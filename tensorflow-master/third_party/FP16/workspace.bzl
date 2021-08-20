@@ -5,11 +5,11 @@ load("//third_party:repo.bzl", "tf_http_archive")
 def repo():
     tf_http_archive(
         name = "FP16",
-        strip_prefix = "FP16-4dfe081cf6bcd15db339cf2680b9281b8451eeb3",
-        sha256 = "d973501a40c55126b31accc2d9f08d931ec3cc190c0430309a5e341d3c0ce32a",
+        strip_prefix = "FP16-0a92994d729ff76a58f692d3028ca1b64b145d91",
+        sha256 = "e66e65515fa09927b348d3d584c68be4215cfe664100d01c9dbc7655a5716d70",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/Maratyszcza/FP16/archive/4dfe081cf6bcd15db339cf2680b9281b8451eeb3.zip",
-            "https://github.com/Maratyszcza/FP16/archive/4dfe081cf6bcd15db339cf2680b9281b8451eeb3.zip",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/Maratyszcza/FP16/archive/0a92994d729ff76a58f692d3028ca1b64b145d91.zip",
+            "https://github.com/Maratyszcza/FP16/archive/0a92994d729ff76a58f692d3028ca1b64b145d91.zip",
         ],
         build_file = "//third_party/FP16:BUILD.bazel",
     )
