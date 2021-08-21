@@ -855,11 +855,11 @@ def _tf_repositories():
     tf_http_archive(
         name = "arm_neon_2_x86_sse",
         build_file = "//third_party:arm_neon_2_x86_sse.BUILD",
-        sha256 = "213733991310b904b11b053ac224fee2d4e0179e46b52fe7f8735b8831e04dcc",
-        strip_prefix = "ARM_NEON_2_x86_SSE-1200fe90bb174a6224a525ee60148671a786a71f",
+        sha256 = "a795f7e20b7bc4cec4a23bc54af2af3333c0c4b84c4fe2479642aa391e35844f",
+        strip_prefix = "ARM_NEON_2_x86_SSE-a1652fd5253afbf3e39357b012974f93511f6108",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/intel/ARM_NEON_2_x86_SSE/archive/1200fe90bb174a6224a525ee60148671a786a71f.tar.gz",
-            "https://github.com/intel/ARM_NEON_2_x86_SSE/archive/1200fe90bb174a6224a525ee60148671a786a71f.tar.gz",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/intel/ARM_NEON_2_x86_SSE/archive/a1652fd5253afbf3e39357b012974f93511f6108.tar.gz",
+            "https://github.com/intel/ARM_NEON_2_x86_SSE/archive/a1652fd5253afbf3e39357b012974f93511f6108.tar.gz",
         ],
     )
     # LINT.ThenChange(//tensorflow/lite/tools/cmake/modules/neon2sse.cmake)
