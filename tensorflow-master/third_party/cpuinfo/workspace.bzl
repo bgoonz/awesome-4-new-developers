@@ -5,11 +5,11 @@ load("//third_party:repo.bzl", "tf_http_archive")
 def repo():
     tf_http_archive(
         name = "cpuinfo",
-        strip_prefix = "cpuinfo-5916273f79a21551890fd3d56fc5375a78d1598d",
-        sha256 = "2a160c527d3c58085ce260f34f9e2b161adc009b34186a2baf24e74376e89e6d",
+        strip_prefix = "cpuinfo-866ae6e5ffe93a1f63be738078da94cf3005cce2",
+        sha256 = "17d136b1793297a80c1f7afd01414f4e6f1ac79d17720f45b13b926231648336",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/pytorch/cpuinfo/archive/5916273f79a21551890fd3d56fc5375a78d1598d.zip",
-            "https://github.com/pytorch/cpuinfo/archive/5916273f79a21551890fd3d56fc5375a78d1598d.zip",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/pytorch/cpuinfo/archive/866ae6e5ffe93a1f63be738078da94cf3005cce2.zip",
+            "https://github.com/pytorch/cpuinfo/archive/866ae6e5ffe93a1f63be738078da94cf3005cce2.zip",
         ],
         build_file = "//third_party/cpuinfo:BUILD.bazel",
     )
