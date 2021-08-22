@@ -640,11 +640,11 @@ def _tf_repositories():
     tf_http_archive(
         name = "linenoise",
         build_file = "//third_party:linenoise.BUILD",
-        sha256 = "7f51f45887a3d31b4ce4fa5965210a5e64637ceac12720cfce7954d6a2e812f7",
-        strip_prefix = "linenoise-c894b9e59f02203dbe4e2be657572cf88c4230c3",
+        sha256 = "1086f82fbf30b0618b1953b05d33db62c68fc7ce49391ce1374192f776fde72d",
+        strip_prefix = "linenoise-97d2850af13c339369093b78abe5265845d78220",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/antirez/linenoise/archive/c894b9e59f02203dbe4e2be657572cf88c4230c3.tar.gz",
-            "https://github.com/antirez/linenoise/archive/c894b9e59f02203dbe4e2be657572cf88c4230c3.tar.gz",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/antirez/linenoise/archive/97d2850af13c339369093b78abe5265845d78220.tar.gz",
+            "https://github.com/antirez/linenoise/archive/97d2850af13c339369093b78abe5265845d78220.tar.gz",
         ],
     )
 
