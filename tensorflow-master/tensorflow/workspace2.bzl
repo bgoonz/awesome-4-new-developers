@@ -971,11 +971,11 @@ def _tf_repositories():
     # https://github.com/bazelbuild/rules_apple/releases
     tf_http_archive(
         name = "build_bazel_rules_apple",
-        sha256 = "ee9e6073aeb5a65c100cb9c44b0017c937706a4ae03176e14a7e78620a198079",
-        strip_prefix = "rules_apple-5131f3d46794bf227d296c82f30c2499c9de3c5b",
+        sha256 = "9f999527cbd36651fd5de55842d8f4faee71ac92299489c91e03ed6aeb04afd4",
+        strip_prefix = "rules_apple-dd47da8154045255e2fa19ef004a518efd2304a7",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/bazelbuild/rules_apple/archive/5131f3d46794bf227d296c82f30c2499c9de3c5b.tar.gz",
-            "https://github.com/bazelbuild/rules_apple/archive/5131f3d46794bf227d296c82f30c2499c9de3c5b.tar.gz",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/bazelbuild/rules_apple/archive/dd47da8154045255e2fa19ef004a518efd2304a7.tar.gz",
+            "https://github.com/bazelbuild/rules_apple/archive/dd47da8154045255e2fa19ef004a518efd2304a7.tar.gz",
         ],
     )
 
