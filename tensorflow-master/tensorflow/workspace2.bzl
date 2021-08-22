@@ -867,12 +867,12 @@ def _tf_repositories():
     tf_http_archive(
         name = "double_conversion",
         build_file = "//third_party:double_conversion.BUILD",
-        sha256 = "2f7fbffac0d98d201ad0586f686034371a6d152ca67508ab611adc2386ad30de",
-        strip_prefix = "double-conversion-3992066a95b823efc8ccc1baf82a1cfc73f6e9b8",
+        sha256 = "5ca0bd28ae466b80718e147b33f38e0fe6dd914f496a1717ea257894bd652b31",
+        strip_prefix = "double-conversion-44944accfd5516a094e1e730334764e0a908aaff",
         system_build_file = "//third_party/systemlibs:double_conversion.BUILD",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/double-conversion/archive/3992066a95b823efc8ccc1baf82a1cfc73f6e9b8.zip",
-            "https://github.com/google/double-conversion/archive/3992066a95b823efc8ccc1baf82a1cfc73f6e9b8.zip",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/double-conversion/archive/44944accfd5516a094e1e730334764e0a908aaff.zip",
+            "https://github.com/google/double-conversion/archive/44944accfd5516a094e1e730334764e0a908aaff.zip",
         ],
     )
 
