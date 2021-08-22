@@ -818,11 +818,11 @@ def _tf_repositories():
     tf_http_archive(
         name = "com_google_pprof",
         build_file = "//third_party:pprof.BUILD",
-        sha256 = "e0928ca4aa10ea1e0551e2d7ce4d1d7ea2d84b2abbdef082b0da84268791d0c4",
-        strip_prefix = "pprof-c0fb62ec88c411cc91194465e54db2632845b650",
+        sha256 = "abe325cfbbb5b8a1ec7f28987e885180023aace12a3ed62b5c9118b29e0dec8e",
+        strip_prefix = "pprof-f964ff60559510aa6b3398b59d6d19c42da2ea37",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/pprof/archive/c0fb62ec88c411cc91194465e54db2632845b650.tar.gz",
-            "https://github.com/google/pprof/archive/c0fb62ec88c411cc91194465e54db2632845b650.tar.gz",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/pprof/archive/f964ff60559510aa6b3398b59d6d19c42da2ea37.tar.gz",
+            "https://github.com/google/pprof/archive/f964ff60559510aa6b3398b59d6d19c42da2ea37.tar.gz",
         ],
     )
 
