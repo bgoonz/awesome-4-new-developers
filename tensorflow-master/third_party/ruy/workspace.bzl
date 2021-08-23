@@ -6,11 +6,11 @@ def repo():
     tf_http_archive(
         name = "ruy",
         # LINT.IfChange
-        sha256 = "fa9a0b9041095817bc3533f7b125c3b4044570c0b3ee6c436d2d29dae001c06b",
-        strip_prefix = "ruy-e6c1b8dc8a8b00ee74e7268aac8b18d7260ab1ce",
+        sha256 = "2c49d028c488701ef96b392879f19417fdd5433152007f5b980175431e58fac3",
+        strip_prefix = "ruy-9c56af3fce210a8a103eda19bd6f47c08a9e3d90",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/ruy/archive/e6c1b8dc8a8b00ee74e7268aac8b18d7260ab1ce.zip",
-            "https://github.com/google/ruy/archive/e6c1b8dc8a8b00ee74e7268aac8b18d7260ab1ce.zip",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/ruy/archive/9c56af3fce210a8a103eda19bd6f47c08a9e3d90.zip",
+            "https://github.com/google/ruy/archive/9c56af3fce210a8a103eda19bd6f47c08a9e3d90.zip",
         ],
         # LINT.ThenChange(//tensorflow/lite/tools/cmake/modules/ruy.cmake)
         build_file = "//third_party/ruy:BUILD",
