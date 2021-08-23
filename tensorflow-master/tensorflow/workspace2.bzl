@@ -842,12 +842,12 @@ def _tf_repositories():
     tf_http_archive(
         name = "cython",
         build_file = "//third_party:cython.BUILD",
-        sha256 = "e2e38e1f0572ca54d6085df3dec8b607d20e81515fb80215aed19c81e8fe2079",
-        strip_prefix = "cython-0.29.21",
+        sha256 = "a5efb97612f0f97164e87c54cc295b2e2d06c539487670079963adeab872de80",
+        strip_prefix = "cython-0.29.24",
         system_build_file = "//third_party/systemlibs:cython.BUILD",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/cython/cython/archive/0.29.21.tar.gz",
-            "https://github.com/cython/cython/archive/0.29.21.tar.gz",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/cython/cython/archive/0.29.24.tar.gz",
+            "https://github.com/cython/cython/archive/0.29.24.tar.gz",
         ],
     )
 
