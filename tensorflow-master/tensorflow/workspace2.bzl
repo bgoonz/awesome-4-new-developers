@@ -595,11 +595,11 @@ def _tf_repositories():
 
     tf_http_archive(
         name = "com_github_gflags_gflags",
-        sha256 = "ae27cdbcd6a2f935baa78e4f21f675649271634c092b1be01469440495609d0e",
-        strip_prefix = "gflags-2.2.1",
+        sha256 = "34af2f15cf7367513b352bdcd2493ab14ce43692d2dcd9dfc499492966c64dcf",
+        strip_prefix = "gflags-2.2.2",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/gflags/gflags/archive/v2.2.1.tar.gz",
-            "https://github.com/gflags/gflags/archive/v2.2.1.tar.gz",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/gflags/gflags/archive/v2.2.2.tar.gz",
+            "https://github.com/gflags/gflags/archive/v2.2.2.tar.gz",
         ],
     )
 
