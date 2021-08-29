@@ -6,14 +6,14 @@ def repo():
     tf_http_archive(
         name = "vulkan_headers",
         # LINT.IfChange
-        strip_prefix = "Vulkan-Headers-ec2db85225ab410bc6829251bef6c578aaed5868",
-        sha256 = "38febe63d53f9c91e90adb1ecd3df0cc0ea834e3a89d96c4fb5961d1cd6dd65e",
+        strip_prefix = "Vulkan-Headers-9e62d027636cd7210f60d934f56107ed6e1579b8",
+        sha256 = "44da373977b1266371774a473792a09d65fe11ec0d1f29d95c7a3d2f035f1fc0",
         link_files = {
             "//third_party/vulkan_headers:tensorflow/vulkan_hpp_dispatch_loader_dynamic.cc": "tensorflow/vulkan_hpp_dispatch_loader_dynamic.cc",
         },
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/KhronosGroup/Vulkan-Headers/archive/ec2db85225ab410bc6829251bef6c578aaed5868.tar.gz",
-            "https://github.com/KhronosGroup/Vulkan-Headers/archive/ec2db85225ab410bc6829251bef6c578aaed5868.tar.gz",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/KhronosGroup/Vulkan-Headers/archive/9e62d027636cd7210f60d934f56107ed6e1579b8.tar.gz",
+            "https://github.com/KhronosGroup/Vulkan-Headers/archive/9e62d027636cd7210f60d934f56107ed6e1579b8.tar.gz",
         ],
         # LINT.ThenChange(//tensorflow/lite/tools/cmake/modules/vulkan_headers.cmake)
         build_file = "//third_party/vulkan_headers:BUILD.bazel",
