@@ -585,11 +585,11 @@ def _tf_repositories():
 
     tf_http_archive(
         name = "com_google_googletest",
-        sha256 = "70e4f07b2df8d471f4738dc9f5a4a149d996b2657796586bd69d9da5588fe1c1",
-        strip_prefix = "googletest-2f80c2ba71c0e8922a03b9b855e5b019ad1f7064",
+        sha256 = "1129a3ff6d81d1b4cd080784e6cb539a9b34d8309831ae4560804337b8cfd27c",
+        strip_prefix = "googletest-955c7f837efad184ec63e771c42542d37545eaef",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/googletest/archive/2f80c2ba71c0e8922a03b9b855e5b019ad1f7064.zip",
-            "https://github.com/google/googletest/archive/2f80c2ba71c0e8922a03b9b855e5b019ad1f7064.zip",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/googletest/archive/955c7f837efad184ec63e771c42542d37545eaef.zip",
+            "https://github.com/google/googletest/archive/955c7f837efad184ec63e771c42542d37545eaef.zip",
         ],
     )
 
