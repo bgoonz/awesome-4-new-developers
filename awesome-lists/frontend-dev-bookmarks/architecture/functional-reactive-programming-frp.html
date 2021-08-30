@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>functional-reactive-programming-frp</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="functional-reactive-programming-frp">
+      Functional Reactive Programming (FRP)
+    </h1>
+    <p>
+      <strong
+        >Context: <a href="../README.md">frontend-dev-bookmarks</a> /
+        Architecture</strong
+      >
+    </p>
+    <p>
+      FRP is a programming paradigm for asynchronous dataflow programming using
+      the building blocks of functional programming.
+    </p>
+    <p>
+      <a href="http://frontend.directory/"
+        ><img
+          src="https://img.shields.io/badge/frontend-directory-blue.svg?style=flat-square"
+          alt="frontend.directory"
+      /></a>
+      <a href="https://gitter.im/dypsilon/frontend-dev-bookmarks"
+        ><img
+          src="https://img.shields.io/gitter/room/dypsilon/frontend-dev-bookmarks.svg?style=flat-square&amp;maxAge=2592000"
+          alt="Gitter"
+      /></a>
+      <a href="https://twitter.com/FrontendDir"
+        ><img
+          src="https://img.shields.io/badge/follow-twitter-55acee.svg?style=flat-square"
+          alt="Twitter"
+      /></a>
+    </p>
+    <table style="width: 58%">
+      <colgroup>
+        <col style="width: 58%" />
+      </colgroup>
+      <tbody>
+        <tr class="odd">
+          <td>
+            +
+            <strong
+              ><a href="https://github.com/kriskowal/gtor"
+                >A General Theory of Reactivity</a
+              ></strong
+            >: Kris Kowal describes popular primitives of Reactive Programming
+            and some use cases. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=R9CGieinKVo"
+                >A General Theory of Reactivity (Video)</a
+              ></strong
+            >: Kris Kowal talks about reactive primitives and their traits. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=Agu6jipKfYw"
+                >Controlling Time and Space</a
+              ></strong
+            >: This talk will quickly cover the basics of FRP, and then go into
+            a couple different formulations of FRP that people are beginning to
+            use. We will explore how these formulations fit together
+            historically and theoretically. +
+            <strong><a href="http://cycle.js.org/">Cycle.js</a></strong
+            >: A functional and reactive JavaScript framework that solves the
+            cyclic dependency of Observables which emerge during dialogues
+            (mutual observations) between the Human and the Computer. +
+            <strong
+              ><a href="https://github.com/whitecolor/cycle-async-driver"
+                >Async Driver</a
+              ></strong
+            >: Higher order factory for creating cycle.js async request based
+            drivers. Allows you almost completely eliminate boilerplate code for
+            this kind of drivers. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=Rj8ZTRVka4E"
+                >Cycle.js Was Built to Solve Problems</a
+              ></strong
+            >: In this video André Staltz shows how Cycle.js has a practical
+            purpose, meant to solve problems your customers/business may relate
+            to. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=uNZnftSksYg"
+                >Cycle.js and Functional Reactive User Interfaces</a
+              ></strong
+            >: In this talk we will discover how Cycle.js is purely reactive and
+            functional, and why it’s an interesting alternative to React. +
+            <strong
+              ><a href="https://glebbahmutov.com/draw-cycle/"
+                >Draw Cycle</a
+              ></strong
+            >: Simple Cycle.js program visualized +
+            <strong
+              ><a href="http://cycle.js.org/drivers.html">Drivers</a></strong
+            >: Drivers are functions that listen to Observable sinks (their
+            input), perform imperative side effects, and may return Observable
+            sources (their output). +
+            <strong
+              ><a href="https://github.com/Widdershin/cycle-animation-driver"
+                >Animation</a
+              ></strong
+            >: A Cycle driver for requestAnimationFrame. +
+            <strong
+              ><a href="https://github.com/benji6/cycle-audio-graph"
+                >Audio Graph Driver</a
+              ></strong
+            >: Audio graph driver for Cycle.js based on virtual-audio-graph. +
+            <strong
+              ><a href="https://github.com/10clouds/cyclejs-cookie"
+                >Cookie</a
+              ></strong
+            >: Cycle.js Cookie Driver, based on cookie_js library. +
+            <strong><a href="https://github.com/cyclejs/dom">DOM</a></strong
+            >: The standard DOM Driver for Cycle.js based on virtual-dom, and
+            other helpers. +
+            <strong
+              ><a href="https://github.com/secobarbital/cycle-fetch-driver"
+                >Fetch</a
+              ></strong
+            >: A Cycle.js Driver for making HTTP requests, using the Fetch API.
+            +
+            <strong
+              ><a href="https://github.com/r7kamura/cycle-fetcher-driver"
+                >Fetcher</a
+              ></strong
+            >: A Cycle.js Driver for making HTTP requests using
+            stackable-fetcher. +
+            <strong
+              ><a href="https://github.com/dralletje/cycle-firebase"
+                >Firebase</a
+              ></strong
+            >: Thin layer around the firebase javascript API that allows you to
+            query and declaratively update your favorite real-time database. +
+            <strong><a href="https://github.com/cyclejs/http">HTTP</a></strong
+            >: A Cycle.js Driver for making HTTP requests, based on superagent.
+            +
+            <strong
+              ><a href="https://github.com/CyclicMaterials/cycle-hammer-driver"
+                >Hammer.js</a
+              ></strong
+            >: The driver incorporates the Hammer.js gesture library. +
+            <strong
+              ><a href="https://github.com/cyclejs/history">History</a></strong
+            >: Cycle.js URL Driver based on the rackt/history library. +
+            <strong
+              ><a href="https://github.com/raquelxmoss/cycle-keys"
+                >Keys</a
+              ></strong
+            >: A Cycle.js driver for keyboard events. +
+            <strong
+              ><a href="https://github.com/whitecolor/cycle-mongoose/"
+                >Mongoose.js</a
+              ></strong
+            >: A driver for using Mongoose with Cycle JS. Accepts both, write
+            and read operations. +
+            <strong
+              ><a href="https://github.com/cyclejs/cycle-notification-driver"
+                >Notification</a
+              ></strong
+            >: A Cycle.js Driver for showing and responding to HTML5
+            Notifications. +
+            <strong
+              ><a href="https://github.com/TylorS/cycle-router"
+                >Router</a
+              ></strong
+            >: A router built from the ground up with Cycle.js in mind. Stands
+            on the shoulders of battle-tested libraries switch-path for route
+            matching and rackt/history for dealing with the History API. +
+            <strong
+              ><a href="https://github.com/axefrog/cycle-router5"
+                >Router5</a
+              ></strong
+            >: A source/sink router driver for Cycle.js, based on router5. +
+            <strong
+              ><a href="https://github.com/jessaustin/cycle-sse-driver"
+                >Server-Sent Events</a
+              ></strong
+            >: Cycle.js driver for Server-Sent Events (SSE), a browser feature
+            also known as EventSource. Server-Sent Events allow the server to
+            continuously update the page with new events, without resorting to
+            hacks like long-polling. +
+            <strong
+              ><a href="https://github.com/TylorS/cycle-snabbdom"
+                >Snabbdom</a
+              ></strong
+            >: Alternative DOM driver utilizing the snabbdom library. +
+            <strong
+              ><a href="https://github.com/cgeorg/cycle-socket.io"
+                >Socket.IO</a
+              ></strong
+            >: A Cycle driver for applications using Socket.IO +
+            <strong
+              ><a href="https://github.com/cyclejs/storage">Storage</a></strong
+            >: A Cycle.js Driver for using localStorage and sessionStorage in
+            the browser. + <strong>Example Projects</strong>: Example
+            applications built with Cycle.js +
+            <strong
+              ><a href="https://github.com/cyclejs/examples"
+                >Cycle.js Examples</a
+              ></strong
+            >: Browse and learn from examples of small Cycle.js apps using Core,
+            DOM Driver, HTML Driver, HTTP Driver, JSONP Driver, and others. +
+            <strong
+              ><a href="https://github.com/staltz/rxmarbles"
+                >RX Marbles</a
+              ></strong
+            >: Interactive diagrams of Rx Observables. +
+            <strong
+              ><a href="https://github.com/cgeorg/todomvp"
+                >TODO: Minimum Viable Pizza</a
+              ></strong
+            >: Minimum Viable Pizza implemented with Cycle.js +
+            <strong
+              ><a href="https://github.com/Widdershin/tricycle"
+                >Tricycle</a
+              ></strong
+            >: A scratchpad for trying out Cycle.js. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=6_ETUyh0tns"
+                >Intro to Functional Reactive Programming with Cycle.js</a
+              ></strong
+            >: Nick Johnstone gives an introduction to developing with Cycle.js
+            in this video presentation. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=31URmaeNHSs"
+                >Learning How to Ride: an Introduction to Cycle.js</a
+              ></strong
+            >: In this talk, Fernando Macias Pereznieto introduces us to the
+            good, the bad, and the beautiful of using Cycle.js, whether you are
+            a complete beginner or an experienced JS ninja. +
+            <strong
+              ><a href="https://github.com/motorcyclejs/core"
+                >Motorcycle.js</a
+              ></strong
+            >: This is a sister project that will continue to evolve and grow
+            alongside Cycle.js for the foreseeable future. The primary focus of
+            this project is to tune it for performance as much as possible. +
+            <strong><a href="https://github.com/cujojs/most">Most</a></strong
+            >: Monadic reactive streams with high performance. +
+            <strong
+              ><a
+                href="https://medium.com/@fkrautwald/plug-and-play-all-your-observable-streams-with-cycle-js-e543fc287872"
+                >Plug and Play All Your Observable Streams With Cycle.js</a
+              ></strong
+            >: Frederik Krautwald explains the principles behind Cycle.js, it’s
+            inner workings and how to use it to create a simple program with
+            drivers. +
+            <strong
+              ><a href="https://github.com/Widdershin/tricycle"
+                >Tricycle</a
+              ></strong
+            >: A scratchpad for trying out Cycle.js. +
+            <strong
+              ><a
+                href="http://thenewstack.io/developers-need-know-mvi-model-view-intent/"
+                >What Developers Need to Know about MVI (Model-View-Intent)</a
+              ></strong
+            >: The article explains the general MVI pattern and how it relates
+            to React, Reactive Programming and Cycle.js +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=uNZnftSksYg"
+                >Cycle.js and Functional Reactive User Interfaces</a
+              ></strong
+            >: In this talk we will discover how Cycle.js is purely reactive and
+            functional, and why it’s an interesting alternative to React. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=v68ppDlvHqs"
+                >Dynamics of Change: why Reactivity Matters</a
+              ></strong
+            >: In this talk we will see when passive or reactive strategy is
+            advantageous, and how the reactive strategy is a sensible default. +
+            <strong
+              ><a href="https://vimeo.com/68987289"
+                >Enemy of the State</a
+              ></strong
+            >: An introduction to Functional Reactive Programming and Bacon.js
+            by Philip Roberts. +
+            <strong><a href="https://github.com/mobxjs/mobx">MobX</a></strong
+            >: MobX is a battle tested library that makes state management
+            simple and scalable by transparently applying functional reactive
+            programming. +
+            <strong
+              ><a
+                href="https://medium.com/@yelouafi/promises-fp-beautiful-streams-6f0235c5b179"
+                >Promises + FP = Beautiful Streams</a
+              ></strong
+            >: Yassine Elouafi show how to use functional programming and
+            algebraic data types to derive a pure functional definition of
+            reactive programming like streams. +
+            <strong>Stream Libraries</strong>: Libraries which help you compose
+            asynchronous operations on streams of time-varying values and
+            events. +
+            <strong><a href="http://baconjs.github.io/">Bacon.js</a></strong
+            >: A small functional reactive programming lib for JavaScript. Turns
+            your event spaghetti into clean and declarative feng shui bacon, by
+            switching from imperative to functional. +
+            <strong
+              ><a href="https://rpominov.github.io/kefir/">Kefir.js</a></strong
+            >: Kefir — is a Reactive Programming library for JavaScript inspired
+            by Bacon.js and RxJS, with focus on high performance and low memory
+            usage. +
+            <strong><a href="https://github.com/cujojs/most">Most</a></strong
+            >: Monadic reactive streams with high performance. +
+            <strong
+              ><a href="https://github.com/Reactive-Extensions/RxJS"
+                >Reactive Extensions (RxJS)</a
+              ></strong
+            >: RxJS is a set of libraries for composing asynchronous and
+            event-based programs using observable sequences and fluent query
+            operators. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=XRYN2xt11Ek"
+                >Async JavaScript with Reactive Extensions</a
+              ></strong
+            >: Jafar Husain explains in this video how Netflix uses the Reactive
+            Extensions (Rx) library to build responsive user experiences that
+            strive to be event-driven, scalable and resilient. +
+            <strong
+              ><a
+                href="http://blog.thoughtram.io/rx/2016/08/01/exploring-rx-operators-flatmap.html"
+                >Exploring Rx Operators: FlatMap</a
+              ></strong
+            >: Christoph Burgdorf introduces the FlatMap operator and its usage
+            for collections and observables. +
+            <strong
+              ><a
+                href="http://blog.thoughtram.io/angular/2016/05/16/exploring-rx-operators-map.html"
+                >Exploring Rx Operators: Map</a
+              ></strong
+            >: Christoph Burgdorf explains how to use the map operator in RxJS.
+            +
+            <strong
+              ><a
+                href="http://www.mokacoding.com/blog/functional-core-reactive-shell/"
+                >Functional Core Reactive Shell</a
+              ></strong
+            >: Giovanni Lodi makes an overview of different architecture
+            meta-patterns and describes his current findings about functional
+            programming and observables as a way to control side effects. +
+            <strong><a href="http://reactivex.io/learnrx/">Learn RX</a></strong
+            >: A series of interactive exercises for learning Microsoft’s
+            Reactive Extensions (Rx) Library for Javascript. +
+            <strong><a href="http://www.learnrxjs.io/">Learn RxJS</a></strong
+            >: This site focuses on making RxJS concepts approachable, the
+            examples clear and easy to explore, and features references
+            throughout to the best RxJS related material on the web. +
+            <strong
+              ><a
+                href="https://medium.com/@sergimansilla/real-world-observables-1f65748c8f9"
+                >Real World Observables</a
+              ></strong
+            >: Sergi Mansilla writes an FTP client to use it as an example for a
+            real world application based on RxJS. +
+            <strong
+              ><a href="https://github.com/JulienMoumne/rx-training-games"
+                >Rx Training Games</a
+              ></strong
+            >: Rx Training Games is a coding playground that can be used to
+            learn and practice Reactive Extensions coding grid-based games +
+            <strong
+              ><a href="http://xgrommx.github.io/rx-book/index.html"
+                >Rx-Book</a
+              ></strong
+            >: A complete book about RxJS v.4.0. +
+            <strong><a href="http://rxmarbles.com/">RxMarbles</a></strong
+            >: A webapp for experimenting with diagrams of Rx Observables, for
+            learning purposes. +
+            <strong
+              ><a href="https://www.npmjs.com/package/rxstate"
+                >RxState</a
+              ></strong
+            >: Simple opinionated state management library based on RxJS and
+            Immutable.js +
+            <strong
+              ><a
+                href="http://blog.thoughtram.io/angular/2016/01/06/taking-advantage-of-observables-in-angular2.html"
+                >Taking Advantage of Observables in Angular 2</a
+              ></strong
+            >: Christoph Burgdorf describes the advantages of Observables and
+            how you can use them in Angular 2 context. +
+            <strong
+              ><a
+                href="https://xgrommx.github.io/rx-book/content/getting_started_with_rxjs/creating_and_querying_observable_sequences/transducers.html"
+                >Transducers with Observable Sequences</a
+              ></strong
+            >: A chapter from the RxJS Book describing Transducers. +
+            <strong
+              ><a href="http://staltz.com/why-we-built-xstream.html"
+                >Why We Built Xstream</a
+              ></strong
+            >: The authors needed a stream library tailored for Cycle.js. It
+            needs to be “hot” only, small in kB size and it should have only a
+            few and intuitive operators. +
+            <strong
+              ><a href="https://github.com/staltz/xstream">Xstream</a></strong
+            >: An extremely intuitive, small, and fast functional reactive
+            stream library for JavaScript. +
+            <strong
+              ><a href="http://staltz.com/why-we-built-xstream.html"
+                >Why We Built Xstream</a
+              ></strong
+            >: The authors needed a stream library tailored for Cycle.js. It
+            needs to be “hot” only, small in kB size and it should have only a
+            few and intuitive operators. +
+            <strong
+              ><a href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754"
+                >The Introduction to Reactive Programming</a
+              ></strong
+            >: André Staltz provides a complete introduction to the Reactive
+            Programming and RxJS. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=1zj7M1LnJV4"
+                >What if the User was a Function?</a
+              ></strong
+            >: In this video André Staltz talks about the input/output cycle
+            between humans and computers and how to take advantage of this model
+            by using FRP and event streams.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h1 id="license">License</h1>
+    <p>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        ><img
+          alt="Creative Commons License"
+          style="border-width: 0"
+          src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a
+      ><br />This work is licensed under a
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International License</a
+      >.
+    </p>
+    <p>
+      Please provide a link back to this repository. This is not necessary for
+      GitHub forks.
+    </p>
+  </body>
+</html>

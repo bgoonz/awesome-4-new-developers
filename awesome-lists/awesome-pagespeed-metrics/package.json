@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "lint": "awesome-lint",
+    "build": "markdown-toc -i --bullets=- --skip=License README.md",
+    "test": "npm run build -- --check && npm run lint"
+  },
+  "devDependencies": {
+    "@csabapalfi/markdown-toc": "2.0.0",
+    "awesome-lint": "0.13.0"
+  }
+}

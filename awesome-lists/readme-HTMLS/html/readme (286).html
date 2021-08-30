@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>readme</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-align="center">
+      <img
+        src="https://raw.githubusercontent.com/bcoe/awesome-cross-platform-nodejs/master/logo.svg?sanitize=true"
+        width="500"
+      />
+      <br />
+      <a href="https://awesome.re">
+        <img src="https://awesome.re/badge.svg" alt="Awesome" />
+      </a>
+      <p>
+        A curated list of awesome developer tools for writing cross-platform
+        Node.js code.
+      </p>
+    </div>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#resources">Resources</a></li>
+      <li>
+        <a href="#applications">Applications</a>
+        <ul>
+          <li>
+            <a href="#development-environment">Development environment</a>
+          </li>
+          <li><a href="#continuous-integration">Continuous integration</a></li>
+          <li><a href="#virtualization">Virtualization</a></li>
+          <li><a href="#compatibility">Compatibility</a></li>
+          <li><a href="#databases">Databases</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#libraries">Libraries</a>
+        <ul>
+          <li><a href="#os-identification">OS identification</a></li>
+          <li><a href="#shell">Shell</a></li>
+          <li><a href="#environment">Environment</a></li>
+          <li><a href="#filesystem">Filesystem</a></li>
+          <li><a href="#signals">Signals</a></li>
+          <li><a href="#processes">Processes</a></li>
+          <li><a href="#streams">Streams</a></li>
+          <li><a href="#desktop-ui">Desktop UI</a></li>
+          <li><a href="#windows-registry">Windows registry</a></li>
+        </ul>
+      </li>
+      <li><a href="#known-issues">Known issues</a></li>
+      <li><a href="#support">Support</a></li>
+    </ul>
+    <h2 id="resources">Resources</h2>
+    <ul>
+      <li>
+        <a href="https://nodejs.org/en/docs/">Core Node.js documentation</a> -
+        Especially the
+        <a href="https://nodejs.org/api/os.html"><code>os</code></a
+        >, <a href="https://nodejs.org/api/path.html"><code>path</code></a
+        >, <a href="https://nodejs.org/api/fs.html"><code>fs</code></a
+        >,
+        <a href="https://nodejs.org/api/process.html"><code>process</code></a>
+        and
+        <a href="https://nodejs.org/api/child_process.html"
+          ><code>child_process</code></a
+        >
+        modules.
+      </li>
+      <li>
+        <a href="https://github.com/ehmicky/cross-platform-node-guide"
+          >Cross-platform Node.js guide</a
+        >
+        - How to write cross-platform Node.js code.
+      </li>
+      <li>
+        <a href="https://github.com/Microsoft/nodejs-guidelines"
+          >Microsoft Node.js Guidelines</a
+        >
+        - Tips, tricks, and resources for working with Node.js on Microsoft
+        platforms.
+      </li>
+      <li>
+        <a href="http://shapeshed.com/writing-cross-platform-node/"
+          >Writing Cross-Platform Node.js</a
+        >
+        - Great tutorial covering many common issues that arise when writing
+        cross-platform code: path creation, script execution, newline
+        characters.
+      </li>
+      <li>
+        <a href="https://github.com/ehmicky/cross-platform-terminal-characters"
+          >Cross-platform terminal characters</a
+        >
+        - All the characters that work on most terminals and most operating
+        systems.
+      </li>
+    </ul>
+    <h2 id="applications">Applications</h2>
+    <h3 id="development-environment">Development environment</h3>
+    <ul>
+      <li>
+        <a href="https://nodejs.org/en/download/">Node.js</a> - Node.js
+        installer for various platforms.
+      </li>
+      <li>
+        <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a> -
+        Manage multiple installations of Node.js on a Windows computer.
+      </li>
+      <li>
+        <a href="https://github.com/creationix/nvm">nvm</a> /
+        <a href="https://github.com/tj/n">n</a> - Node version manager for
+        macOS/Linux.
+      </li>
+      <li>
+        <a href="https://github.com/felixrieseberg/npm-windows-upgrade"
+          >npm-windows-upgrade</a
+        >
+        - Upgrade npm on Windows.
+      </li>
+      <li>
+        <a href="https://github.com/felixrieseberg/windows-build-tools"
+          >windows-build-tools</a
+        >
+        - Install C++ Build Tools for Windows using npm.
+      </li>
+    </ul>
+    <h3 id="continuous-integration">Continuous integration</h3>
+    <ul>
+      <li>
+        <a href="http://www.appveyor.com/">AppVeyor</a> - Focused on Windows.
+        Free tiers are available for OSS projects.
+      </li>
+      <li>
+        <a href="https://travis-ci.org/">Travis</a> - Windows/macOS/Linux. Free
+        for OSS projects.
+      </li>
+      <li>
+        <a href="https://azure.microsoft.com/en-us/services/devops/pipelines/"
+          >Azure Pipelines</a
+        >
+        - Windows/macOS/Linux. Free for OSS projects with 10 parallel jobs.
+      </li>
+      <li>
+        <a href="https://github.com/features/actions">Github Action</a> -
+        Windows/macOS/Linux. GitHub Actions makes it easy to automate all your
+        software workflows.
+      </li>
+      <li>
+        <a href="https://docs.gitlab.com/ee/ci/">Gitlab CI</a> -
+        Windows/macOS/Linux. GitLab CI/CD is a tool built into GitLab for
+        software development.
+      </li>
+    </ul>
+    <h3 id="virtualization">Virtualization</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/amichaelparker/ievms">ievms</a> - Automated
+        installer for the free virtual machine images that Microsoft provides
+        for testing on multiple versions of IE. These images can be useful for
+        cross-platform testing various technologies, however make sure you read
+        and understand Microsofts’ licensing.
+      </li>
+      <li>
+        <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> -
+        General purpose software for running x86 virtual machines.
+      </li>
+      <li>
+        <a href="https://www.docker.com/">Docker</a> - Software platform to
+        create, deploy and manage virtualized application containers on a common
+        operating system, with an ecosystem of allied tools.
+      </li>
+    </ul>
+    <h3 id="compatibility">Compatibility</h3>
+    <ul>
+      <li>
+        <a href="https://www.winehq.org/">Wine</a> - Run Windows API calls on
+        Linux, Mac, BSD and Solaris.
+      </li>
+      <li>
+        <a href="https://www.cygwin.com/">Cygwin</a> - Run POSIX on Windows.
+      </li>
+      <li>
+        <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10"
+          >WSL</a
+        >
+        - Run the Linux command line on Windows (ELF binary execution, system
+        calls, filesystem, Bash, core utilities, common applications).
+      </li>
+      <li>
+        <a href="http://www.mingw.org/">MinGW</a> - <code>gcc</code> on Windows.
+      </li>
+      <li>
+        <a href="http://www.mingw.org/wiki/msys">msys</a> /
+        <a href="https://gitforwindows.org/">Git Bash</a> - Bash on Windows.
+      </li>
+    </ul>
+    <h3 id="databases">Databases</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/tporadowski/redis">Redis</a> - Native port
+        of Redis for Windows.
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <h3 id="os-identification">OS identification</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/jonschlinkert/is-windows">is-windows</a> -
+        Detect whether the current platform is Windows.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/is-wsl">is-wsl</a> - Detect
+        whether current platform is WSL (Windows Subsystem for Linux).
+      </li>
+      <li>
+        <a href="https://github.com/retrohacker/getos">getos</a> - Retrieve the
+        current OS, including Linux distribution.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/os-name">os-name</a> - Get the
+        name of the current operating system.
+      </li>
+      <li>
+        <a href="https://github.com/sebhildebrandt/systeminformation"
+          >systeminformation</a
+        >
+        - Hardware/software system information.
+      </li>
+    </ul>
+    <h3 id="shell">Shell</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/sindresorhus/execa">execa</a> -
+        Cross-platform implementation of
+        <code>child_process.{execFile,exec}</code>.
+      </li>
+      <li>
+        <a href="https://github.com/ehmicky/gulp-execa">gulp-execa</a> -
+        Cross-platform command execution in Gulp.js.
+      </li>
+      <li>
+        <a href="https://github.com/IndigoUnited/node-cross-spawn"
+          >cross-spawn</a
+        >
+        - Cross-platform implementation of <code>child_process.spawn()</code>.
+      </li>
+      <li>
+        <a href="https://github.com/shelljs/shelljs">shelljs</a> -
+        Cross-platform Unix shell commands.
+      </li>
+      <li>
+        <a href="https://github.com/coreybutler/node-windows">node-windows</a> -
+        Windows support for Node.js scripts (daemons, eventlog, UAC, etc).
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/log-symbols">log-symbols</a> -
+        Colored symbols for various log levels with Windows fallbacks.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/figures">figures</a> - Unicode
+        symbols with Windows fallbacks.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/clipboardy">clipboardy</a> /
+        <a href="https://github.com/sindresorhus/clipboard-cli"
+          >clipboard-cli</a
+        >
+        - Cross-platform copy/paste.
+      </li>
+    </ul>
+    <h3 id="environment">Environment</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/kentcdodds/cross-env">cross-env</a> - Set
+        environment variables cross-platform.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/user-home">user-home</a> - Get
+        the path to the user home directory. Cross-platform.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/username">username</a> - Get
+        the current username.
+      </li>
+      <li>
+        <a href="https://github.com/npm/osenv">osenv</a> - Cross-platform
+        environment variables.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/is-elevated">is-elevated</a> -
+        Check if the process is running with elevated privileges.
+      </li>
+      <li>
+        <a href="https://github.com/npm/node-which">which</a> - Cross-platform
+        implementation of Unix’s <code>which</code>.
+      </li>
+    </ul>
+    <h3 id="filesystem">Filesystem</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/isaacs/rimraf">rimraf</a> /
+        <a href="https://github.com/sindresorhus/del">del</a> - Delete files and
+        folders. Cross-platform.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/make-dir">make-dir</a> -
+        Cross-platform <code>mkdir -p</code>.
+      </li>
+      <li>
+        <a href="https://github.com/paulmillr/readdirp">readdirp</a> - Recursive
+        version of <code>fs.readdir()</code>.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/cpy">cpy</a> - Copy files.
+        Cross-platform.
+      </li>
+      <li>
+        <a href="https://github.com/paulmillr/chokidar">chokidar</a> - Improved
+        cross-platform file watching.
+      </li>
+      <li>
+        <a href="https://github.com/isaacs/node-graceful-fs">graceful-fs</a> -
+        Improves the <code>fs</code> module, especially on Windows.
+      </li>
+      <li>
+        <a href="https://github.com/jprichardson/node-fs-extra">fs-extra</a> -
+        Combines <code>graceful-fs</code> with better JSON file reading and
+        promises.
+      </li>
+      <li>
+        <a href="https://github.com/bcoe/any-path">any-path</a> - Use Windows
+        and POSIX paths interchangeably when fetching values from an object.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/dev-null-cli">dev-null-cli</a>
+        - Cross-platform <code>/dev/null</code>.
+      </li>
+    </ul>
+    <h3 id="signals">Signals</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/sindresorhus/fkill">fkill</a> - Kill
+        processes. Cross-platform.
+      </li>
+      <li>
+        <a href="https://github.com/tapjs/signal-exit">signal-exit</a> -
+        Cross-platform <code>exit</code> handler.
+      </li>
+    </ul>
+    <h3 id="processes">Processes</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/sindresorhus/ps-list">ps-list</a> - Get
+        running processes.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/process-exists"
+          >process-exists</a
+        >
+        - Check if a process exists.
+      </li>
+    </ul>
+    <h3 id="streams">Streams</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/sindresorhus/noop-stream">noop-stream</a> -
+        Cross-platform <code>fs.createReadStream('/dev/null')</code>.
+      </li>
+      <li>
+        <a href="https://github.com/sindresorhus/random-bytes-readable-stream"
+          >random-bytes-readable-stream</a
+        >
+        - Cross-platform <code>fs.createReadStream('/dev/urandom')</code>.
+      </li>
+    </ul>
+    <h3 id="desktop-ui">Desktop UI</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/sindresorhus/open">open</a> - Opens stuff
+        like websites, files, executables. Cross-platform.
+      </li>
+      <li>
+        <a href="https://github.com/mikaelbr/node-notifier">node-notifier</a> -
+        Cross-platform desktop notifications.
+      </li>
+    </ul>
+    <h3 id="windows-registry">Windows registry</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/fresc81/node-winreg">node-winreg</a> -
+        Access the Windows registry.
+      </li>
+      <li>
+        <a href="https://github.com/MikeKovarik/rage-edit">rage-edit</a> -
+        Access/modify the Windows registry.
+      </li>
+      <li>
+        <a href="https://github.com/CatalystCode/windows-registry-node"
+          >windows-registry-node</a
+        >
+        - Access/modify the Windows registry and set file associations.
+      </li>
+    </ul>
+    <h2 id="known-issues">Known issues</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/nodejs/node-v0.x-archive/issues/7940"
+          >cmd.exe unicode woes</a
+        >
+        - By default, <code>cmd.exe</code> does not display Unicode characters
+        on Windows.
+      </li>
+      <li>
+        <a href="https://github.com/nodejs/node-v0.x-archive/issues/2318"
+          >spawn issues</a
+        >
+        - <code>child_process.spawn()</code> behavior is not consistent between
+        Windows and Linux.
+      </li>
+      <li>
+        <a href="https://github.com/isaacs/spawn-wrap#contracts-and-caveats"
+          >exec() behavior between shells</a
+        >
+        - Depending on the shell being used, e.g., bash vs. dash,
+        <code>child_process.exec()</code> has inconsistent exit behavior.
+      </li>
+    </ul>
+    <h2 id="see-also">See also</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/styfle/awesome-desktop-js"
+          >awesome-desktop-js</a
+        >
+        - List of tools to build JavaScript applications on the desktop.
+      </li>
+    </ul>
+    <h2 id="support">Support</h2>
+    <p>
+      If you found an error or would like to add more information,
+      <em>don’t hesitate</em> to
+      <a href="../../issues">submit an issue on GitHub</a>.
+    </p>
+    <p>
+      Everyone is welcome regardless of personal background. We enforce a
+      <a href="CODE_OF_CONDUCT.md">Code of conduct</a> in order to promote a
+      positive and inclusive environment.
+    </p>
+    <h2 id="contributing">Contributing</h2>
+    <p>
+      This project was made with ❤️. The simplest way to give back is by
+      starring and sharing it online.
+    </p>
+    <p>
+      If the documentation is unclear or has a typo, please click on the page’s
+      <code>Edit</code> button (pencil icon) and suggest a correction.
+    </p>
+    <p>
+      If you would like to help us fix an error or add more information, please
+      check our <a href="contributing.md">guidelines</a>. Pull requests are
+      welcome!
+    </p>
+    <p>Thanks go to these wonderful people:</p>
+    <!-- ALL-CONTRIBUTORS-LIST:START -->
+    <!-- prettier-ignore -->
+    <table>
+<tr>
+<td align="center">
+<a href="https://twitter.com/benjamincoe"><img src="https://avatars3.githubusercontent.com/u/194609?v=4" width="100px;" alt="Benjamin E. Coe"/><br /><sub><b>Benjamin E. Coe</b></sub></a><br /><a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=bcoe" title="Code">💻</a> <a href="#ideas-bcoe" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=bcoe" title="Documentation">📖</a>
+</td>
+<td align="center">
+<a href="https://twitter.com/ehmicky"><img src="https://avatars2.githubusercontent.com/u/8136211?v=4" width="100px;" alt="ehmicky"/><br /><sub><b>ehmicky</b></sub></a><br /><a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=ehmicky" title="Code">💻</a> <a href="#ideas-ehmicky" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=ehmicky" title="Documentation">📖</a>
+</td>
+<td align="center">
+<a href="https://sindresorhus.com"><img src="https://avatars1.githubusercontent.com/u/170270?v=4" width="100px;" alt="Sindre Sorhus"/><br /><sub><b>Sindre Sorhus</b></sub></a><br /><a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=sindresorhus" title="Code">💻</a> <a href="#ideas-sindresorhus" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=sindresorhus" title="Documentation">📖</a>
+</td>
+<td align="center">
+<a href="https://fb.com/RemoveU"><img src="https://avatars1.githubusercontent.com/u/19208123?v=4" width="100px;" alt="Hongarc"/><br /><sub><b>Hongarc</b></sub></a><br /><a href="#design-Hongarc" title="Design">🎨</a> <a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=Hongarc" title="Documentation">📖</a> <a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=Hongarc" title="Code">💻</a>
+</td>
+<td align="center">
+<a href="https://kentcdodds.com"><img src="https://avatars0.githubusercontent.com/u/1500684?v=4" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="#ideas-kentcdodds" title="Ideas, Planning, & Feedback">🤔</a>
+</td>
+<td align="center">
+<a href="https://nz.linkedin.com/in/jsonc11"><img src="https://avatars0.githubusercontent.com/u/5185660?v=4" width="100px;" alt="Jason Cooke"/><br /><sub><b>Jason Cooke</b></sub></a><br /><a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=Jason-Cooke" title="Documentation">📖</a>
+</td>
+<td align="center">
+<a href="http://aronhafner.com"><img src="https://avatars0.githubusercontent.com/u/3322693?v=4" width="100px;" alt="Aron Hafner"/><br /><sub><b>Aron Hafner</b></sub></a><br /><a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=alonalon" title="Documentation">📖</a>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="https://github.com/ShPelles"><img src="https://avatars0.githubusercontent.com/u/43875468?v=4" width="100px;" alt="ShPelles"/><br /><sub><b>ShPelles</b></sub></a><br /><a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=ShPelles" title="Documentation">📖</a>
+</td>
+<td align="center">
+<a href="https://github.com/Frederick-S"><img src="https://avatars1.githubusercontent.com/u/1182395?v=4" width="100px;" alt="Xiaodan Mao"/><br /><sub><b>Xiaodan Mao</b></sub></a><br /><a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=Frederick-S" title="Documentation">📖</a>
+</td>
+<td align="center">
+<a href="https://github.com/jamestalmage"><img src="https://avatars0.githubusercontent.com/u/4082216?v=4" width="100px;" alt="James Talmage"/><br /><sub><b>James Talmage</b></sub></a><br /><a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=jamestalmage" title="Documentation">📖</a>
+</td>
+<td align="center">
+<a href="http://sylvain.pontoreau.com"><img src="https://avatars3.githubusercontent.com/u/3357643?v=4" width="100px;" alt="Sylvain PONTOREAU"/><br /><sub><b>Sylvain PONTOREAU</b></sub></a><br /><a href="https://github.com/bcoe/awesome-cross-platform-nodejs/commits?author=spontoreau" title="Documentation">📖</a>
+</td>
+<td align="center">
+<a href="https://www.ceriously.com"><img src="https://avatars1.githubusercontent.com/u/229881?v=4" width="100px;" alt="Steven"/><br /><sub><b>Steven</b></sub></a><br /><a href="#ideas-styfle" title="Ideas, Planning, & Feedback">🤔</a>
+</td>
+</tr>
+</table>
+    <!-- ALL-CONTRIBUTORS-LIST:END -->
+    <p>
+      This project follows the
+      <a href="https://github.com/all-contributors/all-contributors"
+        >all-contributors</a
+      >
+      specification.
+    </p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/licenses/by-sa/4.0/"
+        ><img
+          src="https://img.shields.io/github/license/bcoe/awesome-cross-platform-nodejs.svg?color=4cc61e&amp;logo=github"
+          alt="License"
+      /></a>
+    </p>
+  </body>
+</html>

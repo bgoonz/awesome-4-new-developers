@@ -1,0 +1,5 @@
+http://testinginthepub.co.uk/testinginthepub/,Testing In The Pub,https://github.com/ayr-ton/awesome-geek-podcasts#readme,Podcasts error: <HTTPError 403: 'Forbidden'> | reason: Forbidden
+http://www.fullstackradio.com/,Full Stack Radio,https://github.com/ayr-ton/awesome-geek-podcasts#readme,Podcasts error: <HTTPError 308: 'Unknown'> | reason: Unknown
+https://avpodcast.net/podcastlinux,Podcast Linux,https://github.com/ayr-ton/awesome-geek-podcasts#readme,Podcasts error: <HTTPError 503: 'Service Temporarily Unavailable'> | reason: Service Temporarily Unavailable
+http://podcast.sysca.st/,Syscast Podcast,https://github.com/ayr-ton/awesome-geek-podcasts#readme,Podcasts error: <HTTPError 308: 'Unknown'> | reason: Unknown
+https://linuxheadlines.show/,Linux Headlines,https://github.com/ayr-ton/awesome-geek-podcasts#readme,Podcasts error: <HTTPError 404: 'Not Found'> | reason: Not Found

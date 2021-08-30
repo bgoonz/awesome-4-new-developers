@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README.ja</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-wicket-awesome">
+      Awesome Wicket
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      <a href="http://wicket.apache.org/"
+        ><img
+          src="https://upload.wikimedia.org/wikipedia/ru/5/5d/Apache_Wicket_logo.png"
+          align="right"
+          width="100"
+      /></a>
+    </p>
+    <p>
+      これは、<a href="http://wicket.apache.org">Apache Wicket</a> で作られた
+      素晴らしいプロジェクトの キュレーションリストです。
+    </p>
+    <p>あなたの貢献はいつでも歓迎します！</p>
+    <blockquote>
+      <p>
+        Wicketは、オープンソースのコンポーネント指向のサーバーサイドのJava
+        Webアプリケーションフレームワークです。
+        10年以上の歴史を持ち、それは今もなお強くなっており、堅実な未来があります。
+      </p>
+    </blockquote>
+    <h2 id="目次">目次</h2>
+    <ul>
+      <li><a href="#一般的な情報">一般的な情報</a></li>
+      <li>
+        <a href="#ライブラリ">ライブラリ</a>
+        <ul>
+          <li><a href="#wicketstuff">WicketStuff</a></li>
+        </ul>
+      </li>
+      <li><a href="#Webフレームワーク">Webフレームワーク</a></li>
+      <li><a href="#ソリューション">ソリューション</a></li>
+      <li><a href="#IDEプラグインとツール">IDEプラグインとツール</a></li>
+    </ul>
+    <h2 id="一般的な情報">一般的な情報</h2>
+    <ul>
+      <li>
+        <a href="http://wicket.apache.org/">Apache Wicket</a> - Wicket
+        のオフィシャルサイト。
+      </li>
+      <li>
+        <a href="https://github.com/apache/wicket">Wicket on Github</a> -
+        <a href="https://github.com">GitHub</a> にある Wicket
+        の公式ミラーリポジトリ。<br />
+      </li>
+      <li>
+        <a href="https://twitter.com/apache_wicket">Wicket on Twitter</a> -
+        Wicket の公式アカウント。
+      </li>
+      <li>
+        <a href="https://cwiki.apache.org/confluence/display/WICKET/Index"
+          >Wicket wiki</a
+        >
+        - Wicket の公式 Wiki。<br />
+      </li>
+      <li>
+        <a href="https://builtwithwicket.tumblr.com/">Build With Wicket</a> -
+        Wicket の公式
+        <a href="https://www.tumblr.com/">Tumblr</a> アカウント。<br />
+      </li>
+      <li>
+        <a href="http://ci.apache.org/projects/wicket/guide/7.x/"
+          >Wicket User Guide</a
+        >
+        - バージョン7.x の Wicket ユーザーガイド。
+      </li>
+      <li>
+        <a href="http://ci.apache.org/projects/wicket/apidocs/7.x/index.html"
+          >Wicket JavaDocs</a
+        >
+        - バージョン7.x の Wicket の JavaDoc。
+      </li>
+      <li>
+        <a href="http://wicketinaction.com/">Wicket in Action</a> -
+        Wicketに関するブログと書籍。
+      </li>
+    </ul>
+    <h2 id="ライブラリ">ライブラリ</h2>
+    <p>アプリケーションで使用できるライブラリとコンポーネントのリスト。</p>
+    <ul>
+      <li>
+        <a href="https://github.com/l0rdn1kk0n/wicket-akka">wicket-akka</a> -
+        Akka との連携用ライブラリ。
+      </li>
+      <li>
+        <a href="https://github.com/wicket-acc/wicket-autowire"
+          >wicket-autowire</a
+        >
+        -
+        提供されたアノテーションに従ってコンポーネントを自動生成するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/l0rdn1kk0n/wicket-bootstrap"
+          >wicket-bootstrap</a
+        >
+        - Bootstrap ツールキットとの連携用ライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/l0rdn1kk0n/wicket-clientside-logging"
+          >wicket-clientside-logging</a
+        >
+        - クライアントサイドでの JavaScript
+        ロギングを可能にするヘルパーライブラリ。ログメッセージはサーバーサイドにも保存される。<br />
+      </li>
+      <li>
+        <a href="https://github.com/PhantomYdn/wicket-console"
+          >wicket-console</a
+        >
+        - サーバーサイド JavaScript を実行する
+        軽量な組込Webコンソールを追加できるライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/premium-minds/wicket-crudifier"
+          >wicket-crudifier</a
+        >
+        - CRUDを簡単に作成するためのライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/svenmeier/wicket-dnd">wicket-dnd</a> -
+        一般的なドラッグ &amp; ドロップ UI を提供するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/onehippo/wicket-extjs-integration"
+          >wicket-extjs-integration</a
+        >
+        - イベント処理を伴う Wicket と ExtJS の連携ライブラリ。 Java-API
+        をできる限り JS-API に近づけることに焦点を当てている。<br />
+      </li>
+      <li>
+        <a href="https://github.com/42Lines/wicket-fullcalendar"
+          >wicket-fullcalendar</a
+        >
+        - JavaScript ライブラリ
+        <a href="http://fullcalendar.io/">FullCalendar</a>
+        との連携ライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/OrienteerBAP/wicket-jersey"
+          >wicket-jersey</a
+        >
+        - <a href="https://jersey.github.io/">Jersey2</a> の JAR-RX リソース を
+        Wicket で使用するためのアダプタライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/l0rdn1kk0n/wicket-jquery-selectors"
+          >wicket-jquery-selectors</a
+        >
+        - Wicketから、JQuery を操作するためのライブラリ。<br />
+      </li>
+      <li>
+        <a href="http://www.7thweb.net/wicket-jquery-ui/">wicket-jquery-ui</a> -
+        Wicket 1.5.x、Wicket 6.x、Wicket 7.x で使用可能な、JQuery
+        UIとの連携ライブラリ。<br />
+      </li>
+      <li>
+        <a href="http://wicketeer.org/wicket-modelfactory/"
+          >wicket-modelfactory</a
+        >
+        - タイプセーフで安全にリファクタリングできる Wicket PropertyModel
+        を作成するための API。<br />
+      </li>
+      <li>
+        <a href="https://github.com/l0rdn1kk0n/wicket-mustache"
+          >wicket-mustache</a
+        >
+        - Mustache と Wicket
+        を操作することを可能にする特別なパネルといくつかの関連ユーティリティを提供するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/OrienteerDW/wicket-orientdb"
+          >wicket-orientdb</a
+        >
+        - Wicket と<a href="http://orientdb.com/">OrientDB</a>の
+        連携用ライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/l0rdn1kk0n/wicket-requirejs"
+          >wicket-requirejs</a
+        >
+        - Wicket アプリケーションで
+        require.jsを使うためのヘルパーライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/shieldui/wicket-shieldui"
+          >wicket-shieldui</a
+        >
+        - JavaScriptライブラリ Shield UI を使用している Wicket
+        コンポーネント。<br />
+      </li>
+      <li>
+        <a href="https://github.com/42Lines/wicket-source">wicket-source</a> -
+        ブラウザの HTML と、ソース内のHTML出力元となった Wicket
+        コンポーネントを結びつける機能を提供することで、Wicket
+        の開発をスピードアップするライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/MarcGiffing/wicket-spring-boot"
+          >wicket-spring-boot</a
+        >
+        - 最小限の設定作業で Sprint Bootを使った Wicket
+        プロジェクトを簡単に作成できるライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/l0rdn1kk0n/wicket-webjars"
+          >wicket-webjars</a
+        >
+        - Wicket と Webjars の連携用ライブラリ。<br />
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/thombergs/wicked-charts">wicked-charts</a>
+          - Java アプリケーションで、美しいインタラクティブな JavaScript
+          のグラフを描くためのライブラリ。<br />
+          ### WicketStuff
+          <a href="https://github.com/wicketstuff/core">WicketStuff</a>
+          をベースにしたライブラリ。
+        </p>
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Annotation"
+          >Annotation</a
+        >
+        - Java
+        アノテーションによって宣言的にページをマウントを行えるライブラリ。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/tree/master/annotationeventdispatcher-parent"
+          >Annotation Event Dispatcher</a
+        >
+        - Java
+        アノテーションにより、Wicketのイベント処理を改善するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Async-tasks"
+          >Async Tasks</a
+        >
+        - Wicket
+        アプリケーション内のバックグラウンドプロセスを制御するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Autocomplete-TagIt"
+          >Autocomplete TagIt</a
+        >
+        - Wicket と
+        <a href="http://aehlke.github.com/tag-it/">TagIt</a>
+        の連携用ライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/BrowserId"
+          >BrowserId</a
+        >
+        - <a href="https://login.persona.org/">Mozilla Persona</a> と Wicket
+        の連携用ライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Console">Console</a> -
+        動的言語(Groovy, Clojure, Scala, Jython )
+        のコードを実行するためのサポートを提供するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Context">Context</a> -
+        <span class="citation" data-cites="Context">@Context</span>
+        アノテーションを使用して宣言的にコンポーネント、モデル、およびモデルのオブジェクトを検索するライブラリ。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/tree/master/dashboard-parent"
+          >Dashboard</a
+        >
+        - 必要な情報にすばやくアクセスするための Wicket
+        のダッシュボードのサポートを追加するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/DataStores"
+          >DataStores</a
+        >
+        - <a href="http://memcached.org/">MemCached</a>,
+        <a href="http://cassandra.apache.org/">Apache Cassandra</a>,
+        <a href="http://redis.io/">Redis</a>,
+        <a href="http://www.hazelcast.com/">Hazelcast</a> の
+        <a
+          href="https://github.com/apache/wicket/blob/master/wicket-core/src/main/java/org/apache/wicket/pageStore/IDataStore.java"
+          >IDataStore</a
+        >
+        の実装。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/wiki/Datatable-Autocomplete"
+          >Datatable Autocomplete</a
+        >
+        -
+        <a
+          href="https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%A9%E3%82%A4%E6%9C%A8"
+          >トライ木 - Wikipedia</a
+        >
+        として知られる
+        AJAXが大きなデータセットを高速に検索できるようにするためのデータ構造を提供するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/DataTables"
+          >DataTables</a
+        >
+        -
+        <a href="http://www.datatables.net/">DataTables jQuery</a>
+        との連携用ライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Editable-Grid"
+          >Editable Grid</a
+        >
+        -
+        並べ替え/フィルタリング/ページングをサポートを除き、追加/編集/削除機能を持つグリッドコンポーネント。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Eidogo">Eidogo</a> -
+        碁（パドゥク、囲碁、またはウェイチとも呼ばれる）ゲーム用の SGF
+        ビューアおよびエディタ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Facebook">Facebook</a>
+        -
+        <a href="https://facebook.com">Facebook</a
+        >のソーシャルプラグインを使用するための Wicketコンポーネント。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/FastSerializer"
+          >Fast Serializer</a
+        >
+        - Fast 1.x（FST）ライブラリを使った Wicket のSerializerライブラリ。
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/FastSerializer2"
+          >Fast Serializer 2</a
+        >
+        - Fast 2.x（FST）ライブラリを使った Wicket のSerializerライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Gmap3">GMap3</a> -
+        Wicket アプリケーション 内でGoogle Maps v3
+        を使用するためのコンポーネントを提供するライブラリ。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/wiki/Google-AppEngine-Initializer"
+          >Google AppEngine Initializer</a
+        >
+        - Wicket アプリケーションをGoogle App
+        Engineで実行できるように自動設定する Wicket の
+        org.apache.wicket.IInitializer を実装したライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/GoogleCharts"
+          >Google Charts</a
+        >
+        -
+        <a href="https://developers.google.com/chart/">Google Chart API</a>
+        を使用してチャートを作成できるライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Html5">HTML5</a> -
+        エキサイティングな新しい Html5 の機能を Wicket
+        で使うためのライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Htmlcompressor"
+          >HTML Compressor</a
+        >
+        - Wicket と<a href="http://code.google.com/p/htmlcompressor"
+          >htmlcompressor</a
+        >の連携用ライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/InMethodGrid"
+          >InMethodGrid</a
+        >
+        - データグリッドコンポーネント。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Java-EE-Inject"
+          >Java EE Inject</a
+        >
+        - Java EE 5 のリソースインジェクション との連携用ライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/JEE-Web-Integration"
+          >JEE Web Integration</a
+        >
+        - Wicket のHTMLページに サーブレット、JSP、および
+        JSFのコンテンツ埋め込めるライブラリ。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/wiki/JqPlot-Plugin-Integration"
+          >JqPlot Plugin Integration</a
+        >
+        -
+        多くの機能を備えた美しい折れ線グラフ、棒グラフ、円グラフを作成できるライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/jWicket-UI-Tooltip"
+          >JWicket UI Toolip</a
+        >
+        - Wicket Component に jQuery
+        UIツールチップを提供するために必要なJavaScriptを生成するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Kryo-Serializer"
+          >Kryo Serializer</a
+        >
+        - Kryo を使用した Wicket
+        のorg.apache.wicket.serialize.ISerializerの実装。
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/tree/master/serializer-kryo2"
+          >Kryo2 Serializer</a
+        >
+        - Kryo2 を使用した Wicket
+        のorg.apache.wicket.serialize.ISerializerの実装。
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/LazyModel"
+          >LazyModel</a
+        >
+        - タイプセーフなモデルの実装。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/wiki/Lightbox2-Plugin-Integration"
+          >Lightbox2 Plugin Integration</a
+        >
+        - 現在のページの上に画像をオーバーレイするための、シンプルで
+        目立たないスクリプトを組み込みライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Logback">Logback</a> -
+        Wicket と
+        <a href="http://logback.qos.ch/">logback</a>
+        を一緒に使用するためのヘルパーライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/MBeanView"
+          >MBeanView</a
+        >
+        - アプリケーションのMBeanを表示および操作する JMXパネル
+        を提供するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Minis">Minis</a> -
+        小さな機能を提供するさまざまなコンポーネントのコレクションライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/ModalX">ModalX</a> -
+        標準化された MessageBox クラスに付属し、Modal
+        ダイアログボックスクラスの簡単な定義を可能にする、Wicketの ModalWindow
+        機能の軽量な拡張。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Osgi">OSGI</a> -
+        OSGI環境で Wicketを使えるようにするライブラリ。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/tree/master/openlayers3-parent"
+          >Open Layers 3</a
+        >
+        - Wicket
+        アプリケーションにインタラクティブなマップを追加するためのコンポーネントのセットを提供するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/POI">POI</a> - Apache
+        POI との連携用ライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Progressbar"
+          >Progressbar</a
+        >
+        - Wicketのプログレスバーコンポーネントを提供するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Push">Push</a> -
+        Wicket で リバース AJAX をサポートし、部分的な Web ページの更新を Web
+        ブラウザに「プッシュ」できるようにするライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/ScalaExtensions"
+          >Scala Extensions</a
+        >
+        - プログラミング言語 Scala を使うときの
+        Wicketモデルの構文を改善したライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/tree/master/select2-parent"
+          >Select2</a
+        >
+        - JavaScriptライブラリ
+        <a href="http://ivaynberg.github.com/select2">Select2</a> を利用して
+        Ajax
+        選択フィルタリング、カスタム・レンダリングなどを提供する選択ボックスを構築するApache
+        Wicketコンポーネントを提供するライブラリ。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/wiki/Servlet-Container-Authentication-and-Authorization"
+          >Servlet Container Authentication and Authorization</a
+        >
+        - wicket-auth-rolesと servlet 3 の
+        セキュリティーコンテナーとの統合を単純化するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/SpringReference"
+          >Spring Reference</a
+        >
+        - Wicket アプリケーション と Spring の連携用ライブラリ。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/tree/master/stateless-parent"
+          >Stateless</a
+        >
+        -
+        より包括的なステートレス機能を提供するいくつかのコンポーネントを追加するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/TinyMCE-Integration"
+          >TinyMCE Integration</a
+        >
+        - 有名な TinyMCE WYSIWYG エディタ と Wicket の連携用ライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Twitter">Twitter</a> -
+        Twitter ウィジェットを使用するための Wicket
+        コンポーネントを追加するライブラリ。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/tree/master/urlfragment-parent"
+          >UrlFragment</a
+        >
+        - ブックマーク可能な AJAX機能を構築しながらも
+        <code>戻る</code> ボタンをサポートできるライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/wiquery-highcharts"
+          >WHighCharts</a
+        >
+        - HighChart 用の WiQuery バインディングを提供するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/core/wiki/Whiteboard"
+          >Whiteboard</a
+        >
+        - ホワイトボードを提供するライブラリ。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/tree/master/wicket-foundation"
+          >wicket-foundation</a
+        >
+        - <a href="http://foundation.zurb.com/">Zurb Foundation</a> とWicket
+        の連携用ライブラリ。<br />
+      </li>
+      <li>
+        <a
+          href="https://github.com/wicketstuff/core/tree/master/wicketstuff-restannotations-parent"
+          >Wicket Rest Annotations</a
+        >
+        - Spring MVC または標準のJAX-RSで行うのとほぼ同じ方法でREST API
+        を実装するためのリソースクラスとアノテーションを提供するライブラリ。<br />
+      </li>
+      <li>
+        <a href="https://github.com/wicketstuff/wiquery">WiQuery</a> - jQuery
+        および jQuery UI との連携用ライブラリ。<br />
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/wicketstuff/wiquery-jqplot">WqPlot</a> -
+          JqPlot 用の WiQuery バインディングを提供するライブラリ。
+        </p>
+      </li>
+    </ul>
+    <h2 id="webフレームワーク">Webフレームワーク</h2>
+    <p>
+      システムを簡単かつ円滑に構築できるようにする、Wicket 上で作成された Web
+      フレームワーク。
+    </p>
+    <ul>
+      <li>
+        <a href="https://isis.apache.org/">Apache Isis</a> -
+        Javaでドメイン駆動型アプリケーションを迅速に開発するためのフレームワーク。<br />
+      </li>
+      <li>
+        <a href="http://www.brixcms.org/">BrixCMS</a> - WicketベースのCMS
+        (現在はメンテナンスされていない)。<br />
+      </li>
+      <li>
+        <a href="http://www.onehippo.com/en">Hippo CMS</a> -
+        コンテンツのパフォーマンス指標に迅速に対応することで、オンラインビジネス戦略を継続的に改良することができる
+        WicketベースのCMS。
+      </li>
+      <li>
+        <a href="https://github.com/Nocket/nocket">Nocket</a> - Wicket
+        アプリケーションで使用可能な Naked Object ベース のフレームワーク。<br />
+      </li>
+      <li>
+        <a href="http://invesdwin.de/nowicket/">NoWicket</a> - Wicket
+        アプリケーションで使用可能な Naked Object ベース
+        のフレームワーク。開発者が複雑な Web
+        サイトの実装中にボイラープレートの少ない Wicket
+        コードを書くことができる。<br />
+      </li>
+      <li>
+        <a href="https://github.com/OrienteerDW/Orienteer">Orienteer</a> -
+        Wicket と <a href="http://orientdb.com/">OrientDB</a>をベースにした
+        Webフレームワーク。CRM、CMS、ERP、モバイルアプリのバックエンド、または単にWebサイトを構築するために使用できる。<br />
+      </li>
+      <li>
+        <a href="https://github.com/jwcarman/Wicketopia">Wicketopia</a> - Wicket
+        の Rapid Application Development（RAD）ライブラリ。
+      </li>
+    </ul>
+    <h2 id="ソリューション">ソリューション</h2>
+    <p>
+      Wicket 、もしくはWicketをベースにした<a href="#Webフレームワーク"
+        >Webフレームワーク</a
+      >を使用した End-to-end のソリューション。
+    </p>
+    <ul>
+      <li>
+        <a href="http://www.efaps.org/">eFaps</a> - 構成可能な ERP
+        実装の基盤を形成するモジュールとアプリケーションのリスト。<br />
+      </li>
+      <li>
+        <a href="https://ehour.nl/index.phtml">eHour</a> -
+        オープンソースのタイムトラッキングツール。<br />
+      </li>
+      <li>
+        <a href="https://github.com/estatio/estatio">Estatio</a> - Apache Isisと
+        Wicket で構築されたオープンソースの資産管理ツール。<br />
+      </li>
+      <li>
+        <a href="https://github.com/geoserver/geoserver">GeoServer</a> -
+        ユーザーが地理空間データを共有および編集できるようにする、Java
+        で書かれたオープンソースソフトウェアサーバ。<br />
+      </li>
+      <li>
+        <a href="http://www.next-reports.com/">NextReports</a> -
+        スマートビジネスレポート。<br />
+      </li>
+      <li>
+        <a href="https://github.com/OrienteerDW/Orienteer">Orienteer</a> -
+        データウェアハウス、CRM、ERP、アプリケーション/サイトバックエンドシステム、およびその他のビジネスアプリケーションを実装するためのオープンソースのビジネスアプリケーションプラットフォーム。<br />
+      </li>
+      <li>
+        <a href="https://www.projectforge.org/">ProjectForge</a> -
+        オープンソースのプロジェクト管理ツール。<br />
+      </li>
+      <li>
+        <a href="https://github.com/inspire-software/yes-cart">Yes Cart</a> -
+        純粋な E コマースプラットフォーム。
+      </li>
+    </ul>
+    <h2 id="ideプラグインとツール">IDEプラグインとツール</h2>
+    <ul>
+      <li>
+        <a href="https://marketplace.eclipse.org/content/qwickie">qwickie</a> -
+        Java Webframework Wicket 用の<a href="http://www.eclipse.org/"
+          >Eclipse</a
+        >プラグイン<br />
+      </li>
+      <li>
+        <a href="https://github.com/minman/wicketforge">WicketForge</a> -
+        開発者が Apache Wicketを使用してアプリケーションを作成するのを支援する<a
+          href="https://www.jetbrains.com/idea/"
+          >IntelliJ IDEA</a
+        >のIDE プラグイン。
+      </li>
+    </ul>
+    <h1 id="ライセンス">ライセンス</h1>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+  </body>
+</html>

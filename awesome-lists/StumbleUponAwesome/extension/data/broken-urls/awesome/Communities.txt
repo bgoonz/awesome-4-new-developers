@@ -1,0 +1,5 @@
+http://bit.ly/gcp-slack,Google Cloud Platform,https://github.com/filipelinhares/awesome-slack#readme,Communities error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://rubytr.herokuapp.com/,Ruby Turkey Community,https://github.com/filipelinhares/awesome-slack#readme,Communities error: timeout('The read operation timed out') | reason: 
+https://pythoncommunity.herokuapp.com/,Python Community,https://github.com/filipelinhares/awesome-slack#readme,Communities error: timeout('The read operation timed out') | reason: 
+https://slack-helloremote.now.sh,👋 Remote - Remote workers community,https://github.com/filipelinhares/awesome-slack#readme,Communities error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://slack-pythonbrasil.herokuapp.com/,Python Brazilian Community,https://github.com/filipelinhares/awesome-slack#readme,Communities error: <HTTPError 503: 'Service Unavailable'> | reason: Service Unavailable

@@ -1,0 +1,15 @@
+body {
+  min-height: 100vh;
+  color: rgb(77, 77, 77);
+  font-family: Inria Serif, serif;
+  line-height: 1.5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

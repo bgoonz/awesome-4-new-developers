@@ -1,0 +1,21 @@
+{
+  "name": "@playcanvas/awesome-playcanvas",
+  "version": "1.0.0",
+  "author": "Support <support@playcanvas.com>",
+  "homepage": "https://playcanvas.com",
+  "description": "PlayCanvas Awesome List",
+  "keywords": [
+    "awesome",
+    "awesome-list",
+    "playcanvas",
+    "webgl"
+  ],
+  "repository": "https://github.com/playcanvas/awesome-playcanvas",
+  "license": "CC0",
+  "devDependencies": {
+    "awesome-lint": "0.18.0"
+  },
+  "scripts": {
+    "test": "awesome-lint https://github.com/playcanvas/awesome-playcanvas"
+  }
+}

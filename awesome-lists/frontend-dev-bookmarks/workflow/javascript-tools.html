@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>javascript-tools</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="javascript-tools">JavaScript Tools</h1>
+    <p>
+      <strong
+        >Context: <a href="../README.md">frontend-dev-bookmarks</a> /
+        Workflow</strong
+      >
+    </p>
+    <p>
+      Tools for static analysis, pre and post processing of JavaScript files.
+    </p>
+    <p>
+      <a href="http://frontend.directory/"
+        ><img
+          src="https://img.shields.io/badge/frontend-directory-blue.svg?style=flat-square"
+          alt="frontend.directory"
+      /></a>
+      <a href="https://gitter.im/dypsilon/frontend-dev-bookmarks"
+        ><img
+          src="https://img.shields.io/gitter/room/dypsilon/frontend-dev-bookmarks.svg?style=flat-square&amp;maxAge=2592000"
+          alt="Gitter"
+      /></a>
+      <a href="https://twitter.com/FrontendDir"
+        ><img
+          src="https://img.shields.io/badge/follow-twitter-55acee.svg?style=flat-square"
+          alt="Twitter"
+      /></a>
+    </p>
+    <table style="width: 58%">
+      <colgroup>
+        <col style="width: 58%" />
+      </colgroup>
+      <tbody>
+        <tr class="odd">
+          <td>
+            + <strong><a href="https://babeljs.io/">Babel</a></strong
+            >: Babel is a generic multi-purpose compiler for JavaScript. Using
+            Babel you can use (and create) the next generation of JavaScript, as
+            well as the next generation of JavaScript tooling. +
+            <strong
+              ><a
+                href="http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html"
+                >Full-Stack Redux Tutorial</a
+              ></strong
+            >: We will go through all the steps of constructing a Node+Redux
+            backend and a React+Redux frontend for a real-world application,
+            using test-first development. +
+            <strong
+              ><a
+                href="https://scotch.io/tutorials/javascript-transpilers-what-they-are-why-we-need-them"
+                >JavaScript Transpilers: What They Are &amp; Why We Need Them</a
+              ></strong
+            >: Learn how to use Babel, and what has to do with the future of
+            JavaScript. +
+            <strong
+              ><a href="https://developers.google.com/closure/compiler/"
+                >Closure Compiler</a
+              ></strong
+            >: The Closure Compiler parses your JavaScript, analyzes it, removes
+            dead code and rewrites and minimizes what’s left. It also checks
+            syntax, variable references, and types, and warns about common
+            JavaScript pitfalls. +
+            <strong><a href="https://flowtype.org/">Flow</a></strong
+            >: Flow is a static type checker for JavaScript. It can be used to
+            catch common bugs in JavaScript programs before they run. +
+            <strong
+              ><a href="https://github.com/facebook/jscodeshift"
+                >JSCodeshift</a
+              ></strong
+            >: Codemods are tools that assist large-scale, partially automatable
+            codebase refactoring. JSCodeshift is a toolkit for running codemods
+            over multiple JS files. +
+            <strong
+              ><a
+                href="https://medium.com/airbnb-engineering/turbocharged-javascript-refactoring-with-codemods-b0cae8b326b9"
+                >Turbocharged JavaScript Refactoring with Codemods</a
+              ></strong
+            >: Joe Lencioni describes how they used codemods to transform a
+            large JavaScript code base at AirBnB +
+            <strong>JavaScript Code Linting</strong>: Linting is the process of
+            running a program that will analyse code for potential errors. +
+            <strong><a href="http://eslint.org/">ESLint</a></strong
+            >: The pluggable linting utility for JavaScript and JSX. +
+            <strong><a href="http://jshint.com/">JSHint</a></strong
+            >: JSHint is a tool for more flexible static analysis of JavaScript
+            programs. + <strong><a href="http://jslint.com/">JSLint</a></strong
+            >: JSLint is a tool for detecting errors or problems by static
+            analysis of JavaScript programs. +
+            <strong
+              ><a href="http://jslinterrors.com"
+                >JSLint, JSHint and ESLint Error Explanations</a
+              ></strong
+            >: JSLint Error Explanations is designed to help you improve your
+            JavaScript by understanding the sometimes cryptic error messages
+            produced by JSLint, JSHint and ESLint, and teaching you how to avoid
+            such errors. + <strong>Module Bundlers and Loaders</strong>:
+            Libraries for bundling JavaScript Modules into one or several files.
+            + <strong><a href="http://browserify.org/">Browserify</a></strong
+            >: Browserify lets you require(‘modules’) in the browser by bundling
+            up all of your dependencies. +
+            <strong><a href="https://github.com/mattdesl/budo">Budo</a></strong
+            >: A browserify development server, focused on incremental
+            reloading, LiveReload integration (including CSS injection), and
+            other high-level features. +
+            <strong
+              ><a href="https://www.npmjs.org/package/watchify"
+                >Watchify</a
+              ></strong
+            >: Watch mode for browserify builds. +
+            <strong
+              ><a href="https://github.com/gregersrygg/crapLoader"
+                >CrapLoader</a
+              ></strong
+            >: The goal of crapLoader is to load ads, widgets or any JavaScript
+            code with document.write in it. This library hijacks document.write
+            and delegates the content loaded from each script into the correct
+            position. +
+            <strong
+              ><a href="https://github.com/medikoo/modules-webmake"
+                >Modules Webmake</a
+              ></strong
+            >: A CommonJS module bundler similar to Browserify but much faster
+            due to different requirements finder. +
+            <strong><a href="http://requirejs.org/">Require.js</a></strong
+            >: RequireJS is a JavaScript file and AMD module loader. It is
+            optimized for in-browser use, but it can be used in other JavaScript
+            environments. +
+            <strong
+              ><a href="http://stuk.github.io/require1k/">Require1k</a></strong
+            >: CommonJS require for the browser in 1KB, with no build needed. +
+            <strong><a href="http://rollupjs.org/">Rollup.js</a></strong
+            >: Rollup is a next-generation JavaScript module bundler. Author
+            your app or library using ES2015 modules, then efficiently bundle
+            them up into a single file for use in browsers and Node.js. +
+            <strong
+              ><a href="https://github.com/systemjs/systemjs"
+                >SystemJS</a
+              ></strong
+            >: Universal dynamic module loader - loads ES6 modules, AMD,
+            CommonJS and global scripts in the browser and NodeJS. Works with
+            both Traceur and Babel. +
+            <strong
+              ><a
+                href="http://www.sitepoint.com/modular-javascript-systemjs-jspm/"
+                >Modular JavaScript: A Beginners Guide to SystemJS &amp; JSPM</a
+              ></strong
+            >: The combination of jspm and SystemJS provides a unified way of
+            installing and loading dependencies. +
+            <strong
+              ><a href="https://github.com/anodynos/urequire"
+                >URequire</a
+              ></strong
+            >: The Ultimate JavaScript Module Builder &amp; Automagical Task
+            Runner. +
+            <strong><a href="http://webpack.github.io/">Webpack</a></strong
+            >: Webpack is a module bundler. It takes modules with dependencies
+            and generates static assets representing those modules. +
+            <strong
+              ><a
+                href="https://medium.com/seek-ui-engineering/block-element-modifying-your-javascript-components-d7f99fcab52b"
+                >Block, Element, Modifying Your JavaScript Components</a
+              ></strong
+            >: Mark Dalgleish is discussing how to organize React code with BEM
+            and build everything with Webpack. +
+            <strong
+              ><a
+                href="http://dapperdeveloper.com/2016/05/18/developing-with-docker-and-webpack/"
+                >Developing with Docker and Webpack</a
+              ></strong
+            >: Chris Harrington explains how to create a development environment
+            with Webpack and Docker to match the production as much as possible.
+            +
+            <strong
+              ><a
+                href="http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html"
+                >Full-Stack Redux Tutorial</a
+              ></strong
+            >: We will go through all the steps of constructing a Node+Redux
+            backend and a React+Redux frontend for a real-world application,
+            using test-first development. +
+            <strong
+              ><a
+                href="http://www.davidmeents.com/how-to-set-up-webpack-image-loader/"
+                >How to Set Up Webpack Image Loader</a
+              ></strong
+            >: This brief tutorial will help you set up an image loader in
+            Webpack. +
+            <strong
+              ><a
+                href="http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/"
+                >The SoundCloud Client in React + Redux</a
+              ></strong
+            >: After finishing this step by step tutorial you will be able to
+            author your own React + Redux project with Webpack and Babel. +
+            <strong
+              ><a href="http://survivejs.com/webpack/"
+                >Webpack from Apprentice to Master</a
+              ></strong
+            >: The purpose of this guide is to help you get started with Webpack
+            and then go beyond basics. +
+            <strong><a href="http://www.webpackbin.com/">WebpackBin</a></strong
+            >: A webpack code sandbox. +
+            <strong
+              ><a href="http://devlog.disco.zone/2016/06/01/webpack/"
+                >Why I think Webpack is the Right Approach To Build Pipelines</a
+              ></strong
+            >: Thomas Boyt compares how Grunt, Gulp, Broccoli and Webpack
+            discover dependencies. +
+            <strong
+              ><a href="https://github.com/facebook/regenerator"
+                >Regenerator</a
+              ></strong
+            >: This package implements a source transformation that takes the
+            proposed syntax for generators/yield from future versions of JS and
+            spits out efficient JS-of-today (ES5) that behaves the same way.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h1 id="license">License</h1>
+    <p>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        ><img
+          alt="Creative Commons License"
+          style="border-width: 0"
+          src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a
+      ><br />This work is licensed under a
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International License</a
+      >.
+    </p>
+    <p>
+      Please provide a link back to this repository. This is not necessary for
+      GitHub forks.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-wagtail-awesome">
+      Awesome Wagtail
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+      <a href="https://wagtail.io/"
+        ><img
+          src="https://cdn.rawgit.com/springload/awesome-wagtail/ac912cc661a7099813f90545adffa6bb3e75216c/logo.svg"
+          width="104"
+          align="right"
+          alt="Wagtail"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        A curated list of awesome packages, articles, and other cool resources
+        from the Wagtail community. <a href="https://wagtail.io/">Wagtail</a> is
+        a Python CMS powered by Django, focusing on flexibility and user
+        experience.
+      </p>
+    </blockquote>
+    <p>
+      <em
+        >You might also like
+        <a href="https://github.com/wsvincent/awesome-django">Awesome Django</a>
+        and
+        <a href="https://github.com/vinta/awesome-python">Awesome Python</a>.
+        :snake:</em
+      >
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#general-resources">General resources</a></li>
+      <li>
+        <a href="#apps">Apps</a>
+        <ul>
+          <li><a href="#bloggingnews">Blogging/news</a></li>
+          <li>
+            <a href="#rich-text-editor-extensions"
+              >Rich text editor extensions</a
+            >
+          </li>
+          <li><a href="#widgets">Widgets</a></li>
+          <li><a href="#streamfield">StreamField</a></li>
+          <li><a href="#static-site-generation">Static site generation</a></li>
+          <li><a href="#settings-management">Settings management</a></li>
+          <li><a href="#e-commerce">E-commerce</a></li>
+          <li><a href="#seo-and-smo">SEO and SMO</a></li>
+          <li><a href="#analytics">Analytics</a></li>
+          <li><a href="#customer-experience">Customer experience</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#media">Media</a></li>
+          <li><a href="#translations">Translations</a></li>
+          <li><a href="#forms">Forms</a></li>
+          <li><a href="#testing">Testing</a></li>
+          <li><a href="#misc">Misc</a></li>
+        </ul>
+      </li>
+      <li><a href="#tools">Tools</a></li>
+      <li>
+        <a href="#resources">Resources</a>
+        <ul>
+          <li><a href="#getting-started">Getting started</a></li>
+          <li><a href="#articles">Articles</a></li>
+          <li><a href="#recipes">Recipes</a></li>
+          <li><a href="#presentations">Presentations</a></li>
+          <li><a href="#podcasts">Podcasts</a></li>
+          <li><a href="#videos">Videos</a></li>
+          <li><a href="#showcases">Showcases</a></li>
+          <li><a href="#lists">Lists</a></li>
+          <li><a href="#for-editors">For Editors</a></li>
+        </ul>
+      </li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#open-source-sites">Open-source sites</a></li>
+    </ul>
+    <h2 id="general-resources">General resources</h2>
+    <ul>
+      <li><a href="https://wagtail.io/">Official site</a></li>
+      <li>
+        <a href="https://github.com/wagtail/wagtail">GitHub repository</a>
+      </li>
+      <li><a href="https://twitter.com/wagtailcms">Twitter account</a></li>
+      <li>
+        <a href="https://github.com/wagtail/wagtail/projects/1">Roadmap</a>
+      </li>
+      <li>
+        <a href="https://pypi.org/pypi?%3Aaction=list_classifiers"
+          >PyPI classifiers for Wagtail</a
+        >
+      </li>
+      <li><a href="#resources">Other resources</a></li>
+    </ul>
+    <h2 id="apps">Apps</h2>
+    <h3 id="bloggingnews">Blogging/news</h3>
+    <ul>
+      <li>
+        <a href="https://puput.readthedocs.org/">Puput</a> - Puput is a powerful
+        and simple Django app to manage a blog. It uses the awesome Wagtail CMS
+        as content management system.
+      </li>
+      <li>
+        <a href="https://gitlab.com/thelabnyc/wagtail_blog">wagtail_blog</a> - A
+        WordPress-like blog app implemented in Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/takeflight/wagtailnews">wagtailnews</a> - A
+        plugin for Wagtail that provides news / blogging functionality.
+      </li>
+      <li>
+        <a href="https://github.com/Tivix/wagtail-blog-app">wagtail-blog-app</a>
+        - A blog application for the Wagtail Django CMS.
+      </li>
+      <li>
+        <a href="https://github.com/chrisdev/django-wagtail-feeds"
+          >Django Wagtail Feeds</a
+        >
+        - Add support for RSS Feeds, Facebook Instant Articles and Apple News
+        Publisher to your Wagtail CMS Projects.
+      </li>
+      <li>
+        <a href="https://github.com/olopost/snotra_rss">Snotra_RSS</a> -
+        Snotra_RSS is an Atom and RSS news aggregator app for Wagtail.
+      </li>
+    </ul>
+    <h3 id="rich-text-editor-extensions">Rich text editor extensions</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/takeflight/wagtail-readability"
+          >wagtail-readability</a
+        >
+        - Test how readable the content you enter into Wagtail is.
+      </li>
+      <li>
+        <a href="https://github.com/springload/wagtailembedder"
+          >wagtailembedder</a
+        >
+        - Snippets embedder for Wagtail richtext fields.
+      </li>
+      <li>
+        <a href="https://github.com/isotoma/wagtailtinymce">Wagtail TinyMCE</a>
+        - A TinyMCE editor integration for Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/jaydensmith/wagtailfroala"
+          >Wagtail Froala</a
+        >
+        - Extends Wagtail to use the Froala WYSIWYG editor in
+        RichTextField/RichTextBlock.
+      </li>
+      <li>
+        <a href="https://github.com/dperetti/Django-wagtailmedium"
+          >Wagtail Medium Editor</a
+        >
+        - A customizable Medium Editor for Wagtail, with link anchors support.
+      </li>
+      <li>
+        <a href="https://github.com/springload/wagtaildraftail"
+          >WagtailDraftail</a
+        >
+        – Draft.js editor for Wagtail, built upon
+        <a href="https://github.com/springload/draftail">Draftail</a> and
+        <a href="https://github.com/springload/draftjs_exporter"
+          >draftjs_exporter</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/vixdigital/wagtail-readinglevel"
+          >wagtail-readinglevel</a
+        >
+        – Wagtail plugin to determine the reading level of text input into a
+        rich text field.
+      </li>
+    </ul>
+    <h3 id="widgets">Widgets</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/springload/wagtailgmaps">wagtailgmaps</a> -
+        Simple Google Maps address formatter for Wagtail fields.
+      </li>
+      <li>
+        <a href="https://github.com/Frojd/wagtail-geo-widget"
+          >Wagtail-Geo-Widget</a
+        >
+        - Google Maps widget for the GeoDjango PointField field in Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/icpac-igad/wagtail-leaflet-widget"
+          >wagtail-leaflet-widget</a
+        >
+        - A Leaflet JS - OSM based wagtail geo-location widget.
+      </li>
+      <li>
+        <a href="https://github.com/torchbox/wagtail-markdown"
+          >wagtail-markdown</a
+        >
+        - Markdown fields and blocks for Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/wagtail/wagtail-autocomplete"
+          >wagtail-autocomplete</a
+        >
+        - Autocompleting choosers for <code>ForeignKey</code>,
+        <code>ParentalKey</code>, and <code>ManyToMany</code> fields.
+      </li>
+      <li>
+        <a href="https://github.com/ixc/wagtail-instance-selector"
+          >wagtail-instance-selector</a
+        >
+        - A <code>ForeignKey</code> widget to create and select related items.
+        Similar to Django’s <code>raw_id_fields</code>.
+      </li>
+      <li>
+        <a href="https://github.com/wagtail/wagtail-generic-chooser"
+          >wagtail-generic-chooser</a
+        >
+        - provides base classes for building chooser popups and form widgets for
+        the Wagtail admin, matching the look and feel of Wagtail’s built-in
+        choosers for pages, documents, snippets and images.
+      </li>
+      <li>
+        <a href="https://github.com/spapas/wagtail-multi-upload"
+          >wagtail-multi-upload</a
+        >
+        - allows uploading of multiple related images for a page.
+      </li>
+      <li>
+        <a href="https://github.com/marteinn/wagtail-color-panel"
+          >wagtail-color-panel</a
+        >
+        - Introduces panels for selecting colors in Wagtail.
+      </li>
+    </ul>
+    <h3 id="streamfield">StreamField</h3>
+    <ul>
+      <li>
+        <a href="https://gitlab.com/alexgleason/wagtailfontawesome"
+          >Wagtail FontAwesome</a
+        >
+        - Add FontAwesome icons to StreamField.
+      </li>
+      <li>
+        <a href="https://github.com/springload/wagtailblocks"
+          >Wagtail Commonblocks</a
+        >
+        - Common StreamField blocks for Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/City-of-Helsinki/wagtail-svgmap"
+          >Wagtail SVGmap</a
+        >
+        - ImageMap functionality for Wagtail through inline SVGs.
+      </li>
+      <li>
+        <a href="https://github.com/heymonkeyriot/wagtailclearstream"
+          >Wagtail ClearStream</a
+        >
+        - An app to make Wagtail’s StreamField more modular.
+      </li>
+      <li>
+        <a href="https://github.com/UWKM/uwkm_streamfields"
+          >UWKM Streamfields</a
+        >
+        – A basic set of Wagtail StreamField blocks for fun and profit.
+      </li>
+      <li>
+        <a href="https://github.com/cfpb/wagtail-inventory"
+          >wagtail-inventory</a
+        >
+        - Search Wagtail pages by the StreamField blocks they contain.
+      </li>
+      <li>
+        <a href="https://github.com/FlipperPA/wagtailcodeblock"
+          >Wagtail Code Block</a
+        >
+        - StreamField code blocks for the Wagtail CMS with real-time PrismJS
+        Syntax Highlighting.
+      </li>
+      <li>
+        <a href="https://github.com/ibrahimawadhamid/wagtail_blocks"
+          >Wagtail Blocks</a
+        >
+        - A Collection of awesome Wagtail CMS stream-field blocks and Charts.
+      </li>
+      <li>
+        <a href="https://github.com/davidcondenl/wagtailuiplus"
+          >Wagtail UI Plus</a
+        >
+        - Several UI improvements to the Wagtail editor interface for
+        StreamFields and StreamBlocks.
+      </li>
+      <li>
+        <a href="https://github.com/AccordBox/wagtail_cache_block"
+          >Wagtail Cache Block</a
+        >
+        - A templatetag which add HTML fragment cache to your StreamField block
+      </li>
+    </ul>
+    <h3 id="static-site-generation">Static site generation</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/moorinteractive/wagtail-bakery"
+          >Wagtail-bakery</a
+        >
+        - A set of helpers for baking your Django Wagtail site out as flat
+        files.
+      </li>
+      <li>
+        <a href="https://github.com/tomdyson/wagtail-netlify"
+          >Wagtail-Netlify</a
+        >
+        - Easilly publish your statically rendered Wagtail site to Netlify.
+      </li>
+    </ul>
+    <h3 id="settings-management">Settings management</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/MechanisM/wagtail-constance"
+          >Wagtail-Constance</a
+        >
+        - django-constance integration for Wagtail CMS.
+      </li>
+      <li>
+        <a href="https://github.com/cfpb/wagtail-flags">Wagtail-Flags</a> -
+        Feature flags for Wagtail sites.
+      </li>
+    </ul>
+    <h3 id="e-commerce">E-commerce</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/SableWalnut/wagtailinvoices"
+          >wagtailinvoices</a
+        >
+        - A Wagtail module for creating invoices.
+      </li>
+      <li>
+        <a href="https://github.com/JamesRamm/longclaw">longclaw</a> - A shop
+        template for Wagtail CMS.
+      </li>
+      <li>
+        <a href="https://github.com/LabD/django-oscar-wagtail"
+          >django-oscar-wagtail</a
+        >
+        - Wagtail integration for Oscar Commerce (or Oscar Commerce integration
+        for Wagtail?).
+      </li>
+    </ul>
+    <h3 id="seo-and-smo">SEO and SMO</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/takeflight/wagtail-metadata"
+          >wagtail-metadata</a
+        >
+        - A tool to assist with metadata for social media and search engines.
+      </li>
+      <li>
+        <a href="https://github.com/bashu/wagtail-metadata-mixin"
+          >wagtail-metadata-mixin</a
+        >
+        - OpenGraph, Twitter Card and Google+ snippet tags for Wagtail CMS
+        pages.
+      </li>
+      <li>
+        <a href="https://github.com/takeflight/wagtail-schema.org"
+          >wagtail-schema.org</a
+        >
+        - Schema.org JSON-LD tags for Wagtail sites.
+      </li>
+      <li>
+        <a
+          href="https://github.com/candylabshq/wagtail-opengraph-image-generator"
+          >wagtail-opengraph-image-generator</a
+        >
+        - Assists you in automatically creating Open Graph images for your
+        Wagtail pages.
+      </li>
+      <li>
+        <a href="https://github.com/Frojd/wagtail-redirect-importer"
+          >wagtail-redirect-importer</a
+        >
+        - Your friendly neighborhood importer that lets you import redirects
+        from different tabular data formats, such as .csv and .xls
+      </li>
+      <li>
+        <a href="https://github.com/rinti/wagtail-meta-preview"
+          >wagtail-meta-preview</a
+        >
+        - Adds ability to get share previews for Facebook, Twitter and Google in
+        the Wagtail admin.
+      </li>
+      <li>
+        <a href="https://github.com/Aleksi44/wagtailyoast">Wagtail Yoast</a> - A
+        tool to improve readability of your texts with SEO recommendations.
+      </li>
+    </ul>
+    <h3 id="analytics">Analytics</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/tomdyson/wagalytics">Wagtail Analytics</a> -
+        A Google Analytics dashboard in your Wagtail admin.
+      </li>
+    </ul>
+    <h3 id="customer-experience">Customer experience</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/torchbox/wagtail-experiments"
+          >Wagtail Experiments</a
+        >
+        – A/B testing for Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/LabD/wagtail-personalisation"
+          >Wagtail Personalisation</a
+        >
+        - Personalisation module, enabling editors to create customised pages -
+        or parts of pages - based on segments whose rules are configured
+        directly in the admin interface.
+      </li>
+    </ul>
+    <h3 id="security">Security</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/springload/wagtailenforcer"
+          >wagtailenforcer</a
+        >
+        - If you need to enforce security protocols on your Wagtail site you’ve
+        come to the right place.
+      </li>
+      <li>
+        <a href="https://github.com/ahopkins/wagtail-yubikey"
+          >wagtail-yubikey</a
+        >
+        - Enable YubiKey two factor authentication on Wagtail admin panel.
+      </li>
+      <li>
+        <a href="https://github.com/labd/wagtail-2fa">wagtail-2fa</a> - Add
+        two-factor authentication to Wagtail by integrating it with django-otp.
+      </li>
+    </ul>
+    <h3 id="media">Media</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/torchbox/wagtailmedia">wagtailmedia</a> - A
+        Wagtail module for managing video and audio files within the admin.
+      </li>
+      <li>
+        <a href="https://github.com/marteinn/wagtail-alt-generator"
+          >Wagtail Alt Generator</a
+        >
+        - A module for generating image description and tags based on computer
+        vision.
+      </li>
+      <li>
+        <a href="https://github.com/filepreviews/wagtail-filepreviews"
+          >Wagtail FilePreviews</a
+        >
+        - Extend Wagtail’s Documents with image previews and metadata from
+        FilePreviews.io.
+      </li>
+      <li>
+        <a href="https://github.com/fourdigits/wagtail_textract"
+          >Wagtail-Textract</a
+        >
+        - Make Wagtail search Documents contents (PDF, Excel and Word, etc.).
+      </li>
+      <li>
+        <a href="https://github.com/ptrck/wagtail-lazyimages"
+          >Wagtail-Lazyimages</a
+        >
+        - A plugin that generates tiny blurry placeholder images for lazy
+        loading Wagtail images medium.com style.
+      </li>
+      <li>
+        <a href="https://github.com/jacobtoppm/wagtail-image-import"
+          >Wagtail Image Import</a
+        >
+        - A plugin for importing images from Google Drive.
+      </li>
+      <li>
+        <a href="https://github.com/Aleksi44/wagtailsvg">Wagtail SVG</a> - A
+        Wagtail module for managing SVG files within the admin.
+      </li>
+      <li>
+        <a href="https://github.com/kevinhowbrook/wagtail-makeup"
+          >Wagtail Makeup</a
+        >
+        - A plugin that replaces all your images with
+        <a href="https://unsplash.com/">Unsplash</a> images.
+      </li>
+    </ul>
+    <h3 id="translations">Translations</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/infoportugal/wagtail-modeltranslation"
+          >Wagtail Modeltranslation</a
+        >
+        - Simple app containing a mixin model that integrates
+        <a href="https://github.com/deschler/django-modeltranslation"
+          >django-modeltranslation</a
+        >
+        into Wagtail panels system.
+      </li>
+      <li>
+        <a href="https://github.com/LUKKIEN/wagtailtrans">wagtailtrans</a> - A
+        Wagtail add-on for supporting multilingual sites.
+      </li>
+    </ul>
+    <h3 id="forms">Forms</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/takeflight/wagtailpolls">wagtailpolls</a> -
+        A plugin for adding polling capabilities to the Wagtail CMS.
+      </li>
+      <li>
+        <a href="https://github.com/torchbox/wagtailsurveys">Wagtailsurveys</a>
+        - A module for Wagtail which provides the ability to build polls and
+        surveys.
+      </li>
+      <li>
+        <a href="https://github.com/springload/wagtail-django-recaptcha"
+          >Wagtail ReCaptcha</a
+        >
+        - wagtail-django-captcha provides an easy way to integrate the
+        <a href="https://github.com/praekelt/django-recaptcha"
+          >django-recaptcha</a
+        >
+        field when using the Wagtail formbuilder.
+      </li>
+      <li>
+        <a href="https://github.com/acarasimon96/wagtail-django-simple-captcha"
+          >Wagtail Simple Captcha</a
+        >
+        - A self-hosted alternative to Wagtail ReCaptcha that easily integrates
+        a
+        <a href="https://github.com/mbi/django-simple-captcha"
+          >django-simple-captcha</a
+        >
+        field into the Wagtail form builder.
+      </li>
+      <li>
+        <a href="https://github.com/AccentDesign/wagtailstreamforms"
+          >wagtailstreamforms</a
+        >
+        - Build forms in Wagtail’s admin for use in streamfields.
+      </li>
+      <li>
+        <a href="https://github.com/KalobTaulien/wagtail-contact-reply"
+          >wagtail-contact-reply</a
+        >
+        - Reply directly to form submissions from the Wagtail admin
+      </li>
+      <li>
+        <a href="https://github.com/kevinhowbrook/wagtail-jotform"
+          >Wagtail JotForm</a
+        >
+        - Embeddable Jotform forms for Wagtail pages.
+      </li>
+    </ul>
+    <h3 id="testing">Testing</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/takeflight/wagtail-linkchecker"
+          >wagtail-linkchecker</a
+        >
+        - A tool to assist with finding broken links on your Wagtail site.
+      </li>
+      <li>
+        <a href="https://github.com/takeflight/wagtail-accessibility"
+          >Wagtail Accessibility</a
+        >
+        – A plugin to assist with accessibility when developing in Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/mvantellingen/wagtail-factories"
+          >Wagtail Factories</a
+        >
+        - Factory boy classes for Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/harrislapiroff/wagtail-foliage"
+          >Wagtail Foliage</a
+        >
+        - Utilities for programmatically building page trees in Wagtail.
+      </li>
+    </ul>
+    <h3 id="modeladmin">Modeladmin</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/ixc/wagtail-admin-list-controls"
+          >wagtail-admin-list-controls</a
+        >
+        - Adds advanced search, ordering and layout controls to Wagtail’s
+        modeladmin list views.
+      </li>
+    </ul>
+    <h3 id="misc">Misc</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/rkhleics/wagtailmenus">wagtailmenus</a> - An
+        extension for Torchbox’s Wagtail CMS to help you manage and render
+        multi-level navigation and simple flat menus in a consistent, flexible
+        way.
+      </li>
+      <li>
+        <a href="https://gitlab.com/alexgleason/wagtailerrorpages"
+          >Wagtail Error Pages</a
+        >
+        - Pretty, smart, customizable error pages for Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/moorinteractive/wagtail-themes"
+          >Wagtail Themes</a
+        >
+        - Site-specific theme loader for Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/cfpb/wagtail-sharing">Wagtail Sharing</a> –
+        Easier sharing of Wagtail drafts.
+      </li>
+      <li>
+        <a href="https://github.com/wharton/wagtailgridder">Wagtail Gridder</a>
+        - Grid card layout similar to Google image search results, with an
+        expanded area for card details.
+      </li>
+      <li>
+        <a href="https://github.com/wagtail/wagtail-condensedinlinepanel"
+          >Wagtail Condensed Inline Panel</a
+        >
+        - Drop-in replacement for Wagtail’s InlinePanel suited for large number
+        of inlines (collapsible with drag and drop support).
+      </li>
+      <li>
+        <a href="https://github.com/linuxsoftware/ls.joyous">Joyous</a> - A
+        calendar application for Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/mwesterhof/wagtail_app_pages"
+          >Wagtail App Pages</a
+        >
+        - Extend Wagtail pages using an actual URL config and django views.
+      </li>
+      <li>
+        <a href="https://github.com/wagtail/wagtail-transfer"
+          >Wagtail Transfer</a
+        >
+        - An official extension for Wagtail allowing content to be transferred
+        between multiple instances of a Wagtail project
+      </li>
+      <li>
+        <a href="https://github.com/torchbox/wagtail-import-export"
+          >Wagtail Import Export</a
+        >
+        - Import/Export pages between Wagtail instances.
+      </li>
+      <li>
+        <a href="https://github.com/berkalpyakici/wagtail-import-export-tool"
+          >Wagtail Import/Export Tool</a
+        >
+        - Refactor of
+        <a href="https://github.com/torchbox/wagtail-import-export"
+          >Wagtail Import Export</a
+        >. This tool supports importing/exporting images, documents, and
+        snippets that are used on imported/exported pages.
+      </li>
+      <li>
+        <a href="https://github.com/jberghoef/wagtail-tag-manager"
+          >Wagtail Tag Manager</a
+        >
+        - A Wagtail addon that allows for easier and GDPR compliant
+        administration of scripts and tags.
+      </li>
+      <li>
+        <a href="https://github.com/coderedcorp/wagtail-cache">Wagtail Cache</a>
+        - A simple page cache for Wagtail using the Django cache middleware.
+      </li>
+      <li>
+        <a href="https://github.com/tr11/wagtail-graphql">Wagtail GraphQL</a> -
+        App to automatically add GraphQL support to a Wagtail website.
+      </li>
+      <li>
+        <a href="https://github.com/elton2048/wagtail-orderable"
+          >Wagtail Orderable</a
+        >
+        - Mixin support for drag-and-drop ordering in admin panel.
+      </li>
+      <li>
+        <a href="https://github.com/KalobTaulien/wagtail-livepreview"
+          >Wagtail Live Preview</a
+        >
+        - Live page previews beside your content.
+      </li>
+      <li>
+        <a href="https://github.com/adinhodovic/wagtail-resume"
+          >Wagtail Resume</a
+        >
+        – A Wagtail project made to simplify creation of resumes for developers.
+      </li>
+      <li>
+        <a href="https://github.com/torchbox/wagtail-content-import"
+          >Wagtail Content Import</a
+        >
+        - Import content from Google Docs or Docx into StreamFields, using a
+        customisable mapping system.
+      </li>
+      <li>
+        <a href="https://github.com/Frojd/wagtail-trash">Wagtail Trash</a> -
+        Will place pages in a trash can from where they can be restored instead
+        of being permanently deleted.
+      </li>
+      <li>
+        <a href="https://github.com/donhauser/wagtail-pdf">Wagtail PDF View</a>
+        - Render Wagtail pages and models as PDF document using Weasyprint or
+        LaTeX.
+      </li>
+    </ul>
+    <h2 id="tools">Tools</h2>
+    <h3 id="templates-starter-kits">Templates &amp; Starter Kits</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/chrisdev/wagtail-cookiecutter-foundation"
+          >Wagtail Cookiecutter Foundation</a
+        >
+        - A Cookiecutter template for Wagtail CMS using Zurb Foundation 6.
+      </li>
+      <li>
+        <a href="https://github.com/heymonkeyriot/beginner-wagtail"
+          >Beginner Wagtail Cookiecutter</a
+        >
+        – A super simple implementation of Wagtail CMS.
+      </li>
+      <li>
+        <a href="https://github.com/tkjone/starterkit-wagtail"
+          >Wagtail Starter Kit</a
+        >
+        – A cookiecutter complete with wagtail, django layout, vagrant,
+        provisioning scrips, front end build system and more!
+      </li>
+      <li>
+        <a href="https://github.com/Frojd/Wagtail-Boilerplate">Wagtail Pipit</a>
+        – Pipit is a Wagtail boilerplate which aims to provide an easy and
+        modern developer workflow with a React-rendered frontend.
+      </li>
+      <li>
+        <a href="https://github.com/Jean-Zombie/cookiecutter-django-wagtail"
+          >Django Cookiecutter Wagtail</a
+        >
+        – A Django Cookiecutter template with Wagtail. Based on the original
+        ‘Django Cookiecutter’. Features: Docker support using
+        <code>docker-compose</code> for development and production (using
+        Traefik with LetsEncrypt support), customizable PostgreSQL version,
+        Bootstrap 4, media storage using Amazon S3 or Google Cloud Storage and
+        many more.
+      </li>
+      <li>
+        <a href="https://github.com/helixsoftco/wagtail-webpack-dokku/"
+          >wagtail-webpack-dokku</a
+        >
+        - A template with Wagtail, Webpack using django-webpack-loader,
+        Bootstrap 5, production ready for Dokku.
+      </li>
+      <li>
+        <a href="https://github.com/AccordBox/wagtail-bootstrap-blog"
+          >Wagtail bootstrap blog</a
+        >
+        - A Wagtail blog which has Bootstrap theme, supports writing in
+        <code>Markdown</code>, <code>Latex</code>. It also has comment workflow,
+        comment form supports <code>Mention</code> and <code>Emoji</code>.
+        Frontend is built by <code>Webpack</code>, <code>Babel</code> and
+        <code>SCSS</code>.
+      </li>
+      <li>
+        <a href="https://github.com/AccordBox/wagtail-react-blog"
+          >Wagtail react blog</a
+        >
+        - SPA blog built with React, Bootstrap4, Storybook and Wagtail Rest API.
+        It also supports headless preview.
+      </li>
+      <li>
+        <a href="https://github.com/coderedcorp/coderedcms">CodeRed CMS</a> - a
+        professionally supported WordPress alternative for building marketing
+        websites. Create pages, blogs, forms, and every Bootstrap 4 component in
+        the wagtail admin out-of-the-box!
+        <a href="https://www.coderedcorp.com/cms/">Learn more</a> or
+        <a href="https://www.youtube.com/watch?v=U1Y-jgeGh7g&amp;t=228s"
+          >watch the lightning talk</a
+        >.
+      </li>
+    </ul>
+    <h2 id="resources">Resources</h2>
+    <h3 id="getting-started">Getting started</h3>
+    <ul>
+      <li>
+        <a
+          href="https://wagtail.io/blog/getting-started-wagtail-newcomers-perspective/"
+          >Getting started in Wagtail, a newcomer’s perspective</a
+        >
+        - Having used Drupal almost exclusively as my main tool of choice for a
+        while now, I was asked to put together a build using Wagtail. By
+        <span class="citation" data-cites="kiwimind">[@kiwimind]</span
+        >(https://twitter.com/kiwimind).
+      </li>
+      <li>
+        <a
+          href="https://makina-corpus.com/blog/metier/2016/presentation-de-wagtail-le-dernier-cms-django"
+          >Présentation de Wagtail, le dernier CMS Django</a
+        >
+        - Wagtail est un CMS relativement récent dans l’écosystème Django. Pour
+        autant, son jeune âge ne l’empêche pas de posséder de nombreuses
+        fonctionnalités que nous découvrirons dans cet article.
+      </li>
+      <li>
+        <a href="https://vix.digital/insights/getting-started-wagtail/"
+          >Getting Started With Wagtail</a
+        >
+        - Working extensively with Wagtail and the surrounding community, we
+        have discovered a range of common pitfalls developers run into when
+        beginning to deliver with Wagtail.
+      </li>
+    </ul>
+    <h3 id="articles">Articles</h3>
+    <ul>
+      <li>
+        <a
+          href="https://posts-by.lb.ee/dev-wagtail-extending-the-functionality-of-email-forms-232c8469ac97"
+          >Extending The Functionality of Email Forms in Wagtail</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.caktusgroup.com/blog/2016/02/15/wagtail-2-steps-adding-pages-outside-cms/"
+          >Wagtail: 2 Steps for Adding Pages Outside of the CMS</a
+        >
+      </li>
+      <li>
+        <a href="https://jordi.nz/code-blocks-wagtail-using-pygments/"
+          >Code blocks for Wagtail using Pygments</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://filepreviews.io/blog/2017/04/20/adding-document-previews-to-wagtail/"
+          >Adding document previews to Wagtail CMS</a
+        >
+      </li>
+      <li>
+        <a href="https://www.accordbox.com/blog/wagtail-tutorials/"
+          >Wagtail Tutorials: Build Blog Step by Step</a
+        >
+        - The tutorials teach you how to create a standard blog from scratch
+        step by step.
+      </li>
+      <li>
+        <a
+          href="https://www.accordbox.com/blog/python-cms-framework-review-wagtail-vs-django-cms/"
+          >Python CMS Framework Review: Wagtail vs Django-CMS</a
+        >
+        - Talk about the difference between Django-CMS and Wagtail, the two most
+        popular CMS framework in Python world.
+      </li>
+      <li>
+        <a href="https://vix.digital/insights/deploying-wagtail-production/"
+          >Deploying Wagtail In Production</a
+        >
+      </li>
+      <li>
+        <a href="https://vix.digital/insights/setting-foundation-sass-wagtail/"
+          >Setting Up Foundation Sass With Wagtail</a
+        >
+      </li>
+      <li>
+        <a href="https://wagtail.io/blog/upgrading-to-wagtail-2/"
+          >Upgrading to Wagtail 2.0</a
+        >
+        – Wagtail 2.0 is one of our biggest releases to date.
+      </li>
+      <li>
+        <a href="https://thib.me/getting-started-with-draftail-extensions"
+          >Getting started with Draftail extensions</a
+        >
+        – Do you want to write extensions for Draftail? This is a good place to
+        start.
+      </li>
+      <li>
+        <a
+          href="https://parbhatpuri.com/amplify-wagtail-django-site-urls-part-1.html"
+          >Amplify a Wagtail/Django site</a
+        >
+        - Prepare you Wagtail site for Accelerated Mobile Pages (AMP).
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@kevinhowbrook/migrating-your-drupal-content-to-wagtail-d43bb34529e8"
+          >Migrating your Drupal content to Wagtail</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://timonweb.com/tutorials/how-to-add-buttons-to-modeladmin-index-view-in-wagtail-cms/"
+          >How to Add Buttons to ModelAdmin Index View</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://timonweb.com/tutorials/prevent-users-from-creating-certain-page-types-in-wagtail-cms/"
+          >How to Prevent Users from Creating Pages by Type</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@kevinhowbrook/drupal-front-end-wtf-wagtail-front-end-ftw-17712628df3e"
+          >Drupal Front End WTF, Wagtail Front End FTW</a
+        >
+        - Comparing Drupal and Wagtail Markup and approach to each CMS
+      </li>
+      <li>
+        <a
+          href="https://www.accordbox.com/blog/wagtail-tutorial-12-how-create-and-manage-menus-wagtail-application/"
+          >How to Create and Manage Menus of Wagtail application</a
+        >
+      </li>
+      <li>
+        <a href="https://pythoneatstail.com">PythonEatsTail</a> - Complete
+        written and video tutorials to create a Wagtail site with multiple
+        languages, authentication and more
+      </li>
+    </ul>
+    <h3 id="recipes">Recipes</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/LUKKIEN/oscar-wagtail-demo"
+          >Oscar Wagtail demo project</a
+        >
+        - A Django recipe for integrating Oscar E-commerce into a Wagtail CMS
+        application.
+      </li>
+      <li>
+        <a href="https://github.com/spapas/wagtail-faq"
+          >Serafeim’s Wagtail FAQ</a
+        >
+        - Answers and recipes for Wagtail
+      </li>
+    </ul>
+    <h3 id="presentations">Presentations</h3>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=glIIF-kBXf0"
+          >An Introduction to Wagtail</a
+        >
+        by Eloise “Ducky” Macdonald-Meyer - This talk is an introduction to
+        Wagtail, a content management system built on the Python web framework,
+        Django.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=6j0NVq6g4FE"
+          >DjangoCon US 2015 - Wagtail - Yet Another Django CMS</a
+        >
+        by Tom Dyson - Tom will explain why his agency decided to build a new
+        CMS, share some lessons learned in running a growing open source
+        project, and outline Wagtail’s roadmap to version 2 and beyond.
+        <a
+          href="https://speakerdeck.com/tomdyson/wagtail-yet-another-cms-djangocon-us-2015"
+          >Slide deck</a
+        >.
+      </li>
+      <li>
+        <a
+          href="https://docs.google.com/presentation/d/19EGWFtfHovHSAvyHCnLbxK50IAR2o7WwKd709cqi9p4/edit"
+          >Wellington Wagtail CMS Meetup - Meet Wagtail</a
+        >
+        by Josh, Jordi and Rich, from the Springload dev team - An introductory
+        session to Wagtail to showcase the main features it has to offer.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=kqAKiouk1lY"
+          >DjangoCon US 2016 - Atomic Wagtail</a
+        >
+        by Kurt Wall – Brad Frost’s atomic design principles are taking the way
+        we design the web by storm. I’ll explain what Wagtail is, how you can
+        use it with atomic design principles, and some hurdles you might run
+        into along the way with suggestions on how to help.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=3UC1MNFOjEI"
+          >PyCon Australia – Comparing Wagtail, Django CMS and Mezzanine</a
+        >
+        by Adam Brenecki – This talk explores the different approaches,
+        strengths and weaknesses of each CMS, and what they mean for you as a
+        developer and for your content editors.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=yRmZ6WUfoOc"
+          >Wagtail — еще одна CMS на Django</a
+        >
+        by Mikalai Radchuk - This talk is an introduction to Wagtail in Russian.
+      </li>
+      <li>
+        <a href="https://youtu.be/-Qii_AyQsxE?t=2m21s"
+          >Wagtail &amp; Agile – Wagtail Space 2017</a
+        >
+        by Edd Baldry.
+      </li>
+      <li>
+        <a href="https://youtu.be/-Qii_AyQsxE?t=38m13s"
+          >Deploy Wagtail to the Divio Cloud – Wagtail Space 2017</a
+        >
+        by Daniele Procida.
+      </li>
+      <li>
+        <a href="https://youtu.be/OedQi5W3Zho"
+          >All about Wagtail – Wagtail Space 2017</a
+        >
+        by Robin van der Rijst.
+      </li>
+      <li>
+        <a href="https://youtu.be/OedQi5W3Zho?t=19m1s"
+          >Presenting Wagtail Clear StreamField, a modular StreamField app –
+          Wagtail Space 2017</a
+        >
+        by Edd Baldry.
+      </li>
+      <li>
+        <a href="https://youtu.be/OedQi5W3Zho?t=34m37s"
+          >Wagtail Experiments, easy A/B testing for your Wagtail sites –
+          Wagtail Space 2017</a
+        >
+        by Tom Dyson.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=ObM2pUgY-bs"
+          >Wagtail’s preview, a new hope – Wagtail Space 2017</a
+        >
+        by Bertrand Bordage.
+      </li>
+      <li>
+        <a href="https://youtu.be/ObM2pUgY-bs?t=16m38s"
+          >The Zen of Wagtail – Wagtail Space 2017</a
+        >
+        by Matt Westcott.
+      </li>
+      <li>
+        <a href="https://youtu.be/hZcuq8WJVew?t=2m57s"
+          >Plone to Wagtail – Wagtail Space 2017</a
+        >
+        by Coen van der Kamp.
+      </li>
+      <li>
+        <a href="https://youtu.be/hZcuq8WJVew?t=24m9s"
+          >Hundreds of Wagtail in Flight – Wagtail Space 2017</a
+        >
+        by Simon de Haan.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=lh9nmN1mzwQ&amp;t=1937s"
+          >How Google uses Wagtail – Wagtail Space 2018</a
+        >
+        by Kevin Chung.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=lh9nmN1mzwQ&amp;t=2690s"
+          >Introducing Draft.js in Wagtail – Wagtail Space 2018</a
+        >
+        by Thibaud Colas.
+        <a href="https://thib.me/introducing-draft-js-in-wagtail"
+          >Presentation</a
+        >.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=lh9nmN1mzwQ&amp;t=3938s"
+          >Let It Go – Wagtail Space 2018</a
+        >
+        by Matt Wescott.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=lh9nmN1mzwQ&amp;t=5184s"
+          >Developing Solutions for Girls, by Men – Wagtail Space 2018</a
+        >
+        by Lisa Adams.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=P8RUQE7Djdg&amp;t=265s"
+          >Wagtail’s first hatch – Wagtail Space 2018</a
+        >
+        by Bertrand Bordage.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=P8RUQE7Djdg&amp;t=2841s"
+          >The Word Problem – Wagtail Space 2018</a
+        >
+        by Tom Dyson.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=P8RUQE7Djdg&amp;t=3856s"
+          >Wagtail on Divio Cloud – Wagtail Space 2018</a
+        >
+        by Daniele Procida.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=u0CPaXRSOzI&amp;t=152s"
+          >Chopping the head off Wagtail and sticking it back on – Wagtail Space
+          2018</a
+        >
+        by Tony Yates.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=u0CPaXRSOzI&amp;t=400s"
+          >StreamField editor at UWKM – Wagtail Space 2018</a
+        >
+        by Geert jan Hoogeslag.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=u0CPaXRSOzI&amp;t=719s"
+          >Things i learned at Wagtail Space – Wagtail Space 2018</a
+        >
+        by Codie Roelf.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=u0CPaXRSOzI&amp;t=912s"
+          >Fly Wagtail to a PyCon – Wagtail Space 2018</a
+        >
+        by Daniele Procida.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=u0CPaXRSOzI&amp;t=1345s"
+          >Wagtail Performance – Wagtail Space 2018</a
+        >
+        by Michael van Tellingen.
+        <a
+          href="https://gist.github.com/mvantellingen/daebda6abbaa9a5ed0888f886a77fcf0"
+          >Code</a
+        >.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=u0CPaXRSOzI&amp;t=1661s"
+          >Mutliple images uploader – Wagtail Space 2018</a
+        >
+        by Rajeev J Sebastian.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=u0CPaXRSOzI&amp;t=2057s"
+          >Wagtail Space easter egg team demo – Wagtail Space 2018</a
+        >
+        by Lars.
+        <a href="https://github.com/specialunderwear/haunted-wagtail">Code</a>.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=u0CPaXRSOzI&amp;t=2278s"
+          >Wagtail Space 2019 – Wagtail Space 2018</a
+        >
+        by Maarten Kling.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=ICKYMO0YoFI&amp;index=2&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV"
+          >Wagtail in 2018 – Wagtail Space US 2018</a
+        >
+        by Tom Dyson.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=PCkxBNXWM64&amp;index=3&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV"
+          >What the Wagtail Docs Don’t Tell You – Wagtail Space US 2018</a
+        >
+        by Lacey Williams Henschel.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=kkztl9ORUKQ&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV&amp;index=4"
+          >Django Logging for Wagtail – Wagtail Space US 2018</a
+        >
+        by Ryan Sullivan.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=AiOJAKE0M0I&amp;index=5&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV"
+          >Scaling Wagtail for 100 Million Girls – Wagtail Space US 2018</a
+        >
+        by Lisa Adams and Codie Roelf.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=FYqbqsa04T8&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV&amp;index=6"
+          >Using Wagtail to Fight for Press Freedom – Wagtail Space US 2018</a
+        >
+        by Harris Lapiroff.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=OiZScRcluCo&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV&amp;index=7"
+          >Choosing Wagtail for Columbia University – Wagtail Space US 2018</a
+        >
+        by Zarina Mustapha.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=lMCjInjAz-M&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV&amp;index=8"
+          >Running a Multi-Site Newsroom in Wagtail – Wagtail Space US 2018</a
+        >
+        by Ryan Verner.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=N1MeTEPRmJA&amp;index=9&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV"
+          >Wagtail in the Cloud – Wagtail Space US 2018</a
+        >
+        by Daniele Procida.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=HZT14u6WwdY&amp;index=10&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV"
+          >Beheading Wagtail: Wagtail as a Headless CMS – Wagtail Space US
+          2018</a
+        >
+        by Michael Harrison.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=C-tXt5fLj_s&amp;index=11&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV"
+          >Learning Wagtail – Wagtail Space US 2018</a
+        >
+        by Dawn Wages.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=6AXyg6vvMTE&amp;index=12&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV"
+          >Sharing is Caring – Wagtail Space US 2018</a
+        >
+        by Andy Chosak.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=uoxyBIpaXTU&amp;index=13&amp;list=PLEyaio0l1qoGGbXg3XH0205FIF32oO1wV"
+          >Lightning Talks – Wagtail Space US 2018</a
+        >
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=xPPfTvLS7oQ"
+          >Wagtail: когда хочется чего-то приятнее, чем просто Django – Moscow
+          Python Conf++ 2018</a
+        >
+        by Игорь Мосягин
+      </li>
+      <li>
+        <a href="https://youtu.be/MAzZ2lhMhzM?t=592"
+          >The State of Wagtail – Wagtail Space 2019</a
+        >
+        by Tom Dyson.
+      </li>
+      <li>
+        <a href="https://youtu.be/MAzZ2lhMhzM?t=2057"
+          >Image rotation feature – Wagtail Space 2019</a
+        >
+        by Chris Adams. Code.
+      </li>
+      <li>
+        <a href="https://youtu.be/MAzZ2lhMhzM?t=2264"
+          >Debug templates – Wagtail Space 2019</a
+        >
+        by Coen van der Kamp.
+      </li>
+      <li>
+        <a href="https://youtu.be/MAzZ2lhMhzM?t=2567"
+          >Wagtail Headless with HATEOAS – Wagtail Space 2019</a
+        >
+        by Duco Dokter.
+      </li>
+      <li>
+        <a href="https://youtu.be/MAzZ2lhMhzM?t=2926"
+          >Building a Planet Friendly Web (with Wagtail) – Wagtail Space 2019</a
+        >
+        by Chris Adams.
+      </li>
+      <li>
+        <a href="https://youtu.be/MAzZ2lhMhzM?t=4067"
+          >[WIP] The future of (rich text) authoring experiences in Wagtail –
+          Wagtail Space 2019</a
+        >
+        by Thibaud Colas.
+      </li>
+      <li>
+        <a href="https://youtu.be/CSwpj-jyjP4?t=47"
+          >Wagtail &amp; Whatsapp – Wagtail Space 2019</a
+        >
+        by Lisa Adams &amp; Codie Roelf.
+      </li>
+      <li>
+        <a href="https://youtu.be/CSwpj-jyjP4?t=785"
+          >Slack2Wagtail – Wagtail Space 2019</a
+        >
+        by Coen van der Kamp &amp; Lucas Moeskops.
+      </li>
+      <li>
+        <a href="https://youtu.be/CSwpj-jyjP4?t=1634"
+          >Wagtail and Oscar – Wagtail Space 2019</a
+        >
+        by Lars van de Kerkhof.
+      </li>
+      <li>
+        <a href="https://youtu.be/CSwpj-jyjP4?t=3313"
+          >wagtail-textract – Wagtail Space 2019</a
+        >
+        by Kees Hink.
+        <a href="https://github.com/fourdigits/wagtail_textract">Code</a>.
+      </li>
+      <li>
+        <a href="https://youtu.be/CSwpj-jyjP4?t=3468"
+          >Django 2.2 compatibility – Wagtail Space 2019</a
+        >
+        by Matt Wescott.
+      </li>
+      <li>
+        <a href="https://youtu.be/CSwpj-jyjP4?t=3937"
+          >SEO dashboard – Wagtail Space 2019</a
+        >
+        by Janneke Janssen.
+        <a href="https://github.com/LUKKIEN/wagtail-marketing-addons">Code</a>.
+      </li>
+      <li>
+        <a href="https://youtu.be/CSwpj-jyjP4?t=4126"
+          >My First Wagtail Contribution – More formats in RichText Editor –
+          Wagtail Space 2019</a
+        >
+        by Arifin Ibne Matin.
+      </li>
+      <li>
+        <a href="https://youtu.be/CSwpj-jyjP4?t=4404"
+          >Fly, Wagtail, fly! – Wagtail Space 2019</a
+        >
+        by Daniele Procida.
+      </li>
+      <li>
+        <a href="https://youtu.be/YydSbL8gMS4?t=24"
+          >Wagtail &amp; GraphQL – Wagtail Space 2019</a
+        >
+        by Arthur Bayr.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=Ihsrki0d1G8&amp;list=PLEyaio0l1qoEIUFM9bnRKoN6VKEUOdxAn&amp;index=1"
+          >Writing (code) for authors – Wagtail Space US 2019</a
+        >
+        by Brian Smith &amp; Eric Sherman.
+        <a
+          href="https://docs.google.com/presentation/d/1z61u0uKwJxmYS4Zawbu4Zgg-kCtInd1VgsEg-rnwzBE/edit"
+          >Slides</a
+        >.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=QlLWvNT5Wrk&amp;list=PLEyaio0l1qoEIUFM9bnRKoN6VKEUOdxAn&amp;index=2"
+          >Saving Lives With Wagtail: Recovery Meetings Across the World
+          – Wagtail Space US 2019</a
+        >
+        by Timothy Allen.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=1JUOAAmLQFA&amp;list=PLEyaio0l1qoEIUFM9bnRKoN6VKEUOdxAn&amp;index=3"
+          >Why we chose Wagtail for CodeRed CMS – Wagtail Space US 2019</a
+        >
+        by Vince Salvino.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=CxjlAI6R7iY&amp;list=PLEyaio0l1qoEIUFM9bnRKoN6VKEUOdxAn&amp;index=4"
+          >Building a Wagtail-based site and authoring environment with
+          accessibility in mind – Wagtail Space US 2019</a
+        >
+        by Zarina Mustapha.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=tdB1I_gSCeY&amp;list=PLEyaio0l1qoEIUFM9bnRKoN6VKEUOdxAn&amp;index=5"
+          >Making Wagtail Accessible – Wagtail Space US 2019</a
+        >
+        by Thibaud Colas.
+        <a
+          href="https://docs.google.com/presentation/d/15y8XIe7SL-RYEO9tEE8n9chx80_X4j4PbczGGM-cEGE/edit"
+          >Slides</a
+        >.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=ZqwmgsqMTEs&amp;list=PLEyaio0l1qoEIUFM9bnRKoN6VKEUOdxAn&amp;index=6"
+          >Everyone can fly a flag – Wagtail Space US 2019</a
+        >
+        by Will Barton.
+        <a
+          href="https://docs.google.com/presentation/d/1-A1doke2ylcqG72oIP-MLiX8SKXKkKNxQeKxddYUGBw/edit"
+          >Slides</a
+        >.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=xMbJmHF7kCw&amp;list=PLEyaio0l1qoEIUFM9bnRKoN6VKEUOdxAn&amp;index=7"
+          >Architecting for a multi-domain site – Wagtail Space US 2019</a
+        >
+        by Ben Beecher. <a href="https://slides.com/benbeecher/mds/">Slides</a>.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=tK-3kEBbblg&amp;list=PLEyaio0l1qoEIUFM9bnRKoN6VKEUOdxAn&amp;index=8"
+          >Contributions can be more than code – Wagtail Space US 2019</a
+        >
+        by Kalob Taulien.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=RY0K1BEV-_U&amp;list=PLEyaio0l1qoEIUFM9bnRKoN6VKEUOdxAn&amp;index=9"
+          >Thoughtful Code Review – Wagtail Space US 2019</a
+        >
+        by Naomi Morduch Toubman.
+        <a
+          href="https://docs.google.com/presentation/d/1b_Hda8381G6mMc7uzYDc2EYjocfwSi2TYiRMI7d4e3I/"
+          >Slides</a
+        >.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=BMoOhjgirFM&amp;list=PLEyaio0l1qoEIUFM9bnRKoN6VKEUOdxAn&amp;index=10"
+          >Solving your problems by spelunking the Wagtail code – Wagtail Space
+          US 2019</a
+        >
+        by Harris Lapiroff.
+        <a href="https://harrislapiroff.github.io/wagtail-space-us-2019/"
+          >Slides</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=s29vaGnFcq8&amp;list=PLEyaio0l1qoEIUFM9bnRKoN6VKEUOdxAn&amp;index=11"
+          >The State of Wagtail: 2019 – Wagtail Space US 2019</a
+        >
+        by Tom Dyson.
+      </li>
+    </ul>
+    <h3 id="podcasts">Podcasts</h3>
+    <ul>
+      <li>
+        <a href="https://www.podcastinit.com/episode-58-wagtail-with-tom-dyson/"
+          >Podcast.__init__ Episode 58 - Wagtail with Tom Dyson</a
+        >
+        - In this episode Tom Dyson explains how Wagtail came to be created,
+        what sets it apart from other options, and when you should implement it
+        for your projects.
+      </li>
+      <li>
+        <a
+          href="https://django-chat.simplecast.com/episodes/wagtail-cms-tom-dyson"
+          >Django Chat: Wagtail CMS - Tom Dyson</a
+        >
+        - An interview with Tom Dyson on Wagtail, the leading Django-based CMS
+        used by tens of thousands of organizations including Google, NASA, and
+        the British NHS.
+      </li>
+    </ul>
+    <h3 id="videos">Videos</h3>
+    <ul>
+      <li>
+        <a href="https://learnwagtail.com/">Learn Wagtail</a> - Regular video
+        tutorials about all aspects of Wagtail.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=o_dFgr8HZYU"
+          >Wagtail screencasts: Creating and displaying pages in Wagtail</a
+        >
+        - This video will show you how to create and display pages using the
+        Wagtail CMS.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=nCMgoTerEb4"
+          >Draftail extensions – custom entities tutorial</a
+        >
+        - Step-by-step tutorial to make extensions for Draftail.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=ciYNMcv3lE0"
+          >Wagtail Wednesdays #01 - Adding Help Text to Improve Wagtail Editor
+          Experience</a
+        >
+        - Catherine talks you through the steps you can take to add some useful
+        supplementary text fields to the Wagtail admin.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=ei7ot_Wry3o"
+          >Wagtail Wednesdays #02 - Customising Rich Text Features in Wagtail</a
+        >
+        - Catherine talks you through the steps you can take to customise your
+        rich text editors to control which features are available to your
+        content editors.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=uZc0aZrHtQw"
+          >Wagtail Wednesdays #03 - Using tabs to create a cleaner admin
+          interface</a
+        >
+        - Chris talks you through using tabs to organise fields.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=HGXHtFpLDCA"
+          >Wagtail Wednesdays #04 - Organising Images and Documents using
+          Wagtail Collections</a
+        >
+        - Kieran talks you through the process of organising your images and
+        documents into collections.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=CedcZmQ9KHs"
+          >Wagtail Wednesdays #05 - How to organise your fields and streamline
+          the editor experience</a
+        >
+        - Chelsea talks you through the process of organising your fields to
+        make it easier to manage them and streamline the editor experience.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=KJWCGq3IRNc"
+          >Wagtail Wednesdays #06 - Creating &amp; using custom settings in your
+          wagtail site</a
+        >
+        - Chris talks you through setting up and using custom site settings.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=_CfU9UivYPI"
+          >Wagtail Wednesdays #07 - How to Enable the Wagtail Styleguide</a
+        >
+        - It’s a really helpful resource that takes no time at all to enable and
+        it allows you to check your components against the guidelines and shows
+        all the available Wagtail icons.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=uD9PTag2-PQ"
+          >How to Deploy Wagtail to Google App Engine</a
+        >
+        - Focus is Google Cloud Platform but a great introduction on how to get
+        Wagtail up and running in their PAAS.
+      </li>
+    </ul>
+    <h3 id="showcases">Showcases</h3>
+    <ul>
+      <li>
+        <a href="https://madewithwagtail.org/">Made with Wagtail</a> - A
+        showcase of sites and apps made with Wagtail CMS.
+      </li>
+      <li>
+        <a
+          href="https://github.com/torchbox/wagtail/wiki/Contributed-apps-and-website-code"
+          >Contributed apps and website code</a
+        >
+        - A provisional directory of third-party contributed Wagtail websites
+        and apps.
+      </li>
+    </ul>
+    <h3 id="lists">Lists</h3>
+    <ul>
+      <li>
+        <a href="https://pypi.org/search/?q=Wagtail"
+          >PyPI - Python Package Index</a
+        >
+        - Wagtail packages on the Python Package Index.
+      </li>
+      <li>
+        <a href="https://djangopackages.org/grids/g/wagtail-cms/"
+          >Django Packages</a
+        >
+        - Wagtail projects and packages on Django Packages.
+      </li>
+    </ul>
+    <h2 id="for-editors">For editors</h2>
+    <ul>
+      <li>
+        <a href="https://foundation.mozilla.org/en/docs/how-do-i-wagtail/"
+          >How Do I Wagtail?</a
+        >
+        - Mozilla’s editor facing guide for how to use Wagtail’s admin
+        interface. Source for this hosted on
+        <a
+          href="https://github.com/mozilla/foundation.mozilla.org/tree/master/network-api/networkapi/wagtailpages"
+          >Mozilla’s Github</a
+        >
+      </li>
+    </ul>
+    <h2 id="community">Community</h2>
+    <ul>
+      <li>
+        <a href="https://www.meetup.com/Dutch-Wagtail-Meetup/"
+          >Dutch Wagtail Meetup</a
+        >
+        - This is a group for anyone interested in working and developing with
+        Wagtail.
+      </li>
+      <li>
+        <a href="https://www.meetup.com/Wellington-Wagtail-CMS-Meetup/"
+          >Wellington Wagtail CMS Meetup</a
+        >
+        - The first Wagtail CMS meetup in New Zealand!
+      </li>
+      <li>
+        <a href="https://www.wagtail.space/">Wagtail Space</a> - Wagtail
+        training sessions, Wagtail (lightning) talks and a Wagtail sprint. From
+        March 13th until 15th 2019, Wagtail Space takes place in Arnhem, The
+        Netherlands.
+      </li>
+      <li>
+        <a
+          href="https://www.kickstarter.com/projects/noripyt/wagtails-first-hatch"
+          >Wagtail’s first hatch</a
+        >
+        – Kickstarter campaign to accelerate the development of Wagtail.
+      </li>
+    </ul>
+    <h2 id="open-source-sites">Open-source sites</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/wagtail/bakerydemo">bakerydemo</a> – Next
+        generation Wagtail demo, born in Reykjavík.
+      </li>
+      <li>
+        <a href="https://github.com/wagtail/wagtaildemo">wagtaildemo</a> – An
+        example site implemented with Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/torchbox/wagtail-torchbox">Torchbox</a>
+        – Wagtail build of Torchbox.com.
+      </li>
+      <li>
+        <a href="https://github.com/springload/madewithwagtail"
+          >Made with Wagtail</a
+        >
+        - A showcase of sites and apps made with Wagtail CMS.
+      </li>
+      <li>
+        <a href="https://github.com/OpenCanada/website">OpenCanada.org</a> – The
+        opencanada.org website source.
+      </li>
+      <li>
+        <a href="https://github.com/fecgov/fec-cms"
+          >Federal Election Commission</a
+        >
+        – The content management system (CMS) for the new Federal Election
+        Commission website.
+      </li>
+      <li>
+        <a href="https://github.com/jordij/bctt.nz"
+          >Table Tennis Wellington Business Class</a
+        >
+        – Website for the table tennis business league in Wellington NZ.
+      </li>
+      <li>
+        <a href="https://github.com/jordij/jordijoan.me">Jordi Joan’s blog</a>
+        – Personal blog site using Wagtail CMS.
+      </li>
+      <li>
+        <a href="https://github.com/ghostwords/localore"
+          >Localore: Finding America</a
+        >
+        – Wagtail-based CMS and Ansible playbooks for Localore: Finding America.
+      </li>
+      <li>
+        <a href="https://github.com/AdventureCapitalists/website"
+          >Adventure Capitalists</a
+        >
+        – Wagtail powered website for the world’s only investment band.
+      </li>
+      <li>
+        <a href="https://github.com/nhsuk/nhsuk-content-store"
+          >NHS.UK Content Store</a
+        >
+        – NHS.UK content store and editing app.
+      </li>
+      <li>
+        <a href="https://github.com/City-of-Helsinki/devheldev">dev.hel.fi</a> –
+        City of Helsinki development site with Wagtail.
+      </li>
+      <li>
+        <a href="https://github.com/City-of-Helsinki/digihel"
+          >Digital Helsinki</a
+        >
+        – City of Helsinki Digital Helsinki Wagtail CMS.
+      </li>
+      <li>
+        <a href="https://github.com/freedomofpress/securethenews"
+          >Secure the News</a
+        >
+        – An automated scanner and web dashboard for tracking TLS deployment
+        across news organizations.
+      </li>
+      <li>
+        <a href="https://github.com/HackSoftware/hacksoft.io">HackSoft</a>
+        – Website for HackSoft.
+      </li>
+      <li>
+        <a href="https://github.com/HackSoftware/hackconf.bg">HackConf</a>
+        – Website for the annual HackConf.
+      </li>
+      <li>
+        <a href="https://github.com/okfn/rtei">RTEI</a> – Right to Education
+        Index website (OKFN).
+      </li>
+      <li>
+        <a href="https://github.com/nfletton/bvspca">BVSPCA</a> – Bow Valley
+        SPCA website.
+      </li>
+      <li>
+        <a href="https://github.com/ProjectTIER/projecttier.org"
+          >Project TIER</a
+        >
+        – Teaching Integrity in Empirical Research.
+      </li>
+      <li>
+        <a href="https://github.com/freedomofpress/securedrop.org"
+          >SecureDrop</a
+        >
+        – Wagtail-powered website of the SecureDrop whistleblower document
+        submission system.
+      </li>
+      <li>
+        <a href="https://github.com/cfpb/cfgov-refresh"
+          >Consumer Financial Protection Bureau</a
+        >
+        – The source code of the Wagtail-powered consumerfinance.gov is
+        available here on GitHub.
+      </li>
+      <li>
+        <a href="https://github.com/WesternFriend/WF-website">WesternFriend</a>
+        - community website with directory, ecommerce, and online subscription
+      </li>
+    </ul>
+    <h2 id="contribute">Contribute</h2>
+    <p>
+      Contributions are always welcome! Please read the
+      <a href=".github/CONTRIBUTING.md">contribution guidelines</a> first.
+    </p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://www.springload.co.nz/">Springload</a> has waived all
+      copyright and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

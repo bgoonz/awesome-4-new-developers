@@ -1,0 +1,25 @@
+{
+  "name": "awesome-chrome-devtools",
+  "version": "1.0.0",
+  "description": "Awesome tooling and resources in the Chrome DevTools ecosystem",
+  "main": "readme.md",
+  "scripts": {
+    "test": "awesome-lint"
+  },
+  "devDependencies": {
+    "awesome-lint": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChromeDevTools/awesome-chrome-devtools.git"
+  },
+  "keywords": [
+    "chrome",
+    "devtools"
+  ],
+  "license": "CC-BY-4.0",
+  "bugs": {
+    "url": "https://github.com/ChromeDevTools/awesome-chrome-devtools/issues"
+  },
+  "homepage": "https://github.com/ChromeDevTools/awesome-chrome-devtools#readme"
+}

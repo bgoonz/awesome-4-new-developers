@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-laravel-awesome-build-status">
+      Awesome Laravel
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+      <a href="https://travis-ci.org/chiraggude/awesome-laravel"
+        ><img
+          src="https://img.shields.io/travis/chiraggude/awesome-laravel/master.svg?style=flat"
+          alt="Build Status"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        A curated list of awesome bookmarks, packages, tutorials, videos and
+        other cool resources from the Laravel ecosystem.
+      </p>
+    </blockquote>
+    <p>
+      Inspired by
+      <a href="https://github.com/ziadoz/awesome-php">ziadoz/awesome-php</a>
+    </p>
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ul>
+      <li><a href="#essentials">Essentials</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#popular-packages">Popular Packages</a></li>
+      <li><a href="#development-setup">Development Setup</a></li>
+      <li><a href="#application-hosting">Application Hosting</a></li>
+      <li><a href="#application-deployment">Application Deployment</a></li>
+      <li><a href="#code-snippets">Code Snippets</a></li>
+      <li><a href="#tutorials--blogs">Tutorials &amp; Blogs</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#conferences">Conferences</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#starter-projects">Starter Projects</a></li>
+      <li><a href="#codebases-for-reference">Codebases for Reference</a></li>
+      <li>
+        <a href="#content-management-systems">Content Management Systems</a>
+      </li>
+      <li><a href="#podcasts">Podcasts</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#jobs">Jobs</a></li>
+      <li><a href="#hosted-development-tools">Hosted Development Tools</a></li>
+      <li><a href="#miscellaneous">Miscellaneous</a></li>
+    </ul>
+    <h2 id="essentials">Essentials</h2>
+    <ul>
+      <li>
+        <a href="https://laravel.com">Laravel</a> (<a
+          href="https://laravel.com/docs"
+          >Documentation</a
+        >)
+      </li>
+      <li>
+        <a href="https://laravel.com/api/master/">Laravel API Reference</a>
+      </li>
+      <li>
+        <a href="https://lumen.laravel.com">Lumen</a> (<a
+          href="https://lumen.laravel.com/docs"
+          >Documentation</a
+        >)
+      </li>
+      <li><a href="https://laracasts.com">Laracasts</a></li>
+      <li>
+        <a href="https://laravel-news.com">Laravel News</a> (<a
+          href="https://laravel-news.com/archive/"
+          >Archive</a
+        >)
+      </li>
+    </ul>
+    <h2 id="packages">Packages</h2>
+    <ul>
+      <li><a href="https://packagist.org/">Packagist</a></li>
+      <li><a href="https://laravelcollective.com/">Laravel Collective</a></li>
+      <li><a href="http://packalyst.com/">Packalyst</a></li>
+      <li><a href="https://spatie.be/en/opensource/laravel">Spatie</a></li>
+    </ul>
+    <h2 id="popular-packages">Popular Packages</h2>
+    <blockquote>
+      <p>
+        This is a list of well-documented, tested packages that are frequently
+        used in Laravel projects. If you’re looking for an exhaustive list of
+        PHP packages, then check out the Package Repositories mentioned above.
+      </p>
+    </blockquote>
+    <h5 id="developer-tools">Developer Tools</h5>
+    <ul>
+      <li>
+        <a href="https://github.com/amranidev/scaffold-interface"
+          >Scaffold Interface</a
+        >
+        - A Smart CRUD Generator For Laravel
+      </li>
+      <li>
+        <a href="https://github.com/barryvdh/laravel-ide-helper">IDE Helper</a>
+        - Generates a helper file for IDE auto-completion
+      </li>
+      <li>
+        <a href="https://github.com/laracasts/Laravel-5-Generators-Extended"
+          >Laravel 5 Extended Generators</a
+        >
+        - Extends built-in file generators
+      </li>
+      <li>
+        <a href="https://github.com/InfyOmLabs/laravel-generator"
+          >Laravel API/Scaffold/CRUD Generator</a
+        >
+        - Generator for APIs, CRUD scaffolds etc.
+      </li>
+      <li>
+        <a href="https://github.com/furey/tinx">Laravel Tinx</a> - Reload your
+        Laravel Tinker session from inside Tinker
+      </li>
+      <li>
+        <a href="https://github.com/mpociot/laravel-apidoc-generator"
+          >Laravel API Documentation Generator</a
+        >
+        - Automatically generate your API documentation
+      </li>
+      <li>
+        <a href="https://github.com/Jeroen-G/Laravel-Packager"
+          >Laravel Packager</a
+        >
+        - A CLI tool for creating Laravel packages
+      </li>
+      <li>
+        <a
+          href="https://github.com/beckenrode/mysql-workbench-export-laravel-5-migrations"
+          >Workbench Export to Migrations</a
+        >
+        - Workbench plugin for exporting Models to Laravel migrations
+      </li>
+      <li>
+        <a href="https://github.com/lubusIN/laravel-decomposer"
+          >Laravel Decomposer</a
+        >
+        - List all installed packages, their dependencies, app &amp; server
+        details
+      </li>
+      <li>
+        <a href="https://github.com/saleem-hadad/larecipe">LaRecipe</a> - Write
+        gorgeous documentations for your products using Markdown inside your
+        Laravel app.
+      </li>
+      <li>
+        <a href="https://github.com/Protoqol/Prequel/">Prequel</a> - A clear and
+        concise database management GUI tweaked for Laravel.
+      </li>
+    </ul>
+    <h5 id="testing-debugging">Testing &amp; Debugging</h5>
+    <ul>
+      <li>
+        <a
+          href="https://chrome.google.com/webstore/detail/laravel-testtools/ddieaepnbjhgcbddafciempnibnfnakl"
+          >Laravel TestTools</a
+        >
+        - Chrome extension to generate Laravel integration tests while using
+        your app
+      </li>
+      <li>
+        <a href="https://github.com/mpociot/laravel-test-factory-helper"
+          >Laravel Test Factory Generator</a
+        >
+        - Generate Laravel test factories from your existing models
+      </li>
+      <li>
+        <a href="https://github.com/itsgoingd/clockwork">Clockwork</a> -
+        Integrates Clockwork Chrome extension for debugging and profiling apps
+      </li>
+      <li>
+        <a href="https://github.com/barryvdh/laravel-debugbar">Debug Bar</a> -
+        Integrates PHP Debug Bar with Laravel
+      </li>
+      <li>
+        <a href="https://github.com/facade/ignition">Ignition</a> - A beautiful
+        error page for Laravel apps
+      </li>
+      <li>
+        <a href="https://github.com/rap2hpoutre/laravel-log-viewer"
+          >Laravel 5 Log Viewer</a
+        >
+        - Log viewer
+      </li>
+      <li>
+        <a href="https://github.com/ARCANEDEV/LogViewer">LogViewer</a> -
+        Provides a log viewer
+      </li>
+      <li>
+        <a
+          href="https://github.com/tylercd100/lern#lern-laravel-exception-recorder-and-notifier"
+          >LERN</a
+        >
+        - Record exceptions into a database and will send you a notification
+      </li>
+      <li>
+        <a href="https://github.com/themsaid/laravel-mail-preview"
+          >Mail Preview</a
+        >
+        - Preview sent mail in a web browser or mail client
+      </li>
+      <li>
+        <a href="https://github.com/recca0120/laravel-tracy">Laravel Tracy</a> -
+        A Laravel Package to integrate Nette Tracy Debugger
+      </li>
+      <li>
+        <a href="https://github.com/recca0120/laravel-terminal"
+          >Laravel Terminal</a
+        >
+        - run artisan in a web browser
+      </li>
+      <li>
+        <a href="https://github.com/asvae/laravel-api-tester"
+          >Laravel API Tester</a
+        >
+        - Postman-like tool with Laravel routes
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-tail">Laravel Tail</a> - The
+        missing tail command
+      </li>
+      <li>
+        <a href="https://github.com/laravel/telescope">Laravel Telescope</a> -
+        Laravel Telescope is an elegant debug assistant for the Laravel
+        framework
+      </li>
+    </ul>
+    <h5 id="authentication-authorization">
+      Authentication &amp; Authorization
+    </h5>
+    <ul>
+      <li>
+        <a href="https://github.com/JosephSilber/bouncer">Bouncer</a> - Roles
+        &amp; Permissions
+      </li>
+      <li>
+        <a href="https://github.com/santigarcor/laratrust">Laratrust</a> -
+        Roles, Permissions and teams
+      </li>
+      <li>
+        <a href="https://github.com/Zizaco/entrust">Entrust</a> - Role-based
+        Permissions
+      </li>
+      <li>
+        <a href="https://github.com/tymondesigns/jwt-auth">JWT Auth</a> - JSON
+        Web Token authentication for APIs
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-permission"
+          >Laravel Permission</a
+        >
+        - Associate users with roles and permissions
+      </li>
+      <li>
+        <a href="https://github.com/artesaos/defender">Defender</a> - Roles
+        &amp; Permissions
+      </li>
+      <li>
+        <a href="https://github.com/lucadegasperi/oauth2-server-laravel"
+          >OAuth2 Server Laravel</a
+        >
+        - OAuth 2.0 authorization server and resource server
+      </li>
+      <li>
+        <a href="https://github.com/laravel/socialite">Socialite</a> - OAuth
+        authentication with Facebook, Google, Twitter etc.
+      </li>
+      <li>
+        <a href="http://socialiteproviders.github.io/"
+          >Socialite Providers 2.0</a
+        >
+        - 100+ social authentication providers for Socialite with Lumen support
+      </li>
+      <li>
+        <a href="https://github.com/antonioribeiro/google2fa">Google2FA</a> -
+        Google Two-Factor Authentication Module
+      </li>
+      <li>
+        <a href="https://github.com/jrean/laravel-user-verification"
+          >Laravel User Verification</a
+        >
+        - Handle the user verification flow and validate email
+      </li>
+      <li>
+        <a href="https://github.com/Adldap2/Adldap2-Laravel">Adldap2 Laravel</a>
+        - LDAP authentication and Active Directory management
+      </li>
+      <li>
+        <a href="https://github.com/clarkeash/doorman">Doorman</a> - Limit
+        access to your Laravel applications by using invite codes
+      </li>
+      <li>
+        <a href="https://github.com/imanghafoori1/laravel-heyman"
+          >Laravel Heyman</a
+        >
+        - Heyman continues where the above role-permission packages left off
+      </li>
+    </ul>
+    <h5 id="utilities">Utilities</h5>
+    <ul>
+      <li>
+        <a href="https://github.com/awes-io/awes-io">Awes.io</a> - boilerplate
+        for CRM, SaaS, ERP based on Vue (Nuxt.js), TailwindCSS plus Laravel as a
+        backend.
+      </li>
+      <li>
+        <a href="https://github.com/svenluijten/artisan-view">Artisan View</a> -
+        Manage the views in Laravel projects via artisan
+      </li>
+      <li>
+        <a href="https://github.com/patricktalmadge/bootstrapper/"
+          >Bootstrapper</a
+        >
+        - Set of classes to create Bootstrap 3 markup
+      </li>
+      <li>
+        <a href="https://github.com/mewebstudio/captcha">Captcha</a> - An
+        anti-bot image captcha system
+      </li>
+      <li>
+        <a href="https://github.com/ConsoleTVs/Charts">Charts</a> -
+        Multi-library chart package to create interactive charts
+      </li>
+      <li>
+        <a href="https://github.com/kevinkhill/lavacharts">Lavacharts</a> -
+        Charts and Graphs for PHP Powered by the Google Chart API
+      </li>
+      <li>
+        <a href="https://github.com/Tucker-Eric/EloquentFilter"
+          >Eloquent Filter</a
+        >
+        - Filter models and their Relationships
+      </li>
+      <li>
+        <a href="https://github.com/cviebrock/eloquent-sluggable"
+          >Eloquent Sluggable</a
+        >
+        - Create slugs for Eloquent models
+      </li>
+      <li>
+        <a href="https://github.com/spatie/eloquent-sortable"
+          >Eloquent Sortable</a
+        >
+        - Sortable behaviour for Eloquent models
+      </li>
+      <li>
+        <a href="https://github.com/LaravelCollective/html">HTML</a> - HTML and
+        Form Builders for Laravel
+      </li>
+      <li>
+        <a href="https://github.com/hyn/multi-tenant">Multi-tenant</a> -
+        Flexible multi tenancy with secure separation of routes, assets and
+        databases
+      </li>
+      <li>
+        <a href="https://github.com/kristijanhusak/laravel-form-builder"
+          >Laravel Form Builder</a
+        >
+        - Form builder inspired by Symfony’s form builder
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-activitylog"
+          >Laravel Activitylog</a
+        >
+        - Log activity inside your Laravel app
+      </li>
+      <li>
+        <a href="https://github.com/owen-it/laravel-auditing"
+          >Laravel Auditing</a
+        >
+        - Audit for Eloquent models
+      </li>
+      <li>
+        <a href="https://github.com/davejamesmiller/laravel-breadcrumbs"
+          >Laravel Breadcrumbs</a
+        >
+        - Create and manage breadcrumbs
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-collection-macros"
+          >Laravel Collection Macros</a
+        >
+        - A set of handy collection macros
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-cookie-consent"
+          >Laravel Cookie Consent</a
+        >
+        - Make your Laravel app comply with the crazy EU cookie law
+      </li>
+      <li>
+        <a href="https://github.com/yajra/laravel-datatables"
+          >Laravel Datatables</a
+        >
+        - jQuery DataTables API
+      </li>
+      <li>
+        <a href="https://github.com/Torann/laravel-geoip">Laravel GeoIP</a> -
+        Determine the location of website visitors based on their IP addresses
+      </li>
+      <li>
+        <a href="https://github.com/vinkla/laravel-hashids">Laravel Hashids</a>
+        - Generate unique, non-sequential ids using
+        <a href="http://hashids.org/php/">Hashids</a>
+      </li>
+      <li>
+        <a href="https://github.com/404labfr/laravel-impersonate"
+          >Laravel Impersonate</a
+        >
+        - A package to authenticate as one of your users
+      </li>
+      <li>
+        <a href="https://github.com/beyondcode/laravel-mailbox"
+          >Laravel Mailbox</a
+        >
+        - A package to handle incoming emails
+      </li>
+      <li>
+        <a href="https://github.com/GrahamCampbell/Laravel-Markdown"
+          >Laravel Markdown</a
+        >
+        - CommonMark markdown parser
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-menu">Laravel Menu</a> - Html
+        menu generator for Laravel
+      </li>
+      <li>
+        <a href="https://github.com/nahid/talk">Laravel Talk</a> - Realtime User
+        messaging system
+      </li>
+      <li>
+        <a href="https://github.com/cmgmyr/laravel-messenger"
+          >Laravel Messenger</a
+        >
+        - User messaging system
+      </li>
+      <li>
+        <a href="https://github.com/hootlex/laravel-moderation"
+          >Laravel Moderation</a
+        >
+        - Approve or reject resources like posts, comments, users, etc.
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-tags">Laravel Tags</a> - Add
+        tags and taggable behaviour
+      </li>
+      <li>
+        <a href="https://github.com/antonioribeiro/tracker"
+          >Laravel Stats Tracker</a
+        >
+        - Gather information from requests to identify and store
+      </li>
+      <li>
+        <a href="https://github.com/lookitsatravis/listify">Listify</a> - Add
+        sorting/ordering capabilities to any Eloquent model
+      </li>
+      <li>
+        <a href="https://github.com/ARCANEDEV/noCAPTCHA">noCAPTCHA</a> - Helper
+        for Google’s new noCAPTCHA (reCAPTCHA)
+      </li>
+      <li>
+        <a href="https://github.com/mewebstudio/purifier">Purifier</a> - HTML
+        filter
+      </li>
+      <li>
+        <a href="https://github.com/VentureCraft/revisionable">Revisionable</a>
+        - Create a revision history for Eloquent models
+      </li>
+      <li>
+        <a href="https://github.com/artesaos/seotools">SEOTools</a> - Helpers
+        for some common SEO techniques
+      </li>
+      <li>
+        <a href="https://github.com/JosephSilber/page-cache">Page Cache</a> -
+        Caches responses as static files on disk for lightning fast page loads
+      </li>
+      <li>
+        <a href="https://github.com/anlutro/laravel-settings"
+          >Laravel Setting</a
+        >
+        - Persistent configuration settings that are stored in JSON files
+      </li>
+      <li>
+        <a href="https://github.com/hootlex/laravel-friendships">Friendship</a>
+        - Friendship management system
+      </li>
+      <li>
+        <a href="https://github.com/mpociot/teamwork">Teamwork</a> - User to
+        team associations with an invite system
+      </li>
+      <li>
+        <a href="https://github.com/dwightwatson/validating">Validating</a> -
+        Trait for validating Eloquent models
+      </li>
+      <li>
+        <a href="https://github.com/mpociot/vat-calculator">VAT Calculator</a> -
+        Handle all the hard stuff related to EU MOSS vat regulations
+      </li>
+      <li>
+        <a href="https://github.com/webpatser/laravel-uuid">Laravel UUID</a> -
+        Generate a UUID according to the RFC 4122 standard
+      </li>
+      <li>
+        <a href="https://github.com/RachidLaasri/LaravelInstaller"
+          >Laravel Installer</a
+        >
+        - Allow users to install your application just by following the setup
+        wizard, like WordPress
+      </li>
+      <li>
+        <a href="https://github.com/nWidart/laravel-modules">Laravel Modules</a>
+        - Easy module management
+      </li>
+      <li>
+        <a href="https://github.com/Propaganistas/Laravel-Phone"
+          >Laravel Phone</a
+        >
+        - Phone number validator and formatter
+      </li>
+      <li>
+        <a href="https://github.com/cybercog/laravel-ban">Laravel Ban</a> -
+        Simplify blocking and banning Eloquent models
+      </li>
+      <li>
+        <a href="https://github.com/fideloper/TrustedProxy">Laravel Proxy</a> -
+        Handling sessions when behind load balancers or other intermediaries.
+      </li>
+      <li>
+        <a href="https://github.com/PHPJunior/laravel-video-chat"
+          >Laravel Video Chat</a
+        >
+        - Video Chat using Socket.IO and WebRTC
+      </li>
+      <li>
+        <a href="https://github.com/arrilot/laravel-widgets"
+          >Widgets for Laravel</a
+        >
+        - A powerful alternative to view composers.
+      </li>
+      <li>
+        <a href="https://github.com/BePsvPT/secure-headers">Secure Headers</a> -
+        Add security related headers to HTTP response
+      </li>
+      <li>
+        <a href="https://nova.laravel.com/">Laravel Nova</a> - Nova is a
+        beautifully designed administration panel for Laravel
+      </li>
+      <li>
+        <a href="https://github.com/cybercog/laravel-love">Laravel Love</a> - It
+        lets people express how they feel about the content. React on Eloquent
+        models with Likes or Dislikes.
+      </li>
+      <li>
+        <a href="https://github.com/stancl/tenancy">stancl/tenancy</a> -
+        Automatic tenancy for your Laravel app. No code changes needed.
+      </li>
+    </ul>
+    <h5 id="media-document-management">Media &amp; Document Management</h5>
+    <ul>
+      <li>
+        <a href="https://github.com/Intervention/image">Intervention Image</a> -
+        Image handling library for creating, editing and composing images
+      </li>
+      <li>
+        <a href="https://github.com/qcod/laravel-imageup">Laravel ImageUp</a> -
+        Yet another image manipulation package, adds tons of extra functionality
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-glide">Laravel Glide</a> -
+        Easily convert images with Glide
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-medialibrary"
+          >Laravel MediaLibrary</a
+        >
+        - Associate files with Eloquent models
+      </li>
+      <li>
+        <a href="https://github.com/barryvdh/laravel-snappy">Laravel Snappy</a>
+        - HTML to PDF generator using wkhtmltopdf
+      </li>
+      <li>
+        <a href="https://github.com/barryvdh/laravel-dompdf">Laravel DOMPDF</a>
+        - HTML to PDF generator using
+        <a href="https://github.com/dompdf/dompdf">dompdf</a>
+      </li>
+      <li>
+        <a href="https://github.com/CodeSleeve/laravel-stapler"
+          >Laravel Stapler</a
+        >
+        - ORM-based file upload manager
+      </li>
+      <li>
+        <a href="https://github.com/Maatwebsite/Laravel-Excel">Laravel Excel</a>
+        - Import and export Excel and CSV files
+      </li>
+      <li>
+        <a href="https://github.com/rap2hpoutre/fast-excel">Fast Excel</a> -
+        Fast XLSX, CSV and ODT import and export for Laravel
+      </li>
+      <li>
+        <a href="https://github.com/laravolt/avatar">Laravolt Avatar</a> - Plug
+        n play avatar, turn name, email, and any other string into beautiful
+        avatar (or gravatar), effortless.
+      </li>
+      <li>
+        <a href="https://github.com/pascalbaljetmedia/laravel-ffmpeg"
+          >Laravel FFmpeg</a
+        >
+        - This package provides an integration with FFmpeg for Laravel 5.8.
+      </li>
+    </ul>
+    <h5 id="integration-with-javascript">Integration with Javascript</h5>
+    <ul>
+      <li>
+        <a href="https://github.com/aaronlord/laroute">Laroute</a> - Generate
+        Laravel route URLs from JavaScript
+      </li>
+      <li>
+        <a href="https://github.com/laracasts/PHP-Vars-To-Js-Transformer"
+          >PHP Vars to JavaScript Transformer</a
+        >
+        - Pass server-side string/array/collection/whatever to JavaScript
+      </li>
+      <li>
+        <a href="https://github.com/proengsoft/laravel-jsvalidation"
+          >Javascript Validation</a
+        >
+        - Use validation rules, messages, FormRequest and validators to validate
+        forms in client-side
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-pjax">Laravel Pjax</a> - A
+        Pjax middleware
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-blade-javascript"
+          >Laravel Blade Javascript</a
+        >
+        - A Blade directive to export variables to JavaScript
+      </li>
+      <li>
+        <a href="https://github.com/tightenco/ziggy">Ziggy</a> - Use your
+        Laravel named routes in JavaScript
+      </li>
+      <li>
+        <a href="https://github.com/livewire/livewire">LiveWire</a> - A magical
+        front-end framework for Laravel
+      </li>
+    </ul>
+    <h5 id="databases-orms-migrations-seeding">
+      Databases, ORMs, Migrations &amp; Seeding
+    </h5>
+    <ul>
+      <li>
+        <a href="https://github.com/backup-manager/laravel">Backup Manager</a> -
+        Backup and restore databases from S3, Dropbox, SFTP etc.
+      </li>
+      <li>
+        <a href="https://github.com/lazychaser/laravel-nestedset"
+          >Laravel Nestedset</a
+        >
+        - Nested Sets pattern implementation
+      </li>
+      <li>
+        <a href="https://github.com/franzose/ClosureTable">ClosureTable</a> -
+        Closure table pattern implementation
+      </li>
+      <li>
+        <a href="https://github.com/kirkbushell/eloquence">Eloquence</a> - Extra
+        features for Eloquent models
+      </li>
+      <li>
+        <a href="https://github.com/orangehill/iseed">iSeed</a> - Generate a new
+        seed file from an existing database table
+      </li>
+      <li>
+        <a href="https://github.com/yajra/laravel-oci8">Laravel OCI8</a> -
+        Oracle DB driver via OCI8
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-backup">Laravel Backup</a> -
+        Backup your app
+      </li>
+      <li>
+        <a href="https://github.com/laravel-doctrine/orm">Laravel Doctrine</a> -
+        Doctrine 2 ORM implementation
+      </li>
+      <li>
+        <a href="https://github.com/jenssegers/laravel-mongodb"
+          >Laravel MongoDB</a
+        >
+        - Eloquent model and query builder with support for MongoDB
+      </li>
+      <li>
+        <a href="https://github.com/Xethron/migrations-generator"
+          >Migrations Generator</a
+        >
+        - Generate migrations from an existing database
+      </li>
+      <li>
+        <a href="https://github.com/jarektkaczyk/eloquence">Sofa/Eloquence</a> -
+        Extensions for the Eloquent ORM
+      </li>
+      <li>
+        <a href="https://github.com/orchestral/tenanti">Tenanti</a> -
+        Multi-tenant database schema manager
+      </li>
+      <li>
+        <a href="https://github.com/andersao/l5-repository"
+          >Laravel Repository</a
+        >
+        - Repositories to abstract the database layer
+      </li>
+      <li>
+        <a href="https://github.com/spiritix/lada-cache">Lada Cache</a> - A
+        Redis based, fully automated and scalable database cache layer
+      </li>
+      <li>
+        <a href="https://github.com/grimzy/laravel-mysql-spatial"
+          >Laravel MySQL Spatial extension</a
+        >
+        - easily work with MySQL Spatial Data Types and MySQL Spatial Functions
+      </li>
+    </ul>
+    <h5 id="search">Search</h5>
+    <ul>
+      <li>
+        <a href="https://github.com/algolia/algoliasearch-laravel"
+          >Algolia Search</a
+        >
+        - Integrates the Algolia Search API to the Laravel Eloquent ORM
+      </li>
+      <li>
+        <a href="https://github.com/elasticquent/Elasticquent">Elasticquent</a>
+        - Elasticsearch for Eloquent models
+      </li>
+      <li>
+        <a href="https://github.com/sleimanx2/plastic">Plastic</a> - Fluently
+        mapping and searching Elasticsearch
+      </li>
+      <li>
+        <a href="https://github.com/mmanos/laravel-search">Laravel Search</a> -
+        Unified API for Elasticsearch, Algolia, and ZendSearch
+      </li>
+      <li>
+        <a href="https://github.com/spatie/searchindex">SearchIndex</a> - Store
+        and retrieve objects from Algolia or Elasticsearch
+      </li>
+      <li>
+        <a href="https://github.com/nicolaslopezj/searchable">Searchable</a> -
+        Trait that adds a simple search function to Eloquent models
+      </li>
+      <li>
+        <a href="https://github.com/teamtnt/tntsearch">TNTSearch</a> - A fully
+        featured full text search engine written in PHP
+      </li>
+      <li>
+        <a href="https://github.com/teamtnt/laravel-scout-tntsearch-driver"
+          >TNTSearch driver</a
+        >
+        - Driver for
+        <a href="https://github.com/laravel/scout">Laravel Scout</a> search
+        package based on TNTSearch
+      </li>
+      <li>
+        <a href="https://github.com/TomLingham/Laravel-Searchy"
+          >Laravel-Searchy</a
+        >
+        - Fuzzy search, basic string matching, Levenshtein Distance
+      </li>
+    </ul>
+    <h5 id="apis">APIs</h5>
+    <ul>
+      <li>
+        <a href="https://github.com/chrisbjr/api-guard">ApiGuard</a> - Allow API
+        authentication with API keys
+      </li>
+      <li>
+        <a href="https://github.com/dingo/api">Dingo API</a> - Multi-purpose
+        toolkit for developing RESTful APIs
+      </li>
+      <li>
+        <a href="https://github.com/barryvdh/laravel-cors">Laravel CORS</a> -
+        Add CORS (Cross-Origin Resource Sharing) headers support
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-fractal">Laravel Fractal</a>
+        - Output complex, flexible, AJAX/RESTful data structures with Fractal
+      </li>
+      <li>
+        <a href="https://github.com/rebing/graphql-laravel">Laravel GraphQL</a>
+        - Supports Relay, eloquent models, validation and GraphiQL
+      </li>
+      <li>
+        <a href="https://github.com/nuwave/lighthouse">Lighthouse</a> - An up
+        and coming GraphQL library for Laravel
+      </li>
+      <li>
+        <a href="https://github.com/flugger/laravel-responder"
+          >Laravel Responder</a
+        >
+        - Build custom API responses with Fractal
+      </li>
+    </ul>
+    <h5 id="tasks-commands-and-scheduling">Tasks, Commands and Scheduling</h5>
+    <ul>
+      <li>
+        <a href="https://github.com/indatus/dispatcher">Dispatcher</a> -
+        Scheduler for Artisan commands
+      </li>
+      <li>
+        <a href="https://github.com/laravel/elixir">Elixir</a> - Node (NPM)
+        package to run Gulp tasks
+      </li>
+      <li>
+        <a href="https://github.com/JeffreyWay/laravel-mix">Mix</a> - Fluent API
+        for defining basic webpack build steps
+      </li>
+      <li>
+        <a href="https://github.com/laravel/envoy">Envoy</a> - SSH Task Runner
+      </li>
+    </ul>
+    <h5 id="payments">Payments</h5>
+    <ul>
+      <li>
+        <a href="https://github.com/laravel/cashier">Cashier</a> - Subscription
+        billing with Stripe
+      </li>
+      <li>
+        <a href="https://github.com/ignited/laravel-omnipay"
+          >Omnipay for Laravel</a
+        >
+        - Integrate the
+        <a href="https://github.com/thephpleague/omnipay">Omnipay</a> PHP
+        library
+      </li>
+    </ul>
+    <h5 id="optimization">Optimization</h5>
+    <ul>
+      <li>
+        <a href="https://github.com/Intervention/imagecache"
+          >Intervention Image Cache</a
+        >
+        - Caching extension for the Intervention Image Class
+      </li>
+      <li>
+        <a href="https://github.com/GrahamCampbell/Laravel-HTMLMin"
+          >Laravel HTMLMin</a
+        >
+        - Blade/HTML/CSS/javascript minifier
+      </li>
+      <li>
+        <a href="https://github.com/dwightwatson/rememberable">Rememberable</a>
+        - Query caching for Eloquent
+      </li>
+      <li>
+        <a href="https://github.com/imanghafoori1/laravel-widgetize"
+          >Widgetize</a
+        >
+        - Page Partial caching
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-responsecache"
+          >Laravel Responsecache</a
+        >
+        - Speed up app by caching the entire response
+      </li>
+    </ul>
+    <h5 id="monitoring">Monitoring</h5>
+    <ul>
+      <li>
+        <a href="https://github.com/laravel/horizon">Horizon</a> - Monitor and
+        configure queues with a simple web UI
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-failed-job-monitor"
+          >Laravel Failed Job Monitor</a
+        >
+        - Get notified when a queued job fails
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-uptime-monitor"
+          >Laravel Uptime Monitor</a
+        >
+        - A powerful and easy to configure uptime and ssl monitor
+      </li>
+      <li>
+        <a href="https://github.com/aschmelyun/larametrics">Larametrics</a> - A
+        self-hosted metrics and notifications platform for Laravel apps
+      </li>
+    </ul>
+    <h5 id="localization">Localization</h5>
+    <ul>
+      <li>
+        <a href="https://github.com/caouecs/Laravel-lang">Language Files</a> -
+        Validation, Pagination and Reminders language lines in 37 languages
+      </li>
+      <li>
+        <a href="https://github.com/mcamara/laravel-localization"
+          >Laravel Localization</a
+        >
+        - Add i18n support via routes
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-translatable"
+          >Laravel Translatable</a
+        >
+        - Making Eloquent models translatable by storing translations as JSON
+      </li>
+      <li>
+        <a href="https://github.com/dimsav/laravel-translatable"
+          >Laravel Translatable</a
+        >
+        - Retrieve and store translatable Eloquent model instances
+      </li>
+      <li>
+        <a href="https://github.com/vinkla/laravel-translator"
+          >Laravel Translator</a
+        >
+        - Translate Eloquent models into multiple languages
+      </li>
+      <li>
+        <a href="https://github.com/jenssegers/date">Laravel Date</a> - A
+        library to help you work with dates in multiple languages, based on
+        Carbon
+      </li>
+      <li>
+        <a href="https://github.com/themsaid/laravel-langman"
+          >Laravel Langman</a
+        >
+        - Manage language files from Artisan Console
+      </li>
+      <li>
+        <a href="https://github.com/waavi/translation">Laravel Translation</a> -
+        Translation and localization management
+      </li>
+      <li>
+        <a href="https://github.com/keevitaja/linguist">Linguist</a> - i18n
+        localization support for Laravel
+      </li>
+    </ul>
+    <h5 id="third-party-service-integration">
+      Third-party Service Integration
+    </h5>
+    <ul>
+      <li>
+        <a href="https://github.com/spatie/laravel-analytics"
+          >Laravel Analytics</a
+        >
+        - Retrieve pageviews and other data from Google Analytics
+      </li>
+      <li>
+        <a href="https://github.com/GrahamCampbell/Laravel-DigitalOcean"
+          >Laravel DigitalOcean</a
+        >
+        - DigitalOceanV2 bridge
+      </li>
+      <li>
+        <a href="https://github.com/GrahamCampbell/Laravel-GitHub"
+          >Laravel GitHub</a
+        >
+        - PHP GitHub API bridge
+      </li>
+      <li>
+        <a href="https://github.com/vinkla/laravel-instagram"
+          >Laravel Instagram</a
+        >
+        - Instagram API bridge
+      </li>
+      <li>
+        <a href="https://github.com/spatie/laravel-newsletter"
+          >Laravel Newsletter</a
+        >
+        - Send newsletters with Mailchimp
+      </li>
+      <li>
+        <a href="https://github.com/vinkla/laravel-pusher">Laravel Pusher</a> -
+        Pusher API bridge
+      </li>
+    </ul>
+    <h2 id="development-setup">Development Setup</h2>
+    <ul>
+      <li>
+        <a href="https://laravel.com/docs/master/homestead">Homestead</a> -
+        Official Vagrant box for Laravel
+      </li>
+      <li>
+        <a href="https://laravel.com/docs/master/valet">Valet</a> - Development
+        environment for Mac users
+      </li>
+      <li>
+        <a href="https://github.com/cpriego/valet-linux">Valet Linux</a> -
+        Development environment for Linux users
+      </li>
+      <li>
+        <a href="https://github.com/LaraDock/laradock">LaraDock</a> - Run
+        Laravel on Docker (Like Homestead but for Docker instead of Vagrant)
+      </li>
+      <li>
+        <a href="https://github.com/laraedit/laraedit-docker"
+          >LaraEdit Docker</a
+        >
+        - Homestead environment in a single Docker container
+      </li>
+      <li>
+        <a href="https://laragon.org/">Laragon</a> - Isolated development
+        environment on Windows
+      </li>
+      <li>
+        <a href="https://github.com/Maxlab/stacker">Stacker</a> - The
+        environment for local web development on Docker
+      </li>
+      <li>
+        <a href="https://github.com/cytopia/devilbox">Devilbox</a> - A
+        dockerized and general-purpose LAMP/MEAN stack for every PHP version
+      </li>
+      <li>
+        <a href="https://vessel.shippingdocker.com">Vessel</a> - Simple Docker
+        development environments for Laravel
+      </li>
+      <li>
+        <a href="https://docs.lando.dev/config/laravel.html">Lando</a> - A local
+        development environment tool built on Docker
+      </li>
+    </ul>
+    <h2 id="application-hosting">Application Hosting</h2>
+    <ul>
+      <li><a href="https://vapor.laravel.com">Vapor</a></li>
+      <li>
+        <a href="https://forge.laravel.com/">Forge</a> (<a
+          href="https://forgerecipes.com/"
+          >ForgeRecipes</a
+        >)
+      </li>
+      <li>
+        <a href="https://www.fortrabbit.com/laravel-hosting">FortRabbit</a>
+      </li>
+      <li>
+        <a href="https://www.heroku.com/">Heroku</a> (<a
+          href="https://devcenter.heroku.com/articles/getting-started-with-laravel"
+          >Documentation</a
+        >)
+      </li>
+      <li>
+        <a href="https://aws.amazon.com/elasticbeanstalk/"
+          >AWS Elastic Beanstalk</a
+        >
+        (<a
+          href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/php-laravel-tutorial.html"
+          >Tutorial</a
+        >)
+      </li>
+      <li>
+        <a href="https://www.cloudways.com/en/laravel-hosting.php">Cloudways</a>
+      </li>
+      <li><a href="https://ploi.io/">Ploi</a></li>
+      <li><a href="https://codepier.io?ref=awesome-laravel">CodePier</a></li>
+      <li><a href="https://runcloud.io/">RunCloud</a></li>
+    </ul>
+    <h2 id="application-deployment">Application Deployment</h2>
+    <ul>
+      <li>
+        <a href="https://deployer.org/">Deployer</a> - A deployment tool with
+        support for Laravel out of the box
+      </li>
+      <li>
+        <a href="https://envoyer.io/">Envoyer</a> - Zero down-time Deployer for
+        PHP &amp; Laravel projects
+      </li>
+      <li>
+        <a href="https://github.com/rocketeers/rocketeer">Rocketeer</a> - Task
+        runner and deployment package
+      </li>
+    </ul>
+    <h2 id="code-snippets">Code Snippets</h2>
+    <ul>
+      <li>
+        <a href="https://summerblue.github.io/laravel5-cheatsheet/"
+          >Laravel LTS Cheat Sheet</a
+        >
+        (<a href="https://cs.phphub.org/">Chinese version</a>)
+      </li>
+      <li><a href="http://laravel-tricks.com/">Laravel Tricks</a></li>
+    </ul>
+    <h2 id="tutorials-blogs">Tutorials &amp; Blogs</h2>
+    <ul>
+      <li><a href="http://taylorotwell.com/">Taylor Otwell</a></li>
+      <li><a href="https://code.tutsplus.com/categories/laravel">Tuts+</a></li>
+      <li><a href="https://medium.com/tag/laravel/latest">Medium</a></li>
+      <li><a href="https://laraveldaily.com/">Laravel Daily</a></li>
+      <li><a href="https://scotch.io/tag/laravel">Scotch</a></li>
+      <li>
+        <a
+          href="https://www.digitalocean.com/community/search?q=laravel&amp;primary_filter=newest&amp;type=tutorials"
+          >Digital Ocean</a
+        >
+      </li>
+      <li><a href="https://mattstauffer.co/blog">Matt Stauffer</a></li>
+      <li><a href="https://vegibit.com/tag/laravel/">Vegi Bit</a></li>
+      <li>
+        <a href="https://www.neontsunami.com/tags/laravel">Neon Tsunami</a>
+      </li>
+      <li><a href="https://dor.ky/tag/laravel/">Dor.ky</a></li>
+      <li>
+        <a href="https://stillat.com/explore/categories/laravel-5">Stillat</a>
+      </li>
+      <li>
+        <a href="http://www.easylaravelbook.com/blog/"
+          >Easy Laravel Book Blog</a
+        >
+      </li>
+      <li><a href="http://laraveles.com/blog/">Laraveles</a> (ES)</li>
+      <li><a href="https://styde.net/category/laravel-5/">Styde</a> (ES)</li>
+      <li>
+        <a href="http://cloudways.com/blog/laravel">Cloudways Laravel Blog</a>
+      </li>
+      <li>
+        <a href="https://github.com/alexeymezenin/laravel-best-practices"
+          >Laravel Best Practices</a
+        >
+      </li>
+      <li>
+        <a href="https://pusher.com/tutorials?tag=Laravel"
+          >Pusher Laravel Tutorials</a
+        >
+      </li>
+      <li><a href="https://larashout.com/">LaraShout</a></li>
+    </ul>
+    <h2 id="videos">Videos</h2>
+    <ul>
+      <li><a href="https://laracasts.com/">Laracasts</a></li>
+      <li>
+        <a href="https://www.codecourse.com/">Codecourse</a> (<a
+          href="https://www.youtube.com/user/phpacademy/playlists"
+          >YouTube</a
+        >)
+      </li>
+      <li>
+        <a href="http://code.tutsplus.com/categories/laravel/courses">Tuts+</a>
+      </li>
+      <li>
+        <a href="https://serversforhackers.com/laravel-perf"
+          >Servers for Hackers</a
+        >
+      </li>
+      <li>
+        <a href="https://course.testdrivenlaravel.com/">Test-Driven Laravel</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/user/silencedsg/videos"
+          >Duilio Palacios</a
+        >
+        (ES)
+      </li>
+      <li>
+        <a href="https://codigofacilito.com/courses/laravel">CodigoFacilito</a>
+        (ES)
+      </li>
+      <li><a href="https://devdojo.com/search?value=laravel">DevDojo</a></li>
+      <li>
+        <a
+          href="https://www.youtube.com/channel/UC4gijXR8cM4gmEt9Olse-TQ/videos"
+          >Amitav Roy</a
+        >
+      </li>
+      <li><a href="https://laracademy.co/">Laracademy</a></li>
+      <li>
+        <a
+          href="https://www.youtube.com/channel/UC6kwT7-jjZHHF1s7vCfg2CA/playlists"
+          >Dev Marketer</a
+        >
+      </li>
+      <li>
+        <a href="https://www.udemy.com/courses/search/?q=laravel">Udemy</a>
+      </li>
+      <li><a href="https://www.lynda.com/search?q=laravel">Lynda</a></li>
+      <li>
+        <a
+          href="https://www.pluralsight.com/search?q=laravel&amp;categories=course"
+          >Pluralsight</a
+        >
+      </li>
+      <li><a href="https://www.youtube.com/bitfumes">Bitfumes</a></li>
+      <li><a href="https://confidentlaravel.com/">ConfidentLaravel</a></li>
+    </ul>
+    <h2 id="conferences">Conferences</h2>
+    <ul>
+      <li><a href="http://laracon.us/">Laracon US</a></li>
+      <li><a href="http://laracon.eu/">Laracon EU</a></li>
+      <li><a href="https://laracon.net/">Laracon Online</a></li>
+      <li><a href="http://laraconfbrasil.com.br/">Laraconf Brasil</a></li>
+      <li><a href="https://laracon.com.au/">Laracon Australia</a></li>
+      <li><a href="https://laravellive.uk/">Laravel Live UK</a></li>
+      <li><a href="https://laravellive.in/">Laravel Live India</a></li>
+      <li><a href="https://laravelnigeria.com">Laravel Nigeria</a></li>
+    </ul>
+    <h5 id="videos-1">Videos</h5>
+    <ul>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLMdXHJK-lGoC64wnqvm6v1R5dsuAV-MpS"
+          >Laracon EU 2018</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PL-yJve--iT5oM2LgF37VXsBb8Os4ZulIc"
+          >Laracon US 2018</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLMdXHJK-lGoBFZgG2juDXF6LiikpQeLx2"
+          >Laracon EU 2017</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PL-yJve--iT5oaLQA6OI8TWLVSOBP1qhs3"
+          >Laracon US 2017</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLMdXHJK-lGoCMkOxqe82hOC8tgthqhHCN"
+          >Laracon EU 2016</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PL-yJve--iT5o9fH_cRY0u6P751pcF59GK"
+          >Laracon US 2016</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLMdXHJK-lGoA9SIsuFy0UWL8PZD1G3YFZ"
+          >Laracon EU 2015</a
+        >
+      </li>
+      <li>Laracon US 2015</li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLMdXHJK-lGoCYhxlU3OJ5bOGhcKtDMkcN"
+          >Laracon EU 2014</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/channel/UCRawXmZv30Vf_MivyPYb_GQ/videos"
+          >Laracon US 2014</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLMdXHJK-lGoB-CIVsiQt0WU8WcYrb5eoe"
+          >Laracon EU 2013</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLkwAlZpjHQbLcox_S_AgGU24QUfKgXayN"
+          >Laracon US 2013</a
+        >
+      </li>
+    </ul>
+    <h2 id="books">Books</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.amazon.com/Laravel-Starter-Shawn-McCool-ebook/dp/B00ABFQ0AS"
+          >Laravel Starter</a
+        >
+        by Shawn McCool
+      </li>
+      <li>
+        <a href="https://leanpub.com/codehappy">Laravel: Code Happy</a> by Dayle
+        Rees
+      </li>
+      <li>
+        <a href="https://leanpub.com/codebright">Laravel: Code Bright</a> by
+        Dayle Rees
+      </li>
+      <li>
+        <a href="https://leanpub.com/codesmart">Laravel: Code Smart</a> by Dayle
+        Rees
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravel"
+          >Laravel: From Apprentice To Artisan</a
+        >
+        by Taylor Otwell
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravel4cookbook">Laravel 4 Cookbook</a> by
+        Christopher Pitt and Taylor Otwell
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravel-testing-decoded"
+          >Laravel Testing Decoded</a
+        >
+        by Jeffrey Way
+      </li>
+      <li>
+        <a href="https://adamwathan.me/refactoring-to-collections/"
+          >Refactoring to Collections</a
+        >
+        by Adam Wathan
+      </li>
+      <li>
+        <a href="https://leanpub.com/implementinglaravel"
+          >Implementing Laravel</a
+        >
+        by Chris Fidao
+      </li>
+      <li>
+        <a href="https://leanpub.com/gettingstuffdonelaravel"
+          >Getting Stuff Done with Laravel 4</a
+        >
+        by Chuck Heintzelman
+      </li>
+      <li>
+        <a
+          href="https://www.packtpub.com/web-development/laravel-application-development-blueprints"
+          >Laravel Application Development Blueprints</a
+        >
+        by Arda Kılıçdağı and Halil İbrahim Yılmaz
+      </li>
+      <li>
+        <a href="https://leanpub.com/build-apis-you-wont-hate"
+          >Build APIs You Won’t Hate</a
+        >
+        by Phil Sturgeon
+      </li>
+      <li>
+        <a href="https://leanpub.com/frontend"
+          >Integrating Front end Components with Web Applications</a
+        >
+        by Maksim Surguy
+      </li>
+      <li>
+        <a
+          href="https://www.packtpub.com/web-development/laravel-design-patterns-and-best-practices"
+          >Laravel Design Patterns and Best Practices</a
+        >
+        by Arda Kılıçdağı and Halil İbrahim Yılmaz
+      </li>
+      <li>
+        <a
+          href="https://www.packtpub.com/web-development/learning-laravel-4-application-development"
+          >Learning Laravel 4 Application Development</a
+        >
+        by Hardik Dangar
+      </li>
+      <li>
+        <a
+          href="https://www.packtpub.com/web-development/getting-started-laravel-4"
+          >Getting Started with Laravel 4</a
+        >
+        by Raphaël Saunier
+      </li>
+      <li>
+        <a
+          href="https://www.packtpub.com/web-development/laravel-application-development-cookbook"
+          >Laravel Application Development Cookbook</a
+        >
+        by Terry Matula
+      </li>
+      <li>
+        <a
+          href="https://leanpub.com/building-web-applications-using-parse-rest-api"
+          >Building Web Applications Using Parse REST API</a
+        >
+        by Mhd Zaher Ghaibeh
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravel-first-framework"
+          >Laravel - My First Framework</a
+        >
+        by Maksim Surguy
+      </li>
+      <li>
+        <a href="https://leanpub.com/easylaravel/">Easy Laravel 5</a> by W.
+        Jason Gilmore
+      </li>
+      <li>
+        <a href="https://www.packtpub.com/web-development/laravel-5-essentials"
+          >Laravel 5 Essentials</a
+        >
+        by Martin Bean
+      </li>
+      <li>
+        <a href="https://leanpub.com/easyecommerce"
+          >Easy E-Commerce Using Laravel and Stripe</a
+        >
+        by W. Jason Gilmore and Eric L. Barnes
+      </li>
+      <li>
+        <a href="https://leanpub.com/l5-beauty">Laravel 5.1 Beauty</a> by Chuck
+        Heintzelman
+      </li>
+      <li>
+        <a href="https://leanpub.com/larasign"
+          >Design Patterns with PHP and Laravel</a
+        >
+        by Kelt Dockins
+      </li>
+      <li>
+        <a href="https://www.packtpub.com/web-development/mastering-laravel"
+          >Mastering Laravel</a
+        >
+        by Christopher John Pecoraro
+      </li>
+      <li>
+        <a href="http://pusher-community.github.io/real-time-laravel/"
+          >How to Build Real-Time Laravel Apps with Pusher</a
+        >
+        by Pusher
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Learning-Laravels-Eloquent-Francesco-Malatesta-ebook/dp/B00YSILQ6C"
+          >Learning Laravel’s Eloquent</a
+        >
+        by Francesco Malatesta
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravel5learneasy">Laravel 5 Learn Easy</a>
+        by Sanjib Sinha
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravel-and-angularjs"
+          >Laravel and AngularJS</a
+        >
+        by Daniel Schmitz and Daniel Pedrinha Georgii
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravelcollectionsunraveled"
+          >Laravel Collections Unraveled</a
+        >
+        by Jeff Madsen
+      </li>
+      <li>
+        <a href="https://leanpub.com/lumen-apis">Writing APIs With Lumen</a> by
+        Paul Redmond
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravelsurvivalguide"
+          >The Laravel Survival Guide</a
+        >
+        by Tony Lea
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravel-5-for-beginners-laraboot"
+          >Laraboot: Laravel 5 For Beginners</a
+        >
+        by Bill Keck
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravel-5-4-for-beginners"
+          >Laravel 5.4 For Beginners</a
+        >
+        by Bill Keck
+      </li>
+      <li>
+        <a href="https://www.amazon.com/gp/product/1491936088"
+          >Laravel Up &amp; Running</a
+        >
+        by Matt Stauffer
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravelcompanion-secondedition"
+          >Laravel Companion</a
+        >
+        by Johnathon Koster
+      </li>
+      <li>
+        <a href="https://leanpub.com/laravel-aws"
+          >Deploy Laravel on AWS with CloudFormation</a
+        >
+        by Lionel Martin
+      </li>
+      <li>
+        <a href="https://leanpub.com/rn_laravel"
+          >React Native and Laravel for Future Mobile Development</a
+        >
+        by Ega Radiegtya
+      </li>
+      <li>
+        <a href="https://book.serversforhackers.com">Servers for Hackers</a> by
+        Chris Fidao
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Full-Stack-Vue-js-Laravel-frontend-together/dp/1788299582"
+          >Full-Stack Vue.js 2 and Laravel 5</a
+        >
+        by Anthony Gore
+      </li>
+      <li>
+        <a href="https://buildanapi.com">Build an API with Laravel</a> by Wacky
+        Studio
+      </li>
+    </ul>
+    <h2 id="starter-projects">Starter Projects</h2>
+    <ul>
+      <li><a href="https://spark.laravel.com/">Spark</a></li>
+      <li>
+        <a href="https://github.com/dwijitsolutions/laraadmin">LaraAdmin</a>
+      </li>
+      <li>
+        <a href="https://github.com/GrafiteInc/Builder">Grafite Builder</a>
+      </li>
+      <li>
+        <a href="https://github.com/rappasoft/laravel-5-boilerplate"
+          >Laravel Boilerplate</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/jadjoubran/laravel5-angular-material-starter"
+          >Laravel Angular Material Starter</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/acacha/adminlte-laravel"
+          >AdminLTE Laravel</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/unicodeveloper/laravel-hackathon-starter"
+          >Laravel Hackathon Starter</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/joselfonseca/laravel-api"
+          >Laravel API Starter Kit</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/Laravel-Backpack/Base"
+          >Backpack for Laravel</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/someline/someline-starter"
+          >SomelineStarter</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/z-song/laravel-admin">Laravel Admin</a>
+      </li>
+      <li>
+        <a href="https://github.com/the-control-group/voyager">Voyager</a>
+      </li>
+      <li><a href="https://github.com/TheOrchid/Platform">Orchid</a></li>
+      <li>
+        <a
+          href="https://github.com/francescomalatesta/laravel-api-boilerplate-jwt"
+          >Laravel REST API Boilerplate</a
+        >
+      </li>
+      <li><a href="https://github.com/Porto-SAP/Hello-API">Hello API</a></li>
+      <li>
+        <a href="https://github.com/hasib32/rest-api-with-lumen"
+          >REST API With Lumen</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/laravel-zero/laravel-zero"
+          >Laravel Zero - Console application</a
+        >
+      </li>
+      <li><a href="https://github.com/apiato/apiato">Apiato</a></li>
+      <li>
+        <a href="https://github.com/viralsolani/laravel-adminpanel"
+          >Laravel Adminpanel</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/alefesouza/laravel-vue-boilerplate"
+          >Laravel Vue Boilerplate</a
+        >
+      </li>
+      <li><a href="https://github.com/laravel-enso/enso">Laravel Enso</a></li>
+      <li>
+        <a href="https://github.com/wmhello/laravel_template_with_vue"
+          >Laravel Template with Vue</a
+        >
+      </li>
+    </ul>
+    <h2 id="codebases-for-reference">Codebases for Reference</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/cachethq/Cachet">Cachet</a> - Status page
+        system for websites and APIs
+      </li>
+      <li>
+        <a href="https://github.com/REBELinBLUE/deployer">Deployer</a> -
+        Application deployment system
+      </li>
+      <li>
+        <a href="https://github.com/renatomarinho/laravel-gitscrum">GitScrum</a>
+        - Task management with Git and Scrum
+      </li>
+      <li>
+        <a href="https://github.com/invoiceninja/invoiceninja">Invoice Ninja</a>
+        - Invoicing, expenses, &amp; time-tracking application
+      </li>
+      <li>
+        <a href="https://github.com/phanan/koel">Koel</a> - Personal music
+        streaming server
+      </li>
+      <li>
+        <a href="https://github.com/laravelio/portal">Laravel.io</a> - Source
+        for the Laravel.io Community Portal
+      </li>
+      <li>
+        <a href="https://github.com/Attendize/Attendize">Attendize</a> - Ticket
+        selling and event management platform
+      </li>
+      <li>
+        <a href="https://github.com/ant-vel/App">Antvel</a> - Ecommerce platform
+      </li>
+      <li>
+        <a href="https://github.com/tightenco/jigsaw">Jigsaw</a> - Static site
+        generator
+      </li>
+      <li>
+        <a href="https://github.com/cnvs/canvas">Canvas</a> - A Laravel
+        Publishing Platform
+      </li>
+      <li>
+        <a href="https://github.com/Vuedo/vuedo">Vuedo</a> - Vuedo is blog
+        platform, built with Laravel and Vue.js
+      </li>
+      <li>
+        <a href="https://github.com/stefanzweifel/screeenly">Screeenly</a> -
+        Create website screenshots through an API
+      </li>
+      <li>
+        <a href="https://github.com/voten-co/voten">Voten</a> - A real-time
+        social bookmarking for the 21st century
+      </li>
+      <li>
+        <a href="https://github.com/monicahq/monica">Monica</a> - Personal
+        relationship management system
+      </li>
+      <li>
+        <a href="https://github.com/snipe/snipe-it">Snipe-IT</a> - IT
+        asset/license management system
+      </li>
+      <li>
+        <a href="https://github.com/akaunting/akaunting">Akaunting</a> -
+        Accounting software for small businesses and freelancers
+      </li>
+      <li>
+        <a href="https://github.com/mattstauffer/Torch">Torch</a> - Examples of
+        using each Illuminate component in non-Laravel applications
+      </li>
+      <li>
+        <a href="https://github.com/pixelfed/pixelfed">Pixelfed</a> - A free and
+        ethical photo sharing platform, powered by ActivityPub federation
+      </li>
+    </ul>
+    <h2 id="content-management-systems">Content Management Systems</h2>
+    <ul>
+      <li><a href="https://github.com/octobercms/october">OctoberCMS</a></li>
+      <li>
+        <a href="https://github.com/LaravelRUS/SleepingOwlAdmin"
+          >SleepingOwlAdmin</a
+        >
+      </li>
+      <li><a href="https://github.com/pyrocms/pyrocms">PyroCMS</a></li>
+      <li><a href="https://github.com/LavaLite/cms">Lavalite</a></li>
+      <li><a href="https://github.com/typicms/base">TypiCMS</a></li>
+      <li><a href="https://github.com/AsgardCms/Platform">Asgard CMS</a></li>
+      <li><a href="https://github.com/microweber/microweber">Microweber</a></li>
+      <li><a href="https://github.com/web-feet/coastercms">Coaster CMS</a></li>
+      <li><a href="https://statamic.com/">Statamic</a></li>
+      <li>
+        <a href="https://github.com/odirleiborgert/borgert-cms/">Borgert CMS</a>
+      </li>
+      <li><a href="https://github.com/jcc/blog/">PJ Blog</a></li>
+      <li><a href="https://github.com/Laralum/Laralum">Laralum</a></li>
+      <li><a href="https://github.com/area17/twill">Twill</a></li>
+    </ul>
+    <h2 id="podcasts">Podcasts</h2>
+    <ul>
+      <li><a href="http://www.laravelpodcast.com/">The Laravel Podcast</a></li>
+      <li>
+        <a href="https://laravel-news.com/podcast/">The Laravel News Podcast</a>
+      </li>
+      <li>
+        <a href="https://laracasts.simplecast.fm/">The Laracasts Snippet</a>
+      </li>
+      <li>
+        <a href="http://hechoenlaravel.com">Hecho en Laravel (Spanish)</a>
+      </li>
+    </ul>
+    <h2 id="community">Community</h2>
+    <ul>
+      <li><a href="https://laracasts.com/discuss">Laracasts Forum</a></li>
+      <li><a href="http://laravel.io/forum">Laravel.io Forum</a></li>
+      <li>
+        <a href="https://larachat.slack.com/">Larachat Slack</a> (<a
+          href="https://larachat.co/register"
+          >Signup</a
+        >)
+      </li>
+      <li><a href="https://gitter.im/laravel/laravel">Gitter</a></li>
+      <li><a href="http://laravel.io/chat">IRC Channel</a></li>
+      <li>
+        <a href="http://stackoverflow.com/questions/tagged/laravel"
+          >StackOverflow</a
+        >
+      </li>
+      <li><a href="https://twitter.com/laravelphp">Twitter</a></li>
+      <li>
+        <a href="https://plus.google.com/communities/106838454910116161868"
+          >Google+</a
+        >
+      </li>
+      <li><a href="https://www.reddit.com/r/laravel">Reddit</a></li>
+      <li><a href="https://www.quora.com/topic/Laravel">Quora</a></li>
+      <li><a href="https://www.facebook.com/LaravelCommunity">Facebook</a></li>
+      <li>
+        <a href="https://www.linkedin.com/groups/4419933/profile">LinkedIn</a>
+      </li>
+    </ul>
+    <h5 id="local-user-groups">Local User Groups</h5>
+    <ul>
+      <li>
+        <a href="https://www.facebook.com/groups/group.laravel/"
+          >Laravel Global Community</a
+        >
+      </li>
+      <li>
+        <a href="https://laraveles.slack.com">LaravelES Slack</a> (<a
+          href="http://laraveles.com/blog/wp-login.php?action=slack-invitation"
+          >Signup</a
+        >)
+      </li>
+      <li>
+        <a href="https://laravellive.in/">Laravel India</a>,
+        <a
+          href="https://laravelliveindia.slack.com/join/shared_invite/enQtNjQyMDE4NDA3MDQzLWMyZmIxNGZkNGVkNGFmMzE1MTgyOGNiZGY1ZmU1ZDQ3Mzk2ODBlZGJlODk3ZmI0OWNlZmI5MzQyZDJhYzg1NjE"
+          >Slack Signup</a
+        >, <a href="https://twitter.com/LaravelLiveIN">Twitter</a>,
+        <a href="https://www.facebook.com/laravellive/">Facebook</a>,
+        <a href="https://www.youtube.com/channel/UC6TxYSHI7g9FMJ7VlHk72Yg"
+          >Youtube</a
+        >
+      </li>
+      <li>
+        <a href="https://laravelphp.uk/">Laravel UK</a>,
+        <a href="https://laravelphp.uk/login/slack">Slack Signup</a>
+      </li>
+      <li>
+        <a href="https://laravel.ru/">Laravel Russia</a> (<a
+          href="http://m.vk.com/laravel_rus"
+          >VK group</a
+        >)
+      </li>
+      <li><a href="https://laravel.fr/">Laravel France</a></li>
+      <li>
+        <a href="https://www.facebook.com/groups/LaravelBanglaDesh/"
+          >Laravel Bangladesh</a
+        >
+      </li>
+      <li>
+        <a href="http://id-laravel.com/">Laravel Indonesia</a> (<a
+          href="https://www.facebook.com/groups/laravel/"
+          >Facebook</a
+        >, <a href="https://t.me/laravelindonesia">Telegram</a>)
+      </li>
+      <li>
+        <a href="http://www.laravel.com.br/">Laravel Brasil</a> (<a
+          href="https://www.facebook.com/groups/laravelbrasil/"
+          >Facebook</a
+        >, <a href="http://slack.laravel.com.br">Slack</a>,
+        <a href="https://telegram.me/laravelbr">Telegram</a>,
+        <a href="https://github.com/laravelbrasil">GitHub</a>,
+        <a href="https://discord.gg/9dpuWeZ">Discord</a>)
+      </li>
+      <li>
+        <a href="http://www.laravel.gen.tr/">Laravel Turkey</a> (<a
+          href="https://www.facebook.com/groups/laravelturkiye/"
+          >Facebook</a
+        >)
+      </li>
+      <li>
+        <a href="http://www.laravelnigeria.com/">Laravel Nigeria</a> (<a
+          href="https://www.facebook.com/groups/laravelnigeria/"
+          >Facebook</a
+        >)
+      </li>
+      <li><a href="https://phphub.org/">Laravel China</a></li>
+      <li>
+        <a href="https://laravel.tw/">Laravel Taiwan</a> (<a
+          href="https://www.facebook.com/groups/laravel.tw/"
+          >Facebook</a
+        >)
+      </li>
+      <li><a href="http://laraveles.com/foro/">Laravel Spanish</a></li>
+      <li>
+        <a href="https://www.laravel.co.kr/">Laravel Korea</a> (<a
+          href="https://www.facebook.com/groups/laravelkorea/"
+          >Facebook</a
+        >)
+      </li>
+      <li>
+        <a href="http://laravel.jp/">Laravel Japan</a> (<a
+          href="https://www.facebook.com/groups/laravel.jp/"
+          >Facebook</a
+        >)
+      </li>
+      <li>
+        <a href="https://www.facebook.com/groups/laravel.my/"
+          >Laravel Malaysia</a
+        >
+      </li>
+      <li>
+        <a href="https://www.facebook.com/groups/LaravelAlgeria/"
+          >Laravel Algeria</a
+        >
+      </li>
+      <li>
+        <a href="http://www.laravel.gr">Laravel Greece</a> (<a
+          href="https://www.facebook.com/laravelgr"
+          >Facebook</a
+        >)
+      </li>
+      <li>
+        <a href="http://laravelme.com/">Laravel Middle East</a> (<a
+          href="https://www.facebook.com/laravelme"
+          >Facebook</a
+        >)
+      </li>
+      <li>
+        <a href="https://www.facebook.com/groups/laravel.georgia/"
+          >Laravel Georgia</a
+        >
+      </li>
+      <li><a href="http://laravel-italia.it">Laravel Italy</a></li>
+      <li>
+        <a href="https://www.facebook.com/groups/vietnam.laravel/"
+          >Laravel Vietnam</a
+        >
+      </li>
+      <li>
+        <a href="https://www.facebook.com/groups/laravelslovenija/"
+          >Laravel Slovenia</a
+        >
+      </li>
+      <li><a href="https://laravel.hu">Laravel Hungary</a></li>
+      <li>
+        <a href="https://laravelcm.com/">Laravel Cameroon</a> (<a
+          href="https://laravelcm.slack.com"
+          >Slack</a
+        >, <a href="https://github.com/laravelcm">GitHub</a>,
+        <a href="https://www.facebook.com/laravelcm">Facebook</a>,
+        <a href="https://twitter.com/laravelcm">Twitter</a>)
+      </li>
+      <li>
+        <a href="https://www.facebook.com/groups/laravelph"
+          >Laravel Philippines</a
+        >
+      </li>
+    </ul>
+    <h5 id="meetups">Meetups</h5>
+    <ul>
+      <li><a href="http://www.meetup.com/topics/laravel/">All Meetups</a></li>
+      <li>
+        <a href="https://www.meetup.com/London-Laravel/">London Meetup</a>
+      </li>
+      <li>
+        <a href="https://www.meetup.com/Laravel-Buenos-Aires/"
+          >Buenos Aires Meetup</a
+        >
+      </li>
+      <li>
+        <a href="https://www.meetup.com/athens-laravel-meetup/"
+          >Athens-Greece Meetup</a
+        >
+      </li>
+      <li>
+        <a href="https://www.meetup.com/Copenhagen-Laravel-Meetup/"
+          >Copenhagen Meetup</a
+        >
+      </li>
+      <li>
+        <a href="https://www.meetup.com/Laravel-Detroit/">Detroit Meetup</a>
+      </li>
+      <li>
+        <a href="https://www.meetup.com/fr-FR/Paris-Laravel-Meetup/"
+          >Paris Meetup</a
+        >
+      </li>
+      <li>
+        <a href="https://www.meetup.com/Melbourne-laravel-Meetup/"
+          >Melbourne Meetup</a
+        >
+      </li>
+      <li>
+        <a href="https://www.meetup.com/Laravel-Hungary-Meetup/"
+          >Budapest Meetup</a
+        >
+      </li>
+    </ul>
+    <h2 id="jobs">Jobs</h2>
+    <ul>
+      <li><a href="https://larajobs.com/">LaraJobs</a></li>
+      <li><a href="https://laravelgurus.com/">Laravel Gurus</a></li>
+    </ul>
+    <h2 id="hosted-development-tools">Hosted Development Tools</h2>
+    <ul>
+      <li>
+        <a href="https://laravelshift.com/">Laravel Shift</a> - Automated
+        upgrade tool for Laravel projects
+      </li>
+      <li>
+        <a href="http://laravelsd.com/">Laravel Schema Designer</a> - Create,
+        export and share database schemas
+      </li>
+      <li>
+        <a href="https://styleci.io">StyleCI</a> - PHP Coding Style Service
+      </li>
+    </ul>
+    <h2 id="miscellaneous">Miscellaneous</h2>
+    <ul>
+      <li>
+        <a href="https://codecanyon.net/tags/laravel?term=laravel"
+          >CodeCanyon</a
+        >
+        - Paid scripts and plugins
+      </li>
+      <li>
+        <a href="https://laravelcollections.com">Laravel Collections</a> - Every
+        Laravel Developers Goto Resource Site
+      </li>
+      <li>
+        <a href="https://telegram.me/laravellinks">LaravelLinks</a> - A Telegram
+        Channel dedicated to sharing great Laravel Resources
+      </li>
+    </ul>
+    <h2 id="contributing">Contributing</h2>
+    <p>
+      Found an awesome package, blog, course or video? Send me a pull request!
+    </p>
+    <h4 id="guidelines">Guidelines</h4>
+    <ul>
+      <li>Please make an individual pull request for each suggestion</li>
+      <li>Make sure the Travis tests pass on your pull request</li>
+      <li>Use the following format for links: [Resource](URL)</li>
+      <li>
+        Want to suggest a package? Read the
+        <a
+          href="https://github.com/chiraggude/awesome-laravel/blob/master/CONTRIBUTING.md"
+          >Contribution Guide</a
+        >
+      </li>
+      <li>
+        New categories or improvements to the existing categorization are
+        welcome
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/licenses/by/4.0/"
+        ><img
+          src="https://licensebuttons.net/l/by/4.0/88x31.png"
+          alt="CC BY 4.0"
+      /></a>
+    </p>
+    <p>
+      Awesome Laravel is licensed under a
+      <a href="https://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International License</a
+      >.
+    </p>
+  </body>
+</html>

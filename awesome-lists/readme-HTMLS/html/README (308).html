@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-selenium-awesome-build-status">
+      Awesome Selenium
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+      <a href="https://travis-ci.org/christian-bromann/awesome-selenium"
+        ><img
+          src="https://travis-ci.org/christian-bromann/awesome-selenium.svg?branch=master"
+          alt="Build Status"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        A curated list of delightful
+        <a href="http://www.seleniumhq.org/">Selenium</a>
+        <a href="#resources">resources</a>.
+      </p>
+    </blockquote>
+    <p>
+      Inspired by the
+      <a href="https://github.com/sindresorhus/awesome">awesome</a> list thing.
+    </p>
+    <h2 id="resources">Resources</h2>
+    <ul>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#css-regression-testing">CSS Regression Testing</a></li>
+      <li><a href="#containers">Containers</a></li>
+      <li><a href="#driver">Driver</a></li>
+      <li><a href="#desktop-tools">Desktop Tools</a></li>
+      <li><a href="#selenium-grid">Selenium Grid</a></li>
+      <li><a href="#cloud-services">Cloud Services</a></li>
+      <li><a href="#device-farms">Device Farms</a></li>
+      <li><a href="#web-scraping--mining">Web Scraping / Mining</a></li>
+      <li><a href="#specifications">Specifications</a></li>
+      <li><a href="#blogs">Blogs</a></li>
+    </ul>
+    <h3 id="tools">Tools</h3>
+    <h4 id="javascript">Javascript</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/SeleniumHQ/selenium/wiki/WebDriverJs"
+          >selenium-webdriver</a
+        >
+        - The official WebDriver JavaScript bindings from the Selenium project.
+      </li>
+      <li>
+        <a href="https://github.com/admc/wd">WD</a> - WebDriver/Selenium 2
+        node.js client.
+      </li>
+      <li>
+        <a href="http://webdriver.io">WebdriverIO</a> - better implementation of
+        WebDriver bindings with predefined 50+ actions.
+      </li>
+      <li>
+        <a href="http://casperjs.org/">CasperJS</a> - open source navigation
+        scripting &amp; testing utility.
+      </li>
+      <li>
+        <a href="http://zombie.js.org/">Zombie.js</a> - Insanely fast, headless
+        full-stack testing.
+      </li>
+      <li>
+        <a href="http://dalekjs.com/">DalekJS</a> - Automated cross browser
+        testing.
+      </li>
+      <li>
+        <a href="http://slimerjs.org/">SlimerJS</a> - A scriptable browser for
+        Web developers.
+      </li>
+      <li>
+        <a href="http://nightwatchjs.org/">Nightwatch</a> - efficient and
+        straightforward Javascript End-to-End tests.
+      </li>
+      <li>
+        <a href="https://github.com/jlipps/yiewd">yiewd</a> - WD.js wrapper
+        using latest Harmony generators! Get rid of the callback pyramid with
+        yield.
+      </li>
+      <li>
+        <a href="http://karma-runner.github.io/0.12/index.html">Karma</a> -
+        Brings a productive testing environment to developers for unit testing
+        (mostly AngularJS).
+      </li>
+      <li>
+        <a href="https://angular.github.io/protractor/">Protractor</a> -
+        Protractor is an end-to-end test framework for AngularJS applications.
+      </li>
+      <li>
+        <a href="http://codecept.io/">CodeceptJS</a> - Modern Era Acceptance
+        Testing Framework for NodeJS.
+      </li>
+      <li>
+        <a href="http://www.nightmarejs.org/">Nightmare.js</a> - A high-level
+        browser automation library.
+      </li>
+    </ul>
+    <h4 id="ruby">Ruby</h4>
+    <ul>
+      <li>
+        <a href="http://seleniumhq.github.io/selenium/docs/api/rb/index.html"
+          >Selenium with Ruby</a
+        >
+        - Selenium Ruby bindings
+      </li>
+      <li>
+        <a href="http://watir.github.io">Watir</a> - Automated testing that
+        doesn’t hurt
+      </li>
+      <li>
+        <a href="https://github.com/chriskite/anemone">Anemone</a> - Anemone
+        web-spider framework.
+      </li>
+      <li>
+        <a href="http://docs.seattlerb.org/mechanize/">Mechanize</a> -
+        automating interaction with websites.
+      </li>
+      <li>
+        <a href="https://github.com/postmodern/spidr">Spidr</a> - web spidering
+        library that can spider a site, multiple domains, certain links or
+        infinitely.
+      </li>
+      <li>
+        <a href="https://rubygems.org/gems/cobweb">cobweb</a> - web crawler that
+        can use resque to cluster crawls to quickly crawl extremely large sites.
+      </li>
+      <li>
+        <a href="https://rubygems.org/gems/capybara">Capybara</a> - an
+        integration testing tool for rack based web applications. It simulates
+        how a user would interact with a website.
+      </li>
+    </ul>
+    <h4 id="php">PHP</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/facebook/php-webdriver"
+          >Facebook WebDriver</a
+        >
+        - A PHP client for webdriver.
+      </li>
+      <li>
+        <a href="https://github.com/bogdananton/Selenium-Setup"
+          >Selenium Setup</a
+        >
+        - A tool for PHP developers to start their own Selenium server.
+      </li>
+      <li>
+        <a href="https://github.com/lmc-eu/steward">Steward</a> - A test runner
+        integrating php-webdriver with PHPUnit.
+      </li>
+    </ul>
+    <h4 id="python">Python</h4>
+    <ul>
+      <li>
+        <a href="http://selenium-python.readthedocs.io/"
+          >Selenium with Python</a
+        >
+        - Selenium Python bindings
+      </li>
+      <li>
+        <a href="https://github.com/mherrmann/selenium-python-helium">Helium</a>
+        - Helium makes Selenium easier and faster to use
+      </li>
+      <li>
+        <a href="https://github.com/yashaka/selene">Selene</a> -
+        Selenide-inspired concise and readable automated test framework,
+        supports Ajax well like Selenide.
+      </li>
+      <li>
+        <a href="https://github.com/saucelabs/pomade">Pomade</a> - SauceLabs
+        integrated test runner for Selenium test.
+      </li>
+      <li>
+        <a href="http://wwwsearch.sourceforge.net/mechanize/">mechanize</a> -
+        Stateful programmatic web browsing.
+      </li>
+      <li>
+        <a href="http://robotframework.org/">Robot</a> - Robot Framework is a
+        generic test automation framework for acceptance testing and ATDD.
+      </li>
+      <li>
+        <a href="https://github.com/spyoungtech/behave-webdriver"
+          >behave-webdriver</a
+        >
+        behavior driven testing with Selenium and Python.
+      </li>
+    </ul>
+    <h4 id="java">Java</h4>
+    <ul>
+      <li>
+        <a href="http://seleniumhq.github.io/selenium/docs/api/java/index.html"
+          >Selenium with Java</a
+        >
+        - Selenium Java bindings
+      </li>
+      <li>
+        <a href="http://conductor.ddavison.io">Conductor</a> - Turbo-boosted
+        Selenium framework that makes test writing a breeze.
+      </li>
+      <li>
+        <a href="https://github.com/darcy-framework/darcy-webdriver">darcy</a> -
+        Page object framework for structured, maintainable automation.
+      </li>
+      <li>
+        <a href="https://github.com/codeborne/selenide">Selenide</a> - A
+        framework for writing easy-to-read and easy-to-maintain automated tests
+        using a Fluent API. Selenide has a magic trick that resolves most
+        problems with Ajax and timeouts.
+      </li>
+      <li>
+        <a href="http://galenframework.com/">Galen Framework</a> - Automated
+        testing of look and feel for your responsive websites.
+      </li>
+      <li>
+        <a href="http://www.thucydides.info/">Serenity</a> - It is an open
+        source library for writing better quality automated acceptance tests
+        faster. (Formerly Thucydides).
+      </li>
+      <li>
+        <a href="https://github.com/seleniumQuery/seleniumQuery"
+          >seleniumQuery</a
+        >
+        - jQuery-like cross-driver interface in Java for WebDriver. Designed as
+        a thin layer, it can be used alone or on top of your favorite framework
+        just to make some cases (e.g. asserting/waiting) simpler when needed.
+      </li>
+      <li>
+        <a href="https://github.com/bonigarcia/webdrivermanager"
+          >WebDriverManager</a
+        >
+        - Automatic management of Selenium WebDriver binaries.
+      </li>
+    </ul>
+    <h4 id="c">C</h4>
+    <ul>
+      <li>
+        <a
+          href="http://seleniumhq.github.io/selenium/docs/api/dotnet/index.html"
+          >Selenium with C#</a
+        >
+        - Selenium C# bindings
+      </li>
+      <li>
+        <a href="https://github.com/atata-framework/atata">Atata</a> - Automated
+        web testing full featured framework based on Selenium WebDriver.
+      </li>
+      <li>
+        <a href="https://github.com/jimevans/strontium">Strontium</a> - A .NET
+        implementation (but outdated) for Selenium/WebDriver (Remote) Server
+      </li>
+    </ul>
+    <h4 id="groovy">Groovy</h4>
+    <ul>
+      <li>
+        <a href="http://www.gebish.org/">Geb</a> - It can be used for scripting,
+        scraping and general automation — or equally as a
+        functional/web/acceptance testing solution via integration with testing
+        frameworks such as Spock, JUnit &amp; TestNG.
+      </li>
+    </ul>
+    <h4 id="dart">Dart</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/google/webdriver.dart">dart.webdriver</a> -
+        Provides WebDriver bindings for Dart. These use the WebDriver JSON
+        interface, and as such, require the use of the WebDriver remote server.
+      </li>
+    </ul>
+    <h3 id="css-regression-testing">CSS Regression Testing</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/Huddle/PhantomCSS">PhantomCSS</a> -
+        Visual/CSS regression testing with PhantomJS.
+      </li>
+      <li>
+        <a href="https://github.com/webdriverio/webdrivercss">WebdriverCSS</a> -
+        Regression testing tool for
+        <a href="http://webdriver.io">WebdriverIO</a> (currently deprecated,
+        please use
+        <a href="https://www.npmjs.com/package/wdio-screenshot"
+          >wdio-screenshot</a
+        >
+        for the time being).
+      </li>
+    </ul>
+    <h3 id="containers">Containers</h3>
+    <h4 id="docker">Docker</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/elgalu/docker-selenium"
+          >elgalu/docker-selenium</a
+        >
+        - Selenium in Docker with Chrome &amp; Firefox plus video recording
+        support.
+      </li>
+      <li>
+        <a href="https://github.com/aerokube/ggr">Ggr</a> - A lightweight load
+        balancer used to create big Selenium clusters.
+      </li>
+      <li>
+        <a href="https://github.com/SeleniumHQ/docker-selenium"
+          >SeleniumHQ/docker-selenium</a
+        >
+        - Docker images for Selenium Standalone Server, Hub, and Node
+        configurations with Chrome and Firefox.
+      </li>
+      <li>
+        <a href="https://github.com/aerokube/selenoid">Selenoid</a> - A
+        lightweight Selenium hub implementation launching browsers in Docker
+        containers.
+      </li>
+      <li>
+        <a href="https://github.com/zalando/zalenium">zalando/zalenium</a> -
+        Allows anyone to have a disposable and flexible Selenium Grid
+        infrastructure
+      </li>
+      <li>
+        <a href="https://github.com/bravostudiodev/bravo-grid"
+          >bravostudiodev/bravo-grid</a
+        >
+        - Docker image/setup for Selenium Grid Extras (see under Selenium Grid
+        section), for providing remote Sikuli test/automation execution and grid
+        node file upload/download support.
+      </li>
+    </ul>
+    <h4 id="kubernetes">Kubernetes</h4>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/kubernetes/examples/tree/master/staging/selenium"
+          >kubernetes/examples</a
+        >
+        - Example deployment of Selenium Hub and Nodes on a Kubernetes cluster
+      </li>
+      <li>
+        <a href="https://github.com/aerokube/moon">Moon</a> - A commercial
+        closed-source enterprise Selenium implementation using Kubernetes to
+        launch browsers
+      </li>
+      <li>
+        <a href="https://github.com/wrike/callisto">Callisto</a> - An
+        open-source tool to launch browsers in Kubernetes. Separate is created
+        for each selenium session.
+      </li>
+      <li>
+        <a href="https://github.com/TilBlechschmidt/WebGrid">WebGrid</a> - An
+        open-source, decentralized, scalable and robust selenium-grid
+        equivalent.
+      </li>
+    </ul>
+    <h3 id="driver">Driver</h3>
+    <h4 id="desktop-browsers">Desktop (browsers)</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/SeleniumHQ/selenium/wiki/FirefoxDriver"
+          >Firefox</a
+        >
+        - Firefox driver (for FF &lt; v48) is included in the
+        selenium-server-standalone.jar available in the downloads.
+      </li>
+      <li>
+        <a href="https://github.com/mozilla/geckodriver">Geckodriver</a> -
+        Firefox driver (for FF &gt; v48), supported with Selenium &gt;= v3
+      </li>
+      <li>
+        <a href="https://sites.google.com/a/chromium.org/chromedriver/home"
+          >Chrome</a
+        >
+        - ChromeDriver is a standalone server which implements WebDriver’s wire
+        protocol for Chromium.
+      </li>
+      <li>
+        <a
+          href="https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver"
+          >Internet Explorer</a
+        >
+        - The InternetExplorerDriver is a standalone server which implements
+        WebDriver’s wire protocol.
+      </li>
+      <li>
+        <a
+          href="https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/"
+          >Edgedriver</a
+        >
+        - Microsoft Webdriver server for Edge
+      </li>
+      <li>
+        <a href="https://github.com/SeleniumHQ/selenium/wiki/SafariDriver"
+          >Safari</a
+        >
+        - The SafariDriver is implemented as a Safari browser extension. The
+        driver inverts the traditional client/server relationship and
+        communicates with the WebDriver client using WebSockets (only supported
+        for Safari &lt;= v9, all new Safari version comming with macOS Sierra
+        come with an integrated SafariDriver that is closed source by Apple).
+      </li>
+      <li>
+        <a
+          href="https://github.com/operasoftware/operachromiumdriver/blob/master/README.md"
+          >Opera</a
+        >
+        - OperaDriver is a vendor-supported WebDriver implementation developed
+        by Opera Software and volunteers that implements WebDriver API for
+        Opera.
+      </li>
+    </ul>
+    <h4 id="mobile-browsers-and-apps">Mobile (browsers and apps)</h4>
+    <ul>
+      <li>
+        <a href="http://appium.io/">Appium</a> - Appium is an open source test
+        automation framework for use with native and hybrid mobile apps. It
+        drives iOS, Android Apps using the WebDriver protocol.
+      </li>
+      <li>
+        <a href="http://selendroid.io/mobileWeb.html">Selendroid</a> -
+        Selendroid is based on the Android instrumentation framework.
+      </li>
+      <li>
+        <a href="http://ios-driver.github.io/ios-driver/">ios-driver</a> - Test
+        any IOS native, hybrid, or mobile web application using Selenium /
+        WebDriver.
+      </li>
+      <li>
+        <a href="https://github.com/manishPatwari/WebDriverAgent"
+          >WebDriverAgent</a
+        >
+        - a WebDriver server for iOS to remote control devices via WebDriver
+        API.
+      </li>
+    </ul>
+    <h4 id="desktop-gui-automation-non-browser-centric">
+      Desktop GUI Automation (non-browser-centric)
+    </h4>
+    <ul>
+      <li>
+        <a href="https://github.com/Microsoft/WinAppDriver">WinAppDriver</a> -
+        Microsoft’s WebDriver implementation for Windows application automation.
+      </li>
+      <li>
+        <a href="https://github.com/2gis/Winium">Winium</a> - Automation
+        framework for Windows platforms. It is free. It is opensource. It is
+        Selenium-based. Supports: Windows Desktop (WPF, WinForms); Windows Store
+        or Universal Apps for Windows Phone; Windows Phone Silverlight Apps.
+      </li>
+      <li>
+        <a href="https://github.com/cisco-open-source/qtwebdriver"
+          >QtWebDriver</a
+        >
+        - For using WebDriver to automate Qt-based GUI applications.
+      </li>
+      <li>
+        <a href="https://github.com/daluu/AutoItDriverServer"
+          >AutoItDriverServer</a
+        >
+        - Selenium server to control/drive AutoIt via (Remote)WebDriver API.
+      </li>
+      <li>
+        <a href="https://github.com/daluu/AutoPyDriverServer"
+          >AutoPyDriverServer</a
+        >
+        - Selenium server to control/drive AutoPy via (Remote)WebDriver API.
+      </li>
+      <li>
+        <a href="https://appium.io/docs/en/drivers/mac/">Appium for Mac</a> -
+        Appium/WebDriver implementation for automating Mac OS X desktop.
+      </li>
+      <li>
+        <a href="https://github.com/MicroFocus/SilkAppDriver">SilkAppDriver</a>
+        - Selenium server to control/drive the commercial SilkTest platform via
+        (Remote)WebDriver API.
+      </li>
+    </ul>
+    <h3 id="desktop-tools">Desktop Tools</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/dzharii/swd-recorder">SWD Page Recorder</a>
+        - Windows Desktop application that makes it easy to create, test and
+        debug new Selenium Webdriver PageObject classes. It works with C#, Java,
+        Python and Ruby out of the box and you may add own code generation
+        templates.
+      </li>
+      <li>
+        <a href="https://github.com/sergueik/SWET">SWET</a> - A successor to SWD
+        Page Recorder, for the same functionality.
+      </li>
+      <li>
+        <a href="https://github.com/dmolchanenko/LookingGlass">Looking Glass</a>
+        - Java application that offers a cross-browser element inspector and
+        Selenium code generator.
+      </li>
+      <li>
+        <a href="https://www.ranorex.com/selocity/browser-extension/"
+          >Ranorex Selocity</a
+        >
+        - A Firebug/FirePath/Firefinder and Selenium IDE alternative for browser
+        element inspection from the creators of Ranorex.
+      </li>
+      <li>
+        <a
+          href="https://www.microfocus.com/products/silk-portfolio/silk-webdriver/"
+          >Silk WebDriver</a
+        >
+        - A Selenium IDE alternative for record, playback, and script export,
+        from the creators of SilkTest.
+      </li>
+      <li>
+        <a href="https://code.google.com/archive/p/fire-ie-selenium/"
+          >Fire IE Selenium</a
+        >
+        - Microsoft Excel-based tool providing element inspection for Internet
+        Explorer browser.
+      </li>
+    </ul>
+    <h3 id="selenium-grid">Selenium Grid</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/groupon/Selenium-Grid-Extras"
+          >Selenium Grid Extras</a
+        >
+        - A framework that provides additional features beyond the basic
+        Selenium Grid like video recording.
+      </li>
+      <li>
+        <a href="https://github.com/paypal/SeLion">SeLion</a> - A (Java)
+        framework for running Selenium tests with additional features beyond the
+        basic Selenium Grid functionality, particularly like stability
+        improvements, etc.
+      </li>
+      <li>
+        <a href="https://github.com/sterodium/selenium-grid-extensions"
+          >Selenium Grid Extensions</a
+        >
+        - A set of extensions for Selenium Grid that provide additional features
+        like running Sikuli tests/automation remotely, upload/download files on
+        a grid node.
+      </li>
+    </ul>
+    <h3 id="cloud-services">Cloud Services</h3>
+    <ul>
+      <li>
+        <a href="https://saucelabs.com">Sauce Labs</a> - Cross browser testing
+        made awesome. Selenium testing, mobile testing, JS unit testing on 300+
+        OS/browser platforms. Get started for free.
+      </li>
+      <li>
+        <a href="https://www.browserstack.com/">Browserstack</a> - Test your
+        website for cross browser compatibility on real browsers. Instant access
+        to multiple desktop and mobile browsers. Get Free Trial.
+      </li>
+      <li>
+        <a href="https://www.lambdatest.com/selenium-automation">LambdaTest</a>
+        - Test your website for cross browser compatibility on 2000+ real
+        browsers &amp; OS. Get Free Trial.
+      </li>
+      <li>
+        <a href="https://testingbot.com">TestingBot</a> - TestingBot provides
+        easy cross browser testing with Selenium in the cloud.
+      </li>
+      <li>
+        <a href="https://browsers.aerokube.com">Aerokube Browsers</a> -
+        Lightning fast online Selenium testing platform with unlimited billing
+        plans and reasonable pricing.
+      </li>
+      <li>
+        <a href="https://aerokube.com/moon/#cloud">Moon Cloud</a> - Your
+        dedicated Selenium cluster in public cloud platform with per-minute
+        billing and unlimited number of browsers.
+      </li>
+      <li>
+        <a href="https://www.mail7.io/">Mail7</a> - Disposable email service to
+        automate the email workflow testing,
+        <a
+          href="https://docs.mail7.io/tutorials/registration-and-login-automation-using-selenium-with-disposable-email"
+          >This document</a
+        >
+        explains how to implement Mail7 with Selenium
+      </li>
+    </ul>
+    <h3 id="device-farms">Device Farms</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/openstf/stf">OpenSTF</a> - A framework for
+        running your own device farm, geared toward Android, but also iOS.
+      </li>
+    </ul>
+    <h3 id="web-scraping-mining">Web Scraping / Mining</h3>
+    <ul>
+      <li>
+        <a href="http://scrapy.org">Scrapy</a> - <strong>Python</strong>, mainly
+        a scraper/miner - fast, well documented and, can be linked with
+        <a href="http://django-dynamic-scraper.readthedocs.org/en/latest/"
+          >Django Dynamic Scraper</a
+        >
+        for nice mining deployments, or
+        <a href="http://scrapinghub.com/scrapy-cloud.html">Scrapy Cloud</a> for
+        PaaS (server-less) deployment, works in terminal or an server
+        stand-alone process, can be used with <strong>Celery</strong>, built on
+        top of <strong>Twisted</strong>.
+      </li>
+      <li>
+        <a href="https://github.com/sylvinus/node-crawler">Node-Crawler</a> -
+        <strong>Node.js</strong> Web Crawler/Spider for NodeJS + server-side
+        jQuery.
+      </li>
+    </ul>
+    <h3 id="specifications">Specifications</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/SeleniumHQ/selenium/wiki/JsonWireProtocol"
+          >The WebDriver Wire Protocol</a
+        >
+        - All implementations of WebDriver that communicate with the browser, or
+        a RemoteWebDriver server shall use a common wire protocol.
+      </li>
+      <li>
+        <a href="http://www.w3.org/TR/webdriver/">WebDriver</a> - This
+        specification defines the WebDriver API, a platform and language-neutral
+        interface and associated wire protocol that allows programs or scripts
+        to introspect into, and control the behavior of, a web browser.
+      </li>
+    </ul>
+    <h3 id="blogs">Blogs</h3>
+    <ul>
+      <li>
+        <a href="https://seleniumhq.wordpress.com/">Official Selenium Blog</a> -
+        The official blog by SeleniumHQ.
+      </li>
+      <li>
+        <a href="http://elementalselenium.com/">Elemental Selenium</a> - A free,
+        once-weekly e-mail on how to use Selenium like a Pro.
+      </li>
+      <li>
+        <a href="http://www.assertselenium.com/">Assert Selenium</a> - Selenium
+        Automation in a Right way - A Selenium only blog.
+      </li>
+      <li>
+        <a href="https://saucelabs.com/blog">SauceLabs Blog</a> - Blog curated
+        by SauceLabs.
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="http://creativecommons.org/publicdomain/zero/1.0/"
+        ><img src="https://licensebuttons.net/p/zero/1.0/88x31.png" alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="http://www.christian-bromann.com/">Christian Bromann</a> has
+      waived all copyright and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

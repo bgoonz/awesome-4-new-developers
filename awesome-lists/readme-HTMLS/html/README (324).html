@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-opensourcephotography">Awesome-OpenSourcePhotography</h1>
+    <p>
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </p>
+    <p>
+      A list of awesome free open source software &amp; libraries for
+      photography. Also tools for video. For more awesomeness, check out
+      <a href="https://github.com/sindresorhus/awesome">awesome</a>.
+    </p>
+    <ul>
+      <li><a href="#general">General</a></li>
+      <li><a href="#camera-firmware-mods">Camera Firmware Mods</a></li>
+      <li>
+        <a href="#libraries">Libraries</a>
+        <ul>
+          <li><a href="#canon">Canon</a></li>
+          <li><a href="#gopro">GoPro</a></li>
+          <li><a href="#sony">Sony</a></li>
+        </ul>
+      </li>
+      <li><a href="#utilities">Utilities</a></li>
+      <li><a href="#raw-image-developers">RAW image developers</a></li>
+      <li><a href="#hdr-specific-software">HDR Specific Software</a></li>
+      <li><a href="#panorama-stitching">Panorama Stitching</a></li>
+      <li><a href="#photo-organizers">Photo Organizers</a></li>
+      <li><a href="#exif-editors">EXIF Editors</a></li>
+      <li><a href="#photo-downloaders">Photo Downloaders</a></li>
+      <li><a href="#camera-tetherers">Camera Tetherers</a></li>
+      <li><a href="#monitor-color-correction">Monitor Color Correction</a></li>
+      <li>
+        <a href="#alternative-image-viewers">Alternative Image Viewers</a>
+      </li>
+      <li>
+        <a href="#useful-gimp-mods-or-scripts">Useful GIMP Mods or Scripts</a>
+      </li>
+      <li><a href="#communities">Communities</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li>
+        <a href="#video">Video</a>
+        <ul>
+          <li><a href="#general-tools">General tools</a></li>
+          <li><a href="#compositing-software">Compositing software</a></li>
+          <li><a href="#video-libraries">Video Libraries</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#scripts">Scripts</a>
+        <ul>
+          <li><a href="#video-to-panorama">Video to Panorama</a></li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="general">General</h2>
+    <ul>
+      <li>
+        <a href="http://www.gimp.org/">GIMP</a> -
+        <em>A swiss knife for image manipulation.</em>
+      </li>
+      <li>
+        <a href="https://github.com/aferrero2707/PhotoFlow">PhotoFlow</a> -
+        <em
+          >A non-destructive photo retouching program including RAW image
+          development.</em
+        >
+      </li>
+      <li>
+        <a href="http://www.imagemagick.org/">ImageMagick</a> -
+        <em
+          >A suite of command-line utilities for modifying and working with
+          images.</em
+        >
+      </li>
+      <li>
+        <a href="http://www.graphicsmagick.org/">GraphicsMagick</a> -
+        <em>GraphicsMagick is usually faster than ImageMagick.</em>
+      </li>
+    </ul>
+    <h2 id="camera-firmware-mods">Camera Firmware Mods</h2>
+    <ul>
+      <li>
+        <a href="http://chdk.wikia.com/wiki/CHDK">CHDK</a> -
+        <em>Canon Hack Development Kit, for Canon cameras.</em>
+      </li>
+      <li>
+        <a href="http://magiclantern.fm/">Magic Lantern</a> -
+        <em
+          >a software enhancement that offers increased functionality to Canon
+          DSLR cameras.</em
+        >
+      </li>
+      <li>
+        <a href="https://github.com/KonradIT/autoexechack">Autoexec Hack</a> -
+        <em>Compilation of hacks for GoPro Cameras.</em>
+      </li>
+      <li>
+        <a href="http://www.gh1-hack.info/">PTool Firmware Manipulation Tool</a>
+        - <em>change the video recording parameters of Panasonic’s cameras.</em>
+      </li>
+      <li>
+        <a href="https://nikonhacker.com/wiki/Main_Page">Nikon Hacker</a> -
+        <em>Nikon Patch and Nikon Emulator, 2 softwares for Nikon cameras.</em>
+      </li>
+      <li>
+        <a href="https://github.com/PJanisio/Xiaomi_Yi_autoexec"
+          >Xiaomi Yi Autoexec</a
+        >
+        -
+        <em>Compilation of autoexec scripts and mods for Xiaomi Yi camera.</em>
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/gphoto/libgphoto2">LibGphoto2</a> -
+        <em
+          >C APi for Digital camera access and remote control. Java,python,C#,
+          and much more bindings.</em
+        >
+      </li>
+    </ul>
+    <h3 id="canon">Canon</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/roxlu/ofxCanon">OfxCanon</a> -
+        <em>OpenFrameworks addon for the Canon EDSK.</em>
+      </li>
+      <li>
+        <a href="https://github.com/kritzikratzi/edsdk4j">Edsdk4j</a> -
+        <em>Canon SDK for Java.</em>
+      </li>
+    </ul>
+    <h3 id="gopro">GoPro</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/kschzt/gopro">GoPro</a> -
+        <em>API for controlling GoPro Hero 3 Camera from Node.js.</em>
+      </li>
+      <li>
+        <a href="https://github.com/DenisCarriere/gopro">GoPro</a> -
+        <em>GoPro Hero 4 - Python API.</em>
+      </li>
+      <li>
+        <a href="https://github.com/joshvillbrandt/goprohero">GoPro</a> -
+        <em
+          >a Python library and a CLI that can interface with GoPro HERO3,
+          HERO3+, and HERO4 cameras over http.</em
+        >
+      </li>
+      <li>
+        <a href="https://github.com/r1pper/GoPro.Hero">GoPro.Hero</a> -
+        <em>a lightweight c# library to access and control GoPro HERO.</em>
+      </li>
+    </ul>
+    <h3 id="sony">Sony</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/storborg/sonypy">SonyPy</a> -
+        <em>Python module for Sony Camera Remote API.</em>
+      </li>
+    </ul>
+    <h2 id="utilities">Utilities</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/ThibaudM/timelapse-sony">Timelapse-sony</a>
+        -
+        <em
+          >Android app for creating timelapse via “Ctrl with Smartphone” mode or
+          connected by NFC.</em
+        >
+      </li>
+      <li>
+        <a href="https://github.com/crazymaik/remoteyourcam-usb"
+          >Remoteyourcam-usb</a
+        >
+        -
+        <em
+          >Control your Canon or Nikon DSLR camera from your Android device
+          through USB.</em
+        >
+      </li>
+      <li>
+        <a href="https://github.com/dukus/digiCamControl">digiCamControl</a> -
+        <em>DSLR camera remote control open source software.</em>
+      </li>
+    </ul>
+    <h2 id="raw-image-developers">RAW image developers</h2>
+    <ul>
+      <li>
+        <a href="http://www.darktable.org/">Darktable</a> -
+        <em
+          >An open source photography workflow application and RAW
+          developer.</em
+        >
+      </li>
+      <li>
+        <a href="http://rawtherapee.com/">RawTherapee</a> -
+        <em>A cross-platform raw image processing program.</em>
+      </li>
+      <li>
+        <a href="http://photivo.org/photivo/start?redirect=1">Photivo</a> -
+        <em
+          >A multi platform photo processor for RAW and bitmap images with 16
+          bit precision.</em
+        >
+      </li>
+      <li>
+        <a href="https://github.com/rawstudio/rawstudio">Raw Studio</a> -
+        <em>Read and manipulate RAW images from digital cameras.</em>
+      </li>
+      <li>
+        <a href="http://ufraw.sourceforge.net/">UFRaw</a> -
+        <em
+          >A utility to read and manipulate raw images from digital cameras.</em
+        >
+      </li>
+      <li>
+        <a href="http://www.cybercom.net/~dcoffin/dcraw/">DCRaw</a> -
+        <em>Decoding raw digital photos in Linux.</em>
+      </li>
+      <li>
+        <a href="http://lightzoneproject.org/">Lightzone</a> -
+        <em>Open-source digital darkroom software for Windows/Mac/Linux.</em>
+      </li>
+      <li>
+        <a href="http://www.kornelix.com/fotoxx.html">Fotoxx</a> -
+        <em>A Linux program for editing photos and other images.</em>
+      </li>
+    </ul>
+    <h2 id="hdr-specific-software">HDR Specific Software</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/LuminanceHDR/LuminanceHDR">Luminance</a> -
+        <em>A complete workflow for HDR imaging</em>
+      </li>
+      <li>
+        <a
+          href="http://theplaceofdeadroads.blogspot.com/2006/07/qpfstmo-hdr-tone-mapping-gui-for-linux_04.html"
+          >QPSFTMO</a
+        >
+        - <em>HDR Tone Mapping GUI for Linux.</em>
+      </li>
+      <li>
+        <a href="http://pfstools.sourceforge.net/">PFS Tools</a> -
+        <em
+          >A set of command line programs for reading, writing and manipulating
+          HDR images and video frames.</em
+        >
+      </li>
+    </ul>
+    <h2 id="panorama-stitching">Panorama Stitching</h2>
+    <ul>
+      <li>
+        <a href="http://hugin.sourceforge.net/">Hugin</a> -
+        <em>An easy to use cross-platform panoramic imaging toolchain.</em>
+      </li>
+      <li>
+        <a href="http://www.panoramatools.com/">Panorama Tools</a> -
+        <em
+          >A framework for re-projecting and blending multiple source images
+          into immersive panoramics of many types.</em
+        >
+      </li>
+    </ul>
+    <h2 id="photo-organizers">Photo Organizers</h2>
+    <ul>
+      <li>
+        <a href="http://yorba.org/shotwell/">Shotwell</a> -
+        <em>A photo manager for GNOME 3</em>
+      </li>
+      <li>
+        <a href="http://www.digikam.org/drupal/about?q=about/overview"
+          >DigiKam/ShowFoto</a
+        >
+        - <em>Open Source Photo manager for KDE/Gnome desktop.</em>
+      </li>
+      <li>
+        <a href="http://www.gphoto.org/">GPhoto</a> -
+        <em
+          >A program and library framework that lets users download pictures
+          from their digital cameras.</em
+        >
+      </li>
+      <li>
+        <a href="http://lychee.electerious.com/">Lychee</a> -
+        <em
+          >A great looking and easy-to-use photo-management-system you can run
+          on your server, to manage and share photos.</em
+        >
+      </li>
+      <li>
+        <a href="https://github.com/SimpleMobileTools/Simple-Gallery/"
+          >Simple Gallery</a
+        >
+        -
+        <em
+          >A Android gallery app for viewing photos and videos similar to
+          android stock gallery with support for file
+          copy/move/rename/delete/share.</em
+        >
+      </li>
+      <li>
+        <a href="https://github.com/HoraApps/LeafPic/">Leaf Pic</a> -
+        <em>material-designed android gallery alternative.</em>
+      </li>
+      <li>
+        <a href="https://github.com/k3b/APhotoManager/">A Photo Manager</a> -
+        <em
+          >Manage local photos on Android: gallery, geotag with photomap, tags,
+          find, sort, view, copy, delete, send,…</em
+        >
+      </li>
+      <li>
+        <p>
+          <a href="https://photoprism.org/">PhotoPrism</a> -
+          <em
+            >PhotoPrism™ is a server-based application for browsing, organizing
+            and sharing your personal photo collection.A</em
+          >
+          ## EXIF Editors
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="http://owl.phy.queensu.ca/~phil/exiftool/">ExifTool</a> -
+          <em
+            >A program for reading, writing, and manipulating image, audio, and
+            video metadata.</em
+          >
+        </p>
+      </li>
+    </ul>
+    <h2 id="photo-downloaders">Photo Downloaders</h2>
+    <ul>
+      <li>
+        <a href="http://www.damonlynch.net/rapid/index.html"
+          >Rapid Photo Downloader</a
+        >
+        - <em>A photo and video downloader for the Linux Desktop.</em>
+      </li>
+    </ul>
+    <h2 id="camera-tetherers">Camera Tetherers</h2>
+    <ul>
+      <li>
+        <a href="http://entangle-photo.org/">Entangle</a> -
+        <em
+          >Entangle provides a GUI for taking photographs with a digital camera
+          completely controlled from the computer.</em
+        >
+      </li>
+    </ul>
+    <h2 id="monitor-color-correction">Monitor Color Correction</h2>
+    <ul>
+      <li><a href="http://www.hughski.com/index.html">Hughski</a></li>
+      <li>
+        <a href="http://displaycal.net/">DisplayCal</a> -
+        <em>Open source display calibration and characterization.</em>
+      </li>
+    </ul>
+    <h2 id="alternative-image-viewers">Alternative Image Viewers</h2>
+    <ul>
+      <li>
+        <a href="http://geeqie.sourceforge.net/">Geeqie</a> -
+        <em
+          >An image viewer and image organiser program for Unix-like operating
+          systems</em
+        >
+      </li>
+      <li>
+        <a href="http://feh.finalrewind.org/">FEH</a> -
+        <em>An X11 image viewer.</em>
+      </li>
+    </ul>
+    <h2 id="useful-gimp-mods-or-scripts">Useful GIMP Mods or Scripts</h2>
+    <ul>
+      <li><a href="http://registry.gimp.org/">GIMP Plugin Registry</a></li>
+      <li>
+        <a href="http://sourceforge.net/projects/cinepaint/files/CinePaint/"
+          >Cinepaint</a
+        >
+        -
+        <em
+          >A program for painting and retouching bitmap frames of films based on
+          GIMP.</em
+        >
+      </li>
+    </ul>
+    <h2 id="communities">Communities</h2>
+    <ul>
+      <li>
+        <a href="https://www.flickr.com/groups/83823859@N00/"
+          >Flickr Open Source Photography Group</a
+        >
+      </li>
+      <li>
+        <a href="http://reddit.com/r/fossphotography">/r/FOSSPhotography</a> -
+        <em
+          >Community about Free open source software for Photography on
+          reddit.</em
+        >
+      </li>
+      <li>
+        <a href="https://plus.google.com/u/0/communities/110647644928874455108"
+          >Open Source Photography Community on Google+</a
+        >
+      </li>
+      <li>
+        <a href="https://www.facebook.com/groups/326042310770868/"
+          >Open Source Photography Group on Facebook</a
+        >
+      </li>
+      <li>
+        <a href="https://www.reddit.com/r/opensourcephotography"
+          >Open Source Photography Sub on Reddit</a
+        >
+      </li>
+      <li>
+        <a href="https://500px.com/groups/open-source-photography"
+          >Open Source Photography Group on 500px</a
+        >
+      </li>
+      <li>
+        <a href="https://pixls.us">PIXLS.US</a> -
+        <em
+          >Community dedicated to tutorials, workflows, and showcases of
+          high-quality photography using Free Software tools</em
+        >
+      </li>
+    </ul>
+    <h2 id="resources">Resources</h2>
+    <ul>
+      <li>
+        <a href="https://unsplash.com/">Unsplash.com</a> -
+        <em
+          >Free (do whatever you want) high-resolution photos,
+          <a
+            href="https://medium.com/unsplash/the-unsplash-license-f6fb7de5c95a"
+            >licensed</a
+          >
+          under the Unsplash License (<a
+            href="https://medium.com/unsplash/why-we-moved-from-the-creative-commons-zero-license-to-the-unsplash-license-598f76386489"
+            >changed from CC0</a
+          >)</em
+        >
+      </li>
+      <li>
+        <a href="https://pexels.com/">Pexels.com</a> -
+        <em
+          >Royalty free high-resolution stock photos,
+          <a href="https://www.pexels.com/photo-license/">licensed</a> under
+          Creative Commons Zero (CC0)</em
+        >
+      </li>
+      <li>
+        <a href="https://pixabay.com/">Pixabay.com</a> -
+        <em
+          >Royalty free stock photos and videos,
+          <a href="https://pixabay.com/en/service/faq/">licensed</a> under
+          Creative Commons Zero (CC0).</em
+        >
+      </li>
+      <li>
+        <a href="https://www.shutterography.com">Shutterography.com</a> -
+        <em>Free Photos.</em>
+      </li>
+    </ul>
+    <h2 id="video">Video</h2>
+    <h3 id="general-tools">General tools</h3>
+    <ul>
+      <li>
+        <a href="https://www.ffmpeg.org/">FFmpeg</a> -
+        <em
+          >A complete, cross-platform solution to record, convert and stream
+          audio and video.</em
+        >
+      </li>
+      <li>
+        <a href="http://www.virtualdub.org/">Virtualdub</a> -
+        <em>A free video tool for basic editing and encoding.</em>
+      </li>
+    </ul>
+    <h3 id="compositing-software">Compositing software</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/MrKepzie/Natron">Natron</a> -
+        <em
+          >A node-based compositor based on the same principles as state-of-the
+          art tools used in film and television post-production.</em
+        >
+      </li>
+      <li>
+        <a href="https://github.com/buttleofx/ButtleOFX">ButtleOFX</a> -
+        <em>A simple, user-friendly and open source compositing software.</em>
+      </li>
+      <li>
+        <a href="https://www.blender.org/">Blender</a> -
+        <em>This open source 3D graphics has tools for video editing.</em>
+      </li>
+      <li>
+        <a href="https://github.com/mltframework/shotcut">Shotcut</a> -
+        <em>A free, open source, cross-platform video editor.</em>
+      </li>
+    </ul>
+    <h3 id="video-libraries">Video Libraries</h3>
+    <ul>
+      <li>
+        <a href="http://openfx.sourceforge.net/">OpenFX</a> -
+        <em>An Open Plug-in API for 2D Visual Effects.</em>
+      </li>
+      <li>
+        <a href="https://github.com/tuttleofx/TuttleOFX">TuttleOFX</a> -
+        <em>An image processing framework based on OpenFX plugin format.</em>
+      </li>
+      <li>
+        <a href="https://github.com/georgmartius/vid.stab">Vid.stab</a> -
+        <em
+          >A video stabilization library which can be plugged-in with Ffmpeg and
+          Transcode</em
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/dyne/frei0r">Frei0r</a> -
+        <em>A large collection of free and portable video plugins.</em>
+      </li>
+    </ul>
+    <h2 id="scripts">Scripts</h2>
+    <h3 id="video-to-panorama">Video to Panorama</h3>
+    <p>
+      Using <a href="https://www.ffmpeg.org/">FFmpeg</a> and
+      <a href="http://hugin.sourceforge.net/">Hugin</a>.
+    </p>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="co">#!/bin/bash</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">mkdir</span> -p /tmp/images</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="ex">ffmpeg</span> -i video.avi -r 5 -qscale 3  tmp/images/image-%3d.jpg</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="ex">pto_gen</span> -o tmp/hugin.pto tmp/images/*.jpg</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="ex">cpfind</span> --multirow -o tmp/hugin.pto tmp/hugin.pto</a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="ex">cpclean</span> -o tmp/hugin.pto tmp/hugin.pto</a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="ex">linefind</span> -o tmp/hugin.pto tmp/hugin.pto</a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="ex">autooptimiser</span> -a -l -s -m -o tmp/hugin.pto tmp/hugin.pto</a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="ex">pano_modify</span> -o tmp/hugin.pto --center --fov=AUTO --canvas=70% tmp/hugin.pto</a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="ex">pto2mk</span> -o tmp/hugin.mk -p tmp/output tmp/hugin.pto</a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="fu">make</span> -f tmp/hugin.mk all</a></code></pre>
+    </div>
+    <figure>
+      <img
+        src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"
+        alt="license"
+      />
+      <figcaption>license</figcaption>
+    </figure>
+  </body>
+</html>

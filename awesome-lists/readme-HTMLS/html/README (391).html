@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-real-time-communications-awesome">
+      Awesome Real Time Communications
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        Protocols and methodology for near simultaneous exchange of media and
+        data.
+      </p>
+    </blockquote>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#server-software">Server Software</a>
+        <ul>
+          <li><a href="#general-purpose">General Purpose</a></li>
+          <li><a href="#sip-servers">SIP Servers</a></li>
+          <li><a href="#media-servers">Media Servers</a></li>
+          <li><a href="#stunturn">STUN/TURN</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#operations">Operations</a>
+        <ul>
+          <li><a href="#monitoring">Monitoring</a></li>
+          <li><a href="#testing">Testing</a></li>
+          <li><a href="#webapi-interfaces">Web/API Interfaces</a></li>
+          <li><a href="#billing">Billing</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#developer-resources">Developer Resources</a>
+        <ul>
+          <li><a href="#tutorials">Tutorials</a></li>
+          <li><a href="#javascript-libraries">JavaScript Libraries</a></li>
+          <li><a href="#cc-libraries">C/C++ Libraries</a></li>
+          <li><a href="#go-libraries">Go Libraries</a></li>
+          <li><a href="#php-libraries">PHP Libraries</a></li>
+          <li><a href="#python-libraries">Python Libraries</a></li>
+          <li><a href="#erlang-libraries">Erlang Libraries</a></li>
+          <li><a href="#rust-libraries">Rust Libraries</a></li>
+          <li><a href="#dart-libraries">Dart Libraries</a></li>
+        </ul>
+      </li>
+      <li><a href="#blogs">Blogs</a></li>
+      <li><a href="#discussion">Discussion</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#related-lists">Related Lists</a></li>
+      <li><a href="#contribute">Contribute</a></li>
+    </ul>
+    <h2 id="server-software">Server Software</h2>
+    <h3 id="general-purpose">General Purpose</h3>
+    <ul>
+      <li>
+        <a href="http://freeswitch.org">FreeSWITCH</a> - Open source
+        multi-protocol, cross-platform and software switch.
+      </li>
+      <li>
+        <a href="http://asterisk.org">Asterisk</a> - PBX framework supporting
+        multiple protocols and platforms.
+      </li>
+    </ul>
+    <h3 id="sip-servers">SIP Servers</h3>
+    <ul>
+      <li>
+        <a href="http://www.kamailio.org">Kamailio</a> - Open source SIP server
+        widely deployed by carriers and providers. Formerly known as OpenSER.
+      </li>
+      <li>
+        <a href="http://www.opensips.org">OpenSIPS</a> - Open source SIP server,
+        tracing its roots in OpenSER (presently Kamailio).
+      </li>
+      <li>
+        <a href="https://routr.io">Routr</a> - Lightweight SIP proxy, location
+        server, and registrar written in Node.js.
+      </li>
+      <li>
+        <a href="https://github.com/sippy/b2bua">Sippy B2BUA</a> - Back-to-back
+        user agent server written in Python.
+      </li>
+      <li>
+        <a href="https://github.com/BelledonneCommunications/flexisip"
+          >Flexisip</a
+        >
+        - SIP server suite comprising proxy, presence and group chat functions.
+      </li>
+    </ul>
+    <h3 id="media-servers">Media Servers</h3>
+    <ul>
+      <li>
+        <a href="https://janus.conf.meetecho.com">Janus</a> - Lightweight open
+        source, general purpose, WebRTC gateway.
+      </li>
+      <li>
+        <a href="https://www.rtpproxy.org">RTPProxy</a> - General purpose high
+        performance RTP proxy.
+      </li>
+      <li>
+        <a href="https://github.com/sipwise/rtpengine">RTP:Engine</a> - RTP and
+        UDP based media traffic proxy, usable as a kernel module.
+      </li>
+      <li>
+        <a href="https://mediasoup.org">mediasoup</a> - Specialized WebRTC
+        conferencing system.
+      </li>
+      <li>
+        <a href="https://github.com/sems-server/sems">SEMS</a> - Open source
+        media and application server for SIP based VoIP services.
+      </li>
+      <li>
+        <a href="https://jitsi.org/projects/">Jitsi</a> - A collection of RTC
+        open source projects, with a focus on conferencing software.
+      </li>
+    </ul>
+    <h3 id="stunturn">STUN/TURN</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/coturn/coturn">coturn</a> - Fully featured
+        TURN/STUN server supporting multiple platforms.
+      </li>
+      <li>
+        <a href="https://github.com/jselbie/stunserver">STUNTMAN</a> - RFC
+        compliant open source STUN implementation.
+      </li>
+    </ul>
+    <h2 id="operations">Operations</h2>
+    <h3 id="monitoring">Monitoring</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/irontec/sngrep">sngrep</a> - Terminal based
+        SIP flow viewer.
+      </li>
+      <li>
+        <a href="https://github.com/sipcapture/sipgrep">sipgrep</a> - Console
+        tool for sniffing, capturing and exploring SIP traffic.
+      </li>
+      <li>
+        <a href="https://github.com/Naishy/rtpsplit">rtpbreak</a> - Detect,
+        reconstruct and analyze RTP sessions.
+      </li>
+      <li>
+        <a href="https://github.com/sipcapture/homer">HOMER</a> - Multi-protocol
+        capturing and monitoring framework for RTC.
+      </li>
+      <li>
+        <a href="https://test.webrtc.org">WebRTC Troubleshooter</a> - One stop
+        client-side WebRTC troubleshooter.
+      </li>
+      <li>
+        <a
+          href="https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice"
+          >Trickle ICE</a
+        >
+        - Exposes client-side NAT traversal debug data.
+      </li>
+      <li>
+        <a href="https://sip3.io">SIP3</a> - VoIP &amp; RTC traffic monitoring
+        and analysis platform.
+      </li>
+    </ul>
+    <h3 id="testing">Testing</h3>
+    <ul>
+      <li>
+        <a href="http://sipp.sourceforge.net">SIPp</a> - Traffic generator for
+        the SIP protocol.
+      </li>
+      <li>
+        <a href="https://github.com/EnableSecurity/sipvicious">SIPVicious</a> -
+        Suite of security tools that can be used to audit SIP based VoIP
+        systems.
+      </li>
+      <li>
+        <a href="https://github.com/nils-ohlmeier/sipsak">sipsak</a> - SIP
+        stress and diagnostics utility.
+      </li>
+    </ul>
+    <h3 id="webapi-interfaces">Web/API Interfaces</h3>
+    <ul>
+      <li>
+        <a href="https://www.2600hz.org">Kazoo</a> - Carrier-grade VoIP API
+        platform using FreeSWITCH and Kamailio.
+      </li>
+      <li>
+        <a href="https://www.fusionpbx.com">FusionPBX</a> - Multitenant system
+        built on top of FreeSWITCH.
+      </li>
+      <li>
+        <a href="https://www.freepbx.org">FreePBX</a> - Web Manager for
+        Asterisk.
+      </li>
+    </ul>
+    <h3 id="billing">Billing</h3>
+    <ul>
+      <li>
+        <a href="http://cgrates.org">CGRateS</a> - Carrier grade open source
+        billing/rating server.
+      </li>
+      <li>
+        <a href="http://www.asterisk2billing.org">A2Billing</a> - Billing system
+        for Asterisk for multiple applications.
+      </li>
+      <li>
+        <a href="https://github.com/mwolff44/pyfreebilling">PyFreeBilling</a> -
+        Wholesale billing platform for Kamailio and FreeSWITCH.
+      </li>
+    </ul>
+    <h2 id="developer-resources">Developer Resources</h2>
+    <h3 id="tutorials">Tutorials</h3>
+    <ul>
+      <li>
+        <a href="https://webrtc.org">Official Website</a> - Entry level WebRTC
+        resources.
+      </li>
+      <li>
+        <a href="https://www.html5rocks.com/en/tutorials/webrtc/basics"
+          >Getting Started With WebRTC</a
+        >
+        - WebRTC tutorial by HTML5 Rocks.
+      </li>
+      <li>
+        <a href="https://webrtc.github.io/samples">WebRTC Samples</a> -
+        Collection of samples demonstrating various parts of the WebRTC APIs.
+      </li>
+      <li>
+        <a href="https://www.webrtc-experiment.com">WebRTC Experiments</a> -
+        Comprehensive list of samples by Muaz Khan.
+      </li>
+      <li>
+        <a href="https://codelabs.developers.google.com/codelabs/webrtc-web"
+          >Interactive Codelab</a
+        >
+        - 30 minutes step by step live tutorial by Google.
+      </li>
+    </ul>
+    <h3 id="javascript-libraries">JavaScript Libraries</h3>
+    <ul>
+      <li>
+        <a href="https://drachtio.org">drachtio</a> - Node.js SIP server
+        framework.
+      </li>
+      <li>
+        <a href="https://github.com/webrtcHacks/adapter">adapter.js</a> -
+        JavaScript shim for abstracting WebRTC spec changes and inconsistencies.
+      </li>
+      <li>
+        <a href="http://jssip.net">JsSIP</a> - Lightweight open source
+        JavaScript SIP library.
+      </li>
+      <li>
+        <a href="https://www.doubango.org/sipml5">sipML5</a> - Open source
+        JavaScript SIP client with WebRTC media stack.
+      </li>
+      <li>
+        <a href="https://github.com/feross/simple-peer">simple-peer</a> - WebRTC
+        video, voice, and data channels abstraction for Node.js and the browser.
+      </li>
+      <li>
+        <a href="https://github.com/coast-team/netflux">Netflux</a> - Isomorphic
+        JavaScript peer to peer transport API for client and server.
+      </li>
+      <li>
+        <a href="https://peerjs.com">PeerJS</a> - Data and media peer-to-peer
+        connection API implemented over WebRTC.
+      </li>
+    </ul>
+    <h3 id="cc-libraries">C/C++ Libraries</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/creytiv/re">libre</a> - Portable SIP Stack
+        along with companion libraries for media handling, STUN/TURN and a
+        modular user agent.
+      </li>
+      <li>
+        <a href="https://www.pjsip.org">PJSIP</a> - Multi-protocol RTC library
+        written in C.
+      </li>
+      <li>
+        <a href="http://savannah.nongnu.org/projects/exosip">eXosip</a> -
+        eXtended osip is a mature C library for abstracting the SIP protocol.
+      </li>
+      <li>
+        <a href="https://github.com/paullouisageneau/libdatachannel"
+          >libdatachannel</a
+        >
+        - Standalone WebRTC DataChannels C++ implementation.
+      </li>
+      <li>
+        <a href="https://github.com/cisco/libsrtp">libSRTP</a> - Secure
+        Real-time Transport Protocol (SRTP) library for C.
+      </li>
+      <li>
+        <a href="https://github.com/sctplab/usrsctp">usrsctp</a> - Portable
+        Stream Control Transmission Protocol (SCTP) user-land stack.
+      </li>
+      <li>
+        <a href="https://github.com/rawrtc/rawrtc">rawrtc</a> - WebRTC and ORTC
+        library with a small footprint.
+      </li>
+      <li>
+        <a href="https://github.com/joegen/oss_core">OSS Core</a> - General
+        purpose C++ library for Real Time Communications.
+      </li>
+      <li>
+        <a href="https://01.org/open-webrtc-toolkit">Open WebRTC Toolkit</a> -
+        WebRTC development toolkit with bindings for multiple platforms.
+      </li>
+    </ul>
+    <h3 id="go-libraries">Go Libraries</h3>
+    <ul>
+      <li>
+        <a href="https://pion.ly">Pion</a> - Extensive software stack for WebRTC
+        written in Go.
+      </li>
+      <li>
+        <a href="https://github.com/StefanKopieczek/gossip">gossip</a> - SIP
+        stack for stateful user agents written in Go.
+      </li>
+      <li>
+        <a href="https://github.com/marv2097/siprocket">siprocket</a> - Fast SIP
+        and SDP packet parser.
+      </li>
+      <li>
+        <a href="https://github.com/fiorix/go-diameter">go-diameter</a> - RFC
+        compliant Diameter protocol library.
+      </li>
+    </ul>
+    <h3 id="php-libraries">PHP Libraries</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/rtckit/php-sip">RTCKit/SIP</a> - RFC 3261
+        compliant SIP parsing and rendering library for PHP 7.4+.
+      </li>
+    </ul>
+    <h3 id="python-libraries">Python Libraries</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/aiortc/aiortc">aiortc</a> - WebRTC and ORTC
+        implementation for Python using asyncio.
+      </li>
+      <li>
+        <a href="https://github.com/hyperioxx/Katari">Katari</a> - SIP stack
+        application framework.
+      </li>
+      <li>
+        <a href="https://github.com/ambianic/peerjs-python">peerjs-python</a> -
+        Python port of the PeerJS peer-to-peer connection library.
+      </li>
+    </ul>
+    <h3 id="erlang-libraries">Erlang Libraries</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/NetComposer/nksip">NkSIP</a> - Extendable
+        SIP server framework.
+      </li>
+      <li>
+        <a href="https://github.com/poroh/ersip">ersip</a> - Library comprising
+        building blocks for SIP applications.
+      </li>
+    </ul>
+    <h3 id="rust-libraries">Rust Libraries</h3>
+    <ul>
+      <li>
+        <a href="https://docs.rs/libsip/0.2.4/libsip">libsip</a> - SIP
+        implementation, with a focus towards softphone clients.
+      </li>
+      <li>
+        <a href="https://github.com/armatusmiles/sipcore">sipcore</a> - Rust
+        framework for creating SIP applications.
+      </li>
+      <li>
+        <a href="https://github.com/rtcrs/webrtc">rtcrs/webrtc</a> - WebRTC
+        stack, supporting SDP, RTP, RTCP and SRTP.
+      </li>
+    </ul>
+    <h3 id="dart-libraries">Dart Libraries</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/cloudwebrtc/dart-sip-ua">dart-sip-ua</a> -
+        Dart-lang port of JsSIP, capable of SIP over WebSocket.
+      </li>
+    </ul>
+    <h2 id="blogs">Blogs</h2>
+    <ul>
+      <li>
+        <a href="https://bloggeek.me/blog">BlogGeekMe</a> - Blog by Tsahi
+        Levent-Levi with a strong focus on WebRTC.
+      </li>
+      <li>
+        <a href="https://andrewjprokop.wordpress.com">SIP Adventures</a> -
+        Unified communications blog by Andrew Prokop.
+      </li>
+      <li>
+        <a href="https://webrtchacks.com">WebRTCHacks</a> - WebRTC blog by
+        independent technologists.
+      </li>
+    </ul>
+    <h2 id="discussion">Discussion</h2>
+    <ul>
+      <li>
+        <a href="https://signalwire.community">FreeSWITCH Slack</a> - Join
+        #freeswitch and #freeswitch-dev for user and developer support.
+      </li>
+      <li>
+        <a
+          href="https://groups.google.com/forum/?fromgroups#!forum/discuss-webrtc"
+          >discuss-webrtc</a
+        >
+        - Developer oriented Google Group for WebRTC discussions.
+      </li>
+    </ul>
+    <h2 id="events">Events</h2>
+    <ul>
+      <li>
+        <a href="http://cluecon.com">ClueCon</a> - Annual conference held in
+        Chicago for telecommunications developers. Birthplace of FreeSWITCH.
+      </li>
+      <li>
+        <a href="https://www.kamailioworld.com">Kamailio World</a> - Berlin
+        hosted annual event focused on Kamailio as well as VoIP, WebRTC, IMS,
+        VoLTE and more.
+      </li>
+      <li>
+        <a href="https://www.asterisk.org/community/astricon-user-conference"
+          >AstriCon</a
+        >
+        - Asterisk focus event held every year across the US.
+      </li>
+      <li>
+        <a href="https://2019.commcon.xyz">CommCon</a> - Annual conference held
+        in the UK focused on telecommunications in general and WebRTC in
+        particular.
+      </li>
+      <li>
+        <a href="https://www.opensips.org/events">OpenSIPS Summit</a> - Meeting
+        place for the OpenSIPS community.
+      </li>
+      <li>
+        <a href="https://krankygeek.com">Kranky Geek</a> - AI and RTC event in
+        San Francisco.
+      </li>
+      <li>
+        <a href="https://fosdem.org/2020">FOSDEM</a> - Free event for software
+        developers, with a RTC component, held every year in Europe.
+      </li>
+    </ul>
+    <h2 id="related-lists">Related Lists</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/rtckit/awesome-ript">Awesome RIPT</a> - Real
+        Time Internet Peering for Telephony.
+      </li>
+      <li>
+        <a href="https://github.com/EnableSecurity/awesome-rtc-hacking"
+          >Awesome RTC Hacking</a
+        >
+        - Real Time Communications hacking and penetration testing resources.
+      </li>
+      <li>
+        <a href="https://github.com/calee0219/awesome-5g">Awesome 5G</a> - 5G
+        frameworks, libraries, software and resources.
+      </li>
+      <li>
+        <a href="https://github.com/W00t3k/Awesome-Cellular-Hacking"
+          >Awesome Cellular Hacking</a
+        >
+        - Research resources in the 3G/4G/5G Cellular security space.
+      </li>
+      <li>
+        <a href="https://github.com/ravens/awesome-telco">Awesome Telco</a> -
+        Telco resources and projects.
+      </li>
+    </ul>
+    <h2 id="contribute">Contribute</h2>
+    <p>
+      Contributions welcome! Read the
+      <a href="CONTRIBUTING.md">contribution guidelines</a> first.
+    </p>
+  </body>
+</html>

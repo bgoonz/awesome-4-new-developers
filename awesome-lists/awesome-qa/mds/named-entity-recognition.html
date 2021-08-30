@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>named-entity-recognition</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="named-entity-recognition">Named-entity-recognition</h1>
+    <p>
+      Named-entity recognition (NER) (also known as entity identification,
+      entity chunking and entity extraction) is a subtask of information
+      extraction that seeks to locate and classify named entities in text into
+      pre-defined categories such as the names of persons, organizations,
+      locations, expressions of times, quantities, monetary values, percentages,
+      etc.
+    </p>
+    <p>
+      Most research on NER systems has been structured as taking an unannotated
+      block of text, such as this one:
+    </p>
+    <p><code>Jim bought 300 shares of Acme Corp. in 2006.</code></p>
+    <p>
+      And producing an annotated block of text that highlights the names of
+      entities:
+    </p>
+    <p>
+      <code
+        >[Jim]Person bought 300 shares of [Acme Corp.]Organization in
+        [2006]Time.</code
+      >
+    </p>
+    <p>
+      In this example, a person name consisting of one token, a two-token
+      company name and a temporal expression have been detected and classified.
+    </p>
+    <p>
+      State-of-the-art NER systems for English produce near-human performance.
+      For example, the best system entering MUC-7 scored 93.39% of F-measure
+      while human annotators scored 97.60% and 96.95%.[1][2]
+    </p>
+    <p>(Wikipedia; https://en.wikipedia.org/wiki/Named-entity_recognition)</p>
+  </body>
+</html>

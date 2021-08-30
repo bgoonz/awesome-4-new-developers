@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-json-datasets-awesome">
+      Awesome JSON Datasets
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      <a href="http://www.json.org/"
+        ><img
+          src="https://www.justindorfman.com/assets/images/json.svg"
+          align="right"
+          width="100"
+      /></a>
+    </p>
+    <p>
+      A curated list of awesome JSON datasets that don’t require authentication.
+    </p>
+    <blockquote>
+      <p>
+        <em>Link of the month:</em>
+        <a href="https://github.com/stackshareio/awesome-stacks"
+          >Awesome Stacks by StackShare</a
+        >
+      </p>
+    </blockquote>
+    <p>
+      <em>Sponsored link:</em>
+      <a
+        href="https://www.bootstrapcdn.com/jobs/?utm_source=awesome-json-datasets&amp;utm_campaign=awesome-json-datasets-sponsorship&amp;utm_medium=referral"
+        >Front End Developer Jobs</a
+      >
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#bitcoin">Bitcoin</a></li>
+      <li><a href="#climate">Climate</a></li>
+      <li><a href="#crime">Crime</a></li>
+      <li><a href="#currency">Currency</a></li>
+      <li><a href="#gaming">Gaming</a></li>
+      <li><a href="#github-api">GitHub API</a></li>
+      <li><a href="#government">Government</a></li>
+      <li><a href="#historical-events">Historical Events</a></li>
+      <li><a href="#http">HTTP</a></li>
+      <li><a href="#nasa">NASA</a></li>
+      <li><a href="#nobel-prize">Nobel Prize</a></li>
+      <li><a href="#population">Population</a></li>
+      <li><a href="#gdp">GDP</a></li>
+      <li><a href="#reddit">Reddit</a></li>
+      <li><a href="#travel">Travel</a></li>
+      <li><a href="#tv-shows">TV Shows</a></li>
+      <li><a href="#movies">Movies</a></li>
+      <li><a href="#open-source-licenses">Open Source Licenses</a></li>
+      <li><a href="#more-awesome-lists">More Awesome Lists</a></li>
+      <li><a href="#contributing">Contributing</a></li>
+      <li><a href="#license">License</a></li>
+    </ul>
+    <h2 id="bitcoin">Bitcoin</h2>
+    <ul>
+      <li><a href="https://blockchain.info/latestblock">Latest Block</a></li>
+      <li>
+        <a href="https://blockchain.info/unconfirmed-transactions?format=json"
+          >Unconfirmed Transactions</a
+        >
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Pro Tip: Check out
+        <a href="https://api.coinmarketcap.com/v1/ticker/"
+          >Cryptocurrency Market Capitalizations</a
+        >
+        for more cryptocurrency prices.
+      </p>
+    </blockquote>
+    <h2 id="climate">Climate</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.ncdc.noaa.gov/cag/time-series/global/globe/land_ocean/ytd/12/1880-2016.json"
+          >Global Temperature Anomaly</a
+        >
+        <em>(1880-2015 vs. 1901-2000 Average)</em>
+      </li>
+      <li>
+        <a
+          href="https://www.ncdc.noaa.gov/cag/time-series/us/110/00/tavg/ytd/12/1895-2016.json?base_prd=true&amp;begbaseyear=1901&amp;endbaseyear=2000"
+          >US Annual Average Temperature and Anomaly</a
+        >
+        <em>(1880-2015 (vs. 1901-2000 Average)</em>
+      </li>
+      <li>
+        <a
+          href="https://www.ncdc.noaa.gov/cag/time-series/us/110/00/pcp/ytd/12/1895-2016.json?base_prd=true&amp;begbaseyear=1901&amp;endbaseyear=2000"
+          >Contiguous US Annual Precipitation</a
+        >
+        <em>(1895-2015)</em>
+      </li>
+    </ul>
+    <h2 id="crime">Crime</h2>
+    <ul>
+      <li>
+        <a href="https://data.police.uk/docs/">DATA.POLICE.UK</a>
+        <ul>
+          <li>
+            <a
+              href="https://data.police.uk/api/crimes-at-location?date=2015-02&amp;lat=52.629729&amp;lng=-1.131592"
+              >Crimes at Location</a
+            >
+          </li>
+          <li>
+            <a href="https://data.police.uk/api/crimes-street-dates"
+              >Street Crime Dates</a
+            >
+          </li>
+          <li>
+            <a href="https://data.police.uk/api/leicestershire/neighbourhoods"
+              >Neighbourhoods</a
+            >
+          </li>
+          <li>
+            <a href="https://data.police.uk/api/forces">List of Forces</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.data.gov/local/">DATA.GOV</a>
+        <ul>
+          <li>
+            <a
+              href="https://data.cityofchicago.org/api/views/ijzp-q8t2/rows.json?accessType=DOWNLOAD"
+              >Chicago (historical data since 2001)</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://data.lacity.org/api/views/y8tr-7khq/rows.json?accessType=DOWNLOAD"
+              >Los Angeles (historical data since 2010)</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="currency">Currency</h2>
+    <ul>
+      <li>
+        <a href="https://www.exchangerate-api.com">Exchange Rate API</a>
+        <ul>
+          <li>
+            <a href="https://api.exchangerate-api.com/v4/latest/USD">USD</a>
+          </li>
+          <li>
+            <a href="https://api.exchangerate-api.com/v4/latest/GBP">GBP</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="gaming">Gaming</h2>
+    <ul>
+      <li>
+        <a href="https://pokeapi.co/docsv2/">Pokémon</a>
+        <ul>
+          <li>
+            <a href="http://pokeapi.co/api/v2/pokemon/1/">Pokémon by Number</a>
+            <em>(Replace <code>1</code> with desired Pokémon number)</em>
+          </li>
+          <li>
+            <a href="http://pokeapi.co/api/v2/type/1/">Types</a>
+            <em
+              >(Replace <code>1</code> with another number to retrieve different
+              type)</em
+            >
+          </li>
+          <li>
+            <a href="http://pokeapi.co/api/v2/ability/1">Abilities</a>
+            <em
+              >(Replace <code>1</code> with another number to retrieve different
+              ability)</em
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a
+          href="https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
+          >Pokédex</a
+        >
+      </li>
+      <li>
+        <a href="http://magic.wizards.com">Magic: The Gathering</a>
+        <ul>
+          <li>
+            <a href="https://mtgjson.com/json/LEA-x.json"
+              >MTG LEA Set + Extras</a
+            >
+          </li>
+          <li>
+            <a href="https://mtgjson.com/json/LEB-x.json"
+              >MTG LEB Set + Extras</a
+            >
+          </li>
+          <li>
+            <a href="https://mtgjson.com/json/ARN-x.json"
+              >MTG ARN Set + Extras</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Protip: <a href="https://mtgjson.com">https://mtgjson.com</a> lists many
+        more Magic: The Gathering card data sets, as well as zipped versions of
+        all sets.
+      </p>
+    </blockquote>
+    <ul>
+      <li>
+        <a
+          href="https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v0001/?format=json&amp;appid=0"
+          >Steam Player Number</a
+        >
+      </li>
+    </ul>
+    <h2 id="github-api">GitHub API</h2>
+    <ul>
+      <li><a href="https://api.github.com/emojis">Emojis</a></li>
+      <li><a href="https://api.github.com/events">Events</a></li>
+      <li><a href="https://api.github.com/gists">Gists</a></li>
+      <li><a href="https://api.github.com/meta">Meta</a></li>
+    </ul>
+    <h2 id="government">Government</h2>
+    <ul>
+      <li>
+        United States Politicians
+        <ul>
+          <li>
+            <a
+              href="https://www.govtrack.us/api/v2/role?current=true&amp;role_type=senator"
+              >Current US Senators</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.govtrack.us/api/v2/role?current=true&amp;role_type=representative&amp;limit=438"
+              >Current US Representatives</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Protip: <a href="https://www.govtrack.us/">GovTrack</a> provides a
+        <a href="https://www.govtrack.us/developers/api">powerful API</a> for
+        viewing data on Congress, roll calls, and bills.
+      </p>
+    </blockquote>
+    <ul>
+      <li>
+        Department of Justice
+        <ul>
+          <li>
+            <a
+              href="https://www.justice.gov/api/v1/blog_entries.json?amp%3Bpagesize=2"
+              >Blog Entries</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.justice.gov/api/v1/press_releases.json?pagesize=2"
+              >Press Releases</a
+            >
+          </li>
+          <li>
+            <a href="https://www.justice.gov/api/v1/speeches.json?pagesize=2"
+              >Speeches</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.justice.gov/api/v1/vacancy_announcements.json?pagesize=2"
+              >Vacancy Announcements</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        Scottish Parliament
+        <ul>
+          <li>
+            <a href="https://data.parliament.scot/api/departments"
+              >Departments</a
+            >
+          </li>
+          <li><a href="https://data.parliament.scot/api/events">Events</a></li>
+          <li>
+            <a href="https://data.parliament.scot/api/governmentroles"
+              >Government Roles</a
+            >
+          </li>
+          <li>
+            <a href="https://data.parliament.scot/api/members">Members</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Pro Tip: you can do <strong>a lot</strong> more at
+        <a href="http://parliamentdata.ca/">http://parliamentdata.ca/</a>
+      </p>
+    </blockquote>
+    <ul>
+      <li>
+        Government of India
+        <ul>
+          <li>
+            <a href="http://vocab.nic.in/rest.php/states/json">State Codes</a>
+          </li>
+          <li>
+            <a href="https://data.gov.in/node/1084041/datastore/export/json"
+              >Consumer Price Index</a
+            >
+          </li>
+          <li>
+            <a href="https://data.gov.in/node/135611/datastore/export/json"
+              >Agriculture Production</a
+            >
+          </li>
+          <li>
+            <a href="https://data.gov.in/node/100853/datastore/export/json"
+              >Number of Districts/DRDAs/Blocks/Villages</a
+            >
+          </li>
+          <li>
+            <a href="https://www.quandl.com/api/v1/datasets/MOSPI/GDP.json"
+              >Gross Domestic Product at Current Prices</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        Australia
+        <ul>
+          <li>
+            <a
+              href="http://data.gov.au/geoserver/abc-local-stations/wfs?request=GetFeature&amp;typeName=ckan_d534c0e9_a9bf_487b_ac8f_b7877a09d162&amp;outputFormat=json"
+              >ABC Local Stations</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://data.gov.au/geoserver/police-station-locations/wfs?request=GetFeature&amp;typeName=762b47b2_e706_4cab_b0c7_cf8e406aefc1&amp;outputFormat=json"
+              >VIC Police Station Locations</a
+            >
+          </li>
+          <li>
+            <a href="https://collections.museumvictoria.com.au/api/search"
+              >Museums Victoria Collections</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        Spain
+        <ul>
+          <li>
+            <a
+              href="https://datos.comunidad.madrid/catalogo/dataset/032474a0-bf11-4465-bb92-392052962866/resource/301aed82-339b-4005-ab20-06db41ee7017/download/municipio_comunidad_madrid.json"
+              >Province of Madrid Municipalities</a
+            >
+          </li>
+          <li>
+            <a href="https://do.diba.cat/api/dataset/municipis/format/json2"
+              >Province of Barcelona Municipalities</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://datos.comunidad.madrid/catalogo/dataset/ae433b7e-98f7-4547-8aa5-6ada557a429f/resource/21424b1c-6465-4db9-a5e3-6ddf180c634b/download/centros_educativos.json"
+              >Province of Madrid Educational Centers (non-university)</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Pro Tip: At
+        <a href="https://datos.gob.es/catalogo?res_format_label=JSON"
+          >https://datos.gob.es/</a
+        >
+        you can filter all kinds of public Spanish data. From universities to
+        local and regional government institutions.
+      </p>
+    </blockquote>
+    <h2 id="historical-events">Historical Events</h2>
+    <ul>
+      <li>
+        Languages
+        <ul>
+          <li>
+            <a
+              href="http://www.vizgr.org/historical-events/search.php?format=json&amp;begin_date=-3000000&amp;end_date=20151231&amp;lang=en"
+              >English</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.vizgr.org/historical-events/search.php?format=json&amp;begin_date=-3000000&amp;end_date=20151231&amp;lang=de"
+              >German</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.vizgr.org/historical-events/search.php?format=json&amp;begin_date=-3000000&amp;end_date=20151231&amp;lang=it"
+              >Italian</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.vizgr.org/historical-events/search.php?format=json&amp;begin_date=-3000000&amp;end_date=20151231&amp;lang=es"
+              >Spanish</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.vizgr.org/historical-events/search.php?format=json&amp;begin_date=-3000000&amp;end_date=20151231&amp;lang=pt"
+              >Portuguese</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.vizgr.org/historical-events/search.php?format=json&amp;begin_date=-3000000&amp;end_date=20151231&amp;lang=ca"
+              >Catalan</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.vizgr.org/historical-events/search.php?format=json&amp;begin_date=-3000000&amp;end_date=20151231&amp;lang=id"
+              >Indonesian</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.vizgr.org/historical-events/search.php?format=json&amp;begin_date=-3000000&amp;end_date=20151231&amp;lang=ro"
+              >Romanian</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://www.vizgr.org/historical-events/search.php?format=json&amp;begin_date=-3000000&amp;end_date=20151231&amp;lang=tr"
+              >Turkish</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Pro Tip: You can change <code>begin_date</code> and
+        <code>end_date</code> in URL to get events in a specific interval. More
+        options <a href="http://www.vizgr.org/historical-events/">here</a>.
+      </p>
+    </blockquote>
+    <h2 id="http">HTTP</h2>
+    <ul>
+      <li><a href="http://httpbin.org/ip">IP</a></li>
+      <li><a href="http://httpbin.org/user-agent">user-agent</a></li>
+      <li><a href="http://httpbin.org/headers">headers</a></li>
+      <li><a href="http://httpbin.org/get">GET</a></li>
+      <li><a href="http://httpbin.org/gzip">gzip</a></li>
+      <li><a href="http://httpbin.org/deflate">deflate</a></li>
+      <li>
+        <a
+          href="http://httpbin.org/response-headers?Content-Type=text/plain;%20charset=UTF-8&amp;Server=MaxCDN"
+          >response-headers</a
+        >
+      </li>
+      <li><a href="http://httpbin.org/cookies">cookies</a></li>
+      <li><a href="http://httpbin.org/stream/10">stream</a></li>
+      <li><a href="http://httpbin.org/delay/3">delay</a></li>
+      <li>
+        <a href="http://httpbin.org/cache/60">cache</a>
+        <em>(<code>60</code> === <code>60 seconds</code>)</em>
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Pro Tip: you can do <strong>a lot</strong> more at
+        <a href="http://httpbin.org/">http://httpbin.org</a>.
+      </p>
+    </blockquote>
+    <h2 id="nasa">NASA</h2>
+    <ul>
+      <li>
+        <a href="http://api.open-notify.org/iss-now.json"
+          >ISS Current Location</a
+        >
+      </li>
+      <li>
+        <a href="http://api.open-notify.org/astros.json"
+          >How Many People Are In Space Right Now</a
+        >
+      </li>
+      <li>
+        <a href="https://data.nasa.gov/resource/y77d-th95.json"
+          >Earth Meteorite Landings</a
+        >
+      </li>
+      <li>
+        <a href="https://data.nasa.gov/resource/2vr3-k9wn.json"
+          >Near-Earth Asteroids and Comets</a
+        >
+        <em>(Discovered By NEOWISE)</em>
+      </li>
+    </ul>
+    <h2 id="natural-disasters">Natural Disasters</h2>
+    <ul>
+      <li>
+        <a
+          href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
+          >Earthquakes</a
+        >
+      </li>
+    </ul>
+    <h2 id="nobel-prize">Nobel Prize</h2>
+    <ul>
+      <li><a href="http://api.nobelprize.org/v1/prize.json">Prize</a></li>
+      <li><a href="http://api.nobelprize.org/v1/laureate.json">Laureate</a></li>
+      <li><a href="http://api.nobelprize.org/v1/country.json">Country</a></li>
+    </ul>
+    <h2 id="open-source-licenses">Open Source Licenses</h2>
+    <ul>
+      <li><a href="https://api.opensource.org/licenses/">All</a></li>
+      <li>
+        <a href="https://api.opensource.org/licenses/copyleft">Copyleft</a>
+      </li>
+      <li>
+        <a href="https://api.opensource.org/licenses/osi-approved"
+          >OSI Approved</a
+        >
+      </li>
+      <li>
+        <a href="https://api.opensource.org/licenses/redundant">Redundant</a>
+      </li>
+      <li>
+        <a href="https://api.opensource.org/licenses/permissive">Permissive</a>
+      </li>
+      <li>
+        <a href="https://api.opensource.org/licenses/obsolete">Obsolete</a>
+      </li>
+      <li>
+        <a href="https://api.opensource.org/licenses/miscellaneous">Misc</a>
+      </li>
+      <li><a href="https://api.opensource.org/licenses/popular">Popular</a></li>
+      <li>
+        <a href="https://api.opensource.org/licenses/discouraged"
+          >Discouraged</a
+        >
+      </li>
+      <li>
+        <a href="https://api.opensource.org/licenses/non-reusable"
+          >Non-reusable</a
+        >
+      </li>
+      <li>
+        <a href="https://api.opensource.org/licenses/special-purpose"
+          >Special Purpose</a
+        >
+      </li>
+      <li><a href="https://api.opensource.org/licenses/retired">Retired</a></li>
+    </ul>
+    <blockquote>
+      <p>
+        Become an OSI member
+        <a
+          href="https://opensource.org/civicrm/contribute/transact?reset=1&amp;id=1"
+          >here</a
+        >
+      </p>
+    </blockquote>
+    <h2 id="population">Population</h2>
+    <ul>
+      <li>
+        Historical Population (Since 1960)
+        <ul>
+          <li>
+            <a
+              href="http://api.worldbank.org/countries/CHN/indicators/SP.POP.TOTL?per_page=5000&amp;format=json"
+              >China</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://api.worldbank.org/countries/IND/indicators/SP.POP.TOTL?per_page=5000&amp;format=json"
+              >India</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://api.worldbank.org/countries/USA/indicators/SP.POP.TOTL?per_page=5000&amp;format=json"
+              >United States</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="gdp">GDP</h2>
+    <ul>
+      <li>
+        <a
+          href="http://api.worldbank.org/countries/USA/indicators/NY.GDP.MKTP.CD?per_page=5000&amp;format=json"
+          >USA</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.worldbank.org/countries/CHN/indicators/NY.GDP.MKTP.CD?per_page=5000&amp;format=json"
+          >China</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.worldbank.org/countries/IND/indicators/NY.GDP.MKTP.CD?per_page=5000&amp;format=json"
+          >India</a
+        >
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Pro Tip: Link to country list
+        <a
+          href="http://api.worldbank.org/countries?per_page=304&amp;format=json"
+          >Here</a
+        >
+      </p>
+    </blockquote>
+    <h2 id="reddit">Reddit</h2>
+    <ul>
+      <li><a href="https://www.reddit.com/r/all.json">/r/all</a></li>
+      <li>
+        <a href="https://www.reddit.com/r/AskReddit.json">/r/AskReddit</a>
+      </li>
+      <li><a href="https://www.reddit.com/r/funny.json">/r/funny</a></li>
+      <li><a href="https://www.reddit.com/r/pics.json">/r/pics</a></li>
+      <li>
+        <a href="https://www.reddit.com/r/todayilearned.json"
+          >/r/todayilearned</a
+        >
+      </li>
+      <li>
+        <a href="https://www.reddit.com/r/announcements.json"
+          >/r/announcements</a
+        >
+      </li>
+      <li>
+        <a href="https://www.reddit.com/r/worldnews.json">/r/worldnews</a>
+      </li>
+      <li><a href="https://www.reddit.com/r/science.json">/r/science</a></li>
+      <li><a href="https://www.reddit.com/r/IAmA.json">/r/IAmA</a></li>
+      <li><a href="https://www.reddit.com/r/videos.json">/r/videos</a></li>
+      <li><a href="https://www.reddit.com/r/gaming.json">/r/gaming</a></li>
+      <li><a href="https://www.reddit.com/r/linux.json">/r/linux</a></li>
+    </ul>
+    <blockquote>
+      <p>Pro Tip: you can append <code>.json</code> to any subreddit url.</p>
+    </blockquote>
+    <h2 id="travel">Travel</h2>
+    <ul>
+      <li>
+        <a
+          href="https://think.cs.vt.edu/corgis/datasets/json/airlines/airlines.json"
+          >Monthly Airline Delays by Airport, 2003-2016</a
+        >
+      </li>
+      <li>
+        FAA Airport Status
+        <ul>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/SFO?format=application/json"
+              >SFO</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/LAX?format=application/json"
+              >LAX</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/PHX?format=application/json"
+              >PHX</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/JFK?format=application/json"
+              >JFK</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/ATL?format=application/json"
+              >ATL</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/MIA?format=application/json"
+              >MIA</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/AUS?format=application/json"
+              >AUS</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/BOS?format=application/json"
+              >BOS</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/CLE?format=application/json"
+              >CLE</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/ORD?format=application/json"
+              >ORD</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/PDX?format=application/json"
+              >PDX</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://services.faa.gov/airport/status/SJC?format=application/json"
+              >SJC</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p>Heads up: Only works for US airports only, not international.</p>
+    </blockquote>
+    <h2 id="tv-shows">TV Shows</h2>
+    <ul>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=mr-robot&amp;embed=episodes"
+          >Mr. Robot (USA)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=better-call-saul&amp;embed=episodes"
+          >Better Call Saul (AMC)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=Homeland&amp;embed=episodes"
+          >Homeland (Showtime)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=silicon-valley&amp;embed=episodes"
+          >Silicon Valley (HBO)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=the-walking-dead&amp;embed=episodes"
+          >The Walking Dead (AMC)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=south-park&amp;embed=episodes"
+          >South Park (Comedy Central)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=game-of-thrones&amp;embed=episodes"
+          >Game of Thrones (HBO)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=house-of-cards&amp;embed=episodes"
+          >House of Cards (Netflix)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=big-bang-theory&amp;embed=episodes"
+          >The Big Bang Theory (CBS)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=narcos&amp;embed=episodes"
+          >Narcos (Netflix)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=black-mirror&amp;embed=episodes"
+          >Black Mirror (Netflix)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=stranger-things&amp;embed=episodes"
+          >Stranger Things (Netflix)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=rick-&amp;-morty&amp;embed=episodes"
+          >Rick and Morty (Adult Swim)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://api.tvmaze.com/singlesearch/shows?q=westworld&amp;embed=episodes"
+          >Westworld (HBO)</a
+        >
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Pro Tip: replace the field-value for a show not listed
+        e.g. <code>shows?q=show-name</code>. More options
+        <a href="http://www.tvmaze.com/api">here</a>
+      </p>
+    </blockquote>
+    <ul>
+      <li>
+        Rick and Morty
+        <ul>
+          <li>
+            <a href="https://rickandmortyapi.com/api/character/"
+              >Get all characters</a
+            >
+          </li>
+          <li>
+            <a href="https://rickandmortyapi.com/api/character/2"
+              >Get a single character</a
+            >
+          </li>
+          <li>
+            <a href="https://rickandmortyapi.com/api/location/?name=earth"
+              >Filter locations</a
+            >
+          </li>
+          <li>
+            <a href="https://rickandmortyapi.com/api/episode/12"
+              >Get an episode</a
+            >
+          </li>
+          <li>
+            <a href="https://rickandmortyapi.com/api/episode/10,28"
+              >Get multiple episodes</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Pro Tip: More options at
+        <a href="https://rickandmortyapi.com/">https://rickandmortyapi.com/</a>
+      </p>
+    </blockquote>
+    <h2 id="movies">Movies</h2>
+    <ul>
+      <li>
+        <a
+          href="https://raw.githubusercontent.com/prust/wikipedia-movie-data/master/movies.json"
+          >American movies scraped from Wikipedia</a
+        >
+      </li>
+      <li>
+        <a href="http://showtimes.everyday.in.th/api/v2/">Showtime</a>
+        <ul>
+          <li>
+            <a href="http://showtimes.everyday.in.th/api/v2/movie/"
+              >Current Movies in Thailand</a
+            >
+          </li>
+          <li>
+            <a href="http://showtimes.everyday.in.th/api/v2/theater/"
+              >Movie Theaters in Thailand</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="more-awesome-lists">More Awesome Lists</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/sindresorhus/awesome">Awesome</a>
+        <em>(The OG List)</em>
+      </li>
+      <li>
+        <a href="https://github.com/fullstackla/awesome-help-wanted"
+          >Help Wanted</a
+        >
+        <em>(Open Source projects looking for Help)</em>
+      </li>
+      <li>
+        <a href="https://github.com/burningtree/awesome-json">JSON</a>
+        <em>(Libraries and Resources)</em>
+      </li>
+      <li>
+        <a href="https://github.com/davidsonfellipe/awesome-wpo">WPO</a>
+        <em>(Web Performance Optimization)</em>
+      </li>
+      <li>
+        <a href="https://github.com/alebcay/awesome-shell">Shell</a>
+        <em>(CLI Frameworks, Toolkits and Guides)</em>
+      </li>
+      <li>
+        <a href="https://github.com/toddmotto/public-apis">Public APIs</a>
+        <em
+          >(JSON APIs for use in web dev, some of which require
+          authentication)</em
+        >
+      </li>
+      <li>
+        <a href="https://github.com/caesar0301/awesome-public-datasets"
+          >Public Datasets</a
+        >
+        <em>(Datasets beyond just JSON)</em>
+      </li>
+      <li>
+        <a href="https://github.com/kciter/awesome-style-guide">Style Guides</a>
+        <em>(Programming Languages, Platforms, Frameworks)</em>
+      </li>
+    </ul>
+    <h2 id="contributing">Contributing</h2>
+    <p>
+      If you want to contribute, please read the
+      <a href="CONTRIBUTING.md">contribution guidelines</a>.
+    </p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://www.maxcdn.com">MaxCDN</a> has waived all copyright and
+      related or neighboring rights to this work.
+    </p>
+    <p>
+      <img
+        src="https://static.scarf.sh/a.png?x-pxid=bb0fba6a-42e5-4544-9348-f91051d1aa4b"
+      />
+    </p>
+  </body>
+</html>

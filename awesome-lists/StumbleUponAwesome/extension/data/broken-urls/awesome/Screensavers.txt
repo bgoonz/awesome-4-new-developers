@@ -1,0 +1,2 @@
+https://itunes.apple.com/us/app/aquarium-live-lite-relaxing/id462563503,,https://github.com/agarrharr/awesome-macos-screensavers#readme,Screensavers error: <HTTPError 301: 'Moved Permanently'> | reason: Moved Permanently
+https://itunes.apple.com/us/app/textify-me/id470453599,,https://github.com/agarrharr/awesome-macos-screensavers#readme,Screensavers error: <HTTPError 404: 'Not Found'> | reason: Not Found

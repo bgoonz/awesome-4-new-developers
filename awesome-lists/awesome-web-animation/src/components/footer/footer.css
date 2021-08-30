@@ -1,0 +1,49 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15vh;
+  color: rgb(255, 255, 255, 0.7);
+  font-weight: 900;
+  font-size: 3.9vh;
+  font-family: 'Lato', sans-serif;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: uppercase;
+
+  @media all and (max-width: 1111px) {
+    margin: 10vh 0 14vh 0;
+  }
+
+  a {
+    position: relative;
+    width: 42vh;
+    padding: 15vh 0;
+  }
+}
+
+.love {
+  position: absolute;
+  top: 3vh;
+  left: 0;
+  z-index: -1;
+  display: block;
+  width: 42vh;
+  transform-origin: 50% 50%;
+  animation: love 0.7s infinite alternate;
+}
+
+@keyframes love {
+  100% {
+    transform: scale(1.03, 1.03);
+  }
+}
+
+.lineTwo {
+  color: white;
+}
+
+.lineThree {
+  margin-top: 0.65vh;
+  font-size: 0.54em;
+}

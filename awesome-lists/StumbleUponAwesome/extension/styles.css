@@ -1,0 +1,553 @@
+[class^="sax-"] {
+  all: initial;
+  font-size: 12pt;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+  margin-block-end: 0px;
+  margin-block-start: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  border: 0;
+  vertical-align: baseline;
+  max-width: auto;
+  line-height: 2em;
+}
+
+[id^="sax-"] {
+  all: initial;
+  font-size: 12pt;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+  margin-block-end: 0px;
+  margin-block-start: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  border: 0;
+  vertical-align: baseline;
+  max-width: auto;
+  line-height: 2em;
+}
+
+[id^="sax-"] > a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* 
+Welcome popup
+*/
+
+#sax-welcome {
+  overflow: auto;
+  max-height: 90%;
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  width: 330px;
+  display: flex;
+  background-color: black;
+  padding: 1em;
+  flex-direction: column;
+  border-radius: 0.6em;
+  z-index: 99999999999999999999999 !important;
+  box-shadow: 3px 3px 60px rgb(89, 89, 89);
+  font-size: 1em;
+  box-sizing: initial;
+}
+
+#sax-welcome-text * {
+  line-height: 2em;
+}
+
+#sax-welcome-text > p {
+  line-height: 2em;
+  display: block;
+}
+
+#sax-welcome-text-title {
+  font-size: 14pt;
+  color: white;
+  font-weight: bold;
+  text-transform: none;
+  transition: none;
+}
+
+#sax-welcome-text-opensource {
+  color: pink;
+  font-size: 11pt;
+}
+
+#sax-welcome-text-opensource-link {
+  font-size: 11pt;
+  color: rgb(170, 192, 255);
+  text-decoration: none;
+  font-weight: normal;
+  text-transform: none;
+  transition: none;
+}
+
+#sax-welcome-text-opensource-link:hover {
+  opacity: 0.8;
+  background: none;
+  text-transform: none;
+  transition: none;
+}
+
+#sax-welcome-text-body {
+  color: #fafafa;
+  font-size: 12pt;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-transform: none;
+  transition: none;
+}
+
+#sax-welcome-new-feature {
+  display: block;
+  width: 100%;
+  padding: 0.5em;
+  box-sizing: border-box;
+  border-radius: 1em;
+}
+
+#sax-welcome-text-body-small {
+  color: rgb(155, 155, 155);
+  font-size: 12pt;
+  margin-bottom: 0;
+  text-transform: none;
+  transition: none;
+}
+
+#sax-welcome-text-body-small-white {
+  color: white;
+  font-size: 12pt;
+  margin-bottom: 0;
+  text-transform: none;
+  transition: none;
+}
+
+#sax-welcome-text-body-smaller-white {
+  color: white;
+  font-size: 11pt;
+  margin-bottom: 0;
+  text-transform: none;
+  transition: none;
+}
+
+#sax-welcome-text-body-small-accent {
+  color: #fca9a9;
+  font-weight: bold;
+  margin-right: 5px;
+  font-size: 11pt;
+  margin-bottom: 0;
+  text-transform: none;
+  transition: none;
+}
+
+#sax-welcome-icon {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+#sax-keyboard-shortcut {
+  color: rgb(201, 201, 201);
+  background-color: rgb(201, 201, 201, 0.2);
+  padding: 0.2em;
+  border: 1px solid #6f6f6f8e;
+  border-radius: 4px;
+  font-family: monospace, monospace;
+  font-weight: normal;
+}
+
+#sax-welcome-text-body-feedback-link {
+  font-size: 11pt;
+  color: rgb(170, 192, 255);
+  font-weight: normal;
+  text-transform: none;
+  transition: none;
+}
+
+#sax-welcome-text-body-feedback-link:hover {
+  opacity: 0.8;
+  background: none;
+  text-transform: none;
+  transition: none;
+}
+
+#sax-welcome-close {
+  align-self: flex-end;
+  font-size: 12pt;
+  margin: 1em 0 0 0;
+  padding: 0;
+  width: auto;
+  color: #bababa;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: normal;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#sax-welcome-close:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out;
+  background: none;
+  text-transform: none;
+  transition: none;
+}
+
+.sax-show {
+  display: initial;
+  opacity: 1;
+  transition: opacity 400ms ease-in-out;
+}
+
+.sax-hide {
+  transition: opacity 400ms ease-in-out;
+  opacity: 0;
+}
+
+.sax-show-fast {
+  display: initial;
+  opacity: 1;
+  transition: opacity 100ms ease-in-out;
+}
+
+.sax-hide-fast {
+  transition: opacity 100ms ease-in-out;
+  opacity: 0;
+}
+
+.sax-gone {
+  display: none;
+  opacity: 0;
+}
+
+.sax-progress {
+  height: 4px;
+  display: block;
+  margin: 0 4px;
+  width: 100%;
+  position: relative;
+}
+
+.sax-progress-outer {
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(56, 94, 60);
+  border-radius: 4px;
+}
+
+.sax-progress-inner {
+  position: absolute;
+  display: block;
+  height: 100%;
+  background-color: rgb(38, 184, 72);
+  border-radius: 4px;
+  transition: width 500ms ease-in-out;
+}
+
+/**
+Top bubbles
+**/
+
+#sax-top-bubbles {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+}
+
+/**
+Rabbit hole
+**/
+
+#sax-rabbit-hole-bubble {
+  height: 48px;
+  position: relative;
+  left: 1em;
+  width: fit-content;
+  align-self: flex-end;
+  border-radius: 3em;
+  padding: 0 1.5em 0 1em;
+  color: white;
+  background-color: #3d00bd;
+  font-style: normal;
+  font-family: sans-serif;
+  font-size: 12pt;
+  text-align: center;
+  box-shadow: 3px 3px 60px rgba(89, 89, 89, 0.814);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#sax-rabbit-hole-exit-button {
+  width: auto;
+  height: 20px;
+}
+
+#sax-rabbit-hole-exit-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+#sax-rabbit-hole-spiral {
+  height: 20px;
+  width: auto;
+  margin-left: 10px;
+  animation: rotate 3s linear infinite;
+}
+
+#sax-rabbit-hole-spiral-2 {
+  position: relative;
+  top: 3px;
+  height: 20px;
+  width: auto;
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#sax-rabbit-hole-text {
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  line-height: initial;
+}
+
+#sax-rabbit-hole-text-top {
+  color: white;
+  font-size: 9pt;
+  text-align: left;
+  line-height: initial;
+}
+
+#sax-rabbit-hole-text-bottom {
+  color: white;
+  font-size: 9pt;
+  font-weight: bold;
+  text-align: left;
+  line-height: initial;
+}
+
+#sax-info-box-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  align-self: center;
+  margin-right: 0.3em;
+  display: inline-block;
+}
+
+#sax-info-box {
+  position: fixed;
+  top: 2em;
+  right: 2em;
+  width: auto;
+  z-index: 99999999999999999999999 !important;
+  /* I know, I'm sorry... */
+  display: flex;
+  flex-direction: column;
+  background: none;
+}
+
+#sax-info-box-top {
+  height: 48px;
+  justify-content: center;
+  width: fit-content;
+  align-self: flex-end;
+  z-index: 1;
+  border-radius: 3em;
+  padding: 0em 1.5em;
+  color: white;
+  background-color: black;
+  font-style: normal;
+  font-family: sans-serif;
+  font-size: 12pt;
+  text-align: center;
+  box-shadow: 3px 3px 60px rgba(89, 89, 89, 0.814);
+  display: flex;
+  flex-direction: column;
+}
+
+#sax-info-box-top-content {
+  display: flex;
+  flex-direction: row;
+  background: none;
+}
+
+#sax-info-box-bottom {
+  height: 24px;
+  justify-content: center;
+  z-index: 2;
+  width: fit-content;
+  align-self: flex-end;
+  margin-top: 15px;
+  border-radius: 2em;
+  padding: 0.2em 1em 0.2em 1em;
+  color: black;
+  background-color: white;
+  font-style: normal;
+  font-family: sans-serif;
+  font-size: 12pt;
+  text-align: center;
+  box-shadow: rgba(89, 89, 89, 0.745) 3px -13px 45px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#sax-info-box-bottom-content {
+  display: flex;
+  flex-direction: row;
+  background: none;
+}
+
+#sax-label {
+  display: inline-block;
+}
+
+#sax-label-secondary {
+  font-size: 10pt !important;
+  padding-left: 0.2em;
+  color: #bababa;
+  margin: 6px 0px;
+}
+
+#sax-label-primary {
+  font-size: 10pt !important;
+  padding-left: 0.2em;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: initial;
+}
+
+#sax-label-small-primary {
+  font-size: 8pt;
+  padding-left: 0.2em;
+  color: #bababa;
+  align-self: center;
+  line-height: initial;
+}
+
+#sax-label-small-secondary {
+  font-size: 8pt;
+  padding-left: 0.2em;
+  color: #959595;
+  align-self: center;
+  line-height: initial;
+}
+
+#sax-list-url {
+  font-size: 8pt;
+  padding-left: 0.2em;
+  color: #6d8bca;
+  line-height: initial;
+}
+
+#sax-list-url :hover {
+  font-size: 8pt;
+  padding-left: 0.2em;
+  color: #ca976d;
+}
+
+#sax-rabbit-hole {
+  position: relative;
+  top: -45px;
+  right: -25px;
+  margin: auto;
+  height: 28px;
+  transition: all 0.3s ease-in-out;
+}
+.sax-rabbithole-full-width {
+  width: 120px;
+}
+.sax-rabbithole-no-width {
+  width: 0px;
+}
+
+#sax-rabbit-hole:hover {
+  cursor: pointer;
+  transform: translateX(5px);
+}
+
+#sax-rabbit-hole:active {
+  opacity: 0.8;
+}
+
+#sax-rabbit-hole-image {
+  height: 120px;
+  width: auto;
+}
+
+#sax-rabbit-hole-image:hover {
+  cursor: pointer;
+}
+
+#sax-rabbit-hole-image-2 {
+  height: 25px;
+  width: auto;
+}
+
+#sax-new-feature-popup {
+  position: relative;
+  top: -1.8em;
+  width: fit-content;
+  align-self: flex-end;
+  z-index: 1;
+  border-radius: 1.1em;
+  padding: 2em 1.5em 0.5em;
+  color: white;
+  background-color: #6f82eb;
+  font-style: normal;
+  font-family: sans-serif;
+  font-size: 12pt;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  animation: float 1s ease-in-out alternate-reverse infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+#sax-new-feature-popup-badge {
+  font-weight: bold;
+  font-size: 10pt;
+  color: #fca9a9;
+  line-height: initial;
+}
+
+#sax-new-feature-popup-text {
+  margin-left: 5pt;
+  font-size: 9pt;
+  color: white;
+  line-height: initial;
+}
+
+#sax-new-feature-popup-text > bold {
+  font-weight: bold;
+  font-size: 9pt;
+  color: white;
+  line-height: initial;
+}

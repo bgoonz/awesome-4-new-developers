@@ -1,0 +1,2 @@
+https://libraries.io/npm,Libraries.io,https://github.com/sindresorhus/awesome-npm#readme,npm error: timeout('The read operation timed out') | reason: 
+http://www.npmtrends.com,npm trends,https://github.com/sindresorhus/awesome-npm#readme,npm error: <HTTPError 308: 'Unknown'> | reason: Unknown

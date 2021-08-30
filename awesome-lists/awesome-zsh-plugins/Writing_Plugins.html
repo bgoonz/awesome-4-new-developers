@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>Writing_Plugins</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="writing-plugins">Writing Plugins</h1>
+    <p>
+      Keep your plugins as cross-framework compatible as possible. Here are some
+      suggestions to make installing and using your plugin as simple as
+      possible, no matter what framework someone is using.
+    </p>
+    <ol type="1">
+      <li>
+        <p>
+          Make using your plugin easier for everyone and put the plugin file at
+          the root level of your plugin repository instead of hiding it in a
+          subdirectory. This allows
+          <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a>
+          users to install it with a simple
+          <code>git clone git@github.com:you/yourplugin.git</code> in the
+          <code>custom/plugins</code> directory and also lets
+          <a href="https://github.com/zsh-users/antigen">Antigen</a> and
+          <a href="https://github.com/tarjoilija/zgen">zgen</a> users
+          automatically clone the repository without having to specify a
+          subdirectory path.
+        </p>
+      </li>
+      <li>
+        <p>
+          Only oh-my-zsh sets the <code>${ZSH_CUSTOM}</code> variable. Relying
+          on your plugin being in <code>${ZSH_CUSTOM}/yourPluginName</code> will
+          make your plugin not work with anything but oh-my-zsh.
+          <code>$(dirname $0)</code> will tell you what directory your plugin is
+          actually installed in, is cross-framework and won’t break when a user
+          inevitably renames your plugin directory.
+        </p>
+      </li>
+      <li>
+        <p>
+          Don’t assume your plugin will be checked out into a directory with the
+          same name you gave the plugin. This is another case where
+          <code>$(dirname ${0})</code> will work and
+          <code>${ZSH_CUSTOM}/hardcoded-directory-name</code> will fail
+          miserably.
+        </p>
+      </li>
+      <li>
+        <p>
+          Use <code>yourplugin.plugin.zsh</code> for the main plugin file. This
+          is what
+          <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a>
+          looks for. <a href="https://github.com/zsh-users/antigen">Antigen</a>,
+          <a href="https://github.com/tarjoilija/zgen">zgen</a> and most other
+          ZSH frameworks will also automatically load that filename.
+        </p>
+      </li>
+      <li>
+        <p>
+          If you’re making a theme, include a screenshot so prospective users
+          can see what it looks like without having to install it.
+        </p>
+      </li>
+      <li>
+        <p>
+          If your plugin adds any of its subdirectories to the
+          <code>fpath</code>, make sure those subdirectories only contain
+          function definition files. This allows for frameworks to correctly
+          <a
+            href="http://zsh.sourceforge.net/Doc/Release/Functions.html#Autoloading-Functions"
+            >zcompile all functions</a
+          >. Don’t make your plugin add its root directory to the
+          <code>fpath</code>.
+        </p>
+      </li>
+      <li>
+        <p>
+          Don’t forget to add a license.
+          <a href="https://choosealicense.com">choosealicense.com</a> is a good
+          tool to help you pick one.
+        </p>
+      </li>
+      <li><p>Submit a PR here so your plugin is easy to find :-)</p></li>
+    </ol>
+  </body>
+</html>

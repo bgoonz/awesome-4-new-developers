@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-bitcoin">Awesome Bitcoin</h1>
+    <p>
+      A curated list of bitcoin services and tools for software developers
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </p>
+    <h2 id="list-of-content">List of content</h2>
+    <ul>
+      <li><a href="#utilities">Utilities</a></li>
+      <li>
+        <a href="#blockchain-api-and-web-services"
+          >Blockchain API and Web services</a
+        >
+      </li>
+      <li><a href="#wallets-api">Wallets API</a></li>
+      <li><a href="#open-source-wallets">Open Source wallets</a></li>
+      <li><a href="#blockchain-explorers">Blockchain Explorers</a></li>
+      <li><a href="#c-libraries">C++ Libraries</a></li>
+      <li><a href="#javascript-libraries">JavaScript Libraries</a></li>
+      <li><a href="#php-libraries">PHP Libraries</a></li>
+      <li><a href="#ruby-libraries">Ruby Libraries</a></li>
+      <li><a href="#python-libraries">Python Libraries</a></li>
+      <li><a href="#java-libraries">Java Libraries</a></li>
+      <li><a href="#scala-libraries">Scala Libraries</a></li>
+      <li><a href="#net-libraries">.Net Libraries</a></li>
+      <li><a href="#playgrounds">Playgrounds</a></li>
+      <li><a href="#blockchain-dump">Blockchain dump</a></li>
+      <li><a href="#full-nodes">Full nodes</a></li>
+      <li><a href="#read">Read</a></li>
+      <li><a href="#course">Course</a></li>
+      <li><a href="#additional-resources">Additional Resources</a></li>
+    </ul>
+    <h2 id="utilities">Utilities</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/vulpemventures/nigiri/">Nigiri</a> - CLI to
+        quickly fire up a a Bitcoin regtest box along with Electrs and Esplora.
+        Includes faucet and push commands.
+      </li>
+      <li>
+        <a href="https://github.com/vulpemventures/nigiri-travis"
+          >Nigiri in Travis</a
+        >
+        - Travis template for adding Nigiri to your Travis (or Github Action)
+        pipeline.
+      </li>
+      <li>
+        <a href="https://github.com/stevenroose/hal">hal</a> - Bitcoin CLI
+        swiss-army-knife (based on rust-bitcoin).
+      </li>
+      <li>
+        <a href="https://bitkey.io">BitKey</a> - Live USB for airgapped
+        transactions and Bitcoin swiss army knife.
+      </li>
+      <li>
+        <a href="https://github.com/richardkiss/pycoin">Pycoin</a> -
+        Python-based Bitcoin and alt-coin utility library.
+      </li>
+      <li>
+        <a href="https://github.com/libbitcoin/libbitcoin-explorer">bx</a> -
+        Bitcoin Command Line Tool.
+      </li>
+      <li>
+        <a href="https://github.com/tsileo/txwatcher">txwatcher</a> - A little
+        Python utility that lets you monitor Bitcoin addresses through
+        Blockchain Websocket API and perform custom callbacks.
+      </li>
+      <li>
+        <a href="https://github.com/prettymuchbryce/hellobitcoin"
+          >hellobitcoin</a
+        >
+        - A collection of simple programs which can generate bitcoin wallets,
+        create and sign transactions, and send transactions over the bitcoin
+        network.
+      </li>
+      <li><a href="http://www.yogh.io/#mine:last">Mining visualization</a></li>
+      <li>
+        <a href="https://github.com/alexk111/HD-Wallet-Scanner"
+          >HD Wallet Scanner</a
+        >
+        - Find all used addresses in your Bitcoin HD wallets bypassing gap
+        limits.
+      </li>
+      <li>
+        <a href="https://github.com/protontypes/libreselery">LibreSelery</a> -
+        Automated Bitcoin distribution to your project contributors and
+        dependencies integrated into GitHub Actions.
+      </li>
+    </ul>
+    <h2 id="blockchain-api-and-web-services">
+      Blockchain API and Web services
+    </h2>
+    <ul>
+      <li><a href="https://block.io">block.io</a></li>
+      <li><a href="https://www.blockcypher.com">BlockCypher</a></li>
+      <li>
+        <a href="https://github.com/Blockstream/esplora">Esplora</a> -
+        Self-hosted blockchain explorer.
+      </li>
+      <li><a href="https://gem.co">Gem.co</a></li>
+      <li><a href="https://insight.is">Insight</a></li>
+      <li><a href="https://chain.com">Chain.com</a></li>
+      <li><a href="https://wallet.coinbase.com/">Coinbase Wallet</a></li>
+      <li><a href="https://www.smartbit.com.au">Smartbit</a></li>
+      <li>
+        <a href="https://github.com/Overtorment/Cashier-BTC">Cashier-BTC</a> -
+        Self-hosted payment gateway.
+      </li>
+      <li>
+        <a href="https://github.com/yasaricli/chainradar-api">Chainradar API</a>
+        - Blockchain Explorer API for Chainradar.
+      </li>
+      <li>
+        <a href="https://github.com/alexk111/One-Time-Address"
+          >One-Time Address</a
+        >
+        A better way to share your Bitcoin address.
+      </li>
+    </ul>
+    <h2 id="market-data-api">Market Data API</h2>
+    <ul>
+      <li>
+        <a href="https://docs.coinmetrics.io/api/v2/">CoinMetrics.io</a> JSON
+        REST API (free as well as paid) with access to market data. Also CSV
+        data file download available.
+      </li>
+      <li>
+        <a href="https://messari.io/api">Messari.io</a> JSON REST API (free as
+        well as paid) with access to market data, news, metrics, profile, etc.
+      </li>
+    </ul>
+    <h2 id="wallets-api">Wallets API</h2>
+    <ul>
+      <li><a href="https://bitgo.github.io/bitgo-docs/">BitGo</a></li>
+      <li><a href="https://developers.coinbase.com">Coinbase</a></li>
+      <li><a href="https://www.blockchain.com/api">Blockchain.com</a></li>
+      <li><a href="http://bip32.org">BIP32</a></li>
+    </ul>
+    <h2 id="open-source-wallets">Open Source Wallets</h2>
+    <ul>
+      <li><a href="https://copay.io/">CoPay by BitPay</a></li>
+      <li><a href="https://coinb.in">Coinb.in</a></li>
+      <li><a href="https://electrum.org/">Electrum</a></li>
+    </ul>
+    <h2 id="blockchain-explorers">Blockchain Explorers</h2>
+    <ul>
+      <li><a href="http://chain.so">Chain.so</a></li>
+      <li><a href="https://blockchain.com">Blockchain.com</a></li>
+      <li>
+        <a href="https://blockstream.info">Blockstream.info</a> - Blockchain
+        explorer with API (mainnet, testnet and Liquid).
+      </li>
+      <li><a href="https://www.blocktrail.com/BTC">BlockTrail</a></li>
+      <li>
+        <a href="https://github.com/JornC/bitcoin-transaction-explorer"
+          >Bitcoin Transaction Explorer</a
+        >
+      </li>
+      <li><a href="https://blockexplorer.com">Blockexplorer.com</a></li>
+      <li><a href="https://www.smartbit.com.au">Smartbit</a></li>
+      <li>
+        <a href="https://bitkit.live">Bitkit</a> - Real time transaction
+        updates.
+      </li>
+    </ul>
+    <h2 id="c-libraries">C++ Libraries</h2>
+    <ul>
+      <li><a href="https://libbitcoin.org/">Libbitcoin</a></li>
+      <li>
+        <a href="https://github.com/ElementsProject/libwally-core"
+          >libwally-core</a
+        >
+      </li>
+      <li><a href="https://github.com/bitcoin-core/secp256k1">secp256k1</a></li>
+    </ul>
+    <h2 id="javascript-libraries">JavaScript Libraries</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/cryptocoinjs/awesome-cryptocoinjs"
+          >Awesome CryptoCoinJS</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/bitpay/bitcore/tree/v8.0.0/packages/bitcore-lib"
+          >Bitcore Library</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/bitcoinjs/bitcoinjs-lib">Bitcoinjs-lib</a>
+      </li>
+      <li><a href="http://cryptocoinjs.com/#modules">Cryptocoin</a></li>
+      <li>
+        <a href="https://github.com/blocktrail/blocktrail-sdk-nodejs"
+          >BlockTrail SDK NodeJS</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/bcoin-org/bcoin">bcoin</a> - Javascript
+        bitcoin library for node.js and browsers.
+      </li>
+    </ul>
+    <h2 id="php-libraries">PHP Libraries</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/coinspark/php-OP_RETURN">PHP-OP_RETURN</a>
+      </li>
+      <li>
+        <a href="https://github.com/blocktrail/blocktrail-sdk-php"
+          >BlockTrail PHP SDK</a
+        >
+      </li>
+    </ul>
+    <h2 id="ruby-libraries">Ruby Libraries</h2>
+    <ul>
+      <li><a href="https://github.com/lian/bitcoin-ruby">Bitcoin-ruby</a></li>
+    </ul>
+    <h2 id="python-libraries">Python Libraries</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/blocktrail/blocktrail-sdk-python"
+          >BlockTrail SDK Python</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/F483/btctxstore">btctxstore</a> - Simple
+        library to store/retrieve information in bitcoin transactions using
+        OP_RETURN.
+      </li>
+      <li>
+        <a href="https://github.com/vbuterin/pybitcointools">pybitcointools</a>
+        - Python library for Bitcoin signatures and transactions from Vitalik
+        Buterin. Project discontinued.
+      </li>
+      <li>
+        <a href="https://github.com/richardkiss/pycoin">pycoin</a> - Python
+        library for Bitcoin keys, signatures, transactions. Includes full VM
+        implementation and tools for manipulating keys (ku) and transactions
+        (tx).
+      </li>
+      <li>
+        <a href="https://github.com/sr-gi/bitcoin_tools">bitcoin_tools</a> -
+        Python library for building and analyzing transactions and scripts (both
+        standard and custom). Comes along with a UTXO set analysis tool.
+        Includes several examples and exhaustive documentation.
+      </li>
+      <li>
+        <a href="https://github.com/merwane/oogway">oogway</a> - A secure
+        Bitcoin utility library for Python.
+      </li>
+    </ul>
+    <h2 id="java-libraries">Java Libraries</h2>
+    <blockquote>
+      <p>
+        Note that you can also use
+        <a href="#scala-libraries">Scala libraries</a> in Java. *
+        <a href="https://bitcoinj.github.io">BitcoinJ</a> *
+        <a href="https://github.com/knowm/XChange">XChange</a> - Library that
+        provides a simple and consistent API for interacting with 50+ Bitcoin
+        currency exchanges. *
+        <a
+          href="https://github.com/theborakompanioni/bitcoin-spring-boot-starter"
+          >Bitcoin Spring Boot Starter</a
+        >
+        - Bitcoin integration for Spring Boot applications.
+      </p>
+    </blockquote>
+    <h2 id="scala-libraries">Scala libraries</h2>
+    <blockquote>
+      <p>
+        Note that you can also use
+        <a href="#java-libraries">Java libraries</a> in Scala. *
+        <a href="https://bitcoin-s.org">Bitcoin-S</a> - Scala/JVM toolkit for
+        Bitcoin applications, includes Bitcoin data structures, transaction
+        signing, strongly typed <code>bitcoind</code>/Eclair RPC clients, and
+        more.
+      </p>
+    </blockquote>
+    <h2 id="net-libraries">.Net Libraries</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/MetacoSA/NBitcoin">NBitcoin</a> -
+        Comprehensive Bitcoin library for the .NET framework.
+      </li>
+      <li>
+        <a href="https://github.com/cryptean/bitcoinlib">BitcoinLib</a> - The
+        most complete, up-to-date, battle-tested .net Library and RPC Wrapper
+        for Bitcoin and Altcoins in C#.
+      </li>
+      <li>
+        <a href="https://github.com/MetacoSA/QBitNinja">QBitNinja</a> - An Open
+        Source and powerful blockchain API.
+      </li>
+    </ul>
+    <h2 id="playgrounds">Playgrounds</h2>
+    <ul>
+      <li>
+        <a href="https://www.crmarsh.com/script-playground/"
+          >Script Playground</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/siminchen/bitcoinIDE">Bitcoin IDE</a> -
+        Bitcoin Script for dummies.
+      </li>
+      <li><a href="https://github.com/kallewoof/btcdeb">Script Debugger</a></li>
+      <li><a href="https://bitcore.io/playground/">Bitcore Playground</a></li>
+      <li>
+        <a href="https://iancoleman.io/bip39/">Mnemonic Code generator</a>
+      </li>
+      <li>
+        <a href="https://github.com/anders94/blockchain-demo/"
+          >blockchain-demo</a
+        >
+        - A web-based demonstration of blockchain concepts.
+      </li>
+      <li>
+        <a href="https://github.com/liuhongchao/bitcoin4s"
+          >Bitcoin Script Debugger</a
+        >
+        - Visualize Bitcoin script execution for real transactions.
+      </li>
+    </ul>
+    <h2 id="blockchain-dump">Blockchain dump</h2>
+    <ul>
+      <li>
+        <a href="http://dumps.webbtc.com/bitcoin/">WebBTC</a> - These are
+        postgres database dumps of the bitcoin-ruby-blockchain database
+        generated by webbtc.com.
+      </li>
+      <li>
+        <a href="https://github.com/ladimolnar/BitcoinDatabaseGenerator"
+          >BitcoinDatabaseGenerator</a
+        >
+        - A high performance data transfer tool that can be used to copy data
+        from Bitcoin Core blockchain files to a SQL Server database.
+      </li>
+      <li>
+        <a href="https://github.com/mcdee/blockparser">Blockparser+SQL</a> -
+        Fast, quick and dirty bitcoin blockchain parser.
+      </li>
+      <li>
+        <a href="https://github.com/bitcoin-abe/bitcoin-abe">BitcoinABE</a> -
+        Abe: block browser for Bitcoin and similar currencies.
+      </li>
+      <li>
+        <a href="https://github.com/MetacoSA/NBitcoin.Indexer"
+          >NBitcoin.Indexer</a
+        >
+        - Scalable and fault-tolerant block chain indexer for Azure cloud
+        platform.
+      </li>
+      <li>
+        <a href="https://github.com/straumat/blockchain2graph"
+          >Blockchain2Graph</a
+        >
+        - Graph Database Builder.
+      </li>
+    </ul>
+    <h2 id="full-nodes">Full nodes</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/btcsuite/btcd/">btcd</a> - Go-based full
+        node since 2013.
+      </li>
+      <li>
+        <a href="https://github.com/mhanne/bitcoin-ruby-node"
+          >Bitcoin-ruby-node</a
+        >
+        - bitcoin node based on bitcoin-ruby-blockchain.
+      </li>
+      <li>
+        <a href="https://github.com/moneybutton/yours-bitcoin">Fullnode</a> -
+        Javascript implementation of bitcoin.
+      </li>
+      <li>
+        <a href="https://github.com/bitpay/bitcore-node">Bitcore Node</a> -
+        bitcoind linked to node.js by BitPay.
+      </li>
+      <li>
+        <a href="https://github.com/bitpay/bitcore">Bitcore</a> - Formerly just
+        a Nodejs library, now a full node.
+      </li>
+    </ul>
+    <h2 id="read">Read</h2>
+    <ul>
+      <li>
+        <a
+          href="https://bitcointechtalk.com/a-gentle-introduction-to-bitcoin-core-development-fdc95eaee6b8"
+          >A Gentle Introduction to Bitcoin Core Development</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/bitcoinbook/bitcoinbook"
+          >Mastering Bitcoin</a
+        >
+      </li>
+      <li>
+        <a href="https://www.manning.com/books/grokking-bitcoin"
+          >Grokking Bitcoin</a
+        >
+        - An in-depth technical book with rich illustrations.
+      </li>
+      <li>
+        <a href="https://bitcoin.stackexchange.com">Bitcoin Stackexchange</a>
+      </li>
+      <li>
+        <a
+          href="https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/"
+          >Elliptic Curve Cryptography A Gentle Introduction</a
+        >.
+      </li>
+      <li>
+        <a
+          href="https://github.com/bitcoin-studio/Bitcoin-Programming-with-BitcoinJS"
+          >Bitcoin Programming with BitcoinJS and Bitcoin Core CLI</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/chaincodelabs/bitcoin-curriculum"
+          >Bitcoin Protocol Development Curriculum - Chaincode Labs</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/chaincodelabs/lightning-curriculum"
+          >Lightning Network Protocol Development Curriculum - Chaincode Labs</a
+        >.
+      </li>
+      <li>
+        <a href="https://btcinformation.org/en/developer-documentation"
+          >btcinformation.org / Developer Documentation</a
+        >
+        - Find useful resources, guides and reference material for developers.
+      </li>
+    </ul>
+    <h2 id="course">Course</h2>
+    <ul>
+      <li>
+        <a href="http://bitcoinbook.cs.princeton.edu/"
+          >Bitcoin &amp; Cryptocurrency</a
+        >.
+      </li>
+    </ul>
+    <h2 id="additional-resources">Additional Resources</h2>
+    <ul>
+      <li>
+        <span class="citation" data-cites="lopp"
+          >[@lopp / Bitcoin Developers]</span
+        >(https://twitter.com/lopp/lists/bitcoin-developers) - Software
+        developers who have experience working on Bitcoin implementations or
+        applications.
+      </li>
+      <li>
+        <span class="citation" data-cites="lopp"
+          >[@lopp / Lightning Developers]</span
+        >(https://twitter.com/lopp/lists/lightning-developers) - Software
+        developers with experience working on LN implementations / applications.
+      </li>
+      <li>
+        <a
+          href="https://docs.google.com/spreadsheets/d/1Z3Ofa4P8097VWV70Z_bMqIMladngvm-Ck24ot9TDNmw/"
+          >Practical Bitcoin Info - Google Sheets</a
+        >.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=ZfFNce6CVsE"
+          >A brief history of Bitcoin development…</a
+        >
+      </li>
+      <li>
+        <a href="https://bitcoin-resources.com/">bitcoin-resources.com</a>
+        Meta-list of Bitcoin resources, from books, articles, to podcasts.
+      </li>
+      <li>
+        <a href="https://www.lopp.net/bitcoin-information.html"
+          >Jameson Lopp Bitcoin Resource List</a
+        >
+        Very detailed curated Bitcoin resource list and meta-list by J. Lopp
+      </li>
+      <li>
+        <h2
+          id="river-learn-a-collection-of-educational-resources-to-learn-about-bitcoin-basics-investing-technology-and-more."
+        >
+          <a href="https://river.com/learn">River Learn</a> A collection of
+          educational resources to learn about Bitcoin basics, investing,
+          technology, and more.
+        </h2>
+      </li>
+    </ul>
+    <p>
+      Inspired by the
+      <a href="https://github.com/sindresorhus/awesome">awesome</a> list thing.
+      Created by BlockchainU fellows.
+    </p>
+    <hr />
+    <h3 id="license">License</h3>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="https://i.creativecommons.org/p/zero/1.0/88x31.png"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://github.com/igorbarinov/">Igor Barinov</a> has waived all
+      copyright and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-influxdb-awesome">
+      awesome-influxdb
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      A curated list of awesome projects, libraries, tools, etc. related to
+      <a href="https://www.influxdata.com/">InfluxDB</a>. This list focuses on
+      libraries, tools, etc. supporting InfluxDB version 1.0 and up.
+    </p>
+    <p>
+      Want to make this list better? Take a look at our page on
+      <a href="CONTRIBUTING.md">contributing</a> and then open a pull request!
+    </p>
+    <h2 id="reference-material">Reference material</h2>
+    <p>
+      If you know of any particularly useful blog posts, talks, slides, etc.
+      that belong in this list, please open a pull request!
+    </p>
+    <ul>
+      <li>
+        <a href="https://docs.influxdata.com/influxdb/latest/"
+          >Official documentation</a
+        >
+      </li>
+      <li>
+        InfluxDB in IoT world.
+        <a
+          href="https://www.easyitblog.info/2017/11/10/influxdb-and-grafana-fighting-together-with-iot-data-attack/"
+          >Part 1: Introduction</a
+        >
+        |
+        <a
+          href="https://www.easyitblog.info/2017/11/14/influxdb-in-iot-world-aws-part-2/"
+          >Part 2: Hosting and scaling on AWS</a
+        >
+        |
+        <a
+          href="https://www.easyitblog.info/2017/11/26/influxdb-in-iot-world-making-it-production-ready-part-3/"
+          >Part 3: Plotting graphs using Grafana</a
+        >
+      </li>
+    </ul>
+    <h2 id="client-libraries">Client libraries</h2>
+    <h3 id="official">Official</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/influxdata/influxdb-csharp">C#</a> - A .NET
+        library for efficiently sending points to InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/influxdata/influxdb1-client">Go</a> - Go
+        client for InfluxDB 1.x
+      </li>
+      <li>
+        <a href="https://github.com/influxdata/influxdb-java">Java</a> - Java
+        client for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/influxdata/influxdb-php">PHP</a> - PHP
+        client for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/influxdata/influxdb-python">Python</a> -
+        Python client for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/influxdata/influxdb-rails">Rails</a> - Ruby
+        on Rails bindings to automatically write metrics into InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/influxdata/influxdb-ruby">Ruby</a> - Ruby
+        client for InfluxDB
+      </li>
+    </ul>
+    <h3 id="unofficial">Unofficial</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/olauzon/capacitor">capacitor</a> - A Clojure
+        client for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/mmaul/cl-influxdb">cl-influxdb</a> - Common
+        Lisp interface to the Time Series Database InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/gossiperl/erflux">erflux</a> - InfluxDB
+        client for Erlang
+      </li>
+      <li>
+        <a href="https://github.com/lexmag/fluxter">fluxter</a> - An InfluxDB
+        writer for Elixir
+      </li>
+      <li>
+        <a href="https://github.com/gobwas/influent">influent</a> - InfluxDB
+        Javascript driver
+      </li>
+      <li>
+        <a href="https://github.com/gobwas/influent.rs">influent.rs</a> -
+        InfluxDB Rust driver
+      </li>
+      <li>
+        <a href="https://github.com/tobiasschuerg/InfluxDB-Client-for-Arduino"
+          >InfluxDB-Client-for-Arduino</a
+        >
+        - Arduino client for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/johanvandenbroek/InfluxDB-Client-LabVIEW"
+          >InfluxDB-Client-LabVIEW</a
+        >
+        - LabVIEW client for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/d-led/influxdb-cpp-rest"
+          >influxdb-cpp-rest</a
+        >
+        - A C++ InfluxDB client with a batching async interface
+      </li>
+      <li>
+        <a href="https://github.com/maoe/influxdb-haskell">influxdb-haskell</a>
+        - Haskell client library for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/ziyasal/InfluxDB.Net">InfluxDB.NET</a> -
+        .NET client for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/corley/influxdb-php-sdk"
+          >InfluxDB PHP SDK</a
+        >
+        - UDP/IP or HTTP adapters for read and write data
+      </li>
+      <li>
+        <a href="https://github.com/dleutnant/influxdbr">influxdbr</a> - R
+        library for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/mneudert/instream">instream</a> - InfluxDB
+        driver for Elixir
+      </li>
+      <li>
+        <a href="https://github.com/node-influx/node-influx">node-influx</a> -
+        InfluxDB Node.js Client
+      </li>
+      <li>
+        <a href="https://github.com/mediocre/node-influx-udp"
+          >node-influx-udp</a
+        >
+        - Write to InfluxDB using its UDP interface
+      </li>
+      <li>
+        <a href="https://github.com/paulgoldbaum/scala-influxdb-client"
+          >scala-influxdb-client</a
+        >
+        - Asynchronous InfluxDB client for Scala
+      </li>
+    </ul>
+    <h2 id="collecting-data-into-influxdb">Collecting data into InfluxDB</h2>
+    <h3 id="projects">Projects</h3>
+    <h4 id="dedicated">Dedicated</h4>
+    <p>Tools whose primary or sole purpose is to feed data into InfluxDB.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/CorpGlory/accelerometer2influx"
+          >accelerometer2influx</a
+        >
+        - Android application that takes the x-y-z axis metrics from your phone
+        accelerometer and sends the data to InfluxDB.
+      </li>
+      <li>
+        <a href="https://github.com/abrander/agento">agento</a> - Client/server
+        collecting near realtime metrics from Linux hosts
+      </li>
+      <li>
+        <a href="https://github.com/ccpgames/aggregateD">aggregateD</a> - A
+        <a href="https://docs.datadoghq.com/guides/dogstatsd/">dogstatsD</a>
+        inspired metrics and event aggregation daemon for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/FaradayRF/aprs2influxdb">aprs2influxdb</a> -
+        Interfaces ham radio APRS-IS servers and saves packet data into an
+        influxdb database
+      </li>
+      <li>
+        <a href="https://github.com/att-innovate/charmander">Charmander</a> -
+        Charmander is a lab environment for measuring and analyzing
+        resource-scheduling algorithms
+      </li>
+      <li>
+        <a href="https://github.com/chrissnell/gopherwx">gopherwx</a> - a
+        service that pulls live weather data from a Davis Instruments Vantage
+        Pro2 station and stores it in InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/influxdata/grade">grade</a> - Track Go
+        benchmark performance over time by storing results in InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/poxet/Influx-Capacitor">Influx-Capacitor</a>
+        - Influx-Capacitor collects metrics from windows machines using
+        Performance Counters. Data is sent to influxDB to be viewable by grafana
+      </li>
+      <li>
+        <a href="https://github.com/vsavornin/Influxdb-Powershell"
+          >Influxdb-Powershell</a
+        >
+        - Powershell script to send Windows Performance counters to an InfluxDB
+        Server
+      </li>
+      <li>
+        <a
+          href="https://github.com/codersaur/SmartThings/tree/master/smartapps/influxdb-logger"
+          >influxdb-logger</a
+        >
+        - SmartApp to log
+        <a href="https://www.smartthings.com/">SmartThings</a> device attributes
+        to an InfluxDB database
+      </li>
+      <li>
+        <a href="https://github.com/zensqlmonitor/influxdb-sqlserver"
+          >influxdb-sqlserver</a
+        >
+        - Collect Microsoft SQL Server metrics for reporting to InfluxDB and
+        visualize them with Grafana
+      </li>
+      <li>
+        <a href="https://github.com/loadimpact/k6">k6</a> - A modern load
+        testing tool, using Go and JavaScript
+      </li>
+      <li>
+        <a href="https://github.com/Wikia/marathon-event-metrics"
+          >marathon-event-metrics</a
+        >
+        - a tool for reporting
+        <a href="https://mesosphere.github.io/marathon/">Marathon</a> events to
+        InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/kpacha/mesos-influxdb-collector"
+          >mesos-influxdb-collector</a
+        >
+        - Lightweight <a href="https://mesos.apache.org/">mesos</a> stats
+        collector for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/shirou/mqforward">mqforward</a> -
+        <a href="http://mqtt.org/">MQTT</a> to influxdb forwarder
+      </li>
+      <li>
+        <a href="https://github.com/coussej/node-opcua-logger"
+          >node-opcua-logger</a
+        >
+        - Collect industrial data from OPC UA Servers
+      </li>
+      <li>
+        <a href="https://github.com/fss1/ntp_checker">ntp_checker</a> - compares
+        internal NTP sources and warns if the offset between servers exceeds a
+        definable (fraction of) seconds
+      </li>
+      <li>
+        <a href="https://github.com/d-led/proc_to_influxdb">proc_to_influxdb</a>
+        - Console app to observe Windows process starts and stops via InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/nagylzs/pysysinfo_influxdb"
+          >pysysinfo_influxdb</a
+        >
+        - Periodically send system information into influxdb (uses python3 +
+        psutil, so it also works under Windows)
+      </li>
+      <li>
+        <a href="https://github.com/novaquark/sysinfo_influxdb"
+          >sysinfo_influxdb</a
+        >
+        - Collect and send system (linux) info to InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/toni-moreno/snmpcollector">snmpcollector</a>
+        - A full featured Generic SNMP data collector with Web Administration
+        Interface for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/influxdata/telegraf">Telegraf</a> -
+        (Official) plugin-driven server agent for reporting metrics into
+        InfluxDB
+      </li>
+      <li>
+        <a
+          href="https://github.com/timdorr/tesla-trip/blob/master/lib/tesla_stream_reader.rb"
+          >tesla-streamer</a
+        >
+        - Streams data from Tesla Model S to InfluxDB (<a
+          href="https://github.com/timdorr/tesla-trip/blob/master/lib/tasks/tesla.rake#L12-L16"
+          >rake task</a
+        >)
+      </li>
+      <li>
+        <a
+          href="https://traffic-control-cdn.readthedocs.io/en/latest/overview/traffic_stats.html"
+          >traffic_stats</a
+        >
+        - Acquires and stores statistics about CDNs controlled by
+        <a href="https://trafficcontrol.apache.org/">Apache Traffic Control</a>
+      </li>
+      <li>
+        <a href="https://github.com/Oxalide/vsphere-influxdb-go"
+          >vsphere-influxdb-go</a
+        >
+        - Collect VMware vSphere, vCenter and ESXi performance metrics and send
+        them to InfluxDB
+      </li>
+    </ul>
+    <h4 id="non-dedicated">Non-dedicated</h4>
+    <p>
+      Tools that generate data that feed into multiple backends, InfluxDB
+      included.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/google/cadvisor">cAdvisor</a> - Analyzes
+        resource usage and performance characteristics of running containers
+      </li>
+      <li>
+        <a href="https://github.com/centreon/centreon">Centreon</a> - A network,
+        system, applicative supervision and monitoring tool
+      </li>
+      <li>
+        <a href="https://github.com/postmates/cernan">cernan</a> - A telemetry
+        and logging aggregation server
+      </li>
+      <li>
+        <a href="https://github.com/BBC-News/cloudwatch-sender"
+          >cloudwatch-sender</a
+        >
+        - Send metrics to InfluxDB/Graphite from
+        <a href="https://aws.amazon.com/cloudwatch/">Amazon Cloudwatch</a>
+      </li>
+      <li>
+        <a href="https://github.com/fullcontact/crankshaftd">crankshaftd</a> -
+        Simple Go agent to ingest streaming data from
+        <a href="https://github.com/Netflix/Turbine">Turbine</a> via SSE and
+        push it into StatsD as a gauge or to InfluxDB
+      </li>
+      <li>
+        <a href="https://www.domoticz.com">Domoticz</a> - Open source Home
+        Automation System
+      </li>
+      <li>
+        <a href="https://github.com/gatling/gatling">gatling</a> - Async
+        Scala-Akka-Netty based Stress Tool
+      </li>
+      <li>
+        <a href="https://github.com/nicolargo/glances">Glances</a> - Glances an
+        Eye on your system
+      </li>
+      <li>
+        <a href="https://github.com/shawn-sterling/graphios">Graphios</a> - A
+        program to send nagios perf data to graphite (carbon) / statsd / librato
+        / influxDB
+      </li>
+      <li>
+        <a href="https://github.com/kubernetes-retired/heapster">heapster</a> -
+        Monitor container resource usage of a
+        <a href="https://kubernetes.io/">Kubernetes</a> cluster
+      </li>
+      <li>
+        <a href="https://github.com/mozilla-services/heka">heka</a> - General
+        purpose data collection and processing tool
+      </li>
+      <li>
+        <a href="https://github.com/precurse/internet_data_usage"
+          >internet_data_usage</a
+        >
+        - Python based application to pull data plan usage for different
+        carriers such as Telus and Koodo
+      </li>
+      <li>
+        <a href="http://www.iobroker.net/">ioBroker</a> - Homeautomation / IoT
+        Platform uses Influxdb to store
+        <a
+          href="https://github.com/ioBroker/ioBroker.influxdb/blob/master/README.md"
+          >history data</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/jmxtrans/jmxtrans">jmxtrans</a> -
+        Effectively the missing connector between speaking to a JVM via JMX on
+        one end and whatever logging / monitoring / graphing package that you
+        can dream up on the other end.
+      </li>
+      <li>
+        <a href="https://jmeter.apache.org/usermanual/realtime-results.html"
+          >Apache JMeter</a
+        >
+        - Popular load testing tool, you can get real-time results sent to a
+        backend through the InfluxDBBackendListenerClient which allows you to
+        send metrics (active threads, response time …) to an InfluxDB Backend
+        using UDP or HTTP protocols
+      </li>
+      <li>
+        <a href="https://github.com/logary/logary">logary</a> - High
+        performance, multi-target logging, metric and health-check library for
+        mono and .Net
+      </li>
+      <li>
+        <a href="https://github.com/pstadler/metrics.sh">metrics.sh</a> -
+        Collect and forward metrics using portable shell scripts
+      </li>
+      <li>
+        <a href="https://www.openhab.org/">OpenHAB</a> - A universal integration
+        platform for all things around home automation
+      </li>
+      <li>
+        <a href="https://github.com/riemann/riemann">Riemann</a> - A network
+        event stream processing system, in Clojure
+      </li>
+      <li>
+        <a href="https://github.com/etsy/statsd-jvm-profiler"
+          >statsd-jvm-profiler</a
+        >
+        - Simple JVM Profiler Using StatsD
+      </li>
+      <li>
+        <a href="https://github.com/statsite/statsite">statsite</a> - C
+        implementation of statsd
+      </li>
+      <li>
+        <a href="https://github.com/sematext/sematext-agent-integrations"
+          >Sematext Agent</a
+        >
+        -
+        <a
+          href="https://sematext.com/blog/now-open-source-sematext-monitoring-agent/"
+          >Open source monitoring agent</a
+        >
+        to collect metrics from Solr, Elasticsearch, Cassandra, JVM, JMX,
+        ClickHouse, MySQL, Hadoop, and more via pluggable integrations. Output
+        via Influx Line Protocol to InfluxDB or
+        <a href="https://sematext.com/cloud/">Sematext Cloud</a>
+      </li>
+      <li>
+        <a href="https://github.com/sematext/logagent-js">logagent</a> - is a
+        modern, open-source, light-weight log shipper. Logagent includes
+        <a href="https://sematext.com/docs/logagent/input-plugin-influxdb-http/"
+          >influxdb input plugin</a
+        >
+        and
+        <a href="https://sematext.com/docs/logagent/output-plugin-influxdb/"
+          >influxdb output plugin</a
+        >
+        and many other
+        <a href="https://sematext.com/docs/logagent/plugins/">integrations</a>
+      </li>
+    </ul>
+    <h3 id="libraries">Libraries</h3>
+    <p>Libraries to collect data and feed into InfluxDB.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/robey/crow-metrics">crow-metrics</a> - small
+        metrics collector for node servers
+      </li>
+      <li>
+        <a href="https://github.com/bitlabstudio/django-influxdb-metrics"
+          >django-influxdb-metrics</a
+        >
+        - A reusable Django app that sends metrics about your project to
+        InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/tevjef/go-runtime-metrics"
+          >go-runtime-metrics</a
+        >
+        - Collect golang runtime Metrics, outputting to InfluxDB or through
+        Telegraf
+      </li>
+      <li>
+        <a href="https://github.com/p0pr0ck5/lua-resty-influx"
+          >lua-resty-influx</a
+        >
+        - <a href="https://openresty.org/en/">OpenResty</a> client for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/beberlei/metrics">metrics</a> - (PHP) Simple
+        library that abstracts different metrics collectors. “I find this
+        necessary to have a consistent and simple metrics (functional) API that
+        doesn’t cause vendor lock-in”
+      </li>
+      <li>
+        <a href="https://github.com/fennm/pyVsphereInflux">pyVsphereInflux</a> -
+        A library and supporting script for pulling data from
+        <a href="https://www.vmware.com/products/vsphere.html">vSphere</a> and
+        inserting it into InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/arussellsaw/telemetry">telemetry</a> -
+        metric reporting for Go applications
+      </li>
+    </ul>
+    <h4 id="hooks">Hooks</h4>
+    <p>Hooks for other logging libraries to output to InfluxDB.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/vrischmann/go-metrics-influxdb"
+          >go-metrics-influxdb</a
+        >
+        - A reporter for the
+        <a href="https://github.com/rcrowley/go-metrics">go-metrics library</a>
+        which will post the metrics to InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/Abramovic/logrus_influxdb"
+          >logrus_influxdb</a
+        >
+        - InfluxDB Hook for
+        <a href="https://github.com/Sirupsen/logrus">Logrus</a>
+      </li>
+    </ul>
+    <h3 id="plugins">Plugins</h3>
+    <p>
+      Plugins to allow other standalone tools to send their data into InfluxDB.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/joker1007/embulk-output-influxdb"
+          >embulk-output-influxdb</a
+        >
+        - InfluxDB output plugin for
+        <a href="https://github.com/embulk/embulk">Embulk</a>
+      </li>
+      <li>
+        <a href="https://github.com/travelping/exometer_influxdb"
+          >exometer_influxdb</a
+        >
+        - <a href="https://github.com/Feuerlabs/exometer">Exometer</a> reporter
+        for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/fangli/fluent-plugin-influxdb"
+          >fluent-plugin-influxdb</a
+        >
+        - A buffered output plugin for
+        <a href="https://www.fluentd.org/">fluentd</a> and InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/shaharke/influx-nagios-plugin"
+          >influx-nagios-plugin</a
+        >
+        - <a href="https://www.nagios.org/">Nagios</a> plugin for querying
+        monitoring stats from InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/jenkinsci/influxdb-plugin"
+          >jenkinsci/influxdb-plugin</a
+        >
+        - <a href="https://jenkins.io/index.html">Jenkins</a> plugin to send
+        build metrics into InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/mre/kafka-influxdb">kafka-influxdb</a> - A
+        <a href="https://kafka.apache.org/">Kafka</a> consumer for InfluxDB
+        written in Python
+      </li>
+      <li>
+        <a href="https://github.com/logstash-plugins/logstash-output-influxdb"
+          >logstash-output-influxdb</a
+        >
+        - Community-maintained
+        <a href="https://www.elastic.co/products/logstash">Logstash</a> plugin
+        to output metrics to InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/davidB/metrics-influxdb"
+          >metrics-influxdb</a
+        >
+        - A reporter for
+        <a href="https://www.dropwizard.io/0.9.1/docs/">dropwizard</a> metrics
+        which announces measurements to an InfluxDB server
+      </li>
+      <li>
+        <a href="https://github.com/savoirfairelinux/mod-influxdb"
+          >mod-influxdb</a
+        >
+        - <a href="http://www.shinken-monitoring.org/">Shinken</a> module for
+        exporting data to InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/sensu-plugins/sensu-plugins-influxdb"
+          >sensu-plugins-influxdb</a
+        >
+        - <a href="https://sensu.io/">Sensu</a> InfluxDB Plugins
+      </li>
+      <li>
+        <a href="https://github.com/vassilevsky/sidekiq-influxdb"
+          >sidekiq-influxdb</a
+        >
+        - A <a href="https://sidekiq.org/">Sidekiq</a> middleware to send job
+        execution metrics to InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/intelsdi-x/snap-plugin-publisher-influxdb"
+          >snap-plugin-publisher-influxdb</a
+        >
+        - Publishes
+        <a href="https://github.com/intelsdi-x/snap">snap</a> metrics to
+        InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/bernd/statsd-influxdb-backend"
+          >statsd-influxdb-backend</a
+        >
+        - A naive InfluxDB backend for StatsD
+      </li>
+      <li>
+        <a href="https://sematext.com/docs/logagent/input-plugin-influxdb-http/"
+          >logagent influx input plugin</a
+        >
+        - Logagent plugin to receive data via Influx Line Protocol
+      </li>
+      <li>
+        <a href="https://sematext.com/docs/logagent/input-plugin-influxdb-http/"
+          >logagent InfluxDB output plugin</a
+        >
+        - Plugin to send data via Influx Line Protocol
+      </li>
+    </ul>
+    <h3 id="import-tools">Import tools</h3>
+    <p>
+      Tools to import a fixed set of data into InfluxDB. *
+      <a href="https://github.com/soprasteria/jmeter2influxdb"
+        >JMeter2InfluxDB</a
+      >
+      - Read JMeter results in a csv file and put results in InfluxDB after the
+      load test *
+      <a
+        href="https://admhelp.microfocus.com/lr/en/12.60-12.62/help/WebHelp/Content/Controller/raw_results_exporter.htm"
+        >LoadRunner Raw Results Exporter</a
+      >
+      - To export scenario results (load test results) to InfluxDB *
+      <a href="https://github.com/adejoux/nmon2influxdb">nmon2influxdb</a> -
+      Import <a href="http://nmon.sourceforge.net/pmwiki.php">nmon</a> file into
+      InfluxDB
+    </p>
+    <h2 id="consuming-data-from-influxdb">Consuming data from InfluxDB</h2>
+    <h3 id="dashboards-and-visualization">Dashboards and visualization</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/influxdata/chronograf">Chronograf</a> -
+        Official InfluxDB data visualization tool
+      </li>
+      <li>
+        <a href="https://dbeaver.com/databases/influxdb/">DBeaver</a> - DBeaver
+        Universal Database Tool, DBeaver Enterprise has special extensions for
+        InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/facette/facette">facette</a> - Time series
+        data visualization and graphing software
+      </li>
+      <li>
+        <a href="https://github.com/vrecan/FluxDash">FluxDash</a> - Terminal
+        based InfluxDB dashboard
+      </li>
+      <li>
+        <a href="https://github.com/grafana/grafana">grafana</a> - Gorgeous
+        metric viz, dashboards &amp; editors for Graphite, InfluxDB &amp;
+        OpenTSDB
+      </li>
+      <li>
+        <a href="https://github.com/CymaticLabs/InfluxDBStudio"
+          >InfluxDB Studio</a
+        >
+        - InfluxDB Studio is a UI management tool, its inspiration comes from
+        other similar SQL database management tools (use InfluxData.Net run on
+        MS Windows)
+      </li>
+      <li>
+        <a href="https://github.com/InfluxGraph/influxgraph">InfluxGraph</a> -
+        Graphite InfluxDB storage finder for Graphite-API
+      </li>
+      <li>
+        <a href="https://github.com/ostrost/ostent">ostent</a> - collects and
+        displays system metrics and optionally relays to Graphite and/or
+        InfluxDB
+      </li>
+    </ul>
+    <h3 id="other-tools">Other tools</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/amwelch/hubot-influxdb-alerts"
+          >hubot-influxdb-alerts</a
+        >
+        - Create and manage alerts in your chatroom using
+        <a href="https://hubot.github.com/">hubot</a> and influxdb
+      </li>
+      <li>
+        <a href="https://github.com/joshrendek/influx-alert">influx-alert</a> -
+        A tool to query InfluxDB and send alerts based on a YAML config
+      </li>
+      <li>
+        <a href="https://github.com/HormyAJP/influxdb_google_sheets"
+          >influxdb_google_sheets</a
+        >
+        - Google Sheets script for fetching and formatting InfluxDB data
+      </li>
+      <li>
+        <a href="https://github.com/nathanielc/morgoth">Morgoth</a> - Metric
+        anomaly detection
+      </li>
+    </ul>
+    <h2 id="provisioning-influxdb">Provisioning InfluxDB</h2>
+    <p>
+      Tools, libraries, etc. to help you get InfluxDB running without installing
+      it by hand.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/bdangit/chef-influxdb">chef-influxdb</a> -
+        Chef cookbook for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/dgolja/golja-influxdb">golja-influxdb</a> -
+        Puppet module for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/saltstack-formulas/influxdb-formula"
+          >influxdb-formula</a
+        >
+        - Installs and configures the InfluxDB timeseries database
+      </li>
+      <li>
+        <a href="https://github.com/pivotal-cf-experimental/influxdb-release"
+          >influxdb-release</a
+        >
+        - Experimental BOSH release for InfluxDB
+      </li>
+      <li>
+        <a href="https://forge.puppet.com/datacentred/telegraf/readme"
+          >puppet-telegraf</a
+        >
+        - Puppet module for Telegraf
+      </li>
+      <li>
+        <a href="https://github.com/rossmcdonald/influxdb"
+          >rossmcdonald/influxdb</a
+        >
+        - Ansible role for installing, configuring, and maintaining InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/tutumcloud/influxdb"
+          >tutum-docker-influxdb</a
+        >
+        - Docker image to run an out-of-the-box InfluxDB server
+      </li>
+    </ul>
+    <h2 id="queries">Queries</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/corley/dbal-influxdb">dbal-influxdb</a> -
+        Doctrine DBAL for InfluxDB
+      </li>
+      <li>
+        <a href="https://github.com/undr/influxdb-arel">Influxdb::Arel</a> -
+        Influxdb::Arel is a SQL AST manager for InfluxDB dialect. It simplifies
+        the generation of complex SQL queries
+      </li>
+      <li>
+        <a href="https://github.com/palkan/influxer">influxer</a> - InfluxDB
+        ActiveRecord-style
+      </li>
+    </ul>
+    <h2 id="hosting-of-influxdb-saas">Hosting of InfluxDB / SaaS</h2>
+    <ul>
+      <li>
+        <a href="https://cloud.influxdata.com/plan-picker">InfluxCloud</a> -
+        From the creators of InfluxDB
+      </li>
+      <li>
+        <a href="https://aiven.io/influxdb">Aiven</a> - Provides a choice of
+        host (AWS, Google, DigitalOcean, etc.), geographic location, and server
+        specs
+      </li>
+      <li>
+        <a href="https://scalingo.com/databases/influxdb">Scalingo</a> -
+        Provides a choice of server specs
+      </li>
+      <li>
+        <a href="https://hostedmetrics.com/product/influxdb/">HostedMetrics</a>
+        - Geared towards custom application monitoring by hosting the
+        combination of InfluxDB, Grafana, and StatsD
+      </li>
+    </ul>
+    <h2 id="miscellaneous">Miscellaneous</h2>
+    <p>Projects that don’t seem to fit in any other category.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/ve-global/influx-protector"
+          >influx-protector</a
+        >
+        - proxy to prevent dangerous queries getting to influxdb
+      </li>
+      <li>
+        <a href="https://github.com/open-ch/influxdb-schema-updater"
+          >influxdb-schema-updater</a
+        >
+        - A small DevOps tool to manage the schema of an InfluxDB instance with
+        a set of configuration files
+      </li>
+      <li>
+        <a href="https://github.com/RPing/influx-prompt">influx-prompt</a> - An
+        interactive command-line InfluxDB cli with auto completion
+      </li>
+      <li>
+        <a href="https://github.com/Transatel/cleanflux">cleanflux</a> - proxy
+        around /query endpoint with auto retention policy selection and on the
+        wire bug corrections
+      </li>
+    </ul>
+    <h2 id="other-awesome-lists">Other awesome lists</h2>
+    <h3 id="awesome-lists-that-include-links-to-influxdb">
+      Awesome lists that include links to InfluxDB
+    </h3>
+    <ul>
+      <li>
+        <a href="https://github.com/onurakpolat/awesome-bigdata"
+          >awesome-bigdata</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/obazoud/awesome-dashboard"
+          >awesome-dashboard</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/igorbarinov/awesome-data-engineering"
+          >awesome-data-engineering</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/numetriclabz/awesome-db">awesome-db</a>
+      </li>
+      <li><a href="https://github.com/avelino/awesome-go">awesome-go</a></li>
+      <li>
+        <a href="https://github.com/frenck/awesome-home-assistant"
+          >awesome-home-assistant</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/mfornos/awesome-microservices"
+          >awesome-microservices</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/kahun/awesome-sysadmin">awesome-sysadmin</a>
+      </li>
+    </ul>
+    <h3 id="lists-of-awesome-lists-that-include-awesome-influxdb">
+      Lists of awesome lists that include awesome-influxdb
+    </h3>
+    <ul>
+      <li><a href="https://github.com/sindresorhus/awesome">awesome</a></li>
+      <li><a href="https://github.com/jnv/lists">lists</a></li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img src="https://licensebuttons.net/p/zero/1.0/88x31.png" alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law, the authors and contributors have waived
+      all copyright and related or neighboring rights to awesome-influxdb.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+http://www.amazon.com/Learn-R-Day-Steven-Murray-ebook/,[Amazon],https://github.com/RomanTsegelskyi/rbooks#readme,R Books error: <HTTPError 404: 'Not Found'> | reason: Not Found

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>git-cheat-sheet-el</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="git-and-git-flow-cheat-sheet-awesome-build-status">
+      Git and Git Flow Cheat Sheet
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+      <a href="https://travis-ci.org/arslanbilal/git-cheat-sheet"
+        ><img
+          src="https://travis-ci.org/arslanbilal/git-cheat-sheet.svg?branch=master"
+          alt="Build Status"
+      /></a>
+    </h1>
+    <hr />
+    <p align="center">
+      <img alt="Git" src="../Img/git-logo.png" height="190" width="455" />
+    </p>
+    <hr />
+    <h1 id="άλλες-διαθέσιμες-γλώσσες">Άλλες διαθέσιμες γλώσσες:</h1>
+    <ol type="1">
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-ar.md"
+          >Αραβικά</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-zh.md"
+          >Κινέζικα</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-hi.md"
+          >Ινδικά</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-tr.md"
+          >Τουρκικά</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-es.md"
+          >Ισπανικά</a
+        >
+      </li>
+    </ol>
+    <p>
+      Το “σκονάκι” για το Git σας γλιτώνει από την εκμάθηση όλων των εντολών απ’
+      έξω.
+    </p>
+    <p>
+      Είστε ελεύθεροι να συνεισφέρετε και να ενημερώσετε τα λάθη γραμματικής.
+      Είστε επίσης ελεύθεροι να προσθέσετε το αρχείο στη γλώσσα σας.
+    </p>
+    <hr />
+    <h1 id="git-cheat-sheet-greek">Git Cheat Sheet Greek</h1>
+    <h3 id="ευρετήριο">Ευρετήριο</h3>
+    <ul>
+      <li><a href="#setup">Ρύθμιση</a></li>
+      <li><a href="#configuration-files">Αρχεία ρυθμίσεων</a></li>
+      <li><a href="#create">Δημιουργία</a></li>
+      <li><a href="#local-changes">Τοπικές αλλαγές</a></li>
+      <li><a href="#search">Αναζήτηση</a></li>
+      <li><a href="#commit-history">Ιστορικό commit</a></li>
+      <li><a href="#branches--tags">Διακλαδώσεις &amp; Ετικέτες</a></li>
+      <li><a href="#update--publish">Ενημέρωση &amp; Δημοσίευση</a></li>
+      <li><a href="#merge--rebase">Συγχώνευση &amp; Αναπροσαρμογή</a></li>
+      <li><a href="#undo">Αναίρεση</a></li>
+      <li><a href="#git-flow">Git Flow</a></li>
+    </ul>
+    <hr />
+    <h2 id="ρύθμιση">Ρύθμιση</h2>
+    <h5 id="εμφάνιση-τρέχουσας-διαμόρφωσης">Εμφάνιση τρέχουσας διαμόρφωσης:</h5>
+    <pre><code>$ git config --list</code></pre>
+    <h5 id="εμφάνιση-διαμόρφωσης-αποθετηρίου">
+      Εμφάνιση διαμόρφωσης αποθετηρίου:
+    </h5>
+    <pre><code>$ git config --local --list</code></pre>
+    <h5 id="εμφάνιση-γενικώνκαθολικών-ρυθμίσεων">
+      Εμφάνιση γενικών/καθολικών ρυθμίσεων:
+    </h5>
+    <pre><code>$ git config --global --list</code></pre>
+    <h5 id="εμφάνηση-ρυθμίσεων-συστήματος">Εμφάνηση ρυθμίσεων συστήματος:</h5>
+    <pre><code>$ git config --system --list</code></pre>
+    <h5
+      id="ορίστε-ένα-όνομα-που-είναι-αναγνωρίσιμο-για-έπαινο-credit-όταν-γίνει-αναθεώρηση-του-ιστορικού"
+    >
+      Ορίστε ένα όνομα που είναι αναγνωρίσιμο για έπαινο (credit) όταν γίνει
+      αναθεώρηση του ιστορικού:
+    </h5>
+    <pre><code>$ git config --global user.name “[firstname lastname]”</code></pre>
+    <h5
+      id="ορίστε-μια-διεύθυνση-email-που-θα-σχετίζεται-με-κάθε-δείκτη-στο-ιστορικό"
+    >
+      Ορίστε μια διεύθυνση email που θα σχετίζεται με κάθε δείκτη στο ιστορικό:
+    </h5>
+    <pre><code>$ git config --global user.email “[valid-email]”</code></pre>
+    <h5
+      id="ρύθμιση-αυτόματης-γραμμής-εντολών-για-τον-χρωματισμό-του-git-για-εύκολη-αναθεώρηση"
+    >
+      Ρύθμιση αυτόματης γραμμής εντολών για τον χρωματισμό του Git για εύκολη
+      αναθεώρηση:
+    </h5>
+    <pre><code>$ git config --global color.ui auto</code></pre>
+    <h5 id="ορίστε-μια-εφαρμογή-για-επεξεργασία-των-commit">
+      Ορίστε μια εφαρμογή για επεξεργασία των commit
+    </h5>
+    <pre><code>$ git config --global core.editor vi</code></pre>
+    <hr />
+    <h2 id="αρχεία-ρυθμίσεων">Αρχεία ρυθμίσεων</h2>
+    <h5 id="αρχείο-ρυθμίσεων-για-συγκεκριμένο-αποθετήριο-local">
+      Αρχείο ρυθμίσεων για συγκεκριμένο αποθετήριο [–local]:
+    </h5>
+    <pre><code>&lt;repo&gt;/.git/config</code></pre>
+    <h5 id="αρχείο-ρυθμίσεων-για-συγκεκριμένο-χρήστη-global">
+      Αρχείο ρυθμίσεων για συγκεκριμένο χρήστη [–global]:
+    </h5>
+    <pre><code>~/.gitconfig</code></pre>
+    <h5 id="αρχείο-ρυθμίσεων-για-όλο-το-σύστημα-system">
+      Αρχείο ρυθμίσεων για όλο το σύστημα [–system]:
+    </h5>
+    <pre><code>/etc/gitconfig</code></pre>
+    <hr />
+    <h2 id="δημιουργία">Δημιουργία</h2>
+    <h5 id="αντιγραφή-ενός-υπάρχοντος-αποθετηρίου">
+      Αντιγραφή ενός υπάρχοντος αποθετηρίου:
+    </h5>
+    <p>Υπάρχουν δύο τρόποι:</p>
+    <p>Με SSH</p>
+    <pre><code>$ git clone ssh://user@domain.com/repo.git</code></pre>
+    <p>Με HTTP</p>
+    <pre><code>$ git clone http://domain.com/user/repo.git</code></pre>
+    <h5 id="δημιουργία-ενός-νέου-τοπικού-αποθετηρίου">
+      Δημιουργία ενός νέου τοπικού αποθετηρίου:
+    </h5>
+    <pre><code>$ git init</code></pre>
+    <hr />
+    <h2 id="τοπικές-αλλαγές">Τοπικές αλλαγές</h2>
+    <h5 id="εμφάνιση-αλλαγών-στον-τρέχον-φάκελο">
+      Εμφάνιση αλλαγών στον τρέχον φάκελο:
+    </h5>
+    <pre><code>$ git status</code></pre>
+    <h5 id="εμφάνιση-αλλαγών-σε-αρχεία-που-παρακολουθούνται-tracked">
+      Εμφάνιση αλλαγών σε αρχεία που παρακολουθούνται (tracked):
+    </h5>
+    <pre><code>$ git diff</code></pre>
+    <h5 id="πρόσθεσε-όλες-τις-αλλαγές-στο-επόμενο-commit">
+      Πρόσθεσε όλες τις αλλαγές στο επόμενο commit:
+    </h5>
+    <pre><code>$ git add .</code></pre>
+    <h5 id="πρόσθεσε-τις-αλλαγές-που-έγιναν-στο-file-στο-επόμενο-commit">
+      Πρόσθεσε τις αλλαγές που έγιναν στο &lt;file&gt; στο επόμενο commit:
+    </h5>
+    <pre><code>$ git add -p &lt;file&gt;</code></pre>
+    <h5
+      id="κάνε-commit-όλες-τις-τοπικές-αλλαγές-στα-αρχεία-που-παρακολουθούνται"
+    >
+      Κάνε commit όλες τις τοπικές αλλαγές στα αρχεία που παρακολουθούνται:
+    </h5>
+    <pre><code>$ git commit -a</code></pre>
+    <h5 id="κάνε-commit-προηγούμενες-staged-αλλαγές">
+      Κάνε commit προηγούμενες staged αλλαγές:
+    </h5>
+    <pre><code>$ git commit</code></pre>
+    <h5 id="κάνε-commit-με-μήνυμα">Κάνε commit με μήνυμα:</h5>
+    <pre><code>$ git commit -m &#39;message here&#39;</code></pre>
+    <h5
+      id="κάνε-commit-παρακάμπτοντας-την-staging-περιοχή-commit-skipping-the-staging-area-and-adding-message"
+    >
+      Κάνε commit παρακάμπτοντας την staging περιοχή Commit skipping the staging
+      area and adding message:
+    </h5>
+    <pre><code>$ git commit -am &#39;message here&#39;</code></pre>
+    <h5 id="κάνε-commit-σε-μια-προηγούμενη-ημέρα">
+      Κάνε commit σε μια προηγούμενη ημέρα:
+    </h5>
+    <pre><code>git commit --date=&quot;`date --date=&#39;n day ago&#39;`&quot; -am &quot;Commit Message&quot;</code></pre>
+    <h5 id="άλλαξε-το-τελευταίο-commit">Άλλαξε το τελευταίο commit:<br /></h5>
+    <p>
+      <em><sub>Μην τροποποιήσεις τα δημοσιευμένα commits!</sub></em>
+    </p>
+    <pre><code>$ git commit -a --amend</code></pre>
+    <h5 id="άλλαξε-την-ημερομηνία-του-τελευταίου-commit">
+      Άλλαξε την ημερομηνία του τελευταίου commit:
+    </h5>
+    <pre><code>GIT_COMMITTER_DATE=&quot;date&quot; git commit --amend</code></pre>
+    <h5 id="άλλαξε-την-ημερομηνία-του-συγγραφέα-στο-τελευταίο-commit">
+      Άλλαξε την ημερομηνία του Συγγραφέα στο τελευταίο commit:
+    </h5>
+    <pre><code>git commit --amend --date=&quot;date&quot;</code></pre>
+    <h5
+      id="μετακίνησε-τις-uncommitted-αλλαγές-από-την-τωρινή-διακλάδωση-σε-μία-άλλη"
+    >
+      Μετακίνησε τις uncommitted αλλαγές από την τωρινή διακλάδωση σε μία
+      άλλη:<br />
+    </h5>
+    <pre><code>git stash
+git checkout branch2
+git stash pop</code></pre>
+    <h5 id="επανέφερε-τις-stashed-αλλαγές-πίσω-στην-τωρινή-διακλάδωση">
+      Επανέφερε τις stashed αλλαγές πίσω στην τωρινή διακλάδωση:
+    </h5>
+    <pre><code>git stash apply</code></pre>
+    <h5 id="αφαίρεσε-τη-τελευταία-σειρά-από-stashed-αλλαγές">
+      Αφαίρεσε τη τελευταία σειρά από stashed αλλαγές:
+    </h5>
+    <pre><code>git stash drop</code></pre>
+    <hr />
+    <h2 id="αναζήτηση">Αναζήτηση</h2>
+    <h5 id="αναζήτησε-το-κείμενο-σε-όλα-τα-αρχεία-του-φακέλου">
+      Αναζήτησε το κείμενο σε όλα τα αρχεία του φακέλου:
+    </h5>
+    <pre><code>$ git grep &quot;Hello&quot;</code></pre>
+    <h5 id="σε-κάποια-έκδοση">Σε κάποια έκδοση:</h5>
+    <pre><code>$ git grep &quot;Hello&quot; v2.5</code></pre>
+    <hr />
+    <h2 id="ιστορία-commit">Ιστορία commit</h2>
+    <h5
+      id="εμφάνισε-όλα-τα-commits-ξεκινώντας-από-το-πιο-πρόσφατο-θα-εμφανίσει-το-hash-πληροφορίες-για-τον-συγγραφέα-ημερομηνία-του-commit-και-τίτλο-του-commit"
+    >
+      Εμφάνισε όλα τα commits, ξεκινώντας από το πιο πρόσφατο (θα εμφανίσει το
+      hash, πληροφορίες για τον συγγραφέα, ημερομηνία του commit και τίτλο του
+      commit):
+    </h5>
+    <pre><code>$ git log</code></pre>
+    <h5
+      id="εμφάνισε-όλα-τα-commits-θα-εμφανίσει-μόνο-το-commit-hash-και-το-μήνυμα-του-commit"
+    >
+      Εμφάνισε όλα τα commits (θα εμφανίσει μόνο το commit hash και το μήνυμα
+      του commit):
+    </h5>
+    <pre><code>$ git log --oneline</code></pre>
+    <h5 id="εμφάνισε-όλα-τα-commits-ενός-συγκεκριμένου-χρήστη">
+      Εμφάνισε όλα τα commits ενός συγκεκριμένου χρήστη:
+    </h5>
+    <pre><code>$ git log --author=&quot;username&quot;</code></pre>
+    <h5 id="εμφάνισε-τις-αλλαγές-σε-βάθος-χρόνου-για-ένα-συγκεκριμένο-αρχείο">
+      Εμφάνισε τις αλλαγές σε βάθος χρόνου για ένα συγκεκριμένο αρχείο:
+    </h5>
+    <pre><code>$ git log -p &lt;file&gt;</code></pre>
+    <h5
+      id="εμφάνισε-τα-commits-που-υπάρχουν-μόνο-στην-απομακρυσμένη-διακλάδωση-στην-δεξιά-πλευρά"
+    >
+      Εμφάνισε τα commits που υπάρχουν μόνο στην απομακρυσμένη διακλάδωση στην
+      δεξιά πλευρά:
+    </h5>
+    <pre><code>$ git log --oneline &lt;origin/master&gt;..&lt;remote/master&gt; --left-right</code></pre>
+    <h5 id="ποιος-τι-και-πότε-έκανε-τις-αλλαγές-στο-file">
+      Ποιος, τι και πότε έκανε τις αλλαγές στο &lt;file&gt;:
+    </h5>
+    <pre><code>$ git blame &lt;file&gt;</code></pre>
+    <h5 id="εμφάνισε-το-αρχείο-καταγραφής-των-αναφορών-reference-log">
+      Εμφάνισε το αρχείο καταγραφής των αναφορών (Reference log):
+    </h5>
+    <pre><code>$ git reflog show </code></pre>
+    <h5 id="διέγραψε-το-αρχείο-καταγραφής-των-αναφορών-reference-log">
+      Διέγραψε το αρχείο καταγραφής των αναφορών (Reference log):
+    </h5>
+    <pre><code>$ git reflog delete</code></pre>
+    <hr />
+    <h2 id="διακλαδώσεις-και-ετικέτες">Διακλαδώσεις και Ετικέτες</h2>
+    <h5 id="εμφάνισε-λίστα-με-όλες-τις-τοπικές-διακλαδώσεις">
+      Εμφάνισε λίστα με όλες τις τοπικές διακλαδώσεις:
+    </h5>
+    <pre><code>$ git branch</code></pre>
+    <h5 id="εμφάνισε-λίστα-με-όλες-τις-απομακρυσμένες-διακλαδώσεις">
+      Εμφάνισε λίστα με όλες τις απομακρυσμένες διακλαδώσεις:
+    </h5>
+    <pre><code>$ git branch -r</code></pre>
+    <h5 id="κάνε-εναλλαγή-στη-διακλάδωση-head">
+      Κάνε εναλλαγή στη διακλάδωση HEAD:
+    </h5>
+    <pre><code>$ git checkout &lt;branch&gt;</code></pre>
+    <h5 id="δημιούργησε-και-κάνε-εναλλαγή-σε-μια-νέα-διακλάδωση">
+      Δημιούργησε και κάνε εναλλαγή σε μια νέα διακλάδωση:
+    </h5>
+    <pre><code>$ git checkout -b &lt;branch&gt;</code></pre>
+    <h5 id="δημιούργησε-μια-νέα-διακλάδωση-βασιζόμενη-στη-τρέχουσα-διακλάδωση">
+      Δημιούργησε μια νέα διακλάδωση βασιζόμενη στη τρέχουσα διακλάδωση:
+    </h5>
+    <pre><code>$ git branch &lt;new-branch&gt;</code></pre>
+    <h5
+      id="δημιούργησε-μια-νέα-παρακολουθούμενη-διακλάδωση-βασιζόμενη-σε-μία-απομακρυσμένη-διακλάδωση"
+    >
+      Δημιούργησε μια νέα παρακολουθούμενη διακλάδωση βασιζόμενη σε μία
+      απομακρυσμένη διακλάδωση:
+    </h5>
+    <pre><code>$ git branch --track &lt;new-branch&gt; &lt;remote-branch&gt;</code></pre>
+    <h5 id="διέγραψε-μια-τοπική-διακλάδωση">Διέγραψε μια τοπική διακλάδωση:</h5>
+    <pre><code>$ git branch -d &lt;branch&gt;</code></pre>
+    <h5 id="εξανάγκασε-τη-διαγραφή-μιας-τοπικής-διακλάδωσης">
+      Εξανάγκασε τη διαγραφή μιας τοπικής διακλάδωσης:
+    </h5>
+    <p>
+      <em><sub>Θα χάσετε όλες τις αλλαγές που δεν έχουν συγχωνευθεί!</sub></em>
+    </p>
+    <pre><code>$ git branch -D &lt;branch&gt;</code></pre>
+    <h5 id="σημείωσε-το-τρέχων-commit-με-μία-ετικέτα">
+      Σημείωσε το τρέχων commit με μία ετικέτα:
+    </h5>
+    <pre><code>$ git tag &lt;tag-name&gt;</code></pre>
+    <h5
+      id="σημείωσε-το-τρέχων-commit-με-μία-ετικέτα-που-περιλαμβάνει-ένα-μήνυμα"
+    >
+      Σημείωσε το τρέχων commit με μία ετικέτα που περιλαμβάνει ένα μήνυμα:
+    </h5>
+    <pre><code>$ git tag -a &lt;tag-name&gt;</code></pre>
+    <hr />
+    <h2 id="ενημέρωση-δημοσίευση">Ενημέρωση &amp; Δημοσίευση</h2>
+    <h5
+      id="εμφάνισε-μια-λίστα-με-όλα-τα-τωρινά-ρυθμισμένα-απομακρυσμένα-αποθετήρια"
+    >
+      Εμφάνισε μια λίστα με όλα τα τωρινά ρυθμισμένα απομακρυσμένα αποθετήρια:
+    </h5>
+    <pre><code>$ git remote -v</code></pre>
+    <h5 id="εμφάνισε-πληροφορίες-για-ένα-απομακρυσμένο-αποθετήριο">
+      Εμφάνισε πληροφορίες για ένα απομακρυσμένο αποθετήριο:
+    </h5>
+    <pre><code>$ git remote show &lt;remote&gt;</code></pre>
+    <h5 id="πρόσθεσε-ένα-απομεκρυσμένο-αποθετήριο-με-όνομα-remote">
+      Πρόσθεσε ένα απομεκρυσμένο αποθετήριο, με όνομα &lt;remote&gt;:
+    </h5>
+    <pre><code>$ git remote add &lt;remote&gt; &lt;url&gt;</code></pre>
+    <h5
+      id="κατέβασε-όλες-τις-αλλαγές-από-το-remote-αλλά-μην-το-ενσωματώσεις-στο-head"
+    >
+      Κατέβασε όλες τις αλλαγές από το &lt;remote&gt;, αλλά μην το ενσωματώσεις
+      στο HEAD:
+    </h5>
+    <pre><code>$ git fetch &lt;remote&gt;</code></pre>
+    <h5 id="κατέβασε-τις-αλλαγές-και-απευθείας-συγχώνευσεενσωμάτωσε-στο-head">
+      Κατέβασε τις αλλαγές και απευθείας συγχώνευσε/ενσωμάτωσε στο HEAD:
+    </h5>
+    <pre><code>$ git remote pull &lt;remote&gt; &lt;url&gt;</code></pre>
+    <h5
+      id="κατέβασε-όλες-τις-αλλαγές-από-το-απομακρυσμένο-head-στο-τοπικό-αποθετήριο"
+    >
+      Κατέβασε όλες τις αλλαγές από το (απομακρυσμένο) HEAD στο τοπικό
+      αποθετήριο:
+    </h5>
+    <pre><code>$ git pull origin master</code></pre>
+    <h5
+      id="κατέβασε-όλες-τις-αλλαγές-από-το-head-στο-τοπικό-αποθετήριο-χωρίς-συγχώνευση"
+    >
+      Κατέβασε όλες τις αλλαγές από το HEAD στο τοπικό αποθετήριο χωρίς
+      συγχώνευση:
+    </h5>
+    <pre><code>git pull --rebase &lt;remote&gt; &lt;branch&gt;</code></pre>
+    <h5 id="δημοσίευσε-τις-τοπικές-αλλαγές-στο-απομακρυσμένο-αποθετήριο">
+      Δημοσίευσε τις τοπικές αλλαγές στο απομακρυσμένο αποθετήριο:
+    </h5>
+    <pre><code>$ git push remote &lt;remote&gt; &lt;branch&gt;</code></pre>
+    <h5 id="διέγραψε-μια-διακλάδωση-από-το-απομακρυσμένο-αποθετήριο">
+      Διέγραψε μια διακλάδωση από το απομακρυσμένο αποθετήριο:
+    </h5>
+    <pre><code>$ git push &lt;remote&gt; :&lt;branch&gt; (από την έκδοση Git v1.5.0)
+ή
+git push &lt;remote&gt; --delete &lt;branch&gt; (από την έκδοση Git v1.7.0)</code></pre>
+    <h5 id="δημοσίευσε-τις-ετικέτες">Δημοσίευσε τις ετικέτες:</h5>
+    <pre><code>$ git push --tags</code></pre>
+    <hr />
+    <h2 id="συγχώνευση-αναπροσαρμογή">Συγχώνευση &amp; Αναπροσαρμογή</h2>
+    <h5 id="συγχώνευσε-τη-διακλάδωση-στο-τρέχων-head">
+      Συγχώνευσε τη διακλάδωση στο τρέχων HEAD:
+    </h5>
+    <pre><code>$ git merge &lt;branch&gt;</code></pre>
+    <h5 id="αναπροσάρμοσε-το-τρέχων-head-στο-branch">
+      Αναπροσάρμοσε το τρέχων HEAD στο &lt;branch&gt;:<br />
+    </h5>
+    <p>
+      <em><sub>ΜΗΝ αναπροσαρμόσετε δημοσιευσμένα commit!</sub></em>
+    </p>
+    <pre><code>$ git rebase &lt;branch&gt;</code></pre>
+    <h5 id="ακύρωσε-την-αναπροσαρμογή">Ακύρωσε την αναπροσαρμογή:</h5>
+    <pre><code>$ git rebase --abort</code></pre>
+    <h5
+      id="συνεχίστε-την-αναπροσαρμογή-μετά-την-επίλυση-των-συγκρούσεων-conflicts"
+    >
+      Συνεχίστε την αναπροσαρμογή μετά την επίλυση των συγκρούσεων (conflicts):
+    </h5>
+    <pre><code>$ git rebase --continue</code></pre>
+    <h5
+      id="χρησιμοποιήστε-το-δικό-σας-εργαλείο-συγχώνευσης-για-να-λύσετε-τις-συγκρούσεις"
+    >
+      Χρησιμοποιήστε το δικό σας εργαλείο συγχώνευσης για να λύσετε τις
+      συγκρούσεις:
+    </h5>
+    <pre><code>$ git mergetool</code></pre>
+    <h5
+      id="χρησιμοποιείστε-τον-επεξεργαστή-κειμένου-για-να-λύσετε-χειροκίνητα-τις-συγκρούσεις-και-μετά-μετά-την-επίλυση-σημείωσε-το-αρχείο-ως-επιλυμένο"
+    >
+      Χρησιμοποιείστε τον επεξεργαστή κειμένου για να λύσετε χειροκίνητα τις
+      συγκρούσεις και (μετά μετά την επίλυση) σημείωσε το αρχείο ως επιλυμένο:
+    </h5>
+    <pre><code>$ git add &lt;resolved-file&gt;</code></pre>
+    <pre><code>$ git rm &lt;resolved-file&gt;</code></pre>
+    <h5 id="σύνθιψε-squash-τα-commits">Σύνθιψε (squash) τα commits:</h5>
+    <pre><code>$ git rebase -i &lt;commit-just-before-first&gt;</code></pre>
+    <p>Τώρα αντικατέστησε αυτό,</p>
+    <pre><code>pick &lt;commit_id&gt;
+pick &lt;commit_id2&gt;
+pick &lt;commit_id3&gt;</code></pre>
+    <p>με αυτό,</p>
+    <pre><code>pick &lt;commit_id&gt;
+squash &lt;commit_id2&gt;
+squash &lt;commit_id3&gt;</code></pre>
+    <hr />
+    <h2 id="αναίρεση">Αναίρεση</h2>
+    <h5 id="απορρίψτε-όλες-τις-τοπικές-αλλαγές-στον-φάκελο-εργασίας-σας">
+      Απορρίψτε όλες τις τοπικές αλλαγές στον φάκελο εργασίας σας:
+    </h5>
+    <pre><code>$ git reset --hard HEAD</code></pre>
+    <h5
+      id="πάρτε-όλα-τα-αρχεία-από-την-περιοχή-staging-δηλαδή-να-αναιρέσετε-την-τελευταία-git-add."
+    >
+      Πάρτε όλα τα αρχεία από την περιοχή staging (δηλαδή να αναιρέσετε την
+      τελευταία <code>git add</code>.):
+    </h5>
+    <pre><code>$ git reset HEAD</code></pre>
+    <h5 id="απορρίψτε-τις-τοπικές-αλλαγές-σε-ένα-συγκεκριμένο-αρχείο">
+      Απορρίψτε τις τοπικές αλλαγές σε ένα συγκεκριμένο αρχείο:
+    </h5>
+    <pre><code>$ git checkout HEAD &lt;file&gt;</code></pre>
+    <h5
+      id="επαναφορά-ενός-commit-δημιουργώντας-ένα-νέο-commit-με-αντίθετες-αλλαγές-by-producing-a-new-commit-with-contrary-changes"
+    >
+      Επαναφορά ενός commit (δημιουργώντας ένα νέο commit με αντίθετες αλλαγές):
+      (by producing a new commit with contrary changes):
+    </h5>
+    <pre><code>$ git revert &lt;commit&gt;</code></pre>
+    <h5
+      id="επαναφορά-του-δείκτη-head-σε-ένα-προηγούμενο-commit-και-απέρριψε-όλες-τις-αλλαγές-από-τότε"
+    >
+      Επαναφορά του δείκτη HEAD σε ένα προηγούμενο commit και απέρριψε όλες τις
+      αλλαγές από τότε:
+    </h5>
+    <pre><code>$ git reset --hard &lt;commit&gt;</code></pre>
+    <h5
+      id="επαναφορά-του-δείκτη-head-σε-τωρινή-κατάσταση-σε-μια-απομακρυσμένη-διακλάδωση."
+    >
+      Επαναφορά του δείκτη HEAD σε τωρινή κατάσταση σε μια απομακρυσμένη
+      διακλάδωση.
+    </h5>
+    <pre><code>git reset --hard &lt;remote/branch&gt; e.g., upstream/master, origin/my-feature</code></pre>
+    <h5
+      id="επαναφορά-του-δείκτη-head-σε-ενα-προηγούμενο-commit-και-διατήρησε-όλες-τις-αλλαγές-ως-unstaged"
+    >
+      Επαναφορά του δείκτη HEAD σε ενα προηγούμενο commit και διατήρησε όλες τις
+      αλλαγές ως unstaged:
+    </h5>
+    <pre><code>$ git reset &lt;commit&gt;</code></pre>
+    <h5
+      id="επαναφορά-του-δείκτη-head-σε-ενα-προηγούμενο-commit-και-διατήρησε-τις-τοπικές-αλλαγές-που-είναι-uncommitted"
+    >
+      Επαναφορά του δείκτη HEAD σε ενα προηγούμενο commit και διατήρησε τις
+      τοπικές αλλαγές που είναι uncommitted:
+    </h5>
+    <pre><code>$ git reset --keep &lt;commit&gt;</code></pre>
+    <h5
+      id="αφαίρεσε-αρχεία-που-έγιναν-καταλάθος-commit-πριν-προστεθούν-στο-.gitignore"
+    >
+      Αφαίρεσε αρχεία που έγιναν καταλάθος commit πριν προστεθούν στο .gitignore
+    </h5>
+    <pre><code>$ git rm -r --cached .
+$ git add .
+$ git commit -m &quot;remove xyz file&quot;</code></pre>
+    <hr />
+    <h2 id="git-flow">Git-Flow</h2>
+    <h3 id="index">Index</h3>
+    <ul>
+      <li><a href="#setup">Εγκατάσταση</a></li>
+      <li><a href="#getting-started">Ξεκινώντας</a></li>
+      <li><a href="#features">Χαρακτηριστικά</a></li>
+      <li><a href="#make-a-release">Κάνοντας ένα Release</a></li>
+      <li><a href="#hotfixes">Hotfixes</a></li>
+      <li><a href="#commands">Εντολές</a></li>
+    </ul>
+    <hr />
+    <h3 id="εγκατάσταση">Εγκατάσταση</h3>
+    <h6
+      id="θα-χρειαστείτε-μια-λειτουργική-εγκατάσταση-του-git.-το-git-flow-λειτουργεί-σε-osx-linux-και-windows."
+    >
+      Θα χρειαστείτε μια λειτουργική εγκατάσταση του Git. Το Git flow λειτουργεί
+      σε OSX, Linux και Windows.
+    </h6>
+    <h5 id="osx-homebrew">OSX Homebrew:</h5>
+    <pre><code>$ brew install git-flow</code></pre>
+    <h5 id="osx-macports">OSX Macports:</h5>
+    <pre><code>$ port install git-flow</code></pre>
+    <h5 id="linux-βασιζόμενο-σε-debian">Linux (βασιζόμενο σε Debian):</h5>
+    <pre><code>$ apt-get install git-flow</code></pre>
+    <h5 id="windows-cygwin">Windows (Cygwin):</h5>
+    <h6
+      id="χρειάζεστε-το-wget-και-το-util-linux-για-να-εγκαταστήσετε-το-git-flow."
+    >
+      Χρειάζεστε το wget και το util-linux για να εγκαταστήσετε το git-flow.
+    </h6>
+    <pre><code>$ wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/develop/contrib/gitflow-installer.sh | bash</code></pre>
+    <hr />
+    <h3 id="ξεκινώντας">Ξεκινώντας</h3>
+    <h6
+      id="το-git-flow-πρέπει-να-αρχικοποιηθεί-ώστε-να-προσαρμόσει-το-project-σας.-ξεκινήστε-να-χρησιμοποιείτε-το-git-flow-αρχικοποιώντας-το-σε-ένα-ήδη-υπάρχον-git-αποθετήριο"
+    >
+      Το Git flow πρέπει να αρχικοποιηθεί ώστε να προσαρμόσει το project σας.
+      Ξεκινήστε να χρησιμοποιείτε το git-flow αρχικοποιώντας το σε ένα ήδη
+      υπάρχον git αποθετήριο:
+    </h6>
+    <h5 id="αρχικοποίηση">Αρχικοποίηση:</h5>
+    <h6
+      id="θα-χρειαστεί-να-απαντήσετε-σε-μερικές-ερωτήσεις-σχετικά-με-τις-συμβάσεις-ονοματοδοσίας-των-διαδλαδώσεών-σας.-προτείνεται-να-χρησιμοποιήσετε-τις-προκαθορισμένες-τιμές."
+    >
+      Θα χρειαστεί να απαντήσετε σε μερικές ερωτήσεις σχετικά με τις συμβάσεις
+      ονοματοδοσίας των διαδλαδώσεών σας. Προτείνεται να χρησιμοποιήσετε τις
+      προκαθορισμένες τιμές.
+    </h6>
+    <pre><code>git flow init</code></pre>
+    <hr />
+    <h3 id="χαρακτηριστικά">Χαρακτηριστικά</h3>
+    <h6
+      id="ανάπτυξη-νέων-χαρακτηριστικών-για-τα-επερχόμενα-releases.-συνήθως-υπάρχουν-μόνο-σε-αποθετήρια-ανάπτυξης-develop."
+    >
+      Ανάπτυξη νέων χαρακτηριστικών για τα επερχόμενα releases. Συνήθως υπάρχουν
+      μόνο σε αποθετήρια ανάπτυξης (develop).
+    </h6>
+    <h5 id="ξεκινήστε-ένα-νέο-χαρακτηριστικό">
+      Ξεκινήστε ένα νέο χαρακτηριστικό:
+    </h5>
+    <h6
+      id="αυτή-η-ενέργεια-δημιουργεί-μία-νέα-διακλάδωση-για-το-χαρακτηριστικό-βασιζόμενη-στη-develop-και-πηγαίνει-σε-αυτή."
+    >
+      Αυτή η ενέργεια δημιουργεί μία νέα διακλάδωση για το χαρακτηριστικό
+      βασιζόμενη στη ‘develop’ και “πηγαίνει” σε αυτή.
+    </h6>
+    <pre><code>git flow feature start MYFEATURE</code></pre>
+    <h5 id="τελειώστε-ένα-χαρακτηριστικό">Τελειώστε ένα χαρακτηριστικό:</h5>
+    <h6
+      id="τελειώστε-την-ανάπτυξη-του-χαρακτηριστικού.-αυτή-η-ενέργει-εκτελεί-τα-ακόλουθα"
+    >
+      Τελειώστε την ανάπτυξη του χαρακτηριστικού. Αυτή η ενέργει εκτελεί τα
+      ακόλουθα:
+    </h6>
+    <h6 id="συγχώνευση-του-myfeature-στο-develop.">
+      1) Συγχώνευση του MYFEATURE στο ‘develop’.
+    </h6>
+    <h6 id="διαγράφει-τη-διακλάδωση-myfeature.">
+      2) Διαγράφει τη διακλάδωση MYFEATURE.
+    </h6>
+    <h6 id="πηγαίνει-πίσω-στη-διακλάδωση-develop">
+      3) Πηγαίνει πίσω στη διακλάδωση ‘develop’
+    </h6>
+    <pre><code>git flow feature finish MYFEATURE</code></pre>
+    <h5 id="δημοσίευση-ενός-χαρακτηριστικού">
+      Δημοσίευση ενός χαρακτηριστικού:
+    </h5>
+    <h6
+      id="αναπτύσσετε-ένα-χαρακτηριστικό-μαζί-με-άλλους-δημοσιεύστε-το-χαρακτηριστικό-αυτό-σε-έναν-απομεκρυσμένο-διακομιστή-ώστε-να-χρησιμοποιηθεί-και-από-άλλους-χρήστες."
+    >
+      Αναπτύσσετε ένα χαρακτηριστικό μαζί με άλλους; Δημοσιεύστε το
+      χαρακτηριστικό αυτό σε έναν απομεκρυσμένο διακομιστή ώστε να
+      χρησιμοποιηθεί και από άλλους χρήστες.
+    </h6>
+    <pre><code>git flow feature publish MYFEATURE</code></pre>
+    <h5 id="παίρνοντας-ένα-δημοσιευμένο-χαρακτηριστικό">
+      Παίρνοντας ένα δημοσιευμένο χαρακτηριστικό:
+    </h5>
+    <h6 id="πάρτε-ένα-χαρακτηριστικό-δημοσιευμένο-από-έναν-άλλο-χρήστη.">
+      Πάρτε ένα χαρακτηριστικό δημοσιευμένο από έναν άλλο χρήστη.
+    </h6>
+    <pre><code>git flow feature pull origin MYFEATURE</code></pre>
+    <h5 id="παρακολούθηση-ενός-χαρακτηριστικού">
+      Παρακολούθηση ενός χαρακτηριστικού:
+    </h5>
+    <h6 id="μπορείτε-να-παρακολουθήσετε-ένα-χαρακτηριστικό-χρήσιμοποιώντας">
+      Μπορείτε να παρακολουθήσετε ένα χαρακτηριστικό χρήσιμοποιώντας
+    </h6>
+    <pre><code>git flow feature track MYFEATURE</code></pre>
+    <hr />
+    <h3 id="κάνοντας-ένα-release">Κάνοντας ένα Release</h3>
+    <h6
+      id="προετοιμασία-μιας-νέας-έκδοσης-production.-υπάρχει-το-περιθώριο-για-μικρές-διορθώσεις-σφαλμάτων-και-την-προετοιμασία-των-μετα-δεδομένων-για-το-release"
+    >
+      Προετοιμασία μιας νέας έκδοσης production. Υπάρχει το περιθώριο για μικρές
+      διορθώσεις σφαλμάτων και την προετοιμασία των μετα-δεδομένων για το
+      release
+    </h6>
+    <h5 id="ξεκινώντας-ένα-release">Ξεκινώντας ένα release:</h5>
+    <h6
+      id="για-να-ξεκινήσετε-ένα-release-χρησιμοποιείστε-την-εντολή-release-του-git-flow.-δημιουργεί-μία-νέα-release-διακλάδωση-βασιζόμενη-στην-develop.-προαιρετικά-μπορείτε-να-χρησιμοποιήσετε-ένα-base-commit-sha-1-hash-από-όπου-θα-ξεκινήσει-το-release.-αυτό-το-commit-πρέπει-να-είναι-στη-διακλάδωση-develop."
+    >
+      Για να ξεκινήσετε ένα release, χρησιμοποιείστε την εντολή release του git
+      flow. Δημιουργεί μία νέα ‘release’ διακλάδωση βασιζόμενη στην ‘develop’.
+      Προαιρετικά μπορείτε να χρησιμοποιήσετε ένα [BASE] commit sha-1 hash από
+      όπου θα ξεκινήσει το release. Αυτό το commit πρέπει να είναι στη
+      διακλάδωση ‘develop’.
+    </h6>
+    <pre><code>git flow release start RELEASE [BASE]</code></pre>
+    <h6
+      id="είναι-σοφό-να-δημοσιεύσετε-τη-διακλάδωση-release-μετά-τη-δημιουργία-της-ώστε-να-επιτρέψετε-να-την-δουν-κ-άλλοι-προγραμματιστές.-γίνεται-παρόμοια-με-την-εντολή-δημοσίευσης-του-feature"
+    >
+      Είναι σοφό να δημοσιεύσετε τη διακλάδωση release μετά τη δημιουργία της
+      ώστε να επιτρέψετε να την δουν κ άλλοι προγραμματιστές. Γίνεται παρόμοια
+      με την εντολή δημοσίευσης του ‘feature’:
+    </h6>
+    <pre><code>git flow release publish RELEASE</code></pre>
+    <h6 id="μπορείτε-να-παρακολουθήσετε-ένα-απομακρυσμένο-release-με-το">
+      (Μπορείτε να παρακολουθήσετε ένα απομακρυσμένο release με το:
+    </h6>
+    <pre><code>git flow release track RELEASE</code></pre>
+    <h5 id="τελειώνοντας-ένα-release">Τελειώνοντας ένα release:</h5>
+    <h6
+      id="το-τελείωμα-ενός-release-είναι-ένα-από-τα-μεγαλύτερα-βήματα-στο-git-branching.-εκτελούνται-τα-ακόλουθα-βήματα"
+    >
+      Το τελείωμα ενός release είναι ένα από τα μεγαλύτερα βήματα στο git
+      branching. Εκτελούνται τα ακόλουθα βήματα:
+    </h6>
+    <h6 id="συγχώνευση-της-διακλάδωσης-του-release-πίσω-στο-master">
+      1) Συγχώνευση της διακλάδωσης του release πίσω στο ‘master’
+    </h6>
+    <h6 id="βάζει-ετικέτα-στο-release-με-το-όνομά-της">
+      2) Βάζει ετικέτα στο release με το όνομά της
+    </h6>
+    <h6 id="συγχωνεύει-πίσω-στο-develop-το-realease">
+      3) Συγχωνεύει πίσω στο ‘develop’ το realease
+    </h6>
+    <h6 id="διαγράφει-τη-διακλάδωση-του-release">
+      4) Διαγράφει τη διακλάδωση του release
+    </h6>
+    <pre><code>git flow release finish RELEASE</code></pre>
+    <h6
+      id="μην-ξεχάσετε-να-κάνετε-push-τις-ετικέτες-σας-με-την-εντολή-git-push---tags"
+    >
+      Μην ξεχάσετε να κάνετε push τις ετικέτες σας με την εντολή
+      <code>git push --tags</code>
+    </h6>
+    <hr />
+    <h3 id="hotfixes">Hotfixes</h3>
+    <h6
+      id="οι-επείγουσες-επιδιορθώσεις-προκύπτουν-από-την-ανάγκη-να-ενεργήσει-κάποιος-αμέσως-μετά-από-μία-ανεπιθύμητη-κατάσταση-μιας-έκδοσης-που-τρέχει-σε-production.-μπορεί-να-διακλαδωθεί-από-μία-ετικέτα-στη-master-διακλάδωση-που-σηματοδοτεί-την-production-έκδοση."
+    >
+      Οι επείγουσες επιδιορθώσεις προκύπτουν από την ανάγκη να ενεργήσει κάποιος
+      αμέσως μετά από μία ανεπιθύμητη κατάσταση μιας έκδοσης που τρέχει σε
+      production. Μπορεί να διακλαδωθεί από μία ετικέτα στη ‘master’ διακλάδωση
+      που σηματοδοτεί την production έκδοση.
+    </h6>
+    <h5 id="ξεκινώντας-τo-git-flow-hotfix">Ξεκινώντας τo Git flow hotfix:</h5>
+    <h6
+      id="όπως-και-με-όλες-τις-άλλες-εντολές-του-git-flow-ένα-hotfix-ξεκινά-με"
+    >
+      Όπως και με όλες τις άλλες εντολές του git flow, ένα hotfix ξεκινά με
+    </h6>
+    <pre><code>$ git flow hotfix start VERSION [BASENAME]</code></pre>
+    <h6
+      id="η-έκδοση-σηματοδοτεί-το-νέο-όνομα-του-release-μαζί-με-το-hotfix.-προειρετικά-μπορείτε-να-ορίσετε-ένα-όνομα-που-να-ξεκινάει-με-αυτό-basename."
+    >
+      Η έκδοση σηματοδοτεί το νέο όνομα του release μαζί με το hotfix.
+      Προειρετικά μπορείτε να ορίσετε ένα όνομα που να ξεκινάει με αυτό
+      (basename).
+    </h6>
+    <h5 id="τελειώνοντας-ένα-hotfix">Τελειώνοντας ένα hotfix:</h5>
+    <h6
+      id="τελειώνοντας-ένα-hotfix-γίνεται-συγχώνευση-πίσω-στο-develop-και-στο-master.-επιπλέον-στο-master-δημιουργείται-μία-ετικέτα-με-την-έκδοση-του-hotfix"
+    >
+      Τελειώνοντας ένα hotfix γίνεται συγχώνευση πίσω στο develop και στο
+      master. Επιπλέον στο master δημιουργείται μία ετικέτα με την έκδοση του
+      hotfix
+    </h6>
+    <pre><code>git flow hotfix finish VERSION</code></pre>
+    <hr />
+    <h3 id="εντολές">Εντολές</h3>
+    <p align="center">
+      <img
+        alt="Git"
+        src="../Img/git-flow-commands.png"
+        height="270"
+        width="460"
+      />
+    </p>
+    <hr />
+    <h3 id="το-σχήμα-του-git-flow">Το σχήμα του Git flow</h3>
+    <p align="center">
+      <img alt="Git" src="../Img/git-flow-commands-without-flow.png" />
+    </p>
+    <hr />
+  </body>
+</html>

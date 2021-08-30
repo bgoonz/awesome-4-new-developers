@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <!--lint disable double-link-->
+    <h1 id="awesome-seed-rs-awesome">
+      Awesome Seed RS
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <p align="center">
+      <a href="https://seed-rs.org/">
+        <img
+          src="https://raw.githubusercontent.com/seed-rs/seed-rs.org/81ed1acc77062ede3295683f21f2d39611843192/seed_branding/seed_logo.min.svg"
+          width="256"
+          title="Seed logo"
+        />
+      </a>
+    </p>
+    <blockquote>
+      <p>A curated list of awesome things related to Seed</p>
+    </blockquote>
+    <p>
+      <a href="https://seed-rs.org/">Seed</a> is an open-source Rust framework
+      for creating fast and reliable web apps running in WebAssembly.
+    </p>
+    <p>
+      Contributions welcome. Add links through pull requests or create an issue
+      to start a discussion.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#official-resources">Official Resources</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#quickstarts">Quickstarts</a></li>
+      <li><a href="#bundlers">Bundlers</a></li>
+      <li><a href="#examples">Examples</a></li>
+      <li><a href="#projects-using-seed">Projects Using Seed</a></li>
+      <li><a href="#libraries">Libraries</a></li>
+      <li><a href="#contribute">Contribute</a></li>
+    </ul>
+    <h2 id="official-resources">Official Resources</h2>
+    <ul>
+      <li><a href="https://seed-rs.org/">Homepage</a></li>
+      <li><a href="https://github.com/seed-rs/seed">GitHub repo</a></li>
+      <li><a href="https://seed.discourse.group">Forum</a></li>
+      <li><a href="https://discord.gg/JHHcHp5">Chat</a></li>
+    </ul>
+    <h2 id="books">Books</h2>
+    <ul>
+      <li>
+        <a href="https://erwabook.com/">Engineering Rust Web Applications</a> -
+        Diesel, Rocket and Seed.
+      </li>
+      <li>
+        <a
+          href="https://slowtec.de/posts/2019-12-20-porting-javascript-to-rust-part-1.html"
+          >Porting a JS app to Rust</a
+        >
+        - Porting a JavaScript App to WebAssembly with Rust (blog series).
+      </li>
+    </ul>
+    <h2 id="quickstarts">Quickstarts</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/seed-rs/seed-quickstart"
+          >Default quickstart</a
+        >
+        - Contains only Rust libraries.
+      </li>
+      <li>
+        <a href="https://github.com/seed-rs/seed-quickstart-webpack"
+          >Quickstart with Webpack</a
+        >
+        - Main features: Auto-reload, Prerendering, Minification,
+        <a href="https://tailwindcss.com/">TailwindCSS</a>, Typescript.
+      </li>
+    </ul>
+    <h2 id="bundlers">Bundlers</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/thedodd/trunk">Trunk</a> - WASM web
+        application bundler for Rust.
+      </li>
+      <li>
+        <a href="https://github.com/panoptix-za/web-bundler">Web Bundler</a> -
+        Bundles a Seed SPA for publishing.
+      </li>
+      <li>
+        <a href="https://github.com/MartinKavik/seeder">Seeder</a> - Set up Seed
+        app and start dev server by running one command.
+      </li>
+    </ul>
+    <h2 id="examples">Examples</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/seed-rs/seed-rs-realworld"
+          >RealWorld example</a
+        >
+        - “The mother of all demo apps” — Exemplary fullstack
+        <a href="https://medium.com/">Medium.com</a> clone.
+      </li>
+      <li>
+        <a href="https://github.com/MartinKavik/seed-realworld-darklang"
+          >Dark lang Realworld</a
+        >
+        - Seed Realworld example on <em>Quickstart with Webpack</em> with
+        integrated <a href="https://darklang.com/">Dark lang</a> Realworld.
+      </li>
+      <li>
+        <a href="https://github.com/seed-rs/seed/tree/master/examples"
+          >Official examples</a
+        >
+        - Smaller examples included in official repo.
+      </li>
+      <li>
+        <a href="https://github.com/seed-rs/erwa_mytodo">ERWA mytodo</a> - Rust
+        full-stack example. Diesel, Rocket, Seed.
+      </li>
+      <li>
+        <a href="https://gitlab.com/liketechnik/local-gui-seed-gotham"
+          >Template for GUIs with seed+gotham</a
+        >
+        - Electron like template for local/desktop GUIs with Gotham, rust-embed,
+        web-view and Seed.
+      </li>
+      <li>
+        <a href="https://github.com/arn-the-long-beard/seeded_game_of_life"
+          >Seeded Game of Life</a
+        >
+        - Game of life with
+        <a
+          href="https://dev.to/arnthelongbeard/how-to-only-rust-for-web-frontend-1026"
+          >tutorial</a
+        >
+        in pure Rust inspired by
+        <a href="https://rustwasm.github.io/docs/book/">wasm tutorial</a>.
+      </li>
+      <li>
+        <a href="https://github.com/warycat/dotawasm"
+          >Dota Underlord Perfect Build</a
+        >
+        - An app to help build optimal deck in Dota Underlord.
+      </li>
+      <li>
+        <a href="https://ide.play-seed.dev">Play Seed</a> - Playground with
+        several default examples.
+      </li>
+    </ul>
+    <h2 id="projects-using-seed">Projects Using Seed</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/adexnetwork/adex-explorer">AdEx Explorer</a>
+        - Shows curated information about the payment channel network of the
+        AdEx advertising protocol.
+      </li>
+      <li>
+        <a href="https://github.com/MartinKavik/kavik.cz">Kavik.cz</a> -
+        Open-source personal website.
+      </li>
+      <li>
+        <a href="https://github.com/AlterionX/benxu-dev">benxu.dev/blog</a> - A
+        relatively simple open source personal blog. Built on
+        <a href="https://seed-rs.org/"><code>Seed</code></a
+        >, <a href="https://maud.lambda.xyz"><code>maud</code></a
+        >, <a href="https://rocket.rs"><code>Rocket</code></a
+        >, and <a href="https://diesel.rs"><code>Diesel</code></a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/seed-rs/seed-rs.org">seed-rs.org</a> -
+        Seed’s official website.
+      </li>
+      <li>
+        <a href="https://gitlab.com/mkroehnert/weightrs">WeightRS</a> -
+        Minimalistic and privacy friendly progressive web app for tracking your
+        weight.
+      </li>
+      <li>
+        <a href="https://github.com/ethanboxx/planters-rdconf-hackathon-project"
+          >Music composer</a
+        >
+        - A basic music composition app.
+      </li>
+      <li>
+        <a href="https://play-seed.dev">Play Seed</a> - Website about Play Seed,
+        playground to demo Seed apps.
+      </li>
+      <li>
+        <a href="https://typesync.rutrum.net">Typesync</a> - Test your typing
+        speed on song lyrics. Uses
+        <a href="https://seed-rs.org/"><code>Seed</code></a
+        >, <a href="https://rocket.rs"><code>Rocket</code></a
+        >, and <a href="https://diesel.rs"><code>Diesel</code></a
+        >.
+      </li>
+      <li>
+        <a href="https://divykj.github.io/CalcuPi">CalcuPi</a> - A beautiful
+        Monte Carlo simulation for approximating the value of pi.
+      </li>
+      <li>
+        <a href="https://www.fosskers.ca/en/tools/love-letter"
+          >Love Letter Tracker</a
+        >
+        - A knowledge tracker for the card game <em>Love Letter</em>.
+      </li>
+      <li>
+        <a href="https://whatlang.org/">Whatlang.org</a> - An interactive demo
+        for whatlang (language recognition library).
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <ul>
+      <li>
+        <a href="https://gitlab.com/MAlrusayni/savory">Savory</a> - Library for
+        building user interface based on Seed.
+      </li>
+      <li>
+        <a href="https://crates.io/crates/seed-icons">seed-icons</a> - Library
+        with collections of icons to include in Seed-based application.
+      </li>
+      <li>
+        <a href="https://github.com/panoptix-za/seed-bootstrap"
+          >Seed Bootstrap</a
+        >
+        - A collection of the
+        <a href="https://getbootstrap.com/">Bootstrap</a> CSS components.
+      </li>
+      <li>
+        <a href="https://github.com/mh84/seed_heroicons">seed_heroicons</a> -
+        Library providing <a href="https://heroicons.com/">Heroicons</a> to
+        include into Seed-based applications.
+      </li>
+    </ul>
+    <h2 id="contribute">Contribute</h2>
+    <p>
+      Contributions welcome! Read the
+      <a href="contributing.md">contribution guidelines</a> first.
+    </p>
+  </body>
+</html>

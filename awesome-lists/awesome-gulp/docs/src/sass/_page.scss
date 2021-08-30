@@ -1,0 +1,101 @@
+/**
+* See https://github.com/google/material-design-lite/blob/master/templates/article/styles.css
+*/
+
+a {
+  color: #303f9f;
+  text-decoration: none;
+}
+
+blockquote {
+  margin: 0;
+  padding: 0 15px;
+  border-left: 4px solid #ddd;
+  &:before,
+  &:after {
+    content: "";
+    margin: 0;
+  }
+}
+
+.mdl-layout-title {
+  & > a {
+    color: #424242 !important;
+  }
+}
+
+.mdl-ribbon {
+  width: 100%;
+  height: 40vh;
+  background-color: #514a9d;
+  background: -webkit-linear-gradient(0deg, #303f9f 10%, #9c27b0 90%);
+  background: linear-gradient(90deg, #303f9f 10%, #9c27b0 90%);
+  flex-shrink: 0;
+}
+
+.mdl-main {
+  margin-top: -35vh;
+  flex-shrink: 0;
+}
+
+.mdl-header {
+  .mdl-layout__header-row {
+    padding-left: 0;
+  }
+}
+
+.mdl-container {
+  max-width: 1600px;
+  width: calc(100% - 16px);
+  margin: 0 auto;
+}
+
+.mdl-layout.is-small-screen {
+  .mdl-content {
+    padding: 40px 28px;
+  }
+}
+
+.mdl-content {
+  border-radius: 2px;
+  padding: 30px 45px;
+  margin-bottom: 80px;
+
+  h1 {
+    font-size: 30px;
+    line-height: normal;
+  }
+  h2 {
+    font-size: 26px;
+    line-height: normal;
+  }
+  h3 {
+    font-size: 18px;
+    line-height: normal;
+  }
+  h4 {
+    font-size: 16px;
+    line-height: normal;
+  }
+}
+
+.mdl-footer {
+  padding-left: 40px;
+  .mdl-mini-footer--link-list {
+    a {
+      font-size: 13px;
+    }
+  }
+}
+
+.mdl-layout-logo {
+  width: 100px;
+}
+
+.icon {
+  color: #424242;
+}
+
+.icon-large {
+  font-size: 32px;
+}

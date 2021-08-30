@@ -1,0 +1,2 @@
+https://bitwarden.com,https://bitwarden.com,https://github.com/thangchung/awesome-dotnet-core#readme,Core error: <HTTPError 403: 'Forbidden'> | reason: Forbidden
+https://builtwithdot.net,BuiltWithDot.Net,https://github.com/thangchung/awesome-dotnet-core#readme,Core error: timeout('The read operation timed out') | reason: 

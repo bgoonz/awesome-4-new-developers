@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="советы-по-jquery-которые-должен-знать-каждый-awesome">
+      Советы по jQuery, которые должен знать каждый
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>Коллекция простых советов, чтобы помочь вашей работе с jQuery.</p>
+    <blockquote>
+      <p>
+        Другие прекрасные списки, за которыми следит
+        <span class="citation" data-cites="sindresorhus">[@sindresorhus]</span
+        >(https://github.com/sindresorhus/~~HEAD=dobj), можно увидеть
+        <a href="https://github.com/sindresorhus/awesome/">здесь</a>.
+      </p>
+    </blockquote>
+    <div id="table-of-contents"></div>
+    <h2 id="содержание">Содержание</h2>
+    <ul>
+      <li><a href="#Советы">Советы</a></li>
+      <li><a href="#Поддержка">Поддержка</a></li>
+      <li><a href="../../CONTRIBUTING.md">Как сделать вклад</a></li>
+    </ul>
+    <h2 id="советы">Советы</h2>
+    <ol type="1">
+      <li>
+        <a href="#use-noconflict">Используйте <code>noConflict()</code></a>
+      </li>
+      <li>
+        <a href="#checking-if-jquery-loaded">Проверка готовности jQuery</a>
+      </li>
+      <li>
+        <a href="#check-whether-an-element-exists"
+          >проверить, существует ли элемент</a
+        >
+      </li>
+      <li>
+        <a href="#use-on-binding-instead-of-click"
+          >Используйте <code>.on()</code> вместо <code>.click()</code></a
+        >
+      </li>
+      <li><a href="#back-to-top-button">Кнопка “вернуться к началу”</a></li>
+      <li>
+        <a href="#preload-images">Предварительная загрузка изображений</a>
+      </li>
+      <li>
+        <a href="#checking-if-images-are-loaded"
+          >Проверка, загружаются ли изображения</a
+        >
+      </li>
+      <li>
+        <a href="#fix-broken-images-automatically"
+          >Автоматическое исправление сломанных изображений</a
+        >
+      </li>
+      <li><a href="#post-a-form-with-ajax">Дать форму с помощью AJAX</a></li>
+      <li>
+        <a href="#toggle-classes-on-hover">Переключение классов по наведению</a>
+      </li>
+      <li><a href="#disabling-input-fields">Отключение поля ввода</a></li>
+      <li>
+        <a href="#stop-the-loading-of-links">Прерывание загрузки ссылки</a>
+      </li>
+      <li>
+        <a href="#cache-jquery-selectors">Кэширование селекторов jQuery</a>
+      </li>
+      <li><a href="#toggle-fadeslide">Переключение fade/slide</a></li>
+      <li><a href="#simple-accordion">Простой аккордеон</a></li>
+      <li>
+        <a href="#make-two-divs-the-same-height"
+          >Сделать два элемента div одинаковой высотой</a
+        >
+      </li>
+      <li>
+        <a href="#open-external-links-in-new-tabwindow"
+          >Открывать внешние ссылки в новой вкладке или новом окне</a
+        >
+      </li>
+      <li><a href="#find-element-by-text">Найти элемент по тексту</a></li>
+      <li>
+        <a href="#trigger-on-visibility-change"
+          >Запуск по изменению видимости</a
+        >
+      </li>
+      <li>
+        <a href="#ajax-call-error-handling">Обработка ошибок в AJAX-запросах</a>
+      </li>
+      <li><a href="#chain-plugin-calls">Цепочка вызовов плагинов</a></li>
+      <li>
+        <a href="#sort-list-items-alphabetically"
+          >Сортировка элементов списка по алфавиту</a
+        >
+      </li>
+      <li><a href="#disable-right-click">Отключить правую кнопку мыши</a></li>
+    </ol>
+    <div id="use-noconflict"></div>
+    <h3 id="используйте-noconflict">Используйте <code>noConflict()</code></h3>
+    <p>
+      Асимвол <code>$</code>, используемый jQuery, также используется другими
+      библиотеками JavaScript. Чтобы гарантировать, что jQuery не конфликтует с
+      объектом <code>$</code> из разных библиотек, используйте метод
+      <code>noConflict()</code> в начале документа:
+    </p>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="va">jQuery</span>.<span class="at">noConflict</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      Теперь вы ссылаетесь на объект jQuery, используя имя переменной
+      <code>jQuery</code> вместо <code>$</code> (например,
+      <code>jQuery('div p').hide()</code>). Если у вас несколько версий jQuery
+      на одной странице, вы можете использовать <code>noConflict ()</code> для
+      установки псевдонима для определенной версии:
+    </p>
+    <div class="sourceCode" id="cb2">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">let</span> $x <span class="op">=</span> <span class="va">jQuery</span>.<span class="at">noConflict</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="checking-if-jquery-loaded"></div>
+    <h3 id="проверка-готовности-jquery">Проверка готовности jQuery</h3>
+    <p>
+      Перед тем, как сделать что-нибудь с помощью jQuery, необходимо убедиться в
+      том, что он загружен:
+    </p>
+    <div class="sourceCode" id="cb3">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="cf">if</span> (<span class="kw">typeof</span> jQuery <span class="op">==</span> <span class="st">&#39;undefined&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;jQuery hasn</span><span class="sc">\&#39;</span><span class="st">t loaded&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;jQuery has loaded&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">}</span></a></code></pre>
+    </div>
+    <p>Теперь вы можете продолжать …</p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="check-whether-an-element-exists"></div>
+    <h3 id="cпроверить-существует-ли-элемент">
+      Cпроверить, существует ли элемент
+    </h3>
+    <p>
+      Прежде чем использовать элемент HTML, необходимо убедиться, что он
+      является частью DOM.
+    </p>
+    <div class="sourceCode" id="cb4">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="cf">if</span> (<span class="at">$</span>(<span class="st">&quot;#selector&quot;</span>).<span class="at">length</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="co">//сделать что-то с элементом</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="op">}</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="use-on-binding-instead-of-click"></div>
+    <h3 id="используйте-.on-вместо-.click">
+      Используйте <code>.on()</code> вместо <code>.click()</code>
+    </h3>
+    <p>
+      Использование <code>.on()</code> дает ряд преимуществ по сравнению с
+      использованием <code>.click()</code>, например, возможность добавлять
+      несколько событий…
+    </p>
+    <div class="sourceCode" id="cb5">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1">.<span class="at">on</span>(<span class="st">&#39;click tap hover&#39;</span>)</a></code></pre>
+    </div>
+    <p>
+      …привязка применяется к динамически создаваемым элементам (нет
+      необходимости вручную связывать каждый отдельный элемент, динамически
+      добавленный к DOM)…
+    </p>
+    <p>…и возможность установить пространство имен:</p>
+    <div class="sourceCode" id="cb6">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1">.<span class="at">on</span>(<span class="st">&#39;click.menuOpening&#39;</span>)</a></code></pre>
+    </div>
+    <p>
+      Пространства имен дают вам возможность отключать привязку к конкретному
+      событию (например, <code>.off('click.menuOpening')</code>).
+    </p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="back-to-top-button"></div>
+    <h3 id="кнопка-вернуться-к-началу">Кнопка “вернуться к началу”</h3>
+    <p>
+      С помощью методов <code>animate</code> и <code>scrollTop</code> в jQuery
+      вам не нужен плагин, чтобы создать простую анимацию прокрутки вверх:
+    </p>
+    <div class="sourceCode" id="cb7">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">// Вернуться к началу</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="at">$</span>(<span class="st">&#39;.container&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="st">&#39;.back-to-top&#39;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="at">$</span>(<span class="st">&#39;html, body&#39;</span>).<span class="at">animate</span>(<span class="op">{</span><span class="dt">scrollTop</span><span class="op">:</span> <span class="dv">0</span><span class="op">},</span> <span class="dv">800</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb8">
+      <pre
+        class="sourceCode html"
+      ><code class="sourceCode html"><a class="sourceLine" id="cb8-1" title="1"><span class="co">&lt;!-- Создаем элемент anchor --&gt;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;top&quot;</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="kw">&gt;</span>Back to top<span class="kw">&lt;/a&gt;</span></a></code></pre>
+    </div>
+    <p>
+      Изменение значения <code>scrollTop</code> изменяет место, на котором
+      прокрутка остановится. Все, что вы действительно делаете, это прокрутка
+      документа на протяжении 800 миллисекунд, пока мы не окажемся в верхней
+      части документа.
+    </p>
+    <p>
+      <strong>Примечание:</strong> Обратите внимание на некоторое
+      <a href="https://github.com/jquery/api.jquery.com/issues/417"
+        >неправильное поведение</a
+      >
+      <code>scrollTop</code>.
+    </p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="preload-images"></div>
+    <h3 id="предварительная-загрузка-изображений">
+      Предварительная загрузка изображений
+    </h3>
+    <p>
+      Если ваш веб-страница использует много изображений, которые не видны
+      изначально (например, появлюятся при наведении курсора мыши), имеет смысл
+      предварительно загрузить их:
+    </p>
+    <div class="sourceCode" id="cb9">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="va">$</span>.<span class="at">preloadImages</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="kw">arguments</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="at">$</span>(<span class="st">&#39;&lt;img&gt;&#39;</span>).<span class="at">attr</span>(<span class="st">&#39;src&#39;</span><span class="op">,</span> <span class="kw">arguments</span>[i])<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="op">};</span></a>
+<a class="sourceLine" id="cb9-6" title="6"></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="va">$</span>.<span class="at">preloadImages</span>(<span class="st">&#39;img/hover-on.png&#39;</span><span class="op">,</span> <span class="st">&#39;img/hover-off.png&#39;</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="checking-if-images-are-loaded"></div>
+    <h3 id="проверка-загружаются-ли-изображения">
+      Проверка, загружаются ли изображения
+    </h3>
+    <p>
+      Иногда вам может понадобиться проверка того, что ваши изображения
+      полностью загружены, перед тем как вы продолжите работу своего скрипта:
+    </p>
+    <div class="sourceCode" id="cb10">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="at">$</span>(<span class="st">&#39;img&#39;</span>).<span class="at">on</span>(<span class="st">&#39;load&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;image load successful&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      Вы также можете проверить, если одно конкретное изображение загружено,
+      заменив тег <code>&lt;img&gt;</code> на идентификатор или класс.
+    </p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="fix-broken-images-automatically"></div>
+    <h3 id="автоматическое-исправление-сломанных-изображений">
+      Автоматическое исправление сломанных изображений
+    </h3>
+    <p>
+      Если вам посчастливилось найти неработающие ссылки на изображения на вашем
+      сайте, замена их по одной может утомить. Этот простой фрагмент кода
+      поможет избежать этой головной боли:
+    </p>
+    <div class="sourceCode" id="cb11">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="at">$</span>(<span class="st">&#39;img&#39;</span>).<span class="at">on</span>(<span class="st">&#39;error&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="cf">if</span>(<span class="op">!</span><span class="at">$</span>(<span class="kw">this</span>).<span class="at">hasClass</span>(<span class="st">&#39;broken-image&#39;</span>)) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-3" title="3">    <span class="at">$</span>(<span class="kw">this</span>).<span class="at">prop</span>(<span class="st">&#39;src&#39;</span><span class="op">,</span> <span class="st">&#39;img/broken.png&#39;</span>).<span class="at">addClass</span>(<span class="st">&#39;broken-image&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      В качестве альтернативы, если вы хотите просто скрыть сломанные
+      изображения этот фрагмент будет заботиться о том, что для:
+    </p>
+    <div class="sourceCode" id="cb12">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="at">$</span>(<span class="st">&#39;img&#39;</span>).<span class="at">on</span>(<span class="st">&#39;error&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="at">$</span>(<span class="kw">this</span>).<span class="at">hide</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="post-a-form-with-ajax"></div>
+    <h3 id="дать-форму-с-помощью-ajax">Дать форму с помощью AJAX</h3>
+    <p>
+      методы JQuery AJAX являются распространенным способом запросить текст,
+      HTML, XML или JSON. Если вы хотите отправить форму через AJAX можно
+      собирать пользовательские входные данные через <code>val()</code> метода:
+    </p>
+    <div class="sourceCode" id="cb13">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="va">$</span>.<span class="at">post</span>(<span class="st">&#39;sign_up.php&#39;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="dt">user_name</span><span class="op">:</span> <span class="at">$</span>(<span class="st">&#39;input[name=user_name]&#39;</span>).<span class="at">val</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="dt">email</span><span class="op">:</span>     <span class="at">$</span>(<span class="st">&#39;input[name=email]&#39;</span>).<span class="at">val</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb13-4" title="4">  <span class="dt">password</span><span class="op">:</span>  <span class="at">$</span>(<span class="st">&#39;input[name=password]&#39;</span>).<span class="at">val</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      Тем не менее, все эти <code>val()</code> звонки стоят дорого. Лучший
+      способ сбора данных, вводимых пользователем использует
+      <code>serialize()</code> функцию, которая собирает пользовательские
+      входные данные в виде строки:
+    </p>
+    <div class="sourceCode" id="cb14">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="va">$</span>.<span class="at">post</span>(<span class="st">&#39;sign_up&#39;</span><span class="op">,</span> <span class="at">$</span>(<span class="st">&#39;#sign-up-form&#39;</span>).<span class="at">serialize</span>())<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="toggle-classes-on-hover"></div>
+    <h3 id="переключение-классов-по-наведению">
+      Переключение классов по наведению
+    </h3>
+    <p>
+      Допустим, вы хотите изменить визуальный интерактивный элемент на странице,
+      когда пользователь наводит курсор над ним. Вы можете добавить класс к
+      вашему элементу, когда пользователь навел курсор; когда пользователь
+      уводит курсор, класс удаляется:
+    </p>
+    <div class="sourceCode" id="cb15">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="at">$</span>(<span class="st">&#39;.btn&#39;</span>).<span class="at">on</span>(<span class="st">&#39;hover&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="at">$</span>(<span class="kw">this</span>).<span class="at">addClass</span>(<span class="st">&#39;hover&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="op">},</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="at">$</span>(<span class="kw">this</span>).<span class="at">removeClass</span>(<span class="st">&#39;hover&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      Вам просто нужно добавить необходимые стили CSS. Если вы хотите
+      <em>упростить</em> логику, используйте метод <code>toggleClass</code>:
+    </p>
+    <div class="sourceCode" id="cb16">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="at">$</span>(<span class="st">&#39;.btn&#39;</span>).<span class="at">hover</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="at">$</span>(<span class="kw">this</span>).<span class="at">toggleClass</span>(<span class="st">&#39;hover&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <strong>Примечание:</strong> CSS может быть более быстрым решением в этом
+      случае, но вам по-прежнему стоит знать об этом.
+    </p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="disabling-input-fields"></div>
+    <h3 id="отключение-поля-ввода">Отключение поля ввода</h3>
+    <p>
+      Иногда вы можете захотеть отключить кнопку отправки формы или одно из его
+      текстовых полей, до тех пор, пока пользователь не выполнил определенное
+      действие (например, не отметил флаг “я прочитал условия”). Добавьте
+      атрибут <code>disabled</code> на ваше поле ввода, отключив его, когда вы
+      хотите:
+    </p>
+    <div class="sourceCode" id="cb17">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="at">$</span>(<span class="st">&#39;input[type=&quot;submit&quot;]&#39;</span>).<span class="at">prop</span>(<span class="st">&#39;disabled&#39;</span><span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      Все, что вам нужно сделать, чтобы включить поле обратно, это запустить
+      метод <code>prop</code> на том же поле ввода, но установить значение
+      <code>disabled</code> к <code>false</code>:
+    </p>
+    <div class="sourceCode" id="cb18">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="at">$</span>(<span class="st">&#39;input[type=&quot;submit&quot;]&#39;</span>).<span class="at">prop</span>(<span class="st">&#39;disabled&#39;</span><span class="op">,</span> <span class="kw">false</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="stop-the-loading-of-links"></div>
+    <h3 id="прерывание-загрузки-ссылки">Прерывание загрузки ссылки</h3>
+    <p>
+      Иногда вы не хотите, чтобы ссылки переводили пользователя на определенную
+      веб-страницу или перезагружали страницу; Вы можете хотеть, чтобы они
+      делали что-то еще, как спусковой крючок для какой-либо другого сценария.
+      Этот скрипт предотвратит действие по умолчанию:
+    </p>
+    <div class="sourceCode" id="cb19">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="at">$</span>(<span class="st">&#39;a.no-link&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-2" title="2">  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="cache-jquery-selectors"></div>
+    <h3 id="кэширование-селекторов-jquery">Кэширование селекторов jQuery</h3>
+    <p>
+      Подумайте, сколько раз вы пишете один и тот же селектор снова и снова в
+      любом проекте. Каждый <code>$('.element')</code> селектор ищет по всему
+      DOM каждый раз, независимо от того, был ли он использован раньше. Вместо
+      этого запустите селектор один раз и сохраните его результаты в переменной:
+    </p>
+    <div class="sourceCode" id="cb20">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">var</span> blocks <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;#blocks&#39;</span>).<span class="at">find</span>(<span class="st">&#39;li&#39;</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      Теперь вы можете использовать <code>blocks</code> переменную там, где вы
+      хотите, без необходимости выполнять поиск по DOM каждый раз:
+    </p>
+    <div class="sourceCode" id="cb21">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1"><span class="at">$</span>(<span class="st">&#39;#hideBlocks&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb21-2" title="2">  <span class="va">blocks</span>.<span class="at">fadeOut</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-4" title="4"></a>
+<a class="sourceLine" id="cb21-5" title="5"><span class="at">$</span>(<span class="st">&#39;#showBlocks&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb21-6" title="6">  <span class="va">blocks</span>.<span class="at">fadeIn</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-7" title="7"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      Кэширование jQuery селекторов позволяет получить выигрыш в
+      производительности.
+    </p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="toggle-fadeslide"></div>
+    <h3 id="переключение-fadeslide">Переключение fade/slide</h3>
+    <p>
+      Slide и fade являются часто используемыми действиями в анимации с jQuery.
+      Вы можете захотить, показать элемент, когда пользователь нажимает что-то,
+      что делает методы <code>fadeIn</code> и <code>slideDown</code> хорошо
+      подходящими. Но если вы хотите, чтобы этот элемент, появился на первый
+      щелчок, а затем исчез на второй, то этот скрипт будет работать просто
+      отлично:
+    </p>
+    <div class="sourceCode" id="cb22">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1"><span class="co">// Fade</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="at">$</span>(<span class="st">&#39;.btn&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb22-3" title="3">  <span class="at">$</span>(<span class="st">&#39;.element&#39;</span>).<span class="at">fadeToggle</span>(<span class="st">&#39;slow&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-5" title="5"></a>
+<a class="sourceLine" id="cb22-6" title="6"><span class="co">// Toggle</span></a>
+<a class="sourceLine" id="cb22-7" title="7"><span class="at">$</span>(<span class="st">&#39;.btn&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb22-8" title="8">  <span class="at">$</span>(<span class="st">&#39;.element&#39;</span>).<span class="at">slideToggle</span>(<span class="st">&#39;slow&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-9" title="9"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="simple-accordion"></div>
+    <h3 id="простой-аккордеон">Простой аккордеон</h3>
+    <p>Метод для создания простого аккордеона:</p>
+    <div class="sourceCode" id="cb23">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="co">// Закрываем все панели</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="at">$</span>(<span class="st">&#39;#accordion&#39;</span>).<span class="at">find</span>(<span class="st">&#39;.content&#39;</span>).<span class="at">hide</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-3" title="3"></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="co">// Аккордеон</span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="at">$</span>(<span class="st">&#39;#accordion&#39;</span>).<span class="at">find</span>(<span class="st">&#39;.accordion-header&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb23-6" title="6">  <span class="kw">var</span> next <span class="op">=</span> <span class="at">$</span>(<span class="kw">this</span>).<span class="at">next</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-7" title="7">  <span class="va">next</span>.<span class="at">slideToggle</span>(<span class="st">&#39;fast&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-8" title="8">  <span class="at">$</span>(<span class="st">&#39;.content&#39;</span>).<span class="at">not</span>(next).<span class="at">slideUp</span>(<span class="st">&#39;fast&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-9" title="9">  <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb23-10" title="10"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      Добавив этот скрипт все, что вам нужно сделать на вашей веб-странице, это
+      найти необходимый HTML и поручить ему эту работу.
+    </p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="make-two-divs-the-same-height"></div>
+    <h3 id="сделать-два-элемента-div-одинаковой-высотой">
+      Сделать два элемента div одинаковой высотой
+    </h3>
+    <p>
+      Иногда вы будете хотеть две элемента div, которые имеют одинаковую высоту,
+      независимо от содержания:
+    </p>
+    <div class="sourceCode" id="cb24">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1"><span class="at">$</span>(<span class="st">&#39;.div&#39;</span>).<span class="at">css</span>(<span class="st">&#39;min-height&#39;</span><span class="op">,</span> <span class="at">$</span>(<span class="st">&#39;.main-div&#39;</span>).<span class="at">height</span>())<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      В этом примере задается <code>min-height</code>, что означает, что она
+      может быть больше, чем основной DIV, но никогда меньше. Тем не менее,
+      более гибкий метод должен был бы пройтись циклом по множеству элементов и
+      установить высоту самого высокого элемента:
+    </p>
+    <div class="sourceCode" id="cb25">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">var</span> $columns <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;.column&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="kw">var</span> height <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="va">$columns</span>.<span class="at">each</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb25-4" title="4">  <span class="cf">if</span> (<span class="at">$</span>(<span class="kw">this</span>).<span class="at">height</span>() <span class="op">&gt;</span> height) <span class="op">{</span></a>
+<a class="sourceLine" id="cb25-5" title="5">    height <span class="op">=</span> <span class="at">$</span>(<span class="kw">this</span>).<span class="at">height</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb25-7" title="7"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-8" title="8"><span class="va">$columns</span>.<span class="at">height</span>(height)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>Если вы хотите, чтобы <em>все</em> столбцы имели одинаковую высоту:</p>
+    <div class="sourceCode" id="cb26">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">var</span> $rows <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;.same-height-columns&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="va">$rows</span>.<span class="at">each</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb26-3" title="3">  <span class="at">$</span>(<span class="kw">this</span>).<span class="at">find</span>(<span class="st">&#39;.column&#39;</span>).<span class="at">height</span>(<span class="at">$</span>(<span class="kw">this</span>).<span class="at">height</span>())<span class="op">;</span></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <strong>Примечание:</strong> Это можно сделать несколькими способами
+      <a href="http://codepen.io/AllThingsSmitty/pen/KMPqoO">в CSS</a>, но в
+      зависимости от ваших потребностей, стоит знать, как это сделать с помощью
+      jQuery.
+    </p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="open-external-links-in-new-tabwindow"></div>
+    <h3 id="открывать-внешние-ссылки-в-новой-вкладке-или-новом-окне">
+      Открывать внешние ссылки в новой вкладке или новом окне
+    </h3>
+    <p>
+      Открыть внешние ссылки в новой вкладке браузера или новом окне, и
+      открывать внутренние ссылки в той же вкладке или окне:
+    </p>
+    <div class="sourceCode" id="cb27">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb27-1" title="1"><span class="at">$</span>(<span class="st">&#39;a[href^=&quot;http&quot;]&#39;</span>).<span class="at">attr</span>(<span class="st">&#39;target&#39;</span><span class="op">,</span> <span class="st">&#39;_blank&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="at">$</span>(<span class="st">&#39;a[href^=&quot;//&quot;]&#39;</span>).<span class="at">attr</span>(<span class="st">&#39;target&#39;</span><span class="op">,</span> <span class="st">&#39;_blank&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="at">$</span>(<span class="st">&#39;a[href^=&quot;&#39;</span> <span class="op">+</span> <span class="va">window</span>.<span class="va">location</span>.<span class="at">origin</span> <span class="op">+</span> <span class="st">&#39;&quot;]&#39;</span>).<span class="at">attr</span>(<span class="st">&#39;target&#39;</span><span class="op">,</span> <span class="st">&#39;_self&#39;</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <strong>Примечание:</strong> <code>window.location.origin</code> не
+      работает в IE10.
+      <a
+        href="http://tosbourn.com/a-fix-for-window-location-origin-in-internet-explorer/"
+        >Это исправление</a
+      >
+      решает проблему.
+    </p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="find-element-by-text"></div>
+    <h3 id="найти-элемент-по-тексту">Найти элемент по тексту</h3>
+    <p>
+      При использовании <code>contains()</code> селектора в jQuery вы можете
+      найти текст в содержимом элемента. Если текст не существует, то этот
+      элемент будет скрыт:
+    </p>
+    <div class="sourceCode" id="cb28">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">var</span> search <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;#search&#39;</span>).<span class="at">val</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="at">$</span>(<span class="st">&#39;div:not(:contains(&quot;&#39;</span> <span class="op">+</span> search <span class="op">+</span> <span class="st">&#39;&quot;))&#39;</span>).<span class="at">hide</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="trigger-on-visibility-change"></div>
+    <h3 id="запуск-по-изменению-видимости">Запуск по изменению видимости</h3>
+    <p>
+      Запуск скрипта, когда пользователь больше не фокусируется на вкладке или
+      перефокусируется на вкладке:
+    </p>
+    <div class="sourceCode" id="cb29">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb29-1" title="1"><span class="at">$</span>(document).<span class="at">on</span>(<span class="st">&#39;visibilitychange&#39;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb29-2" title="2">  <span class="cf">if</span> (<span class="va">e</span>.<span class="va">target</span>.<span class="at">visibilityState</span> <span class="op">===</span> <span class="st">&#39;visible&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb29-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Tab is now in view!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb29-4" title="4">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">e</span>.<span class="va">target</span>.<span class="at">visibilityState</span> <span class="op">===</span> <span class="st">&#39;hidden&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb29-5" title="5">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Tab is now hidden!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb29-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb29-7" title="7"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="ajax-call-error-handling"></div>
+    <h3 id="обработка-ошибок-в-ajax-запросах">
+      Обработка ошибок в AJAX-запросах
+    </h3>
+    <p>
+      Когда AJAX-запрос возвращает ошибку 404 или 500, будет выполняться
+      обработчик ошибок. Если обработчик не определен, другой код jQuery может
+      не работать после этого. Определить глобальный обработчик ошибок
+      AJAX-запросов можно следующим образом:
+    </p>
+    <div class="sourceCode" id="cb30">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb30-1" title="1"><span class="at">$</span>(document).<span class="at">on</span>(<span class="st">&#39;ajaxError&#39;</span><span class="op">,</span> <span class="kw">function</span> (e<span class="op">,</span> xhr<span class="op">,</span> settings<span class="op">,</span> error) <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(error)<span class="op">;</span></a>
+<a class="sourceLine" id="cb30-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="chain-plugin-calls"></div>
+    <h3 id="цепочка-вызовов-плагинов">Цепочка вызовов плагинов</h3>
+    <p>
+      jQuery позволяет выполнять “цепочки” методов, что упрощает процесс,
+      однократно запрашивая DOM и не создавая несколько объектов jQuery. Скажем,
+      следующий фрагмент кода представляет ваш метод:
+    </p>
+    <div class="sourceCode" id="cb31">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb31-1" title="1"><span class="at">$</span>(<span class="st">&#39;#elem&#39;</span>).<span class="at">show</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="at">$</span>(<span class="st">&#39;#elem&#39;</span>).<span class="at">html</span>(<span class="st">&#39;bla&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="at">$</span>(<span class="st">&#39;#elem&#39;</span>).<span class="at">otherStuff</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>Он может быть значительно улучшен с помощью цепочки:</p>
+    <div class="sourceCode" id="cb32">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb32-1" title="1"><span class="at">$</span>(<span class="st">&#39;#elem&#39;</span>)</a>
+<a class="sourceLine" id="cb32-2" title="2">  .<span class="at">show</span>()</a>
+<a class="sourceLine" id="cb32-3" title="3">  .<span class="at">html</span>(<span class="st">&#39;bla&#39;</span>)</a>
+<a class="sourceLine" id="cb32-4" title="4">  .<span class="at">otherStuff</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      Альтернативой является кэширование элемента в переменной (с приставкой
+      <code>$</code>):
+    </p>
+    <div class="sourceCode" id="cb33">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">var</span> $elem <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;#elem&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="va">$elem</span>.<span class="at">hide</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="va">$elem</span>.<span class="at">html</span>(<span class="st">&#39;bla&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="va">$elem</span>.<span class="at">otherStuff</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      И цепочки и <a href="#cache-jquery-selectors">кэширование</a> в jQuery
+      являются лучшими практиками, которые приводят к более короткому и быстрому
+      код.
+    </p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="sort-list-items-alphabetically"></div>
+    <h3 id="сортировка-элементов-списка-по-алфавиту">
+      Сортировка элементов списка по алфавиту
+    </h3>
+    <p>
+      Допустим, в списке слишком много элементов. Возможно, содержание
+      производится с помощью CMS, а вы хотите показать их в алфавитном порядке:
+    </p>
+    <div class="sourceCode" id="cb34">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">var</span> ul <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;#list&#39;</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb34-2" title="2">lis <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;li&#39;</span><span class="op">,</span> ul).<span class="at">get</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb34-3" title="3"></a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="va">lis</span>.<span class="at">sort</span>(<span class="kw">function</span> (a<span class="op">,</span> b) <span class="op">{</span></a>
+<a class="sourceLine" id="cb34-5" title="5">  <span class="cf">return</span> (<span class="at">$</span>(a).<span class="at">text</span>().<span class="at">toUpperCase</span>() <span class="op">&lt;</span> <span class="at">$</span>(b).<span class="at">text</span>().<span class="at">toUpperCase</span>()) <span class="op">?</span> <span class="dv">-1</span> : <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb34-6" title="6"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb34-7" title="7"></a>
+<a class="sourceLine" id="cb34-8" title="8"><span class="va">ul</span>.<span class="at">append</span>(lis)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>Такие дела!</p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <div id="disable-right-click"></div>
+    <h3 id="отключить-правую-кнопку-мыши">Отключить правую кнопку мыши</h3>
+    <p>
+      Если вы хотите отключить контекстное меню, вы можете сделать это для всей
+      страницы…
+    </p>
+    <div class="sourceCode" id="cb35">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb35-1" title="1"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-2" title="2">  <span class="at">$</span>(document).<span class="at">bind</span>(<span class="st">&#39;contextmenu&#39;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-3" title="3">    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb35-4" title="4">  <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="op">}</span>)</a></code></pre>
+    </div>
+    <p>…но вы также можете сделать то же самое для конкретного элемента:</p>
+    <div class="sourceCode" id="cb36">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb36-1" title="1"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb36-2" title="2">  <span class="at">$</span>(<span class="st">&#39;#submit&#39;</span>).<span class="at">bind</span>(<span class="st">&#39;contextmenu&#39;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb36-3" title="3">    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb36-4" title="4">  <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb36-5" title="5"><span class="op">}</span>)</a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+    <h2 id="поддержка">Поддержка</h2>
+    <p>Текущие версии Chrome, Firefox, Safari, Opera, Edge, и IE11.</p>
+    <p>
+      <sup><a href="#table-of-contents">вернуться к оглавлению</a></sup>
+    </p>
+  </body>
+</html>

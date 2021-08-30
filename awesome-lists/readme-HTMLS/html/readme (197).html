@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>readme</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <img
+        title="Awesome Machine Learning with Ruby"
+        alt="Awesome Machine Learning with Ruby"
+        src="header.png"
+        align="center"
+      />
+    </p>
+    <p>
+      <a href="https://github.com/sindresorhus/awesome#readme"
+        ><img src="https://awesome.re/badge-flat.svg" alt="Awesome"
+      /></a>
+      <a href="https://www.patreon.com/arbox"
+        ><img
+          src="https://img.shields.io/badge/%F0%9F%92%97-Support%20Me-blue.svg?style=flat-square"
+          alt="Support Me"
+      /></a>
+    </p>
+    <p>
+      [<a href="https://github.com/arbox/nlp-with-ruby">RubyNLP</a> |
+      <a href="https://github.com/arbox/data-science-with-ruby"
+        >RubyDataScience</a
+      >
+      |
+      <a href="https://github.com/arbox/ruby-interoperability">RubyInterop</a>]
+    </p>
+    <h1 id="awesome-machine-learning-with-ruby-ruby">
+      Awesome Machine Learning with Ruby
+      <a href="https://www.ruby-lang.org/en/"
+        ><img src="ruby.jpg" align="left" width="30px" height="30px"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>Curated List of Ruby Machine Learning Links and Resources</p>
+    </blockquote>
+    <p>
+      <a href="https://en.wikipedia.org/wiki/Machine_learning"
+        >Machine Learning</a
+      >
+      is a field of
+      <a href="https://en.wikipedia.org/wiki/Computational_science"
+        >Computational Science</a
+      >
+      - often nested under
+      <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">AI</a>
+      research - with many practical applications due to the ability of
+      resulting algorithms to systematically implement a specific solution
+      without explicit programmer’s instructions. Obviously many algorithms need
+      a definition of
+      <a href="https://en.wikipedia.org/wiki/Feature_engineering">features</a>
+      to look at or a biggish
+      <a href="https://en.wikipedia.org/wiki/Test_set">training set</a> of data
+      to derive the solution from.
+    </p>
+    <p>
+      This curated list comprises
+      <a href="https://github.com/sindresorhus/awesome/blob/master/awesome.md"
+        ><em>awesome</em></a
+      >
+      libraries, data sources, tutorials and presentations about
+      <a href="https://en.wikipedia.org/wiki/Machine_learning"
+        >Machine Learning</a
+      >
+      utilizing the <a href="https://www.ruby-lang.org/en/">Ruby</a> programming
+      language.
+    </p>
+    <p>
+      A lot of useful resources on this list come from the development by
+      <a href="https://github.com/sciruby">The Ruby Science Foundation</a>, our
+      <a
+        href="https://github.com/arbox/machine-learning-with-ruby/graphs/contributors"
+        >contributors</a
+      >
+      and our own day to day work on various ML applications.
+    </p>
+    <p>
+      :sparkles: Every <a href="contributing.md">contribution</a> is welcome!
+      Add links through pull requests or create an issue to start a discussion.
+    </p>
+    <p>
+      Follow us on <a href="https://twitter.com/NonWebRuby">Twitter</a> and
+      please spread the word using the <code>#RubyML</code> hash tag!
+    </p>
+    <!-- nodoc -->
+    <h2 id="contents">Contents</h2>
+    <!-- toc -->
+    <ul>
+      <li><a href="#sparkles-tutorials">:sparkles: Tutorials</a></li>
+      <li>
+        <a href="#machine-learning-libraries">Machine Learning Libraries</a>
+        <ul>
+          <li><a href="#frameworks">Frameworks</a></li>
+          <li><a href="#neural-networks">Neural networks</a></li>
+          <li><a href="#deep-learning">Deep Learning</a></li>
+          <li><a href="#kernel-methods">Kernel methods</a></li>
+          <li>
+            <a href="#evolutionary-algorithms">Evolutionary algorithms</a>
+          </li>
+          <li><a href="#bayesian-methods">Bayesian methods</a></li>
+          <li><a href="#decision-trees">Decision trees</a></li>
+          <li><a href="#clustering">Clustering</a></li>
+          <li><a href="#linear-classifiers">Linear classifiers</a></li>
+          <li><a href="#statistical-models">Statistical models</a></li>
+          <li><a href="#gradient-boosting">Gradient boosting</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#applications-of-machine-learning"
+          >Applications of machine learning</a
+        >
+      </li>
+      <li><a href="#data-structures">Data structures</a></li>
+      <li><a href="#data-visualization">Data visualization</a></li>
+      <li>
+        <a href="#articles-posts-talks-and-presentations"
+          >Articles, Posts, Talks, and Presentations</a
+        >
+      </li>
+      <li>
+        <a href="#projects-and-code-examples">Projects and Code Examples</a>
+      </li>
+      <li><a href="#heroku-buildpacks">Heroku buildpacks</a></li>
+      <li><a href="#books-blogs-channels">Books, Blogs, Channels</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#related-resources">Related Resources</a></li>
+      <li><a href="#license">License</a></li>
+    </ul>
+    <!-- tocstop -->
+    <!-- doc -->
+    <h2 id="sparkles-tutorials">:sparkles: Tutorials</h2>
+    <p>
+      Please help us to fill out this section! :smiley: -
+      <a href="https://www.honeybadger.io/blog/ruby-neural-networks/"
+        >Ruby neural networks</a
+      >
+      -
+      <a
+        href="https://www.practicalai.io/implementing-linear-regression-using-ruby/"
+        >How to implement linear regression in Ruby</a
+      >
+      <sup
+        >[<a href="https://github.com/daugaard/example-linear-regression"
+          >code</a
+        >]</sup
+      >
+      -
+      <a
+        href="https://www.practicalai.io/implementing-classification-using-logistic-regression-in-ruby/"
+        >How to implement classification using logistic regression in Ruby</a
+      >
+      -
+      <a
+        href="https://www.practicalai.io/implementing-simple-classification-using-neural-network-in-ruby/"
+        >How to implement simple binary classification using a Neural Network in
+        Ruby</a
+      >
+      <sup
+        >[<a href="https://github.com/daugaard/example-neural-network">code</a
+        >]</sup
+      >
+      -
+      <a
+        href="https://www.practicalai.io/implementing-classification-using-a-svm-in-ruby/"
+        >How to implement classification using a SVM in Ruby</a
+      >
+      <sup>[<a href="https://github.com/daugaard/example-svm">code</a>]</sup> -
+      <a
+        href="https://www.practicalai.io/unsupervised-learning-using-k-means-clustering-in-ruby/"
+        >Unsupervised learning using k-means clustering in Ruby</a
+      >
+      <sup
+        >[<a href="https://github.com/daugaard/example-kmeans-clustering"
+          >code</a
+        >]</sup
+      >
+      -
+      <a
+        href="https://www.practicalai.io/teaching-ai-play-simple-game-using-q-learning/"
+        >Teaching an AI to play a simple game using Q-Learning in Ruby</a
+      >
+      <sup
+        >[<a href="https://github.com/daugaard/q-learning-simple-game">code</a
+        >]</sup
+      >
+      -
+      <a
+        href="https://www.practicalai.io/teaching-a-neural-network-to-play-a-game-with-q-learning/"
+        >Teaching a Neural Network to play a game using Q-Learning in Ruby</a
+      >
+      <sup
+        >[<a
+          href="https://github.com/daugaard/q-learning-simple-game/tree/neuralnetwork"
+          >code</a
+        >]</sup
+      >
+      -
+      <a
+        href="https://www.practicalai.io/using-scikit-learn-machine-learning-library-in-ruby-using-pycall/"
+        >Using the Python scikit-learn machine learning library in Ruby using
+        PyCall</a
+      >
+      <sup
+        >[<a href="https://github.com/daugaard/scikit-learn-from-ruby">code</a
+        >]</sup
+      >
+      -
+      <a
+        href="https://github.com/giuse/machine_learning_workbench/blob/master/examples/neuroevolution.rb"
+        >How to <em>evolve</em> neural networks in Ruby using the Machine
+        Learning Workbench</a
+      >
+    </p>
+    <h2 id="machine-learning-libraries">Machine Learning Libraries</h2>
+    <p>
+      <a href="https://en.wikipedia.org/wiki/Machine_learning"
+        >Machine Learning</a
+      >
+      algorithms in pure Ruby or written in other programming languages with
+      appropriate bindings for Ruby.
+    </p>
+    <h3 id="frameworks">Frameworks</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/paulgoetze/weka-jruby">weka</a> - JRuby
+        bindings for Weka, different ML algorithms implemented through Weka.
+      </li>
+      <li>
+        <a href="https://github.com/SergioFierens/ai4r">ai4r</a> - Artificial
+        Intelligence for Ruby.
+      </li>
+      <li>
+        <a href="https://github.com/jekyll/classifier-reborn"
+          >classifier-reborn</a
+        >
+        - General classifier module to allow Bayesian and other types of
+        classifications. <sup>[<a href="#gls">dep: GLS</a>]</sup>
+      </li>
+      <li>
+        <a href="https://github.com/asafschers/scoruby">scoruby</a> - Ruby
+        scoring API for
+        <a href="http://dmg.org/pmml/v4-3/GeneralStructure.html">PMML</a>
+        (Predictive Model Markup Language).
+      </li>
+      <li>
+        <a href="https://github.com/himkt/rblearn">rblearn</a> - Feature
+        Extraction and Crossvalidation library.
+      </li>
+      <li>
+        <a href="https://github.com/giuse/data_modeler">data_modeler</a> - Model
+        your data with machine learning. Ample test coverage, examples to start
+        fast, complete documentation. Production ready since 1.0.0.
+      </li>
+      <li>
+        <a href="https://github.com/shogun-toolbox/shogun">shogun</a> -
+        Polyfunctional and mature machine learning toolbox with
+        <a
+          href="https://github.com/shogun-toolbox/shogun/tree/develop/src/interfaces/ruby"
+          >Ruby bindings</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/aws/aws-sdk-ruby"
+          >aws-sdk-machinelearning</a
+        >
+        - Machine Learning API of the Amazon Web Services.
+      </li>
+      <li>
+        <a href="https://github.com/Azure/azure-sdk-for-ruby"
+          >azure_mgmt_machine_learning</a
+        >
+        - Machine Learning API of the Microsoft Azure.
+      </li>
+      <li>
+        <a href="https://github.com/giuse/machine_learning_workbench"
+          >machine_learning_workbench</a
+        >
+        - Growing machine learning framework written in pure Ruby, high
+        performance computing using
+        <a href="https://github.com/ruby-numo/">Numo</a>, CUDA bindings through
+        <a href="https://github.com/sonots/cumo">Cumo</a>. Currently
+        implementating neural networks, evolutionary strategies, vector
+        quantization, and plenty of examples and utilities.
+      </li>
+      <li>
+        <a href="https://github.com/giuse/DNE">Deep NeuroEvolution</a> -
+        Experimental setup based on the
+        <a href="https://github.com/giuse/machine_learning_workbench"
+          >machine_learning_workbench</a
+        >
+        towards searching for deep neural networks (rather than training) using
+        evolutionary algorithms. Applications to the
+        <a href="https://github.com/openai/gym">OpenAI Gym</a> using
+        <a href="https://github.com/mrkn/pycall.rb">PyCall</a>.
+      </li>
+      <li>
+        <a href="https://github.com/yoshoku/rumale">rumale</a> - Machine
+        Learninig toolkit in Ruby with wide range of implemented algorithms
+        (SVM, Logistic Regression, Linear Regression, Random Forest etc.) and
+        interfaces similar to
+        <a href="https://scikit-learn.org/stable/index.html">Scikit-Learn</a> in
+        Python.
+      </li>
+      <li>
+        <a href="https://github.com/ankane/eps">eps</a> - Bayesian
+        Classification and Linear Regression with exports using
+        <a href="http://dmg.org/pmml/v4-3/GeneralStructure.html">PMML</a> and an
+        alternative backend using
+        <a href="https://www.gnu.org/software/gsl/">GSL</a>.
+      </li>
+    </ul>
+    <h3 id="neural-networks">Neural networks</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/gbuesing/neural-net-ruby"
+          >neural-net-ruby</a
+        >
+        - Neural network written in Ruby.
+      </li>
+      <li>
+        <a href="https://github.com/tangledpath/ruby-fann">ruby-fann</a> - Ruby
+        bindings to the
+        <a href="http://leenissen.dk/fann/wp/"
+          >Fast Artificial Neural Network Library (FANN)</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/irfansharif/cerebrum">cerebrum</a> -
+        Experimental implementation for Artificial Neural Networks in Ruby.
+      </li>
+      <li>
+        <a href="https://github.com/josephwilk/tlearn-rb">tlearn-rb</a> -
+        Recurrent Neural Network library for Ruby.
+      </li>
+      <li>
+        <a href="https://github.com/jedld/brains-jruby">brains</a> -
+        Feed-forward neural networks for JRuby based on
+        <a href="https://github.com/jedld/brains">brains</a>.
+      </li>
+      <li>
+        <a
+          href="https://github.com/giuse/machine_learning_workbench/tree/master/lib/machine_learning_workbench/neural_network"
+          >machine_learning_workbench</a
+        >
+        - Framework including pure-Ruby implementation of both feed-forward and
+        recurrent neural networks (fully connected). Training available using
+        neuroevolution (Natural Evolution Strategies algorithms).
+      </li>
+      <li>
+        <a href="https://github.com/mikecmpbll/rann">rann</a> - Flexible Ruby
+        ANN implementation with backprop (through-time, for recurrent nets),
+        gradient checking, adagrad, and parallel batch execution.
+      </li>
+    </ul>
+    <h3 id="deep-learning">Deep learning</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/jedld/tensor_stream">tensor_stream</a> -
+        Ground-up and standalone reimplementation of TensorFlow for Ruby.
+      </li>
+      <li>
+        <a href="https://github.com/red-data-tools/red-chainer">red-chainer</a>
+        - Deep learning framework for Ruby.
+      </li>
+      <li>
+        <a href="https://github.com/somaticio/tensorflow.rb">tensorflow</a> -
+        Ruby bindings for <a href="https://www.tensorflow.org/">TensorFlow</a>.
+      </li>
+      <li>
+        <a href="https://github.com/unagiootoro/ruby-dnn">ruby-dnn</a> - Simple
+        deep learning for Ruby.
+      </li>
+      <li>
+        <a href="https://github.com/ankane/torch-rb">torch-rb</a> - Ruby
+        bindings for
+        <a href="https://github.com/pytorch/pytorch">LibTorch</a> using
+        <a href="https://github.com/jasonroelofs/rice">rice</a>.
+      </li>
+      <li>
+        <a href="https://github.com/mrkn/mxnet.rb">mxnet</a> - Ruby bindings for
+        <a href="https://mxnet.apache.org/">mxnet</a>.
+      </li>
+    </ul>
+    <h3 id="kernel-methods">Kernel methods</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/febeling/rb-libsvm">rb-libsvm</a> - Support
+        Vector Machines with Ruby and the
+        <a href="https://www.csie.ntu.edu.tw/~cjlin/libsvm/">LIBSVM</a> library.
+        <sup>[<a href="#bundled">dep: bundled</a>]</sup>
+      </li>
+    </ul>
+    <h3 id="evolutionary-algorithms">Evolutionary algorithms</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/giuse/machine_learning_workbench/tree/master/lib/machine_learning_workbench/optimizer/natural_evolution_strategies"
+          >machine_learning_workbench</a
+        >
+        - Framework including pure-Ruby implementations of Natural Evolution
+        Strategy algorithms (black-box optimization), specifically Exponential
+        NES (XNES), Separable NES (sNES), Block-Diagonal NES (BDNES) and more.
+        Applications include neural network search/training (neuroevolution).
+      </li>
+      <li>
+        <a href="https://github.com/giuse/simple_ga">simple_ga</a> - Simplest
+        Genetic Algorithms implementation in Ruby.
+      </li>
+    </ul>
+    <h3 id="bayesian-methods">Bayesian methods</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/djcp/linnaeus">linnaeus</a> - Redis-backed
+        Bayesian classifier.
+      </li>
+      <li>
+        <a href="https://github.com/reddavis/Naive-Bayes">naive_bayes</a> -
+        Simple Naive Bayes classifier.
+      </li>
+      <li>
+        <a href="https://github.com/oasic/nbayes">nbayes</a> - Full-featured,
+        Ruby implementation of Naive Bayes.
+      </li>
+    </ul>
+    <h3 id="decision-trees">Decision trees</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/igrigorik/decisiontree">decisiontree</a> -
+        Decision Tree ID3 Algorithm in pure Ruby.
+        <sup
+          >[<a href="#graphviz">dep: GraphViz</a> |
+          <a
+            href="https://www.igvita.com/2007/04/16/decision-tree-learning-in-ruby/"
+            >post</a
+          >]</sup
+        >.
+      </li>
+    </ul>
+    <h3 id="clustering">Clustering</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/mariusmuja/flann">flann</a> - Fast Library
+        for Approximate Nearest Neighbors.
+        <sup>[<a href="#flann">flann</a>]</sup>
+      </li>
+      <li>
+        <a href="https://github.com/gbuesing/kmeans-clusterer"
+          >kmeans-clusterer</a
+        >
+        - k-means clustering in Ruby.
+      </li>
+      <li>
+        <a href="https://github.com/reddavis/K-Means">k_means</a> - Attempting
+        to build a fast, memory efficient K-Means program.
+      </li>
+      <li>
+        <a href="https://github.com/reddavis/knn">knn</a> - Simple K Nearest
+        Neighbour Algorithm.
+      </li>
+      <li>
+        <a href="https://github.com/yoshoku/annoy.rb">annoy-rb</a> - bindings
+        for the
+        <a href="https://github.com/spotify/annoy">Annoy</a> (Approximate
+        Nearest Neighbors Oh Yeah).
+      </li>
+    </ul>
+    <h3 id="linear-classifiers">Linear classifiers</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/tomz/liblinear-ruby-swig"
+          >liblinear-ruby-swig</a
+        >
+        - Ruby interface to LIBLINEAR (much more efficient than LIBSVM for text
+        classification).
+      </li>
+      <li>
+        <a href="https://github.com/kei500/liblinear-ruby">liblinear-ruby</a> -
+        Ruby interface to LIBLINEAR using SWIG.
+      </li>
+    </ul>
+    <h3 id="statistical-models">Statistical models</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/maspwr/rtimbl">rtimbl</a> - Memory based
+        learners from the Timbl framework.
+      </li>
+      <li>
+        <a href="https://github.com/ealdent/lda-ruby">lda-ruby</a> - Ruby
+        implementation of the
+        <a href="https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation"
+          >LDA</a
+        >
+        (Latent Dirichlet Allocation) for automatic Topic Modelling and Document
+        Clustering.
+      </li>
+      <li>
+        <a href="https://github.com/mccraigmccraig/maxent_string_classifier"
+          >maxent_string_classifier</a
+        >
+        - JRuby maximum entropy classifier for string data, based on the OpenNLP
+        Maxent framework.
+      </li>
+      <li>
+        <a href="https://github.com/mustafaturan/omnicat">omnicat</a> -
+        Generalized rack framework for text classifications.
+      </li>
+      <li>
+        <a href="https://github.com/mustafaturan/omnicat-bayes"
+          >omnicat-bayes</a
+        >
+        - Naive Bayes text classification implementation as an OmniCat
+        classifier strategy. <sup>[<a href="#bundled">dep: bundled</a>]</sup>
+      </li>
+    </ul>
+    <h3 id="gradient-boosting">Gradient boosting</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/PairOnAir/xgboost-ruby">xgboost</a> — Ruby
+        bindings for XGBoost. <sup>[<a href="#xgboost">dep: XGBoost</a>]</sup>
+      </li>
+      <li>
+        <a href="https://github.com/ankane/xgb">xgb</a> — Ruby bindings for
+        XGBoost. <sup>[<a href="#xgboost">dep: XGBoost</a>]</sup>
+      </li>
+      <li>
+        <a href="https://github.com/ankane/lightgbm">lightgbm</a> — Ruby
+        bindings for LightGBM.
+        <sup>[<a href="#lightgbm">dep: LightGBM</a>]</sup>
+      </li>
+    </ul>
+    <h2 id="applications-of-machine-learning">
+      Applications of machine learning
+    </h2>
+    <ul>
+      <li>
+        <a href="https://github.com/westonplatter/phashion">phashion</a> - Ruby
+        wrapper around pHash, the perceptual hash library for detecting
+        duplicate multimedia files.
+        <sup
+          >[<a href="#imagemagick">ImageMagick</a> |
+          <a href="#libjpeg">libjpeg</a>]</sup
+        >
+      </li>
+    </ul>
+    <h2 id="data-structures">Data structures</h2>
+    <p>
+      If you’re going to implement your own ML algorithms you’re probably
+      interested in storing your feature sets efficiently. Look for appropriate
+      <a href="https://github.com/arbox/data-science-with-ruby#data-structures"
+        >data structures</a
+      >
+      in our
+      <a href="https://github.com/arbox/data-science-with-ruby"
+        >Data Science with Ruby</a
+      >
+      list.
+    </p>
+    <h2 id="data-visualization">Data visualization</h2>
+    <p>
+      Please refer to the
+      <a href="https://github.com/arbox/data-science-with-ruby#visualization"
+        >Data Visualization</a
+      >
+      section on the
+      <a href="https://github.com/arbox/data-science-with-ruby"
+        >Data Science with Ruby</a
+      >
+      list.
+    </p>
+    <h2 id="articles-posts-talks-and-presentations">
+      Articles, Posts, Talks, and Presentations
+    </h2>
+    <ul>
+      <li>
+        2019
+        <ul>
+          <li>
+            <em>TensorStream: Bringing Machine Learning to Ruby</em> by
+            <a href="https://www.linkedin.com/in/jdayo/"
+              >Joseph Emmanuel Dayo</a
+            >
+            <sup
+              >[<a
+                href="https://medium.com/@joseph.dayo/tensorstream-bringing-machine-learning-to-ruby-114582060e3d"
+                >post</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Easy machine learning with Ruby using SVMKit</em> by
+            <span class="citation" data-cites="kojix">[@kojix]</span
+            >(https://twitter.com/kojix2dayo)
+            <sup
+              >[<a
+                href="https://dev.to/kojix2/easy-machine-learning-with-ruby-using-svmkit-4n86"
+                >post</a
+              >]</sup
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        2018
+        <ul>
+          <li>
+            <em>Deep Learning Programming on Ruby</em> by
+            <a href="https://twitter.com/mrkn">Kenta Murata</a> &amp;
+            <a href="https://twitter.com/hatappi">Yusaku Hatanaka</a>
+            <sup
+              >[<a
+                href="https://speakerdeck.com/mrkn/deep-learning-programming-on-ruby"
+                >slides</a
+              >
+              |
+              <a href="https://rubykaigi.org/2018/presentations/mrkn.html"
+                >page</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em
+              >How to use trained Keras and TensorFlow machine learning models
+              within Ruby on Rails</em
+            >
+            by <a href="https://twitter.com/denis_sellu">Denis Sellu</a>
+            <sup
+              >[<a
+                href="https://www.cookieshq.co.uk/posts/how-to-use-trained-keras-and-tensorflow-machine-learning-models-within-ruby-on-rails"
+                >post</a
+              >]</sup
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        2017
+        <ul>
+          <li>
+            <em>Scientific Computing on JRuby</em> by
+            <a href="https://twitter.com/prasun_anand">Prasun Anand</a>
+            <sup
+              >[<a
+                href="https://www.slideshare.net/PrasunAnand2/fosdem2017-scientific-computing-on-jruby"
+                >slides</a
+              >
+              |
+              <a
+                href="https://ftp.fau.de/fosdem/2017/K.4.201/ruby_scientific_computing_on_jruby.mp4"
+                >video</a
+              >
+              |
+              <a
+                href="https://www.slideshare.net/PrasunAnand2/scientific-computing-on-jruby"
+                >slides</a
+              >
+              |
+              <a
+                href="https://www.slideshare.net/PrasunAnand2/scientific-computation-on-jruby"
+                >slides</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Is it Food? An Introduction to Machine Learning</em> by
+            <a href="https://twitter.com/halogenandtoast">Matthew Mongeau</a>
+            <sup
+              >[<a href="https://www.youtube.com/watch?v=8G709hKkthY">video</a>
+              |
+              <a href="https://www.slideshare.net/halogenandtoast/is-it-food"
+                >slides</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Bayes is BAE</em> by
+            <a href="https://twitter.com/schneems">Richard Schneeman</a>
+            <sup
+              >[<a href="https://www.youtube.com/watch?v=bQSzZrDDV80">video</a>
+              |
+              <a href="https://speakerdeck.com/schneems/bayes-is-bae">slides</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Ruby Roundtable: Machine Learning in Ruby</em> by
+            <a href="https://rubythursday.com/">RubyThursday</a>
+            <sup
+              >[<a href="https://www.youtube.com/watch?v=ScIFARN0jCo">video</a
+              >]</sup
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        2016
+        <ul>
+          <li>
+            <em>Practical Machine Learning with Ruby</em> by
+            <a href="https://twitter.com/jordanhudgens">Jordan Hudgens</a>
+            <sup
+              >[<a
+                href="https://www.crondose.com/2016/12/practical-machine-learning-ruby/"
+                >tutorial</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Deep Learning: An Introduction for Ruby Developers</em> by
+            <a href="https://twitter.com/geoffreylitt">Geoffrey Litt</a>
+            <sup
+              >[<a
+                href="https://speakerdeck.com/geoffreylitt/deep-learning-an-introduction-for-ruby-developers"
+                >slides</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>How I made a pure-Ruby word2vec program more than 3x faster</em>
+            by <a href="https://twitter.com/remore">Kei Sawada</a>
+            <sup
+              >[<a
+                href="https://speakerdeck.com/remore/how-i-made-a-pure-ruby-word2vec-program-more-than-3x-faster"
+                >slides</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Dōmo arigatō, Mr. Roboto: Machine Learning with Ruby</em> by
+            <a href="https://twitter.com/ericqweinstein">Eric Weinstein</a>
+            <sup
+              >[<a
+                href="https://speakerdeck.com/ericqweinstein/domo-arigato-mr-roboto-machine-learning-with-ruby"
+                >slides</a
+              >
+              |
+              <a href="https://www.youtube.com/watch?v=T1nFQ49TyeA">video</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em
+              >Building a Recommendation Engine with Machine Learning
+              Techniques</em
+            >
+            by <a href="https://twitter.com/bsbodden">Brian Sam-Bodden</a>
+            <sup
+              >[<a href="https://www.youtube.com/watch?v=SRnM_P_ygqI">video</a
+              >]</sup
+            >
+          </li>
+          <li>
+            :sparkles:
+            <em>SciRuby Machine Learning: Current Status and Future</em> by
+            <a href="https://twitter.com/mrkn">Kenta Murata</a>
+            <sup
+              >[<a
+                href="https://speakerdeck.com/mrkn/sciruby-machine-learning-current-status-and-future"
+                >slides</a
+              >
+              |
+              <a href="https://www.youtube.com/watch?v=gfQ8XEy7vO4">video: jp</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Ruby Roundtable: Intro to Tensorflow</em> by
+            <a href="https://rubythursday.com/">RubyThursday</a>
+            <sup
+              >[<a href="https://www.youtube.com/watch?v=pYC5mXHUWkc">video</a
+              >]</sup
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        2015
+        <ul>
+          <li>
+            <em>Machine Learning made simple with Ruby</em> by
+            <a href="https://twitter.com/rugginoso">Lorenzo Masini</a>
+            <sup
+              >[<a
+                href="https://www.leanpanda.com/blog/2015-08-24-machine-learning-automatic-classification/"
+                >post</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Using Ruby Machine Learning to Find Paris Hilton Quotes</em> by
+            <a href="https://github.com/RickCarlino">Rick Carlino</a>
+            <sup
+              >[<a
+                href="https://web.archive.org/web/20160414072324/http://datamelon.io/blog/2015/using-ruby-machine-learning-id-paris-hilton-quotes.html"
+                >tutorial</a
+              >]</sup
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        2014
+        <ul>
+          <li>
+            <em>Test Driven Neural Networks</em> by
+            <a href="https://twitter.com/mjkirk">Matthew Kirk</a>
+            <sup
+              >[<a href="https://www.youtube.com/watch?v=ppf8m-3uXvU&amp;t=36s"
+                >video</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em
+              >Five machine learning techniques that you can use in your Ruby
+              apps today</em
+            >
+            by <a href="https://twitter.com/stympy">Benjamin Curtis</a>
+            <sup
+              >[<a href="https://www.youtube.com/watch?v=crziu7dk6Vw">video</a>
+              |
+              <a
+                href="https://speakerdeck.com/stympy/machine-learning-techniques"
+                >slides</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Machine Learning for Fun and Profit</em> by
+            <a href="https://twitter.com/johnashenfelter"
+              >John Paul Ashenfelter</a
+            >
+            <sup
+              >[<a href="https://www.youtube.com/watch?v=KC5MtKHm1O4">video</a
+              >]</sup
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        2013
+        <ul>
+          <li>
+            <em>Sentiment Analysis using Support Vector Machines in Ruby</em> by
+            <a href="https://twitter.com/mjkirk">Matthew Kirk</a>
+            <sup
+              >[<a href="https://www.youtube.com/watch?v=iSug6CgxWxc">video</a>
+              |
+              <a href="https://github.com/hexgnu/sentiment_analyzer">code</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Recommender Systems with Ruby</em> by
+            <a href="https://twitter.com/marcelcaraciolo">Marcel Caraciolo</a>
+            <sup
+              >[<a
+                href="https://www.slideshare.net/marcelcaraciolo/recommender-systems-with-ruby-adding-machine-learning-statistics-etc"
+                >slides</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Detecting Faces with Ruby: FFI in a Nutshell</em> by
+            <a href="">Marc Berszick</a>
+            <sup
+              >[<a
+                href="https://www.sitepoint.com/detecting-faces-with-ruby-ffi-in-a-nutshell/"
+                >post</a
+              >]</sup
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        2012
+        <ul>
+          <li>
+            <em>Machine Learning with Ruby, Part One</em> by
+            <a href="https://twitter.com/vasinov">Vasily Vasinov</a>
+            <sup
+              >[<a
+                href="https://www.vasinov.com/blog/machine-learning-with-ruby-part-one/"
+                >tutorial</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Recurrent Neural Networks in Ruby</em> by
+            <a href="https://twitter.com/josephwilk">Joseph Wilk</a>
+            <sup
+              >[<a
+                href="http://blog.josephwilk.net/ruby/recurrent-neural-networks-in-ruby.html"
+                >post</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Recommendation Engines using Machine Learning, and JRuby</em> by
+            <a href="https://twitter.com/mjkirk">Matthew Kirk</a>
+            <sup
+              >[<a href="https://www.youtube.com/watch?v=hsZcrlbBg_0">video</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Practical Machine Learning and Rails</em> by
+            <a href="https://twitter.com/tectonic">Andrew Cantino</a> and
+            <a href="https://twitter.com/ryanstout">Ryan Stout</a>
+            <sup
+              >[<a href="https://www.youtube.com/watch?v=vy_zQ1-F0JI">video</a
+              >]</sup
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        2011
+        <ul>
+          <li>
+            <em>Clustering in Ruby</em> by
+            <a href="https://twitter.com/colinfdrake">Colin Drake</a>
+            <sup
+              >[<a href="https://colindrake.me/post/k-means-clustering-in-ruby/"
+                >post</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Text Classification using Support Vector Machines in Ruby</em>
+            by <a href="https://twitter.com/neovintage">Rimas Silkaitis</a>
+            <sup
+              >[<a
+                href="http://neovintage.org/2011/11/14/text-classification-using-support/"
+                >post</a
+              >]</sup
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        2010
+        <ul>
+          <li>
+            <em>bayes_motel – Bayesian classification for Ruby</em> by
+            <a href="https://twitter.com/mperham">Mike Perham</a>
+            <sup
+              >[<a
+                href="http://www.mikeperham.com/2010/04/28/bayes_motel-bayesian-classification-for-ruby/"
+                >post</a
+              >]</sup
+            >
+          </li>
+          <li>
+            <em>Intelligent Ruby: Getting Started with Machine Learning</em> by
+            <a href="https://twitter.com/igrigorik">Ilya Grigorik</a>
+            <sup>[<a href="https://vimeo.com/22513786">video</a>]</sup>
+          </li>
+        </ul>
+      </li>
+      <li><p>2009</p></li>
+      <li>
+        2008
+        <ul>
+          <li>
+            <em>Support Vector Machines (SVM) in Ruby</em> by
+            <a href="https://twitter.com/igrigorik">Ilya Grigorik</a>
+            <sup
+              >[<a
+                href="https://www.igvita.com/2008/01/07/support-vector-machines-svm-in-ruby/"
+                >post</a
+              >]</sup
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        2007
+        <ul>
+          <li>
+            <em>Decision Tree Learning in Ruby</em> by
+            <a href="https://twitter.com/igrigorik">Ilya Grigorik</a>
+            <sup
+              >[<a
+                href="https://www.igvita.com/2007/04/16/decision-tree-learning-in-ruby/"
+                >post</a
+              >]</sup
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="projects-and-code-examples">Projects and Code Examples</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/hexgnu/wine_clustering">Wine Clustering</a>
+        - Wine quality estimations clustered with different algorithms.
+      </li>
+      <li>
+        <a href="https://github.com/giuse/simple_ga">simple_ga</a> - Basic
+        (working) demo of Genetic Algorithms in Ruby.
+      </li>
+      <li>
+        <a href="https://github.com/jdrzj/handwritten-digits-recognition"
+          >Handwritten Digits Recognition</a
+        >
+        - Handwritten digits recognition using Neural Networks and Ruby.
+      </li>
+    </ul>
+    <h2 id="heroku-buildpacks">Heroku buildpacks</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/tomwolfe/heroku-buildpack-gsl-ruby"
+          >GSL and Ruby buildpack</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/lilibethdlc/heroku-buildpack-ruby-opencv"
+          >OpenCV and Ruby buildpack</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/mcollina/heroku-buildpack-imagemagick"
+          >ImageMagick buildpack</a
+        >
+      </li>
+    </ul>
+    <h2 id="books-blogs-channels">Books, Blogs, Channels</h2>
+    <ul>
+      <li>
+        <a href="https://twitter.com/mjkirk">Kirk, Matthew</a>.
+        <em>Thoughtful Machine Learning: A Test-Driven Approach</em>. O’Reilly,
+        2014.
+        <sup
+          >[<a
+            href="https://www.amazon.com/Thoughtful-Machine-Learning-Test-Driven-Approach/dp/1449374069"
+            >Amazon</a
+          >
+          | <a href="https://github.com/thoughtfulml/examples">code</a>]</sup
+        >
+      </li>
+      <li>
+        <a href="https://www.practicalai.io/"
+          >Practical Artificial Intelligence</a
+        >
+        - Blog about Artificial Intelligence and Machine Learning with tutorials
+        and code samples in Ruby.
+      </li>
+    </ul>
+    <h2 id="community">Community</h2>
+    <ul>
+      <li>
+        <a href="https://groups.google.com/forum/#!forum/sciruby-dev"
+          >SciRuby Mailing List</a
+        >
+      </li>
+      <li><a href="https://sciruby.slack.com/">SciRuby Slack</a></li>
+      <li><a href="https://gitter.im/red-data-tools/">Red Data Gitter</a></li>
+      <li>
+        <a
+          href="https://www.reddit.com/r/MachineLearning/search?q=Ruby&amp;restrict_sr=on"
+          >Reddit</a
+        >
+      </li>
+      <li>
+        <a href="https://stackoverflow.com/search?q=machine+learning+ruby"
+          >Stack Overflow</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://twitter.com/search?q=Machine%20Learning%20Ruby&amp;src=typd"
+          >Twitter</a
+        >
+      </li>
+      <li><a href="https://twitter.com/NonWebRuby">NonWebRuby</a></li>
+    </ul>
+    <h2 id="related-resources">Related Resources</h2>
+    <ul>
+      <li>
+        <a name="lightgbm"></a>
+        <a href="https://github.com/microsoft/LightGBM">LightGBM</a>
+      </li>
+      <li>
+        <a name="xgboost"></a>
+        <a href="https://github.com/dmlc/xgboost">XGBoost</a>
+      </li>
+      <li><a name="gls"></a> [GSL (GNU Scientific Library)][gls]</li>
+      <li><a name="opencv"></a> <a href="https://opencv.org/">OpenCV</a></li>
+      <li>
+        <a name="empty-lines-around-access-modifier"></a>
+        <a href="http://www.graphviz.org/">Graphviz</a>
+      </li>
+      <li>
+        <a name="gnuplot"></a> <a href="http://www.gnuplot.info/">Gnuplot</a>
+      </li>
+      <li>
+        <a name="xquartz"></a>
+        <a href="https://www.xquartz.org/">X11/XQuartz</a>
+      </li>
+      <li>
+        <a name="imagemagic"></a>
+        <a href="https://www.imagemagick.org/script/index.php">ImageMagick</a>
+      </li>
+      <li><a name="r"></a> <a href="http://www.r-project.org/">R</a></li>
+      <li>
+        <a name="octave"></a>
+        <a href="https://www.gnu.org/software/octave/">Octave</a>
+      </li>
+      <li>
+        <a href="https://scikit-learn.org/stable/tutorial/machine_learning_map/"
+          >scikit-learn algorithm cheatsheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/markets/awesome-ruby#natural-language-processing"
+          >Awesome Ruby</a
+        >
+        - Among other awesome items a short list of NLP related projects.
+      </li>
+      <li>
+        <a href="https://github.com/diasks2/ruby-nlp">Ruby NLP</a> -
+        State-of-Art collection of Ruby libraries for NLP.
+      </li>
+      <li>
+        <a href="https://github.com/edobashira/speech-language-processing"
+          >Speech and Natural Language Processing</a
+        >
+        - General List of NLP related resources (mostly not for Ruby
+        programmers).
+      </li>
+      <li>
+        <a href="http://sciruby.com/">Scientific Ruby</a> - Linear Algebra,
+        Visualization and Scientific Computing for Ruby.
+      </li>
+      <li>
+        <a href="https://github.com/SciRuby/iruby">iRuby</a> - IRuby kernel for
+        Jupyter (formerly IPython).
+      </li>
+      <li>
+        <a href="https://github.com/thbar/kiba">Kiba</a> - Lightweight
+        <a href="https://en.wikipedia.org/wiki/Extract,_transform,_load">ETL</a>
+        (Extract, Transform, Load) pipeline.
+      </li>
+      <li>
+        <a href="https://github.com/kba/awesome-ocr">Awesome OCR</a> - Multitude
+        of OCR (Optical Character Recognition) resources.
+      </li>
+      <li>
+        <a href="https://github.com/jtoy/awesome-tensorflow"
+          >Awesome TensorFlow</a
+        >
+        - Machine Learning with TensorFlow libraries.
+      </li>
+      <li>
+        <a href="https://github.com/SciRuby/rb-gsl">rb-gsl</a> - Ruby interface
+        to the
+        <a href="https://www.gnu.org/software/gsl/">GNU Scientific Library</a>.
+      </li>
+      <li>
+        <a href="https://silverhammermba.github.io/emberb/"
+          >The Definitive Guide to Ruby’s C API</a
+        >
+        - Modern Reference and Tutorial on Embedding and Extending Ruby using C
+        programming language.
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/80x15/svg/cc-zero.svg"
+          alt="Creative Commons Zero 1.0"
+      /></a>
+      <code>Awesome ML with Ruby</code> by
+      <a href="https://github.com/arbox">Andrei Beliankou</a> and
+      <a
+        href="https://github.com/arbox/machine-learning-with-ruby/graphs/contributors"
+        >Contributors</a
+      >.
+    </p>
+    <p>
+      To the extent possible under law, the person who associated CC0 with
+      <code>Awesome ML with Ruby</code> has waived all copyright and related or
+      neighboring rights to <code>Awesome ML with Ruby</code>.
+    </p>
+    <p>
+      You should have received a copy of the CC0 legalcode along with this work.
+      If not, see
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/" class="uri"
+        >https://creativecommons.org/publicdomain/zero/1.0/</a
+      >.
+    </p>
+    <!--- Links --->
+  </body>
+</html>

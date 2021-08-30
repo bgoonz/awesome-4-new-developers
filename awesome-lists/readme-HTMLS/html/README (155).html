@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-latex-awesome-license-cc-by-sa-4.0">
+      Awesome LaTeX
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="awesome"
+      /></a>
+      <a href="LICENSE.md"
+        ><img
+          src="https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg?style=flat"
+          alt="License: CC BY-SA 4.0"
+      /></a>
+    </h1>
+    <p>
+      <a href="https://www.latex-project.org/"
+        ><img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/LaTeX_logo.svg/220px-LaTeX_logo.svg.png"
+          align="right"
+          width="100"
+      /></a>
+    </p>
+    <blockquote>
+      <p>
+        This is a curated list of awesome stuff for the
+        <a href="https://www.latex-project.org/">(La)TeX typesetting system</a>.
+      </p>
+    </blockquote>
+    <h2 id="contents">Contents</h2>
+    <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+    <ul>
+      <li><a href="#learning-latex">Learning LaTeX</a></li>
+      <li><a href="#distributions">Distributions</a></li>
+      <li>
+        <a href="#engines">Engines</a>
+        <ul>
+          <li>
+            <a href="#latex-formulas-on-the-web">LaTeX formulas on the web</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#editors">Editors</a>
+        <ul>
+          <li><a href="#latex-focused">LaTeX-focused</a></li>
+          <li>
+            <a href="#general-purpose-text-editors"
+              >General purpose text editors</a
+            >
+          </li>
+          <li><a href="#online-editors">Online editors</a></li>
+        </ul>
+      </li>
+      <li><a href="#bibliography-tools">Bibliography tools</a></li>
+      <li><a href="#build-tools">Build Tools</a></li>
+      <li><a href="#misc-tools">Misc. Tools</a></li>
+      <li>
+        <a href="#latex-compatible-gui-tools">LaTeX-compatible GUI tools</a>
+      </li>
+      <li>
+        <a href="#packages">Packages</a>
+        <ul>
+          <li><a href="#references">References</a></li>
+          <li><a href="#tables">Tables</a></li>
+          <li>
+            <a href="#graphics">Graphics</a>
+            <ul>
+              <li><a href="#pstricks">PSTricks</a></li>
+              <li><a href="#tikz">TikZ</a></li>
+            </ul>
+          </li>
+          <li><a href="#source-code">Source Code</a></li>
+          <li><a href="#typography">Typography</a></li>
+        </ul>
+      </li>
+      <li><a href="#templates">Templates</a></li>
+      <li><a href="#symbols">Symbols</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#showcases">Showcases</a></li>
+      <li><a href="#tutorials">Tutorials</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#blogs">Blogs</a></li>
+      <li><a href="#social-media">Social media</a></li>
+      <li><a href="#meta-awesome-latex">Meta Awesome-LaTeX</a></li>
+      <li><a href="#legend">Legend</a></li>
+    </ul>
+    <!-- /TOC -->
+    <h2 id="learning-latex">Learning LaTeX</h2>
+    <p>Guides how to learn LaTeX</p>
+    <ul>
+      <li>
+        <a href="https://learnlatex.GitHub.io/">learnlatex.GitHub.io</a> -
+        Browser-based LaTeX tutorial.
+      </li>
+    </ul>
+    <h2 id="distributions">Distributions</h2>
+    <ul>
+      <li>
+        <a href="https://tug.org/mactex/">MacTeX</a> - Most common LaTeX
+        distribution for macOS, basically TeXLive with some Mac-specific tools
+        added.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+      </li>
+      <li>
+        <a href="https://www.tug.org/texlive/">TeX Live</a> - Most common LaTeX
+        distribution for Unix-like operating systems, including GNU/Linux. Also
+        works on Windows.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+      </li>
+      <li>
+        <a href="https://miktex.org">MikTeX</a> - Most common LaTeX distribution
+        for Windows, but also available for Mac, Linux or as Docker image.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+    </ul>
+    <h2 id="engines">Engines</h2>
+    <ul>
+      <li>
+        <a href="https://www.tug.org/applications/pdftex/">pdfTeX</a> - TeX
+        compiler that produces PDF files immediately instead of DVI files
+        (nowadays, this is the standard compiler for many users).
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="http://xetex.sourceforge.net">XeTeX</a> - TeX compiler that
+        provides better unicode and font support than TeX/pdfTeX (i.e. you can
+        use the fonts of your operating system instead of only TeX fonts).
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="http://www.luatex.org">LuaTeX</a> - (La)TeX compiler that
+        supports Lua code for scripting and has improved unicode and font
+        support than standard TeX/pdfTeX.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://tectonic-typesetting.GitHub.io/en-US/">tectonic</a> -
+        Modern, self contained (La)TeX compiler powered by XeTeX and TeXLive.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+    </ul>
+    <h3 id="latex-formulas-on-the-web">LaTeX formulas on the web</h3>
+    <ul>
+      <li>
+        <a href="https://sites.google.com/site/autolatexequations"
+          >Auto-LaTeX Equations with Google Docs</a
+        >
+        - Render high-quality math equations directly in Google Docs.
+      </li>
+      <li>
+        <a href="https://www.mathjax.org">MathJaX</a> - JavaScript engine to
+        render mathematical formulas on the web. The outcome looks really slick.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://ctan.org/pkg/mimetex">mimeTeX</a> - mimeTeX is a rather
+        old tool to render LaTeX formulas to PNG figures for your web site,
+        without actually needing a LaTeX installation on your server.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://ctan.org/pkg/mathtex">mathTeX</a> - mathTeX is the
+        successor of mimeTeX: it produces nicer-looking images but it requires
+        LaTeX to be installed on your server.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://khan.GitHub.io/KaTeX/">KaTeX</a> - KaTeX is a math
+        rendering library made by Khan Academy focusing on fast load times. All
+        output is processed as plain HTML instead of fixed images.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://franklinjl.org/">Franklin.jl</a> - Static site
+        generator with KaTeX support, code evaluation, LaTeX-like commands and
+        optional pre-rendering, in Julia.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://github.com/nschloe/purple-pi">Purple Pi</a> - Browser
+        extension that lets you use LaTeX in GitHub pages, StackOverflow etc.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+    </ul>
+    <h2 id="editors">Editors</h2>
+    <p>
+      Because editing LaTeX code with notepad is not awesome. There are many
+      editors out there, below are the most awesome editors. A complete list of
+      LaTeX editors is collected at
+      <a href="https://tex.stackexchange.com/">tex.stackexchange.com</a> as
+      <a href="https://tex.stackexchange.com/q/339/9075"
+        >big list of LaTeX Editors/IDEs</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://tex.stackexchange.com/questions/339/latex-editors-ides"
+          >List of popular LaTeX editors</a
+        >
+        - Community-maintained list of popular LaTeX editors including a
+        screenshot and a short description.
+      </li>
+    </ul>
+    <h3 id="latex-focused">LaTeX-focused</h3>
+    <p>Some of the most awesome editor for LaTeX do just that: edit LaTeX.</p>
+    <ul>
+      <li>
+        <a href="https://kile.sourceforge.io">Kile</a> - Great LaTeX editor
+        originally from the Linux/KDE community. It runs fine on Windows and
+        macOS as well.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="http://www.xm1math.net/texmaker/">TeXMaker</a> - Pretty good
+        alternative to Kile.
+      </li>
+      <li>
+        <a href="https://www.texstudio.org">TeXStudio</a> - Cross-platform LaTeX
+        editor that stems from TeXMaker.
+      </li>
+      <li>
+        <a href="http://www.winedt.com">WinEdt</a> - The LaTeX editor many
+        people swear by. Only for
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />.
+      </li>
+      <li>
+        <a href="http://www.texniccenter.org">TeXnicCenter</a> - Quite old but
+        free and decent editor for LaTeX.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+      </li>
+      <li>
+        <a href="https://www.lyx.org">LyX</a> - Cross-platform WYSIWYM editor
+        that uses LaTeX behind the scenes to render documents.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="http://pages.uoregon.edu/koch/texshop/">TeXShop</a> -
+        No-nonsense editor for LaTeX documents which is included in MacTeX.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+      </li>
+      <li>
+        <a href="https://www.tug.org/texworks/">TeXWorks</a> - No-nonsense
+        editor for LaTeX code, modeled after TeXShop, but this one is
+        cross-platform.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="http://www.bakoma-tex.com">BakomaTex</a> - Commercial LaTeX
+        editor that allows to edit your document both using its source code and
+        WYSIWYG.
+      </li>
+      <li>
+        <a href="http://www.inlage.com/home">Inlage</a> - Commercial LaTeX
+        editor with handwritten formula recognition, Excel importing and more
+        nifty features.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+      </li>
+      <li>
+        <a href="https://www.texpadapp.com">Texpad</a> - Commercial LaTeX editor
+        for macOS and iOS, with excellent features (document overview,
+        synchronised PDF display, autocompletion, sync across devices, etc.)
+        that never get in the way of writing.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+      </li>
+    </ul>
+    <h3 id="general-purpose-text-editors">General purpose text editors</h3>
+    <p>
+      These editors are no one-trick ponies: sure, they edit LaTeX, but they can
+      do a lot more!
+    </p>
+    <ul>
+      <li>
+        <a href="https://atom.io">Atom</a>
+        <a href="https://github.com/mehcode/awesome-atom"
+          ><img
+            src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+            alt="Atom"
+        /></a>
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+        <ul>
+          <li>
+            <a href="https://atom.io/packages/latextools">LaTeXTools</a> - Atom
+            port of the Sublime Text package of the same name.
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+              alt="foss"
+            />
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.sublimetext.com">Sublime Text</a>
+        <a href="https://github.com/dreikanter/sublime-bookmarks"
+          ><img
+            src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+            alt="Sublime Text"
+        /></a>
+        <ul>
+          <li>
+            <a href="http://www.latexing.com">LaTeXing</a> - Commercial plug-in
+            to edit LaTeX.
+          </li>
+          <li>
+            <a href="https://github.com/SublimeText/LaTeXTools">LaTeXTools</a> -
+            Free LaTeX plugin for Sublime Text.
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+              alt="foss"
+            />
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.gnu.org/software/emacs/">Emacs</a>
+        <a href="https://github.com/emacs-tw/awesome-emacs"
+          ><img
+            src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+            alt="Emacs"
+        /></a>
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+        <ul>
+          <li>
+            <a href="https://www.gnu.org/software/auctex/">AucTeX</a> - Emacs
+            plugin for LaTeX that also shows a preview of equations and figures.
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+              alt="foss"
+            />
+          </li>
+          <li>
+            <a href="https://www.gnu.org/software/auctex/reftex">RefTeX</a> -
+            Emacs plugin for LaTeX that adds support for labels, references, and
+            citations.
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+              alt="foss"
+            />
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="http://www.vim.org">Vim</a>
+        <a href="https://github.com/mhinz/vim-galore"
+          ><img
+            src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+            alt="Vim"
+        /></a>
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+        <ul>
+          <li>
+            <a href="http://vim-latex.sourceforge.net">Vim-LaTeX</a>
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+              alt="foss"
+            />
+          </li>
+          <li>
+            <a href="https://github.com/xuhdev/vim-latex-live-preview"
+              >LaTeX Live Preview</a
+            >
+            - Instantly previews your LaTeX document.
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+              alt="foss"
+            />
+          </li>
+          <li>
+            <a href="https://github.com/lervag/vimtex">vimtex</a> - Modern vim
+            plugin for editing LaTeX files. Has a variety of features including
+            live preview and forward search.
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+              alt="foss"
+            />
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.jetbrains.com/idea/">IntelliJ</a>
+        <ul>
+          <li>
+            <a href="https://github.com/Ruben-Sten/TeXiFy-IDEA">TeXiFy-IDEA</a>
+            - Free LaTeX plugin for IntelliJ IDEA.
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+              alt="foss"
+            />
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://code.visualstudio.com/">VS Code</a>
+        <a href="https://github.com/viatsko/awesome-vscode"
+          ><img
+            src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+            alt="VS Code"
+        /></a>
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+        <ul>
+          <li>
+            <a href="https://github.com/James-Yu/LaTeX-Workshop"
+              >LaTeX Workshop</a
+            >
+            - LaTeX extension for Visual Studio Code
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+              alt="foss"
+            />
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="online-editors">Online editors</h3>
+    <p>Online editors that allow you to edit documents collaboratively.</p>
+    <ul>
+      <li>
+        <a
+          href="https://tex.stackexchange.com/questions/3/compiling-documents-online/1654#1654"
+          >List of popular online LaTeX editors</a
+        >
+        - Community-maintained list of popular online LaTeX editor including
+        equation editors.
+      </li>
+      <li>
+        <a href="https://www.authorea.com">Authorea</a> - Online editor with
+        built-in git support and bibliography tools.
+      </li>
+      <li>
+        <a href="https://www.sharelatex.com">ShareLaTeX</a> - Has pretty great
+        LaTeX documentation and simple version control.
+      </li>
+      <li>
+        <a href="https://www.overleaf.com">Overleaf</a> - Online editor, also
+        with a WYSIWYM editor and git support.
+      </li>
+      <li>
+        <a href="https://papeeria.com">Papeeria</a> - Online editor with
+        built-in git support.
+      </li>
+      <li>
+        <a href="https://zohooo.GitHub.io/jaxedit/">JaxEdit</a> - Online LaTeX
+        editor with Live Preview and nice presentation mode.
+      </li>
+    </ul>
+    <h2 id="bibliography-tools">Bibliography tools</h2>
+    <ul>
+      <li>
+        <a href="https://www.jabref.org">JabRef</a> - Very powerful
+        cross-platform (Java) bibtex editor. The GUI looks quite dated, though.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://github.com/alejandrogallo/papis">Papis</a> - Extremely
+        customizable, powerful and simple cross-platform (Python) library
+        manager. It has a very complete Command-Line-Interface, several GUIs and
+        scripting capability.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="http://bibdesk.sourceforge.net">Bibdesk</a> - Great
+        bibliography editor for
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />.
+      </li>
+      <li>
+        <a href="https://www.zotero.org">Zotero</a> - Reference manager for your
+        browser that also exports to bibtex and integrates with many LaTeX
+        editors.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <a href="https://github.com/zotero/"
+          ><img
+            src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+            alt="foss"
+        /></a>
+      </li>
+      <li>
+        <a href="https://www.mendeley.com">Mendeley</a> - Both an app and cloud
+        client to manage your references and PDFs. Can sync out to a bibtex file
+        for your LaTeX workflow.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+      </li>
+      <li>
+        <a href="https://github.com/nschloe/betterbib">betterbib</a> -
+        Command-line utility for improving your BibTeX files. Fetches
+        information from online sources.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+    </ul>
+    <h2 id="build-tools">Build Tools</h2>
+    <p>
+      Compiling LaTeX documents can be tedious, build tools help you to manage
+      the compilation process.
+    </p>
+    <ul>
+      <li>
+        <a href="https://www.ctan.org/pkg/arara">Arara</a> (<a
+          href="https://github.com/cereda/arara"
+          >GitHub repo</a
+        >) - Simple tool that allows you to specify which tools to call inside
+        your document and it can be extended quite easily.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://www.ctan.org/pkg/latexmk">latexmk</a> - Build tool that
+        is the commonly used by many LaTeX editors (LaTeXing, TeXShop, etc.) to
+        build your LaTeX files.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://github.com/alejandrogallo/latex-makefile"
+          >latex-makefile</a
+        >
+        - <code>Makefile</code> based build tool that attempts to be as general
+        and lightweight as possible.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+    </ul>
+    <h2 id="misc.-tools">Misc. Tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/Alexis-benoist/CaTeX">CaTeX</a> -
+        Concatenates LaTeX documents with attention for properly merging the
+        preamble.
+      </li>
+      <li>
+        <a href="https://pandoc.org">Pandoc</a> - This program converts almost
+        any document format (LaTeX, DOC, markdown, etc.) to almost any other
+        format. A great tool to aid workflows where multiple formats are used.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://www.codecogs.com/latex/eqneditor.php"
+          >Codecogs Eqn Editor</a
+        >
+        - Online LaTeX equation editor that allows you to produce figures
+        containing an equation.
+      </li>
+      <li>
+        <a href="https://www.chachatelier.fr/latexit/">LaTeXiT</a> - LaTeXit is
+        an equation editor that makes it easy to drag-and-drop rendered
+        equations (as PDF, PNG, etc.) into your non-LaTeX documents on the Mac.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+      </li>
+      <li>
+        <a href="https://klatexformula.sourceforge.io">KLaTeXFormula</a> -
+        Cross-platform alternative for LaTeXit.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="http://equalx.sourceforge.net">EqualX</a> - Graphical LaTeX
+        formula editor.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="http://baruch.ev-en.org/proj/chktex/">ChkTeX</a> - Linter /
+        code checker for LaTeX documents.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="http://latexeqedit.sourceforge.net/index.php">LaTeXEqEdit</a> -
+        LaTeX formula editor for Windows.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://www.thrysoee.dk/laeqed/">Laeqed</a> - Crossplatform
+        LaTeX formula to PNG convertor.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://github.com/nschloe/blacktex">blacktex</a> -
+        Command-line tool that replaces commonly occurring LaTeX anti-patterns
+        and cleans up your files.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://github.com/sylvainhalle/textidote">TeXtidote</a> - A
+        cross-platform (Java) spelling, grammar and style checker for LaTeX
+        documents.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+    </ul>
+    <h2 id="latex-compatible-gui-tools">LaTeX-compatible GUI tools</h2>
+    <ul>
+      <li>
+        <a href="http://www.tikzedt.org">TikzEdt</a> (also:
+        <a href="https://github.com/hchapman/tikzedt">GitHub repo</a>) - WYSIWYG
+        and text-based editor for TikZ pictures.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://github.com/fredokun/TikZ-Editor">TikZ-Editor</a> -
+        Live-previewing editor for TikZ figures.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="http://ipe.otfried.org">IPE</a> - Drawing tool that integrates
+        well with LaTeX commands and documents.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://www.geogebra.org/cms/">GeoGebra</a> - Cross-platform
+        geometry tool with output to TikZ.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://wiki.gnome.org/Apps/Dia">Dia</a> - Cross-platform
+        diagramming tool that can export to PSTricks and MetaPost code.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://tikzit.GitHub.io">TikZiT</a> - GUI tool for creating
+        graphs and string diagrams using PGF/TikZ.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+    </ul>
+    <h2 id="packages">Packages</h2>
+    <ul>
+      <li>
+        <a href="https://www.ctan.org">CTAN</a> - The Comprehensive TeX Archive
+        Network is the place to look for useful packages and documentation.
+      </li>
+    </ul>
+    <h3 id="references">References</h3>
+    <ul>
+      <li>
+        <a href="https://tex.stackexchange.com/a/36312/9075"
+          >Cross-reference packages explained</a
+        >
+        - Elaboration on cross-reference packages (cleveref, varioref,
+        theoremref, nameref, etc.): Which to use, which conflict?
+      </li>
+    </ul>
+    <h3 id="tables">Tables</h3>
+    <ul>
+      <li>
+        <a href="https://www.ctan.org/pkg/excel2latex?lang=en">Excel2LaTeX</a> -
+        Excel (2010 and older) macros to produce LaTeX
+        <code>tabular</code> code.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+      </li>
+      <li>
+        <a href="http://freshmeat.sourceforge.net/projects/csv2latex"
+          >csv2latex</a
+        >
+        - Converts CSV files from your favorite programs to LaTeX
+        <code>tabular</code>s.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+      </li>
+      <li>
+        <a href="https://www.tablesgenerator.com">Tables Generator</a> - This
+        website provides a graphical interface to input your table and produces
+        properly-formatted code for LaTeX, Markdown, HTML, etc.
+      </li>
+      <li>
+        <a href="https://www.ctan.org/pkg/pgfplotstable?lang=en"
+          >pgfplotstable</a
+        >
+        - This package displays numerical tables rounded to desired precision in
+        various display formats. It can even read CSV files to include directly
+        in your LaTeX document.
+      </li>
+    </ul>
+    <h3 id="graphics">Graphics</h3>
+    <h4 id="pstricks">PSTricks</h4>
+    <p>
+      PSTricks is a great library to draw figures for inclusion in
+      PostScript/DVI files.
+    </p>
+    <h4 id="tikz">TikZ</h4>
+    <p>
+      TikZ is an awesome package with many plugins that allow you to create
+      figures from within your LaTeX documents. Typically, it is easier to get
+      to work with <code>pdflatex</code> than PSTricks is.
+    </p>
+    <ul>
+      <li>
+        <a href="http://www.texample.net">TeXample</a> - Blog about LaTeX, with
+        a big collection of TikZ figures.
+      </li>
+      <li>
+        <a href="https://sciences-indus-cpge.papanicola.info/-LaTeX-en-SI-"
+          >LaTeX en SI</a
+        >
+        - Useful website with some custom packages to draw special plots (Bode,
+        Nyquist, electrical schematics, block schematics, etc.) using TikZ. Note
+        that everything is in French.
+      </li>
+      <li>
+        <a href="http://altermundus.com/pages/tkz/index.html">tkz</a> -
+        Collection of TikZ-based packages to make plots and graphs.
+      </li>
+      <li>
+        <a href="http://pgfplots.sourceforge.net">pgfplots</a> - Truly awesome
+        plotting library on top of and in the style of TikZ/pgf. This library
+        can load in CSV data files, perform some calculations and create
+        beautiful plots.
+      </li>
+      <li>
+        <a href="https://cremeronline.com/LaTeX/minimaltikz.pdf"
+          >A very minimal introduction to TikZ (PDF)</a
+        >
+        - Short introductory document to the world of TikZ, written by Jacques
+        Crémer.
+      </li>
+      <li>
+        <a href="https://github.com/PetarV-/TikZ">PetarV-/TikZ</a> - Collection
+        of publication-ready PGF/TikZ figures by Petar Veličković.
+      </li>
+      <li>
+        <a href="https://github.com/matlab2tikz/matlab2tikz">matlab2tikz</a> -
+        Convert your MATLAB plots to PGFPlots/TikZ.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://github.com/nschloe/tikzplotlib">tikzplotlib</a> -
+        Convert your matplotlib plots to PGFPlots/TikZ.
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+          alt="windows"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+          alt="linux"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+          alt="mac"
+        />
+        <img
+          src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+          alt="foss"
+        />
+      </li>
+      <li>
+        <a href="https://latexdraw.com">TikZBlog</a> - Step-by-Step Tutorials
+        about How to Draw Illustrations in LaTeX.
+      </li>
+    </ul>
+    <h3 id="source-code">Source Code</h3>
+    <ul>
+      <li>
+        <a href="https://www.ctan.org/pkg/minted">minted</a> - The minted
+        package uses <a href="http://pygments.org/">pygments</a> to generate the
+        listings. In this way, LaTeX is able to format more than 300 programming
+        and markup languages and other text formats.
+      </li>
+    </ul>
+    <h3 id="typography">Typography</h3>
+    <ul>
+      <li>
+        <a href="https://ctan.org/pkg/microtype">microtype</a> - This package
+        improves the appearance of your documents by enabling margin kerning and
+        font expansion.
+      </li>
+    </ul>
+    <h3 id="presentations-slides">Presentations, Slides</h3>
+    <ul>
+      <li>
+        <a href="https://nics.nilcons.com/">nics</a> - An opinionated
+        alternative to Beamer, that we created with the hopes to make common
+        tasks very easy and beautifully rendered by default. Has awesome
+        documentation and a detailed cheatsheet to help you getting started.
+      </li>
+    </ul>
+    <h2 id="templates">Templates</h2>
+    <ul>
+      <li>
+        <a href="https://www.latextemplates.com">LaTeX templates</a> -
+        Collection of templates for papers, posters, resumés, theses, books,
+        presentations, … for LaTeX.
+      </li>
+      <li>
+        <a href="https://github.com/martinbjeldbak/ultimate-beamer-theme-list"
+          >Ultimate Beamer Theme List</a
+        >
+        - Links to various beamer themes along with PDF previews.
+      </li>
+    </ul>
+    <h2 id="symbols">Symbols</h2>
+    <ul>
+      <li>
+        <a href="https://www.ctan.org/tex-archive/info/symbols/comprehensive/"
+          >Comprehensive LaTeX symbol list</a
+        >
+        - Very extensive list of symbols for LaTeX. Available in
+        <a
+          href="http://mirrors.ctan.org/info/symbols/comprehensive/symbols-a4.pdf"
+          >A4</a
+        >
+        and
+        <a
+          href="http://mirrors.ctan.org/info/symbols/comprehensive/symbols-letter.pdf"
+          >letter</a
+        >
+        sizes.
+      </li>
+      <li>
+        <a href="http://detexify.kirelabs.org/classify.html">Detexify</a> - You
+        draw the symbol and this site/app will tell you the LaTeX command.
+      </li>
+    </ul>
+    <h2 id="resources">Resources</h2>
+    <ul>
+      <li>
+        <a href="https://www.tug.org">TUG</a> - The TeX User Group is a way to
+        get in touch with other (La)TeX users.
+      </li>
+      <li>
+        <a href="http://texdoc.net">TeXDoc</a> - Online interface to the
+        <code>texdoc</code> utility to browse LaTeX packages and documentation.
+      </li>
+      <li>
+        <a href="http://www.dickimaw-books.com/latexresources.html"
+          >Dickimaw Books: LaTeX resources</a
+        >
+        - Great overview of resources useful for LaTeX.
+      </li>
+      <li>
+        <a href="http://latex-cookbook.net">LaTeX cookbook</a> - Sibling of
+        TeXample, contains quite a bit of example code.
+      </li>
+      <li>
+        <a href="http://mirrors.ctan.org/info/visualFAQ/visualFAQ.pdf"
+          >Visual FAQ</a
+        >
+        - Typesetting issues and a link to appropriate TeX FAQ answers.
+      </li>
+      <li>
+        <a href="https://github.com/MartinThoma/LaTeX-examples/"
+          >MartinThoma’s LaTeX example</a
+        >
+        - GitHub repository containing example LaTeX documents.
+      </li>
+      <li>
+        <a href="http://mactex-wiki.tug.org/wiki/index.php/TeX_Extras"
+          >MacTeX Wiki: TeX Extras</a
+        >
+        - Overview of useful tools for LaTeX. Many of them are specific for Mac,
+        but quite a bit are useful for other platforms as well.
+      </li>
+      <li>
+        <a href="http://latex.org/index.php">LaTeX community</a> - Forum and
+        blog about LaTeX.
+      </li>
+      <li>
+        German: <a href="https://texfragen.de">Neue TeX FAQ</a> - Modern and
+        updated LaTeX FAQ in German.
+      </li>
+      <li>
+        <a href="http://www.cs.stir.ac.uk/~kjt/software/latex/showbst.html"
+          >BibTeX Style Examples</a
+        >
+        - Example output of common BibTeX styles (BST files).
+      </li>
+      <li>
+        <a href="http://tex.world/">TeX World</a> - Websites supported by the
+        TeX Users Group, DANTE, and GUTenberg.
+      </li>
+      <li>
+        <a href="https://texnique.xyz">TeXnique</a> - A LaTeX Typesetting Game.
+      </li>
+    </ul>
+    <h2 id="showcases">Showcases</h2>
+    <ul>
+      <li>
+        <a
+          href="https://tex.stackexchange.com/questions/1319/showcase-of-beautiful-typography-done-in-tex-friends"
+          >Showcase of beautiful typography done in TeX &amp; friends</a
+        >
+        - Set of examples demonstrating the power of LaTeX.
+      </li>
+      <li>
+        <a href="https://tex.stackexchange.com/q/281415/9075"
+          >Showcase of beautiful invitations in TeX</a
+        >
+        - Showcase of invitations typeset using LaTeX.
+      </li>
+      <li>
+        <a href="https://tex.stackexchange.com/q/219774/9075"
+          >Showcase of “programming your document” paradigm</a
+        >
+        - Collection of LaTeX documents demonstrating how LaTeX can be used like
+        a programming language.
+      </li>
+      <li>
+        <a href="https://www.tug.org/texshowcase/">TUG: TeX showcase</a> -
+        Website from the TUG that shows some examples of what LaTeX can do.
+      </li>
+    </ul>
+    <h2 id="tutorials">Tutorials</h2>
+    <ul>
+      <li>
+        <a href="http://mirrors.ctan.org/info/lshort/english/lshort.pdf"
+          >The (Not So) Short Introduction to LaTeX2e</a
+        >
+        - Very comprehensive introduction to LaTeX.
+      </li>
+      <li>
+        <a href="https://github.com/LewisVo/Begin-Latex-in-minutes"
+          >Begin LaTeX in minutes</a
+        >
+        - Brief intro to LaTeX for beginners that helps you use LaTeX with ease.
+      </li>
+      <li>
+        <a href="https://www.andy-roberts.net/writing/latex"
+          >Getting to Grips with LaTeX</a
+        >
+        - Complete guide going through the majority of things you need to know
+        about LaTeX.
+      </li>
+      <li>
+        <a
+          href="https://tex.stackexchange.com/questions/84384/latex-introductions-in-languages-other-than-english/84385"
+          >LaTeX introductions in languages other than English</a
+        >
+        - Collection of introductions in many languages.
+      </li>
+    </ul>
+    <h2 id="books">Books</h2>
+    <ul>
+      <li>
+        <a href="https://en.wikibooks.org/wiki/LaTeX">Wikibooks: LaTeX</a> - The
+        LaTeX wikibook. Not really a paper book, but it is equally extensive.
+      </li>
+      <li>
+        <a href="https://www.informit.com/store/latex-companion-9780201362992"
+          >The LaTeX Companion, F. Mittelbach (2004)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.informit.com/store/latex-graphics-companion-9780321508928"
+          >LaTeX Graphics Companion, M. Goossens (2007)</a
+        >
+      </li>
+      <li><a href="https://ctan.org/pkg/texbytopic">TeX by Topic (2007)</a></li>
+      <li>
+        <a href="https://ctan.org/pkg/impatient"
+          >TeX for the Impatient (2020)</a
+        >
+      </li>
+      <li>
+        <a href="http://latex.silmaril.ie/formattinginformation"
+          >Formatting Information (2020)</a
+        >
+        - This is the HTML5-based online version of the book
+        <em
+          >Formatting Information - An introduction to typesetting with
+          LATEX</em
+        >. It has been continuosuly updated since the early 2000s.
+      </li>
+    </ul>
+    <h2 id="blogs">Blogs</h2>
+    <ul>
+      <li>
+        <a href="http://texblog.net">TeXblog</a> - Blog about LaTeX and
+        everything related.
+      </li>
+      <li>
+        <a href="https://texblog.org">texblog.org</a> - Blog on LaTeX and
+        related topics (tutorials, packages, code snippets, etc.).
+      </li>
+      <li>
+        <a href="http://tex-talk.net">TeX Talk</a> - Blog for the TeX Stack
+        Exchange site with news and interviews.
+      </li>
+    </ul>
+    <h2 id="social-media">Social media</h2>
+    <ul>
+      <li>
+        <a href="https://www.linkedin.com/groups/1600297"
+          >LinkedIn: TeX/LaTeX User Group</a
+        >
+      </li>
+      <li>
+        <span class="citation" data-cites="TeXtip">[Twitter: @TeXtip]</span
+        >(https://twitter.com/TeXtip) - Tips related to (La)TeX by
+        <a href="https://www.johndcook.com/">John D. Cook</a>.
+      </li>
+      <li>
+        <a href="https://tex.stackexchange.com">TeX.StackExchange</a> -
+        StackExchange TeX section.
+      </li>
+    </ul>
+    <hr />
+    <!-- Icons -->
+    <h2 id="meta-awesome-latex">Meta Awesome-LaTeX</h2>
+    <p>
+      If you want to contribute, please do read our
+      <a href="CONTRIBUTING.md">CONTRIBUTING</a> guidelines.
+    </p>
+    <h2 id="legend">Legend</h2>
+    <p>
+      The icons indicating Mac, Linux and Windows compatibility show when a
+      program is <em>only</em> available for those platforms. So absence of
+      those icons means that the software is fully cross-platform.
+    </p>
+    <table>
+      <thead>
+        <tr class="header">
+          <th style="text-align: center">Logo</th>
+          <th style="text-align: left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td style="text-align: center">
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/apple.svg"
+              alt="mac"
+            />
+          </td>
+          <td style="text-align: left">
+            <a href="https://www.apple.com/osx/">macOS</a>
+          </td>
+        </tr>
+        <tr class="even">
+          <td style="text-align: center">
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/linux.svg"
+              alt="linux"
+            />
+          </td>
+          <td style="text-align: left">
+            <a href="https://www.gnu.org">GNU/Linux</a>
+          </td>
+        </tr>
+        <tr class="odd">
+          <td style="text-align: center">
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/windows.svg"
+              alt="windows"
+            />
+          </td>
+          <td style="text-align: left">
+            <a href="https://www.microsoft.com/windows">Microsoft Windows</a>
+          </td>
+        </tr>
+        <tr class="even">
+          <td style="text-align: center">
+            <img
+              src="https://cdn.rawgit.com/egeerardyn/awesome-LaTeX/700138fe725574e1741f148df6d1f77a8aa07eee/fig/foss.svg"
+              alt="FOSS"
+            />
+          </td>
+          <td style="text-align: left">
+            <a href="https://opensource.org">Free Open-Source Software</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <p>All trademarks are property of their respective owners.</p>
+  </body>
+</html>

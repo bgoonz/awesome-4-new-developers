@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-dataviz">Awesome dataviz</h1>
+    <p>
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+      <a href="https://travis-ci.org/fasouto/awesome-dataviz"
+        ><img
+          src="https://api.travis-ci.org/fasouto/awesome-dataviz.svg?branch=master"
+          alt="Build Status"
+      /></a>
+    </p>
+    <p>
+      A curated list of awesome <strong>open-source</strong> data visualizations
+      frameworks, libraries and software. Inspired by
+      <a href="https://github.com/vinta/awesome-python">awesome-python</a>.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#awesome-dataviz">Awesome dataviz</a>
+        <ul>
+          <li>
+            <a href="#javascript-tools">JavaScript tools</a>
+            <ul>
+              <li><a href="#charting-libraries">Charting libraries</a></li>
+              <li>
+                <a href="#charting-libraries-for-graphs"
+                  >Charting libraries for graphs</a
+                >
+              </li>
+              <li><a href="#maps">Maps</a></li>
+              <li><a href="#d3">d3</a></li>
+              <li><a href="#react">React</a></li>
+              <li><a href="#misc">Misc</a></li>
+            </ul>
+          </li>
+          <li><a href="#android-tools">Android tools</a></li>
+          <li><a href="#c-tools">C++ tools</a></li>
+          <li><a href="#excel-tools">Excel tools</a></li>
+          <li><a href="#golang-tools">Golang tools</a></li>
+          <li><a href="#ios-tools">iOS tools</a></li>
+          <li><a href="#python-tools">Python tools</a></li>
+          <li><a href="#r-tools">R tools</a></li>
+          <li><a href="#ruby-tools">Ruby tools</a></li>
+          <li><a href="#markup-based-tools">Markup-based tools</a></li>
+          <li><a href="#other-tools">Other tools</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#resources">Resources</a>
+        <ul>
+          <li><a href="#books">Books</a></li>
+          <li><a href="#podcasts">Podcasts</a></li>
+          <li><a href="#twitter-accounts">Twitter accounts</a></li>
+          <li><a href="#websites">Websites</a></li>
+        </ul>
+      </li>
+      <li><a href="#contributing">Contributing</a></li>
+      <li><a href="#license">License</a></li>
+    </ul>
+    <h2 id="javascript-tools">JavaScript tools</h2>
+    <h3 id="charting-libraries">Charting libraries</h3>
+    <ul>
+      <li>
+        <a href="https://apexcharts.com/">ApexCharts</a> - Modern &amp;
+        Interactive SVG Charts.
+      </li>
+      <li>
+        <a href="http://www.chartjs.org/">Chart.js</a> - Charts with the canvas
+        tag.
+      </li>
+      <li>
+        <a href="http://gionkunz.github.io/chartist-js/">Chartist.js</a> -
+        Responsive charts with great browser compatibility.
+      </li>
+      <li>
+        <a href="https://github.com/dc-js/dc.js">dc.js</a> is an
+        multi-Dimensional charting built to work natively with crossfilter.
+      </li>
+      <li>
+        <a href="http://dimplejs.org/">Dimple</a> - An object-oriented API for
+        business analytics.
+      </li>
+      <li>
+        <a href="http://dygraphs.com/">Dygraphs</a> - Interactive line charts
+        library that works with huge datasets.
+      </li>
+      <li>
+        <a href="https://github.com/ecomfe/echarts">Echarts</a> - Highly
+        customizable and interactive charts ready for big datasets.
+        <a href="https://github.com/hustcc/echarts-for-react">React wrapper</a>
+      </li>
+      <li>
+        <a href="https://github.com/epochjs/epoch">Epoch</a> - Perfect to create
+        real-time charts.
+      </li>
+      <li>
+        <a href="https://metricsgraphicsjs.org/">MetricsGraphics.js</a> -
+        Optimized for time-series data.
+      </li>
+      <li>
+        <a href="https://github.com/novus/nvd3">NVD3</a> - A reusable charting
+        library written in d3.js.
+      </li>
+      <li>
+        <a href="https://github.com/plotly/plotly.js/">Plotly.js</a> - Powerful
+        declarative library with support for 20 chart types.
+      </li>
+      <li>
+        <a href="http://techanjs.org/">TechanJS</a> - Stock and financial
+        charts.
+      </li>
+      <li>
+        <a href="https://github.com/nhnent/tui.chart">TOAST UI Chart</a> -
+        Complete library with support for legacy browsers.
+      </li>
+    </ul>
+    <h3 id="charting-libraries-for-graphs">Charting libraries for graphs</h3>
+    <ul>
+      <li>
+        <a href="http://marvl.infotech.monash.edu/webcola/">Cola.js</a> - A tool
+        to create diagrams using constraint-based optimization techniques. Works
+        with d3 and svg.js.
+      </li>
+      <li>
+        <a href="http://js.cytoscape.org/">Cytoscape.js</a> - JavaScript library
+        for graph drawing maintained by
+        <a href="http://www.cytoscape.org">Cytoscape</a> core developers.
+      </li>
+      <li>
+        <a href="http://sigmajs.org/">Sigma.js</a> - JavaScript library
+        dedicated to graph drawing.
+      </li>
+      <li>
+        <a href="https://github.com/anvaka/VivaGraphJS">VivaGraph</a> - Graph
+        drawing library for JavaScript.
+      </li>
+    </ul>
+    <h3 id="maps">Maps</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/CartoDB/cartodb">CARTO</a> - CARTO is an
+        open source tool that allows for the storage and visualization of
+        geospatial data on the web.
+      </li>
+      <li>
+        <a href="https://github.com/AnalyticalGraphicsInc/cesium">Cesium</a> -
+        WebGL 3D globes and maps.
+      </li>
+      <li>
+        <a href="http://deck.gl/">Deck.gl</a> - WebGL framework for visual
+        exploratory data analysis of large datasets.
+      </li>
+      <li>
+        <a href="https://github.com/markmarkoh/datamaps">DataMaps</a> -
+        Interactive SVG maps using D3.js.
+      </li>
+      <li>
+        <a href="http://leafletjs.com">Leaflet</a> - JavaScript library for
+        mobile-friendly interactive maps.
+      </li>
+      <li>
+        <a href="https://github.com/neveldo/jQuery-Mapael">Mapael</a> - jQuery
+        plugin based on raphael.js to display vector maps.
+      </li>
+    </ul>
+    <h3 id="d3">d3</h3>
+    <ul>
+      <li>See <a href="https://github.com/wbkd/awesome-d3">Awesome D3</a></li>
+    </ul>
+    <h3 id="react">React</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/alibaba/BizCharts">BizCharts</a> - Alibaba
+        data visualization library based on G2 and React.
+        <a href="https://github.com/alibaba/BizCharts/tree/master/doc_en"
+          >English docs</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/uber/react-vis">React-vis</a> - React
+        components to build data visualizations.
+      </li>
+      <li>
+        <a href="https://github.com/recharts/recharts">Recharts</a> -
+        Declarative react components to render D3 charts.
+      </li>
+      <li>
+        <a href="https://formidable.com/open-source/victory/">Victory</a> -
+        Composable components for building interactive data visualizations
+      </li>
+      <li>
+        <a href="https://github.com/plouc/nivo">nivo</a> - Supercharged dataviz
+        components for React with isomorphic ability,
+        <a href="http://nivo.rocks">demo</a>.
+      </li>
+      <li>
+        <a href="https://github.com/finnfiddle/react-svg-textures"
+          >React Svg Textures</a
+        >
+        - Textures.js ported to React. Fully isomorphic.
+      </li>
+      <li>
+        <a href="https://devexpress.github.io/devextreme-reactive/react/chart/"
+          >DevExtreme React Chart</a
+        >
+        - High-performance plugin-based React chart for Bootstrap and Material
+        Design.
+      </li>
+    </ul>
+    <h3 id="misc">Misc</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/lipka/piecon">Piecon</a> - Pie charts in
+        your favicon.
+      </li>
+      <li>
+        <a href="http://riccardoscalco.github.io/textures/">Textures.js</a> - A
+        library to create SVG patterns.
+      </li>
+      <li>
+        <a href="http://timeline.knightlab.com/">Timeline.js</a> - Create
+        interactive timelines.
+      </li>
+      <li>
+        <a href="https://vega.github.io/vega/">Vega</a> - Vega is a
+        visualization grammar, a declarative format for creating, saving, and
+        sharing interactive visualization designs.
+      </li>
+      <li>
+        <a href="http://visjs.org/">Vis.js</a> - A dynamic visualization library
+        including timeline, networks and graphs (2D and 3D).
+      </li>
+    </ul>
+    <h2 id="android-tools">Android tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/bmarrdev/android-DecoView-charting"
+          >DecoView</a
+        >
+        - Animated circular wheel chart library.
+      </li>
+      <li>
+        <a href="https://github.com/PhilJay/MPAndroidChart">MPAndroidChart</a> -
+        A powerful &amp; easy to use chart library.
+      </li>
+      <li>
+        <a href="https://github.com/diogobernardino/WilliamChart"
+          >WilliamChart</a
+        >
+        - Simple chart library.
+      </li>
+    </ul>
+    <h2 id="excel-tools">Excel tools</h2>
+    <ul>
+      <li>
+        <a href="http://bestexcelmaps.com/">Best Excel Maps</a> - Choropleth
+        maps for Microsoft Excel.
+      </li>
+    </ul>
+    <h2 id="c-tools">C++ tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/lferry007/LargeVis">LargeVis</a> -
+        implementation of the
+        <a href="https://arxiv.org/abs/1602.00370">LargeVis paper</a>, used to
+        visualize large-scale and high-dimensional data.
+      </li>
+      <li>
+        <a href="https://github.com/facontidavide/PlotJuggler">PlotJuggler</a> -
+        open-source Qt5 application to plot charts (based on Qwt).
+      </li>
+      <li>
+        <a href="https://gitlab.kitware.com/vtk/vtk/blob/master/README.md"
+          >Visualization Toolkit (VTK)</a
+        >
+        - open-source library for 3d Graphics, image processing and
+        visualization.
+      </li>
+    </ul>
+    <h2 id="golang-tools">Golang tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/ajstarks/svgo">svgo</a> - Go Language
+        Library for SVG generation.
+      </li>
+    </ul>
+    <h2 id="ios-tools">iOS tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/Boris-Em/BEMSimpleLineGraph"
+          >BEMSimpleLineGraph</a
+        >
+        - Highly customizable and interactive line graphs.
+      </li>
+      <li>
+        <a href="https://github.com/danielgindi/Charts">Charts</a> - iOS port of
+        MPAndroidChart. You can create charts for both platforms with very
+        similar code.
+      </li>
+      <li>
+        <a href="https://github.com/Jawbone/JBChartView">JBChartView</a> -
+        Charting library for both line and bar graphs.
+      </li>
+      <li>
+        <a href="https://github.com/kevinzhow/PNChart">PNChart</a> - A simple
+        and beautiful chart lib used in Piner and CoinsMan.
+      </li>
+    </ul>
+    <h2 id="python-tools">Python tools</h2>
+    <ul>
+      <li>
+        <a href="https://altair-viz.github.io/">altair</a> - Declarative
+        statistical visualizations, based on Vega-Lite.
+      </li>
+      <li>
+        <a href="http://bokeh.pydata.org/en/latest/">bokeh</a> - Interactive Web
+        Plotting for Python.
+      </li>
+      <li>
+        <a href="https://github.com/spotify/chartify">Chartify</a> - Bokeh
+        wrapper that makes it easy for data scientists to create charts.
+      </li>
+      <li>
+        <a href="https://github.com/tehmaze/diagram">diagram</a> - Text mode
+        diagrams using UTF-8 characters
+      </li>
+      <li>
+        <a href="https://github.com/yhat/ggpy">ggplot</a> - plotting system
+        based on <a href="#r-tools">R’s</a> ggplot2.
+      </li>
+      <li>
+        <a href="https://github.com/glumpy/glumpy">glumpy</a> - OpenGL
+        scientific visualizations library.
+      </li>
+      <li>
+        <a href="http://holoviews.org/">holoviews</a> - Complex and declarative
+        visualizations from annotated data.
+      </li>
+      <li>
+        <a href="http://docs.enthought.com/mayavi/mayavi/">mayai</a> -
+        interactive scientific data visualization and 3D plotting in Python.
+      </li>
+      <li>
+        <a href="http://matplotlib.org/">matplotlib</a> - 2D plotting library.
+      </li>
+      <li>
+        <a href="https://github.com/ResidentMario/missingno">missingno</a> -
+        provides flexible toolset of data-visualization utilities that allows
+        quick visual summary of the completeness of your dataset, based on
+        matplotlib.
+      </li>
+      <li>
+        <a href="https://plot.ly/python/">plotly</a> - Interactive web based
+        visualization built on top of
+        <a href="https://github.com/plotly/plotly.js">plotly.js</a>
+      </li>
+      <li>
+        <a href="http://www.pyqtgraph.org/">PyQtGraph</a> - Interactive and
+        realtime 2D/3D/Image plotting and science/engineering widgets.
+      </li>
+      <li>
+        <a href="https://github.com/pyvista/pyvista">PyVista</a> – 3D plotting
+        and mesh analysis through a streamlined interface for the Visualization
+        Toolkit (VTK)
+      </li>
+      <li>
+        <a href="https://seaborn.pydata.org/">seaborn</a> - A library for making
+        attractive and informative statistical graphics.
+      </li>
+      <li>
+        <a href="http://toyplot.readthedocs.io/en/stable/">toyplot</a> - The
+        kid-sized plotting toolkit for Python with grownup-sized goals.
+      </li>
+      <li>
+        <a href="https://github.com/stemkoski/three.py/">three.py</a> - Easy to
+        use 3D library based on PyOpenGL. Inspired by Three.js.
+      </li>
+      <li>
+        <a href="https://veusz.github.io/">veusz</a> - Python multiplatform GUI
+        plotting tool and graphing library
+      </li>
+      <li>
+        <a href="http://vispy.org/">VisPy</a> - High-performance scientific
+        visualization based on OpenGL.
+      </li>
+      <li>
+        <a href="https://www.vtk.org/">vtk</a> - 3D computer graphics, image
+        processing, and visualization that includes a Python interface.
+      </li>
+    </ul>
+    <h2 id="r-tools">R tools</h2>
+    <ul>
+      <li>
+        <a href="https://ggplot2.tidyverse.org/">ggplot2</a> - A plotting system
+        based on the grammar of graphics.
+      </li>
+      <li>
+        <a href="http://ggvis.rstudio.com/">ggvis</a> - A data visualization
+        package with a syntax similar to ggplot2 which allows you to create rich
+        interactive graphics.
+      </li>
+      <li>
+        <a href="http://lattice.r-forge.r-project.org">lattice</a> - trellis
+        graphics for R
+      </li>
+      <li>
+        <a href="https://github.com/ropensci/plotly">plotly</a> - Interactive
+        charts (including adding interactivity to ggplot2 output), cartograms
+        and simple network diagrams
+      </li>
+      <li>
+        <a href="http://hafen.github.io/rbokeh/">rbokeh</a> - R Interface to
+        Bokeh.
+      </li>
+      <li>
+        <a href="https://cran.r-project.org/web/packages/rgl/index.html">rgl</a>
+        - 3D Visualization Using OpenGL
+      </li>
+      <li>
+        <a href="http://shiny.rstudio.com">shiny</a> - Framework for creating
+        interactive applications/visualisations
+      </li>
+      <li>
+        <a href="https://datastorm-open.github.io/visNetwork/">visNetwork</a> -
+        Interactive network visualisations
+      </li>
+    </ul>
+    <h2 id="ruby-tools">Ruby tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/ankane/chartkick">Chartkick</a> - Create
+        charts with one line of Ruby.
+      </li>
+    </ul>
+    <h2 id="markup-based-tools">Markup-based tools</h2>
+    <ul>
+      <li>
+        <a href="https://mermaidjs.github.io/mermaid-live-editor">mermaidjs</a>
+        - A simple markdown-like script language for generating charts from text
+        via javascript
+      </li>
+      <li>
+        <a href="http://viz-js.com/">viz-js.com</a> - A hack to put
+        <a href="http://www.graphviz.org/">Graphviz</a> on the web
+      </li>
+      <li>
+        <a href="http://wavedrom.com/">wavedrom.com</a> - Draws your Timing
+        Diagram or Waveform from simple textual description
+      </li>
+    </ul>
+    <h2 id="other-tools">Other tools</h2>
+    <p>
+      Tools that are not tied to a particular platform or language. -
+      <a href="https://github.com/mikesall/charted">Charted</a> - A charting
+      tool that produces automatic, shareable charts from any data file. -
+      <a href="http://circos.ca">Circos</a> - Visualizes data in a circular
+      layout, ideal for exploring relationships between objects or positions.
+      <a href="https://github.com/node/circos">Mirror on github</a>. -
+      <a href="https://github.com/gephi/gephi">Gephi</a> - An open-source
+      platform for visualizing and manipulating large graphs -
+      <a href="http://kepler.gl/">Kepler.gl</a> - Geospatial analysis tool for
+      large-scale data sets. -
+      <a href="http://lightning-viz.org/">Lightning</a> - A data-visualization
+      server providing API-based access to reproducible, web-based, interactive
+      visualizations. - <a href="http://rawgraphs.io">RAW</a> - Create web
+      visualizations from CSV or Excel files. -
+      <a href="https://github.com/holman/spark">Spark</a> - Sparklines for the
+      shell. It have several
+      <a href="https://github.com/holman/spark/wiki/Alternative-Implementations"
+        >implementations in different languages</a
+      >.
+    </p>
+    <h1 id="resources">Resources</h1>
+    <h2 id="books">Books</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.amazon.com/Design-Information-Introduction-Histories-Visualizations/dp/1592538061"
+          >Design for Information</a
+        >
+        by Isabel Meirelles.
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Best-American-Infographics-2014/dp/0547974515"
+          >The Best American Infographics 2014</a
+        >
+        by Gareth Cook.
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Visual-Display-Quantitative-Information/dp/0961392142"
+          >The Visual Display of Quantitative Information</a
+        >
+        by Edward Tufte.
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Street-Journal-Guide-Information-Graphics/dp/0393347281"
+          >The Wall Street Journal Guide to Information Graphics</a
+        >
+        by Dona M. Wong
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Visualization-Analysis-Design-AK-Peters/dp/1466508914"
+          >Visualization Analysis and Design</a
+        >
+        by Tamara Munzner.
+      </li>
+      <li>
+        <a href="http://chimera.labs.oreilly.com/books/1230000000345"
+          >Interactive Data Visualization for the Web</a
+        >
+        by Scott Murray. Available to read online. Focused on D3.
+      </li>
+      <li>
+        <a href="http://datavisualizationtoolkit.com"
+          >Data Visualization Toolkit</a
+        >
+        by Barrett Austin Clark. Uses D3, Ruby on Rails, Postgres, PostGIS,
+        &amp; Leaflet.
+      </li>
+    </ul>
+    <h2 id="podcasts">Podcasts</h2>
+    <ul>
+      <li><a href="http://datastori.es/">Data Stories</a></li>
+      <li>
+        <a href="https://www.datacamp.com/community/podcast">DataFramed</a>
+      </li>
+    </ul>
+    <h2 id="twitter-accounts">Twitter accounts</h2>
+    <ul>
+      <li><a href="https://twitter.com/albertocairo">Alberto Cairo</a></li>
+      <li><a href="https://twitter.com/datavis">Benjamin Wiederkehr</a></li>
+      <li><a href="https://twitter.com/dataandme">Mara Averick</a></li>
+      <li><a href="https://twitter.com/wattenberg">Martin Wattenberg</a></li>
+      <li><a href="https://twitter.com/mbostock">Mike Bostock</a></li>
+      <li><a href="https://twitter.com/NadiehBremer">Nadieh Bremer</a></li>
+      <li><a href="https://twitter.com/nytgraphics">NYT Graphics</a></li>
+      <li><a href="https://twitter.com/VisualizingOrg">Visualizing</a></li>
+    </ul>
+    <h2 id="websites">Websites</h2>
+    <ul>
+      <li><a href="http://annkemery.com/">Ann K. Emery</a>’s blog</li>
+      <li>
+        <a href="https://www.datavisualizationsociety.com/"
+          >Data Visualization Society</a
+        >
+        - The Data Visualization Society is an organization dedicated to
+        fostering community for data visualization professionals.
+      </li>
+      <li><a href="https://eagereyes.org/">eagereyes</a></li>
+      <li><a href="http://stephanieevergreen.com/">EvergreenData</a></li>
+      <li><a href="http://flowingdata.com/">FlowingData</a></li>
+      <li>
+        <a href="http://www.gnuplotting.org/">Gnuplotting</a> -
+        <a href="http://www.gnuplot.info/">Gnuplot</a> tutorials
+      </li>
+      <li>
+        <a href="http://www.informationisbeautiful.net/"
+          >Information is Beautiful</a
+        >
+      </li>
+      <li>
+        <a href="http://junkcharts.typepad.com/">Junk Charts</a> - Kaiser Fung
+        takes apart why certain datavizes work/don’t work
+      </li>
+      <li>
+        <a href="https://lisacharlotterost.github.io/"
+          >Lisa Rost thinks and discusses about why we dataviz</a
+        >
+      </li>
+      <li>
+        <a href="http://www.makeovermonday.co.uk/">Makeover Monday</a> blog -
+        <a href="https://twitter.com/search?q=%23makeovermonday"
+          >#MakeoverMonday</a
+        >
+        on twitter
+      </li>
+      <li>
+        <a href="http://www.datavizcatalogue.com/"
+          >The Data Visualization Catalogue</a
+        >
+        - A collection of data visualization methods, with pros and cons.
+      </li>
+      <li><a href="http://www.thefunctionalart.com/">the functional art</a></li>
+      <li>
+        <a href="https://source.opennews.org/articles/">The Open News</a> blog -
+        Open news has some good dataviz related articles from time to time
+      </li>
+      <li><a href="https://pudding.cool/">The Pudding</a></li>
+      <li>
+        <a href="https://truth-and-beauty.net/"
+          >Truth &amp; Beauty Operations</a
+        >
+      </li>
+      <li>
+        <a href="http://idl.cs.washington.edu/papers"
+          >University of Washington Interactive Data Lab Papers</a
+        >
+      </li>
+      <li>
+        <a href="https://www.vis4.net/blog/">vis4.net</a> - Random thoughts on
+        visualization and data journalism by Gregor Aisch
+      </li>
+      <li>
+        <a href="http://www.visualcomplexity.com/vc/">Visual Complexity</a> - A
+        site about the visualization of complex networks.
+      </li>
+    </ul>
+    <h1 id="contributing">Contributing</h1>
+    <ul>
+      <li>Please check for duplicates first.</li>
+      <li>Keep descriptions short, simple and unbiased.</li>
+      <li>Please make an individual commit for each suggestion</li>
+      <li>Add a new category if needed.</li>
+    </ul>
+    <p>Thanks for your suggestions!</p>
+    <h1 id="license">License</h1>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img src="https://licensebuttons.net/p/zero/1.0/88x31.png" alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="http://fabiosouto.me/">Fabio Souto</a> has waived all copyright
+      and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

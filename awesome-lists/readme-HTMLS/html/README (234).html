@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-plotters-awesome">
+      Awesome Plotters
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      A curated list of code and resources for computer-controlled drawing
+      machines and other visual art robots.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#hardware">Hardware</a>
+        <ul>
+          <li><a href="#plotters">Plotters</a></li>
+          <li><a href="#motor-controllers">Motor Controllers</a></li>
+          <li><a href="#accessories">Accessories</a></li>
+          <li><a href="#pens">Pens</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#software">Software</a>
+        <ul>
+          <li><a href="#hpgl">HPGL</a></li>
+          <li><a href="#g-code">G-code</a></li>
+          <li><a href="#plotter-specific">Plotter-Specific</a></li>
+          <li><a href="#vector-creation">Vector Creation</a></li>
+          <li><a href="#vector-utilities">Vector Utilities</a></li>
+          <li><a href="#fonts">Fonts</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#inspiration-and-instruction">Inspiration and Instruction</a>
+      </li>
+      <li>
+        <a href="#manuals-and-ephemera">Manuals and Ephemera</a>
+        <ul>
+          <li><a href="#manuals">Manuals</a></li>
+          <li><a href="#ephemera">Ephemera</a></li>
+        </ul>
+      </li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#plotter-art-for-sale">Plotter Art For Sale</a></li>
+      <li><a href="#other-awesomes">Other Awesomes</a></li>
+    </ul>
+    <h2 id="hardware">Hardware</h2>
+    <h3 id="plotters">Plotters</h3>
+    <ul>
+      <li>
+        <a href="https://shop.evilmadscientist.com/productsmenu/846">AxiDraw</a>
+        - Pen plotter from
+        <a href="https://www.evilmadscientist.com">Evil Mad Scientist</a>, very
+        popular on
+        <a href="https://twitter.com/hashtag/plottertwitter">#plottertwitter</a
+        >.
+      </li>
+      <li>
+        <a href="https://www.line-us.com">Line-us</a> - A cute little
+        kickstarted robotic drawing arm.
+      </li>
+      <li>
+        <a href="http://learn.makeblock.com/en/xy-plotter-robot-kit"
+          >Makeblock XY Plotter</a
+        >
+        - Hackable XY plotter kit (discontinued?).
+      </li>
+      <li>
+        <a href="https://www.thingiverse.com/thing:2349232">Drawing Robot</a> -
+        3d-Printable AxiDraw clone w/
+        <a href="https://blog.protoneer.co.nz/arduino-cnc-shield"
+          >Arduino CNC Shield</a
+        >
+        controller running grbl firmware.
+      </li>
+      <li>
+        <a href="https://www.instructables.com/id/4xiDraw/">4xiDraw</a> - Yet
+        another 3d-printable AxiDraw clone w/
+        <a href="https://blog.protoneer.co.nz/arduino-cnc-shield"
+          >Arduino CNC Shield</a
+        >
+        controller running grbl firmware.
+      </li>
+      <li>
+        <a href="https://watercolorbot.com">WaterColorBot</a> - XY art robot and
+        software to plot with watercolor paints.
+      </li>
+      <li>
+        <a href="https://egg-bot.com">EggBot</a> - Pen plotter for egg-shaped
+        and spherical objects.
+      </li>
+      <li>
+        <a href="https://www.hpmuseum.net/exhibit.php?class=4&amp;cat=24"
+          >HP Pen Plotters</a
+        >
+        - Vintage desktop and floor-standing pen plotters from the creator of
+        the HPGL standard. Model 7475A is very common and can usually be found
+        on eBay.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=6_pwzqPk6Gg"
+          >Roland Pen Plotters</a
+        >
+        - Vintage flatbed HPGL pen plotters. Search eBay for “roland dxy”.
+      </li>
+      <li>
+        <a href="http://www.polargraph.co.uk">Polargraph</a> - The original
+        polargraph hardware and software project.
+      </li>
+      <li>
+        <a href="http://www.makelangelo.com">Makelangelo</a> - Open source
+        polargraph artbot.
+      </li>
+      <li>
+        <a href="https://brachiograph.readthedocs.io/en/latest/"
+          >BrachioGraph</a
+        >
+        - A cheap and simple plotter made from sticks, servos, and a Raspberry
+        Pi running Python.
+      </li>
+      <li>
+        <a href="https://www.diymachines.co.uk/arduino-cnc-drawing-machine"
+          >Arduino CNC Drawing Machine</a
+        >
+        - A fairly simple 3d-printed AxiDraw-style plotter with good video
+        documentation.
+      </li>
+    </ul>
+    <h3 id="motor-controllers">Motor Controllers</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/synthetos/grblShield">grblShield</a> - All
+        the stepper motor control hardware needed to turn an
+        <a href="https://www.arduino.cc">Arduino</a> into a G-code-based motion
+        controller using the grbl firmware. (<a
+          href="https://www.adafruit.com/product/1750"
+          >adafruit</a
+        >)
+      </li>
+      <li>
+        <a href="https://github.com/synthetos/TinyG">TinyG</a> - More featureful
+        and robust 6-axis G-code-based motion control hardware. (<a
+          href="https://www.adafruit.com/product/1749"
+          >adafruit</a
+        >)
+      </li>
+      <li>
+        <a href="https://blog.protoneer.co.nz/arduino-cnc-shield"
+          >Arduino CNC Shield</a
+        >
+        - Grbl-compatible stepper motor control shield for Arduino, similar to
+        the <a href="https://github.com/synthetos/grblShield">grblShield</a>.
+      </li>
+      <li>
+        <a href="https://wiki.protoneer.co.nz/Raspberry_Pi_CNC"
+          >Raspberry Pi CNC Hat</a
+        >
+        - Raspberry Pi add-on board w/ stepper controllers and a microcontroller
+        running grbl. Interfaces with the Pi’s serial pins.
+      </li>
+    </ul>
+    <h3 id="accessories">Accessories</h3>
+    <ul>
+      <li>
+        <a href="http://biosrhythm.com/?page_id=1453">WiFi232</a> - Wifi to
+        RS-232 serial via a DB25 plug. Control your serial plotter wirelessly.
+      </li>
+      <li>
+        <a
+          href="http://sites.music.columbia.edu/cmc/chiplotle/plotter_cable.pdf"
+          >Plotter Cable Pinout</a
+        >
+        - Schematic for a plotter cable that will work for most HP and Roland
+        plotters. Search eBay or Amazon for
+        <code>DB9 to DB25 Serial Null Modem Cable</code> or similar to find them
+        for sale.
+      </li>
+    </ul>
+    <h3 id="pens">Pens</h3>
+    <ul>
+      <li>
+        <a href="https://www.thingiverse.com/thing:229982"
+          >Sharpie Fine Point Plotter Adapter</a
+        >
+        - 3d-printed adapter to fit a standard Sharpie in an HP-GL plotter.
+      </li>
+      <li>
+        <a
+          href="https://openjscad.org/#https://gist.githubusercontent.com/beardicus/d668c0f6b96be53d16dc/raw/plotter-pen-adapter.jscad"
+          >Parametric 3d-Printable Plotter Pen Adapter</a
+        >
+        - Adjustable model to print adapters for various pens.
+      </li>
+      <li>
+        <a href="https://www.thingiverse.com/thing:227985"
+          >Plotter Pen STL Models</a
+        >
+        - Accurate STL models of both short and long standard plotter pens.
+      </li>
+      <li>
+        <a href="https://wiki.evilmadscientist.com/Pens_for_AxiDraw"
+          >Pens for AxiDraw</a
+        >
+        - List of pens suitable for general plotter abuse.
+      </li>
+      <li>
+        <a href="https://wiki.evilmadscientist.com/Pen_choices"
+          >Pens for EggBot</a
+        >
+        - Egg- and glass-focused pen recommendations but still generally
+        applicable information.
+      </li>
+      <li>
+        <a href="https://www.jetpens.com/blog/the-best-white-ink-pens/pt/340"
+          >JetPens – The Best White Ink Pens</a
+        >
+        - A comprehensive review of many white ink pens, with pictures of their
+        coverage characteristics.
+      </li>
+    </ul>
+    <h2 id="software">Software</h2>
+    <h3 id="hpgl">HPGL</h3>
+    <p>
+      HPGL is a serial/text-based protocol used by most old pen plotters, and
+      even many new vinyl cutters.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/drepetto/chiplotle">Chiplotle</a> - Python
+        library for generating HPGL and interfacing with serial plotters.
+      </li>
+      <li>
+        <a href="https://gitlab.com/mononym/chiplotle-on-parallel-port"
+          >Chiplotle on Parallel Port</a
+        >
+        - Tweak of Chiplotle to work with a parallel port connection.
+      </li>
+      <li>
+        <a href="https://www.isoplotec.co.jp/HPGL/eHPGL.htm"
+          >HPGL Reference Guide</a
+        >
+        - HTML-based HPGL Reference.
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/HP7475AInterfacingandProgrammingManual"
+          >HP 7475A Interfacing and Programming Manual</a
+        >
+        - Scanned PDF manual that contains a full HPGL reference.
+      </li>
+      <li>
+        <a href="https://github.com/djipco/hpgl">djipco/hpgl</a> - A Node.js
+        library to communicate with HPGL-compatible plotters and printers.
+      </li>
+      <li>
+        <a href="https://www.gnu.org/software/hp2xx">hp2xx</a> - GNU tool to
+        convert HPGL into other vector and raster formats. Can also be used as a
+        previewing in X11.
+      </li>
+      <li>
+        <a href="https://github.com/anachrocomputer/vec">vec</a> - Example C
+        code for generating HPGL, with a turtle graphics interface.
+      </li>
+      <li>
+        <a href="https://github.com/aubergene/d3-hpgl">d3-hpgl</a> - An adapter
+        for the HTML Canvas API so you can output HPGL using the popular
+        <a href="https://d3js.org">D3</a> library.
+      </li>
+      <li>
+        <a href="https://github.com/drskullster/HPGLViewer">HPGL Viewer</a> - An
+        HPGL Viewer using JavaScript and HTML5 canvas.
+      </li>
+      <li>
+        <a href="https://github.com/LgHS/hpgl-sender">HPGL Sender</a> - A web
+        interface for previewing HPGL and sending it to your plotter.
+      </li>
+      <li>
+        <a href="https://github.com/ciaron/HPGLGraphics">HPGLGraphics</a> - A
+        Processing library for writing HPGL files.
+      </li>
+    </ul>
+    <h3 id="g-code">G-code</h3>
+    <p>
+      G-code is a text-based standard for controlling CNC machines. Though it
+      was designed for industrial machines, its use in many hobbyist 3d printer
+      firmwares has made it ubiquitous in small-scale DIY projects as well.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/grbl/grbl">grbl</a> - A high-performance
+        G-code interpreting firmware for the Atmega 328 microcontroller and
+        Arduino.
+      </li>
+      <li>
+        <a href="https://github.com/cncjs/cncjs">cncjs</a> - A web-based
+        interface controlling CNC machines running grbl, TinyG, or other
+        G-code-based firmware.
+      </li>
+      <li>
+        <a href="https://github.com/ryansturmer/node-gcode">node-gcode</a> -
+        Node.js-based G-code interpreter and simulator.
+      </li>
+      <li>
+        <a href="https://github.com/em/svg2gcode">svg2gcode</a> - Node.js-based
+        command line utility for converting SVG to G-code.
+      </li>
+      <li>
+        <a href="https://github.com/vishpat/svg2gcode">svg2gcode</a> -
+        Python-based utility for fast SVG to G-code conversion.
+      </li>
+      <li>
+        <a href="http://jscut.org/">jscut</a> - A web-based utiltity for
+        converting SVG to G-code.
+      </li>
+      <li>
+        <a href="https://github.com/winder/Universal-G-Code-Sender"
+          >Universal-G-Code-Sender</a
+        >
+        - Java-based grbl-compatible cross-platform G-code sender.
+      </li>
+      <li>
+        <a href="http://chilipeppr.com">ChiliPeppr Hardware Fiddle</a> - Modular
+        web-based workspaces to visualize G-code and control hardware.
+      </li>
+      <li>
+        <a href="https://github.com/o0morgan0o/gcode-generative-for-processing"
+          >gcode-generative-for-processing</a
+        >
+        - Processing library, aiming to create gcode from simple shapes.
+        (Designed for usage with the Creality CR10)
+      </li>
+    </ul>
+    <h3 id="plotter-specific">Plotter-Specific</h3>
+    <p>Software that is specific to a particular plotter or controller.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/evil-mad/axidraw">axidraw</a> - Official
+        AxiDraw extensions for Inkscape.
+      </li>
+      <li>
+        <a href="https://github.com/fogleman/axi">axi</a> - Unofficial Python
+        library for the AxiDraw v3.
+      </li>
+      <li>
+        <a href="https://github.com/fogleman/xy">xy</a> - Utilities for the
+        Makeblock XY Plotter Robot Kit.
+      </li>
+      <li>
+        <a href="https://github.com/arkypita/LaserGRBL">LaserGRBL</a> -
+        Laser-optimized Windows GUI for grbl controllers. Could be repurposed
+        for DIY pen plotters that use a solenoid for pen up/down movements.
+      </li>
+      <li>
+        <a href="https://github.com/Line-us/Inkscape-Plugin"
+          >Line-us Inkscape Plugin</a
+        >
+        - Sends drawings to the
+        <a href="https://www.line-us.com">Line-us plotter</a> directly from
+        Inkscape.
+      </li>
+      <li>
+        <a href="https://github.com/Line-us/Line-us-Programming"
+          >Line-us API Examples</a
+        >
+        - Example code for the
+        <a href="https://www.line-us.com">Line-us</a> plotter’s G-code-based
+        API.
+      </li>
+      <li>
+        <span class="citation" data-cites="beardicus/line-us"
+          >[@beardicus/line-us]</span
+        >(https://github.com/beardicus/line-us) - JavaScript library for
+        controlling the <a href="https://www.line-us.com">Line-us</a> machine
+        from Node or the browser.
+      </li>
+      <li>
+        <a href="https://github.com/RickMcConney/PenPlotter">PenPlotter</a> -
+        Polargraph controller that uses repetier firmware.
+      </li>
+      <li>
+        <a href="https://github.com/MarginallyClever/Makelangelo-firmware"
+          >Makelangelo-firmware</a
+        >
+        - Firmware for the Makelangelo polargraph robot.
+      </li>
+      <li>
+        <a href="https://github.com/evil-mad/robopaint">RoboPaint</a> - Software
+        for the WaterColorBot.
+      </li>
+      <li>
+        <a href="https://github.com/ralphcrutzen/AxiTurtle">AxiTurtle</a> -
+        Turtle graphics for AxiDraw in Processing.
+      </li>
+      <li>
+        <a href="https://github.com/svenhb/GRBL-Plotter">GRBL-Plotter</a> -
+        Plotter-optimized Windows GUI for grbl controller with SVG and DXF
+        import, and flexible pen up/down control.
+      </li>
+      <li>
+        <a href="https://github.com/nornagon/saxi">saxi</a> - Driver and library
+        for the AxiDraw. Uses constant-acceleration motion planning and
+        automatically resizes to paper.
+      </li>
+      <li>
+        <a href="https://github.com/Jan--Henrik/MP2300-Tools">MP2300-Tools</a> -
+        Software for converting HPGL to Graphtec’s GPGL format, as well as CAD
+        files for a Graphtec plotter pen adapter.
+      </li>
+    </ul>
+    <h3 id="vector-creation">Vector Creation</h3>
+    <p>
+      Tools to create vector artwork from scratch or by conversion from other
+      formats.
+    </p>
+    <ul>
+      <li>
+        <a href="https://inkscape.org">Inkscape</a> - Popular cross-platform
+        open source vector graphics editor.
+      </li>
+      <li>
+        <a href="https://p5js.org">p5.js</a> - “JavaScript library that makes
+        coding accessible for artists, designers, educators, and beginners”.
+      </li>
+      <li>
+        <a href="http://paperjs.org">Paper.js</a> - “The Swiss Army Knife of
+        Vector Graphics Scripting”.
+      </li>
+      <li>
+        <a href="https://github.com/fogleman/ln">ln</a> - Vector-based 3D
+        renderer written in Go.
+      </li>
+      <li>
+        <a href="https://github.com/autotrace/autotrace">autotrace</a> -
+        Converts bitmap images to vector graphics.
+      </li>
+      <li>
+        <a href="https://github.com/evil-mad/stipplegen">stipplegen</a> -
+        Creates interesting stippled drawings from bitmap images. (<a
+          href="https://www.evilmadscientist.com/2012/stipplegen2"
+          >blog post</a
+        >)
+      </li>
+      <li>
+        <a href="https://github.com/gwygonik/SquiggleDraw/commits/master"
+          >SquiggleDraw</a
+        >
+        - “SquiggleDraw will create a SVG file from an image, using the
+        brightness to change the amplitude of sine waves”.
+      </li>
+      <li>
+        <a href="https://svgurt.com">svgurt</a> - Web-based PNG to SVG creative
+        noodler.
+      </li>
+      <li>
+        <a href="https://github.com/mzucker/maptrace">maptrace</a> - Produce
+        watertight polygonal vector maps by tracing raster images.
+      </li>
+      <li>
+        <a href="https://github.com/Scott-Cooper/Drawbot_image_to_gcode_v2"
+          >Drawbot_image_to_gcode_v2</a
+        >
+        - Creates G-code for use on drawbots.
+      </li>
+      <li>
+        <a href="https://github.com/fullscreennl/blackstripes-python-extensions"
+          >blackstripes</a
+        >
+        - Turns a PNG image into a SVG line drawing.
+      </li>
+      <li>
+        <a href="https://github.com/fogleman/ribbon">Ribbon</a> - Ribbon
+        diagrams of proteins in written in Go.
+      </li>
+      <li>
+        <a href="https://github.com/mattdesl/penplot">penplot</a> - A
+        development environment for plotter art in JavaScript.
+      </li>
+      <li>
+        <a href="https://github.com/paulgb/penkit">penkit</a> - A Python library
+        for creating line-based SVG graphics.
+      </li>
+      <li>
+        <a href="https://github.com/digitalcoleman/generativeExamples"
+          >generativeExamples</a
+        >
+        - Example Processing code that generates plottable PDFs.
+      </li>
+      <li>
+        <a href="https://svg-exporter.netlify.com">Let’s make map</a> -
+        Web-based tool to export an SVG map from Mapzen tiles.
+      </li>
+      <li>
+        <a href="https://jasonwebb.github.io/SuperformulaSVG-for-web"
+          >SuperformulaSVG for web</a
+        >
+        - A generative line art web app.
+      </li>
+      <li>
+        <a href="https://github.com/bleeptrack/scribbleplot">scribbleplot</a> -
+        Scribbly image transformations in Processing.
+      </li>
+      <li>
+        <a href="https://maker.js.org">Maker.js</a> - Library for creating 2D
+        vector drawings for CNC and laser cutter machines.
+      </li>
+      <li>
+        <a href="https://turtletoy.net">Turtletoy</a> - Browser-based JavaScript
+        turtle graphics API with SVG export.
+      </li>
+      <li>
+        <a href="https://github.com/brubsby/cozyvec">cozyvec</a> -
+        Web/Standalone terminal environment for plotter art and tweet plots.
+      </li>
+      <li>
+        <a href="https://observablehq.com/collection/@makio135/plotter"
+          >makio135/plotter</a
+        >
+        - An <a href="https://observablehq.com/">Observable</a> notebook
+        collection full of plotter-oriented work.
+      </li>
+      <li>
+        <a href="https://mitxela.com/plotterfun/">PlotterFun</a> - Browser-based
+        Image to SVG converter similar to SquiggleDraw.
+      </li>
+    </ul>
+    <h3 id="vector-utilities">Vector Utilities</h3>
+    <p>Tools to manipulate and optimize vector-based file formats.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/inconvergent/svgsort">svgsort</a> - Path
+        planning for plotting SVG files, reduces time spent moving with the pen
+        up.
+      </li>
+      <li>
+        <a href="https://github.com/svg/svgo">svgo</a> - Node.js-based tool for
+        optimizing SVG files.
+      </li>
+      <li>
+        <a href="https://github.com/ezheidtmann/polargraph-optimizer"
+          >Polargraph Optimizer</a
+        >
+        - Optimize drawing plan for a polargraph.
+      </li>
+      <li>
+        <a href="https://github.com/paulgb/penkit/tree/master/optimizer"
+          >penkit-optimize</a
+        >
+        - An SVG optimizer that uses a vehicle routing solver to minimize plot
+        time.
+      </li>
+      <li>
+        <a href="https://github.com/NYTimes/svg-crowbar">svg-crowbar</a> -
+        Chrome-only bookmarklet for extracting SVG from an HTML document.
+      </li>
+      <li>
+        <a href="https://github.com/abey79/vpype">vpype</a> - Plotter-focused
+        Python-based CLI utility for generating and manipulating SVGs, including
+        scaling and optimizing paths.
+      </li>
+    </ul>
+    <h3 id="fonts">Fonts</h3>
+    <p>Single-line vector fonts or “engraving fonts”.</p>
+    <ul>
+      <li>
+        <a
+          href="http://imajeenyus.com/computer/20150110_single_line_fonts/index.shtml"
+          >Summary of single line fonts</a
+        >
+        - Good information and links to other resources and fonts.
+      </li>
+      <li>
+        <a href="http://paulbourke.net/dataformats/hershey"
+          >Hershey Vector Font</a
+        >
+        - <code>.fnt</code> format of vector fonts from the 60s. Includes a good
+        overview of the original data format of the fonts.
+      </li>
+      <li>
+        <a href="https://github.com/kamalmostafa/hershey-fonts"
+          >hershey-fonts</a
+        >
+        - C library and original font data for the Hershey fonts.
+      </li>
+      <li>
+        <a href="https://www.onelinefonts.com">OneLineFonts.com</a> - Commercial
+        site with some single-line fonts available for purchase.
+      </li>
+      <li>
+        <a href="https://gitlab.com/oskay/svg-fonts">svg-fonts</a> - Single-line
+        fonts in an SVG format, mainly for use with the
+        <a href="https://gitlab.com/oskay/hershey-text">Hershey Text</a>
+        Inkscape plugin.
+      </li>
+      <li>
+        <a href="https://msurguy.github.io/cnc-text-tool/">CNC Text Tool</a> -
+        Browser-based Hershey Text tool with export to SVG.
+      </li>
+    </ul>
+    <h2 id="inspiration-and-instruction">Inspiration and Instruction</h2>
+    <p>Blog posts, articles, tutorials, galleries, videos, et cetera.</p>
+    <ul>
+      <li>
+        <a
+          href="https://medium.com/quarterstudio/an-intro-to-pen-plotters-29b6bd4327ba"
+          >An Intro to Pen Plotters</a
+        >
+        - Good info on getting started with old HPGL plotters.
+      </li>
+      <li>
+        <a
+          href="https://notes.variogr.am/2012/08/12/1980s-pen-plotters-of-the-future"
+          >1980s pen plotters of the future</a
+        >
+        - Another intro to vintage pen plotters.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@fogleman/pen-plotter-programming-the-basics-ec0407ab5929"
+          >Pen Plotter Programming: The Basics</a
+        >
+        - Some basics of programming vector paths, including sorting, joining,
+        and simplifying.
+      </li>
+      <li>
+        <a href="https://inconvergent.net/generative"
+          >On Generative Algorithms</a
+        >
+        - Nice 13-part walkthrough of interesting algorithms.
+      </li>
+      <li>
+        <a href="https://hackaday.io/project/12276-roland-dg-dxy-990"
+          >Roland DG DXY-990</a
+        >
+        - Quickstart guide for a Roland flatbed plotter.
+      </li>
+      <li>
+        <a
+          href="https://sighack.com/post/cohen-sutherland-line-clipping-algorithm"
+          >The Cohen-Sutherland Line Clipping Algorithm</a
+        >
+        - Detailed explanation and examples of an interesting algorithm.
+      </li>
+      <li>
+        <a
+          href="https://www.surfacemag.com/articles/vera-molnar-in-thinking-machines-at-moma"
+          >Vera Molnár</a
+        >
+        - OG plotter artist.
+      </li>
+      <li>
+        <a href="http://juerglehni.com/works/hektor">Hektor</a> - The original
+        cable-based drawbot from 2002.
+      </li>
+      <li>
+        <a href="https://mattdesl.svbtle.com/pen-plotter-1"
+          >Pen Plotter Art &amp; Algorithms</a
+        >
+        - A two-part intro to creating generative graphics for plotting.
+      </li>
+      <li>
+        <a href="https://bitaesthetics.com/posts/surface-projection.html"
+          >Surface Projection</a
+        >
+        - Deep dive into surface projection and hidden line removal using Python
+        and penplot.
+      </li>
+      <li>
+        <a
+          href="https://bitaesthetics.com/posts/fractal-generation-with-l-systems.html"
+          >Fractal Generation with L-Systems</a
+        >
+        - Techniques for creating line-based fractal graphics.
+      </li>
+      <li>
+        <a href="https://mattdesl.svbtle.com/pen-plotter-1"
+          >Pen Plotter Art &amp; Algorithms</a
+        >
+        - Introduction to plotters, AxiDraw, walkthrough of the
+        <code>penplot</code> library.
+      </li>
+      <li>
+        <a href="https://wiki.evilmadscientist.com/TSP_art"
+          >Introduction to TSP art</a
+        >
+        - Resources for traveling salesman problem (single path) art.
+      </li>
+      <li>
+        <a href="https://trmm.net/Hidden_Wireframe">Hidden wireframe removal</a>
+        - Discussion and links to code for wireframe removal of STL files.
+      </li>
+      <li>
+        <a
+          href="https://www.dirtalleydesign.com/blogs/news/how-to-draw-prints-with-an-axidraw-pen-plotter"
+          >How to Draw Generative Art with an Axidraw Pen Plotter</a
+        >
+        - Lots of nice tips, not all specific to the Axidraw, plus some pen
+        reviews and handy 3d-printed tools.
+      </li>
+      <li>
+        <a href="https://all3dp.com/2/pen-plotters-best-xy-plotters/"
+          >The Best XY Plotters in 2020</a
+        >
+        - Good overview of the AxiDraw and its clones, plus some DIY options.
+      </li>
+    </ul>
+    <h2 id="manuals-and-ephemera">Manuals and Ephemera</h2>
+    <p>
+      Scanned plotter manuals and marketing ephemera from the
+      <a href="https://archive.org">Internet Archive</a>
+    </p>
+    <h3 id="manuals">Manuals</h3>
+    <ul>
+      <li>
+        <a href="https://archive.org/details/AppleColorPlotter"
+          >Apple Color Plotter User’s Manual</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/bitsavers_calcompProlottersJun68_2464236"
+          >Programming CalComp Pen Plotters (1968)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/1520PrinterPlotterUsersManualStyleA"
+          >Commodore 1520 Printer Plotter Manual (1983)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/1520PrinterPlotterusersManualStyleB"
+          >Commodore 1520 Printer Plotter Manual</a
+        >
+      </li>
+      <li>
+        <a href="https://archive.org/details/bitsavers_cdc160139c_4086972"
+          >Control Data 165/165-2 Plotter Manual</a
+        >
+      </li>
+      <li>
+        <a href="https://archive.org/details/HP7475AOperationManual"
+          >HP 7475A Graphics Plotter Operation and Interconnection Manual</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/7570adraftproplotterhardwaresupportmanual0757090000201pagesdec86"
+          >HP 7570A DraftPro Plotter Hardware Support Manual</a
+        >
+      </li>
+      <li>
+        <a href="https://archive.org/details/bitsavers_hpplotter0_18190273"
+          >HP 7585B Drafting Plotter Service Manual (1983)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/draftproplotterusersguide0757090017163pagesmay86"
+          >HP DraftPro Plotter User’s Guide (1986)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/draftproprogrammersreference0757090001387pagessep86"
+          >HP DraftPro Plotter Programmers Reference (1986)</a
+        >
+      </li>
+      <li>
+        <a href="https://archive.org/details/Plotter_Printer_19xx_Radio_Shack"
+          >Radio Shack TRS-80 Plotter Printer Manual</a
+        >
+      </li>
+      <li>
+        <a href="https://archive.org/details/RolandDXY880PlotterOperationManual"
+          >Roland DXY-880 Operation Manual (1984)</a
+        >
+      </li>
+      <li>
+        <a href="https://archive.org/details/dpx-3300-service-manual"
+          >Roland DPX-3300 Service Notes (1987)</a
+        >
+      </li>
+      <li>
+        <a href="https://archive.org/details/dpx-3300-schematics"
+          >Roland DPX-3300 Schematics (1987)</a
+        >
+      </li>
+      <li>
+        <a href="https://archive.org/details/SiemensC1613Manual"
+          >Siemens C1613 Plotter Manual (German)</a
+        >
+      </li>
+    </ul>
+    <h3 id="ephemera">Ephemera</h3>
+    <ul>
+      <li>
+        <a
+          href="https://archive.org/details/TNM_Time_Share_Peripherals_-_TSP-212_plotting_sys_20170630_0194"
+          >Time Share Peripherals TSP-212 Brochure</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/Hewlett-Packard_Journal_Vol._29_No._1_1977-09_Hewlett-Packard"
+          >Hewlett-Packard Journal Volume 29 Number 1</a
+        >
+        - Multiple articles about the development of the HP Model 9872A and
+        7221A pen plotters.
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/Hewlett-Packard_Journal_Vol._32_No._11_1981-11_Hewlett-Packard"
+          >Hewlett-Packard Journal Volume 32 Number 11</a
+        >
+        - Multiple articles about the development of the HP Model 7580A plotter.
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/TNM_CalComp_-_Precision_graphics_system_900-728_20170630_0196"
+          >CalComp Precision Graphics System 900/728 Brochure (1970)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/TNM_Digital_Plotting_Newsletter_march-april_1967__20171014_0114"
+          >Digital Plotting Newsletter (1967)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/TNM_Versatec_printers_and_plotters_-_Versatec_a_X_20180227_0009"
+          >Versatec Printers and Plotters Brochure (1977)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/TNM_Printer-plotters_plotters_and_output_systems__20171113_0057"
+          >Versatec Printer/Plotters, Plotters and Output Systems (1981)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/RolandUsersGroupVolume2Number41984/page/n39/mode/2up"
+          >Roland Users Group Volume 2 Number 4 (1984)</a
+        >
+        -
+        <em
+          >Computers and Plotters Take the Place of Drafting Tables and
+          Pencils</em
+        >
+        article on page 36 (PDF page 40).
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/TNM_Omega-t_Systems_-_FasPlot_Plotter_20170630_0254"
+          >Omega-t Systems FasPlot Plotter Brochure</a
+        >
+      </li>
+      <li>
+        <a href="https://archive.org/details/Plotter_CBM8075_198x_Commodore_DE"
+          >Commodore Computer Plotter CBM 8075 Brochure (German)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://archive.org/details/TNM_Strope_Model_100_graphics_plotter_-_Strobe_In_20180506_0009"
+          >Strobe Model 100 Graphics Plotter Brochure (1980)</a
+        >
+      </li>
+    </ul>
+    <h2 id="community">Community</h2>
+    <p>Where to find other plotter and drawbot friends.</p>
+    <ul>
+      <li>
+        <a href="https://twitter.com/hashtag/plottertwitter">#plottertwitter</a>
+        - Twitter hashtag with lots o’ plots.
+      </li>
+      <li>
+        <a href="https://www.reddit.com/r/PlotterArt">PlotterArt Subreddit</a>
+      </li>
+      <li><a href="https://www.reddit.com/r/axidraw">AxiDraw Subreddit</a></li>
+      <li>
+        <a href="https://www.reddit.com/r/generative"
+          >Generative Art Subreddit</a
+        >
+      </li>
+      <li>
+        <a href="https://plotterpeople.github.io/">Plotter People</a> -
+        In-person meetups (SF and NYC so far) with talks and plotter art
+        galleries.
+      </li>
+      <li>
+        <a href="https://discordapp.com/invite/XHP3dBg"
+          >DrawingBots Discord Forum</a
+        >
+        - Discord forum with an active community.
+      </li>
+      <li>
+        <a href="https://plotterfiles.com/">PlotterFiles</a> - Community for
+        sharing SVG files for plotters.
+      </li>
+    </ul>
+    <h2 id="plotter-art-for-sale">Plotter Art For Sale</h2>
+    <ul>
+      <li><a href="https://shop.paulrickards.com">Paul Rickards</a></li>
+      <li>
+        <a href="https://www.michaelfogleman.com/plotter">Michael Fogleman</a>
+      </li>
+      <li><a href="http://buy.inconvergent.net">inconvergent</a></li>
+      <li>
+        <a href="https://www.literalstreetart.com">Customized Streetart</a> -
+        Customizable maps with optional pen plotter output.
+      </li>
+      <li>
+        <a href="https://www.saatchiart.com/account/artworks/155196"
+          >Monica Rizzolli</a
+        >
+      </li>
+      <li>
+        <a href="https://emergentdesign.bigcartel.com/products"
+          >EmergentDesign</a
+        >
+      </li>
+      <li><a href="https://mkt.com/bustbright">BustBright</a></li>
+      <li><a href="https://shop.mewo2.com">Martin O’Leary</a></li>
+      <li><a href="https://www.chromatocosmos.com/">Geoffrey Bradway</a></li>
+      <li><a href="http://store.yuinchien.com/">Yuin Chien</a></li>
+      <li><a href="https://shop.andrewheumann.com/">Andrew Heumann</a></li>
+      <li><a href="http://shop.brubsby.com/">brubsby</a></li>
+      <li><a href="https://dutchplottr.nl/en/">Arjan van der Meij</a></li>
+      <li>
+        <a href="https://shop.visualcinnamon.com/collections/pen-plotter-prints"
+          >Nadieh Bremer</a
+        >
+      </li>
+      <li><a href="https://www.dirtalleydesign.com/">Michelle Chandra</a></li>
+      <li><a href="https://www.jessicain.net/shop-originals">Jessica In</a></li>
+      <li><a href="https://store.pedroalcocer.com/">Pedro Alcocer</a></li>
+      <li><a href="https://shop.andymakes.com/">AndyMakes</a></li>
+      <li>
+        <a href="https://schwittlick.bigcartel.com/">Marcel Schwittlick</a>
+      </li>
+    </ul>
+    <h2 id="other-awesomes">Other Awesomes</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/kosmos/awesome-generative-art"
+          >awesome-generative-art</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/terkelg/awesome-creative-coding"
+          >awesome-creative-coding</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/msurguy/awesome-3d-engines-for-plotters"
+          >awesome-3d-engines-for-plotters</a
+        >
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://boucheron.org/brian">Brian Boucheron</a> has waived all
+      copyright and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

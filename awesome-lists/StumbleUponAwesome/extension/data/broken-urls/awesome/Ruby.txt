@@ -1,0 +1,2 @@
+https://thredded.org,Thredded,https://github.com/markets/awesome-ruby#readme,Ruby error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://radiantcms.org,Radiant,https://github.com/markets/awesome-ruby#readme,Ruby error: URLError(gaierror(8, 'nodename nor servname provided, or not known')) | reason: [Errno 8] nodename nor servname provided, or not known

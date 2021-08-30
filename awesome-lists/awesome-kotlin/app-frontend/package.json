@@ -1,0 +1,56 @@
+{
+    "name": "awesome-kotlin",
+    "version": "1.0.0",
+    "description": "Awesome list for Kotlin",
+    "main": "app/src/main.tsx",
+    "dependencies": {
+        "copy-to-clipboard": "^3.3.1",
+        "core-js": "^3.14.0",
+        "normalize.css": "^8.0.1",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-router": "^5.2.0",
+        "react-router-dom": "^5.2.0"
+    },
+    "devDependencies": {
+        "@types/history": "4.7.8",
+        "@types/node": "15.12.1",
+        "@types/react": "17.0.9",
+        "@types/react-dom": "17.0.6",
+        "@types/react-router": "5.1.14",
+        "@types/react-router-dom": "5.1.7",
+        "autoprefixer": "10.2.6",
+        "copy-webpack-plugin": "9.0.0",
+        "css-loader": "5.2.6",
+        "html-webpack-plugin": "5.3.1",
+        "less": "4.1.1",
+        "less-loader": "9.0.0",
+        "postcss": "8.3.0",
+        "postcss-loader": "5.3.0",
+        "style-loader": "2.0.0",
+        "ts-loader": "9.2.2",
+        "typescript": "4.3.2",
+        "webpack": "5.38.1",
+        "webpack-cli": "4.7.0",
+        "webpack-dev-server": "3.11.2"
+    },
+    "scripts": {
+        "prestart": "yarn install",
+        "prebuild": "yarn install",
+        "start": "webpack serve --mode development --env NODE_ENV=development --env SOURCE_MAP=eval-source-map",
+        "build": "webpack --mode production --env NODE_ENV=production --env SOURCE_MAP=source-map"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/KotlinBy/awesome-kotlin.git"
+    },
+    "keywords": [
+        "kotlin"
+    ],
+    "author": "Ibragimov Ruslan, Labushkina Hanna",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/KotlinBy/awesome-kotlin/issues"
+    },
+    "homepage": "https://github.com/KotlinBy/awesome-kotlin#readme"
+}

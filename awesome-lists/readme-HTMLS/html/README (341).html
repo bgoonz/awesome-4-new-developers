@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <br />
+      <img
+        width="300"
+        src="https://rawgit.com/quangv/awesome-couchdb/master/logo--couch.png"
+        alt="awesome couchdb logo"
+      />
+      <br />
+    </p>
+    <h1 id="awesome-couchdb-awesome-prs-welcome">
+      Awesome CouchDB
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+      <a href="http://makeapullrequest.com"
+        ><img
+          src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square"
+          alt="PRs Welcome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>A curated meta resources &amp; best practices list for CouchDB.</p>
+    </blockquote>
+    <p>
+      <strong><a href="http://couchdb.apache.org/">CouchDB</a></strong> is a
+      document-oriented NoSQL database that syncs.
+    </p>
+    <p>Pull-Requests are welcomed.</p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#news--blog-posts">News &amp; Blog Posts</a></li>
+      <li>
+        <a href="#patterns--best-practices">Patterns &amp; Best Practices</a>
+        <ul>
+          <li><a href="#mapreduce">Map/Reduce</a></li>
+          <li><a href="#joins">Joins</a></li>
+          <li><a href="#document-versioning">Document Versioning</a></li>
+        </ul>
+      </li>
+      <li><a href="#blogs">Blogs</a></li>
+      <li><a href="#docs">Docs</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#libraries">Libraries</a></li>
+      <li>
+        <a href="#community">Community</a>
+        <ul>
+          <li><a href="#mailing-list">Mailing List</a></li>
+          <li>
+            <a href="#companies">Companies</a>
+            <ul>
+              <li><a href="#hosting">Hosting</a></li>
+            </ul>
+          </li>
+          <li><a href="#related-projects">Related Projects</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#misctechnical">Misc/Technical</a>
+        <ul>
+          <li><a href="#attachments">Attachments</a></li>
+          <li><a href="#backups">Backups</a></li>
+          <li><a href="#couchapps">CouchApps</a></li>
+          <li><a href="#scaling">Scaling</a></li>
+        </ul>
+      </li>
+      <li><a href="#resource-lists">Resource Lists</a></li>
+      <li><a href="#license">License</a></li>
+    </ul>
+    <h2 id="news-blog-posts">News &amp; Blog Posts</h2>
+    <ul>
+      <li>
+        <a href="https://www.garrensmith.com/blogs/mini-couch-hack-week"
+          >MiniCouchDB in Rust</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://blog.couchdb.org/2020/02/26/the-road-to-couchdb-3-0-prepare-for-4-0/"
+          >The Road to CouchDB 3.0: Prepare for 4.0</a
+        >
+        <em>(02-26-2020)</em>
+      </li>
+    </ul>
+    <h2 id="patterns-best-practices">Patterns &amp; Best Practices</h2>
+    <ul>
+      <li>
+        <a href="http://ehealthafrica.github.io/couchdb-best-practices/"
+          >Best Practices</a
+        >
+        - Best Practices, eHealth Africa.
+      </li>
+      <li>
+        <a
+          href="https://pouchdb.com/2014/04/14/pagination-strategies-with-pouchdb.html"
+          >Pagination strategies with PouchDB</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://pouchdb.com/2014/06/17/12-pro-tips-for-better-code-with-pouchdb.html"
+          >12 pro tips for better code with PouchDB</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/assafmo/couchdb-linux-performance"
+          >Linux tuning for better CouchDB performance</a
+        >
+      </li>
+    </ul>
+    <h3 id="mapreduce">Map/Reduce</h3>
+    <ul>
+      <li>
+        <a
+          href="https://pouchdb.com/2014/05/01/secondary-indexes-have-landed-in-pouchdb.html"
+          >PouchDB - Secondary Indexes</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://cloudant.com/blog/mapreduce-from-the-basics-to-the-actually-useful/#.WIDBfRsrKUl"
+          >Cloudant - MapReduce Primer</a
+        >
+        - Great intro on reduce, group, group_level.
+      </li>
+      <li>
+        <a
+          href="http://docs.couchdb.org/en/2.0.0/couchapp/views/joins.html#using-view-collation"
+          >Using View Collation</a
+        >
+        - Index mapping (emits) for data joins.
+      </li>
+      <li>
+        <a href="http://docs.couchdb.org/en/2.0.0/couchapp/views/collation.html"
+          >Views Collation</a
+        >
+        - More documentation on “View Collation”.
+      </li>
+      <li>
+        <a
+          href="https://developer.ibm.com/clouddataservices/docs/cloudant/get-started/mapreduce-and-the-secondary-index/"
+          >Cloudant - MapReduce and the Secondary Index (Video)</a
+        >
+        - Great videos here on mapReduce, secondary indexes, and complex keys.
+      </li>
+      <li>
+        <a href="https://docs.cloudant.com/design_documents.html"
+          >Cloudant - Design Documents</a
+        >
+        - Cloudant’s documentation is also great resource for learning concepts
+        of CouchDB.
+      </li>
+      <li>
+        <a href="https://docs.cloudant.com/design_document_management.html"
+          >Cloudant - Design Document Management</a
+        >
+        - How to manage design doc changes in production.
+      </li>
+    </ul>
+    <h3 id="joins">Joins</h3>
+    <ul>
+      <li>
+        <a
+          href="http://docs.couchdb.org/en/2.0.0/couchapp/views/joins.html#joins-with-views"
+          >Joins with Views</a
+        >
+        - Must read for understanding approach on doing efficient joins for
+        CouchDB/PouchDB.
+      </li>
+      <li>
+        <a href="https://docs.cloudant.com/transactions.html"
+          >Grouping related documents together in Cloudant</a
+        >
+        - An approach that leverages CouchDB high availability nature.
+      </li>
+    </ul>
+    <h3 id="document-versioning">Document Versioning</h3>
+    <ul>
+      <li>
+        <a
+          href="https://wiki.apache.org/couchdb/Document_revisions?action=show&amp;redirect=DocumentRevisions"
+          >Document Revisions (from wiki)</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://web.archive.org/web/20100701165612/http://blog.couch.io/post/632718824/simple-document-versioning-with-couchdb"
+          >Simple Document Versioning</a
+        >
+      </li>
+    </ul>
+    <h2 id="blogs">Blogs</h2>
+    <ul>
+      <li><a href="https://blog.couchdb.org/">Official Blog</a></li>
+    </ul>
+    <h2 id="docs">Docs</h2>
+    <ul>
+      <li><a href="http://docs.couchdb.org/">Official Docs</a></li>
+      <li>
+        <a href="https://wiki.apache.org/couchdb/Frequently_asked_questions"
+          >FAQ (old wiki)</a
+        >
+        - Seems to have more faqs than the
+        <a
+          href="https://cwiki.apache.org/confluence/display/COUCHDB/Frequently+Asked+Questions"
+          >new wiki</a
+        >.
+      </li>
+    </ul>
+    <h2 id="books">Books</h2>
+    <ul>
+      <li>
+        <a href="http://guide.couchdb.org/">The Definitive Guide</a> - CouchDB’s
+        <em>“Dog”</em> Book.
+      </li>
+      <li>
+        <a href="https://cwiki.apache.org/confluence/display/COUCHDB/Books"
+          >List of books on the Wiki</a
+        >
+      </li>
+    </ul>
+    <h2 id="videos">Videos</h2>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=BKQ9kXKoHS810"
+          >10 Common Misconceptions</a
+        >
+        - More videos from this
+        <a href="http://conf.couchdb.org/">conference</a>.
+      </li>
+      <li>
+        <a href="http://nosqltapes.com">The NoSQL Tapes</a> - CouchDB is
+        discussed on
+        <a
+          href="http://nosqltapes.com/video/hoffman-and-kocoloski-on-cloudant-and-couchdb"
+          >Volume 5 - CouchDB</a
+        >,
+        <a
+          href="http://nosqltapes.com/video/understanding-mapreduce-with-mike-miller"
+          >Volume 8 - MapReduce</a
+        >.
+      </li>
+      <li>
+        <a href="http://www.oreilly.com/pub/e/1760"
+          >Scaling Out with BigCouch</a
+        >
+        - O’Reilly video on scaling out with BigCouch.
+      </li>
+      <li>
+        <a
+          href="https://event.on24.com/eventRegistration/EventLobbyServlet?target=reg20.jsp&amp;partnerref=cdc&amp;eventid=1240121&amp;sessionid=1&amp;key=9E23B44802902EAD0BB2603F0434742E&amp;regTag=35370&amp;sourcepage=register"
+          >IBM - The New Builders Webinar Series</a
+        >
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/pandeiro/jaki">Jaki</a> - A simple
+        ClojureScript CouchDB client
+      </li>
+    </ul>
+    <h2 id="community">Community</h2>
+    <ul>
+      <li>
+        <a href="http://webchat.freenode.net/?channels=couchdb">IRC</a> -
+        <code>irc://irc.freenode.net/couchdb</code>
+      </li>
+      <li>
+        <a href="http://conf.couchdb.org/">Apache CouchDB Conf</a> - Lots of
+        video links.
+      </li>
+      <li>
+        <a href="http://couchdb.apache.org/bylaws.html">Bylaws</a>,
+        <a href="https://whimsy.apache.org/board/minutes/CouchDB.html"
+          >Minutes</a
+        >
+      </li>
+    </ul>
+    <h3 id="mailing-list">Mailing List</h3>
+    <blockquote>
+      <p>
+        -dev is where developers of couchdb chat, -user is where users of
+        couchdb chat and there’s some crosstalk ofc -dev is appropriate if
+        you’re talking about changes to couchdb itself (“developer” doesn’t mean
+        you have to have a commit bit or anything) -rnewson
+      </p>
+    </blockquote>
+    <ul>
+      <li>
+        <a href="https://mail-archives.apache.org/mod_mbox/#couchdb"
+          >Mailing Lists</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://svn.apache.org/repos/asf/couchdb/site/htdocs/community/lists.html?p=900000"
+          >Mailing Lists Description</a
+        >
+      </li>
+      <li>
+        <a href="http://grokbase.com/s/couchdb">Grokbase</a> - Mailing lists in
+        a
+        <a href="http://stackoverflow.com/questions/tagged/couchdb"
+          >Stack Overflow</a
+        >-like interface.
+      </li>
+    </ul>
+    <p>
+      <a href="http://people.apache.org/committers-by-project.html#couchdb"
+        >:star2:<strong>The</strong> <strong><em>Amazing</em></strong>
+        <strong>CouchDB Committers</strong> <em>and</em>
+        <strong>Project Managers</strong> :heart_eyes_cat:</a
+      >
+    </p>
+    <h3 id="companies">Companies</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/eHealthAfrica">eHealth Africa</a> - Big user
+        of CouchDB, check out their
+        <a href="https://github.com/eHealthAfrica/couchdb-best-practices"
+          >best practices</a
+        >.
+      </li>
+    </ul>
+    <h4 id="hosting">Hosting</h4>
+    <ul>
+      <li>
+        <a href="https://cloudant.com/">Cloudant</a> - Distributed database as a
+        service (DBaaS).
+      </li>
+      <li>
+        <a href="https://www.smileupps.com/">Smileupps</a> - CouchDB hosting.
+      </li>
+      <li>
+        <a href="https://bitnami.com/stack/couchdb/cloud/google"
+          >Bitnami Launchpad for Google Cloud Platform</a
+        >
+        - Host CouchDB on Google Cloud Platform.
+      </li>
+    </ul>
+    <h3 id="related-projects">Related Projects</h3>
+    <ul>
+      <li>
+        <a href="https://pouchdb.com/">PouchDB</a> - A pocket-sized database.
+      </li>
+      <li>
+        <a href="https://www.foundationdb.org/">FoundationDB</a> - CouchDB 4.0
+        will utilize FoundationDB.
+      </li>
+      <li>
+        <a href="http://hood.ie/">Hoodie</a> - A backend for Offline First
+        applications.
+      </li>
+      <li>
+        <a href="https://www.couchbase.com/">Couchbase</a> - NoSQL database.
+        <ul>
+          <li>
+            <a
+              href="https://docs.couchbase.com/server/current/install/migrate-couchdb.html"
+              >Migrating from Apache CouchDB</a
+            >
+            - Comparison of CouchDB and CouchBase
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="misctechnical">Misc/Technical</h2>
+    <ul>
+      <li>
+        <a
+          href="https://web.archive.org/web/20160311144130/https://cloudant.com/blog/dynamo-and-couchdb-clusters/#.WIEp4xsrKUk"
+          >Dynamo and CouchDB Clusters</a
+        >
+        - Article about scaling CouchDB, using clusters.
+      </li>
+      <li>
+        <a href="http://research.google.com/archive/sawzall.html"
+          >Google’s paper on Sawzall</a
+        >
+        - Exotic Reductions Examples.
+      </li>
+      <li>
+        <a
+          href="http://www.dimagi.com/blog/what-every-developer-should-know-about-couchdb/"
+          >What Every Developer Should Know About CouchDB</a
+        >
+        - Article about lessons learned.
+      </li>
+      <li>
+        <a href="http://www.nosql.se/2011/09/couchdb-maximum-database-size/"
+          >CouchDB Maximum Database Size</a
+        >
+      </li>
+      <li>
+        <a href="http://horicky.blogspot.com/2009/11/nosql-patterns.html"
+          >NOSQL Patterns</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://eclipsesource.com/blogs/2009/12/13/persistent-trees-in-git-clojure-and-couchdb-data-structure-convergence/"
+          >Persistent Trees in git, Clojure and CouchDB</a
+        >
+      </li>
+      <li>
+        <a href="https://pozorvlak.livejournal.com/176385.html"
+          >CouchDB - JSON and B-trees and REST, oh my!</a
+        >
+      </li>
+    </ul>
+    <h3 id="attachments">Attachments</h3>
+    <ul>
+      <li>
+        <a
+          href="https://pouchdb.com/2014/06/17/12-pro-tips-for-better-code-with-pouchdb.html"
+          >PouchDB - Attachments are overrated</a
+        >
+        -
+        <em
+          >“Update: since this post was written, the stability and performance
+          of attachments in PouchDB has greatly improved. …”</em
+        >
+      </li>
+      <li>
+        <a
+          href="https://docs.cloudant.com/attachments.html#performance-considerations"
+          >Cloudant - Attachments Performance Considerations</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://grokbase.com/t/couchdb/user/14a1phbzrb/are-attachments-duplicated-for-each-revision-as-well"
+          >Are attachments duplicated for each revision?</a
+        >
+        - Mailing list discussion about attachments across revisions.
+      </li>
+    </ul>
+    <h3 id="backups">Backups</h3>
+    <ul>
+      <li>
+        <a
+          href="https://developer.ibm.com/clouddataservices/2016/03/22/simple-couchdb-and-cloudant-backup/"
+          >Simple CouchDB and Cloudant Backup</a
+        >
+        - Article on IBM about backups.
+      </li>
+      <li>
+        <a href="https://docs.cloudant.com/backup-guide.html"
+          >Cloudant Backup Guide</a
+        >
+        - Cloudant docs on backups.
+      </li>
+    </ul>
+    <h3 id="couchapps">CouchApps</h3>
+    <ul>
+      <li>
+        <a
+          href="https://couchapp.readthedocs.io/en/latest/user/list-of-couchapps.html"
+          >List of CouchApps</a
+        >
+      </li>
+      <li>
+        <a href="http://ddoc.me/">Ddoc Lab</a> - Create couchapps and CouchDB
+        design docs right in your browser.
+      </li>
+    </ul>
+    <h3 id="scaling">Scaling</h3>
+    <ul>
+      <li>
+        <a href="https://bitnami.com/stack/couchdb">Bitnami CouchDB</a> -
+        Bitnami makes it easy to run CouchDB in the cloud.
+      </li>
+    </ul>
+    <h2 id="resource-lists">Resource Lists</h2>
+    <ul>
+      <li>
+        <a
+          href="https://cwiki.apache.org/confluence/display/COUCHDB/Apache+CouchDB+Wiki"
+          >Official CouchDB Wiki</a
+        >
+      </li>
+      <li>
+        <a href="https://wiki.apache.org/couchdb/"
+          >Official CouchDB Wiki (old)</a
+        >
+        - Some things aren’t on new wiki yet.
+      </li>
+      <li>
+        <a href="https://docs.cloudant.com/guides.html"
+          >Cloudant Official Guides</a
+        >
+        - Applicable to CouchDB.
+      </li>
+      <li>
+        <a
+          href="https://cwiki.apache.org/confluence/display/COUCHDB/CouchDB+clients"
+          >List of CouchDB Clients</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://cwiki.apache.org/confluence/display/COUCHDB/Useful+utilities"
+          >List of CouchDB Useful Utilities</a
+        >
+      </li>
+      <li>
+        <a href="https://wiki.apache.org/couchdb/Related_Projects"
+          >Old Wiki’s Related Projects List</a
+        >
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        ><img
+          alt="Creative Commons License"
+          style="border-width: 0"
+          src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by.svg" /></a
+      ><br />This work is licensed under a
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International License</a
+      >.
+    </p>
+  </body>
+</html>

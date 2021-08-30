@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>git-cheat-sheet-es</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="git-cheat-sheet-spanish-awesome">Git Cheat Sheet Spanish <a href="https://github.com/sindresorhus/awesome"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome" /></a></h1>
+<h3 id="índice">Índice</h3>
+<ul>
+<li><a href="#configuración">Configuración</a></li>
+<li><a href="#archivos-de-configuración">Archivos de Configuración</a></li>
+<li><a href="#crear">Crear</a></li>
+<li><a href="#cambios-locales">Cambios locales</a></li>
+<li><a href="#buscar">Buscar</a></li>
+<li><a href="#historial-de-commits">Historial de Commits</a></li>
+<li><a href="#ramas--etiquetas">Ramas &amp; Etiquetas</a></li>
+<li><a href="#actualizar--publicar">Actualizar &amp; Publicar</a></li>
+<li><a href="#fusionar--rebasar">Fusionar &amp; Rebasar</a></li>
+<li><a href="#deshacer">Deshacer</a></li>
+<li><a href="#git-flow">Git Flow</a></li>
+</ul>
+<hr>
+<h2 id="configuración">Configuración</h2>
+<h5 id="mostrar-la-cofiguración-actual">Mostrar la cofiguración actual:</h5>
+<pre><code>$ git config --list</code></pre>
+<h5 id="mostrar-la-configuración-local">Mostrar la configuración local:</h5>
+<pre><code>$ git config --local --list</code></pre>
+<h5 id="mostrar-la-configuración-global">Mostrar la configuración global:</h5>
+<pre><code>$ git config --global --list</code></pre>
+<h5 id="mostrar-la-configuración-del-sistema">Mostrar la configuración del sistema:</h5>
+<pre><code>$ git config --system --list</code></pre>
+<h5 id="establecer-un-nombre-que-es-identificable-de-crédito-cuando-se-revise-el-historial-de-versiones">Establecer un nombre que es identificable de crédito cuando se revise el historial de versiones:</h5>
+<pre><code>$ git config --global user.name “[nombre apellido]”</code></pre>
+<h5 id="establecer-una-dirección-de-email-que-será-asociada-con-cada-marca-histórica">Establecer una dirección de email que será asociada con cada marca histórica:</h5>
+<pre><code>$ git config --global user.email “[email-válido]”</code></pre>
+<h5 id="establecer-coloreado-automático-de-la-línea-de-comandos-de-git-para-una-fácil-revisión">Establecer coloreado automático de la línea de comandos de Git para una fácil revisión:</h5>
+<pre><code>$ git config --global color.ui auto</code></pre>
+<h5 id="establecer-el-editor-global-para-commits">Establecer el editor global para commits:</h5>
+<pre><code>$ git config --global core.editor vi</code></pre>
+<hr>
+<h2 id="archivos-de-configuración">Archivos de Configuración</h2>
+<h5 id="archivo-de-configuración-específico-del-repositorio-local">Archivo de configuración específico del repositorio [–local]:</h5>
+<pre><code>&lt;repo&gt;/.git/config</code></pre>
+<h5 id="archivo-de-configuración-específico-del-usuario-global">Archivo de configuración específico del usuario [–global]:</h5>
+<pre><code>~/.gitconfig</code></pre>
+<h5 id="archivo-de-configuración-del-sistema-system">Archivo de configuración del sistema [–system]:</h5>
+<pre><code>/etc/gitconfig</code></pre>
+<hr>
+<h2 id="crear">Crear</h2>
+<h5 id="clonar-un-repositorio-existente">Clonar un repositorio existente:</h5>
+<p>Existen dos maneras:</p>
+<p>Vía SSH</p>
+<pre><code>$ git clone ssh://usuario@dominio.com/repo.git</code></pre>
+<p>Vía HTTP</p>
+<pre><code>$ git clone http://dominio.com/usuario/repo.git</code></pre>
+<h5 id="crea-un-nuevo-repositorio-local">Crea un nuevo repositorio local:</h5>
+<pre><code>$ git init</code></pre>
+<hr>
+<h2 id="cambios-locales">Cambios Locales</h2>
+<h5 id="cambios-en-el-directorio-de-trabajo">Cambios en el directorio de trabajo:</h5>
+<pre><code>$ git status</code></pre>
+<h5 id="cambios-en-archivos-rastreados">Cambios en archivos rastreados:</h5>
+<pre><code>$ git diff</code></pre>
+<h5 id="agregar-todos-los-cambios-actuales-al-siguiente-commit">Agregar todos los cambios actuales al siguiente commit:</h5>
+<pre><code>$ git add .</code></pre>
+<h5 id="agregar-algunos-cambios-de-archivo-para-el-siguiente-commit">Agregar algunos cambios de &lt;archivo&gt; para el siguiente commit:</h5>
+<pre><code>$ git add -p &lt;archivo&gt;</code></pre>
+<h5 id="realizar-un-commit-de-todos-los-cambios-locales-en-los-archivos-rastreados">Realizar un commit de todos los cambios locales en los archivos rastreados:</h5>
+<pre><code>$ git commit -a</code></pre>
+<h5 id="realizar-un-commit-de-los-cambios-previamente-almacenados-en-el-área-de-pruebas-stage-area">Realizar un commit de los cambios previamente almacenados en el área de pruebas (stage area):</h5>
+<pre><code>$ git commit</code></pre>
+<h5 id="realizar-un-commit-con-un-mensaje">Realizar un commit con un mensaje:</h5>
+<pre><code>$ git commit -m &#39;aquí el mensaje&#39;</code></pre>
+<h5 id="realizar-un-commit-saltándose-el-área-de-pruebas-y-agregando-un-mensaje">Realizar un commit saltándose el área de pruebas y agregando un mensaje:</h5>
+<pre><code>$ git commit -am &#39;aquí el mensaje&#39;</code></pre>
+<h5 id="realizar-un-commit-a-alguna-fecha-anterior">Realizar un commit a alguna fecha anterior:</h5>
+<pre><code>git commit --date=&quot;`date --date=&#39;n day ago&#39;`&quot; -am &quot;Mensaje del commit&quot;</code></pre>
+<h5 id="cambiar-último-commit">Cambiar último commit:</h5>
+<p><em><sub>¡No modificar commits ya publicados!</sub></em></p>
+<pre><code>$ git commit -a --amend</code></pre>
+<h5 id="cambiar-fecha-del-último-commit">Cambiar fecha del último commit:</h5>
+<pre><code>GIT_COMMITTER_DATE=&quot;date&quot; git commit --amend</code></pre>
+<h5 id="cambiar-fecha-del-autor-del-último-commit">Cambiar fecha del autor del último commit:</h5>
+<pre><code>git commit --amend --date=&quot;date&quot;</code></pre>
+<h5 id="mover-cambios-no-confirmados-uncommitted-changes-de-la-rama-actual-a-otra-rama">Mover cambios no confirmados (uncommitted changes) de la rama actual a otra rama:<br></h5>
+<pre><code>git stash
+git checkout branch2
+git stash pop</code></pre>
+<h5 id="restaurar-cambios-del-área-de-pruebas-stage-area-a-la-rama-actual">Restaurar cambios del área de pruebas (stage area) a la rama actual:</h5>
+<pre><code>git stash apply</code></pre>
+<h5 id="eliminar-la-última-serie-de-cambios-del-área-de-pruebas-stage-area">Eliminar la última serie de cambios del área de pruebas (stage area):</h5>
+<pre><code>git stash drop</code></pre>
+<hr>
+<h2 id="buscar">Buscar</h2>
+<h5 id="un-texto-en-todos-los-archivos-del-directorio">Un texto en todos los archivos del directorio:</h5>
+<pre><code>$ git grep &quot;Hola&quot;</code></pre>
+<h5 id="un-texto-en-cualquier-versión">Un texto en cualquier versión:</h5>
+<pre><code>$ git grep &quot;Hola&quot; v2.5</code></pre>
+<hr>
+<h2 id="historial-de-commits">Historial de Commits</h2>
+<h5 id="mostrar-todos-los-commits-empezando-por-los-más-recientes-se-mostrará-el-hash-información-sobre-el-autor-fecha-y-título-del-commit">Mostrar todos los commits, empezando por los más recientes (se mostrará el hash, información sobre el autor, fecha y título del commit):</h5>
+<pre><code>$ git log</code></pre>
+<h5 id="mostrar-todos-los-commits-sólo-se-mostrará-el-hash-y-el-mensaje-del-commit">Mostrar todos los commits (sólo se mostrará el hash y el mensaje del commit):</h5>
+<pre><code>$ git log --oneline</code></pre>
+<h5 id="mostrar-todos-los-commits-de-un-usuario-específico">Mostrar todos los commits de un usuario específico:</h5>
+<pre><code>$ git log --author=&quot;usuario&quot;</code></pre>
+<h5 id="mostrar-los-cambios-a-través-del-tiempo-de-un-archivo-específico">Mostrar los cambios a través del tiempo de un archivo específico:</h5>
+<pre><code>$ git log -p &lt;archivo&gt;</code></pre>
+<h5 id="mostrar-commmits-que-están-presentes-sólamente-en-remotebranch-al-lado-derecho">Mostrar commmits que están presentes sólamente en remote/branch al lado derecho:</h5>
+<pre><code>$ git log --oneline &lt;origin/master&gt;..&lt;remote/master&gt; --left-right</code></pre>
+<h5 id="quién-cambió-qué-y-cuándo-en-archivo">Quién cambió, qué y cuándo en &lt;archivo&gt;:</h5>
+<pre><code>$ git blame &lt;archivo&gt;</code></pre>
+<h5 id="mostrar-reference-log">Mostrar reference log:</h5>
+<pre><code>$ git reflog show</code></pre>
+<h5 id="borrar-reference-log">Borrar reference log:</h5>
+<pre><code>$ git reflog delete</code></pre>
+<hr>
+<h2 id="ramas-etiquetas">Ramas &amp; Etiquetas</h2>
+<h5 id="listar-todas-las-ramas-locales">Listar todas las ramas locales:</h5>
+<pre><code>$ git branch</code></pre>
+<h5 id="listar-todas-las-ramas-remotas">Listar todas las ramas remotas:</h5>
+<pre><code>$ git branch -r</code></pre>
+<h5 id="cambiar-rama-head">Cambiar rama HEAD:</h5>
+<pre><code>$ git checkout &lt;rama&gt;</code></pre>
+<h5 id="crear-nueva-rama-y-cambiar-a-esta">Crear nueva rama y cambiar a esta:</h5>
+<pre><code>$ git checkout -b &lt;rama&gt;</code></pre>
+<h5 id="crear-nueva-rama-basada-en-la-rama-head-actual">Crear nueva rama basada en la rama HEAD actual:</h5>
+<pre><code>$ git branch &lt;nueva-rama&gt;</code></pre>
+<h5 id="crear-nueva-rama-de-seguimiento-basada-en-una-rama-remota">Crear nueva rama de seguimiento basada en una rama remota:</h5>
+<pre><code>$ git branch --track &lt;nueva-rama&gt; &lt;rama-remota&gt;</code></pre>
+<h5 id="eliminar-una-rama-local">Eliminar una rama local:</h5>
+<pre><code>$ git branch -d &lt;rama&gt;</code></pre>
+<h5 id="forzar-eliminación-de-una-rama-local">Forzar eliminación de una rama local:</h5>
+<p><em><sub>¡Perderás los cambios sin fusionar!</sub></em></p>
+<pre><code>$ git branch -D &lt;branch&gt;</code></pre>
+<h5 id="marcar-el-commit-actual-con-una-etiqueta">Marcar el commit actual con una etiqueta:</h5>
+<pre><code>$ git tag &lt;tag-name&gt;</code></pre>
+<h5 id="marcar-el-commit-actual-con-una-etiqueta-que-incluye-un-mensaje">Marcar el commit actual con una etiqueta que incluye un mensaje:</h5>
+<pre><code>$ git tag -a &lt;etiqueta&gt;</code></pre>
+<hr>
+<h2 id="actualizar-publicar">Actualizar &amp; Publicar</h2>
+<h5 id="listar-todos-los-remotos-configurados-actuales">Listar todos los remotos configurados actuales:</h5>
+<pre><code>$ git remote -v</code></pre>
+<h5 id="mostrar-información-sobre-un-remoto">Mostrar información sobre un remoto:</h5>
+<pre><code>$ git remote show &lt;remoto&gt;</code></pre>
+<h5 id="agregar-un-nuevo-repositorio-nombrado-remoto">Agregar un nuevo repositorio, nombrado &lt;remoto&gt;:</h5>
+<pre><code>$ git remote add &lt;remoto&gt; &lt;url&gt;</code></pre>
+<h5 id="descargar-todos-los-cambios-de-remoto-pero-no-integrarlos-al-head">Descargar todos los cambios de &lt;remoto&gt;, pero no integrarlos al HEAD:</h5>
+<pre><code>$ git fetch &lt;remoto&gt;</code></pre>
+<h5 id="descargar-cambios-y-fusionarlosintegrarlos-directamente-al-head">Descargar cambios y fusionarlos/integrarlos directamente al HEAD:</h5>
+<pre><code>$ git remote pull &lt;remote&gt; &lt;url&gt;</code></pre>
+<h5 id="obtener-todos-los-cambios-del-head-al-repositorio-local">Obtener todos los cambios del HEAD al repositorio local:</h5>
+<pre><code>$ git pull origin master</code></pre>
+<h5 id="obtener-todos-los-cambios-del-head-al-repositorio-local-sin-fusionar">Obtener todos los cambios del HEAD al repositorio local sin fusionar:</h5>
+<pre><code>git pull --rebase &lt;remote&gt; &lt;branch&gt;</code></pre>
+<h5 id="publicar-cambios-locales-en-un-remoto">Publicar cambios locales en un remoto:</h5>
+<pre><code>$ git push remote &lt;remoto&gt; &lt;rama&gt;</code></pre>
+<h5 id="eliminar-una-rama-en-el-remoto">Eliminar una rama en el remoto:</h5>
+<pre><code>$ git push &lt;remoto&gt; :&lt;rama&gt; (desde Git v1.5.0) ó $ git push &lt;remoto&gt; --delete &lt;rama&gt; (desde Git v1.7.0)</code></pre>
+<h5 id="publicar-tus-etiquetas">Publicar tus etiquetas:</h5>
+<pre><code>$ git push --tags</code></pre>
+<hr>
+<h2 id="fusionar-y-rebasar">Fusionar y Rebasar</h2>
+<h5 id="fusionar-en-tu-head-actual">Fusionar <rama> en tu HEAD actual:</h5>
+<pre><code>$ git merge &lt;rama&gt;</code></pre>
+<h5 id="rabasar-tu-actual-head-sobre-rama">Rabasar tu actual HEAD sobre &lt;rama&gt;:<br></h5>
+<p><em><sub>¡No rebasar commits ya publicados!</sub></em></p>
+<pre><code>$ git rebase &lt;rama&gt;</code></pre>
+<h5 id="aborta-un-rebase">Aborta un rebase:</h5>
+<pre><code>$ git rebase --abort</code></pre>
+<h5 id="continuar-un-rebase-después-de-resolver-conflictos">Continuar un rebase después de resolver conflictos:</h5>
+<pre><code>$ git rebase --continue</code></pre>
+<h5 id="usar-tu-herramienta-de-fusión-configurada-para-resolver-conflictos">Usar tu herramienta de fusión configurada para resolver conflictos:</h5>
+<pre><code>$ git mergetool</code></pre>
+<h5 id="usar-tu-editor-para-manualmente-resolver-conflictos-y-después-de-resueltos-marcar-el-archivo-como-resuelto">Usar tu editor para manualmente resolver conflictos y (después de resueltos) marcar el archivo como resuelto:</h5>
+<pre><code>$ git add &lt;archivo-resuelto&gt;</code></pre>
+<pre><code>$ git rm &lt;archivo-resuelto&gt;</code></pre>
+<h5 id="aplastando-commits-squashing">Aplastando commits (squashing):</h5>
+<pre><code>$ git rebase -i &lt;commit-just-before-first&gt;</code></pre>
+<p>Ahora reemplazando esto,</p>
+<pre><code>pick &lt;commit_id&gt;
+pick &lt;commit_id2&gt;
+pick &lt;commit_id3&gt;</code></pre>
+<p>con esto,</p>
+<pre><code>pick &lt;commit_id&gt;
+squash &lt;commit_id2&gt;
+squash &lt;commit_id3&gt;</code></pre>
+<hr>
+<h2 id="deshacer">Deshacer</h2>
+<h5 id="descartar-todos-los-cambios-locales-en-tu-directorio-de-trabajo">Descartar todos los cambios locales en tu directorio de trabajo:</h5>
+<pre><code>$ git reset --hard HEAD</code></pre>
+<h5 id="sacar-todos-los-archivos-del-área-de-pruebas-es-decir-deshacer-el-último-git-add">Sacar todos los archivos del área de pruebas (es decir, deshacer el último <code>git add</code>):</h5>
+<pre><code>$ git reset HEAD</code></pre>
+<h5 id="descartar-cambios-locales-de-un-archivo-específico">Descartar cambios locales de un archivo específico:</h5>
+<pre><code>$ git checkout HEAD &lt;archivo&gt;</code></pre>
+<h5 id="revertir-un-commit-produciendo-un-nuevo-commit-con-los-cambios-contrarios">Revertir un commit (produciendo un nuevo commit con los cambios contrarios):</h5>
+<pre><code>$ git revert &lt;commit&gt;</code></pre>
+<h5 id="reestablecer-tu-puntero-head-a-un-commit-anterior-y-descartar-todos-los-cambios-desde-entonces">Reestablecer tu puntero HEAD a un commit anterior y descartar todos los cambios desde entonces:</h5>
+<pre><code>$ git reset --hard &lt;commit&gt;</code></pre>
+<h5 id="reestablecer-tu-putero-head-al-estado-actual-de-una-rama-remota.">Reestablecer tu putero HEAD al estado actual de una rama remota.</h5>
+<pre><code>$ git reset --hard &lt;remote/branch&gt; es decir, upstream/master, origin/my-feature</code></pre>
+<h5 id="reestablecer-tu-puntero-head-a-un-commit-anterior-y-preservar-todos-los-cambios-en-el-área-de-pruebas-stage-area">Reestablecer tu puntero HEAD a un commit anterior y preservar todos los cambios en el área de pruebas (stage area):</h5>
+<pre><code>$ git reset &lt;commit&gt;</code></pre>
+<h5 id="reestablecer-tu-puntero-head-a-un-commit-anterior-y-preservar-los-cambios-locales-sin-confirmar-uncommitted-changes">Reestablecer tu puntero HEAD a un commit anterior y preservar los cambios locales sin confirmar (uncommitted changes):</h5>
+<pre><code>$ git reset --keep &lt;commit&gt;</code></pre>
+<h5 id="remover-los-archivos-que-fueron-accidentalmente-agregados-al-commit-antes-de-ser-añadidos-al-.gitignore">Remover los archivos que fueron accidentalmente agregados al commit antes de ser añadidos al .gitignore:</h5>
+<pre><code>$ git rm -r --cached .
+$ git add .
+$ git commit -m &quot;remove xyz file&quot;</code></pre>
+<hr>
+<h2 id="git-flow">Git-Flow</h2>
+<h3 id="índice-1">Índice</h3>
+<ul>
+<li><a href="#configuración">Configuración</a></li>
+<li><a href="#iniciando">Iniciando</a></li>
+<li><a href="#features__características_">Features (características)</a></li>
+<li><a href="#hacer-un-lanzamiento">Hacer un lanzamiento</a></li>
+<li><a href="#hotfixes__revisiones_">Hotfixes (revisiones)</a></li>
+<li><a href="#commandos">Comandos</a></li>
+</ul>
+<hr>
+<h3 id="configuración-1">Configuración</h3>
+<h6 id="necesitas-tener-git-instalado-como-prerequisito.-git-flow-trabaja-en-osx-linux-y-windows.">Necesitas tener Git instalado como prerequisito. Git flow trabaja en OSX, Linux y Windows.</h6>
+<h5 id="osx-homebrew">OSX Homebrew:</h5>
+<pre><code>$ brew install git-flow</code></pre>
+<h5 id="osx-macports">OSX Macports:</h5>
+<pre><code>$ port install git-flow</code></pre>
+<h5 id="linux-basado-en-debian">Linux (basado en Debian):</h5>
+<pre><code>$ apt-get install git-flow</code></pre>
+<h5 id="windows-cygwin">Windows (Cygwin):</h5>
+<h6 id="necesitas-wget-y-util-linux-para-instalar-git-flow.">Necesitas wget y util-linux para instalar git-flow.</h6>
+<pre><code>$ wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/develop/contrib/gitflow-installer.sh | bash</code></pre>
+<hr>
+<h3 id="iniciando">Iniciando</h3>
+<h6 id="git-flow-necesita-ser-inicializado-con-el-fin-de-personalizar-la-configuración-de-tu-proyecto.-empieza-usando-git-flow-inicializándolo-dentro-de-un-repositorio-git-existente">Git flow necesita ser inicializado con el fin de personalizar la configuración de tu proyecto. Empieza usando git-flow inicializándolo dentro de un repositorio git existente:</h6>
+<h5 id="inicilizar">Inicilizar:</h5>
+<h6 id="tendrás-que-responder-un-par-de-preguntas-acerca-de-las-convenciones-de-nombramiento-de-tus-ramas.-es-recomendable-usar-los-valores-por-defecto.">Tendrás que responder un par de preguntas acerca de las convenciones de nombramiento de tus ramas. Es recomendable usar los valores por defecto.</h6>
+<pre><code>git flow init</code></pre>
+<hr>
+<h3 id="features-características">Features (características)</h3>
+<h6 id="desarrolla-nuevos-features-para-próximos-lanzamientos.-típicamente-sólo-existen-en-los-repositorios-de-desarrolladores.">Desarrolla nuevos features para próximos lanzamientos. Típicamente sólo existen en los repositorios de desarrolladores.</h6>
+<h5 id="iniciar-un-nuevo-feature">Iniciar un nuevo feature:</h5>
+<h6 id="esta-acción-crea-una-nueva-rama-feature-branch-basada-en-la-rama-de-desarrollo-develop-branch-y-cambia-a-esta.">Esta acción crea una nueva rama (feature branch) basada en la rama de desarrollo (develop branch) y cambia a esta.</h6>
+<pre><code>git flow feature start MIFEATURE</code></pre>
+<h5 id="terminar-un-feature">Terminar un feature:</h5>
+<h6 id="finalizar-el-desarrollo-de-un-feature.-esta-accion-realiza-lo-siguiente">Finalizar el desarrollo de un feature. Esta accion realiza lo siguiente:</h6>
+<h6 id="fusiona-mifeature-con-la-rama-de-desarrollo-develop-branch.">1) Fusiona MIFEATURE con la rama de desarrollo (develop branch).</h6>
+<h6 id="elimina-la-rama-del-feature-feature-branch.">2) Elimina la rama del feature (feature branch).</h6>
+<h6 id="cambia-nuevamente-a-la-rama-de-desarrollo-develop-branch.">3) Cambia nuevamente a la rama de desarrollo (develop branch).</h6>
+<pre><code>git flow feature finish MIFEATURE</code></pre>
+<h5 id="publicar-un-feature">Publicar un feature:</h5>
+<h6 id="estás-desarrollando-un-feature-colaborativamente-publica-un-feature-en-el-servidor-remoto-así-puede-ser-usado-por-otros-usuarios.">¿Estás desarrollando un feature colaborativamente? Publica un feature en el servidor remoto, así puede ser usado por otros usuarios.</h6>
+<pre><code>git flow feature publish MIFEATURE</code></pre>
+<h5 id="obteniendo-un-feature-publicado">Obteniendo un feature publicado:</h5>
+<h6 id="obtener-un-feature-publicado-por-otro-usuario.">Obtener un feature publicado por otro usuario.</h6>
+<pre><code>git flow feature pull origin MIFEATURE</code></pre>
+<h5 id="rastrear-un-origin-feature">Rastrear un origin feature:</h5>
+<h6 id="puedes-rastrear-un-feature-en-origin-usando">Puedes rastrear un feature en origin usando:</h6>
+<pre><code>git flow feature track MIFEATURE</code></pre>
+<hr>
+<h3 id="hacer-un-lanzamiento">Hacer un lanzamiento</h3>
+<h6 id="apoya-la-preparación-de-un-nuevo-lanzamiento-a-producción.-permite-la-corrección-de-pequeños-bugs-y-la-preparación-de-metadatos-para-un-lanzamiento.">Apoya la preparación de un nuevo lanzamiento a producción. Permite la corrección de pequeños bugs y la preparación de metadatos para un lanzamiento.</h6>
+<h5 id="empezar-un-lanzamiento">Empezar un lanzamiento:</h5>
+<h6 id="para-empezar-un-lanzamiento-usa-el-comando-release-de-git-flow.-este-crea-una-rama-de-lanzamiento-release-branch-de-la-rama-de-desarrollo-develop-branch.-opcionalmente-puedes-sustituir-el-hash-sha-1-de-un-commit-base-para-empezar-el-lanzamiento-desde-este.-el-commit-debe-estar-en-la-rama-de-desarrollo-develop-branch.">Para empezar un lanzamiento, usa el comando “release” de git flow. Este crea una rama de lanzamiento (release branch) de la rama de desarrollo (develop branch). Opcionalmente puedes sustituir el hash sha-1 de un commit [BASE] para empezar el lanzamiento desde este. El commit debe estar en la rama de desarrollo (develop branch).</h6>
+<pre><code>git flow release start RELEASE [BASE]</code></pre>
+<h6 id="es-aconsejable-publicar-la-rama-de-lanzamiento-release-branch-después-de-crearla-para-permitir-publicar-commits-de-otros-desarrolladores.-hazlo-de-manera-similar-a-publicar-un-feature-con-el-comando">Es aconsejable publicar la rama de lanzamiento (release branch) después de crearla para permitir publicar commits de otros desarrolladores. Hazlo de manera similar a publicar un feature con el comando:</h6>
+<pre><code>git flow release publish RELEASE</code></pre>
+<h6 id="puedes-rastrear-un-lanzamiento-remoto-con-el-comando-git-flow-release-track-release">(Puedes rastrear un lanzamiento remoto con el comando: <code>git flow release track RELEASE</code>)</h6>
+<h5 id="terminando-un-lanzamiento">Terminando un lanzamiento:</h5>
+<h6 id="terminando-un-lanzamiento-es-uno-de-los-grandes-pasos-en-la-ramificación-de-git.-realiza-varias-acciones">Terminando un lanzamiento es uno de los grandes pasos en la ramificación de git. Realiza varias acciones:</h6>
+<h6 id="fusiona-la-rama-de-lanzamiento-release-branch-con-la-rama-master.">1) Fusiona la rama de lanzamiento (release branch) con la rama master.</h6>
+<h6 id="etiqueta-la-publicación-con-su-nombre.">2) Etiqueta la publicación con su nombre.</h6>
+<h6 id="vuelve-a-fusionar-la-rama-de-lanzamiento-release-branch-en-la-rama-de-desarrollo-develop-branch.">3) Vuelve a fusionar la rama de lanzamiento (release branch) en la rama de desarrollo (develop branch).</h6>
+<h6 id="elimina-la-rama-de-lanzamiento-release-branch.">4) Elimina la rama de lanzamiento (release branch).</h6>
+<pre><code>git flow release finish RELEASE</code></pre>
+<h6 id="no-olvides-de-publicar-tus-etiquetas-con-git-push---tags">No olvides de publicar tus etiquetas con <code>git push --tags</code></h6>
+<hr>
+<h3 id="hotfixes-revisiones">Hotfixes (revisiones)</h3>
+<h6 id="los-hotfixes-surgen-de-la-necesidad-de-actuar-inmediatamente-ante-un-estado-indeseado-en-una-versión-de-producción-en-vivo.-puede-ser-desramificada-de-la-correspondiente-etiqueta-en-la-rama-master-que-marca-la-versión-de-producción.">Los hotfixes surgen de la necesidad de actuar inmediatamente ante un estado indeseado en una versión de producción en vivo. Puede ser desramificada de la correspondiente etiqueta en la rama master que marca la versión de producción.</h6>
+<h5 id="emepezar-un-hotfix-en-git-flow">Emepezar un hotfix en git flow:</h5>
+<h6 id="como-los-otros-comandos-de-git-flow-un-hotfix-es-inicializado-con">Como los otros comandos de git flow, un hotfix es inicializado con:</h6>
+<pre><code>$ git flow hotfix start VERSION [BASENAME]</code></pre>
+<h6 id="el-argumento-versión-marca-el-nombre-de-publicación-del-nuevo-hotfix.-opcionalmente-puedes-especificar-un-nombre-base-desde-cual-empezar.">El argumento versión marca el nombre de publicación del nuevo hotfix. Opcionalmente puedes especificar un nombre base desde cual empezar.</h6>
+<h5 id="terminar-un-hotfix">Terminar un hotfix:</h5>
+<h6 id="al-finalizar-un-hotfix-este-se-fusiona-nuevamente-con-la-rama-de-desarrollo-y-la-rama-master.-adicionalmente-la-fusión-master-es-etiquetada-con-la-versión-del-hotfix.">Al finalizar un hotfix este se fusiona nuevamente con la rama de desarrollo y la rama master. Adicionalmente la fusión master es etiquetada con la versión del hotfix.</h6>
+<pre><code>git flow hotfix finish VERSION</code></pre>
+<hr>
+<h3 id="comandos">Comandos</h3>
+<p align="center">
+<img alt="Git" src="../Img/git-flow-commands.png" height="270" width="460">
+</p>
+<hr>
+<h3 id="esquema-de-git-flow">Esquema de git flow</h3>
+<p align="center">
+<img alt="Git" src="../Img/git-flow-commands-without-flow.png">
+</p>
+<hr>
+</body>
+</html>

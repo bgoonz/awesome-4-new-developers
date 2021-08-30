@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>design-patterns</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="design-patterns">Design Patterns</h1>
+    <p>
+      <strong
+        >Context: <a href="../README.md">frontend-dev-bookmarks</a> /
+        Architecture</strong
+      >
+    </p>
+    <p>
+      Best practices that the programmer can use to solve common problems when
+      designing an application or system.
+    </p>
+    <p>
+      <a href="http://frontend.directory/"
+        ><img
+          src="https://img.shields.io/badge/frontend-directory-blue.svg?style=flat-square"
+          alt="frontend.directory"
+      /></a>
+      <a href="https://gitter.im/dypsilon/frontend-dev-bookmarks"
+        ><img
+          src="https://img.shields.io/gitter/room/dypsilon/frontend-dev-bookmarks.svg?style=flat-square&amp;maxAge=2592000"
+          alt="Gitter"
+      /></a>
+      <a href="https://twitter.com/FrontendDir"
+        ><img
+          src="https://img.shields.io/badge/follow-twitter-55acee.svg?style=flat-square"
+          alt="Twitter"
+      /></a>
+    </p>
+    <table style="width: 58%">
+      <colgroup>
+        <col style="width: 58%" />
+      </colgroup>
+      <tbody>
+        <tr class="odd">
+          <td>
+            +
+            <strong
+              ><a href="https://github.com/css-modules">CSS Modules</a></strong
+            >: A CSS Module is a CSS file in which all class names and animation
+            names are scoped locally by default. +
+            <strong
+              ><a href="https://github.com/css-modules/css-modules"
+                >CSS Modules Documentation</a
+              ></strong
+            >: General overview and some implementations. +
+            <strong
+              ><a href="https://github.com/jacobp100/es-css-modules"
+                >ES CSS Modules</a
+              ></strong
+            >: PostCSS plugin that combines CSS Modules and ES Imports. +
+            <strong
+              ><a
+                href="https://medium.com/@jacobp/tree-shaking-bootstrap-95d6301f61a9"
+                >Tree Shaking Bootstrap</a
+              ></strong
+            >: Jacob Parker describes how to include only those parts of
+            Bootstrap you are really using on your website by leveraging CSS
+            modules and ES6 modules. + <strong>Components</strong>: Reusable and
+            composable pieces of HTML, CSS and/or JavaScript code which are
+            mostly used for GUI elements. +
+            <strong
+              ><a href="https://github.com/Mercateo/component-check"
+                >Component Check</a
+              ></strong
+            >: In this project Donald Pipowitch compares the usage and
+            development of components in several frameworks such as Angular,
+            Ember, Cycle.js and React. +
+            <strong
+              ><a
+                href="https://medium.com/@learnreact/container-components-c0e67432e005"
+                >Container Components</a
+              ></strong
+            >: Container Components is a pattern which allows to separate
+            data-fetching and rendering concerns and increase the reusability of
+            the (child) components. +
+            <strong
+              ><a href="http://livingstyleguide.devbridge.com/"
+                >Devbridge Styleguide</a
+              ></strong
+            >: Devbridge Styleguide helps you create, share, and automate a
+            living visual style library of your brand. +
+            <strong
+              ><a
+                href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0"
+                >Presentational and Container Components</a
+              ></strong
+            >: Dan Abramov creates a pattern for separating presentational and
+            container components to increase reusability and clarity of the
+            application code. + <strong>Web Components</strong>: Web Components
+            is a W3C standard for encapsulated, reusable and composable widgets
+            for the web platform. +
+            <strong
+              ><a href="http://jonrimmer.github.io/are-we-componentized-yet/"
+                >Are We Componentized Yet?</a
+              ></strong
+            >: Tracking the progress of Web Components through standardisation,
+            polyfillification and implementation. +
+            <strong
+              ><a
+                href="http://www.html5rocks.com/en/tutorials/webcomponents/customelements/"
+                >Custom Elements</a
+              ></strong
+            >: Eric Bidelman describes how to create new HTML elements and
+            manage their life cycle. +
+            <strong
+              ><a href="http://w3c.github.io/webcomponents/spec/custom/"
+                >Custom Elements W3C Editor’s Draft</a
+              ></strong
+            >: This specification describes the method for enabling the author
+            to define and use new types of DOM elements in a document. +
+            <strong
+              ><a href="http://w3c.github.io/webcomponents/spec/imports/"
+                >HTML Imports W3C Editor’s Draft</a
+              ></strong
+            >: HTML Imports are a way to include and reuse HTML documents in
+            other HTML documents. +
+            <strong
+              ><a
+                href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/"
+                >HTML Imports: #include for the web</a
+              ></strong
+            >: Eric Bidelman describes how to use HTML imports and goes through
+            several edge cases. +
+            <strong
+              ><a
+                href="http://www.html5rocks.com/en/tutorials/webcomponents/template/"
+                >HTML’s New Template Tag</a
+              ></strong
+            >: The template element allows you to declare fragments of DOM which
+            are parsed, inert at page load, and instantiated later at runtime. +
+            <strong
+              ><a
+                href="http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/"
+                >Shadow DOM 101</a
+              ></strong
+            >: Dominic Cooney shows you how to use Shadow DOM in this tutorial.
+            +
+            <strong
+              ><a
+                href="http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-201/"
+                >Shadow DOM 201</a
+              ></strong
+            >: Eric Bidelman explains advanced topics related to styling of
+            Shadow DOM elements. +
+            <strong
+              ><a
+                href="http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom-301/"
+                >Shadow DOM 301</a
+              ></strong
+            >: Eric Bidelman talks about advanced Shadow DOM topics like
+            multiple shadow roots, insertion points, event model and Shadow DOM
+            Visualizer. +
+            <strong
+              ><a href="http://w3c.github.io/webcomponents/spec/shadow/"
+                >Shadow DOM W3C Editor’s Draft</a
+              ></strong
+            >: This specification describes a method of combining multiple DOM
+            trees into one hierarchy and how these trees interact with each
+            other within a document, thus enabling better composition of the
+            DOM. +
+            <strong
+              ><a
+                href="http://html5-demos.appspot.com/static/shadowdom-visualizer/index.html"
+                >ShadowDOM Visualizer</a
+              ></strong
+            >: This tool allows you to visualize how Shadow DOM renders in the
+            browser. +
+            <strong
+              ><a
+                href="https://blog.revillweb.com/why-web-components-are-so-important-66ad0bd4807a"
+                >Why Web Components Are So Important</a
+              ></strong
+            >: Leon Revill compares web components with concepts from different
+            frameworks and explains why web components matter. +
+            <strong
+              ><a
+                href="https://blog.revillweb.com/write-web-components-with-es2015-es6-75585e1f2584"
+                >Write Web Components with ES2015 (ES6)</a
+              ></strong
+            >: This tutorial shows how to create a web component using ES2015
+            and how to make use of babel to transpile back to ES5. +
+            <strong>DOM Diffing &amp; Patching</strong>: Diffing &amp; Patching
+            is a pattern which allows faster and simpler rendering and updating
+            of DOM trees as manual manipulation à la jQuery. +
+            <strong
+              ><a
+                href="http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html"
+                >Change And Its Detection In JavaScript Frameworks</a
+              ></strong
+            >: This article explores several approaches to manage state: Ember’s
+            data binding, Angular’s dirty checking, React’s virtual DOM, and its
+            relationship to immutable data structures. +
+            <strong
+              ><a href="https://github.com/joelrich/citojs">Cito.js</a></strong
+            >: The core of cito.js consists of a virtual DOM library inspired by
+            React/Mithril. On top of that, it will provide a component framework
+            which will make it easy to build well-encapsulated components. +
+            <strong
+              ><a href="https://github.com/google/incremental-dom"
+                >Incremental DOM</a
+              ></strong
+            >: Incremental DOM is a library for building up DOM trees and
+            updating them in-place when data changes. It differs from the
+            established virtual DOM approach in that no intermediate tree is
+            created (the existing tree is mutated in-place). +
+            <strong
+              ><a
+                href="https://medium.com/google-developers/introducing-incremental-dom-e98f79ce2c5f"
+                >Introducing Incremental DOM</a
+              ></strong
+            >: Incremental DOM is a library inspired by Virtual DOM developed at
+            Google. +
+            <strong
+              ><a href="https://github.com/patrick-steele-idem/morphdom"
+                >Morphdom</a
+              ></strong
+            >: Lightweight module for morphing an existing DOM node tree to
+            match a target DOM node tree. It’s fast and works with the real
+            DOM—no virtual DOM here! +
+            <strong
+              ><a
+                href="http://blog.reverberate.org/2014/02/react-demystified.html"
+                >React Demystified</a
+              ></strong
+            >: This article is an attempt to explain the core ideas behind
+            React.js and Virtual DOM. +
+            <strong
+              ><a
+                href="https://auth0.com/blog/2015/11/20/face-off-virtual-dom-vs-incremental-dom-vs-glimmer/"
+                >React vs Incremental DOM vs Glimmer</a
+              ></strong
+            >: In this post we will explore three technologies to build dynamic
+            DOMs. We will also run benchmarks and find out which one is faster.
+            +
+            <strong
+              ><a
+                href="https://medium.com/@yelouafi/react-less-virtual-dom-with-snabbdom-functions-everywhere-53b672cb2fe3"
+                >React-less Virtual DOM with Snabbdom: functions everywhere!</a
+              ></strong
+            >: Yassine Elouafi shows in this post how to write a virtual DOM
+            based applications using a small and standalone library. +
+            <strong
+              ><a href="https://github.com/paldepind/snabbdom"
+                >Snabbdom</a
+              ></strong
+            >: A virtual DOM library with focus on simplicity, modularity,
+            powerful features and performance. +
+            <strong
+              ><a href="https://github.com/Matt-Esch/virtual-dom"
+                >Virtual DOM</a
+              ></strong
+            >: Virtual-dom is a collection of modules designed to provide a
+            declarative way of representing the DOM for your app. So instead of
+            updating the DOM, you simply create a virtual tree or VTree, which
+            looks like the DOM state that you want. +
+            <strong
+              ><a href="https://github.com/TimBeyer/html-to-vdom"
+                >html-to-vdom</a
+              ></strong
+            >: This is yet another library to convert HTML into a vtree. It’s
+            used in conjunction with virtual-dom to convert template based views
+            into virtual-dom views. +
+            <strong
+              ><a href="https://github.com/unframework/html2hyperscript"
+                >html2hyperscript</a
+              ></strong
+            >: Automatically translate old HTML markup into the new Hyperscript
+            markup embeddable directly inside your component Javascript code. +
+            <strong
+              ><a href="https://github.com/nthtran/vdom-to-html/"
+                >vdom-to-html</a
+              ></strong
+            >: Turn Virtual DOM nodes into HTML. +
+            <strong
+              ><a href="https://github.com/marcelklehr/vdom-virtualize/"
+                >vdom-virtualize</a
+              ></strong
+            >: Turn a DOMNode into a virtual-dom node. +
+            <strong
+              ><a href="https://github.com/yoshuawuyts/virtual-html"
+                >virtual-html</a
+              ></strong
+            >: Convert given HTML into Virtual DOM object. +
+            <strong
+              ><a href="https://github.com/parshap/vtree-select"
+                >vtree-select</a
+              ></strong
+            >: Select vtree nodes (used by virtual-dom) using css selectors.
+            Selector matching is done using cssauron. See the documentation for
+            details on supported selectors. +
+            <strong>Design Pattern Collections</strong>: Overview resources and
+            collections of design patterns. +
+            <strong
+              ><a
+                href="http://nicolasgallagher.com/about-html-semantics-front-end-architecture/"
+                >About HTML Semantics and Frontend Architecture</a
+              ></strong
+            >: A collection of thoughts, experiences, ideas on HTML semantics,
+            components and approaches to front-end architecture, class naming
+            patterns, and HTTP compression. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=mKouqShWI4o"
+                >Box Tech Talk: Scalable JavaScript Application Architecture</a
+              ></strong
+            >: A video by Nicholas Zakas (2012) about JavaScript Architecture. +
+            <strong
+              ><a
+                href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/"
+                >Learning JavaScript Design Patterns</a
+              ></strong
+            >: In this free book Addy Osmani explores applying both classical
+            and modern design patterns to the JavaScript programming language. +
+            <strong
+              ><a href="https://addyosmani.com/largescalejavascript/"
+                >Patterns For Large-Scale JavaScript Application Architecture</a
+              ></strong
+            >: An extensive overview by Addy Osmani of existing architectural
+            solutions in the frontend development field. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=vXjVFPosQHw"
+                >Scalable JavaScript Application Architecture</a
+              ></strong
+            >: In this video (2011) Nicholas Zakas discusses frontend
+            architecture for complex, modular web applications with significant
+            JavaScript elements. +
+            <strong
+              ><a href="http://singlepageappbook.com/"
+                >Single Page Apps in Depth</a
+              ></strong
+            >: This free book is what I wanted when I started working with
+            single page apps. It’s not an API reference on a particular
+            framework, rather, the focus is on discussing patterns,
+            implementation choices and decent practices. +
+            <strong>JavaScript Modules</strong>: Modules divide programs into
+            clusters of code that, by some criterion, belong together. +
+            <strong
+              ><a href="http://eloquentjavascript.net/10_modules.html"
+                >Chapter 10 of Eloquent JavaScript: Modules</a
+              ></strong
+            >: This chapter explores some of the benefits that division of code
+            provides and shows techniques for building modules in JavaScript. +
+            <strong
+              ><a href="https://hacks.mozilla.org/2015/08/es6-in-depth-modules/"
+                >ES6 In Depth: Modules</a
+              ></strong
+            >: This article highlights export and import keywords from ES6. +
+            <strong
+              ><a href="https://mariusgundersen.net/module-pusher/"
+                >Efficient Module Loading Without Bundling</a
+              ></strong
+            >: We can combine ES2015 modules, static analysis of those modules,
+            HTTP/2, caching, Service Workers and a bloom-filter to create a
+            server-client relationship where the client can efficiently load any
+            module. +
+            <strong
+              ><a
+                href="https://medium.freecodecamp.com/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#.i78m6tfs9"
+                >JavaScript Modules: A Beginner’s Guide</a
+              ></strong
+            >: In this post, Preethi Kasireddy will unpack the buzzwords like
+            module bundlers, AMD and CommonJS for you in plain English,
+            including a few code samples. +
+            <strong
+              ><a
+                href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modularjavascript"
+                >Modern Modular JavaScript Design Patterns</a
+              ></strong
+            >: A chapter from Essential JavaScript Design Patterns on Modules. +
+            <strong>Module Bundlers and Loaders</strong>: Libraries for bundling
+            JavaScript Modules into one or several files. +
+            <strong><a href="http://browserify.org/">Browserify</a></strong
+            >: Browserify lets you require(‘modules’) in the browser by bundling
+            up all of your dependencies. +
+            <strong><a href="https://github.com/mattdesl/budo">Budo</a></strong
+            >: A browserify development server, focused on incremental
+            reloading, LiveReload integration (including CSS injection), and
+            other high-level features. +
+            <strong
+              ><a href="https://www.npmjs.org/package/watchify"
+                >Watchify</a
+              ></strong
+            >: Watch mode for browserify builds. +
+            <strong
+              ><a href="https://github.com/gregersrygg/crapLoader"
+                >CrapLoader</a
+              ></strong
+            >: The goal of crapLoader is to load ads, widgets or any JavaScript
+            code with document.write in it. This library hijacks document.write
+            and delegates the content loaded from each script into the correct
+            position. +
+            <strong
+              ><a href="https://github.com/medikoo/modules-webmake"
+                >Modules Webmake</a
+              ></strong
+            >: A CommonJS module bundler similar to Browserify but much faster
+            due to different requirements finder. +
+            <strong><a href="http://requirejs.org/">Require.js</a></strong
+            >: RequireJS is a JavaScript file and AMD module loader. It is
+            optimized for in-browser use, but it can be used in other JavaScript
+            environments. +
+            <strong
+              ><a href="http://stuk.github.io/require1k/">Require1k</a></strong
+            >: CommonJS require for the browser in 1KB, with no build needed. +
+            <strong><a href="http://rollupjs.org/">Rollup.js</a></strong
+            >: Rollup is a next-generation JavaScript module bundler. Author
+            your app or library using ES2015 modules, then efficiently bundle
+            them up into a single file for use in browsers and Node.js. +
+            <strong
+              ><a href="https://github.com/systemjs/systemjs"
+                >SystemJS</a
+              ></strong
+            >: Universal dynamic module loader - loads ES6 modules, AMD,
+            CommonJS and global scripts in the browser and NodeJS. Works with
+            both Traceur and Babel. +
+            <strong
+              ><a
+                href="http://www.sitepoint.com/modular-javascript-systemjs-jspm/"
+                >Modular JavaScript: A Beginners Guide to SystemJS &amp; JSPM</a
+              ></strong
+            >: The combination of jspm and SystemJS provides a unified way of
+            installing and loading dependencies. +
+            <strong
+              ><a href="https://github.com/anodynos/urequire"
+                >URequire</a
+              ></strong
+            >: The Ultimate JavaScript Module Builder &amp; Automagical Task
+            Runner. +
+            <strong><a href="http://webpack.github.io/">Webpack</a></strong
+            >: Webpack is a module bundler. It takes modules with dependencies
+            and generates static assets representing those modules. +
+            <strong
+              ><a
+                href="https://medium.com/seek-ui-engineering/block-element-modifying-your-javascript-components-d7f99fcab52b"
+                >Block, Element, Modifying Your JavaScript Components</a
+              ></strong
+            >: Mark Dalgleish is discussing how to organize React code with BEM
+            and build everything with Webpack. +
+            <strong
+              ><a
+                href="http://dapperdeveloper.com/2016/05/18/developing-with-docker-and-webpack/"
+                >Developing with Docker and Webpack</a
+              ></strong
+            >: Chris Harrington explains how to create a development environment
+            with Webpack and Docker to match the production as much as possible.
+            +
+            <strong
+              ><a
+                href="http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html"
+                >Full-Stack Redux Tutorial</a
+              ></strong
+            >: We will go through all the steps of constructing a Node+Redux
+            backend and a React+Redux frontend for a real-world application,
+            using test-first development. +
+            <strong
+              ><a
+                href="http://www.davidmeents.com/how-to-set-up-webpack-image-loader/"
+                >How to Set Up Webpack Image Loader</a
+              ></strong
+            >: This brief tutorial will help you set up an image loader in
+            Webpack. +
+            <strong
+              ><a
+                href="http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/"
+                >The SoundCloud Client in React + Redux</a
+              ></strong
+            >: After finishing this step by step tutorial you will be able to
+            author your own React + Redux project with Webpack and Babel. +
+            <strong
+              ><a href="http://survivejs.com/webpack/"
+                >Webpack from Apprentice to Master</a
+              ></strong
+            >: The purpose of this guide is to help you get started with Webpack
+            and then go beyond basics. +
+            <strong><a href="http://www.webpackbin.com/">WebpackBin</a></strong
+            >: A webpack code sandbox. +
+            <strong
+              ><a href="http://devlog.disco.zone/2016/06/01/webpack/"
+                >Why I think Webpack is the Right Approach To Build Pipelines</a
+              ></strong
+            >: Thomas Boyt compares how Grunt, Gulp, Broccoli and Webpack
+            discover dependencies. +
+            <strong
+              ><a href="https://github.com/umdjs/umd"
+                >UMD (Universal Module Definition)</a
+              ></strong
+            >: This repository formalizes the design and implementation of the
+            Universal Module Definition (UMD) API for JavaScript modules. These
+            are modules which are capable of working everywhere, be it in the
+            client, on the server or elsewhere. +
+            <strong
+              ><a href="https://addyosmani.com/writing-modular-js/"
+                >Writing Modular JavaScript With AMD, CommonJS &amp; ES
+                Harmony</a
+              ></strong
+            >: In this article Addy Osmani reviewes several of the options
+            available for writing modular JavaScript using modern module formats
+            AMD, CommonJS and ES6 Modules. + <strong>Observable</strong>: An
+            Observable is an event stream which can emit zero or more events,
+            and may or may not finish. If it finishes, then it does so by either
+            emitting an error or a special “complete” event. +
+            <strong
+              ><a href="https://github.com/zenparsing/es-observable"
+                >ECMAScript Observable</a
+              ></strong
+            >: This proposal introduces an Observable type to the ECMAScript
+            standard library. The Observable type can be used to model
+            push-based data sources such as DOM events, timer intervals, and
+            sockets. +
+            <strong
+              ><a href="https://github.com/Reactive-Extensions/RxJS"
+                >Reactive Extensions (RxJS)</a
+              ></strong
+            >: RxJS is a set of libraries for composing asynchronous and
+            event-based programs using observable sequences and fluent query
+            operators. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=XRYN2xt11Ek"
+                >Async JavaScript with Reactive Extensions</a
+              ></strong
+            >: Jafar Husain explains in this video how Netflix uses the Reactive
+            Extensions (Rx) library to build responsive user experiences that
+            strive to be event-driven, scalable and resilient. +
+            <strong
+              ><a
+                href="http://blog.thoughtram.io/rx/2016/08/01/exploring-rx-operators-flatmap.html"
+                >Exploring Rx Operators: FlatMap</a
+              ></strong
+            >: Christoph Burgdorf introduces the FlatMap operator and its usage
+            for collections and observables. +
+            <strong
+              ><a
+                href="http://blog.thoughtram.io/angular/2016/05/16/exploring-rx-operators-map.html"
+                >Exploring Rx Operators: Map</a
+              ></strong
+            >: Christoph Burgdorf explains how to use the map operator in RxJS.
+            +
+            <strong
+              ><a
+                href="http://www.mokacoding.com/blog/functional-core-reactive-shell/"
+                >Functional Core Reactive Shell</a
+              ></strong
+            >: Giovanni Lodi makes an overview of different architecture
+            meta-patterns and describes his current findings about functional
+            programming and observables as a way to control side effects. +
+            <strong><a href="http://reactivex.io/learnrx/">Learn RX</a></strong
+            >: A series of interactive exercises for learning Microsoft’s
+            Reactive Extensions (Rx) Library for Javascript. +
+            <strong><a href="http://www.learnrxjs.io/">Learn RxJS</a></strong
+            >: This site focuses on making RxJS concepts approachable, the
+            examples clear and easy to explore, and features references
+            throughout to the best RxJS related material on the web. +
+            <strong
+              ><a
+                href="https://medium.com/@sergimansilla/real-world-observables-1f65748c8f9"
+                >Real World Observables</a
+              ></strong
+            >: Sergi Mansilla writes an FTP client to use it as an example for a
+            real world application based on RxJS. +
+            <strong
+              ><a href="https://github.com/JulienMoumne/rx-training-games"
+                >Rx Training Games</a
+              ></strong
+            >: Rx Training Games is a coding playground that can be used to
+            learn and practice Reactive Extensions coding grid-based games +
+            <strong
+              ><a href="http://xgrommx.github.io/rx-book/index.html"
+                >Rx-Book</a
+              ></strong
+            >: A complete book about RxJS v.4.0. +
+            <strong><a href="http://rxmarbles.com/">RxMarbles</a></strong
+            >: A webapp for experimenting with diagrams of Rx Observables, for
+            learning purposes. +
+            <strong
+              ><a href="https://www.npmjs.com/package/rxstate"
+                >RxState</a
+              ></strong
+            >: Simple opinionated state management library based on RxJS and
+            Immutable.js +
+            <strong
+              ><a
+                href="http://blog.thoughtram.io/angular/2016/01/06/taking-advantage-of-observables-in-angular2.html"
+                >Taking Advantage of Observables in Angular 2</a
+              ></strong
+            >: Christoph Burgdorf describes the advantages of Observables and
+            how you can use them in Angular 2 context. +
+            <strong
+              ><a
+                href="https://xgrommx.github.io/rx-book/content/getting_started_with_rxjs/creating_and_querying_observable_sequences/transducers.html"
+                >Transducers with Observable Sequences</a
+              ></strong
+            >: A chapter from the RxJS Book describing Transducers. +
+            <strong
+              ><a href="http://staltz.com/why-we-built-xstream.html"
+                >Why We Built Xstream</a
+              ></strong
+            >: The authors needed a stream library tailored for Cycle.js. It
+            needs to be “hot” only, small in kB size and it should have only a
+            few and intuitive operators. + <strong>Routing</strong>: A routing
+            system parses a string input (usually a URL) and decides which
+            action should be executed by matching the string against multiple
+            patterns. +
+            <strong
+              ><a
+                href="http://joakim.beng.se/blog/posts/a-javascript-router-in-20-lines.html"
+                >A JavaScript router in 20 lines</a
+              ></strong
+            >: Joakim Carlstein shows how to write a simple router with data
+            binding. +
+            <strong
+              ><a href="http://millermedeiros.github.io/crossroads.js/"
+                >Crossroads.js</a
+              ></strong
+            >: Crossroads.js is a powerful and flexible routing system. If used
+            properly it can reduce code complexity by decoupling objects and
+            also by abstracting navigation paths and server requests. +
+            <strong
+              ><a href="https://github.com/flatiron/director"
+                >Director</a
+              ></strong
+            >: A tiny and isomorphic URL router for JavaScript. +
+            <strong
+              ><a href="https://www.polymer-project.org/1.0/blog/routing"
+                >Encapsulated Routing with Elements</a
+              ></strong
+            >: Peter Burns describes a routing approach based on Polymer
+            elements, that allow to create chained and modular routes. +
+            <strong
+              ><a href="https://github.com/javve/hash.js">Hash.js</a></strong
+            >: Hash.js is a 0.5 KB script that lets you manipulate everything
+            behind # in urls. +
+            <strong
+              ><a href="http://www.asual.com/jquery/address/"
+                >JQuery Address</a
+              ></strong
+            >: The jQuery Address plugin provides powerful deep linking
+            capabilities and allows the creation of unique virtual addresses
+            that can point to a website section or an application state. +
+            <strong
+              ><a href="https://github.com/visionmedia/page.js"
+                >Page.js</a
+              ></strong
+            >: Micro client-side router inspired by the Express router. +
+            <strong
+              ><a href="http://grobmeier.github.io/Roadcrew.js/"
+                >Roadcrew.js</a
+              ></strong
+            >: Roadcrew.js is a small JavaScript component which lets you switch
+            pages of a single file website. +
+            <strong
+              ><a href="https://github.com/tildeio/route-recognizer"
+                >Route Recognizer</a
+              ></strong
+            >: A lightweight JavaScript library that matches paths against
+            registered routes. It includes support for dynamic and star segments
+            and nested handlers. +
+            <strong
+              ><a href="https://github.com/tildeio/router.js"
+                >Router.js (Ember)</a
+              ></strong
+            >: Router.js is the routing microlib used by Ember.js. +
+            <strong
+              ><a href="https://github.com/router5/router5">Router5</a></strong
+            >: A simple, powerful, modular and extensible router, organising
+            your named routes in a tree and handling route transitions. In its
+            simplest form, Router5 processes routing instructions and outputs
+            state updates. + <strong>UI Data Binding</strong>: Binding of UI
+            elements to an application domain model. Most frameworks employ the
+            Observer pattern as the underlying binding mechanism. +
+            <strong
+              ><a
+                href="https://guides.emberjs.com/v2.6.0/object-model/bindings/"
+                >Bindings in Ember</a
+              ></strong
+            >: Unlike most other frameworks that include some sort of binding
+            implementation, bindings in Ember.js can be used with any object. +
+            <strong
+              ><a
+                href="http://teropa.info/blog/2015/03/02/change-and-its-detection-in-javascript-frameworks.html"
+                >Change And Its Detection In JavaScript Frameworks</a
+              ></strong
+            >: This article explores several approaches to manage state: Ember’s
+            data binding, Angular’s dirty checking, React’s virtual DOM, and its
+            relationship to immutable data structures. +
+            <strong
+              ><a
+                href="http://www.lucaongaro.eu/blog/2012/12/02/easy-two-way-data-binding-in-javascript/"
+                >Easy Two-Way Data Binding in JavaScript</a
+              ></strong
+            >: Two-way data binding refers to the ability to bind changes to an
+            object’s properties to changes in the UI, and viceversa. This
+            article describes how to implement data binding with vanilla
+            JavaScript. +
+            <strong
+              ><a href="https://github.com/kriskowal/frb"
+                >Functional Reactive Bindings</a
+              ></strong
+            >: A CommonJS package that includes functional and generic building
+            blocks to help incrementally ensure consistent state. +
+            <strong><a href="http://knockoutjs.com/">Knockout.js</a></strong
+            >: Knockout is a standalone JavaScript implementation of the
+            Model-View-ViewModel pattern with templates. +
+            <strong><a href="http://rivetsjs.com/">Rivets.js</a></strong
+            >: Lightweight and powerful data binding + templating solution for
+            building modern web applications. +
+            <strong
+              ><a href="https://github.com/bruth/synapse/">Synapse</a></strong
+            >: Hooks to support data binding between virtually any object. +
+            <strong>Unidirectional Data Flow</strong>: An architecture design
+            pattern which promotes a flow of data and events in a single
+            direction, usually creating an interactive loop. +
+            <strong><a href="https://facebook.github.io/flux/">Flux</a></strong
+            >: Flux is the application architecture that Facebook uses for
+            building client-side web applications. It complements React’s
+            composable view components by utilizing a unidirectional data flow.
+            It’s more of a pattern rather than a formal framework, and you can
+            start using Flux immediately without a lot of new code. +
+            <strong
+              ><a href="https://github.com/krasimir/fluxiny">Fluxiny</a></strong
+            >: ~1K implementation of flux architecture +
+            <strong
+              ><a href="https://vimeo.com/album/3953264/video/166790294"
+                >Immutable User Interfaces</a
+              ></strong
+            >: Lee Byron talks about unidirectional data flow architectures
+            based on immutable data structures in contrast to traditional MVC
+            based designs. +
+            <strong
+              ><a href="https://github.com/facebook/immutable-js/"
+                >Immutable.js</a
+              ></strong
+            >: Immutable persistent data collections for Javascript which
+            increase efficiency and simplicity. +
+            <strong><a href="https://github.com/mobxjs/mobx">MobX</a></strong
+            >: MobX is a battle tested library that makes state management
+            simple and scalable by transparently applying functional reactive
+            programming. + <strong>Model-View-Intent (MVI)</strong>: MVI is a
+            unidirectional data flow architecture pattern consisting of three
+            parts: Intent (to listen to the user), Model (to process
+            information), and View (to output back to the user). +
+            <strong
+              ><a href="http://cycle.js.org/model-view-intent.html"
+                >MVI in Cycle.js Docs</a
+              ></strong
+            >: André Staltz describes how to refactor an application into MVI
+            pattern. +
+            <strong
+              ><a
+                href="https://satishchilukuri.com/blog/entry/model-view-intent-with-react-and-rxjs"
+                >Model-View-Intent with React and RxJS</a
+              ></strong
+            >: Satish Chilukuri shows an example implementation of MVI pattern
+            with React. +
+            <strong
+              ><a
+                href="http://futurice.com/blog/reactive-mvc-and-the-virtual-dom"
+                >Reactive MVC and the Virtual DOM</a
+              ></strong
+            >: André Staltz describes the idea of Reactive Programming
+            vs. Interactive Programming, proceeds with the MVI design pattern
+            and compares it to React/Flux. +
+            <strong
+              ><a
+                href="http://thenewstack.io/developers-need-know-mvi-model-view-intent/"
+                >What Developers Need to Know about MVI (Model-View-Intent)</a
+              ></strong
+            >: The article explains the general MVI pattern and how it relates
+            to React, Reactive Programming and Cycle.js +
+            <strong
+              ><a
+                href="http://staltz.com/nothing-new-in-react-and-flux-except-one-thing.html"
+                >Nothing New in React and Flux Except One Thing</a
+              ></strong
+            >: Andre Staltz talks about aspects of React and Flux which make
+            them innovative and compelling. +
+            <strong><a href="http://redux.js.org/">Redux</a></strong
+            >: Redux is a predictable state container for JavaScript apps. It
+            attempts to make state mutations predictable by imposing certain
+            restrictions on how and when updates can happen. +
+            <strong
+              ><a
+                href="http://blog.ng-book.com/introduction-to-redux-with-typescript-and-angular-2/"
+                >Building Redux in TypeScript with Angular 2</a
+              ></strong
+            >: In this post we’re going to discuss the ideas behind Redux. How
+            to build our own mini version of the Redux Store and hook it up to
+            Angular 2. +
+            <strong
+              ><a
+                href="http://blog.krawaller.se/posts/exploring-redux-middleware/"
+                >Exploring Redux Middleware</a
+              ></strong
+            >: The author explains how to author your own middleware for Redux.
+            He dives into the execution path of each middleware function in the
+            chain and shows some examples. +
+            <strong
+              ><a
+                href="http://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html"
+                >Full-Stack Redux Tutorial</a
+              ></strong
+            >: We will go through all the steps of constructing a Node+Redux
+            backend and a React+Redux frontend for a real-world application,
+            using test-first development. +
+            <strong
+              ><a href="https://github.com/facebook/immutable-js/"
+                >Immutable.js</a
+              ></strong
+            >: Immutable persistent data collections for Javascript which
+            increase efficiency and simplicity. +
+            <strong
+              ><a href="https://youtu.be/hmwBow1PUuo">Learn Redux</a></strong
+            >: A video series by Wes Bos, teaching Redux. From setting up
+            Webpack to using Dev Tools. +
+            <strong
+              ><a href="https://github.com/paularmstrong/normalizr"
+                >Normalizr</a
+              ></strong
+            >: Normalizes deeply nested JSON API responses according to a schema
+            for Flux and Redux apps. +
+            <strong
+              ><a href="https://github.com/acdlite/redux-actions"
+                >Redux Actions</a
+              ></strong
+            >: Flux Standard Action utilities for Redux. +
+            <strong
+              ><a href="https://github.com/erikras/redux-form"
+                >Redux Form</a
+              ></strong
+            >: A Higher Order Component using react-redux to keep form state in
+            a Redux store. +
+            <strong
+              ><a href="https://github.com/raisemarketplace/redux-loop"
+                >Redux Loop</a
+              ></strong
+            >: A port of elm-effects and the Elm Architecture to Redux that
+            allows you to sequence your effects naturally and purely by
+            returning them from your reducers. +
+            <strong
+              ><a href="https://github.com/yelouafi/redux-saga"
+                >Redux Saga</a
+              ></strong
+            >: An alternative Side Effects middleware for Redux applications.
+            Instead of dispatching Thunks which get handled by the redux-thunk
+            middleware, you create Sagas to gather all your Side Effects logic
+            in a central place. +
+            <strong
+              ><a href="https://github.com/happypoulp/redux-tutorial"
+                >Redux Tutorial</a
+              ></strong
+            >: This repository contains a step by step tutorial to help grasp
+            flux and more specifically Redux. +
+            <strong
+              ><a href="http://survivejs.com/blog/redux-interview/"
+                >Reinventing Flux - Interview with Dan Abramov</a
+              ></strong
+            >: Dan talks about why he developed Redux. +
+            <strong
+              ><a href="https://github.com/reactjs/reselect"
+                >Reselect</a
+              ></strong
+            >: Simple “selector” library for Redux inspired by getters in
+            NuclearJS and subscriptions in re-frame. +
+            <strong
+              ><a href="http://staltz.com/some-problems-with-react-redux.html"
+                >Some Problems with React/Redux</a
+              ></strong
+            >: André Staltz goes through the pros and cons of React + Redux. +
+            <strong
+              ><a href="http://silvenon.com/testing-react-and-redux/"
+                >Testing a React &amp; Redux Codebase</a
+              ></strong
+            >: This series aims to be a very comprehensive guide through testing
+            a React and Redux codebase, where you can really cover a lot with
+            just unit tests because the code is mostly universal. +
+            <strong
+              ><a
+                href="https://medium.com/@denisraslov/the-redux-ecosystem-539c630ec521"
+                >The Redux Ecosystem</a
+              ></strong
+            >: Let’s take a look at most of the features that you’ll have to
+            deal with when the time comes, — and where React &amp; Redux
+            themselves can’t help you. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=uvAXVMwHJXU"
+                >The Redux Journey at react-europe 2016</a
+              ></strong
+            >: In this talk, Dan Abramov reflects on the past, present, and
+            future of Redux. +
+            <strong
+              ><a
+                href="http://www.robinwieruch.de/the-soundcloud-client-in-react-redux/"
+                >The SoundCloud Client in React + Redux</a
+              ></strong
+            >: After finishing this step by step tutorial you will be able to
+            author your own React + Redux project with Webpack and Babel. +
+            <strong
+              ><a href="http://ramonvictor.github.io/tic-tac-toe-js/"
+                >Tic-Tac-Toe.js: Redux Pattern in Plain JavaScript</a
+              ></strong
+            >: Ramon Victor describes how to use Redux with vanilla JavaScript.
+            No React, no jQuery, no micro-library, it doesn’t rely on anything
+            else. It’s just plain JS. +
+            <strong
+              ><a href="https://medium.com/@meagle/understanding-87566abcfb7a"
+                >Understanding Redux Middleware</a
+              ></strong
+            >: The author describes the functional programming concepts involved
+            in the creation and application of middleware functions. +
+            <strong
+              ><a href="https://vimeo.com/168652278"
+                >Unidirectional Data Flow Architectures (Talk)</a
+              ></strong
+            >: Andre Staltz compares modern architecture patterns including
+            Flux, Redux, Model-View-Intent, Elm Arch and BEST.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h1 id="license">License</h1>
+    <p>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        ><img
+          alt="Creative Commons License"
+          style="border-width: 0"
+          src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a
+      ><br />This work is licensed under a
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International License</a
+      >.
+    </p>
+    <p>
+      Please provide a link back to this repository. This is not necessary for
+      GitHub forks.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>functional-programming</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="functional-programming">Functional Programming</h1>
+    <p>
+      <strong
+        >Context: <a href="../README.md">frontend-dev-bookmarks</a> /
+        Architecture</strong
+      >
+    </p>
+    <p>
+      Functional programming is a programming paradigm, that treats computation
+      as the evaluation of mathematical functions and avoids changing-state and
+      mutable data.
+    </p>
+    <p>
+      <a href="http://frontend.directory/"
+        ><img
+          src="https://img.shields.io/badge/frontend-directory-blue.svg?style=flat-square"
+          alt="frontend.directory"
+      /></a>
+      <a href="https://gitter.im/dypsilon/frontend-dev-bookmarks"
+        ><img
+          src="https://img.shields.io/gitter/room/dypsilon/frontend-dev-bookmarks.svg?style=flat-square&amp;maxAge=2592000"
+          alt="Gitter"
+      /></a>
+      <a href="https://twitter.com/FrontendDir"
+        ><img
+          src="https://img.shields.io/badge/follow-twitter-55acee.svg?style=flat-square"
+          alt="Twitter"
+      /></a>
+    </p>
+    <table style="width: 58%">
+      <colgroup>
+        <col style="width: 58%" />
+      </colgroup>
+      <tbody>
+        <tr class="odd">
+          <td>
+            + <strong>A Gentle Introduction to Functional JavaScript</strong>: A
+            3 part series, by Derick Bailey featuring Chet Harrison, about
+            functional programming with many examples in JavaScript. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=ZQSU4geXAxM"
+                >Monads, Monoids and Composition with Functional JavaScript</a
+              ></strong
+            >: Chet Harrison explains monads using form validation as an
+            example. +
+            <strong
+              ><a
+                href="https://github.com/ChetHarrison/A-Gentle-Introduction-to-Functional-JavaScript"
+                >Notes and Code from the Crowdcast</a
+              ></strong
+            >: Chet Harrison provides a broad overview of functional programming
+            concepts and a step by step tutorial for building Monads. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=myISHtMMeyU"
+                >The Basics of Functional Programming</a
+              ></strong
+            >: In this first episode, you’ll learn the basics of why functional
+            programming, what it is, where it came from and what the core of it
+            is. You’ll see function composition, function purity, currying,
+            higher order functions and first-class functions. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=JZSoPZUoR58"
+                >A Million Ways to Fold in JS</a
+              ></strong
+            >: Brian Lonsdorf provides many functional alternatives to loops in
+            this video. +
+            <strong
+              ><a href="https://vimeo.com/45140590"
+                >Adventures in Functional Programming</a
+              ></strong
+            >: A talk by Jim Weirich, demonstrating how to use functional
+            programming and lambda calculus to derive Y combinator. +
+            <strong><a href="http://allong.es/">Allong.es</a></strong
+            >: allong.es is a JavaScript library based on the function
+            combinator and decorator recipes introduced in the book JavaScript
+            Allongé. +
+            <strong
+              ><a href="https://github.com/cullophid/barely-functional"
+                >Barely Functional</a
+              ></strong
+            >: Tiny (2.7kb) functional programming library using native es5/6
+            operations. +
+            <strong
+              ><a
+                href="http://blog.gypsydave5.com/2015/03/21/lazy-eval-and-memo/"
+                >Basic Lazy Evaluation and Memoization in JavaScript</a
+              ></strong
+            >: Memoization is a way of optimizing code so that it will return
+            cached results for the same inputs. +
+            <strong
+              ><a href="http://bilby.brianmckenna.org/">Bilby.js</a></strong
+            >: A functional library based on category theory with immutable
+            multimethods, functional data structures, functional operator
+            overloading, automated specification testing. +
+            <strong
+              ><a
+                href="https://medium.com/@homam/composability-from-callbacks-to-categories-in-es6-f3d91e62451e"
+                >Composability: from Callbacks to Categories in ES6</a
+              ></strong
+            >: The author borrows some ideas from functional languages to
+            explore a different approach for addressing the callback hell. +
+            <strong
+              ><a
+                href="https://medium.com/javascript-scene/curry-or-partial-application-8150044c78b8"
+                >Curry or Partial Application?</a
+              ></strong
+            >: Eric Elliott describes the difference between partial application
+            and curry. +
+            <strong
+              ><a href="https://github.com/puffnfresh/daggy">Daggy</a></strong
+            >: Library for creating tagged constructors with catamorphism. +
+            <strong
+              ><a href="https://github.com/cullophid/date-fp"
+                >Date FP</a
+              ></strong
+            >: Functional programming date manipulation library. +
+            <strong
+              ><a
+                href="https://medium.com/@drboolean/debugging-functional-7deb4688a08c"
+                >Debugging Functional</a
+              ></strong
+            >: This post will demonstrate a simple solution that can go a long
+            way to enhance the debugging experience in functional JavaScript
+            applications. +
+            <strong
+              ><a href="https://deterministic.curated.co/"
+                >Deterministic</a
+              ></strong
+            >: A weekly digest of interesting news and articles covering
+            functional programming for the web, especially on the front end. +
+            <strong>Example Projects</strong>: Open source projects which use
+            functional programming, preferably point-free and side-effect-free.
+            +
+            <strong
+              ><a href="https://github.com/plaid/async-problem"
+                >Async Problem</a
+              ></strong
+            >: This project considers various approaches to the problem of
+            concurrently reading files inside a directory and concatenating
+            their contents. +
+            <strong
+              ><a href="https://github.com/iamstarkov/es-deps-deep"
+                >CommonJS module dependencies resolver</a
+              ></strong
+            >: The module and all related modules are written using point-free
+            style. +
+            <strong
+              ><a
+                href="https://github.com/Bradcomp/egghunt-server/tree/functional"
+                >Egg Hunt Server</a
+              ></strong
+            >: A restful API written in FP style. +
+            <strong
+              ><a href="https://github.com/Avaq/Idealist">Idealist</a></strong
+            >: Functional HTTP micro-framework. +
+            <strong
+              ><a
+                href="https://github.com/sanctuary-js/sanctuary-site/blob/gh-pages/scripts/generate"
+                >Sanctuary Build Script</a
+              ></strong
+            >: A build script for generating the Sanctuary website. +
+            <strong
+              ><a href="https://github.com/fp-dom/fp-dom">FP DOM</a></strong
+            >: A collection of functions to favor functional programming in a
+            DOM context. +
+            <strong
+              ><a href="https://github.com/fantasyland/fantasy-combinators"
+                >Fantasy Combinators</a
+              ></strong
+            >: Combinators which are used for fantasy-land projects. +
+            <strong
+              ><a href="https://github.com/fantasyland/fantasy-land"
+                >Fantasy Land</a
+              ></strong
+            >: Specification for interoperability of common algebraic structures
+            in JavaScript. +
+            <strong
+              ><a
+                href="https://github.com/fantasyland/fantasy-land/blob/master/implementations.md"
+                >Conformant Implementations</a
+              ></strong
+            >: A list of libraries implementing the Fantasy Land specification.
+            +
+            <strong
+              ><a href="https://github.com/fantasyland/fantasy-lenses"
+                >Fantasy Lenses</a
+              ></strong
+            >: Composable, immutable getters and setters. +
+            <strong
+              ><a
+                href="https://blog.simpleblend.net/functional-javascript-concepts-currying/"
+                >Functional Concepts For JavaScript Developers: Currying</a
+              ></strong
+            >: Andrew Robbins talks about what currying is and why it’s useful.
+            +
+            <strong
+              ><a
+                href="http://www.mokacoding.com/blog/functional-core-reactive-shell/"
+                >Functional Core Reactive Shell</a
+              ></strong
+            >: Giovanni Lodi makes an overview of different architecture
+            meta-patterns and describes his current findings about functional
+            programming and observables as a way to control side effects. +
+            <strong
+              ><a
+                href="https://github.com/paldepind/functional-frontend-architecture"
+                >Functional Frontend Architecture</a
+              ></strong
+            >: This repository is meant to document and explore the
+            implementation of what is known as “the Elm architecture”. A simple
+            functional architecture for building frontend applications. +
+            <strong
+              ><a
+                href="https://jcouyang.gitbooks.io/functional-javascript/content/en/index.html"
+                >Functional JavaScript Mini Book</a
+              ></strong
+            >: Jichao Ouyang gives and introduction to functional programming
+            with JavaScript and describes some Typeclasses like Functor and
+            Monad. +
+            <strong
+              ><a
+                href="https://github.com/timoxley/functional-javascript-workshop"
+                >Functional Javascript Workshop</a
+              ></strong
+            >: The goal of this workshop is to create realistic problems that
+            can be solved using terse, vanilla, idiomatic JavaScript. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=1uRC3hmKQnM"
+                >Functional Principles In React</a
+              ></strong
+            >: Jessica Kerr talks about four functional principles: Composition,
+            Declarative Style, Isolation and Flow Of Data, and their usage in
+            React. +
+            <strong
+              ><a
+                href="https://github.com/hemanth/functional-programming-jargon"
+                >Functional Programming Jargon</a
+              ></strong
+            >: Jargon from the functional programming world in simple terms. +
+            <strong
+              ><a
+                href="https://medium.com/@chetcorcos/functional-programming-for-javascript-people-1915d8775504"
+                >Functional Programming for JavaScript People</a
+              ></strong
+            >: Chet Corcos explains different features of functional programming
+            like composition, currying, lazy evaluation, referential
+            transparency and compares Clojure with Haskell. +
+            <strong
+              ><a
+                href="http://victorsavkin.com/post/63551894251/functional-refactoring-in-javascript"
+                >Functional Refactoring in JavaScript</a
+              ></strong
+            >: In this article Victor Savkin shows how to apply functional
+            thinking when refactoring JavaScript code. He does that by taking a
+            simple function and transforming it into a more extendable one,
+            which has no mutable state, and no if statements. +
+            <strong><a href="http://functionaljs.com/">Functional.js</a></strong
+            >: Functional.js is a functional JavaScript library. It facilitates
+            currying and point-free / tacit programming and this methodology has
+            been adhered to from the ground up. +
+            <strong
+              ><a href="https://github.com/paldepind/functionize"
+                >Functionize</a
+              ></strong
+            >: A collection of functions which aids in making non-functional
+            libraries functional. +
+            <strong
+              ><a
+                href="https://medium.com/@yelouafi/futures-and-monoids-7e9f4574bd88"
+                >Futures and Monoids</a
+              ></strong
+            >: Yassine Elouafi explains the nature of Monoids using Futures,
+            Numbers and Strings as examples. +
+            <strong
+              ><a
+                href="http://functionaltalks.org/2013/05/27/brian-lonsdorf-hey-underscore-youre-doing-it-wrong/"
+                >Hey Underscore, You’re Doing It Wrong!</a
+              ></strong
+            >: In this talk Brian Lonsdorf gently takes a shot at underscore.js
+            for not thinking about currying and partial function application in
+            its library design. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=mS264h8KGwk"
+                >Immutability, Interactivity &amp; JavaScript</a
+              ></strong
+            >: We’ll dive in and see how trees of JavaScript arrays can permit
+            building efficient immutable collections. Then we’ll see how
+            embracing immutable values dramatically simplifies some classic hard
+            problems in client side programming including but not limited to
+            undo, error playback, and online/offline synchronization. +
+            <strong
+              ><a href="https://github.com/qiao/immutable-sequence.js"
+                >Immutable Sequence.js</a
+              ></strong
+            >: High performance implementation of Immutable Sequence in
+            JavaScript, based on Finger Tree. +
+            <strong
+              ><a href="https://github.com/facebook/immutable-js/"
+                >Immutable.js</a
+              ></strong
+            >: Immutable persistent data collections for Javascript which
+            increase efficiency and simplicity. +
+            <strong
+              ><a href="https://javascriptair.com/episodes/2015-12-30/"
+                >JSAir - Functional and Immutable Design Patterns in
+                JavaScript</a
+              ></strong
+            >: An episode of JavaScript Air about “the how and why of functional
+            programming and immutable design patterns in JavaScript” with Dab
+            Abramov and Brian Lonsdorf as guests. +
+            <strong
+              ><a
+                href="https://medium.com/@yelouafi/javascript-and-type-thinking-735edddc388d"
+                >JavaScript and Type Thinking</a
+              ></strong
+            >: Yassine Elouafi introduces Algebraic Data Types with an example
+            of a simple and a recursive type. +
+            <strong
+              ><a href="https://vimeo.com/97408202"
+                >Javascript Combinators by Reginald Braithwaite</a
+              ></strong
+            >: In this talk, we’ll explore functions that consume and return
+            functions, and see how they can be used to build expressive programs
+            that hew closely to JavaScript’s natural style. +
+            <strong
+              ><a href="https://github.com/loop-recur/lambdajs"
+                >Lamda.js</a
+              ></strong
+            >: This library takes all the methods on instances of strings,
+            arrays, objects, numbers, and regexp’s and turns them into functions
+            that can be used in a pointfree way. +
+            <strong
+              ><a href="https://vimeo.com/104807358"
+                >Lenses Quick n’ Dirty</a
+              ></strong
+            >: A video by Brian Lonsdorf that introduces lenses. +
+            <strong
+              ><a
+                href="http://joneshf.github.io/programming/2015/12/19/Lenses-and-Virtual-DOM-Support-Open-Closed.html"
+                >Lenses and Virtual DOM Support Open Closed</a
+              ></strong
+            >: Hardy Jones explains how Lenses work using a simple example of
+            working with Virtual DOM. +
+            <strong
+              ><a href="https://github.com/DrBoolean/lenses"
+                >Lenses.js</a
+              ></strong
+            >: Composable kmett style lenses. +
+            <strong
+              ><a href="https://github.com/lodash/lodash/wiki/FP-Guide"
+                >Lodash/fp</a
+              ></strong
+            >: The lodash/fp module is an instance of lodash with its methods
+            wrapped to produce immutable auto-curried iteratee-first data-last
+            methods. +
+            <strong
+              ><a
+                href="http://alistapart.com/article/making-your-javascript-pure"
+                >Making your JavaScript Pure</a
+              ></strong
+            >: Jack Franklin compares pure and impure functions and describes
+            how to leverage functional programming principles in JavaScript. +
+            <strong>Monads</strong>: Composable computation descriptions. The
+            essence of monad is thus separation of composition timeline from the
+            composed computation’s execution timeline, as well as the ability of
+            computation to implicitly carry extra data. +
+            <strong>Collections of Monads</strong>: Libraries of monad
+            implementations. +
+            <strong><a href="http://akh-js.com/">Akh</a></strong
+            >: Akh includes a basic set of common monad transformers, along with
+            monads derived from these transformers. Akh structures implement the
+            Fantasy Land specification. +
+            <strong
+              ><a href="http://folktale.origamitower.com">Folktale</a></strong
+            >: Folktale is a suite of libraries for generic functional
+            programming in JavaScript that allows you to write elegant modular
+            applications with fewer bugs, and more reuse. +
+            <strong
+              ><a href="https://github.com/cwmyers/monet.js"
+                >Monet.js</a
+              ></strong
+            >: Monet is a tool bag that assists Functional Programming by
+            providing a rich set of Monads and other useful functions. +
+            <strong>Continuation Monad</strong>: Represents computations in
+            continuation-passing style (CPS). In continuation-passing style
+            function result is not returned, but instead is passed to another
+            function, received as a parameter (continuation). +
+            <strong
+              ><a
+                href="http://blog.mattbierner.com/the-delimited-continuation-monad-in-javascript/"
+                >The Delimited Continuation Monad in Javascript</a
+              ></strong
+            >: This post overviews continuations in Atum and covers the
+            implementation of the delimited continuation monad in JavaScript. +
+            <strong>Either Monad</strong>: The Either type represents values
+            with two possibilities: a value of type Either a b is either Left a
+            or Right b. It is often used for error handling. +
+            <strong
+              ><a href="https://www.npmjs.com/package/lazy-either"
+                >Lazy Either</a
+              ></strong
+            >: The LazyEither type is used to represent a lazy Either value. It
+            is similar to the Future and Promise types. +
+            <strong
+              ><a
+                href="https://tech.evojam.com/2016/03/21/practical-intro-to-monads-in-javascript-either/"
+                >Practical Intro to Monads in JavaScript: Either</a
+              ></strong
+            >: Jakub Strojewski describes the Either Monad, a tool for
+            fast-failing, synchronous computation chains. +
+            <strong>Free Monad</strong>: A free monad satisfies all the Monad
+            laws, but does not do any computation. It just builds up a nested
+            series of contexts. The user who creates such a free monadic value
+            is responsible for doing something with those nested contexts. +
+            <strong
+              ><a href="https://github.com/fantasyland/fantasy-frees"
+                >Fantasy Frees</a
+              ></strong
+            >: An implementation of Coyoneda, Yoneda, Trampoline, Free Monad and
+            Free Applicative with usage examples. +
+            <strong
+              ><a href="https://github.com/joneshf/abstractions/tree/master/src"
+                >Free Monad Experiments by Hardy Jones</a
+              ></strong
+            >: Coyoneda, Coproduct, Either, Free, State, AJAX and so on. +
+            <strong
+              ><a
+                href="https://www.youtube.com/watch?v=WH5BrkzGgQY&amp;list=PLK_hdtAJ4KqUWp5LJdLOgkD_8qKW0iAHi&amp;index=1"
+                >Free Monads Video Series</a
+              ></strong
+            >: A video series on free monads by Brian Lonsdorf explaining
+            Coyoneda, Free Monad and Interpretors. +
+            <strong
+              ><a href="https://github.com/DrBoolean/freeky">Freeky</a></strong
+            >: Collection of free monads by Brian Lonsdorf. +
+            <strong>Futures</strong>: Futures represent the value arising from
+            the success or failure of an asynchronous operation (I/O). +
+            <strong
+              ><a href="https://github.com/Avaq/Fluture">Fluture</a></strong
+            >: The debuggable Fantasy Land Future library. +
+            <strong
+              ><a
+                href="http://folktale.origamitower.com/api/v2.1.0/en/folktale.concurrency.task.html"
+                >Folktale Task</a
+              ></strong
+            >: A structure for time-dependent values, providing explicit effects
+            for delayed computations, latency, etc. +
+            <strong
+              ><a
+                href="https://medium.com/@yelouafi/from-callback-to-future-functor-monad-6c86d9c16cb5"
+                >From Callback to Future -&gt; Functor -&gt; Monad</a
+              ></strong
+            >: Yassine Elouafi goes through a simple implementation of Futures
+            and compares them to Promises. +
+            <strong
+              ><a href="https://github.com/futurize/future-io"
+                >Future IO</a
+              ></strong
+            >: A fantasy-land compliant monadic IO library for Node.js. +
+            <strong
+              ><a href="https://github.com/arcseldon/futurizer"
+                >Futurizer</a
+              ></strong
+            >: Turn callback-style functions or promises into futures! +
+            <strong>Introduction</strong>: Introductory materials about monads.
+            +
+            <strong
+              ><a href="https://curiosity-driven.org/monads-in-javascript"
+                >Monads in JavaScript</a
+              ></strong
+            >: This article explains monads and their usage in JavaScript
+            including Identity, Maybe, List, Continuation, Do notation and
+            Chaining. +
+            <strong
+              ><a
+                href="https://tech.evojam.com/2016/02/22/practical-intro-to-monads-in-javascript/"
+                >Practical Intro to Monads in JavaScript</a
+              ></strong
+            >: A simple, practical tutorial for JavaScript developers showing
+            how some monads can be used. +
+            <strong
+              ><a
+                href="http://igstan.ro/posts/2011-05-02-understanding-monads-with-javascript.html"
+                >Understanding Monads With JavaScript</a
+              ></strong
+            >: The author starts with a problem of dealing with explicit
+            immutable state and solves it with JavaScript using monads. +
+            <strong>Maybe Monad</strong>: Using Maybe is a good way to deal with
+            errors or exceptional cases without resorting to drastic measures
+            such as error. It is a simple kind of error monad, where all errors
+            are represented by Nothing. A richer error monad can be built using
+            the Either type. +
+            <strong
+              ><a href="http://sean.voisen.org/blog/2013/10/intro-monads-maybe/"
+                >A Gentle Intro to Monads … Maybe?</a
+              ></strong
+            >: A short introduction to Maybe and the world of monads. +
+            <strong
+              ><a
+                href="http://robotlolita.me/2013/12/08/a-monad-in-practicality-first-class-failures.html"
+                >A Monad in Practicality: First-Class Failures</a
+              ></strong
+            >: This article shows how the Maybe monad can be used for handling
+            simple failure use cases. It then extrapolates into complex failure
+            scenarios and shows how these cases can be modelled in terms of the
+            Either monad. +
+            <strong
+              ><a
+                href="https://tech.evojam.com/2016/02/22/practical-intro-to-monads-in-javascript/"
+                >Practical Intro to Monads in JavaScript</a
+              ></strong
+            >: A simple, practical tutorial for JavaScript developers showing
+            how some monads can be used. + <strong>Reader Monad</strong>:
+            Represents a computation, which can read values from a shared
+            environment, pass values from function to function, and execute
+            sub-computations in a modified environment. +
+            <strong
+              ><a href="https://passy.svbtle.com/dont-fear-the-reader"
+                >Don’t Fear the Reader</a
+              ></strong
+            >: Pascal Hartig explains how to use the reader monad in JavaScript.
+            +
+            <strong
+              ><a href="https://github.com/fantasyland/fantasy-readers"
+                >Fantasy Readers</a
+              ></strong
+            >: Fantasy Land compatible implementation of the Reader Monad. +
+            <strong
+              ><a
+                href="https://www.livecoding.tv/evilsoft/videos/WojoB-functional-js-reader-monad"
+                >LiveCoding Video of Reader Monad Implementation</a
+              ></strong
+            >: In this video you will learn how to use and implement a Reader
+            from scratch. +
+            <strong
+              ><a href="https://vimeo.com/105300347"
+                >Monad a Day: Reader</a
+              ></strong
+            >: Short video by Brian Lonsdorf about the Reader Monad. +
+            <strong>Transformers</strong>: Special types that allow us to roll
+            two monads into a single one that shares the behavior of both. +
+            <strong><a href="http://akh-js.com/">Akh</a></strong
+            >: Akh includes a basic set of common monad transformers, along with
+            monads derived from these transformers. Akh structures implement the
+            Fantasy Land specification. +
+            <strong
+              ><a href="https://github.com/quarterto-archive/fantasy-arrayt"
+                >Fantasy ArrayT</a
+              ></strong
+            >: Monad transformer for JavaScript Arrays. +
+            <strong
+              ><a href="https://github.com/boris-marinov/monad-transformers"
+                >Monad Transformers</a
+              ></strong
+            >: Monad transformers are tricky, they require an excessive amount
+            of type juggling. One of the aims of this package is to reduce the
+            amount of wrapping and unwrapping needed for making a new
+            transformer and to provide an easy way to define and combine
+            transformers. +
+            <strong
+              ><a href="https://github.com/boris-marinov/monad-transformers"
+                >Monad Transformers Library</a
+              ></strong
+            >: Practical monad transformers for JS. +
+            <strong>Validation Monad</strong>: A disjunction that is appropriate
+            for validating inputs and aggregating failures. +
+            <strong
+              ><a
+                href="http://folktale.origamitower.com/api/v2.1.0/en/folktale.validation.html"
+                >Folktale Validation</a
+              ></strong
+            >: Validation Monad implementation of Folktale Library. +
+            <strong
+              ><a
+                href="https://tech.evojam.com/2016/04/26/practical-intro-to-monads-in-javascript-validation/"
+                >Practical Intro to Monads in JavaScript: Validation</a
+              ></strong
+            >: Jakub Strojewski shows how to accumulate errors in a simple
+            Validation use case. +
+            <strong
+              ><a href="http://swannodette.github.io/mori/">Mori</a></strong
+            >: A library for using ClojureScript’s persistent data structures
+            and supporting API from the comfort of vanilla JavaScript. +
+            <strong
+              ><a
+                href="https://drboolean.gitbooks.io/mostly-adequate-guide/content/"
+                >Mostly Adequate Guide to Functional Programming</a
+              ></strong
+            >: A book by Brian Lonsdorf that introduces algebraic functional
+            programming in JavaScript. +
+            <strong><a href="http://kovach.me/nanoscope/">Nanoscope</a></strong
+            >: Nanoscope is a javascript library designed to make complex
+            transformations of data much easier. It is a built on the idea of a
+            functional Lens - a construct that enables focusing on sub-parts of
+            data structures to get and modify. +
+            <strong
+              ><a href="https://www.npmjs.com/package/pointfree-fantasy"
+                >Pointfree Fantasy</a
+              ></strong
+            >: Point-free wrappers for fantasy-land. Functions are curried using
+            lodash’s curry function, and receive their data last. Gives us
+            aliases with our familar haskell names as well. +
+            <strong
+              ><a href="http://lucasmreis.github.io/blog/pointfree-javascript/"
+                >Pointfree Javascript</a
+              ></strong
+            >: In this post Lucas Reis presents what is called pointfree style
+            programming and goes through some common scenarios to demonstrate
+            its benefits. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=XcS-LdEBUkE"
+                >Practical Functional Programming: Pick Two</a
+              ></strong
+            >: James Coglan tries to show in this video how to use functional
+            concepts in daily JavaScript programming. +
+            <strong
+              ><a
+                href="https://medium.com/@yelouafi/promises-fp-beautiful-streams-6f0235c5b179"
+                >Promises + FP = Beautiful Streams</a
+              ></strong
+            >: Yassine Elouafi show how to use functional programming and
+            algebraic data types to derive a pure functional definition of
+            reactive programming like streams. +
+            <strong
+              ><a href="https://vimeo.com/49384334">Pure JavaScript</a></strong
+            >: Christian Johansen shows you how you can up your game by leaving
+            loops behind and embracing functions as the primary unit of
+            abstraction. +
+            <strong
+              ><a href="http://rauchg.com/2015/pure-ui/">Pure UI</a></strong
+            >: Guillermo Rauch discusses the definition of an application’s UI
+            as a pure function of application state. +
+            <strong><a href="http://www.purescript.org/">PureScript</a></strong
+            >: PureScript is a strongly, statically typed language which
+            compiles to JavaScript. It is written in and inspired by Haskell. +
+            <strong><a href="http://ramdajs.com/">Ramda</a></strong
+            >: A practical library designed specifically for a functional
+            programming style, one that makes it easy to create functional
+            pipelines, one that never mutates user data. +
+            <strong>Practical Ramda - Functional Programming Examples</strong>:
+            Tom MacWright gives some practical examples of Ramda usage. +
+            <strong
+              ><a href="https://github.com/ramda/ramda-fantasy"
+                >Ramda Fantasy</a
+              ></strong
+            >: Fantasy Land compatible types for easy integration with Ramda.
+            This is an experimental project and will probably merge with
+            Sanctuary. +
+            <strong><a href="http://sanctuary.js.org/">Sanctuary</a></strong
+            >: Sanctuary is a functional programming library inspired by Haskell
+            and PureScript. It depends on and works nicely with Ramda. Sanctuary
+            makes it possible to write safe code without null checks. +
+            <strong
+              ><a
+                href="https://github.com/sanctuary-js/sanctuary-site/blob/gh-pages/scripts/generate"
+                >Sanctuary Build Script</a
+              ></strong
+            >: A build script for generating the Sanctuary website. +
+            <strong
+              ><a
+                href="http://jaysoo.ca/2016/01/13/functional-programming-little-ideas/"
+                >The Little Idea of Functional Programming</a
+              ></strong
+            >: Jack Hsu tries to take a look at a couple of simple concepts that
+            make up the little idea behind functional programming and to tie the
+            concepts back to code examples in JavaScript. +
+            <strong><a href="http://guigrpa.github.io/timm/">Timm</a></strong
+            >: Immutability helpers with fast reads and acceptable writes. +
+            <strong
+              ><a
+                href="http://blog.cognitect.com/blog/2014/8/6/transducers-are-coming"
+                >Transducers</a
+              ></strong
+            >: Transducers are a powerful and composable way to build
+            algorithmic transformations that you can reuse in many contexts. +
+            <strong
+              ><a href="https://www.youtube.com/watch?v=6mTbuzafcII"
+                >“Transducers” Presentation at Strange Loop</a
+              ></strong
+            >: This talk will describe transducers, a new library feature for
+            Clojure (but of interest to other languages) that emphasizes
+            composable, context-free, intermediate-free notions like ‘mapping’
+            and ‘filtering’ and their concrete reuse across all of the contexts
+            above. +
+            <strong
+              ><a
+                href="http://gfxmonk.net/2015/11/25/figuring-out-what-transducers-are-good-for.html"
+                >Figuring out what transducers are good for</a
+              ></strong
+            >: Tim Cuthbertson attempts some plausible but detailed examples
+            with Transducers in JavaScript. + <strong>Implementations</strong>:
+            Libraries that implement Transducer protocoll and include ready to
+            use transformers. +
+            <strong
+              ><a href="https://github.com/transduce/transduce"
+                >Transduce</a
+              ></strong
+            >: Implementation by Kevin Beaty extracted from underarm. +
+            <strong
+              ><a href="https://github.com/cognitect-labs/transducers-js"
+                >Transducers-js by Cognitect Labs</a
+              ></strong
+            >: A high performance Transducers implementation for JavaScript by
+            Cognitect Labs. +
+            <strong
+              ><a href="https://github.com/jlongster/transducers.js"
+                >Transducers.js Library by James Long</a
+              ></strong
+            >: A small library for generalized transformation of data (inspired
+            by Clojure’s transducers) +
+            <strong
+              ><a
+                href="http://jlongster.com/Transducers.js-Round-2-with-Benchmarks"
+                >Transducers.js Round 2 with Benchmarks</a
+              ></strong
+            >: Refactored version of Transducers.js, some benchmarks, Laziness,
+            the transformer protocoll. +
+            <strong
+              ><a
+                href="http://jlongster.com/Transducers.js--A-JavaScript-Library-for-Transformation-of-Data"
+                >Transducers.js: A JavaScript Library for Transformation of
+                Data</a
+              ></strong
+            >: A post announcing the transducers.js library with some
+            explanation. +
+            <strong
+              ><a href="http://simplectic.com/blog/2015/ramda-transducers-logs/"
+                >Streaming Logs with Transducers and Ramda</a
+              ></strong
+            >: In this article we will use Ramda to parse a log file without
+            curly braces (and introduce transducers along the way). +
+            <strong
+              ><a href="http://clojure.org/reference/transducers"
+                >Transducers Documentation for Clojure</a
+              ></strong
+            >: Transducers are composable algorithmic transformations. They are
+            independent from the context of their input and output sources and
+            specify only the essence of the transformation in terms of an
+            individual element. +
+            <strong
+              ><a
+                href="http://simplectic.com/blog/2014/transducers-explained-1/"
+                >Transducers Explained: Part 1</a
+              ></strong
+            >: An introduction to transducers using JavaScript. We will work
+            from reducing over arrays, to defining transformations as
+            transformers, then incrementally introducing transducers and using
+            them with transduce. +
+            <strong
+              ><a
+                href="http://simplectic.com/blog/2014/transducers-explained-pipelines/"
+                >Transducers Explained: Pipelines</a
+              ></strong
+            >: In this article, we will introduce four new transducers: filter,
+            remove, drop and take. We will show how transducers can be composed
+            into pipelines and talk about the order of transformation. +
+            <strong
+              ><a
+                href="http://blog.cognitect.com/blog/2014/8/6/transducers-are-coming"
+                >Transducers are Coming</a
+              ></strong
+            >: The first announcement by Rich Hickey. +
+            <strong
+              ><a
+                href="https://xgrommx.github.io/rx-book/content/getting_started_with_rxjs/creating_and_querying_observable_sequences/transducers.html"
+                >Transducers with Observable Sequences</a
+              ></strong
+            >: A chapter from the RxJS Book describing Transducers. +
+            <strong
+              ><a
+                href="https://medium.com/@roman01la/understanding-transducers-in-javascript-3500d3bd9624#.3lbq6d4yq"
+                >Understanding Transducers in JavaScript</a
+              ></strong
+            >: Roman Liutikov translated code examples from similar Clojure
+            article into JavaScript. So you can still read the article and check
+            code examples here. +
+            <strong
+              ><a href="https://github.com/paldepind/union-type"
+                >Union Type</a
+              ></strong
+            >: Union types are a way to group different values together.
+            Union-type is a small JavaScript library for defining and using
+            union types.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h1 id="license">License</h1>
+    <p>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        ><img
+          alt="Creative Commons License"
+          style="border-width: 0"
+          src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a
+      ><br />This work is licensed under a
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International License</a
+      >.
+    </p>
+    <p>
+      Please provide a link back to this repository. This is not necessary for
+      GitHub forks.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>vert-x2</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="vertx-awesome">vertx-awesome</h1>
+    <p>
+      Vert.x 2 Awesome is an list of awesome frameworks, libraries or other
+      components for use with
+      <a href="https://github.com/eclipse/vert.x">Vert.x</a> version 2.
+    </p>
+    <p>
+      If you want your component to appear here, send a pull request to this
+      repository to add it.
+    </p>
+    <p>For vert.x version 3, check <a href="./README.md">this page</a>.</p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#testing">Testing</a></li>
+      <li><a href="#database--key-value">Database / Key-Value</a></li>
+      <li><a href="#messaging">Messaging</a></li>
+      <li><a href="#image-manipulation">Image manipulation</a></li>
+      <li><a href="#network-protocols">Network protocols</a></li>
+      <li><a href="#mail">Mail</a></li>
+      <li><a href="#event-processing">Event processing</a></li>
+      <li><a href="#language-implementations">Language implementations</a></li>
+      <li><a href="#build-tool-integration">Build tool integration</a></li>
+      <li><a href="#json--bson">JSON / BSON</a></li>
+      <li><a href="#metrics">Metrics</a></li>
+      <li><a href="#dependency-injection">Dependency injection</a></li>
+      <li><a href="#web-middlewre-frameworks">Web middleware frameworks</a></li>
+      <li><a href="#rest">REST</a></li>
+      <li><a href="#session-management">Session management</a></li>
+      <li><a href="#management">Management</a></li>
+      <li><a href="#cloud-support">Cloud support</a></li>
+      <li><a href="#mobile-client">Mobile clients</a></li>
+      <li><a href="#integration">Integration</a></li>
+      <li>
+        <a href="#asynchronous-composition--promises"
+          >Asynchronous composition / promises</a
+        >
+      </li>
+      <li><a href="#archiving">Archiving</a></li>
+      <li><a href="#work-queuing">Work queueing</a></li>
+      <li><a href="#social-networks">Social networks</a></li>
+      <li><a href="#scaffolding">Scaffolding</a></li>
+      <li>
+        <a href="#natural-language-processing">Natural Language Processing</a>
+      </li>
+      <li><a href="#deployment">Deployment</a> (#deployment)</li>
+    </ul>
+    <h2 id="the-vert.x-module-registry">The vert.x module registry</h2>
+    <ul>
+      <li>
+        <code>io.vertx~module-registry</code> -
+        https://github.com/vert-x/vertx-module-registry - The Vert.x module
+        registry itself!
+      </li>
+    </ul>
+    <h2 id="testing">Testing</h2>
+    <ul>
+      <li>
+        <p>
+          <code>org.mock-server~mockserver-vertx</code>
+          http://www.mock-server.com/ - MockServer is an API to enable the easy
+          mocking of any system you integrate with via HTTP or HTTPS
+          (i.e. services, web sites, etc). There are currently specific clients
+          written in Java and JavaScript although any language that can send
+          JSON via HTTP can easily use the MockServer API.
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>mohlemeyer~vertxQunitSinon</code> -
+          https://github.com/mohlemeyer/vertxQunitSinon - This module contains
+          ports of the QUnit and Sinon.JS JavaScript testing frameworks for the
+          Vert.x platform, supplemented by an easy to use testrunner.
+        </p>
+      </li>
+    </ul>
+    <h2 id="database-key-value">Database / Key-Value</h2>
+    <ul>
+      <li>
+        <p>
+          <code>monoid-us~vertx-postgresql</code> -
+          https://github.com/monoid-us/vertx-postgresql - Asynchronous
+          PostgreSQL driver with support for transactions. This driver is used
+          as a library directly in your Verticle and supports running
+          transactions against the database.
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>com.jonnywray.vertx~mod-kairosdb</code> -
+          https://github.com/jonnywray/mod-kairosdb - This is a Vertx module
+          that allows data to be inserted, queryed and deleted from the KairosDB
+          time series database.
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>io.vertx~mod-mysql-postgresql</code> -
+          https://github.com/vert-x/mod-mysql-postgresql - This Vert.x module
+          uses the https://github.com/mauricio/postgresql-async drivers to
+          support a fully async module for MySQL and PostgreSQL.
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>io.vertx~mod-mongo-persistor</code> -
+          https://github.com/vert-x/mod-mongo-persistor - This module allows
+          data to be saved, retrieved, searched for, and deleted in a MongoDB
+          instance. MongoDB is a great match for persisting vert.x data since it
+          natively handles JSON (BSON) documents.
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>io.vertx~mod-redis</code> - https://github.com/vert-x/mod-redis
+          - This module allows data to be saved, retrieved, searched for, and
+          deleted in a Redis. Redis is an open source, BSD licensed, advanced
+          key-value store. It is often referred to as a data structure server
+          since keys can contain strings, hashes, lists, sets and sorted sets.
+          To use this module you must have a Redis server instance running on
+          your network.
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>io.vertx~mod-redis-client</code> - Client module for
+          io.vertx~mod-redis
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>com.bloidonia~mod-jdbc-persistor</code> -
+          https://github.com/timyates/mod-jdbc-persistor - JDBC event bus module
+          for Vert.x
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>ashertarno~vertx-memcached</code> -
+          https://github.com/ashertarno/vertx-memcached - This module provides a
+          Vert.x client for cache/storage servers, implementing memcached
+          protocol.
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>com.kennethjorgensen.vertx~vertx-mod-riak-persistor</code>
+          -https://bitbucket.org/kennethjor/vertx-mod-riak-persistor - This
+          module provides a vert.x client for riak.
+        </p>
+      </li>
+    </ul>
+    <h2 id="messaging">Messaging</h2>
+    <ul>
+      <li>
+        <code>com.zanox.vertx~mod-kafka</code> -
+        https://github.com/zanox/mod-kafka - Kafka module allows to receive
+        events published by other Vert.x verticles and send those events to
+        Kafka broker.
+      </li>
+      <li>
+        <code>p14n~vert-zeromq</code> - https://github.com/p14n/vert-zeromq -
+        Providing a bridge from zero-mq to the vert-x event bus.
+      </li>
+      <li>
+        <code>com.jetdrone~mod-stomp-io</code> -
+        https://github.com/pmlopes/mod-stomp-io - This module allows
+        communcation between Message brokers such as ActiveMQ, RabbitMQ Apache
+        Apollo using the STOMP protocol.
+      </li>
+      <li>
+        <code>RabbitMQ</code> - https://github.com/stream1984/mod-rabbitmq
+      </li>
+    </ul>
+    <h2 id="image-manipulation">Image manipulation</h2>
+    <ul>
+      <li>
+        <code>com.kafeblog.vertx~image-magick</code> -
+        https://github.com/khoinguyen/vertx-imagemagick - Vert.x ImageMagick
+        module provide EventBus to handle the Image processing with ImageMagick
+      </li>
+    </ul>
+    <h2 id="network-protocols">Network protocols</h2>
+    <ul>
+      <li>
+        <code>mohlemeyer~vertxFtpClient</code> -
+        https://github.com/mohlemeyer/vertxFtpClient - An asynchronous FTP
+        client module for the Vert.x platform.
+      </li>
+    </ul>
+    <h2 id="mail">Mail</h2>
+    <ul>
+      <li>
+        <code>mohlemeyer~a-mailer</code> -
+        https://github.com/mohlemeyer/a-mailer - Vert.x module to send email
+        messages via SMTP fully asynchronously.
+      </li>
+      <li>
+        <code>io.vertx~mod-mailer</code> - https://github.com/vert-x/mod-mailer
+        - This module allows emails to be sent via SMTP. Uses blocking JavaMail
+        API.
+      </li>
+      <li>Vert.x IMAP client - https://github.com/karanth/vertx-imap</li>
+    </ul>
+    <h2 id="event-processing">Event processing</h2>
+    <ul>
+      <li>
+        <code>net.kuujo~vertigo</code> - https://github.com/kuujo/vertigo -
+        Vertigo is a distributed event processing framework built on the Vert.x
+        application platform. Following a concept and structure similar to
+        Storm, Vertigo allows real-time problems to be broken down into smaller
+        tasks (as Vert.x verticles) and distributed across one or many Vert.x
+        instances, managing communication between components in a predictable
+        and reliable manner.
+      </li>
+      <li>
+        <code>net.kuujo~vertigo-python</code> -
+        https://github.com/kuujo/vertigo-python - Python API for Vertigo (see
+        above)
+      </li>
+      <li>
+        <code>net.kuujo~vertigo-js</code> - https://github.com/kuujo/vertigo-js
+        - JavaScript API for Vertigo (see above)
+      </li>
+    </ul>
+    <h2 id="language-implementations">Language implementations</h2>
+    <ul>
+      <li>
+        <code>io.vertx~lang-clojure</code> -
+        https://github.com/vert-x/mod-lang-clojure - Clojure API implementation
+        for Vert.x
+      </li>
+      <li>
+        <code>io.vertx~lang-dynjs</code> -
+        https://github.com/vert-x/mod-lang-php - JavaScript API implementation
+        for Vert.x that uses the DynJS JavaScript engine
+      </li>
+      <li>
+        <code>io.vertx~lang-nashorn</code> -
+        https://github.com/vert-x/mod-lang-nashorn - JavaScript API
+        implementation for Vert.x that uses the Oracle Nashorn JavaScript engine
+      </li>
+      <li>
+        <code>io.vertx~lang-rhino</code> -
+        https://github.com/vert-x/mod-lang-rhino - JavaScript API implementation
+        for Vert.x that uses the Mozilla Rhino JavaScript engine
+      </li>
+      <li>
+        <code>io.vertx~lang-scala~0.2.0</code> -
+        https://github.com/vert-x/mod-lang-scala - Scala API implementation for
+        Vert.x.
+      </li>
+      <li>
+        <code>io.vertx~lang-groovy</code> -
+        https://github.com/vert-x/mod-lang-groovy - Groovy API implementation
+        for Vert.x
+      </li>
+      <li>
+        <code>io.vertx~lang-jython</code> -
+        https://github.com/vert-x/mod-lang-jython - Python API implementation
+        for Vert.x, using the Jython Python engine.
+      </li>
+      <li>
+        <code>io.vertx~lang-jruby</code> -
+        https://github.com/vert-x/mod-lang-jruby - Ruby API implementation for
+        Vert.x, using the JRuby Ruby engine.
+      </li>
+      <li>
+        <code>vietj~lang-ceylon</code> - https://github.com/vietj/vertx-ceylon -
+        Ceylon language API implementation for Vert.x
+      </li>
+      <li>
+        <code>io.vertx~lang-php</code> - https://github.com/vert-x/mod-lang-php
+        - PHP language API implementation for Vert.x
+      </li>
+      <li>Yeti - https://github.com/chrisichris/yvertx</li>
+      <li>Kotlin - https://github.com/zhaopuming/kert.x</li>
+      <li>
+        TypeScript definition files for Vert.x APIs
+        https://github.com/frankwallis/vertx-typescript
+      </li>
+    </ul>
+    <h2 id="build-tool-integration">Build tool integration</h2>
+    <ul>
+      <li>
+        Maven. https://github.com/vert-x/vertx-maven - Maven archetype and
+        plugin for Vert.x
+      </li>
+      <li>
+        Gradle. https://github.com/vert-x/vertx-gradle-template - Gradle
+        template project for Vert.x
+      </li>
+    </ul>
+    <h2 id="json-bson">JSON / BSON</h2>
+    <ul>
+      <li>
+        <code>com.campudus~json-schema-validator</code> -
+        https://github.com/campudus/vertx-json-schema-validator - Vert.x module
+        to validate JSON against a schema (see http://json-schema.org/)
+      </li>
+      <li>
+        <code>com.jetdrone~mod-bson-io</code> -
+        https://github.com/pmlopes/mod-bson-io - BSON event bus wrapper for
+        Vert.x
+      </li>
+    </ul>
+    <h2 id="metrics">Metrics</h2>
+    <ul>
+      <li>
+        <code>com.bloidonia~mod-metrics</code> -
+        https://github.com/timyates/mod-metrics - A vert.x mod to try and expose
+        stats over JMX using the Metrics library.
+      </li>
+      <li>https://github.com/englishtown/vertx-mod-metrics</li>
+    </ul>
+    <h2 id="dependency-injection">Dependency injection</h2>
+    <ul>
+      <li>
+        <code>com.alienos.vertx~mod-guice</code> -
+        https://github.com/tigeba/mod-guice - mod-guice is a Google Guice module
+        for Vert.x. It includes everything you need to be Guicing your Vert.x
+        like a pro in five minutes.
+      </li>
+      <li>
+        <code>com.englishtown~vertx-mod-guice</code> -
+        https://github.com/englishtown/vertx-mod-guice - Enable Verticle and
+        Module dependency injection using Google Guice. The default Vert.x Java
+        VerticleFactory is replaced with
+        com.englishtown.vertx.guice.GuiceVerticleFactory for Verticle
+        construction.
+      </li>
+      <li>
+        <code>com.englishtown~vertx-mod-hk2</code> -
+        https://github.com/englishtown/vertx-mod-hk2 - Enable Verticle and
+        Module dependency injection using HK2. The default Vert.x Java
+        VerticleFactory is replaced with
+        com.englishtown.vertx.hk2.HK2VerticleFactory for Verticle construction.
+      </li>
+      <li>
+        <code>bytor99999~mod-spring-appcontext</code> -
+        https://github.com/bytor99999/mod-spring-appcontext - This module
+        creates a Spring ApplicationContext so that you can use the Spring
+        Framework in your Vert.x applications.
+      </li>
+    </ul>
+    <h2 id="web-middleware-frameworks">Web middleware frameworks</h2>
+    <ul>
+      <li>
+        <code>com.jetdrone~yoke</code> - https://github.com/pmlopes/yoke - Yoke
+        is a polyglot middleware framework for Vert.x, shipping with over 12
+        bundled middleware (think - like Node.js Express for Vert.x)
+      </li>
+      <li>
+        <code>com.jetdrone~yoke-extras</code> - Extras module for Yoke.
+        (Including OAuth)
+      </li>
+      <li>
+        https://github.com/spriet2000/vertx-stacker - Stacker provides a minimal
+        and adaptable interface for developing web applications on the vert.x
+        2.0 platform.
+      </li>
+      <li>
+        <code>io.vertx~mod-web-server</code> -
+        https://github.com/vert-x/mod-web-server - This is a simple example web
+        server which efficiently serves files from the file system.
+      </li>
+      <li>
+        <code>whiteship2000~mod-socket-io</code> -
+        https://github.com/keesun/mod-socket-io - This module allows the Vert.x
+        users can make a socket.io server as node.js users do.
+      </li>
+      <li>
+        Atmosphere for Vert.x. https://github.com/Atmosphere/atmosphere-vertx A
+        Java WebSocket and HTTP server powered by the Atmosphere Framework and
+        the Vert.x Framework.
+      </li>
+      <li>
+        Thymeleaf template engine -
+        https://github.com/swilliams-pivotal/mod-thymeleaf
+      </li>
+      <li>
+        Moustache template engine -
+        https://github.com/jorishermans/vert.x-mustache
+      </li>
+    </ul>
+    <h2 id="rest">REST</h2>
+    <ul>
+      <li>
+        <code>com.englishtown~vertx-mod-jersey</code> -
+        https://github.com/englishtown/vertx-mod-jersey - Allows creating JAX-RS
+        jersey resources that will handle incoming http requests to vert.x.
+      </li>
+      <li>
+        <code>vertx-bricks</code> - https://github.com/ThiagoUriel/vertx-brix -
+        Simplifies RESTful API development in Vert.x. Provides a straightforward
+        REST server implementation for endpoint publishing, and basic dependency
+        injection for the Event Bus.
+      </li>
+    </ul>
+    <h2 id="session-management">Session management</h2>
+    <ul>
+      <li>
+        <code>com.campudus~session-manager</code> -
+        https://github.com/campudus/vertx-session-manager - This module allows
+        to store data in a session. Sessions can time out after a specified
+        amount of time. The stored information of timed out sessions will be
+        deleted.
+      </li>
+      <li>
+        <code>io.vertx~mod-auth-mgr</code> -
+        https://github.com/vert-x/mod-auth-mgr - This is a basic auth manager
+        that verifies usernames and passwords in a MongoDB database and
+        generates time-limited session ids. These session ids can be passed
+        around the event bus.
+      </li>
+    </ul>
+    <h2 id="management">Management</h2>
+    <p>
+      <code>org.crashub~vertx.shell</code> -
+      https://github.com/crashub/mod-shell - The module mod-shell provides an
+      embedded shell for Vert.x based on CRaSH shell.
+    </p>
+    <h2 id="cloud-support">Cloud support</h2>
+    <ul>
+      <li>
+        OpenShift - Using diy cartridge -
+        https://github.com/vert-x/openshift-vertx
+      </li>
+      <li>
+        OpenShift - first class cartridge -
+        https://github.com/nscavell/openshift-origin-cartridge-vertx
+      </li>
+      <li>
+        Cloudbees - https://github.com/CloudBees-community/vertx-clickstack
+      </li>
+      <li>Heroku - https://github.com/tomaslin/heroku-buildpack-vertx-jdk7</li>
+      <li>
+        CloudFoundry - https://github.com/cloudfoundry-samples/vertx-vtoons/
+      </li>
+      <li>Cloudify http://rantav.github.io/cloudify-widget-pages/vertx.html</li>
+      <li>Chef template for Vert.x https://github.com/zanox/vertx</li>
+    </ul>
+    <h2 id="mobile-clients">Mobile clients</h2>
+    <ul>
+      <li>
+        https://github.com/goodow/realtime-channel - IoS Vert.x event bus client
+      </li>
+      <li>
+        https://github.com/goodow/realtime-android - Android Vert.x event bus
+        client
+      </li>
+      <li>
+        <code>ashertarno~vertx-gcm</code> -
+        https://github.com/ashertarno/vertx-gcm - This module provides a Google
+        Cloud Messaging for Android server side solution for Vert.x. Google
+        Cloud Messaging for Android (GCM) is a service that helps developers
+        push data from servers to their Android applications on Android devices.
+      </li>
+    </ul>
+    <h2 id="integration">Integration</h2>
+    <ul>
+      <li>
+        Vert.x event bus JCA adaptor:
+        https://github.com/gaol/vertx-resource-adapter
+      </li>
+      <li>
+        Vert.x Apache Camel component http://camel.apache.org/vertx.html
+        https://github.com/apache/camel/blob/master/components/camel-vertx/src/main/java/org/apache/camel/component/vertx/VertxComponent.java
+      </li>
+      <li>
+        https://github.com/projectodd/nodyn - Node.js drop-in compatibility for
+        Vert.x
+      </li>
+    </ul>
+    <h2 id="asynchronous-composition-promises">
+      Asynchronous composition / promises
+    </h2>
+    <ul>
+      <li>
+        <code>io.vertx~mod-rxvertx</code> -
+        https://github.com/vert-x/mod-rxvertx - Vert.x module which uses RxJava
+        to add support for Reactive Extensions (RX) using the RxJava library.
+        This allows VertX developers to use the RxJava type-safe composable API
+        to build VertX verticles.
+      </li>
+      <li>
+        <code>com.englishtown~vertx-mod-when</code> -
+        https://github.com/englishtown/vertx-mod-when - Provides when.java
+        wrappers for standard vert.x objects to return promises.
+      </li>
+      <li>
+        <code>com.darylteo~vertx-promises-java</code> -
+        https://github.com/darylteo/rxjava-promises - Promises is a pattern for
+        callback-based flow control. This particular implementation of Promises
+        is useful in places where blocking calls are undesired.
+      </li>
+      <li>
+        <code>com.darylteo~vertx-promises-groovy</code> - As above but Groovy
+        API.
+      </li>
+    </ul>
+    <h2 id="archiving">Archiving</h2>
+    <ul>
+      <li>
+        <code>io.vertx~mod-unzip</code> - https://github.com/vert-x/mod-unzip -
+        Simple worker module that given the file name of a zip file, unzips it
+        to a temp directory or a specified directory and returns the filename in
+        a Json message
+      </li>
+    </ul>
+    <h2 id="work-queueing">Work queueing</h2>
+    <ul>
+      <li>
+        <code>io.vertx~mod-work-queue</code> -
+        https://github.com/vert-x/mod-work-queue - This module queues messages
+        (work) sent to it, and then forwards the work to one of many processors
+        that may be attached to it, if available.
+      </li>
+    </ul>
+    <h2 id="social-networks">Social networks</h2>
+    <ul>
+      <li>
+        <code>orolle~mod-facebook</code> -
+        https://github.com/orolle/mod-facebook - mod-facebook uses the facebook
+        query language to access data from facebook.
+      </li>
+    </ul>
+    <h2 id="scaffolding">Scaffolding</h2>
+    <ul>
+      <li>
+        https://github.com/sebastienblanc/vertxgo - VertxGo (aka ‘Vertigo’ or
+        ‘Vert.x Go!’) is a CRUD Scaffolding Vert.x Module.
+      </li>
+    </ul>
+    <h2 id="natural-language-processing">Natural Language Processing</h2>
+    <ul>
+      <li>
+        Stanford core NLP https://github.com/jonnywray/mod-stanford-corenlp
+      </li>
+    </ul>
+    <h2 id="deployment">Deployment</h2>
+    <ul>
+      <li>
+        (Seamless) deploy to AWS based Vert.x application clusters -
+        https://github.com/msoute/vertx-deploy-tools
+      </li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+#!/bin/bash
+# Based on a hook from tygertec.com
+# Source: https://www.tygertec.com/git-hooks-practical-uses-windows/
+#
+# Verifies user.name and user.email are set to correct name and email address.
+#
+# The hook should exit with non-zero status after issuing an appropriate
+# message if it stops the commit.
+#
+# Requirements: 
+#   * Bash
+#
+# To enable this hook, rename this file to "pre-commit".
+
+# Make sure user.name is set properly
+username=$(git config user.name)
+if [ "$username" != "Lauren Stephenson" ]
+then
+    cat <<\EOF
+Error: user.name not set to "Lauren Stephenson"
+EOF
+    exit 1
+fi
+
+# Make sure user.email is set properly
+email=$(git config user.email)
+if [ "$email" != "compscilauren@gmail.com" ]
+then
+    cat <<\EOF
+Error: user.email not set to "compscilauren@gmail.com"
+EOF
+    exit 1
+fi

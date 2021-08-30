@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>zh_TW</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/fukuball/Awesome-Laravel-Education/master/laravel-logo-white.png"
+        alt="Laravel Logo"
+      />
+      <figcaption>Laravel Logo</figcaption>
+    </figure>
+    <h1 id="chinese-version-中文版">Chinese Version / 中文版</h1>
+    <h2 id="索引">索引</h2>
+    <ul>
+      <li><a href="#user-content-laravel-新手村">Laravel 新手村</a></li>
+      <li><a href="#user-content-快速參考">快速參考</a></li>
+      <li>
+        <a href="#user-content-從優質影片及文章學習">從優質影片及文章學習</a>
+        <ul>
+          <li>
+            <a href="#user-content-composer--homestead--docker"
+              >Composer / Homestead / Docker</a
+            >
+          </li>
+          <li>
+            <a href="#user-content-路由--控制器--請求--回應"
+              >路由 / 控制器 / 請求 / 回應</a
+            >
+          </li>
+          <li><a href="#user-content-資料庫">資料庫</a></li>
+          <li><a href="#user-content-模型--eloquent">模型 / Eloquent</a></li>
+          <li>
+            <a href="#user-content-視圖--blade--語言">視圖 / Blade / 語言</a>
+          </li>
+          <li><a href="#user-content-表單--驗證">表單 / 驗證</a></li>
+          <li><a href="#user-content-系統架構--ioc">系統架構 / IoC</a></li>
+          <li><a href="#user-content-認證--安全性">認證 / 安全性</a></li>
+          <li><a href="#user-content-中介層">中介層</a></li>
+          <li><a href="#user-content-前端整合">前端整合</a></li>
+          <li><a href="#user-content-session-1">Session</a></li>
+          <li>
+            <a href="#user-content-檔案系統與雲端儲存">檔案系統與雲端儲存</a>
+          </li>
+          <li><a href="#user-content-快取">快取</a></li>
+          <li><a href="#user-content-郵件">郵件</a></li>
+          <li>
+            <a href="#user-content-測試與程式碼風格標準"
+              >測試與程式碼風格標準</a
+            >
+          </li>
+          <li><a href="#user-content-重構">重構</a></li>
+          <li><a href="#user-content-物件導向">物件導向</a></li>
+          <li><a href="#user-content-學習案例">學習案例</a></li>
+        </ul>
+      </li>
+      <li><a href="#user-content-教學網站">教學網站</a></li>
+      <li><a href="#user-content-部落格">部落格</a></li>
+      <li><a href="#user-content-電子報">電子報</a></li>
+      <li><a href="#user-content-laravel-開源碼">Laravel 開源碼</a></li>
+      <li><a href="#user-content-程式碼風格標準">程式碼風格標準</a></li>
+      <li><a href="#user-content-相依管理">相依管理</a></li>
+      <li><a href="#user-content-開發工具">開發工具</a></li>
+      <li>
+        <a href="#user-content-給-php-開發者的書單">給 PHP 開發者的書單</a>
+      </li>
+      <li><a href="#user-content-面試">面試</a></li>
+      <li><a href="#user-content-社群">社群</a></li>
+    </ul>
+    <h2 id="laravel-新手村">Laravel 新手村</h2>
+    <ul>
+      <li>
+        <a href="https://laracasts.com/series/laravel-5-from-scratch"
+          >Laracasts: Laravel From Scratch</a
+        >
+      </li>
+      <li>
+        <a href="https://laracasts.com/series/laravel-5-fundamentals"
+          >Laracasts: Laravel 5 基礎</a
+        >
+      </li>
+      <li>
+        Laravel Homestead 安裝指南
+        <ul>
+          <li>
+            <a href="http://yish.im/2015/07/28/Homestead-2-0-on-windows7-8/"
+              >Homestead 2.0 on windows 7/8</a
+            >
+          </li>
+          <li>
+            <a href="http://yish.im/2015/03/22/Homestead-2-0-on-Ubuntu/"
+              >Homestead 2.0 on Ubuntu</a
+            >
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/homestead"
+              >Laravel 文件：Laravel Homestead on Linux or Mac</a
+            >
+            #5.4
+          </li>
+          <li>
+            <a
+              href="https://laracasts.com/lessons/say-hello-to-laravel-homestead-two"
+              >Laracasts：向 Laravel Homestead 2.0 說 Hello</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://github.com/fukuball/ec2-laravel-evn-installer"
+          >在 AWS EC2 上快速架好符合 Laravel 運行的環境</a
+        >
+      </li>
+      <li>
+        新手做中學
+        <ul>
+          <li>
+            <a href="https://laravel.tw/docs/5.1/quickstart"
+              >Laravel 文件：基本任務清單</a
+            >
+            #5.1
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.1/quickstart-intermediate"
+              >Laravel 文件：中級任務清單</a
+            >
+            #5.1
+          </li>
+        </ul>
+      </li>
+      <li><a href="https://laravel.tw/docs/5.4">Laravel 文件</a> #5.4</li>
+      <li>
+        跟著 Laravel 5.1 一起成為更好的 PHP 開發者
+        <a
+          href="https://www.youtube.com/watch?v=al2eCFvvM-s&amp;feature=youtu.be"
+          >影片</a
+        >
+        <a
+          href="http://www.slideshare.net/shengyou/phpconf-taiwan-2015-laravel-51-php"
+          >投影片</a
+        >
+      </li>
+    </ul>
+    <h2 id="快速參考">快速參考</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/chiraggude/awesome-laravel">偉哉 Laravel</a>
+      </li>
+      <li><a href="https://github.com/ziadoz/awesome-php">偉哉 PHP</a></li>
+      <li><a href="http://laravel.com/api/5.4/">Laravel API</a> #5.4</li>
+      <li><a href="http://cheats.jesse-obrien.ca/">Laravel Cheat Sheet</a></li>
+      <li>
+        <a href="https://github.com/bestmomo/laravel5-3-example"
+          >bestmomo/laravel5-3-example</a
+        >
+        - 如何使用 Laravel 5.3 創建一個 web application 的好範例。
+      </li>
+    </ul>
+    <h2 id="從優質影片及文章學習">從優質影片及文章學習</h2>
+    <h3 id="composer-homestead-docker">Composer / Homestead / Docker</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/1"
+              >Laracasts: Meet Composer</a
+            >
+            #Composer
+          </li>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/2"
+              >Laracasts: Virtual Machines and Homestead</a
+            >
+            #Homestead #Virtual Machine #Vagrant
+          </li>
+          <li>
+            <a href="https://getcomposer.org/doc/00-intro.md">Composer</a>
+            #Composer
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/homestead"
+              >Laravel 文件：設定 Homestead</a
+            >
+            #5.4 #Homestead
+          </li>
+          <li>
+            <a href="https://hackernoon.com/laravel-in-docker-ceed4465352"
+              >Laravel in Docker</a
+            >
+            #5.4 #Docker
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="路由-控制器-請求-回應">路由 / 控制器 / 請求 / 回應</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/3"
+              >Laracasts: A Gentle Introduction to Routing, Controllers, and
+              Views</a
+            >
+            #Routing #Controller #View
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/routing"
+              >Laravel 文件：基本功能 路由</a
+            >
+            #5.4 #Routing
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/controllers"
+              >Laravel 文件：基本功能 控制器</a
+            >
+            #5.4 #Controller
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/requests"
+              >Laravel 文件：基本功能 請求</a
+            >
+            #5.4 #Request
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/responses"
+              >Laravel 文件：基本功能 回應</a
+            >
+            #5.4 #Response
+          </li>
+        </ul>
+      </li>
+      <li>
+        進階
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/18"
+              >Laracasts: Route Model Binding</a
+            >
+            #Routing
+          </li>
+          <li>
+            <a
+              href="http://seanoneill.me/eaest-way-to-https-on-all-laravel-routes/"
+              >Simple Way To HTTPS All Laravel Routes</a
+            >
+            #5.4 #Routing
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="資料庫">資料庫</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/7"
+              >Laracasts: Migrations</a
+            >
+            #Migration
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/database"
+              >Laravel 文件：資料庫 入門</a
+            >
+            #5.4 #Database
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/migrations"
+              >Laravel 文件：資料庫 遷移</a
+            >
+            #5.4 #Migration
+          </li>
+        </ul>
+      </li>
+      <li>
+        進階
+        <ul>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/queries"
+              >Laravel 文件：資料庫 查詢建構器</a
+            >
+            #5.4 #Database
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/seeding"
+              >Laravel 文件：資料庫 資料填充</a
+            >
+            #5.4 #Migration
+          </li>
+          <li>
+            <a
+              href="http://yish.im/2015/12/12/select-with-dbraw-make-your-database-work/"
+              >Select 使用 DB::raw() - 讓你的資料運作得更好</a
+            >
+            #Database
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="模型-eloquent">模型 / Eloquent</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/8"
+              >Laracasts: Eloquent 101</a
+            >
+            #Eloquent
+          </li>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/9"
+              >Laracasts: Basic Model/Controller/View Workflow</a
+            >
+            #Model #Eloquent
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/eloquent"
+              >Laravel 文件：Eloquent ORM 入門</a
+            >
+            #5.4 #Eloquent
+          </li>
+        </ul>
+      </li>
+      <li>
+        進階
+        <ul>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/eloquent-relationships"
+              >Laravel 文件：Eloquent ORM 關聯</a
+            >
+            #5.4 #Eloquent
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/eloquent-collections"
+              >Laravel 文件：Eloquent ORM 集合</a
+            >
+            #5.4 #Eloquent
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/eloquent-mutators"
+              >Laravel 文件：Eloquent ORM 存取器</a
+            >
+            #5.4 #Eloquent
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/eloquent-serialization"
+              >Laravel 文件：Eloquent ORM 序列化</a
+            >
+            #5.4 #Eloquent
+          </li>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/11"
+              >Laracasts: Dates, Mutators, and Scopes</a
+            >
+            #Eloquent #Carbon
+          </li>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/14"
+              >Laracasts: Eloquent Relationships</a
+            >
+            #Eloquent
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="視圖-blade-語言">視圖 / Blade / 語言</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/4"
+              >Laracasts: Passing Data to Views</a
+            >
+            #View
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/views"
+              >Laravel 文件：基本功能 視圖</a
+            >
+            #5.4 #View
+          </li>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/5"
+              >Laracasts: Blade 101</a
+            >
+            #View #Blade
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/blade"
+              >Laravel 文件：基本功能 Blade 模板</a
+            >
+            #5.4 #View #Blade
+          </li>
+        </ul>
+      </li>
+      <li>
+        進階
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/13"
+              >Laracasts: View Partials and Form Reuse</a
+            >
+            #View
+          </li>
+          <li>
+            <a
+              href="https://medium.com/@lollypopgr/php-vars-js-with-the-help-of-a-laravel-sp-view-composer-9e017b66c036"
+              >Php vars @ JS with the help of a Laravel SP &amp; View
+              Composer</a
+            >
+            #5.4 #View #Language
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="表單-驗證">表單 / 驗證</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/10"
+              >Laracasts: Forms</a
+            >
+            #Form #View
+          </li>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/12"
+              >Laracasts: Form Requests and Controller Validation</a
+            >
+            #Form #Validation
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/validation"
+              >Laravel 文件：系統服務 驗證</a
+            >
+            #5.4
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="系統架構-ioc">系統架構 / IoC</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/6"
+              >Laracasts: Environments and Configuration</a
+            >
+            #Architecture
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/structure"
+              >Laravel 文件：系統架構 應用程式結構</a
+            >
+            #5.4 #Architecture
+          </li>
+        </ul>
+      </li>
+      <li>
+        進階
+        <ul>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/lifecycle"
+              >Laravel 文件：系統架構 請求的生命週期</a
+            >
+            #5.4 #Architecture
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/providers"
+              >Laravel 文件：系統架構 服務提供者</a
+            >
+            #5.4 #Architecture
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/container"
+              >Laravel 文件：系統架構 服務容器</a
+            >
+            #5.4 #Architecture
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/contracts"
+              >Laravel 文件：系統架構 Contracts</a
+            >
+            #5.4 #Architecture
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/facades"
+              >Laravel 文件：系統架構 Facades</a
+            >
+            #5.4 #Architecture
+          </li>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/26"
+              >Laracasts: The Service Container</a
+            >
+            #Architecture #Ioc
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="認證-安全性">認證 / 安全性</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/15"
+              >Laracasts: Easy Auth</a
+            >
+            #Authentication #Eloquent
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/authentication"
+              >Laravel 文件：系統服務 認證</a
+            >
+            #5.4 #Authentication
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/authorization"
+              >Laravel 文件：系統服務 授權</a
+            >
+            #5.4 #Authentication
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="中介層">中介層</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/16"
+              >Laracasts: Ogres Are Like Middleware</a
+            >
+            #Middleware #Security
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/middleware"
+              >Laravel 文件：基本功能 中介層</a
+            >
+            #5.4 #Middleware
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="前端整合">前端整合</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/19"
+              >Laracasts: Manage Your Assets</a
+            >
+            #Front-End #Elixir
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.1/elixir"
+              >Laravel 文件：系統服務 Elixir</a
+            >
+            #5.1 #Elixir
+          </li>
+        </ul>
+      </li>
+      <li>
+        進階
+        <ul>
+          <li>
+            <a
+              href="https://laravel-news.com/2015/10/setup-bootstrap-sass-with-laravel-elixir/"
+              >Setup Bootstrap Sass with Laravel Elixir - 使用 Laravel Elixir
+              整合 Bootstrap Sass</a
+            >
+            -
+            <a href="https://twitter.com/ericlbarnes">Eric L. Barnes</a> #Elixir
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="session">Session</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a
+              href="https://laracasts.com/series/laravel-5-fundamentals/episodes/20"
+              >Laracasts: Flash Messaging</a
+            >
+            #Session
+          </li>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/session"
+              >Laravel 文件：系統服務 Session</a
+            >
+            #5.4 #Session
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="檔案系統與雲端儲存">檔案系統與雲端儲存</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/filesystem"
+              >Laravel 文件：系統服務 檔案系統與雲端儲存</a
+            >
+            #5.4 #Filesystem
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="快取">快取</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/cache"
+              >Laravel 文件：系統服務 快取</a
+            >
+            #5.4 #Cache
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="郵件">郵件</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/mail"
+              >Laravel 文件：系統服務 郵件</a
+            >
+            #5.4 #Mail
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="測試與程式碼風格標準">測試與程式碼風格標準</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            <a href="https://laravel.tw/docs/5.4/testing"
+              >Laravel 文件：系統服務 測試</a
+            >
+            #5.4 #Testing
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="重構">重構</h3>
+    <ul>
+      <li>
+        進階
+        <ul>
+          <li>
+            <a href="http://jaceju.net/2015/10/05/simple-refatoring-example-01/"
+              >邁向 PHP 重構之路 - 以 Laravel 程式碼片段為例</a
+            >
+            - <a href="https://twitter.com/jaceju">大澤木小鐵</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="物件導向">物件導向</h3>
+    <ul>
+      <li>
+        進階 -<a href="http://oomusou.io/php/php-namespace/"
+          >如何使用 Namespace?</a
+        >
+        - <a href="https://twitter.com/oomusou">真OO無雙</a> -<a
+          href="http://oomusou.io/php/php-interface/"
+          >如何使用 Interface?</a
+        >
+        - <a href="https://twitter.com/oomusou">真OO無雙</a>
+      </li>
+    </ul>
+    <h3 id="學習案例">學習案例</h3>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            測試越辯越明
+            <ul>
+              <li>
+                <a href="http://blog.turn.tw/?p=2741">PHP與撰寫測試入門</a> -
+                <a href="https://twitter.com/howtomakeaturn">尤川豪</a>
+              </li>
+              <li>
+                <a href="http://jaceju.net/2015/10/14/what-is-test/"
+                  >這樣寫測試錯了嗎？</a
+                >
+                - <a href="https://twitter.com/jaceju">大澤木小鐵</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        進階
+        <ul>
+          <li>
+            文章及標籤應用程式
+            <ul>
+              <li>
+                <a
+                  href="https://laracasts.com/series/laravel-5-fundamentals/episodes/21"
+                  >Laracasts: Many to Many Relations (With Tags)</a
+                >
+                #Eloquent
+              </li>
+              <li>
+                <a
+                  href="https://laracasts.com/series/laravel-5-fundamentals/episodes/22"
+                  >Laracasts: Selecting Tags From the UI</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://laracasts.com/series/laravel-5-fundamentals/episodes/23"
+                  >Laracasts: Syncing Tags</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://laracasts.com/series/laravel-5-fundamentals/episodes/24"
+                  >Laracasts: Enhancing Select Elements</a
+                >
+                #Front-End #Elixir
+              </li>
+              <li>
+                <a
+                  href="https://laracasts.com/series/laravel-5-fundamentals/episodes/25"
+                  >Laracasts: When You Want a View Partial to Always Receive
+                  Data</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://laracasts.com/series/laravel-5-fundamentals/episodes/27"
+                  >Laracasts: Loose Ends and Wrapping Up</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            測試、重構、工具整合使用
+            <ul>
+              <li>
+                <a href="http://oomusou.io/phpstorm/phpstorm-tdd-refactor/"
+                  >如何使用 PhpStorm 實現 TDD、重構與偵錯?</a
+                >
+                - <a href="https://twitter.com/oomusou">真OO無雙</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a
+              href="http://yish.im/2016/03/14/Laravel-5-2-new-architecture-contents/"
+              >Laravel 5.2 專案結構目錄</a
+            >
+            <ul>
+              <li>
+                <a
+                  href="http://yish.im/2016/02/25/Laravel-5-2-new-architecture-entities/"
+                  >Laravel 5.2 專案結構心得(一): 專案命名與 Entities</a
+                >
+                #Eloquent #Model
+              </li>
+              <li>
+                <a
+                  href="http://yish.im/2016/03/09/Laravel-5-2-new-architecture-helpers/"
+                  >Laravel 5.2 專案結構心得(二): Helpers</a
+                >
+                #Helper
+              </li>
+              <li>
+                <a
+                  href="http://yish.im/2016/03/09/Laravel-5-2-new-architecture-providers/"
+                  >Laravel 5.2 專案結構心得(三): Providers</a
+                >
+                #Providers
+              </li>
+              <li>
+                <a
+                  href="http://yish.im/2016/03/09/Laravel-5-2-new-architecture-repositories/"
+                  >Laravel 5.2 專案結構心得(四): Repositories</a
+                >
+                #Repositories
+              </li>
+              <li>
+                <a
+                  href="http://yish.im/2016/03/14/Laravel-5-2-new-architecture-services/"
+                  >Laravel 5.2 專案結構心得(五): Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="http://yish.im/2016/03/14/Laravel-5-2-new-architecture-validators/"
+                  >Laravel 5.2 專案結構心得(六): Validators</a
+                >
+              </li>
+              <li>
+                <a
+                  href="http://yish.im/2016/03/14/Laravel-5-2-new-architecture-transformers/"
+                  >Laravel 5.2 專案結構心得(七): Transformers</a
+                >
+              </li>
+              <li>
+                <a
+                  href="http://yish.im/2016/03/14/Laravel-5-2-new-architecture-middleware/"
+                  >Laravel 5.2 專案結構心得(八): Middleware</a
+                >
+              </li>
+              <li>
+                <a
+                  href="http://yish.im/2016/03/14/Laravel-5-2-new-architecture-request/"
+                  >Laravel 5.2 專案結構心得(九): Request</a
+                >
+              </li>
+              <li>
+                <a
+                  href="http://yish.im/2016/03/14/Laravel-5-2-new-architecture-validator-tricks/"
+                  >Laravel 5.2 專案結構心得(十): Validator 小技巧</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="教學網站">教學網站</h2>
+    <ul>
+      <li><a href="http://www.laravel-dojo.com/">Laravel 道場</a></li>
+      <li><a href="http://laravel.so/">laravel.so</a></li>
+      <li><a href="https://laracasts.com/">Laracasts</a></li>
+      <li>
+        <a href="http://code.tutsplus.com/categories/php/courses">Tuts+</a>
+      </li>
+      <li><a href="http://www.sitepoint.com/php/">Sitepoint</a></li>
+      <li><a href="http://laravel-tricks.com/">Laravel Tricks</a></li>
+      <li><a href="http://laravel-recipes.com/">Laravel Recipes</a></li>
+      <li><a href="http://laravelcoding.com/blog">Laravel Coding</a></li>
+    </ul>
+    <h2 id="部落格">部落格</h2>
+    <ul>
+      <li><a href="http://yish.im/">Yish.im</a></li>
+      <li><a href="http://oomusou.io/">點燈坊</a></li>
+      <li><a href="http://notes.jigsawye.com/">JIgsaw’s Notes</a></li>
+      <li><a href="http://blog.sharenjoy.com/">sharenjoy 享享</a></li>
+      <li><a href="http://blog.turn.tw/?variant=zh-tw">轉個彎日誌</a></li>
+      <li><a href="http://jaceju.net/">網站製作學習誌</a></li>
+    </ul>
+    <h2 id="電子報">電子報</h2>
+    <ul>
+      <li><a href="http://weekly.codetengu.com">碼天狗週刊</a></li>
+      <li><a href="https://laravel-news.com">Laravel News</a></li>
+      <li><a href="http://laravelweekly.com">Laravel Weekly</a></li>
+      <li><a href="http://www.phpweekly.com/archive.html">PHP Weekly</a></li>
+      <li><a href="http://securingphp.com/">Securing PHP</a></li>
+    </ul>
+    <h2 id="laravel-開源碼">Laravel 開源碼</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/laravel/framework">Laravel Framework</a>
+      </li>
+      <li>
+        <a href="https://github.com/laravel/laravel">Laravel Application</a>
+      </li>
+      <li>
+        <a href="https://github.com/laravel-taiwan/docs">Laravel 中文文件</a>
+      </li>
+      <li><a href="https://github.com/laravel/cashier">Laravel Cashier</a></li>
+      <li><a href="https://github.com/laravel/envoy">Laravel Envoy</a></li>
+      <li>
+        <a href="https://github.com/laravel/homestead">Laravel Homestead</a>
+      </li>
+      <li>
+        <a href="https://github.com/laravel/settler"
+          >Laravel Homestead Build Scripts</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/laravel/laravel.com">Laravel Website</a>
+      </li>
+      <li><a href="https://github.com/laravel/art">Laravel Art</a></li>
+    </ul>
+    <h2 id="程式碼風格標準">程式碼風格標準</h2>
+    <ul>
+      <li>
+        <a href="http://laravel-taiwan.github.io/php-the-right-way/"
+          >PHP The Right Way</a
+        >
+      </li>
+      <li><a href="http://www.php-fig.org/">PHP FIG</a></li>
+      <li>
+        <a
+          href="https://github.com/laravel-taiwan/fig-standards/tree/master/accepted/zh-TW"
+          >fig-standards</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/FriendsOfPHP/PHP-CS-Fixer"
+          >Code Style Fixer 程式碼風格修復器</a
+        >
+      </li>
+    </ul>
+    <h2 id="相依管理">相依管理</h2>
+    <ul>
+      <li>
+        <a href="http://getcomposer.org/">Composer</a>/<a
+          href="http://packagist.org/"
+          >Packagist</a
+        >
+        - 使用 Compoer 套件管理工具，可以在 Packagist 搜尋想使用的套件
+      </li>
+    </ul>
+    <h2 id="開發工具">開發工具</h2>
+    <ul>
+      <li>
+        <a href="http://www.sublimetext.com/">Sublime Text</a>
+        <ul>
+          <li>
+            <a href="https://github.com/wbond/sublime_alignment">Alignment</a> -
+            快速對齊多行程式碼
+          </li>
+          <li>
+            <a href="https://github.com/dev4dev/blade-snippets"
+              >Blade Snippets</a
+            >
+            - 提供 Laravel 常用的 Code Snippets
+          </li>
+          <li>
+            <a href="https://github.com/facelessuser/BracketHighlighter"
+              >BracketHighlighter</a
+            >
+            - 游標移到大括號或是一般的括號就會有明顯的高亮顯示
+          </li>
+          <li>
+            <a href="https://github.com/spadgos/sublime-jsdocs">DocBlockr</a> -
+            簡化註解的撰寫
+          </li>
+          <li>
+            <a href="https://github.com/sergeche/emmet-sublime">Emmet</a> -
+            輔助快速產生 HTML 與 CSS 語法的套件
+          </li>
+          <li>
+            <a href="https://github.com/Medalink/laravel-blade"
+              >Laravel Blade Highlighter</a
+            >
+            - 讓 Laravel Blade 的關鍵字高亮
+          </li>
+          <li>
+            <a href="https://github.com/phpfmt/sublime-phpfmt">phpfmt</a> -
+            存檔時，將 PHP Code 自動修成符合標準
+          </li>
+          <li>
+            <a href="https://github.com/titoBouzout/SideBarEnhancements"
+              >Sidebar Enhancements</a
+            >
+            - Enhancements to Sublime Text sidebar -
+            替側邊欄新增許多實用的操作功能
+          </li>
+          <li>
+            <a href="https://github.com/SublimeCodeIntel/SublimeCodeIntel"
+              >SublimeCodeIntel</a
+            >
+            - 程式碼追蹤套件，讓 Sublime 有自動完成功能
+          </li>
+          <li>
+            <a href="https://github.com/SublimeLinter/SublimeLinter3"
+              >SublimeLinter</a
+            >
+            -
+            程式碼錯誤檢查工具，不過只裝這個是沒有作用的，要另外依照不同程式碼安裝相對應的套件，例如下面介紹的
+            SublimeLinter-php
+          </li>
+          <li>
+            <a href="https://github.com/SublimeLinter/SublimeLinter-php"
+              >SublimeLinter-php</a
+            >
+            - PHP 錯誤檢查工具
+          </li>
+          <li>
+            <a href="https://github.com/P233/Syntax-highlighting-for-Sass"
+              >Syntax Highlighting for Sass</a
+            >
+            - 讓 SCSS 及 Sass 關鍵字高亮
+          </li>
+          <li>
+            <a href="https://github.com/SublimeText/TrailingSpaces"
+              >Trailing Spaces</a
+            >
+            - 自動刪除多餘的空白
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.jetbrains.com/phpstorm/">PhpStorm IDE</a>
+        <ul>
+          <li>
+            <a href="https://github.com/Haehnchen/idea-php-laravel-plugin"
+              >Laravel Plugin for PhpStorm</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="給-php-開發者的書單">給 PHP 開發者的書單</h2>
+    <ul>
+      <li>
+        入門
+        <ul>
+          <li>
+            PHP、MySQL 與 JavaScript 學習手冊 (第四版) ISBN：9789863476726
+          </li>
+          <li>PHP 程式設計 (第三版) ISBN：9789862769881</li>
+          <li>
+            PHP、MySQL、JavaScript 與 CSS 學習手冊 (第二版) ISBN：9789862766576
+          </li>
+          <li>深入淺出 PHP 與 MySQL ISBN：9789866840401</li>
+          <li>深入淺出 HTML&amp;CSS (第二版) ISBN：9789862768945</li>
+        </ul>
+      </li>
+      <li>
+        進階
+        <ul>
+          <li>Laravel: From Apprentice To Artisan</li>
+          <li>Laravel Testing Decoded</li>
+          <li>Laravel 5.1 Beauty</li>
+          <li>現代 PHP：新的特點及良好習慣 ISBN：9789863477785</li>
+          <li>PHP 設計模式學習手冊 ISBN：9789862767702</li>
+          <li>測試之美 ISBN：9789862763445</li>
+          <li>PHP 大師：寫出頂尖的程式碼 ISBN：9789862765142</li>
+          <li>
+            Laravel 5 Essentials: Explore the Fundamentals of Laravel, One of
+            the Most Expressive and Robust Php Frameworks ISBN：9781785283017
+          </li>
+          <li>
+            Laravel Design Patterns and Best Practices ISBN：9781783287987
+          </li>
+          <li>Learning Laravel’s Eloquent ISBN: 9781784391584</li>
+        </ul>
+      </li>
+      <li>
+        觀念
+        <ul>
+          <li>深入淺出物件導向分析與設計 ISBN：9789867794994</li>
+          <li>深入淺出－設計模式 ISBN：9867794524</li>
+          <li>大話設計模式 ISBN：9789866761799</li>
+          <li>大話重構 ISBN：9789864340460</li>
+          <li>大話資料結構 ISBN：9789866072116</li>
+          <li>重構－改善既有程式的設計 ISBN：9861547533</li>
+          <li>重構－向範式前進 ISBN：9861814027</li>
+          <li>
+            物件導向設計模式－可再利用物件導向軟體之要素(精裝典藏版)
+            ISBN：9572054112
+          </li>
+          <li>SCRUM：用一半的時間 做兩倍的事 ISBN：9863207144</li>
+          <li>無瑕的程式碼－敏捷軟體開發技巧守則 ISBN：9862017058</li>
+          <li>
+            無瑕的程式碼 番外篇－專業程式設計師的生存之道 ISBN：9862017880
+          </li>
+          <li>
+            Continuous Delivery
+            中文版：利用自動化的建置、測試與部署完美創造出可信賴的軟體發佈
+            ISBN：9789862019627
+          </li>
+          <li>
+            架構之美：頂尖架構師於軟體設計中蘊含的智慧結晶 ISBN：9789862763988
+          </li>
+          <li>
+            易讀程式之美學：提升程式碼可讀性的簡單法則 ISBN：9789862767191
+          </li>
+          <li>設計模式的解析與活用 ISBN：9789862018200</li>
+          <li>代碼之髓：編程語言核心概念 ISBN：9787115361530</li>
+          <li>松本行弘談程式世界的未來 ISBN：9789863473312</li>
+          <li>
+            松本行弘的程式世界：成為一流程式設計師的14種思考術
+            ISBN：9789862013571
+          </li>
+          <li>學徒模式－優秀軟體開發者的養成之路 ISBN: 9789862762561</li>
+          <li>高品質程式：軟體測試原則、實作與模式 ISBN：9789863473060</li>
+          <li>Kent Beck 的實作模式 ISBN：9789862018088</li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="面試">面試</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/MaximAbramchuck/awesome-interviews#php"
+          >偉哉 PHP 面試問題</a
+        >
+      </li>
+      <li>Introduction to Algorithms, 3rd Edition ISBN:9780262033848</li>
+      <li>
+        Cracking the Coding Interview: 150 Programming Questions and Solutions
+        ISBN:9780984782802
+      </li>
+      <li>
+        Elements of Programming Interviews: The Insiders’ Guide
+        ISBN:9781479274833
+      </li>
+      <li>
+        <a
+          href="http://www.slideshare.net/gayle2/cracking-the-facebook-coding-interview"
+          >Cracking the Facebook Coding Interview</a
+        >
+        - <a href="https://twitter.com/gayle">Gayle McDowell</a>
+      </li>
+      <li><a href="http://www.careercup.com/">careercup</a></li>
+      <li><a href="https://leetcode.com/">LeetCode</a></li>
+      <li>
+        <a
+          href="https://github.com/jimhorng/awesome-interview-mindset/tree/master/zh_tw"
+          >求職求才指南-以持久合作為前提</a
+        >
+      </li>
+      <li>
+        <a href="http://www.laravelinterviewquestions.com/"
+          >Laravel Interview Questions and Answers</a
+        >
+      </li>
+    </ul>
+    <h2 id="社群">社群</h2>
+    <ul>
+      <li>
+        <a href="https://www.facebook.com/groups/laravel.tw/">Laravel 台灣</a>
+      </li>
+      <li>
+        <a href="https://www.facebook.com/groups/849639948396465/"
+          >PHP 也有 Day</a
+        >
+      </li>
+      <li>
+        <a href="https://phptw.slack.com/messages/laravel/">PHP 台灣 Slack</a>
+      </li>
+    </ul>
+  </body>
+</html>

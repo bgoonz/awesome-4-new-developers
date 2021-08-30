@@ -1,0 +1,1 @@
+http://gethue.com,Hue,https://github.com/rayokota/awesome-hbase#readme,HBase error: <HTTPError 308: 'Unknown'> | reason: Unknown

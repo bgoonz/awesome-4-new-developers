@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <!--lint disable double-link-->
+    <h1 id="awesome-fastapi-awesome">
+      Awesome FastAPI |
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img src="https://awesome.re/badge-flat.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>A curated list of awesome things related to FastAPI.</p>
+    </blockquote>
+    <p>
+      <a href="https://fastapi.tiangolo.com/">FastAPI</a> is a modern,
+      high-performance, batteries-included Python web framework that’s perfect
+      for building RESTful APIs.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#third-party-extensions">Third-Party Extensions</a>
+        <ul>
+          <li><a href="#admin">Admin</a></li>
+          <li><a href="#auth">Auth</a></li>
+          <li><a href="#databases">Databases</a></li>
+          <li><a href="#developer-tools">Developer Tools</a></li>
+          <li><a href="#email">Email</a></li>
+          <li><a href="#utils">Utils</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#resources">Resources</a>
+        <ul>
+          <li><a href="#official-resources">Official Resources</a></li>
+          <li><a href="#external-resources">External Resources</a></li>
+          <li><a href="#podcasts">Podcasts</a></li>
+          <li><a href="#articles">Articles</a></li>
+          <li><a href="#tutorials">Tutorials</a></li>
+          <li><a href="#talks">Talks</a></li>
+          <li><a href="#videos">Videos</a></li>
+          <li><a href="#courses">Courses</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#hosting">Hosting</a>
+        <ul>
+          <li><a href="#paas">PaaS</a></li>
+          <li><a href="#iaas">IaaS</a></li>
+          <li><a href="#serverless">Serverless</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#projects">Projects</a>
+        <ul>
+          <li><a href="#boilerplate">Boilerplate</a></li>
+          <li><a href="#open-source-projects">Open Source Projects</a></li>
+        </ul>
+      </li>
+      <li><a href="#sponsors">Sponsors</a></li>
+    </ul>
+    <h2 id="third-party-extensions">Third-Party Extensions</h2>
+    <h3 id="admin">Admin</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/fastapi-admin/fastapi-admin"
+          >FastAPI Admin</a
+        >
+        - Functional admin panel that provides a user interface for performing
+        CRUD operations on your data.
+      </li>
+    </ul>
+    <h3 id="auth">Auth</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/dmontagu/fastapi-auth">FastAPI Auth</a> -
+        Pluggable auth that supports the OAuth2 Password Flow with JWT access
+        and refresh tokens.
+      </li>
+      <li>
+        <a href="https://github.com/Intility/fastapi-azure-auth"
+          >FastAPI Azure auth</a
+        >
+        - Azure AD authentication for your FastAPI.
+      </li>
+      <li>
+        <a href="https://github.com/tokusumi/fastapi-cloudauth"
+          >FastAPI Cloud Auth</a
+        >
+        - Simple integration between FastAPI and cloud authentication services
+        (AWS Cognito, Auth0, Firebase Authentication).
+      </li>
+      <li>
+        <a href="https://github.com/MushroomMaula/fastapi_login"
+          >FastAPI Login</a
+        >
+        - Account management and authentication (based on
+        <a href="https://github.com/maxcountryman/flask-login">Flask-Login</a>).
+      </li>
+      <li>
+        <a href="https://github.com/IndominusByte/fastapi-jwt-auth"
+          >FastAPI JWT Auth</a
+        >
+        - JWT auth (based on
+        <a href="https://github.com/vimalloc/flask-jwt-extended"
+          >Flask-JWT-Extended</a
+        >).
+      </li>
+      <li>
+        <a href="https://github.com/holgi/fastapi-permissions"
+          >FastAPI Permissions</a
+        >
+        - Row-level permissions.
+      </li>
+      <li>
+        <a href="https://github.com/jmagnusson/fastapi-security"
+          >FastAPI Security</a
+        >
+        - Implements authentication and authorization as dependencies in
+        FastAPI.
+      </li>
+      <li>
+        <a href="https://github.com/mrtolkien/fastapi_simple_security"
+          >FastAPI Simple Security</a
+        >
+        - Out-of-the-box API key security manageable through path operations.
+      </li>
+      <li>
+        <a href="https://github.com/frankie567/fastapi-users">FastAPI Users</a>
+        - Account management, authentication, authorization.
+      </li>
+    </ul>
+    <h3 id="databases">Databases</h3>
+    <h4 id="orms">ORMs</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/mfreeborn/fastapi-sqlalchemy"
+          >FastAPI SQLAlchemy</a
+        >
+        - Simple integration between FastAPI and
+        <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>.
+      </li>
+      <li>
+        <a href="https://github.com/Ignisor/FastAPIwee">FastAPIwee</a> - A
+        simple way to create REST API based on
+        <a href="https://github.com/coleifer/peewee">PeeWee</a> models.
+      </li>
+      <li>
+        <a href="https://github.com/python-gino/gino">GINO</a> - A lightweight
+        asynchronous ORM built on top of SQLAlchemy core for Python asyncio.
+        <ul>
+          <li>
+            <a href="https://github.com/leosussan/fastapi-gino-arq-uvicorn"
+              >FastAPI Example</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li><a href="https://github.com/encode/orm">ORM</a> - An async ORM.</li>
+      <li>
+        <a href="https://collerek.github.io/ormar/">ormar</a> - Ormar is an
+        async ORM that uses Pydantic validation and can be used directly in
+        FastAPI requests and responses so you are left with only one set of
+        models to maintain. Alembic migrations included.
+        <ul>
+          <li>
+            <a href="https://collerek.github.io/ormar/fastapi/"
+              >FastAPI Example</a
+            >
+            - Using FastAPI with ormar.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://github.com/piccolo-orm/piccolo">Piccolo</a> - An async
+        ORM and query builder, supporting Postgres and SQLite, with batteries
+        (migrations, security, etc).
+        <ul>
+          <li>
+            <a href="https://github.com/piccolo-orm/piccolo_examples"
+              >FastAPI Examples</a
+            >
+            - Using FastAPI with Piccolo.
+          </li>
+          <li>
+            <a href="https://github.com/piccolo-orm/piccolo_admin"
+              >Piccolo Admin</a
+            >
+            - A powerful and modern admin GUI, using the Piccolo ORM.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://tortoise-orm.readthedocs.io/en/latest/index.html"
+          >Tortoise ORM</a
+        >
+        - An easy-to-use asyncio ORM (Object Relational Mapper) inspired by
+        Django.
+        <ul>
+          <li>
+            <a
+              href="https://tortoise-orm.readthedocs.io/en/latest/examples/fastapi.html"
+              >FastAPI Example</a
+            >
+            - An example of the Tortoise-ORM FastAPI integration.
+          </li>
+          <li>
+            <a
+              href="https://web.archive.org/web/20200523174158/https://robwagner.dev/tortoise-fastapi-setup/"
+              >Tutorial: Setting up Tortoise ORM with FastAPI</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://tortoise-orm.readthedocs.io/en/latest/migration.html"
+              >Aerich</a
+            >
+            - Tortoise ORM migrations tools.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://sqlmodel.tiangolo.com/">SQLModel</a> - SQLModel (which
+        is powered by Pydantic and SQLAlchemy) is a library for interacting with
+        SQL databases from Python code, with Python objects.
+      </li>
+    </ul>
+    <h4 id="query-builders">Query Builders</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/CanopyTax/asyncpgsa">asyncpgsa</a> - A
+        wrapper around
+        <a href="https://github.com/MagicStack/asyncpg">asyncpg</a> for use with
+        <a href="https://docs.sqlalchemy.org/en/latest/core/">SQLAlchemy Core</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/encode/databases">Databases</a> - Async SQL
+        query builder that works on top of the
+        <a href="https://docs.sqlalchemy.org/en/latest/core/"
+          >SQLAlchemy Core</a
+        >
+        expression language.
+      </li>
+    </ul>
+    <h4 id="odms">ODMs</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/roman-right/beanie">Beanie</a> -
+        Asynchronous Python ODM for MongoDB, based on
+        <a href="https://motor.readthedocs.io/en/stable/">Motor</a> and
+        <a href="https://pydantic-docs.helpmanual.io/">Pydantic</a>, which
+        supports data and schema migrations out of the box.
+      </li>
+      <li>
+        <a href="http://mongoengine.org/">MongoEngine</a> - A Document-Object
+        Mapper (think ORM, but for document databases) for working with MongoDB
+        from Python.
+      </li>
+      <li>
+        <a href="https://motor.readthedocs.io/">Motor</a> - Asynchronous Python
+        driver for MongoDB.
+      </li>
+      <li>
+        <a href="https://art049.github.io/odmantic/">ODMantic</a> - AsyncIO
+        MongoDB ODM integrated with
+        <a href="https://pydantic-docs.helpmanual.io/">Pydantic</a>.
+      </li>
+    </ul>
+    <h4 id="other-tools">Other Tools</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/tiangolo/pydantic-sqlalchemy"
+          >Pydantic-SQLAlchemy</a
+        >
+        - Convert SQLAlchemy models to
+        <a href="https://pydantic-docs.helpmanual.io/">Pydantic</a> models.
+      </li>
+      <li>
+        <a href="https://ahmednafies.github.io/fastapi_camelcase/"
+          >FastAPI-CamelCase</a
+        >
+        - CamelCase JSON support for FastAPI utilizing
+        <a href="https://pydantic-docs.helpmanual.io/">Pydantic</a>.
+        <ul>
+          <li>
+            <a
+              href="https://medium.com/analytics-vidhya/camel-case-models-with-fast-api-and-pydantic-5a8acb6c0eee"
+              >CamelCase Models with FastAPI and Pydantic</a
+            >
+            - Accompanying blog post from the author of the extension.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="developer-tools">Developer Tools</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/koxudaxi/fastapi-code-generator"
+          >FastAPI Code Generator</a
+        >
+        - Create a FastAPI app from an OpenAPI file, enabling schema-driven
+        development.
+      </li>
+      <li>
+        <a href="https://github.com/dmontagu/fastapi_client"
+          >FastAPI Client Generator</a
+        >
+        - Generate a mypy- and IDE-friendly API client from an OpenAPI spec.
+      </li>
+      <li>
+        <a href="https://github.com/sunhailin-Leo/fastapi_profiler"
+          >FastAPI Profiler</a
+        >
+        - A FastAPI Middleware of joerick/pyinstrument to check your service
+        performance.
+      </li>
+      <li>
+        <a href="https://github.com/DeanWay/fastapi-versioning"
+          >FastAPI Versioning</a
+        >
+        - API versioning.
+      </li>
+      <li>
+        <a href="https://github.com/Invictify/Jupter-Notebook-REST-API"
+          >Jupyter Notebook REST API</a
+        >
+        - Run your Jupyter notebooks as RESTful API endpoints.
+      </li>
+      <li>
+        <a href="https://github.com/ycd/manage-fastapi">Manage FastAPI</a> - CLI
+        tool for generating and managing FastAPI projects.
+      </li>
+      <li>
+        <a href="https://github.com/florimondmanca/msgpack-asgi"
+          >msgpack-asgi</a
+        >
+        - Automatic <a href="https://msgpack.org/">MessagePack</a> content
+        negotiation.
+      </li>
+    </ul>
+    <h3 id="email">Email</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/sabuhish/fastapi-mail">FastAPI Mail</a> -
+        Lightweight mail system for sending emails and attachments (individual
+        and bulk).
+      </li>
+    </ul>
+    <h3 id="utils">Utils</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/comeuplater/fastapi_cache">FastAPI Cache</a>
+        - A simple lightweight cache system.
+      </li>
+      <li>
+        <a href="https://github.com/mikeckennedy/fastapi-chameleon"
+          >FastAPI Chameleon</a
+        >
+        - Adds integration of the Chameleon template language to FastAPI.
+      </li>
+      <li>
+        <a href="https://github.com/identixone/fastapi_contrib"
+          >FastAPI Contrib</a
+        >
+        - Opinionated set of utilities: pagination, auth middleware,
+        permissions, custom exception handlers, MongoDB support, and Opentracing
+        middleware.
+      </li>
+      <li>
+        <a href="https://github.com/awtkns/fastapi-crudrouter"
+          >FastAPI CRUDRouter</a
+        >
+        - A FastAPI router that automatically creates and documents CRUD routes
+        for your models.
+      </li>
+      <li>
+        <a href="https://github.com/AGeekInside/fastapi-jinja">FastAPI Jinja</a>
+        - Adds integration of the Jinja template language to FastAPI.
+      </li>
+      <li>
+        <a href="https://github.com/long2ice/fastapi-limiter"
+          >FastAPI Limiter</a
+        >
+        - A request rate limiter for FastAPI.
+      </li>
+      <li>
+        <a href="https://github.com/sabuhish/fastapi-mqtt">FastAPI MQTT</a> - An
+        extension for the MQTT protocol.
+      </li>
+      <li>
+        <a href="https://github.com/uriyyo/fastapi-pagination"
+          >FastAPI Pagination</a
+        >
+        - Pagination for FastAPI.
+      </li>
+      <li>
+        <a href="https://github.com/madkote/fastapi-plugins">FastAPI Plugins</a>
+        - Redis and Scheduler plugins.
+      </li>
+      <li>
+        <a href="https://github.com/skallfass/fastapi_serviceutils"
+          >FastAPI ServiceUtils</a
+        >
+        - Generator for creating API services.
+      </li>
+      <li>
+        <a href="https://github.com/pyropy/fastapi-socketio"
+          >FastAPI SocketIO</a
+        >
+        - Easy integration for FastAPI and SocketIO.
+      </li>
+      <li>
+        <a href="https://github.com/dmontagu/fastapi-utils"
+          >FastAPI Utilities</a
+        >
+        - Reusable utilities: class-based views, response inferring router,
+        periodic tasks, timing middleware, SQLAlchemy session, OpenAPI spec
+        simplification.
+      </li>
+      <li>
+        <a href="https://github.com/authorizon/fastapi_websocket_pubsub"
+          >FastAPI Websocket Pub/Sub</a
+        >
+        - The classic pub/sub pattern made easily accessible and scalable over
+        the web and across your cloud in realtime.
+      </li>
+      <li>
+        <a href="https://github.com/authorizon/fastapi_websocket_rpc"
+          >FastAPI Websocket RPC</a
+        >
+        - RPC (bidirectional JSON RPC) over Websockets made easy, robust, and
+        production ready.
+      </li>
+      <li>
+        <a
+          href="https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-fastapi"
+          >OpenTelemetry FastAPI Instrumentation</a
+        >
+        - Library provides automatic and manual instrumentation of FastAPI web
+        frameworks, instrumenting http requests served by applications utilizing
+        the framework.
+      </li>
+      <li>
+        <a href="https://github.com/BeeMyDesk/prerender-python-starlette"
+          >Prerender Python Starlette</a
+        >
+        - Starlette middleware for Prerender.
+      </li>
+      <li>
+        <a href="https://github.com/trallnag/prometheus-fastapi-instrumentator"
+          >Prometheus FastAPI Instrumentator</a
+        >
+        - A configurable and modular Prometheus Instrumentator for your FastAPI
+        application.
+      </li>
+      <li>
+        <a href="https://github.com/laurents/slowapi">SlowApi</a> - Rate limiter
+        (based on
+        <a href="https://flask-limiter.readthedocs.io">Flask-Limiter</a>).
+      </li>
+      <li>
+        <a href="https://github.com/tomwojcik/starlette-context"
+          >Starlette Context</a
+        >
+        - Allows you to store and access the request data anywhere in your
+        project, useful for logging.
+      </li>
+      <li>
+        <a href="https://github.com/stephenhillier/starlette_exporter"
+          >Starlette Exporter</a
+        >
+        - One more prometheus integration for FastAPI and Starlette.
+      </li>
+      <li>
+        <a href="https://github.com/acidjunk/starlette-opentracing"
+          >Starlette OpenTracing</a
+        >
+        - Opentracing support for Starlette and FastAPI.
+      </li>
+      <li>
+        <a href="https://github.com/perdy/starlette-prometheus"
+          >Starlette Prometheus</a
+        >
+        - Prometheus integration for FastAPI and Starlette.
+      </li>
+    </ul>
+    <h2 id="resources">Resources</h2>
+    <h3 id="official-resources">Official Resources</h3>
+    <ul>
+      <li>
+        <a href="https://fastapi.tiangolo.com/">Documentation</a> -
+        Comprehensive documentation.
+      </li>
+      <li>
+        <a href="https://fastapi.tiangolo.com/tutorial/">Tutorial</a> - Official
+        tutorial showing you how to use FastAPI with most of its features, step
+        by step.
+      </li>
+      <li>
+        <a href="https://github.com/tiangolo/fastapi">Source Code</a> - Hosted
+        on GitHub.
+      </li>
+      <li>
+        <a href="https://gitter.im/tiangolo/fastapi">Gitter Chat</a> - Chat with
+        other FastAPI users.
+      </li>
+    </ul>
+    <h3 id="external-resources">External Resources</h3>
+    <ul>
+      <li>
+        <a href="https://testdriven.io/blog/topics/fastapi/"
+          >TestDriven.io FastAPI</a
+        >
+        - Multiple FastAPI-specific articles that focus on developing and
+        testing production-ready RESTful APIs, serving up machine learning
+        models, and more.
+      </li>
+    </ul>
+    <h3 id="podcasts">Podcasts</h3>
+    <ul>
+      <li>
+        <a
+          href="https://www.pythonpodcast.com/fastapi-web-application-framework-episode-259/"
+          >Build The Next Generation Of Python Web Applications With FastAPI</a
+        >
+        - In this episode of
+        <a href="https://www.pythonpodcast.com/">Podcast Init</a>, the create of
+        FastAPI, <a href="https://tiangolo.com/">Sebastián Ramirez</a>, shares
+        his motivations for building FastAPI and how it works under the hood.
+      </li>
+      <li>
+        <a
+          href="https://pythonbytes.fm/episodes/show/123/time-to-right-the-py-wrongs?time_in_sec=855"
+          >FastAPI on PythonBytes</a
+        >
+        - Nice overview of the project.
+      </li>
+    </ul>
+    <h3 id="articles">Articles</h3>
+    <ul>
+      <li>
+        <a
+          href="https://towardsdatascience.com/fastapi-has-ruined-flask-forever-for-me-73916127da"
+          >FastAPI has Ruined Flask Forever for Me</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://towardsdatascience.com/why-we-switched-from-flask-to-fastapi-for-production-machine-learning-765aab9b3679"
+          >Why we switched from Flask to FastAPI for production machine
+          learning</a
+        >
+        - In-depth look at why you may want to move from Flask to FastAPI.
+      </li>
+    </ul>
+    <h3 id="tutorials">Tutorials</h3>
+    <ul>
+      <li>
+        <a href="https://stribny.name/blog/fastapi-asyncalchemy/"
+          >Async SQLAlchemy with FastAPI</a
+        >
+        - Learn how to use SQLAlchemy asynchronously.
+      </li>
+      <li>
+        <a
+          href="https://blog.yezz.me/blog/Build-and-Secure-an-API-in-Python-with-FastAPI"
+          >Build and Secure an API in Python with FastAPI</a
+        >
+        - Secure and maintain an API based on FastAPI and SQLAlchemy.
+      </li>
+      <li>
+        <a
+          href="https://kernelpanic.io/demystifying-authentication-with-fastapi-and-a-frontend/"
+          >Demystifying Authentication with FastAPI and a Frontend</a
+        >
+        - Add token-based authentication.
+      </li>
+      <li>
+        <a
+          href="https://towardsdatascience.com/deploy-a-dockerized-fastapi-app-to-google-cloud-platform-24f72266c7ef"
+          >Deploy a Dockerized FastAPI App to Google Cloud Platform</a
+        >
+        - A short guide to deploying a Dockerized Python app to Google Cloud
+        Platform using Cloud Run and a SQL instance.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/analytics-vidhya/deploy-machine-learning-models-with-keras-fastapi-redis-and-docker-4940df614ece"
+          >Deploy Machine Learning Models with Keras, FastAPI, Redis and
+          Docker</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://towardsdatascience.com/deploying-iris-classifications-with-fastapi-and-docker-7c9b83fdec3a"
+          >Deploying Iris Classifications with FastAPI and Docker</a
+        >
+        - Dockerizing a FastAPI application.
+      </li>
+      <li>
+        <a href="https://testdriven.io/blog/fastapi-crud/"
+          >Developing and Testing an Asynchronous API with FastAPI and Pytest</a
+        >
+        - Develop and test an asynchronous API with FastAPI, Postgres, Pytest,
+        and Docker using Test-Driven Development.
+      </li>
+      <li>
+        <a href="https://amitness.com/2020/06/fastapi-vs-flask/"
+          >FastAPI for Flask Users</a
+        >
+        - Learn FastAPI with a side-by-side code comparison to Flask.
+      </li>
+      <li>
+        <a
+          href="https://florian-kromer.medium.com/fastapi-microservice-patterns-3052c1241019"
+          >FastAPI Microservice Patterns</a
+        >
+        - Blog post series with exemplary implementations of microservice
+        patterns.
+        <ul>
+          <li>
+            <a
+              href="https://florian-kromer.medium.com/fastapi-microservice-patterns-local-development-environment-12182e786f1c"
+              >Local Development Environment</a
+            >
+            - Skaffold, docker, kubectl and minikube in a nutshell.
+          </li>
+          <li>
+            <a
+              href="https://florian-kromer.medium.com/fastapi-microservice-patterns-service-discovery-in-container-orchestration-platforms-290c00d1ad8"
+              >Service discovery in Container Orchestration Platforms</a
+            >
+            - Enabling FastAPI service communication in Kubernetes explained.
+          </li>
+          <li>
+            <a
+              href="https://florian-kromer.medium.com/fastapi-microservice-patterns-asynchronous-communication-45a3b68f8bb8"
+              >Asynchronous Communication</a
+            >
+            - Enabling loosely coupled services with messaging.
+          </li>
+          <li>
+            <a
+              href="https://medium.com/swlh/fastapi-microservice-patterns-application-monitoring-49fcb7341d9a"
+              >Application Monitoring</a
+            >
+            - Application metric monitoring with Prometheus and Grafana.
+          </li>
+          <li>
+            <a
+              href="https://medium.com/swlh/fastapi-microservice-serverless-deployment-41a6d21e5cb3"
+              >Serverless Deployment</a
+            >
+            - About the current status of the compatibility between FastAPI and
+            Kubernetes-native FaaS platforms.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a
+          href="https://www.machinecurve.com/index.php/2020/03/19/tutorial-how-to-deploy-your-convnet-classifier-with-keras-and-fastapi/"
+          >How to deploy your ConvNet classifier with Keras and FastAPI</a
+        >
+        - Deploy a machine learning model via a web-based API.
+      </li>
+      <li>
+        <a href="https://guitton.co/posts/fastapi-monitoring/"
+          >How to monitor your FastAPI service</a
+        >
+        - Explains how to implement Application Performance Monitoring (APM)
+        using OpenTelemetry and Datadog/Jaeger.
+      </li>
+      <li>
+        <a
+          href="https://camillovisini.com/article/abstracting-fastapi-services/"
+          >Implementing FastAPI Services – Abstraction and Separation of
+          Concerns</a
+        >
+        - FastAPI application and service structure for a more maintainable
+        codebase.
+      </li>
+      <li>
+        <a
+          href="https://www.mongodb.com/developer/how-to/FARM-Stack-FastAPI-React-MongoDB/"
+          >Introducing FARM Stack - FastAPI, React, and MongoDB</a
+        >
+        - Getting started with a complete FastAPI web application stack.
+      </li>
+      <li>
+        <a href="https://www.errietta.me/blog/python-fastapi-intro/"
+          >Introduction to the FastAPI Python Framework</a
+        >
+        - Quick intro to FastAPI.
+      </li>
+      <li>
+        <a
+          href="https://www.pluralsight.com/tech-blog/porting-flask-to-fastapi-for-ml-model-serving/"
+          >Porting Flask to FastAPI for ML Model Serving</a
+        >
+        - Comparison of Flask vs FastAPI.
+      </li>
+      <li>
+        <a
+          href="https://stribny.name/blog/2020/07/real-time-data-streaming-using-fastapi-and-websockets/"
+          >Real-time data streaming using FastAPI and WebSockets</a
+        >
+        - Learn how to stream data from FastAPI directly into a real-time chart.
+      </li>
+      <li>
+        <a href="https://stribny.name/blog/fastapi-production/"
+          >Running FastAPI applications in production</a
+        >
+        - Use Gunicorn with systemd for production deployments.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@8B_EC/tutorial-serving-machine-learning-models-with-fastapi-in-python-c1a27319c459"
+          >Serving Machine Learning Models with FastAPI in Python</a
+        >
+        - Use FastAPI to quickly and easily deploy and serve machine learning
+        models in Python as a RESTful API.
+      </li>
+      <li>
+        <a href="https://stribny.name/blog/fastapi-video/"
+          >Streaming video with FastAPI</a
+        >
+        - Learn how to serve video streams.
+      </li>
+      <li>
+        <a href="https://testdriven.io/blog/fastapi-hypothesis/"
+          >Using Hypothesis and Schemathesis to Test FastAPI</a
+        >
+        - Apply property-based testing to FastAPI.
+      </li>
+    </ul>
+    <h3 id="talks">Talks</h3>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=z9K5pwb0rt8"
+          >PyConBY 2020: Serve ML models easily with FastAPI</a
+        >
+        - From the talk by Sebastian Ramirez you will learn how to easily build
+        a production-ready web (JSON) API for your ML models with FastAPI,
+        including best practices by default.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=3DLwPcrE5mA"
+          >PyCon UK 2019: FastAPI from the ground up</a
+        >
+        - This talk shows how to build a simple REST API for a database from the
+        ground up using FastAPI.
+      </li>
+    </ul>
+    <h3 id="videos">Videos</h3>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=5GorMC2lPpk"
+          >Building a Stock Screener with FastAPI</a
+        >
+        - A you build a web-based stock screener with FastAPI, you’ll be
+        introduced to many of FastAPI’s features, including Pydantic models,
+        dependency injection, background tasks, and SQLAlchemy integration.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=Pe66M8mn-wA"
+          >Building Web APIs Using FastAPI</a
+        >
+        - Use FastAPI to build a web application programming interface (RESTful
+        API).
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=PUhio8CprhI&amp;list=PL5gdMNl42qynpY-o43Jk3evfxEKSts3HS"
+          >FastAPI - A Web Framework for Python</a
+        >
+        - See how to do numeric validations with FastAPI.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=9YBAOYQOzWs"
+          >FastAPI vs. Django vs. Flask</a
+        >
+        - Which framework is best for Python in 2020? Which uses async/await the
+        best? Which is the fastest?
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=mkDxuRvKUL8"
+          >Serving Machine Learning Models As API with FastAPI</a
+        >
+        - Build a machine learning API with FastAPI.
+      </li>
+    </ul>
+    <h3 id="courses">Courses</h3>
+    <ul>
+      <li>
+        <a href="https://testdriven.io/courses/tdd-fastapi/"
+          >Test-Driven Development with FastAPI and Docker</a
+        >
+        - Learn how to build, test, and deploy a text summarization microservice
+        with Python, FastAPI, and Docker.
+      </li>
+      <li>
+        <a
+          href="https://training.talkpython.fm/courses/getting-started-with-fastapi"
+          >Modern APIs with FastAPI and Python</a
+        >
+        - A course designed to get you creating new APIs running in the cloud
+        with FastAPI quickly.
+      </li>
+      <li>
+        <a
+          href="https://training.talkpython.fm/courses/full-html-web-applications-with-fastapi"
+          >Full Web Apps with FastAPI Course</a
+        >
+        - You’ll learn to build full web apps with FastAPI, equivalent to what
+        you can do with Flask or Django.
+      </li>
+      <li>
+        <a href="https://testdriven.io/courses/fastapi-celery/"
+          >The Definitive Guide to Celery and FastAPI</a
+        >
+        - Learn how to add Celery to a FastAPI application to provide
+        asynchronous task processing.
+      </li>
+    </ul>
+    <h2 id="hosting">Hosting</h2>
+    <h3 id="paas">PaaS</h3>
+    <p>(Platforms-as-a-Service)</p>
+    <ul>
+      <li>
+        <a href="https://www.heroku.com/">Heroku</a> (<a
+          href="https://www.tutlinks.com/create-and-deploy-fastapi-app-to-heroku/"
+          >Step-by-step tutorial</a
+        >,
+        <a href="https://testdriven.io/blog/fastapi-machine-learning/"
+          >ML model on Heroku tutorial</a
+        >)
+      </li>
+      <li>
+        <a href="https://aws.amazon.com/elasticbeanstalk/"
+          >AWS Elastic Beanstalk</a
+        >
+      </li>
+      <li>
+        <a href="https://cloud.google.com/appengine/">Google App Engine</a>
+      </li>
+      <li>
+        <a href="https://azure.microsoft.com/services/app-service/"
+          >Microsoft Azure App Service</a
+        >
+      </li>
+      <li>
+        <a href="https://www.deta.sh/">Deta</a> (<a
+          href="https://dev.to/athulcajay/fastapi-deta-ni5"
+          >example</a
+        >)
+      </li>
+    </ul>
+    <h3 id="iaas">IaaS</h3>
+    <p>(Infrastructure-as-a-Service)</p>
+    <ul>
+      <li><a href="https://aws.amazon.com/ec2/">AWS EC2</a></li>
+      <li>
+        <a href="https://cloud.google.com/compute/">Google Compute Engine</a>
+      </li>
+      <li><a href="https://www.digitalocean.com/">Digital Ocean</a></li>
+      <li><a href="https://www.linode.com/">Linode</a></li>
+    </ul>
+    <h3 id="serverless">Serverless</h3>
+    <p>Frameworks:</p>
+    <ul>
+      <li><a href="https://github.com/aws/chalice">Chalice</a></li>
+      <li>
+        <a href="https://mangum.io/">Mangum</a> - Adapter for running ASGI
+        applications with AWS Lambda and API Gateway.
+      </li>
+      <li>
+        <a href="https://vercel.com/">Vercel</a> - (formerly Zeit) (<a
+          href="https://github.com/paul121/fastapi-zeit-now"
+          >example</a
+        >).
+      </li>
+      <li><a href="https://github.com/Miserlou/Zappa">Zappa</a></li>
+    </ul>
+    <p>Compute:</p>
+    <ul>
+      <li>
+        <a href="https://aws.amazon.com/lambda/">AWS Lambda</a> (<a
+          href="https://iwpnd.pw/articles/2020-01/deploy-fastapi-to-aws-lambda"
+          >tutorial</a
+        >,
+        <a href="https://github.com/iwpnd/fastapi-aws-lambda-example">code</a>)
+      </li>
+      <li>
+        <a href="https://cloud.google.com/functions/">Google Cloud Functions</a>
+      </li>
+      <li>
+        <a href="https://azure.microsoft.com/en-us/services/functions/"
+          >Azure Functions</a
+        >
+      </li>
+      <li>
+        <a href="https://cloud.google.com/run">Google Cloud Run</a> (<a
+          href="https://github.com/anthcor/cloudrun-fastapi"
+          >example</a
+        >)
+      </li>
+    </ul>
+    <h2 id="projects">Projects</h2>
+    <h3 id="boilerplate">Boilerplate</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/tiangolo/full-stack-fastapi-postgresql"
+          >Full Stack FastAPI and PostgreSQL - Base Project Generator</a
+        >
+        - Full stack, modern web application generator, which includes FastAPI,
+        PostgreSQL, Docker, Celery, Vue frontend, automatic HTTPS and more
+        (developed by the creator of FastAPI,
+        <a href="https://github.com/tiangolo">Sebastián Ramírez</a>).
+      </li>
+      <li>
+        <a href="https://github.com/prostomarkeloff/fastapi-tortoise"
+          >FastAPI and Tortoise ORM</a
+        >
+        - Powerful but simple template for web APIs w/ FastAPI (as web
+        framework) and Tortoise-ORM (for working via database without headache).
+      </li>
+      <li>
+        <a href="https://github.com/eightBEC/fastapi-ml-skeleton"
+          >FastAPI Model Server Skeleton</a
+        >
+        - Skeleton app to serve machine learning models production-ready.
+      </li>
+      <li>
+        <a href="https://github.com/microsoft/cookiecutter-spacy-fastapi"
+          >cookiecutter-spacy-fastapi</a
+        >
+        - Quick deployments of spaCy models with FastAPI.
+      </li>
+      <li>
+        <a href="https://github.com/arthurhenrique/cookiecutter-fastapi"
+          >cookiecutter-fastapi</a
+        >
+        - Cookiecutter template for FastAPI projects using: Machine Learning,
+        Poetry, Azure Pipelines and pytest.
+      </li>
+      <li>
+        <a href="https://github.com/openapi-generators/openapi-python-client"
+          >openapi-python-client</a
+        >
+        - Generate modern FastAPI Python clients (via FastAPI) from OpenAPI.
+      </li>
+      <li>
+        <a href="https://github.com/vutran1710/YeomanPywork">Pywork</a> -
+        <a href="https://yeoman.io/">Yeoman</a> generator to scaffold a FastAPI
+        app.
+      </li>
+      <li>
+        <a href="https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker"
+          >uvicorn-gunicorn-fastapi-docker</a
+        >
+        - Docker image with Uvicorn managed by Gunicorn for high-performance
+        FastAPI web applications in Python 3.7 and 3.6 with performance
+        auto-tuning.
+      </li>
+      <li>
+        <a href="https://github.com/leosussan/fastapi-gino-arq-uvicorn"
+          >fastapi-gino-arq-uvicorn</a
+        >
+        - Tempate for a high-performance async REST API, in Python. FastAPI +
+        GINO + Arq + Uvicorn (w/ Redis and PostgreSQL).
+      </li>
+      <li>
+        <a href="https://github.com/Buuntu/fastapi-react"
+          >FastAPI and React Template</a
+        >
+        - Full stack cookiecutter boilerplate using FastAPI, TypeScript, Docker,
+        PostgreSQL, and React.
+      </li>
+      <li>
+        <a href="https://github.com/rednafi/fastapi-nano">FastAPI Nano</a> -
+        Simple FastAPI template with factory pattern architecture.
+      </li>
+      <li>
+        <a href="https://github.com/br3ndonland/inboard">inboard</a> - Docker
+        images to power your FastAPI apps and help you ship faster.
+      </li>
+    </ul>
+    <h3 id="open-source-projects">Open Source Projects</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/Kludex/awesome-fastapi-projects"
+          >Awesome FastAPI Projects</a
+        >
+        - Organized list of projects that use FastAPI.
+      </li>
+      <li>
+        <a href="https://github.com/bitcartcc/bitcart">Bitcart</a> - Platform
+        for merchants, users and developers which offers easy setup and use.
+      </li>
+      <li>
+        <a href="https://github.com/egbakou/coronavirus-tg-api"
+          >Coronavirus-tg-api</a
+        >
+        - API for tracking the global coronavirus (COVID-19, SARS-CoV-2)
+        outbreak.
+      </li>
+      <li>
+        <a href="https://github.com/Netflix/dispatch">Dispatch</a> - Manage
+        security incidents.
+      </li>
+      <li>
+        FastAPI CRUD Example:
+        <ul>
+          <li>
+            <a href="https://github.com/testdrivenio/fastapi-crud-async"
+              >Async flavor</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/testdrivenio/fastapi-crud-sync"
+              >Sync Flavor</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://github.com/yezz123/DogeAPI">DogeAPI</a> - API with high
+        performance to create a simple blog and CRUD with OAuth2PasswordBearer.
+      </li>
+      <li>
+        <a href="https://github.com/cthwaite/fastapi-websocket-broadcast"
+          >FastAPI Websocket Broadcast</a
+        >
+        - Websocket ‘broadcast’ demo.
+      </li>
+      <li>
+        <a href="https://github.com/GregaVrbancic/fastapi-celery"
+          >FastAPI with Celery, RabbitMQ, and Redis</a
+        >
+        - Minimal example utilizing FastAPI and Celery with RabbitMQ for task
+        queue, Redis for Celery backend, and Flower for monitoring the Celery
+        tasks.
+      </li>
+      <li>
+        <a href="https://github.com/yezz123/JeffQL/">JeffQL</a> - Simple
+        authentication and login API using GraphQL and JWT.
+      </li>
+      <li>
+        <a href="https://github.com/smagafurov/fastapi-jsonrpc"
+          >JSON-RPC Server</a
+        >
+        - JSON-RPC server based on FastAPI.
+      </li>
+      <li>
+        <a href="https://github.com/rclement/mailer">Mailer</a> - Dead-simple
+        mailer micro-service for static websites.
+      </li>
+      <li>
+        <a href="https://github.com/authorizon/opal"
+          >OPAL (Open Policy Administration Layer)</a
+        >
+        - Real-time authorization updates on top of Open-Policy; built with
+        FastAPI, Typer, and FastAPI WebSocket pub/sub.
+      </li>
+      <li>
+        <a
+          href="https://github.com/markqiu/fastapi-mongodb-realworld-example-app"
+          >RealWorld Example App - mongo</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/nsidnev/fastapi-realworld-example-app"
+          >RealWorld Example App - postgres</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/leonh/redis-streams-fastapi-chat"
+          >redis-streams-fastapi-chat</a
+        >
+        - A simple Redis Streams backed chat app using Websockets, Asyncio and
+        FastAPI/Starlette.
+      </li>
+      <li>
+        <a href="https://github.com/ljvmiranda921/sprites-as-a-service"
+          >Sprites as a service</a
+        >
+        - Generate your personal 8-bit avatars using Cellular Automata.
+      </li>
+      <li>
+        <a href="https://github.com/uhavin/slackers">Slackers</a> - Slack
+        webhooks API.
+      </li>
+      <li>
+        <a href="https://github.com/cs01/termpair">TermPair</a> - View and
+        control terminals from your browser with end-to-end encryption.
+      </li>
+      <li>
+        <a href="https://github.com/ycd/universities">Universities</a> - API
+        service for obtaining information about +9600 universities worldwide.
+      </li>
+    </ul>
+    <h2 id="sponsors">Sponsors</h2>
+    <p>Please support this open source project by checking out our sponsors:</p>
+    <p>
+      <a
+        href="https://www.deta.sh/?ref=awesome-fastapi"
+        target="_blank"
+        title="The launchpad for all your (team's) ideas"
+        ><img src="images/deta.svg"
+      /></a>
+    </p>
+    <p>
+      <a
+        href="https://testdriven.io/courses/tdd-fastapi/?ref=awesome-fastapi"
+        target="_blank"
+        title="Learn to build high-quality web apps with best practices"
+        ><img src="images/testdriven.svg"
+      /></a>
+    </p>
+  </body>
+</html>

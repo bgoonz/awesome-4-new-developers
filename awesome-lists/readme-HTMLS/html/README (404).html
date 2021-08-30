@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-naming-awesome">
+      Awesome Naming
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <!-- lint disable no-repeat-punctuation -->
+    <p>
+      Famously…
+      <!-- lint enable no-repeat-punctuation -->
+    </p>
+    <blockquote>
+      <p>
+        There are only two hard things in Computer Science: cache invalidation
+        and naming things.
+      </p>
+      <p>― Phil Karlton</p>
+    </blockquote>
+    <p>
+      Concepts in computer science are usually nothing tangible so it’s no
+      surprise that naming things is hard. Nevertheless, we <em>do</em> come up
+      with clever, creative and funny names. Some of them so established, we
+      never pause and admire.
+    </p>
+    <p>This is a curated list for when naming things is done right.</p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#data-structures-and-algorithms"
+          >Data Structures and Algorithms</a
+        >
+      </li>
+      <li>
+        <a href="#design-patterns-and-anti-patterns"
+          >Design Patterns and Anti Patterns</a
+        >
+      </li>
+      <li><a href="#functions">Functions</a></li>
+      <li><a href="#it-security">IT Security</a></li>
+      <li><a href="#libraries-and-frameworks">Libraries and Frameworks</a></li>
+      <li><a href="#machine-learning">Machine Learning</a></li>
+      <li>
+        <a href="#theoretical-computer-science">Theoretical Computer Science</a>
+      </li>
+      <li><a href="#user-interface-design">User Interface Design</a></li>
+      <li><a href="#other">Other</a></li>
+    </ul>
+    <hr />
+    <h2 id="data-structures-and-algorithms">Data Structures and Algorithms</h2>
+    <ul>
+      <li>
+        <a href="https://en.m.wikipedia.org/wiki/Brute-force_search"
+          >Brute force</a
+        >
+        - Violence is actually almost always a solution but not a very clever
+        one.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Greedy_algorithm"
+          >Greedy algorithm</a
+        >
+        - An algorithm that finds a solution by always picking the currently
+        best looking option without thinking too much about past and future
+        decisions.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Hill_climbing">Hill climbing</a>
+        - Starting somewhere in the hilly “landscape” of solutions you go in the
+        direction of steepest ascent until reaching the top of a hill. You might
+        miss higher hills though.
+      </li>
+      <li>
+        <a
+          href="https://rapidapi.com/blog/israeli-queues-exploring-a-bizarre-data-structure/"
+          >Israeli Queue</a
+        >
+        - A type of priority queue and a reference to the infamously unorganized
+        queues in Israel. Here items can <em>cut in line</em> when they
+        <em>have already waiting friends</em>.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)"
+          >Stack</a
+        >
+        - Like with a stack of pancakes you can only add and remove items from
+        the top of this data structure.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Tree_(data_structure)">Tree</a> -
+        A hierarchically organized data structure. From the <em>root</em> item
+        the other items <em>branch out</em> into <em>nodes</em> and
+        <em>leaves</em>.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Queue_(abstract_data_type)"
+          >Queue</a
+        >
+        - In this data structure items are always added at the end and removed
+        at the front as if the items were waiting in line.
+      </li>
+    </ul>
+    <h2 id="design-patterns-and-anti-patterns">
+      Design Patterns and Anti Patterns
+    </h2>
+    <ul>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Adapter_pattern">Adapter</a> -
+        Allows classes with incompatible interfaces to work together by wrapping
+        its own interface around that of an already existing class.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Facade_pattern">Facade</a> -
+        Analogous to a facade in architecture, a facade is an object that serves
+        as a front-facing interface masking more complex underlying structure.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Futures_and_promises">Promise</a>
+        - A representation of a result that is available in the future, unless
+        there are errors. Like in reality, promises are broken sometimes.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Shotgun_surgery"
+          >Shotgun surgery</a
+        >
+        - A programming anitpattern where in a single change you wildly add code
+        everywhere in your codebase.
+      </li>
+    </ul>
+    <h2 id="functions">Functions</h2>
+    <ul>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Fold_(higher-order_function)"
+          >fold</a
+        >
+        - Like a blanket being folded up, this function iterates a collection
+        and in each step combines the current item with everything that has
+        already been folded.
+      </li>
+      <li>
+        <a href="https://clojuredocs.org/clojure.core/trampoline">trampoline</a>
+        - Continuously runs functions which itself return functions. Like a
+        child on a trampoline that <em>returns</em> and bounces back up.
+      </li>
+      <li>
+        <a
+          href="https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#v:zip"
+          >zip</a
+        >
+        - Merges two lists into one list of pairs like the interlocking teeth of
+        a zipper.
+      </li>
+    </ul>
+    <h2 id="it-security">IT Security</h2>
+    <ul>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Backdoor_(computing)"
+          >Backdoor</a
+        >
+        - A method of bypassing normal authentication in a computer system.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Computer_virus"
+          >Computer virus</a
+        >
+        - A computer program that self replicates by <em>infecting</em> other
+        computer programs similar to the behavior of biological viruses.
+      </li>
+      <li>
+        <a
+          href="https://digitalguardian.com/blog/what-cyber-hygiene-definition-cyber-hygiene-benefits-best-practices-and-more"
+          >Cyber hygiene</a
+        >
+        - Steps and practices that users should take to maintain system health
+        and improve online security.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Honeypot_(computing)"
+          >Honeypot</a
+        >
+        - Part of a system meant to look like an attractive target but actually
+        helps detect and deflect attackers.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Phoning_home">Phoning home</a> -
+        When a system (e.g. stolen computer) secretly reports back to a third
+        party other than the current possessor. The name is a reference to the
+        movie E.T.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Sandbox_(computer_security)"
+          >Sandbox</a
+        >
+        - A safe and isolated environment to test unverified programs that may
+        contain malicious code.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Trojan_horse_(computing)"
+          >Trojan horse</a
+        >
+        - Malware which misleads users of its true intent. The term is derived
+        from the Ancient Greek story of the deceptive Trojan Horse.
+      </li>
+    </ul>
+    <h2 id="libraries-and-frameworks">Libraries and Frameworks</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/GoogleChromeLabs/clooney">clooney</a> - A
+        JavaScript library implementing the actor model for concurrent
+        computation. The term is a reference to George Clooney who is also an
+        actor.
+      </li>
+      <li>
+        <a href="https://github.com/mishoo/UglifyJS">Uglify</a> - A JavaScript
+        minifier. Removes everything that makes the code readable and pretty to
+        make it smaller.
+      </li>
+      <li>
+        <a href="https://github.com/transloadit/uppy">uppy</a> - A dog themed
+        uploader component. The name is a blend of <em>upload</em> and
+        <em>puppy</em>. It even comes with a crash recovery plugin called
+        <em>Golden Retriever</em>.
+      </li>
+    </ul>
+    <h2 id="machine-learning">Machine Learning</h2>
+    <ul>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Confusion_matrix"
+          >Confusion matrix</a
+        >
+        - A tabular summary of a classifiers “confusion”, i.e. how often it
+        thought to make correct predictions when it actually didn’t.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Decision_boundary"
+          >Decision boundary</a
+        >
+        - A boundary dividing the space of possible data points. Here you
+        decide, everything on this side is SPAM, everything on that side is not.
+      </li>
+    </ul>
+    <h2 id="user-interface-design">User Interface Design</h2>
+    <ul>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Breadcrumb_(navigation)"
+          >Breadcrumb</a
+        >
+        - Navigational aid allowing users to keep track of their location within
+        programs, documents, or websites. The term is a reference to the fairy
+        tale <em>Hansel and Gretel</em>.
+      </li>
+      <li>
+        <a
+          href="https://www.nngroup.com/articles/designing-effective-carousels/"
+          >Carousel</a
+        >
+        - A kind of animated slideshow looping back on itself.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Clipboard_(computing)"
+          >Clipboard</a
+        >
+        - Where you temporarily put <em>files</em> you are working with
+        (i.e. the copy &amp; paste buffer).
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Desktop_metaphor">Desktop</a> -
+        The metaphorical top of the user’s desk, upon which objects such as
+        documents and folders of documents can be placed.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Hamburger_button"
+          >Hamburger button</a
+        >
+        - A button to toggle a menu. The associated icon resembles a hamburger.
+      </li>
+      <li>
+        <a href="https://uxplanet.org/optimistic-1000-34d9eefe4c05"
+          >Optimistic UI</a
+        >
+        - User interfaces that assume expensive operations will complete
+        successfully thereby improving the perceived performance.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Scrolling">Scrolling</a> - Screen
+        content is often less like a book with discrete pages and more like a
+        continuous roll of parchment, i.e. a scroll.
+      </li>
+    </ul>
+    <h2 id="theoretical-computer-science">Theoretical Computer Science</h2>
+    <ul>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Clique_problem"
+          >Clique problem</a
+        >
+        - The problem of finding groups of mutual friends in a network of people
+        with friendship relations. Or more general, finding complete subgraphs.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
+          >Game of Life</a
+        >
+        - A game world that showcases how astonishing complexity can arise from
+        very simple ingredients.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Oracle_machine">Oracle</a> - A
+        black box that magically gives answers even to undeciable questions like
+        the halting problem.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Pumping_lemma">Pumping lemma</a>
+        - The fact that in some formal languages any sufficiently long string
+        can be <em>pumped</em> with repetitions of its substring and the result
+        stays in the same formal language.
+      </li>
+    </ul>
+    <h2 id="other">Other</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.johndcook.com/blog/2009/07/06/brewer-cap-theorem-base/"
+          >ACID vs. BASE</a
+        >
+        - Acronyms describing competing database ideologies (aka. SQL
+        vs. NoSQL).
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Bottleneck#Computing"
+          >Bottleneck</a
+        >
+        - A central part of a network/application that significantly limits
+        throughput/performance and should ideally be eliminated.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Letter_case#Special_case_styles"
+          >camelCase, snake_case, kebab-case</a
+        >
+        - Different case styles where the name illustrates its appearance.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Easter_egg_(media)"
+          >Easter egg</a
+        >
+        - A hidden feature especially in video games in reference to the Easter
+        egg hunt.
+      </li>
+      <li>
+        <a href="https://floating-point-gui.de/formats/fp/"
+          >Floating point number</a
+        >
+        - This representation can encode numbers at very different magnitudes
+        with limited amount of digits by letting the radix point
+        <em>float</em> instead of being fixed in place.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Software_framework">Framework</a>
+        - In software architecture (like in actual architecture) frameworks
+        provide basic structure to build upon that guide and constrain the
+        further development.
+      </li>
+      <li>
+        <a
+          href="https://en.m.wikipedia.org/wiki/Garbage_collection_(computer_science)"
+          >Garbage Collector</a
+        >
+        - Part of a program that attempts to find and reclaim garbage pieces of
+        memory not used anymore.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Glue_code">Glue Code</a> - Jenga
+        and LEGO bricks don’t share the same interface but you can always glue
+        them together.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Heisenbug">Heisenbug</a> - A bug
+        that seems to disappear or change when one tries to study it. It’s a pun
+        on Werner Heisenberg who discovered that the act of observing quantum
+        systems inevitably alters their state.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Lazy_evaluation"
+          >Lazy evaluation</a
+        >
+        - An evaluation stategy which suspends evaluation until it’s absolutly
+        necessary and then never does it again.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Magic_(programming)">Magic</a> -
+        A magic program/piece of code is doing it’s job but nobody knows how.
+        Like in reality, magic doesn’t actually exists. Once you understand it,
+        it’s not magic anymore.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Starvation_(computer_science)"
+          >Process starvation</a
+        >
+        - A problem where a process is perpetually denied resources to do its
+        work.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Time_travel_debugging"
+          >Time travel debugging</a
+        >
+        - Stepping back in time through source code to understand execution and
+        sometimes even to change history.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Tree_shaking">Tree shaking</a> -
+        Shake the dependency tree until all the dead parts are falling off and
+        you end up with a nice lean tree.
+      </li>
+    </ul>
+  </body>
+</html>

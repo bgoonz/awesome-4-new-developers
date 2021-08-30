@@ -1,0 +1,236 @@
+# Resources to be processed
+
+- https://github.com/ged/linguistics
+- https://github.com/inukshuk/wapiti-ruby
+- https://github.com/jashmenn/ariel
+- https://github.com/rattle/term-extract
+- https://github.com/matstc/text-analysis-utils
+- https://github.com/opener-project/opener-tree-tagger
+- [BOTServer](https://github.com/solyaris/BOTServer)
+- [Chat Correct](https://github.com/diasks2/chat_correct)
+- [Chronic Between](https://github.com/jrobertson/chronic_between)
+- [Chronic Duration](https://github.com/hpoydar/chronic_duration)
+- [Confidential Info Redactor](https://github.com/diasks2/confidential_info_redactor)
+- [Dialogs](https://github.com/solyaris/dialogs)
+- [Epitome](https://github.com/McFreely/epitome)
+- [Explain Regular Expression](http://regexdoc.com/re/explain.pl)
+- [Jieba](https://github.com/mimosa/jieba-jruby)
+- [MeCab](https://github.com/markburns/mecab)
+- [Naturally](https://github.com/dogweather/naturally)
+- [Nickel](https://github.com/iainbeeston/nickel)
+- [Parslet](http://kschiess.github.io/parslet/)
+- [Pragmatic Segmenter](https://github.com/diasks2/pragmatic_segmenter)
+- [Pragmatic Tokenizer](https://github.com/diasks2/pragmatic_tokenizer)
+- [Ruby Readability](https://github.com/cantino/ruby-readability)
+- [SRX English](https://github.com/apohllo/srx-english)
+- [Speech2Text](https://github.com/taf2/speech2text)
+- [TelegramBotRuby](https://github.com/shouya/telegram-bot)
+- [TelegramBot](https://github.com/eljojo/telegram_bot)
+- [Tickle](https://github.com/yb66/tickle)
+- [TreeTagger for Ruby](https://github.com/LeFnord/rstt)
+- [Treetop](https://github.com/cjheath/treetop)
+- [Turkish stemmer](https://github.com/skroutz/turkish_stemmer)
+- [Word Count Analyzer](https://github.com/diasks2/word_count_analyzer)
+- [api-ai-ruby](https://github.com/api-ai/api-ai-ruby)
+- [att_speech](https://github.com/adhearsion/att_speech)
+- [aylien_textapi_ruby](https://github.com/AYLIEN/aylien_textapi_ruby)
+- [biffbot](https://github.com/tevren/biffbot)
+- [clarifier](https://github.com/meducation/clarifier)
+- [dialable](https://github.com/chorn/dialable)
+- [docsplit](http://documentcloud.github.io/docsplit/)
+- [gengo-ruby](https://github.com/gengo/gengo-ruby)
+- [gibber](https://github.com/timonv/gibber)
+- [graph-rank](https://github.com/louismullie/graph-rank)
+- [hiatus](https://github.com/ahanba/hiatus)
+- [highscore](https://github.com/domnikl/highscore)
+- [lingua](https://github.com/dbalatero/lingua)
+- [linkparser](https://github.com/ged/linkparser)
+- [linnaeus](https://github.com/djcp/linnaeus)
+- [nameable](https://github.com/chorn/nameable)
+- [nlp](https://github.com/knife/nlp)
+- [ots](https://github.com/deepfryed/ots)
+- [poliqarpr](https://github.com/apohllo/poliqarpr)
+- [raingrams](https://github.com/postmodern/raingrams)
+- [ranguba](http://ranguba.org/)
+- http://rbtagger.rubyforge.org/
+- [rseg](https://github.com/yzhang/rseg)
+- [rtesseract](https://github.com/dannnylo/rtesseract)
+- [slack-bot-server](https://github.com/dblock/slack-bot-server)
+- [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot)
+- [slack-ruby-client](https://github.com/dblock/slack-ruby-client)
+- [slack-ruby-gem](https://github.com/aki017/slack-ruby-gem)
+- [sort_alphabetical](https://github.com/grosser/sort_alphabetical)
+- [stopwords](https://github.com/brez/stopwords)
+- [string_pl](https://github.com/apohllo/string_pl)
+- [stringex](https://github.com/rsl/stringex)
+- [telegram-bot-ruby](https://github.com/atipugin/telegram-bot-ruby)
+- [thailang4r](https://github.com/veer66/thailang4r)
+- [tiny_segmenter](https://github.com/6/tiny_segmenter)
+- [twitter-cldr-rb](https://github.com/twitter/twitter-cldr-rb)
+- [twitter-cldr-rb](https://github.com/twitter/twitter-cldr-rb/blob/master/lib/twitter_cldr/shared/casefolder.rb)
+- [twitter-text](https://github.com/twitter/twitter-text/tree/master/rb)
+- [unicode_utils](https://github.com/lang/unicode_utils)
+- [ve](https://github.com/Kimtaro/ve)
+- [verbal_expressions](https://github.com/ryan-endacott/verbal_expressions)
+- [zipf](https://github.com/pks/zipf)
+- http://greyblake.com/blog/2015/09/20/nlp-toki-pona-and-ruby-part1/
+- https://www.sitepoint.com/seeking-lovecraft-part-1-an-introduction-to-nlp-and-the-treat-gem/
+- http://www.akitaonrails.com/2016/10/28/natural-language-generation-in-ruby-with-jruby-simplenlg
+- https://platform.systran.net/sdk/nlp
+- https://github.com/yohasebe/engtagger
+- https://deveiate.org/code/linguistics/
+- https://github.com/omazhary/fuzzy-sentiment-analysis
+- https://code.google.com/archive/p/language-detection/
+- https://github.com/aboSamoor/polyglot
+- https://developers.lingvolive.com/en-us/Help
+- https://github.com/SYSTRAN/nlp-api-ruby-client
+- https://github.com/jherr/sentiment
+- https://github.com/abhinaykumar/nlp_treat
+- https://github.com/watsonbox/pocketsphinx-ruby
+- https://github.com/threedaymonk/text
+- https://github.com/cjheath/treetop
+- https://github.com/somaticio/tensorflow.rb
+- https://github.com/dannnylo/rtesseract
+- https://github.com/tiendung/ruby-nlp
+- https://github.com/dariusk/corpora
+- https://github.com/someben/treebank/
+- https://github.com/7compass/sentimental
+- https://github.com/malavbhavsar/sentimentalizer
+- http://www.nltk.org/book_1ed/ch00-extras.html
+- http://www.oreilly.com/pub/e/3210
+- https://github.com/helioid/categorize
+- https://github.com/jeremybmerrill/simplernlg
+- https://github.com/classicist/rgreek
+- https://github.com/schmich/spicy-proton
+- https://github.com/simplifi/string-eater
+- https://emorynlp.github.io/nlp4j/
+- Spellcheckers
+  - https://github.com/nithinbekal/spellingbee
+- Lexical Resources
+  - http://babelnet.org/guide
+  - https://github.com/commonsense/conceptnet5/wiki/API
+  - https://github.com/kenpratt/wikipedia-client
+- Language Identification
+  - https://github.com/thecodingmonk/ruby-langid
+  - https://github.com/igrigorik/language_detector
+  - https://github.com/echen/unsupervised-language-identification
+  - https://github.com/peterc/whatlanguage
+  - [Detect Language API Client](https://github.com/detectlanguage/detectlanguage-ruby)
+- Posts
+  - https://srug.pl/assets/mateusz-drozdzynski-sentiment-analysis-in-ruby.pdf
+  - http://blog.aylien.com/text-analysis-and-ruby-getting-started-with/
+- https://github.com/jedld/brains-jruby
+- https://github.com/andrearampin/string_namify
+- https://github.com/ruby-processing/JRubyArt
+- https://bitbucket.org/ged/ruby-framenet
+- https://github.com/janlelis/unicode-categories
+- https://github.com/janlelis/unicode-types
+- https://github.com/janlelis/unibits
+- https://github.com/kiyoka/fuzzy-string-match
+- https://github.com/mrkn/pycall
+- https://github.com/mrkn/matplotlib.rb
+- https://github.com/IMRealtor/ibm-watson-ruby
+- https://github.com/reddavis/knn_c
+- https://github.com/reddavis/Part-Of-Speech
+- https://github.com/reddavis/Noun-Phrase-Detection
+- https://github.com/reddavis/Feature-Selection
+- https://github.com/reddavis/NLP-Backpack
+- https://github.com/reddavis/knn
+- https://github.com/reddavis/Distance-Measures
+- https://rubygems.org/search?utf8=%E2%9C%93&query=stemmer
+- http://confreaks.tv/videos/lonestarruby2013-neural-networks-with-rubyfann
+- https://github.com/djcp/linnaeus
+- https://github.com/sergey-alekseev/lita-answers
+- https://github.com/janlelis/unicopy
+- https://github.com/janlelis/unibits
+- https://github.com/damianFC/alexa-rubykit
+- https://github.com/IMRealtor/ibm-watson-ruby
+- https://github.com/gbuesing/neural-net-ruby
+- https://github.com/josephwilk/rsemantic
+- https://github.com/openlogic/random-word
+- https://github.com/Swirrl/tripod
+- https://github.com/mntnorv/puttext
+- https://github.com/4ndv/rubyviber
+- https://www.youtube.com/watch?v=U8whfTS3G8U
+
+- Projects
+
+  - https://github.com/hexgnu/pos_tagger
+  - https://github.com/hexgnu/sentiment-server
+  - https://github.com/hexgnu/guise
+  - https://github.com/hexgnu/spam_filter
+  - https://github.com/hexgnu/language-predictor
+
+- https://github.com/Semantria/semantria-sdk/tree/master/Ruby
+- https://github.com/marloncarvalho/ruby-datumbox
+- https://github.com/ranguba/groonga-client
+- https://github.com/romanbsd/fast-stemmer
+- https://github.com/bbcrd/Similarity
+- https://github.com/reddavis/Distance-Measures
+- https://github.com/hexgnu/reem
+- https://github.com/hexgnu/sentiment_analyzer
+- https://github.com/aelaa/hangul
+- https://github.com/projectblacklight/spotlight
+- https://github.com/projectblacklight/blacklight
+- https://github.com/taimur-akhtar/to_words
+- https://github.com/ranguba/chupa-text-decomposer-pdf
+- https://github.com/squiidz/rusty_camel
+- https://github.com/yohasebe/rginger
+- https://github.com/rubysolo/dentaku
+- https://github.com/helioid/categorize
+- https://github.com/sjmog/ralyxa
+- http://rubykaigi.org/2016/presentations/duerst.html
+- https://github.com/Phybbit/dataflow-rb
+- https://github.com/colpan/alexa-toolbox
+- https://github.com/machisuji/ssmd
+- https://rubygems.org/gems/google-cloud-translate
+- https://rubygems.org/gems/google-cloud-speech
+- https://github.com/solyaris/rChatScript/
+- https://convcomp.it/naif-ruby-micro-framework-to-build-dumb-chat-machines-5c552a8c8f7e
+- https://github.com/npezza93/word_search
+- https://github.com/colpan/alexa-toolbox
+- https://github.com/haines/char_size
+- https://github.com/dmdropkick/y-translate
+- https://github.com/alpha-netzilla/watson-conversation
+- https://github.com/sinatra/mustermann
+- https://github.com/eonuonga/texty
+- https://github.com/encoreshao/amazon-awis
+- https://github.com/cbeer/solr_wrapper
+- https://github.com/tomasc/semantic_date_time_tags
+- https://github.com/Eeeeevgen/yandex_translator
+- https://github.com/langalex/numbers_and_words_pl
+- https://github.com/lautis/piperator
+- https://github.com/pamit/watsbot
+- https://github.com/meisyal/sastrawi-ruby
+- https://github.com/taimur-akhtar/to_words
+- https://github.com/VasiliyG/to_russian_words
+- https://github.com/mestoru/russial
+- https://github.com/ai-wordsmith/wordsmith-ruby-sdk
+- https://github.com/mulev/alexa-ruby
+- https://github.com/art2rik/RBender
+- https://github.com/Nakilon/reddit_bot
+- https://github.com/jtoy/cld
+- https://github.com/AnalyzePlatypus/TranslitKit
+- https://appfolio-engineering.squarespace.com/appfolio-engineering/2017/5/24/how-is-ruby-different-in-japan
+- https://github.com/msimonborg/twords
+- https://blog.redpanthers.co/odyssey-in-rails/
+- https://github.com/mulev/alexa-ruby
+- https://github.com/gurgeous/simhilarity
+- https://github.com/josephwilk/pronounce
+- https://github.com/regexident/lasean
+- https://github.com/blackwinter/lsi4r
+- https://github.com/blackwinter/hal4r
+- https://github.com/blackwinter/page_rank
+- https://github.com/janfri/scripref
+- https://github.com/lautis/piperator
+- https://github.com/grosser/i18n_data
+- https://github.com/n7v/phonetic
+- https://speakerdeck.com/addamh/bayesian-sentiment-analysis-with-ruby
+- https://github.com/msimonborg/twords
+- https://github.com/jrobertson/event_nlp
+- https://github.com/jmhodges/rchardet
+- https://googlecloudplatform.github.io/google-cloud-ruby/#/docs/google-cloud-language/v0.29.0/google/cloud/language
+- https://github.com/rovetz/cyrillic
+- https://github.com/rovetz/arabic
+- https://github.com/machinio/solrb
+- https://github.com/secryst/secryst

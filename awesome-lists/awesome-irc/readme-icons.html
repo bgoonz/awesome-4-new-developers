@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>readme-icons</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-irc-awesome">
+      Awesome IRC
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge-flat.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        A curated list of awesome
+        <a href="https://en.wikipedia.org/wiki/Internet_Relay_Chat">IRC</a>
+        resources.
+      </p>
+    </blockquote>
+    <p>
+      A list of tools, software &amp; other resources related to the Internet
+      Relay Chat (IRC) protocol.
+    </p>
+    <p>
+      IRC (Internet Relay Chat) is an open source protocol that can be used for
+      multi-user text based communication through channels.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#clients">Clients</a></li>
+      <li>
+        <a href="#bouncers">Bouncers</a>
+        <ul>
+          <li><a href="#self-hosted">Self-hosted</a></li>
+          <li><a href="#hosted">Hosted</a></li>
+        </ul>
+      </li>
+      <li><a href="#daemons">Daemons</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#bots">Bots</a></li>
+      <li>
+        <a href="#frameworks">Frameworks</a>
+        <ul>
+          <li><a href="#bridges">Bridges</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#channels">Channels</a>
+        <ul>
+          <li><a href="#discovery">Discovery</a></li>
+          <li><a href="#platforms">Platforms</a></li>
+          <li><a href="#programming">Programming</a></li>
+        </ul>
+      </li>
+      <li><a href="#networks">Networks</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#guides">Guides</a></li>
+      <li><a href="#protocol">Protocol</a></li>
+      <li><a href="#miscellaneous">Miscellaneous</a></li>
+    </ul>
+    <h3 id="clients">Clients</h3>
+    <p><em>You use these to connect to IRC.</em></p>
+    <ul>
+      <li>
+        <a href="https://komanda.io"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56874874-bf5ba580-69f1-11e9-9d3e-5265c43bcc7d.png"
+            alt="Komanda-icon-24px"
+          />
+          Komanda</a
+        >
+        - Designed for people who write code (beta). (<a
+          href="https://github.com/mephux/komanda"
+          >source</a
+        >) <code>Linux</code>
+      </li>
+      <li>
+        <a href="https://www.codeux.com/textual/"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56874954-680a0500-69f2-11e9-87ec-d4015ce54af5.png"
+            alt="Textual-icon-24px"
+          />
+          Textual</a
+        >
+        - Very customizable, ZNC integration, iCloud sync ($4.99). (<a
+          href="https://github.com/Codeux-Software/Textual"
+          >source</a
+        >) <code>macOS</code>
+      </li>
+      <li>
+        <a href="http://limechat.net/mac/"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56875043-04cca280-69f3-11e9-8e1f-285e54784fe4.png"
+            alt="Limechat-icon-24px"
+          />
+          LimeChat</a
+        >
+        - One window for multiple servers, keyboard shortcuts, fast &amp;
+        stable. (<a href="https://github.com/psychs/limechat">source</a>)
+        <code>macOS</code> <code>iOS</code>
+      </li>
+      <li>
+        <a href="https://hexchat.github.io"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56874706-b28a8200-69f0-11e9-9ca7-27c8779134e0.png"
+            alt="Hexchat-icon-24px"
+          />
+          HexChat</a
+        >
+        - Based on XChat, easy to use, spell check &amp; multiple languages. (<a
+          href="https://github.com/hexchat/hexchat"
+          >source</a
+        >) <code>Windows</code> <code>macOS</code> <code>Linux</code>
+      </li>
+      <li>
+        <a href="https://kiwiirc.com"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56875143-a7852100-69f3-11e9-8b33-2035c156c016.png"
+            alt="KiwiIRC-icon-24px"
+          />
+          Kiwi IRC</a
+        >
+        - Powerful modern IRC messenger for the web. (<a
+          href="https://github.com/kiwiirc/kiwiirc"
+          >source</a
+        >, <a href="https://kiwiirc.com/nextclient/">demo</a>) <code>Web</code>
+      </li>
+      <li>
+        <a href="https://flackr.github.io/circ/"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56875201-1498b680-69f4-11e9-91ff-ae3b674c82be.png"
+            alt="CIRC-icon-24px"
+          />
+          CIRC</a
+        >
+        - Uses the chrome.sockets APIs to connect directly to IRC servers
+        without needing a proxy. (<a href="https://github.com/flackr/circ"
+          >source</a
+        >) <code>Chrome</code>
+      </li>
+      <li>
+        <a href="https://quassel-irc.org"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56875264-84a73c80-69f4-11e9-807c-75db09db0ec5.png"
+            alt="Quassel-icon-24px"
+          />
+          Quassel</a
+        >
+        - Distributed (clients can attach to and detach from a central core that
+        stays permanently online. (<a href="https://github.com/quassel/quassel"
+          >source</a
+        >) <code>Linux</code> <code>macOS</code> <code>Windows</code>
+      </li>
+      <li>
+        <a href="https://www.yaaic.org"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56875320-f8e1e000-69f4-11e9-9665-de50e95f4d91.png"
+            alt="YAAIC-icon-24px"
+          />
+          Yaaic</a
+        >
+        - Multi-server/channel support, SASL support, Smooth channel scrolling /
+        swiping. (<a href="https://github.com/pocmo/Yaaic">source</a>)
+        <code>Android</code>
+      </li>
+      <li>
+        <a href="https://github.com/KokoIRC/koko"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56875424-c389c200-69f5-11e9-8464-5132a289aefd.png"
+            alt="KokoIRC-icon-24px"
+          />
+          Koko</a
+        >
+        - Minimalistic design, VIM-like shortcuts and built on electron.
+        <code>Windows</code> <code>macOS</code>
+      </li>
+      <li>
+        <a href="https://github.com/Fauntleroy/relay.js">relay.js</a> - Focuses
+        on making IRC less intimidating and easier to use. (<a
+          href="http://demo.relayjs.com"
+          >demo</a
+        >) <code>Web</code>
+      </li>
+      <li>
+        <a href="https://github.com/jorgenschaefer/circe"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56875558-a3a6ce00-69f6-11e9-92da-2e4d8c7b4a53.png"
+            alt="Circe-icon-24px"
+          />
+          Circe</a
+        >
+        - For use in Emacs, sane defaults. <code>Emacs</code>
+      </li>
+      <li>
+        <a href="https://smuxi.im"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56875672-2f205f00-69f7-11e9-8cac-5721602234bb.png"
+            alt="Smuxi-icon-24px"
+          />
+          Smuxi</a
+        >
+        - User-friendly, based on GNOME / GTK+. (<a
+          href="https://github.com/meebey/smuxi"
+          >source</a
+        >) <code>Linux</code> <code>Windows</code> <code>macOS</code>
+      </li>
+      <li>
+        <a href="http://www.kvirc.net"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56874636-1d878900-69f0-11e9-856e-719c4c822e25.png"
+            alt="KvIRC-icon-24px"
+          />
+          KvIRC</a
+        >
+        - Free, portable, based on Qt GUI toolkit. (<a
+          href="https://github.com/kvirc/KVIrc"
+          >source</a
+        >) <code>Linux</code> <code>macOS</code> <code>Windows</code>
+      </li>
+      <li>
+        <a href="https://konversation.kde.org"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56876024-609a2a00-69f9-11e9-91dd-196f310776d7.png"
+            alt="Konversation-icon-24px"
+          />
+          Konversation</a
+        >
+        - User-friendly client built on the KDE Platform. (<a
+          href="https://github.com/KDE/konversation"
+          >source</a
+        >) <code>Linux</code>
+      </li>
+      <li>
+        <a href="https://tools.suckless.org/sic/"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56876157-457bea00-69fa-11e9-94f5-11dcd0bfb00c.png"
+            alt="sic-icon-24px"
+          />
+          sic</a
+        >
+        - <strong>S</strong>imple <strong>I</strong>RC <strong>c</strong>lient -
+        a terminal client in less than 250 lines of C. <code>Linux</code>
+      </li>
+      <li>
+        <a href="http://colloquy.info"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56876204-a3103680-69fa-11e9-8169-00e0450722de.png"
+            alt="Colloquy-icon-24px"
+          />
+          Colloquy</a
+        >
+        - AppleScript-enabled IRC client. <code>macOS</code>
+      </li>
+      <li>
+        <a href="https://irssi.org"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56876266-0c904500-69fb-11e9-85a9-00796373cf88.png"
+            alt="irssi-icon-24px"
+          />
+          irssi</a
+        >
+        - Terminal client, multi-protocol friendly for module authors, GPLv2.
+        <code>Linux</code> <code>macOS</code> <code>Cygwin</code>
+        <code>BSD</code>
+      </li>
+      <li>
+        <a href="https://github.com/MCMrARM/revolution-irc"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56876444-4f065180-69fc-11e9-8200-b244b6a86e94.png"
+            alt="RevolutionIRC-icon-24px"
+          />
+          Revolution IRC</a
+        >
+        - Feature-full, actively maintained Android IRC client. (<a
+          href="https://github.com/MCMrARM/revolution-irc"
+          >source</a
+        >) <code>Android</code>
+      </li>
+      <li>
+        <a href="https://adiirc.com"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56632956-0e2fc680-6611-11e9-949e-c79c21f465a0.png"
+            alt="AdiIRC-icon-24px"
+          />
+          AdiIRC</a
+        >
+        - Never has a client offered such granular settings for every aspect of
+        the IRC experience. (<a
+          href="https://dev.adiirc.com/projects/adiirc/wiki/Features"
+          >features</a
+        >,
+        <a href="https://dev.adiirc.com/projects/adiirc/wiki/Screenshots"
+          >screenshots</a
+        >) <code>Windows</code> <code>WINE</code>
+      </li>
+      <li>
+        <a href="https://www.countercultured.net/android/"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56655816-b3b25c80-6648-11e9-92e1-12ca4587d9eb.png"
+            alt="IRCforAndroid-icon-24px"
+          />
+          IRC for Android™</a
+        >
+        Android/Chrome OS client for power users, with ZNC built-ins,
+        notification logic, reliable DCC, keybinds for hardware keyboards, etc.
+        <code>Android</code> <code>ChromeOS</code>
+      </li>
+    </ul>
+    <p>
+      <em
+        >More? Clients that include bouncers are found
+        <a href="#bouncers">below</a>.</em
+      >
+    </p>
+    <h3 id="bouncers">Bouncers</h3>
+    <p>
+      <em
+        >Useful for disconnecting and reconnecting without losing the chat
+        session.</em
+      >
+    </p>
+    <h4 id="hosted">Hosted</h4>
+    <ul>
+      <li>
+        <a href="https://www.irccloud.com"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56879253-ba581f80-6a0c-11e9-8f6b-8461c10ed149.png"
+            alt="IRCCloud-icon-24px"
+          />
+          IRCCloud</a
+        >
+        - Group chat for teams, friends, and communities. stay connected, chat
+        from anywhere, and never miss a message (+client) (£0-£3.50/month).
+        <ul>
+          <li>
+            <a href="https://github.com/irccloud/ios">iOS App</a> - Official.
+            <code>Objective-C</code>
+          </li>
+          <li>
+            <a href="https://github.com/irccloud/android">Android App</a> -
+            Official. <code>Java</code>
+          </li>
+          <li>
+            <a href="https://github.com/jnordberg/irccloudapp">Nimbus</a> -
+            Standalone client. <code>macOS</code> <code>Objective-C</code>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          <a href="https://grove.io"
+            ><img
+              src="https://user-images.githubusercontent.com/15098724/56879376-541fcc80-6a0d-11e9-882a-980aa6f285bf.png"
+              alt="Grove-icon-24px"
+            />
+            Grove</a
+          >
+          - Hosted IRC and so much more (+client) ($10-$125/month).
+        </p>
+      </li>
+      <li>
+        <a href="https://convos.chat"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56879497-d8724f80-6a0d-11e9-844d-7a5380b4524b.png"
+            alt="Convos-icon-24px"
+          />
+          Convos</a
+        >
+        - Always online web IRC client. (<a
+          href="https://github.com/convos-chat/convos"
+          >source</a
+        >, <a href="https://demo.convos.chat">demo</a>) <code>Perl</code>
+        <code>JavaScript</code> <code>Web</code>
+      </li>
+      <li>
+        <a href="https://wiki.znc.in/ZNC"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56879721-d8268400-6a0e-11e9-8b74-c2c748d15c4a.png"
+            alt="ZNC-icon-24px"
+          />
+          ZNC</a
+        >
+        - Most popular. many different plugins. (<a
+          href="https://github.com/znc/znc"
+          >source</a
+        >)
+      </li>
+      <li>
+        <a href="https://bip.milkypond.org"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56899123-89491080-6a47-11e9-8513-4c8d09be32d9.png"
+            alt="BIP-icon-24px"
+          />
+          BIP IRC Proxy</a
+        >
+        - Always online, lightweight and secure Open Source IRC proxying with
+        backlogging. (<a
+          href="https://projects.duckcorp.org/projects/bip/repository"
+          >source</a
+        >) <code>C</code>
+      </li>
+      <li>
+        <a href="https://thelounge.chat"
+          ><img
+            src="https://user-images.githubusercontent.com/15098724/56899491-6b2fe000-6a48-11e9-9f01-1ed2cfb86b09.png"
+            alt="TheLounge-icon-24px"
+          />
+          TheLounge</a
+        >
+        - Responsive, self-hosted &amp; support for multiple users. (<a
+          href="https://github.com/thelounge/thelounge"
+          >source</a
+        >, <a href="https://demo.thelounge.chat/">demo</a>)
+        <code>JavaScript</code> <code>Node.js</code> <code>Web</code>
+      </li>
+      <li>
+        <p>
+          <a href="https://weechat.org"
+            ><img
+              src="https://user-images.githubusercontent.com/15098724/56876389-e028f880-69fb-11e9-82d6-8084e17f2f04.png"
+              alt="weechat-icon-24px"
+            />
+            WeeChat</a
+          >
+          - A fast, light and extensible chat client. (<a
+            href="https://github.com/weechat/weechat"
+            >source</a
+          >) <code>Linux</code> <code>macOS</code> <code>Windows</code>
+        </p>
+      </li>
+    </ul>
+    <h3 id="daemons">Daemons</h3>
+    <p><em>Used for running your own IRC server or network.</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/alexyoung/ircd.js">ircd.js</a> - Server will
+        allow clients to connect, join channels, change topics; basic stuff.
+      </li>
+      <li>
+        <a href="https://www.inspircd.org">InspIRCd</a> - Modular, stable,
+        written from scratch. (<a href="https://github.com/inspircd/inspircd"
+          >source</a
+        >)
+      </li>
+      <li>
+        <a href="https://github.com/jrosdahl/miniircd">miniircd</a> - Very
+        simple and limited.
+      </li>
+      <li>
+        <a href="https://ngircd.barton.de">ngIRCd</a> - Portable and lightweight
+        for small or private networks. (<a
+          href="https://github.com/ngircd/ngircd"
+          >source</a
+        >)
+      </li>
+      <li>
+        <a href="https://github.com/chrisdone/hulk">Hulk</a> - Intended for
+        private business use or hobby work. <code>Haskell</code>
+      </li>
+      <li>
+        <a href="https://oragono.io">Oragono</a> - Modern, experimental server
+        that’s portable and designed around specifications. (<a
+          href="https://github.com/oragono/oragono"
+          >source</a
+        >)
+      </li>
+      <li>
+        <a href="https://github.com/charybdis-ircd/charybdis">charybdis</a> -
+        Scalable IRCv3 server.
+      </li>
+      <li>
+        <a href="https://robustirc.net">RobustIRC</a> - IRC server without
+        netsplits.
+      </li>
+    </ul>
+    <h3 id="services">Services</h3>
+    <p>
+      <em
+        >Used to provide user accounts and bots like NickServ/ChanServ to your
+        network.</em
+      >
+    </p>
+    <ul>
+      <li>
+        <a href="https://atheme.github.io">Atheme</a> - Designed for large
+        networks with high scalability requirements. (<a
+          href="https://github.com/atheme/atheme"
+          >source</a
+        >)
+      </li>
+      <li>
+        <a href="https://anope.org">anope</a> - Designed for flexibility and
+        ease of use. (<a href="https://github.com/anope/anope">source</a>)
+      </li>
+    </ul>
+    <h3 id="bots">Bots</h3>
+    <p>
+      <em
+        >IRC users which provide services for humans, e.g. integrations or
+        information.</em
+      >
+    </p>
+    <ul>
+      <li>
+        <a href="https://sopel.chat">Sopel</a> - Tonnes of ready made features,
+        tutorial, fully documented. (<a
+          href="https://github.com/sopel-irc/sopel"
+          >source</a
+        >) <code>Python</code>
+      </li>
+      <li>
+        <a href="http://inamidst.com/phenny/">phenny</a> - Simple, module
+        creation guide. (<a href="https://github.com/sbp/phenny">source</a>)
+        <code>Python</code>
+      </li>
+      <li>
+        <a href="https://github.com/RJ/irccat">IRCcat</a> - Simplifies messaging
+        from shell scripts. <code>Java</code>
+      </li>
+      <li>
+        <a href="https://github.com/ProgVal/Limnoria">Limnoria</a> - Robust,
+        user friendly, developer friendly. <code>Python</code>
+      </li>
+      <li>
+        <a href="https://github.com/aidanrwt/twitch-plays">Twitch Plays</a> -
+        Takes input from the chat and presses the corresponding key.
+        <code>Python</code>
+      </li>
+      <li>
+        <a href="https://github.com/rmmh/skybot">Skybot</a> - Main goals are
+        simplicity and power. <code>Python</code>
+      </li>
+      <li>
+        <a href="https://github.com/myano/jenni">Jenni</a> - <code>Python</code>
+      </li>
+      <li>
+        <a href="https://geekchick77.dreamwidth.org/472.html">talkbackbot</a> -
+        Responds to configured trigger phrases with quotes from notable women.
+        (<a href="https://github.com/jessamynsmith/talkbackbot">source</a>)
+        <code>Python</code>
+      </li>
+      <li>
+        <a href="https://github.com/Raynes/lazybot">lazybot</a> - User-friendly
+        and powerful. <code>Clojure</code>
+      </li>
+      <li>
+        <a href="https://github.com/ddevault/bf-irc-bot">IRC-BF</a> -
+        <code>Brainfuck</code>
+      </li>
+      <li>
+        <a href="https://github.com/Eelis/geordi">geordi</a> - Compiles and runs
+        C++ code snippets. <code>C++</code>
+      </li>
+      <li>
+        <a href="https://github.com/CloudBotIRC/CloudBot">CloudBot</a> - Simple,
+        fast, expandable. <code>Python</code>
+      </li>
+      <li>
+        <a href="https://github.com/woodruffw/yossarian-bot">yossarian-bot</a> -
+        Large default plugin set, Cinch-based. <code>Ruby</code>
+      </li>
+      <li>
+        <a href="https://github.com/shaunduncan/helga">helga</a> - Pluggable
+        chat bot supporting multiple protocols. <code>Python</code>
+      </li>
+    </ul>
+    <h3 id="frameworks">Frameworks</h3>
+    <p><em>Helpful to write bots or integrate IRC with applications.</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/Throne3d/node-irc">node-irc</a>
+        <code>JavaScript</code>
+      </li>
+      <li>
+        <a href="https://github.com/cinchrb/cinch">Cinch</a> - Quickly create
+        bots with minimal effort. <code>Ruby</code>
+      </li>
+      <li>
+        <a href="https://github.com/fluffle/goirc">goirc</a> - Event-based,
+        stateful, lacking documentation. <code>Go</code>
+      </li>
+      <li>
+        <a href="https://github.com/nandub/hubot-irc">Hubot IRC Adapter</a> -
+        The IRC adapter for hubot. <code>JavaScript</code>
+      </li>
+      <li>
+        <a href="https://github.com/thoj/go-ircevent">go-ircevent</a> -
+        Event-based. <code>Go</code>
+      </li>
+      <li>
+        <a href="https://github.com/facebook/pyaib">pyaib</a> - Easy to use
+        framework for writing bots. <code>Python</code>
+      </li>
+      <li>
+        <a href="https://github.com/slate/slate-irc">slate-irc</a> - Plugin
+        system, simple api, arbitrary input stream, debug support.
+        <code>JavaScript</code>
+      </li>
+      <li>
+        <a href="https://github.com/pircbotx/pircbotx">PircBotX</a> - Event
+        based IRC Library with a straightforward API (updated fork of
+        <a href="http://www.jibble.org/pircbot.php">PircBot</a>).
+        <code>Java</code>
+      </li>
+      <li>
+        <a href="https://github.com/perl6-community-modules/perl6-IRC-Client"
+          >IRC::Client</a
+        >
+        - <code>Perl6</code> based extendable IRC client framework.
+      </li>
+    </ul>
+    <h4 id="bridges">Bridges</h4>
+    <p><em>Sends messages back and forth.</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/reactiflux/discord-irc">discord-irc</a> -
+        Discord ↔ IRC. <code>JavaScript</code>
+      </li>
+      <li>
+        <a href="https://github.com/ekmartin/slack-irc">slack-irc</a> - Slack ↔
+        IRC. <code>JavaScript</code>
+      </li>
+      <li>
+        <a href="https://github.com/insomniacslk/irc-slack">irc-slack</a> -
+        Slack ↔ IRC. <code>Go</code>
+      </li>
+      <li>
+        <a href="https://www.bitlbee.org/main.php/news.r.html">BitlBee</a> -
+        XMPP, Jabber, Google Talk, MSN Messenger, Yahoo! Messenger, AIM, ICQ,
+        Twitter API, HipChat ↔ IRC. <code>C</code>
+      </li>
+      <li>
+        <a href="https://github.com/FruitieX/teleirc">teleirc</a> - Telegram ↔
+        IRC. <code>JavaScript</code>
+      </li>
+      <li>
+        <a href="https://github.com/endoffile78/toxirc">toxirc</a> - Tox ↔ IRC.
+        <code>C</code>
+      </li>
+      <li>
+        <a href="https://github.com/ProgVal/skyweb2irc">skyweb2irc</a> - Skype
+        (webclient API) ↔ IRC. <code>Javascript</code>
+      </li>
+      <li>
+        <a href="https://github.com/lieuwex/whapp-irc">whapp-irc</a> - WhatsApp
+        Web ↔ IRC. <code>Go</code>
+      </li>
+      <li>
+        <a href="https://github.com/42wim/matterbridge">matterbridge</a> - IRC ↔
+        Mattermost ↔ Discord ↔ XMPP ↔ Gitter ↔ Slack ↔ Discord ↔ Telegram ↔ …
+        <code>Go</code>
+      </li>
+    </ul>
+    <h3 id="channels">Channels</h3>
+    <p><em>IRC channels.</em></p>
+    <h4 id="discovery">Discovery</h4>
+    <ul>
+      <li>
+        <a href="https://netsplit.de/channels/">netsplit.de Search</a> -
+        Searches 563 different networks.
+      </li>
+      <li>
+        <a href="https://search.mibbit.com">mibbit Search</a> - Searches
+        networks listed <a href="https://search.mibbit.com/networks">here</a>.
+      </li>
+      <li>
+        <a href="https://kiwiirc.com/search">KiwiIRC Search</a> - Searches 318
+        different networks.
+      </li>
+    </ul>
+    <h4 id="platforms">Platforms</h4>
+    <ul>
+      <li>
+        <a href="https://freenode.linux.community">##linux</a
+        ><span class="citation" data-cites="freenode">@freenode</span> - Linux
+        support and discussion channel. (<a
+          href="https://freenode.linux.community/channel-rules/"
+          >rules</a
+        >)
+      </li>
+      <li>
+        <a href="https://help.ubuntu.com/community/InternetRelayChat">#ubuntu</a
+        ><span class="citation" data-cites="freenode">@freenode</span> -
+        Official ubuntu support channel. (<a
+          href="https://wiki.ubuntu.com/IRC/Guidelines"
+          >rules</a
+        >)
+      </li>
+    </ul>
+    <h4 id="programming">Programming</h4>
+    <ul>
+      <li>
+        <a href="https://www.python.org/community/irc/">#python</a
+        ><span class="citation" data-cites="freenode">@freenode</span> - Good
+        place for short python questions. (<a
+          href="https://www.python.org/psf/codeofconduct/"
+          >rules</a
+        >)
+      </li>
+    </ul>
+    <h3 id="networks">Networks</h3>
+    <p><em>A collection of IRC servers is known as a network.</em></p>
+    <ul>
+      <li>
+        <a href="https://freenode.net">freenode</a> - The largest network, for
+        free and open source software communities. (<a
+          href="https://freenode.net/policies"
+          >rules</a
+        >)
+      </li>
+      <li>
+        <a href="https://snoonet.org">Snoonet</a> - Community of redditors and
+        subreddits. (<a href="https://snoonet.org/rules/">rules</a>)
+      </li>
+      <li>
+        <a href="https://oftc.net">OFTC</a> - Community for free and open source
+        software communities.
+      </li>
+    </ul>
+    <h3 id="articles">Articles</h3>
+    <p><em>Articles and blog posts about IRC.</em></p>
+    <ul>
+      <li>
+        <a
+          href="https://drewdevault.com/2015/11/01/Please-stop-using-slack.html"
+          >Please don’t use Slack for FOSS projects</a
+        >
+        - Drew DeVault’s Blog.
+      </li>
+      <li>
+        <a
+          href="https://www.quakenet.org/articles/102-press-release-irc-networks-under-systematic-attack-from-governments"
+          >IRC Networks Under Systematic Attack From Governments</a
+        >
+        - QuakeNet.
+      </li>
+      <li>
+        <a href="https://royal.pingdom.com/irc-is-dead-long-live-irc/"
+          >IRC is dead, long live IRC</a
+        >
+        - Royal Pingdom.
+      </li>
+      <li>
+        <a
+          href="https://techcrunch.com/2013/01/06/irc-has-lost-60-of-its-users-since-2003-but-life-as-a-robot-is-just-beginning/"
+          >IRC Has Lost 60% Of Its Users Since 2003, But Life As A Robot Is Just
+          Beginning</a
+        >
+        - Alex Williams (TechCrunch).
+      </li>
+    </ul>
+    <h3 id="guides">Guides</h3>
+    <p><em>How-to’s, documentation and books.</em></p>
+    <ul>
+      <li>
+        <a href="https://www.irchelp.org">#irchelp</a> - A vast amount of
+        reasonably up-to-date information.
+      </li>
+    </ul>
+    <h3 id="protocol">Protocol</h3>
+    <p><em>Information and resources about the IRC protocol itself.</em></p>
+    <ul>
+      <li>
+        <a href="https://ircv3.net">IRCv3 Working Group</a> - A group of IRC
+        software authors working to enhance, improve, maintain and standardize
+        the IRC protocol. (<a href="https://github.com/ircv3/ircv3.github.io"
+          >source</a
+        >)
+      </li>
+      <li>
+        <a href="https://modern.ircdocs.horse">Modern IRC Documents</a> - An
+        attempt to write an update to the original IRC protocol. documentation
+        (<a href="https://github.com/ircdocs/modern-irc">source</a>)
+      </li>
+      <li>
+        <a href="https://defs.ircdocs.horse">IRC Definition Files</a> - Lists of
+        numerics, modes, ISUPPORT tokens and other protocol details. (<a
+          href="https://github.com/ircdocs/irc-defs"
+          >source</a
+        >)
+      </li>
+      <li>
+        <a href="https://github.com/grawity/irc-docs">grawity’s IRC docs</a> -
+        Collection of misc IRC protocol documentation.
+      </li>
+      <li>
+        <a href="https://stats.ircdocs.horse">Protocol Statistics</a> -
+        Statistics around the server software in use on networks today. (<a
+          href="https://github.com/ircdocs/irc-stats"
+          >source</a
+        >)
+      </li>
+      <li>
+        <a href="https://github.com/ircdocs/parser-tests">IRC Parser Tests</a> -
+        A CC0 set of test suites, to ensure IRC message parsers are consistent.
+      </li>
+    </ul>
+    <h3 id="miscellaneous">Miscellaneous</h3>
+    <p><em>Items that belong on the list but defy classification.</em></p>
+    <ul>
+      <li>
+        <a href="https://irc.lc">IRC LC</a> - Create a URL that points to a
+        channel on a IRC network.
+      </li>
+    </ul>
+    <h2 id="use">Use</h2>
+    <p>The best ways to use this list are:</p>
+    <ul>
+      <li>by browsing the <a href="#contents">contents</a></li>
+      <li>by using <kbd>command</kbd> + <kbd>F</kbd> to search the contents</li>
+    </ul>
+    <p>This list also uses tags to help when searching the contents:</p>
+    <ul>
+      <li>
+        <strong>Language</strong> - <code>Python</code>, <code>Java</code>,
+        <code>C++</code>, <code>Go</code>, <code>JavaScript</code>,
+        <code>Ruby</code>, <code>C</code> etc.
+      </li>
+      <li>
+        <strong>Platform</strong> - <code>Web</code>, <code>macOS</code>,
+        <code>Windows</code>, <code>Linux</code>, <code>Chrome</code> etc.
+      </li>
+    </ul>
+    <h2 id="credits">Credits</h2>
+    <p>
+      <strong><a href="https://davison.io">Craig Davison</a></strong>
+    </p>
+    <p>
+      <a href="https://github.com/davisonio"
+        ><img
+          src="https://img.shields.io/github/followers/davisonio.svg?style=social&amp;label=Follow%20@davisonio"
+          alt="GitHub"
+      /></a>
+      <a href="https://twitter.com/davisonio"
+        ><img
+          src="https://img.shields.io/twitter/follow/davisonio.svg?style=social"
+          alt="Twitter"
+      /></a>
+    </p>
+    <p>
+      …and
+      <a href="https://github.com/davisonio/awesome-irc/graphs/contributors"
+        >contributors</a
+      >.
+    </p>
+    <p>
+      <strong
+        ><a
+          href="https://github.com/davisonio/awesome-irc/blob/master/contributing.md"
+          >Contributions are welcome!</a
+        ></strong
+      >
+    </p>
+    <h2 id="license">License</h2>
+    <p>Unless otherwise stated:</p>
+    <ul>
+      <li>
+        Copyright © 2016+ <a href="https://davison.io">Craig Davison</a>.
+        Licensed under
+        <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a
+        >.
+      </li>
+    </ul>
+  </body>
+</html>

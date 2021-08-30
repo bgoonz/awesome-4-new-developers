@@ -1,0 +1,59 @@
+.item {
+  position: relative;
+  display: flex;
+  flex: 1;
+  height: 175px;
+  padding: 20px 20px 0 20px;
+
+  @media all and (max-width: 540px) {
+    height: auto;
+    padding: 15px 15px 0 15px;
+  }
+}
+
+.itemContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: transparent;
+  font-size: 0;
+}
+
+.itemHeader {
+  display: flex;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 24px;
+  font-family: Inria Serif, sans-serif;
+  line-height: 0.7;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.repoOwnerLogo {
+  display: none;
+  align-self: flex-start;
+  height: 17px;
+  margin-right: 15px;
+
+  /* filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.25)); */
+}
+
+.description {
+  height: 100px;
+  margin-top: 20px;
+  font-size: 12px;
+}

@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <p align="center">
+      <img
+        src="https://rawgit.com/AllThingsSmitty/css-protips/master/media/logo.svg"
+        alt="light bulb icon"
+      />
+    </p>
+    <h1 id="css-专业技巧-awesome">
+      CSS 专业技巧
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>一个帮你提升 CSS 技巧的收藏集。</p>
+    <blockquote>
+      <p>
+        对于其他收藏集合可以查看
+        <span class="citation" data-cites="sindresorhus">[@sindresorhus]</span
+        >(https://github.com/sindresorhus/) 创建的收藏集合
+        <a href="https://github.com/sindresorhus/awesome/">Awesome Lists</a>.
+      </p>
+    </blockquote>
+    <div id="table-of-contents"></div>
+    <h2 id="目录">目录</h2>
+    <ul>
+      <li><a href="#专业技巧">专业技巧</a></li>
+      <li><a href="#支持情况">支持情况</a></li>
+      <li><a href="../../CONTRIBUTING.md">贡献准则</a></li>
+    </ul>
+    <h2 id="专业技巧">专业技巧</h2>
+    <ol type="1">
+      <li><a href="#使用css复位">使用CSS复位</a></li>
+      <li>
+        <a href="#继承-box-sizing">继承 <code>box-sizing</code></a>
+      </li>
+      <li>
+        <a href="#使用unset而不是重置所有属性"
+          >使用<code>unset</code>而不是重置所有属性</a
+        >
+      </li>
+      <li>
+        <a href="#使用-not-选择器来决定表单是否显示边框"
+          >使用 <code>:not()</code> 选择器来决定表单是否显示边框</a
+        >
+      </li>
+      <li><a href="#檢查字體是否在本地安裝">檢查字體是否在本地安裝</a></li>
+      <li><a href="#为-body-元素添加行高">为 body 元素添加行高</a></li>
+      <li>
+        <a href="#为表单元素设置focus">为表单元素设置<code>:focus</code></a>
+      </li>
+      <li><a href="#垂直居中任何元素">垂直居中任何元素</a></li>
+      <li><a href="#逗号分隔列表">逗号分隔的列表</a></li>
+      <li>
+        <a href="#使用负的-nth-child-来选择元素"
+          >使用负的 <code>nth-child</code> 来选择元素</a
+        >
+      </li>
+      <li><a href="#使用-svg-图标">使用 SVG 图标</a></li>
+      <li>
+        <a href="#使用-形似猫头鹰-的选择器">使用 “形似猫头鹰” 的选择器</a>
+      </li>
+      <li>
+        <a href="#使用-max-height-来建立纯-css-的滑块"
+          >使用 <code>max-height</code> 来建立纯 CSS 的滑块</a
+        >
+      </li>
+      <li><a href="#创造格子等宽的表格">创造格子等宽的表格</a></li>
+      <li>
+        <a href="#利用-flexbox-去除多余的外边距"
+          >利用 Flexbox 去除多余的外边距</a
+        >
+      </li>
+      <li>
+        <a href="#利用属性选择器来选择空链接">利用属性选择器来选择空链接</a>
+      </li>
+      <li><a href="#给-默认-链接定义样式">给 “默认” 链接定义样式</a></li>
+      <li><a href="#固定比例盒子">内在比例盒</a></li>
+      <li><a href="#为图裂定义样式">为图裂定义样式</a></li>
+      <li>
+        <a href="#用-rem-来调整全局大小用-em-来调整局部大小"
+          >用 rem 来调整全局大小；用 em 来调整局部大小</a
+        >
+      </li>
+      <li>
+        <a href="#隐藏没有静音自动播放的影片">隐藏没有静音、自动播放的影片</a>
+      </li>
+      <li>
+        <a href="#使用选择器root来控制字体弹性"
+          >使用选择器 <code>:root</code> 来控制字体弹性</a
+        >
+      </li>
+      <li>
+        <a href="#为更好的移动体验为表单元素设置字体大小"
+          >为更好的移动体验，为表单元素设置字体大小</a
+        >
+      </li>
+      <li>
+        <a href="#使用指针事件來控制鼠标事件">使用指针事件來控制鼠标事件</a>
+      </li>
+      <li>
+        <a href="#在用作间距的换行符上设置display-none"
+          >在用作间距的换行符上设置<code>display-none</code></a
+        >
+      </li>
+    </ol>
+    <h3 id="使用css复位">使用CSS复位</h3>
+    <p>
+      CSS复位可以在不同的浏览器上保持一致的样式风格。您可以使用CSS reset 库<a
+        href="http://necolas.github.io/normalize.css/"
+        >Normalize</a
+      >等，也可以使用一个更简化的复位方法：
+    </p>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb1-1" title="1"><span class="op">*,</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="op">*</span><span class="in">::before</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">*</span><span class="in">::after</span> {</a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="kw">box-sizing</span>: <span class="dv">border-box</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="kw">margin</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="kw">padding</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">}</a></code></pre>
+    </div>
+    <p>
+      现在元素的 margin 和 padding
+      已为0，<code>box-sizing</code>可以管理您的CSS盒模型布局。
+    </p>
+    <h4 id="演示">
+      <a href="http://codepen.io/AllThingsSmitty/pen/kkrkLL">演示</a>
+    </h4>
+    <p>
+      注意：如果你遵循接下来<a href="#inherit-box-sizing"
+        >继承 <code>box-sizing</code></a
+      >讲解的这个技巧, 你不需要在以上代码中添加 <code>box-sizing</code> 属性。
+    </p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="继承-box-sizing">继承 <code>box-sizing</code></h3>
+    <p>从 <code>html</code> 元素继承 <code>box-sizing</code> ：</p>
+    <div class="sourceCode" id="cb2">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb2-1" title="1">html {</a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="kw">box-sizing</span>: <span class="dv">border-box</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">}</a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="op">*,</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="op">*</span><span class="in">::before</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="op">*</span><span class="in">::after</span> {</a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="kw">box-sizing</span>: <span class="bu">inherit</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-9" title="9">}</a></code></pre>
+    </div>
+    <p>如此在插件或其它组件里改变 <code>box-sizing</code> 变得简单。</p>
+    <h4 id="演示-1">
+      <a
+        href="https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/"
+        >演示</a
+      >
+    </h4>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="使用unset而不是重置所有属性">
+      使用<code>unset</code>而不是重置所有属性
+    </h3>
+    <p>重置元素的属性时，不需要重置每个单独的属性：</p>
+    <div class="sourceCode" id="cb3">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1">button {</a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">background</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">border</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">color</span>: <span class="bu">inherit</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="kw">font</span>: <span class="bu">inherit</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="kw">outline</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="kw">padding</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">}</a></code></pre>
+    </div>
+    <p>
+      你可以用<code>all</code>简写來指定所有元素的属性。
+      将该值设置为<code>unset</code>会将元素的属性更改为其初始值：
+    </p>
+    <div class="sourceCode" id="cb4">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb4-1" title="1">button {</a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">all</span>: <span class="bu">unset</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      <strong>注意：</strong>
+      IE11不支持<code>all</code>和<code>unset</code>的簡寫。
+    </p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="使用-not-选择器来决定表单是否显示边框">
+      使用 <code>:not()</code> 选择器来决定表单是否显示边框
+    </h3>
+    <p>先为元素添加边框</p>
+    <div class="sourceCode" id="cb5">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb5-1" title="1"><span class="co">/* 添加边框 */</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co">.nav li {</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co">  border-right: 1px solid #666;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co">}</span></a></code></pre>
+    </div>
+    <p>为最后一个元素去除边框</p>
+    <div class="sourceCode" id="cb6">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb6-1" title="1"><span class="co">/* 去掉边框 */</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">.nav li:last-child {</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co">  border-right: none;</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">}</span></a></code></pre>
+    </div>
+    <p>不过不要这么做，使用 <code>:not()</code> 伪类来达到同样的效果：</p>
+    <div class="sourceCode" id="cb7">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">.nav</span> li<span class="in">:not(</span>:last-child<span class="in">)</span> {</a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">border-right</span>: <span class="dv">1</span><span class="dt">px</span> <span class="dv">solid</span> <span class="cn">#666</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">}</a></code></pre>
+    </div>
+    <p>CSS选择器以人类描述它的方式定义边界。</p>
+    <h4 id="演示-2">
+      <a href="http://codepen.io/AllThingsSmitty/pen/LkymvO">演示</a>
+    </h4>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="檢查字體是否在本地安裝">檢查字體是否在本地安裝</h3>
+    <p>
+      您可以在遠程獲取字體之前檢查是否在本地安裝了字體，這也是一個很好的性能提示。
+    </p>
+    <div class="sourceCode" id="cb8">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb8-1" title="1"><span class="im">@font-face</span> {</a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="kw">font-family</span>: <span class="st">&quot;Dank Mono&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="kw">src</span>:</a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="co">/* Full name */</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="fu">local(</span><span class="st">&quot;Dank Mono&quot;</span><span class="fu">)</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">    <span class="co">/* Postscript name */</span></a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="fu">local(</span><span class="st">&quot;Dank Mono&quot;</span><span class="fu">)</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-8" title="8">    <span class="co">/* Otherwise, download it! */</span></a>
+<a class="sourceLine" id="cb8-9" title="9">    <span class="fu">url(</span><span class="st">&quot;//...a.server/fonts/DankMono.woff&quot;</span><span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-10" title="10">}</a>
+<a class="sourceLine" id="cb8-11" title="11"></a>
+<a class="sourceLine" id="cb8-12" title="12">code {</a>
+<a class="sourceLine" id="cb8-13" title="13">  <span class="kw">font-family</span>: <span class="st">&quot;Dank Mono&quot;</span><span class="op">,</span> system-ui-monospace<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-14" title="14">}</a></code></pre>
+    </div>
+    <p>
+      H亞當·阿蓋爾（Adam Argyle）的帽子技巧，分享了這個技巧和<a
+        href="https://codepen.io/argyleink/pen/VwYJpgR"
+        >例子</a
+      >.
+    </p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="为-body-元素添加行高">为 <code>body</code> 元素添加行高</h3>
+    <p>
+      不必为每一个 <code>&lt;p&gt;</code>，<code>&lt;h*&gt;</code> 元素逐一添加
+      <code>line-height</code>，直接添加到 <code>body</code> 元素：
+    </p>
+    <div class="sourceCode" id="cb9">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb9-1" title="1">body {</a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="kw">line-height</span>: <span class="dv">1.5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">}</a></code></pre>
+    </div>
+    <p>文本元素可以很容易地继承 <code>body</code> 的样式。</p>
+    <h4 id="演示-3">
+      <a href="http://codepen.io/AllThingsSmitty/pen/VjbdYd">演示</a>
+    </h4>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="为表单元素设置focus">为表单元素设置<code>:focus</code></h3>
+    <p>
+      有視力的键盘用戶依靠焦點來確定键盘事件在頁面中的位置。
+      使表单元素的焦點脫穎而出，然后与浏览器的默认实现保持一致：
+    </p>
+    <div class="sourceCode" id="cb10">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb10-1" title="1">a<span class="in">:focus</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-2" title="2">button<span class="in">:focus</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-3" title="3">input<span class="in">:focus</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-4" title="4">select<span class="in">:focus</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-5" title="5">textarea<span class="in">:focus</span> {</a>
+<a class="sourceLine" id="cb10-6" title="6">  <span class="kw">box-shadow</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-7" title="7">  <span class="kw">outline</span>: <span class="cn">#000</span> <span class="dv">dotted</span> <span class="dv">2</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-8" title="8">  <span class="kw">outline-offset</span>: <span class="dv">.05</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-9" title="9">}</a></code></pre>
+    </div>
+    <h4 id="演示-4">
+      <a href="https://codepen.io/AllThingsSmitty/pen/ePzoOP/">演示</a>
+    </h4>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="垂直居中任何元素">垂直居中任何元素</h3>
+    <p>不！这绝不是黑魔法，真的可以垂直居中任何元素：</p>
+    <div class="sourceCode" id="cb11">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb11-1" title="1">html<span class="op">,</span></a>
+<a class="sourceLine" id="cb11-2" title="2">body {</a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="kw">height</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="kw">margin</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-5" title="5">}</a>
+<a class="sourceLine" id="cb11-6" title="6"></a>
+<a class="sourceLine" id="cb11-7" title="7">body {</a>
+<a class="sourceLine" id="cb11-8" title="8">  -webkit-align-items: <span class="dv">center</span><span class="op">;</span>  </a>
+<a class="sourceLine" id="cb11-9" title="9">  <span class="kw">-ms-flex-align</span>: <span class="dv">center</span><span class="op">;</span>  </a>
+<a class="sourceLine" id="cb11-10" title="10">  <span class="kw">align-items</span>: <span class="dv">center</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-11" title="11">  <span class="kw">display</span>: -webkit-flex<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-12" title="12">  <span class="kw">display</span>: flex<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-13" title="13">}</a></code></pre>
+    </div>
+    <p>…還有CSS Grid:</p>
+    <div class="sourceCode" id="cb12">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb12-1" title="1">body {</a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="kw">display</span>: grid<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="kw">height</span>: <span class="dv">100</span><span class="dt">vh</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="kw">margin</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" title="5">  <span class="kw">place-items</span>: <span class="dv">center</span> <span class="dv">center</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-6" title="6">}</a></code></pre>
+    </div>
+    <p>
+      这还不够？垂直方向，水平方向？任何元素，任何时间，任何地点？CSS-Tricks
+      <a href="https://css-tricks.com/centering-css-complete-guide/"
+        >有篇好文</a
+      >
+      讲到了各种居中的技巧。
+    </p>
+    <p>
+      <strong>注意：</strong> IE11 对 flexbox 的支持<a
+        href="https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items"
+        >有点 bug</a
+      >。
+    </p>
+    <h4 id="演示-5">
+      <a href="http://codepen.io/AllThingsSmitty/pen/GqmGqZ">演示</a>
+    </h4>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="逗号分隔列表">逗号分隔列表</h3>
+    <p>使列表的每项都由逗号分隔：</p>
+    <div class="sourceCode" id="cb13">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb13-1" title="1">ul <span class="op">&gt;</span> li<span class="in">:not(</span>:last-child<span class="in">)::after</span> {</a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="kw">content</span>: <span class="st">&quot;,&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">}</a></code></pre>
+    </div>
+    <p>因最后一项不加逗号，可以使用 <code>:not()</code> 伪类。</p>
+    <p>
+      <strong>注意：</strong>
+      这一技巧对于无障碍，特别是屏幕阅读器而言并不理想。而且复制粘贴并不会带走CSS生成的内容，需要注意。
+    </p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="使用负的-nth-child-来选择元素">
+      使用负的 <code>nth-child</code> 来选择元素
+    </h3>
+    <p>使用负的 <code>nth-child</code> 可以选择 1 至 n 个元素。</p>
+    <div class="sourceCode" id="cb14">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb14-1" title="1">li {</a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3">}</a>
+<a class="sourceLine" id="cb14-4" title="4"></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="co">/* 选择第 1 至第 3 个元素并显示出来 */</span></a>
+<a class="sourceLine" id="cb14-6" title="6">li<span class="in">:nth-child(-n+3)</span> {</a>
+<a class="sourceLine" id="cb14-7" title="7">  <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-8" title="8">}</a></code></pre>
+    </div>
+    <p>
+      或许你已经掌握了<a href="#use-not-to-applyunapply-borders-on-navigation"
+        >如何使用 <code>:not()</code></a
+      >这个技巧，试下这个：
+    </p>
+    <div class="sourceCode" id="cb15">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb15-1" title="1"><span class="co">/* 选择除前3个之外的所有项目，并显示它们 */</span></a>
+<a class="sourceLine" id="cb15-2" title="2">li<span class="in">:not(</span>:nth-child(-n<span class="op">+</span>3<span class="in">)</span>) {</a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4">}</a></code></pre>
+    </div>
+    <p>如此简单！</p>
+    <h4 id="演示-6">
+      <a href="http://codepen.io/AllThingsSmitty/pen/WxjKZp">演示</a>
+    </h4>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="使用-svg-图标">使用 SVG 图标</h3>
+    <p>没有理由不使用 SVG 图标：</p>
+    <div class="sourceCode" id="cb16">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb16-1" title="1"><span class="fu">.logo</span> {</a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="kw">background</span>: <span class="fu">url(</span><span class="st">&quot;logo.svg&quot;</span><span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      SVG 在所有分辨率下都可以良好缩放，并且支持所有
+      <a href="https://caniuse.com/#search=svg">IE9</a> 以后的浏览器，丢掉你的
+      .png，.jpg，或 .gif-jif-whatev 文件吧。
+    </p>
+    <p>
+      <strong>注意：</strong> 针对仅有图标的按钮，如果 SVG
+      没有加载成功的话，以下样式对无障碍有所帮助：
+    </p>
+    <div class="sourceCode" id="cb17">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb17-1" title="1"><span class="fu">.no-svg</span> <span class="fu">.icon-only</span><span class="in">::after</span> {</a>
+<a class="sourceLine" id="cb17-2" title="2">  <span class="kw">content</span>: <span class="fu">attr(</span>aria-label<span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb17-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="使用-形似猫头鹰-的选择器">使用 “形似猫头鹰” 的选择器</h3>
+    <p>
+      这个名字可能比较陌生，不过通用选择器 (<code>*</code>) 和 相邻兄弟选择器
+      (<code>+</code>) 一起使用，效果非凡：
+    </p>
+    <div class="sourceCode" id="cb18">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb18-1" title="1"><span class="op">*</span> <span class="op">+</span> <span class="op">*</span> {</a>
+<a class="sourceLine" id="cb18-2" title="2">  <span class="kw">margin-top</span>: <span class="dv">1.5</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb18-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      在此示例中，文档流中的所有的相邻兄弟元素将都将设置
+      <code>margin-top: 1.5em</code> 的样式。
+    </p>
+    <p>
+      更多 “形似猫头鹰” 的选择器，可参考 <em>A List Apart</em> 上面
+      <a href="http://alistapart.com/article/axiomatic-css-and-lobotomized-owls"
+        >Heydon Pickering 的文章</a
+      >
+    </p>
+    <h4 id="演示-7">
+      <a href="http://codepen.io/AllThingsSmitty/pen/grRvWq">演示</a>
+    </h4>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="使用-max-height-来建立纯-css-的滑块">
+      使用 <code>max-height</code> 来建立纯 CSS 的滑块
+    </h3>
+    <p><code>max-height</code> 与 overflow hidden 一起来建立纯 CSS 的滑块：</p>
+    <div class="sourceCode" id="cb19">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb19-1" title="1"><span class="fu">.slider</span> {</a>
+<a class="sourceLine" id="cb19-2" title="2">  <span class="kw">max-height</span>: <span class="dv">200</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-3" title="3">  <span class="kw">overflow-y</span>: <span class="dv">hidden</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-4" title="4">  <span class="kw">width</span>: <span class="dv">300</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-5" title="5">}</a>
+<a class="sourceLine" id="cb19-6" title="6"></a>
+<a class="sourceLine" id="cb19-7" title="7"><span class="fu">.slider</span><span class="in">:hover</span> {</a>
+<a class="sourceLine" id="cb19-8" title="8">  <span class="kw">max-height</span>: <span class="dv">600</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-9" title="9">  <span class="kw">overflow-y</span>: <span class="dv">scroll</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-10" title="10">}</a></code></pre>
+    </div>
+    <p>
+      鼠标移入滑块元素时增大它的
+      <code>max-height</code> 值，便可以显示溢出部分。
+    </p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="创造格子等宽的表格">创造格子等宽的表格</h3>
+    <p><code>table-layout: fixed</code> 可以让每个格子保持等宽：</p>
+    <div class="sourceCode" id="cb20">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb20-1" title="1"><span class="fu">.calendar</span> {</a>
+<a class="sourceLine" id="cb20-2" title="2">  <span class="kw">table-layout</span>: <span class="dv">fixed</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb20-3" title="3">}</a></code></pre>
+    </div>
+    <p>无痛的 table 布局。</p>
+    <h4 id="演示-8">
+      <a href="http://codepen.io/AllThingsSmitty/pen/jALALm">演示</a>
+    </h4>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="利用-flexbox-去除多余的外边距">利用 Flexbox 去除多余的外边距</h3>
+    <p>
+      与其使用 <code>nth-</code>， <code>first-</code>， 和
+      <code>last-child</code> 去除列之间多余的间隙，不如使用 flexbox 的
+      <code>space-between</code> 属性：
+    </p>
+    <div class="sourceCode" id="cb21">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb21-1" title="1"><span class="fu">.list</span> {</a>
+<a class="sourceLine" id="cb21-2" title="2">  <span class="kw">display</span>: flex<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-3" title="3">  <span class="kw">justify-content</span>: space-between<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-4" title="4">}</a>
+<a class="sourceLine" id="cb21-5" title="5"></a>
+<a class="sourceLine" id="cb21-6" title="6"><span class="fu">.list</span> <span class="fu">.person</span> {</a>
+<a class="sourceLine" id="cb21-7" title="7">  <span class="kw">flex-basis</span>: <span class="dv">23</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-8" title="8">}</a></code></pre>
+    </div>
+    <p>列之间的间隙总是均匀相等。</p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="利用属性选择器来选择空链接">利用属性选择器来选择空链接</h3>
+    <p>
+      当 <code>&lt;a&gt;</code> 元素没有文本内容，但有
+      <code>href</code> 属性的时候，显示它的 <code>href</code> 属性：
+    </p>
+    <div class="sourceCode" id="cb22">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb22-1" title="1">a<span class="ex">[href</span><span class="op">^=</span><span class="st">&quot;http&quot;</span><span class="ex">]</span><span class="in">:empty::before</span> {</a>
+<a class="sourceLine" id="cb22-2" title="2">  <span class="kw">content</span>: <span class="fu">attr(</span>href<span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb22-3" title="3">}</a></code></pre>
+    </div>
+    <p>相当简便。</p>
+    <h4 id="演示-9">
+      <a href="http://codepen.io/AllThingsSmitty/pen/zBzXRx">演示</a>
+    </h4>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="给-默认-链接定义样式">给 “默认” 链接定义样式</h3>
+    <p>给 “默认” 链接定义样式：</p>
+    <div class="sourceCode" id="cb23">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb23-1" title="1">a<span class="ex">[href]</span><span class="in">:not(</span><span class="ex">[class]</span><span class="in">)</span> {</a>
+<a class="sourceLine" id="cb23-2" title="2">  <span class="kw">color</span>: <span class="cn">#008000</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb23-3" title="3">  <span class="kw">text-decoration</span>: <span class="dv">underline</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb23-4" title="4">}</a></code></pre>
+    </div>
+    <p>
+      通过 CMS 系统插入的链接，通常没有
+      <code>class</code> 属性，以上样式可以甄别它们，而且不会影响其它样式。
+    </p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="固定比例盒子">固定比例盒子</h3>
+    <p>
+      要创建具有固定比例的一个盒子，所有你需要做的就是给 div
+      的顶部或底部设置一个 padding：
+    </p>
+    <div class="sourceCode" id="cb24">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb24-1" title="1"><span class="fu">.container</span> {</a>
+<a class="sourceLine" id="cb24-2" title="2">  <span class="kw">height</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-3" title="3">  <span class="kw">padding-bottom</span>: <span class="dv">20</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-4" title="4">  <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-5" title="5">}</a>
+<a class="sourceLine" id="cb24-6" title="6"></a>
+<a class="sourceLine" id="cb24-7" title="7"><span class="fu">.container</span> div {</a>
+<a class="sourceLine" id="cb24-8" title="8">  <span class="kw">border</span>: <span class="dv">2</span><span class="dt">px</span> <span class="dv">dashed</span> <span class="cn">#ddd</span><span class="op">;</span>  </a>
+<a class="sourceLine" id="cb24-9" title="9">  <span class="kw">height</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-10" title="10">  <span class="kw">left</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-11" title="11">  <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-12" title="12">  <span class="kw">top</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-13" title="13">  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-14" title="14">}</a></code></pre>
+    </div>
+    <p>
+      使用 20％ 的 padding-bottom 使得框等于其宽度的 20％
+      的高度。与视口宽度无关，子元素的 div 将保持其宽高比（100％/ 20％= 5:1）。
+    </p>
+    <h4 id="演示-10">
+      <a href="http://codepen.io/AllThingsSmitty/pen/jALZvE">演示</a>
+    </h4>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="为图裂定义样式">为图裂定义样式</h3>
+    <p>只要一点CSS就可以美化破损的图片：</p>
+    <div class="sourceCode" id="cb25">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb25-1" title="1">img {  </a>
+<a class="sourceLine" id="cb25-2" title="2">  <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-3" title="3">  <span class="kw">font-family</span>: <span class="dv">sans-serif</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-4" title="4">  <span class="kw">font-weight</span>: <span class="dv">300</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-5" title="5">  <span class="kw">height</span>: <span class="bu">auto</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-6" title="6">  <span class="kw">line-height</span>: <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-7" title="7">  <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-8" title="8">  <span class="kw">text-align</span>: <span class="dv">center</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-9" title="9">  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-10" title="10">}</a></code></pre>
+    </div>
+    <p>以添加伪元素的法则来显示用户信息和URL的引用：</p>
+    <div class="sourceCode" id="cb26">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb26-1" title="1">img<span class="in">::before</span> {  </a>
+<a class="sourceLine" id="cb26-2" title="2">  <span class="kw">content</span>: <span class="st">&quot;We&#39;re sorry, the image below is broken :(&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-3" title="3">  <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-4" title="4">  <span class="kw">margin-bottom</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-5" title="5">}</a>
+<a class="sourceLine" id="cb26-6" title="6"></a>
+<a class="sourceLine" id="cb26-7" title="7">img<span class="in">::after</span> {  </a>
+<a class="sourceLine" id="cb26-8" title="8">  <span class="kw">content</span>: <span class="st">&quot;(url: &quot;</span> <span class="fu">attr(</span>src<span class="fu">)</span> <span class="st">&quot;)&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-9" title="9">  <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-10" title="10">  <span class="kw">font-size</span>: <span class="dv">12</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-11" title="11">}</a></code></pre>
+    </div>
+    <p>
+      了解更多关于这类样式的技巧
+      <a href="https://github.com/ireade/">Ire Aderinokun</a> 的
+      <a href="http://bitsofco.de/styling-broken-images/">原帖</a>.
+    </p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="用-rem-来调整全局大小用-em-来调整局部大小">
+      用 <code>rem</code> 来调整全局大小；用 <code>em</code> 来调整局部大小
+    </h3>
+    <p>
+      在根元素设置基本字体大小后 (<code>html { font-size: 100%; }</code>), 使用
+      <code>em</code> 设置文本元素的字体大小:
+    </p>
+    <div class="sourceCode" id="cb27">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb27-1" title="1">h2 { </a>
+<a class="sourceLine" id="cb27-2" title="2">  <span class="kw">font-size</span>: <span class="dv">2</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-3" title="3">}</a>
+<a class="sourceLine" id="cb27-4" title="4"></a>
+<a class="sourceLine" id="cb27-5" title="5">p {</a>
+<a class="sourceLine" id="cb27-6" title="6">  <span class="kw">font-size</span>: <span class="dv">1</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-7" title="7">}</a></code></pre>
+    </div>
+    <p>然后设置模块的字体大小为 <code>rem</code>:</p>
+    <div class="sourceCode" id="cb28">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb28-1" title="1">article {</a>
+<a class="sourceLine" id="cb28-2" title="2">  <span class="kw">font-size</span>: <span class="dv">1.25</span><span class="dt">rem</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb28-3" title="3">}</a>
+<a class="sourceLine" id="cb28-4" title="4"></a>
+<a class="sourceLine" id="cb28-5" title="5">aside <span class="fu">.module</span> {</a>
+<a class="sourceLine" id="cb28-6" title="6">  <span class="kw">font-size</span>: <span class="dv">.9</span><span class="dt">rem</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb28-7" title="7">}</a></code></pre>
+    </div>
+    <p>现在，每个模块变得独立，更容易、灵活的样式便于维护。</p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="隐藏没有静音自动播放的影片">隐藏没有静音、自动播放的影片</h3>
+    <p>
+      这是一个自定义用户样式表的不错的技巧。避免在加载页面时自动播放。如果没有静音，则不显示视频：
+    </p>
+    <div class="sourceCode" id="cb29">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb29-1" title="1">video<span class="ex">[autoplay]</span><span class="in">:not(</span><span class="ex">[muted]</span><span class="in">)</span> {</a>
+<a class="sourceLine" id="cb29-2" title="2">  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb29-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      再次，我们利用了
+      <a href="#use-not-to-applyunapply-borders-on-navigation"
+        ><code>:not()</code></a
+      >
+      的优点。
+    </p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="使用选择器root灵活控制字体大小">
+      使用选择器<code>:root</code>灵活控制字体大小
+    </h3>
+    <p>
+      在响应式布局中，字体大小应需要根据不同的视口进行调整。你可以计算字体大小根据视口高度的字体大小和宽度，这时需要用到<code>:root</code>:
+    </p>
+    <div class="sourceCode" id="cb30">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb30-1" title="1"><span class="in">:root</span> {</a>
+<a class="sourceLine" id="cb30-2" title="2">  <span class="kw">font-size</span>: <span class="fu">calc(</span><span class="dv">1</span><span class="dt">vw</span> <span class="op">+</span> <span class="dv">1</span><span class="dt">vh</span> <span class="op">+</span> <span class="dv">.5</span>vmin<span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb30-3" title="3">}</a></code></pre>
+    </div>
+    <p>现在，您可以使用 <code>root em</code></p>
+    <div class="sourceCode" id="cb31">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb31-1" title="1">body {</a>
+<a class="sourceLine" id="cb31-2" title="2">  <span class="kw">font</span>: <span class="dv">1</span><span class="dt">rem</span>/<span class="dv">1.6</span> <span class="dv">sans-serif</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb31-3" title="3">}</a></code></pre>
+    </div>
+    <h4 id="演示-11">
+      <a href="http://codepen.io/AllThingsSmitty/pen/XKgOkR">演示</a>
+    </h4>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="为更好的移动体验为表单元素设置字体大小">
+      为更好的移动体验，为表单元素设置字体大小
+    </h3>
+    <p>
+      当触发<code>&lt;select&gt;</code>的下拉列表时，为了避免表单元素在移动浏览器（iOS
+      Safari 和其它）上的缩放，加上<code>font-size</code>：
+    </p>
+    <div class="sourceCode" id="cb32">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb32-1" title="1">input<span class="ex">[type</span><span class="op">=</span><span class="st">&quot;text&quot;</span><span class="ex">]</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb32-2" title="2">input<span class="ex">[type</span><span class="op">=</span><span class="st">&quot;number&quot;</span><span class="ex">]</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb32-3" title="3">select<span class="op">,</span></a>
+<a class="sourceLine" id="cb32-4" title="4">textarea {</a>
+<a class="sourceLine" id="cb32-5" title="5">  <span class="kw">font-size</span>: <span class="dv">16</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb32-6" title="6">}</a></code></pre>
+    </div>
+    <p>:dancer:</p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="使用指针事件來控制鼠标事件">使用指针事件來控制鼠标事件</h3>
+    <p>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events"
+        >指针事件</a
+      >允許您指定鼠标如何与其触摸的元素进行交互。
+      要禁用按钮上的默认指针事件，例如：
+    </p>
+    <div class="sourceCode" id="cb33">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb33-1" title="1"><span class="fu">.button-disabled</span> {</a>
+<a class="sourceLine" id="cb33-2" title="2">  <span class="kw">opacity</span>: <span class="dv">.5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-3" title="3">  <span class="kw">pointer-events</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-4" title="4">}</a></code></pre>
+    </div>
+    <p>就这么简单。</p>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="在用作间距的换行符上设置display-none">
+      在用作间距的换行符上设置<code>display: none</code>
+    </h3>
+    <p>
+      正如<a href="https://twitter.com/csswizardry/status/1170835532584235008"
+        >Harry Roberts指出</a
+      >，这有助于防止CMS用户使用额外的换行符
+    </p>
+    <div class="sourceCode" id="cb34">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb34-1" title="1">br <span class="op">+</span> br {</a>
+<a class="sourceLine" id="cb34-2" title="2">  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb34-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#目录">回目录</a></sup>
+    </p>
+    <h3 id="支持情况">支持情况</h3>
+    <p>
+      这些技巧适用于最新版的 Chrome, Firefox, Safari, Opera, Edge, 以及 IE11。
+    </p>
+  </body>
+</html>

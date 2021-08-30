@@ -1,0 +1,4 @@
+https://lucasgruwez.github.io/waffle-grid,Waffle Grid,https://github.com/afonsopacifer/awesome-flexbox#readme,Flexbox error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://zyxneo.github.io/flexbox/try-flexbox,Try Flexbox,https://github.com/afonsopacifer/awesome-flexbox#readme,Flexbox error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://afonsopacifer.github.io/flex-grid-framework/,Flex Grid Framework,https://github.com/afonsopacifer/awesome-flexbox#readme,Flexbox error: URLError(gaierror(8, 'nodename nor servname provided, or not known')) | reason: [Errno 8] nodename nor servname provided, or not known
+http://edsonjunior.com/um-guia-visual-para-flexbox/,Um guia visual para Flexbox (pt-br),https://github.com/afonsopacifer/awesome-flexbox#readme,Flexbox error: <HTTPError 504: 'Gateway Time-out'> | reason: Gateway Time-out

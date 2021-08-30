@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="pandoc" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=yes"
+        />
+        <title>free-programming-books-ja</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <h3 id="index">Index</h3>
+        <ul>
+            <li>
+                <a href="#0---%e8%a8%80%e8%aa%9e%e9%9d%9e%e4%be%9d%e5%ad%98"
+                    >0 - 言語非依存</a
+                >
+                <ul>
+                    <li>
+                        <a
+                            href="#%e3%82%a2%e3%82%af%e3%82%bb%e3%82%b7%e3%83%93%e3%83%aa%e3%83%86%e3%82%a3"
+                            >アクセシビリティ</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e3%82%aa%e3%83%bc%e3%83%97%e3%83%b3%e3%82%bd%e3%83%bc%e3%82%b9%e3%82%a8%e3%82%b3%e3%82%b7%e3%82%b9%e3%83%86%e3%83%a0"
+                            >オープンソースエコシステム</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e3%82%ac%e3%83%99%e3%83%bc%e3%82%b8%e3%82%b3%e3%83%ac%e3%82%af%e3%82%b7%e3%83%a7%e3%83%b3"
+                            >ガベージコレクション</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e3%82%b0%e3%83%a9%e3%83%95%e3%82%a3%e3%83%83%e3%82%af%e3%82%b9%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0"
+                            >グラフィックスプログラミング</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e3%82%b0%e3%83%a9%e3%83%95%e3%82%a3%e3%83%83%e3%82%af%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%bc%e3%83%95%e3%82%a7%e3%82%a4%e3%82%b9"
+                            >グラフィックユーザーインターフェイス</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e3%82%bb%e3%82%ad%e3%83%a5%e3%83%aa%e3%83%86%e3%82%a3"
+                            >セキュリティ</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e3%81%9d%e3%81%ae%e4%bb%96%e3%81%ae%e8%a9%b1%e9%a1%8c"
+                            >その他の話題</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%82%a2%e3%83%bc%e3%82%ad%e3%83%86%e3%82%af%e3%83%81%e3%83%a3"
+                            >ソフトウェアアーキテクチャ</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e9%96%8b%e7%99%ba%e6%96%b9%e6%b3%95%e8%ab%96"
+                            >ソフトウェア開発方法論</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e5%93%81%e8%b3%aa"
+                            >ソフトウェア品質</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e3%83%87%e3%83%bc%e3%82%bf%e3%83%99%e3%83%bc%e3%82%b9"
+                            >データベース</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%ad%e3%83%b3%e3%82%b0"
+                            >ネットワーキング</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#%e6%a9%9f%e6%a2%b0%e5%ad%a6%e7%bf%92"
+                            >機械学習</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#%e6%ad%a3%e8%a6%8f%e8%a1%a8%e7%8f%be"
+                            >正規表現</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e7%b5%84%e3%81%bf%e8%be%bc%e3%81%bf%e3%82%b7%e3%82%b9%e3%83%86%e3%83%a0"
+                            >組み込みシステム</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e4%b8%a6%e5%88%97%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0"
+                            >並列プログラミング</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#%e7%90%86%e8%ab%96%e8%a8%88%e7%ae%97%e6%a9%9f%e7%a7%91%e5%ad%a6"
+                            >理論計算機科学</a
+                        >
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#android">Android</a></li>
+            <li><a href="#applescript">AppleScript</a></li>
+            <li><a href="#awk">AWK</a></li>
+            <li><a href="#bash">Bash</a></li>
+            <li><a href="#c">C</a></li>
+            <li><a href="#cpp">C++</a></li>
+            <li><a href="#clojure">Clojure</a></li>
+            <li><a href="#coffeescript">CoffeeScript</a></li>
+            <li><a href="#common-lisp">Common Lisp</a></li>
+            <li><a href="#coq">Coq</a></li>
+            <li><a href="#d">D</a></li>
+            <li><a href="#elixir">Elixir</a></li>
+            <li><a href="#emacs-lisp">Emacs Lisp</a></li>
+            <li><a href="#erlang">Erlang</a></li>
+            <li><a href="#git">Git</a></li>
+            <li><a href="#go">Go</a></li>
+            <li>
+                <a href="#groovy">Groovy</a>
+                <ul>
+                    <li><a href="#gradle">Gradle</a></li>
+                    <li><a href="#grails">Grails</a></li>
+                    <li><a href="#spock-framework">Spock Framework</a></li>
+                </ul>
+            </li>
+            <li><a href="#haskell">Haskell</a></li>
+            <li><a href="#ios">iOS</a></li>
+            <li><a href="#java">Java</a></li>
+            <li>
+                <a href="#javascript">JavaScript</a>
+                <ul>
+                    <li><a href="#angularjs">Angular.js</a></li>
+                    <li><a href="#backbonejs">Backbone.js</a></li>
+                    <li><a href="#jquery">jQuery</a></li>
+                    <li><a href="#nodejs">Node.js</a></li>
+                    <li><a href="#react">React</a></li>
+                </ul>
+            </li>
+            <li><a href="#julia">Julia</a></li>
+            <li><a href="#latex">LaTeX</a></li>
+            <li><a href="#linux">Linux</a></li>
+            <li><a href="#lua">Lua</a></li>
+            <li><a href="#maven">Maven</a></li>
+            <li><a href="#mercurial">Mercurial</a></li>
+            <li><a href="#ml">ML</a></li>
+            <li><a href="#nosql">NoSQL</a></li>
+            <li><a href="#objective-c">Objective-C</a></li>
+            <li><a href="#ocaml">OCaml</a></li>
+            <li><a href="#perl">Perl</a></li>
+            <li>
+                <a href="#php">PHP</a>
+                <ul>
+                    <li><a href="#symfony">Symfony</a></li>
+                </ul>
+            </li>
+            <li><a href="#powershell">PowerShell</a></li>
+            <li><a href="#processing">Processing</a></li>
+            <li><a href="#prolog">Prolog</a></li>
+            <li>
+                <a href="#python">Python</a>
+                <ul>
+                    <li><a href="#flask">Flask</a></li>
+                </ul>
+            </li>
+            <li><a href="#r">R</a></li>
+            <li><a href="#ruby">Ruby</a></li>
+            <li><a href="#sather">Sather</a></li>
+            <li><a href="#scala">Scala</a></li>
+            <li><a href="#scheme">Scheme</a></li>
+            <li><a href="#scratch">Scratch</a></li>
+            <li><a href="#sed">sed</a></li>
+            <li><a href="#smalltalk">Smalltalk</a></li>
+            <li>
+                <a href="#sql%e5%ae%9f%e8%a3%85%e9%9d%9e%e4%be%9d%e5%ad%98"
+                    >SQL(実装非依存)</a
+                >
+            </li>
+            <li><a href="#standard-ml">Standard ML</a></li>
+            <li><a href="#swift">Swift</a></li>
+            <li><a href="#tcltk">Tcl/Tk</a></li>
+            <li><a href="#typescript">TypeScript</a></li>
+            <li><a href="#vba">VBA</a></li>
+            <li><a href="#vim">Vim</a></li>
+        </ul>
+        <h3 id="言語非依存">0 - 言語非依存</h3>
+        <h4 id="アクセシビリティ">アクセシビリティ</h4>
+        <ul>
+            <li>
+                <a
+                    href="https://developer.mozilla.org/ja/docs/ARIA/Accessible_Rich_Internet_Applications"
+                    >Accessible Rich Internet Applications</a
+                >
+                - MDN
+            </li>
+            <li>
+                <a href="https://developer.apple.com/jp/accessibility/ios"
+                    >iOS アクセシビリティ プログラミング ガイド</a
+                >
+                - Apple Developer
+            </li>
+            <li>
+                <a
+                    href="https://msdn.microsoft.com/ja-jp/library/windows/apps/hh700407.aspx"
+                    >アクセシビリティのための設計</a
+                >
+                - MSDN Library
+            </li>
+        </ul>
+        <h4 id="オープンソースエコシステム">オープンソースエコシステム</h4>
+        <ul>
+            <li>
+                <a href="https://opensource.guide/ja/"
+                    >オープンソースガイドライン</a
+                >
+                - GitHub
+            </li>
+            <li>
+                <a href="https://producingoss.com/ja/"
+                    >オープンソースソフトウェアの育て方</a
+                >
+                - Fogel Karl, 高木正弘(翻訳), Yoshinari Takaoka(翻訳)
+            </li>
+            <li>
+                <a href="https://github.com/oss-gate/first-feedback-guidebook"
+                    >これでできる！ はじめてのOSSフィードバックガイド ～
+                    #駆け出しエンジニアと繋がりたい
+                    と言ってた私が野生のつよいエンジニアとつながるのに必要だったこと～</a
+                >
+                - OSS Gate, 結城洋志 / Piro
+            </li>
+        </ul>
+        <h4 id="ガベージコレクション">ガベージコレクション</h4>
+        <ul>
+            <li>
+                <a href="http://matsu-www.is.titech.ac.jp/~endo/gc/gc.pdf"
+                    >一般教養としてのGarbage Collection</a
+                >
+                - 遠藤敏夫 (PDF)
+            </li>
+            <li>
+                <a href="https://github.com/authorNari/g1gc-impl-book/"
+                    >徹底解剖「G1GC」実装編</a
+                >
+                - 中村成洋
+            </li>
+        </ul>
+        <h4 id="グラフィックスプログラミング">グラフィックスプログラミング</h4>
+        <ul>
+            <li>
+                <a
+                    href="https://docs.microsoft.com/ja-jp/windows/uwp/gaming/directx-programming"
+                    >DirectX プログラミング</a
+                >
+                - Microsoft Docs
+            </li>
+            <li>
+                <a href="http://www.wakayama-u.ac.jp/~tokoi/opengl/libglut.html"
+                    >GLUTによる「手抜き」OpenGL入門</a
+                >
+                - 床井浩平
+            </li>
+            <li>
+                <a
+                    href="https://developer.apple.com/jp/documentation/3DDrawing/Conceptual/OpenGLES_ProgrammingGuide/Introduction/Introduction.html"
+                    >iOS OpenGL ES プログラミングガイド</a
+                >
+                - Apple Developer (HTML)
+            </li>
+            <li>
+                <a
+                    href="https://colorful-pico.net/introduction-to-addon-development-in-blender/2.7/"
+                    >はじめてのBlenderアドオン開発 (Blender 2.7版)</a
+                >
+                - nutti
+            </li>
+            <li>
+                <a
+                    href="http://www.natural-science.or.jp/laboratory/opengl_intro.php"
+                    >仮想物理実験室構築のためのOpenGL, WebGL, GLSL入門</a
+                >
+                - 遠藤理平
+            </li>
+        </ul>
+        <h4 id="グラフィックユーザーインターフェイス">
+            グラフィックユーザーインターフェイス
+        </h4>
+        <ul>
+            <li>
+                <a href="http://densan-labs.net/tech/qt/"
+                    >Qtプログラミング入門</a
+                >
+                -
+                <span class="citation" data-cites="nishio_dens"
+                    >@nishio_dens</span
+                >
+            </li>
+        </ul>
+        <h4 id="セキュリティ">セキュリティ</h4>
+        <ul>
+            <li>
+                <a href="http://www.cybersyndrome.net/rsa/">RSA暗号体験入門</a>
+                - CyberSyndrome
+            </li>
+            <li>
+                <a href="https://www.ipa.go.jp/files/000017319.pdf"
+                    >ウェブ健康診断仕様</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="https://herumi.github.io/ango/"
+                    >クラウドを支えるこれからの暗号技術</a
+                >
+                - 光成滋生 (PDF)
+            </li>
+            <li>
+                <a
+                    href="https://www.ipa.go.jp/security/awareness/vendor/programmingv2/"
+                    >セキュア・プログラミング講座</a
+                >
+                - 独立行政法人情報処理推進機構(IPA)
+            </li>
+            <li>
+                <a href="http://www.mew.org/~kazu/doc/rsa.html"
+                    >はやわかり RSA</a
+                >
+                - 山本和彦
+            </li>
+            <li>
+                <a href="https://www.ipa.go.jp/files/000017320.pdf"
+                    >安全なSQLの呼び出し方</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="https://www.ipa.go.jp/files/000017316.pdf"
+                    >安全なウェブサイトの作り方</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://fussy.web.fc2.com/algo/algo9-1.htm"
+                    >暗号化アルゴリズム ([1])</a
+                >
+                - Fussy (<a href="http://fussy.web.fc2.com/algo/algo9-2.htm"
+                    >2</a
+                >), (<a href="http://fussy.web.fc2.com/algo/algo9-3.htm">3</a>),
+                (<a href="http://fussy.web.fc2.com/algo/cipher4_elgamal.htm"
+                    >4</a
+                >)
+            </li>
+        </ul>
+        <h4 id="その他の話題">その他の話題</h4>
+        <ul>
+            <li>
+                <a href="http://tatsu-zine.com/books/kk1"
+                    >ケヴィン・ケリー著作選集　１</a
+                >
+                - ケヴィン・ケリー, 堺屋七左衛門(翻訳)
+            </li>
+            <li>
+                <a href="http://tatsu-zine.com/books/kk2"
+                    >ケヴィン・ケリー著作選集　２</a
+                >
+                - ケヴィン・ケリー, 堺屋七左衛門(翻訳)
+            </li>
+            <li>
+                <a href="http://tatsu-zine.com/books/kk3"
+                    >ケヴィン・ケリー著作選集　３</a
+                >
+                - ケヴィン・ケリー, 堺屋七左衛門(翻訳)
+            </li>
+            <li><a href="http://www.aoky.net">青木靖 翻訳集</a> - 青木靖</li>
+            <li>
+                <a href="http://practical-scheme.net/index-j.html"
+                    >川合史朗 翻訳集</a
+                >
+                - 川合史朗
+            </li>
+        </ul>
+        <h4 id="ソフトウェアアーキテクチャ">ソフトウェアアーキテクチャ</h4>
+        <ul>
+            <li>
+                <a href="http://www.hyuki.com/dp/cat_index.html"
+                    >ギコ猫とデザインパターン</a
+                >
+                - 結城浩
+            </li>
+            <li>
+                <a href="http://www.techscore.com/tech/DesignPattern/"
+                    >デザインパターン</a
+                >
+                - シナジーマーケティング株式会社
+            </li>
+        </ul>
+        <h4 id="ソフトウェア開発方法論">ソフトウェア開発方法論</h4>
+        <ul>
+            <li>
+                <a
+                    href="http://www.infoq.com/jp/minibooks/scrum-xp-from-the-trenches"
+                    >塹壕より Scrum と XP</a
+                >
+                - Henrik Kniberg
+            </li>
+        </ul>
+        <h4 id="ソフトウェア品質">ソフトウェア品質</h4>
+        <ul>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005144.pdf"
+                    >高信頼化ソフトウェアのための開発手法ガイドブック</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005118.pdf"
+                    >組込みシステムの安全性向上の勧め（機能安全編）</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005105.pdf"
+                    >組込みソフトウェア開発におけるプロジェクトマネジメント導入の勧め</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000027629.pdf"
+                    >組込みソフトウェア開発における品質向上の勧め
+                    [バグ管理手法編]</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005114.pdf"
+                    >組込みソフトウェア開発における品質向上の勧め
+                    [ユーザビリティ編]</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005113.pdf"
+                    >組込みソフトウェア開発における品質向上の勧め
+                    [設計モデリング編]</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005106.pdf"
+                    >組込みソフトウェア開発における品質向上の勧め（コーディング編）</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005149.pdf"
+                    >組込みソフトウェア開発における品質向上の勧め［テスト編～事例集～］</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+        </ul>
+        <h4 id="データベース">データベース</h4>
+        <ul>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000018652.pdf"
+                    >データベース</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+        </ul>
+        <h4 id="ネットワーキング">ネットワーキング</h4>
+        <ul>
+            <li>
+                <a href="https://http3-explained.haxx.se/ja/"
+                    >HTTP/3 explained</a
+                >
+                - Daniel Stenberg
+            </li>
+            <li>
+                <a href="https://http2-explained.haxx.se/ja">http2 explained</a>
+                - Daniel Stenberg
+            </li>
+            <li>
+                <a href="http://x68000.q-e-d.net/~68user/net/"
+                    >ネットワークプログラミングの基礎知識</a
+                >
+                - 68user
+            </li>
+        </ul>
+        <h4 id="機械学習">機械学習</h4>
+        <ul>
+            <li>
+                <a href="http://jubat.us/ja/"
+                    >Jubatus : オンライン機械学習向け分散処理フレームワーク</a
+                >
+            </li>
+            <li>
+                <a href="http://gihyo.jp/dev/serial/01/mahout"
+                    >Mahoutで体感する機械学習の実践</a
+                >
+                - やまかつ
+            </li>
+            <li>
+                <a href="http://gihyo.jp/dev/serial/01/machine-learning"
+                    >機械学習 はじめよう</a
+                >
+                - 中谷秀洋，恩田伊織
+            </li>
+            <li>
+                <a
+                    href="https://github.com/komi1230/Resume/raw/master/book_reinforcement/book.pdf"
+                    >強化学習入門</a
+                >
+                - 小南佑介 (PDF)
+            </li>
+        </ul>
+        <h4 id="正規表現">正規表現</h4>
+        <ul>
+            <li>
+                <a
+                    href="https://docs.microsoft.com/ja-jp/dotnet/standard/base-types/regular-expressions"
+                    >.NET の正規表現</a
+                >
+                - Microsoft Docs
+            </li>
+            <li>
+                <a href="http://www.kt.rim.or.jp/~kbk/regex/regex.html"
+                    >正規表現メモ</a
+                >
+                - 木村浩一
+            </li>
+        </ul>
+        <h4 id="組み込みシステム">組み込みシステム</h4>
+        <ul>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005123.pdf"
+                    >【改訂版】 組込みソフトウェア開発向け
+                    コーディング作法ガイド［C言語版］</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005146.pdf"
+                    >【改訂版】 組込みソフトウェア開発向け 品質作り込みガイド</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005126.pdf"
+                    >【改訂版】 組込みソフトウェア向け 開発プロセスガイド</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005142.pdf"
+                    >組込みソフトウェア開発向け
+                    コーディング作法ガイド［C++言語版］</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005116.pdf"
+                    >組込みソフトウェア向け
+                    プロジェクトマネジメントガイド［計画書編］</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005145.pdf"
+                    >組込みソフトウェア向け
+                    プロジェクト計画立案トレーニングガイド</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+            <li>
+                <a href="http://www.ipa.go.jp/files/000005148.pdf"
+                    >組込みソフトウェア向け 設計ガイド ESDR［事例編］</a
+                >
+                - 独立行政法人 情報処理推進機構(IPA) (PDF)
+            </li>
+        </ul>
+        <h4 id="並列プログラミング">並列プログラミング</h4>
+        <ul>
+            <li>
+                <a
+                    href="http://jp.xlsoft.com/documents/intel/compiler/525J-001.pdf"
+                    >インテル コンパイラー OpenMP 入門</a
+                >
+                - 戸室隆彦 (PDF)
+            </li>
+            <li>
+                <a
+                    href="http://www.cc.u-tokyo.ac.jp/support/press/news/VOL12/No1/201001gpgpu.pdf"
+                    >これからの並列計算のためのGPGPU連載講座 [I]</a
+                >
+                - 大島聡史 (<a
+                    href="http://www.cc.u-tokyo.ac.jp/support/press/news/VOL12/No2/201003gpgpu.pdf"
+                    >II</a
+                >), (<a
+                    href="http://www.cc.u-tokyo.ac.jp/support/press/news/VOL12/No3/201005_gpgpu2.pdf"
+                    >III</a
+                >), (<a
+                    href="http://www.cc.u-tokyo.ac.jp/support/press/news/VOL12/No4/201007_gpgpu.pdf"
+                    >VI</a
+                >), (<a
+                    href="http://www.cc.u-tokyo.ac.jp/support/press/news/VOL12/No5/201009_gpgpu.pdf"
+                    >V</a
+                >), (<a
+                    href="http://www.cc.u-tokyo.ac.jp/support/press/news/VOL12/No6/201011_gpgpu.pdf"
+                    >VI</a
+                >) (PDF)
+            </li>
+            <li>
+                <a
+                    href="http://www.cc.u-tokyo.ac.jp/support/press/news/VOL13/No1/Rensai201101.pdf"
+                    >連載講座: 高生産並列言語を使いこなす [1]</a
+                >
+                - 田浦健次朗 (<a
+                    href="http://www.cc.u-tokyo.ac.jp/support/press/news/VOL13/No3/Rensai201105.pdf"
+                    >2</a
+                >), (<a
+                    href="http://www.cc.u-tokyo.ac.jp/support/press/news/VOL13/No4/Rensai201107.pdf"
+                    >3</a
+                >), (<a
+                    href="http://www.cc.u-tokyo.ac.jp/support/press/news/VOL13/No5/Rennsai201109.pdf"
+                    >4</a
+                >), (<a
+                    href="http://www.cc.u-tokyo.ac.jp/support/press/news/VOL13/No6/Rennsai201111.pdf"
+                    >5</a
+                >) (PDF)
+            </li>
+        </ul>
+        <h4 id="理論計算機科学">理論計算機科学</h4>
+        <ul>
+            <li>
+                <a href="https://sicp.iijlab.net/fulltext/"
+                    >計算機プログラムの構造と解釈 第二版</a
+                >
+                - Gerald Jay Sussman et al.
+            </li>
+        </ul>
+        <h3 id="android">Android</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/TechBooster/AndroidOpenTextbook"
+                    >Android Open Text book</a
+                >
+                - TechBooster
+            </li>
+            <li>
+                <a href="https://www.jssec.org/report/securecoding.html"
+                    >Android アプリのセキュア設計・セキュアコーディングガイド</a
+                >
+                - 一般社団法人日本スマートフォンセキュリティ協会(JSSEC)
+            </li>
+            <li>
+                <a href="https://gist.github.com/nobuoka/6546813"
+                    >Android アプリ開発のための Java 入門</a
+                >
+                - id:nobuoka
+            </li>
+            <li>
+                <a href="https://mixi-inc.github.io/AndroidTraining/"
+                    >AndroidTraining</a
+                >
+                - mixi, Inc.
+            </li>
+            <li>
+                <a href="http://www.textdrop.net/android/code-style-ja.html"
+                    >コントリビュータのためのAndroidコードスタイルガイドライン
+                    日本語訳</a
+                >
+                - Android Open Source Project, Takashi Sasai(翻訳)
+            </li>
+        </ul>
+        <h3 id="applescript">AppleScript</h3>
+        <ul>
+            <li>
+                <a
+                    href="http://www.asahi-net.or.jp/~va5n-okmt/factory/applescript/sample_code/"
+                    >Applescript のごく基本的なサンプル</a
+                >
+                - Okamoto
+            </li>
+            <li>
+                <a
+                    href="https://sites.google.com/site/zzaatrans/home/applescriptlangguide"
+                    >AppleScript 言語ガイド(改訂版)</a
+                >
+            </li>
+        </ul>
+        <h3 id="awk">AWK</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://www.magata.net/memo/index.php?plugin=attach&amp;pcmd=open&amp;file=awk%A5%DE%A5%CB%A5%E5%A5%A2%A5%EB.pdf&amp;refer=%A5%B7%A5%A7%A5%EB%A5%B3%A5%DE%A5%F3%A5%C9"
+                    >AWK の第一歩</a
+                >
+                - 小栗栖修 (PDF)
+            </li>
+            <li>
+                <a href="http://shellscript.sunone.me/awk.html"
+                    >AWK リファレンス</a
+                >
+                - SUNONE
+            </li>
+            <li>
+                <a href="http://www.kt.rim.or.jp/~kbk/gawk-30/gawk_toc.html"
+                    >Effective AWK Programming</a
+                >
+                - Arnold D. Robbins
+            </li>
+        </ul>
+        <h3 id="bash">Bash</h3>
+        <ul>
+            <li>
+                <a
+                    href="http://linuxjf.osdn.jp/JFdocs/Bash-Prog-Intro-HOWTO.html"
+                    >BASH Programming - Introduction HOW-TO</a
+                >
+                - Mike G, 千旦裕司(翻訳)
+            </li>
+            <li>
+                <a
+                    href="http://d.hatena.ne.jp/nattou_curry_2/20100131/1264910483"
+                    >Bash 基礎文法最速マスター</a
+                >
+                - id:nattou_curry
+            </li>
+            <li>
+                <a href="https://yakst.com/ja/posts/2929"
+                    >Bashのよくある間違い</a
+                >
+                - GreyCat,
+                <span class="citation" data-cites="yakstcom">@yakstcom</span
+                >(翻訳)
+            </li>
+            <li>
+                <a
+                    href="https://github.com/jlevy/the-art-of-command-line/blob/master/README-ja.md"
+                    >The Art of Command Line</a
+                >
+                - Joshua Levy, Hayato Matsuura(翻訳)
+            </li>
+            <li>
+                <a href="http://shellscript.sunone.me"
+                    >UNIX &amp; Linux コマンド・シェルスクリプト リファレンス</a
+                >
+                - SUNONE
+            </li>
+        </ul>
+        <h3 id="c">C</h3>
+        <ul>
+            <li>
+                <a href="http://www.pro.or.jp/~fuji/mybooks/cdiag/"
+                    >Ｃプログラミング診断室</a
+                >
+                - 藤原博文
+            </li>
+            <li>
+                <a href="https://ja.wikibooks.org/wiki/C%E8%A8%80%E8%AA%9E"
+                    >C言語</a
+                >
+                - Wikibooks
+            </li>
+            <li>
+                <a href="https://docs.microsoft.com/ja-jp/cpp/c-language"
+                    >C言語のドキュメント</a
+                >
+                - Microsoft Docs
+            </li>
+            <li>
+                <a href="http://densan-labs.net/tech/clang/"
+                    >C言語プログラミング入門</a
+                >
+                -
+                <span class="citation" data-cites="nishio_dens"
+                    >@nishio_dens</span
+                >
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/linux/clang.html"
+                    >お気楽Ｃ言語プログラミング超入門</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a href="http://densan-labs.net/tech/game/"
+                    >ゲーム作りで学ぶ！実践的C言語プログラミング</a
+                >
+                -
+                <span class="citation" data-cites="nishio_dens"
+                    >@nishio_dens</span
+                >
+            </li>
+            <li>
+                <a href="https://9cguide.appspot.com">苦しんで覚えるＣ言語</a> -
+                MMGames/森口将憲
+            </li>
+            <li>
+                <a href="http://cms.phys.s.u-tokyo.ac.jp/~naoki/CIPINTRO/"
+                    >計算物理のためのC/C++言語入門</a
+                >
+                - 渡辺尚貴
+            </li>
+            <li>
+                <a href="http://kumei.ne.jp/c_lang/"
+                    >猫でもわかるプログラミング</a
+                >
+                - 粂井康孝
+            </li>
+        </ul>
+        <h3 id="cpp">C++</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://ezoeryou.github.io/cpp-book/C++11-Syntax-and-Feature.xhtml"
+                    >C++11の文法と機能(C++11: Syntax and Feature)</a
+                >
+                - 江添亮
+            </li>
+            <li>
+                <a href="http://www.asahi-net.or.jp/~yf8k-kbys/newcpp0.html"
+                    >C++入門</a
+                >
+                - 小林健一郎
+            </li>
+            <li>
+                <a href="https://cpprefjp.github.io"
+                    >cpprefjp - C++ Reference Site in Japanese</a
+                >
+            </li>
+            <li>
+                <a href="https://ttsuki.github.io/styleguide/cppguide.ja.html"
+                    >Google C++ スタイルガイド 日本語全訳</a
+                >
+                - Benjy Weinberger, Craig Silverstein, Gregory Eitzmann, Mark
+                Mentovai, Tashana Landray, ttsuki(翻訳)
+            </li>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20170607163002/http://episteme.wankuma.com/stlprog/"
+                    >Standard Template Library プログラミング</a
+                >
+                - επιστημη
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/linux/cpp.html"
+                    >お気楽Ｃ++プログラミング超入門</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a href="http://www7b.biglobe.ne.jp/~robe/cpphtml/"
+                    >ロベールのＣ＋＋教室</a
+                >
+                - ロベール
+            </li>
+            <li>
+                <a href="https://ezoeryou.github.io/cpp-intro/"
+                    >江添亮のC++入門</a
+                >
+                - 江添亮
+            </li>
+        </ul>
+        <h3 id="clojure">Clojure</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/totakke/clojure-style-guide"
+                    >Clojureスタイルガイド</a
+                >
+                - Bozhidar Batsov, Toshiki TAKEUCHI(翻訳)
+            </li>
+            <li>
+                <a href="https://github.com/TranslateBabelJapan/modern-cljs"
+                    >Modern cljs(翻訳中)</a
+                >
+                - Mimmo Cosenza,
+                <span class="citation" data-cites="esehara">@esehara</span
+                >(翻訳)
+            </li>
+            <li>
+                <a href="https://github.com/making/rd-clj">逆引きClojure</a> -
+                Toshiaki Maki
+            </li>
+        </ul>
+        <h3 id="coffeescript">CoffeeScript</h3>
+        <ul>
+            <li>
+                <a
+                    href="http://memo.sappari.org/coffeescript/coffeescript-langref"
+                    >CoffeeScript 言語リファレンス</a
+                >
+            </li>
+            <li>
+                <a href="http://blog.bokuweb.me/entry/2015/01/06/190240"
+                    >CoffeeScript基礎文法最速マスター</a
+                >
+                - id:bokuweb
+            </li>
+            <li>
+                <a href="http://minghai.github.io/library/coffeescript/"
+                    >The Little Book on CoffeeScript</a
+                >
+                - Alex MacCaw, Narumi Katoh(翻訳)
+            </li>
+            <li>
+                <a href="http://kyu-mu.net/coffeescript/revref/"
+                    >基本操作逆引きリファレンス（CoffeeScript）</a
+                >
+                - 飯塚直
+            </li>
+            <li>
+                <a href="http://kyu-mu.net/coffeescript/regexp/"
+                    >正規表現リファレンス（CoffeeScript)</a
+                >
+                - 飯塚直
+            </li>
+        </ul>
+        <h3 id="common-lisp">Common Lisp</h3>
+        <ul>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/xyzzy_lisp.html#abclisp"
+                    >Common Lisp 入門</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a
+                    href="https://lisphub.jp/doc/google-common-lisp-style-guide/lispguide.xml"
+                    >Google Common Lisp スタイルガイド 日本語訳</a
+                >
+                - Robert Brown, François-René Rideau, TOYOZUMIKouichi 他(翻訳)
+            </li>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20060526095202/http://home.soka.ac.jp/~unemi/LispProlog/"
+                    >LISP and PROLOG</a
+                >
+                - 畝見達夫
+            </li>
+            <li>
+                <a href="http://www.asahi-net.or.jp/~kc7k-nd/"
+                    >On Lisp (草稿)</a
+                >
+                - Paul Graham, 野田開(翻訳)
+            </li>
+            <li>
+                <a href="http://lambda.bugyo.tk/cdr/mwl/"
+                    >マンガで分かるLisp(Manga Guide to Lisp)</a
+                >
+                - λ組
+            </li>
+        </ul>
+        <h3 id="coq">Coq</h3>
+        <ul>
+            <li>
+                <a href="http://proofcafe.org/sf/">ソフトウェアの基礎</a> -
+                Benjamin C. Pierce, Chris Casinghino, Michael Greenberg, Vilhelm
+                Sjöberg, Brent Yorgey, 梅村晃広(翻訳), 片山功士(翻訳),
+                水野洋樹(翻訳), 大橋台地(翻訳), 増子萌(翻訳), 今井宜洋(翻訳)
+            </li>
+        </ul>
+        <h3 id="d">D</h3>
+        <ul>
+            <li>
+                <a href="https://gist.github.com/repeatedly/2470712"
+                    >D言語基礎文法最速マスター</a
+                >
+                - Masahiro Nakagawa
+            </li>
+        </ul>
+        <h3 id="elixir">Elixir</h3>
+        <ul>
+            <li>
+                <a href="http://qiita.com/niku/items/729ece76d78057b58271"
+                    >Elixir 基礎文法最速マスター</a
+                >
+                - niku
+            </li>
+        </ul>
+        <h3 id="emacs-lisp">Emacs Lisp</h3>
+        <ul>
+            <li>
+                <a href="http://d.hatena.ne.jp/rubikitch/20100201/elispsyntax"
+                    >Emacs Lisp基礎文法最速マスター</a
+                >
+                - id:rubikitch
+            </li>
+            <li>
+                <a href="http://www.fan.gr.jp/~ring/doc/elisp_20/elisp.html"
+                    >GNU Emacs Lispリファレンスマニュアル</a
+                >
+            </li>
+        </ul>
+        <h3 id="erlang">Erlang</h3>
+        <ul>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/func/erlang.html"
+                    >お気楽 Erlang プログラミング入門</a
+                >
+                - 広井誠
+            </li>
+        </ul>
+        <h3 id="git">Git</h3>
+        <ul>
+            <li>
+                <a href="http://rogerdudler.github.io/git-guide/index.ja.html"
+                    >git - 簡単ガイド</a
+                >
+                - Roger Dudler,
+                <span class="citation" data-cites="nacho4d">@nacho4d</span
+                >(翻訳)
+            </li>
+            <li>
+                <a
+                    href="http://cdn8.atwikiimg.com/git_jp/pub/git-manual-jp/Documentation/user-manual.html"
+                    >Git ユーザマニュアル (バージョン 1.5.3 以降用)</a
+                >
+                - Yasuaki Narita
+            </li>
+            <li>
+                <a
+                    href="https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.ja.md"
+                    >GitHubカンニング・ペーパー</a
+                >
+                - Tim Green, marocchino(翻訳)
+            </li>
+            <li>
+                <a href="http://git-scm.com/book/ja/">Pro Git</a> - Scott
+                Chacon, 高木正弘 他(翻訳) (<a
+                    href="https://raw.github.com/progit-ja/progit/master/progit.ja.pdf"
+                    >PDF</a
+                >,
+                <a
+                    href="https://raw.github.com/progit-ja/progit/master/progit.ja.epub"
+                    >EPUB</a
+                >,
+                <a
+                    href="https://raw.github.com/progit-ja/progit/master/progit.ja.mobi"
+                    >MOBI</a
+                >)
+            </li>
+            <li>
+                <a href="http://o2project.github.io/steins-git/"
+                    >Steins;Git 第二版</a
+                >
+                - Shota Kubota
+            </li>
+            <li>
+                <a href="https://backlog.com/ja/git-tutorial/"
+                    >サルでもわかるGit入門</a
+                >
+                - 株式会社ヌーラボ
+            </li>
+            <li>
+                <a href="https://github.com/hatena/Git-for-Designers"
+                    >デザイナのための Git</a
+                >
+                - はてな教科書
+            </li>
+            <li>
+                <a
+                    href="http://marklodato.github.io/visual-git-guide/index-ja.html"
+                    >図解 Git</a
+                >
+                - Mark Lodato, Kazu Yamamoto(翻訳)
+            </li>
+        </ul>
+        <h3 id="go">Go</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://knsh14.github.io/translations/go-codereview-comments/"
+                    >Go Codereview Comments</a
+                >
+                - Kenshi Kamata
+            </li>
+            <li>
+                <a
+                    href="https://astaxie.gitbooks.io/build-web-application-with-golang/content/ja/"
+                    >Go Web プログラミング</a
+                >
+                - AstaXie
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/golang/"
+                    >お気楽 Go 言語プログラミング入門</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a href="https://www.spinute.org/go-by-example/"
+                    >サンプルで学ぶ Go 言語</a
+                >
+                - Mark McGranaghan, spinute(翻訳)
+            </li>
+            <li>
+                <a href="https://andmorefine.gitbook.io/learn-go-with-tests/"
+                    >テスト駆動開発でGO言語を学びましょう</a
+                >
+                - Christopher James, andmorefine(翻訳)
+            </li>
+            <li>
+                <a href="https://gihyo.jp/dev/feature/01/go_4beginners"
+                    >はじめてのGo―シンプルな言語仕様，型システム，並行処理</a
+                >
+                - Jxck
+            </li>
+            <li>
+                <a href="http://go.shibu.jp"
+                    >プログラミング言語 Go ドキュメント</a
+                >
+                - The Go Authors, SHIBUKAWA Yoshiki 他(翻訳)
+            </li>
+        </ul>
+        <h3 id="groovy">Groovy</h3>
+        <ul>
+            <li>
+                <a href="http://grails.jp/g_mag_jp/">JGGUG G*Magazine</a> -
+                JGGUG(日本Grails/Groovyユーザーグループ) (PDF, EPUB)
+            </li>
+        </ul>
+        <h4 id="gradle">Gradle</h4>
+        <ul>
+            <li>
+                <a href="http://gradle.monochromeroad.com/docs/"
+                    >Gradle 日本語ドキュメント</a
+                >
+                - Hayashi Masatoshi, Sekiya Kazuchika, Sue Nobuhiro, Mochida
+                Shinya (<a
+                    href="http://gradle.monochromeroad.com/docs/userguide/userguide.pdf"
+                    >PDF</a
+                >)
+            </li>
+            <li>
+                <a href="https://www.ntts.co.jp/column/tec/java_03/"
+                    >ビルドツールGradleスタートアップガイドの紹介</a
+                >
+                - 鈴木雅貴
+            </li>
+        </ul>
+        <h4 id="grails">Grails</h4>
+        <ul>
+            <li>
+                <a href="http://grails.jp/doc/latest/"
+                    >Grailsフレームワーク 日本語リファレンス</a
+                >
+                - T.Yamamoto &amp; Japanese Grails Doc Translating Team. Special
+                thanks to NTT Software.
+            </li>
+            <li>
+                <a href="https://www.ntts.co.jp/column/tec/java_02/"
+                    >Grailsを用いたファイルアップローダ作成</a
+                >
+                - 須藤悠
+            </li>
+        </ul>
+        <h4 id="spock-framework">Spock Framework</h4>
+        <ul>
+            <li>
+                <a
+                    href="https://github.com/yamkazu/spock-workshop/tree/master/docs"
+                    >G*ワークショップZ May 2013 - Spockハンズオンの資料</a
+                >
+                - Kazuki YAMAMOTO
+            </li>
+            <li>
+                <a
+                    href="http://spock-framework-reference-documentation-ja.readthedocs.org/ja/latest/"
+                    >Spock Framework リファレンスドキュメント</a
+                >
+                - Peter Niederwieser, Kazuki YAMAMOTO
+            </li>
+        </ul>
+        <h3 id="haskell">Haskell</h3>
+        <ul>
+            <li>
+                <a href="http://www.shido.info/hs/">Haskell のお勉強</a> -
+                紫藤貴文
+            </li>
+            <li>
+                <a href="https://ruicc.hatenablog.jp/entry/20100131/1264905896"
+                    >Haskell 基礎文法最速マスター</a
+                >
+                - id:ruicc
+            </li>
+            <li>
+                <a href="https://aiya000.gitbooks.io/haskell_de_groupstructure/"
+                    >Haskellでわかる代数的構造</a
+                >
+                - aiya000
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/func/haskell.html"
+                    >お気楽 Haskell プログラミング入門</a
+                >
+                - 広井誠
+            </li>
+        </ul>
+        <h3 id="ios">iOS</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20170507034234/http://hmdt.jp/tips/cocoa/index.html"
+                    >Cocoa Programming Tips 1001</a
+                >
+                - 木下誠
+            </li>
+            <li>
+                <a
+                    href="https://developer.apple.com/jp/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/Introduction/Introduction.html"
+                    >iOSアプリケーション プログラミングガイド</a
+                >
+                - Apple Developer (PDF)
+            </li>
+            <li>
+                <a href="http://tutorial.rubymotion.jp"
+                    >RubyMotion Tutorial: Ruby で iOS アプリを作ろう</a
+                >
+                - Clay Allsopp, RubyMotion JP(翻訳)
+            </li>
+        </ul>
+        <h3 id="java">Java</h3>
+        <ul>
+            <li>
+                <a
+                    href="http://d.hatena.ne.jp/nattou_curry_2/20100130/1264821094"
+                    >Java基礎文法最速マスター</a
+                >
+                - id:nattou_curry
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/java/"
+                    >お気楽 Java プログラミング入門</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a
+                    href="http://seiza.dip.jp/link/files/writingrobustjavacode.pdf"
+                    >頑健なJavaプログラムの書き方</a
+                >
+                - Scott W. Ambler, 高橋徹(翻訳) (PDF)
+            </li>
+        </ul>
+        <h3 id="javascript">JavaScript</h3>
+        <ul>
+            <li>
+                <a href="https://mitsuruog.github.io/javascript-style-guide/"
+                    >Airbnb JavaScript スタイルガイド</a
+                >
+                - Airbnb, 小川充(翻訳)
+            </li>
+            <li>
+                <a href="https://w.atwiki.jp/aias-jsstyleguide2/"
+                    >Google JavaScript スタイルガイド</a
+                >
+                - Aaron Whyte, Bob Jervis, Dan Pupius, Erik Arvidsson, Fritz
+                Schneider, Robby Walker, aiaswood(翻訳)
+            </li>
+            <li>
+                <a href="http://bonsaiden.github.io/JavaScript-Garden/ja/"
+                    >JavaScript Garden</a
+                >
+                - Ivo Wetzel, HIRAKI Satoru(翻訳)
+            </li>
+            <li>
+                <a
+                    href="https://azu.gitbooks.io/javascript-plugin-architecture/content/"
+                    >JavaScript Plugin Architecture</a
+                >
+                - azu
+            </li>
+            <li>
+                <a href="https://jsprimer.net">JavaScript Primer</a> - azu,
+                Suguru Inatomi
+            </li>
+            <li>
+                <a href="https://azu.github.io/promises-book/"
+                    >JavaScript Promiseの本</a
+                >
+                - azu
+            </li>
+            <li>
+                <a
+                    href="https://developer.mozilla.org/ja/docs/JavaScript_style_guide"
+                    >JavaScript style guide</a
+                >
+                - MDN
+            </li>
+            <li>
+                <a href="http://gifnksm.hatenablog.jp/entry/20100131/1264934942"
+                    >JavaScript 基礎文法最速マスター</a
+                >
+                - id:gifnksm
+            </li>
+            <li>
+                <a href="https://msdn.microsoft.com/ja-jp/library/d1et7k7c.aspx"
+                    >JavaScript 言語リファレンス</a
+                >
+                - MSDN Library
+            </li>
+            <li>
+                <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript"
+                    >Mozilla Developer Network 日本語ドキュメント</a
+                >
+                - MDN
+            </li>
+            <li>
+                <a
+                    href="https://the-little-book-of-busterjs.readthedocs.io/en/latest/"
+                    >The little book of Buster.JS</a
+                >
+                - azu
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/light/javascript.html"
+                    >お気楽 JavaScript プログラミング超入門</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a href="https://www.tohoho-web.com/js"
+                    >とほほのJavaScriptリファレンス</a
+                >
+                - 杜甫々
+            </li>
+            <li>
+                <a href="http://www.openspc2.org/JavaScript/"
+                    >一撃必殺JavaScript日本語リファレンス</a
+                >
+                - 古籏一浩
+            </li>
+            <li>
+                <a href="https://kenju.gitbooks.io/js_step-up-to-intermediate/"
+                    >中上級者になるためのJavaScript</a
+                >
+                - Kenju
+            </li>
+        </ul>
+        <h4 id="angular.js">Angular.js</h4>
+        <ul>
+            <li><a href="https://angular.jp/docs">Angular Docs</a></li>
+            <li>
+                <a href="http://js.studio-kingdom.com/angularjs"
+                    >AngularJS 1.2 日本語リファレンス</a
+                >
+                - <span class="citation" data-cites="tomof">@tomof</span>(翻訳)
+            </li>
+            <li>
+                <a href="http://lab.hisasann.com/AngularJSTutorial/"
+                    >AngularJS’s tutorial - あなたとともにAngularJS</a
+                >
+                - <span class="citation" data-cites="hisasann">@hisasann</span>
+            </li>
+            <li>
+                <a
+                    href="https://github.com/mgechev/angularjs-style-guide/blob/master/README-ja-jp.md"
+                    >AngularJSスタイルガイド</a
+                >
+            </li>
+            <li>
+                <a href="http://8th713.github.io/LearnAngularJS"
+                    >すぐできる AngularJS</a
+                >
+                - <span class="citation" data-cites="8th713">@8th713</span>
+            </li>
+        </ul>
+        <h4 id="backbone.js">Backbone.js</h4>
+        <ul>
+            <li>
+                <a href="https://github.com/enja-oss/Backbone"
+                    >Backboneドキュメント日本語訳</a
+                >
+                - Jeremy Ashkenas,
+                <span class="citation" data-cites="studiomohawk"
+                    >@studiomohawk</span
+                >(監訳)
+            </li>
+        </ul>
+        <h4 id="jquery">jQuery</h4>
+        <ul>
+            <li>
+                <a href="http://stacktrace.jp/jquery/ui/"
+                    >jQuery UI API 1.8.4 日本語リファレンス</a
+                >
+                - いけまさ
+            </li>
+            <li>
+                <a href="http://semooh.jp/jquery/">jQuery日本語リファレンス</a>
+                - semooh.jp
+            </li>
+        </ul>
+        <h4 id="node.js">Node.js</h4>
+        <ul>
+            <li>
+                <a
+                    href="http://popkirby.github.io/contents/nodeguide/style.html"
+                    >Felix’s Node.js Style Guide</a
+                >
+                - Debuggable Limited.,
+                <span class="citation" data-cites="popkirby">@popkirby</span
+                >(翻訳)
+            </li>
+            <li>
+                <a href="https://github.com/omatoro/NodeSample"
+                    >node.js 怒濤の50サンプル!! – socket.io編</a
+                >
+                - omatoro
+            </li>
+            <li>
+                <a href="https://www.nodebeginner.org/index-jp.html"
+                    >Nodeビギナーズブック</a
+                >
+                - Manuel Kiessling, Yuki Kawashima(翻訳)
+            </li>
+        </ul>
+        <h4 id="react">React</h4>
+        <ul>
+            <li>
+                <a href="http://js.studio-kingdom.com/react"
+                    >React 0.13 日本語リファレンス</a
+                >
+                - <span class="citation" data-cites="tomof">@tomof</span>(翻訳)
+            </li>
+            <li>
+                <a
+                    href="https://facebook.github.io/react/docs/tutorial-ja-JP.html"
+                    >React チュートリアル</a
+                >
+                - Facebook Inc.
+            </li>
+        </ul>
+        <h3 id="julia">Julia</h3>
+        <ul>
+            <li>
+                <a href="https://stats.biopapyrus.jp/julia">Julia 0.3.8</a> -
+                孫建強
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/light/julia.html"
+                    >Julia Language Programming</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a
+                    href="https://www.dropbox.com/s/lk7y8lifjcr1vf2/JuliaBook-20151201.pdf"
+                    >実例で学ぶ Julia-0.4.1</a
+                >
+                - Yuichi Motoyama (PDF)
+            </li>
+            <li>
+                <a href="https://github.com/cometscome/Julianotes"
+                    >物理で使う数値計算入門：Julia言語による簡単数値計算</a
+                >
+                - 永井佑紀
+            </li>
+        </ul>
+        <h3 id="latex">LaTeX</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://ja.wikibooks.org/wiki/TeX/LaTeX%E5%85%A5%E9%96%80"
+                    >TeX/LaTeX入門</a
+                >
+                - Wikibooks
+            </li>
+            <li>
+                <a
+                    href="http://www.comp.tmu.ac.jp/tsakai/lectures/intro_tex.html"
+                    >TeX入門</a
+                >
+                - 酒井高司
+            </li>
+            <li>
+                <a href="https://texwiki.texjp.org/?TeX%E5%85%A5%E9%96%80"
+                    >TeX入門 TeX Wiki</a
+                >
+                - 奥村晴彦
+            </li>
+        </ul>
+        <h3 id="linux">Linux</h3>
+        <ul>
+            <li>
+                <a
+                    href="http://www.mech.tohoku-gakuin.ac.jp/rde/contents/linux/drivers/indexframe.html"
+                    >Linux Device Driver</a
+                >
+                - 熊谷正朗
+            </li>
+            <li>
+                <a href="http://lfsbookja.osdn.jp/7.4.ja/"
+                    >Linux from Scratch (Version 7.4)</a
+                >
+                - Gerard Beekmans, 松山道夫(翻訳)
+            </li>
+            <li>
+                <a href="http://linuxjf.osdn.jp/JFdocs/Secure-Programs-HOWTO/"
+                    >Secure Programming for Linux and Unix HOWTO</a
+                >
+                - David A. Wheeler, 高橋聡(翻訳)
+            </li>
+        </ul>
+        <h3 id="lua">Lua</h3>
+        <ul>
+            <li>
+                <a href="http://milkpot.sakura.ne.jp/lua/lua52_manual_ja.html"
+                    >Lua 5.2 リファレンスマニュアル</a
+                >
+                - Lua.org, PUC-Rio.
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/light/lua.html"
+                    >Lua Programming</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a href="https://densan-labs.net/tech/lua/"
+                    >Luaプログラミング入門</a
+                >
+                -
+                <span class="citation" data-cites="nishio_dens"
+                    >@nishio_dens</span
+                >
+            </li>
+        </ul>
+        <h3 id="maven">Maven</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://www.techscore.com/tech/Java/ApacheJakarta/Maven/index/"
+                    >Maven</a
+                >
+                - シナジーマーケティング株式会社
+            </li>
+            <li>
+                <a href="https://github.com/KengoTODA/what-is-maven"
+                    >What is Maven?</a
+                >
+                - Kengo TODA
+            </li>
+        </ul>
+        <h3 id="mercurial">Mercurial</h3>
+        <ul>
+            <li>
+                <a href="http://foozy.bitbucket.org/hgbook-ja/index.ja.html"
+                    >Mercurial: The Definitive Guide</a
+                >
+                - Bryan O’Sullivan, 藤原克則(翻訳)
+            </li>
+            <li>
+                <a
+                    href="https://mmitou.hatenadiary.org/entry/20100501/1272680474"
+                    >Mercurial チュートリアル hginit.com の和訳</a
+                >
+                - Joel Spolsky, id:mmitou(翻訳)
+            </li>
+        </ul>
+        <h3 id="ml">ML</h3>
+        <ul>
+            <li>
+                <a href="http://jats-ug.metasepi.org/doc/ATS2/INT2PROGINATS/"
+                    >ATSプログラミング入門</a
+                >
+            </li>
+        </ul>
+        <h3 id="nosql">NoSQL</h3>
+        <ul>
+            <li>
+                <a
+                    href="http://hibari.github.io/hibari-doc/hibari-app-developer-guide.ja.html"
+                    >Hibari アプリケーション開発者ガイド</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://www.cuspy.org/diary/2012-04-17/the-little-mongodb-book-ja.pdf"
+                    >MongoDBの薄い本</a
+                >
+                - Karl Seguin, 濱野司(翻訳) (PDF)
+            </li>
+            <li>
+                <a href="https://github.com/craftgear/the-little-redis-book"
+                    >The Little Redis Book</a
+                >
+                - Karl Seguin,
+                <span class="citation" data-cites="craftgear">@craftgear</span
+                >(翻訳)
+            </li>
+        </ul>
+        <h3 id="objective-c">Objective-C</h3>
+        <ul>
+            <li>
+                <a
+                    href="http://www.textdrop.net/google-styleguide-ja/objcguide.xml"
+                    >Google Objective-C スタイルガイド 日本語訳</a
+                >
+                - Mike Pinkerton, Greg Miller, Dave MacLachlan, Takashi
+                Sasai(翻訳)
+            </li>
+            <li>
+                <a href="https://marycore.jp/prog/objective-c/basic-syntax/"
+                    >Objective-C 2.0 基礎文法最速マスター</a
+                >
+                -
+                <span class="citation" data-cites="_marycore">@_marycore</span>
+            </li>
+            <li>
+                <a
+                    href="https://developer.apple.com/jp/devcenter/ios/library/documentation/ProgrammingWithObjectiveC.pdf"
+                    >Objective-C によるプログラミング</a
+                >
+                - Apple Developer (PDF)
+            </li>
+            <li>
+                <a
+                    href="https://developer.apple.com/jp/devcenter/ios/library/documentation/CocoaEncyclopedia.pdf"
+                    >Objective-C プログラミングの概念</a
+                >
+                - Apple Developer (PDF)
+            </li>
+            <li>
+                <a
+                    href="https://developer.apple.com/jp/documentation/ProgrammingWithObjectiveC.pdf"
+                    >Objective-C プログラミング言語</a
+                >
+                - Apple Developer (PDF)
+            </li>
+            <li>
+                <a href="https://fn7.hatenadiary.org/entry/20100203/1265207098"
+                    >Objective-C 最速基礎文法マスター</a
+                >
+                -id:fn7
+            </li>
+        </ul>
+        <h3 id="ocaml">OCaml</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20161128072705/http://www.fos.kuis.kyoto-u.ac.jp:80/~t-sekiym/classes/isle4/mltext/ocaml.html"
+                    >Objective Caml 入門</a
+                >
+                - 五十嵐淳
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/func/ocaml.html"
+                    >お気楽 OCaml プログラミング入門</a
+                >
+                - 広井誠
+            </li>
+        </ul>
+        <h3 id="perl">Perl</h3>
+        <ul>
+            <li>
+                <a href="https://qntm.org/files/perl/perl_jp.html"
+                    >2時間半で学ぶPerl</a
+                >
+                - Sam Hughes, Kato Atsusi(翻訳)
+            </li>
+            <li>
+                <a href="https://ja.wikibooks.org/wiki/Perl">Perl</a> -
+                Wikibooks
+            </li>
+            <li>
+                <a
+                    href="https://github.com/hatena/Hatena-Textbook/blob/master/database-programming-perl.md"
+                    >Perl でのデータベース操作</a
+                >
+                - はてな教科書
+            </li>
+            <li>
+                <a href="http://perldoc.jp/index/core"
+                    >Perl のコアドキュメント</a
+                >
+                - 一般社団法人 Japan Perl Association (JPA)
+            </li>
+            <li>
+                <a href="https://tutorial.perlzemi.com/blog/20091226126425.html"
+                    >Perl 基礎文法最速マスター</a
+                >
+                - 木本裕紀
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/linux/perl.html"
+                    >お気楽 Perl プログラミング超入門</a
+                >
+                - 広井誠
+            </li>
+        </ul>
+        <h3 id="php">PHP</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20140703001758/http://www.doyouphp.jp/book/book_phpdp.shtml"
+                    >PHP によるデザインパターン入門</a
+                >
+            </li>
+            <li>
+                <a href="https://www.php.net/manual/ja/">PHP マニュアル</a> -
+                The PHP Group
+            </li>
+            <li>
+                <a href="http://www.1x1.jp/blog/2010/01/php-basic-syntax.html"
+                    >PHP 基礎文法最速マスター</a
+                >
+                - 新原雅司
+            </li>
+            <li>
+                <a href="https://prev.net-newbie.com/support/pdf2/"
+                    >PHP4徹底攻略改訂版</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/maosanhioro/fig-standards/blob/master/translation/PSR-2-coding-style-guide.md"
+                    >PSR-2 – コーディングスタイルガイド</a
+                >
+                - maosanhioro
+            </li>
+        </ul>
+        <h4 id="symfony">Symfony</h4>
+        <ul>
+            <li>
+                <a
+                    href="https://symfony.com/doc/5.0/the-fast-track/ja/index.html"
+                    >Symfony 5: ファストトラック</a
+                >
+            </li>
+        </ul>
+        <h3 id="powershell">PowerShell</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://docs.microsoft.com/ja-jp/powershell/scripting/overview?view=powershell-6"
+                    >PowerShell スクリプト</a
+                >
+                - Microsoft Docs
+            </li>
+            <li>
+                <a href="http://winscript.jp/powershell/202"
+                    >PowerShell基礎文法最速マスター</a
+                >
+                - 牟田口大介
+            </li>
+        </ul>
+        <h3 id="processing">Processing</h3>
+        <ul>
+            <li>
+                <a href="http://www.musashinodenpa.com/p5/"
+                    >Processing クイックリファレンス</a
+                >
+                - 株式会社武蔵野電波
+            </li>
+            <li>
+                <a href="http://www.d-improvement.jp/learning/processing/"
+                    >Processing 学習ノート</a
+                >
+                -
+                <span class="citation" data-cites="mathatelle"
+                    >@mathatelle</span
+                >
+            </li>
+            <li>
+                <a href="http://ap.kakoku.net/index.html"
+                    >Processing 入門講座</a
+                >
+                - maeda
+            </li>
+        </ul>
+        <h3 id="prolog">Prolog</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20060526095202/http://home.soka.ac.jp/~unemi/LispProlog/"
+                    >LISP and PROLOG</a
+                >
+                - 畝見達夫
+            </li>
+            <li>
+                <a href="http://bach.istc.kobe-u.ac.jp/prolog/intro/"
+                    >Prolog プログラミング入門</a
+                >
+                - 田村直之
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/prolog/"
+                    >お気楽 Prolog プログラミング入門</a
+                >
+                - 広井誠
+            </li>
+        </ul>
+        <h3 id="python">Python</h3>
+        <ul>
+            <li>
+                <a href="http://diveintopython3-ja.rdy.jp"
+                    >Dive Into Python 3 日本語版</a
+                >
+                - Mark Pilgrim, Fukada(翻訳), Fujimoto(翻訳)
+            </li>
+            <li>
+                <a href="http://works.surgo.jp/translation/pyguide.html"
+                    >Google Python スタイルガイド</a
+                >
+                - Amit Patel, Antoine Picard, Eugene Jhong, Jeremy Hylton, Matt
+                Smart, Mike Shields, Kosei Kitahara(翻訳)
+            </li>
+            <li>
+                <a href="http://japanichaos.appspot.com"
+                    >Notes on scientific computing with python</a
+                >
+                - 花田康高
+            </li>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20160813152046/http://phpy.readthedocs.io/en/latest/"
+                    >php プログラマのための Python チュートリアル</a
+                >
+                - INADA Naoki
+            </li>
+            <li>
+                <a href="https://docs.python.org/ja/2.7/"
+                    >Python 2.7.16 ドキュメント日本語訳</a
+                >
+                - Python Software Foundation
+            </li>
+            <li>
+                <a href="https://stats.biopapyrus.jp/python">Python 3.4</a> -
+                孫建強
+            </li>
+            <li>
+                <a href="http://turbare.net/transl/scipy-lecture-notes/"
+                    >Python Scientific Lecture Notes</a
+                >
+                - 打田旭宏(翻訳)
+            </li>
+            <li>
+                <a
+                    href="http://aidiary.hatenablog.com/entry/20110514/1305377659"
+                    >Python で音声信号処理</a
+                >
+                - id:aidiary
+            </li>
+            <li>
+                <a href="http://www.s12600.net/psy/python/"
+                    >python で心理実験</a
+                >
+                - 十河宏行
+            </li>
+            <li>
+                <a href="http://www.nltk.org/book-jp/ch12.html"
+                    >Python による日本語自然言語処理</a
+                >
+                - Steven Bird, Ewan Klein, Edward Loper, 萩原正人(翻訳),
+                中山敬広(翻訳), 水野貴明(翻訳)
+            </li>
+            <li>
+                <a href="http://skitazaki.github.io/python-school-ja/"
+                    >Python の学習</a
+                >
+                - KITAZAKI Shigeru
+            </li>
+            <li>
+                <a href="https://python-guide-ja.readthedocs.io/en/latest/"
+                    >Python ヒッチハイク・ガイド</a
+                >
+                - Kenneth Reitz, Tsuyoshi Tokuda(翻訳)
+            </li>
+            <li>
+                <a href="http://methane.github.io/gevent-tutorial-ja/"
+                    >Python プログラマーのための gevent チュートリアル</a
+                >
+                - Stephen Diehl, Jérémy Bethmont, sww, Bruno Bigras, David
+                Ripton, Travis Cline, Boris Feld, youngsterxyf, Eddie Hebert,
+                Alexis Metaireau, Daniel Velkov, methane(翻訳)
+            </li>
+            <li>
+                <a href="https://dplusplus.hatenablog.com/entry/20100126/p1"
+                    >Python 基礎文法最速マスター</a
+                >
+                - id:dplusplus
+            </li>
+            <li>
+                <a
+                    href="https://sites.google.com/site/theprogramminghistorianja/"
+                    >The Programming Historian</a
+                >
+                - William J. Turkel, Alan MacEachern,
+                <span class="citation" data-cites="moroshigeki"
+                    >@moroshigeki</span
+                >(翻訳),
+                <span class="citation" data-cites="historyanddigi"
+                    >@historyanddigi</span
+                >(翻訳),
+                <span class="citation" data-cites="Say">@Say</span>_no(翻訳),
+                <span class="citation" data-cites="knagasaki">@knagasaki</span
+                >(翻訳),
+                <span class="citation" data-cites="mak">@mak</span>_goto(翻訳)
+            </li>
+            <li>
+                <a
+                    href="http://www.cauldron.sakura.ne.jp/thinkpython/thinkpython/ThinkPython.pdf"
+                    >Think
+                    Python：コンピュータサイエンティストのように考えてみよう</a
+                >
+                - Allen Downey, 相川 利樹（翻訳）(PDF)
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/light/"
+                    >お気楽 Python プログラミング入門</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a href="http://hdl.handle.net/2433/245698"
+                    >プログラミング演習 Python 2019</a
+                >
+                - 喜多一 (PDF)
+            </li>
+            <li>
+                <a href="https://coreblog.org/ats/stuff/minpy_web/"
+                    >みんなのPython Webアプリ編</a
+                >
+                - 柴田淳
+            </li>
+            <li>
+                <a href="http://www.kamishima.net/mlmpyja/"
+                    >機械学習の Python との出会い (Machine Learning Meets
+                    Python)</a
+                >
+                - 神嶌敏弘
+                <a href="http://www.kamishima.net/archive/mlmpyja.pdf">PDF</a>,
+                <a href="http://www.kamishima.net/archive/mlmpyja.epub">EPUB</a>
+            </li>
+        </ul>
+        <h4 id="flask">Flask</h4>
+        <ul>
+            <li>
+                <a href="https://flask-docs-ja.readthedocs.io/en/latest/"
+                    >Flask ドキュメント</a
+                >
+                - Armin Ronacher, Tsuyoshi Tokuda(翻訳)
+            </li>
+            <li>
+                <a href="http://methane.github.io/flask-handson/"
+                    >Flask ハンズオン</a
+                >
+                - INADA Naoki
+            </li>
+        </ul>
+        <h3 id="r">R</h3>
+        <ul>
+            <li><a href="https://stats.biopapyrus.jp/r">R</a> - 孫建強</li>
+            <li>
+                <a href="http://cse.naro.affrc.go.jp/takezawa/r-tips/r2.html"
+                    >R-Tips</a
+                >
+                - 舟尾暢男
+            </li>
+            <li>
+                <a
+                    href="https://cran.r-project.org/doc/contrib/manuals-jp/Mase-Rstatman.pdf"
+                    >R 基本統計関数マニュアル</a
+                >
+                - 間瀬茂 (PDF)
+            </li>
+            <li>
+                <a
+                    href="https://cran.r-project.org/doc/contrib/manuals-jp/R-lang.jp.v110.pdf"
+                    >R 言語定義</a
+                >
+                - R Development Core Team, 間瀬茂(翻訳) (PDF)
+            </li>
+            <li>
+                <a
+                    href="https://cran.r-project.org/doc/contrib/manuals-jp/R-intro-170.jp.pdf"
+                    >R 入門</a
+                >
+                - W. N. Venables, D. M. Smith and the R Development Core Team,
+                間瀬茂(翻訳) (PDF)
+            </li>
+            <li>
+                <a
+                    href="http://psycho.edu.yamaguchi-u.ac.jp/wordpress/wp-content/uploads/2014/01/R_tutorial20131.pdf"
+                    >Rチュートリアルセミナーテキスト</a
+                >
+                - 小杉考司, 押江隆 (PDF)
+            </li>
+            <li>
+                <a href="http://minato.sip21c.org/statlib/stat.pdf"
+                    >Rによる統計解析の基礎</a
+                >
+                - 中澤港 (PDF)
+            </li>
+            <li>
+                <a href="http://minato.sip21c.org/msb/medstatbook.pdf"
+                    >Rによる保健医療データ解析演習</a
+                >
+                - 中澤港 (PDF)
+            </li>
+            <li>
+                <a
+                    href="https://nuss.nagoya-u.ac.jp/index.php/s/kN6ZxsyReNzRPlM"
+                    >統計解析ソフトRのスクリプト集</a
+                >
+                - 石井秀宗 (PDF)
+            </li>
+            <li>
+                <a href="http://cse.naro.affrc.go.jp/takezawa/r-tips.pdf"
+                    >統計解析フリーソフトRの備忘録</a
+                >
+                - 竹澤邦夫 (PDF)
+            </li>
+            <li>
+                <a href="http://blue.zero.jp/yokumura/Rhtml/Haebera2002.html"
+                    >無料統計ソフトRで心理学</a
+                >
+                - 奥村泰之
+            </li>
+        </ul>
+        <h3 id="ruby">Ruby</h3>
+        <ul>
+            <li>
+                <a href="https://railsguides.jp">Ruby on Rails ガイド</a> -
+                Michael Hartl, 八田 昌三(翻訳), 安川 要平(翻訳)
+            </li>
+            <li>
+                <a href="https://railstutorial.jp"
+                    >Ruby on Rails チュートリアル</a
+                >
+                - Michael Hartl, 八田 昌三(翻訳), 安川 要平(翻訳)
+            </li>
+            <li>
+                <a href="http://i.loveruby.net/ja/rhg/book/"
+                    >Ruby ソースコード完全解説</a
+                >
+                - 青木峰郎
+            </li>
+            <li>
+                <a href="https://www.ruby-lang.org/ja/documentation/"
+                    >Ruby リファレンスマニュアル</a
+                >
+                - まつもとゆきひろ
+            </li>
+            <li>
+                <a href="https://route477.net/d/?date=20100125"
+                    >Ruby 基礎文法最速マスター</a
+                >
+            </li>
+            <li>
+                <a href="http://yasuhito.github.io/trema-book/"
+                    >TremaでOpenFlowプログラミング</a
+                >
+                - 高宮安仁, 鈴木一哉, 松井暢之, 村木暢哉, 山崎泰宏
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/light/ruby.html"
+                    >お気楽 Ruby プログラミング入門</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a href="https://tatsu-zine.com/books/scheme-in-ruby"
+                    >つくって学ぶプログラミング言語
+                    RubyによるScheme処理系の実装</a
+                >
+                - 渡辺昌寛
+            </li>
+            <li>
+                <a
+                    href="http://www.aoky.net/articles/why_poignant_guide_to_ruby/"
+                    >ホワイの(感動的)Rubyガイド</a
+                >
+                - why the lucky stiff, 青木靖(翻訳)
+            </li>
+            <li>
+                <a
+                    href="https://www.gentei.org/~yuuji/support/sr/scrp-2020-05.pdf"
+                    >実用的Rubyスクリプティング</a
+                >
+                - 広瀬雄二 (PDF)
+            </li>
+        </ul>
+        <h3 id="sather">Sather</h3>
+        <ul>
+            <li>
+                <a href="http://www.shido.info/sather/">Sather を試そう</a> -
+                紫藤貴文
+            </li>
+        </ul>
+        <h3 id="scala">Scala</h3>
+        <ul>
+            <li>
+                <a href="http://twitter.github.io/effectivescala/index-ja.html"
+                    >Effective Scala</a
+                >
+            </li>
+            <li>
+                <a href="http://eed3si9n.com/learning-scalaz/ja/"
+                    >Learning Scalaz</a
+                >
+            </li>
+            <li>
+                <a href="http://eed3si9n.com/tetrix-in-scala-html5-book"
+                    >tetrix in Scala</a
+                >
+            </li>
+        </ul>
+        <h3 id="scheme">Scheme</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20140521224625/http://karetta.jp/book-cover/gauche-hacks"
+                    >Gauche プログラミング(立読み版)</a
+                >
+                - 川合史朗(監修), Kahuaプロジェクト
+            </li>
+            <li>
+                <a
+                    href="http://practical-scheme.net/gauche/man/gauche-refj.html"
+                    >Gauche ユーザリファレンス</a
+                >
+                - 川合史朗
+            </li>
+            <li>
+                <a href="https://ja.wikibooks.org/wiki/Scheme">Scheme</a> -
+                Wikibooks
+            </li>
+            <li>
+                <a
+                    href="https://sites.google.com/site/atponslisp/home/scheme/racket/schemenyuumon-1/schemenyuumon"
+                    >Scheme 入門 スーパービギナー編</a
+                >
+            </li>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/func/scheme.html"
+                    >お気楽 Scheme プログラミング入門</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a href="http://www.shido.info/lisp/idx_scm.html"
+                    >もうひとつの Scheme 入門</a
+                >
+                - 紫藤貴文
+            </li>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20140812144348/http://www4.ocn.ne.jp/~inukai/scheme_primer_j.html"
+                    >入門Scheme</a
+                >
+                - 犬飼大
+            </li>
+        </ul>
+        <h3 id="scratch">Scratch</h3>
+        <ul>
+            <li>
+                <a href="https://kyorohiro.gitbooks.io/doc_scratch/"
+                    >炎の型 With Scratch (ゲームプログラム入門)</a
+                >
+                - kyorohiro
+            </li>
+        </ul>
+        <h3 id="sed">sed</h3>
+        <ul>
+            <li>
+                <a href="http://www.gcd.org/sengoku/sedlec/">SED 教室</a> -
+                仙石浩明
+            </li>
+        </ul>
+        <h3 id="smalltalk">Smalltalk</h3>
+        <ul>
+            <li>
+                <a href="https://swikis.ddo.jp/squeak/13"
+                    >自由自在 Squeakプログラミング</a
+                >
+                - 梅澤真史
+            </li>
+        </ul>
+        <h3 id="sql実装非依存">SQL(実装非依存)</h3>
+        <ul>
+            <li>
+                <a href="https://www.techscore.com/tech/sql/">SQL</a> -
+                シナジーマーケティング株式会社
+            </li>
+            <li>
+                <a href="http://mickindex.sakura.ne.jp/database/WDP/WDP_44.pdf"
+                    >SQLアタマ養成講座</a
+                >
+                - ミック WEB+DB Press Vol.44 (2008) p.47-72 (PDF)
+            </li>
+            <li>
+                <a href="http://mickindex.sakura.ne.jp"
+                    >SQLプログラミング作法</a
+                >
+                - ミック
+            </li>
+        </ul>
+        <h3 id="standard-ml">Standard ML</h3>
+        <ul>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/func/#sml"
+                    >お気楽 Standard ML of New Jersey 入門</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a
+                    href="https://www.pllab.riec.tohoku.ac.jp/smlsharp/docs/3.0/ja/manual.xhtml"
+                    >プログラミング言語SML#解説</a
+                >
+                - 大堀淳, 上野 雄大
+            </li>
+            <li>
+                <a
+                    href="https://www.pllab.riec.tohoku.ac.jp/smlsharp/smlIntroSlidesJP.pdf"
+                    >プログラミング言語Standard ML入門</a
+                >
+                - 大堀淳 (PDF)
+            </li>
+        </ul>
+        <h3 id="swift">Swift</h3>
+        <ul>
+            <li><a href="http://docs.fabo.io/swift/">逆引きSwift</a> - FaBo</li>
+        </ul>
+        <h3 id="tcltk">Tcl/Tk</h3>
+        <ul>
+            <li>
+                <a href="http://www.nct9.ne.jp/m_hiroi/tcl_tk.html"
+                    >Tcl/Tk お気楽 GUI プログラミング</a
+                >
+                - 広井誠
+            </li>
+            <li>
+                <a href="http://aoba.cc.saga-u.ac.jp/lecture/TclTk/text.pdf"
+                    >Tcl/Tk入門</a
+                >
+                - 只木進一 (PDF)
+            </li>
+        </ul>
+        <h3 id="typescript">TypeScript</h3>
+        <ul>
+            <li>
+                <a href="https://typescript-jp.gitbook.io/deep-dive/"
+                    >TypeScript Deep Dive 日本語版</a
+                >
+                - basarat, yohamta(翻訳)
+            </li>
+            <li>
+                <a href="https://msakamaki.github.io/clean-code-typescript/"
+                    >TypeScriptの為のクリーンコード</a
+                >
+                - labs42io, 酒巻 瑞穂(翻訳)
+            </li>
+        </ul>
+        <h3 id="vba">VBA</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://brain.cc.kogakuin.ac.jp/~kanamaru/lecture/vba2013/"
+                    >Excel 2013 で学ぶ Visual Basic for Applications (VBA)</a
+                >
+                - 金丸隆志
+            </li>
+            <li>
+                <a
+                    href="https://nattou-curry-2.hatenadiary.org/entry/20100129/1264787849"
+                    >VBA基礎文法最速マスター</a
+                >
+                - id:nattou_curry
+            </li>
+            <li>
+                <a
+                    href="https://docs.microsoft.com/ja-jp/office/vba/api/overview/language-reference"
+                    >Visual Basic for Applications (VBA) の言語リファレンス</a
+                >
+                - Microsoft Docs
+            </li>
+        </ul>
+        <h3 id="vim">Vim</h3>
+        <ul>
+            <li>
+                <a href="http://nanasi.jp/code.html"
+                    >Vim スクリプトリファレンス</a
+                >
+                - 小見拓
+            </li>
+            <li>
+                <a
+                    href="https://thinca.hatenablog.com/entry/20100201/1265009821"
+                    >Vim スクリプト基礎文法最速マスター</a
+                >
+                - id:thinca
+            </li>
+            <li>
+                <a href="https://vim-jp.org/vimdoc-ja/usr_41.html"
+                    >Vim スクリプト書法</a
+                >
+                - Bram Moolenaar, vimdoc-ja プロジェクト(翻訳)
+            </li>
+        </ul>
+    </body>
+</html>

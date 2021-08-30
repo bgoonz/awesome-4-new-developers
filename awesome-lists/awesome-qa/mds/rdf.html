@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>rdf</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="resrouce-description-frameworkrdf">
+      Resrouce Description Framework(RDF)
+    </h1>
+    <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+    <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+    <p>
+      <strong>Table of Contents</strong>
+      <em
+        >generated with
+        <a href="https://github.com/thlorenz/doctoc">DocToc</a></em
+      >
+    </p>
+    <ul>
+      <li>
+        <a href="#what-is-rdf">What is RDF</a>
+        <ul>
+          <li><a href="#events">Events</a></li>
+          <li>
+            <a href="#timeline-of-sementic-web-language"
+              >Timeline of Sementic Web Language</a
+            >
+          </li>
+          <li><a href="#graph-model">Graph Model</a></li>
+          <li>
+            <a href="#graph-expression-in-language"
+              >Graph Expression in Language</a
+            >
+          </li>
+          <li><a href="#rdf-dataset">RDF dataset</a></li>
+          <li>
+            <a href="#technical-specifications-introduced-by-rdf-primer"
+              >Technical Specifications introduced by RDF PRIMER</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+    <h2 id="what-is-rdf">What is RDF</h2>
+    <p>
+      : Framework for representing information(espeically metadata about web
+      resource) in the Web - Resouce - Description - Framework : For Machine
+      processible, readable, understandable Linked Data from web as database :
+      Has a <a href="#graph-model">Graph Model</a> - RDF Schema - RDF Schema
+      gives additional information(Domain, Range) about preoperty. - Describe
+      the type(or Class) of Resource. ex)Book, Person, Publisher - RDF Syntac
+    </p>
+    <h3 id="events">Events</h3>
+    <ul>
+      <li>
+        Mid 1990s: MCF(Meta Content Framework) - Ramanathan V. Guha &amp; Tim
+        Bray (Apple)
+      </li>
+      <li>1997: MCF/XML - Ramanathan V. Guha &amp; Tim Bray</li>
+      <li>1998: RDF - W3C</li>
+    </ul>
+    <h3 id="timeline-of-sementic-web-language">
+      Timeline of Sementic Web Language
+    </h3>
+    <ul>
+      <li>1970s: Ontology (information science)</li>
+      <li>1996 : XML (W3C WD)</li>
+      <li>1997 : RDF (W3C WD)</li>
+      <li>1998 : RDF Scheme (W3C WD)</li>
+      <li>1999 : DAML</li>
+      <li>1999 : OIL (Europe IST Project)</li>
+      <li>2000 : DAML+OIL</li>
+      <li>2002 : OWL (W3C WD)</li>
+      <li>2004 : SPARQL (WD)</li>
+    </ul>
+    <h3 id="graph-model">Graph Model</h3>
+    <ul>
+      <li>Subject — Predicate —&gt; Object</li>
+      <li>Resource — Property, Relation —&gt; Resource, Literal</li>
+      <li>URL or Blank Node — URL —&gt; URL or Literal</li>
+      <li>
+        ex) http:///dbpedia.org/resource/Billie_Jean has a singer whose value is
+        Michael Jackson
+        <ul>
+          <li>
+            Subject: http:///dbpedia.org/resource/Billie_Jean (URI)
+            <ul>
+              <li>Predicate: http://www.example.com/terms/singer (URI)</li>
+              <li>Object: Michael_Jackson (Literal)</li>
+              <li>+Predicate: http://www.example.com/terms/released (URI)</li>
+              <li>+Object: 1983-01-02 (Literal)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        ex) extension
+        <ul>
+          <li>
+            Subject: http:///dbpedia.org/resource/Billie_Jean (URI)
+            <ul>
+              <li>Predicate: http://www.example.com/terms/singer (URI)</li>
+              <li>
+                Object: http:///dbpedia.org/resource/Michael_Jackson (URI)
+                <ul>
+                  <li>Predicate: http://www.example.com/terms/name (URI)</li>
+                  <li>Object: Michael_Jackson (Literal)</li>
+                  <li>Predicate: http://www.example.com/terms/age (URI)</li>
+                  <li>Object: 44 (Literal)</li>
+                </ul>
+              </li>
+              <li>Predicate: http://www.example.com/terms/released (URI)</li>
+              <li>Object: 1983-01-02 (Literal)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="graph-expression-in-language">Graph Expression in Language</h3>
+    <ul>
+      <li>Turtle: a text based format, easy to scribble, easy to read</li>
+      <li>JSON-LD</li>
+      <li>RDF/XML: an XML based format, hard to read/write</li>
+    </ul>
+    <h3 id="rdf-dataset">RDF dataset</h3>
+    <ul>
+      <li>Wikidata: free, from wikimedia</li>
+      <li>DBpedia: extracted from Wikipedia infoboxes</li>
+      <li>WordNet</li>
+      <li>Europeana</li>
+      <li>VIAF</li>
+      <li><a href="">datahub.io</a>: List for usable Linked Datasets</li>
+    </ul>
+    <h3 id="technical-specifications-introduced-by-rdf-primer">
+      Technical Specifications introduced by RDF PRIMER
+    </h3>
+    <ul>
+      <li>
+        JSON-LD - Manu Sporny, Gregg Kellogg, Markus Lanthaler, Editors.
+        <ul>
+          <li>JSON-LD 1.0 16 January 2014. W3C Recommendation.</li>
+          <li>URL : http://www.w3.org/TR/json-ld/</li>
+        </ul>
+      </li>
+      <li>
+        LINKED-DATA - Tim Berners-Lee. Linked Data . Personal View, imperfect
+        but published.
+        <ul>
+          <li>URL : http://www.w3.org/DesignIssues/LinkedData.html</li>
+        </ul>
+      </li>
+      <li>
+        N-QUADS - Gavin Carothers.
+        <ul>
+          <li>RDF 1.1 N-Quads. W3C Recommendation 25 February 2014.</li>
+          <li>URL : http://www.w3.org/TR/2014/REC-n-quads-20140225/.</li>
+          <li>
+            The latest Edition is available at http://www.w3.org/TR/n-quads/
+          </li>
+        </ul>
+      </li>
+      <li>
+        N-TRIPLES - Gavin Carothers, Andy Seabourne.
+        <ul>
+          <li>RDF 1.1 N-Triples . W3C Recommendation 25 February 2014.</li>
+          <li>URL : http://www.w3.org/TR/2014/REC-n-triples-20140225/ .</li>
+          <li>
+            The latest edition is available at http://www.w3.org/TR/n-triples/
+          </li>
+        </ul>
+      </li>
+      <li>
+        OWL2-OVERVIEW - W3C OWL Working Group.
+        <ul>
+          <li>
+            OWL 2 Web Ontology Language Document Overview (Second Edition) 11
+            December 2012. W3C Recommendation.
+          </li>
+          <li>URL : http://www.w3.org/TR/owl2-overview/</li>
+        </ul>
+      </li>
+      <li>
+        RDF-PRIMER - Frank Manola; Eric Miller. RDF Primer 10 February 2004. W3C
+        Recommendation.
+        <ul>
+          <li>URL : http://www.w3.org/TR/rdf-primer/</li>
+        </ul>
+      </li>
+      <li>
+        RDF-SYNTAX-GRAMMAR - Fabien Gandon; Guus Schreiber.
+        <ul>
+          <li>
+            RDF 1.1 XML Syntax 9 January 2014. W3C Proposed Edited
+            Recommendation.
+          </li>
+          <li>URL : http://www.w3.org/TR/rdf-syntax-grammar/</li>
+        </ul>
+      </li>
+      <li>
+        RDF11-CONCEPTS - Richard Cyganiak, David Wood, Markus Lanthaler.
+        <ul>
+          <li>
+            RDF 1.1 Concepts and Abstract Syntax. W3C Recommendation 25 February
+            2014.
+          </li>
+          <li>
+            URL :http://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/ . The
+            latest Edition is available at http://www.w3.org/TR/rdf11-concepts/
+          </li>
+        </ul>
+      </li>
+      <li>
+        RDF11-DATASETS - Antoine Zimmermann.
+        <ul>
+          <li>
+            RDF 1.1 : On Semantics of RDF Datasets . W3C Working Group Note 25
+            February 2014.
+          </li>
+          <li>
+            The latest version is available a
+            thttp://www.w3.org/TR/rdf11-datasets/ .
+          </li>
+        </ul>
+      </li>
+      <li>
+        RDF11-MT - Patrick J. Hayes, Peter F. Patel-Schneider.
+        <ul>
+          <li>RDF 1.1 Semantics. W3C Recommendation 25 February 2014.</li>
+          <li>URL : http://www.w3.org/TR/2014/REC-rdf11-mt-20140225/ .</li>
+          <li>
+            The latest Edition is available at http://www.w3.org/TR/rdf11-mt/
+          </li>
+        </ul>
+      </li>
+      <li>
+        RDF11-NEW - David Wood.
+        <ul>
+          <li>
+            What ’s New in RDF 1.1 . W3C Working Group Note 25 February 2014.
+          </li>
+          <li>
+            The latest version is available at http://www.w3.org/TR/rdf11-new/ .
+          </li>
+        </ul>
+      </li>
+      <li>
+        RDF11-SCHEMA - Dan Brickley, RV Guha. RDF Schema 1.1 .
+        <ul>
+          <li>W3C Recommendation 25 February 2014.</li>
+          <li>URL : http://www.w3.org/TR/2014/REC-rdf-schema-20140225/ .</li>
+          <li>
+            The latest Published version is available at HTTP :
+            //www.w3.org/TR/rdf-schema/ .
+          </li>
+        </ul>
+      </li>
+      <li>
+        RDF11-XML - Fabien Gandon, Guus Schreiber.
+        <ul>
+          <li>RDF 1.1 XML Syntax . W3C Recommendation 25 February 2014.</li>
+          <li>
+            URL : http://www.w3.org/TR/2014/REC-rdf-syntax-grammar-20140225/ .
+          </li>
+          <li>
+            The latest published version is available at
+            http://www.w3.org/TR/rdf-syntax-grammar/ .
+          </li>
+        </ul>
+      </li>
+      <li>
+        RDFA-LITE - Manu Sporny.
+        <ul>
+          <li>RDFa Lite 1.1 7 June 2012. W3C Recommendation.</li>
+          <li>URL : http://www.w3.org/TR/rdfa-lite/</li>
+        </ul>
+      </li>
+      <li>
+        RDFA-PRIME - Ivan Herman; Ben Adida; Manu Sporny; Mark Birbeck.
+        <ul>
+          <li>
+            RDFa 1.1 Primer - Second Edition 22 August 2013. W3C Note.<br />
+          </li>
+          <li>URL :http://www.w3.org/TR/rdfa-primer/ -</li>
+        </ul>
+      </li>
+      <li>
+        RFC3987 - M. Durst; M. Suignard. Internationalized Resource Identifiers
+        (IRIs).
+        <ul>
+          <li>January 2005. RFC.</li>
+          <li>URL : http://www.ietf.org/rfc/rfc3987.txt</li>
+        </ul>
+      </li>
+      <li>
+        SPARQL11-ENTAILMENT - Birte Glimm; Chimezie Ogbuji.
+        <ul>
+          <li>
+            SPARQL 1.1 Entailment Regimes 21 March 2013. W3C Recommendation.
+          </li>
+          <li>URL : http://www.w3.org/TR/sparql11-entailment/</li>
+        </ul>
+      </li>
+      <li>
+        SPARQL11-OVERVIEW - The W3C SPARQL Working Group.
+        <ul>
+          <li>SPARQL 1.1 Overview 21 March 2013. W3C Recommendation.</li>
+          <li>URL : http://www.w3.org/TR/sparql11-overview/</li>
+        </ul>
+      </li>
+      <li>
+        SPARQL11-UPDATE - Paul Gearon; Alexandre Passant; Axel Polleres.
+        <ul>
+          <li>SPARQL 1.1 Update 21 March 2013. W3C Recommendation.</li>
+          <li>URL :http://www.w3.org/TR/sparql11-update/</li>
+        </ul>
+      </li>
+      <li>
+        TRIG - Gavin Carothers, Andy Seaborne.
+        <ul>
+          <li>W3C Recommendation 25 February 2014.</li>
+          <li>URL :http://www.w3.org/TR/2014/REC-trig-20140225/ .</li>
+          <li>
+            The latest Edition is available at HTTP : //www.w3.org/TR/trig/
+          </li>
+        </ul>
+      </li>
+      <li>
+        TURTLE - Eric Prud’hommeaux, Gavin Carothers.
+        <ul>
+          <li>RDF 1.1 Turtle : Terse RDF Triple Language.</li>
+          <li>W3C Recommendation 25 February 2014.</li>
+          <li>URL :http://www.w3.org/TR/2014/REC-turtle-20140225/ .</li>
+          <li>
+            The latest edition is available at http://www.w3.org/TR/turtle/
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+</html>

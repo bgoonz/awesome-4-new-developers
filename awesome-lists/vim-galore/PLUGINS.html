@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>PLUGINS</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="list-of-plugins">List of plugins</h2>
+    <h4 id="colorschemes"><a href="#colorschemes-1">Colorschemes</a></h4>
+    <h4 id="by-topic"><a href="#by-topic-1">By topic</a></h4>
+    <ul>
+      <li><a href="#alignment">Alignment</a></li>
+      <li><a href="#building-and-linting">Building and linting</a></li>
+      <li><a href="#code-completion">Code completion</a></li>
+      <li><a href="#commenters">Commenters</a></li>
+      <li><a href="#cycle">Cycle</a></li>
+      <li><a href="#databases">Databases</a></li>
+      <li><a href="#delimiter">Delimiter</a></li>
+      <li><a href="#fuzzy-finders">Fuzzy finders</a></li>
+      <li><a href="#grep-tools">Grep tools</a></li>
+      <li><a href="#indent">Indent</a></li>
+      <li><a href="#lsp">LSP</a></li>
+      <li><a href="#misc">Misc</a></li>
+      <li><a href="#navigation">Navigation</a></li>
+      <li><a href="#plugin-managers">Plugin managers</a></li>
+      <li><a href="#snippets">Snippets</a></li>
+      <li><a href="#statusline">Statusline</a></li>
+      <li><a href="#surround">Surround</a></li>
+      <li><a href="#taking-notes">Taking notes</a></li>
+      <li><a href="#testing">Testing</a></li>
+      <li><a href="#text-objects">Text objects</a></li>
+      <li><a href="#tmux">Tmux</a></li>
+      <li><a href="#undo-history">Undo history</a></li>
+      <li><a href="#version-control">Version control</a></li>
+      <li><a href="#writing">Writing</a></li>
+    </ul>
+    <h4 id="by-filetype"><a href="#by-filetype-1">By filetype</a></h4>
+    <ul>
+      <li><a href="#c-and-c">C and C++</a></li>
+      <li><a href="#clojure">Clojure</a></li>
+      <li><a href="#elixir">Elixir</a></li>
+      <li><a href="#go">Go</a></li>
+      <li><a href="#html">HTML</a></li>
+      <li><a href="#java">Java</a></li>
+      <li><a href="#javascript">Javascript</a></li>
+      <li><a href="#lua">Lua</a></li>
+      <li><a href="#php">PHP</a></li>
+      <li><a href="#python">Python</a></li>
+      <li><a href="#rust">Rust</a></li>
+      <li><a href="#tex">TeX</a></li>
+      <li><a href="#viml">VimL</a></li>
+    </ul>
+    <h2 id="colorschemes-1">Colorschemes</h2>
+    <p>Here’s a list of commonly used colorschemes:</p>
+    <ul>
+      <li>
+        <a href="https://github.com/plan9-for-vimspace/acme-colors"
+          >acme-colors</a
+        >
+      </li>
+      <li><a href="https://github.com/romainl/Apprentice">apprentice</a></li>
+      <li><a href="https://github.com/chriskempson/base16-vim">base16</a></li>
+      <li><a href="https://github.com/dracula/vim">dracula</a></li>
+      <li><a href="https://github.com/whatyouhide/vim-gotham">gotham</a></li>
+      <li><a href="https://github.com/morhetz/gruvbox">gruvbox</a></li>
+      <li><a href="https://github.com/mhinz/vim-janah">janah</a></li>
+      <li>
+        <a href="https://github.com/nanotech/jellybeans.vim">jellybeans</a>
+      </li>
+      <li><a href="https://github.com/jonathanfilip/vim-lucius">lucius</a></li>
+      <li><a href="https://github.com/tomasr/molokai">molokai</a></li>
+      <li><a href="https://github.com/robertmeta/nofrils">nofrils</a></li>
+      <li><a href="https://github.com/arcticicestudio/nord-vim">nord</a></li>
+      <li>
+        <a href="https://github.com/mhartington/oceanic-next">oceanic-next</a>
+      </li>
+      <li>
+        <a href="https://github.com/mhartington/oceanic-next">oceanic-next</a>
+      </li>
+      <li><a href="https://github.com/joshdick/onedark.vim">onedark</a></li>
+      <li>
+        <a href="https://github.com/owickstrom/vim-colors-paramount"
+          >paramount</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/jpo/vim-railscasts-theme">railscasts</a>
+      </li>
+      <li><a href="https://github.com/junegunn/seoul256.vim">seoul256</a></li>
+      <li>
+        <a href="https://github.com/altercation/vim-colors-solarized"
+          >solarized</a
+        >
+        (or
+        <a href="https://github.com/lifepillar/vim-solarized8">solarized8</a> or
+        <a href="https://github.com/romainl/flattened">flattened</a>)
+      </li>
+      <li>
+        <a href="https://github.com/chriskempson/vim-tomorrow-theme"
+          >tomorrow</a
+        >
+      </li>
+      <li><a href="https://github.com/tpope/vim-vividchalk">vividchalk</a></li>
+      <li><a href="https://github.com/kabbamine/yowish.vim">yowish</a></li>
+      <li><a href="https://github.com/jnurmine/Zenburn">zenburn</a></li>
+    </ul>
+    <p>
+      Alternatively, generate your own colorscheme using
+      <a href="https://github.com/mjswensen/themer">themer</a> or
+      <a href="https://github.com/lifepillar/vim-colortemplate">Colortemplate</a
+      >.
+    </p>
+    <h2 id="by-topic-1">By topic</h2>
+    <h4 id="alignment">Alignment</h4>
+    <ul>
+      <li><a href="https://github.com/godlygeek/tabular">tabular</a></li>
+      <li>
+        <a href="https://github.com/junegunn/vim-easy-align">vim-easy-align</a>
+      </li>
+      <li><a href="https://github.com/tommcdo/vim-lion">vim-lion</a></li>
+    </ul>
+    <h4 id="building-and-linting">Building and linting</h4>
+    <ul>
+      <li><a href="https://github.com/w0rp/ale">ale</a></li>
+      <li><a href="https://github.com/neomake/neomake">neomake</a></li>
+      <li>
+        <a href="https://github.com/vim-syntastic/syntastic">syntastic</a>
+      </li>
+    </ul>
+    <h4 id="code-completion">Code completion</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/prabirshrestha/asyncomplete.vim"
+          >asyncomplete.vim</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/maralla/completor.vim">completor.vim</a>
+      </li>
+      <li>
+        <a href="https://github.com/Shougo/deoplete.nvim">deoplete.nvim</a>
+      </li>
+      <li>
+        <a href="https://github.com/Shougo/neocomplete.vim">neocomplete.vim</a>
+      </li>
+      <li>
+        <a href="https://github.com/roxma/nvim-completion-manager"
+          >nvim-completion-manager</a
+        >
+      </li>
+      <li><a href="https://github.com/ervandew/supertab">supertab</a></li>
+      <li>
+        <a href="https://github.com/lifepillar/vim-mucomplete"
+          >vim-mucomplete</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/ajh17/VimCompletesMe">VimCompletesMe</a>
+      </li>
+      <li>
+        <a href="https://github.com/Valloric/YouCompleteMe">YouCompleteMe</a>
+      </li>
+    </ul>
+    <h4 id="cycle">Cycle</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/AndrewRadev/switch.vim">switch.vim</a>
+      </li>
+      <li>
+        <a href="https://github.com/tpope/vim-speeddating">vim-speeddating</a>
+      </li>
+    </ul>
+    <h4 id="commenters">Commenters</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/scrooloose/nerdcommenter">nerdcommenter</a>
+      </li>
+      <li><a href="https://github.com/tomtom/tcomment_vim">tcomment_vim</a></li>
+      <li>
+        <a href="https://github.com/tpope/vim-commentary">vim-commentary</a>
+      </li>
+    </ul>
+    <h4 id="databases">Databases</h4>
+    <ul>
+      <li><a href="https://github.com/lifepillar/pgsql.vim">pgsql.vim</a></li>
+      <li><a href="https://github.com/tpope/vim-dadbod">vim-dadbod</a></li>
+    </ul>
+    <h4 id="delimiter">Delimiter</h4>
+    <ul>
+      <li><a href="https://github.com/jiangmiao/auto-pairs">auto-pairs</a></li>
+      <li><a href="https://github.com/Raimondi/delimitMate">delimitMate</a></li>
+      <li><a href="https://github.com/tpope/vim-endwise">vim-endwise</a></li>
+    </ul>
+    <h4 id="fuzzy-finders">Fuzzy finders</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/wincent/Command-T">Command-T</a> (<em
+          >requires +ruby</em
+        >)
+      </li>
+      <li><a href="https://github.com/ctrlpvim/ctrlp.vim">ctrlp.vim</a></li>
+      <li>
+        <a href="https://github.com/Shougo/denite.nvim">denite.nvim</a> (<em
+          >requires +python3</em
+        >)
+      </li>
+      <li>
+        <a href="https://github.com/junegunn/fzf">fzf</a> (and
+        <a href="https://github.com/junegunn/fzf.vim">fzf.vim</a>)
+      </li>
+      <li>
+        <a href="https://github.com/Yggdroot/LeaderF">LeaderF</a> (<em
+          >requires +python or +python3</em
+        >)
+      </li>
+      <li><a href="https://github.com/Shougo/unite.vim">unite.vim</a></li>
+    </ul>
+    <h4 id="grep-tools">Grep tools</h4>
+    <ul>
+      <li><a href="https://github.com/dyng/ctrlsf.vim">ctrlsf.vim</a></li>
+      <li><a href="https://github.com/wincent/ferret">ferret</a></li>
+      <li><a href="https://github.com/mhinz/vim-grepper">vim-grepper</a></li>
+    </ul>
+    <h4 id="indent">Indent</h4>
+    <ul>
+      <li><a href="https://github.com/Yggdroot/indentLine">indentLine</a></li>
+      <li>
+        <a href="https://github.com/nathanaelkane/vim-indent-guides"
+          >vim-indent-guides</a
+        >
+      </li>
+    </ul>
+    <h4 id="lsp">LSP</h4>
+    <p>
+      Plugins for the
+      <a href="https://microsoft.github.io/language-server-protocol"
+        >Language Server Protocol</a
+      >
+    </p>
+    <ul>
+      <li><a href="https://github.com/neoclide/coc.nvim">coc.nvim</a></li>
+      <li>
+        <a href="https://github.com/autozimu/LanguageClient-neovim"
+          >languageclient-neovim</a
+        >
+      </li>
+      <li><a href="https://github.com/natebosch/vim-lsc">vim-lsc</a></li>
+      <li><a href="https://github.com/prabirshrestha/vim-lsp">vim-lsp</a></li>
+    </ul>
+    <h4 id="navigation">Navigation</h4>
+    <ul>
+      <li><a href="https://github.com/scrooloose/nerdtree">nerdtree</a></li>
+      <li><a href="https://github.com/majutsushi/tagbar">tagbar</a></li>
+      <li><a href="https://github.com/justinmk/vim-dirvish">vim-dirvish</a></li>
+      <li>
+        <a href="https://github.com/easymotion/vim-easymotion"
+          >vim-easymotion</a
+        >
+      </li>
+      <li><a href="https://github.com/justinmk/vim-sneak">vim-sneak</a></li>
+      <li><a href="https://github.com/tpope/vim-vinegar">vim-vinegar</a></li>
+      <li>
+        <a href="https://github.com/Shougo/vimfiler.vim">vimfiler.vim</a> (<em
+          >depends on other plugins</em
+        >)
+      </li>
+    </ul>
+    <p>Also see <a href="#fuzzy-finders">fuzzy finders</a>.</p>
+    <h4 id="plugin-managers">Plugin managers</h4>
+    <ul>
+      <li><a href="https://github.com/egalpin/apt-vim">apt-vim</a></li>
+      <li><a href="https://github.com/Shougo/dein.vim">dein.vim</a></li>
+      <li><a href="https://github.com/k-takata/minpac">minpac</a></li>
+      <li>
+        <a href="https://github.com/MarcWeber/vim-addon-manager"
+          >vim-addon-manager</a
+        >
+      </li>
+      <li><a href="https://github.com/tpope/vim-pathogen">vim-pathogen</a></li>
+      <li><a href="https://github.com/junegunn/vim-plug">vim-plug</a></li>
+      <li><a href="https://github.com/VundleVim/Vundle.vim">vundle.vim</a></li>
+    </ul>
+    <h4 id="snippets">Snippets</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/Shougo/neosnippet.vim">neosnippet.vim</a>
+        (<em>depends on other plugins</em>)
+      </li>
+      <li><a href="https://github.com/SirVer/ultisnips">ultisnips</a></li>
+      <li>
+        <a href="https://github.com/garbas/vim-snipmate">vim-snipmate</a> (<em
+          >depends on other plugins</em
+        >)
+      </li>
+      <li>
+        <a href="https://github.com/drmingdrmer/xptemplate">xptemplate</a>
+      </li>
+    </ul>
+    <h4 id="statusline">Statusline</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/itchyny/lightline.vim">lightline.vim</a>
+      </li>
+      <li><a href="https://github.com/powerline/powerline">powerline</a></li>
+      <li>
+        <a href="https://github.com/vim-airline/vim-airline">vim-airline</a>
+      </li>
+      <li><a href="https://github.com/tpope/vim-flagship">vim-flagship</a></li>
+    </ul>
+    <h4 id="surround">Surround</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/rhysd/vim-operator-surround"
+          >vim-operator-surround</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/machakann/vim-sandwich">vim-sandwich</a>
+      </li>
+      <li><a href="https://github.com/tpope/vim-surround">vim-surround</a></li>
+    </ul>
+    <h4 id="taking-notes">Taking notes</h4>
+    <ul>
+      <li><a href="https://github.com/dhruvasagar/vim-dotoo">vim-dotoo</a></li>
+      <li><a href="https://github.com/junegunn/vim-journal">vim-journal</a></li>
+      <li><a href="https://github.com/xolox/vim-notes">vim-notes</a></li>
+      <li><a href="https://github.com/jceb/vim-orgmode">vim-orgmode</a></li>
+      <li><a href="https://github.com/fmoralesc/vim-pad">vim-pad</a></li>
+      <li><a href="https://github.com/vimwiki/vimwiki">vimwiki</a></li>
+    </ul>
+    <h4 id="testing">Testing</h4>
+    <ul>
+      <li><a href="https://github.com/janko-m/vim-test">vim-test</a></li>
+    </ul>
+    <h4 id="text-objects">Text objects</h4>
+    <ul>
+      <li><a href="https://github.com/wellle/targets.vim">targets.vim</a></li>
+      <li>
+        <a href="https://github.com/tommcdo/vim-exchange">vim-exchange</a>
+      </li>
+      <li>
+        <a href="https://github.com/michaeljsmith/vim-indent-object"
+          >vim-indent-object</a
+        >
+      </li>
+      <li><a href="https://github.com/andymass/vim-matchup">vim-matchup</a></li>
+      <li>
+        <a href="https://github.com/kana/vim-textobj-user">vim-textobj-user</a>
+      </li>
+    </ul>
+    <h4 id="tmux">Tmux</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/wellle/tmux-complete.vim"
+          >tmux-complete.vim</a
+        >
+      </li>
+      <li><a href="https://github.com/tpope/vim-dispatch">vim-dispatch</a></li>
+      <li>
+        <a href="https://github.com/christoomey/vim-tmux-navigator"
+          >vim-tmux-navigator</a
+        >
+      </li>
+      <li><a href="https://github.com/sjl/vitality.vim">vitality.vim</a></li>
+    </ul>
+    <h4 id="undo-history">Undo history</h4>
+    <ul>
+      <li><a href="https://github.com/sjl/gundo.vim">gundo.vim</a></li>
+      <li><a href="https://github.com/mbbill/undotree">undotree</a></li>
+    </ul>
+    <h4 id="version-control">Version control</h4>
+    <ul>
+      <li><a href="https://github.com/cohama/agit.vim">agit.vim</a></li>
+      <li>
+        <a href="https://github.com/rhysd/committia.vim">committia.vim</a>
+      </li>
+      <li><a href="https://github.com/mattn/gist-vim">gist-vim</a></li>
+      <li>
+        <a href="https://github.com/jaxbot/github-issues.vim"
+          >github-issues.vim</a
+        >
+      </li>
+      <li><a href="https://github.com/gregsexton/gitv">gitv</a></li>
+      <li><a href="https://github.com/junegunn/gv.vim">gv.vim</a></li>
+      <li>
+        <a href="https://github.com/Xuyuanp/nerdtree-git-plugin"
+          >nerdtree-git-plugin</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/haya14busa/vim-auto-programming"
+          >vim-auto-programming</a
+        >
+      </li>
+      <li><a href="https://github.com/tpope/vim-fugitive">vim-fugitive</a></li>
+      <li>
+        <a href="https://github.com/airblade/vim-gitgutter">vim-gitgutter</a>
+      </li>
+      <li>
+        <a href="https://github.com/junegunn/vim-github-dashboard"
+          >vim-github-dashboard</a
+        >
+      </li>
+      <li>
+        <a href="https://bitbucket.org/ludovicchabant/vim-lawrencium"
+          >vim-lawrencium</a
+        >
+      </li>
+      <li><a href="https://github.com/mhinz/vim-signify">vim-signify</a></li>
+      <li><a href="https://github.com/sodapopcan/vim-twiggy">vim-twiggy</a></li>
+      <li><a href="https://github.com/jreybert/vimagit">vimagit</a></li>
+    </ul>
+    <h4 id="writing">Writing</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/ron89/thesaurus_query.vim"
+          >thesaurus_query.vim</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/rhysd/vim-grammarous">vim-grammarous</a>
+      </li>
+      <li>
+        <a href="https://github.com/dpelle/vim-LanguageTool"
+          >vim-LanguageTool</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/beloglazov/vim-online-thesaurus"
+          >vim-online-thesaurus</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/reedes/vim-textobj-quote"
+          >vim-textobj-quote</a
+        >
+      </li>
+      <li><a href="https://github.com/reedes/vim-wordy">vim-wordy</a></li>
+    </ul>
+    <h4 id="misc">Misc</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/itchyny/calendar.vim">calendar.vim</a>
+      </li>
+      <li><a href="https://github.com/FredKSchott/CoVim">CoVim</a></li>
+      <li><a href="https://github.com/Konfekt/FastFold">FastFold</a></li>
+      <li><a href="https://github.com/junegunn/goyo.vim">goyo.vim</a></li>
+      <li><a href="https://github.com/haya14busa/is.vim">is.vim</a></li>
+      <li>
+        <a href="https://github.com/junegunn/limelight.vim">limelight.vim</a>
+      </li>
+      <li><a href="https://github.com/chrisbra/NrrwRgn">NrrwRgn</a></li>
+      <li>
+        <a href="https://github.com/AndrewRadev/sideways.vim">sideways.vim</a>
+      </li>
+      <li>
+        <a href="https://github.com/AndrewRadev/splitjoin.vim">splitjoin.vim</a>
+      </li>
+      <li><a href="https://github.com/chrisbra/unicode.vim">unicode.vim</a></li>
+      <li><a href="https://github.com/tpope/vim-abolish">vim-abolish</a></li>
+      <li>
+        <a href="https://github.com/ConradIrwin/vim-bracketed-paste"
+          >vim-bracketed-paste</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/ryanoasis/vim-devicons">vim-devicons</a>
+      </li>
+      <li>
+        <a href="https://github.com/chrisbra/vim-diff-enhanced"
+          >vim-diff-enhanced</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/blueyed/vim-diminactive">vim-diminactive</a>
+      </li>
+      <li>
+        <a href="https://github.com/drmikehenry/vim-fixkey">vim-fixkey</a>
+      </li>
+      <li><a href="https://github.com/jamessan/vim-gnupg">vim-gnupg</a></li>
+      <li>
+        <a href="https://github.com/ludovicchabant/vim-gutentags"
+          >vim-gutentags</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/ryanss/vim-hackernews">vim-hackernews</a>
+      </li>
+      <li><a href="https://github.com/matze/vim-move">vim-move</a></li>
+      <li>
+        <a href="https://github.com/terryma/vim-multiple-cursors"
+          >vim-multiple-cursors</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/tpope/vim-projectionist"
+          >vim-projectionist</a
+        >
+      </li>
+      <li><a href="https://github.com/romainl/vim-qf">vim-qf</a></li>
+      <li><a href="https://github.com/tpope/vim-rsi">vim-rsi</a></li>
+      <li><a href="https://github.com/tpope/vim-sleuth">vim-sleuth</a></li>
+      <li><a href="https://github.com/mhinz/vim-startify">vim-startify</a></li>
+      <li>
+        <a href="https://github.com/tpope/vim-unimpaired">vim-unimpaired</a>
+      </li>
+    </ul>
+    <h2 id="by-filetype-1">By filetype</h2>
+    <h4 id="c-and-c">C and C++</h4>
+    <ul>
+      <li><a href="https://github.com/vim-scripts/a.vim">a.vim</a></li>
+      <li>
+        <a href="https://github.com/Rip-Rip/clang_complete">clang_complete</a>
+      </li>
+      <li><a href="https://github.com/jeaye/color_coded">color_coded</a></li>
+      <li><a href="https://github.com/LucHermitte/lh-cpp">lh-cpp</a></li>
+      <li>
+        <a href="https://github.com/octol/vim-cpp-enhanced-highlight"
+          >vim-cpp-enhanced-highlight</a
+        >
+      </li>
+      <li><a href="https://github.com/lyuts/vim-rtags">vim-rtags</a></li>
+    </ul>
+    <h4 id="clojure">Clojure</h4>
+    <ul>
+      <li><a href="https://github.com/kovisoft/paredit">paredit</a></li>
+      <li>
+        <a href="https://github.com/junegunn/rainbow_parentheses.vim"
+          >rainbow_parentheses.vim</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/guns/vim-clojure-highlight"
+          >vim-clojure-highlight</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/tpope/vim-fireplace">vim-fireplace</a>
+      </li>
+      <li><a href="https://github.com/tpope/vim-salve">vim-salve</a></li>
+      <li>
+        <a href="https://github.com/tpope/vim-sexp-mappings-for-regular-people"
+          >vim-sexp-mappings-for-regular-people</a
+        >
+      </li>
+      <li><a href="https://github.com/guns/vim-sexp">vim-sexp</a></li>
+    </ul>
+    <h4 id="elixir">Elixir</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/slashmili/alchemist.vim">alchemist.vim</a>
+      </li>
+      <li>
+        <a href="https://github.com/elixir-editors/vim-elixir">vim-elixir</a>
+      </li>
+      <li>
+        <a href="https://github.com/mhinz/vim-mix-format">vim-mix-format</a>
+      </li>
+    </ul>
+    <h4 id="go">Go</h4>
+    <ul>
+      <li><a href="https://github.com/tweekmonster/gofmt.vim">gofmt.vim</a></li>
+      <li>
+        <a href="https://github.com/tweekmonster/hl-goimport.vim"
+          >hl-goimport.vim</a
+        >
+      </li>
+      <li><a href="https://github.com/fatih/vim-go">vim-go</a></li>
+      <li><a href="https://github.com/jodosha/vim-godebug">vim-godebug</a></li>
+    </ul>
+    <h4 id="html">HTML</h4>
+    <ul>
+      <li><a href="https://github.com/mattn/emmet-vim">emmet-vim</a></li>
+      <li><a href="https://github.com/othree/html5.vim">html5.vim</a></li>
+    </ul>
+    <h4 id="java">Java</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/artur-shaik/vim-javacomplete2"
+          >vim-javacomplete2</a
+        >
+      </li>
+    </ul>
+    <h4 id="javascript">Javascript</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/othree/es.next.syntax.vim"
+          >es.next.syntax.vim</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/othree/javascript-libraries-syntax.vim"
+          >javascript-libraries-syntax.vim</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/sidorares/node-vim-debugger"
+          >node-vim-debugger</a
+        >
+      </li>
+      <li><a href="https://github.com/ternjs/tern_for_vim">tern_for_vim</a></li>
+      <li>
+        <a href="https://github.com/millermedeiros/vim-esformatter"
+          >vim-esformatter</a
+        >
+      </li>
+      <li><a href="https://github.com/flowtype/vim-flow">vim-flow</a></li>
+      <li>
+        <a href="https://github.com/jelera/vim-javascript-syntax"
+          >vim-javascript-syntax</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/pangloss/vim-javascript">vim-javascript</a>
+      </li>
+      <li><a href="https://github.com/mxw/vim-jsx">vim-jsx</a></li>
+      <li><a href="https://github.com/moll/vim-node">vim-node</a></li>
+      <li>
+        <a href="https://github.com/prettier/vim-prettier">vim-prettier</a>
+      </li>
+      <li><a href="https://github.com/othree/yajs.vim">yajs.vim</a></li>
+      <li>
+        <a href="https://github.com/HerringtonDarkholme/yats.vim">yats.vim</a>
+      </li>
+    </ul>
+    <h4 id="lua">Lua</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/xolox/vim-lua-ftplugin">vim-lua-ftplugin</a>
+      </li>
+      <li>
+        <a href="https://github.com/xolox/vim-lua-inspect">vim-lua-inspect</a>
+      </li>
+    </ul>
+    <h4 id="php">PHP</h4>
+    <ul>
+      <li><a href="https://github.com/StanAngeloff/php.vim">php.vim</a></li>
+      <li>
+        <a href="https://github.com/stephpy/vim-php-cs-fixer"
+          >vim-php-cs-fixer</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/arnaud-lb/vim-php-namespace"
+          >vim-php-namespace</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/adoy/vim-php-refactoring-toolbox"
+          >vim-php-refactoring-toolbox</a
+        >
+      </li>
+    </ul>
+    <h4 id="python">Python</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/tweekmonster/braceless.vim"
+          >braceless.vim</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/tweekmonster/impsort.vim">impsort.vim</a>
+      </li>
+      <li><a href="https://github.com/davidhalter/jedi-vim">jedi-vim</a></li>
+      <li><a href="https://github.com/klen/python-mode">python-mode</a></li>
+      <li><a href="https://github.com/tmhedberg/SimpylFold">SimpylFold</a></li>
+      <li><a href="https://github.com/nvie/vim-flake8">vim-flake8</a></li>
+    </ul>
+    <h4 id="rust">Rust</h4>
+    <ul>
+      <li><a href="https://github.com/rust-lang/rust.vim">rust.vim</a></li>
+      <li><a href="https://github.com/mhinz/vim-crates">vim-crates</a></li>
+      <li><a href="https://github.com/racer-rust/vim-racer">vim-racer</a></li>
+    </ul>
+    <h4 id="tex">TeX</h4>
+    <ul>
+      <li><a href="https://github.com/lervag/vimtex">vimtex</a></li>
+    </ul>
+    <h4 id="viml">VimL</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/tweekmonster/exception.vim"
+          >exception.vim</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/tweekmonster/helpful.vim">helpful.vim</a>
+      </li>
+      <li><a href="https://github.com/junegunn/vader.vim">vader.vim</a></li>
+      <li><a href="https://github.com/mhinz/vim-lookup">vim-lookup</a></li>
+      <li>
+        <a href="https://github.com/tpope/vim-scriptease">vim-scriptease</a>
+      </li>
+      <li><a href="https://github.com/thinca/vim-themis">vim-themis</a></li>
+    </ul>
+  </body>
+</html>

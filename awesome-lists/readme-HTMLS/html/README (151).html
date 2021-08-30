@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-data-engineering">Awesome Data Engineering</h1>
+    <p>
+      A curated list of data engineering tools for software developers
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </p>
+    <p>List of content</p>
+    <ol type="1">
+      <li><a href="#databases">Databases</a></li>
+      <li><a href="#data-ingestion">Ingestion</a></li>
+      <li><a href="#file-system">File System</a></li>
+      <li><a href="#serialization-format">Serialization format</a></li>
+      <li><a href="#stream-processing">Stream Processing</a></li>
+      <li><a href="#batch-processing">Batch Processing</a></li>
+      <li><a href="#charts-and-dashboards">Charts and Dashboards</a></li>
+      <li><a href="#workflow">Workflow</a></li>
+      <li><a href="#data-lake-management">Data Lake Management</a></li>
+      <li>
+        <a href="#elk-elastic-logstash-kibana">ELK Elastic Logstash Kibana</a>
+      </li>
+      <li><a href="#docker">Docker</a></li>
+      <li><a href="#datasets">Datasets</a></li>
+      <li><a href="#monitoring">Monitoring</a></li>
+      <li><a href="#community">Community</a></li>
+    </ol>
+    <h1 id="databases">Databases</h1>
+    <ul>
+      <li>
+        Relational
+        <ul>
+          <li>
+            <a href="https://github.com/rqlite/rqlite">RQLite</a> Replicated
+            SQLite using the Raft consensus protocol
+          </li>
+          <li>
+            <a href="https://www.mysql.com/">MySQL</a> The world’s most popular
+            open source database.
+            <ul>
+              <li>
+                <a href="https://github.com/pingcap/tidb">TiDB</a> TiDB is a
+                distributed NewSQL database compatible with MySQL protocol
+              </li>
+              <li>
+                <a
+                  href="https://www.percona.com/software/mysql-database/percona-xtrabackup"
+                  >Percona XtraBackup</a
+                >
+                Percona XtraBackup is a free, open source, complete online
+                backup solution for all versions of Percona Server, MySQL® and
+                MariaDB®
+              </li>
+              <li>
+                <a href="https://github.com/pinterest/mysql_utils"
+                  >mysql_utils</a
+                >
+                Pinterest MySQL Management Tools
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://mariadb.org/">MariaDB</a> An enhanced, drop-in
+            replacement for MySQL.
+          </li>
+          <li>
+            <a href="https://www.postgresql.org/">PostgreSQL</a> The world’s
+            most advanced open source database.
+          </li>
+          <li>
+            <a href="https://aws.amazon.com/rds/">Amazon RDS</a> Amazon RDS
+            makes it easy to set up, operate, and scale a relational database in
+            the cloud.
+          </li>
+          <li>
+            <a href="https://crate.io/">Crate.IO</a> Scalable SQL database with
+            the NOSQL goodies.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Key-Value
+        <ul>
+          <li>
+            <a href="https://redis.io/">Redis</a> An open source, BSD licensed,
+            advanced key-value cache and store.
+          </li>
+          <li>
+            <a href="http://docs.basho.com/riak/kv/">Riak</a> A distributed
+            database designed to deliver maximum data availability by
+            distributing data across multiple servers.
+          </li>
+          <li>
+            <a href="https://aws.amazon.com/dynamodb/">AWS DynamoDB</a> A fast
+            and flexible NoSQL database service for all applications that need
+            consistent, single-digit millisecond latency at any scale.
+          </li>
+          <li>
+            <a href="https://github.com/rescrv/HyperDex">HyperDex</a> HyperDex
+            is a scalable, searchable key-value store. Deprecated.
+          </li>
+          <li>
+            <a href="http://ssdb.io">SSDB</a> A high performance NoSQL database
+            supporting many data structures, an alternative to Redis
+          </li>
+          <li>
+            <a href="https://github.com/alticelabs/kyoto">Kyoto Tycoon</a> Kyoto
+            Tycoon is a lightweight network server on top of the Kyoto Cabinet
+            key-value database, built for high-performance and concurrency
+          </li>
+          <li>
+            <a href="https://github.com/iondbproject/iondb">IonDB</a> A
+            key-value store for microcontroller and IoT applications
+          </li>
+        </ul>
+      </li>
+      <li>
+        Column
+        <ul>
+          <li>
+            <a href="https://cassandra.apache.org/">Cassandra</a> The right
+            choice when you need scalability and high availability without
+            compromising performance.
+            <ul>
+              <li>
+                <a href="https://www.ecyrd.com/cassandracalculator/"
+                  >Cassandra Calculator</a
+                >
+                This simple form allows you to try out different values for your
+                Apache Cassandra cluster and see what the impact is for your
+                application.
+              </li>
+              <li>
+                <a href="https://github.com/pcmanus/ccm">CCM</a> A script to
+                easily create and destroy an Apache Cassandra cluster on
+                localhost
+              </li>
+              <li>
+                <a href="https://github.com/scylladb/scylla">ScyllaDB</a> NoSQL
+                data store using the seastar framework, compatible with Apache
+                Cassandra https://www.scylladb.com/
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://hbase.apache.org/">HBase</a> The Hadoop database, a
+            distributed, scalable, big data store.
+          </li>
+          <li>
+            <a href="https://aws.amazon.com/redshift/">AWS Redshift</a> A fast,
+            fully managed, petabyte-scale data warehouse that makes it simple
+            and cost-effective to analyze all your data using your existing
+            business intelligence tools.
+          </li>
+          <li>
+            <a href="https://github.com/filodb/FiloDB">FiloDB</a> Distributed.
+            Columnar. Versioned. Streaming. SQL.
+          </li>
+          <li>
+            <a href="https://www.vertica.com">Vertica</a> Distributed, MPP
+            columnar database with extensive analytics SQL.
+          </li>
+          <li>
+            <a href="https://clickhouse.tech">ClickHouse</a> Distributed
+            columnar DBMS for OLAP. SQL.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Document
+        <ul>
+          <li>
+            <a href="https://www.mongodb.com">MongoDB</a> An open-source,
+            document database designed for ease of development and scaling.
+            <ul>
+              <li>
+                <a
+                  href="https://www.percona.com/software/mongo-database/percona-server-for-mongodb"
+                  >Percona Server for MongoDB</a
+                >
+                Percona Server for MongoDB® is a free, enhanced, fully
+                compatible, open source, drop-in replacement for the MongoDB®
+                Community Edition that includes enterprise-grade features and
+                functionality.
+              </li>
+              <li>
+                <a href="https://github.com/rain1017/memdb">MemDB</a>
+                Distributed Transactional In-Memory Database (based on MongoDB)
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://www.elastic.co/">Elasticsearch</a> Search &amp;
+            Analyze Data in Real Time.
+          </li>
+          <li>
+            <a href="https://www.couchbase.com/">Couchbase</a> The highest
+            performing NoSQL distributed database.
+          </li>
+          <li>
+            <a href="https://rethinkdb.com/">RethinkDB</a> The open-source
+            database for the realtime web.
+          </li>
+          <li>
+            <a href="https://ravendb.net/">RavenDB</a> Fully Transactional NoSQL
+            Document Database.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Graph
+        <ul>
+          <li>
+            <a href="https://neo4j.com/">Neo4j</a> The world’s leading graph
+            database.
+          </li>
+          <li>
+            <a href="https://orientdb.com">OrientDB</a> 2nd Generation
+            Distributed Graph Database with the flexibility of Documents in one
+            product with an Open Source commercial friendly license.
+          </li>
+          <li>
+            <a href="https://www.arangodb.com/">ArangoDB</a> A distributed free
+            and open-source database with a flexible data model for documents,
+            graphs, and key-values.
+          </li>
+          <li>
+            <a href="https://titan.thinkaurelius.com">Titan</a> A scalable graph
+            database optimized for storing and querying graphs containing
+            hundreds of billions of vertices and edges distributed across a
+            multi-machine cluster.
+          </li>
+          <li>
+            <a href="https://github.com/twitter-archive/flockdb">FlockDB</a> A
+            distributed, fault-tolerant graph database by Twitter. Deprecated.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Distributed
+        <ul>
+          <li>
+            <a href="https://www.datomic.com">DAtomic</a> The fully
+            transactional, cloud-ready, distributed database.
+          </li>
+          <li>
+            <a href="https://geode.apache.org/">Apache Geode</a> An open source,
+            distributed, in-memory database for scale-out applications.
+          </li>
+          <li>
+            <a href="https://github.com/gchq/Gaffer">Gaffer</a> A large-scale
+            graph database
+          </li>
+        </ul>
+      </li>
+      <li>
+        Timeseries
+        <ul>
+          <li>
+            <a href="https://github.com/influxdata/influxdb">InfluxDB</a>
+            Scalable datastore for metrics, events, and real-time analytics.
+          </li>
+          <li>
+            <a href="https://github.com/OpenTSDB/opentsdb">OpenTSDB</a> A
+            scalable, distributed Time Series Database.
+          </li>
+          <li>
+            <a href="https://questdb.io/">QuestDB</a> A relational
+            column-oriented database designed for real-time analytics on time
+            series and event data.
+          </li>
+          <li>
+            <a href="https://github.com/kairosdb/kairosdb">kairosdb</a> Fast
+            scalable time series database.
+          </li>
+          <li>
+            <a href="https://github.com/spotify/heroic">Heroic</a> A scalable
+            time series database based on Cassandra and Elasticsearch, by
+            Spotify
+          </li>
+          <li>
+            <a href="https://github.com/apache/incubator-druid">Druid</a> Column
+            oriented distributed data store ideal for powering interactive
+            applications
+          </li>
+          <li>
+            <a href="http://basho.com/products/riak-ts/">Riak-TS</a> Riak TS is
+            the only enterprise-grade NoSQL time series database optimized
+            specifically for IoT and Time Series data
+          </li>
+          <li>
+            <a href="https://github.com/akumuli/Akumuli">Akumuli</a> Akumuli is
+            a numeric time-series database. It can be used to capture, store and
+            process time-series data in real-time. The word “akumuli” can be
+            translated from esperanto as “accumulate”.
+          </li>
+          <li>
+            <a href="https://github.com/Pardot/Rhombus">Rhombus</a> A
+            time-series object store for Cassandra that handles all the
+            complexity of building wide row indexes.
+          </li>
+          <li>
+            <a href="https://github.com/dalmatinerdb/dalmatinerdb"
+              >Dalmatiner DB</a
+            >
+            Fast distributed metrics database
+          </li>
+          <li>
+            <a href="https://github.com/rackerlabs/blueflood">Blueflood</a> A
+            distributed system designed to ingest and process time series data
+          </li>
+          <li>
+            <a href="https://github.com/NationalSecurityAgency/timely"
+              >Timely</a
+            >
+            Timely is a time series database application that provides secure
+            access to time series data based on Accumulo and Grafana.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Other
+        <ul>
+          <li>
+            <a href="https://github.com/tarantool/tarantool/">Tarantool</a>
+            Tarantool is an in-memory database and application server.
+          </li>
+          <li>
+            <a href="https://github.com/greenplum-db/gpdb">GreenPlum</a> The
+            Greenplum Database (GPDB) is an advanced, fully featured, open
+            source data warehouse. It provides powerful and rapid analytics on
+            petabyte scale data volumes.
+          </li>
+          <li>
+            <a href="https://github.com/cayleygraph/cayley">cayley</a> An
+            open-source graph database. Google.
+          </li>
+          <li>
+            <a href="https://github.com/SnappyDataInc/snappydata">Snappydata</a>
+            SnappyData: OLTP + OLAP Database built on Apache Spark
+          </li>
+          <li>
+            <a href="https://www.timescale.com/">TimescaleDB</a>: Built as an
+            extension on top of PostgreSQL, TimescaleDB is a time-series SQL
+            database providing fast analytics, scalability, with automated data
+            management on a proven storage engine.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h1 id="data-ingestion">Data Ingestion</h1>
+    <ul>
+      <li>
+        <a href="https://kafka.apache.org/">Kafka</a> Publish-subscribe
+        messaging rethought as a distributed commit log.
+        <ul>
+          <li>
+            <a href="https://github.com/confluentinc/bottledwater-pg"
+              >BottledWater</a
+            >
+            Change data capture from PostgreSQL into Kafka. Deprecated.
+          </li>
+          <li>
+            <a href="https://github.com/airbnb/kafkat">kafkat</a> Simplified
+            command-line administration for Kafka brokers
+          </li>
+          <li>
+            <a href="https://github.com/edenhill/kafkacat">kafkacat</a> Generic
+            command line non-JVM Apache Kafka producer and consumer
+          </li>
+          <li>
+            <a href="https://github.com/xstevens/pg_kafka">pg-kafka</a> A
+            PostgreSQL extension to produce messages to Apache Kafka
+          </li>
+          <li>
+            <a href="https://github.com/edenhill/librdkafka">librdkafka</a> The
+            Apache Kafka C/C++ library
+          </li>
+          <li>
+            <a href="https://github.com/wurstmeister/kafka-docker"
+              >kafka-docker</a
+            >
+            Kafka in Docker
+          </li>
+          <li>
+            <a href="https://github.com/yahoo/kafka-manager">kafka-manager</a> A
+            tool for managing Apache Kafka
+          </li>
+          <li>
+            <a href="https://github.com/SOHU-Co/kafka-node">kafka-node</a>
+            Node.js client for Apache Kafka 0.8
+          </li>
+          <li>
+            <a href="https://github.com/pinterest/secor">Secor</a> Pinterest’s
+            Kafka to S3 distributed consumer
+          </li>
+          <li>
+            <a href="https://github.com/uber/kafka-logger">Kafka-logger</a>
+            Kafka-winston logger for nodejs from uber
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://aws.amazon.com/kinesis/">AWS Kinesis</a> A fully
+        managed, cloud-based service for real-time data processing over large,
+        distributed data streams.
+      </li>
+      <li>
+        <a href="https://www.rabbitmq.com/">RabbitMQ</a> Robust messaging for
+        applications.
+      </li>
+      <li>
+        <a href="https://www.fluentd.org">FluentD</a> An open source data
+        collector for unified logging layer.
+      </li>
+      <li>
+        <a href="https://www.embulk.org">Embulk</a> An open source bulk data
+        loader that helps data transfer between various databases, storages,
+        file formats, and cloud services.
+      </li>
+      <li>
+        <a href="https://sqoop.apache.org">Apache Sqoop</a> A tool designed for
+        efficiently transferring bulk data between Apache Hadoop and structured
+        datastores such as relational databases.
+      </li>
+      <li>
+        <a href="https://github.com/mozilla-services/heka">Heka</a> Data
+        Acquisition and Processing Made Easy. Deprecated.
+      </li>
+      <li>
+        <a href="https://github.com/apache/incubator-gobblin">Gobblin</a>
+        Universal data ingestion framework for Hadoop from Linkedin
+      </li>
+      <li>
+        <a href="https://nakadi.io">Nakadi</a> Nakadi is an open source event
+        messaging platform that provides a REST API on top of Kafka-like queues.
+      </li>
+      <li>
+        <a href="http://www.pravega.io">Pravega</a> Pravega provides a new
+        storage abstraction - a stream - for continuous and unbounded data.
+      </li>
+      <li>
+        <a href="https://pulsar.apache.org/">Apache Pulsar</a> Apache Pulsar is
+        an open-source distributed pub-sub messaging system.
+      </li>
+      <li>
+        <a href="https://github.com/awslabs/aws-data-wrangler"
+          >AWS Data Wranlger</a
+        >
+        Utility belt to handle data on AWS.
+      </li>
+    </ul>
+    <h1 id="file-system">File System</h1>
+    <ul>
+      <li>
+        <a
+          href="https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html"
+          >HDFS</a
+        >
+        <ul>
+          <li>
+            <a href="https://github.com/spotify/snakebite">Snakebite</a> A pure
+            python HDFS client
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://aws.amazon.com/s3/">AWS S3</a>
+        <ul>
+          <li>
+            <a href="https://github.com/RaRe-Technologies/smart_open"
+              >smart_open</a
+            >
+            Utils for streaming large files (S3, HDFS, gzip, bz2)
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.alluxio.org/">Alluxio</a> Alluxio is a
+        memory-centric distributed storage system enabling reliable data sharing
+        at memory-speed across cluster frameworks, such as Spark and MapReduce
+      </li>
+      <li>
+        <a href="https://ceph.com/">CEPH</a> Ceph is a unified, distributed
+        storage system designed for excellent performance, reliability and
+        scalability
+      </li>
+      <li>
+        <a href="https://www.orangefs.org/">OrangeFS</a> Orange File System is a
+        branch of the Parallel Virtual File System
+      </li>
+      <li>
+        <a href="https://github.com/tuplejump/snackfs-release">SnackFS</a>
+        SnackFS is our bite-sized, lightweight HDFS compatible FileSystem built
+        over Cassandra
+      </li>
+      <li>
+        <a href="https://www.gluster.org/">GlusterFS</a> Gluster Filesystem
+      </li>
+      <li>
+        <a href="http://www.xtreemfs.org/">XtreemFS</a> fault-tolerant
+        distributed file system for all storage needs
+      </li>
+      <li>
+        <a href="https://github.com/chrislusf/seaweedfs">SeaweedFS</a>
+        Seaweed-FS is a simple and highly scalable distributed file system.
+        There are two objectives: to store billions of files! to serve the files
+        fast! Instead of supporting full POSIX file system semantics, Seaweed-FS
+        choose to implement only a key~file mapping. Similar to the word
+        “NoSQL”, you can call it as “NoFS”.
+      </li>
+      <li>
+        <a href="https://github.com/s3ql/s3ql/">S3QL</a> S3QL is a file system
+        that stores all its data online using storage services like Google
+        Storage, Amazon S3, or OpenStack.
+      </li>
+      <li>
+        <a href="https://lizardfs.com/">LizardFS</a> LizardFS Software Defined
+        Storage is a distributed, parallel, scalable, fault-tolerant,
+        Geo-Redundant and highly available file system.
+      </li>
+    </ul>
+    <h1 id="serialization-format">Serialization format</h1>
+    <ul>
+      <li>
+        <a href="https://avro.apache.org">Apache Avro</a> Apache Avro™ is a data
+        serialization system
+      </li>
+      <li>
+        <a href="https://parquet.apache.org">Apache Parquet</a> Apache Parquet
+        is a columnar storage format available to any project in the Hadoop
+        ecosystem, regardless of the choice of data processing framework, data
+        model or programming language.
+        <ul>
+          <li>
+            <a href="https://github.com/google/snappy">Snappy</a> A fast
+            compressor/decompressor. Used with Parquet
+          </li>
+          <li>
+            <a href="https://zlib.net/pigz/">PigZ</a> A parallel implementation
+            of gzip for modern multi-processor, multi-core machines
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://orc.apache.org/">Apache ORC</a> The smallest, fastest
+        columnar storage for Hadoop workloads
+      </li>
+      <li>
+        <a href="https://thrift.apache.org">Apache Thrift</a> The Apache Thrift
+        software framework, for scalable cross-language services development
+      </li>
+      <li>
+        <a href="https://github.com/protocolbuffers/protobuf">ProtoBuf</a>
+        Protocol Buffers - Google’s data interchange format
+      </li>
+      <li>
+        <a href="https://wiki.apache.org/hadoop/SequenceFile">SequenceFile</a>
+        SequenceFile is a flat file consisting of binary key/value pairs. It is
+        extensively used in MapReduce as input/output formats
+      </li>
+      <li>
+        <a href="https://github.com/EsotericSoftware/kryo">Kryo</a> Kryo is a
+        fast and efficient object graph serialization framework for Java
+      </li>
+    </ul>
+    <h1 id="stream-processing">Stream Processing</h1>
+    <ul>
+      <li>
+        <a href="https://beam.apache.org/">Apache Beam</a> Apache Beam is a
+        unified programming model that implements both batch and streaming data
+        processing jobs that run on many execution engines.
+      </li>
+      <li>
+        <a href="https://spark.apache.org/streaming/">Spark Streaming</a> Spark
+        Streaming makes it easy to build scalable fault-tolerant streaming
+        applications.
+      </li>
+      <li>
+        <a href="https://flink.apache.org/">Apache Flink</a> Apache Flink is a
+        streaming dataflow engine that provides data distribution,
+        communication, and fault tolerance for distributed computations over
+        data streams.
+      </li>
+      <li>
+        <a href="https://storm.apache.org">Apache Storm</a> Apache Storm is a
+        free and open source distributed realtime computation system
+      </li>
+      <li>
+        <a href="https://samza.apache.org">Apache Samza</a> Apache Samza is a
+        distributed stream processing framework
+      </li>
+      <li>
+        <a href="https://nifi.apache.org/">Apache NiFi</a> is an easy to use,
+        powerful, and reliable system to process and distribute data
+      </li>
+      <li>
+        <a href="https://hudi.apache.org/">Apache Hudi</a> Apache Hudi is an
+        open source framework for managing storage for real time processing, one
+        of the most interesting feature is the Upsert
+      </li>
+      <li>
+        <a href="https://voltdb.com/">VoltDB</a> VoltDb is an ACID-compliant
+        RDBMS which uses a
+        <a href="https://en.wikipedia.org/wiki/Shared-nothing_architecture"
+          >shared nothing architecture</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/pipelinedb/pipelinedb">PipelineDB</a> The
+        Streaming SQL Database
+      </li>
+      <li>
+        <a href="https://cloud.spring.io/spring-cloud-dataflow/"
+          >Spring Cloud Dataflow</a
+        >
+        Streaming and tasks execution between Spring Boot apps
+      </li>
+      <li>
+        <a href="https://www.bonobo-project.org/">Bonobo</a> Bonobo is a
+        data-processing toolkit for python 3.5+
+      </li>
+      <li>
+        <a href="https://github.com/robinhood/faust">Robinhood’s Faust</a>
+        Forever scalable event processing &amp; in-memory durable K/V store as a
+        library with asyncio &amp; static typing.
+      </li>
+      <li>
+        <a href="https://github.com/hstreamdb/hstream">HStreamDB</a> The
+        streaming database built for IoT data storage and real-time processing.
+      </li>
+      <li>
+        <a href="https://github.com/emqx/kuiper">Kuiper</a> An edge lightweight
+        IoT data analytics/streaming software implemented by Golang, and it can
+        be run at all kinds of resource-constrained edge devices.
+      </li>
+    </ul>
+    <h1 id="batch-processing">Batch Processing</h1>
+    <ul>
+      <li>
+        <a
+          href="https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html"
+          >Hadoop MapReduce</a
+        >
+        Hadoop MapReduce is a software framework for easily writing applications
+        which process vast amounts of data (multi-terabyte data-sets)
+        in-parallel on large clusters (thousands of nodes) of commodity hardware
+        in a reliable, fault-tolerant manner
+      </li>
+      <li>
+        <a href="https://spark.apache.org/">Spark</a>
+        <ul>
+          <li>
+            <a href="https://spark-packages.org">Spark Packages</a> A community
+            index of packages for Apache Spark
+          </li>
+          <li>
+            <a href="https://github.com/Stratio/deep-spark">Deep Spark</a>
+            Connecting Apache Spark with different data stores. Deprecated.
+          </li>
+          <li>
+            <a
+              href="http://homepage.cs.latrobe.edu.au/zhe/ZhenHeSparkRDDAPIExamples.html"
+              >Spark RDD API Examples</a
+            >
+            by Zhen He
+          </li>
+          <li>
+            <a href="https://livy.incubator.apache.org">Livy</a> Livy, the REST
+            Spark Server
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://aws.amazon.com/emr/">AWS EMR</a> A web service that
+        makes it easy to quickly and cost-effectively process vast amounts of
+        data.
+      </li>
+      <li>
+        <a href="https://tez.apache.org/">Tez</a> An application framework which
+        allows for a complex directed-acyclic-graph of tasks for processing
+        data.
+      </li>
+      <li>
+        <a href="https://github.com/asavinov/bistro">Bistro</a> is a
+        light-weight engine for general-purpose data processing including both
+        batch and stream analytics. It is based on a novel unique data model,
+        which represents data via <em>functions</em> and processes data via
+        <em>columns operations</em> as opposed to having only set operations in
+        conventional approaches like MapReduce or SQL.
+      </li>
+      <li>
+        Batch ML
+        <ul>
+          <li>
+            <a href="https://www.h2o.ai/">H2O</a> Fast scalable machine learning
+            API for smarter applications.
+          </li>
+          <li>
+            <a href="https://mahout.apache.org/">Mahout</a> An environment for
+            quickly creating scalable performant machine learning applications.
+          </li>
+          <li>
+            <a href="https://spark.apache.org/docs/latest/ml-guide.html"
+              >Spark MLlib</a
+            >
+            Spark’s scalable machine learning library consisting of common
+            learning algorithms and utilities, including classification,
+            regression, clustering, collaborative filtering, dimensionality
+            reduction, as well as underlying optimization primitives.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Batch Graph
+        <ul>
+          <li>
+            <a href="https://turi.com/products/create/docs/">GraphLab Create</a>
+            A machine learning platform that enables data scientists and app
+            developers to easily create intelligent apps at scale.
+          </li>
+          <li>
+            <a href="https://giraph.apache.org/">Giraph</a> An iterative graph
+            processing system built for high scalability.
+          </li>
+          <li>
+            <a href="https://spark.apache.org/graphx/">Spark GraphX</a> Apache
+            Spark’s API for graphs and graph-parallel computation.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Batch SQL
+        <ul>
+          <li>
+            <a href="https://prestodb.github.io/docs/current/index.html"
+              >Presto</a
+            >
+            A distributed SQL query engine designed to query large data sets
+            distributed over one or more heterogeneous data sources.
+          </li>
+          <li>
+            <a href="https://hive.apache.org">Hive</a> Data warehouse software
+            facilitates querying and managing large datasets residing in
+            distributed storage.
+            <ul>
+              <li>
+                <a href="https://github.com/apache/incubator-hivemall"
+                  >Hivemall</a
+                >
+                Scalable machine learning library for Hive/Hadoop.
+              </li>
+              <li>
+                <a href="https://github.com/dropbox/PyHive">PyHive</a> Python
+                interface to Hive and Presto.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://drill.apache.org/">Drill</a> Schema-free SQL Query
+            Engine for Hadoop, NoSQL and Cloud Storage.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h1 id="charts-and-dashboards">Charts and Dashboards</h1>
+    <ul>
+      <li>
+        <a href="https://www.highcharts.com/">Highcharts</a> A charting library
+        written in pure JavaScript, offering an easy way of adding interactive
+        charts to your web site or web application.
+      </li>
+      <li>
+        <a href="https://www.zingchart.com/">ZingChart</a> Fast JavaScript
+        charts for any data set.
+      </li>
+      <li>
+        <a href="https://c3js.org">C3.js</a> D3-based reusable chart library.
+      </li>
+      <li>
+        <a href="https://d3js.org/">D3.js</a> A JavaScript library for
+        manipulating documents based on data.
+        <ul>
+          <li>
+            <a href="https://d3plus.org">D3Plus</a> D3’s simplier, easier to use
+            cousin. Mostly predefined templates that you can just plug data in.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="http://smoothiecharts.org">SmoothieCharts</a> A JavaScript
+        Charting Library for Streaming Data.
+      </li>
+      <li>
+        <a href="https://github.com/stitchfix/pyxley">PyXley</a> Python helpers
+        for building dashboards using Flask and React
+      </li>
+      <li>
+        <a href="https://github.com/plotly/dash">Plotly</a> Flask, JS, and CSS
+        boilerplate for interactive, web-based visualization apps in Python
+      </li>
+      <li>
+        <a href="https://github.com/apache/incubator-superset"
+          >Apache Superset</a
+        >
+        Apache Superset (incubating) is a modern, enterprise-ready business
+        intelligence web application
+      </li>
+      <li>
+        <a href="https://redash.io/">Redash</a> Make Your Company Data Driven.
+        Connect to any data source, easily visualize and share your data.
+      </li>
+      <li>
+        <a href="https://github.com/metabase/metabase">Metabase</a> Metabase is
+        the easy, open source way for everyone in your company to ask questions
+        and learn from data.
+      </li>
+      <li>
+        <a href="http://www.pyqtgraph.org/">PyQtGraph</a> PyQtGraph is a
+        pure-python graphics and GUI library built on PyQt4 / PySide and numpy.
+        It is intended for use in mathematics / scientific / engineering
+        applications.
+      </li>
+    </ul>
+    <h1 id="workflow">Workflow</h1>
+    <ul>
+      <li>
+        <a href="https://github.com/spotify/luigi">Luigi</a> Luigi is a Python
+        module that helps you build complex pipelines of batch jobs.
+        <ul>
+          <li>
+            <a href="https://github.com/seatgeek/cronq">CronQ</a> An application
+            cron-like system.
+            <a
+              href="https://chairnerd.seatgeek.com/building-out-the-seatgeek-data-pipeline/"
+              >Used</a
+            >
+            w/Luige. Deprecated.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.cascading.org/">Cascading</a> Java based
+        application development platform.
+      </li>
+      <li>
+        <a href="https://github.com/apache/airflow">Airflow</a> Airflow is a
+        system to programmaticaly author, schedule and monitor data pipelines.
+      </li>
+      <li>
+        <a href="https://azkaban.github.io/">Azkaban</a> Azkaban is a batch
+        workflow job scheduler created at LinkedIn to run Hadoop jobs. Azkaban
+        resolves the ordering through job dependencies and provides an easy to
+        use web user interface to maintain and track your workflows.
+      </li>
+      <li>
+        <a href="https://oozie.apache.org/">Oozie</a> Oozie is a workflow
+        scheduler system to manage Apache Hadoop jobs
+      </li>
+      <li>
+        <a href="https://github.com/pinterest/pinball">Pinball</a> DAG based
+        workflow manager. Job flows are defined programmaticaly in Python.
+        Support output passing between jobs.
+      </li>
+      <li>
+        <a href="https://github.com/dagster-io/dagster">Dagster</a> Dagster is
+        an open-source Python library for building data applications.
+      </li>
+      <li>
+        <a href="https://dataform.co/">Dataform</a> is an open-source framework
+        and web based IDE to manage datasets and their dependencies. SQLX
+        extends your existing SQL warehouse dialect to add features that support
+        dependency management, testing, documentation and more.
+      </li>
+      <li>
+        <a href="https://getcensus.com/">Census</a> is a reverse-ETL tool that
+        let you sync data from your cloud data warehouse to SaaS applications
+        like Salesforce, Marketo, HubSpot, Zendesk, etc. No engineering favors
+        required—just SQL.
+      </li>
+      <li>
+        <a href="https://getdbt.com/">dbt</a> is a command line tool that
+        enables data analysts and engineers to transform data in their
+        warehouses more effectively.
+      </li>
+    </ul>
+    <h1 id="data-lake-management">Data Lake Management</h1>
+    <ul>
+      <li>
+        <a href="https://github.com/treeverse/lakeFS">lakeFS</a> lakeFS is an
+        open source platform that delivers resilience and manageability to
+        object-storage based data lakes.
+      </li>
+    </ul>
+    <h1 id="elk-elastic-logstash-kibana">ELK Elastic Logstash Kibana</h1>
+    <ul>
+      <li>
+        <a href="https://github.com/pblittle/docker-logstash"
+          >docker-logstash</a
+        >
+        A highly configurable logstash (1.4.4) docker image running
+        Elasticsearch (1.7.0) and Kibana (3.1.2).
+      </li>
+      <li>
+        <a href="https://github.com/jprante/elasticsearch-jdbc"
+          >elasticsearch-jdbc</a
+        >
+        JDBC importer for Elasticsearch
+      </li>
+      <li>
+        <a href="https://github.com/zombodb/zombodb">ZomboDB</a> Postgres
+        Extension that allows creating an index backed by Elasticsearch
+      </li>
+    </ul>
+    <h1 id="docker">Docker</h1>
+    <ul>
+      <li>
+        <a href="https://github.com/redbooth/gockerize">Gockerize</a> Package
+        golang service into minimal docker containers
+      </li>
+      <li>
+        <a href="https://github.com/ClusterHQ/flocker">Flocker</a> Easily manage
+        Docker containers &amp; their data
+      </li>
+      <li>
+        <a href="https://rancher.com/rancher-os/">Rancher</a> RancherOS is a
+        20mb Linux distro that runs the entire OS as Docker containers
+      </li>
+      <li>
+        <a href="https://www.kontena.io/">Kontena</a> Application Containers for
+        Masses
+      </li>
+      <li>
+        <a href="https://github.com/weaveworks/weave">Weave</a> Weaving Docker
+        containers into applications
+      </li>
+      <li>
+        <a href="https://github.com/CenturyLinkLabs/zodiac">Zodiac</a> A
+        lightweight tool for easy deployment and rollback of dockerized
+        applications
+      </li>
+      <li>
+        <a href="https://github.com/google/cadvisor">cAdvisor</a> Analyzes
+        resource usage and performance characteristics of running containers
+      </li>
+      <li>
+        <a href="https://github.com/figadore/micro-s3-persistence"
+          >Micro S3 persistence</a
+        >
+        Docker microservice for saving/restoring volume data to S3
+      </li>
+      <li>
+        <a href="https://github.com/grammarly/rocker-compose">Rocker-compose</a>
+        Docker composition tool with idempotency features for deploying apps
+        composed of multiple containers. Deprecated.
+      </li>
+      <li>
+        <a href="https://github.com/hashicorp/nomad">Nomad</a> Nomad is a
+        cluster manager, designed for both long lived services and short lived
+        batch processing workloads
+      </li>
+      <li>
+        <a href="https://imagelayers.io/">ImageLayers</a> Vizualize docker
+        images and the layers that compose them
+      </li>
+    </ul>
+    <h1 id="datasets">Datasets</h1>
+    <h2 id="realtime">Realtime</h2>
+    <ul>
+      <li>
+        <a
+          href="https://developer.twitter.com/en/docs/tweets/filter-realtime/overview"
+          >Twitter Realtime</a
+        >
+        The Streaming APIs give developers low latency access to Twitter’s
+        global stream of Tweet data.
+      </li>
+      <li>
+        <a href="https://github.com/Interana/eventsim">Eventsim</a> Event data
+        simulator. Generates a stream of pseudo-random events from a set of
+        users, designed to simulate web traffic.
+      </li>
+      <li>
+        <a
+          href="https://www.reddit.com/r/datasets/comments/3mk1vg/realtime_data_is_available_including_comments/"
+          >Reddit</a
+        >
+        Real-time data is available including comments, submissions and links
+        posted to reddit
+      </li>
+    </ul>
+    <h2 id="data-dumps">Data Dumps</h2>
+    <ul>
+      <li>
+        <a href="https://www.gharchive.org/">GitHub Archive</a> GitHub’s public
+        timeline since 2011, updated every hour
+      </li>
+      <li>
+        <a href="https://commoncrawl.org/">Common Crawl</a> Open source
+        repository of web crawl data
+      </li>
+      <li>
+        <a href="https://dumps.wikimedia.org/enwiki/latest/">Wikipedia</a>
+        Wikipedia’s complete copy of all wikis, in the form of wikitext source
+        and metadata embedded in XML. A number of raw database tables in SQL
+        form are also available.
+      </li>
+    </ul>
+    <h1 id="monitoring">Monitoring</h1>
+    <h2 id="prometheus">Prometheus</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/prometheus/prometheus">Prometheus.io</a> An
+        open-source service monitoring system and time series database
+      </li>
+      <li>
+        <a href="https://github.com/prometheus/haproxy_exporter"
+          >HAProxy Exporter</a
+        >
+        Simple server that scrapes HAProxy stats and exports them via HTTP for
+        Prometheus consumption
+      </li>
+    </ul>
+    <h1 id="community">Community</h1>
+    <h2 id="forums">Forums</h2>
+    <ul>
+      <li>
+        <a href="https://www.reddit.com/r/dataengineering/"
+          >/r/dataengineering</a
+        >
+        News, tips and background on Data Engineering
+      </li>
+      <li>
+        <a href="https://www.reddit.com/r/ETL/">/r/etl</a> Subreddit focused on
+        ETL
+      </li>
+    </ul>
+    <h2 id="conferences">Conferences</h2>
+    <ul>
+      <li>
+        <a href="https://www.datacouncil.ai/about">Data Council</a> Data Council
+        is the first technical conference that bridges the gap between data
+        scientists, data engineers and data analysts.
+      </li>
+    </ul>
+    <h2 id="podcasts">Podcasts</h2>
+    <ul>
+      <li>
+        <a href="https://www.dataengineeringpodcast.com/"
+          >Data Engineering Podcast</a
+        >
+        The show about modern data infrastructure.
+      </li>
+    </ul>
+    <p>
+      Cheers to
+      <a href="http://xyz.insightdataengineering.com/blog/pipeline_map.html"
+        >The Data Engineering Ecosystem: An Interactive Map</a
+      >
+    </p>
+    <p>
+      Inspired by the
+      <a href="https://github.com/sindresorhus/awesome">awesome</a> list.
+      Created by
+      <a href="https://insightdataengineering.com">Insight Data Engineering</a>
+      fellows.
+    </p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="https://i.creativecommons.org/p/zero/1.0/88x31.png"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://github.com/igorbarinov/">Igor Barinov</a> has waived all
+      copyright and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

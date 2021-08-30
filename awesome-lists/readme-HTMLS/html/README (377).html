@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 align="center">
+      <a href="https://git-scm.com/">
+        <img
+          width="455"
+          src="https://github.com/compscilauren/awesome-git-hooks/blob/master/git-logo.png"
+          alt="Awesome Git Hooks" /></a
+      ><br />Awesome Git Hooks
+    </h1>
+    <p align="center">
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge-flat2.svg" alt="Awesome Lists"
+      /></a>
+      <a
+        href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/CONTRIBUTING.md"
+        ><img
+          src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square"
+          alt="PRs welcome"
+      /></a>
+    </p>
+    <h1 id="awesome-git-hooks">Awesome Git Hooks</h1>
+    <blockquote>
+      <p>
+        :anchor: Easy-to-use git hooks for automating tasks during git
+        workflows.
+      </p>
+    </blockquote>
+    <p>
+      Git hooks are custom scripts you can use to automate tasks which are
+      triggered before or after a git command is executed. There are two groups
+      of these hooks: client-side and server-side. Client-side hooks are
+      triggered by operations such as committing and merging, while server-side
+      hooks run on network operations such as receiving pushed commits. This
+      repo contains helpful resources as well as a variety of git hook scripts
+      that can be easily customized to serve different purposes.
+    </p>
+    <p>:heavy_check_mark: Nothing to install/download</p>
+    <p>:heavy_check_mark: Code is well-documented</p>
+    <p>
+      :heavy_check_mark: Grab &amp; go! Copy the code you want to use and paste
+      into your .git/hooks folder
+    </p>
+    <p>
+      Contributions are <em>always</em> welcome! Please see our
+      <a href="CONTRIBUTING.md">Contribution Guidelines</a>. Also, if you don’t
+      find the script you want below, you can
+      <a
+        href="https://github.com/CompSciLauren/awesome-git-hooks/issues/new?assignees=&amp;labels=enhancement&amp;template=new-git-hook-script-request.md&amp;title="
+        >create a new issue</a
+      >
+      to request it.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#git-hook-scripts">Git Hook Scripts</a>
+        <ul>
+          <li><a href="#commit-msg">commit-msg</a></li>
+          <li><a href="#post-checkout">post-checkout</a></li>
+          <li><a href="#post-update">post-update</a></li>
+          <li><a href="#pre-commit">pre-commit</a></li>
+          <li><a href="#prepare-commit-msg">prepare-commit-msg</a></li>
+          <li><a href="#pre-push">pre-push</a></li>
+          <li><a href="#pre-rebase">pre-rebase</a></li>
+          <li><a href="#query-watchman">query-watchman</a></li>
+          <li><a href="#update">update</a></li>
+        </ul>
+      </li>
+      <li><a href="#quick-start">Quick Start</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#written-guides">Written Guides</a></li>
+      <li><a href="#video-guides">Video Guides</a></li>
+    </ul>
+    <h2 id="git-hook-scripts">Git Hook Scripts</h2>
+    <p>
+      Note: The icon next to each script signifies what language it is written
+      in.
+    </p>
+    <table>
+      <thead>
+        <tr class="header">
+          <th>icon</th>
+          <th>language</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td><img width="14" src="bash-icon.png" alt="Bash Icon" /></td>
+          <td><code>bash</code></td>
+        </tr>
+        <tr class="even">
+          <td><img width="14" src="python-icon.png" alt="Python Icon" /></td>
+          <td><code>python</code></td>
+        </tr>
+        <tr class="odd">
+          <td><img width="14" src="perl-icon.png" alt="Perl Icon" /></td>
+          <td><code>perl</code></td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="commit-msg">commit-msg</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/commit-msg-hooks/enforce-insert-issue-number.hook"
+          >enforce-insert-issue-number</a
+        >
+        - Make sure user did not delete the ISSUE-[#] string that was generated
+        by prepare-commit-msg/insert-issue-number.hook.
+        <img width="14" src="python-icon.png" alt="Python Icon" />
+      </li>
+    </ul>
+    <h3 id="post-checkout">post-checkout</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/post-checkout-hooks/delete-pyc-files.hook"
+          >delete-pyc-files</a
+        >
+        - Delete all .pyc files every time a new branch is checked out.
+        <img width="14" src="python-icon.png" alt="Python Icon" />
+      </li>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/post-checkout-hooks/new-branch-alert.hook"
+          >new-branch-alert</a
+        >
+        - Display a message when a new branch is checked out for the first time.
+        <img width="14" src="bash-icon.png" alt="Bash Icon" />
+      </li>
+    </ul>
+    <h3 id="post-update">post-update</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/post-update-hooks/update-server-info.hook"
+          >update-server-info</a
+        >
+        - Prepare a packed repository for use over dumb transports (e.g. http).
+        <img width="14" src="bash-icon.png" alt="Bash Icon" />
+      </li>
+    </ul>
+    <h3 id="pre-commit">pre-commit</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/pre-commit-hooks/format-code.hook"
+          >format-code</a
+        >
+        - Run command to format code and re-add any files modified after
+        formatting.
+        <img width="14" src="bash-icon.png" alt="Bash Icon" />
+      </li>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/pre-commit-hooks/search-term.hook"
+          >search-term</a
+        >
+        - Fail commit if a specific term is found in the code.
+        <img width="14" src="bash-icon.png" alt="Bash Icon" />
+      </li>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/pre-commit-hooks/spell-check-md-files.hook"
+          >spell-check-md-files</a
+        >
+        - Check files with .md extension for spelling errors.
+        <img width="14" src="bash-icon.png" alt="Bash Icon" />
+      </li>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/pre-commit-hooks/verify-name-and-email.hook"
+          >verify-name-and-email</a
+        >
+        - Fail commit if user.name or user.email is incorrect.
+        <img width="14" src="bash-icon.png" alt="Bash Icon" />
+      </li>
+    </ul>
+    <h3 id="prepare-commit-msg">prepare-commit-msg</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/prepare-commit-msg-hooks/include-git-diff-name-status.hook"
+          >include-git-diff-name-status</a
+        >
+        - Include the output of “git diff –name-status -r” into the message,
+        just before the “git status” output.
+        <img width="14" src="bash-icon.png" alt="Bash Icon" />
+      </li>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/prepare-commit-msg-hooks/insert-issue-number.hook"
+          >insert-issue-number</a
+        >
+        - Insert issue number to beginning of the commit message.
+        <img width="14" src="python-icon.png" alt="Python Icon" />
+      </li>
+    </ul>
+    <h3 id="pre-push">pre-push</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/pre-push-hooks/prevent-bad-push.hook"
+          >prevent-bad-push</a
+        >
+        - Prevent push of commits where the log message starts with “WIP” (work
+        in progress).
+        <img width="14" src="bash-icon.png" alt="Bash Icon" />
+      </li>
+    </ul>
+    <h3 id="pre-rebase">pre-rebase</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/pre-rebase-hooks/prevent-rebase.hook"
+          >prevent-rebase</a
+        >
+        - Prevent topic branches that are already merged to ‘next’ branch from
+        getting rebased, because allowing it would result in rebasing already
+        published history.
+        <img width="14" src="bash-icon.png" alt="Bash Icon" />
+      </li>
+    </ul>
+    <h3 id="query-watchman">query-watchman</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/query-watchman-hooks/fsmonitor-watchman.hook"
+          >fsmonitor-watchman</a
+        >
+        - Output to stdout all files that have been modified since a given time.
+        <img width="14" src="perl-icon.png" alt="Perl Icon" />
+      </li>
+    </ul>
+    <h3 id="update">update</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/CompSciLauren/awesome-git-hooks/blob/master/update-hooks/prevent-unannotated-tags.hook"
+          >update</a
+        >
+        - Block unannotated tags from entering.
+        <img width="14" src="bash-icon.png" alt="Bash Icon" />
+      </li>
+    </ul>
+    <h2 id="quick-start">Quick Start</h2>
+    <ol type="1">
+      <li>
+        Pick a hook, any hook! Try the “verify-name-and-email” one if you’re not
+        sure where to start.
+      </li>
+      <li>Navigate to your project’s hooks folder (.git/hooks).</li>
+      <li>
+        You should see a list of files already in there. Create a new file
+        called the exact commit type that you want to use (eg: “commit-msg”,
+        “pre-rebase”, “pre-commit”, etc). Do not give it an extension.
+      </li>
+    </ol>
+    <figure>
+      <img src="create-new-file.gif" alt="create new file" />
+      <figcaption>create new file</figcaption>
+    </figure>
+    <ol start="4" type="1">
+      <li>
+        Open your new file and paste the code from the hook you chose out of
+        this repo (eg:
+        <a
+          href="https://github.com/CompSciLauren/git-hooks/blob/master/pre-commit-hooks/verify-name-and-email.hook"
+          >verify-name-and-email.hook</a
+        >).
+      </li>
+      <li>
+        Save file. Done! Now the git hook will be triggered automatically.
+      </li>
+    </ol>
+    <h2 id="tools">Tools</h2>
+    <ul>
+      <li>
+        <p>
+          <a href="https://github.com/typicode/husky">Husky</a> - Manage git
+          hooks with a nice user interface.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/sds/overcommit">Overcommit</a> - A fully
+          configurable and extendable git hook manager.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/rudikershaw/git-build-hook"
+            >Git Build Hook Maven Plugin</a
+          >
+          - Install Git hooks and config during a Maven build.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/CaptainHookPhp/captainhook"
+            >CaptainHook</a
+          >
+          - Git hooks manager for PHP developers.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/pre-commit/pre-commit">pre-commit</a> - A
+          framework for managing and maintaining multi-language pre-commit
+          hooks.
+        </p>
+      </li>
+    </ul>
+    <h2 id="written-guides">Written Guides</h2>
+    <ul>
+      <li>
+        <p>
+          <a href="https://git-scm.com/docs/githooks"
+            >Git hooks documentation at git-scm.com</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://git-scm.com/book/en/v2"
+            >Git Pro book by Scott Chacon and Ben Straub</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://www.sitepoint.com/introduction-git-hooks/"
+            >An Introduction to Git Hooks</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://www.atlassian.com/ru/git/tutorials/git-hooks"
+            >Atlassian Tutorial on Git Hooks</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://www.vojtechruzicka.com/githooks-husky/"
+            >Easy git hooks with husky</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://www.javascriptjanuary.com/blog/git-hooked"
+            title="Git Hooked"
+            >Git Hooked</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://www.digitalocean.com/community/tutorials/how-to-use-git-hooks-to-automate-development-and-deployment-tasks"
+            >How To Use Git Hooks To Automate Development and Deployment
+            Tasks</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://hackernoon.com/automate-your-workflow-with-git-hooks-fef5d9b2a58c"
+            >Automate Your Workflow with Git Hooks</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://medium.com/@Sergeon/using-javascript-in-your-git-hooks-f0ce09477334"
+            title="Using JavaScript in Your Git Hooks"
+            >Using JavaScript in Your Git Hooks</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://dzone.com/articles/an-in-depth-look-at-git-hooks"
+            >An In-Depth Look at Git Hooks</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://www.tygertec.com/git-hooks-practical-uses-windows/"
+            >Git hooks and practical uses. Yes, even on Windows.</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://knpw.rs/blog/direnv-git-hooks"
+            >Automatically Manage Git Hooks with Direnv</a
+          >
+        </p>
+      </li>
+    </ul>
+    <h2 id="video-guides">Video Guides</h2>
+    <ul>
+      <li>
+        <p>
+          <a href="https://www.youtube.com/watch?v=aB3eq52sZSU"
+            >Git Hooks Part 1 - Getting Started</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="http://www.youtube.com/watch?feature=player_embedded&amp;v=fMYv6-SZsSo&amp;t=140s"
+            >Git hooks and practical uses. Yes, even on Windows.</a
+          >
+        </p>
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0" /></a
+      ><br />This work is licensed under a
+      <a rel="license" href="http://creativecommons.org/licenses/by/1.0/"
+        >Creative Commons Attribution 1.0 International License</a
+      >.
+    </p>
+  </body>
+</html>

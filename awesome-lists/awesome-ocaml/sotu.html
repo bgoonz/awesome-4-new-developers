@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>sotu</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="state-of-the-ocaml-ecosystem---august-2015">
+      State of the OCaml Ecosystem - August 2015
+    </h1>
+    <p>
+      This document aims to be a community-driven review of the current state of
+      the OCaml ecosystem and its suitability for various programming domains
+      and tasks. The idea comes from Gabriel Gonzalez’s the post about the
+      <a href="https://github.com/Gabriel439/post-rfc/blob/master/sotu.md"
+        >state of the Haskell ecosystem</a
+      >.
+    </p>
+    <p>
+      The content is grouped in various sections, each one covering a particular
+      topic, inspired by the structure found in
+      <a href="https://github.com/rizo/awesome-ocaml">Awesome OCaml</a>.
+    </p>
+    <p>
+      The topics are roughly sorted from greatest strengths to greatest
+      weaknesses. Each programming area will also be summarized, compared to
+      other languages, by a single rating of either:
+    </p>
+    <ul>
+      <li>
+        <strong>Best in class</strong>: the best experience in any language
+      </li>
+      <li><strong>Mature</strong>: suitable for most programmers</li>
+      <li><strong>Immature</strong>: only acceptable for early-adopters</li>
+      <li><strong>Bad</strong>: pretty unusable</li>
+    </ul>
+    <h1 id="application-domains">Application Domains</h1>
+    <p><br /></p>
+    <h2 id="compilers-and-programming-language-tools">
+      Compilers and Programming Language Tools
+    </h2>
+    <ul>
+      <li>
+        <p><strong>Rating</strong>: Best in class</p>
+      </li>
+      <li>
+        <p><strong>Compilers written in OCaml</strong>:</p>
+        <ul>
+          <li>
+            <a href="http://www.cduce.org/">cDuce</a> - cDuce is a modern
+            XML-oriented functional language with innovative features.
+          </li>
+          <li>
+            <a href="http://compcert.inria.fr/">Compcert C Compiler</a> - It is
+            a C Compiler supporting most of the ISO C90 and C99 / ANSI C
+            features.
+          </li>
+          <li>
+            <a href="http://www.eff-lang.org/">Eff Programming Language</a> -
+            Eff is a functional language with handlers of not only exceptions,
+            but also of other computational effects such as state or I/O.
+          </li>
+          <li><a href="http://hacklang.org/">Hack Programming Language</a></li>
+          <li><a href="http://haxe.org/">Haxe Programming Language</a></li>
+          <li>
+            <a href="http://nekovm.org">Neko Programming Language</a> -
+            Originally the compiler was written in OCaml.
+          </li>
+          <li>
+            <a href="http://protz.github.io/mezzo/"
+              >Mezzo Programming Language</a
+            >
+            - Mezzo is a programming language in the ML tradition, which places
+            strong emphasis on the control of aliasing and access to mutable
+            memory.
+          </li>
+          <li>
+            <a href="http://www.ocamljava.org">OCaml-Java</a> - OCaml to Java
+            bytecode compiler.
+          </li>
+          <li>
+            <a href="https://github.com/artagnon/rhine">Rhine</a> – A Lisp on
+            LLVM written in OCaml.
+          </li>
+          <li>
+            <a href="http://rust-lang.org">Rust Programming Language</a> -
+            Originally written in OCaml before bootstrapping.
+          </li>
+          <li>
+            <a href="http://www.cminusminus.org/">Quick C– Target Language</a> -
+            It is now a dead project.
+            <a href="https://github.com/nrnrnr/qc--">Github Repo</a>.
+            <a href="http://www.cs.tufts.edu/~nr/c--/qc--.html"
+              >Alternative website</a
+            >.
+          </li>
+          <li>
+            <a
+              href="http://caml.inria.fr/cgi-bin/hump.en.cgi?sort=0&amp;browse=88"
+              >Others</a
+            >
+            - Some other compilers implemented in OCaml, quite a few dead now.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Parser and Lexer Generators</strong>:
+        <ul>
+          <li>
+            <a href="http://gallium.inria.fr/~fpottier/menhir">Menhir</a> –
+            Menhir is a refined (LA)LR(1) parser generator for OCaml.
+          </li>
+          <li>
+            <a href="http://dypgen.free.fr/">dypgen</a> – Self-extensible GLR
+            parser generator
+          </li>
+          <li>
+            <a
+              href="http://caml.inria.fr/pub/docs/manual-ocaml-4.01/lexyacc.html"
+              >ocamllex</a
+            >
+            – lex (and yacc) implementation for OCaml.
+          </li>
+          <li>
+            <a href="https://github.com/pyrocat101/opal">Opal</a> –
+            Self-contained monadic parser combinators for OCaml.
+          </li>
+          <li>
+            <a href="http://lama.univ-savoie.fr/decap/">DeCaP</a> – Parser
+            generator (aiming at efficiency)
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Articles</strong>:
+        <ul>
+          <li>
+            <a href="http://llvm.org/docs/tutorial/OCamlLangImpl1.html"
+              >Kaleidoscope: Implementing a Language with LLVM in Objective
+              Caml</a
+            >
+          </li>
+          <li>
+            <a
+              href="http://nopaniers.calepin.co/getting-started-with-ocaml-bindings-for-llvm.html"
+              >Getting started with OCaml bindings for LLVM</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="formal-verification">Formal Verification</h2>
+    <ul>
+      <li>
+        <p><strong>Rating</strong>: Best in class</p>
+      </li>
+      <li>
+        <p><strong>Notable projects</strong>:</p>
+        <ul>
+          <li>
+            <a href="http://coq.inria.fr/">Coq</a> – Coq is a formal proof
+            management system. It provides a formal language to write
+            mathematical definitions, executable algorithms and theorems
+            together with an environment for semi-interactive development of
+            machine-checked proofs.
+          </li>
+          <li>
+            <a href="http://why3.lri.fr/">Why3</a> – Why3 is a platform for
+            deductive program verification. It provides a rich language for
+            specification and programming, called WhyML, and relies on external
+            theorem provers, both automated and interactive, to discharge
+            verification conditions.
+          </li>
+          <li>
+            <a href="http://frama-c.com/what_is.html">Frama-C</a>: static
+            analysis toolbox for the C language
+          </li>
+          <li>
+            <a
+              href="https://tla.msr-inria.inria.fr/tlaps/content/Download/Source.html"
+              >TLA+</a
+            >: modeling and verification of concurrent and distributed systems
+          </li>
+          <li>
+            <a href="http://www.astree.ens.fr/">Astrée</a>: abstract-analysis
+            based program analyzer
+          </li>
+          <li>
+            <a href="http://alt-ergo.lri.fr/">Alt-Ergo</a> – Alt-Ergo is an
+            open-source SMT solver dedicated to the proof of mathematical
+            formulas generated in the context of program verification.
+          </li>
+          <li>
+            <a href="http://zenon-prover.org/">Zenon</a>: tableau-based prover
+            used in <code>TLA+</code> and other projects.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Educational resources</strong>: …</p>
+      </li>
+    </ul>
+    <h2 id="scientific-computing">Scientific Computing</h2>
+    <ul>
+      <li><strong>Rating</strong>: Immature</li>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="http://mmottl.github.io/lacaml">Lacaml</a>: OCaml-bindings
+            to BLAS and LAPACK.
+          </li>
+          <li>
+            <a href="http://mmottl.github.io/gsl-ocaml">Gsl</a>: Bindings to the
+            GNU Scientific Library.
+          </li>
+          <li>
+            <a href="http://inria-parkas.github.io/sundialsml/">Sundials/ML</a>
+            is an interface to the Sundials suite of numerical solvers.
+          </li>
+          <li>
+            <a href="http://forge.ocamlcore.org/projects/odepack/">odepack</a>:
+            Binding to ODEPACK.
+          </li>
+          <li>
+            <a href="http://forge.ocamlcore.org/projects/optimization1d/"
+              >optimization1d</a
+            >: Find extrema of 1D functions.
+          </li>
+          <li>
+            <a href="https://github.com/Chris00/L-BFGS-ocaml">Lbfgs</a>:
+            Minimization of multidimensional functions on bounded or unbounded
+            domains. Binding to
+            <a href="http://users.iems.northwestern.edu/~nocedal/lbfgsb.html"
+              >L-BFGS-B</a
+            >.
+          </li>
+          <li>
+            <a href="https://github.com/Chris00/fftw-ocaml">FFTW3</a>: Binding
+            to the famous Fast Fourier Transform library
+            <a href="http://www.fftw.org/">FFTW</a>.
+          </li>
+          <li>
+            <a href="https://github.com/Chris00/mesh">mesh</a>: Triangular mesh
+            generation and manipulation.
+          </li>
+          <li>
+            <a href="http://forge.ocamlcore.org/projects/root1d/">root1d</a>:
+            Find roots of 1D functions.
+          </li>
+          <li>
+            <a href="http://forge.ocamlcore.org/projects/integration1d/"
+              >integration1d</a
+            >: Integration of functions of one variable (inspired from
+            QUADPACK).
+          </li>
+          <li>
+            <a href="https://bitbucket.org/mkur/nlopt-ocaml/">nlopt</a>:
+            bindings to the
+            <a href="http://ab-initio.mit.edu/wiki/index.php/NLopt">NLOpt</a>
+            optimization library.
+          </li>
+        </ul>
+      </li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="web-development">Web Development</h2>
+    <ul>
+      <li><strong>Rating</strong>: Immature</li>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="github.com/mirage/ocaml-cow">COW</a>: Set of tools and
+            syntax extensions for generating and manipulating HTML, CSS, and XML
+            with OCaml.
+          </li>
+          <li>
+            <a href="http://ocsigen.org/">Ocsigen</a>: High-level framework for
+            developing client-server applications in OCaml
+          </li>
+          <li>
+            <a href="https://github.com/BuckleScript/bucklescript"
+              >BuckleScript</a
+            >: JS compiler
+          </li>
+          <li>
+            <a href="https://github.com/ocsigen/js_of_ocaml"
+              >JS of OCaml (JSOO)</a
+            >: Compiler from OCaml bytecode to JavaScript, intended to be used
+            for large, high-performance projects.
+          </li>
+          <li>
+            <a href="https://github.com/facebook/reason">Reason</a>:
+            JavaScript-ish syntax for OCaml.
+          </li>
+        </ul>
+      </li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="mobile-applications">Mobile Applications</h2>
+    <ul>
+      <li><strong>Rating</strong>: Immature</li>
+      <li><strong>Notable libraries</strong>: …</li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="system-programming">System Programming</h2>
+    <ul>
+      <li><strong>Rating</strong>: Mature</li>
+      <li>
+        <p><strong>Notable libraries</strong>:</p>
+        <ul>
+          <li>
+            XenServer’s
+            <a href="https://github.com/xapi-project/xen-api">XAPI</a> toolstack
+          </li>
+          <li>
+            <a href="https://mirage.io/">MirageOS</a> – a library operating
+            system that constructs unikernels
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Educational resources</strong>: …</p>
+      </li>
+    </ul>
+    <h1 id="programming-ecosystem">Programming ecosystem</h1>
+    <p><br /></p>
+    <h2 id="extensions-or-replacements-to-stdlib">
+      Extensions or Replacements to stdlib
+    </h2>
+    <ul>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="http://batteries.forge.ocamlcore.org/"
+              >batteries-included</a
+            >: a community-driven stdlib replacement with many data structures
+          </li>
+          <li>
+            <a href="https://github.com/janestreet/core_kernel">Core</a>:
+            JaneStreet’s replacement for the stdlib
+          </li>
+          <li>
+            <a href="https://github.com/c-cube/ocaml-containers">containers</a>:
+            modular collection of data structures
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="algorithms-and-data-structures">Algorithms and Data Structures</h2>
+    <ul>
+      <li><strong>Rating</strong>: Mature</li>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="https://github.com/rgrinberg/ocaml-hamt">htmt</a>: Hash
+            Array Mapped Tries
+          </li>
+          <li>
+            <a href="http://ocamlgraph.lri.fr/">ocamlgraph</a>: powerful graph
+            library
+          </li>
+        </ul>
+      </li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="code-analysis-and-linters">Code Analysis and Linters</h2>
+    <ul>
+      <li><strong>Rating</strong>: Immature</li>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="https://github.com/cryptosense/ocamllint">OCamlLint</a>:
+            Linter for finding common security and performance problems in OCaml
+            programs.
+          </li>
+        </ul>
+      </li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="parallelism-and-concurrency">Parallelism and concurrency</h2>
+    <ul>
+      <li><strong>Rating</strong>: Immature</li>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="http://ocsigen.org/lwt/">Lwt</a> — A stand-alone monadic
+            cooperative threading library.
+          </li>
+          <li>
+            <a href="http://janestreet.github.io/">Async</a> — A monadic
+            cooperative threading library integrated with the Core library.
+          </li>
+        </ul>
+      </li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="databases">Databases</h2>
+    <ul>
+      <li><strong>Rating</strong>: Immature</li>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="http://pgocaml.forge.ocamlcore.org/">PG’OCaml</a>: Bindings
+            to the PostgreSQL database
+          </li>
+          <li>
+            <a href="https://github.com/mmottl/sqlite3-ocaml">SQLite3-OCaml</a>:
+            Bindings to the SQLite3 database
+          </li>
+          <li>
+            <a href="https://github.com/mirage/irmin">Irmin</a>: A distributed
+            database based on Git, written in OCaml
+          </li>
+        </ul>
+      </li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="developer-tools">Developer Tools</h2>
+    <ul>
+      <li><strong>Rating</strong>: Immature</li>
+      <li><strong>Notable libraries</strong>: …</li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="graphics">Graphics</h2>
+    <ul>
+      <li><strong>Rating</strong>: Immature</li>
+      <li><strong>Notable libraries</strong>: …</li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="system-interaction">System interaction</h2>
+    <ul>
+      <li><strong>Rating</strong>: Mature</li>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="https://forge.ocamlcore.org/projects/ocaml-fileutils/"
+              >fileutils</a
+            >
+            – File manipulation utilties, such as (recursive) directory removal,
+            and path manipulation.
+          </li>
+          <li>
+            <a href="https://github.com/ygrek/extunix">ExtUnix</a> – interface
+            to common and platform-specific Unix system functions D-Bus (system
+            libraries)
+          </li>
+          <li>
+            <a href="https://libvirt.org/ocaml/">Libvirt</a> – a portable
+            toolkit to interact with the virtualisation capabilities of Linux,
+            Solaris and other operating systems.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="foreign-function-interfaces">Foreign Function Interfaces</h2>
+    <h2 id="user-interfaces">User interfaces</h2>
+    <ul>
+      <li><strong>Rating</strong>: Immature</li>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="http://erratique.ch/software/cmdliner/doc/Cmdliner.html"
+              >Cmdliner</a
+            >
+            – Cmdliner is a powerful library for defining command line
+            interfaces in a declarative fashion, include the support for
+            subcommands.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="networking">Networking</h2>
+    <ul>
+      <li><strong>Rating</strong>: …</li>
+      <li><strong>Notable libraries</strong>: …</li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="package-management">Package Management</h2>
+    <ul>
+      <li><strong>Rating</strong>: Mature</li>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="http://opam.ocaml.org/">opam</a>: very active package
+            manager for OCaml
+          </li>
+        </ul>
+      </li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="communication-protocols">Communication protocols</h2>
+    <ul>
+      <li><strong>Rating</strong>: …</li>
+      <li>
+        <strong>Notable libraries</strong>: …
+        <ul>
+          <li>
+            <a href="https://github.com/diml/obus">Obus</a> – pure-OCaml (and
+            fast!) implementation of the DBus protocol
+          </li>
+        </ul>
+      </li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="data-formats">Data Formats</h2>
+    <ul>
+      <li><strong>Rating</strong>: …</li>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="https://github.com/janestreet/sexplib">sexplib</a>:
+            S-expressions
+          </li>
+          <li><a href="http://mjambon.com/yojson.html">yojson</a>: JSON</li>
+        </ul>
+      </li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="serialization">Serialization</h2>
+    <ul>
+      <li><strong>Rating</strong>: Mature</li>
+      <li><strong>Notable libraries</strong>: …</li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+    <h2 id="testing">Testing</h2>
+    <ul>
+      <li><strong>Rating</strong>: Mature</li>
+      <li>
+        <strong>Notable libraries</strong>:
+        <ul>
+          <li>
+            <a href="http://ounit.forge.ocamlcore.org/">OUnit</a>: unit testing
+          </li>
+          <li>
+            <a href="https://github.com/mirage/alcotest">Alcotest</a>: unit
+            testing
+          </li>
+        </ul>
+      </li>
+      <li><strong>Educational resources</strong>: …</li>
+    </ul>
+  </body>
+</html>

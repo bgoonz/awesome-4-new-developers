@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>git-cheat-sheet-ko</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="git-and-git-flow-cheat-sheet-awesome-build-status">
+      Git and Git Flow Cheat Sheet
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+      <a href="https://travis-ci.org/arslanbilal/git-cheat-sheet"
+        ><img
+          src="https://travis-ci.org/arslanbilal/git-cheat-sheet.svg?branch=master"
+          alt="Build Status"
+      /></a>
+    </h1>
+    <hr />
+    <p align="center">
+      <img alt="Git" src="../Img/git-logo.png" height="190" width="455" />
+    </p>
+    <hr />
+    <h1 id="other-available-languages">Other Available Languages:</h1>
+    <ol type="1">
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-ar.md"
+          >Arabic Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-zh.md"
+          >Chinese Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-hi.md"
+          >Hindi Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-tr.md"
+          >Turkish Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-es.md"
+          >Spanish Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-el.md"
+          >Greek Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-ko.md"
+          >Korean Git Cheat Sheet</a
+        >
+      </li>
+    </ol>
+    <p>
+      깃 치트시트는 당신이 모든 명령어를 외우는 일로부터 벗어나게 해드립니다.
+    </p>
+    <p>
+      언제든지 기여하고 문법 실수들을 업데이트하세요. 또한 언어 파일을 자유롭게
+      추가할 수 있습니다.
+    </p>
+    <hr />
+    <h1 id="깃-치트시트-한국어">깃 치트시트 한국어</h1>
+    <h3 id="index">Index</h3>
+    <ul>
+      <li><a href="#설정">설정</a></li>
+      <li><a href="#설정-파일">설정 파일</a></li>
+      <li><a href="#생성">생성</a></li>
+      <li><a href="#로컬-변경사항">로컬 변경사항</a></li>
+      <li><a href="#검색">검색</a></li>
+      <li><a href="#커밋-히스토리">커밋 히스토리</a></li>
+      <li><a href="#브랜치--태그">브랜치 &amp; 태그</a></li>
+      <li><a href="#업데이트--배포">업데이트 &amp; 배포</a></li>
+      <li><a href="#병합--리베이스">병합 &amp; 리베이스</a></li>
+      <li><a href="#실행취소">실행취소</a></li>
+      <li><a href="#깃-플로우">깃 플로우</a></li>
+    </ul>
+    <hr />
+    <h2 id="설정">설정</h2>
+    <h5 id="현재-설정-구성-보기">현재 설정 구성 보기:</h5>
+    <pre><code>$ git config --list</code></pre>
+    <h5 id="현재-저장소-설정-구성-보기">현재 저장소 설정 구성 보기:</h5>
+    <pre><code>$ git config --local --list</code></pre>
+    <h5 id="글로벌-설정-구성-보기">글로벌 설정 구성 보기:</h5>
+    <pre><code>$ git config --global --list</code></pre>
+    <h5 id="시스템-설정-구성-보기">시스템 설정 구성 보기:</h5>
+    <pre><code>$ git config --system --list</code></pre>
+    <h5 id="버전-히스토리-검토할-때-크레딧에-식별-가능한-이름을-설정">
+      버전 히스토리 검토할 때 크레딧에 식별 가능한 이름을 설정:
+    </h5>
+    <pre><code>$ git config --global user.name “[firstname lastname]”</code></pre>
+    <h5 id="각-히스토리-마커와-연결할-이메일-주소-설정">
+      각 히스토리 마커와 연결할 이메일 주소 설정:
+    </h5>
+    <pre><code>$ git config --global user.email “[valid-email]”</code></pre>
+    <h5 id="쉬운-리뷰를-위해서-깃의-자동-명령줄-색-설정">
+      쉬운 리뷰를 위해서 깃의 자동 명령줄 색 설정:
+    </h5>
+    <pre><code>$ git config --global color.ui auto</code></pre>
+    <h5 id="커밋에-대한-글로벌-에디터-설정">커밋에 대한 글로벌 에디터 설정:</h5>
+    <pre><code>$ git config --global core.editor vi</code></pre>
+    <hr />
+    <h2 id="설정-파일">설정 파일</h2>
+    <h5 id="특정-저장소-설정-파일-local">특정 저장소 설정 파일 [–local]:</h5>
+    <pre><code>&lt;repo&gt;/.git/config</code></pre>
+    <h5 id="특정-유저-설정-파일-global">특정 유저 설정 파일 [–global]:</h5>
+    <pre><code>~/.gitconfig</code></pre>
+    <h5 id="시스템-전체-설정-파일-system">시스템 전체 설정 파일 [–system]:</h5>
+    <pre><code>/etc/gitconfig</code></pre>
+    <hr />
+    <h2 id="생성">생성</h2>
+    <h5 id="기존-저장소-복제">기존 저장소 복제:</h5>
+    <p>2가지 방법이 있습니다:</p>
+    <p>SSH를 통해</p>
+    <pre><code>$ git clone ssh://user@domain.com/repo.git</code></pre>
+    <p>HTTP를 통해</p>
+    <pre><code>$ git clone http://domain.com/user/repo.git</code></pre>
+    <h5 id="현재-디렉터리에-새로운-로컬-저장소-생성">
+      현재 디렉터리에 새로운 로컬 저장소 생성:
+    </h5>
+    <pre><code>$ git init</code></pre>
+    <h5 id="특정-디렉터리에-새로운-로컬-저장소-생성">
+      특정 디렉터리에 새로운 로컬 저장소 생성:
+    </h5>
+    <pre><code>$ git init &lt;directory&gt;</code></pre>
+    <hr />
+    <h2 id="로컬-변경사항">로컬 변경사항</h2>
+    <h5 id="작업-디렉터리-변경사항">작업 디렉터리 변경사항:</h5>
+    <pre><code>$ git status</code></pre>
+    <h5 id="추적된-파일들의-변경사항">추적된 파일들의 변경사항:</h5>
+    <pre><code>$ git diff</code></pre>
+    <h5 id="특정-파일의-변경사항차이-확인">특정 파일의 변경사항/차이 확인:</h5>
+    <pre><code>$ git diff &lt;file&gt;</code></pre>
+    <h5 id="모든-현재-변경사항을-다음-커밋에-추가">
+      모든 현재 변경사항을 다음 커밋에 추가:
+    </h5>
+    <pre><code>$ git add .</code></pre>
+    <h5 id="file의-일부-변경사항을-다음-커밋에-추가">
+      &lt;file&gt;의 일부 변경사항을 다음 커밋에 추가:
+    </h5>
+    <pre><code>$ git add -p &lt;file&gt;</code></pre>
+    <h5 id="추적되는-파일들의-모든-로컬-변경사항을-커밋">
+      추적되는 파일들의 모든 로컬 변경사항을 커밋:
+    </h5>
+    <pre><code>$ git commit -a</code></pre>
+    <h5 id="이전에-stage된-변경사항을-커밋">이전에 stage된 변경사항을 커밋:</h5>
+    <pre><code>$ git commit</code></pre>
+    <h5 id="메시지와-함께-커밋">메시지와 함께 커밋:</h5>
+    <pre><code>$ git commit -m &#39;message here&#39;</code></pre>
+    <h5 id="staging-영역-건너뛰기-및-메시지-추가하여-커밋">
+      Staging 영역 건너뛰기 및 메시지 추가하여 커밋:
+    </h5>
+    <pre><code>$ git commit -am &#39;message here&#39;</code></pre>
+    <h5 id="과거-날짜에-커밋">과거 날짜에 커밋:</h5>
+    <pre><code>$ git commit --date=&quot;`date --date=&#39;n day ago&#39;`&quot; -am &quot;&lt;Commit Message Here&gt;&quot;</code></pre>
+    <h5 id="마지막-커밋-수정">마지막 커밋 수정:<br /></h5>
+    <p>
+      <em><sub>이미 배포된 커밋을 수정하지 마세요!</sub></em>
+    </p>
+    <pre><code>$ git commit -a --amend</code></pre>
+    <h5 id="이전-로그-메시지를-사용하여-마지막-커밋-수정">
+      이전 로그 메시지를 사용하여 마지막 커밋 수정:
+    </h5>
+    <p>
+      <em><sub>이미 배포된 커밋을 수정하지 마세요!</sub></em>
+    </p>
+    <pre class="shell"><code>$ git commit --amend --no-edit</code></pre>
+    <h5 id="마지막-커밋의-커밋-작성자-날짜-수정">
+      마지막 커밋의 커밋 작성자 날짜 수정:
+    </h5>
+    <pre><code>GIT_COMMITTER_DATE=&quot;date&quot; git commit --amend</code></pre>
+    <h5 id="마지막-커밋의-작성자-날짜-수정">마지막 커밋의 작성자 날짜 수정:</h5>
+    <pre
+      class="shell"
+    ><code>$ git commit --amend --date=&quot;date&quot;</code></pre>
+    <h5 id="현재-브랜치의-커밋되지-않은-변경사항을-다른-브랜치로-이동">
+      현재 브랜치의 커밋되지 않은 변경사항을 다른 브랜치로 이동:<br />
+    </h5>
+    <pre><code>$ git stash
+$ git checkout branch2
+$ git stash pop</code></pre>
+    <h5 id="보관된-변경사항을-현재-브랜치로-복원">
+      보관된 변경사항을 현재 브랜치로 복원:
+    </h5>
+    <pre class="shell"><code>$ git stash apply</code></pre>
+    <h4 id="보관된-특정-변경사항을-현재-브랜치로-복원">
+      보관된 특정 변경사항을 현재 브랜치로 복원:
+    </h4>
+    <ul>
+      <li>
+        <code>git stash list</code>를 통해 <em>{stash_number}</em> 를 얻을 수
+        있습니다.
+      </li>
+    </ul>
+    <pre class="shell"><code>$ git stash apply stash@{stash_number}</code></pre>
+    <h5 id="마지막으로-보관된-변경사항을-제거">
+      마지막으로 보관된 변경사항을 제거:
+    </h5>
+    <pre><code>$ git stash drop</code></pre>
+    <hr />
+    <h2 id="검색">검색</h2>
+    <h5 id="디렉터리에-있는-모든-파일에서-텍스트-검색">
+      디렉터리에 있는 모든 파일에서 텍스트 검색:
+    </h5>
+    <pre><code>$ git grep &quot;Hello&quot;</code></pre>
+    <h5 id="버전에서-텍스트-검색">버전에서 텍스트 검색:</h5>
+    <pre><code>$ git grep &quot;Hello&quot; v2.5</code></pre>
+    <hr />
+    <h2 id="커밋-히스토리">커밋 히스토리</h2>
+    <h5
+      id="모든-커밋-표시-가장-최신-커밋부터커밋-해시-작성자-정보-커밋-날짜-커밋-제목-포함"
+    >
+      모든 커밋 표시, 가장 최신 커밋부터(커밋 해시, 작성자 정보, 커밋 날짜, 커밋
+      제목 포함):
+    </h5>
+    <pre><code>$ git log</code></pre>
+    <h5 id="모든-커밋-표시-커밋-해시와-커밋-메시지-포함">
+      모든 커밋 표시 (커밋 해시와 커밋 메시지 포함):
+    </h5>
+    <pre><code>$ git log --oneline</code></pre>
+    <h5 id="특정-유저의-모든-커밋-표시">특정 유저의 모든 커밋 표시:</h5>
+    <pre><code>$ git log --author=&quot;username&quot;</code></pre>
+    <h5 id="특정-파일에-대한-시간-경과에-따른-변경사항-표시">
+      특정 파일에 대한 시간 경과에 따른 변경사항 표시:
+    </h5>
+    <pre><code>$ git log -p &lt;file&gt;</code></pre>
+    <h5 id="현재-오른쪽-remote-브랜치에만-있는-커밋-표시">
+      현재 오른쪽 remote 브랜치에만 있는 커밋 표시:
+    </h5>
+    <pre><code>$ git log --oneline &lt;origin/master&gt;..&lt;remote/master&gt; --left-right</code></pre>
+    <h5 id="file에-대한-변경자-변경사항-그리고-변경일자-표시">
+      &lt;file&gt;에 대한 변경자, 변경사항 그리고 변경일자 표시:
+    </h5>
+    <pre><code>$ git blame &lt;file&gt;</code></pre>
+    <h5 id="참조-로그-표시">참조 로그 표시:</h5>
+    <pre><code>$ git reflog show</code></pre>
+    <h5 id="참조-로그-삭제">참조 로그 삭제:</h5>
+    <pre><code>$ git reflog delete</code></pre>
+    <hr />
+    <h2 id="이동-이름-수정">이동 / 이름 수정</h2>
+    <h5 id="파일-이름-수정">파일 이름 수정:</h5>
+    <p>Index.txt에서 Index.html로 이름 바꾸기</p>
+    <pre><code>$ git mv Index.txt Index.html</code></pre>
+    <hr />
+    <h2 id="브랜치-태그">브랜치 &amp; 태그</h2>
+    <h5 id="모든-로컬-브랜치-목록">모든 로컬 브랜치 목록:</h5>
+    <pre><code>$ git branch</code></pre>
+    <h4 id="모든-로컬원격-브랜치-목록">모든 로컬/원격 브랜치 목록</h4>
+    <pre><code>$ git branch -a</code></pre>
+    <h5 id="모든-원격-브랜치-목록">모든 원격 브랜치 목록:</h5>
+    <pre><code>$ git branch -r</code></pre>
+    <h5 id="head-브랜치-전환">HEAD 브랜치 전환:</h5>
+    <pre><code>$ git checkout &lt;branch&gt;</code></pre>
+    <h5 id="다른-브랜치에서-단일-파일-전환">다른 브랜치에서 단일 파일 전환:</h5>
+    <pre><code>$ git checkout &lt;branch&gt; -- &lt;filename&gt;</code></pre>
+    <h5 id="새로운-브랜치-생성-후-head-브랜치-전환">
+      새로운 브랜치 생성 후 HEAD 브랜치 전환:
+    </h5>
+    <pre><code>$ git checkout -b &lt;branch&gt;</code></pre>
+    <h5 id="기존-특정-브랜치에서-새로운-브랜치-생성하고-브랜치-전환">
+      기존 특정 브랜치에서 새로운 브랜치 생성하고 브랜치 전환:
+    </h5>
+    <pre><code>$ git checkout -b &lt;new_branch&gt; &lt;existing_branch&gt;</code></pre>
+    <h4 id="기존-특정-커밋에서-브랜치-생성-후-브랜치-전환">
+      기존 특정 커밋에서 브랜치 생성 후 브랜치 전환:
+    </h4>
+    <pre><code>$ git checkout &lt;commit-hash&gt; -b &lt;new_branch_name&gt;</code></pre>
+    <h5 id="현재-head-브랜치-기준으로-새-브랜치-생성">
+      현재 HEAD 브랜치 기준으로 새 브랜치 생성:
+    </h5>
+    <pre><code>$ git branch &lt;new-branch&gt;</code></pre>
+    <h5 id="원격-브랜치를-기반으로-새로운-추적-브랜치-생성">
+      원격 브랜치를 기반으로 새로운 추적 브랜치 생성:
+    </h5>
+    <pre><code>$ git branch --track &lt;new-branch&gt; &lt;remote-branch&gt;</code></pre>
+    <h5 id="로컬-브랜치-삭제">로컬 브랜치 삭제:</h5>
+    <pre><code>$ git branch -d &lt;branch&gt;</code></pre>
+    <h5 id="현재-브랜치-이름-변경">현재 브랜치 이름 변경:</h5>
+    <pre
+      class="shell"
+    ><code>$ git branch -m &lt;new_branch_name&gt;</code></pre>
+    <h5 id="로컬-브랜치-강제-삭제">로컬 브랜치 강제 삭제:</h5>
+    <p>
+      <em><sub>머지되지 않은 변경사항을 잃게 됩니다!</sub></em>
+    </p>
+    <pre><code>$ git branch -D &lt;branch&gt;</code></pre>
+    <h5 id="head에-태그-추가"><code>HEAD</code>에 태그 추가:</h5>
+    <pre><code>$ git tag &lt;tag-name&gt;</code></pre>
+    <h5 id="head에-태그를-추가하고-메시지를-포함할-편집기-열기">
+      <code>HEAD</code>에 태그를 추가하고 메시지를 포함할 편집기 열기:
+    </h5>
+    <pre><code>$ git tag -a &lt;tag-name&gt;</code></pre>
+    <h5 id="head에-메시지를-포함하는-태그-추가">
+      <code>HEAD</code>에 메시지를 포함하는 태그 추가:
+    </h5>
+    <pre><code>$ git tag &lt;tag-name&gt; -am &#39;message here&#39;</code></pre>
+    <h5 id="모든-태그-목록">모든 태그 목록:</h5>
+    <pre><code>$ git tag</code></pre>
+    <h5 id="메시지-태그-메시지-없다면-커밋-메시지와-함께-모든-태그-목록-표시">
+      메시지 (태그 메시지, 없다면 커밋 메시지)와 함께 모든 태그 목록 표시:
+    </h5>
+    <pre><code>$ git tag -n</code></pre>
+    <hr />
+    <h2 id="업데이트-배포">업데이트 &amp; 배포</h2>
+    <h5 id="현재-구성된-모든-원격-저장소-목록-표시">
+      현재 구성된 모든 원격 저장소 목록 표시:
+    </h5>
+    <pre><code>$ git remote -v</code></pre>
+    <h5 id="특정-원격-저장소-정보-표시">특정 원격 저장소 정보 표시:</h5>
+    <pre><code>$ git remote show &lt;remote&gt;</code></pre>
+    <h5 id="이름-remote-새로운-원격-저장소-추가">
+      이름 &lt;remote&gt; 새로운 원격 저장소 추가:
+    </h5>
+    <pre><code>$ git remote add &lt;remote&gt; &lt;url&gt;</code></pre>
+    <h5 id="remote에서-new_remote로-원격-저장소의-이름-수정">
+      &lt;remote&gt;에서 &lt;new_remote&gt;로 원격 저장소의 이름 수정:
+    </h5>
+    <pre><code>$ git remote rename &lt;remote&gt; &lt;new_remote&gt;</code></pre>
+    <h5 id="등록된-원격-저장소-삭제">등록된 원격 저장소 삭제:</h5>
+    <pre><code>$ git remote rm &lt;remote&gt;</code></pre>
+    <p>
+      <em
+        ><sub
+          >참고: git remote rm 은 서버에서 원격 저장소를 삭제하지 않습니다. 로컬
+          저장소에서 원격정보 및 해당 참조를 제거만 합니다.</sub
+        ></em
+      >
+    </p>
+    <h5 id="remote에서-모든-변경사항-다운로드하지만-head와-통합하지-않음">
+      &lt;remote&gt;에서 모든 변경사항 다운로드하지만 HEAD와 통합하지 않음:
+    </h5>
+    <pre><code>$ git fetch &lt;remote&gt;</code></pre>
+    <h5 id="변경사항을-다운로드하고-head와-병합">
+      변경사항을 다운로드하고 HEAD와 병합:
+    </h5>
+    <pre><code>$ git remote pull &lt;remote&gt; &lt;url&gt;</code></pre>
+    <h5 id="head에서-로컬-저장소로-모든-변경사항을-가져옴">
+      HEAD에서 로컬 저장소로 모든 변경사항을 가져옴:
+    </h5>
+    <pre><code>$ git pull origin master</code></pre>
+    <h5 id="병합하지-않고-head에서-로컬-저장소로-모든-변경사항을-가져옴">
+      병합하지 않고 HEAD에서 로컬 저장소로 모든 변경사항을 가져옴:
+    </h5>
+    <pre><code>$ git pull --rebase &lt;remote&gt; &lt;branch&gt;</code></pre>
+    <h5 id="로컬-변경사항을-원격-저장소에-배포">
+      로컬 변경사항을 원격 저장소에 배포:
+    </h5>
+    <pre><code>$ git push remote &lt;remote&gt; &lt;branch&gt;</code></pre>
+    <h5 id="원격-저장소에서-브랜치-삭제">원격 저장소에서 브랜치 삭제:</h5>
+    <pre><code>$ git push &lt;remote&gt; :&lt;branch&gt; (since Git v1.5.0)</code></pre>
+    <p>혹은</p>
+    <pre><code>$ git push &lt;remote&gt; --delete &lt;branch&gt; (since Git v1.7.0)</code></pre>
+    <h5 id="태그-배포">태그 배포:</h5>
+    <pre><code>$ git push --tags</code></pre>
+    <hr />
+    <h4 id="병합-툴편집기을-글로벌-설정">병합 툴(편집기)을 글로벌 설정</h4>
+    <div class="sourceCode" id="cb76">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb76-1" title="1">$ <span class="fu">git</span> config --global merge.tool meld</a></code></pre>
+    </div>
+    <h5 id="구성된-병합-툴로-충돌-해결">구성된 병합 툴로 충돌 해결:</h5>
+    <pre><code>$ git mergetool</code></pre>
+    <h2 id="병합-리베이스">병합 &amp; 리베이스</h2>
+    <h5 id="현재-head로-브랜치-병합">현재 HEAD로 브랜치 병합:</h5>
+    <pre><code>$ git merge &lt;branch&gt;</code></pre>
+    <h5 id="현재-head에-branch로-리베이스">
+      현재 HEAD에 &lt;branch&gt;로 리베이스:<br />
+    </h5>
+    <p>
+      <em><sub>이미 배포된 커밋을 리베이스하지 마세요!</sub></em>
+    </p>
+    <pre><code>$ git rebase &lt;branch&gt;</code></pre>
+    <h5 id="리베이스-중단">리베이스 중단:</h5>
+    <pre><code>$ git rebase --abort</code></pre>
+    <h5 id="충돌-해결-후-리베이스-재개">충돌 해결 후 리베이스 재개:</h5>
+    <pre><code>$ git rebase --continue</code></pre>
+    <h5 id="편집기를-사용하여-수동으로-충돌을-해결하고-해당-파일에-표시">
+      편집기를 사용하여 수동으로 충돌을 해결하고 해당 파일에 표시:
+    </h5>
+    <pre><code>$ git add &lt;resolved-file&gt;</code></pre>
+    <pre><code>$ git rm &lt;resolved-file&gt;</code></pre>
+    <h5 id="커밋들을-압축">커밋들을 압축:</h5>
+    <pre><code>$ git rebase -i &lt;commit-just-before-first&gt;</code></pre>
+    <p>이제 이걸</p>
+    <pre><code>pick &lt;commit_id&gt;
+pick &lt;commit_id2&gt;
+pick &lt;commit_id3&gt;</code></pre>
+    <p>이렇게 바꿉니다,</p>
+    <pre><code>pick &lt;commit_id&gt;
+squash &lt;commit_id2&gt;
+squash &lt;commit_id3&gt;</code></pre>
+    <hr />
+    <h2 id="실행취소">실행취소</h2>
+    <h5 id="작업-디렉터리의-모든-로컬-변경사항-취소">
+      작업 디렉터리의 모든 로컬 변경사항 취소:
+    </h5>
+    <pre><code>$ git reset --hard HEAD</code></pre>
+    <h5 id="staging-영역에서-모든-파일-빼내기-즉-마지막-git-add를-실행-취소">
+      Staging 영역에서 모든 파일 빼내기 (즉 마지막 <code>git add</code>를 실행
+      취소):
+    </h5>
+    <pre><code>$ git reset HEAD</code></pre>
+    <h5 id="특정-파일의-로컬-변경사항-취소">특정 파일의 로컬 변경사항 취소:</h5>
+    <pre><code>$ git checkout HEAD &lt;file&gt;</code></pre>
+    <h5 id="커밋-되돌리기-되돌리기-위한-변경사항을-포함하는-새-커밋을-생성함">
+      커밋 되돌리기 (되돌리기 위한 변경사항을 포함하는 새 커밋을 생성함):
+    </h5>
+    <pre><code>$ git revert &lt;commit&gt;</code></pre>
+    <h5
+      id="head-포인터를-이전-커밋으로-재설정하고-그-이후의-모든-변경-사항을-삭제"
+    >
+      HEAD 포인터를 이전 커밋으로 재설정하고 그 이후의 모든 변경 사항을 삭제:
+    </h5>
+    <pre><code>$ git reset --hard &lt;commit&gt;</code></pre>
+    <h5 id="head-포인터를-원격-브랜치의-현재-상태로-재설정">
+      HEAD 포인터를 원격 브랜치의 현재 상태로 재설정:
+    </h5>
+    <pre><code>$ git reset --hard &lt;remote/branch&gt; e.g., upstream/master, origin/my-feature</code></pre>
+    <h5
+      id="head-포인터를-이전-커밋으로-재설정하고-모든-변경사항을-unstaging-상태로-유지"
+    >
+      HEAD 포인터를 이전 커밋으로 재설정하고 모든 변경사항을 Unstaging 상태로
+      유지:
+    </h5>
+    <pre><code>$ git reset &lt;commit&gt;</code></pre>
+    <h5
+      id="head-포인터를-이전-커밋으로-재설정하고-커밋되지-않은-로컬-변경사항-유지"
+    >
+      HEAD 포인터를 이전 커밋으로 재설정하고 커밋되지 않은 로컬 변경사항 유지:
+    </h5>
+    <pre><code>$ git reset --keep &lt;commit&gt;</code></pre>
+    <h5 id="gitignore에-추가되기-전에-실수로-커밋된-파일-제거">
+      .gitignore에 추가되기 전에 실수로 커밋된 파일 제거:
+    </h5>
+    <pre><code>$ git rm -r --cached .
+$ git add .
+$ git commit -m &quot;remove xyz file&quot;</code></pre>
+    <hr />
+    <h2 id="깃-플로우">깃 플로우</h2>
+    <p>
+      개선된
+      <a href="https://github.com/petervanderdoes/gitflow-avh">Git-flow</a>
+    </p>
+    <h3 id="인덱스">인덱스</h3>
+    <ul>
+      <li><a href="#설정">설정</a></li>
+      <li><a href="#시작하기">시작하기</a></li>
+      <li><a href="#기능">기능</a></li>
+      <li><a href="#릴리즈-생성">릴리즈 생성</a></li>
+      <li><a href="#핫픽스">핫픽스</a></li>
+      <li><a href="#명령어들">명령어들</a></li>
+    </ul>
+    <hr />
+    <h3 id="설정-1">설정</h3>
+    <h6
+      id="필수-구성-요소로-git을-설치해야-합니다.-git-플로우는-osx-리눅스-및-윈도우즈에서-작동합니다."
+    >
+      필수 구성 요소로 Git을 설치해야 합니다. Git 플로우는 OSX, 리눅스 및
+      윈도우즈에서 작동합니다.
+    </h6>
+    <h5 id="osx-homebrew">OSX Homebrew:</h5>
+    <pre><code>$ brew install git-flow-avh</code></pre>
+    <h5 id="osx-macports">OSX Macports:</h5>
+    <pre><code>$ port install git-flow</code></pre>
+    <h5 id="linux-debian-based">Linux (Debian-based):</h5>
+    <pre><code>$ sudo apt-get install git-flow</code></pre>
+    <h5 id="windows-cygwin">Windows (Cygwin):</h5>
+    <h6 id="git-flow를-설치하기-위해서는-wget과-util-linux가-필요합니다.">
+      git-flow를 설치하기 위해서는 wget과 util-linux가 필요합니다.
+    </h6>
+    <div class="sourceCode" id="cb99">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb99-1" title="1">$ <span class="fu">wget</span> -q -O - --no-check-certificate https://raw.githubusercontent.com/petervanderdoes/gitflow/develop/contrib/gitflow-installer.sh install <span class="op">&lt;</span>state<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">bash</span></a></code></pre>
+    </div>
+    <hr />
+    <h3 id="시작하기">시작하기</h3>
+    <h6
+      id="프로젝트-설정을-커스텀하려면-git-플로우를-초기화해야합니다.-기존-git-저장소-내에서-초기화하여-git-flow-사용을-시작하십시오"
+    >
+      프로젝트 설정을 커스텀하려면 Git 플로우를 초기화해야합니다. 기존 git
+      저장소 내에서 초기화하여 git-flow 사용을 시작하십시오:
+    </h6>
+    <h5 id="초기화">초기화:</h5>
+    <h6
+      id="브랜치의-이름-규칙에-관한-몇-가지-질문에-답해야합니다.-기본값을-사용하는-것이-좋습니다."
+    >
+      브랜치의 이름 규칙에 관한 몇 가지 질문에 답해야합니다. 기본값을 사용하는
+      것이 좋습니다.
+    </h6>
+    <pre class="shell"><code>git flow init</code></pre>
+    <p>혹은 ###### 기본값 사용</p>
+    <pre class="shell"><code>git flow init -d</code></pre>
+    <hr />
+    <h3 id="기능">기능</h3>
+    <h6
+      id="릴리즈를위한-새로운-기능을-개발하십시오.-일반적으로-개발자-저장소에만-존재합니다."
+    >
+      릴리즈를위한 새로운 기능을 개발하십시오. 일반적으로 개발자 저장소에만
+      존재합니다.
+    </h6>
+    <h5 id="새로운-기능-시작">새로운 기능 시작:</h5>
+    <h6 id="이-작업은-develop을-기반으로-새-기능-브랜치를-만들고-전환합니다.">
+      이 작업은 ’develop’을 기반으로 새 기능 브랜치를 만들고 전환합니다.
+    </h6>
+    <pre><code>git flow feature start MYFEATURE</code></pre>
+    <h5 id="기능-완료">기능 완료:</h5>
+    <h6 id="기능-개발을-완료합니다.-이-작업은-다음을-수행합니다">
+      기능 개발을 완료합니다. 이 작업은 다음을 수행합니다:
+    </h6>
+    <h6
+      id="myfeature를-develop에-병합.-2-기능-브랜치를-제거.-3-develop-브랜치로-재전환"
+    >
+      1) MYFEATURE를 ‘develop’에 병합. ###### 2) 기능 브랜치를 제거. ###### 3)
+      ’develop’ 브랜치로 재전환
+    </h6>
+    <pre><code>git flow feature finish MYFEATURE</code></pre>
+    <h5 id="기능-배포">기능 배포:</h5>
+    <h6
+      id="공동으로-기능을-개발하고-있습니까-다른-사용자가-사용할-수-있도록-기능을-원격-서버에-배포합니다."
+    >
+      공동으로 기능을 개발하고 있습니까? 다른 사용자가 사용할 수 있도록 기능을
+      원격 서버에 배포합니다.
+    </h6>
+    <pre><code>git flow feature publish MYFEATURE</code></pre>
+    <h5 id="배포된-기능-가져오기">배포된 기능 가져오기:</h5>
+    <h6 id="다른-사용자에-의해-배포된-기능을-가져오기.">
+      다른 사용자에 의해 배포된 기능을 가져오기.
+    </h6>
+    <pre><code>git flow feature pull origin MYFEATURE</code></pre>
+    <h5 id="오리진-기능-추적">오리진 기능 추적:</h5>
+    <h6 id="다음을-통해서-오리진의-기능을-추적할-수-있습니다.">
+      다음을 통해서 오리진의 기능을 추적할 수 있습니다.
+    </h6>
+    <pre><code>git flow feature track MYFEATURE</code></pre>
+    <hr />
+    <h3 id="릴리즈-생성">릴리즈 생성</h3>
+    <h6
+      id="새로운-프로덕션-릴리즈-준비를-지원하고-사소한-버그-수정-및-릴리즈를위한-메타-데이터-준비를-허용합니다."
+    >
+      새로운 프로덕션 릴리즈 준비를 지원하고 사소한 버그 수정 및 릴리즈를위한
+      메타 데이터 준비를 허용합니다.
+    </h6>
+    <h5 id="릴리즈-시작">릴리즈 시작:</h5>
+    <h6
+      id="릴리스를-시작하려면-git-flow-release-명령을-사용하십시오.-develop브랜치에서-생성-된-릴리즈-브랜치를-생성합니다.-릴리즈를-시작할-base-커밋-sha-1-해시를-선택적으로-제공-할-수-있습니다.-커밋은-develop브랜치에-있어야합니다."
+    >
+      릴리스를 시작하려면 git flow release 명령을 사용하십시오.
+      ’develop’브랜치에서 생성 된 릴리즈 브랜치를 생성합니다. 릴리즈를 시작할
+      [BASE] 커밋 sha-1 해시를 선택적으로 제공 할 수 있습니다. 커밋은
+      ’develop’브랜치에 있어야합니다.
+    </h6>
+    <pre><code>git flow release start RELEASE [BASE]</code></pre>
+    <h6
+      id="다른-개발자의-릴리즈-커밋을-허용하도록-릴리스-브랜치를-만든-후-배포하는-것이-좋습니다.-다음-명령을-사용하여-기능-배포와-유사하게-수행하십시오."
+    >
+      다른 개발자의 릴리즈 커밋을 허용하도록 릴리스 브랜치를 만든 후 배포하는
+      것이 좋습니다. 다음 명령을 사용하여 기능 배포와 유사하게 수행하십시오.
+    </h6>
+    <pre><code>git flow release publish RELEASE</code></pre>
+    <h6
+      id="이-명령어를-통해-원격-저장소-릴리즈를-추적할-수-있습니다-git-flow-release-track-release"
+    >
+      (이 명령어를 통해 원격 저장소 릴리즈를 추적할 수 있습니다:
+      <code>git flow release track RELEASE</code>)
+    </h6>
+    <h5 id="릴리즈-완료">릴리즈 완료:</h5>
+    <h6
+      id="릴리즈를-완료하는-것은-깃-브랜치의-중요한-단계-중-하나입니다.-이것은-몇-가지-작업을-수행합니다"
+    >
+      릴리즈를 완료하는 것은 깃 브랜치의 중요한 단계 중 하나입니다. 이것은 몇
+      가지 작업을 수행합니다:
+    </h6>
+    <h6 id="릴리즈-브랜치를-master브랜치로-다시-병합합니다">
+      1) 릴리즈 브랜치를 ’master’브랜치로 다시 병합합니다
+    </h6>
+    <h6 id="릴리즈에-이름으로-태그-지정">2) 릴리즈에 이름으로 태그 지정</h6>
+    <h6 id="릴리즈를-develop로-역으로-병합">
+      3) 릴리즈를 ’develop’로 역으로 병합
+    </h6>
+    <h6 id="릴리즈-브랜치-삭제">4) 릴리즈 브랜치 삭제</h6>
+    <pre><code>git flow release finish RELEASE</code></pre>
+    <h6 id="git-push---tags로-태그를-푸시하는-것을-잊지마세요">
+      <code>git push --tags</code>로 태그를 푸시하는 것을 잊지마세요
+    </h6>
+    <hr />
+    <h3 id="핫픽스">핫픽스</h3>
+    <h6
+      id="핫픽스는-라이브-프로덕션-버전의-원치-않는-상태에-즉시-대응해야-하는-필요성-때문에-발생합니다.-프로덕션-버전을-표시하는-마스터-브랜치의-해당-태그에서-분기될-수-있습니다."
+    >
+      핫픽스는 라이브 프로덕션 버전의 원치 않는 상태에 즉시 대응해야 하는 필요성
+      때문에 발생합니다. 프로덕션 버전을 표시하는 마스터 브랜치의 해당 태그에서
+      분기될 수 있습니다.
+    </h6>
+    <h5 id="깃-플로우-핫픽스-시작">깃 플로우 핫픽스 시작:</h5>
+    <h6 id="다른-깃-플로우-명령어처럼-핫픽스는-다음으로-시작됩니다">
+      다른 깃 플로우 명령어처럼 핫픽스는 다음으로 시작됩니다
+    </h6>
+    <pre><code>$ git flow hotfix start VERSION [BASENAME]</code></pre>
+    <h6
+      id="위-명령어의-버전-인수를-통해-새로운-릴리즈-이름을-표시합니다.-선택적으로-시작할-기본-이름을-설정할-수-있습니다."
+    >
+      위 명령어의 버전 인수를 통해 새로운 릴리즈 이름을 표시합니다. 선택적으로
+      시작할 기본 이름을 설정할 수 있습니다.
+    </h6>
+    <h5 id="핫픽스-완료">핫픽스 완료:</h5>
+    <h6
+      id="핫픽스를-완료하면-다시-developmaster-브랜치로-병합됩니다.-또한-마스터-병합에는-핫픽스-버전-태그가-지정됩니다."
+    >
+      핫픽스를 완료하면 다시 develop/master 브랜치로 병합됩니다. 또한 마스터
+      병합에는 핫픽스 버전 태그가 지정됩니다.
+    </h6>
+    <pre><code>git flow hotfix finish VERSION</code></pre>
+    <hr />
+    <h3 id="명령어들">명령어들</h3>
+    <p align="center">
+      <img
+        alt="Git"
+        src="../Img/git-flow-commands.png"
+        height="270"
+        width="460"
+      />
+    </p>
+    <hr />
+    <h3 id="깃-플로우-스키마">깃 플로우 스키마</h3>
+    <p align="center">
+      <img alt="Git" src="../Img/git-flow-commands-without-flow.png" />
+    </p>
+    <hr />
+  </body>
+</html>

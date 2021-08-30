@@ -1,0 +1,246 @@
+---
+svg:
+  - repo: adobe-webplatform/Snap.svg
+    bundleData:
+      github:
+        directory: dist
+        fileName: snap.svg-min.js
+  - repo: svgdotjs/svg.js
+    bundleData:
+      jsdelivr:
+        libName: svg.js
+        fileName: svg.min.js
+  - repo: maxwellito/vivus
+    bundleData:
+      github:
+        directory: dist
+        fileName: vivus.min.js
+  - repo: ConnorAtherton/walkway
+    bundleData:
+      jsdelivr:
+        libName: walkway.js
+        fileName: walkway.min.js
+  - repo: DmitryBaranovskiy/raphael
+    bundleData:
+      github:
+        directory: /
+        fileName: raphael.min.js
+  - repo: uxebu/bonsai
+common:
+  - repo: greensock/GSAP
+    bundleData:
+      github:
+        directory: dist
+        fileName: gsap.min.js
+  - repo: CreateJS/tweenjs
+    bundleData:
+      github:
+        directory: lib
+        fileName: tweenjs.min.js
+  - repo: juliangarnier/anime
+    bundleData:
+      github:
+        directory: lib
+        fileName: anime.min.js
+  - repo: mojs/mojs
+    bundleData:
+      github:
+        directory: build
+        fileName: mo.min.js
+  - repo: ThrivingKings/animo.js
+    bundleData:
+      github:
+        directory: /
+        fileName: animo.min.js
+  - repo: visionmedia/move.js
+    bundleData:
+      github:
+        directory: /
+        fileName: move.min.js
+  - repo: julianshapiro/velocity
+    bundleData:
+      jsdelivr:
+        libName: velocity-animate
+        fileName: velocity.min.js
+  - repo: bendc/animateplus
+    bundleData:
+      jsdelivr:
+        libName: animateplus
+        fileName: animateplus.js
+  - repo: lvivski/animatic
+    bundleData:
+      github:
+        directory: /
+        fileName: animatic.min.js
+  - repo: just-animate/just-animate
+    bundleData:
+      jsdelivr:
+        libName: just-animate
+        fileName: just-animate.min.js
+  - repo: HaikuTeam/core
+    bundleData:
+      jsdelivr:
+        libName: '@haiku/core'
+        fileName: dom.bundle.min.js
+  - repo: sasha240100/between.js
+    bundleData:
+      github:
+        directory: build
+        fileName: between.js
+  - repo: kimmobrunfeldt/progressbar.js
+    bundleData:
+      github:
+        directory: dist
+        fileName: progressbar.min.js
+  - repo: gre/bezier-easing
+    bundleData:
+      jsdelivr:
+        libName: 'bezier-easing'
+        fileName: bezier-easing.min.js
+  - repo: glslify/glsl-easings
+  - repo: tweenjs/es6-tween
+    bundleData:
+      jsdelivr:
+        libName: es6-tween
+        fileName: Tween.min.js
+css:
+  - repo: daneden/animate.css
+    bundleData:
+      github:
+        directory: /
+        fileName: animate.min.css
+  - repo: zurb/motion-ui
+  - repo: miniMAC/magic
+    bundleData:
+      github:
+        directory: dist
+        fileName: magic.min.css
+  - repo: lukehaas/css-loaders
+  - repo: tobiasahlin/SpinKit
+    bundleData:
+      github:
+        directory: /
+        fileName: spinkit.min.css
+  - repo: tictail/bounce.js
+    bundleData:
+      jsdelivr:
+        libName: bounce.js
+        fileName: bounce.min.js
+canvas:
+  - repo: CreateJS/EaselJS
+    bundleData:
+      github:
+        directory: lib
+        fileName: easeljs.min.js
+  - repo: fabricjs/fabric.js
+    bundleData:
+      github:
+        directory: dist
+        fileName: fabric.min.js
+  - repo: paperjs/paper.js
+    bundleData:
+      jsdelivr:
+        libName: paper
+        fileName: paper-full.min.js
+  - repo: konvajs/konva
+    bundleData:
+      github:
+        directory: /
+        fileName: konva.min.js
+  - repo: jonobr1/two.js
+    bundleData:
+      github:
+        directory: build
+        fileName: two.min.js
+  - repo: koggdal/ocanvas
+    bundleData:
+      github:
+        directory: build/dist/latest
+        fileName: ocanvas.min.js
+  - repo: martinlaxenaire/curtainsjs
+    bundleData:
+      github:
+        directory: dist
+        fileName: curtains.min.js
+  - repo: robin-dela/hover-effect
+    bundleData:
+      github:
+        directory: dist
+        fileName: hover-effect.js
+  - repo: williamngan/pts
+    bundleData:
+      github:
+        directory: dist
+        fileName: pts.min.js
+  - repo: matteobruni/tsparticles
+scroll:
+  - repo: michalsnik/aos
+    bundleData:
+      jsdelivr:
+        libName: aos
+        fileName: aos.min.js
+  - repo: alexfoxy/laxxx
+    bundleData:
+      github:
+        directory: lib
+        fileName: lax.min.js
+  - repo: matthieua/WOW
+    bundleData:
+      github:
+        directory: dist
+        fileName: wow.min.js
+  - repo: scrollreveal/scrollreveal
+    bundleData:
+      github:
+        directory: dist
+        fileName: scrollreveal.min.js
+  - repo: janpaepke/ScrollMagic
+    bundleData:
+      github:
+        directory: scrollmagic/minified
+        fileName: ScrollMagic.min.js
+  - repo: alexcambose/motus
+    bundleData:
+      github:
+        directory: dist
+        fileName: motus.web.js
+  - repo: mciastek/sal
+    bundleData:
+      github:
+        directory: dist
+        fileName: sal.js
+text:
+  - repo: yuanqing/malarkey
+    bundleData:
+      github:
+        directory: /
+        fileName: index.js
+  - repo: mattboldt/typed.js
+    bundleData:
+      github:
+        directory: lib
+        fileName: typed.min.js
+  - repo: ics-ikeda/shuffle-text
+    bundleData:
+      github:
+        directory: build
+        fileName: shuffle-text.min.js
+  - repo: akzhy/typebot
+    bundleData:
+      github:
+        directory: typebot/js/
+        fileName: typebot.min.js
+  - repo: bradley/Blotter
+    bundleData:
+      github:
+        directory: build
+        fileName: blotter.min.js
+react:
+  - repo: gregberge/svgr
+  - repo: framer/motion
+    bundleData:
+      jsdelivr:
+        libName: framer-motion
+        fileName: framer-motion.js
+  - repo: matteobruni/tsparticles
+  - repo: pmndrs/react-spring
