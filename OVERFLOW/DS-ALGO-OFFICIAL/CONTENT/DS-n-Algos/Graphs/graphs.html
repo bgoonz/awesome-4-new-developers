@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A description of the page and its contents" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Page Title</title>
+    <link rel="stylesheet" href="./../../../assets/style.css" />
+    <link rel="stylesheet" href="./../../../assets/prism.css" />
+    <script async src="./../../../assets/prism.js"></script>
+  </head>
+
+  <body>
+
+
+    <a href="https://github.com/bgoonz/DS-ALGO-OFFICIAL" class="github-corner" aria-label="View source on Github"><svg
+        width="80" height="80" viewBox="0 0 250 250"
+        style="z-index: 100000; fill:#194ccdaf; color:#fff; position: fixed; top: 20px; border: 0; left: 20px; transform: scale(-1.5, 1.5);"
+        aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+          fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+        </path>
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+          fill="currentColor" class="octo-body"></path>
+      </svg></a>
+
+
+
+
+    <h1 id="example-graph">Example Graph</h1>
+    <h3 id="visual-aid">Visual Aid</h3>
+    <hr />
+    <h2 id="picture-alt"><img
+        src="https://s3-us-west-1.amazonaws.com/appacademy-open-assets/data_structures_algorithms/graphs/images/graphs.png"
+        alt="picture alt" /></h2>
+    <hr />
+    <h3 id="example-code">Example Code</h3>
+    <hr />
+    <div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a
+          title="1"><span>class</span>
+          GraphNode <span>{</span></a>
+        <a title="2"> <span>constructor</span>(val) <span>{</span></a>
+        <a title="3"> <span>this</span>.<span>val</span> <span>=</span> val<span>;</span></a>
+        <a title="4"> <span>this</span>.<span>neighbors</span> <span>=</span> []<span>;</span></a>
+        <a title="5"> <span>}</span></a>
+        <a id=-6" title="6"><span>}</span></a>
+        <a title="7"></a>
+        <a title="8"><span>let</span> a <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;a&quot;</span>)<span>;</span></a>
+        <a title="9"><span>let</span> b <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;b&quot;</span>)<span>;</span></a>
+        <a id=-10" title="10"><span>let</span> c <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;c&quot;</span>)<span>;</span></a>
+        <a title="11"><span>let</span> d <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;d&quot;</span>)<span>;</span></a>
+        <a id=-12" title="12"><span>let</span> e <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;e&quot;</span>)<span>;</span></a>
+        <a id=-13" title="13"><span>let</span> f <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;f&quot;</span>)<span>;</span></a>
+        <a id=-14" title="14"><span>a</span>.<span>neighbors</span> <span>=</span> [b<span>,</span> c<span>,</span>
+          e]<span>;</span></a>
+        <a id=-15" title="15"><span>c</span>.<span>neighbors</span> <span>=</span> [b<span>,</span> d]<span>;</span></a>
+        <a id=-16" title="16"><span>e</span>.<span>neighbors</span> <span>=</span> [a]<span>;</span></a>
+        <a id=-17" title="17"><span>f</span>.<span>neighbors</span> <span>=</span> [e]<span>;</span></a></code></pre>
+    </div>
+    <hr />
+    <hr />
+    <h1 id="basics">Basics</h1>
+    <ul>
+      <li>A graph is <strong>any</strong> collection of nodes and edges.
+        <ul>
+          <li>Much more relaxed in structure than a tree.</li>
+        </ul>
+      </li>
+      <li>It doesn't have to have a root node (so not every node can be accessed from a single node)</li>
+      <li>It could have cycles (a group of nodes whose paths begin and end at the same node)</li>
+      <li>Any number of edges may leave a node</li>
+    </ul>
+    <hr />
+    <h1 id="ways-to-reference-a-graph-data-structure">Ways To Reference a Graph Data Structure</h1>
+    <h2 id="visual-reference">Visual Reference</h2>
+    <hr />
+    <h2 id="picture-alt-1"><img
+        src="https://s3-us-west-1.amazonaws.com/appacademy-open-assets/data_structures_algorithms/graphs/images/adj_matrix_graph.png"
+        alt="picture alt" /></h2>
+    <hr />
+    <h2 id="adjacency-matrix">Adjacency Matrix</h2>
+    <hr />
+    <p>The row index will corespond to the source of an edge and the column index will correspond to the edges
+      destination.</p>
+    <ul>
+      <li>When the edges have a direction, <code>matrix[i][j]</code> may not be the same as <code>matrix[j][i]</code>
+      </li>
+      <li>It is common to say that a node is adjacent to itself so matrix[x][x] is true for any node</li>
+      <li>Will be O(n^2) space complexity</li>
+    </ul>
+    <hr />
+    <h3 id="a-2d-array-as-the-method-of-storing-the-location-of-nodes">A 2D Array as the method of storing the location
+      of
+      Nodes</h3>
+    <p>let matrix = [</p>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th><strong>A</strong></th>
+          <th><strong>B</strong></th>
+          <th><strong>C</strong></th>
+          <th><strong>D</strong></th>
+          <th><strong>E</strong></th>
+          <th><strong>F</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A</strong></td>
+          <td>[True,</td>
+          <td>True,</td>
+          <td>True,</td>
+          <td>False,</td>
+          <td>True,</td>
+          <td>False]</td>
+        </tr>
+        <tr>
+          <td><strong>B</strong></td>
+          <td>[False,</td>
+          <td>True,</td>
+          <td>False,</td>
+          <td>False,</td>
+          <td>False,</td>
+          <td>False]</td>
+        </tr>
+        <tr>
+          <td><strong>C</strong></td>
+          <td>[False,</td>
+          <td>True,</td>
+          <td>True,</td>
+          <td>True,</td>
+          <td>False,</td>
+          <td>False]</td>
+        </tr>
+        <tr>
+          <td><strong>D</strong></td>
+          <td>[False,</td>
+          <td>False,</td>
+          <td>False,</td>
+          <td>True,</td>
+          <td>False,</td>
+          <td>False]</td>
+        </tr>
+        <tr>
+          <td><strong>E</strong></td>
+          <td>[True,</td>
+          <td>False,</td>
+          <td>False,</td>
+          <td>False,</td>
+          <td>True,</td>
+          <td>False]</td>
+        </tr>
+        <tr>
+          <td><strong>F</strong></td>
+          <td>[False,</td>
+          <td>False,</td>
+          <td>False,</td>
+          <td>False,</td>
+          <td>True,</td>
+          <td>True]</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>];</p>
+    <hr />
+    <h2 id="adjacency-list">Adjacency List</h2>
+    <hr />
+    <p>Seeks to solve the shortcomings of the matrix implementation. It uses an object where keys represent node labels
+      and values associated with that key are the adjacent nodes.</p>
+    <hr />
+    <div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a title="1"><span>let</span>
+          graph <span>=</span> <span>{</span></a>
+        <a id=-2" title="2"> <span>a:</span> [<span>&quot;b&quot;,</span> <span>&quot;c&quot;,</span>
+          <span>&quot;e&quot;</span>]<span>,</span></a>
+        <a id=-3" title="3"> <span>b:</span> []<span>,</span></a>
+        <a id=-4" title="4"> <span>c:</span> [<span>&quot;b&quot;,</span> <span>&quot;d&quot;</span>]<span>,</span></a>
+        <a id=-5" title="5"> <span>d:</span> []<span>,</span></a>
+        <a id=-6" title="6"> <span>e:</span> [<span>&quot;a&quot;</span>]<span>,</span></a>
+        <a id=-7" title="7"> <span>f:</span> [<span>&quot;e&quot;</span>]<span>,</span></a>
+        <a id=-8" title="8"><span>};</span></a></code></pre>
+    </div>
+    <hr />
+    <h1 id="graph-traversal">Graph Traversal</h1>
+    <h2 id="depth-first">Depth First</h2>
+    <hr />
+    <h3 id="with-a-node-class">With a Node Class</h3>
+    <hr />
+    <h4 id="node-class-example">Node Class Example</h4>
+    <ul>
+      <li>There may not always be a suitable root-like starting point. But in this example all the nodes can be
+        traversed
+        to
+        in some way from the "f" node</li>
+    </ul>
+    <div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a
+          title="1"><span>class</span>
+          GraphNode <span>{</span></a>
+        <a title="2"> <span>constructor</span>(val) <span>{</span></a>
+        <a title="3"> <span>this</span>.<span>val</span> <span>=</span> val<span>;</span></a>
+        <a id=-4" title="4"> <span>this</span>.<span>neighbors</span> <span>=</span> []<span>;</span></a>
+        <a id=-5" title="5"> <span>}</span></a>
+        <a id=-6" title="6"><span>}</span></a>
+        <a id=-7" title="7"></a>
+        <a id=-8" title="8"><span>let</span> a <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;a&quot;</span>)<span>;</span></a>
+        <a id=-9" title="9"><span>let</span> b <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;b&quot;</span>)<span>;</span></a>
+        <a id=-10" title="10"><span>let</span> c <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;c&quot;</span>)<span>;</span></a>
+        <a id=-11" title="11"><span>let</span> d <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;d&quot;</span>)<span>;</span></a>
+        <a id=-12" title="12"><span>let</span> e <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;e&quot;</span>)<span>;</span></a>
+        <a id=-13" title="13"><span>let</span> f <span>=</span> <span>new</span>
+          <span>GraphNode</span>(<span>&quot;f&quot;</span>)<span>;</span></a>
+        <a id=-14" title="14"><span>a</span>.<span>neighbors</span> <span>=</span> [e<span>,</span> c<span>,</span>
+          b]<span>;</span></a>
+        <a id=-15" title="15"><span>c</span>.<span>neighbors</span> <span>=</span> [b<span>,</span> d]<span>;</span></a>
+        <a id=-16" title="16"><span>e</span>.<span>neighbors</span> <span>=</span> [a]<span>;</span></a>
+        <a id=-17" title="17"><span>f</span>.<span>neighbors</span> <span>=</span> [e]<span>;</span></a></code></pre>
+    </div>
+    <hr />
+    <hr />
+    <h4 id="recursive-traversal">Recursive Traversal</h4>
+    <div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a
+          title="1"><span>function</span> <span>depthFirstRecur</span>(node<span>,</span> visited <span>=</span>
+          <span>new</span> <span>Set</span>()) <span>{</span></a>
+        <a id=-2" title="2"> <span>if</span> (<span>visited</span>.<span>has</span>(<span>node</span>.<span>val</span>))
+          <span>return;</span></a>
+        <a id=-3" title="3"></a>
+        <a id=-4" title="4"> <span>console</span>.<span>log</span>(<span>node</span>.<span>val</span>)<span>;</span></a>
+        <a id=-5" title="5"> <span>visited</span>.<span>add</span>(<span>node</span>.<span>val</span>)<span>;</span></a>
+        <a id=-6" title="6"></a>
+        <a id=-7" title="7"> <span>node</span>.<span>neighbors</span>.<span>forEach</span>((neighbor) <span>=&gt;</span>
+          <span>{</span></a>
+        <a id=-8" title="8"> <span>depthFirstRecur</span>(neighbor<span>,</span> visited)<span>;</span></a>
+        <a id=-9" title="9"> <span>}</span>)<span>;</span></a>
+        <a id=-10" title="10"><span>}</span></a>
+        <a id=-11" title="11"></a>
+        <a id=-12" title="12"><span>depthFirstRecur</span>(f)<span>;</span> <span>// starting with f as it is a node
+            that
+            can reach all other nodes</span></a></code></pre>
+    </div>
+    <h4 id="iterative-traversal">Iterative Traversal</h4>
+    <div>
+      <pre data-role="codeBlock" data-info="js" class="language-javascript"> ><code><a   title="1"><span >function</span> <span >depthFirstIter</span>(node) <span >{</span></a>
+<a  id=-2" title="2">  <span >let</span> visited <span >=</span> <span >new</span> <span >Set</span>()<span >;</span></a>
+<a  id=-3" title="3">  <span >let</span> stack <span >=</span> [node]<span >;</span></a>
+<a  id=-4" title="4"></a>
+<a  id=-5" title="5">  <span >while</span> (<span >stack</span>.<span >length</span>) <span >{</span></a>
+<a  id=-6" title="6">    <span >let</span> node <span >=</span> <span >stack</span>.<span >pop</span>()<span >;</span></a>
+<a  id=-7" title="7"></a>
+<a  id=-8" title="8">    <span >if</span> (<span >visited</span>.<span >has</span>(<span >node</span>.<span >val</span>)) <span >continue;</span></a>
+<a  id=-9" title="9"></a>
+<a  id=-10" title="10">    <span >console</span>.<span >log</span>(<span >node</span>.<span >val</span>)<span >;</span></a>
+<a  id=-11" title="11">    <span >visited</span>.<span >add</span>(<span >node</span>.<span >val</span>)<span >;</span></a>
+<a  id=-12" title="12"></a>
+<a  id=-13" title="13">    <span >stack</span>.<span >push</span>(...<span >node</span>.<span >neighbors</span>)<span >;</span></a>
+<a  id=-14" title="14">  <span >}</span></a>
+<a  id=-15" title="15"><span >}</span></a>
+<a  id=-16" title="16"></a>
+<a  id=-17" title="17"><span >depthFirstIter</span>(f)<span >;</span></a></code></pre>
+    </div>
+    <hr />
+    <hr />
+    <h3 id="with-an-adjacency-list">With an Adjacency List</h3>
+    <hr />
+    <h4 id="adjacency-list-example">Adjacency List Example</h4>
+    <p>Remember that the nodes are stored as strings in an array in an object.</p>
+    <div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a title="1"><span>let</span>
+          graph <span>=</span> <span>{</span></a>
+        <a id=-2" title="2"> <span>a:</span> [<span>&quot;b&quot;,</span> <span>&quot;c&quot;,</span>
+          <span>&quot;e&quot;</span>]<span>,</span></a>
+        <a id=-3" title="3"> <span>b:</span> []<span>,</span></a>
+        <a id=-4" title="4"> <span>c:</span> [<span>&quot;b&quot;,</span> <span>&quot;d&quot;</span>]<span>,</span></a>
+        <a id=-5" title="5"> <span>d:</span> []<span>,</span></a>
+        <a id=-6" title="6"> <span>e:</span> [<span>&quot;a&quot;</span>]<span>,</span></a>
+        <a id=-7" title="7"> <span>f:</span> [<span>&quot;e&quot;</span>]<span>,</span></a>
+        <a id=-8" title="8"><span>};</span></a></code></pre>
+    </div>
+    <hr />
+    <hr />
+    <h4 id="recursive-example">Recursive Example</h4>
+    <div id="cb7">
+      <pre data-role="codeBlock" data-info="js"
+        class="language-javascript"> ><code><a   title="1"><span >function</span> <span >depthFirstRecur</span>(node<span >,</span> graph<span >,</span> visited <span >=</span> <span >new</span> <span >Set</span>()) <span >{</span></a>
+<a  id="cb7-2" title="2">  <span >if</span> (<span >visited</span>.<span >has</span>(node)) <span >return;</span></a>
+<a  id="cb7-3" title="3"></a>
+<a  id="cb7-4" title="4">  <span >console</span>.<span >log</span>(node)<span >;</span></a>
+<a  id="cb7-5" title="5">  <span >visited</span>.<span >add</span>(node)<span >;</span></a>
+<a  id="cb7-6" title="6"></a>
+<a  id="cb7-7" title="7">  graph[node].<span >forEach</span>((neighbor) <span >=&gt;</span> <span >{</span></a>
+<a  id="cb7-8" title="8">    <span >depthFirstRecur</span>(neighbor<span >,</span> graph<span >,</span> visited)<span >;</span></a>
+<a  id="cb7-9" title="9">  <span >}</span>)<span >;</span></a>
+<a  id="cb7-10" title="10"><span >}</span></a>
+<a  id="cb7-11" title="11"></a>
+<a  id="cb7-12" title="12"><span >depthFirstRecur</span>(<span >&quot;f&quot;,</span> graph)<span >;</span></a></code></pre>
+    </div>
+    <hr />
+    <h4 id="dynamic-recursive-example">Dynamic Recursive Example</h4>
+    <div id="cb8">
+      <pre data-role="codeBlock" data-info="js" class="language-javascript"> ><code><a   title="1"><span >function</span> <span >depthFirst</span>(graph) <span >{</span></a>
+<a  id="cb8-2" title="2">  <span >let</span> visited <span >=</span> <span >new</span> <span >Set</span>()<span >;</span></a>
+<a  id="cb8-3" title="3"></a>
+<a  id="cb8-4" title="4">  <span >for</span> (<span >let</span> node <span >in</span> graph) <span >{</span></a>
+<a  id="cb8-5" title="5">    <span >_depthFirstRecur</span>(node<span >,</span> graph<span >,</span> visited)<span >;</span></a>
+<a  id="cb8-6" title="6">  <span >}</span></a>
+<a  id="cb8-7" title="7"><span >}</span></a>
+<a  id="cb8-8" title="8"></a>
+<a  id="cb8-9" title="9"><span >function</span> <span >_depthFirstRecur</span>(node<span >,</span> graph<span >,</span> visited) <span >{</span></a>
+<a  id="cb8-10" title="10">  <span >if</span> (<span >visited</span>.<span >has</span>(node)) <span >return;</span></a>
+<a  id="cb8-11" title="11"></a>
+<a  id="cb8-12" title="12">  <span >console</span>.<span >log</span>(node)<span >;</span></a>
+<a  id="cb8-13" title="13">  <span >visited</span>.<span >add</span>(node)<span >;</span></a>
+<a  id="cb8-14" title="14"></a>
+<a  id="cb8-15" title="15">  graph[node].<span >forEach</span>((neighbor) <span >=&gt;</span> <span >{</span></a>
+<a  id="cb8-16" title="16">    <span >_depthFirstRecur</span>(neighbor<span >,</span> graph<span >,</span> visited)<span >;</span></a>
+<a  id="cb8-17" title="17">  <span >}</span>)<span >;</span></a>
+<a  id="cb8-18" title="18"><span >}</span></a>
+<a  id="cb8-19" title="19"></a>
+<a  id="cb8-20" title="20"><span >depthFirst</span>(graph)<span >;</span></a></code></pre>
+    </div>

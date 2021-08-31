@@ -1,0 +1,5 @@
+message "Make sure not to use any meat!"
+
+insert 'find_utensils'
+
+link "find_some_vegetables"

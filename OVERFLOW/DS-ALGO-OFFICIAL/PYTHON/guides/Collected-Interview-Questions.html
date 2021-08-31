@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Collected-Interview-Questions</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h2 id="interpreted-language-vs-compiled-language">Interpreted language vs compiled language</h2>
+<p>Interpreted languages don’t run at the machine code level. They are interpreted by another program that executes the instructions. Sometimes interpreted programs are compiled to <em>bytecode</em> and the bytecode is what is interpreted, which allows the programs to be smaller and run more quickly.</p>
+<p>Compiled languages are converted to machine code to execute directly on the CPU. This makes them typically much faster than interpreted programs.</p>
+<p><em>[Technically any language could be compiled or interpreted, but there are some languages that typically get compiled (Go, C, C++, etc.) and some that typically get interpreted (Java, Python, JavaScript, etc.)]</em></p>
+<h2 id="stack-vs-heap">Stack vs heap</h2>
+<p><em>[This specific question, “stack vs. heap” is about where a language allocates memory for different types of objects. It’s not directly about the stack data structure or heap data structure.]</em></p>
+<p>When a program executes, the stack is used to hold local variables and function arguments. When a function gets called, a new stack frame is allocated on top of the stack with just enough room to hold all the local variables and arguments to the function. When the function returns, its stack frame is popped from the stack and the variables are forgotten. (Which is OK, because they were only needed for as long as the function was active.)</p>
+<p>The heap is used for longer-term storage. Objects that were allocated with new or dynamically allocated another way go on the heap. Constant strings and global variables go there, as well.</p>
+<h2 id="recursion">Recursion</h2>
+<p>Recursion is when a function calls itself.</p>
+<p>It typically keeps calling itself until a <em>base case</em> is met that causes it to no longer call itself. (i.e. when the work is done.)</p>
+<p>Problems that are composed of identical independent subproblems are good candidates for recursive solutions. (e.g a binary search tree is made up of smaller binary search trees, so traversing them has a nice recursive solution.)</p>
+<h2 id="object-oriented-design">Object oriented design</h2>
+<ul>
+<li>https://en.wikipedia.org/wiki/Object-oriented_design</li>
+</ul>
+<h2 id="design-patterns-singleton-factory">Design patterns (singleton, factory)</h2>
+<ul>
+<li>https://en.wikipedia.org/wiki/Singleton_pattern</li>
+<li>https://en.wikipedia.org/wiki/Factory_(object-oriented_programming)</li>
+</ul>
+<h2 id="s.o.l.i.d.-principles">S.O.L.I.D. principles</h2>
+<ul>
+<li>https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)</li>
+</ul>
+<h2 id="data-structures-algorithms">Data Structures, Algorithms</h2>
+<p>TBD</p>
+</body>
+</html>

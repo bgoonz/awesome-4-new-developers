@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-dev-env-awesome">
+      Awesome Dev Env
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      A curated list of awesome tools, resources and workflow tips making an
+      awesome development environment.
+    </p>
+    <p>
+      Inspired by
+      <a href="https://github.com/avelino/awesome-go">awesome-go</a>, which was
+      in turn inspired by
+      <a href="https://github.com/vinta/awesome-python">awesome-python</a>.
+    </p>
+    <h3 id="contributing">Contributing</h3>
+    <p>
+      <a
+        href="https://github.com/jondot/awesome-devenv/blob/master/CONTRIBUTING.md"
+        >Guidelines</a
+      >
+      tweaked and adapted from <code>awesome-go</code> - thanks!
+    </p>
+    <p>But in short:</p>
+    <ul>
+      <li>List is alphabetically sorted</li>
+      <li>
+        If you think an item shouldn’t be here
+        <a href="https://github.com/jondot/awesome-devenv/issues/new"
+          >open an issue</a
+        >
+      </li>
+    </ul>
+    <p>
+      Many thanks to everyone on the
+      <a href="https://github.com/jondot/awesome-devenv/graphs/contributors"
+        >contributor list</a
+      >
+      :)
+    </p>
+    <h1 id="content">Content</h1>
+    <p>
+      <em
+        >Note: for an OS specific tool, please do your best to mark with
+        <code>OSX/WIN/*NIX/LIN</code></em
+      >
+    </p>
+    <ul>
+      <li><a href="#admins">Admins</a></li>
+      <li><a href="#benchmarking">Benchmarking</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#diagnostics">Diagnostics</a></li>
+      <li><a href="#desktop">Desktop</a></li>
+      <li><a href="#documentation">Documentation</a></li>
+      <li><a href="#dotfiles">Dotfiles</a></li>
+      <li>
+        <a href="#editors">Editors</a>
+        <ul>
+          <li><a href="#atom">Atom</a></li>
+          <li><a href="#sublime-text-3">Sublime Text</a></li>
+          <li><a href="#vim">Vim</a></li>
+          <li><a href="#intellij">IntelliJ</a></li>
+          <li><a href="#visual-studio-code">VSCode</a></li>
+        </ul>
+      </li>
+      <li><a href="#git">Git</a></li>
+      <li><a href="#misc">Misc</a></li>
+      <li><a href="#notifications">Notifications</a></li>
+      <li><a href="#orchestration">Orchestration</a></li>
+      <li><a href="#presentation">Presentation</a></li>
+      <li><a href="#shell">Shell</a></li>
+      <li><a href="#text">Text</a></li>
+      <li><a href="#terminal">Terminal</a></li>
+      <li><a href="#workflow">Workflow</a></li>
+    </ul>
+    <h2 id="admins">Admins</h2>
+    <p><em>Tools to manage databases, permissions, etc.</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/six-ddc/hss">hss</a> - Never type the
+        annoying ssh commands again.
+      </li>
+      <li>
+        <a href="https://github.com/fotonauts/MongoHub-Mac/releases"
+          >MongoHub</a
+        >
+        - Native OSx client for mongo
+      </li>
+      <li>
+        <a href="http://robomongo.org/">Robomongo</a> - a cross platform Admin
+        for MongoDB
+      </li>
+    </ul>
+    <h2 id="benchmarking">Benchmarking</h2>
+    <p><em>Tools to benchmark your code or services</em></p>
+    <ul>
+      <li>
+        <a href="http://httpd.apache.org/docs/2.2/programs/ab.html"
+          >apachebench (ab)</a
+        >
+      </li>
+      <li><a href="https://github.com/rakyll/boom">boom</a></li>
+      <li>
+        <a href="http://www.hpl.hp.com/research/linux/httperf/">httperf</a>
+      </li>
+      <li>
+        <a href="https://github.com/macbre/phantomas">phantomas</a> - website
+        perf evaluation tool
+      </li>
+      <li><a href="http://www.joedog.org/siege-home/">siege</a></li>
+      <li><a href="https://github.com/tsenart/vegeta">Vegeta</a></li>
+      <li><a href="https://github.com/wg/wrk">wrk</a></li>
+      <li>
+        <a href="https://github.com/Instagram/redis-faina">redis-faina</a>
+        Instagram’s Redis counter/timing stats based on the MONITOR command
+      </li>
+    </ul>
+    <h2 id="data">Data</h2>
+    <p><em>Tools for handling online and offline data</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/s3tools/s3cmd">s3cmd</a> - the S3 CLI tool
+        for Amazon
+      </li>
+    </ul>
+    <h2 id="diagnostics">Diagnostics</h2>
+    <p><em>Tools for checking diagnosing your system while you work</em></p>
+    <ul>
+      <li><a href="https://github.com/nicolargo/glances">glances</a></li>
+      <li><a href="http://nmon.sourceforge.net/pmwiki.php">nmon</a></li>
+      <li><a href="https://github.com/aksakalli/gtop">gtop</a></li>
+    </ul>
+    <h2 id="desktop">Desktop</h2>
+    <p>
+      <em>Tools for improving and hacking around with your vanilla desktop</em>
+    </p>
+    <ul>
+      <li>
+        <a href="http://www.alfredapp.com/">Alfred</a> - OSX productivity app
+        <code>/OSX/</code>
+      </li>
+      <li>
+        <a href="https://github.com/sdegutis/hydra">hydra</a> - script your
+        desktop <code>/OSX/</code>
+      </li>
+      <li>
+        <a href="https://github.com/sdeken/keycastr">Keycastr</a> - show your
+        keys while presenting/casting <code>/OSX/</code>
+      </li>
+    </ul>
+    <h2 id="documentation">Documentation</h2>
+    <p><em>Tools to document your project</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/thomvaill/log4brains">Log4brains</a> -
+        Docs-as-code knowledge base to manage Architecture Decision Records
+        (ADR) for your project and publish them automatically as a static
+        website.
+      </li>
+    </ul>
+    <h2 id="dotfiles">Dotfiles</h2>
+    <ul>
+      <li>
+        <a href="https://dotfiles.github.io/">dotfiles.github.io</a> - Collected
+        dotfile resources. Has sections with dotfile bootstraps and lists of
+        frameworks for various shells and editors.
+      </li>
+      <li>
+        <a href="https://github.com/holman/dotfiles">Zach Holman’s</a> -
+        oh-my-zsh, osx, Zsh, vi, Ruby, Git, and more
+      </li>
+      <li>
+        <a href="https://github.com/mathiasbynens/dotfiles">Mathias Bynens’s</a>
+        - .files, including ~/.osx — sensible hacker defaults for OS X
+      </li>
+      <li>
+        <a href="https://github.com/thoughtbot/dotfiles">Thoughtbot’s</a> - A
+        set of vim, zsh, git, and tmux configuration files
+      </li>
+      <li>
+        <a href="https://github.com/paulmillr/dotfiles">Paul Miller’s</a> -
+        Colourful &amp; robust OS X configuration files and utilities
+      </li>
+    </ul>
+    <h2 id="editors">Editors</h2>
+    <p><em>Only awesome tools and addons for your favorite editor</em></p>
+    <h3 id="atom">Atom</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/Glavin001/atom-beautify">atom-beautify</a> -
+        Beautify HTML (including Handlebars), CSS (including Sass and Less),
+        JavaScript, and much more in Atom.
+      </li>
+      <li>
+        <a href="https://github.com/DanBrooker/file-icons">file-icons</a> - Adds
+        file specific icons to atom for improved visual grepping.
+      </li>
+      <li>
+        <a href="https://github.com/richrace/highlight-selected"
+          >highlight-selected</a
+        >
+        - Double click on a word to highlight it throughout the open file.
+      </li>
+      <li>
+        <a href="https://github.com/atom-minimap/minimap">minimap</a> - A
+        graphical map (preview) of the full source code.
+      </li>
+      <li>
+        <a href="https://github.com/atom-minimap/minimap-git-diff"
+          >minimap-git-diff</a
+        >
+        - A minimap binding for the Atom git-diff package.
+      </li>
+      <li>
+        <a href="https://github.com/atom-minimap/minimap-highlight-selected"
+          >minimap-highlight-selected</a
+        >
+        - A minimap binding for the highlight-selected package.
+      </li>
+      <li>
+        <a href="https://github.com/danielbrodin/atom-project-manager"
+          >atom-project-manager</a
+        >
+        - Get easy access to all your projects and manage them with project
+        specific settings and options.
+      </li>
+      <li>
+        <a href="https://github.com/subesokun/atom-tree-view-git-status"
+          >atom-tree-view-git-status</a
+        >
+        - Show the Git repository status in the Atom tree-view.
+      </li>
+      <li>
+        <a href="https://github.com/abe33/atom-pigments">atom-pigments</a> - An
+        Atom package to display colors in project and files.
+      </li>
+    </ul>
+    <h3 id="vim">Vim</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/maralla/completor.vim">Completor</a> - async
+        autocomplete with support for omni and semantic completion.
+      </li>
+      <li>
+        <a href="https://github.com/Lokaltog/powerline">Powerline</a> - improved
+        status bar for your buffers.
+      </li>
+      <li>
+        <a href="https://github.com/garbas/vim-snipmate">snipmate</a> - textual
+        snippets compatiable with Textmate snippets.
+      </li>
+      <li>
+        <a href="http://vim.spf13.com/">The Ultimate Vim Distribution</a> -
+        spf13-vim is a distribution of vim plugins and resources for Vim, GVim
+        and MacVim.
+      </li>
+    </ul>
+    <h3 id="sublime-text-3">Sublime Text 3</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/skuroda/Sublime-AdvancedNewFile"
+          >AdvancedNewFile</a
+        >
+        - File creation plugin.
+      </li>
+      <li><a href="https://github.com/sergeche/emmet-sublime">Emmet</a></li>
+      <li>
+        <a href="https://github.com/jisaacks/GitGutter">Git Gutter</a> - display
+        changed/added lines in the margin of the editor window.
+      </li>
+      <li>
+        <a href="https://github.com/jdc0589/JsFormat">jsFormat</a> - Javascript
+        formatting.
+      </li>
+      <li>
+        <a href="https://github.com/dz0ny/LiveReload-sublimetext2"
+          >LiveReload</a
+        >
+        - LiveReload plugin.
+      </li>
+      <li>
+        <a href="https://github.com/SublimeText-Markdown/MarkdownEditing"
+          >MarkdownEditing</a
+        >
+        - Markdown syntax understanding and good color schemes.
+      </li>
+      <li>
+        <a href="https://sublime.wbond.net/installation">Package Control</a> -
+        The Sublime Text package manager.
+      </li>
+      <li>
+        <a href="https://github.com/maltize/sublime-text-2-ruby-tests"
+          >RubyTest</a
+        >
+        - Plugin for running Ruby tests.
+      </li>
+      <li>
+        <a href="https://github.com/titoBouzout/SideBarEnhancements"
+          >Side Bar Enhancments</a
+        >
+        - Enhancements to Sublime Text sidebar. Files and folders.
+      </li>
+      <li>
+        <a href="https://github.com/kemayo/sublime-text-git">Sublime Git</a> -
+        Git Integration for Sublime.
+      </li>
+      <li>
+        <a href="https://github.com/SublimeLinter/SublimeLinter3/"
+          >Sublime Linter</a
+        >
+        - Interactive code linting.
+      </li>
+      <li>
+        <a href="https://github.com/SublimeText/TrailingSpaces"
+          >TrailingSpaces</a
+        >
+        - Highlight trailing spaces and delete them in a flash.
+      </li>
+    </ul>
+    <h3 id="intellij">Intellij</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/jondot/keymaps/">keymap</a> - a hybrid
+        Vim/ReSharper/Intellij keymap
+      </li>
+    </ul>
+    <h3 id="visual-studio-code">Visual Studio Code</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/Microsoft/vscode">Dev Git Repo</a> - Github
+        code repository for VS Code
+      </li>
+      <li>
+        <a href="https://github.com/microsoft/monaco-editor"
+          >Monaco Editor Git Repo</a
+        >
+        - Github code repository for underlying browser-based editor
+      </li>
+    </ul>
+    <h4 id="extensions">Extensions</h4>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/search?target=VSCode&amp;category=All%20categories"
+          >VS Code Extension Marketplace</a
+        >
+        - Official website for extensions
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ms-python.python"
+          >Python extension</a
+        >
+        - Official Python extension
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync"
+          >Sync settings</a
+        >
+        - Excellent extension for settings and extension sync of your VS code
+        setup
+      </li>
+    </ul>
+    <h2 id="git">Git</h2>
+    <p><em>Tools and addons for making an awesome Git experience</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/fffaraz/awesome-github">awesome-github</a> -
+        Faraz Fallahi maintains a curated list of GitHub &amp; Git resources.
+      </li>
+      <li>
+        <a href="https://github.com/jingweno/gh">gh</a> - Fast GitHub command
+        line client (hub port to Go)
+      </li>
+      <li>
+        <a href="https://github.com/unixorn/git-extra-commands"
+          >git-extra-commands</a
+        >
+        - collected git helper scripts
+      </li>
+      <li>
+        <a href="https://github.com/visionmedia/git-extras">git-extras</a> - GIT
+        utilities – repo summary, repl, changelog population, author commit
+        percentages and more
+      </li>
+      <li>
+        <a href="https://github.com/peterhurford/git-it-on.zsh">git-it-on</a> -
+        ZSH plugin, adds a gitit command that opens the current directory on
+        github in your current branch
+      </li>
+      <li>
+        <a href="https://github.com/sobolevn/git-secret">git-secret</a> - A
+        bash-tool to store your private data inside a git repository.
+      </li>
+      <li>
+        <a href="https://github.com/markchalloner/git-semver">git-semver</a> - A
+        git plugin to make Semantic Versioning 2.0.0 and Change Log management
+        easier.
+      </li>
+      <li>
+        <a href="https://github.com/arc90/git-sweep">git-sweep</a> - safely
+        removes branches that have been merged into the master
+      </li>
+      <li>
+        <a href="https://github.com/aanand/git-up">git-up</a> - a better ‘git
+        pull’
+      </li>
+      <li>
+        <a href="https://hub.github.com/">hub</a> - git CLI wrapper which makes
+        working with GitHub easier
+      </li>
+      <li>
+        <a href="https://github.com/ndbroadbent/scm_breeze">scm_breeze</a>
+        Streamline your git workflow
+      </li>
+      <li>
+        <a href="http://jonas.nitro.dk/tig/">tig</a> - an ncurses-based
+        text-mode interface for git
+      </li>
+    </ul>
+    <h2 id="misc">Misc</h2>
+    <p><em>Useful tools that cannot find a home in other categories</em></p>
+    <ul>
+      <li>
+        <a href="https://fenixwebserver.com">Fenix Web Server</a> - A multi-host
+        local static web server with push-button sharing (desktop app).
+      </li>
+      <li>
+        <a href="hhttps://github.com/ml-tooling/ml-workspace">ML Workspace</a> -
+        All-in-one web-based development environment for machine learning and
+        data science.
+      </li>
+      <li>
+        <a href="https://mockoon.com">Mockoon</a> - an API / HTTP REST mocking
+        desktop application
+      </li>
+      <li>
+        <a href="https://httptoolkit.tech">HTTP Toolkit</a> - an HTTP inspection
+        &amp; debugging desktop application
+      </li>
+    </ul>
+    <h2 id="notifications">Notifications</h2>
+    <p>
+      <em
+        >Tools that notify developers about changes in their work
+        environment</em
+      >
+    </p>
+    <ul>
+      <li>
+        <a href="https://catlight.io">CatLight</a> - status notifier for
+        developers. Checks the status of continuous delivery builds and shows
+        desktop notifications.
+      </li>
+    </ul>
+    <h2 id="orchestration">Orchestration</h2>
+    <p><em>Tools for orchestrating awesome development environments</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/azukiapp/azk">azk</a> - a lightweight open
+        source engine to orchestrate development environments
+      </li>
+      <li>
+        <a href="https://github.com/nanobox-io/nanobox">Nanobox</a> - A
+        micro-PaaS (μPaaS) for creating consistent, isolated, development
+        environments deployable anywhere https://nanobox.io.
+      </li>
+    </ul>
+    <h2 id="presentation">Presentation</h2>
+    <p><em>Tools for presenting your work</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/markdalgleish/bespoke.js">bespoke.js</a> -
+        DIY Presentation Micro-Framework
+      </li>
+      <li>
+        <a href="https://github.com/msoedov/hacker-slides">hacker-slides</a> -
+        Reveal.js based presentation tool
+      </li>
+      <li>
+        <a href="https://github.com/impress/impress.js">impress.js</a> -
+        presentation framework based on the power of CSS3 transforms and
+        transitions
+      </li>
+      <li>
+        <a href="https://github.com/wulab/mithril-slides">mithril-slides</a> - A
+        Keynote-inspired presentation app written with Mithril
+      </li>
+      <li>
+        <a href="https://github.com/gnab/remark">remark</a> - markdown based
+        presentation on your browser
+      </li>
+      <li>
+        <a href="https://github.com/hakimel/reveal.js/">reveal.js</a> - markdown
+        based presentation on your browser
+      </li>
+      <li>
+        <a href="https://github.com/imakewebthings/deck.js">deck.js</a> -
+        markdown based presentation on your browser
+      </li>
+      <li>
+        <a href="https://github.com/tybenz/vimdeck">vimdeck</a> - present inside
+        your Vim
+      </li>
+      <li>
+        <a href="https://github.com/jlantunez/webslides">WebSlides</a> - Making
+        HTML presentations easy
+      </li>
+    </ul>
+    <h2 id="shell">Shell</h2>
+    <p><em>Tools for having an awesome shell environment</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/unixorn/awesome-zsh-plugins"
+          >awesome-zsh-plugins</a
+        >
+        - List of zsh plugins usable with
+        <a href="https://github.com/tarjoilija/zgen">zgen</a> and other
+        <a href="https://github.com/robbyrussell/oh-my-zsh/">oh-my-zsh</a>
+        compatible zsh frameworks
+      </li>
+      <li>
+        <a href="https://github.com/fish-shell/fish-shell">fish-shell</a> - The
+        user-friendly command line shell
+      </li>
+      <li>
+        <a href="https://github.com/six-ddc/hss">hss</a> - Never type the
+        annoying ssh commands again.
+      </li>
+      <li>
+        <a href="https://github.com/oh-my-fish/oh-my-fish">oh-my-fish</a> -
+        Framework for managing your fish shell configuration inspired by
+        oh-my-zsh.
+      </li>
+      <li>
+        <a href="https://github.com/robbyrussell/oh-my-zsh/">oh-my-zsh</a> - A
+        community driven framework for managing zsh configuration.
+      </li>
+      <li>
+        <a href="https://github.com/tarjoilija/zgen">zgen</a> - Faster framework
+        for managing your zsh configuration, backward compatible with oh-my-zsh
+        plugins
+      </li>
+      <li>
+        <a href="http://www.zsh.org/">zsh</a> - A shell designed for interactive
+        use, although it is also a powerful scripting language.
+      </li>
+      <li>
+        <a href="https://github.com/koalaman/shellcheck">shellcheck</a> - Lint
+        for shell. Will find deprecated and/or dangerous usage in shell scripts
+      </li>
+      <li>
+        <a href="https://github.com/unixorn/zsh-quickstart-kit"
+          >zsh quickstart kit</a
+        >
+        - Quick intro for getting set up with zsh and zgen
+      </li>
+    </ul>
+    <h2 id="text">Text</h2>
+    <p>
+      <em>Tools for working with text files - search, replace, processing</em>
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/petdance/ack2">ack</a> - the Perl based
+        better-than-grep tool.
+      </li>
+      <li>
+        <a href="https://github.com/ggreer/the_silver_searcher">ag</a> - A C
+        based code-searching tool similar to ack, but faster
+      </li>
+      <li>
+        <a href="https://github.com/peco/peco">peco</a> - interactive filtering,
+        like interactive Grep
+      </li>
+      <li>
+        <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> - Faster
+        than grep, written in Rust
+      </li>
+    </ul>
+    <h2 id="terminal">Terminal</h2>
+    <p><em>Tools and addons for terminal and terminal work</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/joelthelion/autojump">autojump</a> -
+        remembers your folders and jump to them based on partial recall
+        (e.g. <code>j proj</code> will jump to
+        <code>/home/Users/yourself/projects</code>.
+      </li>
+      <li>
+        <a href="https://github.com/clvv/fasd">fasd</a> Command-line
+        productivity booster, offers quick access to files and directories.
+      </li>
+      <li>
+        <a href="http://brew.sh">homebrew</a> - Makes it easy to install open
+        source packages on an <code>OS X</code> system with a single command.
+      </li>
+      <li>
+        <a href="https://github.com/six-ddc/hss">hss</a> - Never type the
+        annoying ssh commands again.
+      </li>
+      <li>
+        <a href="http://httpie.org/">httpie</a> A command line HTTP client, a
+        user-friendly cURL replacement.
+      </li>
+      <li>
+        <a href="http://www.iterm2.com/">iTerm2</a> - a great terminal
+        replacement <code>/OSX/</code>
+      </li>
+      <li>
+        <a href="https://stedolan.github.io/jq/">jq</a> - a lightweight and
+        flexible command-line JSON processor
+      </li>
+      <li>
+        <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a> - the
+        incredible ZSH addon.
+      </li>
+      <li>
+        <a href="http://www.ivarch.com/programs/pv.shtml">Pipe Viewer</a> - a
+        tool for monitoring the progress of data through a pipeline
+      </li>
+      <li>
+        <a href="https://tmux.github.io/">tmux</a> the awesome terminal
+        multiplexer.
+      </li>
+      <li>
+        <a href="https://github.com/ajeetdsouza/zoxide">zoxide</a> - A better
+        way to navigate your filesystem. Written in Rust, cross-shell, and much
+        faster than other autojumpers.
+      </li>
+    </ul>
+    <h2 id="workflow">Workflow</h2>
+    <p><em>Tools and addons which improve your daily workflow with code</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/alandipert/fswatch">fswatch</a> - a watch
+        tool which will emit FS events and you can run commands on demand with.
+        Note - <code>fswatch-run</code> too.
+      </li>
+      <li>
+        <a href="https://github.com/guard/guard">guard</a> - FS watch tool with
+        a huge ecosystem of plugins
+      </li>
+      <li>
+        <a href="http://livereload.com/">LiveReload</a> - FS watch and
+        preprocessor as a desktop app for <code>/OSX/</code> and
+        <code>/WIN/</code> with complementary browser extensions
+        <ul>
+          <li>
+            <a href="https://github.com/guard/guard-livereload"
+              >guard-livereload</a
+            >
+            - Guard plugin compatible with LiveReload’s browser extensions
+          </li>
+          <li>
+            <a href="https://github.com/snwfdhmp/simplehttp">simplehttp</a>
+            Fastest and simplest way to start serving a local directory over
+            http.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://github.com/facebook/watchman">watchman</a> - Facebook’s
+        better <code>watch</code> - note it works as a service.
+      </li>
+      <li>
+        <a href="https://github.com/zalando/zappr">Zappr</a> - GitHub
+        integration built to enhance your project workflow via enable/disable
+        pull request approval checks.
+      </li>
+      <li>
+        <a href="https://github.com/cristianoliveira/ergo">ergo</a> - The
+        management of multiple local services running over different ports made
+        easy.
+      </li>
+      <li>
+        <a href="https://github.com/prodmodel/prodmodel">Prodmodel</a> - Build
+        tool for data science pipelines.
+      </li>
+      <li>
+        <a href="https://github.com/moshebe/gebug">Gebug</a> - A tool that makes
+        debugging of Dockerized Go applications super easy by enabling Debugger
+        and Hot-Reload features, seamlessly.
+      </li>
+    </ul>
+  </body>
+</html>

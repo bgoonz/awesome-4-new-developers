@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <p align="center">
+      <img
+        src="https://rawgit.com/AllThingsSmitty/css-protips/master/media/logo.svg"
+        width="200"
+        alt="light bulb icon"
+      />
+    </p>
+    <h1 id="wskazówki-css-awesome">
+      Wskazówki CSS
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>Zbiór porad, które pomogą Ci rozwinąć zawansowane umiejętności CSS.</p>
+    <blockquote>
+      <p>
+        Sprawdż takze inne wspaniałe listy
+        <span class="citation" data-cites="sindresorhus">[@sindresorhus]</span
+        >(https://github.com/sindresorhus/) z
+        <a href="https://github.com/sindresorhus/awesome/">zaufanych list</a>.
+      </p>
+    </blockquote>
+    <h2 id="powrót-do-spisu-treści">Powrót do spisu treści</h2>
+    <ul>
+      <li><a href="#Wskazowki">Wskazówki</a></li>
+      <li><a href="#Wsparcie">Wsparcie</a></li>
+      <li>
+        <a href="../../CONTRIBUTING.md"
+          >Wskazówki dotyczące kontrybucji do tego projektu</a
+        >
+      </li>
+    </ul>
+    <h2 id="wskazówki">Wskazówki</h2>
+    <ol type="1">
+      <li><a href="#użyj-resetowania-css">Użyj resetowania CSS</a></li>
+      <li>
+        <a href="#dziedziczenie-box-sizing"
+          >Dziedziczenie <code>box-sizing</code></a
+        >
+      </li>
+      <li>
+        <a href="#użyj-unset-zamiast-resetowania-wszystkich-ustawień"
+          >Użyj <code>unset</code> zamiast resetowania wszystkich ustawień</a
+        >
+      </li>
+      <li>
+        <a href="#użyj-not-aby-dodaćusunąć-obramownie-nawigacji"
+          >Użyj <code>:not()</code> aby dodać/usunąć obramownie nawigacji</a
+        >
+      </li>
+      <li>
+        <a href="#sprawdź,-czy-czcionka-jest-zainstalowana-lokalnie"
+          >Sprawdź, czy czcionka jest zainstalowana lokalnie</a
+        >
+      </li>
+      <li>
+        <a href="#dodaj-line-height-do-body"
+          >Dodaj <code>line-height</code> do <code>body</code></a
+        >
+      </li>
+      <li>
+        <a href="#ustaw-:focus-dla-form-elements"
+          >Ustaw <code>:focus</code> dla elementów formularza</a
+        >
+      </li>
+      <li><a href="#przesuwanie-w-pionie">Przesuń cokolwiek pionowo</a></li>
+      <li>
+        <a href="#listy-podzielone-przecinkami">Listy rozdziele przecinkami</a>
+      </li>
+      <li>
+        <a href="#wybierz-przedmioty-za-pomocą-nth-child"
+          >Wybierz elementy za pomocą negatywnego <code>nth-child</code></a
+        >
+      </li>
+      <li><a href="#użyj-svg-dla-ikon">Użyj SVG dla ikon</a></li>
+      <li>
+        <a href="#użyj-selektora-lobotomized-owl"
+          >Użyj selektora “Lobotomized Owl”</a
+        >
+      </li>
+      <li>
+        <a href="#użyjmax-height-dla-suwaków-pure-csss"
+          >Użyj <code>max-height</code> dla suwaków Pure CSS</a
+        >
+      </li>
+      <li>
+        <a href="#równoważne-komórki-tabeli"
+          >Komórki tabeli o równej-szerokości</a
+        >
+      </li>
+      <li>
+        <a href="#pozbądź-się-marginesów-za-pomocą-flexbox"
+          >Pozbądź się marginesów za pomocą Flexbox</a
+        >
+      </li>
+      <li>
+        <a href="#użyj-selektorów-atrybutów-z-pustymi-linkami"
+          >Użyj selektorów atrybutów z pustymi linkami</a
+        >
+      </li>
+      <li><a href="#stylizuj-domyślne-linki">Stylizuj domyślne linki</a></li>
+      <li>
+        <a href="#wewnętrzne-proporcje-bloków">Wewnętrzne proporcje bloków</a>
+      </li>
+      <li>
+        <a href="#wystylizuj-uszkodzone-obrazy">Wystylizuj uszkodzone obrazy</a>
+      </li>
+      <li>
+        <a
+          href="#użyj-rem-dla-ustawień-globalnych-rozmiarow-i-em-do-ustawień-localnych"
+          >Użyj <code>rem</code> dla ustawień globalnych rozmiarow i
+          <code>em</code> do ustawień localnych</a
+        >
+      </li>
+      <li>
+        <a href="#ukryj-filmy-z-autoodtwarzaniem-które-nie-są-wyciszone"
+          >Ukryj filmy z autoodtwarzaniem, które nie są wyciszone</a
+        >
+      </li>
+      <li>
+        <a href="#użyj-%60:root%60-dla-elastycznych-typów"
+          >Użyj <code>:root</code> dla elastycznych typów</a
+        >
+      </li>
+      <li>
+        <a href="#ustaw-rozmiar-czcionki-w-elementach-formularza"
+          >Ustaw rozmiar czcionki w elementach formularza</a
+        >
+      </li>
+      <li>
+        <a href="#użyj-zdarzeń-wskaźnika-do-sterowania-zdarzeniami-myszy"
+          >Użyj zdarzeń wskaźnika do sterowania zdarzeniami myszy</a
+        >
+      </li>
+      <li>
+        <a href="#ustaw-display-none-na-podziały-linii-używane-jako-odstępy"
+          >Ustaw <code>display: none</code> na Podziały linii używane jako
+          odstępy</a
+        >
+      </li>
+    </ol>
+    <h3 id="użyj-resetowania-css">Użyj resetowania CSS</h3>
+    <p>
+      Reset ustawień CSS umośliwia wymuszenie spójność stylu w różnych
+      przeglądarkach z czystym konturem dla elementów stylizacyjnych. Możesz
+      wykorzystać jedną bibliotek resetującej ustawienia CSS np.
+      <a href="http://necolas.github.io/normalize.css/">Normalize</a> lub użyć
+      uproszczonego sposobu resetowania:
+    </p>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb1-1" title="1"><span class="op">*</span> {</a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">box-sizing</span>: <span class="dv">border-box</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="kw">margin</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="kw">padding</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">}</a></code></pre>
+    </div>
+    <p>
+      Elementy zostaną pozbawione marginesów i dopełnienia, a
+      <code>box-sizing</code> pozwala zarządzać układami za pomocą modelu
+      pudełkowego CSS (CSS box model).
+    </p>
+    <h4 id="demonstracja">
+      <a href="http://codepen.io/AllThingsSmitty/pen/kkrkLL">Demonstracja</a>
+    </h4>
+    <p>
+      <strong>Uwaga:</strong> Jeżeli zdecydujesz sie na wykorzystanie powyżej
+      opisanej wskazówki dotyczącej
+      <a href="#inherit-box-sizing">Dziedziczenia <code>box-sizing</code></a>
+      możesz zrezygnować z dodania <code>box-sizing</code> w zresetowanych
+      ustawieniach CSS.
+    </p>
+    <p>
+      <sup><a href="#powrót-do-spisu-treści">powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="dziedziczenie-box-sizing">Dziedziczenie <code>box-sizing</code></h3>
+    <p>
+      Niech <code>box-sizing</code> zostanie odziedziczony z <code>html</code>:
+    </p>
+    <div class="sourceCode" id="cb2">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb2-1" title="1">html {</a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="kw">box-sizing</span>: <span class="dv">border-box</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">}</a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="op">*,</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="op">*</span><span class="in">::before</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="op">*</span><span class="in">::after</span> {</a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="kw">box-sizing</span>: <span class="bu">inherit</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-9" title="9">}</a></code></pre>
+    </div>
+    <p>
+      Ułatwia to łatwiejszą zmianę <code>box-sizing</code> w wtyczkach lub
+      innych komponentach, które wpływaja na inne zachowania.
+    </p>
+    <h4 id="demonstracja-1">
+      <a
+        href="https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/"
+        >Demonstracja</a
+      >
+    </h4>
+    <p>
+      <sup><a href="#powrót-do-spisu-treści">powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="użyj-unset-zamiast-resetowania-wszystkich-ustawień">
+      Użyj <code>unset</code> zamiast resetowania wszystkich ustawień
+    </h3>
+    <p>
+      Podczas resetowania ustawień elementu nie jest konieczne resetowanie
+      pojedyńczych ustawień:
+    </p>
+    <div class="sourceCode" id="cb3">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1">button {</a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">background</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">border</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">color</span>: <span class="bu">inherit</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="kw">font</span>: <span class="bu">inherit</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="kw">outline</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="kw">padding</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">}</a></code></pre>
+    </div>
+    <p>
+      Możesz sprecyzować wszystkie właściwości elementu, używając skrótu
+      <code>all</code>. Używając <code>unset</code> możemy zresetować ustawienia
+      elementu do wartości początkowych:
+    </p>
+    <div class="sourceCode" id="cb4">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb4-1" title="1">button {</a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">all</span>: <span class="bu">unset</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      <strong>Uwaga:</strong> skróty <code>all</code> i <code>unset</code> nie
+      są obsługiwane w IE11.
+    </p>
+    <p>
+      <sup><a href="#powrót-do-spisu-treści">powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="użyj-not-aby-dodaćusunąć-obramownie-nawigacji">
+      Użyj <code>:not()</code>, aby dodać/usunąć obramownie nawigacji
+    </h3>
+    <p>Zamiast dodać obramowanie…</p>
+    <div class="sourceCode" id="cb5">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb5-1" title="1"><span class="co">/* add border */</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="fu">.nav</span> li {</a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="kw">border-right</span>: <span class="dv">1</span><span class="dt">px</span> <span class="dv">solid</span> <span class="cn">#666</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">}</a></code></pre>
+    </div>
+    <p>…a później usunąć ja z ostatniego elementu…</p>
+    <div class="sourceCode" id="cb6">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb6-1" title="1"><span class="co">/* usuń obramowanie */</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="fu">.nav</span> li<span class="in">:last-child</span> {</a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">border-right</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">}</a></code></pre>
+    </div>
+    <p>
+      …użyj <code>:not()</code> pseudo-klasy, aby dodać obramowanie do wybranych
+      elementów:
+    </p>
+    <div class="sourceCode" id="cb7">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">.nav</span> li<span class="in">:not(</span>:last-child<span class="in">)</span> {</a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">border-right</span>: <span class="dv">1</span><span class="dt">px</span> <span class="dv">solid</span> <span class="cn">#666</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">}</a></code></pre>
+    </div>
+    <p>Selektor CSS definiuje granicę w sposób opisany przez człowieka.</p>
+    <h4 id="demonstracja-2">
+      <a href="http://codepen.io/AllThingsSmitty/pen/LkymvO">Demonstracja</a>
+    </h4>
+    <p>
+      <sup><a href="#powrót-do-spisu-treści">powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="sprawdź-czy-czcionka-jest-zainstalowana-lokalnie">
+      Sprawdź, czy czcionka jest zainstalowana lokalnie
+    </h3>
+    <p>
+      Możesz sprawdzić, czy czcionka jest zainstalowana lokalnie, przed jej
+      zdalnym pobraniem, co również jest dobrą wskazówką dotyczącą wydajności.
+    </p>
+    <div class="sourceCode" id="cb8">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb8-1" title="1"><span class="im">@font-face</span> {</a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="kw">font-family</span>: <span class="st">&quot;Dank Mono&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="kw">src</span>:</a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="co">/* Full name */</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="fu">local(</span><span class="st">&quot;Dank Mono&quot;</span><span class="fu">)</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">    <span class="co">/* Postscript name */</span></a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="fu">local(</span><span class="st">&quot;Dank Mono&quot;</span><span class="fu">)</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-8" title="8">    <span class="co">/* Otherwise, download it! */</span></a>
+<a class="sourceLine" id="cb8-9" title="9">    <span class="fu">url(</span><span class="st">&quot;//...a.server/fonts/DankMono.woff&quot;</span><span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-10" title="10">}</a>
+<a class="sourceLine" id="cb8-11" title="11"></a>
+<a class="sourceLine" id="cb8-12" title="12">code {</a>
+<a class="sourceLine" id="cb8-13" title="13">  <span class="kw">font-family</span>: <span class="st">&quot;Dank Mono&quot;</span><span class="op">,</span> system-ui-monospace<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-14" title="14">}</a></code></pre>
+    </div>
+    <p>
+      Czapka dla Adama Argyle’a za podzielenie się tym prototypem i
+      <a href="https://codepen.io/argyleink/pen/VwYJpgR">demonstracją</a>.
+    </p>
+    <p>
+      <sup><a href="#powrót-do-spisu-treści">powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="dodaj-line-height-do-body">
+      Dodaj <code>line-height</code> do <code>body</code>
+    </h3>
+    <p>
+      Nie musisz dodawać <code>wysokości linii</code> do każdego
+      <code>&lt;p&gt;</code>, <code>&lt;h*&gt;</code>, <em>et al</em>. osobno.
+      Zamiast tego dodaj go do <code>body</code>:
+    </p>
+    <div class="sourceCode" id="cb9">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb9-1" title="1">body {</a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="kw">line-height</span>: <span class="dv">1.5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      W ten sposób elementy tekstowe mogą łatwo odziedziczyć ustawienia z
+      <code>body</code>.
+    </p>
+    <h4 id="demonstracja-3">
+      <a href="http://codepen.io/AllThingsSmitty/pen/VjbdYd">Demonstracja</a>
+    </h4>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="ustaw-focus-dla-elementów-formularza">
+      Ustaw <code>:focus</code> dla elementów formularza
+    </h3>
+    <p>
+      Obserwowani użytkownicy klawiatury polegają na fokucie, aby określić,
+      gdzie na stronie pojawiają się zdarzenia na klawiaturze. Skoncentruj się
+      na elementach formy, które będą spójne, a następnie domyślna implementacja
+      przeglądarki:
+    </p>
+    <div class="sourceCode" id="cb10">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb10-1" title="1">a<span class="in">:focus</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-2" title="2">button<span class="in">:focus</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-3" title="3">input<span class="in">:focus</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-4" title="4">select<span class="in">:focus</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-5" title="5">textarea<span class="in">:focus</span> {</a>
+<a class="sourceLine" id="cb10-6" title="6">  <span class="kw">box-shadow</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-7" title="7">  <span class="kw">outline</span>: <span class="cn">#000</span> <span class="dv">dotted</span> <span class="dv">2</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-8" title="8">  <span class="kw">outline-offset</span>: <span class="dv">.05</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-9" title="9">}</a></code></pre>
+    </div>
+    <h4 id="demonstracja-4">
+      <a href="https://codepen.io/AllThingsSmitty/pen/ePzoOP/">Demonstracja</a>
+    </h4>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="przesuwanie-w-pionie">Przesuwanie w pionie</h3>
+    <p>
+      Nie, to nie jest czarna magia, naprawdę możesz wyśrodkować elementy w
+      pionie:
+    </p>
+    <div class="sourceCode" id="cb11">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb11-1" title="1">html<span class="op">,</span></a>
+<a class="sourceLine" id="cb11-2" title="2">body {</a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="kw">height</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="kw">margin</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-5" title="5">}</a>
+<a class="sourceLine" id="cb11-6" title="6"></a>
+<a class="sourceLine" id="cb11-7" title="7">body {</a>
+<a class="sourceLine" id="cb11-8" title="8">  -webkit-align-items: <span class="dv">center</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-9" title="9">  <span class="kw">-ms-flex-align</span>: <span class="dv">center</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-10" title="10">  <span class="kw">align-items</span>: <span class="dv">center</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-11" title="11">  <span class="kw">display</span>: -webkit-flex<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-12" title="12">  <span class="kw">display</span>: flex<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-13" title="13">}</a></code></pre>
+    </div>
+    <p>a także używając CSS Grid:</p>
+    <div class="sourceCode" id="cb12">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb12-1" title="1">body {</a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="kw">display</span>: grid<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="kw">height</span>: <span class="dv">100</span><span class="dt">vh</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="kw">margin</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" title="5">  <span class="kw">place-items</span>: <span class="dv">center</span> <span class="dv">center</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-6" title="6">}</a></code></pre>
+    </div>
+    <p>
+      Chcesz coś przenieść? Pionowo, poziomo… zawsze i wszędzie? Na CSS-Tricks
+      znajdziesz
+      <a href="https://css-tricks.com/centering-css-complete-guide/"
+        >ciekawy artykuł</a
+      >
+      z dobrymi instrukcje na ten temat.
+    </p>
+    <p>
+      <strong>Uwaga:</strong> Uważaj na pewne
+      <a
+        href="https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items"
+        >nieprawidłowe zachowanie</a
+      >
+      z Flexbox w IE11.
+    </p>
+    <h4 id="demonstracja-5">
+      <a href="http://codepen.io/AllThingsSmitty/pen/GqmGqZ">Demonstracja</a>
+    </h4>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="listy-podzielone-przecinkami">Listy podzielone przecinkami</h3>
+    <p>
+      Elementy listy mogą wyglądać jak prawdziwa, oddzielona przecinkami lista:
+    </p>
+    <div class="sourceCode" id="cb13">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb13-1" title="1">ul <span class="op">&gt;</span> li<span class="in">:not(</span>:last-child<span class="in">)::after</span> {</a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="kw">content</span>: <span class="st">&quot;,&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      Użyj <code>:not()</code> pseudo-klasy, aby przecinek nie zostal dodany do
+      ostatniego elementu.
+    </p>
+    <p>
+      <strong>Uwaga:</strong> Ta wskazówka może nie być idealna dla ułatwień
+      dostępu, w szczególności na ekranach czytników. Kopiowanie / wklejanie z
+      przeglądarki nie działa z treścią generowaną przez CSS. Postępuj
+      ostrożnie.
+    </p>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="wybierz-przedmioty-za-pomocą-nth-child">
+      Wybierz przedmioty za pomocą <code>nth-child</code>
+    </h3>
+    <p>
+      Wybierz przedmioty nieparzyste za pomocą negatywnego
+      <code>nth-child</code> w CSS, aby wybrać elementy od 1 do n.
+    </p>
+    <div class="sourceCode" id="cb14">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb14-1" title="1">li {</a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3">}</a>
+<a class="sourceLine" id="cb14-4" title="4"></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="co">/* select items 1 through 3 and display them */</span></a>
+<a class="sourceLine" id="cb14-6" title="6">li<span class="in">:nth-child(-n+3)</span> {</a>
+<a class="sourceLine" id="cb14-7" title="7">  <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-8" title="8">}</a></code></pre>
+    </div>
+    <p>
+      Lub, skoro już nauczyłeś się trochę o użyciu
+      <a href="#use-not-to-applyunapply-borders-on-navigation"
+        ><code>:not()</code></a
+      >,wypróbuj:
+    </p>
+    <div class="sourceCode" id="cb15">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb15-1" title="1"><span class="co">/* select all items except the first 3 and display them */</span></a>
+<a class="sourceLine" id="cb15-2" title="2">li<span class="in">:not(</span>:nth-child(-n<span class="op">+</span>3<span class="in">)</span>) {</a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4">}</a></code></pre>
+    </div>
+    <p>To było całkiem łatwe.</p>
+    <h4 id="demonstracja-6">
+      <a href="http://codepen.io/AllThingsSmitty/pen/WxjKZp">Demonstracja</a>
+    </h4>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="użyj-svg-dla-ikon">Użyj SVG dla ikon</h3>
+    <p>Nie ma powodu, aby nie używać SVG jako ikon:</p>
+    <div class="sourceCode" id="cb16">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb16-1" title="1"><span class="fu">.logo</span> {</a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="kw">background</span>: <span class="fu">url(</span><span class="st">&quot;logo.svg&quot;</span><span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      SVG skaluje się dobrze dla wszystkich typów rozdzielczości i jest
+      obsługiwany we wszystkich przeglądarkach
+      <a href="http://caniuse.com/#search=svg">wróć do IE9</a>. Więc porzuć
+      swoje pliki .png, .jpg lub .gif-jif-whatev.
+    </p>
+    <p>
+      <strong>Uwaga:</strong> Jeśli masz przyciski tylko ikony SVG dla widzących
+      użytkowników, a SVG nie załaduje się, pomoże to w utrzymaniu dostępności:
+    </p>
+    <div class="sourceCode" id="cb17">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb17-1" title="1"><span class="fu">.no-svg</span> <span class="fu">.icon-only</span><span class="in">::after</span> {</a>
+<a class="sourceLine" id="cb17-2" title="2">  <span class="kw">content</span>: <span class="fu">attr(</span>aria-label<span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb17-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="użyj-selektora-lobotomized-owl">
+      Użyj selektora “Lobotomized Owl”
+    </h3>
+    <p>
+      Być może “Lobotomized Owl” to dziwna nazwa dla selektora, ale użycie
+      uniwersalnego (<code>*</code>) selektora z sąsiednim selektorem rodzeństwa
+      (<code>+</code>) może udostepnić potężne możliwości CSS:
+    </p>
+    <div class="sourceCode" id="cb18">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb18-1" title="1"><span class="op">*</span> <span class="op">+</span> <span class="op">*</span> {</a>
+<a class="sourceLine" id="cb18-2" title="2">  <span class="kw">margin-top</span>: <span class="dv">1.5</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb18-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      W tym przykładzie wszystkie elementy, które śledzą inne elementy,
+      otrzymają <code>margin-top: 1.5em</code>.
+    </p>
+    <p>
+      Dowiedź sie wiecej na temat selektora “lobotomized owl” czytajac
+      <a href="http://alistapart.com/article/axiomatic-css-and-lobotomized-owls"
+        >artykul Heydon’a Pickering</a
+      >
+      <em>A List Apart</em>.
+    </p>
+    <h4 id="demonstracja-7">
+      <a href="http://codepen.io/AllThingsSmitty/pen/grRvWq">Demonstracja</a>
+    </h4>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="użyjmax-height-atrybutu-maksymalnej-wysokości-dla-suwaków-pure-css">
+      Użyj<code>max-height</code> (atrybutu maksymalnej wysokości) dla suwaków
+      Pure CSS
+    </h3>
+    <p>
+      Zaimplementuj suwaki CSS używając <code>max-height</code> z ukrytym
+      przepełnieniem:
+    </p>
+    <div class="sourceCode" id="cb19">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb19-1" title="1"><span class="fu">.slider</span> {</a>
+<a class="sourceLine" id="cb19-2" title="2">  <span class="kw">max-height</span>: <span class="dv">200</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-3" title="3">  <span class="kw">overflow-y</span>: <span class="dv">hidden</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-4" title="4">  <span class="kw">width</span>: <span class="dv">300</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-5" title="5">}</a>
+<a class="sourceLine" id="cb19-6" title="6"></a>
+<a class="sourceLine" id="cb19-7" title="7"><span class="fu">.slider</span><span class="in">:hover</span> {</a>
+<a class="sourceLine" id="cb19-8" title="8">  <span class="kw">max-height</span>: <span class="dv">600</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-9" title="9">  <span class="kw">overflow-y</span>: <span class="dv">scroll</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-10" title="10">}</a></code></pre>
+    </div>
+    <p>
+      Element rozwija się do <code>max-height</code> po najechaniu kursorem, a
+      suwak wyświetla się w wyniku przepełnienia.
+    </p>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="komórki-tabeli-o-równej-szerokości">
+      Komórki tabeli o równej-szerokości
+    </h3>
+    <p>
+      Tworzenie tabel może być uciążliwe. Spróbuj użyć
+      <code>table-layout: fixed</code>, aby upewnić sie, że komórki mają
+      jednakową szerokość:
+    </p>
+    <div class="sourceCode" id="cb20">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb20-1" title="1"><span class="fu">.calendar</span> {</a>
+<a class="sourceLine" id="cb20-2" title="2">  <span class="kw">table-layout</span>: <span class="dv">fixed</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb20-3" title="3">}</a></code></pre>
+    </div>
+    <p>Widzisz jakie to proste! :)</p>
+    <h4 id="demonstracja-8">
+      <a href="http://codepen.io/AllThingsSmitty/pen/jALALm">Demonstracja</a>
+    </h4>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="pozbądź-się-marginesów-za-pomocą-flexbox">
+      Pozbądź się marginesów za pomocą Flexbox
+    </h3>
+    <p>
+      Podczas pracy z rynnami kolumnowymi (column gutters) możesz pozbyć się
+      <code>nth-</code>, <code>first-</code>, i <code>last-child</code> za
+      pomocą właściwości<code>space-between</code>:
+    </p>
+    <div class="sourceCode" id="cb21">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb21-1" title="1"><span class="fu">.list</span> {</a>
+<a class="sourceLine" id="cb21-2" title="2">  <span class="kw">display</span>: flex<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-3" title="3">  <span class="kw">justify-content</span>: space-between<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-4" title="4">}</a>
+<a class="sourceLine" id="cb21-5" title="5"></a>
+<a class="sourceLine" id="cb21-6" title="6"><span class="fu">.list</span> <span class="fu">.person</span> {</a>
+<a class="sourceLine" id="cb21-7" title="7">  <span class="kw">flex-basis</span>: <span class="dv">23</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-8" title="8">}</a></code></pre>
+    </div>
+    <p>Teraz rynny kolumnowe zawsze są rozmieszczone równomiernie.</p>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="użyj-selektorów-atrybutów-z-pustymi-linkami">
+      Użyj selektorów atrybutów z pustymi linkami
+    </h3>
+    <p>
+      Wyświetl linki, gdy element <code>&lt;a&gt;</code> nie ma wartości
+      tekstowej, ale atrybut <code>href</code> posiada link:
+    </p>
+    <div class="sourceCode" id="cb22">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb22-1" title="1">a<span class="ex">[href</span><span class="op">^=</span><span class="st">&quot;http&quot;</span><span class="ex">]</span><span class="in">:empty::before</span> {</a>
+<a class="sourceLine" id="cb22-2" title="2">  <span class="kw">content</span>: <span class="fu">attr(</span>href<span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb22-3" title="3">}</a></code></pre>
+    </div>
+    <p>To całkiem wygodne.</p>
+    <h4 id="demonstracja-9">
+      <a href="http://codepen.io/AllThingsSmitty/pen/zBzXRx">Demonstracja</a>
+    </h4>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="stylizuj-domyślne-linki">Stylizuj “domyślne” linki</h3>
+    <p>Dodaj styl dla “domyślnych” linków:</p>
+    <div class="sourceCode" id="cb23">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb23-1" title="1">a<span class="ex">[href]</span><span class="in">:not(</span><span class="ex">[class]</span><span class="in">)</span> {</a>
+<a class="sourceLine" id="cb23-2" title="2">  <span class="kw">color</span>: <span class="cn">#008000</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb23-3" title="3">  <span class="kw">text-decoration</span>: <span class="dv">underline</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb23-4" title="4">}</a></code></pre>
+    </div>
+    <p>
+      Linki wstawiane za pośrednictwem CMS, które zwykle nie mają atrybutu
+      class, będą wyróżnione bez wpływu na kaskadę.
+    </p>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="wewnętrzne-proporcje-bloków">Wewnętrzne proporcje bloków</h3>
+    <p>
+      Aby utworzyć pola, które posiada wewnętrzne proporcje, wystarczy
+      zastosować górny lub dolny margines do elementu div:
+    </p>
+    <div class="sourceCode" id="cb24">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb24-1" title="1"><span class="fu">.container</span> {</a>
+<a class="sourceLine" id="cb24-2" title="2">  <span class="kw">height</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-3" title="3">  <span class="kw">padding-bottom</span>: <span class="dv">20</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-4" title="4">  <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-5" title="5">}</a>
+<a class="sourceLine" id="cb24-6" title="6"></a>
+<a class="sourceLine" id="cb24-7" title="7"><span class="fu">.container</span> div {</a>
+<a class="sourceLine" id="cb24-8" title="8">  <span class="kw">border</span>: <span class="dv">2</span><span class="dt">px</span> <span class="dv">dashed</span> <span class="cn">#ddd</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-9" title="9">  <span class="kw">height</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-10" title="10">  <span class="kw">left</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-11" title="11">  <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-12" title="12">  <span class="kw">top</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-13" title="13">  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-14" title="14">}</a></code></pre>
+    </div>
+    <p>
+      Użycie 20% wypełnienia (padding) sprawia, że wysokość bloku jest równa 20%
+      jego szerokości. Bez względu na szerokość okna roboczego (viewport),
+      element div zachowa swój współczynnik proporcji (100% / 20% = 5:1).
+    </p>
+    <h4 id="demonstracja-10">
+      <a href="http://codepen.io/AllThingsSmitty/pen/jALZvE">Demonstracja</a>
+    </h4>
+    <p>
+      <sup><a href="#powrót-do-spisu-treści">powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="wystylizuj-uszkodzone-obrazy">Wystylizuj uszkodzone obrazy</h3>
+    <p>
+      Spraw, aby uszkodzone obrazy były bardziej estetyczne z użyciem odrobiny
+      CSS:
+    </p>
+    <div class="sourceCode" id="cb25">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb25-1" title="1">img {</a>
+<a class="sourceLine" id="cb25-2" title="2">  <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-3" title="3">  <span class="kw">font-family</span>: <span class="dv">sans-serif</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-4" title="4">  <span class="kw">font-weight</span>: <span class="dv">300</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-5" title="5">  <span class="kw">height</span>: <span class="bu">auto</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-6" title="6">  <span class="kw">line-height</span>: <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-7" title="7">  <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-8" title="8">  <span class="kw">text-align</span>: <span class="dv">center</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-9" title="9">  <span class="kw">width</span>: <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-10" title="10">}</a></code></pre>
+    </div>
+    <p>
+      Następnie dodaj reguły pseudoelementów, aby wyświetlić komunikat
+      użytkownika i adres URL uszkodzonego obrazu:
+    </p>
+    <div class="sourceCode" id="cb26">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb26-1" title="1">img<span class="in">::before</span> {</a>
+<a class="sourceLine" id="cb26-2" title="2">  <span class="kw">content</span>: <span class="st">&quot;We&#39;re sorry, the image below is broken :(&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-3" title="3">  <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-4" title="4">  <span class="kw">margin-bottom</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-5" title="5">}</a>
+<a class="sourceLine" id="cb26-6" title="6"></a>
+<a class="sourceLine" id="cb26-7" title="7">img<span class="in">::after</span> {</a>
+<a class="sourceLine" id="cb26-8" title="8">  <span class="kw">content</span>: <span class="st">&quot;(url: &quot;</span> <span class="fu">attr(</span>src<span class="fu">)</span> <span class="st">&quot;)&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-9" title="9">  <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-10" title="10">  <span class="kw">font-size</span>: <span class="dv">12</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-11" title="11">}</a></code></pre>
+    </div>
+    <p>
+      Dowiedz się więcej o stylizacji używając tego wzoru w oryginalnym
+      <a href="http://bitsofco.de/styling-broken-images/"
+        >originalny artykule</a
+      >
+      <a href="https://github.com/ireade/">Ire Aderinokun</a>.
+    </p>
+    <p>
+      <sup><a href="#powrót-do-spisu-treści">powrót do spisu treści</a></sup>
+    </p>
+    <h3
+      id="użyj-rem-dla-ustawień-globalnych-rozmiarow-i-em-do-ustawień-localnych"
+    >
+      Użyj <code>rem</code> dla ustawień globalnych rozmiarow i
+      <code>em</code> do ustawień localnych
+    </h3>
+    <p>
+      Po ustawieniu podstawowego rozmiaru czcionki w katalogu głównym (<code
+        >html { font-size: 100%; }</code
+      >), ustaw rozmiar czcionki dla elementów tekstowych na <code>em</code>:
+    </p>
+    <div class="sourceCode" id="cb27">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb27-1" title="1">h2 {</a>
+<a class="sourceLine" id="cb27-2" title="2">  <span class="kw">font-size</span>: <span class="dv">2</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-3" title="3">}</a>
+<a class="sourceLine" id="cb27-4" title="4"></a>
+<a class="sourceLine" id="cb27-5" title="5">p {</a>
+<a class="sourceLine" id="cb27-6" title="6">  <span class="kw">font-size</span>: <span class="dv">1</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-7" title="7">}</a></code></pre>
+    </div>
+    <p>Następnie ustaw rozmiar czcionki dla modułów na rem`:</p>
+    <div class="sourceCode" id="cb28">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb28-1" title="1">article {</a>
+<a class="sourceLine" id="cb28-2" title="2">  <span class="kw">font-size</span>: <span class="dv">1.25</span><span class="dt">rem</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb28-3" title="3">}</a>
+<a class="sourceLine" id="cb28-4" title="4"></a>
+<a class="sourceLine" id="cb28-5" title="5">aside <span class="fu">.module</span> {</a>
+<a class="sourceLine" id="cb28-6" title="6">  <span class="kw">font-size</span>: <span class="dv">.9</span><span class="dt">rem</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb28-7" title="7">}</a></code></pre>
+    </div>
+    <p>
+      Teraz każdy moduł jest podzielony na sekcje. Sprawia to żę stylizacja i
+      utrzymanie kodu jest łątwiejsze.
+    </p>
+    <p>
+      <sup><a href="#powrót-do-spisu-treści">powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="ukryj-filmy-z-autoodtwarzaniem-które-nie-są-wyciszone">
+      Ukryj filmy z autoodtwarzaniem, które nie są wyciszone
+    </h3>
+    <p>
+      To świetna sztuczka dla niestandardowego arkusza stylów użytkownika.
+      Unikaj przeciążania użytkownika dźwiękiem z filmu, który odtwarza się
+      automatycznie po wczytaniu strony. Jeśli dźwięk nie jest wyciszony, nie
+      pokazuj widea:
+    </p>
+    <div class="sourceCode" id="cb29">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb29-1" title="1">video<span class="ex">[autoplay]</span><span class="in">:not(</span><span class="ex">[muted]</span><span class="in">)</span> {</a>
+<a class="sourceLine" id="cb29-2" title="2">  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb29-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      Po raz kolejny wykorzystujemy pseudo-klasę
+      <a href="#use-not-to-applyunapply-borders-on-navigation"
+        ><code>:not()</code></a
+      >
+    </p>
+    <p>
+      <sup
+        ><a href="#powrót-do-spisu-treści">Powrót do spisu treści</a
+        >(#Powrót-do-spisu-treści</sup
+      >
+    </p>
+    <h3 id="użyj-root-dla-elastycznych-typów">
+      Użyj <code>:root</code> dla elastycznych typów
+    </h3>
+    <p>
+      Rozmiar czcionki typowej w elastyczny układzie (responsive layout)
+      powinien być dostosowywany dla każdego ekranu. Możesz obliczyć rozmiar
+      czcionki na podstawie wysokości i szerokości okna roboczego używając
+      <code>:root</code>:
+    </p>
+    <div class="sourceCode" id="cb30">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb30-1" title="1"><span class="in">:root</span> {</a>
+<a class="sourceLine" id="cb30-2" title="2">  <span class="kw">font-size</span>: <span class="fu">calc(</span><span class="dv">1</span><span class="dt">vw</span> <span class="op">+</span> <span class="dv">1</span><span class="dt">vh</span> <span class="op">+</span> <span class="dv">.5</span>vmin<span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb30-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      Następnie możesz użyć jednostki<code>root em</code> na podstawie wartości
+      obliczonej przez <code>:root</code>:
+    </p>
+    <div class="sourceCode" id="cb31">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb31-1" title="1">body {</a>
+<a class="sourceLine" id="cb31-2" title="2">  <span class="kw">font</span>: <span class="dv">1</span><span class="dt">rem</span>/<span class="dv">1.6</span> <span class="dv">sans-serif</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb31-3" title="3">}</a></code></pre>
+    </div>
+    <h4 id="demonstracja-11">
+      <a href="http://codepen.io/AllThingsSmitty/pen/XKgOkR">Demonstracja</a>
+    </h4>
+    <p>
+      <sup><a href="#powrót-do-spisu-treści">powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="ustaw-rozmiar-czcionki-w-elementach-formularza">
+      Ustaw rozmiar czcionki w elementach formularza
+    </h3>
+    <p>
+      Aby uniknąć korzystania z przeglądarek komórkowych (iOS Safari etc.)
+      podczas powiększania elementów formularzy HTML, po dotknięciu menu
+      rozwijanego <code>&lt;select&gt;</code> dnależy dodać
+      <code>font-size</code> do reguły selektora:
+    </p>
+    <div class="sourceCode" id="cb32">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb32-1" title="1">input<span class="ex">[type</span><span class="op">=</span><span class="st">&quot;text&quot;</span><span class="ex">]</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb32-2" title="2">input<span class="ex">[type</span><span class="op">=</span><span class="st">&quot;number&quot;</span><span class="ex">]</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb32-3" title="3">select<span class="op">,</span></a>
+<a class="sourceLine" id="cb32-4" title="4">textarea {</a>
+<a class="sourceLine" id="cb32-5" title="5">  <span class="kw">font-size</span>: <span class="dv">16</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb32-6" title="6">}</a></code></pre>
+    </div>
+    <p>:dancer:</p>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="użyj-zdarzeń-wskaźnika-do-sterowania-zdarzeniami-myszy">
+      Użyj zdarzeń wskaźnika do sterowania zdarzeniami myszy
+    </h3>
+    <p>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events"
+        >Pointer events</a
+      >
+      umożliwiają określenie sposobu interakcji myszy z elementem, na które
+      kilka. Aby wyłączyć domyślne zdarzenie wskaźnika na przycisku, na
+      przykład:
+    </p>
+    <div class="sourceCode" id="cb33">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb33-1" title="1"><span class="fu">.button-disabled</span> {</a>
+<a class="sourceLine" id="cb33-2" title="2">  <span class="kw">opacity</span>: <span class="dv">.5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-3" title="3">  <span class="kw">pointer-events</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-4" title="4">}</a></code></pre>
+    </div>
+    <p>To takie proste.</p>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h3 id="ustaw-display-none-na-podziały-linii-używane-jako-odstępy">
+      Ustaw <code>display: none</code> na Podziały linii używane jako odstępy
+    </h3>
+    <p>
+      Jak zauważył
+      <a href="https://twitter.com/csswizardry/status/1170835532584235008"
+        >Harry Roberts</a
+      >, może to pomóc zapobiec korzystaniu przez użytkowników CMS z dodatkowych
+      podziałów linii dla odstępów:
+    </p>
+    <div class="sourceCode" id="cb34">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb34-1" title="1">br <span class="op">+</span> br {</a>
+<a class="sourceLine" id="cb34-2" title="2">  <span class="kw">display</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb34-3" title="3">}</a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+    <h2 id="wsparcie">Wsparcie</h2>
+    <p>Wersje aktualne Chrome, Firefox, Safari, Opera, Edge, and IE11.</p>
+    <p>
+      <sup><a href="#Powrót-do-spisu-treści">Powrót do spisu treści</a></sup>
+    </p>
+  </body>
+</html>

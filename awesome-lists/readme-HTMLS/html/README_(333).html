@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <!--lint disable no-dead-urls-->
+    <p align="center">
+      <img src="media/awesome-v-logo.svg" width="400" />
+    </p>
+    <h1 id="awesome-v-awesome">
+      Awesome V
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        A curated list of awesome V frameworks, libraries, software and
+        resources.
+      </p>
+    </blockquote>
+    <p>
+      <a href="https://vlang.io/">V</a> is a simple, fast, safe, compiled
+      language for developing maintainable software.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#applications">Applications</a>
+        <ul>
+          <li><a href="#interpreterscompilers">Interpreters/Compilers</a></li>
+          <li>
+            <a href="#operating-systemskernels">Operating systems/Kernels</a>
+          </li>
+          <li><a href="#package-managers">Package managers</a></li>
+          <li><a href="#editors">Editors</a></li>
+          <li><a href="#web">Web</a></li>
+          <li><a href="#graphics">Graphics</a></li>
+          <li><a href="#games">Games</a></li>
+          <li><a href="#command-line">Command-line</a></li>
+          <li><a href="#project-management">Project management</a></li>
+          <li><a href="#serialization">Serialization</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#libraries">Libraries</a>
+        <ul>
+          <li>
+            <a href="#command-line-interface-cli--terminal--shell"
+              >Command line interface (CLI) / Terminal / Shell</a
+            >
+          </li>
+          <li><a href="#text-processing">Text processing</a></li>
+          <li><a href="#graphics-1">Graphics</a></li>
+          <li><a href="#game-development">Game development</a></li>
+          <li><a href="#web-1">Web</a></li>
+          <li><a href="#database-clients">Database clients</a></li>
+          <li><a href="#audio">Audio</a></li>
+          <li><a href="#operating-system">Operating system</a></li>
+          <li><a href="#automation">Automation</a></li>
+          <li><a href="#telegram">Telegram</a></li>
+          <li><a href="#discord">Discord</a></li>
+          <li><a href="#irc">IRC</a></li>
+          <li><a href="#files">Files</a></li>
+          <li><a href="#eventing">Eventing</a></li>
+          <li>
+            <a href="#user-interface-toolkits">User Interface toolkits</a>
+          </li>
+          <li><a href="#scientific-computing">Scientific computing</a></li>
+          <li><a href="#utility">Utility</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#other">Other</a>
+        <ul>
+          <li><a href="#syntax-highlighting">Syntax highlighting</a></li>
+          <li><a href="#editor-plugins">Editor plugins</a></li>
+          <li><a href="#github-actions">GitHub actions</a></li>
+          <li><a href="#videos">Videos</a></li>
+          <li><a href="#programming-contests">Programming contests</a></li>
+          <li><a href="#tutorials">Tutorials</a></li>
+          <li><a href="#online-ides-with-v">Online IDEs with V</a></li>
+          <li><a href="#articles">Articles</a></li>
+          <li><a href="#communities">Communities</a></li>
+          <li><a href="#forums">Forums</a></li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="applications">Applications</h2>
+    <h3 id="interpreterscompilers">Interpreters/Compilers</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/vlang/v">v</a> - V itself. Simple, fast,
+        safe, compiled language for developing maintainable software.
+      </li>
+      <li>
+        <a href="https://github.com/vpervenditti/vbf">vbf</a> - A brainfuck
+        interpreter/compiler.
+      </li>
+      <li>
+        <a href="https://github.com/Delta456/monkey_v">monkey_v</a> -
+        Implementation of
+        <a href="https://interpreterbook.com/"
+          >Thorsten Ball’s Monkey Language</a
+        >
+        in V.
+      </li>
+      <li>
+        <a href="https://github.com/lemoncmd/vcc">vcc</a> - A C compiler written
+        in V.
+      </li>
+      <li>
+        <a href="https://github.com/Itay2805/Vork">Vork</a> - Alternative V
+        compiler/interpreter written in Python.
+      </li>
+      <li>
+        <a href="https://github.com/StunxFS/foxil">Foxil</a> - An intermediate
+        language designed to facilitate compiler code generation.
+      </li>
+    </ul>
+    <h3 id="operating-systemskernels">Operating systems/Kernels</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/vlang/vinix">Vinix</a> - Small and simple OS
+        in V. Runs bash.
+      </li>
+    </ul>
+    <h3 id="package-managers">Package managers</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/yue-best-practices/vpm">vpm</a> - The V
+        language package management tool written in V.
+      </li>
+    </ul>
+    <h3 id="editors">Editors</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/vlang/ved">ved</a> - 1 MB text editor
+        written in V with hardware accelerated text rendering. Compiles in
+        &lt;1s.
+      </li>
+    </ul>
+    <h3 id="web">Web</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/vlang/vorum">vorum</a> - Open-source
+        blogging/forum software written in V.
+      </li>
+      <li>
+        <a href="https://github.com/scurty-labs/vblog">vblog</a> - A simple,
+        fast and responsive blogging system.
+      </li>
+      <li>
+        <a href="https://github.com/louis77/heroku-buildpack-v"
+          >Heroku Buildpack for V</a
+        >
+        - Deploy V apps on Heroku.
+      </li>
+    </ul>
+    <h3 id="graphics">Graphics</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/ali-raheem/vraytracer">vRayTracer</a> - A
+        simple ray tracer written in V.
+      </li>
+    </ul>
+    <h3 id="games">Games</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/organization/boundstone">Boundstone</a> -
+        High Performance / Fast Compilation / Lightweight Minecraft: Bedrock
+        Edition Server.
+      </li>
+      <li>
+        <a href="https://github.com/thebigsmileXD/v-pong">v-pong</a> - A classic
+        paddle game brought back to life through the power of V.
+      </li>
+      <li>
+        <a href="https://github.com/uxnow/flappylearning-v">flappylearning-v</a>
+        - A simple flappy learning demo in v. ( Archived )
+      </li>
+    </ul>
+    <h3 id="command-line">Command-line</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/BafS/hn-top">HN-top</a> - A simple command
+        to list most recent news from hacker-news.
+      </li>
+      <li>
+        <a href="https://github.com/lydiandy/vast">vast</a> - A simple tool for
+        vlang, generate v source file to AST json file.
+      </li>
+      <li>
+        <a href="https://github.com/serkonda7/symlinker">symlinker</a> - A small
+        Linux tool to manage symlinks.
+      </li>
+      <li>
+        <a href="https://github.com/Naheel-Azawy/runner">runner</a> - A tool
+        that automates running/compiling code written in various programming
+        languages.
+      </li>
+      <li>
+        <a href="https://github.com/zakuro9715/vcredits">vcredits</a> - A tool
+        that creates CREDITS from LICENSE files of dependencies.
+      </li>
+      <li>
+        <a href="https://github.com/zakuro9715/vspect">vspect</a> - A tool to
+        inspect vlang source file.
+      </li>
+      <li>
+        <a href="https://github.com/pranavbaburaj/vinit">vinit</a> - A tool to
+        generate v projects.
+      </li>
+    </ul>
+    <h3 id="project-management">Project management</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/mulh8377/vset">vset</a> - A project setup
+        and configuration tool for V projects.
+      </li>
+    </ul>
+    <h3 id="serialization">Serialization</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/emily33901/vproto">vproto</a> - Protobuf
+        compiler and runtime in V.
+      </li>
+      <li>
+        <a href="https://github.com/radare/v-toxml">v-toxml</a> - XML
+        Serialization library for V.
+      </li>
+      <li>
+        <a href="https://github.com/jdonnerstag/vlang-yaml">vlang-yaml</a> - A
+        V-native YAML reader, incl. YAML-to-JSON converter.
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <h3 id="command-line-interface-cli-terminal-shell">
+      Command line interface (CLI) / Terminal / Shell
+    </h3>
+    <ul>
+      <li>
+        <a href="https://github.com/thecodrr/boxx">boxx</a> - Create highly
+        customizable terminal boxes that also look great! 📦
+      </li>
+      <li>
+        <a href="https://github.com/0xLeif/lol">lol</a> - V version of lolcat
+        (text/character rainbowizer).
+      </li>
+      <li>
+        <a href="https://github.com/Waqar144/progressbar">progressbar</a> - An
+        easy to use V library for creating progress bars in cli.
+      </li>
+      <li>
+        <a href="https://github.com/serkonda7/termtable">termtable</a> - V
+        Terminal Tables: Simple and highly customizable library to display
+        tables in the terminal.
+      </li>
+      <li>
+        <a href="https://github.com/nedpals/vargs">vargs</a> - V library for
+        parsing arguments from argv-like arrays. ( Archived )
+      </li>
+    </ul>
+    <h3 id="text-processing">Text processing</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/spytheman/v-regex">v-regex</a> - A simple
+        regex library for V.
+      </li>
+      <li>
+        <a href="https://github.com/etienne-napoleone/chalk">chalk</a> -
+        Colorize strings in the terminal.
+      </li>
+      <li>
+        <a href="https://github.com/thecodrr/crayon">crayon</a> - Paint your
+        terminal output like Picasso. 🖍️🎨
+      </li>
+      <li>
+        <a href="https://github.com/lydiandy/cjson">cjson</a> - Wrap cJSON for
+        vlang.
+      </li>
+      <li>
+        <a href="https://github.com/Delta456/ascii_robot">ascii_robot</a> -
+        ASCII Robot generator written in V.
+      </li>
+      <li>
+        <a href="https://github.com/fanlia/iconv">iconv</a> - Wrap iconv for
+        vlang.
+      </li>
+      <li>
+        <a href="https://github.com/jdonnerstag/vlang-rosie">Rosie-RPL</a> - A
+        Rosie Pattern Language (RPL) implementation.
+      </li>
+    </ul>
+    <h3 id="graphics-1">Graphics</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/justicesuh/vgl">vgl</a> - Low-level graphics
+        API access.
+      </li>
+      <li>
+        <a href="https://github.com/kjlaw89/viup">viup</a> - V wrapper for the
+        C-based cross-platform UI library, IUP.
+      </li>
+      <li>
+        <a href="https://github.com/kjlaw89/vsdl">vsdl</a> - V wrapper for the
+        C-based SDL library.
+      </li>
+      <li>
+        <a href="https://github.com/nsauzede/vsdl2">vsdl2</a> - A libSDL2
+        wrapper.
+      </li>
+      <li>
+        <a href="https://github.com/Larpon/earcut">V Earcut</a> - fast
+        (real-time) polygon triangulation library based on
+        <a href="https://github.com/mapbox/earcut">mapbox/Earcut</a> to handle
+        holes, twisted polygons, degeneracies and self-intersections.
+      </li>
+    </ul>
+    <h3 id="game-development">Game development</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/irishgreencitrus/raylib.v">raylib.v</a> -
+        Updated V bindings for <a href="https://www.raylib.com">raylib</a> with
+        plans for complete cross-platform support.
+      </li>
+      <li>
+        <a href="https://github.com/MajorHard/vraylib">vraylib</a> - V wrapper
+        (bindings) for raylib, the C game development framework.
+      </li>
+    </ul>
+    <h3 id="web-1">Web</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/nedpals/vex">vex</a> - Web framework written
+        on V inspired by Express and Sinatra.
+      </li>
+      <li>
+        <a href="https://github.com/vlang/v/tree/master/vlib/vweb">vweb</a> -
+        V’s built-in web framework. Used by Vorum.
+      </li>
+      <li>
+        <a href="https://github.com/endeveit/v-validate">validate</a> - A simple
+        library to validate strings in V.
+      </li>
+      <li>
+        <a href="https://github.com/taojy123/valval">valval</a> - Web framework
+        written in V, improved by vweb.
+      </li>
+      <li>
+        <a href="https://github.com/nedpals/v-jsonrpc">v-jsonrpc</a> - Basic
+        JSON-RPC 2.0-compliant server written on V.
+      </li>
+      <li>
+        <a href="https://github.com/S-YOU/pico.v">pico.v</a> - A web server in V
+        based on picoev and picohttpparser.
+      </li>
+      <li>
+        <a href="https://github.com/WolvesFortress/vxbl-oauth">vxbloauth</a> - A
+        minimalistic Xbox Live authenticator for vweb.
+      </li>
+      <li>
+        <a href="https://github.com/mehtaarn000/vcurrency">vcurrency</a> - API
+        wrapper (written in V) for
+        <a href="https://api.exchangeratesapi.io"
+          >https://api.exchangeratesapi.io</a
+        >.
+      </li>
+    </ul>
+    <h3 id="database-clients">Database clients</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/patrickpissurno/vredis">redis</a> - Redis
+        client for V, written in V.
+      </li>
+      <li>
+        <a href="https://github.com/lydiandy/vsql">vsql</a> - A sql query
+        builder for V.
+      </li>
+      <li>
+        <a href="https://github.com/blacktrub/vmemcached">vmemcached</a> -
+        Memcached client for V, written in V.
+      </li>
+    </ul>
+    <h3 id="audio">Audio</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/thecodrr/vave">vave</a> - A crazy simple
+        library for reading/writing WAV files in V. 🌊
+      </li>
+      <li>
+        <a href="https://github.com/thecodrr/vspeech">vspeech</a> - Complete V
+        bindings for Mozilla’s DeepSpeech TensorFlow based Speech-to-Text
+        library. 📢📜
+      </li>
+      <li>
+        <a href="https://github.com/Larpon/v-miniaudio">v-miniaudio</a> -
+        Bindings for the excellent miniaudio C audio library.
+      </li>
+    </ul>
+    <h3 id="operating-system">Operating system</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/vlang/v/tree/master/vlib/clipboard"
+          >clipboard</a
+        >
+        - V module for interacting with the OS clipboard. Fully cross-platform.
+      </li>
+      <li>
+        <a href="https://github.com/asvvvad/vlipboard">vlipboard</a> - An easy
+        to use wrapper of clipboard with Wayland and Termux support.
+      </li>
+      <li>
+        <a href="https://github.com/jdonnerstag/vlang-mmap">mmap</a> - Provide
+        native V-lang support for memory-mapping on Linux and Windows.
+      </li>
+    </ul>
+    <h3 id="automation">Automation</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/eioo/vrobot">vrobot</a> - Desktop automation
+        for V. Only supports Windows.
+      </li>
+    </ul>
+    <h3 id="telegram">Telegram</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/dariotarantini/vgram">vgram</a> - Telegram
+        bot library.
+      </li>
+    </ul>
+    <h3 id="discord">Discord</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/vlang/viscord">viscord</a> - Pretty basic
+        library for connecting to the Discord gateway.
+      </li>
+      <li>
+        <a href="https://github.com/Terisback/discord.v">discord.v</a> -
+        User-friendly Discord bot library.
+      </li>
+    </ul>
+    <h3 id="irc">IRC</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/m-242/vitric">vitric</a> - A transparent IRC
+        library.
+      </li>
+    </ul>
+    <h3 id="files">Files</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/nedpals/v-mime">v-mime</a> - MIME detection
+        library for V.
+      </li>
+    </ul>
+    <h3 id="eventing">Eventing</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/vlang/v/tree/master/vlib/eventbus"
+          >eventbus</a
+        >
+        - A simple event bus system for V.
+      </li>
+    </ul>
+    <h3 id="user-interface-toolkits">User Interface toolkits</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/vlang/ui">V UI</a> - Integrated cross
+        platform UI toolkit for Windows, macOS, Linux, Android, iOS and the web.
+      </li>
+      <li>
+        <a href="https://github.com/vgtk/vgtk3">vgtk3</a> - A wrapper for GTK3
+        in V.
+      </li>
+      <li>
+        <a href="https://github.com/nsauzede/vig">vig</a> - Bindings for
+        <a href="https://github.com/ocornut/imgui">Dear ImGui</a> GUI toolkit.
+      </li>
+      <li>
+        <a href="https://github.com/nsauzede/vnk">vnk</a> - Bindings for
+        <a href="https://github.com/vurtun/nuklear">Nuklear</a> GUI toolkit.
+      </li>
+    </ul>
+    <h3 id="scientific-computing">Scientific computing</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/vlang/vsl">vsl</a> - A pure-V scientific
+        library with a great variety of functions.
+      </li>
+      <li>
+        <a href="https://github.com/vlang/vtl">vtl</a> - Numerical computing
+        library supporting n-dimensional data structure, backed by LAPACKE and
+        OpenBLAS.
+      </li>
+    </ul>
+    <h3 id="utility">Utility</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/Delta456/range">range</a> - Functionality of
+        Python’s range() in V.
+      </li>
+      <li>
+        <a href="https://github.com/Delta456/random">random</a> - An all purpose
+        random library written in V.
+      </li>
+      <li>
+        <a href="https://github.com/zztkm/vdotenv">vdotenv</a> - Support for
+        .env files which loads environment variables.
+      </li>
+    </ul>
+    <h2 id="other">Other</h2>
+    <h3 id="syntax-highlighting">Syntax highlighting</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/ollykel/v-vim">v-vim</a> - Support for V
+        syntax highlighting in Vim.
+      </li>
+      <li>
+        <a href="https://github.com/cheap-glitch/vim-v">vim-v</a> - Quality
+        syntax highlighting for the V programming language.
+      </li>
+      <li>
+        <a href="https://github.com/0x9ef/vscode-vlang">vscode-vlang</a> - V
+        Language extension for Visual Studio Code.
+      </li>
+      <li>
+        <a href="https://github.com/Larpon/kate-syntax-highlight-v"
+          >kate-syntax-highlight-v</a
+        >
+        - V syntax highlighting for <a href="https://kate-editor.org/">Kate</a>.
+      </li>
+      <li>
+        <a href="https://github.com/sunnylcw/scite-v-support"
+          >scite-v-support</a
+        >
+        - V syntax highlighting for
+        <a href="https://www.scintilla.org/SciTE.html">SciTE</a>.
+      </li>
+      <li>
+        <a href="https://github.com/Cutlery-Drawer/language-v">language-v</a> -
+        V language support for Atom (port of vscode-vlang).
+      </li>
+      <li>
+        <a href="https://github.com/Naheel-Azawy/vlang-mode.el"
+          >vlang-mode.el</a
+        >
+        - Emacs major mode for the V programming language.
+      </li>
+      <li>
+        <a href="https://github.com/damon-kwok/v-mode">v-mode</a> - Emacs major
+        mode for the V programming language.
+      </li>
+      <li>
+        <a href="https://github.com/oversoul/vlang-sublime">vlang-sublime</a> -
+        Sublime text 3 Support for the Vlang Programming Language.
+      </li>
+    </ul>
+    <h3 id="editor-plugins">Editor plugins</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/zakuro9715/vim-vtools">vim-vtools</a> - V
+        tools for Vim, including auto formatting.
+      </li>
+      <li>
+        <a href="https://github.com/onerbs/sublime-v">sublime-v</a> -
+        Fully-featured Sublime Text 3 package for the V Programming Language.
+      </li>
+    </ul>
+    <h3 id="github-actions">GitHub actions</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/marketplace/actions/setup-v-environment"
+          >setup-v-action</a
+        >
+        - GitHub action automation to use V in your workflow.
+      </li>
+      <li>
+        <a
+          href="https://github.com/marketplace/actions/create-documentation-for-v-modules"
+          >action-create-v-docs</a
+        >
+        - GitHub action to create documentation for V modules.
+      </li>
+    </ul>
+    <h3 id="videos">Videos</h3>
+    <ul>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=BVCuZ7z7GMY&amp;list=PLEPMhdsq-gNpFr40A-ZnX-Hu9l-Sp5Oc_"
+          >V Programming Tutorials</a
+        >
+      </li>
+      <li>
+        <a href="https://www.youtube.com/channel/UCLZIElNyubHOvbfudT7KS1A"
+          >The V Programming Language</a
+        >
+      </li>
+    </ul>
+    <h3 id="programming-contests">Programming contests</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/RustemB/rosetta-code-v">Rosetta Code V</a> -
+        Solutions for Rosetta Code in V.
+      </li>
+      <li>
+        <a href="https://github.com/mvlootman/aoc2019">Advent of Code 2019</a> -
+        Solution of Advent of Code 2019 in V.
+      </li>
+      <li>
+        <a href="https://github.com/Serkonda/v-sololearn-coding-challenges"
+          >SoloLearn Coding Challenges</a
+        >
+        - Implementation of the SoloLearn coding challenges in V.
+      </li>
+    </ul>
+    <h3 id="tutorials">Tutorials</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/v-community/learn_v_in_y_minutes"
+          >Learn V in Y Minutes</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/v-community/v_by_example">V by Example</a> -
+        V book as
+        <a href="https://v-community.gitbook.io/v-by-example/">GitBook</a>.
+      </li>
+      <li>
+        <a href="https://github.com/lydiandy/vlang_note">V learning notes</a> -
+        Personal learning notes in Chinese.
+      </li>
+    </ul>
+    <h3 id="online-ides-with-v">Online IDEs with V</h3>
+    <ul>
+      <li><a href="https://v-wasm.now.sh/">V Playground</a></li>
+    </ul>
+    <h3 id="articles">Articles</h3>
+    <ul>
+      <li>
+        <a href="https://simonknott.de/articles/VLang.html"
+          >An introduction to V</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/KeyWeeUsr/the-book-of-v/">The Book of V</a>
+      </li>
+    </ul>
+    <h3 id="communities">Communities</h3>
+    <ul>
+      <li><a href="https://github.com/v-community">V Community</a></li>
+    </ul>
+    <h3 id="forums">Forums</h3>
+    <ul>
+      <li><a href="https://www.reddit.com/r/vlang">r/vlang</a></li>
+      <li>
+        <a href="https://stackoverflow.com/questions/tagged/vlang"
+          >Stack Overflow</a
+        >
+      </li>
+    </ul>
+  </body>
+</html>

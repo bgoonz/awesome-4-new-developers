@@ -1,0 +1,75 @@
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript">
+  <code><a title="1"></a>
+    <a title="2"></a>
+    <a title="3"><span>function</span> <span>flatten</span>(array) <span>{</span></a>
+    <a title="4"> <span>// This is the array we are building out with non-Array elements</span></a>
+    <a title="5"> <span>let</span> newArray <span>=</span> []<span>;</span></a>
+    <a id=-6" title="6"></a>
+    <a title="7"> <span>// We are iterating through each element of the array...</span></a>
+    <a title="8"> <span>array</span>.<span>forEach</span>(<span>function</span> (element) <span>{</span></a>
+    <a title="9"> <span>// ... if it is an array, flatten it, spread each individual element into the new
+        array</span></a>
+    <a id=-10" title="10"> <span>if</span> (<span>Array</span>.<span>isArray</span>(element)) <span>{</span></a>
+    <a title="11"> <span>// Recursive case (the element is an array)</span></a>
+    <a id=-12" title="12"> <span>newArray</span>.<span>push</span>(...<span>flatten</span>(element))<span>;</span>
+      <span>// Recursive step (flatten this nested array - at a certain point we will get to our deepest level of
+        nesting and not recurse any more)</span></a>
+    <a id=-13" title="13"> <span>// ... if it is a non-Array element, push it directly into the new array</span></a>
+    <a id=-14" title="14"> <span>}</span> <span>else</span> <span>{</span></a>
+    <a id=-15" title="15"> <span>// Base case (the element is not an array)</span></a>
+    <a id=-16" title="16"> <span>newArray</span>.<span>push</span>(element)<span>;</span></a>
+    <a id=-17" title="17"> <span>}</span></a>
+    <a id=-18" title="18"> <span>}</span>)<span>;</span></a>
+    <a id=-19" title="19"></a>
+    <a id=-20" title="20"> <span>// Now that we&#39;ve built up our array with non-Array elements, return it</span></a>
+    <a id=-21" title="21"> <span>return</span> newArray<span>;</span></a>
+    <a id=-22" title="22"><span>}</span></a>
+    <a id=-23" title="23"></a>
+    <a id=-24" title="24"><span>console</span>.<span>log</span>(<span>flatten</span>([<span>1,</span>
+      <span>&quot;a&quot;,</span> [<span>&quot;hello&quot;,</span> [<span>&quot;world&quot;,</span>
+      <span>&quot;1&quot;</span>]]]))<span>;</span> <span>// [1, &quot;a&quot;, &quot;hello&quot;, &quot;world&quot;,
+        &quot;1&quot;]</span></a></code>
+  </pre>
+</div>
+<hr />
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a title="1"></a>
+    <a id=-2" title="2"><span>// Tracing the call stack:</span></a>
+    <a id=-3" title="3"><span>flatten</span>([<span>1,</span> <span>&quot;a&quot;,</span>
+      [<span>&quot;hello&quot;,</span> [<span>&quot;world&quot;,</span> <span>&quot;1&quot;</span>]]])</a>
+    <a id=-4" title="4"><span>// create newArray = []</span></a>
+    <a id=-5" title="5"><span>// iterate through each element:</span></a>
+    <a id=-6" title="6"><span>// current element: 1</span></a>
+    <a id=-7" title="7"> <span>// element is not array, push into newArray</span></a>
+    <a id=-8" title="8"> <span>// newArray is now [1]</span></a>
+    <a id=-9" title="9"><span>// current element: &quot;a&quot;</span></a>
+    <a id=-10" title="10"> <span>// element is not array, push into newArray</span></a>
+    <a id=-11" title="11"> <span>// newArray is now [1, &quot;a&quot;]</span></a>
+    <a id=-12" title="12"><span>// current element: [&quot;hello&quot;, [&quot;world&quot;, &quot;1&quot;]]</span></a>
+    <a id=-13" title="13"> <span>// element is an array, call flatten on it:</span></a>
+    <a id=-14" title="14"> <span>flatten</span>([<span>&quot;hello&quot;,</span> [<span>&quot;world&quot;,</span>
+      <span>&quot;1&quot;</span>]])</a>
+    <a id=-15" title="15"> <span>// create newArray = []</span></a>
+    <a id=-16" title="16"> <span>// iterate through each element:</span></a>
+    <a id=-17" title="17"> <span>// current element: &quot;hello&quot;</span></a>
+    <a id=-18" title="18"> <span>// element is not array, push into newArray</span></a>
+    <a id=-19" title="19"> <span>// newArray is now [&quot;hello&quot;]</span></a>
+    <a id=-20" title="20"> <span>// current element: [&quot;world&quot;, &quot;1&quot;]</span></a>
+    <a id=-21" title="21"> <span>// element is an array, call flatten on it:</span></a>
+    <a id=-22" title="22"> <span>flatten</span>([<span>&quot;world&quot;,</span> <span>&quot;1&quot;</span>])</a>
+    <a id=-23" title="23"> <span>// create newArray = []</span></a>
+    <a id=-24" title="24"> <span>// iterate through each element:</span></a>
+    <a id=-25" title="25"> <span>// current element: &quot;world&quot;</span></a>
+    <a id=-26" title="26"> <span>// element is not an array, push into newArray</span></a>
+    <a id=-27" title="27"> <span>// newArray is now [&quot;world&quot;]</span></a>
+    <a id=-28" title="28"> <span>// current element: &quot;1&quot;</span></a>
+    <a id=-29" title="29"> <span>// element is not an array, push into newArray</span></a>
+    <a id=-30" title="30"> <span>// newArray is now [&quot;world&quot;, &quot;1&quot;]</span></a>
+    <a id=-31" title="31"> <span>// Finished iterating, return newArray</span></a>
+    <a id=-32" title="32"> <span>// spread elements of returned flatten into newArray</span></a>
+    <a id=-33" title="33"> <span>// newArray is now [&quot;hello&quot;, &quot;world&quot;, &quot;1&quot;]</span></a>
+    <a id=-34" title="34"> <span>// Finished iterating, return newArray</span></a>
+    <a id=-35" title="35"> <span>// spread elements of returned flatten into newArray</span></a>
+    <a id=-36" title="36"> <span>// newArray is now [1, &quot;a&quot;, &quot;hello&quot;, &quot;world&quot;,
+        &quot;1&quot;]</span></a>
+    <a id=-37" title="37"><span>// Finished iterating, return newArray</span></a></code></pre>
+</div>

@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-flask-awesome">
+      Awesome Flask
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img src="https://awesome.re/badge-flat.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>A curated list of awesome things related to Flask.</p>
+    </blockquote>
+    <!--lint ignore double-link-->
+    <p>
+      <a href="https://flask.palletsprojects.com/">Flask</a> is a lightweight
+      WSGI web application framework written in Python.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#third-party-extensions">Third-Party Extensions</a>
+        <ul>
+          <li><a href="#admin">Admin</a></li>
+          <li><a href="#apis">APIs</a></li>
+          <li><a href="#auth">Auth</a></li>
+          <li><a href="#cache">Cache</a></li>
+          <li>
+            <a href="#data-validation-and-serialization"
+              >Data Validation and Serialization</a
+            >
+          </li>
+          <li><a href="#databases">Databases</a></li>
+          <li><a href="#developer-tools">Developer Tools</a></li>
+          <li><a href="#email">Email</a></li>
+          <li><a href="#forms">Forms</a></li>
+          <li><a href="#full-text-search">Full-text Search</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#task-queues">Task Queues</a></li>
+          <li><a href="#utils">Utils</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#resources">Resources</a>
+        <ul>
+          <li><a href="#official-resources">Official Resources</a></li>
+          <li><a href="#external-resources">External Resources</a></li>
+          <li><a href="#community">Community</a></li>
+          <li><a href="#conferences">Conferences</a></li>
+          <li><a href="#meetups">Meetups</a></li>
+          <li><a href="#podcasts">Podcasts</a></li>
+          <li><a href="#tutorials">Tutorials</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#books">Books</a></li>
+          <li><a href="#videos">Videos</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#hosting">Hosting</a>
+        <ul>
+          <li><a href="#paas">PaaS</a></li>
+          <li><a href="#iaas">IaaS</a></li>
+          <li><a href="#serverless">Serverless</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#projects">Projects</a>
+        <ul>
+          <li><a href="#boilerplates">Boilerplates</a></li>
+          <li><a href="#open-source-projects">Open Source Projects</a></li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="third-party-extensions">Third-Party Extensions</h2>
+    <h3 id="admin">Admin</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/flask-admin/flask-admin">Flask-Admin</a> -
+        Functional admin panel that provides a user interface for managing data
+        based on your models.
+      </li>
+    </ul>
+    <h3 id="apis">APIs</h3>
+    <h4 id="restful-api-support">RESTful API Support</h4>
+    <ul>
+      <li>
+        <a href="https://docs.python-eve.org">Eve</a> - RESTful API framework
+        designed for human beings.
+      </li>
+      <li>
+        <a href="https://flask-classful.teracy.org/">Flask-Classful</a> - Adds
+        support for class-based views for setting up RESTful API route
+        endpoints.
+      </li>
+      <li>
+        <a href="https://github.com/closeio/flask-mongorest">Flask-MongoRest</a>
+        - RESTful API framework wrapped around
+        <a href="http://mongoengine.org/">MongoEngine</a>.
+      </li>
+      <li>
+        <a href="https://flask-restful.readthedocs.io">Flask-RESTful</a> -
+        Quickly build RESTful APIs.
+      </li>
+    </ul>
+    <h4 id="restful-api-swaggeropenapi-documentation-support">
+      RESTful API + Swagger/OpenAPI Documentation Support
+    </h4>
+    <ul>
+      <li>
+        <a href="https://connexion.readthedocs.io">Connexion</a> - Open source,
+        OpenAPI-based, REST framework built on top of Flask.
+      </li>
+      <li>
+        <a href="https://github.com/plangrid/flask-rebar">Flask-Rebar</a> -
+        Combines Flask,
+        <a href="https://marshmallow.readthedocs.io/">marshmallow</a>, and
+        <a href="https://www.openapis.org/">OpenAPI</a> for robust REST
+        services.
+      </li>
+      <li>
+        <a href="https://flask-restx.readthedocs.io">Flask-RESTX</a> -
+        Community-driven fork of
+        <a href="https://flask-restplus.readthedocs.io/">Flask-RESTPlus</a> that
+        makes it easy to build and document RESTful APIs with Flask.
+      </li>
+    </ul>
+    <h4 id="swaggeropenapi-documentation-support">
+      Swagger/OpenAPI Documentation Support
+    </h4>
+    <ul>
+      <li>
+        <a href="https://flask-apispec.readthedocs.io/">Flask-APISpec</a> -
+        Auto-documenting REST APIs.
+      </li>
+      <li>
+        <a href="https://github.com/thomaxxl/safrs"
+          >SAFRS: Python OpenAPI &amp; JSON:API Framework</a
+        >
+        - SAFRS, which is an acronym for <em>S</em>ql<em>A</em>lchemy
+        <em>F</em>lask-<em>R</em>estful <em>S</em>wagger, is meant to help
+        developers create self-documenting JSON APIs for SQLAlchemy database
+        objects and relationships.
+      </li>
+    </ul>
+    <h3 id="auth">Auth</h3>
+    <h4 id="basic-auth-and-session-based-for-html-endpoints">
+      Basic Auth and Session-based (for HTML Endpoints)
+    </h4>
+    <ul>
+      <li>
+        <a href="https://flask-httpauth.readthedocs.io">Flask-HTTPAuth</a> -
+        Authentication.
+      </li>
+      <li>
+        <a href="https://flask-login.readthedocs.io/">Flask-Login</a> - Account
+        management and authentication.
+      </li>
+      <li>
+        <a href="https://pythonhosted.org/Flask-Principal/">Flask Principal</a>
+        - Authorization.
+      </li>
+      <li>
+        <a href="https://flask-security-too.readthedocs.io/en/stable/"
+          >Flask-Security-Too</a
+        >
+        - Account management, authentication, authorization.
+      </li>
+      <li>
+        <a href="https://github.com/flask-extensions/flask_simplelogin"
+          >Flask-SimpleLogin</a
+        >
+        - Authentication.
+      </li>
+      <li>
+        <a href="https://flask-user.readthedocs.io">Flask-User</a> - Account
+        management, authentication, authorization.
+      </li>
+    </ul>
+    <blockquote>
+      <p>
+        Curious about the differences differences between Flask-User and
+        Flask-Security? Review the Flask-User
+        <a href="https://flask-user.readthedocs.io/en/latest/faq.html">FAQ</a>.
+      </p>
+    </blockquote>
+    <h4 id="jwt-based-for-json-endpoints">JWT-based (for JSON Endpoints)</h4>
+    <ul>
+      <li>
+        <a href="https://pythonhosted.org/Flask-JWT/">Flask-JWT</a> - Basic
+        support for working with JWTs.
+      </li>
+      <li>
+        <a href="https://flask-jwt-extended.readthedocs.io"
+          >Flask-JWT-Extended</a
+        >
+        - Advanced support for working with JWTs.
+      </li>
+      <li>
+        <a href="https://github.com/joegasewicz/flask-jwt-router"
+          >Flask-JWT-Router</a
+        >
+        - Adds authorized routes to a Flask app.
+      </li>
+      <li>
+        <a href="https://flask-praetorian.readthedocs.io">Flask-Praetorian</a> -
+        Authentication and authorization for Flask APIs.
+      </li>
+    </ul>
+    <h4 id="oauth">OAuth</h4>
+    <ul>
+      <li>
+        <a href="https://authlib.org/">Authlib</a> - Library for building OAuth
+        and OpenID clients and servers.
+      </li>
+      <li>
+        <a href="https://github.com/authomatic/authomatic">Authomatic</a> -
+        Framework agnostic library for Python web applications that simplifies
+        authentication and authorization of users via OAuth and OpenID.
+      </li>
+      <li>
+        <a href="https://github.com/singingwolfboy/flask-dance">Flask-Dance</a>
+        - OAuth support via
+        <a href="https://oauthlib.readthedocs.io/">OAuthLib</a>.
+      </li>
+    </ul>
+    <h3 id="cache">Cache</h3>
+    <ul>
+      <li>
+        <a href="https://flask-caching.readthedocs.io/">Flask-Caching</a> -
+        Caching support.
+      </li>
+    </ul>
+    <h3 id="data-validation-and-serialization">
+      Data Validation and Serialization
+    </h3>
+    <ul>
+      <li>
+        <a href="https://flask-marshmallow.readthedocs.io">Flask-Marshmallow</a>
+        - Thin integration layer for Flask and marshmallow (an object
+        serialization /deserialization library) that adds additional features to
+        marshmallow.
+      </li>
+      <li>
+        <a href="https://github.com/bauerji/flask_pydantic">Flask-Pydantic</a> -
+        <a href="https://github.com/samuelcolvin/pydantic">Pydantic</a> support.
+      </li>
+    </ul>
+    <h3 id="databases">Databases</h3>
+    <h4 id="orms">ORMs</h4>
+    <ul>
+      <li>
+        <a href="https://flask-peewee.readthedocs.io">Flask-Peewee</a> - Support
+        for Peewee, an ORM and database migration tool.
+      </li>
+      <li>
+        <a href="https://pypi.org/project/Flask-Pony/">Flask-Pony</a> - Support
+        for Pony ORM.
+      </li>
+      <li>
+        <a href="https://flask-sqlalchemy.palletsprojects.com"
+          >Flask-SQLAlchemy</a
+        >
+        - Support for SQLAlchemy, a SQL toolkit and ORM.
+      </li>
+    </ul>
+    <h4 id="odms">ODMs</h4>
+    <ul>
+      <li>
+        <a href="https://flask-mongoengine.readthedocs.io">Flask-MongoEngine</a>
+        - Bridges Flask and MongoEngine for working with MongoDB.
+      </li>
+      <li>
+        <a href="https://flask-pymongo.readthedocs.io">Flask-PyMongo</a> -
+        Bridges Flask and PyMongo for working with MongoDB.
+      </li>
+    </ul>
+    <h4 id="migrations">Migrations</h4>
+    <ul>
+      <li>
+        <a href="https://flask-alembic.readthedocs.io">Flask-Alembic</a> -
+        Configurable
+        <a href="https://alembic.sqlalchemy.org/">Alembic</a> migration
+        environment around a Flask-SQLAlchemy database for handling database
+        migrations.
+        <!--lint ignore double-link-->
+      </li>
+      <li>
+        <a href="https://github.com/nickjj/flask-db">Flask-DB</a> - Flask CLI
+        extension that helps you migrate, drop, create and seed your SQL
+        database.
+      </li>
+      <li>
+        <a href="https://flask-migrate.readthedocs.io">Flask-Migrate</a> -
+        Handles SQLAlchemy database migrations via Alembic.
+      </li>
+    </ul>
+    <!--lint ignore double-link-->
+    <blockquote>
+      <p>
+        Curious about the differences between Alembic, Flask-Alembic,
+        Flask-Migrate, and Flask-DB? Review
+        <a
+          href="https://github.com/nickjj/flask-db#differences-between-alembic-flask-migrate-flask-alembic-and-flask-db"
+          >this item</a
+        >
+        from Flask-DB’s FAQ.
+      </p>
+    </blockquote>
+    <h4 id="other-tools">Other Tools</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/pyexcel-webwares/Flask-Excel"
+          >Flask-Excel</a
+        >
+        - Uses <a href="https://github.com/pyexcel/pyexcel">pyexcel</a> to read,
+        manipulate, and write data in different Excel formats: csv, ods, xls,
+        xlsx and xlsm.
+      </li>
+    </ul>
+    <h3 id="developer-tools">Developer Tools</h3>
+    <h4 id="debugging">Debugging</h4>
+    <ul>
+      <li>
+        <a href="https://flask-debugtoolbar.readthedocs.io"
+          >Flask-DebugToolbar</a
+        >
+        - Port of Django’s debug toolbar for Flask.
+      </li>
+      <li>
+        <a href="https://github.com/muatik/flask-profiler">Flask-Profiler</a> -
+        Endpoint analyzer/profiler.
+      </li>
+    </ul>
+    <h4 id="fixtures">Fixtures</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/croach/Flask-Fixtures">Flask-Fixtures</a> -
+        Create database fixtures from JSON or YAML.
+      </li>
+      <li>
+        <a href="https://mixer.readthedocs.io">Mixer</a> - Object generation
+        tool.
+      </li>
+    </ul>
+    <h4 id="logging">Logging</h4>
+    <ul>
+      <li>
+        <a href="https://rollbar.com/platforms/flask-error-tracking/"
+          >Rollbar</a
+        >
+        - Flask error logging with Rollbar.
+      </li>
+    </ul>
+    <h4 id="monitoring">Monitoring</h4>
+    <ul>
+      <li>
+        <a
+          href="https://airbrake.io/docs/installing-airbrake/installing-airbrake-in-a-flask-app/"
+          >Airbrake</a
+        >
+        - Airbrake Flask integration.
+      </li>
+      <li>
+        <a
+          href="https://www.elastic.co/guide/en/apm/agent/python/current/flask-support.html"
+          >Elastic APM Agent</a
+        >
+        - Elastic APM Flask integration.
+      </li>
+      <li>
+        <a href="https://flask-monitoringdashboard.readthedocs.io"
+          >Flask Monitoring Dashboard</a
+        >
+        - Dashboard for automatic monitoring of Flask web-services.
+      </li>
+      <li>
+        <a href="https://sentry.io/for/flask/">Sentry Python SDK</a> - Sentry
+        SDK Flask integration.
+      </li>
+    </ul>
+    <h4 id="tracing">Tracing</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/opentracing-contrib/python-flask"
+          >Flask-OpenTracing</a
+        >
+        - OpenTracing instrumentation.
+      </li>
+    </ul>
+    <h4 id="testing">Testing</h4>
+    <ul>
+      <li>
+        <a href="https://pythonhosted.org/Flask-Testing/">Flask-Testing</a> -
+        Unittest extensions.
+      </li>
+      <li>
+        <a href="https://github.com/pytest-dev/pytest-flask">Pytest-Flask</a> -
+        Pytest support for testing Flask applications.
+      </li>
+    </ul>
+    <h3 id="email">Email</h3>
+    <ul>
+      <li>
+        <a href="https://pythonhosted.org/Flask-Mail/">Flask-Mail</a> - Provides
+        simple email sending capabilities.
+      </li>
+      <li>
+        <a href="https://pypi.org/project/flask-mailman/">Flask-Mailman</a> - A
+        port of <code>django.mail</code> for Flask.
+      </li>
+    </ul>
+    <h3 id="forms">Forms</h3>
+    <ul>
+      <li>
+        <a href="https://flask-wtf.readthedocs.io">Flask-WTF</a> - Integrates
+        Flask with WTForms (provides CSRF protection as well).
+      </li>
+    </ul>
+    <h3 id="full-text-search">Full-text Search</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/honmaple/flask-msearch">flask-msearch</a> -
+        Full-text search.
+      </li>
+      <li>
+        <a href="https://github.com/blakev/Flask-WhooshAlchemy3"
+          >Flask-WhooshAlchemy3</a
+        >
+        - Full-text search + Whoosh indexing capabilities for Flask-SQLAlchemy.
+      </li>
+      <li>
+        <a href="https://sqlalchemy-searchable.readthedocs.io"
+          >SQLAlchemy-Searchable</a
+        >
+        - Provides full-text search capabilities for SQLAlchemy models.
+      </li>
+    </ul>
+    <h3 id="security">Security</h3>
+    <ul>
+      <li>
+        <a href="https://flask-bcrypt.readthedocs.io">Flask-Bcrypt</a> -
+        Provides bcrypt hashing utilities.
+      </li>
+      <li>
+        <a href="https://flask-cors.readthedocs.io">Flask-CORS</a> - Cross
+        Origin Resource Sharing (CORS) handling.
+      </li>
+      <li>
+        <a href="https://github.com/maxcountryman/flask-seasurf/"
+          >Flask-SeaSurf</a
+        >
+        - Cross-site request forgery (CSRF) prevention.
+      </li>
+      <li>
+        <a href="https://github.com/GoogleCloudPlatform/flask-talisman"
+          >Flask-Talisman</a
+        >
+        - HTTPS and security headers.
+      </li>
+    </ul>
+    <h3 id="task-queues">Task Queues</h3>
+    <ul>
+      <li>
+        <a href="https://docs.celeryproject.org/">Celery</a> - The most commonly
+        used Python library for handling asynchronous tasks and scheduling.
+      </li>
+      <li>
+        <a href="https://flask-dramatiq.rtfd.io/">Dramatiq</a> - Fast and
+        reliable alternative to Celery.
+      </li>
+      <li>
+        <a href="https://github.com/mattupstate/flask-rq">Flask-RQ</a> -
+        <a href="https://python-rq.org/">RQ</a> (Redis Queue) integration.
+      </li>
+      <li>
+        <a href="https://huey.readthedocs.io">Huey</a> -
+        <a href="https://redis.io/">Redis</a>-based task queue that aims to
+        provide a simple, yet flexible framework for executing tasks.
+      </li>
+    </ul>
+    <h3 id="utils">Utils</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/python-babel/flask-babel">Flask-Babel</a> -
+        Support for internationalization (i18n) and localization (l10n).
+      </li>
+      <li>
+        <a href="https://github.com/joegasewicz/flask-file-upload"
+          >Flask-File-Upload</a
+        >
+        - Easy file uploads.
+      </li>
+      <li>
+        <a href="https://pythonhosted.org/Flask-FlatPages/">Flask-FlatPages</a>
+        - Provides flat static pages based on text files.
+      </li>
+      <li>
+        <a href="https://github.com/Frozen-Flask/Frozen-Flask">Frozen-Flask</a>
+        - Freezes a Flask application into a set of static files.
+      </li>
+      <li>
+        <a href="https://github.com/graphql-python/flask-graphql"
+          >Flask-GraphQL</a
+        >
+        - GraphQL support.
+      </li>
+      <li>
+        <a href="https://github.com/alecthomas/flask_injector"
+          >Flask-Injector</a
+        >
+        - Adds support for dependency injection.
+      </li>
+      <li>
+        <a href="https://flask-limiter.readthedocs.io">Flask-Limiter</a> - Rate
+        limiting features to Flask routes.
+      </li>
+      <li>
+        <a href="https://github.com/miguelgrinberg/Flask-Moment"
+          >Flask-Moment</a
+        >
+        - Moment.js date and time formatting helpers for Jinja2 templates.
+      </li>
+      <li>
+        <a href="https://pythonhosted.org/Flask-paginate/">Flask-Paginate</a> -
+        Pagination support.
+      </li>
+      <li>
+        <a href="https://github.com/Eshaan7/Flask-Shell2HTTP"
+          >Flask-Shell2HTTP</a
+        >
+        - RESTful/HTTP wrapper for Python’s subprocess API, so you can convert
+        any command-line tool into a RESTful API service.
+      </li>
+      <li>
+        <a href="https://flask-sitemap.readthedocs.io">Flask-Sitemap</a> -
+        Sitemap generation.
+      </li>
+      <li>
+        <a href="https://flask-socketio.readthedocs.io">Flask-SocketIO</a> -
+        Socket.IO integration.
+      </li>
+    </ul>
+    <h2 id="resources">Resources</h2>
+    <h3 id="official-resources">Official Resources</h3>
+    <ul>
+      <li>
+        <a href="https://palletsprojects.com/p/flask/">Project Website</a> -
+        Official Flask website.
+        <!--lint ignore double-link-->
+      </li>
+      <li>
+        <a href="https://flask.palletsprojects.com">Documentation</a> -
+        Comprehensive documentation for all Flask versions.
+      </li>
+      <li>
+        <a href="https://flask.palletsprojects.com/tutorial/"
+          >Flaskr Tutorial</a
+        >
+        - Build a basic blog application called Flaskr.
+      </li>
+      <li>
+        <a href="https://github.com/pallets/flask">Source Code</a> - Hosted on
+        GitHub.
+      </li>
+    </ul>
+    <h3 id="external-resources">External Resources</h3>
+    <ul>
+      <li>
+        <a href="https://www.fullstackpython.com/flask.html"
+          >Full Stack Python’s Flask Page</a
+        >
+        - Explanation of Flask philosophy and links to other resources and
+        tutorials.
+      </li>
+      <li>
+        <p>
+          <a href="https://blog.miguelgrinberg.com/category/Flask"
+            >Miguel Grinberg’s Blog</a
+          >
+          - Multiple Flask-specific tutorials.
+        </p>
+      </li>
+      <li>
+        <a
+          href="https://nickjanetakis.com/blog/tag/flask-tips-tricks-and-tutorials"
+          >Nick Janetakis’s Blog</a
+        >
+        - Flask Tips, Tricks and Tutorials.
+      </li>
+      <li>
+        <a href="http://www.patricksoftwareblog.com/flask-tutorial/"
+          >Patrick Kennedy’s Blog</a
+        >
+        - Numerous tutorials on learning Python web application development with
+        Flask.
+      </li>
+      <li>
+        <a href="https://realpython.com/tutorials/flask/">RealPython</a> - Many
+        high-quality tutorials on Flask.
+      </li>
+      <li>
+        <p>
+          <a href="https://testdriven.io/blog/topics/flask/">TestDriven.io</a> -
+          Up-to-date tutorials on Flask.
+        </p>
+      </li>
+    </ul>
+    <h3 id="community">Community</h3>
+    <ul>
+      <li>
+        <a href="https://discord.com/invite/t6rrQZH">Discord</a> - Pallets
+        Projects community on Discord (use the <code>#get-help</code> channel
+        for Flask support).
+      </li>
+      <li>
+        IRC Channel - Chat with other Flask users on IRC channel
+        <code>#pocoo</code> on FreeNode.
+      </li>
+      <li>
+        <a href="https://mail.python.org/mailman/listinfo/flask"
+          >Mailing List</a
+        >
+        - General discussion of Flask and the Pallets projects
+        (<code>flask@python.org</code>).
+      </li>
+      <li>
+        <a href="https://www.reddit.com/r/flask/">Reddit</a> - Flask subreddit.
+      </li>
+      <li>
+        <a href="https://stackoverflow.com/questions/tagged/flask"
+          >Stack Overflow</a
+        >
+        - Questions tagged <code>flask</code>.
+      </li>
+      <li>
+        <a href="https://twitter.com/PalletsTeam">Twitter</a> - For official
+        announcements on updates, security fixes, etc.
+      </li>
+    </ul>
+    <h3 id="conferences">Conferences</h3>
+    <ul>
+      <li>
+        <a href="https://flaskcon.com/">FlaskCon</a> - Community driven Flask
+        event intended for speakers and attendees all over the world to
+        participate in technical and evangelical sessions related to Flask.
+      </li>
+      <li>
+        <a href="https://twitter.com/pyconweb">PyConWeb</a> - Covers Django,
+        Tornado, Flask, API frameworks. AsyncIO, networking, Frontend,
+        JavaScript, and web security.
+      </li>
+      <li>
+        <a href="https://2019.flask.python.org.br/">Flask Conf Brazil</a> -
+        Conference for the developers and users of Flask.
+      </li>
+      <li>
+        <a href="https://us.pycon.org/">PyCon US</a> - The largest annual
+        gathering for the community using and developing the open-source Python
+        programming language.
+      </li>
+      <li>
+        <a href="https://pycon-au.org/">PyCon Australia</a> - National
+        conference organized for the Python Programming Community.
+      </li>
+      <li>
+        <a href="https://europython.eu/">Euro Python</a> - The largest Python
+        conference in Europe.
+      </li>
+      <li>
+        <a href="https://pycon.org/">PyCon</a> - Complete listing of all PyCons
+        globally.
+      </li>
+    </ul>
+    <h3 id="meetups">Meetups</h3>
+    <ul>
+      <li>
+        <a href="https://www.meetup.com/topics/flask/all/">Flask</a> - 40+
+        groups in 20 countries.
+      </li>
+      <li>
+        <a href="https://www.meetup.com/topics/python-web-development/all/"
+          >Python Web Development</a
+        >
+        - 600+ groups in 81 countries.
+      </li>
+      <li>
+        <a href="https://www.meetup.com/topics/python/all/">Python</a> - 2,400+
+        groups in 100 countries.
+      </li>
+    </ul>
+    <h3 id="podcasts">Podcasts</h3>
+    <ul>
+      <li>
+        <a href="https://talkpython.fm/">TalkPython</a> - The leading Python
+        podcast with several episodes on Flask.
+      </li>
+      <li>
+        <a href="https://www.pythonpodcast.com/">Podcast Init</a> - A popular
+        Python podcast that features Flask guests on occasion.
+      </li>
+      <li>
+        <a href="https://pythonbytes.fm/">Python Bytes</a> - Another Python
+        podcast that discusses Flask from time to time.
+      </li>
+      <li>
+        <a href="https://www.fullstackpython.com/best-python-podcasts.html"
+          >Full Stack Python’s Best Python Podcasts Page</a
+        >
+        - A list of active Python-specific podcasts.
+      </li>
+    </ul>
+    <h3 id="tutorials">Tutorials</h3>
+    <ul>
+      <li>
+        <a
+          href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world"
+          >Flask Mega-Tutorial</a
+        >
+        - Overarching tutorial for Python beginner and intermediate developers
+        that teaches web development with the Flask framework.
+      </li>
+      <li>
+        <a href="https://github.com/mjhea0/flaskr-tdd">Flaskr TDD</a> - Intro to
+        Flask, Test-Driven Development (TDD), and JavaScript.
+      </li>
+      <li>
+        <a
+          href="https://aryaboudaie.com/python/technical/educational/web/flask/2018/10/17/flask.html"
+          >Make a Web App Using Python &amp; Flask!</a
+        >
+        - Creating a Python Website from the Bottom Up.
+      </li>
+    </ul>
+    <h3 id="courses">Courses</h3>
+    <ul>
+      <li>
+        <a href="https://testdriven.io/courses/learn-flask/"
+          >Developing Web Applications with Python and Flask</a
+        >
+        - This course focuses on teaching the fundamentals of Flask by building
+        and testing a web application using Test-Driven Development (TDD).
+      </li>
+      <li>
+        <a href="https://testdriven.io/courses/tdd-flask/"
+          >Test-Driven Development with Python, Flask, and Docker</a
+        >
+        - Learn how to build, test, and deploy a production-grade microservice
+        powered by Python, Flask, and Docker.
+      </li>
+      <li>
+        <a href="https://testdriven.io/courses/auth-flask-react/"
+          >Authentication with Flask, React, and Docker</a
+        >
+        - Learn how to add authentication to a Flask and React microservice!.
+      </li>
+      <li>
+        <a href="https://testdriven.io/courses/aws-flask-react/"
+          >Deploying a Flask and React Microservice to AWS ECS</a
+        >
+        - Learn how to deploy microservices to Amazon ECS powered by Flask,
+        React, and Docker.
+      </li>
+      <li>
+        <a href="https://buildasaasappwithflask.com"
+          >Build a SAAS App with Flask</a
+        >
+        - Learn to build web applications with Flask and Docker.
+      </li>
+      <li>
+        <a href="https://www.udacity.com/course/full-stack-foundations--ud088"
+          >Full Stack Foundations</a
+        >
+        - Build a data-driven web app with Python.
+      </li>
+      <li>
+        <a href="https://www.udacity.com/course/designing-restful-apis--ud388"
+          >Designing RESTful APIs</a
+        >
+        - Build and Secure a backend API server.
+      </li>
+    </ul>
+    <h3 id="books">Books</h3>
+    <ul>
+      <li>
+        <a
+          href="https://www.oreilly.com/library/view/flask-web-development/9781491991725/"
+          >Flask Web Development</a
+        >
+        - Learn the framework from the ground up by developing, step-by-step, a
+        real-world project.
+      </li>
+      <li>
+        <a href="https://realpython.com">Real Python</a> - Learn Python
+        programming, by example.
+      </li>
+      <li>
+        <a href="https://exploreflask.com/">Explore Flask</a> - Best practices
+        and patterns for developing web applications with Flask.
+      </li>
+    </ul>
+    <h3 id="videos">Videos</h3>
+    <ul>
+      <li><a href="https://pyvideo.org/search.html?q=flask">PyVideo</a></li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLQVvvaa0QuDc_owjTbIY4rbgXOFkUYOUB"
+          >Practical Flask Web Development Tutorials</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH"
+          >Python Flask Tutorial: Full-Featured Web App</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/realpython/discover-flask"
+          >Discover Flask - Full Stack Web Development with Flask</a
+        >
+      </li>
+    </ul>
+    <h2 id="hosting">Hosting</h2>
+    <h3 id="paas">PaaS</h3>
+    <p>(Platforms-as-a-Service)</p>
+    <ul>
+      <li><a href="https://www.heroku.com/">Heroku</a></li>
+      <li>
+        <a href="https://www.pythonanywhere.com/details/flask_hosting"
+          >PythonAnywhere</a
+        >
+      </li>
+      <li>
+        <a href="https://aws.amazon.com/elasticbeanstalk/"
+          >AWS Elastic Beanstalk</a
+        >
+      </li>
+      <li>
+        <a href="https://cloud.google.com/appengine/">Google App Engine</a>
+      </li>
+      <li>
+        <a href="https://azure.microsoft.com/services/app-service/"
+          >Microsoft Azure App Service</a
+        >
+      </li>
+      <li><a href="https://www.divio.com">Divio</a></li>
+      <li><a href="https://render.com/">Render</a></li>
+    </ul>
+    <h3 id="iaas">IaaS</h3>
+    <p>(Infrastructure-as-a-Service)</p>
+    <ul>
+      <li><a href="https://aws.amazon.com/ec2/">AWS EC2</a></li>
+      <li>
+        <a href="https://cloud.google.com/compute/">Google Compute Engine</a>
+      </li>
+      <li>
+        <a href="https://www.digitalocean.com/">Digital Ocean</a>
+        <!-- markdown-link-check-disable-next-line -->
+      </li>
+      <li><a href="https://www.linode.com/">Linode</a></li>
+    </ul>
+    <h3 id="serverless">Serverless</h3>
+    <p>Frameworks:</p>
+    <ul>
+      <li><a href="https://github.com/Miserlou/Zappa">Zappa</a></li>
+      <li><a href="https://github.com/aws/chalice">Chalice</a></li>
+    </ul>
+    <p>Compute:</p>
+    <ul>
+      <li><a href="https://aws.amazon.com/lambda/">AWS Lambda</a></li>
+      <li>
+        <a href="https://cloud.google.com/functions/">Google Cloud Functions</a>
+      </li>
+      <li>
+        <a href="https://azure.microsoft.com/en-us/services/functions/"
+          >Azure Functions</a
+        >
+      </li>
+    </ul>
+    <h2 id="projects">Projects</h2>
+    <h3 id="boilerplates">Boilerplates</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/cookiecutter-flask/cookiecutter-flask"
+          >cookiecutter-flask</a
+        >
+        - With Bootstrap 4, asset bundling annd minification with webpack,
+        starter templates, and registration/authentication.
+      </li>
+      <li>
+        <a href="https://github.com/testdrivenio/cookiecutter-flask-skeleton"
+          >Cookiecutter Flask Skeleton</a
+        >
+        - Flask starter project for
+        <a href="https://github.com/cookiecutter/cookiecutter">Cookiecutter</a>.
+      </li>
+      <li>
+        <a href="https://gae-init.appspot.com">gae-init</a> - For starting new
+        applications on Google App Engine.
+      </li>
+      <li>
+        <a href="https://github.com/dpgaspar/Flask-AppBuilder"
+          >Flask-AppBuilder</a
+        >
+        - Simple and rapid application development framework that includes
+        detailed security, auto CRUD generation for your models, Google charts,
+        and much more.
+      </li>
+      <li>
+        <a href="http://hack4impact.github.io/flask-base/">flask-base</a> -
+        Includes SQLAlchemy, Redis, User Authentication, and more.
+      </li>
+      <li>
+        <a href="https://github.com/esbullington/flask-bootstrap"
+          >Flask-Bootstrap</a
+        >
+        - Integrated SQLAlchemy, authentication, and Bootstrap frontend.
+      </li>
+      <li>
+        <a href="https://github.com/tiangolo/uwsgi-nginx-flask-docker"
+          >uwsgi-nginx-flask-docker</a
+        >
+        - Docker image with uWSGI and Nginx for Flask applications in Python
+        running in a single container.
+      </li>
+      <li>
+        <a href="https://github.com/dternyak/React-Redux-Flask"
+          >React-Redux-Flask</a
+        >
+        - Boilerplate application for a Flask JWT Backend and a React/Redux
+        Front-End with Material UI.
+      </li>
+      <li>
+        <a href="https://github.com/Leo-G/Flask-Scaffold">Flask-Scaffold</a> -
+        Prototype Database driven Web apps in Angular 6, Bootstrap 4 and REST
+        API’s with Flask.
+      </li>
+      <li>
+        <a href="https://github.com/marcuxyz/flask-vuejs">Flask-VueJS</a> -
+        Connect Flask application with VueJS.
+      </li>
+    </ul>
+    <h3 id="open-source-projects">Open Source Projects</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/actorcloud/ActorCloud">ActorCloud</a> -
+        Open-source IoT Platform.
+      </li>
+      <li>
+        <a href="https://github.com/apache/airflow/tree/master/airflow/www"
+          >Airflow</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/busy-beaver-dev/busy-beaver">Busy Beaver</a>
+        - Chicago Python’s Community Engagement Slack bot.
+      </li>
+      <li>
+        <a href="https://github.com/flaskbb/flaskbb">FlaskBB</a> - Classic forum
+        software.
+      </li>
+      <li>
+        <a href="https://github.com/indico/indico">Indico</a> - Feature-rich
+        event management system, made at <a href="https://home.cern/">CERN</a>.
+      </li>
+      <li>
+        <a href="https://github.com/quokkaproject">Quokka CMS</a> - The happiest
+        CMS in the world.
+      </li>
+      <li>
+        <a href="https://github.com/ethanchewy/PythonBuddy">PythonBuddy</a> -
+        Online Python Editor with live syntax checking and execution.
+      </li>
+      <li>
+        <a href="https://github.com/getredash/redash">Redash</a> - Designed to
+        enable anyone, regardless of the level of technical sophistication, to
+        harness the power of data big and small.
+      </li>
+      <li>
+        <a href="https://github.com/skylines-project/skylines">SkyLines</a> -
+        Live tracking, flight database, and competition framework.
+      </li>
+      <li>
+        <a href="https://github.com/Netflix/security_monkey">Security Monkey</a>
+        - Monitors AWS, GCP, OpenStack, and GitHub orgs for assets and their
+        changes over time.
+      </li>
+      <li>
+        <a href="https://github.com/freedomofpress/securedrop">SecureDrop</a> -
+        Open-source whistleblower submission system that media organizations can
+        use to securely accept documents from, and communicate with anonymous
+        sources.
+      </li>
+      <li>
+        <a href="https://github.com/simple-login/app">SimpleLogin</a> - Protect
+        your online identity with email alias.
+      </li>
+      <li>
+        <a href="https://git.sr.ht/~sircmpwn/core.sr.ht/tree">sr.ht</a> - Git
+        hosting service (check out
+        <a
+          href="https://drewdevault.com/2019/01/30/Why-I-built-sr.ht-with-Flask.html"
+          >Why I chose Flask to build sr.ht’s mini-services</a
+        >
+        as well).
+      </li>
+      <li>
+        <a href="https://github.com/google/timesketch">Timesketch</a> -
+        Collaborative forensic timeline analysis.
+      </li>
+    </ul>
+    <hr />
+    <p><br /></p>
+    <blockquote>
+      <p>
+        <strong>NOTE</strong>: This project is powered by
+        <strong><a href="https://testdriven.io/">TestDriven.io</a></strong
+        >. Please support this open source project by purchasing one of our
+        Flask courses. Learn how to build, test, and deploy microservices
+        powered by Docker, Flask, and React!
+      </p>
+    </blockquote>
+  </body>
+</html>

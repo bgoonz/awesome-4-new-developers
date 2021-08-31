@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-cybersecurity-blue-team-awesome">
+      Awesome Cybersecurity Blue Team
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge-flat2.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        A collection of awesome resources, tools, and other shiny things for
+        cybersecurity blue teams.
+      </p>
+    </blockquote>
+    <p>
+      <a href="https://en.wikipedia.org/wiki/Blue_team_(computer_security)"
+        >Cybersecurity blue teams</a
+      >
+      are groups of individuals who identify security flaws in information
+      technology systems, verify the effectiveness of security measures, and
+      monitor the systems to ensure that implemented defensive measures remain
+      effective in the future. While not exclusive, this list is heavily biased
+      towards
+      <a href="https://www.gnu.org/philosophy/free-sw.html">Free Software</a>
+      projects and against proprietary products or corporate services. For
+      offensive TTPs, please see
+      <a href="https://github.com/fabacab/awesome-pentest">awesome-pentest</a>.
+    </p>
+    <p>
+      Your contributions and suggestions are heartily ♥ welcome. (✿◕‿◕). Please
+      check the <a href="CONTRIBUTING.md">Contributing Guidelines</a> for more
+      details. This work is licensed under a
+      <a href="http://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International License</a
+      >.
+    </p>
+    <p>
+      Many cybersecurity professionals enable racist state violence, wittingly
+      or unwittingly, by providing services to local, state, and federal
+      policing agencies or otherwise cooperating with similar institutions who
+      do so. This evil most often happens through the coercive mechanism of
+      employment under threat of lack of access to food, shelter, or healthcare.
+      Despite this list’s public availability, it is the maintainer’s intention
+      and hope that this list supports the people and organizations who work to
+      counter such massive albeit banal evil.
+    </p>
+    <figure>
+      <img
+        src="https://web.archive.org/web/20201028021653if_/https://lauerrealtygroup.com/wp-content/uploads/2020/06/BLM-FIST-scaled.jpg"
+        alt="Image of a raised fist composed of the names of Black people murdered by taxpayer-funded racist police violence."
+      />
+      <figcaption>
+        Image of a raised fist composed of the names of Black people murdered by
+        taxpayer-funded racist police violence.
+      </figcaption>
+    </figure>
+    <figure>
+      <img
+        src="https://web.archive.org/web/20201123181815if_/https://i.redd.it/86pl28p0dl631.jpg"
+        alt="Image of a “Blue Lives Matter” flag with the thin blue line being peeled away to reveal a Nazi swastika underneath."
+      />
+      <figcaption>
+        Image of a “Blue Lives Matter” flag with the thin blue line being peeled
+        away to reveal a Nazi swastika underneath.
+      </figcaption>
+    </figure>
+    <p>
+      <strong
+        ><a href="https://defundthepolice.org/">DEFUND THE POLICE.</a></strong
+      >
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#automation">Automation</a>
+        <ul>
+          <li>
+            <a href="#code-libraries-and-bindings"
+              >Code libraries and bindings</a
+            >
+          </li>
+          <li>
+            <a href="#security-orchestration-automation-and-response-soar"
+              >Security Orchestration, Automation, and Response (SOAR)</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#cloud-platform-security">Cloud platform security</a>
+        <ul>
+          <li><a href="#distributed-monitoring">Distributed monitoring</a></li>
+          <li><a href="#kubernetes">Kubernetes</a></li>
+          <li><a href="#service-meshes">Service meshes</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#communications-security-comsec"
+          >Communications security (COMSEC)</a
+        >
+      </li>
+      <li>
+        <a href="#devsecops">DevSecOps</a>
+        <ul>
+          <li>
+            <a href="#application-or-binary-hardening"
+              >Application or Binary Hardening</a
+            >
+          </li>
+          <li>
+            <a href="#compliance-testing-and-reporting"
+              >Compliance testing and reporting</a
+            >
+          </li>
+          <li><a href="#fuzzing">Fuzzing</a></li>
+          <li><a href="#policy-enforcement">Policy enforcement</a></li>
+          <li><a href="#supply-chain-security">Supply chain security</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#honeypots">Honeypots</a>
+        <ul>
+          <li><a href="#tarpits">Tarpits</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#host-based-tools">Host-based tools</a>
+        <ul>
+          <li><a href="#sandboxes">Sandboxes</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#incident-response-tools">Incident Response tools</a>
+        <ul>
+          <li><a href="#ir-management-consoles">IR management consoles</a></li>
+          <li><a href="#evidence-collection">Evidence collection</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#network-perimeter-defenses">Network perimeter defenses</a>
+        <ul>
+          <li>
+            <a href="#firewall-appliances-or-distributions"
+              >Firewall appliances or distributions</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#operating-system-distributions"
+          >Operating System distributions</a
+        >
+      </li>
+      <li>
+        <a href="#phishing-awareness-and-reporting"
+          >Phishing awareness and reporting</a
+        >
+      </li>
+      <li>
+        <a href="#preparedness-training-and-wargaming"
+          >Preparedness training and wargaming</a
+        >
+      </li>
+      <li><a href="#security-configurations">Security configurations</a></li>
+      <li>
+        <a href="#security-monitoring">Security monitoring</a>
+        <ul>
+          <li>
+            <a href="#endpoint-detection-and-response-edr"
+              >Endpoint Detection and Response (EDR)</a
+            >
+          </li>
+          <li>
+            <a href="#network-security-monitoring-nsm"
+              >Network Security Monitoring (NSM)</a
+            >
+          </li>
+          <li>
+            <a href="#security-information-and-event-management-siem"
+              >Security Information and Event Management (SIEM)</a
+            >
+          </li>
+          <li>
+            <a href="#service-and-performance-monitoring"
+              >Service and performance monitoring</a
+            >
+          </li>
+          <li><a href="#threat-hunting">Threat hunting</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#threat-intelligence">Threat intelligence</a>
+        <ul>
+          <li>
+            <a href="#threat-signature-packages-and-collections"
+              >Threat signature packages and collections</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#tor-onion-service-defenses">Tor Onion service defenses</a>
+      </li>
+      <li><a href="#transport-layer-defenses">Transport-layer defenses</a></li>
+      <li><a href="#macos-based-defenses">macOS-based defenses</a></li>
+      <li><a href="#windows-based-defenses">Windows-based defenses</a></li>
+    </ul>
+    <h2 id="automation">Automation</h2>
+    <ul>
+      <li>
+        <a href="https://ansiblelockdown.io/">Ansible Lockdown</a> - Curated
+        collection of information security themed Ansible roles that are both
+        vetted and actively maintained.
+      </li>
+      <li>
+        <a href="https://github.com/latchset/clevis">Clevis</a> - Plugable
+        framework for automated decryption, often used as a Tang client.
+      </li>
+      <li>
+        <a href="https://github.com/USArmyResearchLab/Dshell">DShell</a> -
+        Extensible network forensic analysis framework written in Python that
+        enables rapid development of plugins to support the dissection of
+        network packet captures.
+      </li>
+      <li>
+        <a href="https://dev-sec.io/">Dev-Sec.io</a> - Server hardening
+        framework providing Ansible, Chef, and Puppet implementations of various
+        baseline security configurations.
+      </li>
+      <li>
+        <a href="https://eternal-todo.com/tools/peepdf-pdf-analysis-tool"
+          >peepdf</a
+        >
+        - Scriptable PDF file analyzer.
+      </li>
+      <li>
+        <a href="https://talosintelligence.com/pyrebox">PyREBox</a> -
+        Python-scriptable reverse engineering sandbox, based on QEMU.
+      </li>
+      <li>
+        <a href="https://containrrr.dev/watchtower/">Watchtower</a> -
+        Container-based solution for automating Docker container base image
+        updates, providing an unattended upgrade experience.
+      </li>
+    </ul>
+    <h3 id="code-libraries-and-bindings">Code libraries and bindings</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/mitre/multiscanner">MultiScanner</a> - File
+        analysis framework written in Python that assists in evaluating a set of
+        files by automatically running a suite of tools against them and
+        aggregating the output.
+      </li>
+      <li>
+        <a href="https://github.com/darkoperator/Posh-VirusTotal"
+          >Posh-VirusTotal</a
+        >
+        - PowerShell interface to VirusTotal.com APIs.
+      </li>
+      <li>
+        <a href="https://github.com/censys/censys-python">censys-python</a> -
+        Python wrapper to the Censys REST API.
+      </li>
+      <li>
+        <a href="https://github.com/pellegre/libcrafter">libcrafter</a> - High
+        level C++ network packet sniffing and crafting library.
+      </li>
+      <li>
+        <a href="https://github.com/rshipp/python-dshield">python-dshield</a> -
+        Pythonic interface to the Internet Storm Center/DShield API.
+      </li>
+      <li>
+        <a href="https://github.com/InQuest/python-sandboxapi"
+          >python-sandboxapi</a
+        >
+        - Minimal, consistent Python API for building integrations with malware
+        sandboxes.
+      </li>
+      <li>
+        <a href="https://github.com/oasis-open/cti-python-stix2"
+          >python-stix2</a
+        >
+        - Python APIs for serializing and de-serializing Structured Threat
+        Information eXpression (STIX) JSON content, plus higher-level APIs for
+        common tasks.
+      </li>
+    </ul>
+    <h3 id="security-orchestration-automation-and-response-soar">
+      Security Orchestration, Automation, and Response (SOAR)
+    </h3>
+    <p>
+      See also
+      <a href="#security-information-and-event-management-siem"
+        >Security Information and Event Management (SIEM)</a
+      >, and <a href="#ir-management-consoles">IR management consoles</a>.
+    </p>
+    <ul>
+      <li>
+        <a href="https://shuffler.io/">Shuffle</a> - Graphical generalized
+        workflow (automation) builder for IT professionals and blue teamers.
+      </li>
+    </ul>
+    <h2 id="cloud-platform-security">Cloud platform security</h2>
+    <p>
+      See also <a href="https://asecure.cloud/tools/">asecure.cloud/tools</a>.
+    </p>
+    <ul>
+      <li>
+        <a href="https://www.checkov.io/">Checkov</a> - Static analysis for
+        Terraform (infrastructure as code) to help detect CIS policy violations
+        and prevent cloud security misconfiguration.
+      </li>
+      <li>
+        <a href="https://falco.org/">Falco</a> - Behavioral activity monitor
+        designed to detect anomalous activity in containerized applications,
+        hosts, and network packet flows by auditing the Linux kernel and
+        enriched by runtime data such as Kubernetes metrics.
+      </li>
+      <li>
+        <a href="https://katacontainers.io/">Kata Containers</a> - Secure
+        container runtime with lightweight virtual machines that feel and
+        perform like containers, but provide stronger workload isolation using
+        hardware virtualization technology as a second layer of defense.
+      </li>
+      <li>
+        <a href="https://github.com/toniblyx/prowler">Prowler</a> - Tool based
+        on AWS-CLI commands for Amazon Web Services account security assessment
+        and hardening.
+      </li>
+      <li>
+        <a href="https://github.com/nccgroup/ScoutSuite">Scout Suite</a> - Open
+        source multi-cloud security-auditing tool, which enables security
+        posture assessment of cloud environments.
+      </li>
+      <li>
+        <a href="https://github.com/google/gvisor">gVisor</a> - Application
+        kernel, written in Go, that implements a substantial portion of the
+        Linux system surface to provide an isolation boundary between the
+        application and the host kernel.
+      </li>
+    </ul>
+    <h3 id="distributed-monitoring">Distributed monitoring</h3>
+    <p>
+      See also
+      <a href="#service-and-performance-monitoring"
+        >§ Service and performance monitoring</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://cortexmetrics.io/">Cortex</a> - Provides horizontally
+        scalable, highly available, multi-tenant, long term storage for
+        Prometheus.
+      </li>
+      <li>
+        <a href="https://www.jaegertracing.io/">Jaeger</a> - Distributed tracing
+        platform backend used for monitoring and troubleshooting
+        microservices-based distributed systems.
+      </li>
+      <li>
+        <a href="https://opentelemetry.io/">OpenTelemetry</a> - Observability
+        framework for cloud-native software, comprising a collection of tools,
+        APIs, and SDKs for exporting application performance metrics to a
+        tracing backend (formerly maintained by the OpenTracing and OpenCensus
+        projects).
+      </li>
+      <li>
+        <a href="https://prometheus.io/">Prometheus</a> - Open-source systems
+        monitoring and alerting toolkit originally built at SoundCloud.
+      </li>
+      <li>
+        <a href="https://zipkin.io/">Zipkin</a> - Distributed tracing system
+        backend that helps gather timing data needed to troubleshoot latency
+        problems in service architectures.
+      </li>
+    </ul>
+    <h3 id="kubernetes">Kubernetes</h3>
+    <p>
+      See also
+      <a href="https://kubernetes-security.info/">Kubernetes-Security.info</a>.
+    </p>
+    <ul>
+      <li>
+        <a href="https://kubesec.io/">KubeSec</a> - Static analyzer of
+        Kubernetes manifests that can be run locally, as a Kuberenetes admission
+        controller, or as its own cloud service.
+      </li>
+      <li>
+        <a href="https://kyverno.io/">Kyverno</a> - Policy engine designed for
+        Kubernetes.
+      </li>
+      <li>
+        <a href="https://linkerd.io/">Linkerd</a> - Ultra light
+        Kubernetes-specific service mesh that adds observability, reliability,
+        and security to Kubernetes applications without requiring any
+        modification of the application itself.
+      </li>
+      <li>
+        <a href="https://github.com/darkbitio/mkit"
+          >Managed Kubernetes Inspection Tool (MKIT)</a
+        >
+        - Query and validate several common security-related configuration
+        settings of managed Kubernetes cluster objects and the
+        workloads/resources running inside the cluster.
+      </li>
+      <li>
+        <a href="https://polaris.docs.fairwinds.com/">Polaris</a> - Validates
+        Kubernetes best practices by running tests against code commits, a
+        Kubernetes admission request, or live resources already running in a
+        cluster.
+      </li>
+      <li>
+        <a href="https://github.com/muxinc/certificate-expiry-monitor"
+          >certificate-expiry-monitor</a
+        >
+        - Utility that exposes the expiry of TLS certificates as Prometheus
+        metrics.
+      </li>
+      <li>
+        <a href="https://github.com/cruise-automation/k-rail">k-rail</a> -
+        Workload policy enforcement tool for Kubernetes.
+      </li>
+      <li>
+        <a href="https://github.com/keikoproj/kube-forensics">kube-forensics</a>
+        - Allows a cluster administrator to dump the current state of a running
+        pod and all its containers so that security professionals can perform
+        off-line forensic analysis.
+      </li>
+      <li>
+        <a href="https://kube-hunter.aquasec.com/">kube-hunter</a> - Open-source
+        tool that runs a set of tests (“hunters”) for security issues in
+        Kubernetes clusters from either outside (“attacker’s view”) or inside a
+        cluster.
+      </li>
+      <li>
+        <a href="https://github.com/opsgenie/kubernetes-event-exporter"
+          >kubernetes-event-exporter</a
+        >
+        - Allows exporting the often missed Kubernetes events to various outputs
+        so that they can be used for observability or alerting purposes.
+      </li>
+    </ul>
+    <h3 id="service-meshes">Service meshes</h3>
+    <p>See also <a href="https://servicemesh.es/">ServiceMesh.es</a>.</p>
+    <ul>
+      <li>
+        <a href="https://consul.io/">Consul</a> - Solution to connect and
+        configure applications across dynamic, distributed infrastructure and,
+        with Consul Connect, enabling secure service-to-service communication
+        with automatic TLS encryption and identity-based authorization.
+      </li>
+      <li>
+        <a href="https://istio.io/">Istio</a> - Open platform for providing a
+        uniform way to integrate microservices, manage traffic flow across
+        microservices, enforce policies and aggregate telemetry data.
+      </li>
+    </ul>
+    <h2 id="communications-security-comsec">
+      Communications security (COMSEC)
+    </h2>
+    <p>
+      See also <a href="#transport-layer-defenses">Transport-layer defenses</a>.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/firstlookmedia/gpgsync">GPG Sync</a> -
+        Centralize and automate OpenPGP public key distribution, revocation, and
+        updates amongst all members of an organization or team.
+      </li>
+      <li>
+        <a href="https://censorship.ai/">Geneva (Genetic Evasion)</a> - Novel
+        experimental genetic algorithm that evolves packet-manipulation-based
+        censorship evasion strategies against nation-state level censors to
+        increase availability of otherwise blocked content.
+      </li>
+      <li>
+        <a href="https://www.globaleaks.org/">GlobaLeaks</a> - Free, open source
+        software enabling anyone to easily set up and maintain a secure
+        whistleblowing platform.
+      </li>
+      <li>
+        <a href="https://securedrop.org/">SecureDrop</a> - Open source
+        whistleblower submission system that media organizations and NGOs can
+        install to securely accept documents from anonymous sources.
+      </li>
+      <li>
+        <a href="https://goteleport.com/">Teleport</a> - Allows engineers and
+        security professionals to unify access for SSH servers, Kubernetes
+        clusters, web applications, and databases across all environments.
+      </li>
+    </ul>
+    <h2 id="devsecops">DevSecOps</h2>
+    <p>
+      See also
+      <a href="https://github.com/devsecops/awesome-devsecops"
+        >awesome-devsecops</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/genuinetools/bane">Bane</a> - Custom and
+        better AppArmor profile generator for Docker containers.
+      </li>
+      <li>
+        <a href="https://github.com/StackExchange/blackbox">BlackBox</a> -
+        Safely store secrets in Git/Mercurial/Subversion by encrypting them “at
+        rest” using GnuPG.
+      </li>
+      <li>
+        <a href="https://cilium.io/">Cilium</a> - Open source software for
+        transparently securing the network connectivity between application
+        services deployed using Linux container management platforms like Docker
+        and Kubernetes.
+      </li>
+      <li>
+        <a href="https://github.com/coreos/clair">Clair</a> - Static analysis
+        tool to probe for vulnerabilities introduced via application container
+        (e.g., Docker) images.
+      </li>
+      <li>
+        <a href="https://securitylab.github.com/tools/codeql">CodeQL</a> -
+        Discover vulnerabilities across a codebase by performing queries against
+        code as though it were data.
+      </li>
+      <li>
+        <a href="https://www.defectdojo.org/">DefectDojo</a> - Application
+        vulnerability management tool built for DevOps and continuous security
+        integration.
+      </li>
+      <li>
+        <a href="http://gauntlt.org/">Gauntlt</a> - Pentest applications during
+        routine continuous integration build pipelines.
+      </li>
+      <li>
+        <a href="https://github.com/awslabs/git-secrets">Git Secrets</a> -
+        Prevents you from committing passwords and other sensitive information
+        to a git repository.
+      </li>
+      <li>
+        <a href="https://github.com/mozilla/sops">SOPS</a> - Editor of encrypted
+        files that supports YAML, JSON, ENV, INI and binary formats and encrypts
+        with AWS KMS, GCP KMS, Azure Key Vault, and PGP.
+      </li>
+      <li>
+        <a href="https://snyk.io/">Snyk</a> - Finds and fixes vulnerabilities
+        and license violations in open source dependencies and container images.
+      </li>
+      <li>
+        <a href="https://sonarqube.org">SonarQube</a> - Continuous inspection
+        tool that provides detailed reports during automated testing and alerts
+        on newly introduced security vulnerabilities.
+      </li>
+      <li>
+        <a href="https://github.com/aquasecurity/trivy">Trivy</a> - Simple and
+        comprehensive vulnerability scanner for containers and other artifacts,
+        suitable for use in continuous integration pipelines.
+      </li>
+      <li>
+        <a href="https://www.vaultproject.io/">Vault</a> - Tool for securely
+        accessing secrets such as API keys, passwords, or certificates through a
+        unified interface.
+      </li>
+      <li>
+        <a href="https://www.agwa.name/projects/git-crypt/">git-crypt</a> -
+        Transparent file encryption in git; files which you choose to protect
+        are encrypted when committed, and decrypted when checked out.
+      </li>
+      <li>
+        <a href="https://github.com/jkroepke/helm-secrets">helm-secrets</a> -
+        Helm plugin that helps manage secrets with Git workflow and stores them
+        anywhere, backed by SOPS.
+      </li>
+    </ul>
+    <h3 id="application-or-binary-hardening">
+      Application or Binary Hardening
+    </h3>
+    <ul>
+      <li>
+        <a href="https://dyninst.org/dyninst">DynInst</a> - Tools for binary
+        instrumentation, analysis, and modification, useful for binary patching.
+      </li>
+      <li>
+        <a href="https://dynamorio.org/">DynamoRIO</a> - Runtime code
+        manipulation system that supports code transformations on any part of a
+        program, while it executes, implemented as a process-level virtual
+        machine.
+      </li>
+      <li>
+        <a href="https://egalito.org/">Egalito</a> - Binary recompiler and
+        instrumentation framework that can fully disassemble, transform, and
+        regenerate ordinary Linux binaries designed for binary hardening and
+        security research.
+      </li>
+      <li>
+        <a href="https://www.valgrind.org/">Valgrind</a> - Instrumentation
+        framework for building dynamic analysis tools.
+      </li>
+    </ul>
+    <h3 id="compliance-testing-and-reporting">
+      Compliance testing and reporting
+    </h3>
+    <ul>
+      <li>
+        <a href="https://www.chef.io/products/chef-inspec">Chef InSpec</a> -
+        Language for describing security and compliance rules, which become
+        automated tests that can be run against IT infrastructures to discover
+        and report on non-compliance.
+      </li>
+      <li>
+        <a href="https://www.open-scap.org/tools/openscap-base/"
+          >OpenSCAP Base</a
+        >
+        - Both a library and a command line tool (<code>oscap</code>) used to
+        evaluate a system against SCAP baseline profiles to report on the
+        security posture of the scanned system(s).
+      </li>
+    </ul>
+    <h3 id="fuzzing">Fuzzing</h3>
+    <p>
+      See also
+      <a href="https://github.com/secfigo/Awesome-Fuzzing">Awesome-Fuzzing</a>.
+    </p>
+    <ul>
+      <li>
+        <a href="https://pypi.org/project/atheris/">Atheris</a> -
+        Coverage-guided Python fuzzing engine based off of libFuzzer that
+        supports fuzzing of Python code but also native extensions written for
+        CPython.
+      </li>
+      <li>
+        <a href="https://google.github.io/fuzzbench/">FuzzBench</a> - Free
+        service that evaluates fuzzers on a wide variety of real-world
+        benchmarks, at Google scale.
+      </li>
+      <li>
+        <a href="https://github.com/microsoft/onefuzz">OneFuzz</a> - Self-hosted
+        Fuzzing-as-a-Service (FaaS) platform.
+      </li>
+    </ul>
+    <h3 id="policy-enforcement">Policy enforcement</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/ossf/allstar">AllStar</a> - GitHub App
+        installed on organizations or repositories to set and enforce security
+        policies.
+      </li>
+      <li>
+        <a href="https://conftest.dev/">Conftest</a> - Utility to help you write
+        tests against structured configuration data.
+      </li>
+      <li>
+        <a href="https://www.openpolicyagent.org/">Open Policy Agent (OPA)</a> -
+        Unified toolset and framework for policy across the cloud native stack.
+      </li>
+      <li>
+        <a href="https://github.com/latchset/tang">Tang</a> - Server for binding
+        data to network presence; provides data to clients only when they are on
+        a certain (secured) network.
+      </li>
+    </ul>
+    <h3 id="supply-chain-security">Supply chain security</h3>
+    <ul>
+      <li>
+        <a href="https://grafeas.io/">Grafeas</a> - Open artifact metadata API
+        to audit and govern your software supply chain.
+      </li>
+      <li>
+        <a href="https://github.com/technosophos/helm-gpg"
+          >Helm GPG (GnuPG) Plugin</a
+        >
+        - Chart signing and verification with GnuPG for Helm.
+      </li>
+      <li>
+        <a href="https://github.com/theupdateframework/notary">Notary</a> - Aims
+        to make the internet more secure by making it easy for people to publish
+        and verify content.
+      </li>
+    </ul>
+    <h2 id="honeypots">Honeypots</h2>
+    <p>
+      See also
+      <a href="https://github.com/paralax/awesome-honeypots"
+        >awesome-honeypots</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/thinkst/canarytokens">CanaryTokens</a> -
+        Self-hostable honeytoken generator and reporting dashboard; demo version
+        available at <a href="https://canarytokens.org/">CanaryTokens.org</a>.
+      </li>
+      <li>
+        <a href="https://kushtaka.org">Kushtaka</a> - Sustainable all-in-one
+        honeypot and honeytoken orchestrator for under-resourced blue teams.
+      </li>
+    </ul>
+    <h3 id="tarpits">Tarpits</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/skeeto/endlessh">Endlessh</a> - SSH tarpit
+        that slowly sends an endless banner.
+      </li>
+      <li>
+        <a href="http://labrea.sourceforge.net/labrea-info.html">LaBrea</a> -
+        Program that answers ARP requests for unused IP space, creating the
+        appearance of fake machines that answer further requests very slowly in
+        order to slow down scanners, worms, etcetera.
+      </li>
+    </ul>
+    <h2 id="host-based-tools">Host-based tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/BinaryDefense/artillery">Artillery</a> -
+        Combination honeypot, filesystem monitor, and alerting system designed
+        to protect Linux and Windows operating systems.
+      </li>
+      <li>
+        <a href="http://chkrootkit.org/">chkrootkit</a> - Locally checks for
+        signs of a rootkit on GNU/Linux systems.
+      </li>
+      <li>
+        <a
+          href="https://www.crowdstrike.com/resources/community-tools/crowdinspect-tool/"
+          >Crowd Inspect</a
+        >
+        - Free tool for Windows systems aimed to alert you to the presence of
+        malware that may be communicating over the network.
+      </li>
+      <li>
+        <a href="https://www.fail2ban.org/">Fail2ban</a> - Intrusion prevention
+        software framework that protects computer servers from brute-force
+        attacks.
+      </li>
+      <li>
+        <a href="https://www.ossec.net/">Open Source HIDS SECurity (OSSEC)</a> -
+        Fully open source and free, feature-rich, Host-based Instrusion
+        Detection System (HIDS).
+      </li>
+      <li>
+        <a href="http://rkhunter.sourceforge.net/">Rootkit Hunter (rkhunter)</a>
+        - POSIX-compliant Bash script that scans a host for various signs of
+        malware.
+      </li>
+    </ul>
+    <h3 id="sandboxes">Sandboxes</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/containers/bubblewrap">Bubblewrap</a> -
+        Sandboxing tool for use by unprivileged Linux users capable of
+        restricting access to parts of the operating system or user data.
+      </li>
+      <li>
+        <a href="https://dangerzone.rocks/">Dangerzone</a> - Take potentially
+        dangerous PDFs, office documents, or images and convert them to a safe
+        PDF.
+      </li>
+      <li>
+        <a href="https://firejail.wordpress.com/">Firejail</a> - SUID program
+        that reduces the risk of security breaches by restricting the running
+        environment of untrusted applications using Linux namespaces and
+        seccomp-bpf.
+      </li>
+    </ul>
+    <h2 id="incident-response-tools">Incident Response tools</h2>
+    <p>
+      See also
+      <a href="https://github.com/meirwah/awesome-incident-response"
+        >awesome-incident-response</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/JPCERTCC/LogonTracer">LogonTracer</a> -
+        Investigate malicious Windows logon by visualizing and analyzing Windows
+        event log.
+      </li>
+      <li>
+        <a href="https://www.volatilityfoundation.org/">Volatility</a> -
+        Advanced memory forensics framework.
+      </li>
+      <li>
+        <a href="https://github.com/ThreatResponse/aws_ir">aws_ir</a> -
+        Automates your incident response with zero security preparedness
+        assumptions.
+      </li>
+    </ul>
+    <h3 id="ir-management-consoles">IR management consoles</h3>
+    <p>
+      See also
+      <a href="#security-orchestration-automation-and-response-soar"
+        >Security Orchestration, Automation, and Response (SOAR)</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/opensourcesec/CIRTKit">CIRTKit</a> -
+        Scriptable Digital Forensics and Incident Response (DFIR) toolkit built
+        on Viper.
+      </li>
+      <li>
+        <a href="https://github.com/certsocietegenerale/FIR"
+          >Fast Incident Response (FIR)</a
+        >
+        - Cybersecurity incident management platform allowing for easy creation,
+        tracking, and reporting of cybersecurity incidents.
+      </li>
+      <li>
+        <a href="http://www.rekall-forensic.com/">Rekall</a> - Advanced forensic
+        and incident response framework.
+      </li>
+      <li>
+        <a href="https://thehive-project.org/">TheHive</a> - Scalable, free
+        Security Incident Response Platform designed to make life easier for
+        SOCs, CSIRTs, and CERTs, featuring tight integration with MISP.
+      </li>
+      <li>
+        <a href="https://github.com/defpoint/threat_note">threat_note</a> - Web
+        application built by Defense Point Security to allow security
+        researchers the ability to add and retrieve indicators related to their
+        research.
+      </li>
+    </ul>
+    <h3 id="evidence-collection">Evidence collection</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/CrowdStrike/automactc">AutoMacTC</a> -
+        Modular, automated forensic triage collection framework designed to
+        access various forensic artifacts on macOS, parse them, and present them
+        in formats viable for analysis.
+      </li>
+      <li>
+        <a href="https://github.com/jipegit/OSXAuditor">OSXAuditor</a> - Free
+        macOS computer forensics tool.
+      </li>
+      <li>
+        <a href="https://github.com/Yelp/osxcollector">OSXCollector</a> -
+        Forensic evidence collection &amp; analysis toolkit for macOS.
+      </li>
+      <li>
+        <a href="https://github.com/diogo-fernan/ir-rescue">ir-rescue</a> -
+        Windows Batch script and a Unix Bash script to comprehensively collect
+        host forensic data during incident response.
+      </li>
+      <li>
+        <a href="https://github.com/ThreatResponse/margaritashotgun"
+          >Margarita Shotgun</a
+        >
+        - Command line utility (that works with or without Amazon EC2 instances)
+        to parallelize remote memory acquisition.
+      </li>
+    </ul>
+    <h2 id="network-perimeter-defenses">Network perimeter defenses</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/AltraMayor/gatekeeper">Gatekeeper</a> -
+        First open source Distributed Denial of Service (DDoS) protection
+        system.
+      </li>
+      <li>
+        <a href="https://www.cipherdyne.org/fwknop/">fwknop</a> - Protects ports
+        via Single Packet Authorization in your firewall.
+      </li>
+      <li>
+        <a href="https://github.com/jtesta/ssh-audit">ssh-audit</a> - Simple
+        tool that makes quick recommendations for improving an SSH server’s
+        security posture.
+      </li>
+    </ul>
+    <h3 id="firewall-appliances-or-distributions">
+      Firewall appliances or distributions
+    </h3>
+    <p>
+      See also
+      <a
+        href="https://en.wikipedia.org/wiki/List_of_router_and_firewall_distributions"
+        >Wikipedia: List of router and firewall distributions</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://www.ipfire.org/">IPFire</a> - Hardened GNU/Linux based
+        router and firewall distribution forked from IPCop.
+      </li>
+      <li>
+        <a href="https://opnsense.org/">OPNsense</a> - Hardened FreeBSD based
+        firewall and routing platform forked from pfSense.
+      </li>
+      <li>
+        <a href="https://www.pfsense.org/">pfSense</a> - FreeBSD firewall and
+        router distribution forked from m0n0wall.
+      </li>
+    </ul>
+    <h2 id="operating-system-distributions">Operating System distributions</h2>
+    <ul>
+      <li>
+        <a href="https://caine-live.net/"
+          >Computer Aided Investigative Environment (CAINE)</a
+        >
+        - Italian GNU/Linux live distribution that pre-packages numerous digital
+        forensics and evidence collection tools.
+      </li>
+      <li>
+        <a href="https://securityonion.net/">Security Onion</a> - Free and open
+        source GNU/Linux distribution for intrusion detection, enterprise
+        security monitoring, and log management.
+      </li>
+      <li>
+        <a href="https://qubes-os.org/">Qubes OS</a> - Desktop environment built
+        atop the Xen hypervisor project that runs each end-user program in its
+        own virtual machine intended to provide strict security controls to
+        constrain the reach of any successful malware exploit.
+      </li>
+    </ul>
+    <h2 id="phishing-awareness-and-reporting">
+      Phishing awareness and reporting
+    </h2>
+    <p>
+      See also
+      <a
+        href="https://github.com/fabacab/awesome-pentest#social-engineering-tools"
+        >awesome-pentest § Social Engineering Tools</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/SSLMate/certspotter">CertSpotter</a> -
+        Certificate Transparency log monitor from SSLMate that alerts you when a
+        SSL/TLS certificate is issued for one of your domains.
+      </li>
+      <li>
+        <a href="https://getgophish.com/">Gophish</a> - Powerful, open-source
+        phishing framework that makes it easy to test your organization’s
+        exposure to phishing.
+      </li>
+      <li>
+        <a href="https://github.com/securestate/king-phisher">King Phisher</a> -
+        Tool for testing and promoting user awareness by simulating real world
+        phishing attacks.
+      </li>
+      <li>
+        <a href="https://github.com/certsocietegenerale/NotifySecurity"
+          >NotifySecurity</a
+        >
+        - Outlook add-in used to help your users to report suspicious e-mails to
+        security teams.
+      </li>
+      <li>
+        <a href="https://github.com/LogRhythm-Labs/PIE"
+          >Phishing Intelligence Engine (PIE)</a
+        >
+        - Framework that will assist with the detection and response to phishing
+        attacks.
+      </li>
+      <li>
+        <a href="https://github.com/certsocietegenerale/swordphish-awareness"
+          >Swordphish</a
+        >
+        - Platform allowing to create and manage (fake) phishing campaigns
+        intended to train people in identifying suspicious mails.
+      </li>
+      <li>
+        <a href="https://github.com/serain/mailspoof">mailspoof</a> - Scans SPF
+        and DMARC records for issues that could allow email spoofing.
+      </li>
+      <li>
+        <a href="https://github.com/x0rz/phishing_catcher">phishing_catcher</a>
+        - Configurable script to watch for issuances of suspicious TLS
+        certificates by domain name in the Certificate Transparency Log (CTL)
+        using the
+        <a href="https://certstream.calidog.io/">CertStream</a> service.
+      </li>
+    </ul>
+    <h2 id="preparedness-training-and-wargaming">
+      Preparedness training and wargaming
+    </h2>
+    <p>
+      (Also known as <em>adversary emulation</em>, <em>threat simulation</em>,
+      or similar.)
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/NextronSystems/APTSimulator"
+          >APTSimulator</a
+        >
+        - Toolset to make a system look as if it was the victim of an APT
+        attack.
+      </li>
+      <li>
+        <a href="https://atomicredteam.io/">Atomic Red Team</a> - Library of
+        simple, automatable tests to execute for testing security controls.
+      </li>
+      <li>
+        <a href="https://www.secframe.com/badblood/">BadBlood</a> - Fills a test
+        (non-production) Windows Domain with data that enables security analysts
+        and engineers to practice using tools to gain an understanding and
+        prescribe to securing Active Directory.
+      </li>
+      <li>
+        <a href="https://www.dns-oarc.net/tools/drool">Drool</a> - Replay DNS
+        traffic from packet capture files and send it to a specified server,
+        such as for simulating DDoS attacks on the DNS and measuring normal DNS
+        querying.
+      </li>
+      <li>
+        <a href="https://github.com/TryCatchHCF/DumpsterFire">DumpsterFire</a> -
+        Modular, menu-driven, cross-platform tool for building repeatable,
+        time-delayed, distributed security events for Blue Team drills and
+        sensor/alert mapping.
+      </li>
+      <li>
+        <a href="https://github.com/uber-common/metta">Metta</a> - Automated
+        information security preparedness tool to do adversarial simulation.
+      </li>
+      <li>
+        <a href="https://github.com/alphasoc/flightsim"
+          >Network Flight Simulator (<code>flightsim</code>)</a
+        >
+        - Utility to generate malicious network traffic and help security teams
+        evaluate security controls and audit their network visibility.
+      </li>
+      <li>
+        <a href="https://github.com/redhuntlabs/RedHunt-OS">RedHunt OS</a> -
+        Ubuntu-based Open Virtual Appliance (<code>.ova</code>) preconfigured
+        with several threat emulation tools as well as a defender’s toolkit.
+      </li>
+    </ul>
+    <h2 id="security-configurations">Security configurations</h2>
+    <p>
+      (Also known as <em>secure-by-default baselines</em> and
+      <em>implemented best practices</em>.)
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/bunkerity/bunkerized-nginx"
+          >Bunkerized-nginx</a
+        >
+        - Docker image of an NginX configuration and scripts implementing many
+        defensive techniques for Web sites.
+      </li>
+    </ul>
+    <h2 id="security-monitoring">Security monitoring</h2>
+    <h3 id="endpoint-detection-and-response-edr">
+      Endpoint Detection and Response (EDR)
+    </h3>
+    <ul>
+      <li>
+        <a href="https://wazuh.com/">Wazuh</a> - Open source, multiplatform
+        agent-based security monitoring based on a fork of OSSEC HIDS.
+      </li>
+    </ul>
+    <h3 id="network-security-monitoring-nsm">
+      Network Security Monitoring (NSM)
+    </h3>
+    <p>
+      See also
+      <a href="https://github.com/caesar0301/awesome-pcaptools"
+        >awesome-pcaptools</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/MITRECND/chopshop">ChopShop</a> - Framework
+        to aid analysts in the creation and execution of pynids-based decoders
+        and detectors of APT tradecraft.
+      </li>
+      <li>
+        <a href="https://github.com/stamparm/maltrail">Maltrail</a> - Malicious
+        network traffic detection system.
+      </li>
+      <li>
+        <a href="https://github.com/aol/moloch">Moloch</a> - Augments your
+        current security infrastructure to store and index network traffic in
+        standard PCAP format, providing fast, indexed access.
+      </li>
+      <li>
+        <a href="https://www.owlh.net/">OwlH</a> - Helps manage network IDS at
+        scale by visualizing Suricata, Zeek, and Moloch life cycles.
+      </li>
+      <li>
+        <a href="https://github.com/activecm/rita"
+          >Real Intelligence Threat Analysis (RITA)</a
+        >
+        - Open source framework for network traffic analysis that ingests Zeek
+        logs and detects beaconing, DNS tunneling, and more.
+      </li>
+      <li>
+        <a href="https://github.com/codeexpress/respounder">Respounder</a> -
+        Detects the presence of the Responder LLMNR/NBT-NS/MDNS poisoner on a
+        network.
+      </li>
+      <li>
+        <a href="https://snort.org/">Snort</a> - Widely-deployed, Free Software
+        IPS capable of real-time packet analysis, traffic logging, and custom
+        rule-based triggers.
+      </li>
+      <li>
+        <a href="https://github.com/NetSPI/SpoofSpotter">SpoofSpotter</a> -
+        Catch spoofed NetBIOS Name Service (NBNS) responses and alert to an
+        email or log file.
+      </li>
+      <li>
+        <a href="https://github.com/google/stenographer">Stenographer</a> -
+        Full-packet-capture utility for buffering packets to disk for intrusion
+        detection and incident response purposes.
+      </li>
+      <li>
+        <a href="https://suricata-ids.org/">Suricata</a> - Free, cross-platform,
+        IDS/IPS with on- and off-line analysis modes and deep packet inspection
+        capabilities that is also scriptable with Lua.
+      </li>
+      <li>
+        <a href="https://github.com/google/tsunami-security-scanner">Tsunami</a>
+        - General purpose network security scanner with an extensible plugin
+        system for detecting high severity vulnerabilities with high confidence.
+      </li>
+      <li>
+        <a href="https://github.com/tenzir/vast">VAST</a> - Free and open-source
+        network telemetry engine for data-driven security investigations.
+      </li>
+      <li>
+        <a href="https://www.wireshark.org">Wireshark</a> - Free and open-source
+        packet analyzer useful for network troubleshooting or forensic netflow
+        analysis.
+      </li>
+      <li>
+        <a href="https://zeek.org/">Zeek</a> - Powerful network analysis
+        framework focused on security monitoring, formerly known as Bro.
+      </li>
+      <li>
+        <a href="http://netsniff-ng.org/">netsniff-ng</a> - Free and fast
+        GNU/Linux networking toolkit with numerous utilities such as a
+        connection tracking tool (<code>flowtop</code>), traffic generator
+        (<code>trafgen</code>), and autonomous system (AS) trace route utility
+        (<code>astraceroute</code>).
+      </li>
+    </ul>
+    <h3 id="security-information-and-event-management-siem">
+      Security Information and Event Management (SIEM)
+    </h3>
+    <ul>
+      <li>
+        <a href="https://www.alienvault.com/open-threat-exchange/projects"
+          >AlienVault OSSIM</a
+        >
+        - Single-server open source SIEM platform featuring asset discovery,
+        asset inventorying, behavioral monitoring, and event correlation, driven
+        by AlienVault Open Threat Exchange (OTX).
+      </li>
+      <li>
+        <a href="https://www.prelude-siem.org/">Prelude SIEM OSS</a> - Open
+        source, agentless SIEM with a long history and several commercial
+        variants featuring security event collection, normalization, and
+        alerting from arbitrary log input and numerous popular monitoring tools.
+      </li>
+    </ul>
+    <h3 id="service-and-performance-monitoring">
+      Service and performance monitoring
+    </h3>
+    <p>
+      See also
+      <a href="https://github.com/n1trux/awesome-sysadmin#monitoring"
+        >awesome-sysadmin#monitoring</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://icinga.com/">Icinga</a> - Modular redesign of Nagios
+        with pluggable user interfaces and an expanded set of data connectors,
+        collectors, and reporting tools.
+      </li>
+      <li>
+        <a href="https://locust.io/">Locust</a> - Open source load testing tool
+        in which you can define user behaviour with Python code and swarm your
+        system with millions of simultaneous users.
+      </li>
+      <li>
+        <a href="https://nagios.org">Nagios</a> - Popular network and service
+        monitoring solution and reporting platform.
+      </li>
+      <li>
+        <a href="https://opennms.org/">OpenNMS</a> - Free and feature-rich
+        networking monitoring system supporting multiple configurations, a
+        variety of alerting mechanisms (email, XMPP, SMS), and numerous data
+        collection methods (SNMP, HTTP, JDBC, etc).
+      </li>
+      <li>
+        <a href="https://github.com/facebook/osquery">osquery</a> - Operating
+        system instrumentation framework for macOS, Windows, and Linux, exposing
+        the OS as a high-performance relational database that can be queried
+        with a SQL-like syntax.
+      </li>
+      <li>
+        <a href="https://www.zabbix.com/">Zabbix</a> - Mature, enterprise-level
+        platform to monitor large-scale IT environments.
+      </li>
+    </ul>
+    <h3 id="threat-hunting">Threat hunting</h3>
+    <p>(Also known as <em>hunt teaming</em> and <em>threat detection</em>.)</p>
+    <p>
+      See also
+      <a href="https://github.com/0x4D31/awesome-threat-detection"
+        >awesome-threat-detection</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/PowerShellMafia/CimSweep">CimSweep</a> -
+        Suite of CIM/WMI-based tools enabling remote incident response and
+        hunting operations across all versions of Windows.
+      </li>
+      <li>
+        <a href="https://github.com/sans-blue-team/DeepBlueCLI">DeepBlueCLI</a>
+        - PowerShell module for hunt teaming via Windows Event logs.
+      </li>
+      <li>
+        <a href="https://github.com/google/grr">GRR Rapid Response</a> -
+        Incident response framework focused on remote live forensics consisting
+        of a Python agent installed on assets and Python-based server
+        infrastructure enabling analysts to quickly triage attacks and perform
+        analysis remotely.
+      </li>
+      <li>
+        <a href="https://github.com/Cyb3rWard0g/HELK">Hunting ELK (HELK)</a> -
+        All-in-one Free Software threat hunting stack based on Elasticsearch,
+        Logstash, Kafka, and Kibana with various built-in integrations for
+        analytics including Jupyter Notebook.
+      </li>
+      <li>
+        <a href="https://github.com/mozilla/MozDef">MozDef</a> - Automate the
+        security incident handling process and facilitate the real-time
+        activities of incident handlers.
+      </li>
+      <li>
+        <a href="https://github.com/Infocyte/PSHunt">PSHunt</a> - PowerShell
+        module designed to scan remote endpoints for indicators of compromise or
+        survey them for more comprehensive information related to state of those
+        systems.
+      </li>
+      <li>
+        <a href="https://github.com/gfoss/PSRecon">PSRecon</a> - PSHunt-like
+        tool for analyzing remote Windows systems that also produces a
+        self-contained HTML report of its findings.
+      </li>
+      <li>
+        <a href="https://github.com/Invoke-IR/PowerForensics">PowerForensics</a>
+        - All in one PowerShell-based platform to perform live hard disk
+        forensic analysis.
+      </li>
+      <li>
+        <a href="https://github.com/rastrea2r/rastrea2r">rastrea2r</a> -
+        Multi-platform tool for triaging suspected IOCs on many endpoints
+        simultaneously and that integrates with antivirus consoles.
+      </li>
+      <li>
+        <a href="https://www.fireeye.com/services/freeware/redline.html"
+          >Redline</a
+        >
+        - Freeware endpoint auditing and analysis tool that provides host-based
+        investigative capabilities, offered by FireEye, Inc.
+      </li>
+    </ul>
+    <h2 id="threat-intelligence">Threat intelligence</h2>
+    <p>
+      See also
+      <a href="https://github.com/hslatman/awesome-threat-intelligence"
+        >awesome-threat-intelligence</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/ANSSI-FR/AD-control-paths"
+          >Active Directory Control Paths</a
+        >
+        - Visualize and graph Active Directory permission configs (“control
+        relations”) to audit questions such as “Who can read the CEO’s email?”
+        and similar.
+      </li>
+      <li>
+        <a href="https://attackerkb.com/">AttackerKB</a> - Free and public
+        crowdsourced vulnerability assessment platform to help prioritize
+        high-risk patch application and combat vulnerability fatigue.
+      </li>
+      <li>
+        <a href="https://github.com/hadojae/DATA">DATA</a> - Credential phish
+        analysis and automation tool that can accept suspected phishing URLs
+        directly or trigger on observed network traffic containing such a URL.
+      </li>
+      <li>
+        <a href="https://github.com/opensourcesec/Forager">Forager</a> -
+        Multi-threaded threat intelligence gathering built with Python3
+        featuring simple text-based configuration and data storage for ease of
+        use and data portability.
+      </li>
+      <li>
+        <a href="https://github.com/nsacyber/GRASSMARLIN">GRASSMARLIN</a> -
+        Provides IP network situational awareness of industrial control systems
+        (ICS) and Supervisory Control and Data Acquisition (SCADA) by passively
+        mapping, accounting for, and reporting on your ICS/SCADA network
+        topology and endpoints.
+      </li>
+      <li>
+        <a href="https://github.com/mlsecproject/combine">MLSec Combine</a> -
+        Gather and combine multiple threat intelligence feed sources into one
+        customizable, standardized CSV-based format.
+      </li>
+      <li>
+        <a href="https://misp-project.org/"
+          >Malware Information Sharing Platform and Threat Sharing (MISP)</a
+        >
+        - Open source software solution for collecting, storing, distributing
+        and sharing cyber security indicators.
+      </li>
+      <li>
+        <a href="https://osv.dev/">Open Source Vulnerabilities (OSV)</a> -
+        Vulnerability database and triage infrastructure for open source
+        projects aimed at helping both open source maintainers and consumers of
+        open source.
+      </li>
+      <li>
+        <a href="https://github.com/Neo23x0/sigma">Sigma</a> - Generic signature
+        format for SIEM systems, offering an open signature format that allows
+        you to describe relevant log events in a straightforward manner.
+      </li>
+      <li>
+        <a href="https://github.com/tenzir/threatbus">Threat Bus</a> - Threat
+        intelligence dissemination layer to connect security tools through a
+        distributed publish/subscribe message broker.
+      </li>
+      <li>
+        <a href="https://github.com/InQuest/ThreatIngestor">ThreatIngestor</a> -
+        Extendable tool to extract and aggregate IOCs from threat feeds
+        including Twitter, RSS feeds, or other sources.
+      </li>
+      <li>
+        <a href="https://nsacyber.github.io/unfetter/">Unfetter</a> - Identifies
+        defensive gaps in security posture by leveraging Mitre’s ATT&amp;CK
+        framework.
+      </li>
+      <li>
+        <a href="https://github.com/viper-framework/viper">Viper</a> - Binary
+        analysis and management framework enabling easy organization of malware
+        and exploit samples.
+      </li>
+      <li>
+        <a href="https://github.com/VirusTotal/yara">YARA</a> - Tool aimed at
+        (but not limited to) helping malware researchers to identify and
+        classify malware samples, described as “the pattern matching swiss army
+        knife” for file patterns and signatures.
+      </li>
+    </ul>
+    <h3 id="threat-signature-packages-and-collections">
+      Threat signature packages and collections
+    </h3>
+    <ul>
+      <li>
+        <a href="https://github.com/eset/malware-ioc">ESET’s Malware IoCs</a> -
+        Indicators of Compromises (IOCs) derived from ESET’s various
+        investigations.
+      </li>
+      <li>
+        <a href="https://github.com/fireeye/red_team_tool_countermeasures"
+          >FireEye’s Red Team Tool Countermeasures</a
+        >
+        - Collection of Snort and YARA rules to detect attacks carried out with
+        FireEye’s own Red Team tools, first released after FireEye disclosed a
+        breach in December 2020.
+      </li>
+      <li>
+        <a href="https://github.com/fireeye/sunburst_countermeasures"
+          >FireEye’s Sunburst Countermeasures</a
+        >
+        - Collection of IoC in various languages for detecting backdoored
+        SolarWinds Orion NMS activities and related vulnerabilities.
+      </li>
+      <li>
+        <a href="https://github.com/Yara-Rules/rules">YARA Rules</a> - Project
+        covering the need for IT security researchers to have a single
+        repository where different Yara signatures are compiled, classified and
+        kept as up to date as possible.
+      </li>
+    </ul>
+    <h2 id="tor-onion-service-defenses">Tor Onion service defenses</h2>
+    <p>
+      See also <a href="https://github.com/ajvb/awesome-tor">awesome-tor</a>.
+    </p>
+    <ul>
+      <li>
+        <a href="https://onionbalance.readthedocs.io/">OnionBalance</a> -
+        Provides load-balancing while also making Onion services more resilient
+        and reliable by eliminating single points-of-failure.
+      </li>
+      <li>
+        <a href="https://github.com/mikeperry-tor/vanguards">Vanguards</a> -
+        Version 3 Onion service guard discovery attack mitigation script
+        (intended for eventual inclusion in Tor core).
+      </li>
+    </ul>
+    <h2 id="transport-layer-defenses">Transport-layer defenses</h2>
+    <ul>
+      <li>
+        <a href="https://certbot.eff.org/">Certbot</a> - Free tool to automate
+        the issuance and renewal of TLS certificates from the
+        <a href="https://letsencrypt.org/">LetsEncrypt Root CA</a> with plugins
+        that configure various Web and e-mail server software.
+      </li>
+      <li>
+        <a href="https://github.com/tonarino/innernet">Innernet</a> - Private
+        network system that uses WireGuard under the hood.
+      </li>
+      <li>
+        <a href="https://github.com/cloudflare/mitmengine">MITMEngine</a> -
+        Golang library for server-side detection of TLS interception events.
+      </li>
+      <li>
+        <a href="https://github.com/slackhq/nebula">Nebula</a> - Scalable
+        overlay networking tool with a focus on performance, simplicity and
+        security.
+      </li>
+      <li>
+        <a href="https://openvpn.net/">OpenVPN</a> - Open source, SSL/TLS-based
+        virtual private network (VPN).
+      </li>
+      <li>
+        <a href="https://torproject.org/">Tor</a> - Censorship circumvention and
+        anonymizing overlay network providing distributed, cryptographically
+        verified name services (<code>.onion</code> domains) to enhance
+        publisher privacy and service availability.
+      </li>
+      <li>
+        <a href="https://www.wireguard.com/">WireGuard</a> - Extremely simple
+        yet fast and modern VPN that utilizes state-of-the-art cryptography.
+      </li>
+    </ul>
+    <h2 id="macos-based-defenses">macOS-based defenses</h2>
+    <p>
+      See also
+      <a href="https://github.com/drduh/macOS-Security-and-Privacy-Guide"
+        >drduh/macOS-Security-and-Privacy-Guide</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://objective-see.com/products/blockblock.html"
+          >BlockBlock</a
+        >
+        - Monitors common persistence locations and alerts whenever a persistent
+        component is added, which helps to detect and prevent malware
+        installation.
+      </li>
+      <li>
+        <a href="https://objective-see.com/products/lulu.html">LuLu</a> - Free
+        macOS firewall.
+      </li>
+      <li>
+        <a href="https://github.com/google/santa">Santa</a> - Keep track of
+        binaries that are naughty or nice in an allow/deny-listing system for
+        macOS.
+      </li>
+      <li>
+        <a href="https://github.com/alichtman/stronghold">Stronghold</a> -
+        Easily configure macOS security settings from the terminal.
+      </li>
+      <li>
+        <a href="https://github.com/essandess/macOS-Fortress">macOS Fortress</a>
+        - Automated configuration of kernel-level, OS-level, and client-level
+        security features including privatizing proxying and anti-virus scanning
+        for macOS.
+      </li>
+    </ul>
+    <h2 id="windows-based-defenses">Windows-based defenses</h2>
+    <p>
+      See also
+      <a href="https://github.com/Awesome-Windows/Awesome#security"
+        >awesome-windows#security</a
+      >
+      and
+      <a href="https://github.com/PaulSec/awesome-windows-domain-hardening"
+        >awesome-windows-domain-hardening</a
+      >.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/securitywithoutborders/hardentools"
+          >HardenTools</a
+        >
+        - Utility that disables a number of risky Windows features.
+      </li>
+      <li>
+        <a href="https://github.com/sensepost/notruler">NotRuler</a> - Detect
+        both client-side rules and VBScript enabled forms used by the
+        <a href="https://github.com/sensepost/ruler">Ruler</a> attack tool when
+        attempting to compromise a Microsoft Exchange server.
+      </li>
+      <li>
+        <a href="https://github.com/PlumHound/PlumHound">PlumHound</a> - More
+        effectively use BloodHoundAD in continual security life-cycles by
+        utilizing its pathfinding engine to identify Active Directory security
+        vulnerabilities.
+      </li>
+      <li>
+        <a href="https://www.sandboxie.com/">Sandboxie</a> - Free and open
+        source general purpose Windows application sandboxing utility.
+      </li>
+      <li>
+        <a
+          href="https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck"
+          >Sigcheck</a
+        >
+        - Audit a Windows host’s root certificate store against Microsoft’s
+        <a
+          href="https://docs.microsoft.com/en-us/windows/desktop/SecCrypto/certificate-trust-list-overview"
+          >Certificate Trust List (CTL)</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/linuz/Sticky-Keys-Slayer"
+          >Sticky Keys Slayer</a
+        >
+        - Establishes a Windows RDP session from a list of hostnames and scans
+        for accessibility tools backdoors, alerting if one is discovered.
+      </li>
+      <li>
+        <a href="https://github.com/nsacyber/Windows-Secure-Host-Baseline"
+          >Windows Secure Host Baseline</a
+        >
+        - Group Policy objects, compliance checks, and configuration tools that
+        provide an automated and flexible approach for securely deploying and
+        maintaining the latest releases of Windows 10.
+      </li>
+      <li>
+        <a href="https://github.com/realparisi/WMI_Monitor">WMI Monitor</a> -
+        Log newly created WMI consumers and processes to the Windows Application
+        event log.
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/licenses/by/4.0/"
+        ><img
+          src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by.svg"
+          alt="CC-BY"
+      /></a>
+    </p>
+    <p>
+      This work is licensed under a
+      <a href="https://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International License</a
+      >.
+    </p>
+  </body>
+</html>

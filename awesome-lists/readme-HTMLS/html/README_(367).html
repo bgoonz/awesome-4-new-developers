@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-opengl-awesome">
+      awesome-opengl
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      <a href="https://www.opengl.org"
+        ><img
+          src="https://rawgit.com/eug/awesome-opengl/master/opengl-logo.svg"
+          align="right"
+          width="140"
+      /></a>
+    </p>
+    <p>A curated list of awesome OpenGL libraries, debuggers and resources.</p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#debug">Debug</a></li>
+      <li><a href="#glsl-editors">GLSL Editors</a></li>
+      <li><a href="#libraries">Libraries</a></li>
+      <li><a href="#profile-loaders">Profile Loaders</a></li>
+      <li><a href="#references">References</a></li>
+      <li><a href="#talks">Talks</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#websites">Websites</a></li>
+    </ul>
+    <h2 id="articles">Articles</h2>
+    <p><em>OpenGL articles (non-tutorials)</em></p>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/LWJGL/lwjgl3-wiki/wiki/2.6.1.-Ray-tracing-with-OpenGL-Compute-Shaders-%28Part-I%29"
+          >(2014) Ray tracing with OpenGL Compute Shaders</a
+        >
+        by <strong>Kai Burjack</strong> - Detailed tutorial series about ray
+        tracing using OpenGL (LWJGL).
+      </li>
+      <li>
+        <a
+          href="http://richg42.blogspot.com.au/2014/05/things-that-drive-me-nuts-about-opengl.html"
+          >(2014) Things that drive me nuts about OpenGL</a
+        >
+        by <strong>Rich Geldreich</strong> - Constructive (or not) criticism of
+        GL API.
+      </li>
+      <li>
+        <a
+          href="https://fgiesen.wordpress.com/2011/07/09/a-trip-through-the-graphics-pipeline-2011-index"
+          >(2011) A trip through the graphics pipeline</a
+        >
+        by <strong>Fabian Giesen</strong> - Comprehensive and rich series about
+        the D3D/OpenGL graphics pipeline.
+      </li>
+      <li>
+        <a
+          href="http://duriansoftware.com/joe/An-intro-to-modern-OpenGL.-Chapter-1:-The-Graphics-Pipeline.html"
+          >(2010) What is OpenGL?</a
+        >
+        by <strong>Joe Groff</strong> - Brief introduction to the building
+        blocks of OpenGL.
+      </li>
+    </ul>
+    <h2 id="books">Books</h2>
+    <p><em>Popular books about OpenGL</em></p>
+    <ul>
+      <li>
+        <a href="http://www.amazon.com/dp/1558603875"
+          >A Trip Down the Graphics Pipeline</a
+        >
+        by <strong>Jim Blinn</strong> - Popular book that contains wealth
+        information about the graphics pipeline, and of the best sources to
+        learn the core concepts of Computer Graphics.
+      </li>
+      <li>
+        <a href="http://www.amazon.com/dp/0321399528">Computer Graphics</a> by
+        <strong>John F. Hughes, et al.</strong> - Computer Graphics is indeed a
+        must for anyone being involved in the design and implementation of
+        Computer Graphics algorithms. However, this is not a OpenGL focused
+        book, but contains valuable demonstrations of the technology.
+      </li>
+      <li>
+        <a href="http://www.amazon.com/dp/0132545233"
+          >Interactive Computer Graphics</a
+        >
+        by <strong>Edward Angel and Dave Shreiner</strong> - It provides several
+        examples using OpenGL and it covers several aspects at once, but if you
+        are trying to learn OpenGL on your own you might not find this helpful.
+      </li>
+      <li>
+        <a href="http://www.amazon.com/dp/0321933885"
+          >OpenGL ES 3.0 Programming Guide</a
+        >
+        by <strong>Dan Ginsburg, et al.</strong> - It presents all the necessary
+        information to use the OpenGL ES 3.0 API in a clear manner.
+      </li>
+      <li>
+        <a href="http://www.amazon.com/dp/1439893764">OpenGL Insights</a> by
+        <strong>Patrick Cozzi, Christophe Riccio</strong> - Rich and
+        comprehensive resource to learn techniques and tips, covering several
+        advanced topics of OpenGL.
+      </li>
+      <li>
+        <a href="http://www.amazon.com/dp/0321773039"
+          >OpenGL Programming Guide</a
+        >
+        by <strong>Dave Shreiner, et al.</strong> - It does a good job covering
+        the basics and providing clear reference of the API.
+      </li>
+      <li>
+        <a href="http://www.amazon.com/dp/0321637631"
+          >OpenGL Shading Language</a
+        >
+        by <strong>Randi J. Rost, et al.</strong> - Very clear and well written
+        book about Shading Language. Also, it provides several explanations of
+        writing shaders.
+      </li>
+      <li>
+        <a href="http://www.amazon.com/dp/0321712617">OpenGL SuperBible</a> by
+        <strong>Richard S. Wright, et al.</strong> - It covers the basic
+        concepts of computer graphics and provides clear examples using OpenGL.
+        Definitely, it is a must for beginners.
+      </li>
+      <li>
+        <a href="http://www.amazon.com/dp/1568814240">Real-Time Rendering</a> by
+        <strong>Tomas Akenine-Moller, Eric Haines and Naty Hoffman</strong> - It
+        does a good job at explaining concepts for game engine, basis for game
+        client programming as well as the necessary knowledge for understanding
+        DirectX and OpenGL.
+      </li>
+    </ul>
+    <h2 id="debug">Debug</h2>
+    <p><em>Debugging and profiling libraries</em></p>
+    <ul>
+      <li>
+        <a href="http://apitrace.github.io">apitrace</a> - Tools for tracing
+        OpenGL, Direct3D, and other graphics APIs.
+      </li>
+      <li>
+        <a href="https://github.com/GPUOpen-Tools/CodeXL">CodeXL</a> - AMD’s
+        tool suite that includes debugger, profiler and frame/shader analysis.
+      </li>
+      <li>
+        <a href="http://glsl-debugger.github.io">GL-SL Debugger</a> - Tool for
+        debugging OpenGL programs.
+      </li>
+      <li>
+        <a href="https://github.com/dtrebilco/glintercept">GLIntercept</a> -
+        OpenGL function call interceptor for Windows.
+      </li>
+      <li>
+        <a href="https://software.intel.com/en-us/gpa">Intel-GPA</a> - Intel’s
+        OpenGL Graphics Performance Analyzer.
+      </li>
+      <li>
+        <a
+          href="https://developer.nvidia.com/nvidia-nsight-visual-studio-edition"
+          >NVIDIA® Nsight™</a
+        >
+        - Development platform for graphics applications.
+      </li>
+      <li>
+        <a href="https://github.com/baldurk/renderdoc">RenderDoc</a> - RenderDoc
+        is a stand-alone graphics debugging tool.
+      </li>
+      <li>
+        <a href="https://github.com/wolfpld/tracy">tracy</a> - A real time
+        remote telemetry frame profiler for games and other applications.
+      </li>
+      <li>
+        <a href="https://github.com/ValveSoftware/vogl">vogl</a> - OpenGL
+        capture and playback debugger developed by Valve.
+      </li>
+    </ul>
+    <h2 id="glsl-editors">GLSL Editors</h2>
+    <p><em>Online GLSL Editors</em></p>
+    <ul>
+      <li>
+        <a href="http://glslsandbox.com">GLSL Sandbox</a> - Online live editor
+        for fragment shaders.
+      </li>
+      <li>
+        <a href="http://glslb.in">GLSLbin</a> - Fragment shader sandbox
+        supporting <a href="https://github.com/stackgl/glslify">glslify</a>.
+      </li>
+      <li>
+        <a href="http://shdr.bkcore.com">SHDR Editor</a> - Live GLSL shader
+        editor, viewer and validator.
+      </li>
+      <li>
+        <a href="https://www.shadertoy.com">Shader Toy</a> - Most popular live
+        editor for fragment shaders.
+      </li>
+      <li>
+        <a href="http://shaderfrog.com/">ShaderFrog</a> - WebGL Shader Editor
+        and Composer
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <p><em>Useful libraries for OpenGL applications</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/assimp/assimp">assimp</a> - Portable library
+        to import 3D models in a uniform manner.
+      </li>
+      <li>
+        <a href="http://bulletphysics.org/wordpress">Bullet</a> - It provides
+        state of the art collision detection, soft body and rigid body dynamics.
+      </li>
+      <li>
+        <a href="https://www.fltk.org/">fltk</a> - C++ Toolkit to generate UI
+        widgets portably. <a href="https://www.fltk.org/COPYING.php">LGPLv2</a>
+      </li>
+      <li>
+        <a href="http://freeglut.sourceforge.net">freeGLUT</a> - Mature library
+        that allows to create/manage windows containing OpenGL contexts.
+      </li>
+      <li>
+        <a href="http://www.glfw.org">GLFW</a> - Modern library for
+        creating/interact windows with OpenGL contexts.
+      </li>
+      <li>
+        <a href="https://github.com/brackeen/glfm">GLFM</a> - Supplies an OpenGL
+        ES context and input events for mobile devices and the web.
+      </li>
+      <li>
+        <a href="http://glm.g-truc.net/0.9.6/index.html">glm</a> - Mathematics
+        library for graphics software based on the GLSL specifications.
+      </li>
+      <li>
+        <a href="https://github.com/mosra/magnum">Magnum</a> - It is a 2D/3D
+        graphics engine for modern OpenGL.
+      </li>
+      <li>
+        <a href="http://google.github.io/mathfu/">MathFu</a> - C++ math library
+        developed primarily for games focused on simplicity and efficiency.
+      </li>
+      <li>
+        <a href="http://newtondynamics.com/forum/newton.php">Newton</a> - It is
+        a cross-platform life-like physics.
+      </li>
+      <li>
+        <a href="http://oglplus.org">OGLplus</a> - Collection of libraries which
+        implement an object-oriented facade over OpenGL.
+      </li>
+      <li>
+        <a href="http://www.libsdl.org">SDL</a> - Designed to provide low level
+        access to multimedia and graphics hardware.
+      </li>
+      <li>
+        <a href="http://www.sfml-dev.org">SFML</a> - Simple interface to ease
+        the development of games and multimedia applications.
+      </li>
+      <li>
+        <a href="http://www.lonesock.net/soil.html">SOIL</a> - Tiny C library
+        used primarily for uploading textures into OpenGL. (see
+        <a href="https://bitbucket.org/SpartanJ/soil2">SOIL2</a>)
+      </li>
+      <li>
+        <a href="https://github.com/stevenlovegrove/Pangolin">Pangolin</a> -
+        Lightweight portable rapid development library for managing OpenGL
+        display / interaction and abstracting video input.
+      </li>
+    </ul>
+    <h2 id="profile-loaders">Profile Loaders</h2>
+    <p><em>Profile loaders for OpenGL</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/skaslev/gl3w">gl3w</a> - Simple OpenGL core
+        profile loader.
+      </li>
+      <li>
+        <a href="https://github.com/Dav1dde/glad">glad</a> - Multi profile
+        loader-generator based on the official specs.
+      </li>
+      <li>
+        <a href="https://github.com/nnesse/glbindify">glbindify</a> - Command
+        line tool to generate C bindings for OpenGL, wgl, and glX.
+      </li>
+      <li>
+        <a href="https://github.com/cginternals/glbinding">glbinding</a> -
+        Profile loader leveraging C++11 features to provide type safety.
+      </li>
+      <li>
+        <a href="http://glew.sourceforge.net">GLEW</a> - Mature cross-platform
+        library to load OpenGL extensions.
+      </li>
+    </ul>
+    <h2 id="references">References</h2>
+    <p><em>OpenGL references</em></p>
+    <ul>
+      <li>
+        <a href="http://docs.gl">docs.GL</a> - It is an alternative
+        documentation for OpenGL.
+      </li>
+      <li>
+        <a
+          href="http://web.eecs.umich.edu/~sugih/courses/eecs487/common/notes/APITables.xml"
+          >OpenGL API Tables</a
+        >
+        - Quick reference of API’s for several OpenGL and GLSL versions.
+      </li>
+      <li>
+        <a
+          href="https://www.khronos.org/files/opengl43-quick-reference-card.pdf"
+          >OpenGL Cheat Sheet</a
+        >
+        - Quick reference card of OpenGL 4.3 commands and syntax.
+      </li>
+      <li>
+        <a href="https://www.opengl.org/sdk/docs">OpenGL Docs</a> - Official
+        documentation website.
+      </li>
+      <li>
+        <a href="https://www.opengl.org/wiki/Main_Page">OpenGL Wiki</a> -
+        Official OpenGL wiki.
+      </li>
+    </ul>
+    <h2 id="talks">Talks</h2>
+    <p>
+      <em>OpenGL related talks</em> *
+      <a href="http://gdcvault.com/play/1020791/"
+        >Approaching Zero Driver Overhead in OpenGL</a
+      >
+      -
+      <a
+        href="http://www.slideshare.net/CassEveritt/approaching-zero-driver-overhead"
+        >Slides</a
+      >
+      -
+      <a
+        href="https://www.reddit.com/r/gamedev/comments/21mbo8/we_are_the_authors_of_approaching_zero_driver"
+        >AMA Reddit</a
+      >
+      by
+      <strong>Cass Everitt, Tim Foley, John McDonald, Graham Sellers</strong>
+      [1:15:54] *
+      <a href="https://www.youtube.com/watch?v=-bCeNzgiJ8I"
+        >How Modern OpenGL Can Radically Reduce Driver Overhead</a
+      >
+      by <strong>Cass Everitt, John McDonald</strong> [51:13] *
+      <a href="https://www.youtube.com/watch?v=45O7WTc6k2Y"
+        >Moving Your Games to OpenGL</a
+      >
+      by
+      <strong
+        >Rich Geldreich, Dan Ginsburg, Peter Lohrmann, Jason Mitchell</strong
+      >
+      [54:45]
+    </p>
+    <h2 id="videos">Videos</h2>
+    <p><em>OpenGL video tutorials</em></p>
+    <ul>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLRwVmtr-pp06qT6ckboaOhnm9FxmzHpbY"
+          >Jamie King</a
+        >
+        - Comprehensive tutorials about modern OpenGL and Qt.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLSPw4ASQYyymu3PfG9gxywSPghnSMiOAW"
+          >MakingGamesWithBen</a
+        >
+        - Video tutorials (step-by-step) about OpenGL and game development.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/user/ACMSIGGRAPH/playlists"
+          >SIGGRAPH</a
+        >
+        - Popular conference about computer graphics.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2"
+          >TheChernoProject</a
+        >
+        - Introduction to OpenGL in C++
+      </li>
+      <li>
+        <a href="https://www.youtube.com/user/thebennybox/playlists"
+          >thebennybox</a
+        >
+        - Videos tutorials about OpenGL and game development.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/user/ThinMatrix/playlists"
+          >ThinMatrix</a
+        >
+        - Video tutorials about OpenGL and game development using Java.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLQVvvaa0QuDdfGpqjkEJSeWKGCP31__wD"
+          >sentdex</a
+        >
+        - Videos tutorials about OpenGL (immediate mode) using Python.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLRtjMdoYXLf6zUMDJVRZYV-6g6n62vet8"
+          >Sonar Systems</a
+        >
+        - Learn about the new and modern OpenGL 3.0+.
+      </li>
+    </ul>
+    <h2 id="websites">Websites</h2>
+    <p><em>OpenGL tutorial websites</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/lettier/3d-game-shaders-for-beginners"
+          >3D Game Shaders For Beginners</a
+        >
+        by <strong>David Lettier</strong>
+      </li>
+      <li>
+        <a href="https://learnopengl.com">Learn OpenGL</a> by
+        <strong>Joey de Vries</strong>
+      </li>
+      <li>
+        <a href="https://bitbucket.org/alfonse/gltut/wiki/Home"
+          >Learning Modern 3D Graphics Programming</a
+        >
+        by <strong>Jason L. McKesson</strong>
+      </li>
+      <li>
+        <a href="http://www.lighthouse3d.com/tutorials/glsl-core-tutorial"
+          >Light House 3D</a
+        >
+        by <strong>Light House 3D</strong>
+      </li>
+      <li>
+        <a href="http://www.tomdalling.com/blog/category/modern-opengl"
+          >Modern OpenGL</a
+        >
+        by <strong>Tom Dalling</strong>
+      </li>
+      <li>
+        <a href="https://github.com/McNopper/OpenGL">OpenGL Examples</a> by
+        <strong>Norbert Nopper</strong>
+      </li>
+      <li>
+        <a href="http://ogldev.atspace.co.uk">OpenGL Step by Step</a> by
+        <strong>Etay Meiri</strong>
+      </li>
+      <li>
+        <a href="https://open.gl">OpenGL Tutorial</a> by
+        <strong>Alexander Overvoorde</strong>
+      </li>
+      <li>
+        <a href="http://antongerdelan.net/opengl/index.html">OpenGL Tutorial</a>
+        by <strong>Anton Gerdelan</strong>
+      </li>
+      <li>
+        <a href="http://www.opengl-tutorial.org">OpenGL Tutorial</a> by
+        <strong>Bonder Wu</strong>
+      </li>
+      <li>
+        <a href="http://www.songho.ca/opengl">OpenGL Tutorial</a> by
+        <strong>Song Ho Ahn</strong>
+      </li>
+    </ul>
+    <h2 id="related-lists">Related lists</h2>
+    <p>
+      <em>Similar awesome lists</em> *
+      <a href="https://github.com/sindresorhus/awesome">awesome</a> - A curated
+      list of awesome lists. *
+      <a href="https://github.com/jbhuang0604/awesome-computer-vision"
+        >awesome-computer-vision</a
+      >
+      - A curated list of awesome computer vision resources. *
+      <a href="https://github.com/sjfricke/awesome-webgl">awesome-webgl</a> - A
+      curated list of awesome WebGL libraries, resources and much more. *
+      <a href="https://github.com/vinjn/awesome-vulkan">awesome-vulkan</a> - A
+      curated list of awesome Vulkan projects and ecosystem. *
+      <a href="https://github.com/ellisonleao/magictools">gamedev</a> - A
+      awesome list about game development. *
+      <a href="https://github.com/mattdesl/graphics-resources"
+        >graphics-resources</a
+      >
+      - A list of graphic programming resources.
+    </p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="http://creativecommons.org/licenses/by/4.0/"
+        ><img
+          src="http://i.creativecommons.org/l/by/4.0/88x31.png"
+          alt="Creative Commons License"
+      /></a>
+    </p>
+    <p>
+      This work is licensed under a
+      <a href="http://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International License</a
+      >.
+    </p>
+    <h2 id="contributing">Contributing</h2>
+    <p>
+      Please see
+      <a
+        href="https://github.com/eug/awesome-opengl/blob/master/CONTRIBUTING.md"
+        >CONTRIBUTING</a
+      >
+      for details.
+    </p>
+  </body>
+</html>

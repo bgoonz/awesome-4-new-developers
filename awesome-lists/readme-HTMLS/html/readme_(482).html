@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>readme</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-tap-awesome">
+      Awesome TAP
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+      <a href="https://testanything.org"
+        ><img
+          src="https://testanything.org/images/tap.png"
+          width="67"
+          align="right"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        Useful resources for the
+        <a href="https://testanything.org">Test Anything Protocol</a>
+      </p>
+    </blockquote>
+    <p>
+      TAP is a simple text-based interface between testing modules in a test
+      harness.
+    </p>
+    <p>
+      <em
+        >The list is very JavaScript focused right now. That’s just because I’m
+        only familiar with TAP stuff in the JS world. Contributions welcome for
+        any language.</em
+      >
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#reporters">Reporters</a></li>
+      <li><a href="#producers">Producers</a></li>
+      <li><a href="#consumers">Consumers</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#tutorials">Tutorials</a></li>
+      <li><a href="#documentation">Documentation</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+    <h2 id="reporters">Reporters</h2>
+    <h3 id="javascript">JavaScript</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/scottcorgan/tap-dot">tap-dot</a> - Dotted
+        output.
+      </li>
+      <li>
+        <a href="https://github.com/scottcorgan/tap-spec">tap-spec</a> -
+        Mocha-like spec reporter.
+      </li>
+      <li>
+        <a href="https://github.com/calvinmetcalf/tap-nyan">tap-nyan</a> - Nyan
+        cat.
+      </li>
+      <li>
+        <a href="https://github.com/derhuerst/tap-min">tap-min</a> - Minimal
+        output.
+      </li>
+      <li>
+        <a href="https://github.com/namuol/tap-difflet">tap-difflet</a> -
+        Minimal output with diffing.
+      </li>
+      <li>
+        <a href="https://github.com/axross/tap-diff">tap-diff</a> -
+        Human-friendly output with diffing.
+      </li>
+      <li>
+        <a href="https://github.com/joeybaker/tap-simple">tap-simple</a> -
+        Simple output.
+      </li>
+      <li>
+        <a href="https://github.com/substack/faucet">faucet</a> - Human-readable
+        summarizer.
+      </li>
+      <li>
+        <a href="https://github.com/isaacs/tap-mocha-reporter"
+          >tap-mocha-reporter</a
+        >
+        - Use any of the
+        <a
+          href="https://github.com/isaacs/tap-mocha-reporter/tree/master/lib/reporters"
+          >Mocha reporters</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/zoubin/tap-summary">tap-summary</a> -
+        Summarized output.
+      </li>
+      <li>
+        <a href="https://github.com/clux/tap-pessimist">tap-pessimist</a> - Only
+        shows failed tests.
+      </li>
+      <li>
+        <a href="https://github.com/toolness/tap-prettify">tap-prettify</a> -
+        Nice readable output with diffing.
+      </li>
+      <li>
+        <a href="https://github.com/substack/tap-colorize">tap-colorize</a> -
+        Colorize the output while preserving machine-readability.
+      </li>
+      <li>
+        <a href="https://github.com/juliangruber/tap-bail">tap-bail</a> - Bail
+        out when the first test fails.
+      </li>
+      <li>
+        <a href="https://github.com/axross/tap-notify">tap-notify</a> - Notifier
+        for macOS, Linux and Windows.
+      </li>
+      <li>
+        <a href="https://github.com/gummesson/tap-json">tap-json</a> - JSON
+        output.
+      </li>
+      <li>
+        <a href="https://github.com/yovasx2/ava-tap-json">ava-tap-json</a> -
+        JSON output with AVA compatibility.
+      </li>
+      <li>
+        <a href="https://github.com/aghassemi/tap-xunit">tap-xunit</a> - xUnit
+        output.
+      </li>
+      <li>
+        <a href="https://github.com/smockle/tap-teamcity">tap-teamcity</a> -
+        Output for TeamCity.
+      </li>
+    </ul>
+    <h2 id="producers">Producers</h2>
+    <p>Things that produce TAP output.</p>
+    <h3 id="javascript-1">JavaScript</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/sindresorhus/ava">AVA</a> - Futuristic test
+        runner (<code>$ ava --tap</code>).
+      </li>
+      <li>
+        <a href="https://github.com/isaacs/node-tap">tap</a> - TAP test
+        framework for Node.js.
+      </li>
+      <li>
+        <a href="https://github.com/substack/tape">tape</a> - TAP-producing test
+        harness for Node.js and browsers.
+      </li>
+      <li>
+        <a href="https://eslint.org/docs/user-guide/formatters/#tap">ESLint</a>
+        - Pluggable JavaScript linter (<code>$ eslint --format=tap</code>).
+      </li>
+      <li>
+        <a href="https://mochajs.org">Mocha</a> - Feature-rich test framework
+        for Node.js and browsers (<code>$ mocha reporter=tap</code>).
+      </li>
+      <li>
+        <a href="https://github.com/twada/qunit-tap">qunit-tap</a> - TAP output
+        for QUnit.
+      </li>
+      <li>
+        <a href="https://github.com/larrymyers/jasmine-reporters"
+          >jasmine-reporters</a
+        >
+        - TAP output for Jasmine.
+      </li>
+      <li>
+        <a href="https://github.com/fumiakiy/karma-tap-reporter"
+          >karma-tap-reporter</a
+        >
+        - TAP output for Karma.
+      </li>
+      <li>
+        <a href="https://github.com/zkochan/mos">mos</a> - Markdown file
+        generator and tester (<code>$ mos test --tap</code>).
+      </li>
+      <li>
+        <a href="https://github.com/lorenzofox3/zora">zora</a> - TAP-producing
+        test runner that works with ES2015 without Babel.
+      </li>
+    </ul>
+    <h3 id="swift">Swift</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/swiftdocorg/tap">TAP</a> - A Swift package
+        for the Test Anything Protocol (v13).
+      </li>
+    </ul>
+    <h3 id="fish">Fish</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/fisherman/fishtape">Fishtape</a> - TAP
+        producer and test harness for fish.
+      </li>
+    </ul>
+    <h3 id="bash">Bash</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/sstephenson/bats">bats</a> - Bash Automated
+        Testing System.
+      </li>
+      <li>
+        <a href="https://github.com/shellspec/shellspec">ShellSpec</a> - A
+        full-featured BDD unit testing framework for POSIX shells.
+      </li>
+    </ul>
+    <p><a href="https://testanything.org/producers.html">More…</a></p>
+    <h2 id="consumers">Consumers</h2>
+    <p>Things that consume TAP output.</p>
+    <h3 id="javascript-2">JavaScript</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/substack/tap-parser">tap-parser</a> - TAP
+        parser.
+      </li>
+      <li>
+        <a href="https://github.com/scottcorgan/tap-out">tap-out</a> - TAP
+        parser.
+      </li>
+      <li>
+        <a href="https://github.com/isaacs/yamlish">yamlish</a> - YAML-block
+        parser.
+      </li>
+    </ul>
+    <p><a href="https://testanything.org/consumers.html">More…</a></p>
+    <h2 id="tools">Tools</h2>
+    <h3 id="javascript-3">JavaScript</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/Jam3/tap-dev-tool">tap-dev-tool</a> -
+        Prettify TAP in the browser console.
+      </li>
+      <li>
+        <a href="https://github.com/anko/tap-merge">tap-merge</a> - Merge
+        multiple TAP streams.
+      </li>
+      <li>
+        <a href="https://github.com/hughsk/smokestack">smokestack</a> - Run TAP
+        tests in a browser and write the output to <code>stdout</code>.
+      </li>
+      <li>
+        <a href="https://github.com/derhuerst/chutney">chutney</a> - Run TAP
+        tests at Sauce Labs. Lightweight
+        <a href="https://github.com/hughsk/smokestack">smokestack</a>
+        alternative.
+      </li>
+    </ul>
+    <h3 id="python">Python</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/mblayman/tappy">tappy</a> - Tools for
+        working with TAP.
+      </li>
+    </ul>
+    <h2 id="articles">Articles</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.effectiveperlprogramming.com/2011/05/understand-the-test-anything-protocol/"
+          >Understand the Test Anything Protocol</a
+        >
+      </li>
+    </ul>
+    <h2 id="tutorials">Tutorials</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/finnp/test-anything">test-anything</a> -
+        Learn to test anything with TAP through an interactive workshop.
+      </li>
+    </ul>
+    <h2 id="documentation">Documentation</h2>
+    <ul>
+      <li>
+        <a href="https://testanything.org/tap-version-13-specification.html"
+          >Specification</a
+        >
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Test_Anything_Protocol"
+          >Wikipedia</a
+        >
+      </li>
+    </ul>
+    <h2 id="community">Community</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/TestAnything/Specification/issues"
+          >Discuss</a
+        >
+      </li>
+      <li>
+        <a href="https://www.reddit.com/r/testanythingprotocol">Reddit</a>
+      </li>
+      <li>
+        <a href="https://stackoverflow.com/questions/tagged/tap"
+          >Stack Overflow</a
+        >
+      </li>
+    </ul>
+  </body>
+</html>

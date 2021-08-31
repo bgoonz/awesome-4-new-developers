@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-security">Awesome Security</h1>
+    <p>
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </p>
+    <p>
+      A collection of awesome software, libraries, documents, books, resources
+      and cool stuff about security.
+    </p>
+    <p>
+      Inspired by
+      <a href="https://github.com/ziadoz/awesome-php">awesome-php</a>,
+      <a href="https://github.com/vinta/awesome-python">awesome-python</a>.
+    </p>
+    <p>
+      Thanks to all
+      <a href="https://github.com/sbilly/awesome-security/graphs/contributors"
+        >contributors</a
+      >, you’re awesome and wouldn’t be possible without you! The goal is to
+      build a categorized community-driven collection of very well-known
+      resources.
+    </p>
+    <ul>
+      <li>
+        <a href="#awesome-security">Awesome Security</a>
+        <ul>
+          <li>
+            <a href="#network">Network</a>
+            <ul>
+              <li><a href="#scanning--pentesting">Scanning / Pentesting</a></li>
+              <li><a href="#monitoring--logging">Monitoring / Logging</a></li>
+              <li>
+                <a href="#ids--ips--host-ids--host-ips"
+                  >IDS / IPS / Host IDS / Host IPS</a
+                >
+              </li>
+              <li><a href="#honey-pot--honey-net">Honey Pot / Honey Net</a></li>
+              <li>
+                <a href="#full-packet-capture--forensic"
+                  >Full Packet Capture / Forensic</a
+                >
+              </li>
+              <li><a href="#sniffer">Sniffer</a></li>
+              <li>
+                <a href="#security-information--event-management"
+                  >Security Information &amp; Event Management</a
+                >
+              </li>
+              <li><a href="#vpn">VPN</a></li>
+              <li>
+                <a href="#fast-packet-processing">Fast Packet Processing</a>
+              </li>
+              <li><a href="#firewall">Firewall</a></li>
+              <li><a href="#anti-spam">Anti-Spam</a></li>
+              <li>
+                <a href="#docker-images-for-penetration-testing--security"
+                  >Docker</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#endpoint">Endpoint</a>
+            <ul>
+              <li>
+                <a href="#anti-virus--anti-malware"
+                  >Anti-Virus / Anti-Malware</a
+                >
+              </li>
+              <li>
+                <a href="#content-disarm--reconstruct"
+                  >Content Disarm &amp; Reconstruct</a
+                >
+              </li>
+              <li>
+                <a href="#configuration-management">Configuration Management</a>
+              </li>
+              <li><a href="#authentication">Authentication</a></li>
+              <li>
+                <a href="#mobile--android--ios">Mobile / Android / iOS</a>
+              </li>
+              <li><a href="#forensics">Forensics</a></li>
+            </ul>
+          </li>
+          <li><a href="#threat-intelligence">Threat Intelligence</a></li>
+          <li>
+            <a href="#web">Web</a>
+            <ul>
+              <li><a href="#organization">Organization</a></li>
+              <li>
+                <a href="#web-application-firewall">Web Application Firewall</a>
+              </li>
+              <li>
+                <a href="#scanning--pentesting-1">Scanning / Pentesting</a>
+              </li>
+              <li>
+                <a href="#runtime-application-self-protection"
+                  >Runtime Application Self-Protection</a
+                >
+              </li>
+              <li><a href="#development">Development</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#red-team-infrastructure-deployment"
+              >Red Team Infrastructure Deployment</a
+            >
+          </li>
+          <li><a href="#exploits--payloads">Exploits &amp; Payloads</a></li>
+          <li><a href="#usability">Usability</a></li>
+          <li><a href="#big-data">Big Data</a></li>
+          <li><a href="#devops">DevOps</a></li>
+          <li>
+            <a href="#operating-systems">Operating Systems</a>
+            <ul>
+              <li><a href="#online-resources">Online resources</a></li>
+            </ul>
+          </li>
+          <li><a href="#datastores">Datastores</a></li>
+          <li><a href="#fraud-prevention">Fraud prevention</a></li>
+          <li><a href="#ebooks">EBooks</a></li>
+          <li>
+            <a href="#other-awesome-lists">Other Awesome Lists</a>
+            <ul>
+              <li>
+                <a href="#other-security-awesome-lists"
+                  >Other Security Awesome Lists</a
+                >
+              </li>
+              <li>
+                <a href="#other-common-awesome-lists"
+                  >Other Common Awesome Lists</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li><a href="#contributing">Contributing</a></li>
+        </ul>
+      </li>
+    </ul>
+    <hr />
+    <h2 id="network">Network</h2>
+    <h3 id="scanning-pentesting">Scanning / Pentesting</h3>
+    <ul>
+      <li>
+        <a href="http://www.openvas.org/">OpenVAS</a> - OpenVAS is a framework
+        of several services and tools offering a comprehensive and powerful
+        vulnerability scanning and vulnerability management solution.
+      </li>
+      <li>
+        <a href="https://github.com/rapid7/metasploit-framework"
+          >Metasploit Framework</a
+        >
+        - A tool for developing and executing exploit code against a remote
+        target machine. Other important sub-projects include the Opcode
+        Database, shellcode archive and related research.
+      </li>
+      <li>
+        <a href="https://www.kali.org/">Kali</a> - Kali Linux is a
+        Debian-derived Linux distribution designed for digital forensics and
+        penetration testing. Kali Linux is preinstalled with numerous
+        penetration-testing programs, including nmap (a port scanner), Wireshark
+        (a packet analyzer), John the Ripper (a password cracker), and
+        Aircrack-ng (a software suite for penetration-testing wireless LANs).
+      </li>
+      <li>
+        <a href="https://github.com/rafael-santiago/pig">pig</a> - A Linux
+        packet crafting tool.
+      </li>
+      <li>
+        <a href="https://github.com/gpotter2/awesome-scapy">scapy</a> - Scapy:
+        the python-based interactive packet manipulation program &amp; library.
+      </li>
+      <li>
+        <a href="https://github.com/rfunix/Pompem">Pompem</a> - Pompem is an
+        open source tool, which is designed to automate the search for exploits
+        in major databases. Developed in Python, has a system of advanced
+        search, thus facilitating the work of pentesters and ethical hackers. In
+        its current version, performs searches in databases: Exploit-db,
+        1337day, Packetstorm Security…
+      </li>
+      <li>
+        <a href="https://nmap.org">Nmap</a> - Nmap is a free and open source
+        utility for network discovery and security auditing.
+      </li>
+      <li>
+        <a href="https://github.com/caffix/amass">Amass</a> - Amass performs DNS
+        subdomain enumeration by scraping the largest number of disparate data
+        sources, recursive brute forcing, crawling of web archives, permuting
+        and altering names, reverse DNS sweeping and other techniques.
+      </li>
+      <li>
+        <a href="https://github.com/rozgo/anevicon">Anevicon</a> - The most
+        powerful UDP-based load generator, written in Rust.
+      </li>
+      <li>
+        <a href="https://github.com/isgasho/finshir">Finshir</a> - A
+        coroutines-driven Low &amp; Slow traffic generator, written in Rust.
+      </li>
+      <li>
+        <a href="https://github.com/GoVanguard/legion">Legion</a> - Open source
+        semi-automated discovery and reconnaissance network penetration testing
+        framework.
+      </li>
+      <li>
+        <a href="https://github.com/aboul3la/Sublist3r">Sublist3r</a> - Fast
+        subdomains enumeration tool for penetration testers
+      </li>
+      <li>
+        <a href="https://github.com/RustScan/RustScan">RustScan</a> - Faster
+        Nmap scanning with Rust. Take a 17 minute Nmap scan down to 19 seconds.
+      </li>
+      <li>
+        <a href="https://github.com/jtpereyda/boofuzz">Boofuzz</a> - Fuzzing
+        engine and fuzz testing framework.
+      </li>
+      <li>
+        <a href="https://github.com/RedTeamPentesting/monsoon">monsoon</a> -
+        Very flexible and fast interactive HTTP enumeration/fuzzing.
+      </li>
+      <li>
+        <a href="https://github.com/spectralops/netz">Netz</a>- Discover
+        internet-wide misconfigurations, using zgrab2 and others.
+      </li>
+    </ul>
+    <h3 id="monitoring-logging">Monitoring / Logging</h3>
+    <ul>
+      <li>
+        <a href="http://justniffer.sourceforge.net/">justniffer</a> - Justniffer
+        is a network protocol analyzer that captures network traffic and
+        produces logs in a customized way, can emulate Apache web server log
+        files, track response times and extract all “intercepted” files from the
+        HTTP traffic.
+      </li>
+      <li>
+        <a href="http://dumpsterventures.com/jason/httpry/">httpry</a> - httpry
+        is a specialized packet sniffer designed for displaying and logging HTTP
+        traffic. It is not intended to perform analysis itself, but to capture,
+        parse, and log the traffic for later analysis. It can be run in
+        real-time displaying the traffic as it is parsed, or as a daemon process
+        that logs to an output file. It is written to be as lightweight and
+        flexible as possible, so that it can be easily adaptable to different
+        applications.
+      </li>
+      <li>
+        <a href="http://ngrep.sourceforge.net/">ngrep</a> - ngrep strives to
+        provide most of GNU grep’s common features, applying them to the network
+        layer. ngrep is a pcap-aware tool that will allow you to specify
+        extended regular or hexadecimal expressions to match against data
+        payloads of packets. It currently recognizes IPv4/6, TCP, UDP, ICMPv4/6,
+        IGMP and Raw across Ethernet, PPP, SLIP, FDDI, Token Ring and null
+        interfaces, and understands BPF filter logic in the same fashion as more
+        common packet sniffing tools, such as tcpdump and snoop.
+      </li>
+      <li>
+        <a href="https://github.com/gamelinux/passivedns">passivedns</a> - A
+        tool to collect DNS records passively to aid Incident handling, Network
+        Security Monitoring (NSM) and general digital forensics. PassiveDNS
+        sniffs traffic from an interface or reads a pcap-file and outputs the
+        DNS-server answers to a log file. PassiveDNS can cache/aggregate
+        duplicate DNS answers in-memory, limiting the amount of data in the
+        logfile without loosing the essens in the DNS answer.
+      </li>
+      <li>
+        <a href="http://sagan.quadrantsec.com/">sagan</a> - Sagan uses a ‘Snort
+        like’ engine and rules to analyze logs (syslog/event
+        log/snmptrap/netflow/etc).
+      </li>
+      <li>
+        <a href="https://nodesecurity.io/">Node Security Platform</a> - Similar
+        feature set to Snyk, but free in most cases, and very cheap for others.
+      </li>
+      <li>
+        <a href="http://www.ntop.org/products/traffic-analysis/ntop/">ntopng</a>
+        - Ntopng is a network traffic probe that shows the network usage,
+        similar to what the popular top Unix command does.
+      </li>
+      <li>
+        <a href="https://github.com/rabbitstack/fibratus">Fibratus</a> -
+        Fibratus is a tool for exploration and tracing of the Windows kernel. It
+        is able to capture the most of the Windows kernel activity -
+        process/thread creation and termination, file system I/O, registry,
+        network activity, DLL loading/unloading and much more. Fibratus has a
+        very simple CLI which encapsulates the machinery to start the kernel
+        event stream collector, set kernel event filters or run the lightweight
+        Python modules called filaments.
+      </li>
+      <li>
+        <a href="https://github.com/evilsocket/opensnitch">opensnitch</a> -
+        OpenSnitch is a GNU/Linux port of the Little Snitch application firewall
+      </li>
+    </ul>
+    <h3 id="ids-ips-host-ids-host-ips">IDS / IPS / Host IDS / Host IPS</h3>
+    <ul>
+      <li>
+        <a href="https://www.snort.org/">Snort</a> - Snort is a free and open
+        source network intrusion prevention system (NIPS) and network intrusion
+        detection system (NIDS)created by Martin Roesch in 1998. Snort is now
+        developed by Sourcefire, of which Roesch is the founder and CTO. In
+        2009, Snort entered InfoWorld’s Open Source Hall of Fame as one of the
+        “greatest [pieces of] open source software of all time”.
+      </li>
+      <li>
+        <a href="https://zeek.org/">Zeek</a> - Zeek is a powerful network
+        analysis framework that is much different from the typical IDS you may
+        know.
+      </li>
+      <li>
+        <a href="https://ossec.github.io/">OSSEC</a> - Comprehensive Open Source
+        HIDS. Not for the faint of heart. Takes a bit to get your head around
+        how it works. Performs log analysis, file integrity checking, policy
+        monitoring, rootkit detection, real-time alerting and active response.
+        It runs on most operating systems, including Linux, MacOS, Solaris,
+        HP-UX, AIX and Windows. Plenty of reasonable documentation. Sweet spot
+        is medium to large deployments.
+      </li>
+      <li>
+        <a href="http://suricata-ids.org/">Suricata</a> - Suricata is a high
+        performance Network IDS, IPS and Network Security Monitoring engine.
+        Open Source and owned by a community run non-profit foundation, the Open
+        Information Security Foundation (OISF). Suricata is developed by the
+        OISF and its supporting vendors.
+      </li>
+      <li>
+        <a href="http://blog.securityonion.net/">Security Onion</a> - Security
+        Onion is a Linux distro for intrusion detection, network security
+        monitoring, and log management. It’s based on Ubuntu and contains Snort,
+        Suricata, Zeek, OSSEC, Sguil, Squert, Snorby, ELSA, Xplico,
+        NetworkMiner, and many other security tools. The easy-to-use Setup
+        wizard allows you to build an army of distributed sensors for your
+        enterprise in minutes!
+      </li>
+      <li>
+        <a href="https://github.com/marshyski/sshwatch">sshwatch</a> - IPS for
+        SSH similar to DenyHosts written in Python. It also can gather
+        information about attacker during the attack in a log.
+      </li>
+      <li>
+        <a href="https://fbb-git.github.io/stealth/">Stealth</a> - File
+        integrity checker that leaves virtually no sediment. Controller runs
+        from another machine, which makes it hard for an attacker to know that
+        the file system is being checked at defined pseudo random intervals over
+        SSH. Highly recommended for small to medium deployments.
+      </li>
+      <li>
+        <a href="https://bitbucket.org/camp0/aiengine">AIEngine</a> - AIEngine
+        is a next generation interactive/programmable Python/Ruby/Java/Lua
+        packet inspection engine with capabilities of learning without any human
+        intervention, NIDS(Network Intrusion Detection System) functionality,
+        DNS domain classification, network collector, network forensics and many
+        others.
+      </li>
+      <li>
+        <a href="http://denyhosts.sourceforge.net/">Denyhosts</a> - Thwart SSH
+        dictionary based attacks and brute force attacks.
+      </li>
+      <li>
+        <a href="http://www.fail2ban.org/wiki/index.php/Main_Page">Fail2Ban</a>
+        - Scans log files and takes action on IPs that show malicious behavior.
+      </li>
+      <li>
+        <a href="http://www.sshguard.net/">SSHGuard</a> - A software to protect
+        services in addition to SSH, written in C
+      </li>
+      <li>
+        <a href="https://cisofy.com/lynis/">Lynis</a> - an open source security
+        auditing tool for Linux/Unix.
+      </li>
+    </ul>
+    <h3 id="honey-pot-honey-net">Honey Pot / Honey Net</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/paralax/awesome-honeypots"
+          >awesome-honeypots</a
+        >
+        - The canonical awesome honeypot list.
+      </li>
+      <li>
+        <a href="https://github.com/foospidy/HoneyPy">HoneyPy</a> - HoneyPy is a
+        low to medium interaction honeypot. It is intended to be easy to:
+        deploy, extend functionality with plugins, and apply custom
+        configurations.
+      </li>
+      <li>
+        <a href="http://conpot.org/">Conpot</a> - ICS/SCADA Honeypot. Conpot is
+        a low interactive server side Industrial Control Systems honeypot
+        designed to be easy to deploy, modify and extend. By providing a range
+        of common industrial control protocols we created the basics to build
+        your own system, capable to emulate complex infrastructures to convince
+        an adversary that he just found a huge industrial complex. To improve
+        the deceptive capabilities, we also provided the possibility to server a
+        custom human machine interface to increase the honeypots attack surface.
+        The response times of the services can be artificially delayed to mimic
+        the behaviour of a system under constant load. Because we are providing
+        complete stacks of the protocols, Conpot can be accessed with productive
+        HMI’s or extended with real hardware. Conpot is developed under the
+        umbrella of the Honeynet Project and on the shoulders of a couple of
+        very big giants.
+      </li>
+      <li>
+        <a href="https://github.com/zeroq/amun">Amun</a> - Amun Python-based
+        low-interaction Honeypot.
+      </li>
+      <li>
+        <a href="http://glastopf.org/">Glastopf</a> - Glastopf is a Honeypot
+        which emulates thousands of vulnerabilities to gather data from attacks
+        targeting web applications. The principle behind it is very simple:
+        Reply the correct response to the attacker exploiting the web
+        application.
+      </li>
+      <li>
+        <a href="https://github.com/desaster/kippo">Kippo</a> - Kippo is a
+        medium interaction SSH honeypot designed to log brute force attacks and,
+        most importantly, the entire shell interaction performed by the
+        attacker.
+      </li>
+      <li>
+        <a href="http://kojoney.sourceforge.net/">Kojoney</a> - Kojoney is a low
+        level interaction honeypot that emulates an SSH server. The daemon is
+        written in Python using the Twisted Conch libraries.
+      </li>
+      <li>
+        <a href="https://github.com/tnich/honssh">HonSSH</a> - HonSSH is a
+        high-interaction Honey Pot solution. HonSSH will sit between an attacker
+        and a honey pot, creating two separate SSH connections between them.
+      </li>
+      <li>
+        <a href="http://sourceforge.net/projects/bifrozt/">Bifrozt</a> - Bifrozt
+        is a NAT device with a DHCP server that is usually deployed with one NIC
+        connected directly to the Internet and one NIC connected to the internal
+        network. What differentiates Bifrozt from other standard NAT devices is
+        its ability to work as a transparent SSHv2 proxy between an attacker and
+        your honeypot. If you deployed an SSH server on Bifrozt’s internal
+        network it would log all the interaction to a TTY file in plain text
+        that could be viewed later and capture a copy of any files that were
+        downloaded. You would not have to install any additional software,
+        compile any kernel modules or use a specific version or type of
+        operating system on the internal SSH server for this to work. It will
+        limit outbound traffic to a set number of ports and will start to drop
+        outbound packets on these ports when certain limits are exceeded.
+      </li>
+      <li>
+        <a href="http://bruteforce.gr/honeydrive">HoneyDrive</a> - HoneyDrive is
+        the premier honeypot Linux distro. It is a virtual appliance (OVA) with
+        Xubuntu Desktop 12.04.4 LTS edition installed. It contains over 10
+        pre-installed and pre-configured honeypot software packages such as
+        Kippo SSH honeypot, Dionaea and Amun malware honeypots, Honeyd
+        low-interaction honeypot, Glastopf web honeypot and Wordpot, Conpot
+        SCADA/ICS honeypot, Thug and PhoneyC honeyclients and more. Additionally
+        it includes many useful pre-configured scripts and utilities to analyze,
+        visualize and process the data it can capture, such as Kippo-Graph,
+        Honeyd-Viz, DionaeaFR, an ELK stack and much more. Lastly, almost 90
+        well-known malware analysis, forensics and network monitoring related
+        tools are also present in the distribution.
+      </li>
+      <li>
+        <a href="http://www.cuckoosandbox.org/">Cuckoo Sandbox</a> - Cuckoo
+        Sandbox is an Open Source software for automating analysis of suspicious
+        files. To do so it makes use of custom components that monitor the
+        behavior of the malicious processes while running in an isolated
+        environment.
+      </li>
+      <li>
+        <a
+          href="http://dtag-dev-sec.github.io/mediator/feature/2017/11/07/t-pot-17.10.html"
+          >T-Pot Honeypot Distro</a
+        >
+        - T-Pot is based on the network installer of Ubuntu Server 16/17.x LTS.
+        The honeypot daemons as well as other support components being used have
+        been containerized using docker. This allows us to run multiple honeypot
+        daemons on the same network interface while maintaining a small
+        footprint and constrain each honeypot within its own environment.
+        Installation over vanilla Ubuntu -
+        <a href="https://github.com/dtag-dev-sec/t-pot-autoinstall"
+          >T-Pot Autoinstall</a
+        >
+        - This script will install T-Pot 16.04/17.10 on a fresh Ubuntu 16.04.x
+        LTS (64bit). It is intended to be used on hosted servers, where an
+        Ubuntu base image is given and there is no ability to install custom ISO
+        images. Successfully tested on vanilla Ubuntu 16.04.3 in VMware.
+      </li>
+    </ul>
+    <h3 id="full-packet-capture-forensic">Full Packet Capture / Forensic</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/simsong/tcpflow">tcpflow</a> - tcpflow is a
+        program that captures data transmitted as part of TCP connections
+        (flows), and stores the data in a way that is convenient for protocol
+        analysis and debugging. Each TCP flow is stored in its own file. Thus,
+        the typical TCP flow will be stored in two files, one for each
+        direction. tcpflow can also process stored ‘tcpdump’ packet flows.
+      </li>
+      <li>
+        <a href="http://www.xplico.org/">Xplico</a> - The goal of Xplico is
+        extract from an internet traffic capture the applications data
+        contained. For example, from a pcap file Xplico extracts each email
+        (POP, IMAP, and SMTP protocols), all HTTP contents, each VoIP call
+        (SIP), FTP, TFTP, and so on. Xplico isn’t a network protocol analyzer.
+        Xplico is an open source Network Forensic Analysis Tool (NFAT).
+      </li>
+      <li>
+        <a href="https://github.com/aol/moloch">Moloch</a> - Moloch is an open
+        source, large scale IPv4 packet capturing (PCAP), indexing and database
+        system. A simple web interface is provided for PCAP browsing, searching,
+        and exporting. APIs are exposed that allow PCAP data and JSON-formatted
+        session data to be downloaded directly. Simple security is implemented
+        by using HTTPS and HTTP digest password support or by using apache in
+        front. Moloch is not meant to replace IDS engines but instead work along
+        side them to store and index all the network traffic in standard PCAP
+        format, providing fast access. Moloch is built to be deployed across
+        many systems and can scale to handle multiple gigabits/sec of traffic.
+      </li>
+      <li>
+        <a href="http://www.openfpc.org">OpenFPC</a> - OpenFPC is a set of tools
+        that combine to provide a lightweight full-packet network traffic
+        recorder &amp; buffering system. It’s design goal is to allow non-expert
+        users to deploy a distributed network traffic recorder on COTS hardware
+        while integrating into existing alert and log management tools.
+      </li>
+      <li>
+        <a href="https://github.com/USArmyResearchLab/Dshell">Dshell</a> -
+        Dshell is a network forensic analysis framework. Enables rapid
+        development of plugins to support the dissection of network packet
+        captures.
+      </li>
+      <li>
+        <a href="https://github.com/google/stenographer">stenographer</a> -
+        Stenographer is a packet capture solution which aims to quickly spool
+        all packets to disk, then provide simple, fast access to subsets of
+        those packets.
+      </li>
+    </ul>
+    <h3 id="sniffer">Sniffer</h3>
+    <ul>
+      <li>
+        <a href="https://www.wireshark.org">wireshark</a> - Wireshark is a free
+        and open-source packet analyzer. It is used for network troubleshooting,
+        analysis, software and communications protocol development, and
+        education. Wireshark is very similar to tcpdump, but has a graphical
+        front-end, plus some integrated sorting and filtering options.
+      </li>
+      <li>
+        <a href="http://netsniff-ng.org/">netsniff-ng</a> - netsniff-ng is a
+        free Linux networking toolkit, a Swiss army knife for your daily Linux
+        network plumbing if you will. Its gain of performance is reached by
+        zero-copy mechanisms, so that on packet reception and transmission the
+        kernel does not need to copy packets from kernel space to user space and
+        vice versa.
+      </li>
+      <li>
+        <a
+          href="https://addons.mozilla.org/en-US/firefox/addon/http-header-live/"
+          >Live HTTP headers</a
+        >
+        - Live HTTP headers is a free firefox addon to see your browser requests
+        in real time. It shows the entire headers of the requests and can be
+        used to find the security loopholes in implementations.
+      </li>
+    </ul>
+    <h3 id="security-information-event-management">
+      Security Information &amp; Event Management
+    </h3>
+    <ul>
+      <li>
+        <a href="https://www.prelude-siem.org/">Prelude</a> - Prelude is a
+        Universal “Security Information &amp; Event Management” (SIEM) system.
+        Prelude collects, normalizes, sorts, aggregates, correlates and reports
+        all security-related events independently of the product brand or
+        license giving rise to such events; Prelude is “agentless”.
+      </li>
+      <li>
+        <a href="https://www.alienvault.com/open-threat-exchange/projects"
+          >OSSIM</a
+        >
+        - OSSIM provides all of the features that a security professional needs
+        from a SIEM offering – event collection, normalization, and correlation.
+      </li>
+      <li>
+        <a href="https://github.com/certsocietegenerale/FIR">FIR</a> - Fast
+        Incident Response, a cybersecurity incident management platform.
+      </li>
+      <li>
+        <a href="https://github.com/dogoncouch/LogESP">LogESP</a> - Open Source
+        SIEM (Security Information and Event Management system).
+      </li>
+    </ul>
+    <h3 id="vpn">VPN</h3>
+    <ul>
+      <li>
+        <a href="https://openvpn.net/">OpenVPN</a> - OpenVPN is an open source
+        software application that implements virtual private network (VPN)
+        techniques for creating secure point-to-point or site-to-site
+        connections in routed or bridged configurations and remote access
+        facilities. It uses a custom security protocol that utilizes SSL/TLS for
+        key exchange.
+      </li>
+    </ul>
+    <h3 id="fast-packet-processing">Fast Packet Processing</h3>
+    <ul>
+      <li>
+        <a href="http://dpdk.org/">DPDK</a> - DPDK is a set of libraries and
+        drivers for fast packet processing.
+      </li>
+      <li>
+        <a href="https://github.com/pfq/PFQ">PFQ</a> - PFQ is a functional
+        networking framework designed for the Linux operating system that allows
+        efficient packets capture/transmission (10G and beyond), in-kernel
+        functional processing and packets steering across sockets/end-points.
+      </li>
+      <li>
+        <a href="http://www.ntop.org/products/packet-capture/pf_ring/"
+          >PF_RING</a
+        >
+        - PF_RING is a new type of network socket that dramatically improves the
+        packet capture speed.
+      </li>
+      <li>
+        <a
+          href="http://www.ntop.org/products/packet-capture/pf_ring/pf_ring-zc-zero-copy/"
+          >PF_RING ZC (Zero Copy)</a
+        >
+        - PF_RING ZC (Zero Copy) is a flexible packet processing framework that
+        allows you to achieve 1/10 Gbit line rate packet processing (both RX and
+        TX) at any packet size. It implements zero copy operations including
+        patterns for inter-process and inter-VM (KVM) communications.
+      </li>
+      <li>
+        <a
+          href="https://elixir.bootlin.com/linux/latest/source/Documentation/networking/packet_mmap.rst"
+          >PACKET_MMAP/TPACKET/AF_PACKET</a
+        >
+        - It’s fine to use PACKET_MMAP to improve the performance of the capture
+        and transmission process in Linux.
+      </li>
+      <li>
+        <a href="http://info.iet.unipi.it/~luigi/netmap/">netmap</a> - netmap is
+        a framework for high speed packet I/O. Together with its companion VALE
+        software switch, it is implemented as a single kernel module and
+        available for FreeBSD, Linux and now also Windows.
+      </li>
+    </ul>
+    <h3 id="firewall">Firewall</h3>
+    <ul>
+      <li>
+        <a href="https://www.pfsense.org/">pfSense</a> - Firewall and Router
+        FreeBSD distribution.
+      </li>
+      <li>
+        <a href="https://opnsense.org/">OPNsense</a> - is an open source,
+        easy-to-use and easy-to-build FreeBSD based firewall and routing
+        platform. OPNsense includes most of the features available in expensive
+        commercial firewalls, and more in many cases. It brings the rich feature
+        set of commercial offerings with the benefits of open and verifiable
+        sources.
+      </li>
+      <li>
+        <a href="https://www.cipherdyne.org/fwknop/">fwknop</a> - Protects ports
+        via Single Packet Authorization in your firewall.
+      </li>
+    </ul>
+    <h3 id="anti-spam">Anti-Spam</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/spamscanner">Spam Scanner</a> - Anti-Spam
+        Scanning Service and Anti-Spam API by
+        <span class="citation" data-cites="niftylettuce">[@niftylettuce]</span
+        >(https://github.com/niftylettuce).
+      </li>
+      <li>
+        <a href="https://github.com/rspamd/rspamd">rspamd</a> - Fast, free and
+        open-source spam filtering system.
+      </li>
+      <li>
+        <a href="https://spamassassin.apache.org/">SpamAssassin</a> - A powerful
+        and popular email spam filter employing a variety of detection
+        technique.
+      </li>
+      <li>
+        <a href="https://scammerlist.now.sh/">Scammer-List</a> - A free open
+        source AI based Scam and Spam Finder with a free API
+      </li>
+    </ul>
+    <h3 id="docker-images-for-penetration-testing-security">
+      Docker Images for Penetration Testing &amp; Security
+    </h3>
+    <ul>
+      <li>
+        <code>docker pull kalilinux/kali-linux-docker</code>
+        <a href="https://hub.docker.com/r/kalilinux/kali-linux-docker/"
+          >official Kali Linux</a
+        >
+      </li>
+      <li>
+        <code>docker pull owasp/zap2docker-stable</code> -
+        <a href="https://github.com/zaproxy/zaproxy">official OWASP ZAP</a>
+      </li>
+      <li>
+        <code>docker pull wpscanteam/wpscan</code> -
+        <a href="https://hub.docker.com/r/wpscanteam/wpscan/"
+          >official WPScan</a
+        >
+      </li>
+      <li>
+        <code>docker pull remnux/metasploit</code> -
+        <a href="https://hub.docker.com/r/remnux/metasploit/"
+          >docker-metasploit</a
+        >
+      </li>
+      <li>
+        <code>docker pull citizenstig/dvwa</code> -
+        <a href="https://hub.docker.com/r/citizenstig/dvwa/"
+          >Damn Vulnerable Web Application (DVWA)</a
+        >
+      </li>
+      <li>
+        <code>docker pull wpscanteam/vulnerablewordpress</code> -
+        <a href="https://hub.docker.com/r/wpscanteam/vulnerablewordpress/"
+          >Vulnerable WordPress Installation</a
+        >
+      </li>
+      <li>
+        <code>docker pull hmlio/vaas-cve-2014-6271</code> -
+        <a href="https://hub.docker.com/r/hmlio/vaas-cve-2014-6271/"
+          >Vulnerability as a service: Shellshock</a
+        >
+      </li>
+      <li>
+        <code>docker pull hmlio/vaas-cve-2014-0160</code> -
+        <a href="https://hub.docker.com/r/hmlio/vaas-cve-2014-0160/"
+          >Vulnerability as a service: Heartbleed</a
+        >
+      </li>
+      <li>
+        <code>docker pull opendns/security-ninjas</code> -
+        <a href="https://hub.docker.com/r/opendns/security-ninjas/"
+          >Security Ninjas</a
+        >
+      </li>
+      <li>
+        <code>docker pull diogomonica/docker-bench-security</code> -
+        <a href="https://hub.docker.com/r/diogomonica/docker-bench-security/"
+          >Docker Bench for Security</a
+        >
+      </li>
+      <li>
+        <code>docker pull ismisepaul/securityshepherd</code> -
+        <a href="https://hub.docker.com/r/ismisepaul/securityshepherd/"
+          >OWASP Security Shepherd</a
+        >
+      </li>
+      <li>
+        <code>docker pull danmx/docker-owasp-webgoat</code> -
+        <a href="https://hub.docker.com/r/danmx/docker-owasp-webgoat/"
+          >OWASP WebGoat Project docker image</a
+        >
+      </li>
+      <li>
+        <code>docker-compose build &amp;&amp; docker-compose up</code> -
+        <a
+          href="https://github.com/owasp/nodegoat#option-3---run-nodegoat-on-docker"
+          >OWASP NodeGoat</a
+        >
+      </li>
+      <li>
+        <code>docker pull citizenstig/nowasp</code> -
+        <a href="https://hub.docker.com/r/citizenstig/nowasp/"
+          >OWASP Mutillidae II Web Pen-Test Practice Application</a
+        >
+      </li>
+      <li>
+        <code>docker pull bkimminich/juice-shop</code> -
+        <a href="https://hub.docker.com/r/bkimminich/juice-shop"
+          >OWASP Juice Shop</a
+        >
+      </li>
+    </ul>
+    <h2 id="endpoint">Endpoint</h2>
+    <h3 id="anti-virus-anti-malware">Anti-Virus / Anti-Malware</h3>
+    <ul>
+      <li>
+        <a href="https://www.rfxn.com/projects/linux-malware-detect/"
+          >Linux Malware Detect</a
+        >
+        - A malware scanner for Linux designed around the threats faced in
+        shared hosted environments.
+      </li>
+      <li>
+        <a href="https://github.com/Neo23x0/Loki">LOKI</a> - Simple Indicators
+        of Compromise and Incident Response Scanner
+      </li>
+      <li>
+        <a href="http://rkhunter.sourceforge.net/">rkhunter</a> - A Rootkit
+        Hunter for Linux
+      </li>
+    </ul>
+    <h3 id="content-disarm-reconstruct">Content Disarm &amp; Reconstruct</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/docbleach/DocBleach">DocBleach</a> - An
+        open-source Content Disarm &amp; Reconstruct software sanitizing Office,
+        PDF and RTF Documents.
+      </li>
+    </ul>
+    <h3 id="configuration-management">Configuration Management</h3>
+    <ul>
+      <li>
+        <a href="http://www.rudder-project.org/">Rudder</a> - Rudder is an easy
+        to use, web-driven, role-based solution for IT Infrastructure Automation
+        &amp; Compliance. Automate common system administration tasks
+        (installation, configuration); Enforce configuration over time
+        (configuring once is good, ensuring that configuration is valid and
+        automatically fixing it is better); Inventory of all managed nodes; Web
+        interface to configure and manage nodes and their configuration;
+        Compliance reporting, by configuration and/or by node.
+      </li>
+    </ul>
+    <h3 id="authentication">Authentication</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/google/google-authenticator"
+          >google-authenticator</a
+        >
+        - The Google Authenticator project includes implementations of one-time
+        passcode generators for several mobile platforms, as well as a pluggable
+        authentication module (PAM). One-time passcodes are generated using open
+        standards developed by the Initiative for Open Authentication (OATH)
+        (which is unrelated to OAuth). These implementations support the
+        HMAC-Based One-time Password (HOTP) algorithm specified in RFC 4226 and
+        the Time-based One-time Password (TOTP) algorithm specified in RFC 6238.
+        <a
+          href="http://xmodulo.com/two-factor-authentication-ssh-login-linux.html"
+          >Tutorials: How to set up two-factor authentication for SSH login on
+          Linux</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/kurolabs/stegcloak">Stegcloak</a> - Securely
+        assign Digital Authenticity to any written text
+      </li>
+    </ul>
+    <h3 id="mobile-android-ios">Mobile / Android / iOS</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/ashishb/android-security-awesome"
+          >android-security-awesome</a
+        >
+        - A collection of android security related resources. A lot of work is
+        happening in academia and industry on tools to perform dynamic analysis,
+        static analysis and reverse engineering of android apps.
+      </li>
+      <li>
+        <a href="http://wiki.secmobi.com/">SecMobi Wiki</a> - A collection of
+        mobile security resources which including articles, blogs, books,
+        groups, projects, tools and conferences. *
+      </li>
+      <li>
+        <a href="https://github.com/OWASP/owasp-mstg"
+          >OWASP Mobile Security Testing Guide</a
+        >
+        - A comprehensive manual for mobile app security testing and reverse
+        engineering.
+      </li>
+      <li>
+        <a href="https://github.com/kai5263499/osx-security-awesome"
+          >OSX Security Awesome</a
+        >
+        - A collection of OSX and iOS security resources
+      </li>
+      <li>
+        <a href="https://github.com/cossacklabs/themis">Themis</a> - High-level
+        multi-platform cryptographic framework for protecting sensitive data:
+        secure messaging with forward secrecy and secure data storage
+        (AES256GCM), suits for building end-to-end encrypted applications.
+      </li>
+      <li>
+        <a href="https://mobilesecuritywiki.com/">Mobile Security Wiki</a> - A
+        collection of mobile security resources.
+      </li>
+      <li>
+        <a href="https://github.com/iBotPeaches/Apktool">Apktool</a> - A tool
+        for reverse engineering Android apk files.
+      </li>
+      <li>
+        <a href="https://github.com/skylot/jadx">jadx</a> - Command line and GUI
+        tools for produce Java source code from Android Dex and Apk files.
+      </li>
+      <li>
+        <a href="https://github.com/Storyyeller/enjarify">enjarify</a> - A tool
+        for translating Dalvik bytecode to equivalent Java bytecode.
+      </li>
+      <li>
+        <a href="https://github.com/51j0/Android-Storage-Extractor"
+          >Android Storage Extractor</a
+        >
+        - A tool to extract local data storage of an Android application in one
+        click.
+      </li>
+      <li>
+        <a href="https://github.com/quark-engine/quark-engine">Quark-Engine</a>
+        - An Obfuscation-Neglect Android Malware Scoring System.
+      </li>
+      <li>
+        <a href="https://www.jetbrains.com/decompiler/">dotPeek</a> -
+        Free-of-charge standalone tool based on ReSharper’s bundled decompiler.
+      </li>
+      <li>
+        <a href="https://github.com/GrapheneOS/hardened_malloc"
+          >hardened_malloc</a
+        >
+        - Hardened allocator designed for modern systems. It has integration
+        into Android’s Bionic libc and can be used externally with musl and
+        glibc as a dynamic library for use on other Linux-based platforms. It
+        will gain more portability / integration over time.
+      </li>
+      <li>
+        <a href="https://github.com/ir193/AMExtractor">AMExtractor</a> -
+        AMExtractor can dump out the physical content of your Android device
+        even without kernel source code.
+      </li>
+      <li>
+        <a href="https://github.com/frida/frida">frida</a> - Dynamic
+        instrumentation toolkit for developers, reverse-engineers, and security
+        researchers.
+      </li>
+      <li>
+        <a href="https://github.com/UDcide/udcide">UDcide</a> - Android Malware
+        Behavior Editor.
+      </li>
+    </ul>
+    <h3 id="forensics">Forensics</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/google/grr">grr</a> - GRR Rapid Response is
+        an incident response framework focused on remote live forensics.
+      </li>
+      <li>
+        <a href="https://github.com/volatilityfoundation/volatility"
+          >Volatility</a
+        >
+        - Python based memory extraction and analysis framework.
+      </li>
+      <li>
+        <a href="http://mig.mozilla.org/">mig</a> - MIG is a platform to perform
+        investigative surgery on remote endpoints. It enables investigators to
+        obtain information from large numbers of systems in parallel, thus
+        accelerating investigation of incidents and day-to-day operations
+        security.
+      </li>
+      <li>
+        <a href="https://github.com/diogo-fernan/ir-rescue">ir-rescue</a> -
+        <em>ir-rescue</em> is a Windows Batch script and a Unix Bash script to
+        comprehensively collect host forensic data during incident response.
+      </li>
+      <li>
+        <a href="https://github.com/dogoncouch/logdissect">Logdissect</a> - CLI
+        utility and Python API for analyzing log files and other data.
+      </li>
+      <li>
+        <a href="https://github.com/TonyPhipps/Meerkat">Meerkat</a> -
+        PowerShell-based Windows artifact collection for threat hunting and
+        incident response.
+      </li>
+      <li>
+        <a href="https://github.com/google/rekall">Rekall</a> - The Rekall
+        Framework is a completely open collection of tools, implemented in
+        Python under the Apache and GNU General Public License, for the
+        extraction and analysis of digital artifacts computer systems.
+      </li>
+      <li>
+        <a href="https://github.com/504ensicsLabs/LiME.git">LiME</a> - Linux
+        Memory Extractor
+      </li>
+    </ul>
+    <h2 id="threat-intelligence">Threat Intelligence</h2>
+    <ul>
+      <li>
+        <a href="https://www.abuse.ch/">abuse.ch</a> - ZeuS Tracker / SpyEye
+        Tracker / Palevo Tracker / Feodo Tracker tracks Command&amp;Control
+        servers (hosts) around the world and provides you a domain- and an
+        IP-blocklist.
+      </li>
+      <li>
+        <a href="http://doc.emergingthreats.net/bin/view/Main/EmergingFAQ"
+          >Emerging Threats - Open Source</a
+        >
+        - Emerging Threats began 10 years ago as an open source community for
+        collecting Suricata and SNORT® rules, firewall rules, and other IDS
+        rulesets. The open source community still plays an active role in
+        Internet security, with more than 200,000 active users downloading the
+        ruleset daily. The ETOpen Ruleset is open to any user or organization,
+        as long as you follow some basic guidelines. Our ETOpen Ruleset is
+        available for download any time.
+      </li>
+      <li>
+        <a href="http://www.phishtank.com/">PhishTank</a> - PhishTank is a
+        collaborative clearing house for data and information about phishing on
+        the Internet. Also, PhishTank provides an open API for developers and
+        researchers to integrate anti-phishing data into their applications at
+        no charge.
+      </li>
+      <li>
+        <a href="http://www.spamhaus.org/"
+          >SBL / XBL / PBL / DBL / DROP / ROKSO</a
+        >
+        - The Spamhaus Project is an international nonprofit organization whose
+        mission is to track the Internet’s spam operations and sources, to
+        provide dependable realtime anti-spam protection for Internet networks,
+        to work with Law Enforcement Agencies to identify and pursue spam and
+        malware gangs worldwide, and to lobby governments for effective
+        anti-spam legislation.
+      </li>
+      <li>
+        <a href="https://www.dshield.org/reports.html">Internet Storm Center</a>
+        - The ISC was created in 2001 following the successful detection,
+        analysis, and widespread warning of the Li0n worm. Today, the ISC
+        provides a free analysis and warning service to thousands of Internet
+        users and organizations, and is actively working with Internet Service
+        Providers to fight back against the most malicious attackers.
+      </li>
+      <li>
+        <a href="https://www.autoshun.org/">AutoShun</a> - AutoShun is a Snort
+        plugin that allows you to send your Snort IDS logs to a centralized
+        server that will correlate attacks from your sensor logs with other
+        snort sensors, honeypots, and mail filters from around the world.
+      </li>
+      <li>
+        <a href="http://www.malwaredomains.com/">DNS-BH</a> - The DNS-BH project
+        creates and maintains a listing of domains that are known to be used to
+        propagate malware and spyware. This project creates the Bind and Windows
+        zone files required to serve fake replies to localhost for any requests
+        to these, thus preventing many spyware installs and reporting.
+      </li>
+      <li>
+        <a href="http://www.alienvault.com/open-threat-exchange/dashboard"
+          >AlienVault Open Threat Exchange</a
+        >
+        - AlienVault Open Threat Exchange (OTX), to help you secure your
+        networks from data loss, service disruption and system compromise caused
+        by malicious IP addresses.
+      </li>
+      <li>
+        <a href="https://metrics.torproject.org/collector.html"
+          >Tor Bulk Exit List</a
+        >
+        - CollecTor, your friendly data-collecting service in the Tor network.
+        CollecTor fetches data from various nodes and services in the public Tor
+        network and makes it available to the world. If you’re doing research on
+        the Tor network, or if you’re developing an application that uses Tor
+        network data, this is your place to start.
+        <a href="https://www.dan.me.uk/tornodes">TOR Node List</a> /
+        <a href="https://www.dan.me.uk/dnsbl">DNS Blacklists</a> /
+        <a href="http://torstatus.blutmagie.de/">Tor Node List</a>
+      </li>
+      <li>
+        <a href="http://www.leakedin.com/">leakedin.com</a> - The primary
+        purpose of leakedin.com is to make visitors aware about the risks of
+        loosing data. This blog just compiles samples of data lost or disclosed
+        on sites like pastebin.com.
+      </li>
+      <li>
+        <a href="https://github.com/fireeye/iocs">FireEye OpenIOCs</a> - FireEye
+        Publicly Shared Indicators of Compromise (IOCs)
+      </li>
+      <li>
+        <a href="http://www.openvas.org/openvas-nvt-feed.html"
+          >OpenVAS NVT Feed</a
+        >
+        - The public feed of Network Vulnerability Tests (NVTs). It contains
+        more than 35,000 NVTs (as of April 2014), growing on a daily basis. This
+        feed is configured as the default for OpenVAS.
+      </li>
+      <li>
+        <a href="http://www.projecthoneypot.org/">Project Honey Pot</a> -
+        Project Honey Pot is the first and only distributed system for
+        identifying spammers and the spambots they use to scrape addresses from
+        your website. Using the Project Honey Pot system you can install
+        addresses that are custom-tagged to the time and IP address of a visitor
+        to your site. If one of these addresses begins receiving email we not
+        only can tell that the messages are spam, but also the exact moment when
+        the address was harvested and the IP address that gathered it.
+      </li>
+      <li>
+        <a href="https://www.virustotal.com/">virustotal</a> - VirusTotal, a
+        subsidiary of Google, is a free online service that analyzes files and
+        URLs enabling the identification of viruses, worms, trojans and other
+        kinds of malicious content detected by antivirus engines and website
+        scanners. At the same time, it may be used as a means to detect false
+        positives, i.e. innocuous resources detected as malicious by one or more
+        scanners.
+      </li>
+      <li>
+        <a href="https://github.com/certtools/intelmq/">IntelMQ</a> - IntelMQ is
+        a solution for CERTs for collecting and processing security feeds,
+        pastebins, tweets using a message queue protocol. It’s a community
+        driven initiative called IHAP (Incident Handling Automation Project)
+        which was conceptually designed by European CERTs during several InfoSec
+        events. Its main goal is to give to incident responders an easy way to
+        collect &amp; process threat intelligence thus improving the incident
+        handling processes of CERTs.
+        <a
+          href="https://www.enisa.europa.eu/activities/cert/support/incident-handling-automation"
+          >ENSIA Homepage</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/csirtgadgets/massive-octo-spice">CIFv2</a> -
+        CIF is a cyber threat intelligence management system. CIF allows you to
+        combine known malicious threat information from many sources and use
+        that information for identification (incident response), detection (IDS)
+        and mitigation (null route).
+      </li>
+      <li>
+        <a href="https://www.misp-project.org/"
+          >MISP - Open Source Threat Intelligence Platform</a
+        >
+        - MISP threat sharing platform is a free and open source software
+        helping information sharing of threat intelligence including cyber
+        security indicators. A threat intelligence platform for gathering,
+        sharing, storing and correlating Indicators of Compromise of targeted
+        attacks, threat intelligence, financial fraud information, vulnerability
+        information or even counter-terrorism information. The MISP project
+        includes software, common libraries (<a
+          href="https://www.misp-project.org/taxonomies.html"
+          >taxonomies</a
+        >,
+        <a href="https://www.misp-project.org/galaxy.html"
+          >threat-actors and various malware</a
+        >), an extensive data model to share new information using
+        <a href="https://www.misp-project.org/objects.html">objects</a> and
+        default <a href="https://www.misp-project.org/feeds/">feeds</a>.
+      </li>
+      <li>
+        <a href="https://phishstats.info/">PhishStats</a> - Phishing Statistics
+        with search for IP, domain and website title.
+      </li>
+    </ul>
+    <h2 id="web">Web</h2>
+    <h3 id="organization">Organization</h3>
+    <ul>
+      <li>
+        <a href="http://www.owasp.org">OWASP</a> - The Open Web Application
+        Security Project (OWASP) is a 501(c)(3) worldwide not-for-profit
+        charitable organization focused on improving the security of software.
+      </li>
+      <li>
+        <a href="https://portswigger.net">Portswigger</a> - PortSwigger offers
+        tools for web application security, testing &amp; scanning. Choose from
+        a wide range of security tools &amp; identify the very latest
+        vulnerabilities.
+      </li>
+    </ul>
+    <h3 id="web-application-firewall">Web Application Firewall</h3>
+    <ul>
+      <li>
+        <a href="http://www.modsecurity.org/">ModSecurity</a> - ModSecurity is a
+        toolkit for real-time web application monitoring, logging, and access
+        control.
+      </li>
+      <li>
+        <a href="https://github.com/nbs-system/naxsi">NAXSI</a> - NAXSI is an
+        open-source, high performance, low rules maintenance WAF for NGINX,
+        NAXSI means Nginx Anti Xss &amp; Sql Injection.
+      </li>
+      <li>
+        <a href="https://github.com/uptimejp/sql_firewall">sql_firewall</a> SQL
+        Firewall Extension for PostgreSQL
+      </li>
+      <li>
+        <a href="https://github.com/ironbee/ironbee">ironbee</a> - IronBee is an
+        open source project to build a universal web application security
+        sensor. IronBee as a framework for developing a system for securing web
+        applications - a framework for building a web application firewall
+        (WAF).
+      </li>
+      <li>
+        <a href="https://github.com/curiefense/curiefense">Curiefense</a> -
+        Curiefense adds a broad set of automated web security tools, including a
+        WAF to Envoy Proxy.
+      </li>
+    </ul>
+    <h3 id="scanning-pentesting-1">Scanning / Pentesting</h3>
+    <ul>
+      <li>
+        <a href="https://spyse.com/">Spyse</a> - Spyse is an OSINT search engine
+        that provides fresh data about the entire web. All the data is stored in
+        its own DB for instant access and interconnected with each other for
+        flexible search. Provided data: IPv4 hosts, sub/domains/whois,
+        ports/banners/protocols, technologies, OS, AS, wide SSL/TLS DB and more.
+      </li>
+      <li>
+        <a href="http://sqlmap.org/">sqlmap</a> - sqlmap is an open source
+        penetration testing tool that automates the process of detecting and
+        exploiting SQL injection flaws and taking over of database servers. It
+        comes with a powerful detection engine, many niche features for the
+        ultimate penetration tester and a broad range of switches lasting from
+        database fingerprinting, over data fetching from the database, to
+        accessing the underlying file system and executing commands on the
+        operating system via out-of-band connections.
+      </li>
+      <li>
+        <a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project"
+          >ZAP</a
+        >
+        - The Zed Attack Proxy (ZAP) is an easy to use integrated penetration
+        testing tool for finding vulnerabilities in web applications. It is
+        designed to be used by people with a wide range of security experience
+        and as such is ideal for developers and functional testers who are new
+        to penetration testing. ZAP provides automated scanners as well as a set
+        of tools that allow you to find security vulnerabilities manually.
+      </li>
+      <li>
+        <a href="https://www.owasp.org/index.php/Testing_Checklist"
+          >OWASP Testing Checklist v4</a
+        >
+        - List of some controls to test during a web vulnerability assessment.
+        Markdown version may be found
+        <a
+          href="https://github.com/amocrenco/owasp-testing-checklist-v4-markdown/blob/master/README.md"
+          >here</a
+        >.
+      </li>
+      <li>
+        <a href="http://w3af.org/">w3af</a> - w3af is a Web Application Attack
+        and Audit Framework. The project’s goal is to create a framework to help
+        you secure your web applications by finding and exploiting all web
+        application vulnerabilities.
+      </li>
+      <li>
+        <a href="https://github.com/lanmaster53/recon-ng">Recon-ng</a> -
+        Recon-ng is a full-featured Web Reconnaissance framework written in
+        Python. Recon-ng has a look and feel similar to the Metasploit
+        Framework.
+      </li>
+      <li>
+        <a href="https://github.com/trustedsec/ptf">PTF</a> - The Penetration
+        Testers Framework (PTF) is a way for modular support for up-to-date
+        tools.
+      </li>
+      <li>
+        <a href="https://github.com/guardicore/monkey">Infection Monkey</a> - A
+        semi automatic pen testing tool for mapping/pen-testing networks.
+        Simulates a human attacker.
+      </li>
+      <li>
+        <a href="https://github.com/tijme/angularjs-csti-scanner">ACSTIS</a> -
+        ACSTIS helps you to scan certain web applications for AngularJS
+        Client-Side Template Injection (sometimes referred to as CSTI, sandbox
+        escape or sandbox bypass). It supports scanning a single request but
+        also crawling the entire web application for the AngularJS CSTI
+        vulnerability.
+      </li>
+      <li>
+        <a href="https://github.com/KishanBagaria/padding-oracle-attacker"
+          >padding-oracle-attacker</a
+        >
+        - padding-oracle-attacker is a CLI tool and library to execute padding
+        oracle attacks (which decrypts data encrypted in CBC mode) easily, with
+        support for concurrent network requests and an elegant UI.
+      </li>
+      <li>
+        <a href="https://github.com/lirantal/is-website-vulnerable"
+          >is-website-vulnerable</a
+        >
+        - finds publicly known security vulnerabilities in a website’s frontend
+        JavaScript libraries.
+      </li>
+      <li>
+        <a href="https://github.com/nil0x42/phpsploit">PhpSploit</a> -
+        Full-featured C2 framework which silently persists on webserver via evil
+        PHP oneliner. Built for stealth persistence, with many
+        privilege-escalation &amp; post-exploitation features.
+      </li>
+    </ul>
+    <h3 id="runtime-application-self-protection">
+      Runtime Application Self-Protection
+    </h3>
+    <ul>
+      <li>
+        <a href="https://www.sqreen.io/">Sqreen</a> - Sqreen is a Runtime
+        Application Self-Protection (RASP) solution for software teams. An
+        in-app agent instruments and monitors the app. Suspicious user
+        activities are reported and attacks are blocked at runtime without code
+        modification or traffic redirection.
+      </li>
+      <li>
+        <a href="https://github.com/baidu/openrasp">OpenRASP</a> - An open
+        source RASP solution actively maintained by Baidu Inc. With
+        context-aware detection algorithm the project achieved nearly no false
+        positives. And less than 3% performance reduction is observed under
+        heavy server load.
+      </li>
+    </ul>
+    <h3 id="development">Development</h3>
+    <ul>
+      <li>
+        <a href="https://www.manning.com/books/api-security-in-action"
+          >API Security in Action</a
+        >
+        - Book covering API security including secure development, token-based
+        authentication, JSON Web Tokens, OAuth 2, and Macaroons. (early access,
+        published continuously, final release summer 2020)
+      </li>
+      <li>
+        <a
+          href="https://www.manning.com/books/secure-by-design?a_aid=danbjson&amp;a_bid=0b3fac80"
+          >Secure by Design</a
+        >
+        - Book that identifies design patterns and coding styles that make lots
+        of security vulnerabilities less likely. (early access, published
+        continuously, final release fall 2017)
+      </li>
+      <li>
+        <a href="https://www.manning.com/books/understanding-api-security"
+          >Understanding API Security</a
+        >
+        - Free eBook sampler that gives some context for how API security works
+        in the real world by showing how APIs are put together and how the OAuth
+        protocol can be used to protect them.
+      </li>
+      <li>
+        <a href="https://www.manning.com/books/oauth-2-in-action"
+          >OAuth 2 in Action</a
+        >
+        - Book that teaches you practical use and deployment of OAuth 2 from the
+        perspectives of a client, an authorization server, and a resource
+        server.
+      </li>
+      <li>
+        <a href="https://github.com/zaproxy/zap-api-nodejs"
+          >OWASP ZAP Node API</a
+        >
+        - Leverage the OWASP Zed Attack Proxy (ZAP) within your NodeJS
+        applications with this official API.
+      </li>
+      <li>
+        <a href="https://github.com/apps/guardrails">GuardRails</a> - A GitHub
+        App that provides security feedback in Pull Requests.
+      </li>
+      <li>
+        <a href="https://github.com/bridgecrewio/checkov/">Checkov</a> - A
+        static analysis tool for infrastucture as code (Terraform).
+      </li>
+      <li>
+        <a href="https://github.com/tfsec/tfsec/">TFSec</a> - A static analysis
+        tool for infrastucture as code (Terraform).
+      </li>
+      <li>
+        <a href="https://github.com/Checkmarx/kics">KICS</a> - Scans IaC
+        projects for security vulnerabilities, compliance issues, and
+        infrastructure misconfiguration. Currently working with Terraform
+        projects, Kubernetes manifests, Dockerfiles, AWS CloudFormation
+        Templates, and Ansible playbooks.
+      </li>
+      <li>
+        <a href="https://github.com/insidersec/insider">Insider CLI</a> - A open
+        source Static Application Security Testing tool (SAST) written in GoLang
+        for Java (Maven and Android), Kotlin (Android), Swift (iOS), .NET Full
+        Framework, C# and Javascript (Node.js).
+      </li>
+    </ul>
+    <h2 id="exploits-payloads">Exploits &amp; Payloads</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/swisskyrepo/PayloadsAllTheThings"
+          >PayloadsAllTheThings</a
+        >
+        - A list of useful payloads and bypass for Web Application Security and
+        Pentest/CTF
+      </li>
+    </ul>
+    <h2 id="red-team-infrastructure-deployment">
+      Red Team Infrastructure Deployment
+    </h2>
+    <ul>
+      <li>
+        <a href="https://github.com/khast3x/Redcloud">Redcloud</a> - A automated
+        Red Team Infrastructure deployement using Docker.
+      </li>
+      <li>
+        <a href="https://github.com/pry0cc/axiom">Axiom</a> -Axiom is a dynamic
+        infrastructure framework to efficiently work with multi-cloud
+        environments, build and deploy repeatable infrastructure focussed on
+        offensive and defensive security.
+      </li>
+    </ul>
+    <h2 id="usability">Usability</h2>
+    <ul>
+      <li>
+        <a href="https://pt.coursera.org/learn/usable-security"
+          >Usable Security Course</a
+        >
+        - Usable Security course at coursera. Quite good for those looking for
+        how security and usability intersects.
+      </li>
+    </ul>
+    <h2 id="big-data">Big Data</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/ClickSecurity/data_hacking">data_hacking</a>
+        - Examples of using IPython, Pandas, and Scikit Learn to get the most
+        out of your security data.
+      </li>
+      <li>
+        <a href="https://github.com/RIPE-NCC/hadoop-pcap">hadoop-pcap</a> -
+        Hadoop library to read packet capture (PCAP) files.
+      </li>
+      <li>
+        <a href="http://workbench.readthedocs.org/">Workbench</a> - A scalable
+        python framework for security research and development teams.
+      </li>
+      <li>
+        <a href="https://github.com/OpenSOC/opensoc">OpenSOC</a> - OpenSOC
+        integrates a variety of open source big data technologies in order to
+        offer a centralized tool for security monitoring and analysis.
+      </li>
+      <li>
+        <a href="https://github.com/apache/incubator-metron"
+          >Apache Metron (incubating)</a
+        >
+        - Metron integrates a variety of open source big data technologies in
+        order to offer a centralized tool for security monitoring and analysis.
+      </li>
+      <li>
+        <a href="https://github.com/apache/incubator-spot"
+          >Apache Spot (incubating)</a
+        >
+        - Apache Spot is open source software for leveraging insights from flow
+        and packet analysis.
+      </li>
+      <li>
+        <a href="https://github.com/endgameinc/binarypig">binarypig</a> -
+        Scalable Binary Data Extraction in Hadoop. Malware Processing and
+        Analytics over Pig, Exploration through Django, Twitter Bootstrap, and
+        Elasticsearch.
+      </li>
+    </ul>
+    <h2 id="devops">DevOps</h2>
+    <ul>
+      <li>
+        <a href="https://manning.com/books/securing-devops">Securing DevOps</a>
+        - A book on Security techniques for DevOps that reviews state of the art
+        practices used in securing web applications and their infrastructure.
+      </li>
+      <li>
+        <a href="https://github.com/dev-sec/ansible-os-hardening"
+          >ansible-os-hardening</a
+        >
+        - Ansible role for OS hardening
+      </li>
+      <li>
+        <a href="https://github.com/bunkerity/bunkerized-nginx"
+          >bunkerized-nginx</a
+        >
+        - nginx Docker image secure by default
+      </li>
+      <li>
+        <a href="https://github.com/aquasecurity/trivy">Trivy</a> - A simple and
+        comprehensive vulnerability scanner for containers and other artifacts,
+        suitable for CI.
+      </li>
+      <li>
+        <a href="https://github.com/spectralops/preflight">Preflight</a> - helps
+        you verify scripts and executables to mitigate supply chain attacks in
+        your CI and other systems.
+      </li>
+      <li>
+        <a href="https://github.com/spectralops/teller">Teller</a> - a secrets
+        management tool for devops and developers - manage secrets across
+        multiple vaults and keystores from a single place.
+      </li>
+    </ul>
+    <h2 id="operating-systems">Operating Systems</h2>
+    <h3 id="privacy-security">Privacy &amp; Security</h3>
+    <ul>
+      <li>
+        <a href="https://www.qubes-os.org/">Qubes OS</a> - Qubes OS is a free
+        and open-source security-oriented operating system meant for single-user
+        desktop computing.
+      </li>
+      <li>
+        <a href="https://www.whonix.org">Whonix</a> - Operating System designed
+        for anonymity.
+      </li>
+      <li>
+        <a href="https://tails.boum.org/">Tails OS</a> - Tails is a portable
+        operating system that protects against surveillance and censorship.
+      </li>
+    </ul>
+    <h3 id="online-resources">Online resources</h3>
+    <ul>
+      <li>
+        <a href="http://rawsec.ml/en/security-related-os/"
+          >Security related Operating Systems @ Rawsec</a
+        >
+        - Complete list of security related operating systems
+      </li>
+      <li>
+        <a href="https://www.cyberpunk.rs/category/pentest-linux-distros"
+          >Best Linux Penetration Testing Distributions @ CyberPunk</a
+        >
+        - Description of main penetration testing distributions
+      </li>
+      <li>
+        <a href="http://distrowatch.com/search.php?category=Security"
+          >Security @ Distrowatch</a
+        >
+        - Website dedicated to talking about, reviewing and keeping up to date
+        with open source operating systems
+      </li>
+      <li>
+        <a href="https://www.hardenwindows10forsecurity.com/"
+          >Hardening Windows 10</a
+        >
+        - Guide for hardening Windows 10
+      </li>
+    </ul>
+    <h2 id="datastores">Datastores</h2>
+    <ul>
+      <li>
+        <a href="https://databunker.org/">databunker</a> - Databunker is an
+        address book on steroids for storing personal data. GDPR and encryption
+        are out of the box.
+      </li>
+      <li>
+        <a href="https://github.com/cossacklabs/acra">acra</a> - Database
+        security suite: proxy for data protection with transparent “on the fly”
+        data encryption, data masking and tokenization, SQL firewall (SQL
+        injections prevention), intrusion detection system.
+      </li>
+      <li>
+        <a href="https://github.com/StackExchange/blackbox">blackbox</a> -
+        Safely store secrets in a VCS repo using GPG
+      </li>
+      <li>
+        <a href="https://github.com/lyft/confidant">confidant</a> - Stores
+        secrets in AWS DynamoDB, encrypted at rest and integrates with IAM
+      </li>
+      <li>
+        <a href="https://github.com/ConradIrwin/dotgpg">dotgpg</a> - A tool for
+        backing up and versioning your production secrets or shared passwords
+        securely and easily.
+      </li>
+      <li>
+        <a href="https://github.com/cloudflare/redoctober">redoctober</a> -
+        Server for two-man rule style file encryption and decryption.
+      </li>
+      <li>
+        <a href="https://github.com/99designs/aws-vault">aws-vault</a> - Store
+        AWS credentials in the OSX Keychain or an encrypted file
+      </li>
+      <li>
+        <a href="https://github.com/fugue/credstash">credstash</a> - Store
+        secrets using AWS KMS and DynamoDB
+      </li>
+      <li>
+        <a href="https://github.com/segmentio/chamber">chamber</a> - Store
+        secrets using AWS KMS and SSM Parameter Store
+      </li>
+      <li>
+        <a href="https://github.com/starkandwayne/safe">Safe</a> - A Vault CLI
+        that makes reading from and writing to the Vault easier to do.
+      </li>
+      <li>
+        <a href="https://github.com/mozilla/sops">Sops</a> - An editor of
+        encrypted files that supports YAML, JSON and BINARY formats and encrypts
+        with AWS KMS and PGP.
+      </li>
+      <li>
+        <a href="https://www.passbolt.com/">passbolt</a> - The password manager
+        your team was waiting for. Free, open source, extensible, based on
+        OpenPGP.
+      </li>
+      <li>
+        <a href="https://github.com/marcwebbie/passpie">passpie</a> -
+        Multiplatform command-line password manager
+      </li>
+      <li>
+        <a href="https://www.vaultproject.io/">Vault</a> - An encrypted
+        datastore secure enough to hold environment and application secrets.
+      </li>
+    </ul>
+    <h2 id="fraud-prevention">Fraud prevention</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/fingerprintjs/fingerprintjs"
+          >FingerprintJS</a
+        >
+        - Identifies browser and hybrid mobile application users even when they
+        purge data storage. Allows you to detect account takeovers, account
+        sharing and repeated malicious activity.
+      </li>
+      <li>
+        <a href="https://github.com/fingerprintjs/fingerprint-android"
+          >FingerprintJS Android</a
+        >
+        - Identifies Android application users even when they purge data
+        storage. Allows you to detect account takeovers, account sharing and
+        repeated malicious activity.
+      </li>
+    </ul>
+    <h2 id="ebooks">EBooks</h2>
+    <ul>
+      <li>
+        <a href="https://holisticinfosecforwebdevelopers.com/"
+          >Holistic Info-Sec for Web Developers</a
+        >
+        - Free and downloadable book series with very broad and deep coverage of
+        what Web Developers and DevOps Engineers need to know in order to create
+        robust, reliable, maintainable and secure software, networks and other,
+        that are delivered continuously, on time, with no nasty surprises
+      </li>
+      <li>
+        <a href="https://binarymist.io/publication/docker-security/"
+          >Docker Security - Quick Reference: For DevOps Engineers</a
+        >
+        - A book on understanding the Docker security defaults, how to improve
+        them (theory and practical), along with many tools and techniques.<br />
+      </li>
+      <li>
+        <a href="https://books2read.com/u/bWzdBx"
+          >How to Hack Like a Pornstar</a
+        >
+        - A step by step process for breaking into a BANK, Sparc Flow, 2017<br />
+      </li>
+      <li>
+        <a href="https://amzn.to/2uWh1Up">How to Hack Like a Legend</a> - A
+        hacker’s tale breaking into a secretive offshore company, Sparc Flow,
+        2018<br />
+      </li>
+      <li>
+        <a href="https://books2read.com/u/4jDWoZ"
+          >How to Investigate Like a Rockstar</a
+        >
+        - Live a real crisis to master the secrets of forensic analysis, Sparc
+        Flow, 2017
+      </li>
+      <li>
+        <a href="https://www.manning.com/books/real-world-cryptography"
+          >Real World Cryptography</a
+        >
+        - This early-access book teaches you applied cryptographic techniques to
+        understand and apply security at every level of your systems and
+        applications.
+      </li>
+      <li>
+        <a
+          href="https://www.manning.com/books/aws-security?utm_source=github&amp;utm_medium=organic&amp;utm_campaign=book_shields_aws_1_31_20"
+          >AWS Security</a
+        >
+        - This early-access book covers commong AWS security issues and best
+        practices for access policies, data protection, auditing, continuous
+        monitoring, and incident response.
+      </li>
+      <li>
+        <a
+          href="https://www.manning.com/books/the-art-of-network-penetration-testing"
+          >The Art of Network Penetration Testing</a
+        >
+        - Book that is a hands-on guide to running your own penetration test on
+        an enterprise network. (early access, published continuously, final
+        release December 2020)
+      </li>
+    </ul>
+    <h2 id="other-awesome-lists">Other Awesome Lists</h2>
+    <h3 id="other-security-awesome-lists">Other Security Awesome Lists</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/ashishb/android-security-awesome"
+          >Android Security Awesome</a
+        >
+        - A collection of android security related resources.
+      </li>
+      <li>
+        <a href="https://github.com/HenryHoggard/awesome-arm-exploitation"
+          >Awesome ARM Exploitation</a
+        >
+        - A curated list of ARM exploitation resources.
+      </li>
+      <li>
+        <a href="https://github.com/apsdehal/awesome-ctf">Awesome CTF</a> - A
+        curated list of CTF frameworks, libraries, resources and software.
+      </li>
+      <li>
+        <a href="https://github.com/joe-shenouda/awesome-cyber-skills"
+          >Awesome Cyber Skills</a
+        >
+        - A curated list of hacking environments where you can train your cyber
+        skills legally and safely.
+      </li>
+      <li>
+        <a href="https://github.com/Lissy93/personal-security-checklist"
+          >Awesome Personal Security</a
+        >
+        - A curated list of digital security and privacy tips, with links to
+        further resources.
+      </li>
+      <li>
+        <a href="https://github.com/carpedm20/awesome-hacking"
+          >Awesome Hacking</a
+        >
+        - A curated list of awesome Hacking tutorials, tools and resources.
+      </li>
+      <li>
+        <a href="https://github.com/paralax/awesome-honeypots"
+          >Awesome Honeypots</a
+        >
+        - An awesome list of honeypot resources.
+      </li>
+      <li>
+        <a href="https://github.com/rshipp/awesome-malware-analysis"
+          >Awesome Malware Analysis</a
+        >
+        - A curated list of awesome malware analysis tools and resources.
+      </li>
+      <li>
+        <a href="https://github.com/caesar0301/awesome-pcaptools"
+          >Awesome PCAP Tools</a
+        >
+        - A collection of tools developed by other researchers in the Computer
+        Science area to process network traces.
+      </li>
+      <li>
+        <a href="https://github.com/enaqx/awesome-pentest">Awesome Pentest</a> -
+        A collection of awesome penetration testing resources, tools and other
+        shiny things.
+      </li>
+      <li>
+        <a href="https://github.com/Friz-zy/awesome-linux-containers"
+          >Awesome Linux Containers</a
+        >
+        - A curated list of awesome Linux Containers frameworks, libraries and
+        software.
+      </li>
+      <li>
+        <a href="https://github.com/meirwah/awesome-incident-response"
+          >Awesome Incident Response</a
+        >
+        - A curated list of resources for incident response.
+      </li>
+      <li>
+        <a href="https://github.com/infoslack/awesome-web-hacking"
+          >Awesome Web Hacking</a
+        >
+        - This list is for anyone wishing to learn about web application
+        security but do not have a starting point.
+      </li>
+      <li>
+        <a href="https://github.com/carpedm20/awesome-hacking"
+          >Awesome Hacking</a
+        >
+        - A curated list of awesome Hacking tutorials, tools and resources
+      </li>
+      <li>
+        <a href="https://github.com/doyensec/awesome-electronjs-hacking"
+          >Awesome Electron.js Hacking</a
+        >
+        - A curated list of awesome resources about Electron.js (in)security
+      </li>
+      <li>
+        <a href="https://github.com/hslatman/awesome-threat-intelligence"
+          >Awesome Threat Intelligence</a
+        >
+        - A curated list of threat intelligence resources.
+      </li>
+      <li>
+        <a href="https://github.com/redshiftzero/awesome-threat-modeling"
+          >Awesome Threat Modeling</a
+        >
+        - A curated list of Threat Modeling resources.
+      </li>
+      <li>
+        <a href="https://github.com/coreb1t/awesome-pentest-cheat-sheets"
+          >Awesome Pentest Cheat Sheets</a
+        >
+        - Collection of the cheat sheets useful for pentesting
+      </li>
+      <li>
+        <a
+          href="https://github.com/mpesen/awesome-industrial-control-system-security"
+          >Awesome Industrial Control System Security</a
+        >
+        - A curated list of resources related to Industrial Control System (ICS)
+        security.
+      </li>
+      <li>
+        <a href="https://github.com/InQuest/awesome-yara">Awesome YARA</a> - A
+        curated list of awesome YARA rules, tools, and people.
+      </li>
+      <li>
+        <a href="https://github.com/0x4D31/awesome-threat-detection"
+          >Awesome Threat Detection and Hunting</a
+        >
+        - A curated list of awesome threat detection and hunting resources.
+      </li>
+      <li>
+        <a href="https://github.com/kai5263499/container-security-awesome"
+          >Awesome Container Security</a
+        >
+        - A curated list of awesome resources related to container building and
+        runtime security
+      </li>
+      <li>
+        <a href="https://github.com/pFarb/awesome-crypto-papers"
+          >Awesome Crypto Papers</a
+        >
+        - A curated list of cryptography papers, articles, tutorials and howtos.
+      </li>
+      <li>
+        <a href="https://github.com/jakejarvis/awesome-shodan-queries"
+          >Awesome Shodan Search Queries</a
+        >
+        - A collection of interesting, funny, and depressing search queries to
+        plug into Shodan.io.
+      </li>
+      <li>
+        <a href="https://github.com/remiflavien1/awesome-anti-forensic"
+          >Awesome Anti Forensics</a
+        >
+        - A collection of awesome tools used to counter forensics activities.
+      </li>
+      <li>
+        <a href="https://github.com/PaulSec/awesome-sec-talks"
+          >Awesome Security Talks &amp; Videos</a
+        >
+        - A curated list of awesome security talks, organized by year and then
+        conference.
+      </li>
+    </ul>
+    <h3 id="other-common-awesome-lists">Other Common Awesome Lists</h3>
+    <p>Other amazingly awesome lists:</p>
+    <ul>
+      <li>
+        <a href="https://github.com/bayandin/awesome-awesomeness"
+          >awesome-awesomeness</a
+        >
+        - awesome-* or *-awesome lists.
+      </li>
+      <li>
+        <a href="https://github.com/jnv/lists">lists</a> - The definitive list
+        of (awesome) lists curated on GitHub.
+      </li>
+      <li>
+        <a href="https://github.com/k4m4/movies-for-hackers"
+          >Movies For Hacker</a
+        >
+        - A curated list of movies every hacker &amp; cyberpunk must watch.
+      </li>
+    </ul>
+    <h2 id="contributing"><a href="contributing.md">Contributing</a></h2>
+    <p>Your contributions are always welcome!</p>
+  </body>
+</html>

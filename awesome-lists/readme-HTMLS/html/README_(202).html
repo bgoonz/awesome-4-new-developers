@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="git-and-git-flow-cheat-sheet-awesome-build-status">
+      Git and Git Flow Cheat Sheet
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+      <a href="https://travis-ci.org/arslanbilal/git-cheat-sheet"
+        ><img
+          src="https://travis-ci.org/arslanbilal/git-cheat-sheet.svg?branch=master"
+          alt="Build Status"
+      /></a>
+    </h1>
+    <hr />
+    <p align="center">
+      <img alt="Git" src="./Img/git-logo.png" height="190" width="455" />
+    </p>
+    <hr />
+    <h1 id="other-available-languages">Other Available Languages:</h1>
+    <ol type="1">
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-ar.md"
+          >Arabic Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-zh.md"
+          >Chinese Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-hi.md"
+          >Hindi Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-tr.md"
+          >Turkish Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-es.md"
+          >Spanish Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-el.md"
+          >Greek Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-pt_BR.md"
+          >Brazilian Portuguese Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-ko.md"
+          >Korean Git Cheat Sheet</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-pl.md"
+          >Polish Git Cheat Sheet</a
+        >
+      </li>
+    </ol>
+    <p>Git cheat sheet saves you from learning all the commands by heart.</p>
+    <p>
+      Be free to contribute, update the grammar mistakes. You are also free to
+      add your language file.
+    </p>
+    <hr />
+    <h1 id="git-cheat-sheet-english">Git Cheat Sheet English</h1>
+    <h3 id="index">Index</h3>
+    <ul>
+      <li><a href="#setup">Set Up</a></li>
+      <li><a href="#configuration-files">Configuration Files</a></li>
+      <li><a href="#create">Create</a></li>
+      <li><a href="#local-changes">Local Changes</a></li>
+      <li><a href="#search">Search</a></li>
+      <li><a href="#commit-history">Commit History</a></li>
+      <li><a href="#branches--tags">Branches &amp; Tags</a></li>
+      <li><a href="#update--publish">Update &amp; Publish</a></li>
+      <li><a href="#merge--rebase">Merge &amp; Rebase</a></li>
+      <li><a href="#undo">Undo</a></li>
+      <li><a href="#git-flow">Git Flow</a></li>
+    </ul>
+    <hr />
+    <h2 id="setup">Setup</h2>
+    <h5 id="show-current-configuration">Show current configuration:</h5>
+    <pre><code>$ git config --list</code></pre>
+    <h5 id="show-repository-configuration">Show repository configuration:</h5>
+    <pre><code>$ git config --local --list</code></pre>
+    <h5 id="show-global-configuration">Show global configuration:</h5>
+    <pre><code>$ git config --global --list</code></pre>
+    <h5 id="show-system-configuration">Show system configuration:</h5>
+    <pre><code>$ git config --system --list</code></pre>
+    <h5
+      id="set-a-name-that-is-identifiable-for-credit-when-review-version-history"
+    >
+      Set a name that is identifiable for credit when review version history:
+    </h5>
+    <pre><code>$ git config --global user.name “[firstname lastname]”</code></pre>
+    <h5
+      id="set-an-email-address-that-will-be-associated-with-each-history-marker"
+    >
+      Set an email address that will be associated with each history marker:
+    </h5>
+    <pre><code>$ git config --global user.email “[valid-email]”</code></pre>
+    <h5 id="set-automatic-command-line-coloring-for-git-for-easy-reviewing">
+      Set automatic command line coloring for Git for easy reviewing:
+    </h5>
+    <pre><code>$ git config --global color.ui auto</code></pre>
+    <h5 id="set-global-editor-for-commit">Set global editor for commit</h5>
+    <pre><code>$ git config --global core.editor vi</code></pre>
+    <hr />
+    <h2 id="configuration-files">Configuration Files</h2>
+    <h5 id="repository-specific-configuration-file-local">
+      Repository specific configuration file [–local]:
+    </h5>
+    <pre><code>&lt;repo&gt;/.git/config</code></pre>
+    <h5 id="user-specific-configuration-file-global">
+      User-specific configuration file [–global]:
+    </h5>
+    <pre><code>~/.gitconfig</code></pre>
+    <h5 id="system-wide-configuration-file-system">
+      System-wide configuration file [–system]:
+    </h5>
+    <pre><code>/etc/gitconfig</code></pre>
+    <hr />
+    <h2 id="create">Create</h2>
+    <h5 id="clone-an-existing-repository">Clone an existing repository:</h5>
+    <p>There are two ways:</p>
+    <p>Via SSH</p>
+    <pre><code>$ git clone ssh://user@domain.com/repo.git</code></pre>
+    <p>Via HTTP</p>
+    <pre><code>$ git clone http://domain.com/user/repo.git</code></pre>
+    <h5 id="create-a-new-local-repository-in-the-current-directory">
+      Create a new local repository in the current directory:
+    </h5>
+    <pre><code>$ git init</code></pre>
+    <h5 id="create-a-new-local-repository-in-a-specific-directory">
+      Create a new local repository in a specific directory:
+    </h5>
+    <pre><code>$ git init &lt;directory&gt;</code></pre>
+    <hr />
+    <h2 id="local-changes">Local Changes</h2>
+    <h5 id="changes-in-working-directory">Changes in working directory:</h5>
+    <pre><code>$ git status</code></pre>
+    <h5 id="changes-to-tracked-files">Changes to tracked files:</h5>
+    <pre><code>$ git diff</code></pre>
+    <h5 id="see-changesdifference-of-a-specific-file">
+      See changes/difference of a specific file:
+    </h5>
+    <pre><code>$ git diff &lt;file&gt;</code></pre>
+    <h5 id="add-all-current-changes-to-the-next-commit">
+      Add all current changes to the next commit:
+    </h5>
+    <pre><code>$ git add .</code></pre>
+    <h5 id="add-some-changes-in-file-to-the-next-commit">
+      Add some changes in &lt;file&gt; to the next commit:
+    </h5>
+    <pre><code>$ git add -p &lt;file&gt;</code></pre>
+    <h5 id="add-only-the-mentioned-files-to-the-next-commit">
+      Add only the mentioned files to the next commit:
+    </h5>
+    <pre><code>$ git add &lt;filename1&gt; &lt;filename2&gt;</code></pre>
+    <h5 id="commit-all-local-changes-in-tracked-files">
+      Commit all local changes in tracked files:
+    </h5>
+    <pre><code>$ git commit -a</code></pre>
+    <h5 id="commit-previously-staged-changes">
+      Commit previously staged changes:
+    </h5>
+    <pre><code>$ git commit</code></pre>
+    <h5 id="commit-with-message">Commit with message:</h5>
+    <pre><code>$ git commit -m &#39;message here&#39;</code></pre>
+    <h5 id="commit-skipping-the-staging-area-and-adding-message">
+      Commit skipping the staging area and adding message:
+    </h5>
+    <pre><code>$ git commit -am &#39;message here&#39;</code></pre>
+    <h5 id="commit-to-some-previous-date">Commit to some previous date:</h5>
+    <pre><code>$ git commit --date=&quot;`date --date=&#39;n day ago&#39;`&quot; -am &quot;&lt;Commit Message Here&gt;&quot;</code></pre>
+    <h5 id="change-last-commit">Change last commit:<br /></h5>
+    <p>
+      <em><sub>Don’t amend published commits!</sub></em>
+    </p>
+    <pre><code>$ git commit -a --amend</code></pre>
+    <h5 id="amend-with-last-commit-but-use-the-previous-commit-log-message">
+      Amend with last commit but use the previous commit log message
+    </h5>
+    <p>
+      <em><sub>Don’t amend published commits!</sub></em>
+    </p>
+    <pre class="shell"><code>$ git commit --amend --no-edit</code></pre>
+    <h5 id="change-committer-date-of-last-commit">
+      Change committer date of last commit:
+    </h5>
+    <pre><code>GIT_COMMITTER_DATE=&quot;date&quot; git commit --amend</code></pre>
+    <h5 id="change-author-date-of-last-commit">
+      Change Author date of last commit:
+    </h5>
+    <pre
+      class="shell"
+    ><code>$ git commit --amend --date=&quot;date&quot;</code></pre>
+    <h5 id="move-uncommitted-changes-from-current-branch-to-some-other-branch">
+      Move uncommitted changes from current branch to some other branch:<br />
+    </h5>
+    <pre><code>$ git stash
+$ git checkout branch2
+$ git stash pop</code></pre>
+    <h5 id="restore-stashed-changes-back-to-current-branch">
+      Restore stashed changes back to current branch:
+    </h5>
+    <pre class="shell"><code>$ git stash apply</code></pre>
+    <h4 id="restore-particular-stash-back-to-current-branch">
+      Restore particular stash back to current branch:
+    </h4>
+    <ul>
+      <li>
+        <em>{stash_number}</em> can be obtained from <code>git stash list</code>
+      </li>
+    </ul>
+    <pre class="shell"><code>$ git stash apply stash@{stash_number}</code></pre>
+    <h5 id="remove-the-last-set-of-stashed-changes">
+      Remove the last set of stashed changes:
+    </h5>
+    <pre><code>$ git stash drop</code></pre>
+    <hr />
+    <h2 id="search">Search</h2>
+    <h5 id="a-text-search-on-all-files-in-the-directory">
+      A text search on all files in the directory:
+    </h5>
+    <pre><code>$ git grep &quot;Hello&quot;</code></pre>
+    <h5 id="in-any-version-of-a-text-search">
+      In any version of a text search:
+    </h5>
+    <pre><code>$ git grep &quot;Hello&quot; v2.5</code></pre>
+    <h5 id="show-commits-that-introduced-a-specific-keyword">
+      Show commits that introduced a specific keyword
+    </h5>
+    <pre><code>$ git log -S &#39;keyword&#39;</code></pre>
+    <h5
+      id="show-commits-that-introduced-a-specific-keyword-using-a-regular-expression"
+    >
+      Show commits that introduced a specific keyword (using a regular
+      expression)
+    </h5>
+    <pre><code>$ git log -S &#39;keyword&#39; --pickaxe-regex</code></pre>
+    <hr />
+    <h2 id="commit-history">Commit History</h2>
+    <h5
+      id="show-all-commits-starting-with-newest-itll-show-the-hash-author-information-date-of-commit-and-title-of-the-commit"
+    >
+      Show all commits, starting with newest (it’ll show the hash, author
+      information, date of commit and title of the commit):
+    </h5>
+    <pre><code>$ git log</code></pre>
+    <h5
+      id="show-all-the-commitsitll-show-just-the-commit-hash-and-the-commit-message"
+    >
+      Show all the commits(it’ll show just the commit hash and the commit
+      message):
+    </h5>
+    <pre><code>$ git log --oneline</code></pre>
+    <h5 id="show-all-commits-of-a-specific-user">
+      Show all commits of a specific user:
+    </h5>
+    <pre><code>$ git log --author=&quot;username&quot;</code></pre>
+    <h5 id="show-changes-over-time-for-a-specific-file">
+      Show changes over time for a specific file:
+    </h5>
+    <pre><code>$ git log -p &lt;file&gt;</code></pre>
+    <h5
+      id="display-commits-that-are-present-only-in-remotebranch-in-right-side"
+    >
+      Display commits that are present only in remote/branch in right side
+    </h5>
+    <pre><code>$ git log --oneline &lt;origin/master&gt;..&lt;remote/master&gt; --left-right</code></pre>
+    <h5 id="who-changed-what-and-when-in-file">
+      Who changed, what and when in &lt;file&gt;:
+    </h5>
+    <pre><code>$ git blame &lt;file&gt;</code></pre>
+    <h5 id="show-reference-log">Show Reference log:</h5>
+    <pre><code>$ git reflog show</code></pre>
+    <h5 id="delete-reference-log">Delete Reference log:</h5>
+    <pre><code>$ git reflog delete</code></pre>
+    <hr />
+    <h2 id="move-rename">Move / Rename</h2>
+    <h5 id="rename-a-file">Rename a file:</h5>
+    <p>Rename Index.txt to Index.html</p>
+    <pre><code>$ git mv Index.txt Index.html</code></pre>
+    <hr />
+    <h2 id="branches-tags">Branches &amp; Tags</h2>
+    <h5 id="list-all-local-branches">List all local branches:</h5>
+    <pre><code>$ git branch</code></pre>
+    <h4 id="list-localremote-branches">List local/remote branches</h4>
+    <pre><code>$ git branch -a</code></pre>
+    <h5 id="list-all-remote-branches">List all remote branches:</h5>
+    <pre><code>$ git branch -r</code></pre>
+    <h5 id="switch-head-branch">Switch HEAD branch:</h5>
+    <pre><code>$ git checkout &lt;branch&gt;</code></pre>
+    <h5 id="checkout-single-file-from-different-branch">
+      Checkout single file from different branch
+    </h5>
+    <pre><code>$ git checkout &lt;branch&gt; -- &lt;filename&gt;</code></pre>
+    <h5 id="create-and-switch-new-branch">Create and switch new branch:</h5>
+    <pre><code>$ git checkout -b &lt;branch&gt;</code></pre>
+    <h5 id="switch-to-the-previous-branch-without-saying-the-name-explicitly">
+      Switch to the previous branch, without saying the name explicitly:
+    </h5>
+    <pre><code>$ git checkout -</code></pre>
+    <h5
+      id="create-a-new-branch-from-an-exiting-branch-and-switch-to-new-branch"
+    >
+      Create a new branch from an exiting branch and switch to new branch:
+    </h5>
+    <pre><code>$ git checkout -b &lt;new_branch&gt; &lt;existing_branch&gt;</code></pre>
+    <h4 id="checkout-and-create-a-new-branch-from-existing-commit">
+      Checkout and create a new branch from existing commit
+    </h4>
+    <pre><code>$ git checkout &lt;commit-hash&gt; -b &lt;new_branch_name&gt;</code></pre>
+    <h5 id="create-a-new-branch-based-on-your-current-head">
+      Create a new branch based on your current HEAD:
+    </h5>
+    <pre><code>$ git branch &lt;new-branch&gt;</code></pre>
+    <h5 id="create-a-new-tracking-branch-based-on-a-remote-branch">
+      Create a new tracking branch based on a remote branch:
+    </h5>
+    <pre><code>$ git branch --track &lt;new-branch&gt; &lt;remote-branch&gt;</code></pre>
+    <h5 id="delete-a-local-branch">Delete a local branch:</h5>
+    <pre><code>$ git branch -d &lt;branch&gt;</code></pre>
+    <h5 id="rename-current-branch-to-new-branch-name">
+      Rename current branch to new branch name
+    </h5>
+    <pre
+      class="shell"
+    ><code>$ git branch -m &lt;new_branch_name&gt;</code></pre>
+    <h5 id="force-delete-a-local-branch">Force delete a local branch:</h5>
+    <p>
+      <em><sub>You will lose unmerged changes!</sub></em>
+    </p>
+    <pre><code>$ git branch -D &lt;branch&gt;</code></pre>
+    <h5 id="mark-head-with-a-tag">Mark <code>HEAD</code> with a tag:</h5>
+    <pre><code>$ git tag &lt;tag-name&gt;</code></pre>
+    <h5 id="mark-head-with-a-tag-and-open-the-editor-to-include-a-message">
+      Mark <code>HEAD</code> with a tag and open the editor to include a
+      message:
+    </h5>
+    <pre><code>$ git tag -a &lt;tag-name&gt;</code></pre>
+    <h5 id="mark-head-with-a-tag-that-includes-a-message">
+      Mark <code>HEAD</code> with a tag that includes a message:
+    </h5>
+    <pre><code>$ git tag &lt;tag-name&gt; -am &#39;message here&#39;</code></pre>
+    <h5 id="list-all-tags">List all tags:</h5>
+    <pre><code>$ git tag</code></pre>
+    <h5
+      id="list-all-tags-with-their-messages-tag-message-or-commit-message-if-tag-has-no-message"
+    >
+      List all tags with their messages (tag message or commit message if tag
+      has no message):
+    </h5>
+    <pre><code>$ git tag -n</code></pre>
+    <hr />
+    <h2 id="update-publish">Update &amp; Publish</h2>
+    <h5 id="list-all-current-configured-remotes">
+      List all current configured remotes:
+    </h5>
+    <pre><code>$ git remote -v</code></pre>
+    <h5 id="show-information-about-a-remote">
+      Show information about a remote:
+    </h5>
+    <pre><code>$ git remote show &lt;remote&gt;</code></pre>
+    <h5 id="add-new-remote-repository-named-remote">
+      Add new remote repository, named &lt;remote&gt;:
+    </h5>
+    <pre><code>$ git remote add &lt;remote&gt; &lt;url&gt;</code></pre>
+    <h5 id="rename-a-remote-repository-from-remote-to-new_remote">
+      Rename a remote repository, from &lt;remote&gt; to &lt;new_remote&gt;:
+    </h5>
+    <pre><code>$ git remote rename &lt;remote&gt; &lt;new_remote&gt;</code></pre>
+    <h5 id="remove-a-remote">Remove a remote:</h5>
+    <pre><code>$ git remote rm &lt;remote&gt;</code></pre>
+    <p>
+      <em
+        ><sub
+          >Note: git remote rm does not delete the remote repository from the
+          server. It simply removes the remote and its references from your
+          local repository.</sub
+        ></em
+      >
+    </p>
+    <h5 id="download-all-changes-from-remote-but-dont-integrate-into-head">
+      Download all changes from &lt;remote&gt;, but don’t integrate into HEAD:
+    </h5>
+    <pre><code>$ git fetch &lt;remote&gt;</code></pre>
+    <h5 id="download-changes-and-directly-mergeintegrate-into-head">
+      Download changes and directly merge/integrate into HEAD:
+    </h5>
+    <pre><code>$ git remote pull &lt;remote&gt; &lt;url&gt;</code></pre>
+    <h5 id="get-all-changes-from-head-to-local-repository">
+      Get all changes from HEAD to local repository:
+    </h5>
+    <pre><code>$ git pull origin master</code></pre>
+    <h5 id="get-all-changes-from-head-to-local-repository-without-a-merge">
+      Get all changes from HEAD to local repository without a merge:
+    </h5>
+    <pre><code>$ git pull --rebase &lt;remote&gt; &lt;branch&gt;</code></pre>
+    <h5 id="publish-local-changes-on-a-remote">
+      Publish local changes on a remote:
+    </h5>
+    <pre><code>$ git push remote &lt;remote&gt; &lt;branch&gt;</code></pre>
+    <h5 id="delete-a-branch-on-the-remote">Delete a branch on the remote:</h5>
+    <pre><code>$ git push &lt;remote&gt; :&lt;branch&gt; (since Git v1.5.0)</code></pre>
+    <p>OR</p>
+    <pre><code>$ git push &lt;remote&gt; --delete &lt;branch&gt; (since Git v1.7.0)</code></pre>
+    <h5 id="publish-your-tags">Publish your tags:</h5>
+    <pre><code>$ git push --tags</code></pre>
+    <hr />
+    <h4 id="configure-the-merge-tool-globally-to-meld-editor">
+      Configure the merge tool globally to meld (editor)
+    </h4>
+    <div class="sourceCode" id="cb80">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb80-1" title="1">$ <span class="fu">git</span> config --global merge.tool meld</a></code></pre>
+    </div>
+    <h5 id="use-your-configured-merge-tool-to-solve-conflicts">
+      Use your configured merge tool to solve conflicts:
+    </h5>
+    <pre><code>$ git mergetool</code></pre>
+    <h2 id="merge-rebase">Merge &amp; Rebase</h2>
+    <h5 id="merge-branch-into-your-current-head">
+      Merge branch into your current HEAD:
+    </h5>
+    <pre><code>$ git merge &lt;branch&gt;</code></pre>
+    <h4 id="list-merged-branches">List merged branches</h4>
+    <pre><code>$ git branch --merged</code></pre>
+    <h5 id="rebase-your-current-head-onto-branch">
+      Rebase your current HEAD onto &lt;branch&gt;:<br />
+    </h5>
+    <p>
+      <em><sub>Don’t rebase published commit!</sub></em>
+    </p>
+    <pre><code>$ git rebase &lt;branch&gt;</code></pre>
+    <h5 id="abort-a-rebase">Abort a rebase:</h5>
+    <pre><code>$ git rebase --abort</code></pre>
+    <h5 id="continue-a-rebase-after-resolving-conflicts">
+      Continue a rebase after resolving conflicts:
+    </h5>
+    <pre><code>$ git rebase --continue</code></pre>
+    <h5
+      id="use-your-editor-to-manually-solve-conflicts-and-after-resolving-mark-file-as-resolved"
+    >
+      Use your editor to manually solve conflicts and (after resolving) mark
+      file as resolved:
+    </h5>
+    <pre><code>$ git add &lt;resolved-file&gt;</code></pre>
+    <pre><code>$ git rm &lt;resolved-file&gt;</code></pre>
+    <h5 id="squashing-commits">Squashing commits:</h5>
+    <pre><code>$ git rebase -i &lt;commit-just-before-first&gt;</code></pre>
+    <p>Now replace this,</p>
+    <pre><code>pick &lt;commit_id&gt;
+pick &lt;commit_id2&gt;
+pick &lt;commit_id3&gt;</code></pre>
+    <p>to this,</p>
+    <pre><code>pick &lt;commit_id&gt;
+squash &lt;commit_id2&gt;
+squash &lt;commit_id3&gt;</code></pre>
+    <hr />
+    <h2 id="undo">Undo</h2>
+    <h5 id="discard-all-local-changes-in-your-working-directory">
+      Discard all local changes in your working directory:
+    </h5>
+    <pre><code>$ git reset --hard HEAD</code></pre>
+    <h5
+      id="get-all-the-files-out-of-the-staging-areai.e.-undo-the-last-git-add"
+    >
+      Get all the files out of the staging area(i.e. undo the last
+      <code>git add</code>):
+    </h5>
+    <pre><code>$ git reset HEAD</code></pre>
+    <h5 id="discard-local-changes-in-a-specific-file">
+      Discard local changes in a specific file:
+    </h5>
+    <pre><code>$ git checkout HEAD &lt;file&gt;</code></pre>
+    <h5 id="revert-a-commit-by-producing-a-new-commit-with-contrary-changes">
+      Revert a commit (by producing a new commit with contrary changes):
+    </h5>
+    <pre><code>$ git revert &lt;commit&gt;</code></pre>
+    <h5
+      id="reset-your-head-pointer-to-a-previous-commit-and-discard-all-changes-since-then"
+    >
+      Reset your HEAD pointer to a previous commit and discard all changes since
+      then:
+    </h5>
+    <pre><code>$ git reset --hard &lt;commit&gt;</code></pre>
+    <h5 id="reset-your-head-pointer-to-a-remote-branch-current-state.">
+      Reset your HEAD pointer to a remote branch current state.
+    </h5>
+    <pre><code>$ git reset --hard &lt;remote/branch&gt; e.g., upstream/master, origin/my-feature</code></pre>
+    <h5
+      id="reset-your-head-pointer-to-a-previous-commit-and-preserve-all-changes-as-unstaged-changes"
+    >
+      Reset your HEAD pointer to a previous commit and preserve all changes as
+      unstaged changes:
+    </h5>
+    <pre><code>$ git reset &lt;commit&gt;</code></pre>
+    <h5
+      id="reset-your-head-pointer-to-a-previous-commit-and-preserve-uncommitted-local-changes"
+    >
+      Reset your HEAD pointer to a previous commit and preserve uncommitted
+      local changes:
+    </h5>
+    <pre><code>$ git reset --keep &lt;commit&gt;</code></pre>
+    <h5
+      id="remove-files-that-were-accidentally-committed-before-they-were-added-to-.gitignore"
+    >
+      Remove files that were accidentally committed before they were added to
+      .gitignore
+    </h5>
+    <pre><code>$ git rm -r --cached .
+$ git add .
+$ git commit -m &quot;remove xyz file&quot;</code></pre>
+    <hr />
+    <h2 id="git-flow">Git-Flow</h2>
+    <p>
+      Improved
+      <a href="https://github.com/petervanderdoes/gitflow-avh">Git-flow</a>
+    </p>
+    <h3 id="index-1">Index</h3>
+    <ul>
+      <li><a href="#setup">Setup</a></li>
+      <li><a href="#getting-started">Getting Started</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#make-a-release">Make a Release</a></li>
+      <li><a href="#hotfixes">Hotfixes</a></li>
+      <li><a href="#commands">Commands</a></li>
+    </ul>
+    <hr />
+    <h3 id="setup-1">Setup</h3>
+    <h6
+      id="you-need-a-working-git-installation-as-prerequisite.-git-flow-works-on-osx-linux-and-windows."
+    >
+      You need a working git installation as prerequisite. Git flow works on
+      OSX, Linux and Windows.
+    </h6>
+    <h5 id="osx-homebrew">OSX Homebrew:</h5>
+    <pre><code>$ brew install git-flow-avh</code></pre>
+    <h5 id="osx-macports">OSX Macports:</h5>
+    <pre><code>$ port install git-flow</code></pre>
+    <h5 id="linux-debian-based">Linux (Debian-based):</h5>
+    <pre><code>$ sudo apt-get install git-flow</code></pre>
+    <h5 id="windows-cygwin">Windows (Cygwin):</h5>
+    <h6 id="you-need-wget-and-util-linux-to-install-git-flow.">
+      You need wget and util-linux to install git-flow.
+    </h6>
+    <div class="sourceCode" id="cb104">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb104-1" title="1">$ <span class="fu">wget</span> -q -O - --no-check-certificate https://raw.githubusercontent.com/petervanderdoes/gitflow/develop/contrib/gitflow-installer.sh install <span class="op">&lt;</span>state<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">bash</span></a></code></pre>
+    </div>
+    <hr />
+    <h3 id="getting-started">Getting Started</h3>
+    <h6
+      id="git-flow-needs-to-be-initialized-in-order-to-customize-your-project-setup.-start-using-git-flow-by-initializing-it-inside-an-existing-git-repository"
+    >
+      Git flow needs to be initialized in order to customize your project setup.
+      Start using git-flow by initializing it inside an existing git repository:
+    </h6>
+    <h5 id="initialize">Initialize:</h5>
+    <h6
+      id="youll-have-to-answer-a-few-questions-regarding-the-naming-conventions-for-your-branches.-its-recommended-to-use-the-default-values."
+    >
+      You’ll have to answer a few questions regarding the naming conventions for
+      your branches. It’s recommended to use the default values.
+    </h6>
+    <pre class="shell"><code>git flow init</code></pre>
+    <p>OR ###### To use default</p>
+    <pre class="shell"><code>git flow init -d</code></pre>
+    <hr />
+    <h3 id="features">Features</h3>
+    <h6
+      id="develop-new-features-for-upcoming-releases.-typically-exist-in-developers-repos-only."
+    >
+      Develop new features for upcoming releases. Typically exist in developers
+      repos only.
+    </h6>
+    <h5 id="start-a-new-feature">Start a new feature:</h5>
+    <h6
+      id="this-action-creates-a-new-feature-branch-based-on-develop-and-switches-to-it."
+    >
+      This action creates a new feature branch based on ‘develop’ and switches
+      to it.
+    </h6>
+    <pre><code>git flow feature start MYFEATURE</code></pre>
+    <h5 id="finish-up-a-feature">Finish up a feature:</h5>
+    <h6
+      id="finish-the-development-of-a-feature.-this-action-performs-the-following"
+    >
+      Finish the development of a feature. This action performs the following:
+    </h6>
+    <h6 id="merged-myfeature-into-develop.">
+      1) Merged MYFEATURE into ‘develop’.
+    </h6>
+    <h6 id="removes-the-feature-branch.">2) Removes the feature branch.</h6>
+    <h6 id="switches-back-to-develop-branch">
+      3) Switches back to ‘develop’ branch
+    </h6>
+    <pre><code>git flow feature finish MYFEATURE</code></pre>
+    <h5 id="publish-a-feature">Publish a feature:</h5>
+    <h6
+      id="are-you-developing-a-feature-in-collaboration-publish-a-feature-to-the-remote-server-so-it-can-be-used-by-other-users."
+    >
+      Are you developing a feature in collaboration? Publish a feature to the
+      remote server so it can be used by other users.
+    </h6>
+    <pre><code>git flow feature publish MYFEATURE</code></pre>
+    <h5 id="getting-a-published-feature">Getting a published feature:</h5>
+    <h6 id="get-a-feature-published-by-another-user.">
+      Get a feature published by another user.
+    </h6>
+    <pre><code>git flow feature pull origin MYFEATURE</code></pre>
+    <h5 id="tracking-a-origin-feature">Tracking a origin feature:</h5>
+    <h6 id="you-can-track-a-feature-on-origin-by-using">
+      You can track a feature on origin by using
+    </h6>
+    <pre><code>git flow feature track MYFEATURE</code></pre>
+    <hr />
+    <h3 id="make-a-release">Make a Release</h3>
+    <h6
+      id="support-preparation-of-a-new-production-release.-allow-for-minor-bug-fixes-and-preparing-meta-data-for-a-release"
+    >
+      Support preparation of a new production release. Allow for minor bug fixes
+      and preparing meta-data for a release
+    </h6>
+    <h5 id="start-a-release">Start a release:</h5>
+    <h6
+      id="to-start-a-release-use-the-git-flow-release-command.-it-creates-a-release-branch-created-from-the-develop-branch.-you-can-optionally-supply-a-base-commit-sha-1-hash-to-start-the-release-from.-the-commit-must-be-on-the-develop-branch."
+    >
+      To start a release, use the git flow release command. It creates a release
+      branch created from the ‘develop’ branch. You can optionally supply a
+      [BASE] commit sha-1 hash to start the release from. The commit must be on
+      the ‘develop’ branch.
+    </h6>
+    <pre><code>git flow release start RELEASE [BASE]</code></pre>
+    <h6
+      id="its-wise-to-publish-the-release-branch-after-creating-it-to-allow-release-commits-by-other-developers.-do-it-similar-to-feature-publishing-with-the-command"
+    >
+      It’s wise to publish the release branch after creating it to allow release
+      commits by other developers. Do it similar to feature publishing with the
+      command:
+    </h6>
+    <pre><code>git flow release publish RELEASE</code></pre>
+    <h6
+      id="you-can-track-a-remote-release-with-the-git-flow-release-track-release-command"
+    >
+      (You can track a remote release with the:
+      <code>git flow release track RELEASE</code> command)
+    </h6>
+    <h5 id="finish-up-a-release">Finish up a release:</h5>
+    <h6
+      id="finishing-a-release-is-one-of-the-big-steps-in-git-branching.-it-performs-several-actions"
+    >
+      Finishing a release is one of the big steps in git branching. It performs
+      several actions:
+    </h6>
+    <h6 id="merges-the-release-branch-back-into-master">
+      1) Merges the release branch back into ‘master’
+    </h6>
+    <h6 id="tags-the-release-with-its-name">
+      2) Tags the release with its name
+    </h6>
+    <h6 id="back-merges-the-release-into-develop">
+      3) Back-merges the release into ‘develop’
+    </h6>
+    <h6 id="removes-the-release-branch">4) Removes the release branch</h6>
+    <pre><code>git flow release finish RELEASE</code></pre>
+    <h6 id="dont-forget-to-push-your-tags-with-git-push---tags">
+      Don’t forget to push your tags with <code>git push --tags</code>
+    </h6>
+    <hr />
+    <h3 id="hotfixes">Hotfixes</h3>
+    <h6
+      id="hotfixes-arise-from-the-necessity-to-act-immediately-upon-an-undesired-state-of-a-live-production-version.-may-be-branched-off-from-the-corresponding-tag-on-the-master-branch-that-marks-the-production-version."
+    >
+      Hotfixes arise from the necessity to act immediately upon an undesired
+      state of a live production version. May be branched off from the
+      corresponding tag on the master branch that marks the production version.
+    </h6>
+    <h5 id="git-flow-hotfix-start">Git flow hotfix start:</h5>
+    <h6 id="like-the-other-git-flow-commands-a-hotfix-is-started-with">
+      Like the other git flow commands, a hotfix is started with
+    </h6>
+    <pre><code>$ git flow hotfix start VERSION [BASENAME]</code></pre>
+    <h6
+      id="the-version-argument-hereby-marks-the-new-hotfix-release-name.-optionally-you-can-specify-a-basename-to-start-from."
+    >
+      The version argument hereby marks the new hotfix release name. Optionally
+      you can specify a basename to start from.
+    </h6>
+    <h5 id="finish-a-hotfix">Finish a hotfix:</h5>
+    <h6
+      id="by-finishing-a-hotfix-it-gets-merged-back-into-develop-and-master.-additionally-the-master-merge-is-tagged-with-the-hotfix-version"
+    >
+      By finishing a hotfix it gets merged back into develop and master.
+      Additionally the master merge is tagged with the hotfix version
+    </h6>
+    <pre><code>git flow hotfix finish VERSION</code></pre>
+    <hr />
+    <h3 id="commands">Commands</h3>
+    <p align="center">
+      <img
+        alt="Git"
+        src="./Img/git-flow-commands.png"
+        height="270"
+        width="460"
+      />
+    </p>
+    <hr />
+    <h3 id="git-flow-schema">Git flow schema</h3>
+    <p align="center">
+      <img alt="Git" src="Img/git-flow-commands-without-flow.png" />
+    </p>
+    <hr />
+  </body>
+</html>

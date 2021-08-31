@@ -1,0 +1,173 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*navbar1*/
+@import "https://fonts.googleapis.com/css?family=Raleway";
+
+div.container {
+  font-family: Raleway;
+  margin: 0 auto;
+  padding: 2em 2em;
+  text-align: center;
+}
+
+div.container a {
+  color: #fff;
+  text-decoration: none;
+  font: 20px Raleway;
+  margin: 0px 10px;
+  padding: 10px 10px;
+  position: relative;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.blue {
+  background: #2196f3;
+}
+
+/*logo */
+.navbar-brand {
+  padding: 0px;
+}
+
+.navbar-brand img {
+  background: rgb(248, 242, 242);
+  border-radius: 60%; /* the magic */
+  padding: 9px 10px;
+  position: relative;
+  float: left;
+  height: 50px;
+  margin: 10px 5px 0px 100px;
+}
+/*logo endl*/
+
+/* Circle behind */
+div.circleBehind a:before,
+div.circleBehind a:after {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  border: 4px solid #0277bd;
+  transform: translateX(-50%) translateY(-50%) scale(0.8);
+  border-radius: 50%;
+  background: transparent;
+  content: "";
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: -1;
+}
+
+div.circleBehind a:after {
+  border-width: 2px;
+  transition: all 0.4s;
+}
+
+div.circleBehind a:hover:before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+}
+
+div.circleBehind a:hover:after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50%) scale(1.3);
+}
+
+/*navbar1*/
+
+#array_container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+  margin: 5% auto;
+  border: 2px solid black;
+  padding: 5%;
+}
+
+#array_container2 {
+  display: flex;
+  width: 80%;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin: 1% auto;
+  padding: 1%;
+}
+
+button {
+  margin: 20px 20px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.button {
+  background: rgb(20, 165, 145);
+  background: linear-gradient(
+    0deg,
+    rgba(20, 243, 213) 0%,
+    rgba(20, 243, 213) 100%
+  );
+  border: none;
+}
+.custom:hover {
+  background: rgb(0, 3, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 3, 255, 1) 0%,
+    rgba(2, 126, 251, 1) 100%
+  );
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.current {
+  background-color: #4caf50;
+  color: white;
+}
+
+#resultDiv {
+  text-align: center;
+  margin: 10px;
+}
+
+#result {
+  margin: 20px;
+}
+
+#texty {
+  margin: 20px;
+  padding-left: 10px;
+}

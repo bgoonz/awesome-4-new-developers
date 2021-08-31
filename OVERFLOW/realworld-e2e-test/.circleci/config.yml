@@ -1,0 +1,30 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.5.0-browsers
+      - image: circleci/mongo:3.4
+    steps:
+      - checkout
+      - restore_cache:
+          key: node-modules-{{ checksum "package.json" }}
+      - restore_cache:
+          key: sut-node-modules-{{ checksum "packages/package.json" }}
+      - run:
+          name: Start app and test
+          command: |
+            npm install
+            npm run start
+            npm run test
+      - save_cache:
+          key: node-modules-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - save_cache:
+          key: sut-node-modules-{{ checksum "packages/package.json" }}
+          paths:
+            - ./packages/node_modules/
+      - store_artifacts:
+          path: ./.screenshots
+          destination: screenshots

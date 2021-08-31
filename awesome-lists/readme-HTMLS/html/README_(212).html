@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="htaccess-snippets-awesome">
+      .htaccess Snippets
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>Una collezione di esempi utili di .htaccess.</p>
+    <p>
+      <strong>Disclaimer</strong>: Anche se nella maggior parte dei casi basta
+      copiare l’<code>.htaccess</code> d’esempio ci sono casi in cui sia
+      necessario fare delle modifiche. L’utilizzo è a vostro totale rischio.
+    </p>
+    <p>
+      <strong>IMPORTANTE</strong>: Apache 2.4 introduce alcuni cambiamenti, in
+      particolare la configurazione del controllo degli accessi. Per maggiori
+      informazioni potete consultare il
+      <a href="https://httpd.apache.org/docs/2.4/upgrading.html"
+        >documento sull’aggiornamento</a
+      >
+      oltre a
+      <a href="https://github.com/phanan/htaccess/issues/2"
+        >questa problematica</a
+      >.
+    </p>
+    <h2 id="riconoscimenti">Riconoscimenti</h2>
+    <p>
+      Ciò che stiamo facendo è mettere insieme esempi utili da tutto il web (ad
+      esempio, una buona parte viene da
+      <a href="https://github.com/h5bp/server-configs-apache"
+        >Apache Server Configs</a
+      >) in un solo posto. Anche se abbiamo cercato di dare riconoscimento, dove
+      previsto, potrebbe mancare qualche riferimento. Se credete che sia
+      presente del vostro lavoro e volete che venga riconosciuto fatecelo sapere
+      e inviateci un PR.
+    </p>
+    <h2 id="sommario">Sommario</h2>
+    <ul>
+      <li>
+        <a href="#rewrite-and-redirection">Rewrite e Redirection</a>
+        <ul>
+          <li><a href="#force-www">Forza www</a></li>
+          <li>
+            <a href="#force-www-in-a-generic-way"
+              >Forza www in maniera generica</a
+            >
+          </li>
+          <li><a href="#force-non-www">Forza non-www</a></li>
+          <li>
+            <a href="#force-non-www-in-a-generic-way"
+              >Forza non-www in maniera generica</a
+            >
+          </li>
+          <li><a href="#force-https">Forza HTTPS</a></li>
+          <li>
+            <a href="#force-https-behind-a-proxy"
+              >Forza HTTPS se dietro Proxy</a
+            >
+          </li>
+          <li><a href="#force-trailing-slash">Forza lo Slash finale</a></li>
+          <li><a href="#remove-trailing-slash">Rimuovi lo Slash finale</a></li>
+          <li>
+            <a href="#remove-trailing-slash-from-arbitrary-paths"
+              >Rimuovi lo Slash finale da percorsi arbitrari</a
+            >
+          </li>
+          <li>
+            <a href="#redirect-a-single-page">Redireziona una singola pagina</a>
+          </li>
+          <li>
+            <a href="#alias-a-single-directory">Alias a singole Cartelle</a>
+          </li>
+          <li><a href="#alias-paths-to-script">Percorsi Alias a Script</a></li>
+          <li>
+            <a href="#redirect-an-entire-site">Redireziona un Intero Sito</a>
+          </li>
+          <li><a href="#alias-clean-urls">Alias per URL “Pulite”</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#security">Sicurezza</a>
+        <ul>
+          <li><a href="#deny-all-access">Nega tutti gli accessi</a></li>
+          <li>
+            <a href="#deny-all-access-except-yours"
+              >Nega l’accesso a tutti tranne per te stesso</a
+            >
+          </li>
+          <li>
+            <a href="#allow-all-access-except-spammers"
+              >Permetti a tutti l’accesso tranne agli Spammer</a
+            >
+          </li>
+          <li>
+            <a href="#deny-access-to-hidden-files-and-directories"
+              >Nega l’accesso a Cartelle e File Nascosti</a
+            >
+          </li>
+          <li>
+            <a href="#deny-access-to-backup-and-source-files"
+              >Nega l’accesso a Backup e File Sorgenti</a
+            >
+          </li>
+          <li>
+            <a href="#disable-directory-browsing"
+              >Disabilita l’Esplorazione delle Cartelle</a
+            >
+          </li>
+          <li>
+            <a href="#disable-image-hotlinking"
+              >Disabilita Hotlinking delle Immagini</a
+            >
+          </li>
+          <li>
+            <a href="#disable-image-hotlinking-for-specific-domains"
+              >Disabilita Hotlinking delle Immagini per Domini Specifici</a
+            >
+          </li>
+          <li>
+            <a href="#password-protect-a-directory"
+              >Proteggi una Cartella con Password</a
+            >
+          </li>
+          <li>
+            <a href="#password-protect-a-file-or-several-files"
+              >Proteggi uno o più file con Password</a
+            >
+          </li>
+          <li>
+            <a href="#block-visitors-by-referrer"
+              >Blocca i visitatori in base al Referrer</a
+            >
+          </li>
+          <li>
+            <a href="#prevent-framing-the-site"
+              >Previeni l’inclusione del Sito tramite frame (framing)</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#performance">Prestazioni</a>
+        <ul>
+          <li><a href="#compress-text-files">Comprimi i File di Testo</a></li>
+          <li><a href="#set-expires-headers">Imposta header expires</a></li>
+          <li><a href="#turn-etags-off">Disabilita gli eTags</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#miscellaneous">Miscellanea</a>
+        <ul>
+          <li><a href="#set-php-variables">Imposta variabili PHP</a></li>
+          <li>
+            <a href="#custom-error-pages">Pagine di Errore Personalizzate</a>
+          </li>
+          <li><a href="#force-downloading">Forza il Download</a></li>
+          <li><a href="#prevent-downloading">Previeni il Download</a></li>
+          <li>
+            <a href="#allow-cross-domain-fonts"
+              >Permetti i Web Font da domini differenti</a
+            >
+          </li>
+          <li>
+            <a href="#auto-utf-8-encode">Codifica automaticamente in UTF-8</a>
+          </li>
+          <li>
+            <a href="#switch-to-another-php-version"
+              >Passa a una versione diversa di PHP</a
+            >
+          </li>
+          <li>
+            <a href="#disable-internet-explorer-compatibility-view"
+              >Disabilita Visualizzazione Compatibilità di Internet Explorer</a
+            >
+          </li>
+          <li>
+            <a href="#serve-webp-images"
+              >Rendere disponibili immagini in formato WebP</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="rewrite-e-redirection">Rewrite e Redirection</h2>
+    <p>
+      Nota: Si presume che <code>mod_rewrite</code> sia installato e abilitato.
+    </p>
+    <h3 id="forza-www">Forza www</h3>
+    <pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTP_HOST} ^esempio\.com [NC]
+RewriteRule ^(.*)$ http://www.esempio.com/$1 [L,R=301,NC]</code></pre>
+    <h3 id="forza-www-in-maniera-generica">Forza www in maniera generica</h3>
+    <pre class="apacheconf"><code>RewriteCond %{HTTP_HOST} !^$
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteCond %{HTTPS}s ^on(s)|
+RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]</code></pre>
+    <p>
+      Funziona per <em>qualsiasi</em> dominio.
+      <a
+        href="https://stackoverflow.com/questions/4916222/htaccess-how-to-force-www-in-a-generic-way"
+        >Sorgente</a
+      >
+    </p>
+    <h3 id="forza-non-www">Forza non-www</h3>
+    <p>
+      E’ <a href="http://www.sitepoint.com/domain-www-or-no-www/">ancora</a>
+      <a href="https://devcenter.heroku.com/articles/apex-domains">aperta</a>
+      <a href="http://yes-www.org/">la</a>
+      <a href="http://no-www.org/">discussione</a> sul se utilizzare o meno www.
+      Se invece preferite domini senza www:
+    </p>
+    <pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.esempio\.com [NC]
+RewriteRule ^(.*)$ http://esempio.com/$1 [L,R=301]</code></pre>
+    <h3 id="forza-non-www-in-maniera-generica">
+      Forza non-www in maniera generica
+    </h3>
+    <pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.
+RewriteCond %{HTTPS}s ^on(s)|off
+RewriteCond http%1://%{HTTP_HOST} ^(https?://)(www\.)?(.+)$
+RewriteRule ^ %1%3%{REQUEST_URI} [R=301,L]</code></pre>
+    <h3 id="forza-https">Forza HTTPS</h3>
+    <pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTPS} !on
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+# Nota: Si consiglia di abilitare anche HTTP Strict Transport Security (HSTS)
+# sul sito HTTPS per aiutare a prevenire attacchi man-in-the-middle.
+# Vedere https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security
+&lt;IfModule mod_headers.c&gt;
+    Header always set Strict-Transport-Security &quot;max-age=31536000; includeSubDomains&quot;
+&lt;/IfModule&gt;</code></pre>
+    <h3 id="forza-https-se-dietro-proxy">Forza HTTPS se dietro Proxy</h3>
+    <p>Utile se hai un proxy con TLS prima del tuo server.</p>
+    <pre class="apacheconf"><code>RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}</code></pre>
+    <h3 id="forza-slash-finale">Forza Slash Finale</h3>
+    <pre class="apacheconf"><code>RewriteCond %{REQUEST_URI} /+[^\.]+$
+RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301,L]</code></pre>
+    <h3 id="rimuovi-slash-finale">Rimuovi Slash Finale</h3>
+    <pre class="apacheconf"><code>RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]</code></pre>
+    <h3 id="rimuovi-slash-finale-da-percorsi-arbitrari">
+      Rimuovi Slash Finale da percorsi arbitrari
+    </h3>
+    <p>
+      Questo esempio redirezionerà i percorsi che finiscono con gli slash ai
+      rispettivi percorsi senza slash (eccetto le attuali cartelle), es.
+      <code>http://www.esempio.com/blog/</code> in
+      <code>http://www.esempio.com/blog</code>. E’ importante per il SEO in
+      quanto
+      <a href="http://overit.com/blog/canonical-urls">raccomandato</a> per avere
+      un URL canonico per ogni pagina.
+    </p>
+    <pre class="apacheconf"><code>RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [L,R=301]</code></pre>
+    <p>
+      <a
+        href="https://stackoverflow.com/questions/21417263/htaccess-add-remove-trailing-slash-from-url#27264788"
+        >Sorgente</a
+      >
+    </p>
+    <h3 id="redireziona-una-singola-pagina">Redireziona una singola pagina</h3>
+    <pre
+      class="apacheconf"
+    ><code>Redirect 301 /vecchiapagina.html http://www.esempio.com/nuovapagina.html
+Redirect 301 /vecchiapagina2.html http://www.esempio.com/cartella/</code></pre>
+    <p>
+      <a href="http://css-tricks.com/snippets/htaccess/301-redirects/"
+        >Sorgente</a
+      >
+    </p>
+    <h3 id="alias-di-una-singola-cartella">Alias di una singola Cartella</h3>
+    <pre class="apacheconf"><code>RewriteEngine On
+RewriteRule ^source-directory/(.*) /target-directory/$1 [R=301,L]</code></pre>
+    <h3 id="percorsi-alias-a-script">Percorsi Alias a Script</h3>
+    <pre class="apacheconf"><code>FallbackResource /index.fcgi</code></pre>
+    <p>
+      Questo esempio presenta un file <code>index.fcgi</code> in alcune cartelle
+      e ogni richiesta fallita nel risolvere un file/cartella verrà inviata allo
+      script <code>index.fcgi</code>. Va bene se volete che
+      <code>baz.foo/some/cool/path</code> venga gestito da
+      <code>baz.foo/index.fcgi</code> (che supporta anche richieste verso
+      <code>baz.foo</code>) mantenendo <code>baz.foo/css/style.css</code> e
+      simili. Accedi al percorso originale dalla variabile d’ambiente PATH_INFO
+      come previsto dal vostro ambiente di scripting.
+    </p>
+    <pre class="apacheconf"><code>RewriteEngine On
+RewriteRule ^$ index.fcgi/ [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.fcgi/$1 [QSA,L]</code></pre>
+    <p>
+      Questa è una versione meno efficiente della direttiva FallbackResource
+      directive (l’uso di <code>mod_rewrite</code> è più complesso del gestire
+      la direttiva <code>FallbackResource</code>) ma è anche più flessibile.
+    </p>
+    <h3 id="redireziona-un-intero-sito">Redireziona un intero sito</h3>
+    <pre
+      class="apacheconf"
+    ><code>Redirect 301 / http://nuovosito.com/</code></pre>
+    <p>
+      Questo metodo ti permette di mantenere i collegamenti intatti. Il vecchio
+      indirizzo <code>www.vecchiosito.com/some/crazy/link.html</code> diventerà
+      <code>www.nuovosito.com/some/crazy/link.html</code>. E’ estremamente utile
+      quando ci si “sposta” verso un nuovo dominio.
+      <a href="http://css-tricks.com/snippets/htaccess/301-redirects/"
+        >Sorgente</a
+      >
+    </p>
+    <h3 id="alias-per-url-pulite">Alias per URL “Pulite”</h3>
+    <p>
+      Questo esempio ti permette di utilizzare URL “pulite” – URL senza
+      estensione PHP. es. <code>esempio.com/utenti</code> invece di
+      <code>esempio.com/utenti.php</code>.
+    </p>
+    <pre class="apacheconf"><code>RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^([^.]+)$ $1.php [NC,L]</code></pre>
+    <p>
+      <a
+        href="http://www.abeautifulsite.net/access-pages-without-the-php-extension-using-htaccess/"
+        >Sorgente</a
+      >
+    </p>
+    <h2 id="sicurezza">Sicurezza</h2>
+    <h3 id="nega-tutti-gli-accessi">Nega tutti gli Accessi</h3>
+    <pre class="apacheconf"><code>## Apache 2.2
+Deny from all
+
+## Apache 2.4
+# Require all denied</code></pre>
+    <p>
+      In questa maniera rimarrai escluso anche tu dai tui contenuti! Per questo
+      introduciamo…
+    </p>
+    <h3 id="nega-laccesso-a-tutti-tranne-per-te-stesso">
+      Nega l’accesso a tutti tranne per te stesso
+    </h3>
+    <pre class="apacheconf"><code>## Apache 2.2
+Order deny,allow
+Deny from all
+Allow from xxx.xxx.xxx.xxx
+
+## Apache 2.4
+# Require all denied
+# Require ip xxx.xxx.xxx.xxx</code></pre>
+    <p>
+      <code>xxx.xxx.xxx.xxx</code> indica il tuo indirizzo IP. Se modifichi le
+      ultime tre cifre con, per esempio, <code>0/12</code> verrà specificato un
+      intervallo di IP all’interno della stessa rete, utile per non dover
+      inserire singolarmente tutti gli ip.
+      <a
+        href="http://speckyboy.com/2013/01/08/useful-htaccess-snippets-and-hacks/"
+        >Sorgente</a
+      >
+    </p>
+    <p>Ecco la versione al contrario:</p>
+    <h3 id="permetti-a-tutti-gli-accessi-tranne-agli-spammer">
+      Permetti a tutti gli accessi tranne agli Spammer
+    </h3>
+    <pre class="apacheconf"><code>## Apache 2.2
+Order deny,allow
+Deny from xxx.xxx.xxx.xxx
+Deny from xxx.xxx.xxx.xxy
+
+## Apache 2.4
+# Require all granted
+# Require not ip xxx.xxx.xxx.xxx
+# Require not ip xxx.xxx.xxx.xxy</code></pre>
+    <h3 id="nega-laccesso-a-cartelle-e-file-nascosti">
+      Nega l’accesso a Cartelle e File Nascosti
+    </h3>
+    <p>
+      La maggior parte, se non tutti, cartelle e File nascosti (quelli con i
+      nomi che iniziano con il punto <code>.</code>) dovrebbero essere al
+      sicuro. Per esempio: <code>.htaccess</code>, <code>.htpasswd</code>,
+      <code>.git</code>, <code>.hg</code>…
+    </p>
+    <pre class="apacheconf"><code>RewriteCond %{SCRIPT_FILENAME} -d [OR]
+RewriteCond %{SCRIPT_FILENAME} -f
+RewriteRule &quot;(^|/)\.&quot; - [F]</code></pre>
+    <p>
+      In alternativa puoi inviare il messaggio “Not Found” error, giving the
+      attacker dude no clue:
+    </p>
+    <pre class="apacheconf"><code>RedirectMatch 404 /\..*$</code></pre>
+    <h3 id="nega-laccesso-a-backup-e-file-sorgenti">
+      Nega l’accesso a Backup e File Sorgenti
+    </h3>
+    <p>
+      Questi file potrebbero esser stati lasciati da editor di testo o html
+      (come Vi/Vim) e sono un possibile pericolo di sicurezza se mostrati al
+      pubblico.
+    </p>
+    <pre
+      class="apacheconf"
+    ><code>&lt;FilesMatch &quot;(\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|swp)|~)$&quot;&gt;
+    ## Apache 2.2
+    Order allow,deny
+    Deny from all
+    Satisfy All
+
+    ## Apache 2.4
+    # Require all denied
+&lt;/FilesMatch&gt;</code></pre>
+    <p><a href="https://github.com/h5bp/server-configs-apache">Sorgente</a></p>
+    <h3 id="disabilita-esplorazione-cartella">
+      Disabilita Esplorazione Cartella
+    </h3>
+    <pre class="apacheconf"><code>Options All -Indexes</code></pre>
+    <h3 id="disabilita-hotlinking-delle-immagini">
+      Disabilita Hotlinking delle Immagini
+    </h3>
+    <pre class="apacheconf"><code>RewriteEngine on
+# Rimuovere la riga che segue se vuoi bloccare anche i referrer vuoti
+RewriteCond %{HTTP_REFERER} !^$
+
+RewriteCond %{HTTP_REFERER} !^https?://(.+\.)?esempio.com [NC]
+RewriteRule \.(jpe?g|png|gif|bmp)$ - [NC,F,L]
+
+# Se vuoi mostrare un banner di &quot;blocco&quot; al posto dell&#39;immagine collegata (hotlinked),
+# sostituisci la regola precedente con:
+# RewriteRule \.(jpe?g|png|gif|bmp) http://esempio.com/blocked.png [R,L]</code></pre>
+    <h3 id="disabilita-hotlinking-delle-immagini-per-domini-specifici">
+      Disabilita Hotlinking delle Immagini per Domini Specifici
+    </h3>
+    <p>
+      A volte vuoi disabilitare il collegamento ad immagini del tuo sito
+      (hotlinking) solo da alcuni cattivoni.
+    </p>
+    <pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTP_REFERER} ^https?://(.+\.)?badsite\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} ^https?://(.+\.)?badsite2\.com [NC,OR]
+RewriteRule \.(jpe?g|png|gif|bmp)$ - [NC,F,L]
+
+# Se vuoi mostrare un banner di &quot;blocco&quot; al posto dell&#39;immagine collegata (hotlinked),
+# sostituisci la regola precedente con:
+# RewriteRule \.(jpe?g|png|gif|bmp) http://esempio.com/blocked.png [R,L]</code></pre>
+    <h3 id="proteggi-una-cartella-con-password">
+      Proteggi una Cartella con Password
+    </h3>
+    <p>
+      Prima è necessario creare un file <code>.htpasswd</code> da qualche parte
+      nell sistema:
+    </p>
+    <div class="sourceCode" id="cb25">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" title="1"><span class="ex">htpasswd</span> -c /home/compagnia/.htpasswd boromir</a></code></pre>
+    </div>
+    <p>E adesso potete utilizzarlo per l’autenticazione:</p>
+    <pre class="apacheconf"><code>AuthType Basic
+AuthName &quot;Non si entra con facilità&quot;
+AuthUserFile /home/compagnia/.htpasswd
+Require valid-user</code></pre>
+    <h3 id="proteggi-uno-o-più-file-con-password">
+      Proteggi uno o più file con Password
+    </h3>
+    <pre
+      class="apacheconf"
+    ><code>AuthName &quot;Ancora non si entra con facilità&quot;
+AuthType Basic
+AuthUserFile /home/compagnia/.htpasswd
+
+&lt;Files &quot;one-ring.o&quot;&gt;
+Require valid-user
+&lt;/Files&gt;
+
+&lt;FilesMatch ^((one|two|three)-rings?\.o)$&gt;
+Require valid-user
+&lt;/FilesMatch&gt;</code></pre>
+    <h3 id="blocca-i-visitatori-in-base-al-referrer">
+      Blocca i visitatori in base al Referrer
+    </h3>
+    <p>
+      Nega l’accesso a tutti gli utenti che arrivano da (con referrer da) un
+      dominio specifico.
+      <a href="http://www.htaccess-guide.com/deny-visitors-by-referrer/"
+        >Sorgente</a
+      >
+    </p>
+    <pre class="apacheconf"><code>RewriteEngine on
+# Options +FollowSymlinks
+RewriteCond %{HTTP_REFERER} undominio\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} unaltrodominio\.com
+RewriteRule .* - [F]</code></pre>
+    <h3 id="previeni-linclusione-del-sito-tramite-frame-framing">
+      Previeni l’inclusione del Sito tramite frame (framing)
+    </h3>
+    <p>
+      Previene la possibilità di inserimento del sito web tramite frame (es.
+      inserito all’interno del tag <code>iframe</code>) permettendo solo un URI
+      specifico.
+    </p>
+    <pre
+      class="apacheconf"
+    ><code>SetEnvIf Request_URI &quot;/starry-night&quot; allow_framing=true
+Header set X-Frame-Options SAMEORIGIN env=!allow_framing</code></pre>
+    <h2 id="prestazioni">Prestazioni</h2>
+    <h3 id="comprimi-i-file-di-testo">Comprimi i File di Testo</h3>
+    <pre class="apacheconf"><code>&lt;IfModule mod_deflate.c&gt;
+
+    # Forza la compressione per header manipolati (es. da proxy).
+    # https://developer.yahoo.com/blogs/ydn/pushing-beyond-gzipping-25601.html
+    &lt;IfModule mod_setenvif.c&gt;
+        &lt;IfModule mod_headers.c&gt;
+            SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+            RequestHeader append Accept-Encoding &quot;gzip,deflate&quot; env=HAVE_Accept-Encoding
+        &lt;/IfModule&gt;
+    &lt;/IfModule&gt;
+
+    # Comprimi tutto l&#39;output segnato con uno dei seguentiMIME-type
+    # (per le versioni di Apache inferiori a 2.3.7 non è necessario abilitare `mod_filter`
+    #  ed è possibile rimuovere `&lt;IfModule mod_filter.c&gt;` e `&lt;/IfModule&gt;` lines
+    #  in quanto `AddOutputFilterByType` è ancora nelle direttive principali).
+    &lt;IfModule mod_filter.c&gt;
+        AddOutputFilterByType DEFLATE application/atom+xml \
+                                      application/javascript \
+                                      application/json \
+                                      application/rss+xml \
+                                      application/vnd.ms-fontobject \
+                                      application/x-font-ttf \
+                                      application/x-web-app-manifest+json \
+                                      application/xhtml+xml \
+                                      application/xml \
+                                      font/opentype \
+                                      image/svg+xml \
+                                      image/x-icon \
+                                      text/css \
+                                      text/html \
+                                      text/plain \
+                                      text/x-component \
+                                      text/xml
+    &lt;/IfModule&gt;
+
+&lt;/IfModule&gt;</code></pre>
+    <p><a href="https://github.com/h5bp/server-configs-apache">Sorgente</a></p>
+    <h3 id="imposta-gli-header-expires">Imposta gli Header “Expires”</h3>
+    <p>
+      <em>Expires headers</em> indicano al browser se devono richiedere il file
+      al server o caricarli dalla cache. E’ consigliabile impostare gli header
+      expires per i contenuti statici con una data futura abbastanza ampia. Se
+      non controlli la versione del file in base al nome imposta la cache per
+      risorse come CSS e JS a qualcosa come 1 settimana .
+      <a href="https://github.com/h5bp/server-configs-apache">Sorgente</a>
+    </p>
+    <pre class="apacheconf"><code>&lt;IfModule mod_expires.c&gt;
+    ExpiresActive on
+    ExpiresDefault                                      &quot;access plus 1 month&quot;
+
+  # CSS
+    ExpiresByType text/css                              &quot;access plus 1 year&quot;
+
+  # Interscambio Dati
+    ExpiresByType application/json                      &quot;access plus 0 seconds&quot;
+    ExpiresByType application/xml                       &quot;access plus 0 seconds&quot;
+    ExpiresByType text/xml                              &quot;access plus 0 seconds&quot;
+
+  # Favicon (non può essere rinominato!)
+    ExpiresByType image/x-icon                          &quot;access plus 1 week&quot;
+
+  # componenti HTML (HTC)
+    ExpiresByType text/x-component                      &quot;access plus 1 month&quot;
+
+  # HTML
+    ExpiresByType text/html                             &quot;access plus 0 seconds&quot;
+
+  # JavaScript
+    ExpiresByType application/javascript                &quot;access plus 1 year&quot;
+
+  # File Manifesto
+    ExpiresByType application/x-web-app-manifest+json   &quot;access plus 0 seconds&quot;
+    ExpiresByType text/cache-manifest                   &quot;access plus 0 seconds&quot;
+
+  # Media
+    ExpiresByType audio/ogg                             &quot;access plus 1 month&quot;
+    ExpiresByType image/gif                             &quot;access plus 1 month&quot;
+    ExpiresByType image/jpeg                            &quot;access plus 1 month&quot;
+    ExpiresByType image/png                             &quot;access plus 1 month&quot;
+    ExpiresByType video/mp4                             &quot;access plus 1 month&quot;
+    ExpiresByType video/ogg                             &quot;access plus 1 month&quot;
+    ExpiresByType video/webm                            &quot;access plus 1 month&quot;
+
+  # Feed Web
+    ExpiresByType application/atom+xml                  &quot;access plus 1 hour&quot;
+    ExpiresByType application/rss+xml                   &quot;access plus 1 hour&quot;
+
+  # Web font
+    ExpiresByType application/font-woff2                &quot;access plus 1 month&quot;
+    ExpiresByType application/font-woff                 &quot;access plus 1 month&quot;
+    ExpiresByType application/vnd.ms-fontobject         &quot;access plus 1 month&quot;
+    ExpiresByType application/x-font-ttf                &quot;access plus 1 month&quot;
+    ExpiresByType font/opentype                         &quot;access plus 1 month&quot;
+    ExpiresByType image/svg+xml                         &quot;access plus 1 month&quot;
+&lt;/IfModule&gt;</code></pre>
+    <h3 id="disabilita-etags">Disabilita eTags</h3>
+    <p>
+      Rimuovendo l’intestazione <code>ETag</code> vegono disabilitate le cache
+      del browser per poter validare i file e sono forzati a far fede alle
+      intestazioni <code>Cache-Control</code> e <code>Expires</code>.
+      <a href="http://www.askapache.com/htaccess/apache-speed-etags.html"
+        >Sorgente</a
+      >
+    </p>
+    <pre class="apacheconf"><code>&lt;IfModule mod_headers.c&gt;
+    Header unset ETag
+&lt;/IfModule&gt;
+FileETag None</code></pre>
+    <h2 id="miscellanea">Miscellanea</h2>
+    <h3 id="set-php-variables">Set PHP Variables</h3>
+    <pre class="apacheconf"><code>php_value &lt;key&gt; &lt;val&gt;
+
+# Peresempio:
+php_value upload_max_filesize 50M
+php_value max_execution_time 240</code></pre>
+    <h3 id="pagine-personalizzate-di-errore">
+      Pagine Personalizzate di Errore
+    </h3>
+    <pre
+      class="apacheconf"
+    ><code>ErrorDocument 500 &quot;Houston, abbiamo un problema.&quot;
+ErrorDocument 401 http://errore.esempio.com/mordor.html
+ErrorDocument 404 /errori/halflife3.html</code></pre>
+    <h3 id="forza-download">Forza Download</h3>
+    <p>
+      A volte volete poter forzare il browser a scaricare una tipologia di
+      contenuto al posto di mostrarlo.
+    </p>
+    <pre class="apacheconf"><code>&lt;Files *.md&gt;
+    ForceType application/octet-stream
+    Header set Content-Disposition attachment
+&lt;/Files&gt;</code></pre>
+    <p>Adesso c’è lo yang a questo yin:</p>
+    <h3 id="previeni-il-download">Previeni il Download</h3>
+    <p>
+      A volte si vuole forzare il brower a mostrare una tipologia di contenuto
+      al posto di farlo scaricare.
+    </p>
+    <pre
+      class="apacheconf"
+    ><code>&lt;FilesMatch &quot;\.(tex|log|aux)$&quot;&gt;
+    Header set Content-Type text/plain
+&lt;/FilesMatch&gt;</code></pre>
+    <h3 id="permetti-i-web-font-da-domini-differenti">
+      Permetti i Web Font da domini differenti
+    </h3>
+    <p>
+      I webfont messi a disposiziontra tramite CDN potrebbero non funzionare in
+      Firefox o IE a causa dei
+      <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing"
+        >CORS</a
+      >. Questo esempio risolve il problema.
+    </p>
+    <pre class="apacheconf"><code>&lt;IfModule mod_headers.c&gt;
+    &lt;FilesMatch &quot;\.(eot|otf|ttc|ttf|woff|woff2)$&quot;&gt;
+        Header set Access-Control-Allow-Origin &quot;*&quot;
+    &lt;/FilesMatch&gt;
+&lt;/IfModule&gt;</code></pre>
+    <p>
+      <a href="https://github.com/h5bp/server-configs-apache/issues/32"
+        >Sorgente</a
+      >
+    </p>
+    <h3 id="codifica-automaticamente-in-utf-8">
+      Codifica automaticamente in UTF-8
+    </h3>
+    <p>Il contenuto del tuo testo de evessere sempre codificato UTF-8 no?</p>
+    <pre
+      class="apacheconf"
+    ><code># Utilizza la codifica UTF-8 per qualasiasi contenuto inviato come text/plain or text/html
+AddDefaultCharset utf-8
+
+# Forza UTF-8 per un numero di formati file
+AddCharset utf-8 .atom .css .js .json .rss .vtt .xml</code></pre>
+    <p><a href="https://github.com/h5bp/server-configs-apache">Sorgente</a></p>
+    <h3 id="passa-a-unaltra-versione-di-php-version">
+      Passa a un’altra versione di PHP Version
+    </h3>
+    <p>
+      Se vi trovate in un hosting condiviso è possibile che sia presente più di
+      una versione di PHP e a volte potreste aver bisogno di una versione
+      specifica per il vostro sito web. Es.
+      <a href="https://github.com/laravel/laravel">Laravel</a> richiede PHP
+      &gt;= 5.4. il seguente esempio switch the PHP version for you.
+    </p>
+    <pre class="apacheconf"><code>AddHandler application/x-httpd-php55 .php
+
+# Alternatively, you can use AddType
+AddType application/x-httpd-php55 .php</code></pre>
+    <h3 id="disabilita-visualizzazione-compatibilità-di-internet-explorer">
+      Disabilita Visualizzazione Compatibilità di Internet Explorer
+    </h3>
+    <p>
+      La Visualizzazione Compatibilità in internet exporer potrebbe creare
+      problemi nel come vengano visualizzati alcuni siti web. Il seguente
+      esempio dovrebbe forzare IE ad utilizzare il motore di Rendering Edge e
+      disabilitare la Visualizzazione Compatibilità.
+    </p>
+    <pre class="apacheconf"><code>&lt;IfModule mod_headers.c&gt;
+    BrowserMatch MSIE is-msie
+    Header set X-UA-Compatible IE=edge env=is-msie
+&lt;/IfModule&gt;</code></pre>
+    <h3 id="rendere-disponibili-immagini-in-formato-webp">
+      Rendere disponibili immagini in formato WebP
+    </h3>
+    <p>
+      Se sono supportate le
+      <a href="https://developers.google.com/speed/webp/?csw=1"
+        >immagini WebP</a
+      >
+      inviate un’immagine webp in caso sia stata richiesta un’immagine jpg/png
+      con lo stesso nome e nello stesso percorso.
+    </p>
+    <pre class="apacheconf"><code>RewriteEngine On
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+RewriteRule (.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=accept:1]</code></pre>
+    <p>
+      <a href="https://github.com/vincentorback/WebP-images-with-htaccess"
+        >Sorgente</a
+      >
+    </p>
+  </body>
+</html>

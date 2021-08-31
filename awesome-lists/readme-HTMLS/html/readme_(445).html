@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>readme</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-align="center">
+      <img src="browserify.png" alt="Browserify!" />
+    </div>
+    <h1 id="awesome-browserify-awesome">
+      Awesome Browserify
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        :crystal_ball: A curated list of awesome
+        <a href="https://github.com/substack/node-browserify">Browserify</a>
+        resources, libraries, and tools.
+      </p>
+    </blockquote>
+    <p>
+      Please help improve this list by
+      <a href="contributing.md">contributing</a>!
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#official-resources">Official Resources</a></li>
+      <li><a href="#community-resources">Community Resources</a></li>
+      <li><a href="#tutorials">Tutorials</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#demos">Demos</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li>
+        <a href="#tools">Tools</a>
+        <ul>
+          <li><a href="#development-servers">Development Servers</a></li>
+          <li><a href="#plugins">Plugins</a></li>
+          <li><a href="#watchers">Watchers</a></li>
+          <li><a href="#css-bundlers">CSS Bundlers</a></li>
+          <li><a href="#transforms">Transforms</a></li>
+          <li><a href="#node-in-the-browser">Node in the Browser</a></li>
+          <li><a href="#production-tools">Production Tools</a></li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="about">About</h2>
+    <p>
+      Browserify lets you <code>require('modules')</code> in the browser by
+      bundling up all of your dependencies.
+    </p>
+    <p>
+      You can use a node-style <code>require()</code> to organize your browser
+      code and load modules installed by npm. Browserify will recursively
+      analyze all the <code>require()</code> calls in your app in order to build
+      a bundle you can serve up to the browser in a single
+      <code>&lt;script&gt;</code> tag.
+    </p>
+    <h2 id="official-resources">Official Resources</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/substack/node-browserify#usage">Docs</a>
+      </li>
+      <li>
+        <a href="https://github.com/substack/browserify-handbook">Handbook</a>
+      </li>
+      <li><a href="https://github.com/substack/node-browserify">Repo</a></li>
+      <li><a href="http://browserify.org/">Website</a></li>
+    </ul>
+    <h2 id="community-resources">Community Resources</h2>
+    <ul>
+      <li>
+        <a href="http://webchat.freenode.net/?channels=browserify">IRC</a>
+      </li>
+      <li><a href="http://twitter.com/browserify">Twitter</a></li>
+      <li>
+        <a href="http://stackoverflow.com/questions/tagged/browserify"
+          >StackOverflow</a
+        >
+      </li>
+    </ul>
+    <h2 id="tutorials">Tutorials</h2>
+    <ul>
+      <li>
+        <a href="http://browserify.org/#middle-section"
+          >Hello World with Browserify</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/workshopper/browserify-adventure"
+          >Browserify Adventure</a
+        >
+      </li>
+      <li>
+        <a href="https://ponyfoo.com/articles/a-gentle-browserify-walkthrough"
+          >A Gentle Browserify Walkthrough</a
+        >
+      </li>
+      <li>
+        <a href="http://zhaoda.net/2015/10/16/browserify-guide/"
+          >Browserify guide</a
+        >
+        (Chinese)
+      </li>
+    </ul>
+    <h2 id="articles">Articles</h2>
+    <ul>
+      <li>
+        <a href="https://writingjavascript.org/posts/introduction-to-browserify"
+          >Introduction to Browserify</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://dontkry.com/posts/code/using-npm-on-the-client-side.html"
+          >Using npm on the client side</a
+        >
+      </li>
+      <li>
+        <a href="http://benclinkinbeard.com/posts/how-browserify-works/"
+          >How Browserify Works</a
+        >
+      </li>
+      <li>
+        <a href="https://www.viget.com/articles/gulp-browserify-starter-faq"
+          >Gulp + Browserify: The Everything Post</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://www.forbeslindesay.co.uk/post/44144487088/browserify-vs-component"
+          >Browserify vs Component</a
+        >
+      </li>
+      <li>
+        <a href="https://gist.github.com/substack/68f8d502be42d5cd4942"
+          >Browserify for Webpack users</a
+        >
+      </li>
+      <li>
+        <a href="https://mattdesl.svbtle.com/browserify-vs-webpack"
+          >Browserify vs. Webpack</a
+        >
+      </li>
+    </ul>
+    <h2 id="demos">Demos</h2>
+    <ul>
+      <li>
+        <a href="http://requirebin.com/?gist=maxogden/9576799"
+          >Canvas Splitter</a
+        >
+        by <a href="http://github.com/hughsk">hughsk</a>
+      </li>
+      <li>
+        <a href="http://requirebin.com/?gist=maxogden/9557700"
+          >Infinite 2D Cave Generator</a
+        >
+        by <a href="http://github.com/hughsk">hughsk</a>
+      </li>
+      <li>
+        <a href="http://requirebin.com/?gist=maxogden/9557776"
+          >2D Velocity Control</a
+        >
+        by <a href="http://github.com/sethvincent">sethvincent</a>
+      </li>
+    </ul>
+    <h2 id="videos">Videos</h2>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=DCQNm6yiZh0"
+          >James Halliday (substack) - LXJS 2013 - Modularidade para todos</a
+        >
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=CTAa8IcQh1U"
+          >Getting Started with Browserify</a
+        >
+        by <a href="https://github.com/shama/">shama</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=Uk2bgp8OLT8"
+          >Transform your Bundles with Browserify</a
+        >
+        by <a href="https://github.com/shama/">shama</a>
+      </li>
+    </ul>
+    <h2 id="tools">Tools</h2>
+    <h3 id="development-servers">Development Servers</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/mattdesl/budo">budo</a> - Dev server for
+        rapid prototyping.
+      </li>
+      <li>
+        <a href="https://github.com/chrisdickinson/beefy">beefy</a> - Local
+        development server that aims to make using browserify fast and fun.
+      </li>
+      <li>
+        <a href="https://github.com/maxogden/wzrd">wzrd</a> - Super minimal
+        browserify development server.
+      </li>
+    </ul>
+    <h3 id="plugins">Plugins</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/AgentME/browserify-hmr">browserify-hmr</a> -
+        Hot Module Replacement plugin for Browserify.
+      </li>
+    </ul>
+    <h3 id="watchers">Watchers</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/substack/watchify">watchify</a> - Watch mode
+        for browserify builds.
+      </li>
+      <li>
+        <a href="https://github.com/royriojas/persistify">persistify</a> -
+        Wrapper around <code>browserify</code> to make incremental builds.
+      </li>
+    </ul>
+    <h3 id="css-bundlers">CSS bundlers</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/stackcss/sheetify">sheetify</a> - Modular
+        CSS bundler for browserify.
+      </li>
+      <li>
+        <a href="https://github.com/rotundasoftware/parcelify">parcelify</a> -
+        Add css to your npm modules consumed with browserify.
+      </li>
+      <li>
+        <a href="https://github.com/css-modules/css-modulesify"
+          >css-modulesify</a
+        >
+        - Browserify plugin to load CSS Modules.
+      </li>
+    </ul>
+    <h3 id="transforms">Transforms</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/babel/babelify">babelify</a> - Browserify
+        transform for babel.
+      </li>
+      <li>
+        <a href="https://github.com/benbria/aliasify">aliasify</a> - Remap
+        require calls at build time.
+      </li>
+      <li>
+        <a href="https://github.com/substack/brfs">brfs</a> -
+        <code>fs.readFileSync()</code> and <code>fs.readFile()</code> static
+        asset browserify transform.
+      </li>
+    </ul>
+    <h3 id="node-in-the-browser">Node in the Browser</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/crypto-browserify/crypto-browserify"
+          >crypto-browserify</a
+        >
+        - Port of node’s <code>crypto</code> module to the browser.
+      </li>
+      <li>
+        <a href="https://github.com/substack/stream-browserify"
+          >stream-browserify</a
+        >
+        - The <code>stream</code> module from node core, for browsers!
+      </li>
+      <li>
+        <a href="https://github.com/feross/buffer">buffer</a> - The
+        <code>buffer</code> module from node.js, for the browser.
+      </li>
+      <li>
+        <a href="http://requirebin.com/">requirebin</a> - Write browser
+        JavaScript programs using modules from NPM.
+      </li>
+    </ul>
+    <h3 id="production-tools">Production Tools</h3>
+    <ul>
+      <li>
+        <a href="https://wzrd.in/">wzrd.in</a> - Browserify CDN.
+        Browserify-as-a-Service!
+      </li>
+      <li>
+        <a href="https://github.com/yoshuawuyts/bankai">bankai</a> - DIY asset
+        server. Serves HTML, CSS and JS as streams.
+      </li>
+    </ul>
+    <h2 id="contributing">Contributing</h2>
+    <p>
+      Contributions welcome! Please read the
+      <a href="contributing.md">contributing guidelines</a> before getting
+      started.
+    </p>
+    <h2 id="license">License</h2>
+    <p>
+      The <a href="browserify.png">browserify logo</a> is by
+      <a href="https://github.com/substack">substack</a>.
+    </p>
+    <p>
+      All other content is released to the public domain under
+      <a href="https://spdx.org/licenses/CC0-1.0.html">CC0-1.0</a>.
+    </p>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+  </body>
+</html>

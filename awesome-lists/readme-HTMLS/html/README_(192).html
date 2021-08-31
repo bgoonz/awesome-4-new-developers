@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="htaccess-snippets">.htaccess Snippets</h1>
+<p><code>.htaccess</code>の便利なスニペットのまとめ</p>
+<p><strong>免責事項</strong>: スニペットを<code>.htaccess</code>で利用した場合、たいていは十分機能するはずですが、一定の修正が必要になることもあります。ご自身の責任で使用してください。</p>
+<p><strong>重要</strong>: Apache2.4ではいくつかの破壊的変更点があり、それはアクセスコントロールの設定において顕著です。より詳しい情報を知りたい場合は次のリンクをチェックしてください。 <a href="https://httpd.apache.org/docs/2.4/upgrading.html">upgrading document</a>　こちらもどうぞ。 <a href="https://github.com/phanan/htaccess/issues/2">this issue</a>.</p>
+<h2 id="クレジット">クレジット</h2>
+<p>まとめている、便利なスニペットの大部分はインターネットを通じて収集されたものです。（例えば、かなりの部分は、<a href="https://github.com/h5bp/server-configs-apache">Apache Server Configs</a>からのものです）。Source等などを正確にクレジットしようと努めていますが、不足してることも考えられます。もしも、ご自分の制作物などがクレジットされるべきだという方がいれば私たちに知らせてください。</p>
+<h2 id="目次">目次</h2>
+<ul>
+<li><a href="#rewrite-and-redirection">URL書き換え&amp;リダイレクト</a>
+<ul>
+<li><a href="#force-www">wwwありに統一</a></li>
+<li><a href="#force-www-in-a-generic-way">wwwありに統一（包括的に）</a></li>
+<li><a href="#force-non-www">wwwなしに統一</a></li>
+<li><a href="#force-non-www-in-a-generic-way">wwwなしに統一（包括的に）</a></li>
+<li><a href="#force-https">httpsに統一</a></li>
+<li><a href="#force-https-behind-a-proxy">httpsに統一する（リバースプロキシー経由）</a></li>
+<li><a href="#force-trailing-slash">URL末尾をスラッシュ（/）で統一する</a></li>
+<li><a href="#remove-trailing-slash">末尾のスラッシュ（/）を取り除く</a></li>
+<li><a href="#redirect-a-single-page">決められたページにリダイレクトさせる</a></li>
+<li><a href="#alias-a-single-directory">ディレクトリエイリアス設定</a></li>
+<li><a href="#alias-paths-to-script">スクリプトへのエイリアスパス</a></li>
+<li><a href="#redirect-an-entire-site">とにかくリダイレクトする</a></li>
+<li><a href="#alias-clean-urls">クリーンURLエイリアス</a></li>
+</ul></li>
+<li><a href="#security">セキュリティ</a>
+<ul>
+<li><a href="#deny-all-access">全アクセス拒否</a></li>
+<li><a href="#deny-all-access-except-yours">特定のIPを除いたアクセスの拒否</a></li>
+<li><a href="#allow-all-access-except-spammers">特定のIPのみアクセスを拒否</a></li>
+<li><a href="#deny-access-to-hidden-files-and-directories">隠しファイル、隠しディレクトリへのアクセス拒否</a></li>
+<li><a href="#deny-access-to-backup-and-source-files">バックアップファイルやソースファイルにアクセスするのを防ぐ</a></li>
+<li><a href="#disable-directory-browsing">ディレクトリ下のファイル一覧の表示禁止</a></li>
+<li><a href="#disable-image-hotlinking">画像直リンクの禁止</a></li>
+<li><a href="#disable-image-hotlinking-for-specific-domains">特定のドメインからの画像直リンクの禁止</a></li>
+<li><a href="#password-protect-a-directory">ディレクトリをパスワードで保護する</a></li>
+<li><a href="#password-protect-a-file-or-several-files">一つか複数かのファイルをパスワードで保護する</a></li>
+<li><a href="#block-visitors-by-referrer">特定の他所のサイトからアクセスをブロック</a></li>
+<li><a href="#prevent-framing-the-site">フレーミングされるのを防ぐ</a></li>
+</ul></li>
+<li><a href="#performance">パフォーマンス</a>
+<ul>
+<li><a href="#compress-text-files">テキストファイルの圧縮</a></li>
+<li><a href="#set-expires-headers">Expires(有効期限)ヘッダを設定する</a></li>
+<li><a href="#turn-etags-off">Etagをオフにする</a></li>
+</ul></li>
+<li><a href="#miscellaneous">その他の項目</a>
+<ul>
+<li><a href="#set-php-variables">PHPの環境変数をセットする</a></li>
+<li><a href="#custom-error-pages">カスタムのエラーページ</a></li>
+<li><a href="#force-downloading">強制ダウンロード</a></li>
+<li><a href="#prevent-downloading">ダウンロードを防ぐ</a></li>
+<li><a href="#allow-cross-domain-fonts">WEBフォントに対する他のドメインからのアクセスを許可する</a></li>
+<li><a href="#auto-utf-8-encode">自動的にUTF8エンコードにする</a></li>
+<li><a href="#switch-to-another-php-version">別のPHPのバージョンに切り替える</a></li>
+<li><a href="#disable-internet-explorer-compatibility-view">インターネットエクスプローラーの互換表示をさせない</a></li>
+<li><a href="#serve-webp-images">WebP画像の配信</a></li>
+</ul></li>
+</ul>
+<h2 id="url書き換えリダイレクト"><a name="rewrite-and-redirection">URL書き換え&amp;リダイレクト</h2>
+<p>注: <code>mod_rewrite</code>がインストールされていて有効になってることを前提とします。</p>
+<h3 id="wwwありに統一"><a name="force-www">wwwありに統一</h3>
+<pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTP_HOST} ^example\.com [NC]
+RewriteRule ^(.*)$ http://www.example.com/$1 [L,R=301,NC]</code></pre>
+<h3 id="wwwありに統一包括的に"><a name="force-www-in-a-generic-way">wwwありに統一（包括的に）</h3>
+<pre class="apacheconf"><code>RewriteCond %{HTTP_HOST} !^$
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteCond %{HTTPS}s ^on(s)|
+RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]</code></pre>
+<p>上記の設定はどんなドメインでも動作します。 <a href="https://stackoverflow.com/questions/4916222/htaccess-how-to-force-www-in-a-generic-way">Source</a></p>
+<h3 id="wwwなしに統一"><a name="force-non-www">wwwなしに統一</h3>
+<p>参考 <a href="http://www.sitepoint.com/domain-www-or-no-www/">still</a> <a href="https://devcenter.heroku.com/articles/apex-domains">open</a> <a href="http://yes-www.org/">for</a> <a href="http://no-www.org/">debate</a> wwwのついたドメインかついてないドメインかは好きなほうにすればよいです。</p>
+<pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.example\.com [NC]
+RewriteRule ^(.*)$ http://example.com/$1 [L,R=301]</code></pre>
+<h3 id="wwwなしに統一包括的に"><a name="force-non-www-in-a-generic-way">wwwなしに統一（包括的に）</h3>
+<pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.
+RewriteCond %{HTTPS}s ^on(s)|off
+RewriteCond http%1://%{HTTP_HOST} ^(https?://)(www\.)?(.+)$
+RewriteRule ^ %1%3%{REQUEST_URI} [R=301,L]</code></pre>
+<h3 id="httpsに統一"><a name="force-https">httpsに統一</h3>
+<pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTPS} !on
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+# Note: It&#39;s also recommended to enable HTTP Strict Transport Security (HSTS)
+# on your HTTPS website to help prevent man-in-the-middle attacks.
+# See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security
+&lt;IfModule mod_headers.c&gt;
+    Header always set Strict-Transport-Security &quot;max-age=31536000; includeSubDomains&quot;
+&lt;/IfModule&gt;</code></pre>
+<h3 id="httpsに統一するリバースプロキシー経由"><a name="force-https-behind-a-proxy">httpsに統一する（リバースプロキシー経由）</h3>
+<p>リバースプロキシーを経由してhttpsじゃなくなってるいる場合に便利です。</p>
+<pre class="apacheconf"><code>RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}</code></pre>
+<h3 id="url末尾をスラッシュで統一する"><a name="force-trailing-slash">URL末尾をスラッシュ（/）で統一する</h3>
+<pre class="apacheconf"><code>RewriteCond %{REQUEST_URI} /+[^\.]+$
+RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301,L]</code></pre>
+<h3 id="末尾のスラッシュを取り除く"><a name="remove-trailing-slash">末尾のスラッシュ（/）を取り除く</h3>
+<pre class="apacheconf"><code>RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [R=301,L]</code></pre>
+<h3 id="決められたページにリダイレクトさせる"><a name="redirect-a-single-page">決められたページにリダイレクトさせる</h3>
+<pre class="apacheconf"><code>Redirect 301 /oldpage.html http://www.example.com/newpage.html
+Redirect 301 /oldpage2.html http://www.example.com/folder/</code></pre>
+<p><a href="http://css-tricks.com/snippets/htaccess/301-redirects/">Source</a></p>
+<h3 id="ディレクトリエイリアス設定"><a name="alias-a-single-directory">ディレクトリエイリアス設定</h3>
+<pre class="apacheconf"><code>RewriteEngine On
+RewriteRule ^source-directory/(.*) target-directory/$1</code></pre>
+<h3 id="スクリプトへのエイリアスパス"><a name="alias-paths-to-script">スクリプトへのエイリアスパス</h3>
+<pre class="apacheconf"><code>FallbackResource /index.fcgi</code></pre>
+<p>存在しないディレクトリまたはファイルへのリクエストがあれば、スクリプト <code>index.fcgi</code> へ転送させるような時に使います。<code>baz.foo/css/style.css</code>のような実際にファイルがある時はそちらにアクセスさせておいて、<code>baz.foo/some/cool/path</code>のようなクールなURL表現で、<code>baz.foo/index.fcgi</code> (<code>baz.foo</code>へのリクエストでも同じく扱える)へリクエストを転送させるさせるような時に便利です。あなたのスクリプト環境にさらされるように、PATH_INFO環境変数から元のパスへのアクセスを取得します。</p>
+<pre class="apacheconf"><code>RewriteEngine On
+RewriteRule ^$ index.fcgi/ [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.fcgi/$1 [QSA,L]</code></pre>
+<p>上記の設定はFallbackResourceより非効率ですが（mod_rewriteは<code>FallbackResource</code>を扱うより複雑なため）、より柔軟な設定が可能です。</p>
+<h3 id="とにかくリダイレクトする"><a name="redirect-an-entire-site">とにかくリダイレクトする</h3>
+<pre class="apacheconf"><code>Redirect 301 / http://newsite.com/</code></pre>
+<p>この方法はそっくりそのまま別のサイトにリダイレクトさせます。<code>www.oldsite.com/some/crazy/link.html</code>にアクセスした場合、<code>www.newsite.com/some/crazy/link.html</code>にリダイレクトさせます。新しいドメインに引っ越したときなど、非常に役に立ちます。 <a href="http://css-tricks.com/snippets/htaccess/301-redirects/">Source</a></p>
+<h3 id="クリーンurlエイリアス"><a name="alias-clean-urls">クリーンURLエイリアス</h3>
+<p>このスニペットは、クリーンURL用です。拡張子がPHPで、<code>example.com/users.php</code>というURLをではなく<code>example.com/users</code>というURLとしてあつかえます。</p>
+<pre class="apacheconf"><code>RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^([^.]+)$ $1.php [NC,L]</code></pre>
+<p><a href="http://www.abeautifulsite.net/access-pages-without-the-php-extension-using-htaccess/">Source</a></p>
+<h2 id="セキュリティ"><a name="security">セキュリティ</h2>
+<h3 id="全アクセス拒否"><a name="deny-all-access">全アクセス拒否</h3>
+<pre class="apacheconf"><code>## Apache 2.2
+Deny from all
+
+## Apache 2.4
+# Require all denied</code></pre>
+<p>あなたも同様にコンテンツをみれなくなるのでよく考えて利用してください。</p>
+<h3 id="特定のipを除いたアクセスの拒否"><a name="deny-all-access-except-yours">特定のIPを除いたアクセスの拒否</h3>
+<pre class="apacheconf"><code>## Apache 2.2
+Order deny,allow
+Deny from all
+Allow from xxx.xxx.xxx.xxx
+
+## Apache 2.4
+# Require all denied
+# Require ip xxx.xxx.xxx.xxx</code></pre>
+<p><code>xxx.xxx.xxx.xxx</code>はあなたのIPです。あなたが例えば12桁のIPのうち最後の3桁を0/12で交換する場合、同じネットワーク内のIPの範囲を指定することになり、別途許可IPを全てリストアップしなければいけないような面倒を回避します。 <a href="http://speckyboy.com/2013/01/08/useful-htaccess-snippets-and-hacks/">Source</a></p>
+<p>もちろん逆のバージョンもあります。</p>
+<h3 id="特定のipのみアクセスを拒否"><a name="allow-all-access-except-spammers">特定のIPのみアクセスを拒否</h3>
+<pre class="apacheconf"><code>## Apache 2.2
+Order deny,allow
+Allow from all
+Deny from xxx.xxx.xxx.xxx
+Deny from xxx.xxx.xxx.xxy
+
+## Apache 2.4
+# Require all granted
+# Require not ip xxx.xxx.xxx.xxx
+# Require not ip xxx.xxx.xxx.xxy</code></pre>
+<h3 id="隠しファイル隠しディレクトリへのアクセス拒否"><a name="deny-access-to-hidden-files-and-directories">隠しファイル、隠しディレクトリへのアクセス拒否</h3>
+<p>ドット<code>.</code>ではじまる隠しファイルや隠しディレクトリはいかなる時も安全である（閲覧されないようにする）必要があります。例えば、<code>.htaccess</code>, <code>.htpasswd</code>, <code>.git</code>, <code>.hg</code>　等です。</p>
+<pre class="apacheconf"><code>RewriteCond %{SCRIPT_FILENAME} -d [OR]
+RewriteCond %{SCRIPT_FILENAME} -f
+RewriteRule &quot;(^|/)\.&quot; - [F]</code></pre>
+<p>攻撃者に手がかりを与える代わりに、404エラーページを表示させることができます。</p>
+<pre class="apacheconf"><code>RedirectMatch 404 /\..*$</code></pre>
+<h3 id="バックアップファイルやソースファイルにアクセスするのを防ぐ"><a name="deny-access-to-backup-and-source-files">バックアップファイルやソースファイルにアクセスするのを防ぐ</h3>
+<p>これらのファイルはviやvimによって置かれたり、公にさらされると、セキュリティ上の危険をもたらすファイルである可能性があります。</p>
+<pre class="apacheconf"><code>&lt;FilesMatch &quot;(\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|swp)|~)$&quot;&gt;
+    ## Apache 2.2
+    Order allow,deny
+    Deny from all
+    Satisfy All
+
+    ## Apache 2.4
+    # Require all denied
+&lt;/FilesMatch&gt;</code></pre>
+<p><a href="https://github.com/h5bp/server-configs-apache">Source</a></p>
+<h3 id="ディレクトリ下のファイル一覧の表示禁止"><a name="disable-directory-browsing">ディレクトリ下のファイル一覧の表示禁止</h3>
+<pre class="apacheconf"><code>Options All -Indexes</code></pre>
+<h3 id="画像直リンクの禁止"><a name="disable-image-hotlinking">画像直リンクの禁止</h3>
+<pre class="apacheconf"><code>RewriteEngine on
+# Remove the following line if you want to block blank referrer too
+RewriteCond %{HTTP_REFERER} !^$
+
+RewriteCond %{HTTP_REFERER} !^https?://(.+\.)?example.com [NC]
+RewriteRule \.(jpe?g|png|gif|bmp)$ - [NC,F,L]
+
+# もしも、直リンクされた画像の代わりにブロックしたことを示す画像を表示させたいのであれば
+# `RewriteRule`を次のようにしてください:
+# RewriteRule \.(jpe?g|png|gif|bmp) http://example.com/blocked.png [R,L]</code></pre>
+<h3 id="特定のドメインからの画像直リンクの禁止"><a name="disable-image-hotlinking-for-specific-domains">特定のドメインからの画像直リンクの禁止</h3>
+<p>特定のサイトからの画像直リンクを無効にしたい場合です。</p>
+<pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTP_REFERER} ^https?://(.+\.)?badsite\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} ^https?://(.+\.)?badsite2\.com [NC,OR]
+RewriteRule \.(jpe?g|png|gif|bmp)$ - [NC,F,L]
+
+# もしも、直リンクされた画像の代わりにブロック下ことを示す画像を表示させたいのであれば
+# `RewriteRule`を次のようにしてください:
+# RewriteRule \.(jpe?g|png|gif|bmp) http://example.com/blocked.png [R,L]</code></pre>
+<h3 id="ディレクトリをパスワードで保護する"><a name="password-protect-a-directory">ディレクトリをパスワードで保護する</h3>
+<p>最初に<code>.htpasswd</code>作成してシステムのどこかに配置しておく必要があります。</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb24-1" title="1"><span class="ex">htpasswd</span> -c /home/fellowship/.htpasswd boromir</a></code></pre></div>
+<p>そして、作成した<code>.htpasswd</code>を認証のために使うことができます。</p>
+<pre class="apacheconf"><code>AuthType Basic
+AuthName &quot;One does not simply&quot;
+AuthUserFile /home/fellowship/.htpasswd
+Require valid-user</code></pre>
+<h3 id="一つか複数かのファイルをパスワードで保護する"><a name="password-protect-a-file-or-several-files">一つか複数かのファイルをパスワードで保護する</h3>
+<pre class="apacheconf"><code>AuthName &quot;One still does not simply&quot;
+AuthType Basic
+AuthUserFile /home/fellowship/.htpasswd
+
+&lt;Files &quot;one-ring.o&quot;&gt;
+Require valid-user
+&lt;/Files&gt;
+
+&lt;FilesMatch ^((one|two|three)-rings?\.o)$&gt;
+Require valid-user
+&lt;/FilesMatch&gt;</code></pre>
+<h3 id="特定の他所のサイトからアクセスをブロック"><a name="block-visitors-by-referrer">特定の他所のサイトからアクセスをブロック</h3>
+<p>この設定は特定のドメインからのアクセスをブロックします <a href="http://www.htaccess-guide.com/deny-visitors-by-referrer/">Source</a></p>
+<pre class="apacheconf"><code>RewriteEngine on
+# Options +FollowSymlinks
+RewriteCond %{HTTP_REFERER} somedomain\.com [NC,OR]
+RewriteCond %{HTTP_REFERER} anotherdomain\.com
+RewriteRule .* - [F]</code></pre>
+<h3 id="フレーミングされるのを防ぐ"><a name="prevent-framing-the-site">フレーミングされるのを防ぐ</h3>
+<p>下記の設定はウェブサイトがフレーム内に表示(IEでは<code>iframe</code>を使う)されるのを防止しています。同時に特定のURIの時には許可しています。</p>
+<pre class="apacheconf"><code>SetEnvIf Request_URI &quot;/starry-night&quot; allow_framing=true
+Header set X-Frame-Options SAMEORIGIN env=!allow_framing</code></pre>
+<h2 id="パフォーマンス"><a name="performance">パフォーマンス</h2>
+<h3 id="テキストファイルの圧縮"><a name="compress-text-files">テキストファイルの圧縮</h3>
+<pre class="apacheconf"><code>&lt;IfModule mod_deflate.c&gt;
+
+    # Force compression for mangled headers.
+    # https://developer.yahoo.com/blogs/ydn/pushing-beyond-gzipping-25601.html
+    &lt;IfModule mod_setenvif.c&gt;
+        &lt;IfModule mod_headers.c&gt;
+            SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+            RequestHeader append Accept-Encoding &quot;gzip,deflate&quot; env=HAVE_Accept-Encoding
+        &lt;/IfModule&gt;
+    &lt;/IfModule&gt;
+
+    # Compress all output labeled with one of the following MIME-types
+    # (for Apache versions below 2.3.7, you don&#39;t need to enable `mod_filter`
+    #  and can remove the `&lt;IfModule mod_filter.c&gt;` and `&lt;/IfModule&gt;` lines
+    #  as `AddOutputFilterByType` is still in the core directives).
+    &lt;IfModule mod_filter.c&gt;
+        AddOutputFilterByType DEFLATE application/atom+xml \
+                                      application/javascript \
+                                      application/json \
+                                      application/rss+xml \
+                                      application/vnd.ms-fontobject \
+                                      application/x-font-ttf \
+                                      application/x-web-app-manifest+json \
+                                      application/xhtml+xml \
+                                      application/xml \
+                                      font/opentype \
+                                      image/svg+xml \
+                                      image/x-icon \
+                                      text/css \
+                                      text/html \
+                                      text/plain \
+                                      text/x-component \
+                                      text/xml
+    &lt;/IfModule&gt;
+
+&lt;/IfModule&gt;</code></pre>
+<p><a href="https://github.com/h5bp/server-configs-apache">Source</a></p>
+<h3 id="expires有効期限ヘッダを設定する"><a name="set-expires-headers">Expires(有効期限)ヘッダを設定する</h3>
+<p>ブラウザはexpires （有効期限）ヘッダをみてコンテンツをサーバーから取得すべきか、キャッシュから取得するかを判断します。静的コンテンツの有効期限はいくらか遠い未来に設定したほうがよいといえます。</p>
+<pre class="apacheconf"><code>&lt;IfModule mod_expires.c&gt;
+    ExpiresActive on
+    ExpiresDefault                                      &quot;access plus 1 month&quot;
+
+  # CSS
+    ExpiresByType text/css                              &quot;access plus 1 year&quot;
+
+  # Data interchange
+    ExpiresByType application/json                      &quot;access plus 0 seconds&quot;
+    ExpiresByType application/xml                       &quot;access plus 0 seconds&quot;
+    ExpiresByType text/xml                              &quot;access plus 0 seconds&quot;
+
+  # Favicon (cannot be renamed!)
+    ExpiresByType image/x-icon                          &quot;access plus 1 week&quot;
+
+  # HTML components (HTCs)
+    ExpiresByType text/x-component                      &quot;access plus 1 month&quot;
+
+  # HTML
+    ExpiresByType text/html                             &quot;access plus 0 seconds&quot;
+
+  # JavaScript
+    ExpiresByType application/javascript                &quot;access plus 1 year&quot;
+
+  # Manifest files
+    ExpiresByType application/x-web-app-manifest+json   &quot;access plus 0 seconds&quot;
+    ExpiresByType text/cache-manifest                   &quot;access plus 0 seconds&quot;
+
+  # Media
+    ExpiresByType audio/ogg                             &quot;access plus 1 month&quot;
+    ExpiresByType image/gif                             &quot;access plus 1 month&quot;
+    ExpiresByType image/jpeg                            &quot;access plus 1 month&quot;
+    ExpiresByType image/png                             &quot;access plus 1 month&quot;
+    ExpiresByType video/mp4                             &quot;access plus 1 month&quot;
+    ExpiresByType video/ogg                             &quot;access plus 1 month&quot;
+    ExpiresByType video/webm                            &quot;access plus 1 month&quot;
+
+  # Web feeds
+    ExpiresByType application/atom+xml                  &quot;access plus 1 hour&quot;
+    ExpiresByType application/rss+xml                   &quot;access plus 1 hour&quot;
+
+  # Web fonts
+    ExpiresByType application/font-woff2                &quot;access plus 1 month&quot;
+    ExpiresByType application/font-woff                 &quot;access plus 1 month&quot;
+    ExpiresByType application/vnd.ms-fontobject         &quot;access plus 1 month&quot;
+    ExpiresByType application/x-font-ttf                &quot;access plus 1 month&quot;
+    ExpiresByType font/opentype                         &quot;access plus 1 month&quot;
+    ExpiresByType image/svg+xml                         &quot;access plus 1 month&quot;
+&lt;/IfModule&gt;</code></pre>
+<h3 id="etagをオフにする"><a name="turn-etags-off">Etagをオフにする</h3>
+<p><code>ETag</code>ヘッダを取り除くことによって、ブラウザ側が持っているキャッシュファイルと、サーバー側にある実ファイルの内容、更新日などが同じかどうか等の検証作業を無効にして、<code>Cache-Control</code> と <code>Expires</code> ヘッダを利用するようにします。</p>
+<pre class="apacheconf"><code>&lt;IfModule mod_headers.c&gt;
+    Header unset ETag
+&lt;/IfModule&gt;
+FileETag None</code></pre>
+<h2 id="その他の項目"><a name="miscellaneous">その他の項目</h2>
+<h3 id="phpの環境変数をセットする"><a name="set-php-variables">PHPの環境変数をセットする</h3>
+<pre class="apacheconf"><code>php_value &lt;key&gt; &lt;val&gt;
+
+# 例:
+php_value upload_max_filesize 50M
+php_value max_execution_time 240</code></pre>
+<h3 id="カスタムのエラーページ"><a name="custom-error-pages">カスタムのエラーページ</h3>
+<pre class="apacheconf"><code>ErrorDocument 500 &quot;Houston, we have a problem.&quot;
+ErrorDocument 401 http://error.example.com/mordor.html
+ErrorDocument 404 /errors/halflife3.html</code></pre>
+<h3 id="強制ダウンロード"><a name="force-downloading">強制ダウンロード</h3>
+<p>コンテンツをブラウザに表示させるのではなく、強制的にダウンロードさせたい場合は次のようにします。</p>
+<pre class="apacheconf"><code>&lt;Files *.md&gt;
+    ForceType application/octet-stream
+    Header set Content-Disposition attachment
+&lt;/Files&gt;</code></pre>
+<p>Now there is a yang to this yin:</p>
+<h3 id="ダウンロードを防ぐ"><a name="prevent-downloading">ダウンロードを防ぐ</h3>
+<p>コンテンツをダウンロードさせるのではなく内容をそのままブラウザに表示させたい時は次のようにします。</p>
+<pre class="apacheconf"><code>&lt;FilesMatch &quot;\.(tex|log|aux)$&quot;&gt;
+    Header set Content-Type text/plain
+&lt;/FilesMatch&gt;</code></pre>
+<h3 id="webフォントに対する他のドメインからのアクセスを許可する"><a name="allow-cross-domain-fonts">WEBフォントに対する他のドメインからのアクセスを許可する</h3>
+<p>IE, Firefoxのだとクロスドメイン制約のため、WEBフォントが正常に機能しない可能性があります。<a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>　このスニペットはその問題を解決します。</p>
+<pre class="apacheconf"><code>&lt;IfModule mod_headers.c&gt;
+    &lt;FilesMatch &quot;\.(eot|otf|ttc|ttf|woff|woff2)$&quot;&gt;
+        Header set Access-Control-Allow-Origin &quot;*&quot;
+    &lt;/FilesMatch&gt;
+&lt;/IfModule&gt;</code></pre>
+<p><a href="https://github.com/h5bp/server-configs-apache/issues/32">Source</a></p>
+<h3 id="自動的にutf8エンコードにする"><a name="auto-utf-8-encode">自動的にUTF8エンコードにする</h3>
+<p>あなたのテキストコンテンツを常にUTF-8エンコードする時は次の設定をご利用ください。</p>
+<pre class="apacheconf"><code># text/plain か text/htmlを配信する時はUTF-8を使用します。
+AddDefaultCharset utf-8
+
+# 特定のファイルフォーマットで強制的にUTF-8を使う
+AddCharset utf-8 .atom .css .js .json .rss .vtt .xml</code></pre>
+<p><a href="https://github.com/h5bp/server-configs-apache">Source</a></p>
+<h3 id="別のphpのバージョンに切り替える"><a name="switch-to-another-php-version">別のPHPのバージョンに切り替える</h3>
+<p>もしも、あなたが共有のホストを利用している場合、おそらく複数のバージョンのPHPがインストールされている可能性があり、時には自分のウェブサイトで特定のバージョンのPHPを使いたくなるかもしれません。例えば、ララベルではPHP5.4以上である必要があります。次のスニペットを使えば自分のウェブサイト用のPHPバージョンに切り替える事ができます。</p>
+<pre class="apacheconf"><code>AddHandler application/x-httpd-php55 .php
+
+# 代わりにAddTypeを使うこともできます。
+AddType application/x-httpd-php55 .php</code></pre>
+<h3 id="インターネットエクスプローラーの互換表示をさせない"><a name="disable-internet-explorer-compatibility-view">インターネットエクスプローラーの互換表示をさせない</h3>
+<p>IEの互換表示モードはIEにおけるウェブサイトの表示に影響があたえることがあります。次のスニペットを使用することで、IEに最新のエンジンでページをレンダリングさせて、互換表示をさせなくすることができます。</p>
+<pre class="apacheconf"><code>&lt;IfModule mod_headers.c&gt;
+    BrowserMatch MSIE is-msie
+    Header set X-UA-Compatible IE=edge env=is-msie
+&lt;/IfModule&gt;</code></pre>
+<h3 id="webp画像の配信"><a name="serve-webp-images">WebP画像の配信</h3>
+<p>もしも、<a href="https://developers.google.com/speed/webp/?csw=1">WebP images</a> がサポートされていて、同じでディレクトリ下に、同じ名前のファイル名で、.webp と jpg/pngの拡張子のファイルがあった場合、WebP画像(.webp)が優先して配信されます。</p>
+<pre class="apacheconf"><code>RewriteEngine On
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
+RewriteRule (.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=accept:1]</code></pre>
+<p><a href="https://github.com/vincentorback/WebP-images-with-htaccess">Source</a></p>
+</body>
+</html>

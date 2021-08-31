@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-golem-awesome-awesome-lint">
+      Awesome Golem
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+      <a
+        href="https://github.com/golemfactory/awesome-golem/actions/workflows/main.yml/badge.svg"
+        ><img
+          src="https://github.com/golemfactory/awesome-golem/actions/workflows/main.yml/badge.svg"
+          alt="awesome-lint"
+      /></a>
+    </h1>
+    <p>
+      <a href="https://golem.network/"
+        ><img src="golem-logo.svg" align="right" width="150"
+      /></a>
+    </p>
+    <blockquote>
+      <p>
+        Welcome to <strong>Awesome Golem</strong>, a community-curated list of
+        resources, links, projects, tools and applications on Golem!
+      </p>
+    </blockquote>
+    <p>
+      The users of Golem run the reference implementation in the form of the
+      Rust implementation, Yagna. Together the users make up the Golem Network,
+      a P2P marketplace for computational resources where individuals can act as
+      one of the two non-exclusive roles; a provider selling idle resources, or
+      a requestor buying resources to run tasks.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#golem">Golem</a></li>
+      <li><a href="#network-statistics">Network Statistics</a></li>
+      <li>
+        <a href="#apps">Apps</a>
+        <ul>
+          <li><a href="#docker">Docker</a></li>
+          <li><a href="#testing">Testing</a></li>
+          <li><a href="#games">Games</a></li>
+          <li><a href="#cli-tools">CLI Tools</a></li>
+          <li><a href="#data-analysis">Data Analysis</a></li>
+          <li><a href="#data-simulation">Data Simulation</a></li>
+          <li><a href="#data-optimization">Data Optimization</a></li>
+          <li><a href="#finance">Finance</a></li>
+          <li><a href="#machine-learning">Machine Learning</a></li>
+          <li><a href="#deep-learning">Deep Learning</a></li>
+          <li><a href="#rng">RNG</a></li>
+          <li><a href="#password-recovery">Password Recovery</a></li>
+          <li><a href="#defi">DeFi</a></li>
+          <li><a href="#user-interfaces">User Interfaces</a></li>
+          <li><a href="#miscellaneous">Miscellaneous</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#developer-and-requestor-resources"
+          >Developer and Requestor Resources</a
+        >
+      </li>
+      <li>
+        <a href="#provider-resources">Provider Resources</a>
+        <ul>
+          <li><a href="#monitoring">Monitoring</a></li>
+          <li><a href="#provisioning">Provisioning</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#learning-resources">Learning Resources</a>
+        <ul>
+          <li>
+            <a href="#presentations-and-workshop-material"
+              >Presentations and Workshop Material</a
+            >
+          </li>
+          <li>
+            <a href="#unraveling-golems-the-next-milestone-blog-series"
+              >Unraveling Golem’s The Next Milestone Blog Series</a
+            >
+          </li>
+          <li>
+            <a href="#github-digest-blog-series">GitHub Digest Blog Series</a>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+    <h2 id="golem">Golem</h2>
+    <ul>
+      <li>
+        <a href="https://www.golem.network/platform">Golem Network Platform</a>
+        - Learn the Golem platform on the official Golem Network website.
+      </li>
+      <li>
+        <a href="https://github.com/golemfactory">Golem Factory GitHub</a> -
+        Where you can find the open source code of all things Golem.
+      </li>
+      <li>
+        <a href="https://github.com/golemfactory/yagna">Yagna GitHub</a> - The
+        official Rust implementation of Golem.
+      </li>
+      <li>
+        <a href="https://chat.golem.network/">Golem Community Chat</a> - Join
+        the community and team open discussion on Discord.
+      </li>
+      <li>
+        <a href="https://reddit.com/r/GolemProject">Reddit</a> - Golem Network
+        discussion on the Reddit platform.
+      </li>
+      <li>
+        <a href="https://twitter.com/golemproject">Twitter</a> - The Golem
+        Project Twitter.
+      </li>
+      <li>
+        <a href="http://blog.golemproject.net/">Blog</a> - The official blog
+        where you can find the most reliable information on announcements,
+        summaries and updates.
+      </li>
+    </ul>
+    <h2 id="network-statistics">Network Statistics</h2>
+    <ul>
+      <li>
+        <a href="https://stats.golem.network">Golem Network Stats</a> -
+        Statistics tracking tasks and provider resource utilization in the Golem
+        Network.
+      </li>
+      <li>
+        <a href="https://github.com/cryptobench/golem-stats-backend"
+          >Golem Stats backend</a
+        >
+        - Backend of the Golem Network Statistics page including API endpoint
+        URLs.
+      </li>
+      <li>
+        <a href="https://docs.stats.golem.network/">Stats API Documentation</a>
+        - API endpoints that the Golem Network Stats page uses to display its
+        data.
+      </li>
+    </ul>
+    <h2 id="apps">Apps</h2>
+    <ul>
+      <li>
+        <a href="https://golem-slate.xyz/">Golem SLATE</a> - Hosted code pen SPA
+        for writing a requester script to have work computed by the network.
+        Utilizes dockerized yagna environments to communicate with the Golem
+        Network in the background.
+      </li>
+      <li>
+        <a href="https://chessongolem.app/">Chess On Golem</a> - Hosted Chess
+        app to play against the providers of the network utilizing the Stockfish
+        open source Chess engine.
+      </li>
+      <li>
+        <a href="https://github.com/Doc-Saintly/golem-video"
+          >Golem Network Video Transcoder</a
+        >
+        - Sample app to transcode videos. Select your transcoding profile and
+        then upload your videos.
+      </li>
+      <li>
+        <a href="https://github.com/Edhendil/golem-transcoding"
+          >Golem Transcoding requestor</a
+        >
+        - React + Spring based webapp accepting video files as input and
+        transcoding these files into different formats.
+      </li>
+      <li>
+        <a href="https://github.com/DEUTSCHKLUB/go-le-m">Go le’ Machin</a> - Web
+        based bulk image editor that allows users to upload multiple images and
+        apply bulk actions to them.
+      </li>
+    </ul>
+    <h3 id="docker">Docker</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/DerekJarvis/general-golem"
+          >Golem Requestor Node</a
+        >
+        - Dockerized requestor environment. Pass in the py script, it sets up
+        the daemon and runs it.
+      </li>
+    </ul>
+    <h3 id="testing">Testing</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/golemfactory/goth"
+          >Golem Test Harness (Goth)</a
+        >
+        - Tool with the purpose of speeding up your development process and
+        making it more enjoyable for application creators.
+      </li>
+      <li>
+        <a href="https://github.com/sladecek/golem-afl">Golem-afl</a> - An
+        experimental test-fuzzing framework. Assists in finding security holes.
+      </li>
+      <li>
+        <a href="https://github.com/sladecek/golem_cargo_test"
+          >Golem Cargo Test</a
+        >
+        - An adaptive distributed test executor for Rust projects.
+      </li>
+      <li>
+        <a href="https://github.com/hhio618/golem-ci">Golem CI</a> -
+        Decentralized task pipeline.
+      </li>
+      <li>
+        <a href="https://github.com/deutschklub/golem-slate">Golem SLATE</a> -
+        Open source repository for Golem SLATE described in the above Apps
+        section.
+      </li>
+    </ul>
+    <h3 id="games">Games</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/Dodecane/golem-sudoku">Golem Sudoku</a> -
+        Game of Sudoku with size variants.
+      </li>
+      <li>
+        <a href="https://github.com/ChrisHelmsC/hsog-requestor"
+          >HSOG-requester</a
+        >
+        - Helps the HearthStone community in the design and building of decks by
+        running a large number of simulated games.
+      </li>
+      <li>
+        <a href="https://github.com/broadcastmonkey/ChessOnGolem"
+          >ChessOnGolem</a
+        >
+        - Open source repository for Chess described in first Apps section.
+        Includes React frontend for the 2 AI’s playing against each other
+        through the Golem backend.
+      </li>
+      <li>
+        <a href="https://github.com/UnfortuN8/Golem-Fleet-Battle-Simulator"
+          >Golem Fleet Battle Simulator</a
+        >
+        - System for calculating the results of a battle between two opposing
+        starship fleets. Used in the iOS game Rock Paper Frigate to determine
+        the result of PvP fleet battles.
+      </li>
+    </ul>
+    <h3 id="cli-tools">CLI Tools</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/davidstyers/golocity">Golocity</a> - Build
+        and deploy your dockerized applications on the Golem Network in just two
+        commands.
+      </li>
+    </ul>
+    <h3 id="data-analysis">Data Analysis</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/nestorbonilla/flan">Flan</a> - Tool for
+        entrepreneurs that provide customized analysis of millions of worldwide
+        trade value records giving them a bold guideline about what sectors they
+        would need to take more attention to.
+      </li>
+      <li>
+        <a href="https://github.com/hhio618/golem-lorenz-attractor"
+          >Golem Lorenz-attractor</a
+        >
+        - A system of three coupled, first-order, nonlinear differential
+        equations which describe the trajectory of a particle through time.
+      </li>
+      <li>
+        <a href="https://github.com/Edhendil/golem-geomandel"
+          >Golem Geomandel</a
+        >
+        - Python script for generating sequences of Mandelbrot images centered
+        on a single point and with zoom increasing in each image.
+      </li>
+      <li>
+        <a href="https://github.com/iRhonin/golem-covid">Golem COVID</a> -
+        Creates images of new deaths per million related to COVID. After all
+        images generated, it will gather them and create a gif.
+      </li>
+      <li>
+        <a href="https://github.com/CoeJoder/golem-parallel-matplotlib"
+          >Golem Parallel Matplotlib</a
+        >
+        - Various statistical analyses are performed on circadian rhythm
+        measurements in human test subjects.
+      </li>
+    </ul>
+    <h3 id="data-simulation">Data Simulation</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/rogervs/cadcadgolem">cadCAD Golem</a> -
+        Package wrapper for cadCAD to dispatch the simulation workload to
+        multiple Golem nodes. Supports Jupyter Notebook.
+      </li>
+      <li>
+        <a href="https://github.com/johngrantuk/golem-array">Golem Array</a> -
+        Antenna array design and simulation.
+      </li>
+      <li>
+        <a href="https://github.com/vporton/limit-visualization"
+          >Limit visualization</a
+        >
+        - Plots graphs with various limits. Supports discontinous graphs.
+      </li>
+      <li>
+        <a href="https://github.com/smiley1983/golemGraphWavePair"
+          >GolemGraphWavePair</a
+        >
+        - Generates graph frames, then combine them into an animation.
+      </li>
+      <li>
+        <a
+          href="https://github.com/rezahsnz/golemized-strong-gravitational-lense"
+          >Golemized strong-gravitational-lense</a
+        >
+        - Simple distributed computing hack that simulates a physical phenomena
+        called gravitional lensing.
+      </li>
+    </ul>
+    <h3 id="data-optimization">Data Optimization</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/Doc-Saintly/golem-ortools"
+          >Golem or-tools</a
+        >
+        - Uses the or-tools Constraint Programming library to solve problems.
+      </li>
+      <li>
+        <a href="https://github.com/DEUTSCHKLUB/no-more-COFUD">No more COFUD</a>
+        - Calculates how to fit the most people into a space while keeping 2
+        meters distance between each other.
+      </li>
+      <li>
+        <a href="https://github.com/DeveloperInProgress/Mutta-Puffs"
+          >Mutta Puffs</a
+        >
+        - Sports league scheduler that solves the Travelling Tournament Problem
+        for a given set of teams using Population-based Simulated Annealing.
+      </li>
+    </ul>
+    <h3 id="finance">Finance</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/blue-notes-robot/zksync-csv-export"
+          >ZKSync .csv export</a
+        >
+        - Scrapes ZKSync to generate financial data in a .csv file.
+      </li>
+    </ul>
+    <h3 id="machine-learning">Machine Learning</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/anshuman73/DeML-Golem">DeML-Golem</a> -
+        Decentralised Machine Learning using Federated Learning to combine the
+        sub-step models, it trains on different provider nodes into a full
+        fleged model.
+      </li>
+    </ul>
+    <h3 id="deep-learning">Deep Learning</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/rezahsnz/mlg">Mlg</a> - CNN predict
+        services, a deep learning application that distributes popular CNNs
+        pre-trained with ImageNet datasets.
+      </li>
+      <li>
+        <a href="https://github.com/echinocacti/deepart_golem">Deepart Golem</a>
+        - Makes art using distributed computing by running a tensorflow app,
+        uploading your content and style picture.
+      </li>
+    </ul>
+    <h3 id="rng">RNG</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/rezahsnz/gandom">Gandom</a> - Extract random
+        streams from providers. Supports two PRNGs, one based on Chaos machines
+        and the other that makes use of Sodium.
+      </li>
+      <li>
+        <a href="https://github.com/krunch3r76/entropythief">Entropythief</a> -
+        Get random entropy at a steal of a rate from multiple providers
+        utilizing the linux entropy source or Intel’s RDRAND cpu instruction
+        (inspired by Gandom).
+      </li>
+    </ul>
+    <h3 id="password-recovery">Password Recovery</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/hhio618/golem-jtr">Golem-JTR</a> - Run John
+        The Ripper to recover a password.
+      </li>
+      <li>
+        <a
+          href="https://handbook.golem.network/requestor-tutorials/task-processing-development/task-example-2-hashcat"
+          >Yacat</a
+        >
+        - Hashcat password-recovery step-by-step.
+      </li>
+    </ul>
+    <h3 id="defi">DeFi</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/masaun/GLM-stake-pool"
+          >Golem Staking Pool incentivize system for GLM holders</a
+        >
+        - A smart contract in order to provide the opportunity of yield farming
+        for GLM token holders.
+      </li>
+      <li>
+        <a href="https://github.com/bakaoh/magic-doll">Magic-doll</a> - Sumer is
+        a DeFi application that people may delegate their Splinterland card to
+        earn passive income. Its core is <code>Kyle</code>, a Golem app that
+        does all the computation to pick the best team to play for each match.
+      </li>
+    </ul>
+    <h3 id="user-interfaces">User Interfaces</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/shri4net/golem-hackathon-2020">Golem UI</a>
+        - Electron user interface for Yagna.
+      </li>
+    </ul>
+    <h3 id="miscellaneous">Miscellaneous</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/krunch3r76/gc__gvmi_hash">Gc__gvmi_hash</a>
+        - Recalculate the hash of gvmi image file. Solves the issue of having
+        lost the hash of a previously uploaded image or if you’re unsure if a
+        key corresponds to a specific image.
+      </li>
+      <li>
+        <a href="https://github.com/canokaue/gvm-vim">gvm-vim</a> - Golemized
+        docker image for compiling the VIM editor.
+      </li>
+      <li>
+        <a href="https://github.com/rezahsnz/yajsapi"
+          >YaJSapi fork with greeting example</a
+        >
+        - Simple Node.js requestor app that greets you. It writes some important
+        message to a file and then downloads it for you, the basic eskeleton of
+        a requestor app. Look in <code>examples/greetings</code>.
+      </li>
+      <li>
+        <a href="https://github.com/visualNext/golem">Golem Image Sharpening</a>
+        - A tool to sharpen images.
+      </li>
+    </ul>
+    <h2 id="developer-and-requestor-resources">
+      Developer and Requestor Resources
+    </h2>
+    <ul>
+      <li>
+        <a href="https://handbook.golem.network/">Yagna handbook</a> - Handbook
+        for the Golem, implementation name, Yagna.
+      </li>
+      <li>
+        <a href="https://github.com/golemfactory/yagna/releases"
+          >Releases List</a
+        >
+        - GitHub releases of Yagna.
+      </li>
+      <li>
+        <a
+          href="https://handbook.golem.network/requestor-tutorials/flash-tutorial-of-requestor-development"
+          >Requestor flash tutorial</a
+        >
+        - Get started quick and create your first tasks/request on Golem.
+      </li>
+      <li>
+        <a href="https://stackoverflow.com/questions/tagged/yagna"
+          >Yagna tag on Stack Overflow</a
+        >
+        - Use the Yagna tag if you have an interesting question you’d like
+        answered.
+      </li>
+      <li>
+        <a
+          href="https://docs.google.com/document/d/e/2PACX-1vRONc0RRaqImJumYQ3SmILtLo4jiCYgtE0AO3JfpMy0b0-BjAU8TvlIHdtbrs5cDrMbuPFv7khE47MO/pub"
+          >Breakdown of blender.js</a
+        >
+        - JS guide for developers to get a better idea of how to run a task with
+        the JavaScript API.
+      </li>
+    </ul>
+    <h2 id="provider-resources">Provider Resources</h2>
+    <ul>
+      <li>
+        <a
+          href="https://handbook.golem.network/provider-tutorials/provider-tutorial"
+          >Provider Tutorial</a
+        >
+        - Get started as a Provider on Golem Network using the handbook.
+      </li>
+      <li>
+        <a
+          href="https://github.com/figurestudios/community-golem-docs/blob/main/providing/provider-faq.md"
+          >Provider FAQ</a
+        >
+        - Community curated list of commonly asked questions and answers.
+      </li>
+      <li>
+        <a href="https://github.com/MarijnStevens/yagna-binaries"
+          >Yagna-binaries for aarch64</a
+        >
+        - Build for 64 bit arm architecture to be able to run as a provider on a
+        system such as a Raspberry Pi.
+      </li>
+    </ul>
+    <h3 id="monitoring">Monitoring</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/vciancio/golem-dashboard"
+          >Golem Provider dashboard</a
+        >
+        - ReactJS dashboard made to quickly gather status from your provider
+        nodes without havingn to SSH into them.
+      </li>
+      <li>
+        <a href="https://github.com/vciancio/golem-node-server"
+          >Golem Provider dashboard backend / GolemBar</a
+        >
+        - Flask backend that collects the data from the provider that’s then
+        used with the dashboard project above.
+      </li>
+    </ul>
+    <h3 id="provisioning">Provisioning</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/r34x/WSL">WSL</a> - Allows Windows users to
+        run Golem within Windows Subsystem for Linux. Removing the requirement
+        of Windows users needing to use a Virtual Machine.
+      </li>
+      <li>
+        <a href="https://github.com/nemani/golem-provider-terraform"
+          >Golem Provider Terraform</a
+        >
+        - Terraform script to automatically deploy a Golem Provider on a cloud
+        provider and setup monitoring using prometheus.
+      </li>
+      <li>
+        <a href="https://github.com/r34x/Automatic-Golem">Automatic Golem</a> -
+        Setup a Golem Provider with simple instructions and logs guiding you
+        through the process.
+      </li>
+      <li>
+        <a href="https://github.com/alexandre-abrioux/golem-node"
+          >Golem Provider Node</a
+        >
+        - Docker version of a node to help you get started running as a provider
+        in a Docker container quick.
+      </li>
+      <li>
+        <a href="https://github.com/blue-notes-robot/golem-node"
+          >Golem Provider node</a
+        >
+        - Fork of Alxexandre-abrioux project above that allows to dynamically
+        generate config files from ENV variables and specify how many replicas
+        you’d like to spawn.
+      </li>
+      <li>
+        <a href="https://github.com/cryptobench/scaleable-golem-provider"
+          >Scaleable golem provider</a
+        >
+        - Spawn x amount of providers using Docker.
+      </li>
+    </ul>
+    <h2 id="learning-resources">Learning Resources</h2>
+    <h3 id="presentations-and-workshop-material">
+      Presentations and Workshop Material
+    </h3>
+    <ul>
+      <li>
+        <a href="https://youtu.be/1UoZWC9XI2g"
+          >Golem: Architecture, SDKs and tips with Jakub Mazurek at 0xHack</a
+        >
+        - Live workshop diving into how any developer with Python or JS coding
+        experience can start build applications running on Golem.
+      </li>
+      <li>
+        <a href="https://youtu.be/FmrdyU90NVE"
+          >Golem: Growing an ecosystem the Golem way with María Paula Fernández
+          at 0xHack</a
+        >
+        - High-level overview and introduction to Golem as a project.
+      </li>
+      <li>
+        <a
+          href="https://gist.github.com/zakaprov/5366bffa49b3c116748bf9b5b73c602c"
+          >Golem Workshop at H3LLO Decentralization</a
+        >
+        - List of resources containing a live-coding hackathon workshop and
+        relevant resources to help developers understand and requesting on
+        Golem.
+      </li>
+      <li>
+        <a href="https://youtu.be/GcdTq3i_wdY"
+          >Mainnet Requestor quickstart Walk-through</a
+        >
+        - Video walk-through of the requestor quick-start handbook guide to get
+        a request on Golem Network testnet and then mainnet using the Yagna
+        Python API.
+      </li>
+      <li>
+        <a href="https://youtu.be/RITdKtEOV_E"
+          >Mainnet Provider quickstart Walk-through</a
+        >
+        - Video walk-through of the provider handbook guide to start sharing
+        computational resources the Golem Network.
+      </li>
+    </ul>
+    <h3 id="unraveling-golems-the-next-milestone-blog-series">
+      Unraveling Golem’s The Next Milestone Blog Series
+    </h3>
+    <ul>
+      <li>
+        <a href="https://blog.golemproject.net/next-milestone"
+          >Unraveling Golem’s The Next Milestone</a
+        >
+        - Introduction to the Yagna implementation of Golem.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/next-milestone-part-ii/"
+          >Unraveling Golem’s The Next Milestone, Part II</a
+        >
+        - Fundamental architectural concepts which constitute the foundations of
+        the new implemenation of Golem, Yagna.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/next-milestone-part-iii/"
+          >Unraveling Golem’s The Next Milestone, Part III</a
+        >
+        - The elements of Golem’s reference architecture, and illustrates how
+        they interact to form a working ecosystem, being the Golem Network.
+      </li>
+    </ul>
+    <h3 id="github-digest-blog-series">GitHub Digest Blog Series</h3>
+    <ul>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-1/"
+          >Golem GitHub Digest #1</a
+        >
+        - Understanding the Golem Repositories.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-2/"
+          >Golem GitHub Digest #2</a
+        >
+        - Diving into the Golem Repositories.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-3/"
+          >Golem GitHub Digest #3</a
+        >
+        - Diving into Pull Requests of the Golem repositories.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-4/"
+          >Golem GitHub Digest #4</a
+        >
+        - Diving into latest releases in the Golem repositories.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-5/"
+          >Golem GitHub Digest #5</a
+        >
+        - Diving into the Golem alpha testnet.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-6/"
+          >Golem GitHub Digest #6</a
+        >
+        - SGX proof-of-concept for Golem.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-7/"
+          >Golem GitHub Digest #7</a
+        >
+        - Decentralization of the Golem marketplace.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-8/"
+          >Golem GitHub Digest #8</a
+        >
+        - Awesome Golem and next steps to Alpha 3.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-9/"
+          >Golem GitHub Digest #9</a
+        >
+        - AMD provider support, network metrics and improved proposal handling.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-10/"
+          >Golem GitHub Digest #10</a
+        >
+        - Improvements from community feedback.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-11/"
+          >Golem GitHub Digest #11</a
+        >
+        - Easy log collection.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-12/"
+          >Golem GitHub Digest #12</a
+        >
+        - We are on MAINNET and gathering feedback.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-13/"
+          >Golem GitHub Digest #13</a
+        >
+        - Progressing faster with the help of the Golem community.
+      </li>
+      <li>
+        <a href="https://blog.golemproject.net/golem-github-digest-14/"
+          >Golem GitHub Digest #14</a
+        >
+        - Towards the next major release.
+      </li>
+    </ul>
+    <h2 id="community">Community</h2>
+    <ul>
+      <li>
+        <a href="https://blog.golemproject.net/community-incentives-program/"
+          >Golem Community GLM Rewards Program</a
+        >
+        - Participate in the community and get rewarded for it in GLM tokens.
+      </li>
+      <li>
+        <a href="https://t.me/GolemProject">Golem Network Discussion Group</a> -
+        Community driven Telegram channel.
+      </li>
+      <li>
+        <a href="https://github.com/figurestudios/golem-stat-bot"
+          >Reddit Golem Stat Bot</a
+        >
+        - Scrapes Reddit posts on /r/GolemProject, and replies if specific
+        keywords/commands are found.
+      </li>
+    </ul>
+    <h2 id="contributing">Contributing</h2>
+    <p>
+      Pull requests and issues with suggestions to Awesome Golem are welcome!
+      Please read the <a href="contributing.md">contributing</a> guidelines
+      before submitting a PR.
+    </p>
+  </body>
+</html>

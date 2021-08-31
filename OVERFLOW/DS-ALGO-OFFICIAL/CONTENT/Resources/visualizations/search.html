@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="src/search/css/style.css" />
+  
+        </style>
+    </head>
+    <body>
+        <header>
+            <div id="header-inner">
+                <a href="#" id="logo"></a>
+                 <a class="navbar-brand" rel="home" href="#" title="logo">
+                        <img src="src/assets/logo.png" width="90" height="80" >
+                <div class="container blue circleBehind">
+                    <a href="#" id="menu-icon"></a>
+                    
+                    <a href="sort.html">Sorting</a>
+                    <a href="#" class="current">Searching</a>
+             
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div id="array_container"></div>
+        </section>
+
+        <section>
+            <div id="array_container2">
+                <input id="texty" type="text" placeholder="Enter number" />
+               <button class="custom button" id="b1"  onclick="search(1)">Linear Search</button>
+                <button class="custom button" id="b2" onclick="search(2)">Binary Search</button>
+                <div id="resultDiv">
+                    <p id="result"></p>
+                </div>
+            </div>
+           
+        </section>
+
+        <script src="src/search/js/index.js"></script>
+        <script src="src/search/js/linearSearch.js"></script>
+        <script src="src/search/js/binarySearch.js"></script>
+    </body>
+</html>

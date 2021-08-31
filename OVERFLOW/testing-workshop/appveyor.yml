@@ -1,0 +1,24 @@
+environment:
+  matrix:
+    - node_version: "8"
+
+branches:
+  only:
+    - master
+
+install:
+  - ps: Install-Product node $env:node_version
+
+test_script:
+  - node ./scripts/make-appveyor-work.js
+  - npm run setup
+
+cache:
+  - ./node_modules -> package.json
+  - ./client/node_modules -> ./client/package.json
+  - ./server/node_modules -> ./server/package.json
+  - ./shared/node_modules -> ./shared/package.json
+  - ./other/configuration/calculator/node_modules -> ./other/configuration/calculator/package.json
+  - ./other/configuration/calculator.solution/node_modules -> ./other/configuration/calculator.solution/package.json
+
+build: off

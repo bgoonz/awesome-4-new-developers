@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="htaccess-ukážky-kódov">.htaccess Ukážky kódov</h1>
+    <p>
+      Kolekcia užitočných .htaccess súborov, všetky na jednom mieste. Rozhodol
+      som sa vytvoriť tento repozitár po tom, čo som bol znudený z Googlenia,
+      keď som potreboval presmerovať moje nové stránky na <code>www</code>.
+    </p>
+    <p>
+      <strong>DISCLAIMER</strong>: Vložiť kus kódu je väčšinou postačujúce,
+      avšak existujú prípady, kedy treba kód pozmeniť. Použitie na vlastné
+      riziko.
+    </p>
+    <p>
+      <strong>POZNÁMKA</strong>: Apache 2.4 prináša niekoľko zmien, najme pre
+      kontrolu prístupu. Pre viac informácii sa pozrite na
+      <a href="https://httpd.apache.org/docs/2.4/upgrading.html"
+        >upgrading document</a
+      >
+      a tiež na
+      <a href="https://github.com/phanan/htaccess/issues/2">this issue</a>.
+    </p>
+    <h2 id="tabuľka-obsahu">Tabuľka obsahu</h2>
+    <ul>
+      <li>
+        <a href="#prepisovanie-a-presmerovanie">Prepisovanie a presmerovanie</a>
+        <ul>
+          <li><a href="#presmerovanie-na-www">Presmerovanie na WWW</a></li>
+          <li>
+            <a href="#v-eobecn-presmerovanie-na-www"
+              >Všeobecné presmerovanie na WWW</a
+            >
+          </li>
+          <li><a href="#presmerovanie-bez-www">Presmerovanie bez WWW</a></li>
+          <li><a href="#presmerovanie-na-https">Presmerovanie na HTTPS</a></li>
+          <li>
+            <a href="#pridanie-koncov-ho-lom-tka">Pridanie koncového lomítka</a>
+          </li>
+          <li>
+            <a href="#presmerovanie-jednej-str-nky"
+              >Presmerovanie jednej stránky</a
+            >
+          </li>
+          <li>
+            <a href="#presmerovanie-cel-ho-webu">Presmerovanie celého webu</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#bezpe-nos">Bezpečnosť</a>
+        <ul>
+          <li>
+            <a href="#zak-zanie-pr-stupu-pre-v-etk-ch"
+              >Zakázanie prístupu pre všetkých</a
+            >
+          </li>
+          <li>
+            <a href="#zak-zanie-pr-stupu-v-etk-m-okrem-v-s"
+              >Zakázanie prístupu všetkým okrem vás</a
+            >
+          </li>
+          <li>
+            <a href="#povoli-pr-stup-v-etk-m-ale-nie-spamerom"
+              >Povoliť prístup všetkým, ale nie spamerom</a
+            >
+          </li>
+          <li>
+            <a href="#zak-za-pr-stup-k-skryt-m-s-borom-a-prie-inkom"
+              >Zakázať prístup k skrytým súborom a priečinkom</a
+            >
+          </li>
+          <li>
+            <a href="#zak-zanie-pr-stupu-k-z-loh-m-a-zdrojov-m-s-borom"
+              >Zakázanie prístupu k zálohám a zdrojovým súborom</a
+            >
+          </li>
+          <li>
+            <a href="#zak-zanie-prehliadania-prie-inka"
+              >Zakázanie prehliadania priečinka</a
+            >
+          </li>
+          <li>
+            <a href="#zak-zanie-hotlinkovania-obr-zkov"
+              >Zakázanie hotlinkovania obrázkov</a
+            >
+          </li>
+          <li>
+            <a href="#prie-inok-chr-nen-heslom">Priečinok chránený heslom</a>
+          </li>
+          <li>
+            <a href="#s-bor-alebo-nieko-ko-s-borov-chr-nen-ch-heslom"
+              >Súbor alebo niekoľko súborov chránených heslom</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#v-kon">Výkon</a>
+        <ul>
+          <li>
+            <a href="#kompresia-textov-ch-s-borov"
+              >Kompresia textových súborov</a
+            >
+          </li>
+          <li>
+            <a href="#nastavenia-expir-cie-headerov"
+              >Nastavenia expirácie headerov</a
+            >
+          </li>
+          <li><a href="#vypnutie-etags">Vypnutie eTags</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#ostatn">Ostatné</a>
+        <ul>
+          <li>
+            <a href="#nastavenie-php-premenn-ch">Nastavenie PHP premenných</a>
+          </li>
+          <li><a href="#vlastn-chybov-str-nky">Vlastné chybové stránky</a></li>
+          <li><a href="#povinn-stiahnutie">Povinné stiahnutie</a></li>
+          <li>
+            <a href="#povoli-cross-domain-p-sma">Povoliť cross-domain písma</a>
+          </li>
+          <li>
+            <a href="#automatick-utf-8-k-dovanie"
+              >Automatické UTF-8 kódovanie</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="prepisovanie-a-presmerovanie">Prepisovanie a presmerovanie</h2>
+    <p>
+      Poznámka: Predpokladá sa, že máte nainštalovaný a povolený
+      <code>mod_rewrite</code>.
+    </p>
+    <h3 id="presmerovanie-na-www">Presmerovanie na WWW</h3>
+    <pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTP_HOST} ^example\.com [NC]
+RewriteRule ^(.*)$ http://www.example.com/$1 [L,R=301,NC]</code></pre>
+    <h3 id="všeobecné-presmerovanie-na-www">Všeobecné presmerovanie na WWW</h3>
+    <pre class="apacheconf"><code>RewriteCond %{HTTP_HOST} !^$
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteCond %{HTTPS}s ^on(s)|
+RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]</code></pre>
+    <p>
+      Funguje pre <em>akúkoľvek</em> doménu.
+      <a
+        href="https://stackoverflow.com/questions/4916222/htaccess-how-to-force-www-in-a-generic-way"
+        >Source</a
+      >
+    </p>
+    <h3 id="presmerovanie-bez-www">Presmerovanie bez WWW</h3>
+    <p>
+      Je <a href="http://no-www.org/">odporúčané</a> vymazať <code>www</code> z
+      vašej domény. Prekvapenie prekvapenie!
+    </p>
+    <pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.example\.com [NC]
+RewriteRule ^(.*)$ http://example.com/$1 [L,R=301]</code></pre>
+    <h3 id="presmerovanie-na-https">Presmerovanie na HTTPS</h3>
+    <pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTPS} !on
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}</code></pre>
+    <h3 id="pridanie-koncového-lomítka">Pridanie koncového lomítka</h3>
+    <pre class="apacheconf"><code>RewriteCond %{REQUEST_URI} /+[^\.]+$
+RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301,L]</code></pre>
+    <h3 id="presmerovanie-jednej-stránky">Presmerovanie jednej stránky</h3>
+    <pre
+      class="apacheconf"
+    ><code>Redirect 301 /oldpage.html http://www.yoursite.com/newpage.html
+Redirect 301 /oldpage2.html http://www.yoursite.com/folder/</code></pre>
+    <p>
+      <a href="http://css-tricks.com/snippets/htaccess/301-redirects/">Zdroj</a>
+    </p>
+    <h3 id="presmerovanie-celého-webu">Presmerovanie celého webu</h3>
+    <pre
+      class="apacheconf"
+    ><code>Redirect 301 / http://newsite.com/</code></pre>
+    <p>
+      Tento spôsob nezničí linky. Stránka
+      <code>www.oldsite.com/some/crazy/link.html</code> bude presmerovaná na
+      <code>www.newsite.com/some/crazy/link.html</code>. Toto je extrémne
+      nápomocné, ak migrujete web na inú doménu.
+      <a href="http://css-tricks.com/snippets/htaccess/301-redirects/">Zdroj</a>
+    </p>
+    <h2 id="bezpečnosť">Bezpečnosť</h2>
+    <h3 id="zakázanie-prístupu-pre-všetkých">
+      Zakázanie prístupu pre všetkých
+    </h3>
+    <pre class="apacheconf"><code>Deny from All</code></pre>
+    <p>Ale pozor, toto zakáže prístup aj vám!</p>
+    <h3 id="zakázanie-prístupu-všetkým-okrem-vás">
+      Zakázanie prístupu všetkým okrem vás
+    </h3>
+    <pre class="apacheconf"><code>Order deny, allow
+Deny from All
+Allow from xxx.xxx.xxx.xxx</code></pre>
+    <p>
+      <code>xxx.xxx.xxx.xxx</code> je tvoja IP. Ak nahradíš posledné tri čísla
+      napríklad týmto 0/12, bude povolený prístup špecifickému rozashu ip adries
+      vo vašej sieti, toto môže ušetriť čas pri pridávaní IP adries samostatne.
+      <a
+        href="http://speckyboy.com/2013/01/08/useful-htaccess-snippets-and-hacks/"
+        >Zdroj</a
+      >
+    </p>
+    <p>Samozrejme je tu aj opačná verzia:</p>
+    <h3 id="povoliť-prístup-všetkým-ale-nie-spamerom">
+      Povoliť prístup všetkým, ale nie spamerom
+    </h3>
+    <pre class="apacheconf"><code>Order deny, allow
+Deny from xxx.xxx.xxx.xxx
+Deny from xxx.xxx.xxx.xxy</code></pre>
+    <h3 id="zakázať-prístup-k-skrytým-súborom-a-priečinkom">
+      Zakázať prístup k skrytým súborom a priečinkom
+    </h3>
+    <p>
+      Skryté súbory a priečinky (tie ktorých názov začína bodkou <code>.</code>)
+      by mali byť väčšinu, ak nie stále chránené. Príklad:
+      <code>.htaccess</code>, <code>.htpasswd</code>, <code>.git</code>,
+      <code>.hg</code>…
+    </p>
+    <pre class="apacheconf"><code>RewriteCond %{SCRIPT_FILENAME} -d [OR]
+RewriteCond %{SCRIPT_FILENAME} -f
+RewriteRule &quot;(^|/)\.&quot; - [F]</code></pre>
+    <p>
+      Ako alternatívu môžte použíť <code>Not Found</code> chybu, pri ktorej nemá
+      útočník ani potuchy:
+    </p>
+    <pre class="apacheconf"><code>RedirectMatch 404 /\..*$</code></pre>
+    <h3 id="zakázanie-prístupu-k-zálohám-a-zdrojovým-súborom">
+      Zakázanie prístupu k zálohám a zdrojovým súborom
+    </h3>
+    <p>
+      Tieto súbory môžu byť pozostatky z text/html editorov (ako Vi/Vim) a
+      predstavujú veľké bezpečnostné riziko, keď k nim má niekto prístup.
+    </p>
+    <pre
+      class="apacheconf"
+    ><code>&lt;FilesMatch &quot;(\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|swp)|~)$&quot;&gt;
+    Order allow,deny
+    Deny from all
+    Satisfy All
+&lt;/FilesMatch&gt;</code></pre>
+    <p><a href="http://h5bp.com">Zdroj</a></p>
+    <h3 id="zakázanie-prehliadania-priečinka">
+      Zakázanie prehliadania priečinka
+    </h3>
+    <pre class="apacheconf"><code>Options All -Indexes</code></pre>
+    <h3 id="zakázanie-hotlinkovania-obrázkov">
+      Zakázanie hotlinkovania obrázkov
+    </h3>
+    <pre class="apacheconf"><code>RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?yourdomain.com [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ - [NC,F,L]</code></pre>
+    <h3 id="priečinok-chránený-heslom">Priečinok chránený heslom</h3>
+    <p>
+      Ako prvé potrebujete vytvoriť <code>.htpasswd</code> súbor niekde v
+      systéme:
+    </p>
+    <div class="sourceCode" id="cb16">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1"><span class="ex">htpasswd</span> -c /home/fellowship/.htpasswd boromir</a></code></pre>
+    </div>
+    <p>Potom to môžte použiť na autentifikáciu:</p>
+    <pre class="apacheconf"><code>AuthType Basic
+AuthName &quot;One does not simply&quot;
+AuthUserFile /home/fellowship/.htpasswd
+Require valid-user</code></pre>
+    <h3 id="súbor-alebo-niekoľko-súborov-chránených-heslom">
+      Súbor alebo niekoľko súborov chránených heslom
+    </h3>
+    <pre class="apacheconf"><code>AuthName &quot;One still does not simply&quot;
+AuthType Basic
+AuthUserFile /home/fellowship/.htpasswd
+
+&lt;Files &quot;one-ring.o&quot;&gt;
+Require valid-user
+&lt;/Files&gt;
+
+&lt;FilesMatch ^((one|two|three)-rings?\.o)$&gt;
+Require valid-user
+&lt;/FilesMatch&gt;</code></pre>
+    <h2 id="výkon">Výkon</h2>
+    <h3 id="kompresia-textových-súborov">Kompresia textových súborov</h3>
+    <pre class="apacheconf"><code>&lt;IfModule mod_deflate.c&gt;
+
+    # &quot;Tvrdá&quot; kompresia pre pozmenené hlavičky
+    # https://developer.yahoo.com/blogs/ydn/pushing-beyond-gzipping-25601.html
+    &lt;IfModule mod_setenvif.c&gt;
+        &lt;IfModule mod_headers.c&gt;
+            SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+            RequestHeader append Accept-Encoding &quot;gzip,deflate&quot; env=HAVE_Accept-Encoding
+        &lt;/IfModule&gt;
+    &lt;/IfModule&gt;
+
+    # Komprimovať všetky výstup s týmito konkrétnymi MIME-typmi
+    # (pre Apache verzie pod 2.3.7, nepotrebujete povoľovať `mod_filter`
+    #  a môžte vymazať `&lt;IfModule mod_filter.c&gt;` a `&lt;/IfModule&gt;` riadky
+    #  ale `AddOutputFilterByType` je stále jedna zo základných smerníc).
+    &lt;IfModule mod_filter.c&gt;
+        AddOutputFilterByType DEFLATE application/atom+xml \
+                                      application/javascript \
+                                      application/json \
+                                      application/rss+xml \
+                                      application/vnd.ms-fontobject \
+                                      application/x-font-ttf \
+                                      application/x-web-app-manifest+json \
+                                      application/xhtml+xml \
+                                      application/xml \
+                                      font/opentype \
+                                      image/svg+xml \
+                                      image/x-icon \
+                                      text/css \
+                                      text/html \
+                                      text/plain \
+                                      text/x-component \
+                                      text/xml
+    &lt;/IfModule&gt;
+
+&lt;/IfModule&gt;</code></pre>
+    <p><a href="https://h5bp.com">Zdroj</a></p>
+    <h3 id="nastavenia-expirácie-headerov">Nastavenia expirácie headerov</h3>
+    <p>
+      <em>Expires Headers</em> povedia prehliadaču, či by si mal vyžiadať
+      konkrétny súbor zo servera, alebo ho len prevziať z vyrovnávacej pamäte.
+      Je vhodné nastaviť dobu expirácie statického obsahu na dlhú dobu. Ak
+      nemáte kontrolu verzií na báze mena súboru mali by ste zvážiť dobu
+      uloženia v medzipameti pre súbory ako je CSS a JS na napríklad 1 týždeň.
+      <a href="http://h5bp.com">Zdroj</a>
+    </p>
+    <pre class="apacheconf"><code>&lt;IfModule mod_expires.c&gt;
+    ExpiresActive on
+    ExpiresDefault                                      &quot;access plus 1 month&quot;
+
+  # CSS
+    ExpiresByType text/css                              &quot;access plus 1 year&quot;
+
+  # Data interchange
+    ExpiresByType application/json                      &quot;access plus 0 seconds&quot;
+    ExpiresByType application/xml                       &quot;access plus 0 seconds&quot;
+    ExpiresByType text/xml                              &quot;access plus 0 seconds&quot;
+
+  # Favicon (cannot be renamed!)
+    ExpiresByType image/x-icon                          &quot;access plus 1 week&quot;
+
+  # HTML components (HTCs)
+    ExpiresByType text/x-component                      &quot;access plus 1 month&quot;
+
+  # HTML
+    ExpiresByType text/html                             &quot;access plus 0 seconds&quot;
+
+  # JavaScript
+    ExpiresByType application/javascript                &quot;access plus 1 year&quot;
+
+  # Manifest files
+    ExpiresByType application/x-web-app-manifest+json   &quot;access plus 0 seconds&quot;
+    ExpiresByType text/cache-manifest                   &quot;access plus 0 seconds&quot;
+
+  # Media
+    ExpiresByType audio/ogg                             &quot;access plus 1 month&quot;
+    ExpiresByType image/gif                             &quot;access plus 1 month&quot;
+    ExpiresByType image/jpeg                            &quot;access plus 1 month&quot;
+    ExpiresByType image/png                             &quot;access plus 1 month&quot;
+    ExpiresByType video/mp4                             &quot;access plus 1 month&quot;
+    ExpiresByType video/ogg                             &quot;access plus 1 month&quot;
+    ExpiresByType video/webm                            &quot;access plus 1 month&quot;
+
+  # Web feeds
+    ExpiresByType application/atom+xml                  &quot;access plus 1 hour&quot;
+    ExpiresByType application/rss+xml                   &quot;access plus 1 hour&quot;
+
+  # Web fonts
+    ExpiresByType application/font-woff                 &quot;access plus 1 month&quot;
+    ExpiresByType application/vnd.ms-fontobject         &quot;access plus 1 month&quot;
+    ExpiresByType application/x-font-ttf                &quot;access plus 1 month&quot;
+    ExpiresByType font/opentype                         &quot;access plus 1 month&quot;
+    ExpiresByType image/svg+xml                         &quot;access plus 1 month&quot;
+&lt;/IfModule&gt;</code></pre>
+    <h3 id="vypnutie-etags">Vypnutie eTags</h3>
+    <p>
+      Odstránenín ETag headeru zabránite cache a prehliadaču overovať súbory, a
+      tým ich prinútite aby sa spoliehali na svoju Cache-Control a Expires
+      header.
+      <a href="http://www.askapache.com/htaccess/apache-speed-etags.html"
+        >Zdroj</a
+      >
+    </p>
+    <pre class="apacheconf"><code>&lt;IfModule mod_headers.c&gt;
+    Header unset ETag
+&lt;/IfModule&gt;
+FileETag None</code></pre>
+    <h2 id="ostatné">Ostatné</h2>
+    <h3 id="nastavenie-php-premenných">Nastavenie PHP premenných</h3>
+    <pre class="apacheconf"><code>php_value &lt;key&gt; &lt;val&gt;
+
+# Príklad:
+php_value upload_max_filesize 50M
+php_value max_execution_time 240</code></pre>
+    <h3 id="vlastné-chybové-stránky">Vlastné chybové stránky</h3>
+    <pre class="apacheconf"><code>ErrorDocument 400 /errors/breakingbad.html
+ErrorDocument 401 /errors/notrespassing.html
+ErrorDocument 403 /errors/mordor.html
+ErrorDocument 404 /errors/halflife3.html
+ErrorDocument 500 /errors/notabugitsafeature.html</code></pre>
+    <h3 id="povinné-stiahnutie">Povinné stiahnutie</h3>
+    <p>
+      Niekedy chcete aby preliadač stiahol obsah namiesto jeho zobrazenia. Toto
+      slúži presne na to.
+    </p>
+    <pre class="apacheconf"><code>&lt;Files *.md&gt;
+    ForceType application/octet-stream
+    Header set Content-Disposition attachment
+&lt;/Files&gt;</code></pre>
+    <h3 id="povoliť-cross-domain-písma">Povoliť cross-domain písma</h3>
+    <p>
+      Fonty pochádzajúce z CDN nemusia pracovať správne vo Firefoxe a IE kvôli
+      <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing"
+        >CORS</a
+      >. Nasledujúci kód z <a href="http://h5bp.com">HTML5Boilerplate</a> by to
+      mal vyriešiť.
+    </p>
+    <pre class="apacheconf"><code>&lt;IfModule mod_headers.c&gt;
+    &lt;FilesMatch &quot;\.(eot|otf|ttc|ttf|woff)$&quot;&gt;
+        Header set Access-Control-Allow-Origin &quot;*&quot;
+    &lt;/FilesMatch&gt;
+&lt;/IfModule&gt;</code></pre>
+    <h3 id="automatické-utf-8-kódovanie">Automatické UTF-8 kódovanie</h3>
+    <p>Tvoj text by sa mal vždy kódovať v UTF-8, nie?</p>
+    <pre
+      class="apacheconf"
+    ><code># Použiť UTF-8 kódovanie pre všetky súbory typu text/plain a text/html
+AddDefaultCharset utf-8
+
+# Nastavenie UTF-8 pre niekoľko formátov súborov
+AddCharset utf-8 .atom .css .js .json .rss .vtt .xml</code></pre>
+    <p><a href="http://h5bp.com">Zdroj</a></p>
+  </body>
+</html>

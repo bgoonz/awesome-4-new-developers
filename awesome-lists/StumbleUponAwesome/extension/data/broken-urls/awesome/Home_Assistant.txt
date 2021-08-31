@@ -1,0 +1,1 @@
+https://itunes.apple.com/us/app/home-assistant-open-source-home-automation/id1099568401?mt=8,Home Assistant Companion,https://github.com/frenck/awesome-home-assistant#readme,Home Assistant error: <HTTPError 301: 'Moved Permanently'> | reason: Moved Permanently

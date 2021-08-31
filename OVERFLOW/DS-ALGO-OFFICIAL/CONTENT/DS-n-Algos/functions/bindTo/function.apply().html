@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A description of the page and its contents" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Page Title</title>
+  <link rel="stylesheet" href="./../../../assets/style.css" />
+  <link rel="stylesheet" href="./../../../assets/prism.css" />
+  <script async src="./../../../assets/prism.js"></script>
+</head>
+
+<body>
+
+
+  <a href="https://github.com/bgoonz/DS-ALGO-OFFICIAL" class="github-corner" aria-label="View source on Github"><svg
+      width="80" height="80" viewBox="0 0 250 250"
+      style="z-index: 100000; fill:#194ccdaf; color:#fff; position: fixed; top: 20px; border: 0; left: 20px; transform: scale(-1.5, 1.5);"
+      aria-hidden="true">
+      <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+      <path
+        d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+        fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+      </path>
+      <path
+        d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+        fill="currentColor" class="octo-body"></path>
+    </svg></a>
+
+
+
+
+  <h1 id="function.prototype.apply">Function.prototype.apply()</h1>
+  <blockquote>
+    <p>The apply() method calls a function with a given this value, and arguments provided as an array (or an array-like
+      object).</p>
+  </blockquote>
+  <p>The <code>**apply()**</code> method calls a function with a given <code>this</code> value, and
+    <code>arguments</code>
+    provided as an array (or an <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Guide/Indexed_collections#Working_with_array-like_objects">array-like
+      object</a>).</p>
+  <p>The source for this interactive example is stored in a GitHub repository. If you'd like to contribute to the
+    interactive examples project, please clone <a class="btn"
+      href="https://github.com/mdn/interactive-examples">https://github.com/mdn/interactive-examples</a> and send us a
+    pull request.</p>
+  <h2 id="syntax">Syntax</h2>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>func</code></pre>
+  <h3 id="parameters">Parameters</h3>
+  <p><code>thisArg</code></p>
+  <p>The value of <code>this</code> provided for the call to <code>func</code>.</p>
+  <p>Note that <code>this</code> may not be the actual value seen by the method: if the method is a function in <a
+      class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Strict_mode">non-strict
+      mode</a> code, <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/null"><code>null</code></a>
+    and <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined"><code>undefined</code></a>
+    will be replaced with the global object, and primitive values will be boxed. This argument is required.</p>
+  <p><code>argsArray</code> Optional</p>
+  <p>An array-like object, specifying the arguments with which <code>func</code> should be called, or <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/null"><code>null</code></a>
+    or <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined"><code>undefined</code></a>
+    if no arguments should be provided to the function.</p>
+  <p>Starting with ECMAScript 5 these arguments can be a generic array-like object instead of an array. See below for <a
+      class="btn" href="#Browser_compatibility">browser compatibility</a> information.</p>
+  <h3 id="return-value">Return value</h3>
+  <p>The result of calling the function with the specified <code>**this**</code> value and arguments.</p>
+  <h2 id="description">Description</h2>
+  <p><strong>Note:</strong> While the syntax of this function is almost identical to that of <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call"><code>call()</code></a>,
+    the fundamental difference is that <code>call()</code> accepts an <strong>argument list</strong>, while
+    <code>apply()</code> accepts a <strong>single array of arguments</strong>.
+  </p>
+  <p><strong>Note:</strong> When the first argument is undefined or null a similar outcome can be achieved using the
+    array
+    <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">spread
+      syntax</a>.
+  </p>
+  <p>You can assign a different <code>this</code> object when calling an existing function. <code>this</code> refers to
+    the current object (the calling object). With <code>apply</code>, you can write a method once, and then inherit it
+    in another object, without having to rewrite the method for the new object.</p>
+  <p><code>apply</code> is very similar to <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call"><code>call()</code></a>,
+    except for the type of arguments it supports. You use an arguments array instead of a list of arguments
+    (parameters).
+    With <code>apply</code>, you can also use an array literal, for example,
+    <code>func.apply(this, ['eat', 'bananas'])</code>, or an <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"><code>Array</code></a>
+    object, for example, <code>func.apply(this, new Array('eat', 'bananas'))</code>.
+  </p>
+  <p>You can also use <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Functions/arguments"><code>arguments</code></a>
+    for the <code>argsArray</code> parameter. <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Functions/arguments"><code>arguments</code></a>
+    is a local variable of a function. It can be used for all unspecified arguments of the called object. Thus, you do
+    not
+    have to know the arguments of the called object when you use the <code>apply</code> method. You can use
+    <code>arguments</code> to pass all the arguments to the called object. The called object is then responsible for
+    handling the arguments.
+  </p>
+  <p>Since ECMAScript 5th Edition, you can also use any kind of object which is array-like. In practice, this means it's
+    going to have a <code>length</code> property, and integer ("index") properties in the range
+    <code>(0..length - 1)</code>. For example, you could use a <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/NodeList"><code>NodeList</code></a>,
+    or
+    a custom object like <code>{ 'length': 2, '0': 'eat', '1': 'bananas' }</code>.
+  </p>
+  <p><strong>Note:</strong> Many older browsers—including Chrome &lt;17 and Internet Explorer &lt;9—don't accept
+    array-like objects, and will throw an exception.</p>
+  <h2 id="examples">Examples</h2>
+  <h3 id="using-apply-to-append-an-array-to-another">Using apply to append an array to another</h3>
+  <p>You can use <code>push</code> to append an element to an array. And, because <code>push</code> accepts a variable
+    number of arguments, you can also push multiple elements at once.</p>
+  <p>But, if you pass an array to <code>push</code>, it will actually add that array as a single element, instead of
+    adding the elements individually. So you end up with an array inside an array.</p>
+  <p>What if that is not what you want? <code>concat</code> does have the desired behaviour in this case, but it does
+    not append to the <em>existing</em> array—it instead creates and returns a new array.</p>
+  <p>But you wanted to append to the existing array… So what now? Write a loop? Surely not?</p>
+  <p><code>apply</code> to the rescue!</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>const array = [&#39;a&#39;, &#39;b&#39;];
+    const elements = [0, 1, 2];
+    array.push.apply(array, elements);
+    console.info(array); </code></pre>
+  <h3 id="using-apply-and-built-in-functions">Using apply and built-in functions</h3>
+  <p>Clever usage of <code>apply</code> allows you to use built-in functions for some tasks that would probably have
+    otherwise been written by looping over the array values.</p>
+  <p>As an example, here are <code>Math.max</code>/<code>Math.min</code>, used to find out the maximum/minimum value in
+    an array.</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>const numbers = [5, 6, 2, 3, 7];
+
+
+    let max = Math.max.apply(null, numbers);
+
+
+
+    let min = Math.min.apply(null, numbers);
+
+
+    max = -Infinity, min = +Infinity;
+
+    for (let i = 0; i &lt; numbers.length; i++) {
+    if (numbers[i] &gt; max) {
+    max = numbers[i];
+    }
+    if (numbers[i] &lt; min) {
+    min = numbers[i];
+    }
+    }</code></pre>
+  <p>But beware: by using <code>apply</code> this way, you run the risk of exceeding the JavaScript engine's argument
+    length limit. The consequences of applying a function with too many arguments (that is, more than tens of thousands
+    of
+    arguments) varies across engines. (The JavaScriptCore engine has hard-coded <a class="btn"
+      href="https://bugs.webkit.org/show_bug.cgi?id=80797">argument limit of 65536</a>.</p>
+  <p>This is because the limit (and indeed, even the nature of any excessively-large-stack behavior) is unspecified.
+    Some engines will throw an exception. More perniciously, others will arbitrarily limit the number of arguments
+    actually passed to the applied function. To illustrate this latter case: if such an engine had a limit of four
+    arguments (actual limits are of course significantly higher), it would be as if the arguments <code>5, 6, 2,
+      3</code> had been passed to <code>apply</code> in the examples above, rather than the full array.</p>
+  <p>If your value array might grow into the tens of thousands, use a hybrid strategy: apply your function to chunks of
+    the array at a time:</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>function minOfArray(arr) {
+    let min = Infinity;
+    let QUANTUM = 32768;
+
+    for (var i = 0, len = arr.length; i &lt; len; i += QUANTUM) {
+    var submin = Math.min.apply(null,
+    arr.slice(i, Math.min(i+QUANTUM, len)));
+    min = Math.min(submin, min);
+    }
+
+    return min;
+    }
+
+    let min = minOfArray([5, 6, 2, 3, 7]);</code></pre>
+  <h3 id="using-apply-to-chain-constructors">Using apply to chain constructors</h3>
+  <p>You can use <code>apply</code> to chain <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/new">constructors</a>
+    for an object (similar to Java).</p>
+  <p>In the following example we will create a global <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function</code></a>
+    method called <code>construct</code>, which will enable you to use an array-like object with a constructor instead
+    of
+    an arguments list.</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>Function.prototype.construct =
+    function(aArgs) {
+    let oNew = Object.create(this.prototype);
+    this.apply(oNew, aArgs);
+    return oNew;
+    };</code></pre>
+  <p><strong>Note:</strong> The <code>Object.create()</code> method used above is relatively new. For alternative
+    methods, please consider one of the following approaches:</p>
+  <p>Using <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/__proto__"><code>Object.__proto__</code></a>:
+  </p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>Function.prototype.construct = function
+    (aArgs) {
+    let oNew = {};
+    oNew.__proto__ = this.prototype;
+    this.apply(oNew, aArgs);
+    return oNew;
+    };</code></pre>
+  <p>Using <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Closures">closures</a>:</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>Function.prototype.construct =
+    function(aArgs) {
+    let fConstructor = this, fNewConstr = function() {
+    fConstructor.apply(this, aArgs);
+    };
+    fNewConstr.prototype = fConstructor.prototype;
+    return new fNewConstr();
+    };</code></pre>
+  <p>Using the <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function</code></a>
+    constructor:</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>Function.prototype.construct = function
+    (aArgs) {
+    let fNewConstr = new Function(&quot;&quot;);
+    fNewConstr.prototype = this.prototype;
+    let oNew = new fNewConstr();
+    this.apply(oNew, aArgs);
+    return oNew;
+    };</code></pre>
+  <p>Example usage:</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>function MyConstructor() {
+    for (let nProp = 0; nProp &lt; arguments.length; nProp++) {
+    this[&#39;property&#39; + nProp] = arguments[nProp];
+    }
+    }
+
+    let myArray = [4, &#39;Hello world!&#39;, false];
+    let myInstance = MyConstructor.construct(myArray);
+
+    console.log(myInstance.property1);
+    console.log(myInstance instanceof MyConstructor);
+    console.log(myInstance.constructor); </code></pre>
+  <p><strong>Note:</strong> This non-native <code>Function.construct</code> method will not work with some native
+    constructors; like <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a>,
+    for example. In these cases you have to use the <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind"><code>Function.prototype.bind</code></a>
+    method.</p>
+  <p>For example, imagine having an array like the following, to be used with <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a>
+    constructor: <code>[2012, 11, 4]</code>; in this case you have to write something like:
+    <code>new (Function.prototype.bind.apply(Date, [null].concat([2012, 11, 4])))()</code>.
+  </p>
+  <p>This is not the best way to do things, and probably not to be used in any production environment.</p>
+  <h2 id="specifications">Specifications</h2>
+  <table>
+    <colgroup>
+      <col style="width: 100%" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Specification</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>[ECMAScript (ECMA-262)</td>
+      </tr>
+      <tr>
+        <td>The definition of ‘Function.prototype.apply' in that
+          specification.](https://tc39.es/ecma262/#sec-function.prototype.apply)</td>
+      </tr>
+    </tbody>
+  </table>
+  <h2 id="browser-compatibility">Browser compatibility</h2>
+  <p>The compatibility table on this page is generated from structured data. If you'd like to contribute to the data,
+    please check out <a class="btn"
+      href="https://github.com/mdn/browser-compat-data">https://github.com/mdn/browser-compat-data</a> and send us a
+    pull
+    request.</p>
+  <p><a class="btn" href="https://github.com/mdn/browser-compat-data">Update compatibility data on GitHub</a></p>
+  <table>
+    <colgroup>
+      <col style="width: 25%" />
+      <col style="width: 25%" />
+      <col style="width: 25%" />
+      <col style="width: 25%" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Desktop</th>
+        <th>Mobile</th>
+        <th>Server</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td>Chrome</td>
+        <td>Edge</td>
+        <td>Firefox</td>
+      </tr>
+      <tr>
+        <td>—</td>
+        <td>—</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><code>apply</code></td>
+        <td>Chrome Full support 1</td>
+        <td>Edge Full support 12</td>
+        <td>Firefox Full support 1</td>
+      </tr>
+      <tr>
+        <td>ES 5.1: generic array-like object as <code>arguments</code></td>
+        <td>Chrome Full support 17</td>
+        <td>Edge Full support 12</td>
+        <td>Firefox Full support 4</td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 id="what-happens-next">What happens next?</h4>
+  <p>Our team will review your report. Once we verify the information you have supplied we will update this browser
+    compatability table accordingly.</p>
+  <h4 id="can-i-keep-track-of-my-report">Can I keep track of my report?</h4>
+  <p>You can join the GitHub repository to see updates and commits for this table data:</p>
+  <p><a class="btn" href="https://github.com/mdn/browser-compat-data">https://github.com/mdn/browser-compat-data</a></p>
+  <p>Our goal is to provide accurate, real values for all our compatibility data tables. Notifying MDN of inaccurate
+    data or supplying new data pushes us further towards our goal of providing 100% real values to the developer
+    community.<br />
+    Thank you for helping.</p>
+  <p>Please select the browser or browsers which are affected.</p>
+  <p>Briefly outline the issue you are highlighting. Minimum 10 and maximum 1,000 characters.</p>
+  <p>Browser documentation and release notes are good supporting items to accompany your message. A demo hosted on
+    services like Codepen or JSBin are perfect for providing real examples of your findings.</p>
+  <p>Connection error:Sorry, we can't seem to reach the server. We are working to fix the problem. Please try again
+    later.
+  </p>
+  <h3 id="legend">Legend</h3>
+  <p>Full support</p>
+  <p>Full support</p>
+  <h2 id="see-also">See also</h2>
+  <ul>
+    <li><a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Functions/arguments"><code>arguments</code></a>
+      object</li>
+    <li><a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind"><code>Function.prototype.bind()</code></a>
+    </li>
+    <li><a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call"><code>Function.prototype.call()</code></a>
+    </li>
+    <li><a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Functions">Functions
+        and function scope</a></li>
+    <li><a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/apply"><code>Reflect.apply()</code></a>
+    </li>
+    <li><a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Spread
+        syntax</a></li>
+  </ul>
+  <p><a class="btn"
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">Source</a>
+  </p>
+
+</body>
+
+</html>

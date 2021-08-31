@@ -1,0 +1,17 @@
+{
+  "name": "building-your-own-file-utilities-solution",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "COPYRIGHT 2020 Hash Map Labs, Inc.",
+  "private": true,
+  "dependencies": {
+    "chalk": "4.1.1",
+    "line-reader": "0.4.0"
+  }
+}

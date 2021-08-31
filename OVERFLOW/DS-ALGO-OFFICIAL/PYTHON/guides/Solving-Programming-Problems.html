@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Solving-Programming-Problems</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p>“What do we solve, and how do we solve it?”</p>
+<h2 id="get-a-clear-understanding-of-the-problem-and-requirements">Get a clear understanding of the problem and requirements</h2>
+<ul>
+<li>The Goals
+<ul>
+<li>What are you trying to solve? What is the benefit?</li>
+</ul></li>
+<li>The Problem
+<ul>
+<li>Write pseudocode.</li>
+<li>Manually work through some examples.</li>
+</ul></li>
+<li>The Data
+<ul>
+<li>How does the data flow from one component to another?
+<ul>
+<li>Draw diagrams.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>If you make any assumptions about what the problem is, write those down.</p>
+<ul>
+<li>Get clarification from interested parties.</li>
+</ul>
+<p>You should be able to describe the problem in your own terms.</p>
+<p>Future-proofing</p>
+<ul>
+<li>Imagine how the problem requirements are likely to change in the future and keep those in mind as you implement the solution.</li>
+</ul>
+<p>“What do we solve” is about the complete description of the problem.</p>
+<h2 id="break-down-the-problem">Break down the problem</h2>
+<p>Top Down design: start with a high-level description and break it down.</p>
+<ul>
+<li><strong>Build a shed</strong></li>
+</ul>
+<p>becomes:</p>
+<ul>
+<li>Build a shed
+<ul>
+<li><strong>Build a foundation</strong></li>
+<li><strong>Build a floor</strong></li>
+<li><strong>Build 4 walls</strong></li>
+<li><strong>Build a roof</strong></li>
+</ul></li>
+</ul>
+<p>becomes:</p>
+<ul>
+<li>Build a shed
+<ul>
+<li>Build a foundation
+<ul>
+<li><strong>Flatten terrain</strong></li>
+<li><strong>Lay down blocks</strong></li>
+</ul></li>
+<li>Build a floor
+<ul>
+<li><strong>Build framing</strong></li>
+<li><strong>Add subfloor</strong></li>
+<li><strong>Add floor</strong></li>
+</ul></li>
+<li>Build 4 walls
+<ul>
+<li><strong>Build framing</strong></li>
+<li><strong>Install windows</strong>
+<ul>
+<li><strong>Frame</strong></li>
+<li><strong>Install sill</strong></li>
+<li><strong>Install glass</strong></li>
+</ul></li>
+<li><strong>Install door</strong>
+<ul>
+<li><strong>Frame</strong></li>
+<li><strong>Install threshold</strong></li>
+<li><strong>Install door</strong></li>
+</ul></li>
+</ul></li>
+<li>Build a roof</li>
+</ul></li>
+</ul>
+<p>And so on. Keep breaking down tasks until their implementation become obvious. This might be to the level of <code>for</code> loops, if need be.</p>
+<h2 id="inspiration-and-exploration">Inspiration and Exploration</h2>
+<p>What does it remind you of?</p>
+<ul>
+<li>Are there similar problems you’ve solved in the past?</li>
+</ul>
+<p>Try small things</p>
+<ul>
+<li>Write “toy” programs to see if they get you close to your goal</li>
+</ul>
+<p>Reach out</p>
+<ul>
+<li>Existing code samples</li>
+<li>Documentation</li>
+<li>Google</li>
+</ul>
+<h2 id="testing">Testing</h2>
+<ul>
+<li><p>Keep an eye open for corner and edge cases, especially.</p></li>
+<li>Does it run quickly enough?
+<ul>
+<li>Can you make small changes to speed it up?</li>
+<li>Do you have to revamp the algorithm to get a decrease in time complexity?</li>
+</ul></li>
+</ul>
+<h2 id="post-mortem">Post-Mortem</h2>
+<p>When you’re done, take a look back at the solution and see what works well and what doesn’t. This helps with future implementations of any problem.</p>
+<h2 id="example">Example</h2>
+<p>Write a program that converts a CSV file to JSON.</p>
+<h3 id="understand-the-problem">Understand the problem</h3>
+<p>So far, the problem statement isn’t nearly clear enough.</p>
+<ul>
+<li>What’s in the CSV file?</li>
+<li>What’s in each record?</li>
+<li>What’s in each field?</li>
+<li>How big is the CSV file?</li>
+<li>How many fields does it have?</li>
+<li>How many records?</li>
+<li>Do all the fields need to be converted?</li>
+<li>Do all the records need to be converted?</li>
+<li>If not, how many need to be converted?</li>
+<li>Are any fields blank or missing?</li>
+<li>Does the CSV file have a header?</li>
+<li>If so, do we use those names for the fields in JSON?</li>
+<li>If not, what is the mapping between CSV fields and JSON property names?</li>
+<li>Does the JSON need to be human-readable (pretty-printed)?</li>
+</ul>
+<p>These (and more!) are all valid questions to ask, and should be asked.</p>
+<p>Answers from the client:</p>
+<ul>
+<li>The CSV file contains store name, location, and sales figures.</li>
+<li>There is one record per store, one store per record.</li>
+<li>Fields listed below.</li>
+<li>The file is 1.8 TB in size.</li>
+<li>There are 120,000 records.</li>
+<li>Don’t know how many will be in the result set.</li>
+<li>The only fields we need are store name, zipcode, and total sales.</li>
+<li>Only the records that have total sales greater than $10 million need to be outputted.</li>
+<li>Don’t know if any fields are blank.</li>
+<li>Don’t know if the file has a header.</li>
+<li>Fields names listed below can be used for JSON property names.</li>
+<li>Don’t care if the JSON is human-readable.</li>
+</ul>
+<p>Fields:</p>
+<p>Field name| :-:| name| addr1| addr2| city| state| zip| country| total sales| hourly_sales_1_1| hourly_sales_1_2| hourly_sales_1_3| hourly_sales_1_4| hourly_sales_1_5| hourly_sales_1_6| hourly_sales_1_7| hourly_sales_1_8| hourly_sales_1_9| hourly_sales_1_10| hourly_sales_1_11| hourly_sales_1_12| hourly_sales_2_1| hourly_sales_2_2| hourly_sales_2_3| hourly_sales_2_4| hourly_sales_2_5| hourly_sales_2_6| hourly_sales_2_7| hourly_sales_2_8| hourly_sales_2_9| hourly_sales_2_10| hourly_sales_2_11| hourly_sales_2_12| <em>[… 4365 fields omitted …]</em>| hourly_sales_365_1| hourly_sales_365_2| hourly_sales_365_3| hourly_sales_365_4| hourly_sales_365_5| hourly_sales_365_6| hourly_sales_365_7| hourly_sales_365_8| hourly_sales_365_9| hourly_sales_365_10| hourly_sales_365_11| hourly_sales_365_12|</p>
+<p>There are 12 fields per every day of the year per store. Apparently this is where the 1.8 GB comes from.</p>
+<p>This leads to a number of other questions you’ll need to explore.</p>
+<ul>
+<li><code>total sales</code> has a space in it. Replace with <code>_</code>?
+<ul>
+<li><em>[Client answers “Sure”.]</em></li>
+</ul></li>
+<li>Do the <code>total sales</code> fields have dollar signs or commas in them?
+<ul>
+<li><em>[Client answers “Don’t know”.]</em></li>
+</ul></li>
+<li>Is there a header?</li>
+<li>Are any of the important fields blank or invalid?</li>
+</ul>
+<p>And some conclusions:</p>
+<ul>
+<li>We can’t load the whole CSV into memory at once (it’s too big), so we’ll have to process it a line at a time.</li>
+</ul>
+<p>We can’t understand the problem fully without answering our questions, above. Visually inspecting 120,000 rows is a nonstarter. So we <em>might</em> have to write some special software just to inspect it. Or might not.</p>
+<h4 id="subproblem-determine-if-there-is-a-header">Subproblem: Determine if there is a header</h4>
+<p>An attempt to load the CSV file into an editor simply causes it to hang because it’s so large. What else can we do?</p>
+<p>Some quick googling shows that the Unix <code>head</code> command can show you just the first line of a file.</p>
+<p><code>head -1 file.csv</code> produces:</p>
+<pre><code>7|SuperMart|123 SW Manfredjinsinjin St|Ste 12|Portland|OR|97204|United States|$12,211,682.20|[remaining fields omitted for brevity]</code></pre>
+<p>Answers:</p>
+<ul>
+<li>This first row is clearly data, and not a header. There is no header.</li>
+<li>There are dollar signs and commas in the <code>total sales</code> field.</li>
+</ul>
+<p>Surprises:</p>
+<ul>
+<li>The fields are separated by pipes <code>|</code> and not commas.</li>
+</ul>
+<p>New question:</p>
+<ul>
+<li>What’s the <code>7</code> out front? Clearly the <code>name</code> is the second field, not the first like the data dictionary, above, says. You ask the client.
+<ul>
+<li><em>[Client says “ignore it”.]</em></li>
+</ul></li>
+</ul>
+<h4 id="subproblem-are-any-of-the-important-fields-blank-or-invalid">Subproblem: Are Any of the Important Fields Blank or Invalid?</h4>
+<p>We could write a program that looks for unparseable numbers in <code>total sales</code>, or missing numbers or <code>name</code>s.</p>
+<p>But we’re going to be writing a program to process the file anyway, and we might as well check then.</p>
+<h4 id="subproblem-how-many-records-in-the-result-set">Subproblem: How many records in the result set?</h4>
+<p>The source data is 1.8 TB and 120,000 records, but we know we’re only keeping a few of the fields and our result set will be a lot smaller.</p>
+<p>Even if we have to output all 120,000 records, that doesn’t seem like such a hardship.</p>
+<p>We’ll just be content not caring about the answer to this one.</p>
+<h4 id="rewrite-the-problem-statement-in-your-own-terms">Rewrite the problem statement in your own terms</h4>
+<p>Let’s try this:</p>
+<blockquote>
+<p>Write a program that parses a giant CSV file and extracts records for which the <code>total sales</code> field is more than <code>10000000</code>. Save the <code>name</code>, <code>zip</code>, and <code>total sales</code>. In the JSON, <code>total_sales</code> should have an underscore. It doesn’t matter if the JSON is human-readable or not.</p>
+</blockquote>
+<p>Much clearer. Not 100% complete, but we’ll do that next.</p>
+<h3 id="top-down-design">Top Down Design</h3>
+<p>Write a CSV to JSON converter:</p>
+<ul>
+<li>CSV reader
+<ul>
+<li>Open the file</li>
+<li>Read all the lines</li>
+<li>Close file</li>
+</ul></li>
+<li>JSON writer
+<ul>
+<li>Open the file</li>
+<li>Write all the records</li>
+<li>Close the file</li>
+</ul></li>
+</ul>
+<p>But here we have trouble brewing. We know we can’t read the entire file at once, so we have to nest some of this. Take two:</p>
+<ul>
+<li>CSV reader/JSON writer
+<ul>
+<li>Open the CSV file</li>
+<li>Open the JSON file</li>
+<li>Process lines</li>
+<li>Close the JSON file</li>
+<li>Close the CSV file</li>
+</ul></li>
+</ul>
+<p>Better… Drill down.</p>
+<ul>
+<li>CSV reader/JSON writer
+<ul>
+<li>Open the CSV file</li>
+<li>Open the JSON file</li>
+<li>Process lines
+<ul>
+<li><strong>Read a line from the CSV</strong></li>
+<li><strong>Decide if we keep the line</strong></li>
+<li><strong>Write a record to the JSON file</strong></li>
+</ul></li>
+<li>Close the JSON file</li>
+<li>Close the CSV file</li>
+</ul></li>
+</ul>
+<p>More:</p>
+<ul>
+<li>CSV reader/JSON writer
+<ul>
+<li>Open the CSV file</li>
+<li>Open the JSON file</li>
+<li>Process lines
+<ul>
+<li>Read a line from the CSV
+<ul>
+<li><strong>Keep the <code>name</code>, <code>zip</code>, and <code>total sales</code> fields</strong></li>
+</ul></li>
+<li>Decide if we keep the record
+<ul>
+<li><strong>Parse the <code>total sales</code> field</strong></li>
+<li><strong>If greater than 10,000,000:</strong>
+<ul>
+<li><strong>Write a record to the JSON file</strong></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Close the JSON file</li>
+<li>Close the CSV file</li>
+</ul>
+<p>At this point, we’re practically writing pseudocode. Translate it to whatever language you want.</p>
+<p>Depending on the language, we might have a lot of this stuff written for us already. Googling things like <code>how do I read a CSV file in Python</code> might give some good ideas.</p>
+<p>Notice how much time we spent in the researching-the-problem phase versus the programming design phase. It’s difficult to <em>overplan</em> for a project.</p></li>
+</ul>
+</body>
+</html>

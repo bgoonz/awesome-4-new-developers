@@ -1,0 +1,12 @@
+https://www.suse.com/products/susestudio/,suseapplication,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://www.qaforums.com,qaforums,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: URLError(gaierror(8, 'nodename nor servname provided, or not known')) | reason: [Errno 8] nodename nor servname provided, or not known
+http://tfs.visualstudio.com,teamfoundationservice,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: <HTTPError 504: 'Gateway Time-out'> | reason: Gateway Time-out
+http://hudson-ci.org,hudson,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: <HTTPError 500: 'Internal Server Error'> | reason: Internal Server Error
+http://dbdeploy.com,dbdeploy,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: <HTTPError 504: 'Gateway Time-out'> | reason: Gateway Time-out
+https://code.google.com/p/gerrit/,gerrit,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: <HTTPError 500: 'Internal Server Error'> | reason: Internal Server Error
+http://zutubi.com,pulse,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: <HTTPError 504: 'Gateway Time-out'> | reason: Gateway Time-out
+http://www.installshield.com,installshield,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: timeout('timed out') | reason: 
+http://closeheat.com,closeheat,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: <HTTPError 308: 'Unknown'> | reason: Unknown
+http://wiki.gridengine.info/wiki/index.php/Main_Page,GridWiki,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://wiki.jenkins-ci.org/display/JENKINS/Deploy%20Plugin,Jenkinsdeployplugin,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: timeout('The read operation timed out') | reason: 
+http://www.codebrag.com/,Codebrag,https://github.com/cicdops/awesome-ciandcd#readme,Continuous Integration and Continuous Delivery error: <HTTPError 504: 'Gateway Time-out'> | reason: Gateway Time-out

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-visual-regression-testing-awesome">
+      Awesome Visual Regression Testing
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>Curated list of awesome visual regression testing resources.</p>
+    </blockquote>
+    <p>
+      Regression testing is a type of software testing which verifies that
+      software which was previously developed and tested still performs the same
+      way after it was changed or interfaced with other software. The purpose of
+      regression testing is to ensure that changes to the software have not
+      introduced new faults.
+    </p>
+    <h2 id="foreword">Foreword</h2>
+    <p>
+      This is intended to be an <em>incomplete</em> list of resources about
+      visual regression testing. It is not tailored to a specific area or role
+      (Developer/QA/UX-Designer). Note that this is for all areas of regression
+      software testing <em>after</em> the code in question is written. For a
+      awesome list on general software testing see e.g. <a
+        href="https://github.com/TheJambo/awesome-testing"
+        >awesome-testing</a
+      >.
+    </p>
+    <p>
+      Finally, I’m sure everyone who reads this list has one thing they want to
+      add. Please read the
+      <a href=".github/CONTRIBUTING.md">How to Contribute</a> page and
+      <strong>Feel free to add to the list!!</strong>. If you think this is
+      helpful <strong>Please give a Star ★</strong>.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#general-information">General information</a></li>
+      <li><a href="#browser-automation">Browser automation</a></li>
+      <li><a href="#tools-and-frameworks">Tools and frameworks</a></li>
+      <li><a href="#online-services">Online services</a></li>
+      <li><a href="#blog-posts">Blog posts</a></li>
+      <li>
+        <a href="#slideshows-talks-and-videos">Slideshows, talks and videos</a>
+      </li>
+      <li><a href="#deprecated">Deprecated</a></li>
+      <li>
+        <a href="#Miscellaneous">Miscellaneous</a>
+        <ul>
+          <li><a href="#contributing">Contributing</a></li>
+          <li><a href="#code-of-conduct">Code of Conduct</a></li>
+          <li><a href="#license">License</a></li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="general-information">General information</h2>
+    <ul>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Regression_testing"
+          >Wikipedia: Regression testing</a
+        >
+      </li>
+      <li>
+        <a href="https://gist.github.com/cvrebert/adf91e429906a4d746cd"
+          >Survey of screenshot-based CSS testing tools</a
+        >
+      </li>
+      <li>
+        <a href="https://visualregressiontesting.com/"
+          >visualregressiontesting.com</a
+        >
+        - Basic collection of links.
+      </li>
+    </ul>
+    <h2 id="browser-automation">Browser automation</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/SeleniumHQ/selenium">Selenium</a> - Browser
+        automation framework and ecosystem.
+      </li>
+      <li>
+        <a href="https://github.com/laurentj/slimerjs">SlimerJS</a> - Scriptable
+        browser like PhantomJS, based on Firefox.
+      </li>
+      <li>
+        <a href="https://github.com/sdesalas/trifleJS">trifleJS</a> - Headless
+        automation for Internet Explorer.
+      </li>
+      <li>
+        <a href="https://github.com/casperjs/casperjs">CasperJS</a> - Navigation
+        scripting and testing utility for PhantomJS and SlimerJS.
+      </li>
+      <li>
+        <a href="https://github.com/webdriverio/webdriverio/">Webdriver.io</a> -
+        Node.js bindings implementation for the W3C WebDriver protocol.
+      </li>
+      <li>
+        <a href="https://github.com/joelgriffith/navalia">Navalia</a> - Browser
+        Automation based on headless Chrome and GraphQL.
+      </li>
+      <li>
+        <a href="https://github.com/graphcool/chromeless">Chromeless</a> -
+        Chrome automation made simple. Runs locally or headless on AWS Lambda.
+      </li>
+      <li>
+        <a href="https://www.cypress.io/">Cypress.io</a> - An automation
+        framework that runs in-browser.
+      </li>
+    </ul>
+    <h2 id="tools-and-frameworks">Tools and frameworks</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/eWert-Online/osnap">OSnap</a> - The speedy
+        and easy to use Snapshot Testing tool for your project (1200 snapshots
+        will run in under 3 minutes).
+      </li>
+      <li>
+        <a href="https://basset.io">basset</a> - Open source platform for
+        generating and reviewing visual differences. Supports multiple browsers,
+        integrations for github and slack.
+      </li>
+      <li>
+        <a href="https://github.com/newsuk/ayespy">AyeSpy</a> - 44 image
+        comparisons in 90 seconds.
+      </li>
+      <li>
+        <a href="https://github.com/BBC-News/wraith">Wraith</a> - Easy to use
+        ruby tool with docker support.
+      </li>
+      <li>
+        <a href="https://github.com/garris/BackstopJS">BackstopJS</a> -
+        Config-driven automated screenshot test framework.
+      </li>
+      <li>
+        <a href="https://github.com/galenframework/galen">Galen</a> - Java
+        framework based on
+        <a href="https://github.com/SeleniumHQ/selenium">Selenium</a>.
+      </li>
+      <li>
+        <a href="https://github.com/wKich/creevey">Creevey</a> - Cross-browser
+        visual testing with magic. Feature-rich tool with UI Runner, Tests Hot
+        Reloading, Docker and Storybook integration.
+      </li>
+      <li>
+        <a href="https://github.com/cburgmer/csscritic">CSSCritic</a> -
+        Lightweight CSS regression testing.
+      </li>
+      <li>
+        <a href="https://github.com/wearefriday/spectre">Spectre</a> - Provides
+        image comparison capabilities and an admin interface for managing
+        screenshots.
+      </li>
+      <li>
+        <a href="https://github.com/shoov/shoov">Shoov</a> - UI regression and
+        functional testing focused on Drupal 7 sites.
+      </li>
+      <li>
+        <a href="https://www.drupal.org/project/qd_screenshottests"
+          >qd_screenshottests</a
+        >
+        - CasperJS-based UI regression and functional testing focused on Drupal
+        8 sites.
+      </li>
+      <li>
+        <a href="https://github.com/kdzwinel/Look-alike">Look-alike</a> - Chrome
+        Extension for taking and comparing screenshots.
+      </li>
+      <li>
+        <a href="https://github.com/thingsinjars/Hardy">Hardy</a> -
+        Selenium-driven, cucumber-powered CSS testing.
+      </li>
+      <li>
+        <a href="https://github.com/DevExpress/testcafe">TestCafe</a> -
+        Automated browser testing for the modern web development stack.
+      </li>
+      <li>
+        <a href="https://github.com/python-needle/needle">Needle</a> - Needle is
+        a tool for testing visuals with Selenium and nose (Python).
+      </li>
+      <li>
+        <a href="https://github.com/gabrielrotbart/gatling">gatling</a> -
+        Integrated visual RSpec matcher which makes real visual testing easy
+        (Ruby).
+      </li>
+      <li>
+        <a href="https://github.com/stefanjudis/grunt-photobox"
+          >grunt-photobox</a
+        >
+        - Plugin to prevent your project of broken layout via screenshot photo
+        sessions of your site.
+      </li>
+      <li>
+        <a href="https://github.com/nathanmarks/vrtest">vrtest</a> - JavaScript
+        library for running visual regression tests on your components cross
+        browser via selenium.
+      </li>
+      <li>
+        <a href="https://github.com/Galooshi/happo">Happo</a> - Visual diffing
+        in CI for user interfaces.
+      </li>
+      <li>
+        <a href="https://github.com/bokuweb/reg-cli">reg-cli</a> - Visual
+        regression test tool which output easy-to-read single file html report.
+      </li>
+      <li>
+        <a href="https://github.com/segmentio/nightmare">Nightmare</a> -
+        High-level browser automation library based on Electron.
+      </li>
+      <li>
+        <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a> -
+        Headless Google Chrome Node API.
+      </li>
+      <li>
+        <a href="https://github.com/microsoft/playwright">Playwright</a> - Node
+        library to automate Chromium, Firefox and WebKit with a single API.
+      </li>
+      <li>
+        <a href="https://github.com/reg-viz/reg-suit">reg-suit</a> - Visual
+        regression testing suite which compares images, stores snapshots, and
+        notifies the difference to your GitHub repo.
+      </li>
+      <li>
+        <a href="https://github.com/xolvio/chimp">Chimp</a> - Develop acceptance
+        tests &amp; end-to-end tests with realtime feedback.
+      </li>
+      <li>
+        <a href="https://github.com/NimaSoroush/differencify">Differencify</a> -
+        A library for visual regression testing using
+        <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a>.
+      </li>
+      <li>
+        <a href="https://github.com/Huddle/Resemble.js">ResembleJS</a> - Analyse
+        and compare images with Javascript and HTML5.
+      </li>
+      <li>
+        <a href="https://github.com/HuddleEng/Muppeteer">Muppeteer</a> - Visual
+        regression testing framework for Chrome using
+        <a href="https://mochajs.org/">Mocha</a> and
+        <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a>.
+      </li>
+      <li>
+        <a href="https://github.com/Cropster/ember-visual-test"
+          >ember-visual-test</a
+        >
+        - Simple visual regression testing for
+        <a href="https://emberjs.com/">Ember</a>.
+      </li>
+      <li>
+        <a href="https://github.com/Cognifide/aet">AET</a> - Scalable testing
+        tool providing visual regression testing, accessibility and performance
+        validation, markup analysis and more.
+      </li>
+      <li>
+        <a href="https://github.com/angrykoala/wendigo">Wendigo</a> -
+        Test-oriented browser automation library based on Puppeteer.
+      </li>
+      <li>
+        <a href="https://github.com/oblador/loki">Loki</a> - Visual regression
+        testing for Storybook using Chrome in docker et al.
+      </li>
+      <li>
+        <a href="http://zombie.js.org/">Zombie.js</a> - Insanely fast, headless
+        full-stack testing using Node.js.
+      </li>
+      <li>
+        <a href="https://github.com/codeception/codeceptjs/">CodeceptJS</a> -
+        Modern Era Acceptance Testing Framework for NodeJS.
+      </li>
+      <li>
+        <a href="https://github.com/bitovi/funcunit">FuncUnit</a> - A functional
+        test suite based on jQuery
+      </li>
+      <li>
+        <a href="https://github.com/nightwatchjs/nightwatch">Nightwatch</a> -
+        Automated testing and continuous integration framework based on Node.js
+        and using the Webdriver protocol.
+      </li>
+      <li>
+        <a href="https://github.com/angular/protractor">Protractor</a> - E2E
+        test framework for Angular apps.
+      </li>
+      <li>
+        <a href="https://github.com/Hapag-Lloyd/jest-puppeteer-react"
+          >jest-puppeteer-react</a
+        >
+        - Visual regression testing with Jest and puppeteer for React components
+      </li>
+      <li>
+        <a href="https://github.com/apiel/test-crawler">test-crawler</a> -
+        Visual regression testing, by crawling a website and providing snapshot
+        comparison reports.
+      </li>
+      <li>
+        <a href="https://github.com/ennjin/wdio-visual-regression"
+          >wdio-visual-regression</a
+        >
+        - Visual regression tool for webdriver.io
+      </li>
+      <li>
+        <a href="https://github.com/selenide/selenide">Selenide</a> - Framework
+        powered by Selenium WebDriver for writing easy-to-read and
+        easy-to-maintain automated tests in Java.
+      </li>
+      <li>
+        <a href="http://karma-runner.github.io/latest/index.html">Karma</a> - A
+        test runner by the AngularJS team, that fits all our needs.
+      </li>
+    </ul>
+    <h2 id="online-services">Online services</h2>
+    <ul>
+      <li>
+        <a href="https://www.browserstack.com">BrowserStack</a> - Free for Open
+        Source. Supports
+        <a
+          href="https://github.com/SeleniumHQ/selenium/tree/master/javascript/node/selenium-webdriver"
+          >Selenium Webdriver</a
+        >.
+      </li>
+      <li>
+        <a href="https://www.lambdatest.com/">LambdaTest</a> - Perform Automated
+        and Live Interactive Cross Browser Testing on 2000+ Real Browsers and
+        Operating Systems Online.
+      </li>
+      <li>
+        <a href="https://screener.io">screener.io</a> - For React, looks open
+        source.
+      </li>
+      <li>
+        <a href="https://applitools.com">applitools</a> - Cloud base visual
+        tests.
+      </li>
+      <li>
+        <a href="https://percy.io">percy.io</a> - Continuous visual reviews for
+        web apps.
+      </li>
+      <li>
+        <a href="http://screenster.io">screenster.io</a> - Cloud based
+        automation testing platform for web and mobile UI.
+      </li>
+      <li>
+        <a href="https://www.browserling.com">browserling</a> - LIVE interactive
+        cross-browser testing.
+      </li>
+      <li>
+        <a href="http://browsershots.org">Browser Shots</a> - Screenshots only.
+      </li>
+      <li>
+        <a href="https://ghostinspector.com">Ghost Inspector</a> - See
+        <a href="https://vimeo.com/ghostinspector/intro">introduction video</a>.
+      </li>
+      <li>
+        <a href="https://crossbrowsertesting.com">CrossBrowserTesting</a> -
+        Manual &amp; exploratory testing on 1500+ real browsers and mobile
+        devices.
+      </li>
+      <li>
+        <a href="https://www.argos-ci.com">Argos-CI</a> - Automate visual
+        regression testing.
+      </li>
+      <li>
+        <a href="https://diffy.website">Diffy</a> - Cloud based visual
+        regression tool. Uses puppeteer and proprietary comparison algorithm
+        (detect layout shifts). Great scalability with AWS Lambda.
+      </li>
+      <li>
+        <a href="https://www.chromatic.com/">Chromatic</a> - Visual testing and
+        UI review for component libraries. Cloud-based.
+        <a href="https://youtu.be/6KDLJBcutQE">Video</a>
+      </li>
+      <li>
+        <a href="https://www.viswiz.io">VisWiz.io</a> - Flexible visual
+        regression testing service.
+      </li>
+      <li>
+        <a href="https://happo.io/">Happo</a> - Cloud-based screenshot testing
+        service with support for multiple browsers.
+      </li>
+      <li>
+        <a href="https://visual-knight.io/">Visual Knight</a> - Cloud-based
+        visual testing platform with realtime results for testing tools.
+      </li>
+      <li>
+        <a href="https://axcept.io">Axcept</a> - Testing for the whole team. Up
+        to 100 tests in parallel. Endpoint Mocking. Code Coverage.
+      </li>
+      <li>
+        <a href="https://fluxguard.com">Fluxguard</a> - Screenshot pixel and DOM
+        change comparisons and regressions.
+      </li>
+      <li>
+        <a href="https://vidiff.com">Vidiff</a> - Cloud-based visual regression
+        testing across stages.
+      </li>
+      <li>
+        <a href="https://reflect.run">Reflect</a> - Visual regression testing
+        and test automation tool.
+      </li>
+      <li>
+        <a
+          href="https://github.com/Visual-Regression-Tracker/Visual-Regression-Tracker"
+          >Visual Regression Tracker</a
+        >
+        - Open Source selfhosted service for visual regression testing
+      </li>
+      <li>
+        <a href="https://github.com/Mikuu/Micoo">Micoo</a> - Open source service
+        for all UI application visual regression solution
+      </li>
+    </ul>
+    <h2 id="blog-posts">Blog posts</h2>
+    <ul>
+      <li>
+        <a
+          href="http://www.creativebloq.com/features/the-5-best-visual-regression-testing-tools"
+          >Kevin Lamping: The 5 best visual regression testing tools</a
+        >
+        - Compares: Wraith, PhantomCSS, Gemini, WebdriverCSS and Spectre.
+      </li>
+      <li>
+        <a
+          href="https://davidwalsh.name/visual-regression-testing-angular-applications"
+          >Garris Shipon: Visual Regression Testing For Angular Applications</a
+        >
+        - Tutorial using BackstopJS.
+      </li>
+      <li>
+        <a
+          href="https://www.metaltoad.com/blog/visual-regression-testing-backstopjs"
+          >Angela Riggs: Visual Regression Testing with BackstopJS</a
+        >
+        - Tutorial using BackstopJS.
+      </li>
+      <li>
+        <a href="https://css-tricks.com/automating-css-regression-testing/"
+          >Garris Shipon: Automating CSS Regression Testing</a
+        >
+        - Tutorial using BackstopJS.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@philgourley/making-visual-regression-useful-acfae27e5031"
+          >Phillip Gourley: Making visual regression useful</a
+        >
+        - Why you should use BackstopJS.
+      </li>
+      <li>
+        <a
+          href="https://www.sitepoint.com/visual-regression-testing-with-phantomcss"
+          >Pavels Jelisejevs: Visual Regression Testing with PhantomCSS</a
+        >
+        - Introduction to PhantomCSS.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@kensoh/chromeless-chrominator-chromy-navalia-lambdium-ghostjs-autogcd-ef34bcd26907"
+          >Chromeless, Chrominator, Chromy, Navalia, Lambdium, GhostJS,
+          AutoGCD</a
+        >
+        - Headless Chrome is shaking up traditional approaches to test
+        automation.
+      </li>
+      <li>
+        <a
+          href="https://github.com/novemberfiveco/visual-regression-testing-jest-chromeless"
+          >Visual regression testing using Jest, Chromeless and AWS Lambda</a
+        >
+        - Tutorial using Chromeless and jest-image-snapshot.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@nima.soroush.h/make-visual-regression-testing-easier-4a3dc7073737"
+          >Make visual regression testing easier</a
+        >
+        - Introduction to
+        <a href="https://github.com/NimaSoroush/differencify">Differencify</a>
+        and how to use it.
+      </li>
+      <li>
+        <a href="https://www.viswiz.io/help/tutorials/puppeteer"
+          >Visual Regression Testing with Puppeteer &amp; Jest</a
+        >
+        - Tutorial to setup visual testing with Puppeteer, Jest and VisWiz.io.
+      </li>
+      <li>
+        <a
+          href="https://techblog.commercetools.com/keeping-a-react-design-system-consistent-f055160d5166"
+          >Keeping a React Design System consistent: using visual regression
+          testing to save time and headaches</a
+        >
+        - Using percy, and jest puppeteer to visually test a React component
+        library.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@dalenguyen/visual-regression-test-with-webdriverio-webdrivercss-d7675a1812b2"
+          >Visual Regression Test with WebdriverIO &amp; WebdriverCSS</a
+        >
+        - Tutorial using WebdriverIO and WebdriverCSS with Spec Reporter
+      </li>
+      <li>
+        <a
+          href="https://jakobzanker.de/blog/automated-screenshot-comparison-test-with-headless-chrome-in-bitbucket-pipeline/"
+          >Automated screenshot comparison tests with headless Chrome, Puppeteer
+          and Pixelmatch, in Bitbucket pipeline</a
+        >
+      </li>
+      <li>
+        <a href="https://meowni.ca/posts/2017-puppeteer-tests/"
+          >Automatic visual diffing with Puppeteer</a
+        >
+      </li>
+      <li>
+        <a href="https://theheadless.dev">theheadless.dev</a> - Blog with
+        practical guides and runnable examples on Playwright and Puppeteer.
+      </li>
+      <li>
+        <a
+          href="https://jameskiefer.com/posts/visual-regression-testing-for-hugo-with-github-ci-and-backstopjs/"
+          >Visual regression testing for Hugo with Github-CI and BackstopJS</a
+        >
+        - How to automate regression testing for Hugo with BackstopJS
+      </li>
+      <li>
+        <a
+          href="https://mikuu.medium.com/ui-visual-regression-testing-with-micoo-12c7a4a036b9"
+          >UI Visual Regression Testing with Micoo</a
+        >
+        - Introduction about how to do visual regression testing with Micoo
+        service
+      </li>
+    </ul>
+    <h2 id="slideshows-talks-and-videos">Slideshows, talks and videos</h2>
+    <ul>
+      <li>
+        <a href="https://youtu.be/gE_19L0l2q0"
+          >CSS Regression Testing with Wraith</a
+        >
+        - Screencast: Basic introduction to wraith, a screenshot comparison
+        tool.
+      </li>
+      <li>
+        <a href="https://youtu.be/CBBiJ6YlXLc"
+          >Visual Regression Testing with Shoov</a
+        >
+        - How to setup shoov and get your first test written.
+      </li>
+      <li>
+        <a href="https://youtu.be/Vp8vnXMjIfw"
+          >Visual Regression Testing with PhantomCSS</a
+        >
+        - Talk by Jon Bellah on how to use PhantomCSS during wordpress
+        development.
+      </li>
+      <li>
+        <a href="https://youtu.be/l8lGj8Zh0k4"
+          >Visual Regression Testing: Sanity Checks With BackstopJS</a
+        >
+        - Screencast with code demo and best practices.
+      </li>
+      <li>
+        <a href="https://youtu.be/Zy8y_dGzZXI">Screenster Tutorial</a> -
+        Tutorial on how to create visual automated tests with Screenster.
+      </li>
+      <li>
+        <a href="https://youtu.be/vTyoQuC0To8"
+          >Look-alike - visual regression testing tool</a
+        >
+        - Demo what the Look-alike Chrome extension is, how it works and how and
+        why it was build.
+      </li>
+      <li>
+        <a href="https://youtu.be/AqQ2bNPtF60"
+          >Screencast on CSS critic - a lightweight testing framework for CSS</a
+        >
+        - How to write your first CSS test with CSS critic, make it pass, break
+        it, and make it pass again.
+      </li>
+      <li>
+        <a
+          href="https://speakerdeck.com/nikhilverma/visual-regression-testing-from-a-tool-to-a-process"
+          >Visual Regression Testing - from a tool to a process</a
+        >
+        by Nikhil Verma - How the Mobile Web team in Badoo converted and
+        integrated PhantomCSS into their workflow and connected it to their CI
+        process.
+      </li>
+    </ul>
+    <h2 id="deprecated">Deprecated</h2>
+    <p>
+      The following projects are no longer maintained actively but are still
+      worth mentioning because of their user base.
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/ariya/phantomjs">PhantomJS</a> - Scriptable
+        Headless WebKit. No longer maintained since 2 June 2018.
+      </li>
+      <li>
+        <a href="https://github.com/Huddle/PhantomCSS">PhantomCSS</a> -
+        Visual/CSS regression testing with PhantomJS or SlimerJS. No longer
+        maintained since 22 Dec 2017.
+      </li>
+      <li>
+        <a href="https://github.com/Huddle/PhantomFlow">PhantomFlow</a> -
+        Experimental approach to UI testing, based on Decision Trees.
+      </li>
+      <li>
+        <a href="https://github.com/dalekjs/dalek">DalekJS</a> - Automated cross
+        browser testing with JavaScript. No longer maintained since 4 Jun 2017.
+      </li>
+      <li>
+        <a href="https://github.com/bslatkin/dpxdt">dpxdt</a> - End-to-end
+        testing with Python.
+      </li>
+      <li>
+        <a href="https://github.com/xebia/VisualReview">Visual Review</a> - A
+        human-friendly tool for testing and reviewing visual regressions.
+      </li>
+      <li>
+        <a href="https://github.com/facebookarchive/huxley">Huxley</a> - Python
+        framework based on
+        <a
+          href="https://github.com/SeleniumHQ/selenium/tree/master/javascript/node/selenium-webdriver"
+          >Selenium Webdriver</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/webdriverio/webdrivercss">WebdriverCSS</a> -
+        WebdriverCSS sits on top of
+        <a href="https://github.com/webdriverio/webdriverio/">Webdriver.io</a>
+        and hooks into
+        <a href="https://github.com/SeleniumHQ/selenium">Selenium</a>.
+      </li>
+      <li>
+        <a href="https://github.com/gemini-testing/gemini">Gemini</a> - Feature
+        rich framework with support for
+        <a href="https://github.com/SeleniumHQ/selenium">Selenium</a> and
+        <a href="https://github.com/casperjs/casperjs">CasperJS</a>. Gemini is
+        deprecated, use hermione instead.
+      </li>
+      <li>
+        <a href="https://github.com/mmacartney10/ocularjs">OcularJS</a> - uses
+        <a href="https://github.com/ariya/phantomjs">PhantomJS</a>.
+      </li>
+    </ul>
+    <h2 id="miscellaneous">Miscellaneous</h2>
+    <h3 id="contributing">Contributing</h3>
+    <p>
+      See the <a href=".github/CONTRIBUTING.md">Contribution Guide</a> for
+      details on how to contribute.
+    </p>
+    <h3 id="code-of-conduct">Code of Conduct</h3>
+    <p>
+      See the <a href=".github/CODE-OF-CONDUCT.md">Code of Conduct</a> for
+      details. Basically it comes down to: &gt; In the interest of fostering an
+      open and welcoming environment, we as contributors and maintainers pledge
+      to making participation in our project and our community a harassment-free
+      experience for everyone, regardless of age, body size, disability,
+      ethnicity, gender identity and expression, level of experience,
+      nationality, personal appearance, race, religion, or sexual identity and
+      orientation.
+    </p>
+    <h3 id="license">License</h3>
+    <p>
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-sa.svg"
+          alt="CC-BY-SA"
+      /></a>
+    </p>
+    <p>
+      This work is licensed under a
+      <a href="http://creativecommons.org/licenses/by-sa/4.0/"
+        >Creative Commons Attribution-ShareAlike 4.0 International License</a
+      >. License holders are
+      <a
+        href="https://github.com/mojoaxel/awesome-regression-testing/graphs/contributors"
+        >all contributors</a
+      >.
+    </p>
+  </body>
+</html>

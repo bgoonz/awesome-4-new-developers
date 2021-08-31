@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="nginx-resources-awesome">
+      Nginx Resources
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      A collection of resources covering Nginx, Nginx + Lua, OpenResty and
+      Tengine.
+    </p>
+    <p>
+      This list is maintained by
+      <a href="https://www.cambus.net">Frederic Cambus</a>. For updates, follow
+      me on Twitter:
+      <span class="citation" data-cites="fcambus">[@fcambus]</span
+      >(https://twitter.com/fcambus)
+    </p>
+    <h2 id="understanding-nginx">Understanding Nginx</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.nginx.com/wp-content/uploads/2014/11/Infographic_History-of-Nginx_FulI_20141101.png"
+          >History of Nginx</a
+        >
+      </li>
+      <li>
+        <a href="https://www.nginx.com/blog/nginx-1-6-1-7-released/"
+          >Understanding Nginx versioning</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://web.archive.org/web/20180614224054/http://mindend.com/interview-with-the-creator-of-nginx/"
+          >Interview with the creator of Nginx</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://freesoftwaremagazine.com/articles/interview_igor_sysoev_author_apaches_competitor_nginx/"
+          >Interview with Igor Sysoev, author of Apache’s competitor NGINX</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.cambus.net/the-case-for-nginx-in-front-of-application-servers/"
+          >The case for Nginx in front of application servers</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://thoughts.t37.net/nginx-optimization-understanding-sendfile-tcp-nodelay-and-tcp-nopush-c55cdd276765"
+          >Nginx Optimization: understanding sendfile, tcp_nodelay and
+          tcp_nopush</a
+        >
+      </li>
+    </ul>
+    <h2 id="architecture">Architecture</h2>
+    <ul>
+      <li>
+        <a href="https://aosabook.org/en/nginx.html"
+          >The Architecture of Open Source Applications (Volume 2): nginx</a
+        >
+      </li>
+      <li>
+        <a href="http://www.nginxguts.com/category/nginx/"
+          >Nginx Guts - Shedding light on Nginx internals</a
+        >
+      </li>
+      <li>
+        <a href="https://www.nginx-discovery.com/">Nginx discovery journey</a>
+      </li>
+      <li>
+        <a href="https://www.slideshare.net/joshzhu/nginx-internals"
+          >Nginx Internals</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/"
+          >Inside NGINX: How We Designed for Performance &amp; Scale</a
+        >
+      </li>
+      <li>
+        <a href="https://www.nginx.com/blog/thread-pools-boost-performance-9x/"
+          >Thread Pools in NGINX</a
+        >
+      </li>
+    </ul>
+    <h2 id="configuration">Configuration</h2>
+    <ul>
+      <li>
+        <a href="https://nginx.org/en/docs/beginners_guide.html"
+          >Beginner’s Guide</a
+        >
+      </li>
+      <li>
+        <a href="https://nginx.org/en/docs/varindex.html"
+          >Alphabetical index of variables</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/"
+          >Nginx Pitfalls</a
+        >
+      </li>
+      <li>
+        <a href="https://blog.engineyard.com/useful-rewrites-for-nginx"
+          >Useful Rewrites for Nginx</a
+        >
+      </li>
+      <li>
+        <a href="https://blog.martinfjordvald.com/nginx-primer/"
+          >Nginx Configuration Primer</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://blog.martinfjordvald.com/nginx-primer-2-from-apache-to-nginx/"
+          >Nginx Primer 2: From Apache to Nginx</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://blog.martinfjordvald.com/understanding-the-nginx-configuration-inheritance-model/"
+          >Understanding the Nginx Configuration Inheritance Model</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/h5bp/server-configs-nginx"
+          >Nginx HTTP server boilerplate configs</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/nginx-boilerplate/nginx-boilerplate"
+          >Nginx Boilerplate - Configuration template and a set of handy
+          must-have snippets</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://sslmate.com/blog/post/ocsp_stapling_in_apache_and_nginx"
+          >How to Configure OCSP Stapling in Apache and Nginx</a
+        >
+      </li>
+      <li>
+        <a href="https://www.digitalocean.com/community/tools/nginx"
+          >NGINX Config - Online nginx configuration generator</a
+        >
+      </li>
+    </ul>
+    <h2 id="tutorials">Tutorials</h2>
+    <ul>
+      <li>
+        <a href="https://docs.nginx.com/nginx/admin-guide/"
+          >NGINX and NGINX Plus Admin Guide</a
+        >
+      </li>
+      <li>
+        <a href="https://openresty.org/download/agentzh-nginx-tutorials-en.html"
+          >agentzh’s Nginx Tutorials</a
+        >
+        (<a href="https://github.com/openresty/nginx-tutorials">Source</a>)
+      </li>
+      <li>
+        <a
+          href="https://agentzh.org/misc/slides/nginx-conf-scripting/nginx-conf-scripting.html"
+          >Introduction to nginx.conf scripting</a
+        >
+      </li>
+      <li>
+        <a href="https://www.nginx.com/blog/load-balancing-with-nginx-plus/"
+          >Load Balancing with NGINX and NGINX Plus</a
+        >
+        (<a
+          href="https://www.nginx.com/blog/load-balancing-with-nginx-plus-part-2/"
+          >Part 2</a
+        >)
+      </li>
+      <li>
+        <a
+          href="https://blog.martinfjordvald.com/optimizing-nginx-for-high-traffic-loads/"
+          >Optimizing Nginx for High Traffic Loads</a
+        >
+      </li>
+      <li>
+        <a href="https://www.nginx.com/blog/websocket-nginx/"
+          >NGINX as a WebSockets Proxy</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.nginx.com/blog/http-keepalives-and-web-performance/"
+          >HTTP Keepalive Connections and Web Performance</a
+        >
+      </li>
+      <li>
+        <a href="https://enable-cors.org/server_nginx.html">CORS on Nginx</a>
+      </li>
+      <li>
+        <a
+          href="https://www.cambus.net/serving-precompressed-content-with-nginx-and-zopfli/"
+          >Serving precompressed content with Nginx and Zopfli</a
+        >
+      </li>
+      <li>
+        <a href="https://www.cambus.net/nginx-on-freebsd/">Nginx on FreeBSD</a>
+      </li>
+      <li>
+        <a
+          href="https://www.nginx.com/blog/new-debugging-features-probe-nginx-internals/"
+          >Using New Debugging Features to Probe NGINX Internals</a
+        >
+      </li>
+      <li>
+        <a href="https://www.nginx.com/blog/performing-a-b-testing-nginx-plus/"
+          >Performing A/B Testing with NGINX and NGINX Plus</a
+        >
+      </li>
+    </ul>
+    <h2 id="modules-development">Modules development</h2>
+    <ul>
+      <li>
+        <a href="https://nginx.org/en/docs/dev/development_guide.html"
+          >Official Development Guide</a
+        >
+      </li>
+      <li>
+        <a href="https://www.evanmiller.org/nginx-modules-guide.html"
+          >Guide to Nginx Module Development</a
+        >
+      </li>
+      <li>
+        <a href="https://www.evanmiller.org/nginx-modules-guide-advanced.html"
+          >Advanced Topics In Nginx Module Development</a
+        >
+      </li>
+      <li>
+        <a href="https://www.airpair.com/nginx/extending-nginx-tutorial"
+          >Developing Nginx Modules</a
+        >
+      </li>
+    </ul>
+    <h2 id="apis">APIs</h2>
+    <ul>
+      <li>
+        <a href="https://www.telize.com"
+          >Telize - JSON IP and GeoIP REST API (IP Geolocation) built on Nginx
+          and Lua</a
+        >
+      </li>
+      <li><a href="http://gin.io/">GIN - JSON-API framework</a></li>
+      <li>
+        <a
+          href="https://www.monterail.com/blog/2011/outbound-api-rate-limits-the-nginx-way"
+          >Outbound API rate limits: the nginx way</a
+        >
+      </li>
+      <li>
+        <a href="https://vitobotta.com/2014/01/12/nginx-rate-limits/"
+          >Using Nginx to comply with a third-party API’s rate limits</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://rny.io/nginx/postgresql/2013/07/26/simple-api-with-nginx-and-postgresql.html"
+          >Simple API with Nginx and PostgreSQL</a
+        >
+      </li>
+      <li>
+        <a href="https://konghq.com/kong/"
+          >Kong - Management Layer for Microservices and APIs</a
+        >
+      </li>
+    </ul>
+    <h2 id="hacks">Hacks</h2>
+    <ul>
+      <li>
+        <a
+          href="https://web.archive.org/web/20140921162448/http://www.gabrielweinberg.com/blog/2011/07/nginx-json-hacks.html"
+          >Nginx JSON hacks</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://web.archive.org/web/20170712003702/https://docs.apitools.com/blog/2014/07/02/using-environment-variables-in-nginx-conf.html"
+          >Using Environment Variables In Nginx.conf</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.cambus.net/log-rotation-directly-within-nginx-configuration-file/"
+          >Log rotation directly within Nginx configuration file</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://benwilber.github.io/nginx/redis/syslog/pixel-tracking/2013/09/13/realtime-pixel-tracking-with-nginx-syslog-ng-and-redis.html"
+          >Realtime pixel tracking with Nginx, syslog-ng, and Redis</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://benwilber.github.io/nginx/syslog/logging/2015/08/26/dynamic-log-formats-in-nginx.html"
+          >Dynamic log formats in Nginx</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/p0pr0ck5/lua-resty-tarpit"
+          >Capture and delay unwanted requests</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://charlesleifer.com/blog/nginx-a-caching-thumbnailing-reverse-proxying-image-server-/"
+          >Nginx: a caching, thumbnailing, reverse proxying image server?</a
+        >
+      </li>
+    </ul>
+    <h2 id="tips">Tips</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.slideshare.net/sarahnovotny/5-things-you-didnt-know-nginx-could-do"
+          >Things you didn’t know Nginx could do</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://mjanja.ch/2015/03/finding-the-nginx-gzip_comp_level-sweet-spot/"
+          >Finding the nginx gzip_comp_level sweet spot</a
+        >
+      </li>
+    </ul>
+    <h2 id="nginx-lua">Nginx + Lua</h2>
+    <ul>
+      <li>
+        <a href="https://agentzh.org/misc/slides/nginx-lua-and-beyond.pdf"
+          >Nginx, Lua, and beyond</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://blog.cloudflare.com/pushing-nginx-to-its-limit-with-lua/"
+          >Pushing Nginx to its limit with Lua</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://tech.3scale.net/2013/01/09/augment-your-api-without-touching-it"
+          >Augmenting APIs with Nginx and Lua</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://chairnerd.seatgeek.com/oauth-support-for-nginx-with-lua/"
+          >Adding OAuth Support to Nginx via Lua</a
+        >
+      </li>
+      <li>
+        <a href="https://agentzh.org/misc/slides/libdrizzle-lua-nginx.pdf"
+          >Scripting libdrizzle with Lua inside Nginx</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://web.archive.org/web/20141223070856/http://devblog.mixlr.com/2012/09/01/nginx-lua/"
+          >Nginx and Lua</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.stavros.io/posts/writing-an-nginx-authentication-module-in-lua/"
+          >Writing an Nginx authentication module in Lua</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.textrazor.com/blog/2013/03/scaling-textrazor-in-the-cloud-with-nginx-and-lua.html"
+          >Scaling TextRazor in the Cloud with Nginx and Lua</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/pirogoeth/lsso"
+          >LSSO - Lua + Nginx SSO System with an OAuth Backend</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://charlesleifer.com/blog/measuring-nginx-cache-performance-using-lua-and-redis/"
+          >Measuring Nginx Cache Performance using Lua and Redis</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/fabiocicerchia/nginx-lua"
+          >nginx-lua - Nginx 1.19+ with LUA support based on Alpine Linux,
+          Amazon Linux, CentOS, Debian, Fedora and Ubuntu.</a
+        >
+      </li>
+    </ul>
+    <h2 id="openresty">OpenResty</h2>
+    <ul>
+      <li>
+        <a href="https://openresty.org/en/"
+          >OpenResty - Fast web app server by extending Nginx</a
+        >
+      </li>
+      <li>
+        <a href="https://leafo.net/lapis/"
+          >Lapis - A web framework for Lua or MoonScript powered by OpenResty</a
+        >
+      </li>
+      <li>
+        <a href="https://leafo.net/posts/creating_an_image_server.html"
+          >Nginx image processing server with OpenResty and Lua</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/cagerton/dropthat/"
+          >Building an OpenResty events server</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://sysadvent.blogspot.com/2014/12/day-22-largely-unappreciated.html"
+          >SysAdvent 2014 - OpenResty, Nginx and Lua</a
+        >
+        (<a href="https://github.com/lusis/sysadvent-2014">Source</a>)
+      </li>
+      <li>
+        <a
+          href="https://blog.dutchcoders.io/openresty-with-dynamic-generated-certificates/"
+          >OpenResty (Nginx) with dynamically generated certificates</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://ide.sourcelair.com/blog/articles/75/ceryx-dynamic-nginx"
+          >Ceryx - A dynamic reverse proxy</a
+        >
+      </li>
+      <li>
+        <a href="https://openmymind.net/An-Introduction-To-OpenResty-Nginx-Lua/"
+          >An Introduction To OpenResty</a
+        >
+      </li>
+      <li>
+        <a href="https://openresty.gitbooks.io/programming-openresty/content/"
+          >Programming OpenResty (written by the OpenResty creator)</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/alexazhou/VeryNginx"
+          >VeryNginx - Nginx distribution which provides WAF, Control Panel, and
+          Dashboards</a
+        >
+      </li>
+    </ul>
+    <h2 id="tengine">Tengine</h2>
+    <ul>
+      <li><a href="https://tengine.taobao.org">Tengine Web Server</a></li>
+      <li>
+        <a href="https://github.com/openresty/openresty/issues/54"
+          >Difference between OpenResty and Tengine</a
+        >
+      </li>
+    </ul>
+    <h2 id="talks">Talks</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLGz_X9w9raXflDvBv642YFqT0UTqQGFsH"
+          >NGINX Conference 2019 Videos</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLGz_X9w9raXe_Vc708VKvr5KJ4gnf1WxS"
+          >NGINX Conference 2018 Videos</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLGz_X9w9raXeT-z_rcZ9yF0kV5SENZ-yt"
+          >NGINX Conference 2017 Videos</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLGz_X9w9raXcOsB_dT26iu0BvbSxWYG1g"
+          >NGINX Conference 2016 Videos</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLGz_X9w9raXdED9BR6GQ61A6d3fBzjpbn"
+          >NGINX Conference 2015 Videos</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLGz_X9w9raXewvc6tjIGGFZ6DBKHEld3k"
+          >NGINX Conference 2014 Videos</a
+        >
+      </li>
+      <li><a href="https://www.nginx.com/nginxconf/">NGINX Conference</a></li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLGz_X9w9raXfTnRnI6Xl0LMhAKoTVVZv8"
+          >NGINX User Summit 2014 - Lightning talks</a
+        >
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img src="https://licensebuttons.net/p/zero/1.0/88x31.png" alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://www.cambus.net">Frederic Cambus</a> has waived all
+      copyright and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

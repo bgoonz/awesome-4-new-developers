@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>readme</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <a href="https://libgdx.com/"
+        ><img
+          src="logo.png"
+          title="Awesome libGDX Logo"
+          alt="Awesome libGDX Logo"
+      /></a>
+    </p>
+    <h1 id="awesome-libgdx-awesome-prs-welcome">
+      Awesome libGDX
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge-flat2.svg" alt="Awesome"
+      /></a>
+      <a href="https://github.com/rafaskb/awesome-libgdx#contributing"
+        ><img
+          src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square"
+          alt="PRs welcome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        <a href="https://libgdx.com/"
+          ><img
+            src="https://libgdx.com/assets/images/logo.png"
+            alt="libGDX Logo"
+            align="right"
+            style="margin-right: 25px"
+            height="40"
+        /></a>
+      </p>
+      <p>
+        <a href="https://libgdx.com/">libGDX</a> is a relatively low level,
+        free, open source cross platform game development framework written in
+        Java.
+      </p>
+      <p>
+        This list is a curated collection of awesome resources, tools,
+        tutorials, and projects using the
+        <a href="https://libgdx.com/">libGDX</a> game framework to help
+        developers make <em>awesome</em> games, conforming to the
+        <a href="https://github.com/sindresorhus/awesome/blob/master/awesome.md"
+          >Awesome Manifesto</a
+        >.
+      </p>
+      <p>
+        Contributions <em>very welcome</em> but first see
+        <a href="#contributing">Contributing</a>.
+      </p>
+    </blockquote>
+    <hr />
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#resources">Resources</a>
+        <ul>
+          <li><a href="#algorithms-and-ai">Artificial Intelligence</a></li>
+          <li><a href="#controllers">Controllers</a></li>
+          <li><a href="#editors">Editors</a></li>
+          <li>
+            <a href="#entity-component-system-ecs"
+              >Entity Component System (ECS)</a
+            >
+          </li>
+          <li><a href="#physics">Physics</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#setup-and-deployment">Setup and Deployment</a></li>
+          <li><a href="#user-interface">User Interface</a></li>
+          <li><a href="#visual-effects">Visual Effects</a></li>
+          <li><a href="#others">Others</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#tutorials">Tutorials</a>
+        <ul>
+          <li><a href="#getting-started">Getting Started</a></li>
+          <li><a href="#advanced">Advanced</a></li>
+        </ul>
+      </li>
+      <li><a href="#assets">Assets</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#other-lists">Other Lists</a></li>
+    </ul>
+    <hr />
+    <h2 id="resources">Resources</h2>
+    <p>
+      <em
+        >Resources that can be used in libGDX code to boost the framework’s
+        capabilities.</em
+      >
+    </p>
+    <h3 id="algorithms-and-ai">Algorithms and AI</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/libgdx/gdx-ai">gdx-ai</a> - Artificial
+        Intelligence framework featuring Steering Behaviors, Formation Motion,
+        Pathfinding, Behavior Trees and Finite State Machines.
+      </li>
+      <li>
+        <a href="https://github.com/earlygrey/simple-graphs">Simple Graphs</a> -
+        A java library for graph data structures and algorithms (including fast
+        pathfinding).
+      </li>
+    </ul>
+    <h3 id="controllers">Controllers</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/libgdx/libgdx/wiki/Controllers"
+          >Controllers</a
+        >
+        - Adds support to gamepads and joysticks.
+      </li>
+      <li>
+        <a href="https://github.com/MrStahlfelge/gdx-controllerutils"
+          >gdx-controllerutils</a
+        >
+        - Adds Scene2D button input support, user configurable button mappings
+        and hotplugging for LWJGL2.
+      </li>
+      <li>
+        <a href="https://github.com/electronstudio/sdl2gdx">sdl2gdx</a> -
+        Powerful gamepad implementation using SDL. Supports hundreds of
+        controllers under the same mapping, rumble, and hotplugging.
+      </li>
+    </ul>
+    <h3 id="editors">Editors</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/rednblackgames/HyperLap2D">HyperLap2D</a> -
+        Visual editor for complex 2D worlds and scenes with a runtime for
+        libGDX.
+      </li>
+      <li>
+        <a href="http://esotericsoftware.com/">Spine</a> - Skeleton-based
+        animation tool that focuses specifically on 2D animation for games.
+      </li>
+    </ul>
+    <h3 id="entity-component-system-ecs">Entity Component System (ECS)</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/junkdog/artemis-odb">Artemis-odb</a> - High
+        performance java based Entity-Component-System framework.
+      </li>
+      <li>
+        <a href="https://github.com/libgdx/ashley">Ashley</a> - A Java entity
+        system inspired by Ash &amp; Artemis.
+      </li>
+    </ul>
+    <h3 id="physics">Physics</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/libgdx/libgdx/wiki/Box2d">Box2D</a> - One of
+        the most popular physics libraries for 2D games.
+      </li>
+      <li>
+        <a href="https://github.com/libgdx/libgdx/wiki/Bullet-physics"
+          >Bullet</a
+        >
+        - 3D Collision Detection and Rigid Body Dynamics Library.
+      </li>
+      <li>
+        <a href="https://github.com/tommyettinger/jbump">jbump</a> - Easy to
+        implement AABB collision detection useful for platformers and other
+        simple 2D games.
+      </li>
+    </ul>
+    <h3 id="services">Services</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/TomGrill/gdx-facebook">gdx-facebook</a> -
+        Provides cross-platform support for Facebook Graph API.
+      </li>
+      <li>
+        <a href="https://github.com/mk-5/gdx-fireapp">gdx-fireapp</a> -
+        Cross-platform API for Firebase.
+      </li>
+      <li>
+        <a href="https://github.com/TomGrill/gdx-firebase">gdx-firebase</a> -
+        Cross-platform (only Desktop/Android) API for Firebase.
+      </li>
+      <li>
+        <a href="https://github.com/MrStahlfelge/gdx-gameanalytics"
+          >gdx-gameanalytics</a
+        >
+        - Game Analytics REST API client implementation for libGDX. Works on all
+        backends.
+      </li>
+      <li>
+        <a href="https://github.com/MrStahlfelge/gdx-gamesvcs">gdx-gamesvcs</a>
+        - Easy integration of gameservices, such as Google Play Games, Apple
+        Game Center, and more.
+      </li>
+      <li>
+        <a href="https://github.com/libgdx/gdx-pay">gdx-pay</a> - Provides a
+        cross-platform API for InApp purchasing.
+      </li>
+      <li>
+        <a href="https://github.com/code-disaster/steamworks4j">steamworks4j</a>
+        - A thin wrapper which allows Java applications to access the Steamworks
+        C++ API.
+      </li>
+    </ul>
+    <h3 id="setup-and-deployment">Setup and Deployment</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/tommyettinger/gdx-liftoff">gdx-liftoff</a> -
+        A modern setup tool for libGDX that uses the current Gradle 5.x series.
+      </li>
+      <li>
+        <a href="https://github.com/libGDX/packr">Packr</a> - Packages your JAR,
+        assets and a JVM for distribution on Windows, Linux and macOS.
+      </li>
+    </ul>
+    <h3 id="user-interface">User Interface</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/libgdx/libgdx/wiki/Gdx-freetype"
+          >Freetype</a
+        >
+        - Generate BitmapFonts of your desired size on the fly from lightweight
+        .ttf font files.
+      </li>
+      <li>
+        <a href="https://github.com/TomGrill/gdx-dialogs">gdx-dialogs</a> -
+        Provides cross-platform support for native dialogs.
+      </li>
+      <li>
+        <a href="https://github.com/czyzby/gdx-skins">gdx-skins</a> - Free
+        Scene2D GUI skins.
+      </li>
+      <li>
+        <a href="https://github.com/StrongJoshua/libGDX-inGameConsole"
+          >InGameConsole</a
+        >
+        - Allows a developer to add a console (similar to how it is featured in
+        Source games) to their game.
+      </li>
+      <li>
+        <a href="https://github.com/maltaisn/msdf-gdx">msdf-gdx</a> - Provides
+        lightweight utilities to draw high-quality MSDF (multi-channel signed
+        distance field) text on libGDX.
+      </li>
+      <li>
+        <a href="https://github.com/payne911/PieMenu">PieMenu</a> - Radial menus
+        for Scene2D that are highly flexible and easy to customize.
+      </li>
+      <li>
+        <a href="https://ray3k.wordpress.com/artwork/">Ray3K Skins</a> - Free
+        Scene2D.UI skins with example code, custom drawables, and experimental
+        features.
+      </li>
+      <li>
+        <a href="https://github.com/raeleus/skin-composer">Skin Composer</a> -
+        Create skins for libGDX scene2d.ui with a graphical interface.
+      </li>
+      <li>
+        <a href="https://github.com/raeleus/TenPatch">TenPatch</a> - An
+        alternative to libGDX’s 9patch implementation that implements multiple
+        stretch regions.
+      </li>
+      <li>
+        <a href="https://github.com/rafaskb/typing-label">TypingLabel</a> - A
+        libGDX Label that appears as if it was being typed in real time.
+      </li>
+      <li>
+        <a href="https://github.com/kotcrab/vis-ui">VisUI</a> - Allows to create
+        nice looking UI in libGDX using scene2d.ui. Note this is not a UI
+        editor.
+      </li>
+    </ul>
+    <h3 id="visual-effects">Visual Effects</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/libgdx/box2dlights">Box2DLights</a> - 2D
+        lighting framework that uses Box2D for raycasting and OpenGL ES 2.0 for
+        rendering.
+      </li>
+      <li>
+        <a href="https://github.com/crashinvaders/gdx-vfx">gdx-vfx</a> -
+        Flexible post-processing shader visual effects based on
+        libgdx-contribs-postprocessing.
+      </li>
+      <li>
+        <a href="https://github.com/crykn/libgdx-screenmanager"
+          >libgdx-screenmanager</a
+        >
+        - A screen manager for libGDX supporting various transition effects
+      </li>
+      <li>
+        <a href="https://github.com/raeleus/Particle-Park">Particle Park</a> - A
+        showcase of downloadable particle effects with live previews.
+      </li>
+      <li>
+        <a href="https://github.com/earlygrey/shapedrawer">Shape Drawer</a> - A
+        performant alternative to ShapeRenderer that avoids Batch flushing.
+      </li>
+      <li>
+        <a href="https://github.com/mgsx-dev/gdx-gltf">gdx-gltf</a> - GLTF 3D
+        file format support (import/export), PBR shaders, and others advanced
+        rendering.
+      </li>
+      <li>
+        <a href="https://github.com/marcinsc/libgdx-graph">libgdx-graph</a> -
+        Provides a GUI to design your rendering pipeline and shaders, and a
+        library to easily incorporate them into your games.
+        <a href="https://www.youtube.com/channel/UCzbGLy819RyOkKb_kmV2kCA"
+          >Guide here</a
+        >
+      </li>
+    </ul>
+    <h3 id="others">Others</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/PokeMMO/gdx-dbgagent">gdx-dbgagent</a> -
+        Java Agent for debugging common issues, like objects not being disposed
+        and constants such as Color.WHITE being modified.
+      </li>
+      <li>
+        <a
+          href="https://github.com/libgdx/libgdx/tree/master/extensions/gdx-jnigen"
+          >gdx-jnigen</a
+        >
+        - Small library that allows C/C++ code to be written inline with Java
+        source code.
+      </li>
+      <li>
+        <a href="https://github.com/Anuken/GDXGifRecorder">gdxGifRecorder</a> -
+        A utility class that records a GIF and saves it automatically.
+      </li>
+      <li>
+        <a href="https://github.com/libktx/ktx">KTX</a> - Kotlin extensions and
+        utilities for libGDX.
+      </li>
+      <li>
+        <a href="https://github.com/czyzby/noise4j">noise4j</a> - Simple map
+        generators based on various procedural content generation tutorials.
+      </li>
+      <li>
+        <a href="https://github.com/crashinvaders/gdx-texture-packer-gui"
+          >Texture Packer GUI</a
+        >
+        - A simple way to pack and manage texture atlases for libGDX game
+        framework.
+      </li>
+    </ul>
+    <h2 id="tutorials">Tutorials</h2>
+    <p><em>Tutorials for newbies and seasoned developers alike.</em></p>
+    <h3 id="getting-started">Getting Started</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/libgdx/libgdx/wiki">Official libGDX Wiki</a>
+        - Official libGDX wiki that contains a huge amount of information.
+      </li>
+      <li>
+        <a href="https://colourtann.github.io/HelloLibgdx/"
+          >Tann’s Hello libGDX</a
+        >
+        - An excellent guide for beginners on how to create a game from scratch.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLfd-5Q3Fwq0WKrkEKw12nqpfER3MG5_Wi"
+          >Brandon Grasley’s Space Shooter Game</a
+        >
+        - Video tutorial series on making a complete Android game from scratch.
+      </li>
+      <li>
+        <a href="https://youtu.be/Rnmq_Jv-pe4">Splash Screens</a> - Video
+        tutorial on creating splash screens to display before your game window
+        loads.
+      </li>
+      <li>
+        <a href="https://youtu.be/3l5F7f7vfTU">Creating a Launcher</a> - Video
+        tutorial on using libGDX to make a game launcher.
+      </li>
+      <li>
+        <a
+          href="https://github.com/raeleus/skin-composer/wiki/libGDX-and-JPackage"
+          >Deploying with JPackage</a
+        >
+        - A tutorial on deploying libGDX games with JPackage via Gradle
+        commands.
+      </li>
+      <li>
+        <a
+          href="http://mana-break.blogspot.com/2014/06/power-of-json-in-game-development-items.html"
+          >JSON in Game Dev</a
+        >
+        - General tutorial on using JSON for storing data.
+      </li>
+      <li>
+        <a
+          href="https://github.com/raeleus/skin-composer/wiki/The-Man-Who-Killed-Hitler-and-then-The-Progress-Bar"
+          >Progress Bar Design</a
+        >
+        - Discusses the pros and cons of different progress bar design
+        techniques with examples.
+      </li>
+      <li>
+        <a href="https://github.com/libgdx/libgdx/wiki/External-tutorials"
+          >libGDX External Tutorials</a
+        >
+        - Big list of official unofficial tutorials.
+      </li>
+    </ul>
+    <h3 id="advanced">Advanced</h3>
+    <ul>
+      <li>
+        <a href="https://youtu.be/zKfh6WuaikQ">Code Hotswapping</a> - Video
+        tutorial on enabling code hotswapping for libGDX projects to increase
+        productivity.
+      </li>
+      <li>
+        <a
+          href="https://javadocmd.com/blog/libgdx-dynamic-textures-with-pixmap/"
+          >Dynamic Textures with Pixmap</a
+        >
+        - Details how to create a mask using Pixmaps.
+      </li>
+      <li>
+        <a href="https://link.medium.com/vgYo0mSi3W">iOS Deployment Tutorial</a>
+        - Deploying to iOS in 2019 using RoboVM.
+      </li>
+      <li>
+        <a
+          href="http://code-disaster.com/2016/02/subpixel-perfect-smooth-scrolling.html"
+          >Sub-pixel Perfect Smooth Scrolling</a
+        >
+        - Pixel-perfect smooth scrolling.
+      </li>
+    </ul>
+    <h2 id="assets">Assets</h2>
+    <p>
+      <em
+        >Collection of free and high quality assets to get your game to the next
+        level.</em
+      >
+    </p>
+    <ul>
+      <li>
+        <a href="https://kenney.nl/">Kenney Assets</a> - High quality assets for
+        your game, from 2D and 3D art to sound effects.
+      </li>
+      <li>
+        <a href="https://opengameart.org/">OpenGameArt.org</a> - Repository
+        offering a variety of open content assets.
+      </li>
+      <li>
+        <a href="http://game-icons.net/">Game-Icons.net</a> - Repository
+        containing heaps of cool game related graphics.
+      </li>
+      <li>
+        <a href="https://www.bfxr.net/">bfxr.net</a> - Quickly create unique
+        sound effects by pressing a few buttons, excellent for prototyping.
+      </li>
+      <li>
+        <a href="https://freesound.org/">freesound.org</a> - Huge collaborative
+        database of audio snippets, samples, recordings, bleeps.
+      </li>
+    </ul>
+    <h2 id="community">Community</h2>
+    <p>
+      <em
+        >Get in touch with other libGDX developers to collaborate and get
+        help.</em
+      >
+    </p>
+    <ul>
+      <li>
+        <a href="https://discord.gg/4S8pQqc">Discord</a> - An active chat with
+        various leaders from the community available every day.
+        <strong>Recommended</strong>
+      </li>
+      <li>
+        <a href="https://www.reddit.com/r/libgdx/">Reddit</a> - Unofficial
+        subreddit for libGDX. Not a lot of activity.
+      </li>
+    </ul>
+    <h2 id="other-lists">Other Lists</h2>
+    <p>
+      <em>Other awesome lists that might be useful to libGDX developers.</em>
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/MFatihMAR/Awesome-Game-Networking"
+          >Game Networking</a
+        >
+        - A Curated List of Game Network Programming Resources.
+      </li>
+      <li>
+        <a href="https://github.com/hzoo/awesome-gametalks">Game Talks</a> - A
+        curated list of gaming talks (development, design, etc).
+      </li>
+      <li>
+        <a href="https://github.com/akullpp/awesome-java">Java</a> - A curated
+        list of awesome Java frameworks, libraries and software.
+      </li>
+      <li>
+        <a href="https://github.com/KotlinBy/awesome-kotlin">Kotlin</a> - A
+        curated list of awesome Kotlin related stuff.
+      </li>
+      <li>
+        <a href="https://github.com/ellisonleao/magictools">Magic Tools</a> - A
+        list of Game Development resources to make magic happen.
+      </li>
+      <li>
+        <a href="http://gameaccessibilityguidelines.com/"
+          >Game Accessibility Guidelines</a
+        >
+        - A straightforward reference for inclusive game design, to ensure that
+        games are just as fun for as wide a range of people as possible.
+        <strong>Recommended</strong>
+      </li>
+    </ul>
+    <hr />
+    <h2 id="contributing">Contributing</h2>
+    <p>
+      Contributions welcome! Read the
+      <a href="contributing.md">contribution guidelines</a> first.
+    </p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0"
+        ><img
+          src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+  </body>
+</html>

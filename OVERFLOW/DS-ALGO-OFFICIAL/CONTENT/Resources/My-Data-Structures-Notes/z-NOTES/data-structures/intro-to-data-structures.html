@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./prism.css" />
+    <script async defer src="./prism.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body>
+    <a
+      href="https://github.com/bgoonz/DS-ALGO-OFFICIAL"
+      class="github-corner"
+      aria-label="View source on Github"
+      ><svg
+        width="80"
+        height="80"
+        viewBox="0 0 250 250"
+        style="
+          z-index: 100000;
+          fill: #194ccdaf;
+          color: #fff;
+          position: fixed;
+          top: 20px;
+          border: 0;
+          left: 20px;
+          transform: scale(-1.5, 1.5);
+        "
+        aria-hidden="true"
+      >
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+          fill="currentColor"
+          style="transform-origin: 130px 106px"
+          class="octo-arm"
+        ></path>
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+          fill="currentColor"
+          class="octo-body"
+        ></path></svg
+    ></a>
+
+    ;
+    <h1 id="data-structures">Data Structures</h1>
+    <h3 id="projected-time">Projected Time</h3>
+    <p>75 - 90 min</p>
+    <ul>
+      <li>20 minutes - Slideshow</li>
+      <li>40 minutes - Independent Practice</li>
+      <li>15 minutes - Check for Understanding</li>
+    </ul>
+    <h3 id="prerequisites">Prerequisites</h3>
+    <ul>
+      <li>
+        <a href="/javascript/javascript-1-variables.md"
+          >JavaScript 1 - Variables, Strings, Numbers</a
+        >
+      </li>
+      <li>
+        <a href="/javascript/javascript-2-arrays-functions.md"
+          >JavaScript 2 - Arrays, Functions</a
+        >
+      </li>
+      <li>
+        <a href="/javascript/javascript-3-conditionals.md"
+          >JavaScript 3 - Conditionals, Comparisons, Booleans</a
+        >
+      </li>
+      <li>
+        <a href="/javascript/javascript-4-loops.md">JavaScript 4 - Loops</a>
+      </li>
+      <li>
+        <a href="/javascript/javascript-5-switch.md"
+          >JavaScript 5 - Switch Statements</a
+        >
+      </li>
+      <li>
+        <a href="/javascript/javascript-6-object-literals.md"
+          >JavaScript 6 - Object Literals</a
+        >
+      </li>
+      <li>
+        <a href="/javascript/javascript-7-oop.md"
+          >JavaScript 7 - Object-Oriented Programming</a
+        >
+      </li>
+      <li>
+        <a href="/runtime-complexity/runtime-complexity.md"
+          >Runtime Complexity</a
+        >
+      </li>
+    </ul>
+    <h3 id="motivation">Motivation</h3>
+    <p>
+      Structuring data, and deciding how to organize and store data in
+      non-arbitrary ways is one way to create performant programs. When data is
+      efficiently structured, then data manipulation can be optimized. With that
+      in mind, it’s important to take note of the fact that no single data
+      structure is a one-size fits all solution, therefore, it is necessary to
+      know the strengths and limitations of several data structures. Data
+      Structures can be grouped into two camps: <strong>Linear</strong> and
+      <strong>Non-Linear</strong>.
+    </p>
+    <p>
+      Linear data structures arrange values in a linear form, and some commonly
+      used linear data structures include <strong>Arrays</strong>: great for
+      storing a list of a fixed length, <strong>Linked-list</strong>: great for
+      storing a number of data items that can easily change size to add or
+      remove items, <strong>Stacks</strong>: Add to top and remove from the top
+      (last in, first out data traversal), <strong>Queues</strong>: Add to the
+      back and remove from the front, (first in first out data
+      storage/traversal), and <strong>Priority queues</strong>: add anywhere,
+      and remove the highest priority (array that searches for the lowest cost
+      contained and appends it to the end).
+    </p>
+    <p>
+      <strong>Non-linear data structures</strong> imply that data values are not
+      arranged in order. Some structures include <strong>hash tables</strong>:
+      unordered lists which use a hash function to insert and search (used to
+      implement key, value, dictionary-like interfaces), <strong>Trees</strong>:
+      data is organized in branches (data structure consisting of one or more
+      data nodes, an XML document with a root node is a good example),
+      <strong>Binary Trees</strong> (great for storing records that can be
+      accessed in a key, value pair), <strong>Graphs</strong>: a general
+      branching structure with less strict conditions than a tree. Some other
+      data structures include record, union, tagged union, class, graphs, and
+      binary trees.
+    </p>
+    <p>
+      Data Structure forms the major part of IT companies. Many top companies
+      like Microsoft and Google hire on the basis of coding skills that mainly
+      includes data structure.
+    </p>
+    <p>Example of people getting hired having data structure knowledge:</p>
+    <ul>
+      <li>
+        <a
+          href="https://www.freecodecamp.org/news/how-i-landed-offers-from-microsoft-amazon-and-twitter-without-an-ivy-league-degree-d62cfe286eb8/"
+          >How I landed offers from Microsoft, Amazon and Twitter (by Zhia Hwa
+          Chong)</a
+        >
+      </li>
+    </ul>
+    <h3 id="objectives">Objectives</h3>
+    <p><strong>Apprentices will be able to:</strong></p>
+    <ul>
+      <li>Consider data structure availability when problem solving</li>
+      <li>Contrast data structures with data types</li>
+      <li>
+        Identify main types of data structures, along with their pros and cons
+      </li>
+      <li>Classic use cases for each data structure</li>
+    </ul>
+    <h3 id="materials">Materials</h3>
+    <ul>
+      <li>
+        <a
+          href="https://www.topcoder.com/community/data-science/data-science-tutorials/data-structures/"
+          >Overview of common data structures</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.tutorialspoint.com/data_structures_algorithms/data_structures_basics.htm"
+          >Article:
+          https://www.tutorialspoint.com/data_structures_algorithms/data_structures_basics.htm</a
+        >
+      </li>
+      <li>
+        <a href="https://youtu.be/DuDz6B4cqVc"
+          >Data Structures: Crash Course Computer Science #14</a
+        >
+      </li>
+    </ul>
+    <h3 id="lesson">Lesson</h3>
+    <p>
+      <a
+        href="https://docs.google.com/presentation/d/1Vxx4hTzi8JFO8TFWS4dU4q2tyIEq7iBex59m6-k68XA/edit?usp=sharing"
+        >Data Structures &amp; Algorithms Slideshow</a
+      >
+    </p>
+    <h3 id="independent-practice">Independent Practice</h3>
+    <ol type="1">
+      <li>
+        Using the links available in the Common Mistakes section, create a
+        diagram outlining the key functional differences between type and
+        structure.
+      </li>
+      <li>
+        Watch Crash Course Computer Science #14 video featured in Materials
+        section above.
+      </li>
+      <li>
+        Look through the Tutorials Point lessons from Data Structures through
+        the Sorting Techniques section to gain more insight on Data Structures
+        and their use cases.
+      </li>
+      <li>
+        Practice questions on every data structure using link available in the
+        Materials section
+      </li>
+    </ol>
+    <h3 id="common-mistakes-misconceptions">
+      Common Mistakes / Misconceptions:
+    </h3>
+    <p>
+      <a href="https://en.wikipedia.org/wiki/Data_structure">Data structures</a>
+      and <a href="https://en.wikipedia.org/wiki/Data_type">data types</a> are
+      not the same.
+    </p>
+    <h3 id="check-for-understanding">Check for Understanding</h3>
+    <p>
+      Using a timer, pair up for 5 minutes and quiz each other while reviewing
+      the differences between data types and data structures. After that, switch
+      partners and discuss the ways each featured data structure works for 10
+      minutes.
+    </p>
+    <h3 id="additional-resources">Additional Resources</h3>
+    <ul>
+      <li>
+        <a href="https://visualgo.net/en"
+          >Watch Data Structures and Algorithms in action at visualgo.net</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://medium.freecodecamp.org/10-common-data-structures-explained-with-videos-exercises-aaff6c06fb2b"
+          >Article w/Videos: Data Structures and Algorithms in JavaScript by
+          Beau Carnes</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.hackerearth.com/practice/data-structures/arrays/1-d/tutorial/"
+          >Practice Data Structures</a
+        >
+      </li>
+    </ul>
+  </body>
+</html>

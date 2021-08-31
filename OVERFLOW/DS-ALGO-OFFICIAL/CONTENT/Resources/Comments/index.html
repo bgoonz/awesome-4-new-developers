@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+      body {
+        overflow-x: hidden;
+      }
+      * {
+        font-family: "Noto Sans JP", sans-serif;
+      }
+      #messages {
+        position: relative;
+        transform: translate(25%, 0);
+      }
+      .message {
+        width: calc(50vw - 6px);
+        height: 50px;
+        border: 3px solid #000000;
+        border-radius: 6px;
+        position: absolute;
+        left: 0;
+        margin: 0;
+      }
+      #sendbox {
+        position: fixed;
+        bottom: 0;
+      }
+      input[type="text"] {
+        border: 3px solid #000000;
+        border-radius: 6px;
+        width: calc(98vw - 60px);
+        height: 25px;
+        font-size: 15px;
+        outline: none;
+      }
+      input[type="submit"] {
+        border: 3px solid #000000;
+        border-radius: 6px;
+        background: #ffffff;
+        cursor: pointer;
+        width: 60px;
+        height: 35px;
+        outline: none;
+        font-size: 15px;
+      }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Testy</title>
+  </head>
+  <body align="center">
+    <div id="messages"></div>
+    <br />
+    <form id="sendbox" onsubmit="sendMessage();return false">
+      <input type="text" id="textbox" placeholder="Hello world!" />
+      <input type="submit" value="send" />
+    </form>
+  </body>
+</html>
+<script src="https://rawgit.com/leizongmin/js-xss/master/dist/xss.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  socket = io();
+  var previousMessages = "<%= messages %>".split(",");
+  console.log(previousMessages);
+  for (let step = 0; step < previousMessages.length; step++) {
+    displayMsg(previousMessages[step]);
+  }
+
+  function sendMessage() {
+    var content = filterXSS(document.getElementById("textbox").value, {
+      whiteList: [],
+      stripIgnoreTag: true,
+      stripIgnoreTagBody: ["script"],
+    });
+    if (!content || content == "[removed]") return;
+    socket.emit("message", content);
+    document.getElementById("textbox").value = "";
+  }
+  socket.on("message", function (content) {
+    displayMsg(content);
+  });
+
+  function displayMsg(msg) {
+    if (document.getElementById("last"))
+      document.getElementById("last").id = "notlast";
+    document.getElementById("messages").innerHTML =
+      document.getElementById("messages").innerHTML +
+      '<div class="message" id="last">' +
+      msg +
+      "</div><br><br><br>";
+    document.getElementById("last").scrollIntoView();
+  }
+</script>

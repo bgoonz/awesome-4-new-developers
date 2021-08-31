@@ -1,0 +1,2 @@
+https://datree.io/blog/top-10-github-best-practices/,Best Practices List,https://github.com/tiimgreen/github-cheat-sheet#readme,Cheat Sheet error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://docs.travis-ci.com/user/getting-started/,get started with Travis CI,https://github.com/tiimgreen/github-cheat-sheet#readme,Cheat Sheet error: <HTTPError 308: 'Unknown'> | reason: Unknown

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-natural-language-generation-awesome">
+      Awesome Natural Language Generation
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <figure>
+      <img src="logo.png" alt="Piscis Magnus from BL Harley 647" />
+      <figcaption>Piscis Magnus from BL Harley 647</figcaption>
+    </figure>
+    <p>
+      Natural Language Generation is a broad domain with applications in
+      chat-bots, story generation, and data descriptions. There is a wide
+      spectrum of different technologies addressing parts or the whole of the
+      NLG process. This list aims to represent this deversity of NLG
+      applications and techniques by providing links to various projects, tools,
+      research papers, and learning materials.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#datasets">Datasets</a></li>
+      <li><a href="#dialog">Dialog</a></li>
+      <li><a href="#evaluation">Evaluation</a></li>
+      <li><a href="#grammar">Grammar</a></li>
+      <li><a href="#libraries">Libraries</a></li>
+      <li><a href="#narrative-generation">Narrative Generation</a></li>
+      <li>
+        <a href="#neural-natural-language-generation"
+          >Neural Natural Language Generation</a
+        >
+      </li>
+      <li><a href="#papers-and-articles">Papers and Articles</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#realizers">Realizers</a></li>
+      <li><a href="#templating-languages">Templating Languages</a></li>
+      <li><a href="#videos">Videos</a></li>
+    </ul>
+    <h2 id="datasets">Datasets</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/UFAL-DSG/alex_context_nlg_dataset"
+          >Alex Context NLG Dataset</a
+        >
+        - A dataset for NLG in dialogue systems in the public transport
+        information domain.
+      </li>
+      <li>
+        <a href="https://github.com/harvardnlp/boxscore-data/"
+          >Box-score data</a
+        >
+        - This dataset consists of (human-written) NBA basketball game summaries
+        aligned with their corresponding box- and line-scores.
+      </li>
+      <li>
+        <a href="http://www.macs.hw.ac.uk/InteractionLab/E2E">E2E</a> - This
+        shared task focuses on recent end-to-end (E2E), data-driven NLG methods,
+        which jointly learn sentence planning and surface realisation from
+        non-aligned data.
+      </li>
+      <li>
+        <a href="https://github.com/pvougiou/Neural-Wikipedian"
+          >Neural-Wikipedian</a
+        >
+        - The repository contains the code along with the required corpora that
+        were used in order to build a system that “learns” how to generate
+        English biographies for Semantic Web triples.
+      </li>
+      <li>
+        <a href="https://cs.stanford.edu/~pliang/data/weather-data.zip"
+          >WeatherGov</a
+        >
+        - Computer-generated weather forecasts from weather.gov (US public
+        forecast), along with corresponding weather data.
+      </li>
+      <li>
+        <a href="https://github.com/ThiagoCF05/webnlg">WebNLG</a> - The enriched
+        version of the WebNLG - a resource for evaluating common NLG tasks,
+        including Discourse Ordering, Lexicalization and Referring Expression
+        Generation.
+      </li>
+      <li>
+        <a href="https://rlebret.github.io/wikipedia-biography-dataset/"
+          >WikiBio - wikipedia biography dataset</a
+        >
+        - This dataset gathers 728,321 biographies from wikipedia. It aims at
+        evaluating text generation algorithms.
+      </li>
+      <li>
+        <a
+          href="https://github.com/google-research-datasets/dstc8-schema-guided-dialogue"
+          >The Schema-Guided Dialogue Dataset</a
+        >
+        - The Schema-Guided Dialogue (SGD) dataset consists of over 20k
+        annotated multi-domain, task-oriented conversations between a human and
+        a virtual assistant.
+      </li>
+      <li>
+        <a
+          href="https://gricad-gitlab.univ-grenoble-alpes.fr/getalp/wikipediacompanycorpus"
+          >The Wikipedia company corpus</a
+        >
+        - Company descriptions collected from Wikipedia. The dataset contains
+        semantic representations, short, and long descriptions for 51K companies
+        in English.
+      </li>
+      <li>
+        <a href="https://nlds.soe.ucsc.edu/yelpnlg">YelpNLG</a> - YelpNLG
+        provides resources for natural language generation of restaurant
+        reviews.
+      </li>
+    </ul>
+    <h2 id="dialog">Dialog</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/rodrigopivi/Chatito">Chatito</a> - Generate
+        datasets for AI chatbots, NLP tasks, named entity recognition or text
+        classification models using a simple DSL!
+      </li>
+      <li>
+        <a href="https://github.com/shawnwun/NNDIAL">NNDIAL</a> - NNDial is an
+        open source toolkit for building end-to-end trainable task-oriented
+        dialogue models.
+      </li>
+      <li>
+        <a
+          href="https://github.com/uber-research/plato-research-dialogue-system"
+          >Plato</a
+        >
+        - This is the Plato Research Dialogue System, a flexible platform for
+        developing conversational AI agents.
+      </li>
+      <li>
+        <a href="https://github.com/shawnwun/RNNLG">RNNLG</a> - RNNLG is an open
+        source benchmark toolkit for Natural Language Generation (NLG) in spoken
+        dialogue system application domains.
+      </li>
+      <li>
+        <a href="https://github.com/UFAL-DSG/tgen">TGen</a> - Statistical NLG
+        for spoken dialogue systems.
+      </li>
+    </ul>
+    <h2 id="evaluation">Evaluation</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/google-research/bleurt"
+          >BLEURT: a Transfer Learning-Based Metric for Natural Language
+          Generation</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/neulab/compare-mt">compare-mt</a> - A tool
+        for holistic analysis of language generations systems.
+      </li>
+      <li>
+        <a href="https://gem-benchmark.com/">GEM</a> - a benchmark environment
+        for NLG with a focus on its Evaluation, both through human annotations
+        and automated Metrics.
+      </li>
+      <li>
+        <a href="https://github.com/Maluuba/nlg-eval">NLG-eval</a> - Evaluation
+        code for various unsupervised automated metrics for Natural Language
+        Generation.
+      </li>
+      <li>
+        <a href="https://github.com/facebookresearch/vizseq">VizSeq</a> - A
+        Visual Analysis Toolkit for Text Generation Tasks.
+      </li>
+    </ul>
+    <h2 id="grammar">Grammar</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/OpenCCG/openccg">OpenCCG</a> - OpenCCG
+        library for parsing and realization with CCG.
+      </li>
+      <li>
+        <a href="http://www.grammaticalframework.org/">GrammaticalFramework</a>
+        - A programming language for multilingual grammar applications.
+      </li>
+      <li>
+        <a href="https://github.com/mikelewis0/easyccg">EasyCCG</a> - CCG: All
+        combinators, common grammar format, parsing to logical form, parameter
+        estimation for probabilistic CCG.
+      </li>
+      <li>
+        <a href="https://github.com/bozsahin/ccglab">CCG Lab</a> - All
+        combinators, common grammar format, parsing to logical form, parameter
+        estimation for probabilistic CCG.
+      </li>
+      <li>
+        <a href="https://github.com/texttheater/ccgweb">CCGweb</a> - A Web
+        platform for parsing and annotation.
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/bradymholt/cron-expression-descriptor"
+          >Cron Expression Descriptor</a
+        >
+        - A .NET library that converts cron expressions into human readable
+        descriptions.
+      </li>
+      <li>
+        <a href="https://github.com/tokenmill/numberwords">Number Words</a> -
+        Convert a number to an approximated text expression: from ‘0.23’ to
+        ‘less than a quarter’.
+      </li>
+    </ul>
+    <h2 id="narrative-generation">Narrative Generation</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/aherriot/story-generator"
+          >Random Story Generator</a
+        >
+        - Using Natural Language Generation (NLG) to create a random short
+        story.
+      </li>
+      <li>
+        <a href="https://github.com/galaxykate/tracery">Tracery</a> - A
+        story-grammar generation library for JavaScript.
+      </li>
+    </ul>
+    <h2 id="neural-natural-language-generation">
+      Neural Natural Language Generation
+    </h2>
+    <ul>
+      <li>
+        <a href="https://github.com/minimaxir/aitextgen">aitextgen</a> - A
+        robust Python tool for text-based AI training and generation using
+        GPT-2.
+      </li>
+      <li>
+        <a href="https://github.com/diegma/graph-2-text">graph-2-text</a> -
+        Graph to sequence implemented in Pytorch combining Graph convolutional
+        networks and opennmt-py.
+      </li>
+      <li>
+        <a href="https://github.com/neural-nuts/image-caption-generator"
+          >Image Caption Generator</a
+        >
+        - A Neural Network based generative model for captioning images using
+        Tensorflow.
+      </li>
+      <li>
+        <a href="https://github.com/EagleW/PaperRobot"
+          >PaperRobot: Incremental Draft Generation of Scientific Ideas</a
+        >
+        - We present a PaperRobot who performs as an automatic research
+        assistant.
+      </li>
+      <li>
+        <a href="https://github.com/uber-research/PPLM">PPLM</a> - Plug and Play
+        Language Model implementation. Allows to steer topic and attributes of
+        GPT-2 models.
+      </li>
+      <li>
+        <a href="https://github.com/patil-suraj/question_generation"
+          >Question Generation using hugstransformers</a
+        >
+        - Question generation is the task of automatically generating questions
+        from a text paragraph.
+      </li>
+      <li>
+        <a href="https://github.com/asyml/texar">Texar</a> - Texar is a toolkit
+        aiming to support a broad set of machine learning, especially natural
+        language processing and text generation tasks.
+      </li>
+      <li>
+        <a href="https://github.com/minimaxir/textgenrnn">textgenrnn</a> -
+        Easily train your own text-generating neural network of any size and
+        complexity on any text dataset with a few lines of code.
+      </li>
+      <li>
+        <a href="https://github.com/turtlesoupy/this-word-does-not-exist"
+          >This Word Does Not Exist</a
+        >
+        - This is a project allows people to train a variant of GPT-2 that makes
+        up words, definitions and examples from scratch.
+      </li>
+      <li>
+        <a href="https://github.com/huggingface/transformers">Transformers</a> -
+        State-of-the-art Natural Language Processing for TensorFlow 2.0 and
+        PyTorch.
+      </li>
+      <li>
+        <a
+          href="https://github.com/akanimax/natural-language-summary-generation-from-structured-data"
+          >Summary Generation From Structured Data</a
+        >
+        - For converting information present in the form of structured data into
+        natural language text.
+      </li>
+    </ul>
+    <h2 id="papers-and-articles">Papers and Articles</h2>
+    <ul>
+      <li>
+        <a
+          href="https://ehudreiter.com/2021/03/17/vision-nlg-can-help-humanise-data-and-ai/"
+          >2021: Vision: NLG Can Help Humanise Data and AI</a
+        >
+      </li>
+      <li>
+        <a href="https://openreview.net/forum?id=rygGQyrFvH"
+          >2020: The Curious Case of Neural Text Degeneration</a
+        >
+      </li>
+      <li>
+        <a href="https://arxiv.org/abs/2011.03992"
+          >2020: A Gold Standard Methodology for Evaluating Accuracy in
+          Data-To-Text Systems</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.sciencedirect.com/science/article/pii/S0885230819300919"
+          >2020: Evaluating the state-of-the-art of End-to-End Natural Language
+          Generation: The E2E NLG challenge</a
+        >
+      </li>
+      <li>
+        <a href="https://huggingface.co/blog/how-to-generate"
+          >2020: How to generate text: using different decoding methods for
+          language generation with Transformers</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.cambridge.org/core/services/aop-cambridge-core/content/view/BA2417D73AF29F8073FF5B611CDEB97F/S135132492000025Xa.pdf/natural_language_generation_the_commercial_state_of_the_art_in_2020.pdf"
+          >2020: Natural language generation: The commercial state ofthe art in
+          2020</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.microsoft.com/en-us/research/blog/turing-nlg-a-17-billion-parameter-language-model-by-microsoft/"
+          >2020: Turing-NLG: A 17-billion-parameter language model by
+          Microsoft</a
+        >
+      </li>
+      <li>
+        <a href="https://www.inlg2019.com/assets/papers/178_Paper.pdf"
+          >2019: A Closer Look at Recent Results of Verb Selection for
+          Data-to-Text NLG</a
+        >
+      </li>
+      <li>
+        <a href="https://www.inlg2019.com/assets/papers/28_Paper.pdf"
+          >2019: A Personalized Data-to-Text Support Tool for Cancer Patients</a
+        >
+      </li>
+      <li>
+        <a href="https://www.inlg2019.com/assets/papers/79_Paper.pdf"
+          >2019: Controlling Contents in Data-to-Document Generation with
+          Human-Designed Topic Labels</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://ehudreiter.com/2019/09/26/generated-texts-must-be-accurate/"
+          >2019: Generated Texts Must Be Accurate!</a
+        >
+      </li>
+      <li>
+        <a href="https://www.inlg2019.com/assets/papers/44_Paper.pdf"
+          >2019: Hotel Scribe: Generating High Variation Hotel Descriptions</a
+        >
+      </li>
+      <li>
+        <a href="https://www.inlg2019.com/assets/papers/32_Paper.pdf"
+          >2019: Revisiting Challenges in Data-to-Text Generation with Fact
+          Grounding</a
+        >
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1703.09902.pdf"
+          >2017: Survey of the State of the Art in NaturalLanguage Generation:
+          Core tasks, applicationsand evaluation</a
+        >
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1606.03254.pdf"
+          >2016: Natural Language Generation enhances human decision-making with
+          uncertain information</a
+        >
+      </li>
+    </ul>
+    <h2 id="products">Products</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/tokenmill/accelerated-text"
+          >Accelerated Text</a
+        >
+        - Automatically generate multiple natural language descriptions of your
+        data varying in wording and structure.
+      </li>
+      <li>
+        <a href="https://rosaenlg.org">RosaeNLG</a> - An open-source library for
+        node.js or client side (browser) execution, based on the Pug template
+        engine, to generate texts in English, French, German and Italian.
+      </li>
+      <li>
+        <a href="http://twinery.org/">Twine</a> - An open-source tool for
+        telling interactive, nonlinear stories.
+      </li>
+    </ul>
+    <h2 id="realizers">Realizers</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/kowey/GenI">Genl</a> - Surface realiser
+        (part of a Natural Language Generation system) using Tree Adjoining
+        Grammar.
+      </li>
+      <li>
+        <a href="https://github.com/rali-udem/JSrealB">JSrealB</a> - A
+        JavaScript bilingual text realizer for web development.
+      </li>
+      <li>
+        <a href="https://github.com/simplenlg/simplenlg">SimpleNLG</a> - Java
+        API for Natural Language Generation.
+      </li>
+      <li>
+        <a href="https://github.com/sebischair/SimpleNLG-DE">SimpleNLG DE</a> -
+        German version of SimpleNLG 4.
+      </li>
+      <li>
+        <a href="https://github.com/rali-udem/SimpleNLG-EnFr">SimpleNLG-EnFr</a>
+        - SimpleNLG-EnFr 1.1 is a bilingual English/French adaption of SimpleNLG
+        v4.2.
+      </li>
+    </ul>
+    <h2 id="templating-languages">Templating Languages</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/maetl/calyx">calyx</a> - A Ruby library for
+        generating text with recursive template grammars.
+      </li>
+      <li>
+        <a href="https://github.com/spro/nalgene">nalgene</a> - Natural language
+        generation language.
+      </li>
+      <li>
+        <a href="https://www.stringtemplate.org/">StringTemplate</a> - Java
+        template engine (with ports for C##, Objective-C, JavaScript, Scala) for
+        generating source code, web pages, emails, or any other formatted text
+        output.
+      </li>
+    </ul>
+    <h2 id="videos">Videos</h2>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=kFRw-wk5YOA"
+          >Data-To-Text: Generating Textual Summaries of Complex Data - Ehud
+          Reiter</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://slideslive.com/38922816/imitation-learning-and-its-application-to-natural-language-generation"
+          >Imitation Learning and its Application to Natural Language
+          Generation</a
+        >
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=4fjM72lbJaw"
+          >Natural Language Generation (Introduction)</a
+        >
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=Ls7elVbN8bI"
+          >Strata Data Conference | The future of natural language generation:
+          2017-2027</a
+        >
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=wgcDUX_BPpk"
+          >The Quest for Automated Story Generation - Mark Riedl</a
+        >
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="http://creativecommons.org/publicdomain/zero/1.0"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://www.tokenmill.ai">TokenMill</a> has waived all copyright
+      and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-stacks-awesome">
+      Awesome Stacks
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      <a href="https://www.stacks.co"
+        ><img
+          src="img/awesome-stacks.png"
+          title="Awesome Stacks"
+          alt="Awesome Stacks"
+      /></a>
+    </p>
+    <p>
+      <a href="https://www.stacks.co/what-is-stacks">Stacks</a> is a blockchain
+      anchored by Bitcoin that enables apps, smart contracts, and digital
+      assets. Stacks is a layer-1 blockchain that connects to Bitcoin and
+      implements smart contracts and decentralized applications through the
+      <a href="https://clarity-lang.org/">Clarity language</a>. Through the
+      <a href="https://docs.stacks.co/understand-stacks/proof-of-transfer"
+        >Proof of Transfer (PoX) consensus mechanism</a
+      >, the state of the Stacks blockchain is anchored against the Bitcoin
+      blockchain, thus providing the security and finality of Bitcoin to Stacks.
+      Stacks brings the programmability of other blockchain technologies to
+      Bitcoin, without the need to modify the core consensus mechanism of
+      Bitcoin itself.
+    </p>
+    <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+    <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#apps">Apps</a>
+        <ul>
+          <li><a href="#wallets">Wallets</a></li>
+          <li>
+            <a href="#stacks-web-applications">Stacks Web Applications</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#clarity-resources">Clarity Resources</a>
+        <ul>
+          <li><a href="#developer-tools">Developer Tools</a></li>
+          <li><a href="#libraries">Libraries</a></li>
+          <li><a href="#contracts">Contracts</a></li>
+          <li><a href="#non-fungible-tokens">Non-Fungible Tokens</a></li>
+          <li><a href="#fungible-tokens">Fungible Tokens</a></li>
+          <li><a href="#stacking">Stacking</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#app-development">App Development</a>
+        <ul>
+          <li><a href="#frontend-libraries">Frontend Libraries</a></li>
+          <li><a href="#cli">CLI</a></li>
+          <li><a href="#storage">Storage</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#learning-resources">Learning Resources</a>
+        <ul>
+          <li><a href="#documentation">Documentation</a></li>
+          <li><a href="#videos">Videos</a></li>
+        </ul>
+      </li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+    <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+    <h2 id="apps">Apps</h2>
+    <h3 id="wallets">Wallets</h3>
+    <ul>
+      <li>
+        <a href="https://www.hiro.so/wallet/install-desktop"
+          >Stacks Wallet for Desktop</a
+        >
+        - Desktop wallet application for managing STX and stacking individually
+        or in pools.
+      </li>
+      <li>
+        <a href="https://www.hiro.so/wallet/install-web"
+          >Stacks Wallet for Web</a
+        >
+        - Web wallet for connecting to Stacks web applications.
+      </li>
+      <li>
+        <a href="https://www.secretkeylabs.com/">Xverse Wallet</a> - Mobile
+        wallet application for managing STX and stacking.
+      </li>
+    </ul>
+    <h3 id="stacks-web-applications">Stacks Web Applications</h3>
+    <ul>
+      <li>
+        <a href="https://explorer.stacks.co/?chain=mainnet">Stacks Explorer</a>
+        - An application for reviewing transactions on the Stacks blockchain.
+      </li>
+      <li>
+        <a href="https://boom.money">Boom.money</a> - A web wallet focused on
+        NFTs, and custom tokens.
+      </li>
+      <li>
+        <a href="https://sendstx.com/">Send Many</a> - An application to send
+        STX to many recipients in one transaction.
+      </li>
+      <li>
+        <a href="http://miamining.com/">MIA Block explorer</a> - A web
+        application to exolore MIA coin transactions for all and personal
+        accounts.
+      </li>
+      <li>
+        <a href="https://speed-spend.org">Speed Spend</a> - A suite of working
+        Clarity experiments on testnet (<a
+          href="https://github.com/friedger/speed-spend"
+          >source</a
+        >).
+      </li>
+    </ul>
+    <h2 id="clarity-resources">Clarity Resources</h2>
+    <h3 id="developer-tools">Developer Tools</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/hirosystems/clarinet">Clarinet</a> - Clarity
+        runtime packaged as a CLI, facilitates development and testing of
+        Clarity smart contracts.
+      </li>
+      <li>
+        <a href="https://github.com/obylabs/clarigen">Clarigen</a> - A tool for
+        writing TypeScript code that interacts with Clarity smart contracts.
+      </li>
+      <li>
+        <a href="https://clarity.tools">clarity.tools</a> - In-browser Clarity
+        REPL.
+      </li>
+      <li>
+        <a href="https://search-clarity.dev">search-clarity.dev</a> - An
+        application for searching for deployed Clarity contracts.
+      </li>
+    </ul>
+    <h3 id="libraries">Libraries</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/KStasi/clarity-uint256-lib">uint256</a> - A
+        library for converting values into 256-bits.
+      </li>
+      <li>
+        <a href="https://github.com/jcnelson/clarity-bitcoin"
+          >clarity-bitcoin</a
+        >
+        - A library to verify Bitcoin transactions.
+      </li>
+    </ul>
+    <h3 id="contracts">Contracts</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/citycoins/citycoin">CityCoin</a> - An
+        implementation of PoX lite using STX transfers to mint new coins using
+        proportional probabilities.
+      </li>
+      <li>
+        <a href="https://github.com/psq/swapr">SWAPR</a> - A Uniswap-like
+        implementation on Stacks 2.0 and Clarity.
+      </li>
+      <li>
+        <a href="https://github.com/psq/flexr">FLEXR</a> - An interpretation of
+        Ampleforth for Stacks.
+      </li>
+      <li>
+        <a href="https://github.com/friedger/clarity-dao">ClarityDAO</a> - A
+        conversion of Moloch DAO in Clarity.
+      </li>
+      <li>
+        <a
+          href="https://github.com/friedger/clarity-marketplace/blob/master/contracts/market.clar"
+          >NFT Marketplace</a
+        >
+        - Clarity smart contract for a marketplace of tradable assets.
+      </li>
+      <li>
+        <a
+          href="https://github.com/MarvinJanssen/stackstarter/blob/master/contracts/stackstarter.clar"
+          >StackStarter</a
+        >
+        - Clarity smart contract for crowdfunding.
+      </li>
+      <li>
+        <a
+          href="https://github.com/radicleart/clarity-rstack/blob/master/contracts/lightning-swaps-v1.clar"
+          >Lightning Swaps</a
+        >
+        - Fraud-proof swaps using Lightning Network.
+      </li>
+      <li>
+        <a
+          href="https://github.com/elbaruni/clarity-election/blob/master/contracts/election.clar"
+          >Election Voting</a
+        >
+        - Basic voting for candidates using Clarity.
+      </li>
+      <li>
+        <a href="https://github.com/westridgeblockchain/dualX">DualX</a> - A
+        collection of Clarity contracts that implement a DeFi ecosystem for
+        exchanges.
+      </li>
+    </ul>
+    <h3 id="non-fungible-tokens">Non-Fungible Tokens</h3>
+    <ul>
+      <li>
+        <a href="https://www.tofauti.net">Tofauti</a> - Collection of resources
+        around NFTs on Stacks.
+      </li>
+      <li>
+        <a href="https://www.thisisnumberone.com">This is #1</a> - The first
+        professional NFT built on Bitcoin and the Stacks blockchain (<a
+          href="https://explorer.stacks.co/txid/SP3QSAJQ4EA8WXEDSRRKMZZ29NH91VZ6C5X88FGZQ.thisisnumberone-v2?chain=mainnet"
+          >contract</a
+        >).
+      </li>
+    </ul>
+    <h3 id="fungible-tokens">Fungible Tokens</h3>
+    <ul>
+      <li>
+        <a href="https://www.nothingtoken.com/">Nothing</a> - A fungible token
+        that does nothing (<a
+          href="https://explorer.stacks.co/txid/0x022bed728d648ff1a68036c40f3aff8136ee22fee18380731df0ab9d76d3c4a9?chain=mainnet"
+          >contract</a
+        >).
+      </li>
+    </ul>
+    <h3 id="stacking">Stacking</h3>
+    <ul>
+      <li>
+        <a href="https://stacking.club">stacking.club</a> - Stacking information
+        and statistics.
+      </li>
+      <li>
+        <a href="https://pool.friedger.de/">Friedger pool</a> - Community
+        stacking pool with no fees.
+      </li>
+      <li>
+        <a href="https://planbetter.org/">PlanBetter pool</a> - Stacking pool
+        with Bitcoin rewards.
+      </li>
+    </ul>
+    <h2 id="app-development">App Development</h2>
+    <h3 id="frontend-libraries">Frontend Libraries</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/blockstack/stacks.js">Stacks.js</a> -
+        Monorepo for JavaScript libraries for interacting with the Stacks
+        blockchain.
+      </li>
+    </ul>
+    <h3 id="cli">CLI</h3>
+    <ul>
+      <li>
+        <span class="citation" data-cites="stacks/cli">[@stacks/cli]</span
+        >(https://github.com/blockstack/stacks.js/tree/master/packages/cli) -
+        Command line interface for interacting with auth, storage, and
+        transactions.
+      </li>
+    </ul>
+    <h3 id="storage">Storage</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/eder-ai/compass-db">CompassDB</a> - A
+        library for managing advanced collections in Gaia storage.
+      </li>
+      <li>
+        <a href="https://gitlab.com/MyLens/lens-file-source"
+          >lens-file-source</a
+        >
+        - File storage abstraction through mechanisms like caching,
+        transactions, and JSON map aggregation for Gaia.
+      </li>
+      <li>
+        <a href="https://github.com/AcidLeroy/gaiadown-ts">GaiaDown</a> - Gaia
+        storage backend for
+        <a href="https://github.com/Level/levelup">LevelUp</a>.
+      </li>
+    </ul>
+    <h2 id="learning-resources">Learning Resources</h2>
+    <h3 id="documentation">Documentation</h3>
+    <ul>
+      <li>
+        <a href="https://docs.stacks.co/">Official Stacks documentation</a> -
+        Documentation and developer tutorials for learning Clarity and
+        developing Stacks apps.
+      </li>
+      <li>
+        <a href="https://stacks101.com">Stacks 101</a> - Community curated STX
+        knowledge.
+      </li>
+    </ul>
+    <h3 id="videos">Videos</h3>
+    <ul>
+      <li>
+        <a href="https://youtu.be/lXJutQqDq3w">Clarity 101</a> - Learn the
+        basics of Clarity’s design principles.
+      </li>
+      <li>
+        <a href="https://www.crowdcast.io/e/clarity-program"
+          >Developer Registry 101</a
+        >
+        - Learn how to build a Clarity smart contract from scratch.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=VYXhrwPsBws"
+          >How Clarity Prevents Common Smart Contract Vulnerabilities</a
+        >
+        - Explanation of Clarity’s security princples.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=NY_eUrIcWOY&amp;t=3s"
+          >Proof of Transfer Whitepaper Reading with Muneeb Ali</a
+        >
+        - Overview of the Proof of Transfer (PoX) whitepaper from the author.
+      </li>
+    </ul>
+    <h2 id="community">Community</h2>
+    <ul>
+      <li>
+        <a href="https://discord.gg/zrvWsQC">Discord</a> - Stacks ecosystem
+        Discord.
+      </li>
+      <li>
+        <a href="https://twitter.com/stacks">Twitter</a> - Stacks ecosystem
+        Twitter.
+      </li>
+      <li>
+        <a href="https://forum.stacks.org/">Official Stacks Forum</a> - Stacks
+        community forum.
+      </li>
+      <li>
+        <a href="https://www.reddit.com/r/stacks">r/stacks</a> - Stacks
+        subreddit.
+      </li>
+    </ul>
+    <h2 id="contributing">Contributing</h2>
+    <p>
+      We welcome community contributions to this list. Please read the
+      <a href="contributing.md">contribution guidelines</a> before contributing.
+    </p>
+  </body>
+</html>

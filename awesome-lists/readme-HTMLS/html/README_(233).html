@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-ai-in-finance-awesome-community">
+      Awesome AI in Finance
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+      <a href="https://discord.gg/cqaUf47"
+        ><img
+          src="https://img.shields.io/discord/733027681184251937.svg?style=flat&amp;label=Join%20Community&amp;color=7289DA"
+          alt="Community"
+      /></a>
+    </h1>
+    <p>
+      There are millions of trades made in the global financial market every
+      day. Data grows very quickly and people are hard to understand. With the
+      power of the latest artificial intelligence research, people analyze &amp;
+      trade automatically and intelligently. This list contains the research,
+      tools and code that people use to beat the market.
+    </p>
+    <p>[<a href="./chinese.md">中文资源</a>]</p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#papers">Papers</a></li>
+      <li><a href="#courses--books">Courses &amp; Books</a></li>
+      <li>
+        <a href="#strategies--research">Strategies &amp; Research</a>
+        <ul>
+          <li><a href="#time-series-data">Time Series Data</a></li>
+          <li><a href="#portfolio-management">Portfolio Management</a></li>
+          <li><a href="#high-frequency-trading">High Frequency Trading</a></li>
+          <li><a href="#event-drive">Event Drive</a></li>
+          <li>
+            <a href="#crypto-currencies-strategies"
+              >Crypto Currencies Strategies</a
+            >
+          </li>
+          <li><a href="#technical-analysis">Technical Analysis</a></li>
+          <li><a href="#lottery--gamble">Lottery &amp; Gamble</a></li>
+          <li><a href="#arbitrage">Arbitrage</a></li>
+        </ul>
+      </li>
+      <li><a href="#data-sources">Data Sources</a></li>
+      <li><a href="#research-tools">Research Tools</a></li>
+      <li><a href="#trading-system">Trading System</a></li>
+      <li><a href="#ta-lib">TA Lib</a></li>
+      <li><a href="#exchange-api">Exchange API</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#others">Others</a></li>
+    </ul>
+    <h2 id="papers">Papers</h2>
+    <ul>
+      <li>
+        <a
+          href="http://www.radio.goldseek.com/bachelier-thesis-theory-of-speculation-en.pdf"
+          >The Theory of Speculation L. Bachelier, 1900</a
+        >
+        - The influences which determine the movements of the Stock Exchange
+        are.
+      </li>
+      <li>
+        <a href="http://m.e-m-h.org/Osbo59.pdf"
+          >Brownian Motion in the Stock Market Osborne, 1959</a
+        >
+        - The common-stock prices can be regarded as an ensemble of decisions in
+        statistical equilibrium.
+      </li>
+      <li>
+        <a
+          href="http://www.doc.ic.ac.uk/teaching/distinguished-projects/2015/j.cumming.pdf"
+          >An Investigation into the Use of Reinforcement Learning Techniques
+          within the Algorithmic Trading Domain, 2015</a
+        >
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1706.10059.pdf"
+          >A Deep Reinforcement Learning Framework for the Financial Portfolio
+          Management Problem</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://papers.nips.cc/paper/1551-reinforcement-learning-for-trading.pdf"
+          >Reinforcement Learning for Trading, 1994</a
+        >
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/0907.4290.pdf"
+          >Dragon-Kings, Black Swans and the Prediction of Crises Didier
+          Sornette</a
+        >
+        - The power laws in the distributions of event sizes under a broad range
+        of conditions in a large variety of systems.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1807.02787.pdf"
+          >Financial Trading as a Game: A Deep Reinforcement Learning
+          Approach</a
+        >
+        - Deep reinforcement learning provides a framework toward end-to-end
+        training of such trading agent.
+      </li>
+      <li>
+        <a href="https://cims.nyu.edu/~ritter/ritter2017machine.pdf"
+          >Machine Learning for Trading</a
+        >
+        - With an appropriate choice of the reward function, reinforcement
+        learning techniques can successfully handle the risk-averse case.
+      </li>
+      <li>
+        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3197726"
+          >Ten Financial Applications of Machine Learning, 2018</a
+        >
+        - Slides review few important financial ML applications.
+      </li>
+      <li>
+        <a href="https://arxiv.org/abs/2011.09607"
+          >FinRL: A Deep Reinforcement Learning Library for Automated Stock
+          Trading in Quantitative Finance, 2011</a
+        >
+        - Introduce a DRL library FinRL that facilitates beginners to expose
+        themselves to quantitative finance and to develop their own stock
+        trading strategies.
+      </li>
+      <li>
+        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3690996"
+          >Deep Reinforcement Learning for Automated Stock Trading: An Ensemble
+          Strategy, 2020</a
+        >
+        - Propose an ensemble strategy that employs deep reinforcement schemes
+        to learn a stock trading strategy by maximizing investment return.
+      </li>
+    </ul>
+    <h2 id="courses-books">Courses &amp; Books</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.coursera.org/learn/advanced-methods-reinforcement-learning-finance/home/welcome"
+          >NYU: Overview of Advanced Methods of Reinforcement Learning in
+          Finance</a
+        >
+      </li>
+      <li>
+        <a href="https://www.udacity.com/course/ai-for-trading--nd880"
+          >Udacity: Artificial Intelligence for Trading</a
+        >
+      </li>
+      <li>
+        <a href="https://cfte.education/">AI in Finance</a> - Learn Fintech
+        Online.
+      </li>
+      <li>
+        <a href="https://github.com/Rachnog/Advanced-Deep-Trading"
+          >Advanced-Deep-Trading</a
+        >
+        - Experiments based on “Advances in financial machine learning” book.
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Advances-Financial-Machine-Learning-Marcos-ebook/dp/B079KLDW21/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1541717436&amp;sr=1-1"
+          >Advances in Financial Machine Learning</a
+        >
+        - Using advanced ML solutions to overcome real-world investment
+        problems.
+      </li>
+      <li>
+        <a
+          href="https://github.com/jamesmawm/mastering-python-for-finance-second-edition"
+          >Mastering Python for Finance</a
+        >
+        - Sources codes for: Mastering Python for Finance, Second Edition.
+      </li>
+    </ul>
+    <h2 id="strategies-research">Strategies &amp; Research</h2>
+    <h3 id="time-series-data">Time Series Data</h3>
+    <p>Price and Volume process with Technology Analysis Indices</p>
+    <ul>
+      <li>
+        🌟🌟
+        <a href="https://github.com/borisbanushev/stockpredictionai"
+          >stockpredictionai</a
+        >
+        - A complete process for predicting stock price movements.
+      </li>
+      <li>
+        🌟 <a href="https://github.com/Ceruleanacg/Personae">Personae</a> -
+        Implements and environment of Deep Reinforcement Learning &amp;
+        Supervised Learning for Quantitative Trading.
+      </li>
+      <li>
+        🌟
+        <a
+          href="https://github.com/AI4Finance-LLC/Deep-Reinforcement-Learning-for-Automated-Stock-Trading-Ensemble-Strategy-ICAIF-2020"
+          >Ensemble-Strategy</a
+        >
+        - Deep Reinforcement Learning for Automated Stock Trading.
+      </li>
+      <li>
+        <a href="https://github.com/AI4Finance-LLC/FinRL-Library">FinRL</a> - A
+        Deep Reinforcement Learning Library for Automated Stock Trading in
+        Quantitative Finance.
+      </li>
+      <li>
+        <a
+          href="https://github.com/sachink2010/AutomatedStockTrading-DeepQ-Learning"
+          >AutomatedStockTrading-DeepQ-Learning</a
+        >
+        - Build a Deep Q-learning reinforcement agent model as automated trading
+        robot.
+      </li>
+      <li>
+        <a href="https://github.com/miroblog/tf_deep_rl_trader"
+          >tf_deep_rl_trader</a
+        >
+        - Trading environment(OpenAI Gym) + PPO(TensorForce).
+      </li>
+      <li>
+        <a href="https://github.com/6-Billionaires/trading-gym">trading-gym</a>
+        - Trading agent to train with episode of short term trading itself.
+      </li>
+      <li>
+        <a href="https://github.com/Kostis-S-Z/trading-rl">trading-rl</a> - Deep
+        Reinforcement Learning for Financial Trading using Price Trailing.
+      </li>
+      <li>
+        <a href="https://github.com/miroblog/deep_rl_trader">deep_rl_trader</a>
+        - Trading environment(OpenAI Gym) + DDQN (Keras-RL).
+      </li>
+      <li>
+        <a href="https://github.com/Ceruleanacg/Quantitative-Trading"
+          >Quantitative-Trading</a
+        >
+        - Papers and code implementing Quantitative-Trading.
+      </li>
+      <li>
+        <a href="https://github.com/hackthemarket/gym-trading">gym-trading</a> -
+        Environment for reinforcement-learning algorithmic trading models.
+      </li>
+      <li>
+        <a href="https://github.com/carlos8f/zenbrain">zenbrain</a> - A
+        framework for machine-learning bots.
+      </li>
+      <li>
+        <a href="https://github.com/AlphaSmartDog/DeepLearningNotes"
+          >DeepLearningNotes</a
+        >
+        - Machine learning in quant analysis.
+      </li>
+      <li>
+        <a href="https://github.com/kh-kim/stock_market_reinforcement_learning"
+          >stock_market_reinforcement_learning</a
+        >
+        - Stock market trading OpenAI Gym environment with Deep Reinforcement
+        Learning using Keras.
+      </li>
+    </ul>
+    <h3 id="portfolio-management">Portfolio Management</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/Albert-Z-Guo/Deep-Reinforcement-Stock-Trading"
+          >Deep-Reinforcement-Stock-Trading</a
+        >
+        - A light-weight deep reinforcement learning framework for portfolio
+        management.
+      </li>
+      <li>
+        <a href="https://github.com/filangel/qtrader">qtrader</a> -
+        Reinforcement Learning for portfolio management.
+      </li>
+      <li>
+        <a href="https://github.com/ZhengyaoJiang/PGPortfolio">PGPortfolio</a> -
+        A Deep Reinforcement Learning framework for the financial portfolio
+        management problem.
+      </li>
+      <li>
+        <a href="https://github.com/jankrepl/deepdow">DeepDow</a> - Portfolio
+        optimization with deep learning.
+      </li>
+    </ul>
+    <h3 id="high-frequency-trading">High Frequency Trading</h3>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/jamesmawm/High-Frequency-Trading-Model-with-IB"
+          >High-Frequency-Trading-Model-with-IB</a
+        >
+        - A high-frequency trading model using Interactive Brokers API with
+        pairs and mean-reversion.
+      </li>
+      <li>
+        🌟
+        <a
+          href="https://github.com/rorysroes/SGX-Full-OrderBook-Tick-Data-Trading-Strategy"
+          >SGX-Full-OrderBook-Tick-Data-Trading-Strategy</a
+        >
+        - Solutions for high-frequency trading (HFT) strategies using data
+        science approaches (Machine Learning) on Full Orderbook Tick Data.
+      </li>
+      <li>
+        <a href="https://github.com/ghgr/HFT_Bitcoin">HFT_Bitcoin</a> - Analysis
+        of High Frequency Trading on Bitcoin exchanges.
+      </li>
+    </ul>
+    <h3 id="event-drive">Event Drive</h3>
+    <ul>
+      <li>
+        🌟🌟
+        <a href="https://github.com/borisbanushev/stockpredictionai"
+          >stockpredictionai</a
+        >
+        - Complete process for predicting stock price movements.
+      </li>
+      <li>
+        🌟 <a href="https://github.com/maxbbraun/trump2cash">trump2cash</a> - A
+        stock trading bot powered by Trump tweets.
+      </li>
+    </ul>
+    <h3 id="crypto-currencies-strategies">Crypto Currencies Strategies</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/SC4RECOIN/LSTM-Crypto-Price-Prediction"
+          >LSTM-Crypto-Price-Prediction</a
+        >
+        - Predicting price trends in crypto markets using an LSTM-RNN for
+        trading.
+      </li>
+      <li>
+        <a href="https://github.com/lefnire/tforce_btc_trader"
+          >tforce_btc_trader</a
+        >
+        - TensorForce Bitcoin trading bot.
+      </li>
+      <li>
+        <a
+          href="https://github.com/SC4RECOIN/Tensorflow-NeuroEvolution-Trading-Bot"
+          >Tensorflow-NeuroEvolution-Trading-Bot</a
+        >
+        - A population model that trade cyrpto and breed and mutate iteratively.
+      </li>
+      <li>
+        <a href="https://github.com/gekkowarez/gekkoga">gekkoga</a> - Genetic
+        algorithm for solving optimization of trading strategies using Gekko.
+      </li>
+      <li>
+        <a href="https://github.com/markchen8717/Gekko_ANN_Strategies"
+          >Gekko_ANN_Strategies</a
+        >
+        - ANN trading strategies for the Gekko trading bot.
+      </li>
+      <li>
+        <a href="https://github.com/zschro/gekko-neuralnet">gekko-neuralnet</a>
+        - Neural network strategy for Gekko.
+      </li>
+      <li>
+        <a href="https://github.com/llSourcell/bitcoin_prediction"
+          >bitcoin_prediction</a
+        >
+        - Code for “Bitcoin Prediction” by Siraj Raval on YouTube.
+      </li>
+    </ul>
+    <h3 id="technical-analysis">Technical Analysis</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/je-suis-tm/quant-trading">quant-trading</a>
+        - Python quantitative trading strategies.
+      </li>
+      <li>
+        <a href="https://github.com/cloggy45/Gekko-Bot-Resources"
+          >Gekko-Bot-Resources</a
+        >
+        - Gekko bot resources.
+      </li>
+      <li>
+        <a href="https://github.com/tommiehansen/gekko_tools">gekko_tools</a> -
+        Gekko strategies, tools etc.
+      </li>
+      <li>
+        <a href="https://github.com/zzmike76/gekko">gekko RSI_WR</a> - Gekko
+        RSI_WR strategies.
+      </li>
+      <li>
+        <a href="https://github.com/mounirlabaied/gekko-strat-hl">gekko HL</a> -
+        Calculate down peak and trade on.
+      </li>
+      <li>
+        <a href="https://github.com/Philipid3s/EthTradingAlgorithm"
+          >EthTradingAlgorithm</a
+        >
+        - Ethereum trading algorithm using Python 3.5 and the library ZipLine.
+      </li>
+      <li>
+        <a href="https://github.com/thegamecat/gekko-trading-stuff"
+          >gekko_trading_stuff</a
+        >
+        - Awesome crypto currency trading platform.
+      </li>
+      <li>
+        <a href="https://github.com/mkmarek/forex.analytics">forex.analytics</a>
+        - Node.js native library performing technical analysis over an OHLC
+        dataset with use of genetic algorithmv.
+      </li>
+      <li>
+        <a href="https://github.com/VermeirJellen/Bitcoin_MACD_Strategy"
+          >Bitcoin_MACD_Strategy</a
+        >
+        - Bitcoin MACD crossover trading strategy backtest.
+      </li>
+      <li>
+        <a href="https://github.com/CryptoSignal/crypto-signal"
+          >crypto-signal</a
+        >
+        - Automated crypto trading &amp; technical analysis (TA) bot for
+        Bittrex, Binance, GDAX, and more.
+      </li>
+      <li>
+        <a href="https://github.com/xFFFFF/Gekko-Strategies"
+          >Gekko-Strategies</a
+        >
+        - Strategies to Gekko trading bot with backtests results and some useful
+        tools.
+      </li>
+      <li>
+        <a href="https://github.com/johndoe75/gekko-gannswing"
+          >gekko-gannswing</a
+        >
+        - Gann’s Swing trade strategy for Gekko trade bot.
+      </li>
+    </ul>
+    <h3 id="lottery-gamble">Lottery &amp; Gamble</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/chengstone/LotteryPredict"
+          >LotteryPredict</a
+        >
+        - Use LSTM to predict lottery.
+      </li>
+    </ul>
+    <h3 id="arbitrage">Arbitrage</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/BatuhanUsluel/ArbitrageBot">ArbitrageBot</a>
+        - Arbitrage bot that currently works on bittrex &amp; poloniex.
+      </li>
+      <li>
+        <a href="https://github.com/bitrinjani/r2">r2</a> - Automatic arbitrage
+        trading system powered by Node.js + TypeScript.
+      </li>
+      <li>
+        <a href="https://github.com/manu354/cryptocurrency-arbitrage"
+          >cryptocurrency-arbitrage</a
+        >
+        - A crypto currency arbitrage opportunity calculator. Over 800
+        currencies and 50 markets.
+      </li>
+      <li>
+        <a href="https://github.com/maxme/bitcoin-arbitrage"
+          >bitcoin-arbitrage</a
+        >
+        - Bitcoin arbitrage opportunity detector.
+      </li>
+      <li>
+        <a href="https://github.com/butor/blackbird">blackbird</a> - Long /
+        short market-neutral strategy.
+      </li>
+    </ul>
+    <h2 id="data-sources">Data Sources</h2>
+    <h4 id="traditional-markets">Traditional Markets</h4>
+    <ul>
+      <li>
+        🌟 <a href="https://www.quandl.com/tools/api">Quandl</a> - Get millions
+        of financial and economic dataset from hundreds of publishers via a
+        single free API.
+      </li>
+      <li>
+        <a href="https://github.com/lukaszbanasiak/yahoo-finance"
+          >yahoo-finance</a
+        >
+        - Python module to get stock data from Yahoo! Finance.
+      </li>
+      <li>
+        <a href="https://github.com/waditu/tushare">Tushare</a> - Crawling
+        historical data of Chinese stocks.
+      </li>
+    </ul>
+    <h4 id="crypto-currencies">Crypto Currencies</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/Optixal/CryptoInscriber">CryptoInscriber</a>
+        - A live crypto currency historical trade data blotter. Download live
+        historical trade data from any crypto exchange.
+      </li>
+      <li>
+        <a href="https://github.com/xFFFFF/Gekko-Datasets">Gekko-Datasets</a> -
+        Gekko trading bot dataset dumps. Download and use history files in
+        SQLite format.
+      </li>
+    </ul>
+    <h2 id="research-tools">Research Tools</h2>
+    <ul>
+      <li>
+        🌟🌟
+        <a href="https://github.com/tensortrade-org/tensortrade">TensorTrade</a>
+        - Trade efficiently with reinforcement learning.
+      </li>
+      <li>
+        <a href="https://github.com/quantOS-org/JAQS">JAQS</a> - An open source
+        quant strategies research platform.
+      </li>
+      <li>
+        <a href="https://github.com/quantopian/pyfolio">pyfolio</a> - Portfolio
+        and risk analytics in Python.
+      </li>
+      <li>
+        <a href="https://github.com/quantopian/alphalens">alphalens</a> -
+        Performance analysis of predictive (alpha) stock factors.
+      </li>
+      <li>
+        <a href="https://github.com/quantopian/empyrical">empyrical</a> - Common
+        financial risk and performance metrics. Used by Zipline and pyfolio.
+      </li>
+      <li>
+        <a href="https://github.com/zvtvz/zvt">zvt</a> - Zero vector trader.
+      </li>
+    </ul>
+    <h2 id="trading-system">Trading System</h2>
+    <p>For Back Test &amp; Live trading</p>
+    <h3 id="traditional-market">Traditional Market</h3>
+    <p><strong>System</strong></p>
+    <ul>
+      <li>
+        🌟🌟 <a href="https://github.com/quantopian/zipline">zipline</a> - A
+        python algorithmic trading library.
+      </li>
+      <li>
+        🌟 <a href="http://tradingview.com/">TradingView</a> - Get real-time
+        information and market insights.
+      </li>
+      <li>
+        <a href="https://github.com/ricequant/rqalpha">rqalpha</a> - A
+        extendable, replaceable Python algorithmic backtest &amp; trading
+        framework.
+      </li>
+      <li>
+        <a href="https://github.com/backtrader/backtrader">backtrader</a> -
+        Python backtesting library for trading strategies.
+      </li>
+      <li>
+        <a href="https://github.com/taurusai/kungfu">kungfu</a> - Kungfu Master
+        trading system.
+      </li>
+      <li>
+        <a href="https://github.com/QuantConnect/Lean">lean</a> - Algorithmic
+        trading engine built for easy strategy research, backtesting and live
+        trading.
+      </li>
+    </ul>
+    <p><strong>Combine &amp; Rebuild</strong></p>
+    <ul>
+      <li>
+        <a href="https://github.com/alpacahq/pylivetrader">pylivetrader</a> -
+        Python live trade execution library with zipline interface.
+      </li>
+      <li>
+        <a href="https://github.com/JimmyWuMadchester/CoinMarketCapBacktesting"
+          >CoinMarketCapBacktesting</a
+        >
+        - As backtest frameworks for coin trading strategy.
+      </li>
+    </ul>
+    <h3 id="crypto-currencies-1">Crypto Currencies</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/DeviaVir/zenbot">zenbot</a> - Command-line
+        crypto currency trading bot using Node.js and MongoDB.
+      </li>
+      <li>
+        <a href="https://github.com/carlos8f/bot18">bot18</a> - High-frequency
+        crypto currency trading bot developed by Zenbot.
+      </li>
+      <li>
+        <a href="https://github.com/magic8bot/magic8bot">magic8bot</a> - Crypto
+        currency trading bot using Node.js and MongoDB.
+      </li>
+      <li>
+        <a href="https://github.com/enigmampc/catalyst">catalyst</a> - An
+        algorithmic trading library for Crypto-Assets in python.
+      </li>
+      <li>
+        <a href="https://github.com/mounirlabaied/QuantResearchDev"
+          >QuantResearchDev</a
+        >
+        - Quant Research dev &amp; Traders open source project.
+      </li>
+      <li>
+        <a href="https://github.com/sudoscripter/MACD">MACD</a> - Zenbot MACD
+        Auto-Trader.
+      </li>
+      <li>
+        <a href="https://github.com/bbfamily/abu">abu</a> - A quant trading
+        system base on python.
+      </li>
+    </ul>
+    <h4 id="plugins">Plugins</h4>
+    <ul>
+      <li>
+        <a href="https://github.com/JimmyWuMadchester/CoinMarketCapBacktesting"
+          >CoinMarketCapBacktesting</a
+        >
+        - Tests bt and Quantopian Zipline as backtesting frameworks for coin
+        trading strategy.
+      </li>
+      <li>
+        <a href="https://github.com/xFFFFF/Gekko-BacktestTool"
+          >Gekko-BacktestTool</a
+        >
+        - Batch backtest, import and strategy params optimalization for Gekko
+        Trading Bot.
+      </li>
+    </ul>
+    <h2 id="ta-lib">TA Lib</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/femtotrader/pandas_talib">pandas_talib</a> -
+        A Python Pandas implementation of technical analysis indicators.
+      </li>
+      <li>
+        <a href="https://github.com/peerchemist/finta">finta</a> - Common
+        financial technical indicators implemented in Python-Pandas (70+
+        indicators).
+      </li>
+      <li>
+        <a href="https://github.com/TulipCharts/tulipnode">tulipnode</a> -
+        Official Node.js wrapper for Tulip Indicators. Provides over 100
+        technical analysis overlay and indicator functions.
+      </li>
+      <li>
+        <a href="https://github.com/andredumas/techan.js">techan.js</a> - A
+        visual, technical analysis and charting (Candlestick, OHLC, indicators)
+        library built on D3.
+      </li>
+    </ul>
+    <h2 id="exchange-api">Exchange API</h2>
+    <p>Do it in real world!</p>
+    <ul>
+      <li>
+        <a href="https://github.com/blampe/IbPy">IbPy</a> - Python API for the
+        Interactive Brokers on-line trading system.
+      </li>
+      <li>
+        <a href="https://github.com/mmmaaaggg/HuobiFeeder">HuobiFeeder</a> -
+        Connect HUOBIPRO exchange, get market/historical data for ABAT trading
+        platform backtest analysis and live trading.
+      </li>
+      <li>
+        <a href="https://github.com/nooperpudd/ctpwrapper">ctpwrapper</a> -
+        Shanghai future exchange CTP api.
+      </li>
+    </ul>
+    <h3 id="framework">Framework</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/google/tf-quant-finance"
+          >tf-quant-finance</a
+        >
+        - High-performance TensorFlow library for quantitative finance.
+      </li>
+    </ul>
+    <h3 id="visualizing">Visualizing</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/tensorflow/playground">playground</a> - Play
+        with neural networks.
+      </li>
+      <li>
+        <a href="https://github.com/lutzroeder/netron">netron</a> - Visualizer
+        for deep learning and machine learning models.
+      </li>
+    </ul>
+    <h3 id="gym-environment">GYM Environment</h3>
+    <ul>
+      <li>
+        🌟 <a href="https://github.com/Yvictor/TradingGym">TradingGym</a> -
+        Trading and Backtesting environment for training reinforcement learning
+        agent.
+      </li>
+      <li>
+        <a href="https://github.com/kkuette/TradzQAI">TradzQAI</a> - Trading
+        environment for RL agents, backtesting and training.
+      </li>
+      <li>
+        <a href="https://github.com/Kismuz/btgym">btgym</a> - Scalable,
+        event-driven, deep-learning-friendly backtesting library.
+      </li>
+    </ul>
+    <h2 id="articles">Articles</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/nailperry-zd/The-Economist"
+          >The-Economist</a
+        >
+        - The Economist.
+      </li>
+      <li>
+        <a href="https://github.com/wizardforcel/nyu-mlif-notes"
+          >nyu-mlif-notes</a
+        >
+        - NYU machine learning in finance notes.
+      </li>
+      <li>
+        <a
+          href="https://www.quantopian.com/posts/watch-our-webinar-buying-happiness-using-lstms-to-turn-feelings-into-trades-now?utm_source=forum&amp;utm_medium=twitter&amp;utm_campaign=sentiment-analysis"
+          >Using LSTMs to Turn Feelings Into Trades</a
+        >
+      </li>
+    </ul>
+    <h2 id="others">Others</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/jimgoo/zipline-tensorboard"
+          >zipline-tensorboard</a
+        >
+        - TensorBoard as a Zipline dashboard.
+      </li>
+      <li>
+        <a href="https://github.com/H256/gekko-quasar-ui">gekko-quasar-ui</a> -
+        An UI port for gekko trading bot using Quasar framework.
+      </li>
+    </ul>
+    <h4 id="other-resource">Other Resource</h4>
+    <ul>
+      <li>
+        🌟🌟🌟
+        <a href="https://github.com/huseinzol05/Stock-Prediction-Models"
+          >Stock-Prediction-Models</a
+        >
+        - Stock-Prediction-Models, Gathers machine learning and deep learning
+        models for Stock forecasting, included trading bots and simulations.
+      </li>
+      <li>
+        🌟🌟
+        <a href="https://github.com/firmai/financial-machine-learning"
+          >Financial Machine Learning</a
+        >
+        - A curated list of practical financial machine learning (FinML) tools
+        and applications. This collection is primarily in Python.
+      </li>
+      <li>
+        🌟
+        <a
+          href="https://github.com/grananqvist/Awesome-Quant-Machine-Learning-Trading"
+          >Awesome-Quant-Machine-Learning-Trading</a
+        >
+        - Quant / Algorithm trading resources with an emphasis on Machine
+        Learning.
+      </li>
+      <li>
+        <a href="https://github.com/wilsonfreitas/awesome-quant"
+          >awesome-quant</a
+        >
+        - A curated list of insanely awesome libraries, packages and resources
+        for Quants (Quantitative Finance).
+      </li>
+    </ul>
+  </body>
+</html>

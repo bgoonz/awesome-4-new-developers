@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-empirical-software-engineering-awesome">
+      Awesome Empirical Software Engineering
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      A curated repository of data sets and tools that can be used for
+      conducting evidence-based, data-driven research on software systems. This
+      research approach is often termed
+      <a href="https://en.wikipedia.org/wiki/Experimental_software_engineering"
+        >experimental, or empirical software engineering</a
+      >. Many of the data sets can also be useful in research using
+      <a href="https://en.wikipedia.org/wiki/Search-based_software_engineering"
+        >search-based software engineering</a
+      >
+      methods. The repository is named after the
+      <a href="https://www.msrconf.org/">Mining Software Repositories (MSR)</a>
+      conference series. For examples of such work see the MSR conference’s
+      <a href="http://2016.msrconf.org/#/hall-of-fame">Hall of Fame</a>.
+    </p>
+    <ul>
+      <li>
+        This list requires your input for its continuous improvement. Read the
+        <a href="contributing.md">contribution guide</a> for instructions on how
+        you can contribute. Alternatively, you can send me an
+        <a href="mailto:dds@aueb.gr">email</a> if you find the process too
+        cumbersome or confusing.
+      </li>
+      <li>
+        For more awesome lists, see
+        <a href="https://github.com/sindresorhus/awesome">awesome</a>.
+      </li>
+    </ul>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#repositories">Repositories</a></li>
+      <li><a href="#data-sets">Data Sets</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#research-outlets">Research Outlets</a></li>
+    </ul>
+    <h2 id="repositories">Repositories</h2>
+    <ul>
+      <li>
+        <a href="http://sir.unl.edu/portal/index.php">SIR</a> -
+        Software-artifact infrastructure repository; Java, C, C++, and C#
+        software together with test suites and fault data.
+      </li>
+      <li>
+        <a href="http://promise.site.uottawa.ca/SERepository/datasets-page.html"
+          >PROMISE</a
+        >
+        - About 20 datasets related to software engineering research.
+      </li>
+      <li>
+        <a href="https://flossmole.org/collection_details">FLOSSmole</a> -
+        Collaborative collection and analysis of free/libre/open source project
+        data.
+      </li>
+      <li>
+        <a href="http://zenodo.org/">Zenodo</a> - Software data collections in
+        CERN’s open-access repository.
+        <ul>
+          <li>
+            <a href="http://zenodo.org/communities/seacraft"
+              >Software Engineering Artifacts Can Really Assist Future Tasks</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://zenodo.org/communities/empirical-software-engineering/"
+              >Empirical Software Engineering</a
+            >
+          </li>
+          <li>
+            <a href="https://zenodo.org/communities/msr/"
+              >Mining Software Repositories</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="data-sets">Data Sets</h2>
+    <ul>
+      <li>
+        <a href="https://androidtimemachine.github.io">AndroidTimeMachine</a> -
+        Graph-based dataset of commit history of 8,431 real-world Android apps.
+      </li>
+      <li>
+        <a href="https://androzoo.uni.lu/">AndroZoo</a> - Collection of Android
+        Applications.
+      </li>
+      <li>
+        <a href="http://bug.inf.usi.ch/index.php">Bug Prediction Dataset</a> -
+        Collection of models and metrics from Eclipse JDT Core, PDE UI, Equinox
+        Framework, Lucene, Mylyn, and their histories.
+      </li>
+      <li>
+        <a href="http://kin-y.github.io/miningReviewRepo/">Code Reviews</a> -
+        Code reviews of OpenStack, LibreOffice, AOSP, Qt, Eclipse.
+      </li>
+      <li>
+        <a href="http://www.comp.nus.edu.sg/%7Erelease/corebench/">CoREBench</a>
+        - Collection of 70 realistically Complex Regression Errors that were
+        systematically extracted from the repositories and bug reports of four
+        open-source software projects: Make, Grep, Findutils, and Coreutils.
+      </li>
+      <li>
+        <a href="https://rvantonder.github.io/CryptOSS/"
+          >Cryptocurrency GitHub Activity and Market Cap Dataset</a
+        >
+        - Activity such as commits, stars, prices, and market cap of over 200
+        cryptocurrency projects on GitHub over time. Raw, historic data is also
+        <a href="https://zenodo.org/record/2595588#.XRuzuBNKhSM">available</a>.
+      </li>
+      <li>
+        <a href="https://github.com/rjust/defects4j">Defects4J</a> - Collection
+        of 395 reproducible bugs collected with the goal of advancing software
+        testing research.
+      </li>
+      <li>
+        <a
+          href="http://download.eclipse.org/scava/datasets/aeri_stacktraces/aeri_stacktraces.html"
+          >Eclipse AERI stacktraces</a
+        >
+        - Collection of stacktraces of Exceptions encountered by users of the
+        Eclipse IDE, as retrieved by the AERI reporting system.
+      </li>
+      <li>
+        <a
+          href="https://figshare.com/articles/Enron_Spreadsheets_and_Emails/1221767"
+          >Enron Spreadsheets and Emails</a
+        >
+        - All the spreadsheets and emails used in the paper ‘Enron’s
+        Spreadsheets and Related Emails: A Dataset and Analysis’.
+      </li>
+      <li>
+        <a href="https://github.com/istlab/maven_bug_catalog">Findbugs-maven</a>
+        - Set of FindBugs reports for the Java projects of the
+        <a href="https://maven.apache.org">Maven repository</a>.
+      </li>
+      <li>
+        <a href="http://ghtorrent.org/">GHTorrent</a> - Scalable, queriable,
+        offline mirror of data offered through the GitHub REST API.
+      </li>
+      <li>
+        <a href="http://www.inf.u-szeged.hu/~ferenc/papers/GitHubBugDataSet/"
+          >GitHub Bug Dataset</a
+        >
+        - Bug Dataset of 15 Java open-source projects characterized by static
+        source code metrics.
+      </li>
+      <li>
+        <a href="https://cloud.google.com/bigquery/public-data/github"
+          >GitHub on Google BigQuery</a
+        >
+        - GitHub data accessible through Google’s BigQuery platform.
+      </li>
+      <li>
+        <a href="http://slebok.github.io/zoo/">Grammar Zoo</a> - Collection of
+        grammars of DSLs and GPLs, some extracted from metamodels and document
+        schemata.
+      </li>
+      <li>
+        <a href="http://www.kave.cc/datasets">KaVE</a> - Developer tool
+        interaction data.
+      </li>
+      <li>
+        <a href="https://zenodo.org/record/2652487#.XRnvomUzb0o"
+          >Linux Kernel 4.21 Call Graphs</a
+        >
+        - The Linux Kernel 4.21 Call Graphs produced using
+        <a href="https://github.com/dspinellis/cscout/">CScout</a>.
+      </li>
+      <li>
+        <a href="https://github.com/bkarak/data_msr2015">Maven metrics</a> -
+        Collection of software complexity &amp; sizing metrics for the
+        <a href="https://maven.apache.org">Maven Repository</a>.
+      </li>
+      <li>
+        <a href="https://zenodo.org/record/1489120">Maven Dependency Graph</a> -
+        Snapshot of the whole Maven Central taken on September 6, 2018, stored
+        in a graph database.
+      </li>
+      <li>
+        <a href="https://github.com/jxshin/mzdata">mzdata</a> - Multi-extract
+        and multi-level dataset of Mozilla issue tracking history.
+      </li>
+      <li>
+        <a href="https://github.com/AuthEceSoftEng/msr-2018-npm-miner"
+          >npm-miner</a
+        >
+        - The dataset contains the analysis results of 5 open source software
+        quality tools eslint, escomplex, nsp, jsinspect and sonarjs for 2000
+        popular (in terms of stars and downloads) npm packages.
+      </li>
+      <li>
+        <a href="https://github.com/tue-mdse/ocl-dataset"
+          >OCL Expressions on GitHub</a
+        >
+        - Data set of 9188 OCL expressions originating from 504 EMF meta-models
+        in 245 systematically selected GitHub repositories.
+      </li>
+      <li>
+        <a href="https://reporeapers.github.io">RepoReapers Data Set</a> - Data
+        set containing a collection of
+        <em>engineered software projects</em> from GHTorrent.
+      </li>
+      <li>
+        <a href="https://doi.org/10.5281/zenodo.2583978"
+          >Software Heritage Graph Dataset</a
+        >
+        - Graph of the development history and file metadata of &gt;80 million
+        software projects from various forges (GitHub, Gitlab, Debian, PyPI,
+        Google Code, etc) in a deduplicated and unified representation (<a
+          href="https://dl.acm.org/citation.cfm?id=3341907"
+          >paper here</a
+        >).
+      </li>
+      <li>
+        <a href="http://stamina.chefbe.net/download">STAMINA</a> - (STAte
+        Machine INference Approaches) data are used to benchmark techniques for
+        learning deterministic finite state machines (FSMs).
+      </li>
+      <li>
+        <a href="https://archive.org/details/stackexchange">Stack Exchange</a> -
+        Anonymized dump of all user-contributed content on the Stack Exchange
+        network.
+      </li>
+      <li>
+        <a href="http://travistorrent.testroots.org">TravisTorrent</a> -
+        Provides free and easy-to-use Traivs CI build analyses.
+      </li>
+      <li>
+        <a href="https://wiki.debian.org/UltimateDebianDatabase"
+          >Ultimate Debian Database (UDD)</a
+        >
+        - Data about various aspects of Debian (e.g. packages, bugs, mainteners)
+        in the same SQL database.
+      </li>
+      <li>
+        <a href="http://www.inf.u-szeged.hu/~ferenc/papers/UnifiedBugDataSet/"
+          >Unified Bug Dataset</a
+        >
+        - Static source code based datasets which includes the Bugcatchers Bug
+        Dataset, the
+        <a href="http://bug.inf.usi.ch/index.php">Bug Prediction Dataset</a>,
+        the
+        <a href="https://www.st.cs.uni-saarland.de/softevo/bug-data/eclipse/"
+          >Eclipse Bug Dataset</a
+        >, the
+        <a href="http://www.inf.u-szeged.hu/~ferenc/papers/GitHubBugDataSet/"
+          >GitHub Bug Dataset</a
+        >, some datasets from the
+        <a href="http://promise.site.uottawa.ca/SERepository/datasets-page.html"
+          >PROMISE</a
+        >
+        repository.
+      </li>
+      <li>
+        <a href="https://github.com/dspinellis/unix-history-repo"
+          >Unix history</a
+        >
+        - Git repository with 46 years of Unix history evolution.
+      </li>
+    </ul>
+    <h2 id="tools">Tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/JetBrains-Research/astminer">astminer</a> -
+        Library and tool for mining of path-based representations of code and
+        other data derived from ASTs.
+      </li>
+      <li>
+        <a href="http://boa.cs.iastate.edu/">Boa</a> - Domain-specific language
+        and infrastructure that eases mining software repositories.
+      </li>
+      <li>
+        <a href="https://github.com/JetBrains-Research/buckwheat">buckwheat</a>
+        - Multi-language tokenizer for extracting identifiers from source code.
+      </li>
+      <li>
+        <a href="http://www.spinellis.gr/sw/ckjm/">ckjm</a> - Chidamber and
+        Kemerer Java Metrics.
+      </li>
+      <li>
+        <a href="https://github.com/SpoonLabs/coming/">Coming</a> - A Java
+        framework for analyzing code changes and mining instances of change
+        patterns from Git repositories.
+      </li>
+      <li>
+        <a href="https://github.com/rvantonder/CryptOSS">CryptOSS</a> - Mine
+        GitHub activity and market cap data for cryptocurrency projects.
+      </li>
+      <li>
+        <a href="https://github.com/tushartushar/DbDeo">DbDeo</a> - Extract
+        embedded SQL statements and detect database schema smells.
+      </li>
+      <li>
+        <a href="http://www.designite-tools.com">Designite</a> - Compute source
+        code metrics and detect a variety of implementation, design, and
+        architecture smells for C#.
+      </li>
+      <li>
+        <a href="https://github.com/tushartushar/DesigniteJava"
+          >DesigniteJava</a
+        >
+        - Compute source code metrics and detect a variety of implementation and
+        design smells for Java.
+      </li>
+      <li>
+        <a href="https://github.com/jrfaller/diggit">Diggit</a> - Agile Ruby
+        Tool to analyze Git repositories.
+      </li>
+      <li>
+        <a href="http://grimoirelab.github.io/">GrimoireLab</a> -
+        Free/Libre/Open Source tools for Software Development Analytics.
+      </li>
+      <li>
+        <a href="http://www.github.com/mauricioaniche/metricminer2"
+          >MetricMiner</a
+        >
+        - Lean Java DSL to mine and extract data (e.g. commits, developers,
+        modifications, diffs) from Git and SVN repositories.
+      </li>
+      <li>
+        <a href="https://github.com/diverse-project/maven-miner">Maven-miner</a>
+        - Java tools and infrastructure to resolve the whole Maven dependency
+        graph, hosted in Maven Central, in the form of a
+        <a href="https://neo4j.com/">Neo4j</a> Graph.
+      </li>
+      <li>
+        <a href="https://github.com/chaoss/grimoirelab-perceval">Perceval</a> -
+        Fetch repository data from tens of back-ends.
+      </li>
+      <li>
+        <a href="https://github.com/tushartushar/Puppeteer">Puppeteer</a> -
+        Detect configuration smells in Puppet code.
+      </li>
+      <li>
+        <a href="https://github.com/ishepard/pydriller">PyDriller</a> - Python
+        Framework to analyse Git repositories.
+      </li>
+      <li>
+        <a href="https://github.com/dspinellis/cqmetrics">qmcalc</a> - Calculate
+        quality metrics from C source code.
+      </li>
+      <li>
+        <a href="https://github.com/RepoReapers/reaper">reaper</a> - Python tool
+        to compute a score for a repository from GHTorrent. The score quantifies
+        the extent to which the project contained within the repository is
+        <em>engineered</em>.
+      </li>
+      <li>
+        <a href="https://github.com/tsantalis/RefactoringMiner"
+          >RefactoringMiner</a
+        >
+        - Library/API for detection of refactorings in changes of Java code.
+      </li>
+      <li>
+        <a href="https://github.com/electricalwind/data7">VulData7</a> - Java
+        framework enabling the automated collection of commits fixing
+        vulnerabilities that are reported in NVD (links NVD with Git).
+      </li>
+    </ul>
+    <h2 id="research-outlets">Research Outlets</h2>
+    <ul>
+      <li>
+        Outlets exclusively devoted to empirical software engineering research
+        <ul>
+          <li>
+            <a href="https://link.springer.com/journal/10664"
+              >Empirical Software Engineering journal</a
+            >
+          </li>
+          <li>
+            <a href="https://www.msrconf.org/"
+              >MSR: Mining Software Repositories conference</a
+            >
+          </li>
+          <li>
+            <a href="http://promise.site.uottawa.ca/SERepository/"
+              >PROMISE: Predictive Models and Data Analytics in Software
+              Engineering conference</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        Outlets that publish empirical software engineering research
+        <ul>
+          <li>
+            <a href="https://dl.acm.org/citation.cfm?id=J790"
+              >ACM Transactions on Software Engineering and Methodology
+              (TOSEM)</a
+            >
+          </li>
+          <li>
+            <a href="https://www.esec-fse.org/"
+              >ESEC/FSE: ACM Joint European Software Engineering Conference and
+              Symposium on the Foundations of Software Engineering</a
+            >
+          </li>
+          <li>
+            <a href="http://www.icse-conferences.org/"
+              >ICSE: International Conference on Software Engineering</a
+            >
+          </li>
+          <li>
+            <a href="https://publications.computer.org/software-magazine/"
+              >IEEE Software magazine</a
+            >
+          </li>
+          <li>
+            <a href="https://www.computer.org/csdl/journal/ts"
+              >IEEE Transactions on Software Engineering</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.journals.elsevier.com/journal-of-systems-and-software"
+              >Journal of Systems and Software</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://ieeexplore.ieee.org/xpl/conhome.jsp?punumber=1000695"
+              >SANER: IEEE International Conference on Software Analysis,
+              Evolution and Reengineering</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="http://www.spinellis.gr">Diomidis Spinellis</a> has waived all
+      copyright and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

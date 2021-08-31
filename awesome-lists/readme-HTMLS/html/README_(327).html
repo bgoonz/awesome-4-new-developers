@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-mobile-web-development-awesome">
+      Awesome Mobile Web Development
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <p>All that you need to create a great mobile web experience.</p>
+    <p>
+      <a
+        href="https://github.com/myshov/awesome-mobile-web-development/blob/master/CONTRIBUTING.md"
+        >Contribution Guidelines</a
+      >
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#articles-and-documentation">Articles and Documentation</a>
+      </li>
+      <li><a href="#books">Books</a></li>
+      <li>
+        <a href="#specifications-from-w3c-for-enhancing-mobile-web-experience"
+          >Specifications from W3C for Enhancing Mobile Web Experience</a
+        >
+      </li>
+      <li><a href="#talks">Talks</a></li>
+      <li>
+        <a href="#performance-auditing-tools">Performance Auditing Tools</a>
+      </li>
+      <li><a href="#platform-monitoring">Platform Monitoring</a></li>
+      <li>
+        <a href="#other-useful-tools-and-libraries"
+          >Other Useful Tools and Libraries</a
+        >
+      </li>
+    </ul>
+    <h2 id="articles-and-documentation">Articles and Documentation</h2>
+    <ul>
+      <li>
+        <a
+          href="https://developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away"
+          >300ms Tap Delay, Gone Away</a
+        >
+        - How to prevent 300 ms delay on tap.
+      </li>
+      <li>
+        <a href="http://engineering.flipboard.com/2015/02/mobile-web"
+          >60 FPS on Mobile Web</a
+        >
+        - How to make a really fast mobile website (by Flipboard).
+      </li>
+      <li>
+        <a href="https://web.dev/adaptive-loading-cds-2019/"
+          >Adaptive loading: improving web performance on slow devices</a
+        >
+        - How to optimize site for specific hardware and network constraints.
+      </li>
+      <li>
+        <a
+          href="https://engineeringblog.yelp.com/2015/01/animating-the-mobile-web.html"
+          >Animating the Mobile Web</a
+        >
+        - A case study on achieving fast animations on mobile web (by Yelp).
+      </li>
+      <li>
+        <a
+          href="https://cloudfour.com/thinks/autofill-what-web-devs-should-know-but-dont/"
+          >Autofill: What web devs should know, but don’t</a
+        >
+        - Everything you need to know about forms autofill.
+      </li>
+      <li>
+        <a href="https://web.dev/bfcache/">Back/forward cache</a> - How to
+        optimize site for navigation through the history.
+      </li>
+      <li>
+        <a
+          href="https://www.opensignal.com/2021/02/03/benchmarking-the-global-5g-experience"
+          >Benchmarking the global 5G experience</a
+        >
+        - A case study on prolifiration of 5G networks.
+      </li>
+      <li>
+        <a href="https://csswizardry.com/2019/03/cache-control-for-civilians/"
+          >Cache-Control for Civilians</a
+        >
+        - How to setup Cache-Control to achieve the best reponse time.
+      </li>
+      <li>
+        <a
+          href="https://allthingssmitty.com/2020/05/11/css-fix-for-100vh-in-mobile-webkit/"
+          >CSS fix for 100vh in mobile WebKit</a
+        >
+        - How to fix issue with 100vh in mobile WebKit.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/samsung-internet-dev/current-web-on-galaxy-fold-ad12d7f57c26"
+          >Current Web on Galaxy Fold</a
+        >
+        - An advices on web development for Galaxy Fold.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/lookup-design/designing-a-dark-theme-for-oled-iphones-e13cdfea7ffe"
+          >Designing a Dark Theme for OLED iPhones</a
+        >
+        - On issues with dark themes on OLED displays and what to do with them.
+      </li>
+      <li>
+        <a href="https://webkit.org/blog/7929/designing-websites-for-iphone-x/"
+          >Designing Websites for iPhone X</a
+        >
+        - How to deal with “the notch” on iPhone X.
+      </li>
+      <li>
+        <a
+          href="https://www.toptal.com/android/developing-mobile-web-apps-when-why-and-how"
+          >Developing Mobile Web Applications: When, Why, and How</a
+        >
+        - The good high-level overview of mobile web development.
+      </li>
+      <li>
+        <a href="https://developer.apple.com/news/?id=z0i801mg"
+          >Enhance SMS-delivered code security with domain-bound codes</a
+        >
+        - On additional security measures for 2FA.
+      </li>
+      <li>
+        <a href="https://kryogenix.org/code/browser/everyonehasjs.html"
+          >Everyone has JavaScript, right?</a
+        >
+        - A diagram that shows in which cases JavaScript can be unavailable.
+      </li>
+      <li>
+        <a href="https://addyosmani.com/blog/the-prpl-pattern/"
+          >Faster Web App Delivery with PRPL</a
+        >
+        - On pattern for performant web applications.
+      </li>
+      <li>
+        <a
+          href="https://developers.google.com/web/tools/chrome-devtools/remote-debugging/"
+          >Get Started with Remote Debugging Android Devices</a
+        >
+        - Debug your web app on Adroid with Chrome DevTools.
+      </li>
+      <li>
+        <a
+          href="https://www.smashingmagazine.com/guidelines-for-mobile-web-development/"
+          >Guidelines For Mobile Web Development</a
+        >
+        - The compilation of good articles about mobile web development.
+      </li>
+      <li>
+        <a
+          href="https://dougsillars.com/2020/01/06/hiding-videos-on-the-mbile-web/"
+          >Hiding Videos on the Mobile Web</a
+        >
+        - How to hide videos without an impact on mobile traffic.
+      </li>
+      <li>
+        <a
+          href="https://www.smashingmagazine.com/2016/10/how-to-poison-the-mobile-user/"
+          >How To Poison The Mobile User</a
+        >
+        - An overview of negative practices on mobile sites.
+      </li>
+      <li>
+        <a
+          href="https://webkit.org/blog/8970/how-web-content-can-affect-power-usage/"
+          >How Web Content Can Affect Power Usage</a
+        >
+        - What you can do with web app to achieve better battery life.
+      </li>
+      <li>
+        <a
+          href="https://www.twilio.com/blog/html-attributes-two-factor-authentication-autocomplete"
+          >HTML attributes to improve your users’ two factor authentication
+          experience</a
+        >
+        - On autocomplete attribute regarding 2fa.
+      </li>
+      <li>
+        <a
+          href="https://css-tricks.com/interaction-media-features-and-their-potential-for-incorrect-assumptions/"
+          >Interaction Media Features and Their Potential (for Incorrect
+          Assumptions</a
+        >
+        - On detection of various input devices.
+      </li>
+      <li>
+        <a href="https://ampbyexample.com">Learn AMP by Example</a> - A hands-on
+        introduction to Accelerated Mobile Pages focusing on code and live
+        samples.
+      </li>
+      <li>
+        <a
+          href="https://dev.to/addyosmani/loading-web-pages-fast-on-a-20-feature-phone-8h6"
+          >Loading web pages fast on a $20 feature phone</a
+        >
+        - Best practices for building web pages for feature phones.
+      </li>
+      <li>
+        <a
+          href="https://csswizardry.com/2021/02/measuring-network-performance-in-mobile-safari/"
+          >Measuring Network Performance in Mobile Safari</a
+        >
+        - An advices on using Mobile Safari for measuring network performance.
+      </li>
+      <li>
+        <a href="https://24ways.org/2019/microbrowsers-are-everywhere/"
+          >Microbrowsers are Everywhere</a
+        >
+        - On optimizing sites for messengers.
+      </li>
+      <li>
+        <a
+          href="https://infrequently.org/2021/03/the-performance-inequality-gap/"
+          >Mobile Performance Inequality Gap</a
+        >
+        - Why you need to care of performance on cheap smartphones.
+      </li>
+      <li>
+        <a href="https://blog.algolia.com/mobile-search-ux-8-obstacles/"
+          >Mobile Search UX 8 Obstacles</a
+        >
+        - Series of articles about mobile search UX.
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/mobile-bp/">Mobile Web Best Practices</a>
+        - A little bit out of date but still useful list of best practices for
+        mobile websites from W3C.
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/mwabp/"
+          >Mobile Web Application Best Practices</a
+        >
+        - The list of best practices for mobile web applications from W3C.
+      </li>
+      <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/Mobile"
+          >Mobile Web Development</a
+        >
+        - Guideline (must read) from Mozilla about designing mobile websites.
+      </li>
+      <li>
+        <a href="https://www.oreilly.com/ideas/mobile-web-performance-checklist"
+          >Mobile Web Performance Checklist</a
+        >
+        - Best practices for optimizing mobile web apps.
+      </li>
+      <li>
+        <a href="https://davidwalsh.name/intersection-observers"
+          >Observing Intersection Observers</a
+        >
+        - An introduction to intersection observers.
+      </li>
+      <li>
+        <a href="https://github.com/pazguille/offline-first"
+          >Offline First (Awesome List)</a
+        >
+        - The awesome list of offline-first stuff (Progressive Web Apps, Service
+        Workers etc.)
+      </li>
+      <li>
+        <a href="https://davidwalsh.name/wake-lock-shim"
+          >Prevent Mobile Browser From Sleeping</a
+        >
+        - How to prevent your phone from sleeping.
+      </li>
+      <li>
+        <a
+          href="https://www.smashingmagazine.com/2011/01/guidelines-for-responsive-web-design/"
+          >Responsive Web Design – What It Is And How To Use It</a
+        >
+        - Overview of technics of responsive design.
+      </li>
+      <li>
+        <a href="https://queue.acm.org/detail.cfm?id=2510122"
+          >Rules for Mobile Performance Optimization</a
+        >
+        - An overview of techniques to speed page loading.
+      </li>
+      <li>
+        <a href="https://csswizardry.com/2019/05/self-host-your-static-assets/"
+          >Self-Host Your Static Assets</a
+        >
+        - Reason why you need to self-host your static assets.
+      </li>
+      <li>
+        <a href="https://simplified.dev/performance/impact-of-web-performance"
+          >The Impact of Web Performance</a
+        >
+        - On performance as a key factor for the business.
+      </li>
+      <li>
+        <a
+          href="https://nolanlawson.com/2019/09/22/the-joy-and-challenge-of-developing-for-kaios/"
+          >The joy and challenge of developing for KaiOS</a
+        >
+        - How to start developing for KaiOS.
+      </li>
+      <li>
+        <a href="https://adactio.com/journal/15122">Timing Out</a> - A service
+        worker strategy for dealing with lie-fi (a bad network connection).
+      </li>
+      <li>
+        <a
+          href="https://bitsofco.de/tips-for-making-interactive-elements-accessible-on-mobile-devices/"
+          >Tips for making interactive elements accessible on mobile devices</a
+        >
+        - List of advices on creating accessible mobile UI.
+      </li>
+      <li>
+        <a href="https://css-tricks.com/touch-devices-not-judged-size/"
+          >Touch Devices Should Not Be Judged By Their Size</a
+        >
+        - Overview of interaction media features.
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/WCAG21/"
+          >Web Content Accessibility Guidelines (WCAG)</a
+        >
+        - Wide range of recommendations for making Web content more accessible.
+      </li>
+      <li>
+        <a href="https://developers.google.com/web/fundamentals/"
+          >Web Fundamentals</a
+        >
+        - Guideline from Google about creating good mobile web experiences.
+      </li>
+      <li>
+        <a href="https://www.smashingmagazine.com/2020/02/foldable-web-meaning/"
+          >What Does A Foldable Web Actually Mean?</a
+        >
+        - Musings on the impact of foldable phones on web.
+      </li>
+      <li>
+        <a href="https://mobisocial.stanford.edu/papers/boneh-www2012.pdf"
+          >Who Killed My Battery</a
+        >
+        - An interesting paper about websites’ power consumption.
+      </li>
+    </ul>
+    <h2 id="books">Books</h2>
+    <ul>
+      <li>
+        <a href="http://www.awwwards.org/brainfood-mobile-performance-vol3.pdf"
+          >Brain Food Mobile Performance</a
+        >
+        - Free small ebook on mobile performance from Awwwards.
+      </li>
+      <li>
+        <a href="https://abookapart.com/products/going-offline"
+          >Going Offline</a
+        >
+        - Guide on building offline experience with service workers.
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/High-Performance-Mobile-Web-Optimizing/dp/1491912553"
+          >High-Performance Mobile Web: Best Practices for Optimizing Mobile Web
+          Apps</a
+        >
+        - Book about the performance of the web on mobile devices.
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Mobile-Design-Pattern-Gallery-Smartphone/dp/1449363636"
+          >Mobile Design Pattern Gallery: UI Patterns for Smartphone Apps</a
+        >
+        - UI patterns which can be useful for mobile web apps.
+      </li>
+      <li>
+        <a href="http://mobile-first.abookapart.com/">Mobile First</a> - How to
+        design sites for mobile devices (free online version).
+      </li>
+      <li>
+        <a href="https://abookapart.com/products/responsive-web-design"
+          >Responsive Web Design</a
+        >
+        - Book about responsive web design.
+      </li>
+    </ul>
+    <h2 id="specifications-from-w3c-for-enhancing-mobile-web-experience">
+      Specifications from W3C for Enhancing Mobile Web Experience
+    </h2>
+    <ul>
+      <li>
+        <a href="https://www.w3.org/TR/battery-status/">Battery API</a> - On
+        access to information about the battery.
+      </li>
+      <li>
+        <a href="http://wicg.github.io/netinfo/">Connection API</a> - On access
+        to information about connection.
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/generic-sensor/">Generic Sensor API</a> -
+        The spec for exposing sensor data.
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/geolocation-API/">Geolocation API</a> -
+        On access to geolocation.
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/html-media-capture/"
+          >HTML Media Capture</a
+        >
+        - On user access to camera or microphone.
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/payment-request/">Payment Request API</a>
+        - On payment method with minimal integration.
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/presentation-api/">Presentation API</a> -
+        On access to presentation displays.
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/remote-playback/">Remote Playback API</a>
+        - On controlling remote playback of media from a web page.
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/vibration/">Vibration API</a> - On access
+        to the vibration mechanism of the hosting device.
+      </li>
+      <li>
+        <a href="https://wicg.github.io/visual-viewport/"
+          >Visual Viewport API</a
+        >
+        - On access to a visual portion of a screen excluding on-screen
+        keyboards, areas outside of a pinch-zoom area etc..
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/wake-lock/">Wake Lock Api</a> - On access
+        to wake lock request (prevents some aspect of a device from entering the
+        power-saving state).
+      </li>
+      <li>
+        <a href="https://webbluetoothcg.github.io/web-bluetooth/"
+          >Web Bluetooth</a
+        >
+        - On an API to discover and communicate with devices over the Bluetooth
+        4.
+      </li>
+      <li>
+        <a href="https://w3c.github.io/web-nfc/">Web NFC API</a> - On access to
+        Near Field Communication capabilities of the device.
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/notifications/">Web Notifications</a> -
+        On an API for end-user notifications.
+      </li>
+    </ul>
+    <h2 id="talks">Talks</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=puUPpVrIRkc&amp;feature=emb_title"
+          >Adaptive Loading - Improving web performance on slow devices</a
+        >
+        - Overview of practices for adapting a site to hardware and network
+        constraints, by Addy Osmani, Nate Schloss.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=z6dg_V22wV0"
+          >Fundamentals of Mobile Web Development</a
+        >
+        - Overview of the best practices for mobile web development, by Matt
+        Gaunt.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=J2dOTKBoTL4"
+          >Future App Model: Advanced Service Worker</a
+        >
+        - The glimpse on how to optimize web apps and sites using streams and
+        service workers and other new APIs, by Jake Archibald.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=cmGr0RszHc8"
+          >Instant Loading: Building offline-first Progressive Web Apps</a
+        >
+        - Introduction to service workers, by Jake Archibald.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=_y5IzI_tpTw"
+          >Mobile Web Performance</a
+        >
+        - What to do on your site to achieve the best possible mobile
+        experience, by Estelle Weyl.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=WrA85a4ZIaM"
+          >Mobile Web Performance Auditing</a
+        >
+        - How to audit performance issues on the site, by Paul Lewis.
+      </li>
+    </ul>
+    <h2 id="auditing-tools">Auditing Tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/GoogleChrome/lighthouse">Lighthouse</a> -
+        Analyzing tool for web apps and web pages.
+      </li>
+      <li>
+        <a href="https://search.google.com/test/mobile-friendly"
+          >Mobile-Friendly Test</a
+        >
+        - Tool for testing that your site is mobile-friendly.
+      </li>
+      <li>
+        <a href="https://developers.google.com/speed/pagespeed/insights"
+          >PageSpeed Insights</a
+        >
+        - The tool that analyzes your page and gives recommendations for
+        increasing downloading speed.
+      </li>
+      <li>
+        <a href="https://www.modpagespeed.com">PageSpeed</a> - Web server
+        modules that optimize your site automatically.
+      </li>
+      <li>
+        <a href="https://www.thinkwithgoogle.com/feature/mobile"
+          >Site Speed Checker</a
+        >
+        - Compare the speed of your mobile site to others.
+      </li>
+      <li>
+        <a href="https://testmysite.withgoogle.com/intl/en-gb"
+          >Test Your Mobile Speed</a
+        >
+        - The tool from Google that performs comprehesive speed check of the
+        mobile site.
+      </li>
+      <li>
+        <a href="https://webpagetest.org">Webpagetest</a> - Website speed test
+        from multiple locations using real browsers and at real consumer
+        connection speeds.
+      </li>
+    </ul>
+    <h2 id="platform-monitoring">Platform Monitoring</h2>
+    <ul>
+      <li>
+        <a href="https://caniuse.com">Can I Use</a> - State of support of
+        various web features in browsers.
+      </li>
+      <li>
+        <a href="http://gs.statcounter.com/browser-market-share/mobile"
+          >Mobile Browser Market Share</a
+        >
+        - Market share between various platforms and countries.
+      </li>
+      <li>
+        <a href="https://www.w3.org/Mobile/mobile-web-app-state"
+          >Standards for Web Applications on Mobile</a
+        >
+        - Current state of mobile-related W3C specifications.
+      </li>
+      <li>
+        <a href="https://whatwebcando.today">What Web Can Do Today</a> - What
+        your browser capable of.
+      </li>
+    </ul>
+    <h2 id="other-useful-tools-and-libraries">
+      Other Useful Tools and Libraries
+    </h2>
+    <ul>
+      <li>
+        <a href="https://browsersync.io">Browsersync</a> - Time-saving
+        synchronised browser testing.
+      </li>
+      <li>
+        <a href="https://github.com/liriliri/eruda">Eruda</a> - Console for
+        mobile web browsers.
+      </li>
+      <li>
+        <a href="https://github.com/taye/interact.js">Interact.js</a> - Drag and
+        drop, resizing and multi-touch gestures with inertia and snapping for
+        modern browsers.
+      </li>
+      <li>
+        <a href="https://github.com/ftlabs/fastclick">Fastclick</a> - Removing
+        of 300ms delay in old browsers.
+      </li>
+      <li>
+        <a href="https://github.com/ApoorvSaxena/lozad.js">Lozad.js</a> - Highly
+        performant, light and configurable lazy loader using
+        IntersectionObserver API
+      </li>
+      <li>
+        <a href="https://github.com/airbnb/react-dates">React Dates</a> - An
+        easily internationalizable, mobile-friendly datepicker React library for
+        the web.
+      </li>
+      <li>
+        <a href="http://screensiz.es/phone">Screen Sizes</a> - A list of screen
+        sizes of all popular smartphones.
+      </li>
+      <li>
+        <a href="https://github.com/rikschennink/shiny">Shiny</a> - Shiny
+        reflections for mobile websites.
+      </li>
+      <li>
+        <a href="https://github.com/Mango/slideout">Slideout</a> - Standalone
+        and lightweight navigation menu for your mobile web apps.
+      </li>
+      <li>
+        <a href="https://github.com/nolimits4web/swiper">Swiper</a> - The most
+        modern mobile touch slider with hardware accelerated transitions.
+      </li>
+      <li>
+        <a href="https://www.npmjs.com/package/weinre"
+          >Web Inspector Remote (Weinre)</a
+        >
+        - Web inspector for debugging sites in non-mainstream browsers.
+      </li>
+      <li>
+        <a href="https://github.com/google/web-starter-kit">Web Starter Kit</a>
+        - A workflow for multi-device websites.
+      </li>
+      <li>
+        <a href="https://developers.google.com/web/tools/workbox/">Workbox</a> -
+        JavaScript libraries for adding offline support to web apps.
+      </li>
+      <li>
+        <a href="https://amphtml.wordpress.com/2018/08/21/workerdom/"
+          >WorkerDOM</a
+        >
+        - Library to provide a full representation of the DOM inside of Web
+        Workers.
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <span class="citation" data-cites="myshov">[@myshov]</span
+      >(https://github.com/myshov) has waived all copyright and related or
+      neighboring rights to this work.
+    </p>
+  </body>
+</html>

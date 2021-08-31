@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <pre><code>                                                                       ---.
+      ╭───╮╭──╮  ╭──╮   ╭──╮ ╭───╮  ╭──╮  ╭─── ───╮   ╭──╮            -..  \
+     /    ││  │──│  │  / ╭─╯/ ╭──╯ /    \ │   │   │  / ╭─╯              _|_|_
+    │  o  ││  │  │  │ /  ╰─(   \─╮│      ││ ─   ─ │ /  ╰─╮            /  O    \
+    │     ││  │  │  ││   ╭─╯\__  ││   O  ││  \_/  ││   ╭─╯            \_______/
+    │  _  ││  `  &#39;  ││   ╰─╮/  \ ││      ││   │   ││   ╰─╮               /   \
+    │  │  │ \      / │     │\    │ \    / │   │   ││     │               \/   \
+    ╰──┴──╯  ╰──╯─╯  ╰─────╯ ╰───╯  ╰──╯  ╰───╯───╯╰─────╯               /&#39;---&#39;\
+                                                                    ____/  |     \_____
+      ╭───╮╭───╮  ╭──────╮   ╭──╮      ╭──╮ ╭───╮╭────╮  ╭───╮╭───╮      __/\____/      \_
+     /    ││    \ │      │   │   \    / ╭─╯/ ╭──╯╰╮  ╭╯ /    ││    \          |            \
+    │  o  ││  _  ││      │   │    \  /  ╰─(   \─╮ │  │ │  ╭──╯│  _  │        / \__  /\      &#39;_
+    │     ││  │  │╰─╯  ╰─╯   │  D  ││   ╭─╯\__  │ │  │ │  │╭─╮│  │  │       /     \__ \        \
+    │  _  ││  │  │  │  │     │     ││   ╰─╮/  \ │ │  │ │  ╰─ ││  │  │       \        \_\_________\
+    │  │  ││  │  │  │  │     │     ││     │\    │╭╯  ╰╮│     ││  │  │        \          \     \
+    ╰──┴──╯╰──┴──╯  ╰──╯     ╰─────╯╰─────╯ ╰───╯╰────╯╰─────╯╰──┴──╯         \          \</code></pre>
+    <blockquote>
+      <p>
+        A curated list of <a href="http://ant.design/">Ant Design</a> resources
+        and related projects. The main idea is that everyone can contribute
+        here, so we can have a central repository of informations about Ant
+        Design that we keep up-to-date.
+      </p>
+    </blockquote>
+    <p>
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+      <a href="https://ant.design/"
+        ><img
+          src="https://camo.githubusercontent.com/2f393ed1a4c6d222de314c16e0334301cae3fb7a/68747470733a2f2f67772e616c697061796f626a656374732e636f6d2f7a6f732f726d73706f7274616c2f4b4470677667754d704766716148506a6963524b2e7376673f73616e6974697a653d74727565"
+          align="right"
+          width="160"
+      /></a>
+    </p>
+    <p>
+      Ant Design, a design language for middleware, is refined by Experience
+      Technology Department of Ant Financial, aims to uniform the user interface
+      specs for middleware projects, reduce the unnecessary cost of design
+      differences and implementation and liberate the resources of design and
+      front-end development.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#contents">Contents</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li>
+        <a href="#theming">Theming</a>
+        <ul>
+          <li><a href="#themes">Themes</a></li>
+        </ul>
+      </li>
+      <li><a href="#related-projects">Related Projects</a></li>
+      <li><a href="#angular">Angular</a></li>
+      <li><a href="#vuejs">Vue.js</a></li>
+      <li><a href="#components">Components</a></li>
+      <li><a href="#react-hooks">React Hooks</a></li>
+      <li><a href="#applications">Applications</a></li>
+      <li><a href="#boilerplates">Boilerplates</a></li>
+      <li><a href="#non-javascript-libraries">Non-JavaScript Libraries</a></li>
+      <li><a href="#electron">Electron</a></li>
+      <li><a href="#icons">Icons</a></li>
+      <li>
+        <a href="#design-tools-and-resources">Design Tools and Resources</a>
+      </li>
+      <li><a href="#other">Other</a></li>
+      <li><a href="#contributing">Contributing</a></li>
+      <li><a href="#license">License</a></li>
+    </ul>
+    <h2 id="resources">Resources</h2>
+    <p>Official projects and resources of Ant Design.</p>
+    <ul>
+      <li>
+        <a href="http://ant.design/">Ant Design</a> - An Enterprise-class UI
+        design language and React-based implementation.
+      </li>
+      <li>
+        <a href="http://pro.ant.design/">Ant Design Pro</a> - An out-of-box UI
+        solution for enterprise applications :fire::fire::fire:
+      </li>
+      <li>
+        <a href="http://mobile.ant.design/">Ant Design Mobile</a> - Configurable
+        Mobile UI specification and React-based implementation.
+      </li>
+      <li>
+        <a href="http://react-component.github.io/badgeboard/"
+          >Ant Design of React</a
+        >
+        - Graceful UI components out of the box, based on React.
+      </li>
+      <li>
+        <a href="http://leungwensen.github.io/svg-icon/#ant"
+          >Ant Design SVG Icons</a
+        >
+        - Project to transform regular icon fonts into SVG format, supporting
+        Ant Design icon fonts.
+      </li>
+    </ul>
+    <h2 id="articles">Articles</h2>
+    <ul>
+      <li>
+        <a
+          href="https://medium.com/@yoniweisbrod/styling-react-applications-with-ant-design-92b742aab0b0"
+          >Styling React Applications with Ant.Design</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://waywardmonkeys.org/2016/03/14/finding-a-user-interface-library/"
+          >Finding a User Interface library</a
+        >
+      </li>
+    </ul>
+    <h2 id="tools">Tools</h2>
+    <p>These are tools and utilities to help build apps using Ant Design,</p>
+    <ul>
+      <li>
+        <a href="https://github.com/ant-design/antd-init">Antd Init</a> - Ant
+        Design boilerplate generator (for demo only, use dva-cli).
+      </li>
+      <li>
+        <a href="https://github.com/dvajs/dva-cli">Dva Cli</a> - Create Ant
+        Design projects based on
+        <a href="https://github.com/dvajs/dva">Dva.js</a>, a lightweight
+        front-end framework based on Redux and React and inspired by
+        <a href="http://elm-lang.org">Elm</a> and
+        <a href="https://github.com/yoshuawuyts/choo">Choo</a>.
+      </li>
+      <li>
+        <a href="https://github.com/ant-tool">Antd Tools</a> - Very useful list
+        of tools for Ant Design to create documentation, create new components,
+        build tools and many more.
+      </li>
+      <li>
+        <a href="http://ant-tool.github.io/">Antd Tools Docs</a> -
+        Documentations for Ant Tools.
+      </li>
+      <li>
+        <a href="https://github.com/hutxs/iconfig-antd">iConfig Ant Design</a> -
+        Boilerplate for quickly getting a new project up and running with a few
+        useful transforms.
+      </li>
+      <li>
+        <a href="https://github.com/fi3ework/vscode-antd-rush"
+          >vscode-antd-rush</a
+        >
+        - Rush to Ant Design in VS Code
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=bang.antd-snippets"
+          >Antd Snippets for VS Code</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/codetrial/generator-antd-pro"
+          >Generator Antd Pro</a
+        >
+        - An easy way to build your Ant Design Pro application.
+      </li>
+      <li>
+        <a href="https://github.com/jannikbuschke/formik-antd">formik-antd</a> -
+        Declarative bindings for the popular form state management library
+        Formik.
+      </li>
+      <li>
+        <a href="https://github.com/limichange/zaku">Zaku</a> - JSX-based UI
+        editor, easy way to build page and generate antd code.
+      </li>
+      <li>
+        <a href="https://github.com/garrett12138/antd-pro-generator"
+          >Antd-Pro-Generator for VS Code</a
+        >
+        Generate Service/Mock/Model from Swagger2.0 or OpenApi3.x docs for Ant
+        Design Pro.
+      </li>
+    </ul>
+    <h2 id="theming">Theming</h2>
+    <p>
+      Here are utilities that can help you customize your theme and ability to
+      change it in browser
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/mzohaibqc/antd-theme-webpack-plugin"
+          >antd-theme-webpack-plugin</a
+        >
+        - A webpack plugin to generate your custom theme file.
+      </li>
+      <li>
+        <a href="https://github.com/mzohaibqc/antd-theme-generator"
+          >antd-theme-generator</a
+        >
+        - A simple script to generate theme specific less file which can be used
+        in any environment.
+      </li>
+      <li>
+        <a href="https://github.com/luffyZh/dynamic-antd-theme"
+          >dynamic-antd-theme</a
+        >
+        - A simple plugin to dynamic change ant-design theme whether less or
+        css.
+      </li>
+    </ul>
+    <h3 id="themes">Themes</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/ant-design/ant-design-dark-theme"
+          >ant-design-dark-theme</a
+        >
+        - Dark theme variables of Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/ant-design/ant-design-aliyun-theme"
+          >ant-design-aliyun-theme</a
+        >
+        - Aliyun console theme variables of Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/Kuechlin/ant-dark-theme">ant-dark-theme</a>
+        - Dark theme variables of Ant Design.
+      </li>
+    </ul>
+    <h2 id="related-projects">Related Projects</h2>
+    <p>Ant Design family of projects.</p>
+    <ul>
+      <li>
+        <a href="https://g2.alipay.com/">Grammar of Graphics</a> - Pure
+        javascript, powerful semantic graph generation tool for big data which
+        provides a set of graphical syntax that lets users build with simple
+        syntax a myriad of charts and integrates a large number of statistical
+        tools, (<a href="https://github.com/antvis/feedback">Read more</a>).
+      </li>
+      <li>
+        <a href="https://antv.alipay.com/">Ant Visualization</a> - Professional
+        data visualization specification that aims to put several years of
+        valuable data pattern group work in the process of exploring data
+        visualization to share with all people who need data visualization
+        theory. AntV consists of few parts, data, design specifications and
+        rules for use of the chart, (<a
+          href="https://github.com/antvis/feedback"
+          >Read more</a
+        >).
+      </li>
+      <li>
+        <a href="http://motion.ant.design/">Ant Motion</a> - Efficient motion
+        design solutions that complies with Ant Design Visual specification with
+        React implementation.
+      </li>
+      <li>
+        <a href="http://ux.ant.design/">Ant UX</a> - Make a sitemap template for
+        UX design using
+        <a href="https://www.omnigroup.com/omnigraffle">Omnigraffle</a>,
+        <a href="https://www.sketchapp.com/">Sketch</a> or
+        <a href="http://www.axure.com/">Axure</a>. This is a library which
+        assists designers to define, refine and finalize the inter-page logic of
+        their products.
+      </li>
+    </ul>
+    <h2 id="angular">Angular</h2>
+    <p>Projects that are built with Angular and Ant Design.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/NG-ZORRO/ng-zorro-antd">NG-ZORRO</a> - Ant
+        Design of Angular.
+      </li>
+      <li>
+        <a href="https://github.com/NG-ZORRO/ng-zorro-antd-mobile"
+          >NG-ZORRO-Mobile</a
+        >
+        - Ant Design Mobile of Angular
+      </li>
+      <li>
+        <a href="https://ng-alain.com/">ng-alain</a> - ng-zorro-antd admin panel
+        front-end framework.
+      </li>
+    </ul>
+    <h2 id="vue.js">Vue.js</h2>
+    <p>Projects that are built with Vue.js and Ant Design.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/vueComponent/ant-design-vue"
+          >ant-design-vue</a
+        >
+        - Ant Design of Vue.js 2.5.0+.
+      </li>
+      <li>
+        <a href="https://github.com/FE-Driver/vue-beauty">Vue.js Beauty</a> -
+        Beautiful UI components build with Vue.js and Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/kokoroX/vue-ant-ui">Vue.js Ant UI</a> - Ant
+        Design UI components built in Vue.js.
+      </li>
+      <li>
+        <a href="https://github.com/lileilei/Ant-design-vue">Ant Design Vue</a>
+        - Vue.js version of Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/zzuu666/antue">antue</a> - A set of
+        enterprise-class Vue UI components, following the Ant Design
+        specification completely.
+      </li>
+      <li>
+        <a href="https://github.com/iczer/vue-antd-admin">vue-antd-admin</a> -
+        Ant Design Pro’s implementation with Vue
+      </li>
+    </ul>
+    <h2 id="blazor">Blazor</h2>
+    <p>Projects that are built with Blazor WebAssembly and Ant Design.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/ElderJames/ant-design-blazor"
+          >ant-design-blazor</a
+        >
+        - Ant Design of Blazor(both Server-side and WebAssembly).
+      </li>
+      <li>
+        <a href="https://github.com/stsrki/Blazorise">Blazorise</a> - AntDesign
+        support for Blazorise and Blazor
+        <a href="https://antdesigndemo.blazorise.com/">Demo</a>
+      </li>
+    </ul>
+    <h2 id="components">Components</h2>
+    <p>A list of UI components built with Ant Design.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/huyennbl/antd-group-slider"
+          >antd-group-slider</a
+        >
+        - A group of sliders that help input data with multiple ranges &amp;
+        description. Have data sync between sliders to improve UX, avoid
+        accidental missing range during inputing range data.
+      </li>
+      <li>
+        <a href="https://github.com/Leonard-Li777/antd-table-infinity"
+          >antd-table-infinity</a
+        >
+        - An infinite scroll component based on antd table that supports virtual
+        scrolling &amp; high-performance
+      </li>
+      <li>
+        <a href="https://github.com/leejaen/react-lz-editor">react-lz-editor</a>
+        - An open source rich react editor based on draft-Js and ant design.
+      </li>
+      <li>
+        <a href="https://github.com/kagawagao/react-grid">React Grid</a>
+        <strong>[Deprecated]</strong> - Grid React UI Component based on Ant
+        Design.
+      </li>
+      <li>
+        <a href="https://github.com/huhulab/antd-kit">Antd Kit</a> - Advanced
+        Ant Design components.
+      </li>
+      <li>
+        <a href="https://github.com/NewbeeFE/antd-data-table"
+          >antd-data-table</a
+        >
+        - A component that combines antd’s Table and Form to do the search,
+        display, and operating jobs for data.
+      </li>
+      <li>
+        <a href="https://github.com/hsbalar/ngx-recursive-form"
+          >ngx-recursive-form</a
+        >
+        - Angular recursive form based on json input built with Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/mzohaibqc/antd-amplify-react"
+          >antd-amplify-react</a
+        >
+        - A collection of Ant Design component for Aws Amplify for
+        Authentication
+      </li>
+      <li>
+        <a href="https://github.com/Kombustor/antd-password-input-strength"
+          >antd-password-input-strength</a
+        >
+        - AntD Input component with password-strength indicator.
+      </li>
+    </ul>
+    <h2 id="react-hooks">React Hooks</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/ant-design/sunflower">Sunflower(🌻)</a>
+        Collection of React Hooks returning component of antd.
+      </li>
+    </ul>
+    <h2 id="applications">Applications</h2>
+    <p>A list of mature apps built with Ant Design.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/pizn/eevee">Eevee</a> - Based on Github page
+        online editing blog platform. The project is based React, Ant Design and
+        GitHub API.
+      </li>
+      <li>
+        <a href="https://github.com/dhruv-kumar-jha/productivity-frontend"
+          >Productivity Application</a
+        >
+        - Kanban style, Trello inspired Productivity application built using
+        React, Ant Design and other fantastic modules.
+      </li>
+    </ul>
+    <h2 id="boilerplates">Boilerplates</h2>
+    <p>A list of starter projects and boilerplates built with Ant Design.</p>
+    <ul>
+      <li>
+        <a href="http://pro.ant.design/">Ant Design Pro</a> - An out-of-box UI
+        solution for enterprise applications :fire::fire::fire:
+      </li>
+      <li>
+        <a href="http://scaffold.ant.design/">Scaffold Market</a> - scaffolds
+        and boilerplates using Ant Design
+      </li>
+      <li>
+        <a href="https://github.com/zuiidea/antd-admin">Antd Admin</a> - A admin
+        dashboard application demo built upon Ant Design and Dva.js.
+      </li>
+      <li>
+        <a href="https://github.com/elmarti/meteor-antd-boilerplate"
+          >Meteor Antd Boilerplate</a
+        >
+        - A basic social network built using Antd and Meteor.
+        <a href="https://antdmeteor.herokuapp.com/login">Example</a>
+      </li>
+      <li>
+        <a href="https://github.com/JasonBai007/reactSPA">React SPA</a> -
+        Building SPA with React, Router, ES6, Fetch, Babel, Webpack, Npm,
+        MockJs, FontAwesome, AnimateCSS, Ant Design, LESS and jQuery.
+      </li>
+      <li>
+        <a href="https://github.com/fireyy/react-antd-admin">React Admin</a> -
+        React Admin UI built on Ant Design (username: admin, password: 123456).
+      </li>
+      <li>
+        <a href="https://github.com/Justin-lu/react-redux-antd">React Redux</a>
+        - React Redux for CMS/Enterprise class apps (ERP/Admin) built with Ant
+        Design.
+      </li>
+      <li>
+        <a href="https://github.com/yuzhouisme/react-antd-redux-router-starter"
+          >React Antd Starter</a
+        >
+        - This project is designed to develop website/web apps using Ant Design
+        and Redux.
+      </li>
+      <li>
+        <a href="https://github.com/peterchenhdu/webbf">Webbf</a> - Java demo
+        that uses Maven to build the backend with Spring, Spring MVC and
+        Mybatis. React, Reflux, Eebpack, jQuery, React-bootstrap and Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/BetaRabbit/react-redux-antd-starter"
+          >React Redux Antd Starter</a
+        >
+        - Front-end boilerplate built with React, Redux and Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/yukrain/koa-antd-admin">Koa</a> - Example
+        app to build Admin UI built with React, Ant Design and Koa.
+      </li>
+      <li>
+        <a href="https://github.com/pookpal/star-initReact-example"
+          >Star Admin</a
+        >
+        - Demo app built with React, Ant Design, Redux, React-router, Webpack
+        and Babel.
+      </li>
+      <li>
+        <a href="https://github.com/LeuisKen/react-redux-intro"
+          >React Redux Intro</a
+        >
+        - Demo app built with Ant Design and can be configured to initialize a
+        Redux dependencies.
+      </li>
+      <li>
+        <a href="https://github.com/jovey-zheng/react-start-kit"
+          >React Start Kit</a
+        >
+        - SPA Boilerplate built with React, Webpack, ES6+, Redux, Router, Babel,
+        Express, Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/chenliang2016/CLReactAntDesign">CL React</a>
+        - Based on Ant Design front-end framework structures for enterprise
+        back-office software.
+      </li>
+      <li>
+        <a href="https://github.com/cupools/todoMVC-react">TODO MVC</a> - Todo
+        list built with React and Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/huhulab/react-frontend-boilerplate"
+          >React Boilerplate</a
+        >
+        - React Admin front-end boilerplate built with Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/xlsdg/dva-antd-starter">Dva Antd Starter</a>
+        - Get started with Dva.js and Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/xlsdg/dva-antd-mobile-starter"
+          >Dva Antd Mobile Starter</a
+        >
+        - Get started with Dva.js and Ant Design mobile.
+      </li>
+      <li>
+        <a href="https://github.com/jiangbo2015/learn-dva">Dva Ant Admin</a> - A
+        front-end boilerplate built with Dva, Ant-Design
+      </li>
+      <li>
+        <a href="https://github.com/bang88/aspnet-core-react-antd-boilerplate"
+          >Aspnet Core Antd Boilerplate</a
+        >
+        - Server Side Rendering with Asp.net core.
+      </li>
+      <li>
+        <a href="https://github.com/subenksaha/react-redux-universal"
+          >React Redux Universal</a
+        >
+        - Universal/Isomorphic boilerplate using react router 4 and webpack
+        2.5+. All latest packages.
+      </li>
+      <li>
+        <a href="https://github.com/comerc/cra-ts-antd">CRA-TS-Antd</a> -
+        Create-React-App + TypeScript + Ant-Design (without Eject).
+      </li>
+      <li>
+        <a href="https://github.com/cipchk/ng-alain">Ng-Alain</a> - Angular
+        Admin UI built on Ant Design (with ng-zorro-antd).
+      </li>
+      <li>
+        <a href="https://github.com/YDJ-FE/ts-react-webpack"
+          >Typescript React With Mobx Starter</a
+        >
+        - a starter-template with typescript, react, mobx, antd and webpack).
+      </li>
+      <li>
+        <a href="https://github.com/Atyantik/example-pawjs-ant-design"
+          >React-PWA, PawJS and AntDesign</a
+        >
+        - A pluggable boilerplate with SEO, PWA, SSR, Skeleton, Placeholders,
+        etc. as some of its many features.
+      </li>
+      <li>
+        <a href="https://github.com/ant-design/create-react-app-antd"
+          >Create React App + Ant Design</a
+        >
+        - Use antd in create-react-app without ejecting
+      </li>
+      <li>
+        <a href="https://scaffoldhub.io">ScaffoldHub.io</a> - Generate fullstack
+        React + Ant Design applications with MongoDB, SQL or Firebase Firestore.
+      </li>
+      <li>
+        <a href="https://github.com/VincentCordobes/the-green-meal"
+          >The Green Meal</a
+        >
+        - Next.js, PostgreSQL demo app written in TypeScript.
+      </li>
+    </ul>
+    <h2 id="non-javascript-libraries">Non-JavaScript Libraries</h2>
+    <p>A list of libraries that are written for non-JavaScript languages.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/priornix/antizer">Antizer</a> - Ant Design
+        library for <a href="https://clojurescript.org/">ClojureScript</a>, an
+        immutable, functional language that cross-compiles to JavaScript.
+      </li>
+      <li>
+        <a href="https://gitlab.com/synqrinus/syn-antd">syn-antd</a> - Ant
+        Design wrapper for
+        <a href="https://clojurescript.org/">ClojureScript</a> and
+        <a href="https://github.com/reagent-project/reagent">Reagent</a> using
+        <a href="http://shadow-cljs.org/">shadow-cljs</a> with tree-shaking
+        support. As with other ClojureScript libraries, it cross-compiles to
+        JavaScript.
+      </li>
+    </ul>
+    <h2 id="electron">Electron</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/thundernet8/StarCabinet">StarCabinet</a> -
+        Github Stars-based cross-platform tool based on React, Electronand and
+        Ant Design.
+      </li>
+      <li>
+        <a href="https://github.com/nowa-webpack/nowa-gui">Nowa</a> - A webpack
+        based front-end plug-in scaffolding and development solution.
+      </li>
+    </ul>
+    <h2 id="icons">Icons</h2>
+    <ul>
+      <li>
+        <a href="http://github.com/ant-design/ant-design-icons"
+          >Official Ant Design Icons</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/fjc0k/ant-design-icons">Ant Design Icons</a>
+        - The premium icon font from Ant Design and Ant Design Mobile.
+      </li>
+      <li>
+        <a href="https://github.com/2fd/ant-design-icons"
+          >Material Design Icons</a
+        >
+        Material Design Icons for Ant Design
+      </li>
+    </ul>
+    <h2 id="design-tools-and-resources">Design Tools and Resources</h2>
+    <ul>
+      <li>
+        <a href="http://kitchen.alipay.com/">Kitchen</a> - Sketch Plugin with
+        suites of functions to enhance designers
+      </li>
+      <li>
+        <a href="http://library.ant.design/">Ant Design Library</a> - Ant Design
+        Axure Library
+      </li>
+      <li>
+        <a href="http://ux.ant.design/">Ant UX</a> - Sitemap templates for ux
+        design in OG, Sketch, Axure, Affinity, Adobe XD.
+      </li>
+      <li>
+        <a href="https://ant.design/docs/spec/download"
+          >Ant Design Design Resources</a
+        >
+        - Sketch Symbols
+      </li>
+    </ul>
+    <h2 id="other">Other</h2>
+    <ul>
+      <li>
+        <a href="http://idcos.github.io/antd-ember/#/home"
+          >Ant Design of Ember</a
+        >
+        - Enterprise-class UI framework based on Ant Design and Emberjs.
+      </li>
+      <li>
+        <a href="https://github.com/evilz/fable-ant-design">Fable Ant Design</a>
+        - Ant Design bindings for Fable Elmish.
+      </li>
+    </ul>
+    <h2 id="contributing">Contributing</h2>
+    <p>
+      Your contributions are always welcome!
+      <a
+        href="https://github.com/websemantics/awesome-ant-design/blob/master/contributing.md"
+        >Click Here to read the guidelines</a
+      >.
+    </p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="http://creativecommons.org/licenses/by/4.0/"
+        ><img
+          src="http://i.creativecommons.org/l/by/4.0/88x31.png"
+          alt="Creative Commons License"
+      /></a>
+    </p>
+    <p>
+      This work is licensed under a
+      <a href="http://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International License</a
+      >.
+    </p>
+  </body>
+</html>

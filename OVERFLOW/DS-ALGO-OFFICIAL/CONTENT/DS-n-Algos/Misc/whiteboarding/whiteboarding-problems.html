@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A description of the page and its contents" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Page Title</title>
+  <link rel="stylesheet" href="./../../../assets/style.css" />
+  <link rel="stylesheet" href="./../../../assets/prism.css" />
+  <script async src="./../../../assets/prism.js"></script>
+</head>
+
+<body>
+
+
+  <a href="https://github.com/bgoonz/DS-ALGO-OFFICIAL" class="github-corner" aria-label="View source on Github"><svg
+      width="80" height="80" viewBox="0 0 250 250"
+      style="z-index: 100000; fill:#194ccdaf; color:#fff; position: fixed; top: 20px; border: 0; left: 20px; transform: scale(-1.5, 1.5);"
+      aria-hidden="true">
+      <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+      <path
+        d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+        fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+      </path>
+      <path
+        d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+        fill="currentColor" class="octo-body"></path>
+    </svg></a>
+
+
+
+
+  <h1 id="module-3-whiteboarding-exercises">Module 3 Whiteboarding Exercises</h1>
+  <h2 id="problem-1-breadth-first-search-on-a-graph">Problem 1: Breadth First Search on a Graph</h2>
+  <p>given the adjacency list below, how many friends would Joe visit if he were trying to get to Jesse using
+    Breadth-First Traversal?</p>
+  <p>NOTE: your function should return the number of friends visited, not including Joe himself</p>
+  <div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a title="1"><span>const</span>
+        adjacencyList <span>=</span> <span>{</span></a>
+      <a title="2"> <span>&#39;derek&#39;:</span>[<span>&#39;selam&#39;,</span>
+        <span>&#39;dean&#39;</span>]<span>,</span></a>
+      <a title="3"> <span>&#39;joe&#39;:</span>[<span>&#39;selam&#39;</span>]<span>,</span></a>
+      <a title="4"> <span>&#39;selam&#39;:</span> [<span>&#39;derek&#39;,</span> <span>&#39;joe&#39;,</span>
+        <span>&#39;dean&#39;,</span> <span>&#39;evan&#39;</span>]<span>,</span></a>
+      <a title="5"> <span>&#39;dean&#39;:</span> [<span>&#39;derek&#39;,</span> <span>&#39;evan&#39;,</span>
+        <span>&#39;selam&#39;</span>]<span>,</span></a>
+      <a id=-6" title="6"> <span>&#39;sam&#39;:</span> [<span>&#39;jen&#39;</span>]<span>,</span></a>
+      <a title="7"> <span>&#39;evan&#39;:</span> [<span>&#39;selam&#39;,</span> <span>&#39;jesse&#39;,</span>
+        <span>&#39;dean&#39;</span>]<span>,</span></a>
+      <a title="8"> <span>&#39;jen&#39;:</span>[<span>&#39;sam&#39;,</span>
+        <span>&#39;javier&#39;</span>]<span>,</span></a>
+      <a title="9"> <span>&#39;javier&#39;:</span>[<span>&#39;jen&#39;</span>]<span>,</span></a>
+      <a id=-10" title="10"> <span>&#39;chris&#39;:</span>[]<span>,</span></a>
+      <a title="11"> <span>&#39;jesse&#39;:</span> [<span>&#39;evan&#39;</span>]<span>,</span></a>
+      <a id=-12" title="12"><span>};</span></a></code></pre>
+  </div>
+  <h2 id="problem-2-depth-first-search-on-a-graph">Problem 2: Depth First Search on a Graph</h2>
+  <p>Given the adjacency list below, which friends would Joe visit if he were trying to get to Jesse using Depth-First
+    Traversal?</p>
+  <p>NOTE: your function should return a list of friends visited, not including Joe himself.</p>
+  <div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a title="1"><span>const</span>
+        adjacencyList <span>=</span> <span>{</span></a>
+      <a id=-2" title="2"> <span>&#39;derek&#39;:</span>[<span>&#39;selam&#39;,</span>
+        <span>&#39;dean&#39;</span>]<span>,</span></a>
+      <a id=-3" title="3"> <span>&#39;joe&#39;:</span>[<span>&#39;selam&#39;</span>]<span>,</span></a>
+      <a id=-4" title="4"> <span>&#39;selam&#39;:</span> [<span>&#39;derek&#39;,</span> <span>&#39;joe&#39;,</span>
+        <span>&#39;dean&#39;,</span> <span>&#39;evan&#39;</span>]<span>,</span></a>
+      <a id=-5" title="5"> <span>&#39;dean&#39;:</span> [<span>&#39;derek&#39;,</span> <span>&#39;evan&#39;,</span>
+        <span>&#39;selam&#39;</span>]<span>,</span></a>
+      <a id=-6" title="6"> <span>&#39;sam&#39;:</span> [<span>&#39;jen&#39;</span>]<span>,</span></a>
+      <a id=-7" title="7"> <span>&#39;evan&#39;:</span> [<span>&#39;selam&#39;,</span> <span>&#39;jesse&#39;,</span>
+        <span>&#39;dean&#39;</span>]<span>,</span></a>
+      <a id=-8" title="8"> <span>&#39;jen&#39;:</span>[<span>&#39;sam&#39;,</span>
+        <span>&#39;javier&#39;</span>]<span>,</span></a>
+      <a id=-9" title="9"> <span>&#39;javier&#39;:</span>[<span>&#39;jen&#39;</span>]<span>,</span></a>
+      <a id=-10" title="10"> <span>&#39;chris&#39;:</span>[]<span>,</span></a>
+      <a id=-11" title="11"> <span>&#39;jesse&#39;:</span> [<span>&#39;evan&#39;</span>]<span>,</span></a>
+      <a id=-12" title="12"><span>};</span></a></code></pre>
+  </div>
+  <h2 id="problem-3-path-sum-of-binary-tree">Problem 3: Path Sum of Binary Tree</h2>
+  <p>Given the binary tree below and a sum, determine if the tree has a root-to-leaf path such that adding up all the
+    values along the path equals the given sum.</p>
+  <p>Use the following test-case: pathSum(5, 22) where 5 is the root node and 22 is the sum. Note: this function should
+    return a boolean value indicating whether or not the sum is possible to achieve.</p>
+  <div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a title="1"><span>//
+          5</span></a>
+      <a title="2"><span>// / \</span></a>
+      <a title="3"><span>// 4 8</span></a>
+      <a id=-4" title="4"><span>// / / \</span></a>
+      <a id=-5" title="5"><span>// 11 13 4</span></a>
+      <a id=-6" title="6"><span>// / \ \</span></a>
+      <a id=-7" title="7"><span>// 7 2 1</span></a></code></pre>
+  </div>
+  <h2 id="problem-4-max-depth-of-binary-tree">Problem 4: Max Depth of Binary Tree</h2>
+  <p>Given a binary tree, find its maximum depth.</p>
+  <p>The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+  </p>
+  <p>Note: the depth at the root is 0.</p>
+  <div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a title="1"> <span>//
+          3</span></a>
+      <a id=-2" title="2"> <span>// / \</span></a>
+      <a id=-3" title="3"> <span>// 9 20</span></a>
+      <a id=-4" title="4"> <span>// / \</span></a>
+      <a id=-5" title="5"> <span>// 15 7</span></a></code></pre>
+  </div>
+  <h2 id="now-go-ahead-and-start-the-problems-that-are-in-aao">Now go ahead and start the problems that are in AAO</h2>

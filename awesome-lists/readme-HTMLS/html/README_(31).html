@@ -1,0 +1,4289 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+
+      span.underline {
+        text-decoration: underline;
+      }
+
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+
+      .sourceCode {
+        overflow: visible;
+      }
+
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+
+      div.sourceCode {
+        margin: 1em 0;
+      }
+
+      pre.sourceCode {
+        margin: 0;
+      }
+
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+
+      div.sourceCode {
+      }
+
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      }
+
+      /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      /* Annotation */
+      code span.at {
+        color: #7d9029;
+      }
+
+      /* Attribute */
+      code span.bn {
+        color: #40a070;
+      }
+
+      /* BaseN */
+      code span.bu {
+      }
+
+      /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      }
+
+      /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      }
+
+      /* Char */
+      code span.cn {
+        color: #880000;
+      }
+
+      /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      }
+
+      /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      }
+
+      /* Documentation */
+      code span.dt {
+        color: #902000;
+      }
+
+      /* DataType */
+      code span.dv {
+        color: #40a070;
+      }
+
+      /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      }
+
+      /* Error */
+      code span.ex {
+      }
+
+      /* Extension */
+      code span.fl {
+        color: #40a070;
+      }
+
+      /* Float */
+      code span.fu {
+        color: #06287e;
+      }
+
+      /* Function */
+      code span.im {
+      }
+
+      /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      }
+
+      /* Keyword */
+      code span.op {
+        color: #666666;
+      }
+
+      /* Operator */
+      code span.ot {
+        color: #007020;
+      }
+
+      /* Other */
+      code span.pp {
+        color: #bc7a00;
+      }
+
+      /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      }
+
+      /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      }
+
+      /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      }
+
+      /* String */
+      code span.va {
+        color: #19177c;
+      }
+
+      /* Variable */
+      code span.vs {
+        color: #4070a0;
+      }
+
+      /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      /* Warning */
+    </style>
+  </head>
+
+  <body>
+    <br />
+    <div data-align="center">
+      <p>
+        <img
+          width="380px"
+          src="https://raw.githubusercontent.com/viatsko/awesome-vscode/master/awesome-vscode-logo.png"
+        />
+      </p>
+    </div>
+    <br />
+    <div data-align="center">
+      <p>
+        A curated list of delightful
+        <a href="https://code.visualstudio.com/">Visual Studio Code</a> packages
+        and resources. For more awesomeness, check out
+        <a href="https://github.com/sindresorhus/awesome">awesome</a>.
+      </p>
+      <p>
+        <a href="https://github.com/sindresorhus/awesome"
+          ><img
+            src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+            alt="Awesome"
+        /></a>
+        <a href="https://travis-ci.org/viatsko/awesome-vscode"
+          ><img
+            src="https://travis-ci.org/viatsko/awesome-vscode.svg"
+            alt="Build Status"
+        /></a>
+      </p>
+    </div>
+    <p><br /></p>
+    <h1 id="table-of-contents">Table of Contents</h1>
+    <ul>
+      <li><a href="#table-of-contents">Table of Contents</a></li>
+      <li><a href="#official">Official</a></li>
+      <li><a href="#syntax">Syntax</a></li>
+      <li>
+        <a href="#migrating-from-other-editors">Migrating from other editors</a>
+        <ul>
+          <li><a href="#migrating-from-vim">Migrating from Vim</a></li>
+          <li><a href="#migrating-from-atom">Migrating from Atom</a></li>
+          <li>
+            <a href="#migrating-from-sublime-text"
+              >Migrating from Sublime Text</a
+            >
+          </li>
+          <li>
+            <a href="#migrating-from-visual-studio"
+              >Migrating from Visual Studio</a
+            >
+          </li>
+          <li>
+            <a href="#migrating-from-intellij-idea"
+              >Migrating from Intellij IDEA</a
+            >
+          </li>
+          <li><a href="#camel-humps">Camel Humps</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#using-vs-code-with-particular-technologies"
+          >Using VS Code with particular technologies</a
+        >
+      </li>
+      <li>
+        <a href="#lint-and-intellisense">Lint and IntelliSense</a>
+        <ul>
+          <li><a href="#1c">1C</a></li>
+          <li>
+            <a href="#autohotkey">AutoHotkey</a>
+            <ul>
+              <li><a href="#autohotkey-plus">AutoHotkey Plus</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#bash">Bash</a>
+            <ul>
+              <li><a href="#bash-ide">Bash IDE</a></li>
+              <li><a href="#bash-debug">Bash Debug</a></li>
+              <li><a href="#shellman">Shellman</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#c">C++</a>
+            <ul>
+              <li><a href="#more">More</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#c-asp-net-and-net-core">C#, ASP .NET and .NET Core</a>
+          </li>
+          <li>
+            <a href="#clojure">Clojure</a>
+            <ul>
+              <li><a href="#calva">Calva</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#css">CSS</a>
+            <ul>
+              <li><a href="#css-peek">CSS Peek</a></li>
+            </ul>
+          </li>
+          <li><a href="#go">Go</a></li>
+          <li><a href="#groovy">Groovy</a></li>
+          <li><a href="#haskell">Haskell</a></li>
+          <li><a href="#shell">Shell</a></li>
+          <li><a href="#java">Java</a></li>
+          <li>
+            <a href="#javascript">JavaScript</a>
+            <ul>
+              <li><a href="#linters">Linters</a></li>
+              <li><a href="#framework-specific">Framework-specific</a></li>
+              <li><a href="#debugger-for-chrome">Debugger for Chrome</a></li>
+              <li><a href="#facebook-flow">Facebook Flow</a></li>
+              <li><a href="#typescript">TypeScript</a></li>
+              <li><a href="#debugger-for-chrome-1">Debugger for Chrome</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#markdown">Markdown</a>
+            <ul>
+              <li><a href="#markdownlint">markdownlint</a></li>
+              <li><a href="#markdown-all-in-one">Markdown All in One</a></li>
+              <li><a href="#markdown-emoji">Markdown Emoji</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#php">PHP</a>
+            <ul>
+              <li><a href="#intellisense">IntelliSense</a></li>
+              <li><a href="#laravel">Laravel</a></li>
+              <li><a href="#twig">Twig</a></li>
+              <li>
+                <a href="#smarty">Smarty</a>
+                <ul>
+                  <li>
+                    <a href="#smarty-template-support"
+                      >Smarty Template Support</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li><a href="#other-extensions">Other extensions</a></li>
+              <li><a href="#read-more">Read more</a></li>
+            </ul>
+          </li>
+          <li><a href="#pov-ray">POV-Ray</a></li>
+          <li>
+            <a href="#python">Python</a>
+            <ul>
+              <li><a href="#tensorflow">TensorFlow</a></li>
+            </ul>
+          </li>
+          <li><a href="#reasonml">ReasonML</a></li>
+          <li><a href="#rust">Rust</a></li>
+          <li><a href="#terraform">Terraform</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#productivity">Productivity</a>
+        <ul>
+          <li><a href="#arm-template-viewer">ARM Template Viewer</a></li>
+          <li><a href="#azure-cosmos-db">Azure Cosmos DB</a></li>
+          <li><a href="#azure-iot-toolkit">Azure IoT Toolkit</a></li>
+          <li><a href="#bookmarks">Bookmarks</a></li>
+          <li><a href="#color-tabs">Color Tabs</a></li>
+          <li><a href="#create-tests">Create tests</a></li>
+          <li><a href="#deploy">Deploy</a></li>
+          <li><a href="#duplicate-action">Duplicate Action</a></li>
+          <li><a href="#error-lens">Error Lens</a></li>
+          <li>
+            <a href="#es7-reactreduxgraphqlreact-native-snippets"
+              >ES7 React/Redux/GraphQL/React-Native snippets</a
+            >
+            <ul>
+              <li><a href="#gi">Gi</a></li>
+            </ul>
+          </li>
+          <li><a href="#gistpad">GistPad</a></li>
+          <li><a href="#git-history">Git History</a></li>
+          <li><a href="#git-project-manager">Git Project Manager</a></li>
+          <li><a href="#gitlink">GitLink</a></li>
+          <li><a href="#gitlens">GitLens</a></li>
+          <li><a href="#git-indicators">Git Indicators</a></li>
+          <li><a href="#github">GitHub</a></li>
+          <li>
+            <a href="#github-pull-request-monitor"
+              >GitHub Pull Request Monitor</a
+            >
+          </li>
+          <li>
+            <a href="#gitlab-workflow">GitLab Workflow</a>
+            <ul>
+              <li><a href="#gradle-tasks">Gradle Tasks</a></li>
+            </ul>
+          </li>
+          <li><a href="#icon-fonts">Icon Fonts</a></li>
+          <li><a href="#import-cost">Import Cost</a></li>
+          <li><a href="#jira-and-bitbucket">Jira and Bitbucket</a></li>
+          <li>
+            <a href="#js-parameter-annotations">JS Parameter Annotations</a>
+          </li>
+          <li><a href="#jumpy">Jumpy</a></li>
+          <li><a href="#kanban">Kanban</a></li>
+          <li><a href="#live-server">Live Server</a></li>
+          <li><a href="#multiple-clipboards">Multiple clipboards</a></li>
+          <li><a href="#ngrok-for-vscode">ngrok for VSCode</a></li>
+          <li>
+            <a href="#dotnet-core-test-explorer">Dotnet Core Test Explorer</a>
+          </li>
+          <li><a href="#i18n-ally">i18n Ally</a></li>
+          <li><a href="#instant-markdown">Instant Markdown</a></li>
+          <li><a href="#npm-intellisense">npm Intellisense</a></li>
+          <li><a href="#parameter-hints">Parameter Hints</a></li>
+          <li>
+            <a href="#partial-diff">Partial Diff</a>
+            <ul>
+              <li><a href="#paste-json-as-code">Paste JSON as Code</a></li>
+            </ul>
+          </li>
+          <li><a href="#path-autocomplete">Path Autocomplete</a></li>
+          <li><a href="#path-intellisense">Path IntelliSense</a></li>
+          <li><a href="#power-tools">Power Tools</a></li>
+          <li><a href="#printcode">PrintCode</a></li>
+          <li><a href="#project-manager">Project Manager</a></li>
+          <li><a href="#project-dashboard">Project Dashboard</a></li>
+          <li><a href="#rainbow-csv">Rainbow CSV</a></li>
+          <li><a href="#remote-development">Remote Development</a></li>
+          <li><a href="#remote-vscode">Remote VSCode</a></li>
+          <li><a href="#rest-client">REST Client</a></li>
+          <li><a href="#text-power-tools">Text Power Tools</a></li>
+          <li><a href="#todo-tree">Todo Tree</a></li>
+          <li><a href="#toggle-quotes">Toggle Quotes</a></li>
+          <li><a href="#typescript-destructure">Typescript Destructure</a></li>
+          <li><a href="#wakatime">WakaTime</a></li>
+          <li><a href="#yo">Yo</a></li>
+          <li><a href="#timing">Timing</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#formatting--beautification"
+          >Formatting &amp; Beautification</a
+        >
+        <ul>
+          <li><a href="#better-align">Better Align</a></li>
+          <li><a href="#auto-close-tag">Auto Close Tag</a></li>
+          <li><a href="#auto-rename-tag">Auto Rename Tag</a></li>
+          <li>
+            <a href="#beautify">beautify</a>
+            <ul>
+              <li><a href="#html2pug">html2pug</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#ecmascript-quotes-transformer"
+              >ECMAScript Quotes Transformer</a
+            >
+          </li>
+          <li><a href="#paste-and-indent">Paste and Indent</a></li>
+          <li><a href="#sort-lines">Sort Lines</a></li>
+          <li><a href="#surround">Surround</a></li>
+          <li><a href="#wrap-selection">Wrap Selection</a></li>
+          <li><a href="#formatting-toggle">Formatting Toggle</a></li>
+          <li><a href="#bracket-pair-colorizer">Bracket Pair Colorizer</a></li>
+          <li><a href="#auto-import">Auto Import</a></li>
+          <li><a href="#shell-format">shell-format</a></li>
+          <li>
+            <a href="#vscode-google-translate">Vscode Google Translate</a>
+          </li>
+          <li>
+            <a href="#explorer-icons">Explorer Icons</a>
+            <ul>
+              <li><a href="#city-lights-icons">City Lights Icons</a></li>
+              <li><a href="#vscode-icons">VSCode Icons</a></li>
+              <li><a href="#seti-icons">Seti Icons</a></li>
+              <li><a href="#material-icon-theme">Material Icon Theme</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#uncategorized">Uncategorized</a>
+        <ul>
+          <li><a href="#browser-preview">Browser Preview</a></li>
+          <li><a href="#coderoad">CodeRoad</a></li>
+          <li><a href="#code-runner">Code Runner</a></li>
+          <li><a href="#code-time">Code Time</a></li>
+          <li><a href="#color-highlight">Color Highlight</a></li>
+          <li><a href="#output-colorizer">Output Colorizer</a></li>
+          <li><a href="#dash">Dash</a></li>
+          <li>
+            <a href="#edit-with-shell-command">Edit with Shell Command</a>
+          </li>
+          <li>
+            <a href="#editor-config-for-vs-code">Editor Config for VS Code</a>
+          </li>
+          <li><a href="#ftp-sync">ftp-sync</a></li>
+          <li><a href="#highlight-jsxhtml-tags">Highlight JSX/HTML tags</a></li>
+          <li><a href="#indent-rainbow">Indent Rainbow</a></li>
+          <li><a href="#iterm2-theme-sync">iTerm2 Theme Sync</a></li>
+          <li><a href="#password-generator">Password Generator</a></li>
+          <li><a href="#platformio">PlatformIO</a></li>
+          <li><a href="#polacode">Polacode</a></li>
+          <li><a href="#carbon-now-sh">carbon-now-sh</a></li>
+          <li><a href="#quokka">Quokka</a></li>
+          <li><a href="#runner">Runner</a></li>
+          <li><a href="#slack">Slack</a></li>
+          <li><a href="#smoothtype">SmoothType</a></li>
+          <li><a href="#spotify">Spotify</a></li>
+          <li><a href="#svg">SVG</a></li>
+          <li><a href="#svg-viewer">SVG Viewer</a></li>
+          <li>
+            <a href="#text-marker-highlighter">Text Marker (Highlighter)</a>
+          </li>
+          <li><a href="#esdoc-mdn">ESDOC MDN</a></li>
+          <li><a href="#interface-generator">Interface generator</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#themes">Themes</a>
+        <ul>
+          <li><a href="#ui">UI</a></li>
+          <li>
+            <a href="#syntax-1">Syntax</a>
+            <ul>
+              <li>
+                <a href="#2077-theme-by-endormi">2077 theme by Endormi</a>
+              </li>
+              <li>
+                <a href="#an-old-hope-theme-by-dustin-sanders"
+                  >An Old Hope Theme by Dustin Sanders</a
+                >
+              </li>
+              <li><a href="#ariake-dark-by-wart">Ariake Dark by wart</a></li>
+              <li>
+                <a href="#atom-one-dark-theme-by-mahmoud-ali"
+                  >Atom One Dark Theme by Mahmoud Ali</a
+                >
+              </li>
+              <li><a href="#atomize-by-emroussel">Atomize by emroussel</a></li>
+              <li><a href="#ayu-by-teabyii">Ayu by teabyii</a></li>
+              <li>
+                <a href="#borealis-theme-by-alexander-eckert"
+                  >Borealis Theme by Alexander Eckert</a
+                >
+              </li>
+              <li>
+                <a href="#captain-sweetheart-by-ultradracula"
+                  >Captain Sweetheart by ultradracula</a
+                >
+              </li>
+              <li>
+                <a href="#city-lights-by-yummygum">City Lights by Yummygum</a>
+              </li>
+              <li>
+                <a href="#cobalt2-theme-official-by-wes-bos"
+                  >Cobalt2 Theme Official by Wes Bos</a
+                >
+              </li>
+              <li>
+                <a href="#dracula-official-by-dracula-theme"
+                  >Dracula Official by Dracula Theme</a
+                >
+              </li>
+              <li><a href="#edge-by-bogdan-lazar">Edge by Bogdan Lazar</a></li>
+              <li><a href="#eva-theme-by-fisheva">Eva Theme by fisheva</a></li>
+              <li>
+                <a href="#fairy-floss-by-nopjmp-and-sailorhg"
+                  >Fairy Floss by nopjmp and sailorhg</a
+                >
+              </li>
+              <li>
+                <a href="#github-theme-by-thomas-pink"
+                  >GitHub Theme by Thomas Pink</a
+                >
+              </li>
+              <li>
+                <a href="#jellybeans-theme-by-dimitar-nonov"
+                  >Jellybeans Theme by Dimitar Nonov</a
+                >
+              </li>
+              <li>
+                <a href="#material-palenight-theme-by-whizkydee"
+                  >Material Palenight Theme by whizkydee</a
+                >
+              </li>
+              <li>
+                <a href="#material-theme-by-mattia-astorino"
+                  >Material Theme by Mattia Astorino</a
+                >
+              </li>
+              <li><a href="#mno-by-u29dc">Mno by u29dc</a></li>
+              <li>
+                <a href="#monokai-oblique-by-pushqrdx"
+                  >Monokai Oblique by pushqrdx</a
+                >
+              </li>
+              <li>
+                <a href="#monokai-pro-by-monokai-commercial"
+                  >Monokai Pro by monokai (commercial)</a
+                >
+              </li>
+              <li>
+                <a href="#night-owl-by-sarah-drasner"
+                  >Night Owl by Sarah Drasner</a
+                >
+              </li>
+              <li>
+                <a href="#plastic-by-will-stone">Plastic by Will Stone</a>
+              </li>
+              <li>
+                <a href="#nord-by-arcticicestudio">Nord by arcticicestudio</a>
+              </li>
+              <li>
+                <a href="#rainglow-by-dayle-rees">Rainglow by Dayle Rees</a>
+              </li>
+              <li>
+                <a href="#relaxed-theme-by-michael-kühnel"
+                  >Relaxed Theme by Michael Kühnel</a
+                >
+              </li>
+              <li>
+                <a href="#shades-of-purple-by-ahmad-awais"
+                  >Shades of Purple by Ahmad Awais</a
+                >
+              </li>
+              <li>
+                <a href="#slime-theme-by-smlombardi"
+                  >Slime Theme by smlombardi</a
+                >
+              </li>
+              <li>
+                <a href="#niketa-theme-by-dejan-toteff"
+                  >Niketa Theme by Dejan Toteff</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#people-to-follow">People to Follow</a></li>
+      <li>
+        <a href="#resources-for-extension-developers"
+          >Resources for extension developers</a
+        >
+        <ul>
+          <li><a href="#documentation">Documentation</a></li>
+          <li><a href="#libraries">Libraries</a></li>
+          <li><a href="#tools">Tools</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#online-courses">Online Courses</a>
+        <ul>
+          <li>
+            <a href="#visual-studio-code-power-user-course-commercial"
+              >Visual Studio Code Power User Course (commercial)</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li><a href="#contribute">Contribute</a></li>
+      <li><a href="#license">License</a></li>
+    </ul>
+    <h1 id="official">Official</h1>
+    <ul>
+      <li><a href="https://code.visualstudio.com/">Official website</a></li>
+      <li>
+        <a href="https://github.com/microsoft/vscode">Source code</a> on GitHub
+      </li>
+      <li>
+        <a href="https://code.visualstudio.com/download"
+          >Releases (stable channel)</a
+        >
+      </li>
+      <li>
+        <a href="https://code.visualstudio.com/insiders"
+          >Releases (insiders channel)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/Microsoft/vscode/issues?utf8=%E2%9C%93&amp;q=label%3Aiteration-plan+"
+          >Monthly iteration plans</a
+        >
+      </li>
+    </ul>
+    <h1 id="syntax">Syntax</h1>
+    <p>
+      Language packages extend the editor with syntax highlighting and/or
+      snippets for a specific language or file format.
+    </p>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.vscode-arduino"
+          >Arduino</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=kagof.befunge"
+          >Befunge</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=melmass.blink"
+          >Blink</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=smkamranqadri.vscode-bolt-language"
+          >Bolt</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=yiwwan.vscode-bond"
+          >Bond</a
+        >
+      </li>
+      <li>
+        <a href="https://marketplace.visualstudio.com/items?itemName=twxs.cmake"
+          >CMake</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code"
+          >Dart</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker"
+          >Dockerfile</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=QassimFarid.ejs-language-support"
+          >EJS</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=mjmcloug.vscode-elixir"
+          >Elixir</a
+        >
+      </li>
+      <li>
+        <a href="https://marketplace.visualstudio.com/items?itemName=sbrink.elm"
+          >Elm</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=pgourlain.erlang"
+          >Erlang</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=Ionide.Ionide-fsharp"
+          >F#</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=gaborv.flatbuffers"
+          >Flatbuffers</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=Gimly81.fortran"
+          >Fortran</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=pranayagarwal.vscode-hack"
+          >Hack(HHVM)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=andrejunges.Handlebars"
+          >Handlebars</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=josephtbradley.hive-sql"
+          >Hive SQL</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=julialang.language-julia"
+          >Julia</a
+        >
+      </li>
+      <li>
+        <a href="https://marketplace.visualstudio.com/items?itemName=melmass.kl"
+          >KL</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=mathiasfrohlich.Kotlin"
+          >Kotlin</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=torn4dom4n.latex-support"
+          >LaTeX</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=viatsko.html-mason"
+          >Mason</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=openhab.openhab"
+          >openHAB</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=viatsko.parser3"
+          >Parser 3</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=alefragnani.pascal"
+          >Pascal</a
+        >, or
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=Wosi.omnipascal"
+          >OmniPascal</a
+        >
+        (only for Windows)
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=viatsko.perl-html-template"
+          >Perl HTML-Template</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=jmaxwilson.vscode-povray"
+          >POV-Ray</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=peterj.proto"
+          >Protobuf</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=groksrc.ruby"
+          >Ruby</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=scala-lang.scala"
+          >Scala</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=slevesque.shader"
+          >Shaders (<em>HLSL</em>, <em>GLSL</em>, <em>Cg</em>)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=sysoev.language-stylus"
+          >Stylus</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=Kasik96.swift"
+          >Swift</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=melmass.vex"
+          >VEX</a
+        >
+      </li>
+      <li><a href="https://github.com/antfu/wenyan-lang-vscode">Wenyan</a></li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=zephir-lang.zephir"
+          >Zephir</a
+        >
+      </li>
+    </ul>
+    <h1 id="migrating-from-other-editors">Migrating from other editors</h1>
+    <p>
+      The VSCode team provides keymaps from popular editors, making the
+      transition to VSCode almost seamless and easy.
+    </p>
+    <h2 id="migrating-from-vim">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim"
+        >Migrating from Vim</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        <strong>Vim Mode</strong> - Relatively new, but promising extension
+        implementing Vim features in VSCode
+      </p>
+    </blockquote>
+    <h2 id="migrating-from-atom">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.atom-keybindings"
+        >Migrating from Atom</a
+      >
+    </h2>
+    <blockquote>
+      <p>Popular Atom key bindings for Visual Studio Code</p>
+    </blockquote>
+    <h2 id="migrating-from-sublime-text">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.sublime-keybindings"
+        >Migrating from Sublime Text</a
+      >
+    </h2>
+    <blockquote>
+      <p>Popular Sublime Text key bindings for VS Code.</p>
+    </blockquote>
+    <h2 id="migrating-from-visual-studio">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.vs-keybindings"
+        >Migrating from Visual Studio</a
+      >
+    </h2>
+    <blockquote>
+      <p>Popular Visual Studio key bindings for VS Code.</p>
+    </blockquote>
+    <h2 id="migrating-from-intellij-idea">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings"
+        >Migrating from Intellij IDEA</a
+      >
+    </h2>
+    <blockquote>
+      <p>Popular Intellij IDEA key bindings for VS Code.</p>
+    </blockquote>
+    <h2 id="camel-humps">
+      <a
+        href="https://www.damirscorner.com/blog/posts/20190726-CamelHumpsNavigationInVsCode.html"
+        >Camel Humps</a
+      >
+    </h2>
+    <blockquote>
+      <p>Like with Visual Studio and Resharper or Intellij IDEA</p>
+    </blockquote>
+    <h1 id="using-vs-code-with-particular-technologies">
+      Using VS Code with particular technologies
+    </h1>
+    <p>
+      Microsoft created a collection of recipes for using VS Code with
+      particular technologies (mostly Web).
+    </p>
+    <p>
+      Make sure to visit it at
+      <a href="https://github.com/Microsoft/vscode-recipes"
+        >Microsoft/vscode-recipes</a
+      >
+    </p>
+    <h1 id="lint-and-intellisense">Lint and IntelliSense</h1>
+    <p>
+      In case the awesome nirvana that is linting has not yet been unleashed
+      upon you: &gt; lint was the name originally given to a particular program
+      that flagged some suspicious and non-portable constructs (likely to be
+      bugs) in C language source code. The term is now applied generically to
+      tools that flag suspicious usage in software written in any computer
+      language.
+    </p>
+    <p>
+      Unlike some other editors, VS Code supports IntelliSense, linting, outline
+      out-of-the-box and doesn’t require any separate extension to run linter
+      packages. Some linters are already integrated in VS Code, you can find the
+      full list in the official documentation,
+      <a href="https://code.visualstudio.com/Docs/languages/overview"
+        >Languages</a
+      >
+      section.
+    </p>
+    <h2 id="c">1C</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=1c-syntax.language-1c-bsl"
+          >1C/OScript</a
+        >
+        - rich 1С:Enterprise 8 (BSL) language support in VSC - add syntax
+        highlighting to <em>.bsl и </em>.os files in VSC, add IntelliSense and
+        syntax helper for 1С lang
+      </li>
+    </ul>
+    <h2 id="autohotkey">AutoHotkey</h2>
+    <h3 id="autohotkey-plus">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=cweijan.vscode-autohotkey-plus"
+        >AutoHotkey Plus</a
+      >
+    </h3>
+    <blockquote>
+      <p>
+        Syntax Highlighting, Snippets, Go to Definition, Signature helper and
+        Code formatter
+      </p>
+    </blockquote>
+    <h2 id="bash">Bash</h2>
+    <h3 id="bash-ide">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=mads-hartmann.bash-ide-vscode"
+        >Bash IDE</a
+      >
+    </h3>
+    <blockquote>
+      <p>A language server for Bash</p>
+    </blockquote>
+    <h3 id="bash-debug">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=rogalmic.bash-debug"
+        >Bash Debug</a
+      >
+    </h3>
+    <blockquote>
+      <p>A debugger extension for Bash scripts based on <code>bashdb</code></p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://user-images.githubusercontent.com/10897048/47375120-1a9a9b80-d722-11e8-819d-a0090540b2ba.gif"
+        alt="Bash Debug"
+      />
+      <figcaption>Bash Debug</figcaption>
+    </figure>
+    <h3 id="shellman">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=Remisa.shellman"
+        >Shellman</a
+      >
+    </h3>
+    <blockquote>
+      <p>Bash script snippets extension</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/yousefvand/shellman/master/images/demo.gif"
+        alt="Shellman"
+      />
+      <figcaption>Shellman</figcaption>
+    </figure>
+    <h2 id="c-1">C++</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools"
+          >C/C++</a
+        >
+        - Preview C/C++ extension by
+        <a href="https://www.microsoft.com">Microsoft</a>, read
+        <a
+          href="https://blogs.msdn.microsoft.com/vcblog/2016/03/31/cc-extension-for-visual-studio-code/"
+          >official blog post</a
+        >
+        for the details
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd"
+          >Clangd</a
+        >
+        - Provides C/C++ language IDE features for VS Code using clangd: code
+        completion, compile errors and warnings, go-to-definition and cross
+        references, include management, code formatting, simple refactorings.
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=austin.code-gnu-global"
+          >gnu-global-tags</a
+        >
+        - Provide Intellisense for C/C++ with the help of the GNU Global tool.
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=RichardHe.you-complete-me"
+          >YouCompleteMe</a
+        >
+        - Provides semantic completions for C/C++ (and TypeScript, JavaScript,
+        Objective-C, Golang, Rust) using
+        <a href="http://ycm-core.github.io/YouCompleteMe/">YouCompleteMe</a>.
+      </li>
+      <li>
+        <a href="https://github.com/mitaki28/vscode-clang"
+          >C/C++ Clang Command Adapter</a
+        >
+        - Completion and Diagnostic for C/C++/Objective-C using Clang command.
+      </li>
+      <li>
+        <a href="https://github.com/cquery-project/vscode-cquery">CQuery</a> -
+        <a href="https://github.com/jacobdufault/cquery"
+          >C/C++ language server</a
+        >
+        supporting multi-million line code base, powered by libclang. Cross
+        references, completion, diagnostics, semantic highlighting and more.
+      </li>
+    </ul>
+    <h4 id="more">More</h4>
+    <ul>
+      <li>
+        <a
+          href="https://devblogs.microsoft.com/cppblog/vscode-cpp-may-2019-update/"
+          >Microsoft’s tutorial on using VSCode for remote C/C++ development</a
+        >
+      </li>
+    </ul>
+    <h2 id="c-asp-.net-and-.net-core">C#, ASP .NET and .NET Core</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp"
+          >C#</a
+        >
+        - C# extension by <a href="https://www.microsoft.com">Microsoft</a>,
+        read
+        <a href="https://code.visualstudio.com/docs/languages/csharp"
+          >official documentation</a
+        >
+        for the details
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=Leopotam.csharpfixformat"
+          >C# FixFormat</a
+        >
+        - Fix format of usings / indents / braces / empty lines
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=jchannon.csharpextensions"
+          >C# Extensions</a
+        >
+        - Provides extensions to the IDE that will speed up your development
+        workflow.
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=tintoy.msbuild-project-tools"
+          >MSBuild Project Tools</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=fernandoescolar.vscode-solution-explorer"
+          >VSCode Solution Explorer</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=formulahendry.dotnet-test-explorer"
+          >.NET Core Test Explorer</a
+        >
+      </li>
+    </ul>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/formulahendry/vscode-dotnet-test-explorer/master/images/test-explorer-065.gif"
+        alt=".NET Core Test Explorer"
+      />
+      <figcaption>.NET Core Test Explorer</figcaption>
+    </figure>
+    <h2 id="clojure">Clojure</h2>
+    <h3 id="calva">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=betterthantomorrow.calva"
+        >Calva</a
+      >
+    </h3>
+    <blockquote>
+      <p>
+        Integrated REPL, linting, inline eval, test runner, and more. Powered by
+        Cider &amp; nRepl.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/BetterThanTomorrow/calva/master/assets/howto/top-level-comment-eval.gif"
+        alt="Calva"
+      />
+      <figcaption>Calva</figcaption>
+    </figure>
+    <h2 id="css">CSS</h2>
+    <h3 id="css-peek">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=pranaygp.vscode-css-peek"
+        >CSS Peek</a
+      >
+    </h3>
+    <blockquote>
+      <p>
+        Peek or Jump to a CSS definition directly from HTML, just like in
+        Brackets!
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/pranaygp/vscode-css-peek/master/readme/symbolProvider.gif"
+        alt="CSS Peek"
+      />
+      <figcaption>CSS Peek</figcaption>
+    </figure>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint"
+          >stylelint</a
+        >
+        - Lint CSS/SCSS.
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-autoprefixer"
+            >Autoprefixer</a
+          >
+          Parse CSS,SCSS, LESS and add vendor prefixes automatically.
+          <img
+            src="https://cloud.githubusercontent.com/assets/7034281/16823311/da82a3c6-496b-11e6-8d95-0bebbf0b9607.gif"
+            alt="Autoprefixer"
+          />
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion"
+            >Intellisense for CSS class names</a
+          >
+          - Provides CSS class name completion for the HTML class attribute
+          based on the CSS files in your workspace. Also supports React’s
+          className attribute.
+        </p>
+        <figure>
+          <img
+            src="https://i.imgur.com/5crMfTj.gif"
+            alt="Intellisense CSS class names"
+          />
+          <figcaption>Intellisense CSS class names</figcaption>
+        </figure>
+      </li>
+    </ul>
+    <h2 id="go">Go</h2>
+    <ul>
+      <li>
+        <a href="https://marketplace.visualstudio.com/items?itemName=golang.Go"
+          >Go</a
+        >
+        - Rich language support for the Go language.
+      </li>
+    </ul>
+    <h2 id="groovy">Groovy</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=NicolasVuillamy.vscode-groovy-lint"
+          >VsCode Groovy Lint</a
+        >
+        - Groovy lint, format, prettify and auto-fix
+      </li>
+    </ul>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/nvuillam/vscode-groovy-lint/master/images/vscode-anim.gif"
+        alt="VsCode Groovy Lint"
+      />
+      <figcaption>VsCode Groovy Lint</figcaption>
+    </figure>
+    <h2 id="haskell">Haskell</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=hoovercj.haskell-linter"
+          >haskell-linter</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=alanz.vscode-hie-server"
+          >Haskell IDE engine</a
+        >
+        - provides
+        <a href="https://github.com/haskell/haskell-ide-engine"
+          >language server</a
+        >
+        for stack and cabal projects.
+      </li>
+    </ul>
+    <h2 id="shell">Shell</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=truman.autocomplate-shell"
+          >autocomplate-shell</a
+        >
+      </li>
+    </ul>
+    <h2 id="java">Java</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=redhat.java"
+          >Language Support for Java(TM) by Red Hat</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug"
+          >Debugger for Java</a
+        >
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven"
+            >Maven for Java</a
+          >
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=GabrielBB.vscode-lombok"
+            >Lombok</a
+          >
+        </p>
+      </li>
+    </ul>
+    <h2 id="javascript">JavaScript</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=mgmcdermott.vscode-language-babel"
+          >Babel JavaScript</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode"
+          >Visual Studio IntelliCode</a
+        >
+        - This extension provides AI-assisted development features including
+        autocomplete and other insights based on understanding your code
+        context.
+        <img
+          src="https://docs.microsoft.com/en-us/visualstudio/intellicode/media/python-intellicode.gif"
+          alt="Visual Studio IntelliCode"
+        />
+      </li>
+    </ul>
+    <p>
+      See the difference between these two
+      <a href="https://github.com/michaelgmcd/vscode-language-babel/issues/1"
+        >here</a
+      >
+    </p>
+    <h3 id="linters">Linters</h3>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin"
+          >tslint (deprecated)</a
+        >
+        - TSLint for Visual Studio Code (with
+        <code>"tslint.jsEnable": true</code>).
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint"
+          >eslint</a
+        >
+        - Linter for <a href="https://eslint.org/">eslint</a>.
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=samverschueren.linter-xo"
+          >XO</a
+        >
+        - Linter for <a href="https://github.com/xojs/xo">XO</a>.
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=samverschueren.ava"
+          >AVA</a
+        >
+        - Snippets for <a href="https://github.com/avajs/ava">AVA</a>.
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode"
+          >Prettier</a
+        >
+        - Linter, Formatter and Pretty printer for
+        <a href="https://github.com/prettier/prettier-vscode">Prettier</a>.
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker"
+            >Code Spell Checker</a
+          >
+          - Spelling Checker for Visual Studio Code (English). Also supports
+          other languages via external extensions.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=austinleegordon.vscode-schema-dot-org"
+            >Schema.org Snippets</a
+          >
+          - Snippets for <a href="https://schema.org/">Schema.org</a>.
+        </p>
+      </li>
+    </ul>
+    <h3 id="framework-specific">Framework-specific</h3>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=octref.vetur"
+          >Vetur</a
+        >
+        - Toolkit for Vue.js <img src="screenshots/Vetur.png" alt="Vetur" />
+      </li>
+    </ul>
+    <h3 id="debugger-for-chrome">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome"
+        >Debugger for Chrome</a
+      >
+    </h3>
+    <blockquote>
+      <p>
+        A VS Code extension to debug your JavaScript code in the Chrome browser,
+        or other targets that support the Chrome Debugging Protocol.
+      </p>
+    </blockquote>
+    <h3 id="facebook-flow">Facebook Flow</h3>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode"
+          >Flow Language Support</a
+        >
+        - provides all the functionality you would expect — linting,
+        intellisense, type tooltips and click-to-definition
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=gcazaciuc.vscode-flow-ide"
+          >vscode-flow-ide</a
+        >
+        - an alternative Flowtype extension for Visual Studio Code
+      </li>
+    </ul>
+    <h3 id="typescript">TypeScript</h3>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin"
+          >tslint (deprecated)</a
+        >
+        - TSLint for Visual Studio Code.
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero"
+          >TypeScript Hero</a
+        >
+        - Code outline view of your open TS, sort and organize your imports.
+      </li>
+    </ul>
+    <h3 id="debugger-for-chrome-1">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome"
+        >Debugger for Chrome</a
+      >
+    </h3>
+    <blockquote>
+      <p>
+        A VS Code extension to debug your JavaScript code in the Chrome browser,
+        or other targets that support the Chrome Debugging Protocol.
+      </p>
+    </blockquote>
+    <h2 id="markdown">Markdown</h2>
+    <h3 id="markdownlint">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint"
+        >markdownlint</a
+      >
+    </h3>
+    <blockquote>
+      <p>
+        Linter for
+        <a href="https://github.com/DavidAnson/markdownlint">markdownlint</a>.
+      </p>
+    </blockquote>
+    <h3 id="markdown-all-in-one">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one"
+        >Markdown All in One</a
+      >
+    </h3>
+    <blockquote>
+      <p>
+        All-in-one markdown plugin (keyboard shortcuts, table of contents, auto
+        preview, list editing and more)
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://user-images.githubusercontent.com/10897048/47027336-d8a9ac80-d199-11e8-9836-b8dbc4a97d1a.gif"
+        alt="Markdown All in One"
+      />
+      <figcaption>Markdown All in One</figcaption>
+    </figure>
+    <h3 id="markdown-emoji">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=bierner.markdown-emoji"
+        >Markdown Emoji</a
+      >
+    </h3>
+    <blockquote>
+      <p>Adds emoji syntax support to VS Code’s built-in Markdown preview</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/mjbvz/vscode-markdown-emoji/master/docs/example.png"
+        alt="Markdown Emoji"
+      />
+      <figcaption>Markdown Emoji</figcaption>
+    </figure>
+    <h2 id="php">PHP</h2>
+    <h3 id="intellisense">IntelliSense</h3>
+    <p>
+      These extensions provide slightly different sets of features. While the
+      first one offers better autocompletion support, the second one seems to
+      have more features overall.
+    </p>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client"
+          >PHP Intelephense</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-intellisense"
+          >PHP IntelliSense</a
+        >
+      </li>
+    </ul>
+    <h3 id="laravel">Laravel</h3>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=onecentlin.laravel5-snippets"
+          >Laravel 5 Snippets</a
+        >
+        - Laravel 5 snippets for Visual Studio Code
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=onecentlin.laravel-blade"
+          >Laravel Blade Snippets</a
+        >
+        - Laravel blade snippets and syntax highlight support
+      </li>
+    </ul>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/onecentlin/laravel-blade-snippets-vscode/master/images/screenshot.gif"
+        alt="Laravel blade snippets and syntax highlight support animation"
+      />
+      <figcaption>
+        Laravel blade snippets and syntax highlight support animation
+      </figcaption>
+    </figure>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ahinkle.laravel-model-snippets"
+          >Laravel Model Snippets</a
+        >
+        - Quickly get models up and running with Laravel Model Snippets.
+      </li>
+    </ul>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/ahinkle/vscode-laravel-model-snippets/master/images/example.gif"
+        alt="Laravel Model Snippets animation"
+      />
+      <figcaption>Laravel Model Snippets animation</figcaption>
+    </figure>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ryannaddy.laravel-artisan"
+          >Laravel Artisan</a
+        >
+        - Laravel Artisan commands within Visual Studio Code
+      </li>
+    </ul>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/TheColorRed/vscode-laravel-artisan/master/images/screens/make-controller.gif"
+        alt="Laravel Artisan commands within Visual Studio Code animation"
+      />
+      <figcaption>
+        Laravel Artisan commands within Visual Studio Code animation
+      </figcaption>
+    </figure>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv"
+          >DotENV</a
+        >
+        - Support for dotenv file syntax
+      </li>
+    </ul>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/mikestead/vscode-dotenv/master/images/screenshot.png"
+        alt="Support for dotenv file syntax screenshot"
+      />
+      <figcaption>Support for dotenv file syntax screenshot</figcaption>
+    </figure>
+    <h3 id="twig">Twig</h3>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=mblode.twig-language-2"
+          >Twig Language 2</a
+        >
+      </li>
+    </ul>
+    <p>
+      To enable Emmet support in .twig files, you’ll need to have the following
+      in your settings:
+    </p>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode json"
+      ><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;emmet.includeLanguages&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">&quot;twig&quot;</span><span class="fu">:</span> <span class="st">&quot;html&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="fu">}</span></a></code></pre>
+    </div>
+    <h3 id="smarty">Smarty</h3>
+    <h4 id="smarty-template-support">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=aswinkumar863.smarty-template-support"
+        >Smarty Template Support</a
+      >
+    </h4>
+    <blockquote>
+      <p>
+        Smarty template support with formatting, folding, snippets, syntax
+        highlighting and more.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/aswinkumar863/smarty-vscode-support/master/images/preview.gif"
+        alt="Smarty Template Support"
+      />
+      <figcaption>Smarty Template Support</figcaption>
+    </figure>
+    <h3 id="other-extensions">Other extensions</h3>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=rifi2k.format-html-in-php"
+          >Format HTML in PHP</a
+        >
+        - Formatting for the HTML in PHP files. Runs before the save action so
+        you can still have a PHP formatter.
+      </li>
+    </ul>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/RiFi2k/format-html-in-php/master/format-html-in-php.gif"
+        alt="Format HTML in PHP"
+      />
+      <figcaption>Format HTML in PHP</figcaption>
+    </figure>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ikappas.composer"
+          >Composer</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug"
+          >PHP Debug</a
+        >
+        - XDebug extension for Visual Studio Code
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=neilbrayfield.php-docblocker"
+          >PHP DocBlocker</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=junstyle.php-cs-fixer"
+          >php cs fixer</a
+        >
+        - PHP CS Fixer extension for VS Code, php formatter, php code beautify
+        tool
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ikappas.phpcs"
+          >phpcs</a
+        >
+        - PHP CodeSniffer for Visual Studio Code
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=kokororin.vscode-phpfmt"
+          >phpfmt</a
+        >
+        - phpfmt for Visual Studio Code
+      </li>
+    </ul>
+    <h3 id="read-more">Read more</h3>
+    <ul>
+      <li>
+        <a
+          href="https://www.drupal.org/docs/develop/development-tools/configuring-visual-studio-code"
+          >Configuring Visual Studio Code for Drupal</a
+        >
+      </li>
+    </ul>
+    <h2 id="pov-ray">POV-Ray</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=jmaxwilson.vscode-povray"
+          >POV-Ray</a
+        >
+        - Persistence of Vision Ray Tracer (POV-Ray) Extension, includes Syntax
+        Highlighting and Snippets for common POV-Ray scene elements, Render the
+        current scene from within Visual Studio Code
+      </li>
+    </ul>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/jmaxwilson/vscode-povray/master/images/vscode-povray-demo.gif"
+        alt="Animated GIF of POV-Ray in Visual Studio Code"
+      />
+      <figcaption>Animated GIF of POV-Ray in Visual Studio Code</figcaption>
+    </figure>
+    <h2 id="python">Python</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ms-python.python"
+          >Python</a
+        >
+        - Linting, Debugging (multi threaded, web apps), Intellisense,
+        auto-completion, code formatting, snippets, unit testing, and more.
+      </li>
+    </ul>
+    <h3 id="tensorflow">TensorFlow</h3>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=vahidk.tensorflow-snippets"
+          >TensorFlow Snippets</a
+        >
+        - This extension includes a set of useful code snippets for developing
+        TensorFlow models in Visual Studio Code.
+      </li>
+    </ul>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/vahidk/tensorflow-snippets/master/images/framework.gif"
+        alt="TensorFlow Snippets GIF"
+      />
+      <figcaption>TensorFlow Snippets GIF</figcaption>
+    </figure>
+    <h2 id="reasonml">ReasonML</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=jaredly.reason-vscode"
+          >ReasonML</a
+        >
+        - Intellisense, code formatting, refactoring, code lens and more
+      </li>
+    </ul>
+    <h2 id="rust">Rust</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust"
+          >Rust</a
+        >
+        - Linting, auto-completion, code formatting, snippets and more
+      </li>
+    </ul>
+    <h2 id="terraform">Terraform</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=hashicorp.terraform"
+          >Terraform</a
+        >
+        - Syntax highlighting, linting, formatting, and validation for
+        Hashicorp’s Terraform
+      </li>
+    </ul>
+    <h1 id="productivity">Productivity</h1>
+    <h2 id="arm-template-viewer">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=bencoleman.armview"
+        >ARM Template Viewer</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Displays a graphical preview of Azure Resource Manager (ARM) templates.
+        The view will show all resources with the official Azure icons and also
+        linkage between the resources.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/benc-uk/armview-vscode/master/assets/readme/screen1.png"
+        alt="Displays a graphical preview of Azure Resource Manager (ARM) templates"
+      />
+      <figcaption>
+        Displays a graphical preview of Azure Resource Manager (ARM) templates
+      </figcaption>
+    </figure>
+    <h2 id="azure-cosmos-db">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb"
+        >Azure Cosmos DB</a
+      >
+    </h2>
+    <blockquote>
+      <p>Browse your database inside the vs code editor</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://media.giphy.com/media/fnK9fzP80e7YfO7JAq/giphy.gif"
+        alt="Browse your database inside the vs code editor animation"
+      />
+      <figcaption>
+        Browse your database inside the vs code editor animation
+      </figcaption>
+    </figure>
+    <h2 id="azure-iot-toolkit">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-toolkit"
+        >Azure IoT Toolkit</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Everything you need for the Azure IoT development: Interact with Azure
+        IoT Hub, manage devices connected to Azure IoT Hub, and develop with
+        code snippets for Azure IoT Hub
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/formulahendry/vscode-azure-iot-toolkit/master/images/device-explorer.png"
+        alt="Code snippets for Azure IoT Hub screenshot"
+      />
+      <figcaption>Code snippets for Azure IoT Hub screenshot</figcaption>
+    </figure>
+    <h2 id="bookmarks">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=alefragnani.Bookmarks"
+        >Bookmarks</a
+      >
+    </h2>
+    <blockquote>
+      <p>Mark lines and jump to them</p>
+    </blockquote>
+    <h2 id="color-tabs">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=orepor.color-tabs-vscode-ext"
+        >Color Tabs</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        An extension for big projects or monorepos that colors your tab/titlebar
+        based on the current package
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/oreporan/color-tabs-vscode/master/docs/coverGif.gif"
+        alt="Color your tabs and/or titlebar based on regex"
+      />
+      <figcaption>Color your tabs and/or titlebar based on regex</figcaption>
+    </figure>
+    <h2 id="create-tests">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=hardikmodha.create-tests"
+        >Create tests</a
+      >
+    </h2>
+    <blockquote>
+      <p>An extension to quickly generate test files.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://media.giphy.com/media/1iqPhENd8SLd9SggeX/giphy.gif"
+        alt="Create tests extension animation"
+      />
+      <figcaption>Create tests extension animation</figcaption>
+    </figure>
+    <h2 id="deploy">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=mkloubert.vs-deploy"
+        >Deploy</a
+      >
+    </h2>
+    <blockquote>
+      <p>Commands for upload or copy files of a workspace to a destination.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/mkloubert/vs-deploy/master/img/demo.gif"
+        alt="Upload/copy files animation"
+      />
+      <figcaption>Upload/copy files animation</figcaption>
+    </figure>
+    <h2 id="duplicate-action">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=mrmlnc.vscode-duplicate"
+        >Duplicate Action</a
+      >
+    </h2>
+    <blockquote>
+      <p>Ability to duplicate files and directories.</p>
+    </blockquote>
+    <h2 id="error-lens">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens"
+        >Error Lens</a
+      >
+    </h2>
+    <blockquote>
+      <p>Show language diagnostics inline (errors/warnings/…).</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://user-images.githubusercontent.com/9638156/71784742-de421b00-3007-11ea-8862-8c6ea2836202.gif"
+        alt="error lens demo gif"
+      />
+      <figcaption>error lens demo gif</figcaption>
+    </figure>
+    <h2 id="es7-reactreduxgraphqlreact-native-snippets">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets"
+        >ES7 React/Redux/GraphQL/React-Native snippets</a
+      >
+    </h2>
+    <blockquote>
+      <p>Provides Javascript and React/Redux snippets in ES7</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://user-images.githubusercontent.com/37667437/46757404-aa365800-cce7-11e8-80ca-9207b7a68dea.png"
+        alt="es7-reactreduxgraphqlreact-native-snippets"
+      />
+      <figcaption>es7-reactreduxgraphqlreact-native-snippets</figcaption>
+    </figure>
+    <h3 id="gi">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=rubbersheep.gi"
+        >Gi</a
+      >
+    </h3>
+    <blockquote>
+      <p>Generating .gitignore files made easy.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/hasit/vscode-gi/master/assets/gi.gif"
+        alt=".gitignore generation animation"
+      />
+      <figcaption>.gitignore generation animation</figcaption>
+    </figure>
+    <h2 id="gistpad">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=vsls-contrib.gistfs"
+        >GistPad</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Allows you to manage GitHub Gists entirely within the editor. You can
+        open, create, delete, fork, star and clone gists, and then seamlessly
+        begin editing files as if they were local. It’s like your very own
+        developer library for building and referencing code snippets, commonly
+        used config/scripts, programming-related notes/documentation, and
+        interactive samples.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://user-images.githubusercontent.com/116461/69910156-96274b80-13fe-11ea-9be4-d801f4e9c377.gif"
+        alt="GistPad gist management"
+      />
+      <figcaption>GistPad gist management</figcaption>
+    </figure>
+    <h2 id="git-history">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory"
+        >Git History</a
+      >
+    </h2>
+    <blockquote>
+      <p>View git log, file or line History</p>
+    </blockquote>
+    <h2 id="git-project-manager">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=felipecaputo.git-project-manager"
+        >Git Project Manager</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Automatically indexes your git projects and lets you easily toggle
+        between them
+      </p>
+    </blockquote>
+    <h2 id="gitlink">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=qezhu.gitlink"
+        >GitLink</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        GoTo current file’s online link in browser and Copy the link in
+        clipboard.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/qinezh/vscode-gitlink/master/images/how_to_use_it.gif"
+        alt="GoTo current file online animation"
+      />
+      <figcaption>GoTo current file online animation</figcaption>
+    </figure>
+    <h2 id="gitlens">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens"
+        >GitLens</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Provides Git CodeLens information (most recent commit, # of authors),
+        on-demand inline blame annotations, status bar blame information, file
+        and blame history explorers, and commands to compare changes with the
+        working tree or previous versions.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/eamodio/vscode-git-codelens/master/images/docs/gitlens-preview.gif"
+        alt="GitLens inline git information animation"
+      />
+      <figcaption>GitLens inline git information animation</figcaption>
+    </figure>
+    <h2 id="git-indicators">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=lamartire.git-indicators"
+        >Git Indicators</a
+      >
+    </h2>
+    <blockquote>
+      <p>Atom-like git indicators on active panel</p>
+    </blockquote>
+    <p>
+      <img
+        src="https://raw.githubusercontent.com/lamartire/vscode-git-indicators/master/preview/added.png"
+        alt="git added indicator screenshot"
+      />
+      <img
+        src="https://raw.githubusercontent.com/lamartire/vscode-git-indicators/master/preview/removed.png"
+        alt="git removed indicator screenshot"
+      />
+      <img
+        src="https://raw.githubusercontent.com/lamartire/vscode-git-indicators/master/preview/modified.png"
+        alt="git modified indicator screenshot"
+      />
+    </p>
+    <h2 id="github">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=KnisterPeter.vscode-github"
+        >GitHub</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Provides GitHub workflow support. For example browse project, issues,
+        file (the current line), create and manage pull request. Support for
+        other providers (e.g. gitlab or bitbucket) is planned. Have a look at
+        the
+        <a
+          href="https://github.com/KnisterPeter/vscode-github/blob/master/README.md"
+          >README.md</a
+        >
+        on how to get started with the setup for this extension.
+      </p>
+    </blockquote>
+    <h2 id="github-pull-request-monitor">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=erichbehrens.pull-request-monitor"
+        >GitHub Pull Request Monitor</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        This extension uses the GitHub api to monitor the state of your pull
+        requests and let you know when it’s time to merge or if someone
+        requested changes.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/erichbehrens/pull-request-monitor/master/images/statusBarItems.png"
+        alt="GitHub Pull Request Monitor"
+      />
+      <figcaption>GitHub Pull Request Monitor</figcaption>
+    </figure>
+    <h2 id="gitlab-workflow">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=gitlab.gitlab-workflow"
+        >GitLab Workflow</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Adds a GitLab sidebar icon to view issues, merge requests and other
+        GitLab resources. You can also view the results of your GitLab CI/CD
+        pipeline and check the syntax of your <code>.gitlab-ci.yml</code>.
+      </p>
+    </blockquote>
+    <h4 id="gradle-tasks">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=richardwillis.vscode-gradle"
+        >Gradle Tasks</a
+      >
+    </h4>
+    <blockquote>
+      <p>Run gradle tasks in VS Code.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/badsyntax/vscode-gradle/master/images/screencast.gif"
+        alt="Gradle Tasks"
+      />
+      <figcaption>Gradle Tasks</figcaption>
+    </figure>
+    <h2 id="icon-fonts">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=idleberg.icon-fonts"
+        >Icon Fonts</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Snippets for popular icon fonts such as Font Awesome, Ionicons,
+        Glyphicons, Octicons, Material Design Icons and many more!
+      </p>
+    </blockquote>
+    <h2 id="import-cost">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost"
+        >Import Cost</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        This extension will display inline in the editor the size of the
+        imported package. The extension utilizes webpack with
+        babili-webpack-plugin in order to detect the imported size.
+      </p>
+    </blockquote>
+    <h2 id="jira-and-bitbucket">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=Atlassian.atlascode"
+        >Jira and Bitbucket</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Bringing the power of Jira and Bitbucket to VS Code - With Atlassian for
+        VS Code you can create and view issues, start work on issues, create
+        pull requests, do code reviews, start builds, get build statuses and
+        more!
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://bitbucket.org/atlassianlabs/atlascode/raw/master/.readme/dev-workflow.gif"
+        alt="Jira and Bitbucket workflow"
+      />
+      <figcaption>Jira and Bitbucket workflow</figcaption>
+    </figure>
+    <h2 id="js-parameter-annotations">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=lannonbr.vscode-js-annotations"
+        >JS Parameter Annotations</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Provides annotations on function calls in JS/TS files to provide
+        parameter names to arguments.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/lannonbr/vscode-js-annotations/master/jsannotations.png"
+        alt="JS Parameter Annotations"
+      />
+      <figcaption>JS Parameter Annotations</figcaption>
+    </figure>
+    <h2 id="jumpy">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=wmaurer.vscode-jumpy"
+        >Jumpy</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Provides fast cursor movement, inspired by Atom’s package of the same
+        name.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://cloud.githubusercontent.com/assets/2899448/19660934/0481c44c-9a32-11e6-87cc-1f8913922ccb.gif"
+        alt="Jumpy"
+      />
+      <figcaption>Jumpy</figcaption>
+    </figure>
+    <h2 id="kanban">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=mkloubert.vscode-kanban"
+        >Kanban</a
+      >
+    </h2>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/mkloubert/vscode-kanban/master/img/demo1.gif"
+        alt="kanban"
+      />
+      <figcaption>kanban</figcaption>
+    </figure>
+    <blockquote>
+      <p>
+        Simple Kanban board for use in Visual Studio Code, with time tracking
+        and Markdown support.
+      </p>
+    </blockquote>
+    <h2 id="live-server">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer"
+        >Live Server</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Launch a development local Server with live reload feature for static
+        &amp; dynamic pages.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/ritwickdey/vscode-live-server/master/images/Screenshot/vscode-live-server-animated-demo.gif"
+        alt="live-server"
+      />
+      <figcaption>live-server</figcaption>
+    </figure>
+    <h2 id="multiple-clipboards">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=slevesque.vscode-multiclip"
+        >Multiple clipboards</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Override the regular Copy and Cut commands to keep selections in a
+        clipboard ring
+      </p>
+    </blockquote>
+    <h2 id="ngrok-for-vscode">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=philnash.ngrok-for-vscode"
+        >ngrok for VSCode</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        ngrok allows you to expose a web server running on your local machine to
+        the internet. Just tell ngrok what port your web server is listening on.
+        This extension allows you to control
+        <a href="https://ngrok.com/">ngrok</a> from the VSCode command palette
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/philnash/ngrok-for-vscode/master/images/start.gif"
+        alt="ngrok for VSCode"
+      />
+      <figcaption>ngrok for VSCode</figcaption>
+    </figure>
+    <h2 id="dotnet-core-test-explorer">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=formulahendry.dotnet-test-explorer"
+        >Dotnet Core Test Explorer</a
+      >
+    </h2>
+    <blockquote>
+      <p>View and run your .NET Core tests directly in the editor.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/formulahendry/vscode-dotnet-test-explorer/master/images/test-explorer.gif"
+        alt="View and run your .NET Core tests directly in the editor animation"
+      />
+      <figcaption>
+        View and run your .NET Core tests directly in the editor animation
+      </figcaption>
+    </figure>
+    <h2 id="i18n-ally">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=antfu.i18n-ally"
+        >i18n Ally</a
+      >
+    </h2>
+    <blockquote>
+      <p>🌍 All in one i18n extension for VSCode</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/antfu/i18n-ally/master/screenshots/overview.png"
+        alt="i18n Ally"
+      />
+      <figcaption>i18n Ally</figcaption>
+    </figure>
+    <h2 id="instant-markdown">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=dbankier.vscode-instant-markdown"
+        >Instant Markdown</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Simply, edit markdown documents in vscode and instantly preview it in
+        your browser as you type.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/dbankier/vscode-instant-markdown/master/vscode-instant-markdown.gif"
+        alt="Instant Markdown Screencast"
+      />
+      <figcaption>Instant Markdown Screencast</figcaption>
+    </figure>
+    <h2 id="npm-intellisense">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense"
+        >npm Intellisense</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Visual Studio Code plugin that autocompletes npm modules in import
+        statements.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/ChristianKohler/NpmIntellisense/master/images/auto_complete.gif"
+        alt="npm-intellisense"
+      />
+      <figcaption>npm-intellisense</figcaption>
+    </figure>
+    <h2 id="parameter-hints">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=DominicVonk.parameter-hints"
+        >Parameter Hints</a
+      >
+    </h2>
+    <blockquote>
+      <p>Provides parameter hints on function calls in JS/TS/PHP files.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/dominicvonk/vscode-parameter-hints/master/preview.png"
+        alt="Parameter Hints"
+      />
+      <figcaption>Parameter Hints</figcaption>
+    </figure>
+    <h2 id="partial-diff">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ryu1kn.partial-diff"
+        >Partial Diff</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Compare (diff) text selections within a file, across different files, or
+        to the clipboard
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/ryu1kn/vscode-partial-diff/master/images/public.gif"
+        alt="Partial Diff"
+      />
+      <figcaption>Partial Diff</figcaption>
+    </figure>
+    <h3 id="paste-json-as-code">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=quicktype.quicktype"
+        >Paste JSON as Code</a
+      >
+    </h3>
+    <blockquote>
+      <p>
+        Infer the structure of JSON and paste is as types in many programming
+        languages
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/quicktype/quicktype-vscode/master/media/demo.gif"
+        alt="Paste JSON as Code"
+      />
+      <figcaption>Paste JSON as Code</figcaption>
+    </figure>
+    <h2 id="path-autocomplete">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ionutvmi.path-autocomplete"
+        >Path Autocomplete</a
+      >
+    </h2>
+    <blockquote>
+      <p>Provides path completion for visual studio code.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/ionutvmi/path-autocomplete/master/demo/path-autocomplete.gif"
+        alt="Path Autocomplete"
+      />
+      <figcaption>Path Autocomplete</figcaption>
+    </figure>
+    <h2 id="path-intellisense">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense"
+        >Path IntelliSense</a
+      >
+    </h2>
+    <blockquote>
+      <p>Visual Studio Code plugin that autocompletes filenames</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://i.giphy.com/iaHeUiDeTUZuo.gif"
+        alt="Autocompletion for filenames animation"
+      />
+      <figcaption>Autocompletion for filenames animation</figcaption>
+    </figure>
+    <h2 id="power-tools">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=egomobile.vscode-powertools"
+        >Power Tools</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Extends Visual Studio Code via things like Node.js based scripts or
+        shell commands, without writing separate extensions
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/egomobile/vscode-powertools/master/img/demo.gif"
+        alt="Power Tools"
+      />
+      <figcaption>Power Tools</figcaption>
+    </figure>
+    <h2 id="printcode">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=nobuhito.printcode"
+        >PrintCode</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        PrintCode converts the code being edited into an HTML file, displays it
+        by browser and prints it.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/nobuhito/vscode.printcode/master/printcode.gif"
+        alt="PrintCode"
+      />
+      <figcaption>PrintCode</figcaption>
+    </figure>
+    <h2 id="project-manager">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager"
+        >Project Manager</a
+      >
+    </h2>
+    <blockquote>
+      <p>Easily switch between projects.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/alefragnani/vscode-project-manager/master/images/project-manager-commands.png"
+        alt="Switch between projects screenshot"
+      />
+      <figcaption>Switch between projects screenshot</figcaption>
+    </figure>
+    <h2 id="project-dashboard">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=kruemelkatze.vscode-dashboard"
+        >Project Dashboard</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        VSCode Project Dashboard is a Visual Studio Code extension that lets you
+        organize your projects in a speed-dial like manner. Pin your frequently
+        visited folders, files, and SSH remotes onto a dashboard to access them
+        quickly.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://user-images.githubusercontent.com/5564731/79053450-b7663700-7c3d-11ea-8498-bbfe7723b47f.gif"
+        alt="Project Dashboard"
+      />
+      <figcaption>Project Dashboard</figcaption>
+    </figure>
+    <h2 id="rainbow-csv">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv"
+        >Rainbow CSV</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Highlight columns in comma, tab, semicolon and pipe separated files,
+        consistency check and linting with CSVLint, multi-cursor column editing,
+        column trimming and realignment, and SQL-style querying with RBQL.
+      </p>
+    </blockquote>
+    <figure>
+      <img src="https://i.imgur.com/PRFKVIN.png" alt="Rainbow CSV" />
+      <figcaption>Rainbow CSV</figcaption>
+    </figure>
+    <h2 id="remote-development">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack"
+        >Remote Development</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Allows users to open any folder in a container, on a remote machine,
+        container or in Windows Subsystem for Linux(WSL) and take advantage of
+        VS Code’s full feature set.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif"
+        alt="Remote SSH extension at work"
+      />
+      <figcaption>Remote SSH extension at work</figcaption>
+    </figure>
+    <h2 id="remote-vscode">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=rafaelmaiolla.remote-vscode"
+        >Remote VSCode</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Allow user to edit files from Remote server in Visual Studio Code
+        directly.
+      </p>
+    </blockquote>
+    <h2 id="rest-client">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client"
+        >REST Client</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Allows you to send HTTP request and view the response in Visual Studio
+        Code directly.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Huachao/vscode-restclient/master/images/usage.gif"
+        alt="Send HTTP request and view response animation"
+      />
+      <figcaption>Send HTTP request and view response animation</figcaption>
+    </figure>
+    <h2 id="text-power-tools">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=qcz.text-power-tools"
+        >Text Power Tools</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        All-in-one extension for text manipulation: filtering (grep), remove
+        lines, insert number sequences and GUIDs, format content as table,
+        change case, converting numbers and more. Great for finding information
+        in logs and manipulating text.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/qcz/vscode-text-power-tools/89a1d9d7be3edfc9bcf112fe427c662655cb60cc/images/filtering.gif"
+        alt="Text Power Tools"
+      />
+      <figcaption>Text Power Tools</figcaption>
+    </figure>
+    <h2 id="todo-tree">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree"
+        >Todo Tree</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Custom keywords, highlighting, and colors for TODO comments. As well as
+        a sidebar to view all your current tags.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://thumbs.gfycat.com/PowerlessWindyCivet-size_restricted.gif"
+        alt="Todo Tree"
+      />
+      <figcaption>Todo Tree</figcaption>
+    </figure>
+    <h2 id="toggle-quotes">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=BriteSnow.vscode-toggle-quotes"
+        >Toggle Quotes</a
+      >
+    </h2>
+    <blockquote>
+      <p>Cycle between single, double and backtick quotes</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://d3vv6lp55qjaqc.cloudfront.net/items/2V092N0u2O1a393Y0f28/Screen%20Recording%202018-10-04%20at%2009.26%20AM.gif?X-CloudApp-Visitor-Id=26998&amp;v=e2908c88"
+        alt="Toggle Quotes"
+      />
+      <figcaption>Toggle Quotes</figcaption>
+    </figure>
+    <h2 id="typescript-destructure">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=tusaeff.vscode-typescript-destructure-plugin"
+        >Typescript Destructure</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        TypeScript Language Service Plugin providing a set of source actions for
+        easy objects destructuring
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/tusaeff/vscode-typescript-destructure-plugin/master/assets/destructure-to-constant.gif"
+        alt="Typescript Destructure"
+      />
+      <figcaption>Typescript Destructure</figcaption>
+    </figure>
+    <h2 id="wakatime">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=WakaTime.vscode-wakatime"
+        >WakaTime</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Automatic time tracker and productivity dashboard showing how long you
+        coded in each project, file, branch, and language.
+      </p>
+    </blockquote>
+    <h2 id="yo">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=samverschueren.yo"
+        >Yo</a
+      >
+    </h2>
+    <blockquote>
+      <p>Scaffold projects using <a href="https://yeoman.io/">Yeoman</a></p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/SamVerschueren/vscode-yo/master/media/yo.gif"
+        alt="Using yeoman animation"
+      />
+      <figcaption>Using yeoman animation</figcaption>
+    </figure>
+    <h2 id="timing">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=HaaLeo.timing"
+        >Timing</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Time converter extension to convert timestamps from/to various formats
+        and insert them on demand or just display them. It further provides a
+        neat hover provider to beautify epoch timestamps instantly. All features
+        are highly customizable.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/HaaLeo/vscode-timing/master/doc/Convert_Sample.gif"
+        alt="Timing"
+      />
+      <figcaption>Timing</figcaption>
+    </figure>
+    <h1 id="formatting-beautification">Formatting &amp; Beautification</h1>
+    <h2 id="better-align">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=wwm.better-align"
+        >Better Align</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Align your code by colon(:), assignment(=,+=,-=,*=,/=) and arrow(=&gt;).
+        It has additional support for comma-first coding style and trailing
+        comment.
+      </p>
+      <p>
+        And it doesn’t require you to select what to be aligned, the extension
+        will figure it out by itself.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/WarWithinMe/better-align/master/images/2.gif"
+        alt="Better Align"
+      />
+      <figcaption>Better Align</figcaption>
+    </figure>
+    <h2 id="auto-close-tag">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag"
+        >Auto Close Tag</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Automatically add HTML/XML close tag, same as Visual Studio IDE or
+        Sublime Text
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/formulahendry/vscode-auto-close-tag/master/images/usage.gif"
+        alt="Automatically add close tags animation"
+      />
+      <figcaption>Automatically add close tags animation</figcaption>
+    </figure>
+    <h2 id="auto-rename-tag">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag"
+        >Auto Rename Tag</a
+      >
+    </h2>
+    <blockquote>
+      <p>Auto rename paired HTML/XML tags</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/formulahendry/vscode-auto-rename-tag/master/images/usage.gif"
+        alt="Auto rename paired HTML/XML tags animation"
+      />
+      <figcaption>Auto rename paired HTML/XML tags animation</figcaption>
+    </figure>
+    <h2 id="beautify">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify"
+        >beautify</a
+      >
+    </h2>
+    <blockquote>
+      <p>Beautify code in place for VS Code</p>
+    </blockquote>
+    <h3 id="html2pug">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=dbalas.vscode-html2pug"
+        >html2pug</a
+      >
+    </h3>
+    <blockquote>
+      <p>
+        Transform html to pug inside your Visual Studio Code, forget about using
+        an external page anymore.
+      </p>
+    </blockquote>
+    <h2 id="ecmascript-quotes-transformer">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=vilicvane.es-quotes"
+        >ECMAScript Quotes Transformer</a
+      >
+    </h2>
+    <blockquote>
+      <p>Transform quotes of ECMAScript string literals</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://cloud.githubusercontent.com/assets/970430/10563944/4cc04462-75d1-11e5-984b-41e0a21a72c3.gif"
+        alt="Transform quotes of ECMAScript string literals animation"
+      />
+      <figcaption>
+        Transform quotes of ECMAScript string literals animation
+      </figcaption>
+    </figure>
+    <h2 id="paste-and-indent">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=Rubymaniac.vscode-paste-and-indent"
+        >Paste and Indent</a
+      >
+    </h2>
+    <blockquote>
+      <p>Paste code with “correct” indentation</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://github.com/vikrantnegi/vscode-personal-preference-setting/blob/master/screenshots/pasteandindent.gif"
+        alt="Indentation of pasted code animation"
+      />
+      <figcaption>Indentation of pasted code animation</figcaption>
+    </figure>
+    <h2 id="sort-lines">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=Tyriar.sort-lines"
+        >Sort Lines</a
+      >
+    </h2>
+    <blockquote>
+      <p>Sorts lines of text in specific order</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Tyriar/vscode-sort-lines/master/images/usage-animation.gif"
+        alt="Sorts lines of text in specific order animation"
+      />
+      <figcaption>Sorts lines of text in specific order animation</figcaption>
+    </figure>
+    <h2 id="surround">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=yatki.vscode-surround"
+        >Surround</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        A simple yet powerful extension to add wrapper templates around your
+        code blocks.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/yatki/vscode-surround/master/images/demo.gif"
+        alt="Wrap a template around a code block"
+      />
+      <figcaption>Wrap a template around a code block</figcaption>
+    </figure>
+    <h2 id="wrap-selection">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=konstantin.wrapSelection"
+        >Wrap Selection</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Wraps selection or multiple selections with symbol or multiple symbols
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://github.com/gko/wrap/blob/master/features.gif"
+        alt="Wraps selection or multiple selections with symbol or multiple symbols animation"
+      />
+      <figcaption>
+        Wraps selection or multiple selections with symbol or multiple symbols
+        animation
+      </figcaption>
+    </figure>
+    <h2 id="formatting-toggle">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=tombonnike.vscode-status-bar-format-toggle"
+        >Formatting Toggle</a
+      >
+    </h2>
+    <blockquote>
+      <p>Allows you to toggle your formatter on and off with a simple click</p>
+    </blockquote>
+    <h2 id="bracket-pair-colorizer">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer"
+        >Bracket Pair Colorizer</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        This extension allows matching brackets to be identified with colours.
+        The user can define which characters to match, and which colours to use.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/CoenraadS/BracketPair/master/images/example.png"
+        alt="Bracket Pair Colorizer"
+      />
+      <figcaption>Bracket Pair Colorizer</figcaption>
+    </figure>
+    <h2 id="auto-import">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=steoates.autoimport"
+        >Auto Import</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Automatically finds, parses and provides code actions and code
+        completion for all available imports. Works with Typescript and TSX.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://camo.githubusercontent.com/c952445b4a04a9d358be991cc2d830f2a4c0f33b/68747470733a2f2f67696679752e636f6d2f696d616765732f6175746f696d706f72742e676966"
+        alt="Auto import"
+      />
+      <figcaption>Auto import</figcaption>
+    </figure>
+    <h2 id="shell-format">
+      <a href="https://github.com/foxundermoon/vs-shell-format">shell-format</a>
+    </h2>
+    <blockquote>
+      <p>shell script &amp; Dockerfile &amp; dotenv format</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/foxundermoon/vs-shell-format/master/image/shell_format.gif"
+        alt="shell-format"
+      />
+      <figcaption>shell-format</figcaption>
+    </figure>
+    <h2 id="vscode-google-translate">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=funkyremi.vscode-google-translate"
+        >Vscode Google Translate</a
+      >
+    </h2>
+    <blockquote>
+      <p>Quickly translate selected text right in your code</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/funkyremi/vscode-google-translate/master/demo.gif"
+        alt="Vscode Google Translate"
+      />
+      <figcaption>Vscode Google Translate</figcaption>
+    </figure>
+    <h2 id="explorer-icons">Explorer Icons</h2>
+    <h3 id="city-lights-icons">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=Yummygum.city-lights-icon-vsc"
+        >City Lights Icons</a
+      >
+    </h3>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/yummygum/city-lights-icons-vsc/master/city-lights-icon-preview.gif"
+        alt="City Lights Icons"
+      />
+      <figcaption>City Lights Icons</figcaption>
+    </figure>
+    <h3 id="vscode-icons">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons"
+        >VSCode Icons</a
+      >
+    </h3>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/master/images/screenshot.gif"
+        alt="VSCode Icons"
+      />
+      <figcaption>VSCode Icons</figcaption>
+    </figure>
+    <h3 id="seti-icons">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=qinjia.seti-icons"
+        >Seti Icons</a
+      >
+    </h3>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/hellopao/vscode-seti-icons/master/screenshot.png"
+        alt="Seti Icons"
+      />
+      <figcaption>Seti Icons</figcaption>
+    </figure>
+    <h3 id="material-icon-theme">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme"
+        >Material Icon Theme</a
+      >
+    </h3>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/master/images/fileIcons.png"
+        alt="Material Icon Theme"
+      />
+      <figcaption>Material Icon Theme</figcaption>
+    </figure>
+    <h1 id="uncategorized">Uncategorized</h1>
+    <h2 id="browser-preview">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=auchenberg.vscode-browser-preview"
+        >Browser Preview</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Browser Preview for VS Code enables you to open a real browser preview
+        inside your editor that you can debug. Browser Preview is powered by
+        Chrome Headless, and works by starting a headless Chrome instance in a
+        new process. This enables a secure way to render web content inside VS
+        Code, and enables interesting features such as in-editor debugging and
+        more!
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/auchenberg/vscode-browser-preview/master/resources/demo.gif"
+        alt="Browser Preview Demo"
+      />
+      <figcaption>Browser Preview Demo</figcaption>
+    </figure>
+    <h2 id="coderoad">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=CodeRoad.coderoad"
+        >CodeRoad</a
+      >
+    </h2>
+    <blockquote>
+      <p>Play interactive tutorials in your favorite editor.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/coderoad/coderoad-vscode/master/docs/static/gif/coderoad-example.gif"
+        alt="CodeRoad Demo"
+      />
+      <figcaption>CodeRoad Demo</figcaption>
+    </figure>
+    <h2 id="code-runner">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner"
+        >Code Runner</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Run code snippet or code file for multiple languages: C, C++, Java,
+        JavaScript, PHP, Python, Perl, Ruby, Go, Lua, Groovy, PowerShell,
+        BAT/CMD, BASH/SH, F# Script, C# Script, VBScript, TypeScript,
+        CoffeeScript, Scala, Swift, Julia, Crystal, OCaml Script
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/formulahendry/vscode-code-runner/master/images/usage.gif"
+        alt="Run a snippet or file animation"
+      />
+      <figcaption>Run a snippet or file animation</figcaption>
+    </figure>
+    <h2 id="code-time">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=softwaredotcom.swdc-vscode"
+        >Code Time</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Automatic time reports by project and other programming metrics right in
+        VS Code.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://camo.githubusercontent.com/918d2dfc585074f3b20566723f3ab8ce32e9d23e/68747470733a2f2f737764632d7673636f64652e73332d75732d776573742d312e616d617a6f6e6177732e636f6d2f636f64652d74696d652d66656174757265732e706e67"
+        alt="Code Time"
+      />
+      <figcaption>Code Time</figcaption>
+    </figure>
+    <h2 id="color-highlight">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight"
+        >Color Highlight</a
+      >
+    </h2>
+    <blockquote>
+      <p>Highlight web colors in your editor</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://cdn-images-1.medium.com/max/1600/1*ZwE7OHKR5opvDCJJOw9KeQ.png"
+        alt="Highlight web colors in your editor screenshot"
+      />
+      <figcaption>Highlight web colors in your editor screenshot</figcaption>
+    </figure>
+    <h2 id="output-colorizer">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=IBM.output-colorizer"
+        >Output Colorizer</a
+      >
+    </h2>
+    <blockquote>
+      <p>Syntax highlighting for the VS Code Output Panel and log files</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/IBM-Bluemix/vscode-log-output-colorizer/master/github-assets/screenshot-1.jpg"
+        alt="IBM.output-colorizer"
+      />
+      <figcaption>IBM.output-colorizer</figcaption>
+    </figure>
+    <h2 id="dash">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=deerawan.vscode-dash"
+        >Dash</a
+      >
+    </h2>
+    <blockquote>
+      <p>Dash integration in Visual Studio Code</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://cdn-images-1.medium.com/max/2000/1*sqGllC-pgXNaEBfB-cxG9Q.png"
+        alt="Dash integration screenshot"
+      />
+      <figcaption>Dash integration screenshot</figcaption>
+    </figure>
+    <h2 id="edit-with-shell-command">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ryu1kn.edit-with-shell"
+        >Edit with Shell Command</a
+      >
+    </h2>
+    <blockquote>
+      <p>Leverage your favourite shell commands to edit text</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/ryu1kn/vscode-edit-with-shell/master/images/animations/public.gif"
+        alt="Edit with Shell Command"
+      />
+      <figcaption>Edit with Shell Command</figcaption>
+    </figure>
+    <h2 id="editor-config-for-vs-code">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig"
+        >Editor Config for VS Code</a
+      >
+    </h2>
+    <blockquote>
+      <p>Editor Config for VS Code</p>
+    </blockquote>
+    <h2 id="ftp-sync">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=lukasz-wronski.ftp-sync"
+        >ftp-sync</a
+      >
+    </h2>
+    <blockquote>
+      <p>Auto-sync your work to remote FTP server</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://i.imgur.com/W9h4pwW.gif"
+        alt="Auto-sync your work to remote FTP server animation"
+      />
+      <figcaption>
+        Auto-sync your work to remote FTP server animation
+      </figcaption>
+    </figure>
+    <h2 id="highlight-jsxhtml-tags">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=vincaslt.highlight-matching-tag"
+        >Highlight JSX/HTML tags</a
+      >
+    </h2>
+    <blockquote>
+      <p>Highlights matching tags in the file.</p>
+    </blockquote>
+    <p>
+      <img
+        src="https://camo.githubusercontent.com/010b886fb93f49c56e4c7308ba0a5a1aca8a2db7/68747470733a2f2f692e696d67626f782e636f6d2f4455584c467657372e676966"
+      />
+    </p>
+    <h2 id="indent-rainbow">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow"
+        >Indent Rainbow</a
+      >
+    </h2>
+    <blockquote>
+      <p>A simple extension to make indentation more readable.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/oderwat/vscode-indent-rainbow/master/assets/example.png"
+        alt="indent-rainbow"
+      />
+      <figcaption>indent-rainbow</figcaption>
+    </figure>
+    <h2 id="iterm2-theme-sync">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=tusaeff.vscode-iterm2-theme-sync"
+        >iTerm2 Theme Sync</a
+      >
+    </h2>
+    <blockquote>
+      <p>Syncs selected VSCode theme with iTerm2 color profile</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/tusaeff/vscode-iterm2-theme-sync/master/screencast.gif"
+        alt="iTerm2 Theme Sync"
+      />
+      <figcaption>iTerm2 Theme Sync</figcaption>
+    </figure>
+    <h2 id="password-generator">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ftonato.password-generator"
+        >Password Generator</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Create a secure password using our generator tool. Help prevent a
+        security threat by getting a strong password today.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/ftonato/vscode-password-generator/master/preview.gif"
+        alt="Password Generator"
+      />
+      <figcaption>Password Generator</figcaption>
+    </figure>
+    <h2 id="platformio">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=formulahendry.platformio"
+        >PlatformIO</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        An open source ecosystem for IoT development: supports 350+ embedded
+        boards, 20+ development platforms, 10+ frameworks. Arduino and ARM mbed
+        compatible.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/formulahendry/vscode-platformio/master/images/build.gif"
+        alt="Build using platformio animation"
+      />
+      <figcaption>Build using platformio animation</figcaption>
+    </figure>
+    <h2 id="polacode">
+      <a href="https://marketplace.visualstudio.com/items?itemName=pnp.polacode"
+        >Polacode</a
+      >
+    </h2>
+    <blockquote>
+      <p>Polaroid for your code 📸.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/octref/polacode/master/demo/usage.gif"
+        alt="Make a polaroid image of your code animation"
+      />
+      <figcaption>Make a polaroid image of your code animation</figcaption>
+    </figure>
+    <h2 id="carbon-now-sh">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ericadamski.carbon-now-sh"
+        >carbon-now-sh</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Send your code to <a href="https://carbon.now.sh">carbon.now.sh</a>.
+        <img
+          src="https://user-images.githubusercontent.com/6516758/46617867-df765680-caeb-11e8-8899-95778cdcceb7.gif"
+          alt="Send your code to carbon.now.sh animation"
+        />
+      </p>
+    </blockquote>
+    <h2 id="quokka">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=WallabyJs.quokka-vscode"
+        >Quokka</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Rapid prototyping playground for JavaScript and TypeScript in VS Code,
+        with access to your project’s files, inline reporting, code coverage and
+        rich output formatting.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://quokkajs.com/assets/img/main-video.gif"
+        alt="Integrated JavaScript/TypeScript playground animation"
+      />
+      <figcaption>
+        Integrated JavaScript/TypeScript playground animation
+      </figcaption>
+    </figure>
+    <h2 id="runner">
+      <a href="https://marketplace.visualstudio.com/items?itemName=mattn.Runner"
+        >Runner</a
+      >
+    </h2>
+    <blockquote>
+      <p>Run various scripts right from VS Code</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/mattn/vscode-runner/master/images/screenshot.gif"
+        alt="Run various scripts right from VS Code animation"
+      />
+      <figcaption>Run various scripts right from VS Code animation</figcaption>
+    </figure>
+    <h2 id="slack">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=sozercan.slack"
+        >Slack</a
+      >
+    </h2>
+    <blockquote>
+      <p>Send messages and code snippets, upload files to Slack</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/sozercan/vscode-slack/master/slack-upload.gif"
+        alt="Send messages or code snippets to Slack animation"
+      />
+      <figcaption>Send messages or code snippets to Slack animation</figcaption>
+    </figure>
+    <h2 id="smoothtype">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=spikespaz.vscode-smoothtype"
+        >SmoothType</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Add a smooth typing animation, similar to MS Office and the Windows 10
+        Mail app.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/spikespaz/vscode-smoothtype/master/images/preview.gif"
+        alt="SmoothType Animation"
+      />
+      <figcaption>SmoothType Animation</figcaption>
+    </figure>
+    <h2 id="spotify">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=shyykoserhiy.vscode-spotify"
+        >Spotify</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Provides integration with Spotify Desktop client. Shows the currently
+        playing song in status bar, search lyrics and provides commands for
+        controlling Spotify with buttons and hotkeys.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://media.giphy.com/media/3ohhwMgeIj1MhEdBJe/giphy.gif"
+        alt="vscode-spotify"
+      />
+      <figcaption>vscode-spotify</figcaption>
+    </figure>
+    <h2 id="svg">
+      <a href="https://marketplace.visualstudio.com/items?itemName=jock.svg"
+        >SVG</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        A Powerful SVG Language Support Extension(beta). Almost all the features
+        you need to handle SVG.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/lishu/vscode-svg/master/images/f1.png"
+        alt="SVG"
+      />
+      <figcaption>SVG</figcaption>
+    </figure>
+    <h2 id="svg-viewer">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=cssho.vscode-svgviewer"
+        >SVG Viewer</a
+      >
+    </h2>
+    <blockquote>
+      <p>View an SVG in the editor and export it as data URI scheme or PNG.</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://github.com/cssho/vscode-svgviewer/blob/master/img/preview.png"
+        alt="SVG Viewer"
+      />
+      <figcaption>SVG Viewer</figcaption>
+    </figure>
+    <h2 id="text-marker-highlighter">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ryu1kn.text-marker"
+        >Text Marker (Highlighter)</a
+      >
+    </h2>
+    <blockquote>
+      <p>
+        Highlight multiple text patterns with different colors at the same time.
+        Highlighting a single text pattern can be done with the editor’s search
+        functionality, but it cannot highlight multiple patterns at the same
+        time, and this is where this extension comes handy.
+      </p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/ryu1kn/vscode-text-marker/master/images/animations/public.gif"
+        alt="Text Marker (Highlighter)"
+      />
+      <figcaption>Text Marker (Highlighter)</figcaption>
+    </figure>
+    <h2 id="esdoc-mdn">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=samundrak.esdoc-mdn"
+        >ESDOC MDN</a
+      >
+    </h2>
+    <blockquote>
+      <p>Quickly bring up helpful MDN documentation in the editor</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/samundrak/vscode-esdoc-mdn/master/demo.gif"
+        alt="ESDOC MDN"
+      />
+      <figcaption>ESDOC MDN</figcaption>
+    </figure>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/ryu1kn/vscode-text-marker/master/images/animations/public.gif"
+        alt="Interface generator (Typescript)"
+      />
+      <figcaption>Interface generator (Typescript)</figcaption>
+    </figure>
+    <h2 id="interface-generator">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=dotup.dotup-vscode-interface-generator"
+        >Interface generator</a
+      >
+    </h2>
+    <blockquote>
+      <p>Quickly generate interface definitions from typescript class</p>
+    </blockquote>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/dotupNET/dotup-vscode-interface-generator/master/images/video2.gif"
+        alt="Interface generator"
+      />
+      <figcaption>Interface generator</figcaption>
+    </figure>
+    <h1 id="themes">Themes</h1>
+    <h2 id="ui">UI</h2>
+    <p>
+      If you’re feeling brave, there are at least two custom UIs for VS Code:
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/essence-language/vscode-extension"
+          >Essence</a
+        >
+      </li>
+      <li><a href="https://github.com/orta/Essence">Pragmatic Essence</a></li>
+    </ul>
+    <h2 id="syntax-1">Syntax</h2>
+    <h3 id="theme-by-endormi">
+      <a href="https://vscodethemes.com/e/Endormi.2077-theme"
+        >2077 theme by Endormi</a
+      >
+    </h3>
+    <p>Cyberpunk 2077 inspired theme</p>
+    <p>
+      <a href="https://vscodethemes.com/e/Endormi.2077-theme">
+        <img src="./themes/screenshots/endormi.2077-theme.png" width="600" />
+      </a>
+    </p>
+    <h3 id="an-old-hope-theme-by-dustin-sanders">
+      <a
+        href="https://vscodethemes.com/e/dustinsanders.an-old-hope-theme-vscode"
+        >An Old Hope Theme by Dustin Sanders</a
+      >
+    </h3>
+    <p>VSCode theme inspired by a galaxy far far away…</p>
+    <p>
+      <a
+        href="https://vscodethemes.com/e/dustinsanders.an-old-hope-theme-vscode"
+      >
+        <img
+          src="./themes/screenshots/dustinsanders.an-old-hope-theme-vscode.png"
+          width="600"
+        />
+      </a>
+    </p>
+    <h3 id="ariake-dark-by-wart">
+      <a href="https://vscodethemes.com/e/wart.ariake-dark"
+        >Ariake Dark by wart</a
+      >
+    </h3>
+    <p>
+      Dark VSCode theme inspired by Japanese traditional colors and the poetry
+      composed 1000 years ago.
+    </p>
+    <p>
+      <a href="https://vscodethemes.com/e/wart.ariake-dark">
+        <img src="./themes/screenshots/wart.ariake-dark.png" width="600" />
+      </a>
+    </p>
+    <h3 id="atom-one-dark-theme-by-mahmoud-ali">
+      <a href="https://vscodethemes.com/e/akamud.vscode-theme-onedark"
+        >Atom One Dark Theme by Mahmoud Ali</a
+      >
+    </h3>
+    <p>One Dark Theme based on Atom.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/akamud.vscode-theme-onedark">
+        <img
+          src="./themes/screenshots/akamud.vscode-theme-onedark.png"
+          width="600"
+        />
+      </a>
+    </p>
+    <h3 id="atomize-by-emroussel">
+      <a href="https://vscodethemes.com/e/emroussel.atomize-atom-one-dark-theme"
+        >Atomize by emroussel</a
+      >
+    </h3>
+    <p>A detailed and accurate Atom One Dark Theme.</p>
+    <p>
+      <a
+        href="https://vscodethemes.com/e/emroussel.atomize-atom-one-dark-theme"
+      >
+        <img src="./themes/screenshots/atomize.png" width="600" />
+      </a>
+    </p>
+    <h3 id="ayu-by-teabyii">
+      <a href="https://vscodethemes.com/e/teabyii.ayu">Ayu by teabyii</a>
+    </h3>
+    <p>
+      A simple theme with bright colors and comes in three versions — dark,
+      light and mirage for all day long comfortable work.
+    </p>
+    <p>
+      <a href="https://vscodethemes.com/e/teabyii.ayu">
+        <img src="./themes/screenshots/teabyii.ayu.png" width="600" />
+      </a>
+    </p>
+    <h3 id="borealis-theme-by-alexander-eckert">
+      <a href="https://vscodethemes.com/e/eckertalex.borealis"
+        >Borealis Theme by Alexander Eckert</a
+      >
+    </h3>
+    <p>
+      VS Code theme inspired by the calm colors of the aurora borealis in
+      Alaska.
+    </p>
+    <p>
+      <a href="https://vscodethemes.com/e/eckertalex.borealis">
+        <img src="./themes/screenshots/eckertalex.borealis.png" width="600" />
+      </a>
+    </p>
+    <h3 id="captain-sweetheart-by-ultradracula">
+      <a href="https://vscodethemes.com/e/ultradracula.captain-sweetheart"
+        >Captain Sweetheart by ultradracula</a
+      >
+    </h3>
+    <p>Tuff but sweet theme.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/ultradracula.captain-sweetheart">
+        <img
+          src="./themes/screenshots/ultradracula.captain-sweetheart.png"
+          width="600"
+        />
+      </a>
+    </p>
+    <h3 id="city-lights-by-yummygum">
+      <a href="https://vscodethemes.com/e/Yummygum.city-lights-theme"
+        >City Lights by Yummygum</a
+      >
+    </h3>
+    <p>🏙 Yummygum’s Official City Lights suite</p>
+    <p>
+      <a href="http://citylights.xyz">
+        <img src="./themes/screenshots/city-lights-yummygum.png" width="600" />
+      </a>
+    </p>
+    <h3 id="cobalt2-theme-official-by-wes-bos">
+      <a href="https://vscodethemes.com/e/wesbos.theme-cobalt2"
+        >Cobalt2 Theme Official by Wes Bos</a
+      >
+    </h3>
+    <p>🔥 Official theme by Wes Bos.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/wesbos.theme-cobalt2">
+        <img src="./themes/screenshots/wesbos.theme-cobalt2.png" width="600" />
+      </a>
+    </p>
+    <h3 id="dracula-official-by-dracula-theme">
+      <a href="https://vscodethemes.com/e/dracula-theme.theme-dracula"
+        >Dracula Official by Dracula Theme</a
+      >
+    </h3>
+    <p>
+      Official Dracula Theme. A dark theme for many editors, shells, and more.
+    </p>
+    <p>
+      <a href="https://vscodethemes.com/e/dracula-theme.theme-dracula">
+        <img
+          src="./themes/screenshots/dracula-theme.theme-dracula.png"
+          width="600"
+        />
+      </a>
+    </p>
+    <h3 id="edge-by-bogdan-lazar">
+      <a href="https://vscodethemes.com/e/bogdanlazar.edge"
+        >Edge by Bogdan Lazar</a
+      >
+    </h3>
+    <p>
+      A simple theme with bright colors in three variants — Night Sky, Serene
+      and Ocean for all day long comfortable work.
+    </p>
+    <p>
+      <a href="https://vscodethemes.com/e/bogdanlazar.edge">
+        <img
+          src="./themes/screenshots/bogdanlazar.edge-theme.png"
+          width="600"
+        />
+      </a>
+    </p>
+    <h3 id="eva-theme-by-fisheva">
+      <a href="https://vscodethemes.com/e/fisheva.eva-theme"
+        >Eva Theme by fisheva</a
+      >
+    </h3>
+    <p>A colorful and semantic coloring code theme.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/fisheva.eva-theme">
+        <img src="./themes/screenshots/fisheva.eva-theme.png" width="600" />
+      </a>
+    </p>
+    <h3 id="fairy-floss-by-nopjmp-and-sailorhg">
+      <a href="https://vscodethemes.com/e/nopjmp.fairyfloss"
+        >Fairy Floss by nopjmp and sailorhg</a
+      >
+    </h3>
+    <p>
+      A fun, purple-based pastel/candy/daydream fairyfloss theme made by
+      sailorhg.
+    </p>
+    <p>
+      <a href="https://vscodethemes.com/e/nopjmp.fairyfloss">
+        <img src="./themes/screenshots/nopjmp.fairyfloss.png" width="600" />
+      </a>
+    </p>
+    <h3 id="github-theme-by-thomas-pink">
+      <a href="https://vscodethemes.com/e/thomaspink.theme-github"
+        >GitHub Theme by Thomas Pink</a
+      >
+    </h3>
+    <p>GitHub Theme for Visual Studio Code.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/thomaspink.theme-github">
+        <img
+          src="./themes/screenshots/thomaspink.theme-github.png"
+          width="600"
+        />
+      </a>
+    </p>
+    <h3 id="jellybeans-theme-by-dimitar-nonov">
+      <a href="https://vscodethemes.com/e/DimitarNonov.jellybeans-theme"
+        >Jellybeans Theme by Dimitar Nonov</a
+      >
+    </h3>
+    <p>Jellybeans Theme for Visual Studio Code.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/DimitarNonov.jellybeans-theme">
+        <img src="./themes/screenshots/jellybeans-theme.png" width="600" />
+      </a>
+    </p>
+    <h3 id="material-palenight-theme-by-whizkydee">
+      <a href="https://vscodethemes.com/e/whizkydee.material-palenight-theme"
+        >Material Palenight Theme by whizkydee</a
+      >
+    </h3>
+    <p>An elegant and juicy material-like theme for Visual Studio Code.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/whizkydee.material-palenight-theme">
+        <img
+          src="./themes/screenshots/whizkydee.material-palenight-theme.png"
+          width="600"
+        />
+      </a>
+    </p>
+    <h3 id="material-theme-by-mattia-astorino">
+      <a href="https://vscodethemes.com/e/Equinusocio.vsc-material-theme"
+        >Material Theme by Mattia Astorino</a
+      >
+    </h3>
+    <p>The most epic theme now for Visual Studio Code.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/Equinusocio.vsc-material-theme">
+        <img
+          src="./themes/screenshots/Equinusocio.vsc-material-theme.png"
+          width="600"
+        />
+      </a>
+    </p>
+    <h3 id="mno-by-u29dc">
+      <a href="https://vscodethemes.com/e/u29dc.mno">Mno by u29dc</a>
+    </h3>
+    <p>Minimal monochrome theme.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/u29dc.mno">
+        <img src="./themes/screenshots/u29dc.mno.png" width="600" />
+      </a>
+    </p>
+    <h3 id="monokai-oblique-by-pushqrdx">
+      <a href="https://vscodethemes.com/e/pushqrdx.theme-monokai-oblique-vscode"
+        >Monokai Oblique by pushqrdx</a
+      >
+    </h3>
+    <p>
+      Monokai inspired theme for
+      <a href="https://vscodethemes.com/e/pushqrdx.theme-monokai-oblique-vscode"
+        >Visual Studio Code</a
+      >
+      and <a href="https://github.com/pushqrdx/monokai">Visual Studio IDE</a>.
+    </p>
+    <p>
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=pushqrdx.theme-monokai-oblique-vscode"
+      >
+        <img src="./themes/screenshots/moblique.png" width="600" />
+      </a>
+    </p>
+    <h3 id="monokai-pro-by-monokai-commercial">
+      <a href="https://vscodethemes.com/e/monokai.theme-monokai-pro-vscode"
+        >Monokai Pro by monokai (commercial)</a
+      >
+    </h3>
+    <p>
+      Beautiful functionality for professional developers, from the author of
+      the original Monokai color scheme.
+    </p>
+    <p>
+      <a href="https://vscodethemes.com/e/monokai.theme-monokai-pro-vscode">
+        <img src="./themes/screenshots/1079cc76.png" width="600" />
+      </a>
+    </p>
+    <h3 id="night-owl-by-sarah-drasner">
+      <a href="https://vscodethemes.com/e/sdras.night-owl"
+        >Night Owl by Sarah Drasner</a
+      >
+    </h3>
+    <p>
+      A VS Code theme for the night owls out there. Works well in the daytime,
+      too, but this theme is fine-tuned for those of us who like to code late
+      into the night. Color choices have taken into consideration what is
+      accessible to people with color blindness and in low-light circumstances.
+      Decisions were also based on meaningful contrast for reading comprehension
+      and for optimal razzle dazzle. ✨
+    </p>
+    <p>
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=sdras.night-owl"
+      >
+        <img src="./themes/screenshots/night-owl.png" width="600" />
+      </a>
+    </p>
+    <h3 id="plastic-by-will-stone">
+      <a href="https://vscodethemes.com/e/will-stone.plastic"
+        >Plastic by Will Stone</a
+      >
+    </h3>
+    <p>A simple theme.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/will-stone.plastic">
+        <img src="./themes/screenshots/will-stone.plastic.png" width="600" />
+      </a>
+    </p>
+    <h3 id="nord-by-arcticicestudio">
+      <a
+        href="https://vscodethemes.com/e/arcticicestudio.nord-visual-studio-code"
+        >Nord by arcticicestudio</a
+      >
+    </h3>
+    <p>An arctic, north-bluish clean and elegant Visual Studio Code theme.</p>
+    <p>
+      <a
+        href="https://vscodethemes.com/e/arcticicestudio.nord-visual-studio-code"
+      >
+        <img
+          src="./themes/screenshots/arcticicestudio.nord-visual-studio-code.png"
+          width="600"
+        />
+      </a>
+    </p>
+    <h3 id="rainglow-by-dayle-rees">
+      <a href="https://vscodethemes.com/e/daylerees.rainglow"
+        >Rainglow by Dayle Rees</a
+      >
+    </h3>
+    <p>Collection of 320+ beautiful syntax and UI themes.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/daylerees.rainglow">
+        <img
+          src="https://raw.githubusercontent.com/rainglow/examples/master/vscode/gloom-contrast.png"
+          width="600"
+        />
+      </a>
+    </p>
+    <h3 id="relaxed-theme-by-michael-kühnel">
+      <a href="https://vscodethemes.com/e/mischah.relaxed-theme"
+        >Relaxed Theme by Michael Kühnel</a
+      >
+    </h3>
+    <p>A relaxed theme to take a more relaxed view of things.</p>
+    <p>
+      <a href="https://vscodethemes.com/e/mischah.relaxed-theme">
+        <img src="./themes/screenshots/relaxed-theme.png" width="600" />
+      </a>
+    </p>
+    <h3 id="shades-of-purple-by-ahmad-awais">
+      <a href="https://vscodethemes.com/e/ahmadawais.shades-of-purple"
+        >Shades of Purple by Ahmad Awais</a
+      >
+    </h3>
+    <p>
+      ⚡ A professional theme with hand-picked &amp; bold shades of purple 💜 to
+      go along with your VS Code. A custom VS Code theme with style.
+    </p>
+    <p>
+      <a href="https://vscodethemes.com/e/ahmadawais.shades-of-purple">
+        <img
+          src="./themes/screenshots/ahmadawais.shades-of-purple.png"
+          width="600"
+        />
+      </a>
+    </p>
+    <h3 id="slime-theme-by-smlombardi">
+      <a href="https://vscodethemes.com/e/smlombardi.slime"
+        >Slime Theme by smlombardi</a
+      >
+    </h3>
+    <p>
+      A dark syntax/workbench theme for Visual Studio Code - optimized for SCSS,
+      HTML, JS, TS, Markdown, and PHP files.
+    </p>
+    <p>
+      <a href="https://vscodethemes.com/e/smlombardi.slime">
+        <img src="./themes/screenshots/slime.png" width="600" />
+      </a>
+    </p>
+    <h3 id="niketa-theme-by-dejan-toteff">
+      <a href="https://vscodethemes.com/e/selfrefactor.niketa-theme"
+        >Niketa Theme by Dejan Toteff</a
+      >
+    </h3>
+    <p>
+      Collection of 18 light themes separated in 4 groups by background’s
+      brightness.
+    </p>
+    <p>
+      <a href="https://vscodethemes.com/e/mischah.relaxed-theme">
+        <img src="./themes/screenshots/niketa-theme.png" width="600" />
+      </a>
+    </p>
+    <h1 id="people-to-follow">People to Follow</h1>
+    <p>
+      A list of Twitter accounts for various people in the VS Code Community
+    </p>
+    <ul>
+      <li>
+        <span class="citation" data-cites="code">[@code]</span
+        >(https://twitter.com/code) - The official VS Code Twitter
+      </li>
+      <li>
+        <span class="citation" data-cites="auchenberg">[@auchenberg]</span
+        >(https://twitter.com/auchenberg) - VS Code Program Manager
+      </li>
+      <li>
+        <span class="citation" data-cites="BenjaminPasero"
+          >[@BenjaminPasero]</span
+        >(https://twitter.com/BenjaminPasero) - VS Code Dev
+      </li>
+      <li>
+        <span class="citation" data-cites="chrisdias">[@chrisdias]</span
+        >(https://twitter.com/chrisdias) - VS Code Program Manager
+      </li>
+      <li>
+        <span class="citation" data-cites="_clarkio">[@_clarkio]</span
+        >(https://twitter.com/_clarkio) - Developer Advocate @ Azure. Creator of
+        VS Code release highlight videos
+      </li>
+      <li>
+        <span class="citation" data-cites="eamodio">[@eamodio]</span
+        >(https://twitter.com/eamodio) - GitLens creator
+      </li>
+      <li>
+        <span class="citation" data-cites="ErichGamma">[@ErichGamma]</span
+        >(https://twitter.com/ErichGamma) - VS Code Dev
+      </li>
+      <li>
+        <span class="citation" data-cites="IsidorN">[@IsidorN]</span
+        >(https://twitter.com/<span class="citation" data-cites="IsidorN"
+          >@IsidorN</span
+        >) - VS Code Dev
+      </li>
+      <li>
+        <span class="citation" data-cites="joaomoreno">[@joaomoreno]</span
+        >(https://twitter.com/joaomoreno) - VS Code Dev
+      </li>
+      <li>
+        <span class="citation" data-cites="johannesrieken"
+          >[@johannesrieken]</span
+        >(https://twitter.com/johannesrieken) - VS Code Dev
+      </li>
+      <li>
+        <span class="citation" data-cites="lannonbr">[@lannonbr]</span
+        >(https://twitter.com/lannonbr) - Creator of vscode.rocks &amp; JS
+        Parameter Annotations extension
+      </li>
+      <li>
+        <span class="citation" data-cites="maeschli">[@maeschli]</span
+        >(https://twitter.com/maeschli) - VS Code Dev
+      </li>
+      <li>
+        <span class="citation" data-cites="mattbierner">[@mattbierner]</span
+        >(https://twitter.com/mattbierner) - VS Code Dev
+      </li>
+      <li>
+        <span class="citation" data-cites="MrAhmadAwais">[@MrAhmadAwais]</span
+        >(https://twitter.com/MrAhmadAwais) - JS/WordPress Core Dev. Creator of
+        VSCode.pro course &amp; Shades of Purple theme
+      </li>
+      <li>
+        <span class="citation" data-cites="ramyanexus">[@ramyanexus]</span
+        >(https://twitter.com/ramyanexus) - VS Code Dev. Maintainer of Go
+        extension
+      </li>
+      <li>
+        <span class="citation" data-cites="Tyriar">[@Tyriar]</span
+        >(https://twitter.com/Tyriar) - VS Code Dev. Creator of xterm.js
+      </li>
+    </ul>
+    <h1 id="resources-for-extension-developers">
+      Resources for extension developers
+    </h1>
+    <h2 id="documentation">Documentation</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments"
+          >Better Comments</a
+        >
+        - The Better Comments extension will help you create more human-friendly
+        comments in your code.
+      </li>
+      <li>
+        <a href="https://code.visualstudio.com/api">Visual Studio Code API</a>
+        section of
+        <a href="https://code.visualstudio.com/docs">Official Documentation</a>
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/mlewand-org/vscode-test-content"
+          >vscode-test-content</a
+        >
+        - A method to set/get editor content, and it’s selection. Especially
+        useful for unit tests.
+      </li>
+    </ul>
+    <h2 id="tools">Tools</h2>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare"
+          >Live Share</a
+        >
+        - Visual Studio Live Share enables you to collaboratively edit and debug
+        with others in real time, regardless what programming languages you’re
+        using or app types you’re building.
+      </li>
+      <li>
+        <a href="https://tmtheme-editor.herokuapp.com/"
+          >Online TextMate Themes Editor</a
+        >
+        - since VS Code supports TextMate themes, you can create them in this
+        online editor and then create a new VS Code package using
+        <a href="https://code.visualstudio.com/docs/extensions/yocode"
+          >Yo Code</a
+        >
+        tool
+      </li>
+      <li>
+        <a href="https://code.visualstudio.com/docs/extensions/yocode"
+          >Yo Code - Extension Generator</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/sozercan/OpenInCode">Open in Code</a> -
+        macOS Finder toolbar app to open current folder in Visual Studio Code
+      </li>
+    </ul>
+    <figure>
+      <img
+        src="https://camo.githubusercontent.com/edbae5fe27d6c7af23218e60cb07e3a5061bbbab/687474703a2f2f692e696d6775722e636f6d2f4c6d56484978572e676966"
+        alt="macOS Finder toolbar app to open current folder in Visual Studio Code animation"
+      />
+      <figcaption>
+        macOS Finder toolbar app to open current folder in Visual Studio Code
+        animation
+      </figcaption>
+    </figure>
+    <ul>
+      <li>
+        <a href="https://themer.dev">Themer</a> - Easily create your own theme
+        for VS Code (and matching ones for your other tools).
+      </li>
+      <li>
+        <a href="https://github.com/bradygaster-zz/azure-tools-vscode"
+          >Azure Tools for Visual Studio Code</a
+        >
+        - This extension for Visual Studio Code gives Azure developers some
+        convenient commands for creating or accessing resources directly in the
+        editor.
+      </li>
+    </ul>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/johnpapa/vscode-azure-functions-tools/master/images/json-schema-function.gif"
+        alt="azure-tools-vscode"
+      />
+      <figcaption>azure-tools-vscode</figcaption>
+    </figure>
+    <ul>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced"
+          >Mark down preview</a
+        >
+        - Markdown Preview Enhanced is an extension that provides you with many
+        useful functionalities such as automatic scroll sync, math typesetting,
+        mermaid, PlantUML, pandoc, PDF export, code chunk, presentation writer,
+        etc. A lot of its ideas are inspired by Markdown Preview Plus and
+        RStudio Markdown.
+      </li>
+    </ul>
+    <h1 id="online-courses">Online Courses</h1>
+    <h2 id="visual-studio-code-power-user-course-commercial">
+      Visual Studio Code Power User Course (commercial)
+    </h2>
+    <p>
+      After 10 years with Sublime Text,
+      <a href="https://twitter.com/MrAhmadAwais/">Ahmad Awais</a> switched to
+      VSCode, built
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ahmadawais.shades-of-purple"
+        >Shades of Purple theme</a
+      >, and spent over a 1,000 hours perfecting his setup. He has launched a
+      VSCode Power User Course to help you switch today. You can bring all your
+      custom settings from the previous editor and learn the power user
+      workflows for HTML/CSS, Git/GitHub &amp; Open Source, supercharged
+      Markdown, and everything from JavaScript to PHP, Go, Python, C++, C#, ROR.
+      In this course, you’ll also learn to install/setup 50+ Extensions.
+    </p>
+    <ul>
+      <li>
+        <a href="https://vscode.pro/">VSCode.pro</a> - 📺 Huge five hours 65
+        videos VSCode course.
+      </li>
+      <li>
+        <a href="https://twitter.com/MrAhmadAwais/">Ahmad Awais</a> - 🙌 Creator
+        of Shades of Purple theme. Core Developer for WP/JS. OSS Dev Advocate.
+      </li>
+    </ul>
+    <h1 id="contribute">Contribute</h1>
+    <p>
+      Contributions welcome! Read the
+      <a href="CONTRIBUTING.md">contribution guidelines</a> first.
+    </p>
+    <h1 id="license">License</h1>
+    <p>
+      I am providing code and resources in this repository to you under an open
+      source license. Because this is my personal repository, the license you
+      receive to my code and resources is from me and not my employer
+      (Microsoft).
+    </p>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://viatsko.me">Valerii Iatsko</a> has waived all copyright
+      and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

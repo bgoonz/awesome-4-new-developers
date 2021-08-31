@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="모두가-알아야-할-jquery-팁들-awesome">
+      모두가 알아야 할 jQuery 팁들
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>당신의 jQuery 사용에 도움이 되는 간단한 팁들의 모음입니다.</p>
+    <blockquote>
+      <p>
+        <span class="citation" data-cites="sindresorhus">[@sindresorhus]</span
+        >(https://github.com/sindresorhus/)이 엄선한
+        <a href="https://github.com/sindresorhus/awesome/">awesome lists</a>의
+        다른 훌륭한 리스트들 확인해보세요.
+      </p>
+    </blockquote>
+    <h2 id="목차">목차</h2>
+    <ul>
+      <li><a href="#팁">팁</a></li>
+      <li><a href="#지원">지원</a></li>
+      <li><a href="../../CONTRIBUTING.md">컨트리뷰션시 지켜야 할 사항</a></li>
+    </ul>
+    <h2 id="팁">팁</h2>
+    <ol type="1">
+      <li>
+        <a href="#use-noconflict"><code>noConflict()</code> 사용하기</a>
+      </li>
+      <li>
+        <a href="#checking-if-jquery-loaded">jQuery가 로드되었는지 확인하기</a>
+      </li>
+      <li>
+        <a href="#check-whether-an-element-exists"
+          >엘리먼트가 존재하는지 확인하기</a
+        >
+      </li>
+      <li>
+        <a href="#use-on-binding-instead-of-click"
+          ><code>.click()</code> 대신에 <code>.on()</code> 으로 바인딩 하기</a
+        >
+      </li>
+      <li><a href="#back-to-top-button">처음으로 돌아가기 버튼</a></li>
+      <li><a href="#preload-images">이미지 사전로드 시키기</a></li>
+      <li>
+        <a href="#checking-if-images-are-loaded"
+          >이미지들이 로드되었는지 확인하기</a
+        >
+      </li>
+      <li>
+        <a href="#fix-broken-images-automatically"
+          >손상된 이미지 자동으로 수정</a
+        >
+      </li>
+      <li><a href="#post-a-form-with-ajax">AJAX 형식으로 게시하기</a></li>
+      <li>
+        <a href="#toggle-classes-on-hover"
+          >마우스를 올렸을 때 클래스 토글하기</a
+        >
+      </li>
+      <li><a href="#disabling-input-fields">입력 필드 비활성 하기</a></li>
+      <li><a href="#stop-the-loading-of-links">링크의 로딩을 중지하기</a></li>
+      <li>
+        <a href="#cache-jquery-selectors">jQuery 셀렉터를 캐시에 저장하기</a>
+      </li>
+      <li><a href="#toggle-fadeslide">Fade/Slide 토글</a></li>
+      <li><a href="#simple-accordion">아코디언 간단히 작성하기</a></li>
+      <li>
+        <a href="#make-two-divs-the-same-height"
+          >두 개의 Div를 같은 높이로 만들기</a
+        >
+      </li>
+      <li>
+        <a href="#open-external-links-in-new-tabwindow"
+          >새 탭/새 창에서 외부 링크 열기</a
+        >
+      </li>
+      <li><a href="#find-element-by-text">텍스트로 엘리먼트 찾기</a></li>
+      <li>
+        <a href="#trigger-on-visibility-change">가시성 변화에 따른 작동</a>
+      </li>
+      <li>
+        <a href="#ajax-call-error-handling">AJAX의 에러반환에 대한 핸들링</a>
+      </li>
+      <li><a href="#chain-plugin-calls">체인 플러그인 호출</a></li>
+      <li>
+        <a href="#sort-list-items-alphabetically"
+          >알파벳 순서로 아이템 목록 정렬하기</a
+        >
+      </li>
+      <li><a href="#disable-right-click">우클릭 비활성화</a></li>
+    </ol>
+    <div id="use-noconflict"></div>
+    <h3 id="noconflict사용하기"><code>noConflict()</code>사용하기</h3>
+    <p>
+      jQuery에서 사용되는 <code>$</code> 와 같은 별명은 JavaScript의 다른
+      라이브러리에서도 사용됩니다. jQuery의 <code>$</code> 객체가 다른
+      라이브러리와 충돌하지 않게 하려면, 문서의 시작에
+      <code>coConflict()</code> 메소드를 사용하세요:
+    </p>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="va">jQuery</span>.<span class="at">noConflict</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      이제 <code>$</code> 대신에 <code>jQuery</code> 변수 이름을 사용하여 jQuery
+      객체를 참조할 것입니다 (예를들어, <code>jQuery('div p').hide()</code>).
+      만일 같은 페이지에서 여러 버전의 jQuery를 사용한다면 (추천하지는
+      않습니다), <code>noConflict()</code> 를 사용하여 특정 버전에 별명을 설정할
+      수 있습니다:
+    </p>
+    <div class="sourceCode" id="cb2">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">let</span> $x <span class="op">=</span> <span class="va">jQuery</span>.<span class="at">noConflict</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="checking-if-jquery-loaded"></div>
+    <h3 id="jquery가-로드되었는지-확인하기">jQuery가 로드되었는지 확인하기</h3>
+    <p>
+      jQuery로 무엇이든 하기전에 jQuery가 확실히 로드되었는지 확인할 필요가
+      있습니다:
+    </p>
+    <div class="sourceCode" id="cb3">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="cf">if</span> (<span class="kw">typeof</span> jQuery <span class="op">==</span> <span class="st">&#39;undefined&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;jQuery hasn</span><span class="sc">\&#39;</span><span class="st">t loaded&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;jQuery has loaded&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">}</span></a></code></pre>
+    </div>
+    <p>이제 시작해 봅시다…</p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="check-whether-an-element-exists"></div>
+    <h3 id="엘리먼트가-존재하는지-확인하기">엘리먼트가 존재하는지 확인하기</h3>
+    <p>
+      HTML 엘리먼트를 사용하기 전에 그 엘리먼트가 DOM의 일부인지 확인해야
+      합니다.
+    </p>
+    <div class="sourceCode" id="cb4">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="cf">if</span> (<span class="at">$</span>(<span class="st">&quot;#selector&quot;</span>).<span class="at">length</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="co">//엘리먼트로 무언가를 해볼 것</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="op">}</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="use-on-binding-instead-of-click"></div>
+    <h3 id="click-대신에-.on-으로-바인딩-하기">
+      <code>.click()</code> 대신에 <code>.on()</code> 으로 바인딩 하기
+    </h3>
+    <p>
+      <code>.on()</code> 을 사용하는 것은 <code>.click()</code> 에 비해 몇 가지
+      더 장점이 있습니다, 예를들면 여러 이벤트를 추가할 수 있는 점…
+    </p>
+    <div class="sourceCode" id="cb5">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1">.<span class="at">on</span>(<span class="st">&#39;click tap hover&#39;</span>)</a></code></pre>
+    </div>
+    <p>
+      …동적으로 생성된 엘리먼트에 바인딩이 적용된다는 점, 뿐만 아니라 (동적으로
+      추가된 모든 DOM 요소에 각각 직접 바인딩할 필요가 없다는 점)…
+    </p>
+    <p>…그리고 네임스페이스 설정이 가능하다는 점:</p>
+    <div class="sourceCode" id="cb6">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1">.<span class="at">on</span>(<span class="st">&#39;click.menuOpening&#39;</span>)</a></code></pre>
+    </div>
+    <p>
+      네임스페이스는 특정 이벤트의 바인딩을 해제할 수도 있게 해줍니다 (예를들면,
+      <code>.off('click.menuOpening')</code>).
+    </p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="back-to-top-button"></div>
+    <h3 id="처음으로-돌아가기-버튼">처음으로 돌아가기 버튼</h3>
+    <p>
+      jQuery에서 <code>animate</code> 와 <code>scrollTop</code> 메소드를
+      이용하면 처음으로 돌아가기 애니메이션을 만들기 위해 플러그인을 이용할
+      필요가 없습니다:
+    </p>
+    <div class="sourceCode" id="cb7">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">// 처음으로 돌아가기</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="at">$</span>(<span class="st">&#39;.container&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="st">&#39;.back-to-top&#39;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="at">$</span>(<span class="st">&#39;html, body&#39;</span>).<span class="at">animate</span>(<span class="op">{</span><span class="dt">scrollTop</span><span class="op">:</span> <span class="dv">0</span><span class="op">},</span> <span class="dv">800</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb8">
+      <pre
+        class="sourceCode html"
+      ><code class="sourceCode html"><a class="sourceLine" id="cb8-1" title="1"><span class="co">&lt;!-- a 태그 만들기 --&gt;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="ot"> class=</span><span class="st">&quot;back-to-top&quot;</span><span class="kw">&gt;</span>Back to top<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="kw">&lt;/div&gt;</span></a></code></pre>
+    </div>
+    <p>
+      <code>scrollTop</code>의 값을 원하는 곳으로 변경함으로서 스크롤바가 멈출
+      곳을 정할 수 있습니다. 그저 800밀리초 동안 문서의 처음으로 올라갈때까지
+      본문을 애니메이션으로 만드는 것만 하면 됩니다.
+    </p>
+    <p>
+      <strong>메모:</strong> <code>scrollTop</code> 의 몇 가지
+      <a href="https://github.com/jquery/api.jquery.com/issues/417">버그동작</a>
+      을 보세요.
+    </p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="preload-images"></div>
+    <h3 id="이미지-사전로드-시키기">이미지 사전로드 시키기</h3>
+    <p>
+      만일 웹페이지가 초기에 볼 수 없는 많은 이미지를 이용할 경우 (예를들어,
+      마우스를 올렸을 때) 이미지들을 사전로드 시키는 것이 옳은 방법입니다:
+    </p>
+    <div class="sourceCode" id="cb9">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="va">$</span>.<span class="at">preloadImages</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="kw">arguments</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="at">$</span>(<span class="st">&#39;&lt;img&gt;&#39;</span>).<span class="at">attr</span>(<span class="st">&#39;src&#39;</span><span class="op">,</span> <span class="kw">arguments</span>[i])<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="op">};</span></a>
+<a class="sourceLine" id="cb9-6" title="6"></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="va">$</span>.<span class="at">preloadImages</span>(<span class="st">&#39;img/hover-on.png&#39;</span><span class="op">,</span> <span class="st">&#39;img/hover-off.png&#39;</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="checking-if-images-are-loaded"></div>
+    <h3 id="이미지들이-로드되었는지-확인하기">
+      이미지들이 로드되었는지 확인하기
+    </h3>
+    <p>
+      때로는 스크립트를 계속 진행하기 위해 이미지가 완전히 로드되었는지 확인해야
+      할 때도 있습니다:
+    </p>
+    <div class="sourceCode" id="cb10">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="at">$</span>(<span class="st">&#39;img&#39;</span>).<span class="at">on</span>(<span class="st">&#39;load&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;image load successful&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      필요에따라 <code>&lt;img&gt;</code> 태그를 ID나 class로 변경하여 특정
+      이미지가 로드되었는지 체크할 수도 있습니다.
+    </p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="fix-broken-images-automatically"></div>
+    <h3 id="손상된-이미지-자동으로-수정">손상된 이미지 자동으로 수정</h3>
+    <p>
+      사이트에서 손상된 이미지들을 발견했을 때 그 이미지들을 하나하나 수정하는
+      것은 고통을 가져옵니다. 이 간단한 코드는 그러한 많은 두통을 겪지않게 할 수
+      있습니다:
+    </p>
+    <div class="sourceCode" id="cb11">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="at">$</span>(<span class="st">&#39;img&#39;</span>).<span class="at">on</span>(<span class="st">&#39;error&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="cf">if</span>(<span class="op">!</span><span class="at">$</span>(<span class="kw">this</span>).<span class="at">hasClass</span>(<span class="st">&#39;broken-image&#39;</span>)) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-3" title="3">    <span class="at">$</span>(<span class="kw">this</span>).<span class="at">prop</span>(<span class="st">&#39;src&#39;</span><span class="op">,</span> <span class="st">&#39;img/broken.png&#39;</span>).<span class="at">addClass</span>(<span class="st">&#39;broken-image&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      대체로, 손상된 이미지들을 숨기려할 때 이 스니펫이 그 부분을 도와줄
+      것입니다:
+    </p>
+    <div class="sourceCode" id="cb12">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="at">$</span>(<span class="st">&#39;img&#39;</span>).<span class="at">on</span>(<span class="st">&#39;error&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="at">$</span>(<span class="kw">this</span>).<span class="at">hide</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="post-a-form-with-ajax"></div>
+    <p>AJAX 형식으로 게시하기 ### Post a Form with AJAX</p>
+    <p>
+      jQuery의 AJAX 메소드는 text, HTML, XML 또는 JSON을 요청하는 일반적인
+      방법과 같습니다. 만일 AJAX 형식으로 보내기를 원한다면 사용자의 입력을
+      <code>val()</code> 메소드로 받을 수 있습니다:
+    </p>
+    <div class="sourceCode" id="cb13">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="va">$</span>.<span class="at">post</span>(<span class="st">&#39;sign_up.php&#39;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="dt">user_name</span><span class="op">:</span> <span class="at">$</span>(<span class="st">&#39;input[name=user_name]&#39;</span>).<span class="at">val</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="dt">email</span><span class="op">:</span>     <span class="at">$</span>(<span class="st">&#39;input[name=email]&#39;</span>).<span class="at">val</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb13-4" title="4">  <span class="dt">password</span><span class="op">:</span>  <span class="at">$</span>(<span class="st">&#39;input[name=password]&#39;</span>).<span class="at">val</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      그러나 모든 <code>val()</code> 부름은 값을 많이 치뤄야 하고
+      <code>&lt;textarea&gt;</code> 에 <code>.val()</code> 을 사용하면
+      브라우저의 반환 값에서 줄바꿈 되는 문자가 제거됩니다. 따라서 사용자의
+      입력을 받는 더 좋은 방법은 <code>serialize()</code> 함수를 이용하여
+      문자열로 받는 것입니다:
+    </p>
+    <div class="sourceCode" id="cb14">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="va">$</span>.<span class="at">post</span>(<span class="st">&#39;sign_up&#39;</span><span class="op">,</span> <span class="at">$</span>(<span class="st">&#39;#sign-up-form&#39;</span>).<span class="at">serialize</span>())<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="toggle-classes-on-hover"></div>
+    <h3 id="마우스를-올렸을-때-클래스-토글하기">
+      마우스를 올렸을 때 클래스 토글하기
+    </h3>
+    <p>
+      사용자가 페이지 중 클릭가능한 엘리먼트에 마우스를 올렸을 때 페이지가
+      시각적으로 바뀌는 것을 얘기해봅시다. 당신은 사용자가 엘리먼트에 마우스를
+      올렸을 때 그 엘리먼트에 클래스가 추가되도록 할 수 있습니다; 그리고
+      사용자가 엘리먼트에서 마우스를 내리면 클래스가 제거되도록 할 수 있습니다:
+    </p>
+    <div class="sourceCode" id="cb15">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="at">$</span>(<span class="st">&#39;.btn&#39;</span>).<span class="at">on</span>(<span class="st">&#39;hover&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="at">$</span>(<span class="kw">this</span>).<span class="at">addClass</span>(<span class="st">&#39;hover&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="op">},</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="at">$</span>(<span class="kw">this</span>).<span class="at">removeClass</span>(<span class="st">&#39;hover&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <code>toggleClass</code> 메소드를 사용하기 위해 더 <em>간단한</em> 방법을
+      원한다면. 당신은 필수적으로 CSS를 추가할 필요가 있습니다:
+    </p>
+    <div class="sourceCode" id="cb16">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="at">$</span>(<span class="st">&#39;.btn&#39;</span>).<span class="at">on</span>(<span class="st">&#39;hover&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="at">$</span>(<span class="kw">this</span>).<span class="at">toggleClass</span>(<span class="st">&#39;hover&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <strong>메모:</strong> 이 예시에서는 CSS가 더 빠른 해결방법이 될 수 있지만
+      이 방법을 아는 것도 여전히 가치가 있습니다.
+    </p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="disabling-input-fields"></div>
+    <h3 id="입력-필드-비활성-하기">입력 필드 비활성 하기</h3>
+    <p>
+      때때로 사용자가 특정 액션을 행할때까지 양식의 제출 버튼 또는 글 입력
+      필드가 비활성 되어있기를 바랄 수 있습니다 (예를들면, “조항을 읽었습니다”
+      의 체크박스를 체크할 때). 이런때에는 input에 <code>disabled</code> 속성을
+      추가함으로서 당신이 원할때 입력필드를 활성화시킬 수 있습니다:
+    </p>
+    <div class="sourceCode" id="cb17">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="at">$</span>(<span class="st">&#39;input[type=&quot;submit&quot;]&#39;</span>).<span class="at">prop</span>(<span class="st">&#39;disabled&#39;</span><span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      당신이 할 일은 input의 <code>prop</code> 메소드를 다시 실행시키되,
+      <code>disabled</code> 의 값을 <code>false</code> 로 설정하는 것 뿐입니다:
+    </p>
+    <div class="sourceCode" id="cb18">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="at">$</span>(<span class="st">&#39;input[type=&quot;submit&quot;]&#39;</span>).<span class="at">prop</span>(<span class="st">&#39;disabled&#39;</span><span class="op">,</span> <span class="kw">false</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="stop-the-loading-of-links"></div>
+    <h3 id="링크의-로딩을-중지하기">링크의 로딩을 중지하기</h3>
+    <p>
+      때때로 링크를 어떤 웹 페이지로 보내거나 페이지를 리로드하는 것을 원치 않을
+      때가 있습니다; 다른 스크립트를 띄우는 것과 같은 다른 것을 하기를 원할 때가
+      있습니다. 이 것은 기본적인 액션을 방지하는 트릭입니다:
+    </p>
+    <div class="sourceCode" id="cb19">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="at">$</span>(<span class="st">&#39;a.no-link&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-2" title="2">  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="cache-jquery-selectors"></div>
+    <h3 id="jquery-셀렉터를-캐시에-저장하기">
+      jQuery 셀렉터를 캐시에 저장하기
+    </h3>
+    <p>
+      프로젝트에서 같은 셀렉터를 얼마나 많이 적어보게 되는지 생각해보세요. 모든
+      <code>$('.element')</code> 셀렉터는 이전에 실행되었는지에 상관없이 매번
+      모든 DOM을 검색해야 합니다. 이에대한 대안으로 셀렉터를 한번만 실행하고 그
+      결과를 변수에 저장할 수 있습니다:
+    </p>
+    <div class="sourceCode" id="cb20">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">var</span> blocks <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;#blocks&#39;</span>).<span class="at">find</span>(<span class="st">&#39;li&#39;</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      이제 매번 DOM을 검색하지 않아도 <code>blocks</code> 변수를 원하는 곳에서
+      사용할 수 있습니다:
+    </p>
+    <div class="sourceCode" id="cb21">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1"><span class="at">$</span>(<span class="st">&#39;#hideBlocks&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb21-2" title="2">  <span class="va">blocks</span>.<span class="at">fadeOut</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-4" title="4"></a>
+<a class="sourceLine" id="cb21-5" title="5"><span class="at">$</span>(<span class="st">&#39;#showBlocks&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb21-6" title="6">  <span class="va">blocks</span>.<span class="at">fadeIn</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-7" title="7"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>jQuery 셀렉터를 캐시에 저장하는 것은 성능의 향상에 도움이 됩니다.</p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="toggle-fadeslide"></div>
+    <h3 id="fadeslide-토글">Fade/Slide 토글</h3>
+    <p>
+      jQuery에서 sliding과 fading은 일반적인 애니메이션입니다. 당신은 사용자가
+      무언가를 클릭할 때, <code>fadeIn</code> 과 <code>slideDown</code> 메소드를
+      완벽하게 만들 수도 있지만, 첫번째 클릭에 엘리먼트가 나타나고 두번째 클릭에
+      사라지게 하는 것도, 제대로 작동하게 만들 수 있습니다:
+    </p>
+    <div class="sourceCode" id="cb22">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1"><span class="co">// Fade</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="at">$</span>(<span class="st">&#39;.btn&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb22-3" title="3">  <span class="at">$</span>(<span class="st">&#39;.element&#39;</span>).<span class="at">fadeToggle</span>(<span class="st">&#39;slow&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-5" title="5"></a>
+<a class="sourceLine" id="cb22-6" title="6"><span class="co">// Toggle</span></a>
+<a class="sourceLine" id="cb22-7" title="7"><span class="at">$</span>(<span class="st">&#39;.btn&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb22-8" title="8">  <span class="at">$</span>(<span class="st">&#39;.element&#39;</span>).<span class="at">slideToggle</span>(<span class="st">&#39;slow&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-9" title="9"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="simple-accordion"></div>
+    <h3 id="아코디언-간단히-작성하기">아코디언 간단히 작성하기</h3>
+    <p>이것은 빠르게 아코디언을 작성하기 위한 간단한 메소드입니다:</p>
+    <div class="sourceCode" id="cb23">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="co">// 모든 패널 닫기</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="at">$</span>(<span class="st">&#39;#accordion&#39;</span>).<span class="at">find</span>(<span class="st">&#39;.content&#39;</span>).<span class="at">hide</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-3" title="3"></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="co">// 아코디언</span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="at">$</span>(<span class="st">&#39;#accordion&#39;</span>).<span class="at">find</span>(<span class="st">&#39;.accordion-header&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb23-6" title="6">  <span class="kw">var</span> next <span class="op">=</span> <span class="at">$</span>(<span class="kw">this</span>).<span class="at">next</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-7" title="7">  <span class="va">next</span>.<span class="at">slideToggle</span>(<span class="st">&#39;fast&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-8" title="8">  <span class="at">$</span>(<span class="st">&#39;.content&#39;</span>).<span class="at">not</span>(next).<span class="at">slideUp</span>(<span class="st">&#39;fast&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-9" title="9">  <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb23-10" title="10"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      이 스크립트를 추가함으로서 당신이 할 일은 이 웹페이지가 작동하기위해
+      필수적인 HTML을 작성하는 것 뿐입니다.
+    </p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="make-two-divs-the-same-height"></div>
+    <h3 id="두-개의-div를-같은-높이로-만들기">
+      두 개의 Div를 같은 높이로 만들기
+    </h3>
+    <p>
+      때때로 각 div의 내용에 상관없이 두 개의 div가 같은 높이이기를 원할때가
+      있을 것입니다:
+    </p>
+    <div class="sourceCode" id="cb24">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1"><span class="at">$</span>(<span class="st">&#39;.div&#39;</span>).<span class="at">css</span>(<span class="st">&#39;min-height&#39;</span><span class="op">,</span> <span class="at">$</span>(<span class="st">&#39;.main-div&#39;</span>).<span class="at">height</span>())<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      이 예시는 <code>min-height</code> 을 설정함으로서 main div보다 클 수는
+      있지만 결코 작아질 수 없도록 했습니다. 그러나, 더 유연한 메소드는
+      엘리먼트의 높이확인을 반복하여 가장 큰 엘리먼트의 높이로
+      <code>height</code> 을 설정하는 것입니다:
+    </p>
+    <div class="sourceCode" id="cb25">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">var</span> $columns <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;.column&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="kw">var</span> height <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="va">$columns</span>.<span class="at">each</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb25-4" title="4">  <span class="cf">if</span> (<span class="at">$</span>(<span class="kw">this</span>).<span class="at">height</span>() <span class="op">&gt;</span> height) <span class="op">{</span></a>
+<a class="sourceLine" id="cb25-5" title="5">    height <span class="op">=</span> <span class="at">$</span>(<span class="kw">this</span>).<span class="at">height</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb25-7" title="7"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-8" title="8"><span class="va">$columns</span>.<span class="at">height</span>(height)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>만일 <em>모든</em> 열의 높이를 같게 하고 싶다면:</p>
+    <div class="sourceCode" id="cb26">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">var</span> $rows <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;.same-height-columns&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="va">$rows</span>.<span class="at">each</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb26-3" title="3">  <span class="at">$</span>(<span class="kw">this</span>).<span class="at">find</span>(<span class="st">&#39;.column&#39;</span>).<span class="at">height</span>(<span class="at">$</span>(<span class="kw">this</span>).<span class="at">height</span>())<span class="op">;</span></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <strong>메모:</strong> 이것은
+      <a href="http://codepen.io/AllThingsSmitty/pen/KMPqoO">CSS를 이용해</a>
+      여러가지 방법으로 할 수 있습니다. 그러나 필요에 따라, jQuery로 이것을
+      핸들링하는 방법을 알아야 편리할 때도 있습니다.
+    </p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="open-external-links-in-new-tabwindow"></div>
+    <h3 id="새-탭새-창에서-외부-링크-열기">새 탭/새 창에서 외부 링크 열기</h3>
+    <p>
+      브라우저의 새로운 탭 또는 새로운 창에서 외부 링크를 열고 같은 원본의
+      링크가 같은 탭 또는 창에서 열리는것을 보장함:
+    </p>
+    <div class="sourceCode" id="cb27">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb27-1" title="1"><span class="at">$</span>(<span class="st">&#39;a[href^=&quot;http&quot;]&#39;</span>).<span class="at">attr</span>(<span class="st">&#39;target&#39;</span><span class="op">,</span> <span class="st">&#39;_blank&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="at">$</span>(<span class="st">&#39;a[href^=&quot;//&quot;]&#39;</span>).<span class="at">attr</span>(<span class="st">&#39;target&#39;</span><span class="op">,</span> <span class="st">&#39;_blank&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="at">$</span>(<span class="st">&#39;a[href^=&quot;&#39;</span> <span class="op">+</span> <span class="va">window</span>.<span class="va">location</span>.<span class="at">origin</span> <span class="op">+</span> <span class="st">&#39;&quot;]&#39;</span>).<span class="at">attr</span>(<span class="st">&#39;target&#39;</span><span class="op">,</span> <span class="st">&#39;_self&#39;</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <strong>메모:</strong> <code>window.location.origin</code> 은 IE10에서
+      작동하지 않습니다.
+      <a
+        href="http://tosbourn.com/a-fix-for-window-location-origin-in-internet-explorer/"
+        >이 수정</a
+      >
+      으로 문제가 해결되었습니다.
+    </p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="find-element-by-text"></div>
+    <h3 id="텍스트로-엘리먼트-찾기">텍스트로 엘리먼트 찾기</h3>
+    <p>
+      jQuery에서 <code>contains()</code> 셀렉터를 사용하여 엘리먼트의 내용에서
+      텍스트를 찾을 수 있습니다. 만일 텍스트가 존재하지 않으면, 해당 엘리먼트는
+      숨겨질 것입니다:
+    </p>
+    <div class="sourceCode" id="cb28">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">var</span> search <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;#search&#39;</span>).<span class="at">val</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="at">$</span>(<span class="st">&#39;div:not(:contains(&quot;&#39;</span> <span class="op">+</span> search <span class="op">+</span> <span class="st">&#39;&quot;))&#39;</span>).<span class="at">hide</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="trigger-on-visibility-change"></div>
+    <h3 id="가시성-변화에-따른-작동">가시성 변화에 따른 작동</h3>
+    <p>
+      사용자가 더이상 탭에 초점을 맞추지 않거나 탭에 다시 포커스를 맞출 때
+      자바스크립트가 작동합니다:
+    </p>
+    <div class="sourceCode" id="cb29">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb29-1" title="1"><span class="at">$</span>(document).<span class="at">on</span>(<span class="st">&#39;visibilitychange&#39;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb29-2" title="2">  <span class="cf">if</span> (<span class="va">e</span>.<span class="va">target</span>.<span class="at">visibilityState</span> <span class="op">===</span> <span class="st">&#39;visible&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb29-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Tab is now in view!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb29-4" title="4">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">e</span>.<span class="va">target</span>.<span class="at">visibilityState</span> <span class="op">===</span> <span class="st">&#39;hidden&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb29-5" title="5">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Tab is now hidden!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb29-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb29-7" title="7"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="ajax-call-error-handling"></div>
+    <h3 id="ajax의-에러반환에-대한-핸들링">AJAX의 에러반환에 대한 핸들링</h3>
+    <p>
+      AJAX의 반환값이 404 또는 500 에러일 때, 에러 핸들러가 실행될 것입니다.
+      만일 핸들러가 정의되지 않았다면, 다른 jQuery 코드가 계획대로 작동하지 않을
+      수 있습니다. 따라서 전역에 AJAX 오류 핸들러를 정의하려면:
+    </p>
+    <div class="sourceCode" id="cb30">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb30-1" title="1"><span class="at">$</span>(document).<span class="at">on</span>(<span class="st">&#39;ajaxError&#39;</span><span class="op">,</span> <span class="kw">function</span> (e<span class="op">,</span> xhr<span class="op">,</span> settings<span class="op">,</span> error) <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(error)<span class="op">;</span></a>
+<a class="sourceLine" id="cb30-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="chain-plugin-calls"></div>
+    <h3 id="체인-플러그인-호출">체인 플러그인 호출</h3>
+    <p>
+      jQuery는 여러 개체를 생성하고 반복적으로 DOM을 처리하는 과정을 완화하기
+      위해 플러그인 메소드의 호출을 “체이닝” 하는 것을 허용합니다. 다음 스니펫이
+      당신의 플러그인 메소드 호출을 나타낸다고 가정해봅시다:
+    </p>
+    <div class="sourceCode" id="cb31">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb31-1" title="1"><span class="at">$</span>(<span class="st">&#39;#elem&#39;</span>).<span class="at">show</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="at">$</span>(<span class="st">&#39;#elem&#39;</span>).<span class="at">html</span>(<span class="st">&#39;bla&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="at">$</span>(<span class="st">&#39;#elem&#39;</span>).<span class="at">otherStuff</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>이 스니펫은 체이닝을 통해 크게 개선될 수 있습니다:</p>
+    <div class="sourceCode" id="cb32">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb32-1" title="1"><span class="at">$</span>(<span class="st">&#39;#elem&#39;</span>)</a>
+<a class="sourceLine" id="cb32-2" title="2">  .<span class="at">show</span>()</a>
+<a class="sourceLine" id="cb32-3" title="3">  .<span class="at">html</span>(<span class="st">&#39;bla&#39;</span>)</a>
+<a class="sourceLine" id="cb32-4" title="4">  .<span class="at">otherStuff</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      대안 중 하나는 엘리먼트를 변수 안에 캐시하는 것입니다 (<code>$</code>를
+      앞에 붙인):
+    </p>
+    <div class="sourceCode" id="cb33">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">var</span> $elem <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;#elem&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="va">$elem</span>.<span class="at">hide</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="va">$elem</span>.<span class="at">html</span>(<span class="st">&#39;bla&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="va">$elem</span>.<span class="at">otherStuff</span>()<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      jQuery에서 체이닝과 <a href="#cache-jquery-selectors">캐싱</a> 메소드는
+      길이가 더 짧고 더 빠른 코드에 대한 최고의 예제입니다.
+    </p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="sort-list-items-alphabetically"></div>
+    <h3 id="알파벳-순서로-아이템-목록-정렬하기">
+      알파벳 순서로 아이템 목록 정렬하기
+    </h3>
+    <p>
+      하나의 목록에 아이템이 너무 많다고 가정해봅시다. 아마 컨텐츠는 CMS에 의해
+      생성되었을 것이고 당신은 알파벳순서로 정돈하기를 원할 것입니다:
+    </p>
+    <div class="sourceCode" id="cb34">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">var</span> ul <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;#list&#39;</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb34-2" title="2">lis <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;li&#39;</span><span class="op">,</span> ul).<span class="at">get</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb34-3" title="3"></a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="va">lis</span>.<span class="at">sort</span>(<span class="kw">function</span> (a<span class="op">,</span> b) <span class="op">{</span></a>
+<a class="sourceLine" id="cb34-5" title="5">  <span class="cf">return</span> (<span class="at">$</span>(a).<span class="at">text</span>().<span class="at">toUpperCase</span>() <span class="op">&lt;</span> <span class="at">$</span>(b).<span class="at">text</span>().<span class="at">toUpperCase</span>()) <span class="op">?</span> <span class="dv">-1</span> : <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb34-6" title="6"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb34-7" title="7"></a>
+<a class="sourceLine" id="cb34-8" title="8"><span class="va">ul</span>.<span class="at">append</span>(lis)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>여기 있습니다!</p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <div id="disable-right-click"></div>
+    <h3 id="우클릭-비활성화">우클릭 비활성화</h3>
+    <p>
+      만일 우클릭을 비활성화 시키고 싶다면, 전체 페이지에 그것을 적용할 수
+      있습니다…
+    </p>
+    <div class="sourceCode" id="cb35">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb35-1" title="1"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-2" title="2">  <span class="at">$</span>(document).<span class="at">bind</span>(<span class="st">&#39;contextmenu&#39;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-3" title="3">    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb35-4" title="4">  <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="op">}</span>)</a></code></pre>
+    </div>
+    <p>…그리고 특정 엘리먼트에만 적용할 수도 있습니다:</p>
+    <div class="sourceCode" id="cb36">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb36-1" title="1"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb36-2" title="2">  <span class="at">$</span>(<span class="st">&#39;#submit&#39;</span>).<span class="at">bind</span>(<span class="st">&#39;contextmenu&#39;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb36-3" title="3">    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb36-4" title="4">  <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb36-5" title="5"><span class="op">}</span>)</a></code></pre>
+    </div>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+    <h2 id="지원">지원</h2>
+    <p>Chrome, Firefox, Safari, Opera, edge, and IE11의 최신버전.</p>
+    <p>
+      <sup><a href="#목차">목차로 돌아가기</a></sup>
+    </p>
+  </body>
+</html>

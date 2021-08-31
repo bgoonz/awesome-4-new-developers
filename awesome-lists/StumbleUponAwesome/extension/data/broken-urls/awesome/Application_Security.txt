@@ -1,0 +1,7 @@
+https://cryptolosophy.io/memory-security-go/,Memory Security in Go - cryptolosophy.io,https://github.com/paragonie/awesome-appsec#readme,Application Security error: URLError(gaierror(8, 'nodename nor servname provided, or not known')) | reason: [Errno 8] nodename nor servname provided, or not known
+https://www.cs.fsu.edu/~redwood/OffensiveComputerSecurity/,Offensive Computer Security (CIS 4930) FSU,https://github.com/paragonie/awesome-appsec#readme,Application Security error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://matasano.com,Matasano Security,https://github.com/paragonie/awesome-appsec#readme,Application Security error: <HTTPError 403: 'Forbidden'> | reason: Forbidden
+https://www.cs.fsu.edu/~redwood/OffensiveComputerSecurity/lectures.html,lectures,https://github.com/paragonie/awesome-appsec#readme,Application Security error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://report-uri.io,report-uri.io,https://github.com/paragonie/awesome-appsec#readme,Application Security error: <HTTPError 308: 'Permanent Redirect'> | reason: Permanent Redirect
+http://blog.astrumfutura.com/2013/04/20-point-list-for-preventing-cross-site-scripting-in-php,20 Point List For Preventing Cross-Site Scripting In PHP,https://github.com/paragonie/awesome-appsec#readme,Application Security error: <HTTPError 504: 'Gateway Time-out'> | reason: Gateway Time-out
+http://blog.astrumfutura.com,Pádraic Brady's Blog,https://github.com/paragonie/awesome-appsec#readme,Application Security error: <HTTPError 504: 'Gateway Time-out'> | reason: Gateway Time-out

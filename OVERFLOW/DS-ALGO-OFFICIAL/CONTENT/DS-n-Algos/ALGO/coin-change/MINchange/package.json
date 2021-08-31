@@ -1,0 +1,20 @@
+{
+  "name": "minchange",
+  "version": "1.0.0",
+  "description": "",
+  "main": "minchange.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "Bryan Guner",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-spies": "^1.0.0",
+    "mocha": "^9.0.0"
+  }
+}

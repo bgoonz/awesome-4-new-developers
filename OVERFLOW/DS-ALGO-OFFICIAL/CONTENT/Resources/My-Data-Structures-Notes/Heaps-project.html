@@ -1,0 +1,2008 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <meta name="Generator" content="Microsoft Word 15 (filtered)" />
+    <style>
+       <!--
+       /* Font Definitions */
+       @font-face {
+         font-family: Wingdings;
+         panose-1: 5 0 0 0 0 0 0 0 0 0;
+       }
+
+       @font-face {
+         font-family: "Cambria Math";
+         panose-1: 2 4 5 3 5 4 6 3 2 4;
+       }
+
+       @font-face {
+         font-family: Calibri;
+         panose-1: 2 15 5 2 2 2 4 3 2 4;
+      }
+
+       @font-face {
+         font-family: Georgia;
+         panose-1: 2 4 5 2 5 4 5 2 3 3;
+       }
+
+       @font-face {
+         font-family: inherit;
+         panose-1: 0 0 0 0 0 0 0 0 0 0;
+       }
+
+       @font-face {
+         font-family: Consolas;
+         panose-1: 2 11 6 9 2 2 4 3 2 4;
+       }
+
+       /* Style Definitions */
+       p.MsoNormal,
+       li.MsoNormal,
+       div.MsoNormal {
+         margin-top: 0in;
+         margin-right: 0in;
+         margin-bottom: 8.0pt;
+         margin-left: 0in;
+         line-height: 107%;
+         font-size: 11.0pt;
+         font-family: "Calibri", sans-serif;
+       }
+
+       .MsoChpDefault {
+         font-family: "Calibri", sans-serif;
+       }
+
+       .MsoPapDefault {
+         margin-bottom: 8.0pt;
+         line-height: 107%;
+       }
+
+       @page WordSection1 {
+         size: 11.0in 8.5in;
+         margin: .5in .5in .5in .5in;
+       }
+
+       div.WordSection1 {
+         page: WordSection1;
+       }
+
+       /* List Definitions */
+       ol {
+         margin-bottom: 0in;
+       }
+
+       ul {
+         margin-bottom: 0in;
+       }
+       -->
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body lang="EN-US" link="blue" vlink="#954F72" style="word-wrap: break-word">
+    <div class="WordSection1">
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 15pt;
+          line-height: normal;
+          background: white;
+          vertical-align: baseline;
+        "
+      >
+        <b
+          ><span
+            style="
+              font-size: 27pt;
+              font-family: 'Arial', sans-serif;
+              color: black;
+            "
+            >Heaps Project</span
+          ></b
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          line-height: normal;
+          background: white;
+          vertical-align: baseline;
+        "
+      >
+        <span
+          style="font-size: 15pt; font-family: 'Georgia', serif; color: black"
+          >This project contains a skeleton for you to implement a max heap.
+          This is a test-driven project. Run the tests and read the top-most
+          error. If it's not clear what is failing, open the&nbsp;</span
+        ><b
+          ><span
+            style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+            >test/test.js</span
+          ></b
+        ><span
+          style="font-size: 15pt; font-family: 'Georgia', serif; color: black"
+          >&nbsp;file to figure out what the test is expecting. Make the
+          top-most test pass.</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-top: 15pt;
+          margin-right: 0in;
+          margin-bottom: 15pt;
+          margin-left: 0in;
+          line-height: normal;
+          background: white;
+          vertical-align: baseline;
+        "
+      >
+        <span
+          style="font-size: 15pt; font-family: 'Georgia', serif; color: black"
+          >Keep making the top-most test pass until all tests pass.</span
+        >
+      </p>
+
+      <div
+        style="
+          border: none;
+          border-bottom: solid #dddddd 1pt;
+          padding: 0in 0in 4pt 0in;
+          background: white;
+        "
+      >
+        <p
+          class="MsoNormal"
+          style="
+            margin-top: 60pt;
+            margin-right: 0in;
+            margin-bottom: 15pt;
+            margin-left: 0in;
+            line-height: normal;
+            background: white;
+            vertical-align: baseline;
+            border: none;
+            padding: 0in;
+          "
+        >
+          <b
+            ><span
+              style="
+                font-size: 22.5pt;
+                font-family: 'Arial', sans-serif;
+                color: black;
+              "
+              >Instructions</span
+            ></b
+          >
+        </p>
+      </div>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-top: 0in;
+          margin-right: 0in;
+          margin-bottom: 0in;
+          margin-left: 43.5pt;
+          text-indent: -0.25in;
+          line-height: normal;
+          background: white;
+          vertical-align: baseline;
+        "
+      >
+        <span style="font-size: 10pt; font-family: Symbol; color: black"
+          >�<span style="font: 7pt 'Times New Roman'"
+            >&nbsp;&nbsp;&nbsp;
+          </span></span
+        ><span style="font-size: 15pt; font-family: 'Courier New'; color: black"
+          >cd</span
+        ><span
+          style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+          >&nbsp;into the project folder</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-top: 0in;
+          margin-right: 0in;
+          margin-bottom: 0in;
+          margin-left: 43.5pt;
+          text-indent: -0.25in;
+          line-height: normal;
+          background: white;
+          vertical-align: baseline;
+        "
+      >
+        <span style="font-size: 10pt; font-family: Symbol; color: black"
+          >�<span style="font: 7pt 'Times New Roman'"
+            >&nbsp;&nbsp;&nbsp;
+          </span></span
+        ><span style="font-size: 15pt; font-family: 'Courier New'; color: black"
+          >npm install</span
+        ><span
+          style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+          >&nbsp;to install dependencies in the project root directory</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-top: 0in;
+          margin-right: 0in;
+          margin-bottom: 0in;
+          margin-left: 43.5pt;
+          text-indent: -0.25in;
+          line-height: normal;
+          background: white;
+          vertical-align: baseline;
+        "
+      >
+        <span style="font-size: 10pt; font-family: Symbol; color: black"
+          >�<span style="font: 7pt 'Times New Roman'"
+            >&nbsp;&nbsp;&nbsp;
+          </span></span
+        ><span style="font-size: 15pt; font-family: 'Courier New'; color: black"
+          >npm test</span
+        ><span
+          style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+          >&nbsp;to run the specs</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-top: 0in;
+          margin-right: 0in;
+          margin-bottom: 0in;
+          margin-left: 43.5pt;
+          text-indent: -0.25in;
+          line-height: normal;
+          background: white;
+          vertical-align: baseline;
+        "
+      >
+        <span style="font-size: 10pt; font-family: Symbol; color: black"
+          >�<span style="font: 7pt 'Times New Roman'"
+            >&nbsp;&nbsp;&nbsp;
+          </span></span
+        ><span
+          style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+          >You can view the test cases in&nbsp;</span
+        ><span style="font-size: 15pt; font-family: 'Courier New'; color: black"
+          >test/test.js</span
+        ><span
+          style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+          >. Your job is to write code in</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-top: 0in;
+          margin-right: 0in;
+          margin-bottom: 0in;
+          margin-left: 87pt;
+          text-indent: -0.25in;
+          line-height: normal;
+          background: white;
+          vertical-align: baseline;
+        "
+      >
+        <span style="font-size: 10pt; font-family: 'Courier New'; color: black"
+          >o<span style="font: 7pt 'Times New Roman'"
+            >&nbsp;&nbsp;&nbsp;
+          </span></span
+        ><b
+          ><span
+            style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+            >lib/max_heap.js</span
+          ></b
+        ><span
+          style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+          >&nbsp;to implement the&nbsp;</span
+        ><span style="font-size: 15pt; font-family: 'Courier New'; color: black"
+          >MaxHeap</span
+        ><span
+          style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+          >&nbsp;class</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-top: 0in;
+          margin-right: 0in;
+          margin-bottom: 0in;
+          margin-left: 87pt;
+          text-indent: -0.25in;
+          line-height: normal;
+          background: white;
+          vertical-align: baseline;
+        "
+      >
+        <span style="font-size: 10pt; font-family: 'Courier New'; color: black"
+          >o<span style="font: 7pt 'Times New Roman'"
+            >&nbsp;&nbsp;&nbsp;
+          </span></span
+        ><b
+          ><span
+            style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+            >lib/is_heap.js</span
+          ></b
+        ><span
+          style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+          >&nbsp;to implement the&nbsp;</span
+        ><span style="font-size: 15pt; font-family: 'Courier New'; color: black"
+          >isMaxHeap</span
+        ><span
+          style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+          >&nbsp;function</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-top: 0in;
+          margin-right: 0in;
+          margin-bottom: 0in;
+          margin-left: 87pt;
+          text-indent: -0.25in;
+          line-height: normal;
+          background: white;
+          vertical-align: baseline;
+        "
+      >
+        <span style="font-size: 10pt; font-family: 'Courier New'; color: black"
+          >o<span style="font: 7pt 'Times New Roman'"
+            >&nbsp;&nbsp;&nbsp;
+          </span></span
+        ><b
+          ><span
+            style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+            >lib/leet_code_215.js</span
+          ></b
+        ><span
+          style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+          >&nbsp;to implement the&nbsp;</span
+        ><span style="font-size: 15pt; font-family: 'Courier New'; color: black"
+          >findKthLargest</span
+        ><span
+          style="font-size: 15pt; font-family: 'inherit', serif; color: black"
+          >&nbsp;function located at&nbsp;</span
+        ><span style="color: black"
+          ><a
+            href="https://leetcode.com/problems/kth-largest-element-in-an-array/"
+            target="_blank"
+            ><span
+              style="
+                font-size: 15pt;
+                font-family: 'inherit', serif;
+                color: #0077ff;
+              "
+              >https://leetcode.com/problems/kth-largest-element-in-an-array/</span
+            ></a
+          ></span
+        >
+      </p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">
+        <span style="position: relative; z-index: 251659264"
+          ><span
+            style="
+              position: absolute;
+              left: -3px;
+              top: -21px;
+              width: 852px;
+              height: 384px;
+            "
+            ><img
+              width="852"
+              height="384"
+              src="Heaps-project_files/image001.png"
+              alt="Graphical user interface, application, Teams&#10;&#10;Description automatically generated" /></span></span
+        >&nbsp;
+      </p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <br clear="ALL" />
+
+      <p class="MsoNormal">/**</p>
+
+      <p class="MsoNormal">�* @param {number[]} nums</p>
+
+      <p class="MsoNormal">�* @param {number} k</p>
+
+      <p class="MsoNormal">�* @return {number}</p>
+
+      <p class="MsoNormal">�*/</p>
+
+      <p class="MsoNormal">let findKthLargest = function(nums, k) {</p>
+
+      <p class="MsoNormal">���</p>
+
+      <p class="MsoNormal">};</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">&nbsp;</p>
+
+      <p class="MsoNormal">
+        Soln:--------------------------------------------------------------
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: green"
+          >//&nbsp;you&nbsp;may&nbsp;assume&nbsp;that&nbsp;the&nbsp;array&nbsp;will&nbsp;always&nbsp;have&nbsp;a&nbsp;null&nbsp;element&nbsp;at&nbsp;the&nbsp;0-th&nbsp;index</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >function</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;isMaxHeap(&nbsp;array&nbsp;)&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: green"
+          >//&nbsp;check&nbsp;if&nbsp;the&nbsp;tree&nbsp;is&nbsp;complete,&nbsp;i.e.&nbsp;there&nbsp;are&nbsp;no&nbsp;gaps&nbsp;like&nbsp;[null,&nbsp;50,&nbsp;undefined,&nbsp;20]</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;isComplete&nbsp;=&nbsp;array.every(&nbsp;el&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >=&gt;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;el&nbsp;!==&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >undefined</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;);</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >return</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;isComplete&nbsp;&amp;&amp;&nbsp;_isMaxHeap(&nbsp;array&nbsp;);</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >function</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;_isMaxHeap(&nbsp;array,&nbsp;idx&nbsp;=&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >1</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;)&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >if</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;(&nbsp;array[&nbsp;idx&nbsp;]&nbsp;===&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >undefined</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;)&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >return</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >true</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;leftIdx&nbsp;=&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >2</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;*&nbsp;idx;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;rightIdx&nbsp;=&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >2</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;*&nbsp;idx&nbsp;+&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >1</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;leftVal;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >if</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;(&nbsp;array[&nbsp;leftIdx&nbsp;]&nbsp;===&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >undefined</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;)&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;leftVal&nbsp;=&nbsp;-Infinity;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >else</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;leftVal&nbsp;=&nbsp;array[&nbsp;leftIdx&nbsp;];</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;rightVal;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >if</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;(&nbsp;array[&nbsp;rightIdx&nbsp;]&nbsp;===&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >undefined</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;)&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rightVal&nbsp;=&nbsp;-Infinity;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >else</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rightVal&nbsp;=&nbsp;array[&nbsp;rightIdx&nbsp;];</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >return</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;array[&nbsp;idx&nbsp;]&nbsp;&gt;&nbsp;leftVal&nbsp;&amp;&amp;&nbsp;array[&nbsp;idx&nbsp;]&nbsp;&gt;&nbsp;rightVal&nbsp;&amp;&amp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_isMaxHeap(&nbsp;array,&nbsp;leftIdx&nbsp;)&nbsp;&amp;&amp;&nbsp;_isMaxHeap(&nbsp;array,&nbsp;rightIdx&nbsp;);</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >module.exports&nbsp;=&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;isMaxHeap</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="
+          margin-bottom: 0in;
+          margin-bottom: 0in;
+          margin-top: 0in;
+          line-height: normal;
+          background: white;
+        "
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >};</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: 18pt; background: white"
+      >
+        <span style="font-size: 13.5pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >--------------------------------------------------------------------------------------------------------</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >class</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;MaxHeap&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;constructor()&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array&nbsp;=&nbsp;[</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >null</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >];</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;getParent(idx)&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >return</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;Math.floor(idx&nbsp;/&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >2</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >);</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;getLeftChild(idx)&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >return</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;idx&nbsp;*&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >2</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;getRightChild(idx)&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >return</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;idx&nbsp;*&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >2</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;+&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >1</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;insert(val)&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array.push(val);</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.siftUp(</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array.length&nbsp;-&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >1</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >);</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;siftUp(idx)&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >if</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;(idx&nbsp;===&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >1</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >)&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >return</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;parentIdx&nbsp;=&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.getParent(idx);</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >if</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;(</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array[parentIdx]&nbsp;&lt;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array[idx])&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array[parentIdx],&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array[idx]&nbsp;]&nbsp;=&nbsp;[&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array[idx],&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array[parentIdx]&nbsp;];</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.siftUp(parentIdx);</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;deleteMax()&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >if</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;(</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array.length&nbsp;===&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >2</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >)&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >return</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array.pop();</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >if</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;(</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array.length&nbsp;===&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >1</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >)&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >return</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >null</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;max&nbsp;=&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array[</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >1</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >];</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array[</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >1</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >]&nbsp;=&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array.pop();</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.siftDown(</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: #098658"
+          >1</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >);</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >return</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;max;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;siftDown(idx)&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;ary&nbsp;=&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.array;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;leftIdx&nbsp;=&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.getLeftChild(idx);</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;rightIdx&nbsp;=&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.getRightChild(idx);&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;leftVal&nbsp;=&nbsp;ary[leftIdx];</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >let</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;rightVal&nbsp;=&nbsp;ary[rightIdx];</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >if</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;(leftVal&nbsp;===&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >undefined</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >)&nbsp;leftVal&nbsp;=&nbsp;-Infinity;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >if</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;(rightVal&nbsp;===&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >undefined</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >)&nbsp;rightVal&nbsp;=&nbsp;-Infinity;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >if</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;(ary[idx]&nbsp;&gt;&nbsp;leftVal&nbsp;&amp;&amp;&nbsp;ary[idx]&nbsp;&gt;&nbsp;rightVal)&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >return</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >if</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;(leftVal&nbsp;&lt;&nbsp;rightVal)&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >var</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;swapIdx&nbsp;=&nbsp;rightIdx;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >else</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >var</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;swapIdx&nbsp;=&nbsp;leftIdx;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;ary[idx],&nbsp;ary[swapIdx]&nbsp;]&nbsp;=&nbsp;[&nbsp;ary[swapIdx],&nbsp;ary[idx]&nbsp;];</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: blue"
+          >this</span
+        ><span style="font-size: 12pt; font-family: Consolas; color: black"
+          >.siftDown(swapIdx);</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >}</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >module.exports&nbsp;=&nbsp;{</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >&nbsp;&nbsp;&nbsp;&nbsp;MaxHeap</span
+        >
+      </p>
+
+      <p
+        class="MsoNormal"
+        style="margin-bottom: 0in; line-height: normal; background: white"
+      >
+        <span style="font-size: 12pt; font-family: Consolas; color: black"
+          >};</span
+        >
+      </p>
+
+      <p class="MsoNormal">&nbsp;</p>
+    </div>
+  </body>
+</html>
