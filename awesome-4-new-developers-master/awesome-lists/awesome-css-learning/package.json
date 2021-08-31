@@ -1,0 +1,11 @@
+{
+    "name": "awesome-css-learning",
+    "private": true,
+    "scripts": {
+        "test": "awesome-lint"
+    },
+    "author": "Michael Kühnel",
+    "devDependencies": {
+        "awesome-lint": "0.12.1"
+    }
+}

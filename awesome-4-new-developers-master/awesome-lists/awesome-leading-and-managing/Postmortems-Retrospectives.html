@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>Postmortems-Retrospectives</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="postmortems-and-retrospectives">Postmortems and Retrospectives</h2>
+    <h3 id="postmortems">Postmortems</h3>
+    <ul>
+      <li>
+        <p>
+          <a href="https://extfiles.etsy.com/DebriefingFacilitationGuide.pdf"
+            >Etsy’s Guide to Postmortems</a
+          >
+          - by John Allspaw, Morgan Evans and Daniel Schauenberg. A lengthy
+          document that provides a guide on the art of asking questions.
+          <a href="https://beero.ps/2017/06/17/on-failure-and-resilience/"
+            >On Failure and Resilience</a
+          >
+          provides a briefer summary, describing an Etsy incident and how the
+          team managed it.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://www.blameless.com/improve-postmortem-with-sre-steve-mcghee/"
+            >Improving Postmortem Practices with Veteran Google SRE, Steve
+            McGhee</a
+          >
+          - by Blameless. Takeaway: Suggests turning your post-mortems into
+          “textbook-lets,” being cautious about finding good authors, and
+          creating action items with structured discipline.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://www.kitchensoap.com/2014/11/14/the-infinite-hows-or-the-dangers-of-the-five-whys/"
+            >The Infinite Hows (or, the Dangers of The Five Whys)</a
+          >
+          - by John Allspaw. Takeaway: A slight tweak to the “5 whys.” Allspaw
+          points out that “why” leads to blaming a person, while “how” leads to
+          blaming the system.
+        </p>
+      </li>
+      <li>
+        <a
+          href="http://articles.bplans.com/swot-analysis-challenge-day-5-turning-swot-analysis-actionable-strategies/"
+          >Making SWOT Analysis Actionable</a
+        >
+        - by Lisa Furgison. Takeaway: Make connections between each quadrant of
+        your analysis, combining information from two quadrants to create
+        actionable strategies:
+        <ul>
+          <li>
+            Strengths–Opportunities. Use internal strengths to take advantage of
+            opportunities
+          </li>
+          <li>Strengths-Threats. Use your strengths to minimize threats</li>
+          <li>
+            Weaknesses-Opportunities. Improve weaknesses by taking advantage of
+            opportunities
+          </li>
+          <li>
+            Weaknesses-Threats. Work to eliminate weaknesses to avoid threats
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/dastergon/postmortem-templates"
+            >Post-Mortem Templates</a
+          >
+          - by Pavlos Ratis. A collection of postmortem templates from Google,
+          Microsoft and others.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://www.benlinders.com/2011/root-cause-analysis-practical-tools/"
+            >Root Cause Analysis: Practical Tools</a
+          >
+          - by Ben Linders. Tools for you to use to conduct your own root cause
+          analysis, including a process, a checklist to help you get started and
+          a report with an example.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://www.xaprb.com/blog/2014/07/21/root-cause-fallacy/"
+            >The Root Cause Fallacy</a
+          >
+          - by Baron Schwartz. Takeaway: Asking why repeatedly will always get
+          you to the CEO, eventually; stop looking for a single root cause —
+          instead, identify system of conditions/dysfunctions that jointly
+          caused the problem; change the culture and own failures as
+          opportunities.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://medium.com/@allspaw/social-issues-in-postmortems-d48dde624d18"
+            >Social Issues in Postmortems</a
+          >
+          - by John Allspaw. Takeaway: “Although apparently technically focused,
+          postmortems are inherently social events. Especially for events with
+          significant consequences, there are incentives to direct attention
+          towards some issues and away from others. When large losses incur
+          attention of senior management the tenor and content of the postmortem
+          may shift away from freewheeling discourse to a more closed ended,
+          narrowly technical discussion. Postmortems may become “stage plays”
+          intended to assert organizational control, ratify management
+          decisions, or localize and truncate the inquiry into circumstances and
+          contributors."
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="http://www.inc.com/adam-vaccaro/airbnb-demise.html"
+            >Why Airbnb Encourages Employees to Predict Its Own Downfall</a
+          >
+          - by Adam Vaccaro. Takeaway: Imagine the disruption that causes your
+          company’s demise. Have pre-mortems: “Meet before a project and imagine
+          they’re a few months or a year in the future and that the project has
+          failed.” Or the opposite: “the team imagines absolute success–and
+          talks through the crucial hypothetical points in the process where the
+          right decisions were made.”
+        </p>
+      </li>
+    </ul>
+    <h3 id="retrospectives">Retrospectives</h3>
+    <ul>
+      <li>
+        <p>
+          <a
+            href="https://www.amazon.com/Agile-Retrospectives-Making-Teams-Great/dp/0977616649"
+            >Agile Retrospectives: Making Good Teams Great [$]</a
+          >
+          - by Esther Derby and Diana Larsen. This book offers a wealth of
+          tools, tips and tricks to make your retros effective.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://github.com/josephearl/awesome-retrospectives"
+            >Awesome Retrospectives</a
+          >
+          - by Joseph Earl. A super-helpful, curated list of resources for
+          facilitating and learning about retrospectives.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://luis-goncalves.com/energize-your-team-retrospective/"
+            >Energizing Retrospective – Energize Your Team Retrospective With
+            This Easy Exercise</a
+          >
+          - by Sam Laing. Suggests a combination of short positivity-generating
+          and task-breakdown exercises to motivate teams to take action.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://archive.org/details/pdxdevops2017-failure"
+            >Failure: Why It Happens &amp; How to Benefit from It</a
+          >
+          (video) - by VM (Vicky) Brasseur. Takeaway: The most common causes for
+          failure; suggestions for how to avoid failing; and how to use failure
+          to your advantage. “[E]mbracing failure can be one of the best things
+          you do for your project. Failure is a vital part of evolution. By
+          learning to love failure we learn how to take the next step forward.
+          Ignoring or punishing failure leads to stagnation and wasted
+          potential.”
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="http://www.funretrospectives.com/">Fun Retrospectives</a> -
+          by Paulo Caroli and Taina TC Caetano. Takeaway: A website with various
+          exercises your team can play to extract value and fun from retros.
+          Includes a link to download the related eBook, and another to their
+          <a href="https://funretro.github.io/distributed/"
+            >free and open-source fun retros tool</a
+          >.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://www.infoq.com/minibooks/agile-retrospectives-value#minibookDownload"
+            >Getting Value out of Agile Retrospectives</a
+          >
+          - by Ben Linders and Luis Gonçalves. Takeaway: “[A] pocket book [that]
+          contains many exercises that you can use to do retrospectives,
+          supported with the “what” and “why” of retrospectives, the business
+          value and benefits that they can bring you, and advice for introducing
+          and improving retrospectives."
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="http://tech.gilt.com/agile/2017/07/27/large-scale-retro"
+            >How Large Is YOUR Retrospective?</a
+          >
+          - by Dana Pylayeva at Gilt/HBC Digital. Takeaway: Pylayeva describes
+          how she and other facilitators organized a meaningful retrospective
+          involving 60 people and five consulting companies. Lots of details,
+          references to other resources and insights into what went well and
+          what didn’t.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="http://www.innovationgames.com/2014/06/how-to-run-huge-retrospectives/"
+            >How to Run HUGE Retrospectives Across Dozens of Teams in Multiple
+            Time Zones</a
+          >
+          - by Luke Hohmann. Takeaway: “[T]raditional approaches to
+          retrospectives – assembling a group people in a room with one or more
+          facilitators – are too costly, don’t scale, take far too long and fail
+          to produce high-impact results. As a consequence, large organizations
+          either skip retrospectives entirely or they relegate retrospectives to
+          individual teams, which tragically limit their effectiveness in
+          identifying and implementing enterprise changes that can profoundly
+          improve performance. Over time, because individual teams are not
+          obtaining material benefits from retrospectives, they stop doing them
+          at all.” Using online games can be a less expensive option.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://labs.spotify.com/2015/11/05/large-scale-retros/"
+            >How We Do Large Scale Retrospectives</a
+          >
+          - by Henrik Kniberg. Takeaway: How decentralized retrospectives with
+          tiered granularity helped Spotify hold large and meaningful retros.
+          Breaking down large groups into teams organized around themes is the
+          “scaling trick” here.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://age-of-product.com/overall-retrospective/"
+            >The Overall Retrospective for Team and Stakeholders</a
+          >
+          - by Stefan Wolpers. Takeaway: How to do a two-hour retrospective with
+          16 people, based on the LeSS framework’s overall retrospective
+          concept—modified to include all team members, not just team
+          representatives.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://plans-for-retrospectives.com/en/?id=31-127-66-29-102"
+            >Retromat</a
+          >
+          - by Corinna Baldauf and Timon Fiddike. Activities for retrospectives,
+          plus an eBook link.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://age-of-product.com/retrospective-exercises/"
+            >Retrospective Exercises</a
+          >
+          - by Stefan Wolpers. Takeaway: How to use Retromat, which aggregates
+          lots of exercises for retrospectives, to change up your retros to keep
+          them interesting and fresh.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="http://www.retrospectives.com/">Retrospectives</a> - by
+          Norman L. Kerth. Takeaway: A website dedicated to retrospectives, “the
+          practice of looking back to move forward.” Includes the Retrospective
+          Prime Directive: “Regardless of what we discover, we understand and
+          truly believe that everyone did the best job they could, given what
+          they knew at the time, their skills and abilities, the resources
+          available, and the situation at hand.”
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="http://lisacrispin.com/2018/02/14/retrospectives-large-teams-many-sub-teams/"
+            >Retrospectives for Large Teams with Many Sub-Teams</a
+          >
+          - by Lisa Crispin. Takeaway: How Crispin organized a retro with 40+
+          team members, distributed into seven or so “pods” and across several
+          locations.
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="http://werve.net/articles/running-effective-retrospectives/"
+            >Running Effective Retrospectives</a
+          >
+          - by Don Werve. Takeaway: “[R]etrospectives plus science equals an
+          effective tool for killing bad process before it metastasizes into
+          truly epic stupidity.”
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://www.benlinders.com/2013/which-questions-do-you-ask-in-retrospectives/"
+            >Which Questions Do You Ask in Retrospectives?</a
+          >
+          - by Ben Linders. With four key retro questions: “What did we do well,
+          that if we don’t discuss we might forget? What did we learn? What
+          should we do differently next time? What still puzzles us?”
+        </p>
+      </li>
+      <li>
+        <p>
+          <a
+            href="https://luis-goncalves.com/the-world-cafe/?__s=zmnhwriwrwhonuvpmtq8"
+            >The World Cafe – Agile Retrospective Technique</a
+          >
+          - by Timothee Bourguignon. Takeaway: an approach to spread knowledge,
+          tips and practices across teams.
+        </p>
+      </li>
+    </ul>
+  </body>
+</html>

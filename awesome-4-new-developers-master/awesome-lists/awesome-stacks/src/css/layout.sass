@@ -1,0 +1,123 @@
+@import "bulma/bulma"
+@import "lib/bulma-helpers/bulma-helpers"
+@import "./fonts/inter"
+@import "./fonts/bebas"
+
+.layout
+  display: flex
+  min-height: 100vh
+  flex-direction: column
+  main
+    flex: 1
+
+.is-size-hero-title
+  font-size: 5rem
+
+.is-size-larger
+  font-size: 1.5rem
+
+.navbar-end
+  .navbar-item
+    padding-top: 18px
+
+.is-uppercase
+  text-transform: uppercase
+  font-family: 'BebasNeue', serif
+
+.stack-hero
+  a, h1, h2, h3, h4, h5, h6
+    color: white !important
+
+.grey-box
+  background: $grey
+  border-radius: 0
+  box-shadow: none
+  *
+    color: $white !important
+  a
+    font-weight: bold
+    font-size: $size-7
+  li
+    line-height: 1.1em !important
+  &.is-fixed
+    width: 165px
+
+.card .level
+  align-items: flex-start
+
+.is-strong
+  font-weight: bold
+
+.content hr
+  margin: 2rem 0
+
+.content > div > hr:first-child
+  display: none
+
+.has-background-blue-gradient
+  background: $blue
+  background: linear-gradient(90deg, rgba(8,31,50,1) 0%, rgba(19,58,89,1) 50%, rgba(24,84,130,1) 100%)
+
+body hr, .has-dotted-line
+  background: $grey-lighter
+  height: 2px
+
+.is-logo
+  width: 75px
+  height: 75px
+  border-radius: 3px
+
+.is-fixed
+  position: fixed
+
+.anchor
+  position: relative
+  a, div
+    position: absolute
+    left: 0px
+    top: -100px
+
+.card
+  height: 360px
+  .is-top
+    height: 120px
+    .is-logo-link
+      height: 80px
+  .is-description
+    height: 65px
+    font-size: 0.8rem
+  .tag
+    color: $white
+    background: $blue
+    background: linear-gradient(90deg, rgba(8,31,50,1) 0%, rgba(19,58,89,1) 50%, rgba(24,84,130,1) 100%)
+
+.is-comment
+  font-size: 0.8rem
+
+.has-overflow-hidden
+  overflow: hidden
+
+.is-relative
+  position: relative
+
+.is-absolute
+  position: absolute
+
+.is-avatar-image
+  max-width: 75px
+  border-radius: 3px
+
+.arrow
+  display: none
+  @media(min-width: 960px)
+    display: block
+  position: absolute
+  top: 40%
+  &.prev-arrow
+    left: -10%
+  &.next-arrow
+    right: -10%
+
+.has-grey-lighter-hover
+  &:hover
+    background-color: $grey-lighter

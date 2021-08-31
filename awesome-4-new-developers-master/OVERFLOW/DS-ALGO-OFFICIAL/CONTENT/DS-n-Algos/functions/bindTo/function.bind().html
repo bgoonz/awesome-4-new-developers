@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A description of the page and its contents" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Page Title</title>
+  <link rel="stylesheet" href="./../../../assets/style.css" />
+  <link rel="stylesheet" href="./../../../assets/prism.css" />
+  <script async src="./../../../assets/prism.js"></script>
+</head>
+
+<body>
+
+
+  <a href="https://github.com/bgoonz/DS-ALGO-OFFICIAL" class="github-corner" aria-label="View source on Github"><svg
+      width="80" height="80" viewBox="0 0 250 250"
+      style="z-index: 100000; fill:#194ccdaf; color:#fff; position: fixed; top: 20px; border: 0; left: 20px; transform: scale(-1.5, 1.5);"
+      aria-hidden="true">
+      <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+      <path
+        d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+        fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+      </path>
+      <path
+        d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+        fill="currentColor" class="octo-body"></path>
+    </svg></a>
+
+
+
+
+  <h1 id="function.prototype.bind">Function.prototype.bind()</h1>
+  <blockquote>
+    <p>The bind() method creates a new function that, when called, has its this keyword set to the provided value, with
+      a given sequence of arguments preceding any provided when the new function is called.</p>
+  </blockquote>
+  <p>The <code>**bind()**</code> method creates a new function that, when called, has its <code>this</code> keyword set
+    to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+  </p>
+  <p>The source for this interactive example is stored in a GitHub repository. If you'd like to contribute to the
+    interactive examples project, please clone <a class="btn"
+      href="https://github.com/mdn/interactive-examples">https://github.com/mdn/interactive-examples</a> and send us a
+    pull request.</p>
+  <h2 id="syntax">Syntax</h2>
+  <p>let boundFunc = func.bind(thisArg[, arg1[, arg2[, …argN]]])</p>
+  <h3 id="parameters">Parameters</h3>
+  <p><code>thisArg</code></p>
+  <p>The value to be passed as the <code>this</code> parameter to the target function <code>func</code> when the bound
+    function is called. The value is ignored if the bound function is constructed using the <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/new"><code>new</code></a>
+    operator. When using <code>bind</code> to create a function (supplied as a callback) inside a
+    <code>setTimeout</code>,
+    any primitive value passed as <code>thisArg</code> is converted to object. If no arguments are provided to
+    <code>bind</code> , or if the <code>thisArg</code>  is <code>null</code> or <code>undefined</code>, the
+    <code>this</code> of the executing scope is treated as the <code>thisArg</code> for the new function.
+  </p>
+  <p><code>arg1, arg2, ...argN</code> Optional</p>
+  <p>Arguments to prepend to arguments provided to the bound function when invoking <code>func</code>.</p>
+  <h3 id="return-value">Return value</h3>
+  <p>A copy of the given function with the specified <code>this</code> value, and initial arguments (if provided).</p>
+  <h2 id="description">Description</h2>
+  <p>The <code>bind()</code> function creates a new <strong>bound function</strong>, which is an <em>exotic function
+      object</em> (a term from ECMAScript 2015) that wraps the original function object. Calling the bound function
+    generally results in the execution of its wrapped function.</p>
+  <p>A bound function has the following internal properties:</p>
+  <p><strong><code>[[BoundTargetFunction]]</code></strong></p>
+  <p>The wrapped function object</p>
+  <p><code>**[[BoundThis]]**</code></p>
+  <p>The value that is always passed as <code>this</code> value when calling the wrapped function.</p>
+  <p><code>**[[BoundArguments]]**</code></p>
+  <p>A list of values whose elements are used as the first arguments to any call to the wrapped function.</p>
+  <p><code>**[[Call]]**</code></p>
+  <p>Executes code associated with this object. Invoked via a function call expression. The arguments to the internal
+    method are a <code>this</code> value and a list containing the arguments passed to the function by a call
+    expression.</p>
+  <p>When a bound function is called, it calls internal method <code>[[Call]]</code> on
+    <code>[[BoundTargetFunction]]</code>, with following arguments <code>Call(boundThis, ...args)</code>. Where
+    <code>boundThis</code> is <code>[[BoundThis]]</code>, <code>args</code> is <code>[[BoundArguments]]</code>, followed
+    by the arguments passed by the function call.</p>
+  <p>A bound function may also be constructed using the <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/new"><code>new</code></a>
+    operator. Doing so acts as though the target function had instead been constructed. The provided <code>this</code>
+    value is ignored, while prepended arguments are provided to the emulated function.</p>
+  <h2 id="polyfill">Polyfill</h2>
+  <p>Because older browsers are generally also slower browsers, it is far more critical than most people recognize to
+    create performance polyfills to make the browsing experience in outdated browsers slightly less horrible.</p>
+  <p>Thus, presented below are two options for <code>Function.prototype.bind()</code> polyfills:</p>
+  <ol type="1">
+    <li>The first one is much smaller and more performant, but does not work when using the <code>new</code> operator.
+    </li>
+    <li>The second one is bigger and less performant, but it permits some usage of the <code>new</code> operator on
+      bound functions.</li>
+  </ol>
+  <p>Generally, in most code it's very rare to see <code>new</code> used on a bound function, so it is generally best to
+    go with the first option.</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>if (!Function.prototype.bind) (function(){
+    var slice = Array.prototype.slice;
+    Function.prototype.bind = function() {
+    var thatFunc = this, thatArg = arguments[0];
+    var args = slice.call(arguments, 1);
+    if (typeof thatFunc !== &#39;function&#39;) {
+
+
+    throw new TypeError(&#39;Function.prototype.bind - &#39; +
+    &#39;what is trying to be bound is not callable&#39;);
+    }
+    return function(){
+    var funcArgs = args.concat(slice.call(arguments))
+    return thatFunc.apply(thatArg, funcArgs);
+    };
+    };
+    })();</code></pre>
+  <p>You can partially work around this by inserting the following code at the beginning of your scripts, allowing use
+    of much of the functionality of <code>bind()</code> in implementations that do not natively support it.</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>if (!Function.prototype.bind) (function(){
+    var ArrayPrototypeSlice = Array.prototype.slice;
+    Function.prototype.bind = function(otherThis) {
+    if (typeof this !== &#39;function&#39;) {
+
+
+    throw new TypeError(&#39;Function.prototype.bind - what is trying to be bound is not callable&#39;);
+    }
+
+    var baseArgs= ArrayPrototypeSlice.call(arguments, 1),
+    baseArgsLength = baseArgs.length,
+    fToBind = this,
+    fNOP = function() {},
+    fBound = function() {
+    baseArgs.length = baseArgsLength;
+    baseArgs.push.apply(baseArgs, arguments);
+    return fToBind.apply(
+    fNOP.prototype.isPrototypeOf(this) ? this : otherThis, baseArgs
+    );
+    };
+
+    if (this.prototype) {
+
+    fNOP.prototype = this.prototype;
+    }
+    fBound.prototype = new fNOP();
+
+    return fBound;
+    };
+    })();</code></pre>
+  <p>Some of the many differences (there may well be others, as this list does not seriously attempt to be exhaustive)
+    between this algorithm and the specified algorithm are:</p>
+  <ul>
+    <li>The partial implementation relies on <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice"><code>Array.prototype.slice()</code></a>,
+      <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat"><code>Array.prototype.concat()</code></a>,
+      <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call"><code>Function.prototype.call()</code></a>
+      and <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply"><code>Function.prototype.apply()</code></a>,
+      built-in methods to have their original values.
+    </li>
+    <li>The partial implementation creates functions that do not have immutable "poison pill" <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/caller"><code>caller</code></a>
+      and <code>arguments</code> properties that throw a <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError"><code>TypeError</code></a>
+      upon get, set, or deletion. (This could be added if the implementation supports <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"><code>Object.defineProperty</code></a>,
+      or partially implemented [without throw-on-delete behavior] if the implementation supports the <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/__defineGetter__"><code>__defineGetter__</code></a>
+      and <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/__defineSetter__"><code>__defineSetter__</code></a>
+      extensions.)</li>
+    <li>The partial implementation creates functions that have a <code>prototype</code> property. (Proper bound
+      functions have none.)</li>
+    <li>The partial implementation creates bound functions whose <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/length"><code>length</code></a>
+      property does not agree with that mandated by ECMA-262: it creates functions with <code>length</code> of
+      <code>0</code>. A full implementation—depending on the length of the target function and the number of
+      pre-specified
+      arguments—may return a non-zero length.
+    </li>
+    <li>The partial implementation creates bound functions whose <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name"><code>name</code></a>
+      property is not derived from the original function name. According to ECMA-262, name of the returned bound
+      function
+      should be "bound" + name of target function (note the space character).</li>
+  </ul>
+  <p>If you choose to use this partial implementation, <strong>you must not rely on those cases where behavior deviates
+      from ECMA-262, 5th edition!</strong> Thankfully, these deviations from the specification rarely (if ever) come up
+    in most coding situations. If you do not understand any of the deviations from the specification above, then it is
+    safe in this particular case to not worry about these noncompliant deviation details.</p>
+  <p><strong>If it's absolutely necessary and performance is not a concern</strong>, a far slower (but more
+    specification-compliant solution) can be found at <a class="btn"
+      href="https://github.com/Raynos/function-bind">https://github.com/Raynos/function-bind</a>.</p>
+  <h2 id="examples">Examples</h2>
+  <h3 id="creating-a-bound-function">Creating a bound function</h3>
+  <p>The simplest use of <code>bind()</code> is to make a function that, no matter how it is called, is called with a
+    particular <code>this</code> value.</p>
+  <p>A common mistake for new JavaScript programmers is to extract a method from an object, then to later call that
+    function and expect it to use the original object as its <code>this</code> (e.g., by using the method in
+    callback-based code).</p>
+  <p>Without special care, however, the original object is usually lost. Creating a bound function from the function,
+    using the original object, neatly solves this problem:</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>this.x = 9;
+    const module = {
+    x: 81,
+    getX: function() { return this.x; }
+    };
+
+    module.getX();
+
+
+    const retrieveX = module.getX;
+    retrieveX();
+
+
+
+
+
+    const boundGetX = retrieveX.bind(module);
+    boundGetX(); </code></pre>
+  <h3 id="partially-applied-functions">Partially applied functions</h3>
+  <p>The next simplest use of <code>bind()</code> is to make a function with pre-specified initial arguments.</p>
+  <p>These arguments (if any) follow the provided <code>this</code> value and are then inserted at the start of the
+    arguments passed to the target function, followed by whatever arguments are passed bound function at the time it is
+    called.</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>function list() {
+    return Array.prototype.slice.call(arguments);
+    }
+
+    function addArguments(arg1, arg2) {
+    return arg1 + arg2
+    }
+
+    const list1 = list(1, 2, 3);
+
+
+    const result1 = addArguments(1, 2);
+
+
+
+    const leadingThirtysevenList = list.bind(null, 37);
+
+
+    const addThirtySeven = addArguments.bind(null, 37);
+
+    const list2 = leadingThirtysevenList();
+
+
+    const list3 = leadingThirtysevenList(1, 2, 3);
+
+
+    const result2 = addThirtySeven(5);
+
+
+    const result3 = addThirtySeven(5, 10);</code></pre>
+  <h3 id="with-settimeout">With <code>setTimeout()</code></h3>
+  <p>By default within <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout"><code>window.setTimeout()</code></a>,
+    the <code>this</code> keyword will be set to the <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/Window"><code>window</code></a> (or
+    <code>global</code>) object. When working with class methods that require <code>this</code> to refer to class
+    instances, you may explicitly bind <code>this</code> to the callback function, in order to maintain the instance.
+  </p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>function LateBloomer() {
+    this.petalCount = Math.floor(Math.random() * 12) + 1;
+    }
+
+
+    LateBloomer.prototype.bloom = function() {
+    window.setTimeout(this.declare.bind(this), 1000);
+    };
+
+    LateBloomer.prototype.declare = function() {
+    console.log(`I am a beautiful flower with ${this.petalCount} petals!`);
+    };
+
+    const flower = new LateBloomer();
+    flower.bloom(); </code></pre>
+  <h3 id="bound-functions-used-as-constructors">Bound functions used as constructors</h3>
+  <p><strong>Warning:</strong> This section demonstrates JavaScript capabilities and documents some edge cases of the
+    <code>bind()</code> method.</p>
+  <p>The methods shown below are not the best way to do things, and probably should not be used in any production
+    environment.</p>
+  <p>Bound functions are automatically suitable for use with the <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/new"><code>new</code></a>
+    operator to construct new instances created by the target function. When a bound function is used to construct a
+    value, the provided <code>this</code> is ignored.</p>
+  <p>However, provided arguments are still prepended to the constructor call:</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>function Point(x, y) {
+    this.x = x;
+    this.y = y;
+    }
+
+    Point.prototype.toString = function() {
+    return `${this.x},${this.y}`;
+    };
+
+    const p = new Point(1, 2);
+    p.toString();
+
+
+
+
+
+
+
+    const YAxisPoint = Point.bind(null, 0);
+
+
+    const emptyObj = {};
+    const YAxisPoint = Point.bind(emptyObj, 0);
+
+    const axisPoint = new YAxisPoint(5);
+    axisPoint.toString();
+
+    axisPoint instanceof Point;
+    axisPoint instanceof YAxisPoint;
+    new YAxisPoint(17, 42) instanceof Point; </code></pre>
+  <p>Note that you need not do anything special to create a bound function for use with <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/new"><code>new</code></a>.
+  </p>
+  <p>The corollary is that you need not do anything special to create a bound function to be called plainly, even if you
+    would rather require the bound function to only be called using <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/new"><code>new</code></a>.
+  </p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>YAxisPoint(13);
+
+    `${emptyObj.x},${emptyObj.y}`;</code></pre>
+  <p>If you wish to support the use of a bound function only using <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/new"><code>new</code></a>,
+    or only by calling it, the target function must enforce that restriction.</p>
+  <h3 id="creating-shortcuts">Creating shortcuts</h3>
+  <p><code>bind()</code> is also helpful in cases where you want to create a shortcut to a function which requires a
+    specific <code>this</code> value.</p>
+  <p>Take <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice"><code>Array.prototype.slice()</code></a>,
+    for example, which you want to use for converting an array-like object to a real array. You could create a shortcut
+    like this:</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>const slice = Array.prototype.slice;
+
+
+
+    slice.apply(arguments);</code></pre>
+  <p>With <code>bind()</code>, this can be simplified.</p>
+  <p>In the following piece of code, <code>slice()</code> is a bound function to the <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply"><code>apply()</code></a>
+    function of <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/prototype"><code>Function.prototype</code></a>,
+    with the <code>this</code> value set to the <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice"><code>slice()</code></a>
+    function of <code>Array.prototype</code>. This means that additional <code>apply()</code> calls can be eliminated:
+  </p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>const unboundSlice = Array.prototype.slice;
+    const slice = Function.prototype.apply.bind(unboundSlice);
+
+
+
+    slice(arguments);</code></pre>
+  <h2 id="specifications">Specifications</h2>
+  <table>
+    <colgroup>
+      <col style="width: 100%" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Specification</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>[ECMAScript (ECMA-262)</td>
+      </tr>
+      <tr>
+        <td>The definition of ‘Function.prototype.bind' in that
+          specification.](https://tc39.es/ecma262/#sec-function.prototype.bind)</td>
+      </tr>
+    </tbody>
+  </table>
+  <h2 id="browser-compatibility">Browser compatibility</h2>
+  <p>The compatibility table on this page is generated from structured data. If you'd like to contribute to the data,
+    please check out <a class="btn"
+      href="https://github.com/mdn/browser-compat-data">https://github.com/mdn/browser-compat-data</a> and send us a
+    pull
+    request.</p>
+  <p><a class="btn" href="https://github.com/mdn/browser-compat-data">Update compatibility data on GitHub</a></p>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Desktop</th>
+        <th>Mobile</th>
+        <th>Server</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td>Chrome</td>
+        <td>Edge</td>
+        <td>Firefox</td>
+      </tr>
+      <tr>
+        <td>—</td>
+        <td>—</td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><code>bind</code></td>
+        <td>Chrome Full support 7</td>
+        <td>Edge Full support 12</td>
+        <td>Firefox Full support 4</td>
+      </tr>
+    </tbody>
+  </table>
+  <h4 id="what-happens-next">What happens next?</h4>
+  <p>Our team will review your report. Once we verify the information you have supplied we will update this browser
+    compatability table accordingly.</p>
+  <h4 id="can-i-keep-track-of-my-report">Can I keep track of my report?</h4>
+  <p>You can join the GitHub repository to see updates and commits for this table data:</p>
+  <p><a class="btn" href="https://github.com/mdn/browser-compat-data">https://github.com/mdn/browser-compat-data</a></p>
+  <p>Our goal is to provide accurate, real values for all our compatibility data tables. Notifying MDN of inaccurate
+    data or supplying new data pushes us further towards our goal of providing 100% real values to the developer
+    community.<br />
+    Thank you for helping.</p>
+  <p>Please select the browser or browsers which are affected.</p>
+  <p>Briefly outline the issue you are highlighting. Minimum 10 and maximum 1,000 characters.</p>
+  <p>Browser documentation and release notes are good supporting items to accompany your message. A demo hosted on
+    services like Codepen or JSBin are perfect for providing real examples of your findings.</p>
+  <p>Connection error:Sorry, we can't seem to reach the server. We are working to fix the problem. Please try again
+    later.
+  </p>
+  <h3 id="legend">Legend</h3>
+  <p>Full support</p>
+  <p>Full support</p>
+  <h2 id="see-also">See also</h2>
+  <ul>
+    <li><a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply"><code>Function.prototype.apply()</code></a>
+    </li>
+    <li><a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call"><code>Function.prototype.call()</code></a>
+    </li>
+    <li><a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Functions">Functions</a>
+    </li>
+  </ul>
+  <p><a class="btn"
+      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Function/bind">Source</a>
+  </p>
+
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+https://prisma-tools.ahmedelywa.com/schema,@prisma-tools/schema,https://github.com/catalinmiron/awesome-prisma#readme,Prisma error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://prisma-tools.ahmedelywa.com/admin/generator,@prisma-tools/admin,https://github.com/catalinmiron/awesome-prisma#readme,Prisma error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://prisma-tools.ahmedelywa.com/nexus/features,@prisma-tools/nexus,https://github.com/catalinmiron/awesome-prisma#readme,Prisma error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://prisma-tools.ahmedelywa.com/graphql-modules,@prisma-tools/graphql-modules,https://github.com/catalinmiron/awesome-prisma#readme,Prisma error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://prisma-tools.ahmedelywa.com/sdl,@prisma-tools/sdl,https://github.com/catalinmiron/awesome-prisma#readme,Prisma error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://prisma-tools.ahmedelywa.com/select,@prisma-tools/select,https://github.com/catalinmiron/awesome-prisma#readme,Prisma error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://prisma-tools.ahmedelywa.com/delete,@prisma-tools/delete,https://github.com/catalinmiron/awesome-prisma#readme,Prisma error: <HTTPError 404: 'Not Found'> | reason: Not Found

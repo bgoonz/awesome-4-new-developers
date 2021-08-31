@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-geojson-awesome">
+      awesome geojson
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>GeoJSON utilities that will make your life easier.</p>
+    <h3 id="operations">operations</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/berlinermorgenpost/cogran">CoGran</a>:
+        Resample statistics from one set of GeoJSON polygons to another
+      </li>
+      <li>
+        <a href="https://github.com/stadt-karlsruhe/geo_assigner"
+          >geo_assigner</a
+        >: Copy a property to all intersecting features
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/geojson-coords">geojson-coords</a>:
+        Extract coordinates from GeoJSON
+      </li>
+      <li>
+        <a href="https://www.npmjs.com/package/geojson-extent">geojson-extent</a
+        >: compute the bounding box of geojson features
+      </li>
+      <li>
+        <a href="https://github.com/tmcw/geojson-flatten">geojson-flatten</a>:
+        flatten multi geometries into normal geometries
+      </li>
+      <li>
+        <a href="https://github.com/haoliangyu/geojson-multiply"
+          >geojson-multiply</a
+        >: merge normal geojson features into one multi geometry type feature
+      </li>
+      <li>
+        <a href="https://github.com/maxogden/geojson-js-utils"
+          >geojson-js-utils</a
+        >: JavaScript helper functions for manipulating GeoJSON
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/geojson-merge">geojson-merge</a>:
+        Merge multiple GeoJSON files into one FeatureCollection.
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/geojson-normalize"
+          >geojson-normalize</a
+        >: normalize any geojson object into a geojson featurecollection
+      </li>
+      <li>
+        <a href="https://www.npmjs.com/package/geojson-pick">geojson-pick</a>:
+        remove all but specified properties from features in a geojson
+        featurecollection
+      </li>
+      <li>
+        <a href="https://github.com/tmcw/geojson-random">geojson-random</a>:
+        generate random geojson points, lines, and polygons
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/geojson-rewind">geojson-rewind</a>:
+        enforce ring winding order
+      </li>
+      <li>
+        <a href="https://github.com/tyrasd/rfc7946-to-d3">rfc7946-to-d3</a>:
+        Converts polygon winding order between rfc7946 and
+        <a href="https://github.com/d3/d3-geo#d3-geo">d3 compatible</a>
+        conventions.
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/geojson-summary">geojson-summary</a>:
+        get a plain-english summary of what’s in a geojson file
+      </li>
+      <li>
+        <a href="https://github.com/substack/point-grouper">point-grouper</a>:
+        group geojson points into containing polygons
+      </li>
+      <li>
+        <a href="https://github.com/tmcw/geojson-join">geojson-join</a>: join
+        geojson against json, dbf, and csv files
+      </li>
+      <li>
+        <a href="https://github.com/maxogden/simplify-geojson"
+          >simplify-geojson</a
+        >: apply the ramer-douglas-peucker line simplification to geojson
+        features or feature collections in JS or on the CLI
+      </li>
+      <li>
+        <a href="https://github.com/Turfjs/turf">turf</a>: collection of
+        functions for spatial operations and analysis
+      </li>
+      <li>
+        <a href="https://github.com/dmfenton/winnow">winnow</a>: run sql queries
+        against geojson with javascript
+      </li>
+      <li>
+        <a href="https://github.com/andrewharvey/geojson-id-streaming"
+          >geojson-id-streaming</a
+        >: Add a unique id to each Feature
+      </li>
+      <li>
+        <a href="https://github.com/andrewharvey/geojson-mesh">geojson-mesh</a>:
+        extract shared borders of Polygons in a GeoJSON
+      </li>
+      <li>
+        <a href="https://github.com/andrewharvey/geojson-polygon-labels"
+          >geojson-polygon-labels</a
+        >: generate point labels from GeoJSON polygons
+      </li>
+      <li>
+        <a href="https://github.com/micolous/geojsontools">geojsontools</a>:
+        Python tools for manipulating GeoJSON files
+      </li>
+    </ul>
+    <h3 id="editors-viewers">editors &amp; viewers</h3>
+    <ul>
+      <li>
+        <a href="http://geojson.io/">geojson.io</a>: web-based editor, supports
+        many filetype imports &amp; exports, operations, sharing via GitHub
+      </li>
+      <li>
+        <a href="http://umap.openstreetmap.fr/en/">umap</a>: web-based editor,
+        supports sharing on-site
+      </li>
+      <li>
+        <a href="http://geojson.tools/">geojson.tools</a>: web-based editor from
+        HERE XYZ
+      </li>
+      <li>
+        <a href="http://mapstarter.com/">mapstarter</a>: helps generate svg,
+        images, and code from GeoJSON
+      </li>
+      <li>
+        <a href="https://github.com/anandthakker/gjv">gjv</a>: electron app
+        enables viewing GeoJSON locally and hack on it with turf; works offline
+      </li>
+      <li>
+        <a href="https://tomscholz.github.io/geojson-editor/">GeoJSON editor</a
+        >: a modified version of Google’s simple geojson editor
+      </li>
+      <li>
+        <a href="https://github.com/brycejohnston/geojson2image"
+          >geojson2image</a
+        >: library for generating images from GeoJSON
+      </li>
+      <li>
+        <a href="http://dropchop.io/">dropchop</a>: browser-based GIS based on
+        Turf.js
+      </li>
+      <li>
+        <a href="https://drewweth.github.io/geodebugger">Web GIS</a>: tools to
+        view, inspect, and manipulate geospatial data
+      </li>
+    </ul>
+    <h3 id="validation">validation</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/mapbox/geojsonhint">geojsonhint</a>: find
+        errors in your geojson files
+      </li>
+      <li>
+        <a href="https://www.npmjs.com/package/geojson-validation"
+          >geojson-validation</a
+        >: many validation functions, plus simple gjv command line tool
+      </li>
+      <li>
+        <a href="https://github.com/yazeed44/gjf">gjf</a>: A tool to fix invalid
+        GeoJSON objects
+      </li>
+    </ul>
+    <h3 id="services">services</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/mapbox/geojsonio-cli">geojsonio-cli</a>:
+        send geojson features to geojson.io from your command line
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/geojsonio-extension"
+          >geojsonio-extension</a
+        >: chrome extension for editing github files in geojson.io
+      </li>
+      <li>
+        <a href="http://geojsonlint.com/">geojsonlint</a>: REST interface for
+        GeoJSON validation
+      </li>
+      <li>
+        <a href="http://mapshaper.org/">mapshaper</a>: Simple interface for
+        simplification and conversion of GeoJSON and TopoJSON
+      </li>
+      <li>
+        <a href="https://koopjs.github.io">koop</a>: Server with plugins that
+        recast Esri, GitHub, Socrata and other services as GeoJSON endpoints
+      </li>
+      <li>
+        <a href="https://github.com/featureserver/featureserver"
+          >featureserver</a
+        >: An open source Esri-Style Feature Server
+      </li>
+    </ul>
+    <h3 id="conversion">conversion</h3>
+    <ul>
+      <li>
+        <strong>CSV</strong>
+        <ul>
+          <li>
+            <a href="https://github.com/mapbox/csv2geojson">csv2geojson</a>:
+            convert CSV to geojson
+          </li>
+          <li>
+            <a href="https://github.com/tmcw/geojson2dsv">geojson2dsv</a>:
+            convert geojson to CSV and TSV
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/geojson-mapnikify"
+          >geojson-mapnikify</a
+        >: Transform GeoJSON objects into Mapnik XML stylesheets with embedded
+        GeoJSON data and simplestyle-spec-derived styles.
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/geojson-vt">geojson-vt</a>: Slice
+        GeoJSON into vector tiles on the fly in the browser
+      </li>
+      <li>
+        <a href="https://github.com/developmentseed/vt-geojson">vt-geojson</a>:
+        Extract GeoJSON from Mapbox vector tiles
+      </li>
+      <li>
+        <a href="https://github.com/maxogden/geojson2rtree">geojson2rtree</a>:
+        generate a static rtree (using terraformer) from a set of geojson
+        features
+      </li>
+      <li>
+        <a href="http://www.gdal.org/ogr2ogr.html">ogr2ogr</a>: convert anything
+        to anything
+        <ul>
+          <li>
+            <a href="https://github.com/toblerity/fiona">fiona</a>: nice python
+            interface on top of ogr
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://github.com/substack/shp2json">shp2json</a>: convert
+        shapefile zip archives to streaming GeoJSON
+      </li>
+      <li>
+        <a href="https://github.com/tmcw/togeojson">togeojson</a>: convert GPX
+        &amp; KML to geojson
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/tokml">tokml</a>: convert GeoJSON to
+        KML
+      </li>
+      <li>
+        <a href="https://github.com/topojson/topojson">topojson</a>: convert
+        GeoJSON to &amp; from TopoJSON, join data from CSV
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/wellknown">wellknown</a>: convert WKT
+        to GeoJSON
+      </li>
+      <li>
+        <a href="https://github.com/project-open-data/esri2open">esri2open</a>
+        converts proprietary Esri formats to GeoJSON
+      </li>
+      <li>
+        <a href="https://github.com/tmcw/gtfs2geojson">gtfs2geojson</a>: convert
+        GTFS transit data to GeoJSON
+      </li>
+      <li>
+        <a href="https://github.com/koopjs/geoxform">geoxform</a>: convert any
+        size stream of geojson into a streaming CSV, Shapefile or KML, etc.
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/supercluster">supercluster</a>: A
+        fast GeoJSON clustering library for browsers and Node.
+      </li>
+      <li>
+        <strong>SVG</strong>
+        <ul>
+          <li>
+            <a href="https://github.com/juliuste/geojson-svgify"
+              >geojson-svgify</a
+            >: Convert GeoJSON geometry paths to SVG polyline elements.
+          </li>
+          <li>
+            <a href="https://github.com/derhuerst/geojson-to-svg-cli"
+              >geojson-to-svg-cli</a
+            >: Command line tool to convert GeoJSON to SVG.
+          </li>
+          <li>
+            <a href="https://github.com/mapbox/svg-to-geojson">svg-to-geojson</a
+            >: Drag and drop SVG on the map and it returns GeoJSON back to you.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.npmjs.com/package/geojson2ndjson">geojson2ndjson</a
+        >: convert GeoJSON to/from newline-delimited GeoJSON
+      </li>
+      <li>
+        <p>
+          <a href="https://www.npmjs.com/package/geobuf/v/0.2.1">geobuf</a>:
+          convert GeoJSON to/from GeoBuf
+        </p>
+      </li>
+      <li>
+        <strong>OpenStreetMap</strong>
+        <ul>
+          <li>
+            <a href="https://github.com/tyrasd/osmtogeojson">osmtogeojson</a>:
+            convert OpenStreetMap data to GeoJSON
+          </li>
+          <li>
+            <a href="https://github.com/rclark/osm2geojson">osm2geojson</a>:
+            converts OSM XML to GeoJSON
+          </li>
+          <li>
+            <a href="https://github.com/aspectumapp/osm2geojson">osm2geojson</a
+            >: (Python) converts OSM XML and Overpass XML/JSON to GeoJSON
+          </li>
+          <li>
+            <a href="https://github.com/mapbox/minjur">minjur</a>: converts
+            OpenStreetMap data to GeoJSON faster than anything else
+          </li>
+          <li>
+            <a href="https://github.com/tyrasd/geojsontoosm">geojsontoosm</a>:
+            convert GeoJSON to OSM XML
+          </li>
+          <li>
+            <a href="https://github.com/Rub21/geojson2osm">geojson2osm</a>:
+            convert GeoJSON to OSM XML
+          </li>
+          <li>
+            <a href="https://github.com/aaronlidman/osm-and-geojson"
+              >osm-and-geojson</a
+            >: convert GeoJSON to OSM XML and OSM XML to GeoJSON
+          </li>
+          <li>
+            <a href="https://github.com/DenisCarriere/geojson2osm-es6/"
+              >geojson2osm-es6</a
+            >: convert GeoJSON to OSM XML
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="data">data</h3>
+    <ul>
+      <li>
+        <a href="http://www.naturalearthdata.com/">natural earth</a>: country,
+        province, and geographical data
+      </li>
+      <li>
+        <a href="http://geojson.xyz/">geojson.xyz</a>: natural earth data in
+        web-friendly sizes with hotlinking
+      </li>
+      <li>
+        <a href="https://github.com/topojson/world-atlas">world-atlas</a>:
+        customizable simplified versions of natural earth data
+      </li>
+      <li>
+        <a href="https://github.com/simonepri/geo-maps">geo-maps</a>: High
+        Quality GeoJSON maps programmatically generated.
+      </li>
+      <li>
+        <a href="https://github.com/tmcw/openflights-geojson"
+          >openflights-geojson</a
+        >: <a href="http://openflights.org/">openflights</a> airports &amp;
+        airplane routes
+      </li>
+      <li>
+        <a href="https://github.com/topojson/us-atlas">us-atlas</a>: geojson
+        &amp; topojson for United States features
+      </li>
+      <li>
+        <a href="https://mapzen.com/data/metro-extracts/">metro-extracts</a>:
+        regional OpenStreetMap data as GeoJSON
+      </li>
+      <li>
+        <a href="https://github.com/straup/whereonearth-airport"
+          >whereonearth-airport</a
+        >: outlines of every airport
+      </li>
+      <li>
+        <a href="https://github.com/straup/whereonearth-building/"
+          >whereonearth-building</a
+        >: building outlines
+      </li>
+      <li>
+        <a href="https://github.com/search?q=user%3Astraup+whereonearth"
+          >whereonearth repos</a
+        >: other features output from GeoPlanet by Aaron Straup Cope
+      </li>
+      <li>
+        <a href="https://github.com/straup/tgn-geojson">tgn-geojson</a>: The
+        Getty Thesaurus of Geographic Names (TGN) As GeoJSON.
+      </li>
+      <li>
+        <a href="https://github.com/taketime/strava-to-geojsonio"
+          >strava-to-geojsonio</a
+        >: export runs &amp; rides from Strava to GeoJSON
+      </li>
+      <li>
+        <a href="https://github.com/tmcw/strava-geojson">strava-geojson</a>:
+        export <em>all</em> strava data to geojson, in node &amp;
+        <a href="http://www.macwright.org/strava-geojson/">on the web</a>
+      </li>
+      <li>
+        <a href="http://ustroetz.github.io/gimmeOSM/">gimme OSM</a>: Fetch
+        geojson file by openstreetmap id
+      </li>
+      <li>
+        <a href="https://github.com/hyperknot/country-levels-export"
+          >country-levels</a
+        >
+        Full planet GeoJSON extracts, based on ISO and FIPS codes.
+      </li>
+    </ul>
+    <h3 id="serialization">serialization</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/frewsxcv/python-geojson">python-geojson</a>:
+        serialize geojson to/from python datatypes
+      </li>
+      <li>
+        <a href="https://github.com/rgeo/rgeo-geojson">rgeo-geojson</a>:
+        serialize geojson to/from ruby RGeo datatypes
+      </li>
+      <li>
+        <a href="https://github.com/georust/rust-geojson">rust-geojson</a>:
+        serialize geojson to/from rust datatypes
+      </li>
+      <li>
+        <a href="https://github.com/opendatalab-de/geojson-jackson"
+          >geojson-jackson</a
+        >: serialize GeoJSON to and from Java datatypes (based on
+        <a href="http://wiki.fasterxml.com/JacksonHome">Jackson</a>)
+      </li>
+      <li>
+        <a href="https://github.com/mapbox/mapbox-java">mapbox-java</a>:
+        serialize GeoJSON to and from Java datatypes (based on
+        <a href="https://github.com/google/gson">Gson</a>)
+      </li>
+      <li>
+        <a href="https://github.com/ancore/geojson-serializer"
+          >geojson-serializer</a
+        >: serialize Java with annotations as GeoJSON
+      </li>
+    </ul>
+    <h3 id="resources">resources</h3>
+    <ul>
+      <li>
+        <a href="https://tools.ietf.org/html/rfc7946"
+          >RFC 7946 – The GeoJSON Format</a
+        >: the current GeoJSON standard by IETF
+      </li>
+      <li>
+        <a href="http://geojson.org/">GeoJSON.org</a>: the first specification,
+        defining all the rules for GeoJSON structures
+      </li>
+      <li>
+        <a href="http://www.macwright.org/2015/03/23/geojson-second-bite.html"
+          >More than you ever wanted to know about GeoJSON</a
+        >: a review of the concepts behind the specification in a more narrative
+        format.
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img src="https://licensebuttons.net/p/zero/1.0/88x31.png" alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="http://www.macwright.org">Tom MacWright</a> has waived all
+      copyright and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-ssh-awesome">
+      Awesome SSH
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        A curated list of <em>SSH</em> <a href="#apps">apps</a>,
+        <a href="#libraries">libraries</a> and
+        <a href="#resources">resources</a>.
+      </p>
+    </blockquote>
+    <h2 align="center">
+      <img
+        src="https://raw.githubusercontent.com/moul/awesome-ssh/master/logo.jpg"
+        width="400"
+      />
+    </h2>
+    <p>
+      Inspired by the
+      <a href="https://github.com/sindresorhus/awesome">awesome</a> list thing.
+    </p>
+    <p>
+      Please read the <a href="CONTRIBUTING.md">contribution guidelines</a> if
+      you want to contribute.
+    </p>
+    <p>
+      <strong
+        >Check out my <a href="https://manfred.life/">blog</a> 🦄 or say
+        <em>hi</em> on <a href="https://twitter.com/moul">Twitter</a>.</strong
+      >
+    </p>
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ul>
+      <li>
+        <a href="#apps">Apps</a>
+        <ul>
+          <li>
+            <a href="#sshconfig"><code>.ssh/config</code></a>
+          </li>
+          <li>
+            <a href="#tools-using-the-ssh-protocol"
+              >Tools using the <em>SSH</em> protocol</a
+            >
+          </li>
+          <li><a href="#servers">Servers</a></li>
+          <li><a href="#network">Network</a></li>
+          <li><a href="#multiplexers">Multiplexers</a></li>
+          <li>
+            <a href="#ssh-keys--authentication">SSH Keys / Authentication</a>
+          </li>
+          <li><a href="#ssh-agent">SSH agent</a></li>
+          <li><a href="#tools">Tools</a></li>
+          <li><a href="#automation">Automation</a></li>
+          <li><a href="#web">Web</a></li>
+          <li><a href="#testing--honeypots">Testing / Honeypots</a></li>
+          <li><a href="#alternatives-to-ssh">Alternatives to SSH</a></li>
+        </ul>
+      </li>
+      <li><a href="#libraries">Libraries</a></li>
+      <li>
+        <a href="#resources">Resources</a>
+        <ul>
+          <li><a href="#tutorials">Tutorials</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#documentation">Documentation</a></li>
+          <li><a href="#community">Community</a></li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="apps">Apps</h2>
+    <h3 id="sshconfig"><code>.ssh/config</code></h3>
+    <ul>
+      <li>
+        <a href="https://github.com/moul/assh"><code>assh</code></a>
+        <a href="https://github.com/moul/advanced-ssh-config"
+          ><img
+            src="https://img.shields.io/github/stars/moul/advanced-ssh-config.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Transparent wrapper (ProxyCommand) that adds regex, aliases, gateways,
+        includes, dynamic hostnames to <em>SSH</em> and <code>ssh-config</code>.
+        <em>Previously: <code>advanced-ssh-config</code></em>
+      </li>
+      <li>
+        <a href="https://github.com/emre/storm">storm</a>
+        <a href="https://github.com/emre/storm"
+          ><img
+            src="https://img.shields.io/github/stars/emre/storm.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Manage your <em>SSH</em> like a boss.
+      </li>
+      <li>
+        <a href="https://github.com/gaqzi/ansible-ssh-config"
+          >ansible-ssh-config</a
+        >
+        <a href="https://github.com/gaqzi/ansible-ssh-config"
+          ><img
+            src="https://img.shields.io/github/stars/gaqzi/ansible-ssh-config.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Letting <em>Ansible</em> manage <code>ssh_config</code>.
+      </li>
+      <li>
+        <a href="https://github.com/mirakui/ec2ssh">ec2ssh</a>
+        <a href="https://github.com/mirakui/ec2ssh"
+          ><img
+            src="https://img.shields.io/github/stars/mirakui/ec2ssh.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - A <code>ssh_config</code> manager for <em>AWS EC2</em>.
+      </li>
+      <li>
+        <a href="https://github.com/dbrady/ssh-config">ssh-config</a>
+        <a href="https://github.com/dbrady/ssh-config"
+          ><img
+            src="https://img.shields.io/github/stars/dbrady/ssh-config.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - A tool to help manage your <code>.ssh/config</code> file.
+      </li>
+    </ul>
+    <h3 id="tools-using-the-ssh-protocol">
+      Tools using the <em>SSH</em> protocol
+    </h3>
+    <ul>
+      <li>
+        <a href="http://linux.die.net/man/1/scp">scp</a> - Secure remote file
+        copy utility over <em>SSH</em>.
+      </li>
+      <li>
+        <a href="https://rsync.samba.org">rsync</a> - Fast incremental transfer
+        utility that supports <em>SSH</em>.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol"
+          >sftp</a
+        >
+        - File transfer protocol over <em>SSH</em>.
+      </li>
+      <li>
+        <a href="http://curl.haxx.se">curl</a> - Command line tool and library
+        to transfer data (support <code>sftp</code>).
+      </li>
+    </ul>
+    <h3 id="servers">Servers</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/moul/sshportal">sshportal</a>
+        <a href="https://github.com/moul/sshportal"
+          ><img
+            src="https://img.shields.io/github/stars/moul/sshportal.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - simple, fun, and transparent SSH (&amp; Telnet) Bastion Server
+      </li>
+      <li>
+        <a href="https://github.com/moul/ssh2docker">ssh2docker</a>
+        <a href="https://github.com/moul/ssh2docker"
+          ><img
+            src="https://img.shields.io/github/stars/moul/ssh2docker.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <em>SSH</em> server to Docker containers.
+      </li>
+      <li>
+        <a href="https://github.com/ml-tooling/ssh-proxy">ssh-proxy</a>
+        <a href="https://github.com/ml-tooling/ssh-proxy"
+          ><img
+            src="https://img.shields.io/github/stars/ml-tooling/ssh-proxy.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Dockerized SSH bastion to proxy SSH connections to arbitrary
+        containers.
+      </li>
+      <li>
+        <a href="https://github.com/FiloSottile/whosthere">whosthere</a>
+        <a href="https://github.com/FiloSottile/whosthere"
+          ><img
+            src="https://img.shields.io/github/stars/FiloSottile/whosthere.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - A <em>SSH</em> server that knows who you are.
+        <code>$ ssh whoami.filippo.io</code>.
+      </li>
+      <li>
+        <a href="https://github.com/gliderlabs/sshfront">sshfront</a>
+        <a href="https://github.com/gliderlabs/sshfront"
+          ><img
+            src="https://img.shields.io/github/stars/gliderlabs/sshfront.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Programmable <em>SSH</em> frontend.
+      </li>
+      <li>
+        <a href="https://github.com/shazow/ssh-chat">ssh-chat</a>
+        <a href="https://github.com/shazow/ssh-chat"
+          ><img
+            src="https://img.shields.io/github/stars/shazow/ssh-chat.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Chat over <em>SSH</em>.
+      </li>
+      <li>
+        <a href="https://github.com/dokku/sshcommand">sshcommand</a>
+        <a href="https://github.com/dokku/sshcommand"
+          ><img
+            src="https://img.shields.io/github/stars/dokku/sshcommand.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Turn <em>SSH</em> into a thin client specifically for your app.
+      </li>
+      <li>
+        <a href="https://github.com/joushou/sshmuxd">sshmuxd</a>
+        <a href="https://github.com/joushou/sshmuxd"
+          ><img
+            src="https://img.shields.io/github/stars/joushou/sshmuxd.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <code>sshmux</code> frontend.
+      </li>
+      <li>
+        <a href="https://github.com/jquast/x84">x84</a>
+        <a href="https://github.com/jquast/x84"
+          ><img
+            src="https://img.shields.io/github/stars/jquast/x84.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - A <em>python</em> <code>telnet</code>/<code>ssh</code> server for
+        modern <em>UTF-8</em> and classic <em>cp437</em> network virtual
+        terminals. In spirit of classic software such as <em>ami/x</em>,
+        <em>teleguard</em>, <em>renegade</em>, <em>iniquity</em>.
+      </li>
+      <li>
+        <a href="https://github.com/gravitational/teleport">teleport</a>
+        <a href="https://github.com/gravitational/teleport"
+          ><img
+            src="https://img.shields.io/github/stars/gravitational/teleport.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Modern <em>SSH</em> server for clusters and teams.
+      </li>
+      <li>
+        <a href="https://github.com/shellhub-io/shellhub">ShellHub</a>
+        <a href="https://github.com/shellhub-io/shellhub"
+          ><img
+            src="https://img.shields.io/github/stars/shellhub-io/shellhub.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - A <em>SSH</em> gateway for remotely accessing any Linux device behind
+        firewall and NAT.
+      </li>
+    </ul>
+    <h3 id="network">Network</h3>
+    <ul>
+      <li><a href="https://mosh.mit.edu">Mosh</a> - The mobile shell.</li>
+      <li>
+        <a href="https://github.com/libfuse/sshfs">sshfs</a>
+        <a href="https://github.com/libfuse/sshfs"
+          ><img
+            src="https://img.shields.io/github/stars/libfuse/sshfs.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Filesystem client based on the <em>SSH</em> File Transfer Protocol.
+      </li>
+      <li>
+        <a href="https://github.com/inconshreveable/ngrok">ngrok</a>
+        <a href="https://github.com/inconshreveable/ngrok"
+          ><img
+            src="https://img.shields.io/github/stars/inconshreveable/ngrok.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Introspected tunnels to localhost.
+      </li>
+      <li>
+        <a href="https://github.com/progrium/localtunnel">localtunnel</a>
+        <a href="https://github.com/progrium/localtunnel"
+          ><img
+            src="https://img.shields.io/github/stars/progrium/localtunnel.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Expose localhost servers to the Internet.
+      </li>
+      <li>
+        <a href="https://github.com/sshuttle/sshuttle">sshuttle</a>
+        <a href="https://github.com/sshuttle/sshuttle"
+          ><img
+            src="https://img.shields.io/github/stars/sshuttle/sshuttle.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Transparent proxy server that works as a poor man’s <em>VPN</em>.
+        Forwards over <code>ssh</code>. Doesn’t require admin. Works with
+        <em>Linux</em> and <em>MacOS</em>. Supports <em>DNS tunneling</em>.
+      </li>
+      <li>
+        <a href="https://github.com/stealth/sshttp">sshttp</a>
+        <a href="https://github.com/stealth/sshttp"
+          ><img
+            src="https://img.shields.io/github/stars/stealth/sshttp.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <em>SSH</em>/<em>HTTP(S)</em> multiplexer. Run a webserver and a
+        <code>sshd</code> on the same port w/o changes.
+      </li>
+      <li>
+        <a href="https://github.com/jamescun/switcher">switcher</a>
+        <a href="https://github.com/jamescun/switcher"
+          ><img
+            src="https://img.shields.io/github/stars/jamescun/switcher.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Run <em>SSH</em> and <em>HTTP(S)</em> on the same port.
+      </li>
+      <li>
+        <a href="https://github.com/yrutschle/sslh">sslh</a>
+        <a href="https://github.com/yrutschle/sslh"
+          ><img
+            src="https://img.shields.io/github/stars/yrutschle/sslh.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Applicative Protocol Multiplexer (i.e: <em>SSH</em> + <em>HTTPS</em>).
+      </li>
+      <li>
+        <a href="https://github.com/aphyr/tund">tund</a>
+        <a href="https://github.com/aphyr/tund"
+          ><img
+            src="https://img.shields.io/github/stars/aphyr/tund.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <em>SSH</em> reverse tunnel daemon.
+      </li>
+      <li>
+        <a href="http://www.harding.motd.ca/autossh/">autossh</a> -
+        Automatically respawn <em>SSH</em> session after network interruption.
+      </li>
+      <li>
+        <a href="https://github.com/aluzzardi/wssh">wssh</a>
+        <a href="https://github.com/aluzzardi/wssh"
+          ><img
+            src="https://img.shields.io/github/stars/aluzzardi/wssh.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <em>SSH</em> to WebSockets Bridge.
+      </li>
+      <li>
+        <a href="https://github.com/vieux/docker-volume-sshfs"
+          >docker-volume-sshfs</a
+        >
+        <a href="https://github.com/vieux/docker-volume-sshfs"
+          ><img
+            src="https://img.shields.io/github/stars/vieux/docker-volume-sshfs.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <code>sshfs</code> docker volume plugin.
+      </li>
+      <li>
+        <a href="https://github.com/moul/quicssh">quicssh</a>
+        <a href="https://github.com/moul/quicssh"
+          ><img
+            src="https://img.shields.io/github/stars/moul/quicssh.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - QUIC proxy for SSH
+      </li>
+      <li>
+        <a href="https://github.com/tg123/sshpiper">sshpiper</a>
+        <a href="https://github.com/tg123/sshpiper"
+          ><img
+            src="https://img.shields.io/github/stars/tg123/sshpiper.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - The missing reverse proxy for ssh scp.
+      </li>
+      <li>
+        <a href="https://sshhub.de">sshhub</a> - Web Service: access your SSH
+        servers behind firewalls (ssh-teamviewer).
+      </li>
+    </ul>
+    <h3 id="multiplexers">Multiplexers</h3>
+    <ul>
+      <li><a href="https://tmux.github.io">tmux</a> - Terminal multiplexer.</li>
+      <li>
+        <a href="https://github.com/duncs/clusterssh">clusterssh</a>
+        <a href="https://github.com/duncs/clusterssh"
+          ><img
+            src="https://img.shields.io/github/stars/duncs/clusterssh.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Cluster admin via <em>SSH</em>.
+      </li>
+      <li>
+        <a href="https://github.com/dennishafemann/tmux-cssh">tmux-cssh</a>
+        <a href="https://github.com/dennishafemann/tmux-cssh"
+          ><img
+            src="https://img.shields.io/github/stars/dennishafemann/tmux-cssh.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <code>tmux</code> with a <em>ClusterSSH</em>-like behavior.
+      </li>
+      <li>
+        <a href="https://github.com/Ganneff/tm">tm</a>
+        <a href="https://github.com/Ganneff/tm"
+          ><img
+            src="https://img.shields.io/github/stars/Ganneff/tm.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <code>tmux</code> manager / helper.
+      </li>
+      <li>
+        <a href="https://github.com/wouterdebie/i2cssh">i2cssh</a>
+        <a href="https://github.com/wouterdebie/i2cssh"
+          ><img
+            src="https://img.shields.io/github/stars/wouterdebie/i2cssh.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <code>csshX</code> like <em>SSH</em> tool for <em>iTerm2</em>.
+      </li>
+      <li>
+        <a href="http://sourceforge.net/projects/clusterssh/">ClusterSSH</a> -
+        Controls a number of <code>xterm</code> windows via a single graphical
+        console.
+      </li>
+    </ul>
+    <h3 id="ssh-keys-authentication"><em>SSH</em> keys / Authentication</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/authy/authy-ssh">authy-ssh</a>
+        <a href="https://github.com/authy/authy-ssh"
+          ><img
+            src="https://img.shields.io/github/stars/authy/authy-ssh.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Easy <em>two-factor</em> authentication for <em>SSH</em> servers.
+      </li>
+      <li>
+        <a href="https://github.com/chrishunt/github-auth">github-auth</a>
+        <a href="https://github.com/chrishunt/github-auth"
+          ><img
+            src="https://img.shields.io/github/stars/chrishunt/github-auth.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <em>SSH</em> key management for GitHub users.
+      </li>
+      <li>
+        <a href="https://github.com/substack/cipherhub">cipherhub</a>
+        <a href="https://github.com/substack/cipherhub"
+          ><img
+            src="https://img.shields.io/github/stars/substack/cipherhub.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Encrypt messages based on <em>SSH</em> public keys with easy import
+        from GitHub.
+      </li>
+      <li>
+        <a href="http://www.ryanbrink.com/slack-ssh-session-notifications/"
+          >Slack notifications</a
+        >
+        (<a
+          href="https://web.archive.org/web/20160505202303/http://www.ryanbrink.com/slack-ssh-session-notifications/"
+          >archived version</a
+        >) - Guide to setup Slack notifications (can be modified for other
+        services).
+      </li>
+      <li>
+        <a href="https://github.com/benjojo/totp-ssh-fluxer">totp-ssh-fluxer</a>
+        <a href="https://github.com/benjojo/totp-ssh-fluxer"
+          ><img
+            src="https://img.shields.io/github/stars/benjojo/totp-ssh-fluxer.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - A way to make sure your <code>sshd</code> port changes every 30
+        seconds.
+      </li>
+      <li>
+        <a href="https://github.com/dolmen/github-keygen">github-keygen</a>
+        <a href="https://github.com/dolmen/github-keygen"
+          ><img
+            src="https://img.shields.io/github/stars/dolmen/github-keygen.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Easy creation of secure <em>SSH</em> configuration for your GitHub
+        account(s).
+      </li>
+      <li>
+        <a href="https://github.com/KryptCo/kr">kr</a>
+        <a href="https://github.com/KryptCo/kr"
+          ><img
+            src="https://img.shields.io/github/stars/dolmen/github-keygen.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Kr agent that route access request to the paired mobile phone where
+        Kryptonite is installed.
+      </li>
+      <li>
+        <a href="https://serverauth.com">ServerAuth</a> - Automatically sync SSH
+        access across servers
+      </li>
+    </ul>
+    <h3 id="ssh-agent"><em>SSH</em> agent</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/ccontavalli/ssh-ident">ssh-ident</a>
+        <a href="https://github.com/ccontavalli/ssh-ident"
+          ><img
+            src="https://img.shields.io/github/stars/ccontavalli/ssh-ident.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Different agents and different keys for different projects, with
+        <code>ssh</code>.
+      </li>
+      <li>
+        <a href="https://github.com/robbyrussell/oh-my-zsh"
+          >oh-my-zsh/plugins/ssh-agent</a
+        >
+        <a href="https://github.com/robbyrussell/oh-my-zsh"
+          ><img
+            src="https://img.shields.io/github/stars/robbyrussell/oh-my-zsh.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <code>ssh-agent</code> plugin for <code>zsh</code>.
+      </li>
+      <li>
+        <a href="https://github.com/thcipriani/sshecret">sshecret</a> -
+        Automatically create and manage multiple agents for multiple keys.
+      </li>
+    </ul>
+    <h3 id="tools">Tools</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/xxh/xxh">xxh</a>
+        <a href="https://github.com/xxh/xxh"
+          ><img
+            src="https://img.shields.io/github/stars/xxh/xxh.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Bring your favorite shell wherever you go through the ssh.
+      </li>
+      <li>
+        <a href="https://github.com/danrabinowitz/sshrc">sshrc</a>
+        <a href="https://github.com/danrabinowitz/sshrc"
+          ><img
+            src="https://img.shields.io/github/stars/danrabinowitz/sshrc.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Bring your <code>.bashrc</code>, <code>.vimrc</code>, etc. with you
+        when you <code>ssh</code>.
+      </li>
+      <li>
+        <a href="https://github.com/fsquillace/kyrat">kyrat</a>
+        <a href="https://github.com/fsquillace/kyrat"
+          ><img
+            src="https://img.shields.io/github/stars/fsquillace/kyrat.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - SSH wrapper script that brings your dotfiles always with you on Linux
+        and OSX.
+      </li>
+      <li>
+        <a href="https://github.com/ssh-vault/ssh-vault">ssh-vault</a>
+        <a href="https://github.com/ssh-vault/ssh-vault"
+          ><img
+            src="https://img.shields.io/github/stars/ssh-vault/ssh-vault.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - encrypt/decrypt files using ssh keys
+      </li>
+      <li>
+        <a href="https://github.com/vaporup/ssh-tools">ssh-ping</a>
+        <a href="https://github.com/vaporup/ssh-tools"
+          ><img
+            src="https://img.shields.io/github/stars/vaporup/ssh-tools.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - check if host is reachable using ssh_config
+      </li>
+      <li>
+        <a href="https://github.com/nopernik/SSHPry2.0">SSHPry v2</a>
+        <a href="https://github.com/nopernik/SSHPry2.0"
+          ><img
+            src="https://img.shields.io/github/stars/nopernik/SSHPry2.0.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Spy &amp; Control os SSH Connected client’s TTY
+      </li>
+      <li>
+        <a href="https://github.com/taypo/redial">redial</a>
+        <a href="https://github.com/taypo/redial"
+          ><img
+            src="https://img.shields.io/github/stars/taypo/redial?style=social"
+            alt="stars"
+        /></a>
+        - Terminal Based SSH Session Manager for Unix Systems
+      </li>
+    </ul>
+    <h3 id="automation">Automation</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/ansible/ansible">Ansible</a>
+        <a href="https://github.com/ansible/ansible"
+          ><img
+            src="https://img.shields.io/github/stars/ansible/ansible.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - App deployment, configuration management and orchestration over
+        <em>SSH</em>.
+      </li>
+      <li>
+        <a href="https://github.com/rapidloop/rtop">rtop</a>
+        <a href="https://github.com/rapidloop/rtop"
+          ><img
+            src="https://img.shields.io/github/stars/rapidloop/rtop.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Interactive, remote system monitoring tool based on <em>SSH</em>.
+      </li>
+      <li>
+        <a href="https://www.netfort.gr.jp/~dancer/software/dsh.html.en"
+          >DSH - Dancer’s shell / distributed shell</a
+        >
+        - Wrapper for executing multiple remote shell commands from one command
+        line.
+      </li>
+      <li>
+        <a href="https://github.com/ParallelSSH/parallel-ssh">parallel-ssh</a>
+        <a href="https://github.com/ParallelSSH/parallel-ssh"
+          ><img
+            src="https://img.shields.io/github/stars/ParallelSSH/parallel-ssh.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Provides parallel versions of OpenSSH and related tools.
+      </li>
+      <li>
+        <a href="https://code.google.com/p/sshpt/">SSH Power Tool</a> - Execute
+        commands and upload files to many servers simultaneously without using
+        pre-shared keys.
+      </li>
+    </ul>
+    <h3 id="web">Web</h3>
+    <ul>
+      <li>
+        <a
+          href="https://chrome.google.com/webstore/detail/secure-shell/pnhechapfaindjhompbnflcldabbghjo?hl=en"
+          >Secure Shell chrome extension</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/liftoff/GateOne">GateOne</a>
+        <a href="https://github.com/liftoff/GateOne"
+          ><img
+            src="https://img.shields.io/github/stars/liftoff/GateOne.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - HTML5-powered terminal emulator and <em>SSH</em> client.
+      </li>
+      <li>
+        <a href="https://github.com/skavanagh/KeyBox">KeyBox</a>
+        <a href="https://github.com/skavanagh/KeyBox"
+          ><img
+            src="https://img.shields.io/github/stars/skavanagh/KeyBox.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Web-based <em>SSH</em> console that centrally manages administrative
+        access to systems.
+      </li>
+      <li>
+        <a href="https://guacamole.incubator.apache.org/">Apache Guacamole</a> -
+        Apache Guacamole is a HTML5 based clientless remote desktop gateway. It
+        supports standard protocols like VNC, RDP, and SSH.
+      </li>
+      <li>
+        <a href="https://github.com/hpello/sshmon">SSHmon</a>
+        <a href="https://github.com/hpello/sshmon"
+          ><img
+            src="https://img.shields.io/github/stars/hpello/sshmon.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Real-time GUI to monitor SSH connections and establish port
+        forwardings.
+      </li>
+    </ul>
+    <h3 id="testing-honeypots">Testing / Honeypots</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/shazow/ssh-hammer">ssh-hammer</a>
+        <a href="https://github.com/shazow/ssh-hammer"
+          ><img
+            src="https://img.shields.io/github/stars/shazow/ssh-hammer.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <em>SSH</em> load testing tool.
+      </li>
+      <li>
+        <a href="https://github.com/desaster/kippo">kippo</a>
+        <a href="https://github.com/desaster/kippo"
+          ><img
+            src="https://img.shields.io/github/stars/desaster/kippo.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <em>SSH</em> Honeypot.
+      </li>
+      <li>
+        <a href="https://github.com/micheloosterhof/cowrie">cowrie</a>
+        <a href="https://github.com/micheloosterhof/cowrie"
+          ><img
+            src="https://img.shields.io/github/stars/micheloosterhof/cowrie.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <em>SSH</em> Honeypot (based on kippo).
+      </li>
+      <li>
+        <a href="http://linux.die.net/man/8/sshmitm">sshmitm</a> -
+        <em>SSH</em> monkey-in-the-middle.
+      </li>
+      <li>
+        <a href="https://github.com/arthepsy/ssh-audit">ssh-audit</a>
+        <a href="https://github.com/arthepsy/ssh-audit"
+          ><img
+            src="https://img.shields.io/github/stars/arthepsy/ssh-audit.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - A tool for <em>SSH</em> server auditing.
+      </li>
+      <li>
+        <a href="https://github.com/jaksi/sshesame">sshesame</a>
+        <a href="https://github.com/jaksi/sshesame"
+          ><img
+            src="https://img.shields.io/github/stars/jaksi/sshesame.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - A fake SSH server that lets everyone in and logs their activity.
+      </li>
+    </ul>
+    <h3 id="alternatives-to-ssh">Alternatives to <em>SSH</em></h3>
+    <ul>
+      <li>
+        <a href="https://github.com/yudai/gotty">GoTTY</a>
+        <a href="https://github.com/yudai/gotty"
+          ><img
+            src="https://img.shields.io/github/stars/yudai/gotty.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Share your terminal as web application.
+      </li>
+      <li>
+        <a href="http://www.telnet.org/htm/faq.htm">telnet</a> - An unencrypted
+        network protocol and an application used to connect to remote computers
+        and issue commands.
+      </li>
+      <li>
+        <a href="https://github.com/tsl0922/ttyd">ttyd</a>
+        <a href="https://github.com/tsl0922/ttyd"
+          ><img
+            src="https://img.shields.io/github/stars/tsl0922/ttyd.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - Share your terminal over the web.
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Remote_Shell">rsh</a> - An
+        unencrypted network protocol and application used to connect to remote
+        computers and issue commands.
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <ul>
+      <li>
+        C/C++
+        <ul>
+          <li>
+            <a href="https://www.libssh.org">libssh</a> - The
+            <em>SSH</em> library.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Golang
+        <ul>
+          <li>
+            <a href="https://godoc.org/golang.org/x/crypto/ssh">crypto/ssh</a> -
+            Built-in <em>SSH</em> client and server library.
+          </li>
+          <li>
+            <a href="https://github.com/pkg/sftp">sftp</a>
+            <a href="https://github.com/pkg/sftp"
+              ><img
+                src="https://img.shields.io/github/stars/pkg/sftp.svg?style=social&amp;label=stars"
+                alt="stars"
+            /></a>
+            - <em>SFTP</em> support for the go.crypto/ssh package.
+          </li>
+          <li>
+            <a href="https://github.com/shazow/go-sshkit">go-sshkit</a>
+            <a href="https://github.com/shazow/go-sshkit"
+              ><img
+                src="https://img.shields.io/github/stars/shazow/go-sshkit.svg?style=social&amp;label=stars"
+                alt="stars"
+            /></a>
+            - Toolkit for building <em>SSH</em> servers and clients in Go.
+          </li>
+          <li>
+            <a href="https://github.com/cosiner/socker">Socker</a>
+            <a href="https://github.com/cosiner/socker"
+              ><img
+                src="https://img.shields.io/github/stars/cosiner/socker.svg?style=social&amp;label=stars"
+                alt="stars"
+            /></a>
+            - Library for Go to simplify the use of <em>SSH</em>.
+          </li>
+          <li>
+            <a href="https://github.com/moul/go-sshkeys">go-sshkeys</a> - Golang
+            SSH Keys manipulation library
+          </li>
+        </ul>
+      </li>
+      <li>
+        Java
+        <ul>
+          <li>
+            <a href="http://www.jcraft.com/jsch/">jsch</a> - Pure <em>java</em>,
+            <em>BSD</em> licensed, <em>SSH2</em> client library.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Javascript/Node.js
+        <ul>
+          <li>
+            <a href="https://github.com/mscdex/ssh2">ssh2</a>
+            <a href="https://github.com/mscdex/ssh2"
+              ><img
+                src="https://img.shields.io/github/stars/mscdex/ssh2.svg?style=social&amp;label=stars"
+                alt="stars"
+            /></a>
+            - <em>SSH2</em> client and server modules written in pure
+            <em>JavaScript</em> for <em>node.js</em>.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Python
+        <ul>
+          <li>
+            <a href="https://github.com/paramiko/paramiko">paramiko</a>
+            <a href="https://github.com/paramiko/paramiko"
+              ><img
+                src="https://img.shields.io/github/stars/paramiko/paramiko.svg?style=social&amp;label=stars"
+                alt="stars"
+            /></a>
+            - Native <em>Python</em> <em>SSHv2</em> protocol library.
+          </li>
+        </ul>
+      </li>
+      <li>
+        Ruby
+        <ul>
+          <li>
+            <a href="https://github.com/net-ssh/net-ssh">net-ssh</a>
+            <a href="https://github.com/net-ssh/net-ssh"
+              ><img
+                src="https://img.shields.io/github/stars/net-ssh/net-ssh.svg?style=social&amp;label=stars"
+                alt="stars"
+            /></a>
+            - Pure <em>Ruby</em> implementation of an <em>SSH</em> (protocol 2)
+            client.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="resources">Resources</h2>
+    <h3 id="tutorials">Tutorials</h3>
+    <ul>
+      <li>
+        <a
+          href="https://www.digitalocean.com/community/tutorials/how-to-use-ssh-to-connect-to-a-remote-server-in-ubuntu"
+          >How to use <em>SSH</em> to Connect to a Remote Server</a
+        >
+      </li>
+      <li>
+        <a href="https://blog.0xbadc0de.be/archives/300">Best practices</a>
+      </li>
+      <li>
+        <a
+          href="http://linux-audit.com/granting-temporary-access-to-servers-using-signed-ssh-keys/"
+          >Granting Temporary Access to Your Servers (Using Signed
+          <em>SSH</em> Keys)</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.rosehosting.com/blog/ssh-login-without-password-using-ssh-keys/"
+          >How to SSH login without a password</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://gist.github.com/mjalajel/beaa91a5f8d04ebb464c2c28da01406a"
+          >Gist: SSH Recipes</a
+        >
+        - Collection of recipes for writing awesome ssh config files.
+      </li>
+    </ul>
+    <h3 id="security">Security</h3>
+    <ul>
+      <li>
+        <a href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-0777"
+          >01/14/2016</a
+        >
+        - Integer Overflow <code>CVE 2016 077[7-8]</code>.
+      </li>
+      <li>
+        <a href="https://wiki.mozilla.org/Security/Guidelines/OpenSSH"
+          >Security/Guidelines/OpenSSH - MozillaWiki</a
+        >
+        - <code>sshd\_config</code> for <code>6.7+</code>, <code>5.3</code>.
+      </li>
+      <li>
+        <a href="https://github.com/BetterCrypto/Applied-Crypto-Hardening"
+          >Applied-Crypto-Hardening</a
+        >
+        <a href="https://github.com/BetterCrypto/Applied-Crypto-Hardening"
+          ><img
+            src="https://img.shields.io/github/stars/BetterCrypto/Applied-Crypto-Hardening.svg?style=social&amp;label=stars"
+            alt="stars"
+        /></a>
+        - <code>sshd\_config</code> for <code>6.X</code>
+      </li>
+    </ul>
+    <h3 id="documentation">Documentation</h3>
+    <ul>
+      <li><a href="http://linux.die.net/man/1/ssh">man page</a></li>
+      <li>
+        <a href="http://www.openssh.com/specs.html">Specifications (OpenSSH)</a>
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Secure_Shell"
+          >Wikipedia article</a
+        >
+      </li>
+    </ul>
+    <h3 id="community">Community</h3>
+    <ul>
+      <li>
+        <a href="http://stackoverflow.com/questions/tagged/ssh"
+          >StackOverflow</a
+        >
+      </li>
+      <li>
+        <a href="http://serverfault.com/questions/tagged/ssh">ServerFault</a>
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="https://i.creativecommons.org/p/zero/1.0/88x31.png"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://github.com/moul">Manfred Touron</a> has waived all
+      copyright and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

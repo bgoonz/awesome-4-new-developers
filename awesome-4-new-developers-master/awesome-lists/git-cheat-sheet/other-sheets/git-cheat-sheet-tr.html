@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>git-cheat-sheet-tr</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="git-cheat-sheet-turkish-awesome">Git Cheat Sheet Turkish <a href="https://github.com/sindresorhus/awesome"><img src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg" alt="Awesome" /></a></h1>
+<h3 id="index">Index</h3>
+<ul>
+<li><a href="#kurulum">Kurulum</a></li>
+<li><a href="#yapılandırma">Yapılandırma</a></li>
+<li><a href="#oluşturma">Oluşturma</a></li>
+<li><a href="#yerel-değişiklikler">Yerel Değişiklikler</a></li>
+<li><a href="#arama">Arama</a></li>
+<li><a href="#commit-geçmişi">Commit Geçmişi</a></li>
+<li><a href="#branches--tags">Branches &amp; Tags(Etiketler)</a></li>
+<li><a href="#güncelleştirme--yayınlama">Güncelleştirme &amp; Yayınlama</a></li>
+<li><a href="#merge--rebase">Merge(Birleştirme) &amp; Rebase</a></li>
+<li><a href="#geri-alma">Geri Alma</a></li>
+<li><a href="#git-flow">Git Flow</a></li>
+</ul>
+<hr>
+<h2 id="kurulum">Kurulum</h2>
+<h5 id="mevcut-ayarları-göstermek">Mevcut ayarları göstermek:</h5>
+<pre><code>$ git config --list</code></pre>
+<h5 id="repositorydepo-ayarlarını-göstermek">Repository(depo) ayarlarını göstermek:</h5>
+<pre><code>$ git config --local --list</code></pre>
+<h5 id="global-ayarları-göstermek">Global ayarları göstermek:</h5>
+<pre><code>$ git config --global --list</code></pre>
+<h5 id="sistem-ayarlarını-göstermek">Sistem ayarlarını göstermek:</h5>
+<pre><code>$ git config --system --list</code></pre>
+<h5 id="sürüm-geçmişinde-gözükecek-adı-belirlemek">Sürüm geçmişinde gözükecek adı belirlemek:</h5>
+<pre><code>$ git config --global user.name “[firstname lastname]”</code></pre>
+<h5 id="sürüm-geçmişinde-ilişkilendirilecek-e-postayı-belirlemek">Sürüm geçmişinde ilişkilendirilecek e-postayı belirlemek:</h5>
+<pre><code>$ git config --global user.email “[valid-email]”</code></pre>
+<h5 id="otomatik-komut-satırı-renklendirmesini-ayarlamak">Otomatik komut satırı renklendirmesini ayarlamak:</h5>
+<pre><code>$ git config --global color.ui auto</code></pre>
+<h5 id="commitler-için-global-yazı-editörünü-ayarlamak">Commitler için global yazı editörünü ayarlamak:</h5>
+<pre><code>$ git config --global core.editor vi</code></pre>
+<hr>
+<h2 id="yapılandırma">Yapılandırma</h2>
+<h5 id="repositoryedepoya-özgü-yapılandırma-dosyası-local">Repositorye(depoya) özgü yapılandırma dosyası [–local]:</h5>
+<pre><code>&lt;repo&gt;/.git/config</code></pre>
+<h5 id="kullanıcıya-özel-yapılandırma-dosyası-global">Kullanıcıya özel yapılandırma dosyası [–global]:</h5>
+<pre><code>~/.gitconfig</code></pre>
+<h5 id="sistem-genelinde-yapılandırma-dosyası-system">Sistem genelinde yapılandırma dosyası [–system]:</h5>
+<pre><code>/etc/gitconfig</code></pre>
+<hr>
+<h2 id="oluşturma">Oluşturma</h2>
+<h5 id="var-olan-bir-repositoryidepoyu-klonlama">Var olan bir repositoryi(depoyu) klonlama:</h5>
+<pre><code>$ git clone ssh://user@domain.com/repo.git</code></pre>
+<h5 id="yeni-bir-yerel-repositorydepo-oluşturma">Yeni bir yerel repository(depo) oluşturma:</h5>
+<pre><code>$ git init</code></pre>
+<h5 id="belirli-dizinde-yerel-repositorydepo-oluşturma">Belirli dizinde yerel repository(depo) oluşturma:</h5>
+<pre><code>$ git init &lt;directory&gt;
+
+&lt;hr&gt;
+
+## Yerel Değişiklikler
+
+##### Çalışılan dizindeki dosyaların değişimi:</code></pre>
+<p>$ git status</p>
+<pre><code>
+##### İzlenen dosyalardaki değişiklikler:</code></pre>
+<p>$ git diff</p>
+<pre><code>
+##### Tüm güncel değişiklikleri sonraki commite ekleme:</code></pre>
+<p>$ git add .</p>
+<pre><code>
+##### Sonraki commite &amp;lt;dosyasındaki&amp;gt; bazı değişikleri ekleme:</code></pre>
+<p>$ git add -p <file></p>
+<pre><code>
+##### Tüm izlenen dosyalardaki yerel değişiklikleri Commitleme:</code></pre>
+<p>$ git commit -a</p>
+<pre><code>
+##### Önceden hazırlanan değişiklikleri commitleme:</code></pre>
+<p>$ git commit</p>
+<pre><code>
+##### Mesaj ile commitleme:</code></pre>
+<p>$ git commit -m ‘message here’</p>
+<pre><code>
+##### Önceki belli bir tarihe commitleme:</code></pre>
+<p>git commit –date=“<code>date --date='n day ago'</code>” -am “Commit Message”</p>
+<pre><code>
+##### Son commiti değiştirme:&lt;br&gt;
+###### Yayınlanan commite değişiklik yapmayın!</code></pre>
+<p>$ git commit –amend</p>
+<pre><code>
+##### Mevcut branchteki kaydedilmemiş commitleri diğer bazı branchlere taşıma:</code></pre>
+<p>git stash git checkout branch2 git stash pop ```</p>
+<h5 id="saklanan-değişiklikleri-mevcut-branche-geri-yükleme">Saklanan değişiklikleri mevcut branche geri yükleme:</h5>
+<pre class="shell"><code>$ git stash apply</code></pre>
+<h4 id="istenilen-saklanma-yerini-mevcut-branche-geri-yükleme">İstenilen saklanma yerini mevcut branche geri yükleme:</h4>
+<ul>
+<li><em>{stash_number}</em> <code>git stash list</code> ile elde edilebilir</li>
+</ul>
+<pre class="shell"><code>$ git stash apply stash@{stash_number}</code></pre>
+<h5 id="saklanan-değişiklikleri-kaldırma">Saklanan değişiklikleri kaldırma:</h5>
+<pre><code>$ git stash drop</code></pre>
+<hr>
+<h2 id="arama">Arama</h2>
+<h5 id="bir-metni-dizindeki-bütün-dosyalarda-aramak">Bir metni dizindeki bütün dosyalarda aramak:</h5>
+<pre><code>$ git grep &quot;Merhaba&quot;</code></pre>
+<h5 id="bir-metni-herhangi-bir-sürüm-içinde-aramak">Bir metni herhangi bir sürüm içinde aramak:</h5>
+<pre><code>$ git grep &quot;Merhaba&quot; v2.5</code></pre>
+<h5 id="belirli-bir-kelimeyi-içeren-commitleri-göstermek">Belirli bir kelimeyi içeren commitleri göstermek:</h5>
+<pre><code>$ git log -S &quot;keyword&quot;</code></pre>
+<h5 id="belirli-bir-kelimeyi-içeren-commitleri-göstermek-düzenli-ifadeler-kullanarak">Belirli bir kelimeyi içeren commitleri göstermek (düzenli ifadeler kullanarak):</h5>
+<pre><code>$ git log -S &quot;keyword&quot; --pickaxe-regex</code></pre>
+<hr>
+<h2 id="commit-geçmişi">Commit Geçmişi</h2>
+<h5 id="tüm-commitleri-en-yenisinden-başlayarak-listeler">Tüm commitleri en yenisinden başlayarak listeler:</h5>
+<pre><code>$ git log</code></pre>
+<h5 id="tüm-commitleri-görüntülersadece-commit-hash-ve-commit-mesajı-görüntülenir.">Tüm commitleri görüntüler(Sadece commit hash ve commit mesajı görüntülenir.):</h5>
+<pre><code>$ git log --oneline</code></pre>
+<h5 id="belli-kullanıcıya-ait-commitleri-görüntüler">Belli kullanıcıya ait commitleri görüntüler:</h5>
+<pre><code>$ git log --author=&quot;username&quot;</code></pre>
+<h5 id="belirli-bir-dosya-üzerinde-zaman-içinde-meydana-gelen-değişiklikleri-göstermektedir">Belirli bir dosya üzerinde zaman içinde meydana gelen değişiklikleri göstermektedir:</h5>
+<pre><code>$ git log -p &lt;file&gt;</code></pre>
+<h5 id="dosyayı-kimin-ne-zaman-değiştirdiğini-gösterir">&lt;Dosyayı&gt; kimin ne zaman değiştirdiğini gösterir:</h5>
+<pre><code>$ git blame &lt;file&gt;</code></pre>
+<h5 id="referans-kayıtlarını-gösterir">Referans kayıtlarını gösterir:</h5>
+<pre><code>$ git reflog show</code></pre>
+<h5 id="referans-kayıtlarını-siler">Referans kayıtlarını siler:</h5>
+<pre><code>$ git reflog delete</code></pre>
+<hr>
+<h2 id="taşı-yeniden-adlandır">Taşı / Yeniden Adlandır</h2>
+<h5 id="dosyayı-yeniden-adlandırmak">Dosyayı yeniden adlandırmak:</h5>
+<p>Index.txt’den Index.html’e</p>
+<pre><code>$ git mv Index.txt Index.html</code></pre>
+<hr>
+<h2 id="branches-tags">Branches &amp; Tags</h2>
+<h5 id="tüm-var-olan-branchleri-listeler">Tüm var olan branchleri listeler:</h5>
+<pre><code>$ git branch</code></pre>
+<h5 id="ana-branchi-değiştirir">Ana branchi değiştirir:</h5>
+<pre><code>$ git checkout &lt;branch&gt;</code></pre>
+<h5 id="mevcut-ana-branchte-yeni-bir-branch-oluşturur">Mevcut ana branchte yeni bir branch oluşturur:</h5>
+<pre><code>$ git branch &lt;new-branch&gt;</code></pre>
+<h5 id="remote-branchte-yeni-bir-izlenen-branch-oluşturur">Remote branchte yeni bir izlenen branch oluşturur:</h5>
+<pre><code>$ git branch --track &lt;new-branch&gt; &lt;remote-branch&gt;</code></pre>
+<h5 id="yerel-branchi-siler">Yerel branchi siler:</h5>
+<pre><code>$ git branch -d &lt;branch&gt;</code></pre>
+<h5 id="güncel-commiti-etiket-ile-işaretler">Güncel commiti etiket ile işaretler:</h5>
+<pre><code>$ git tag &lt;tag-name&gt;</code></pre>
+<h5 id="headi-etiket-ile-işaretler-ve-bir-mesaj-eklemek-için-yazı-editörünü-açar"><code>HEAD</code>i etiket ile işaretler ve bir mesaj eklemek için yazı editörünü açar:</h5>
+<pre><code>$ git tag -a &lt;tag-name&gt;</code></pre>
+<h5 id="headi-bir-mesaj-içermek-şartı-ile-etiketler"><code>HEAD</code>i bir mesaj içermek şartı ile etiketler:</h5>
+<pre><code>$ git tag &lt;tag-name&gt; -am &#39;message here&#39;</code></pre>
+<h5 id="tüm-etiketleri-listeler">Tüm etiketleri listeler:</h5>
+<pre><code>$ git tag</code></pre>
+<h5 id="tüm-etiketleri-mesajları-ile-listeler-etiket-mesajı-yoksa-bir-etiket-mesajı-yaz">Tüm etiketleri mesajları ile listeler (etiket mesajı yoksa bir etiket mesajı yaz):</h5>
+<pre><code>$ git tag -n</code></pre>
+<hr>
+<h2 id="güncelleştirme-yayınlama">Güncelleştirme &amp; Yayınlama</h2>
+<h5 id="yapılandırılmış-tüm-güncel-remoteları-listeler">Yapılandırılmış tüm güncel remoteları listeler:</h5>
+<pre><code>$ git remote -v</code></pre>
+<h5 id="belirli-bir-remote-hakkında-bilgileri-gösterir.">Belirli bir &lt;remote&gt; hakkında bilgileri gösterir.:</h5>
+<pre><code>$ git remote show &lt;remote&gt;</code></pre>
+<h5 id="yeni-remote-repository-oluşturur-remote-diye-isimlendirir">Yeni remote repository oluşturur, &lt;remote&gt; diye isimlendirir:</h5>
+<pre><code>$ git remote add &lt;remote&gt; &lt;url&gt;</code></pre>
+<h5 id="remote-da-bulunan-tüm-değişiklikleri-indirir-ama-ana-brachle-birleştirmez">&lt;Remote&gt; da bulunan tüm değişiklikleri indirir, ama ana brachle birleştirmez:</h5>
+<pre><code>$ git fetch &lt;remote&gt;</code></pre>
+<h5 id="değişiklikleri-indirir-ve-doğrudan-ana-brache-mergeintegrate-eder">Değişiklikleri indirir ve doğrudan ana brache merge/integrate eder:</h5>
+<pre><code>$ git remote pull &lt;remote&gt; &lt;url&gt;</code></pre>
+<h5 id="tüm-ana-branchteki-değişiklikleri-yerel-repositorye-ekler">Tüm ana Branchteki değişiklikleri yerel repositorye ekler:</h5>
+<pre><code>$ git pull origin master</code></pre>
+<h5 id="remote-da-bulunan-repositoryedepoya-yerel-değişiklikleri-yayınlar">Remote da bulunan repositorye(depoya), yerel değişiklikleri yayınlar:</h5>
+<pre><code>$ git push remote &lt;remote&gt; &lt;branch&gt;</code></pre>
+<h5 id="remote-da-bulunan-bir-branchi-siler">Remote da bulunan bir branchi siler:</h5>
+<pre><code>$ git push &lt;remote&gt; :&lt;branch&gt; (since Git v1.5.0)</code></pre>
+<p>ya da</p>
+<pre><code>$ git push &lt;remote&gt; --delete &lt;branch&gt; (since Git v1.7.0)</code></pre>
+<h5 id="etiketleri-yayınlar">Etiketleri yayınlar:</h5>
+<pre><code>$ git push --tags</code></pre>
+<hr>
+<h2 id="merge-rebase">Merge &amp; Rebase</h2>
+<h5 id="seçili-headinizi-istediğiniz-branche-merge-eder">Seçili HEADinizi istediğiniz &lt;branch&gt;’e merge eder:</h5>
+<pre><code>$ git merge &lt;branch&gt;</code></pre>
+<h5 id="seçili-headinizi-şimdiki-branche-rebase-yapar">Seçili HEADinizi şimdiki &lt;branch&gt;’e rebase yapar<br></h5>
+<h6 id="yayınlanan-committen-sonra-rebase-yapmayın">Yayınlanan committen sonra rebase yapmayın!</h6>
+<pre><code>$ git rebase &lt;branch&gt;</code></pre>
+<h5 id="rebase-iptal-etmek">Rebase iptal etmek:</h5>
+<pre><code>$ git rebase --abort</code></pre>
+<h5 id="çakışmaları-çözümledikten-sonra-rebase-devam-etmek">Çakışmaları çözümledikten sonra rebase devam etmek:</h5>
+<pre><code>$ git rebase --continue</code></pre>
+<h5 id="çakışmaları-çözmek-için-yapılandırılmış-birleştirme-aracını-kullanmak">Çakışmaları çözmek için yapılandırılmış birleştirme aracını kullanmak:</h5>
+<pre><code>$ git mergetool</code></pre>
+<h5 id="editörünüzü-kullanarak-çakışmaları-çözümledikten-sonra-dosyayı-çözümlenmiş-olarak-ekleyin">Editörünüzü kullanarak çakışmaları çözümledikten sonra dosyayı çözümlenmiş olarak ekleyin:</h5>
+<pre><code>$ git add &lt;resolved-file&gt;</code></pre>
+<pre><code>$ git rm &lt;resolved-file&gt;</code></pre>
+<h5 id="commitleri-birleştirmek">Commitleri birleştirmek:</h5>
+<pre><code>$ git rebase -i &lt;commit-just-before-first&gt;</code></pre>
+<p>Bu metni,</p>
+<pre><code>pick &lt;commit_id&gt;
+pick &lt;commit_id2&gt;
+pick &lt;commit_id3&gt;</code></pre>
+<p>bu metin ile değiştirin,</p>
+<pre><code>pick &lt;commit_id&gt;
+squash &lt;commit_id2&gt;
+squash &lt;commit_id3&gt;</code></pre>
+<hr>
+<h2 id="geri-alma">Geri Alma</h2>
+<h5 id="çalışılan-dosyadaki-tüm-yerel-değişiklikleri-kaldırır">Çalışılan dosyadaki tüm yerel değişiklikleri kaldırır:</h5>
+<pre><code>$ git reset --hard HEAD</code></pre>
+<h5 id="evreleme-alanı-dışındaki-tüm-dosyaları-alırörnek-son-git-addi-geri-alır">Evreleme alanı dışındaki tüm dosyaları alır(örnek: son git add’i geri alır):</h5>
+<pre><code>$ git reset HEAD</code></pre>
+<h5 id="belli-bir-dosyadaki-yerel-değişiklikleri-kaldırır">Belli bir dosyadaki yerel değişiklikleri kaldırır:</h5>
+<pre><code>$ git checkout HEAD &lt;file&gt;</code></pre>
+<h5 id="silinen-dosyayı-geri-döndürme-dosyanın-commit-loglarının-tutuluyor-olması-ile-mümkündür">Silinen dosyayı geri döndürme dosyanın commit loglarının tutuluyor olması ile mümkündür:</h5>
+<pre><code>$ git revert &lt;commit&gt;</code></pre>
+<h5 id="belirlediğiniz-headden-bir-önceki-commite-döner-ve-belirlemiş-olduğunuz-committe-yaptığınız-tüm-değişiklikleri-geri-alır">Belirlediğiniz HEADden bir önceki commite döner ve belirlemiş olduğunuz committe yaptığınız tüm değişiklikleri geri alır:</h5>
+<pre><code>$ git reset --hard &lt;commit&gt;</code></pre>
+<h5 id="belirlediğiniz-headden-bir-önceki-commite-döner-ve-belirlemiş-olduğunuz-committe-yaptığınız-tüm-değişiklikleri-untracked-dosyalar-arasına-alır">Belirlediğiniz HEADden bir önceki commite döner ve belirlemiş olduğunuz committe yaptığınız tüm değişiklikleri untracked dosyalar arasına alır:</h5>
+<pre><code>$ git reset &lt;commit&gt;</code></pre>
+<h5 id="belirlediğiniz-headden-bir-önceki-commite-döner-ve-yaptığınız-tüm-değişiklilkleri-local-commitlerinizi-tutarak-geri-alır">Belirlediğiniz HEADden bir önceki commite döner ve yaptığınız tüm değişiklilkleri local commitlerinizi tutarak geri alır:</h5>
+<pre><code>$ git reset --keep &lt;commit&gt;</code></pre>
+<h5 id="gitignorea-eklenmeden-önce-yanlışlıkla-kaydedilmiş-dosyaları-kaldırın">Gitignore’a eklenmeden önce yanlışlıkla kaydedilmiş dosyaları kaldırın:</h5>
+<pre><code>$ git rm -r --cached .
+$ git add .
+$ git commit -m &quot;remove xyz file&quot;</code></pre>
+<hr>
+<h2 id="git-flow">Git-Flow</h2>
+<h3 id="index-1">Index</h3>
+<ul>
+<li><a href="#ayarlar">Ayarlar</a></li>
+<li><a href="#başlarken">Başlarken</a></li>
+<li><a href="#features">Özellikler (Features)</a></li>
+<li><a href="#release">Bir Yayın Çıkarırken (Release)</a></li>
+<li><a href="#hata-giderimleri">Hata Giderimleri (Hotfixes)</a></li>
+<li><a href="#komutlar">Komutlar (Commands)</a></li>
+</ul>
+<hr>
+<h3 id="ayarlar">Ayarlar</h3>
+<h6 id="git-flowu-kullanabilmek-için-öncelikli-olarak-git-kurulumunun-yapılması-gerekmektedir.-git-flow-osx-linux-ve-windows-üzerinde-çalıştırılabilir.">Git flow’u kullanabilmek için öncelikli olarak git kurulumunun yapılması gerekmektedir. Git flow OSX, Linux ve Windows üzerinde çalıştırılabilir.</h6>
+<h5 id="osx-homebrew">OSX Homebrew:</h5>
+<pre><code>$ brew install git-flow</code></pre>
+<h5 id="osx-macports">OSX Macports:</h5>
+<pre><code>$ port install git-flow</code></pre>
+<h5 id="linux">Linux:</h5>
+<pre><code>$ apt-get install git-flow</code></pre>
+<h5 id="windows-cygwin">Windows (Cygwin):</h5>
+<h6 id="git-flow-kurulumu-için-wget-ve-util-linux-gerekmektedir.">Git flow kurulumu için wget ve util-linux gerekmektedir.</h6>
+<pre><code>$ wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/develop/contrib/gitflow-installer.sh | bash</code></pre>
+<hr>
+<h3 id="başlarken">Başlarken</h3>
+<h6 id="git-flow-kullanmak-istediğiniz-projede-ayarlarınızı-özelleştirmek-amacıyla-başlatılır-initialize.">Git flow, kullanmak istediğiniz projede ayarlarınızı özelleştirmek amacıyla başlatılır (initialize).</h6>
+<h5 id="başlangıç-initialize">Başlangıç (Initialize):</h5>
+<h6 id="bu-noktada-kafanızda-dallarınızı-branches-isimlendirme-konusuna-ilişkin-birçok-soru-işareti-oluşacaktır.-bu-bağlamda-varsayılan-default-değerleri-kullanmanız-önerilir.">Bu noktada kafanızda dallarınızı (branches) isimlendirme konusuna ilişkin birçok soru işareti oluşacaktır. Bu bağlamda varsayılan (default) değerleri kullanmanız önerilir.</h6>
+<h6 id="git-flowu-kullanmak-istediğiniz-reponuzdayken">git flow’u kullanmak istediğiniz reponuzdayken:</h6>
+<pre class="shell"><code>git flow init</code></pre>
+<p>ya da ###### varsayılan:</p>
+<pre class="shell"><code>git flow init -d</code></pre>
+<hr>
+<h3 id="özellikler-features">Özellikler (Features)</h3>
+<h6 id="git-flow-ile-yayınlamak-üzere-olduğunuz-projenize-ekleyeceğiniz-özellikler-için-yeni-dallarda-feature-kodlama-yaparsınız.-genel-olarak-sadece-geliştirici-repolarında-bulunurlar.">Git flow ile yayınlamak üzere olduğunuz projenize ekleyeceğiniz özellikler için yeni dallarda (feature) kodlama yaparsınız. Genel olarak sadece geliştirici repolarında bulunurlar.</h6>
+<h5 id="yeni-bir-özellik-eklemesi-başlatmak-feature-start">Yeni bir özellik eklemesi başlatmak (feature start):</h5>
+<h6 id="yeni-özelliklerin-eklenmesi-öncelikle-develop-dalından-branch-başlar.">Yeni özelliklerin eklenmesi öncelikle develop dalından (branch) başlar.</h6>
+<pre><code>git flow feature start MYFEATURE</code></pre>
+<h6 id="bu-komut-bize-develop-dalını-branch-temel-alan-bir-özellik-dalı-feature-oluşturur.-ve-bulunduğumuz-dalı-developmyfeature-olarak-değiştirir.">Bu komut bize develop dalını (branch) temel alan bir özellik dalı (feature) oluşturur. Ve bulunduğumuz dalı develop/MYFEATURE olarak değiştirir.</h6>
+<h5 id="bir-özellik-eklemesi-bitirilirken-feature-finish">Bir özellik eklemesi bitirilirken (feature finish):</h5>
+<h6 id="bir-özelliğin-eklenme-işlemi-bitirilirken-şunları-yapılır">Bir özelliğin eklenme işlemi bitirilirken şunları yapılır:</h6>
+<h6 id="kendi-çalıştığımız-özellik-dalı-burada-myfeature-develop-ana-dalı-ile-birleştirilir.">1)Kendi çalıştığımız özellik dalı (burada MYFEATURE) develop ana dalı ile birleştirilir.</h6>
+<h6 id="bu-birleşmeden-sonra-kendi-özellik-dalımız-myfeature-silinir.">2)Bu birleşmeden sonra kendi özellik dalımız (MYFEATURE) silinir.</h6>
+<h6 id="bulunduğumuz-dal-tekrar-develop-olarak-değiştirilir.">3)Bulunduğumuz dal tekrar develop olarak değiştirilir.</h6>
+<pre><code>git flow feature finish MYFEATURE</code></pre>
+<h5 id="bir-özelliği-yayınlamak-publish-a-feature">Bir özelliği yayınlamak (Publish a feature):</h5>
+<h6 id="bir-ekip-içerisinde-geliştirme-mi-yapıyorsunuz-o-zaman-geliştirdiğiniz-özelliği-bir-uzak-sunucuya-gönderin-böylelikle-geliştirdiğiniz-özellik-diğer-kullanıcılar-tarafından-kullanılabilir.">Bir ekip içerisinde geliştirme mi yapıyorsunuz? O zaman geliştirdiğiniz özelliği bir uzak sunucuya gönderin, böylelikle geliştirdiğiniz özellik diğer kullanıcılar tarafından kullanılabilir.</h6>
+<pre><code>git flow feature publish MYFEATURE</code></pre>
+<h5 id="yayınlanmış-bir-özelliği-almak-getting-a-published-feature">Yayınlanmış bir özelliği almak (Getting a published feature):</h5>
+<h6 id="uzak-sunucu-üzerinde-yayınlanmış-bir-özelliği-kendi-yerel-local-çalışma-ortamınıza-aktarırken">Uzak sunucu üzerinde yayınlanmış bir özelliği kendi yerel (local) çalışma ortamınıza aktarırken:</h6>
+<pre><code>git flow feature pull origin MYFEATURE</code></pre>
+<hr>
+<h3 id="bir-yayın-çıkarırken-release">Bir Yayın Çıkarırken (Release)</h3>
+<h6 id="yeni-bir-ürünün-yayınlanmasına-yardımcı-olur.-küçük-hata-giderimleri-ve-meta-data-hazırlığı-için-kullanılabilir.">Yeni bir ürünün yayınlanmasına yardımcı olur. Küçük hata giderimleri ve meta-data hazırlığı için kullanılabilir.</h6>
+<h5 id="bir-sürüm-yayınlamak-start-a-release">Bir sürüm yayınlamak (Start a release):</h5>
+<h6 id="bu-komut-ile-develop-dalını-temel-kabul-eden-bir-release-dalı-branch-yaratılır.">Bu komut ile develop dalını temel kabul eden bir release dalı (branch) yaratılır.</h6>
+<h6 id="opsiyonel-olarak-yayınınızın-base-noktasından-başlamasını-sağlayabilirsiniz.-bu-commit-develop-dalında-branch-iken-yapılmalıdır.">Opsiyonel olarak yayınınızın [BASE] noktasından başlamasını sağlayabilirsiniz. Bu commit develop dalında (branch) iken yapılmalıdır.</h6>
+<pre><code>git flow release start RELEASE [BASE]</code></pre>
+<h6 id="yayınlama-dalınız-release-branch-oluştuktan-sonra-bu-yöntem-ile-diğer-yazılımcılar-tarafından-yapılan-release-commitlerinin-de-kabul-edilmesini-sağlayabilirsiniz.-bunu-özellik-yayınlama-feature-publishing-ile-kolaylıkla-yapabilirsiniz.">Yayınlama dalınız (release branch) oluştuktan sonra bu yöntem ile diğer yazılımcılar tarafından yapılan release commitlerinin de kabul edilmesini sağlayabilirsiniz. Bunu özellik yayınlama (feature publishing) ile kolaylıkla yapabilirsiniz.</h6>
+<pre><code>git flow release publish RELEASE</code></pre>
+<h6 id="uzak-sunucu-üzerindeki-yayınları-git-flow-release-track-release-ile-izleyebilirsiniz.">(Uzak sunucu üzerindeki yayınları <code>git flow release track RELEASE</code> ile izleyebilirsiniz. )</h6>
+<h5 id="bir-sürüm-yayınını-tamamlamakfinish-up-a-release">Bir sürüm yayınını tamamlamak(Finish up a release):</h5>
+<h6 id="bir-sürüm-yayınını-tamamlarken-git-dallanmasının-branching-en-büyük-adımını-atarız.-yayınlanma-tamamlanırken">Bir sürüm yayınını tamamlarken git dallanmasının (branching) en büyük adımını atarız. Yayınlanma tamamlanırken:</h6>
+<h6 id="yayınlama-yaptığımız-dal-olan-release-dalı-branch-master-ana-dalı-ile-birleştirilir.">1)Yayınlama yaptığımız dal olan release dalı (branch) master ana dalı ile birleştirilir.</h6>
+<h6 id="etiketler-tags-isimleri-ile-birlikte-yayınlanır.">2)Etiketler (tags) isimleri ile birlikte yayınlanır.</h6>
+<h6 id="arkaplandaki-birleştirmeler-back-merges-develop-dalında-yayınlanır.">3)Arkaplandaki birleştirmeler (back-merges) develop dalında yayınlanır.</h6>
+<h6 id="yayınlama-için-açmış-olduğumuz-dal-branch-silinir.">4)Yayınlama için açmış olduğumuz dal (branch) silinir.</h6>
+<pre><code>git flow release finish RELEASE</code></pre>
+<h6 id="ancak-etiketlerinizi-de-eklemeyi-unutmayın-git-push---tags-bu-sorununuzu-da-halledecektir.">Ancak etiketlerinizi de eklemeyi unutmayın! <code>git push --tags</code> bu sorununuzu da halledecektir.</h6>
+<hr>
+<h3 id="hata-giderimleri-hotfixes">Hata giderimleri (Hotfixes)</h3>
+<h6 id="yayına-çıkarılmış-bir-versiyonda-istenmeyen-durumlar-ortaya-çıktığında-ani-hata-giderimi-için-kullanılır.-hotfixler-master-ana-dalı-branchındaki-versiyon-numarasını-belirten-etiketten-dallanır-branching.">Yayına çıkarılmış bir versiyonda istenmeyen durumlar ortaya çıktığında ani hata giderimi için kullanılır. Hotfixler, master ana dalı (branch)ındaki versiyon numarasını belirten etiketten dallanır (branching).</h6>
+<h5 id="bir-hata-giderimini-başlatmakgit-flow-hotfix-start">Bir hata giderimini başlatmak(git flow hotfix start):</h5>
+<h6 id="diğer-git-flow-komutlarında-olduğu-gibi-bir-hotfix-başlatılırken">Diğer git flow komutlarında olduğu gibi bir hotfix başlatılırken:</h6>
+<pre><code>$ git flow hotfix start VERSION [BASENAME]</code></pre>
+<h6 id="versiyon-argümanları-yeni-hotfix-yayınının-adını-alır.-opsiyonel-olarak-başlangıç-noktası-için-bir-isim-özelleştirmesi-yapabilirsiniz-basename.">Versiyon argümanları yeni hotfix yayınının adını alır. Opsiyonel olarak başlangıç noktası için bir isim özelleştirmesi yapabilirsiniz (basename).</h6>
+<h5 id="hata-giderimi-bitirme-finish-a-hotfix">Hata giderimi bitirme (Finish a hotfix):</h5>
+<h6 id="bir-hata-giderimi-tamamlanırken-develop-ve-master-dalları-ile-birleştirilir.-ayrıca-master-dalına-branch-hotfix-versiyonunun-etiketi-eklenir.">Bir hata giderimi tamamlanırken, develop ve master dalları ile birleştirilir. Ayrıca master dalına (branch) hotfix versiyonunun etiketi eklenir.</h6>
+<pre><code>git flow hotfix finish VERSION</code></pre>
+<hr>
+<h3 id="komutlar-commands">Komutlar (Commands)</h3>
+<p align="center">
+<img alt="Git" src="../Img/git-flow-commands.png" height="270" width="460">
+</p>
+<hr>
+<h3 id="git-flow-şeması">Git flow şeması</h3>
+<p align="center">
+<img alt="Git" src="../Img/git-flow-commands-without-flow.png">
+</p>
+<hr>
+</body>
+</html>

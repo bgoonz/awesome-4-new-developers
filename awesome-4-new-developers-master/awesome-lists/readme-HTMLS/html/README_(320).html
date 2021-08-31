@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-mysql">awesome-mysql</h1>
+    <p>
+      A curated list of awesome MySQL free and opensource software, libraries
+      and resources.
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </p>
+    <p>
+      This list accepts and encourages pull requests. See
+      <a
+        href="https://github.com/shlomi-noach/awesome-mysql/blob/master/CONTRIBUTING.md"
+        >CONTRIBUTING</a
+      >
+    </p>
+    <h3 id="contents">Contents</h3>
+    <ul>
+      <li>
+        <a href="#awesome-mysql">Awesome MySQL</a>
+        <ul>
+          <li><a href="#analysis">Analysis</a></li>
+          <li><a href="#backup">Backup</a></li>
+          <li><a href="#benchmarking">Benchmarking</a></li>
+          <li><a href="#binlog-replication">Binlog Replication</a></li>
+          <li><a href="#chatops">ChatOps</a></li>
+          <li><a href="#configuration">Configuration</a></li>
+          <li><a href="#connectors">Connectors</a></li>
+          <li><a href="#deployment">Deployment</a></li>
+          <li><a href="#development">Development</a></li>
+          <li><a href="#gui">GUI</a></li>
+          <li><a href="#ha">HA</a></li>
+          <li><a href="#proxy">Proxy</a></li>
+          <li><a href="#replication">Replication</a></li>
+          <li><a href="#schema">Schema</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#server">Server</a></li>
+          <li><a href="#sharding">Sharding</a></li>
+          <li><a href="#toolkits">Toolkits</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#resources">Resources</a>
+        <ul>
+          <li><a href="#conferences">Conferences</a></li>
+          <li><a href="#e-books">E-Books</a></li>
+          <li><a href="#media">Media</a></li>
+          <li><a href="#newsletters">Newsletters</a></li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="analysis">Analysis</h2>
+    <p><em>Performance, structure &amp; data analysis tools</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/box/Anemometer">Anemometer</a> - Box SQL
+        slow query monitor.
+      </li>
+      <li>
+        <a href="https://github.com/jeremycole/innodb_ruby">innodb-ruby</a> - A
+        parser for InnoDB file formats, in Ruby.
+      </li>
+      <li>
+        <a href="https://github.com/innotop/innotop">innotop</a> - a ‘top’ clone
+        for MySQL with many features and flexibility.
+      </li>
+      <li>
+        <a href="https://github.com/Preetam/explain-analyzer"
+          >MySQL Explain Analyzer</a
+        >
+        - A web-based analyzer of <code>EXPLAIN FORMAT=JSON</code> output,
+        providing comments, scalability analysis and permalinks for saved
+        samples.
+      </li>
+      <li>
+        <a href="https://github.com/db-art/mysql-statsd">mysql-statsd</a> - A
+        Python daemon to collect information from MySQL and send it via StatsD
+        to Graphite.
+      </li>
+      <li>
+        <a href="http://mysqltuner.com">MySQLTuner-perl</a> - A script that
+        allows you to review a MySQL installation quickly and make adjustments
+        to increase performance and stability.
+      </li>
+      <li>
+        <a
+          href="https://www.percona.com/doc/percona-monitoring-and-management/index.html"
+          >Percona Monitoring and Management</a
+        >
+        - An open-source platform for managing and monitoring MySQL performance.
+      </li>
+      <li>
+        <a href="https://prometheus.io/">Prometheus</a>/<a
+          href="https://github.com/prometheus/mysqld_exporter"
+          >mysqld_exporter</a
+        >
+        - Time series database for real-time monitoring and alerting.
+      </li>
+      <li>
+        <a href="https://github.com/sjmudd/ps-top">pstop</a> - a top-like
+        program for MySQL, collecting, aggregating and displaying information
+        from performance_schema. ## Backup
+      </li>
+    </ul>
+    <p><em>Backup/restore/recovery tools</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/pingcap/dumpling">Dumpling</a> - Logical,
+        parallel backup/dumper tool for MySQL/TiDB written in GoLang - support
+        csv format output and integrated as library
+      </li>
+      <li>
+        <a href="https://github.com/maxbube/mydumper">MyDumper</a> - Logical,
+        parallel backup/dumper tool for MySQL
+      </li>
+      <li>
+        <a href="http://www.mysqldumper.net/">MySQLDumper</a> - open-source web
+        based backup tool - useful for shared webhosting
+      </li>
+      <li>
+        <a href="http://www.percona.com/doc/percona-xtrabackup"
+          >Percona Xtrabackup</a
+        >
+        - an open-source hot backup utility for MySQL - based servers that
+        doesn’t lock your database during the backup.
+      </li>
+    </ul>
+    <h2 id="benchmarking">Benchmarking</h2>
+    <p><em>Tools to stress your servers</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/tmcallaghan/iibench-mysql">iibench-mysql</a>
+        - Java based version of the Index Insertion Benchmark for
+        MySQL/Percona/MariaDB.
+      </li>
+      <li>
+        <a href="https://github.com/pingcap/go-tpc">go-tpc</a> - A golang port
+        of <a href="http://www.tpc.org/tpcc/">TPCC</a> and
+        <a href="http://www.tpc.org/tpch/">TPCH</a> benchmark for MySQL.
+      </li>
+      <li>
+        <a href="https://github.com/akopytov/sysbench">Sysbench</a> - a modular,
+        cross-platform and multi-threaded benchmark tool.
+      </li>
+      <li>
+        <a
+          href="https://code.launchpad.net/~percona-dev/perconatools/tpcc-mysql"
+          >TPCC-MySQL</a
+        >
+        - A port of the popular
+        <a href="http://www.tpc.org/tpcc/">TPCC</a> benchmark for MySQL.
+      </li>
+    </ul>
+    <h2 id="binlog-replication">Binlog-Replication</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/pingcap/dm">DM</a> - A High-Availability
+        data migration platform which supports migrating data from MySQL/MariaDB
+        to TiDB and merging shard tables
+      </li>
+      <li>
+        <a href="https://github.com/flike/kingbus">Kingbus</a> - A distributed
+        MySQL binlog storage system built on Raft
+      </li>
+      <li>
+        <a href="https://github.com/google/mysql-ripple">mysql-ripple</a> -
+        Ripple, a server that can serve as a middleman in MySQL replication
+      </li>
+    </ul>
+    <h2 id="chatops">ChatOps</h2>
+    <p><em>Scripts integrated into chat rooms</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/samlambert/hubot-mysql-chatops"
+          >Hubot MySQL ChatOps</a
+        >
+      </li>
+    </ul>
+    <h2 id="configuration">Configuration</h2>
+    <p><em>MySQL sample configuration and advisors</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/morgo/mysql-compatibility-config"
+          >mysql-compatibility-config</a
+        >
+        - make MySQL configuration behave more like newer (or older) releases of
+        MySQL.
+      </li>
+    </ul>
+    <h2 id="connectors">Connectors</h2>
+    <p><em>MySQL connectors for various programming languages</em></p>
+    <ul>
+      <li>
+        <a href="https://dev.mysql.com/downloads/connector/c/">Connector/C</a> -
+        Official C driver for MySQL.
+      </li>
+      <li>
+        <a href="https://dev.mysql.com/downloads/connector/cpp/"
+          >Connector/CPP</a
+        >
+        - Official C++ driver for MySQL.
+      </li>
+      <li>
+        <a href="https://dev.mysql.com/downloads/connector/j/">Connector/J</a> -
+        a standardized database driver for the Java platforms and development.
+      </li>
+      <li>
+        <a href="https://dev.mysql.com/downloads/connector/net/"
+          >Connector/Net</a
+        >
+        - a standardized database driver for .Net platforms and development.
+      </li>
+      <li>
+        <a href="https://dev.mysql.com/downloads/connector/nodejs/"
+          >Connector/Node.js</a
+        >
+        - Official Node.js driver for MySQL.
+      </li>
+      <li>
+        <a href="https://dev.mysql.com/downloads/connector/python/"
+          >Connector/Python</a
+        >
+        - a standardized database driver for Python platforms and development.
+      </li>
+      <li>
+        <a href="https://metacpan.org/pod/DBD::mysql">DBD::mysql</a> - MySQL
+        driver for the Perl5 Database Interface.
+      </li>
+      <li>
+        <a href="https://github.com/go-sql-driver/mysql">go-sql-driver</a> - a
+        lightweight and fast MySQL-Driver for Go’s (golang) database/sql
+        package.
+      </li>
+      <li>
+        <a href="https://github.com/libattachsql/libattachsql">libAttachSQL</a>
+        - libAttachSQL is a lightweight, non-blocking C API for MySQL servers.
+      </li>
+      <li>
+        <a href="https://mariadb.com/kb/en/mariadb/mariadb-connector-j/"
+          >MariaDB Java Client</a
+        >
+        - LGPL-licensed MariaDB Client Library for Java Applications.
+      </li>
+      <li>
+        <a href="https://github.com/markuman/mex-mariadb">mex-mariadb</a> - MIT
+        licensed MariaDB/MySQL Client Library for GNU Octave and Matlab.
+      </li>
+      <li>
+        <a href="https://github.com/PyMySQL/mysqlclient-python"
+          >mysqlclient-python</a
+        >
+        - (Old) MySQL database connector for Python.
+      </li>
+      <li>
+        <a href="https://github.com/felixge/node-mysql">node-mysql</a> - A pure
+        Nodejs Javascript client implementing the MySQL protocol.
+      </li>
+      <li>
+        <a href="https://dev.mysql.com/downloads/connector/php-mysqlnd/"
+          >PHP mysqlnd</a
+        >
+        - MySQL native driver for MySQL, deprecating older libmysql based
+        driver.
+      </li>
+      <li>
+        <a href="https://github.com/PyMySQL/PyMySQL">PyMySQL</a> - MySQL
+        database connector for Python.
+      </li>
+      <li>
+        <a href="https://github.com/brianmario/mysql2">Ruby Mysql2 gem</a> -
+        MySQL driver for Ruby and Rails projects.
+      </li>
+    </ul>
+    <h2 id="deployment">Deployment</h2>
+    <p><em>MySQL deployment tools</em></p>
+    <ul>
+      <li>
+        <a href="https://hub.docker.com/_/mysql/">MySQL Docker</a> - Official
+        Docker images.
+      </li>
+      <li>
+        <a href="https://www.dbdeployer.com">dbdeployer</a> - A tool that
+        installs one or more MySQL servers within seconds, easily, securely, and
+        with full control.
+      </li>
+    </ul>
+    <h2 id="development">Development</h2>
+    <p><em>Tools to support MySQL-related development</em></p>
+    <ul>
+      <li>
+        <a href="http://flywaydb.org/getstarted/">Flywaydb</a> - Database
+        migrations; Evolve your database schema easily and reliably across all
+        your instances
+      </li>
+      <li>
+        <a href="http://www.liquibase.org/">Liquibase</a> - Source control for
+        your database
+      </li>
+      <li>
+        <a href="https://github.com/square/shift">Shift</a> - An application
+        that helps you run schema migrations on MySQL databases
+      </li>
+      <li>
+        <a href="https://www.skeema.io">Skeema</a> - Declarative pure-SQL schema
+        management system for MySQL and MariaDB, with support for sharding and
+        external online schema change tools
+      </li>
+      <li>
+        <a href="https://github.com/datacharmer/test_db">Test database</a> - A
+        sample MySQL database with an integrated test suite, used to test
+        applications and servers
+      </li>
+    </ul>
+    <h2 id="gui">GUI</h2>
+    <p><em>GUI frontends &amp; applications</em></p>
+    <ul>
+      <li>
+        <a href="https://www.adminer.org/">Adminer</a> - Database management in
+        a single PHP file.
+      </li>
+      <li>
+        <a href="http://www.heidisql.com/">HeidiSQL</a> - MySQL GUI frontend for
+        Windows.
+      </li>
+      <li>
+        <a href="https://github.com/dbcli/mycli">mycli</a> - A Terminal Client
+        for MySQL with AutoCompletion and Syntax Highlighting.
+      </li>
+      <li>
+        <a href="https://dev.mysql.com/downloads/shell/">MySQL Shell</a> -
+        Advanced client and code editor for MySQL that supports development and
+        administration for the MySQL Server and MySQL InnoDB cluster (AdminAPI)
+        with an interactive JavaScript, Python, or SQL interface.
+      </li>
+      <li>
+        <a href="http://dev.mysql.com/downloads/workbench/">MySQL Workbench</a>
+        - provides DBAs and developers an integrated tools environment for
+        database design &amp; modeling; SQL devleopment; database
+        administration.
+      </li>
+      <li>
+        <a href="https://github.com/ocelot-inc/ocelotgui">Ocelot GUI</a> - GUI
+        client for MySQL or MariaDB, including debugger.
+      </li>
+      <li>
+        <a
+          href="https://www.percona.com/doc/percona-monitoring-and-management/index.html"
+          >Percona Monitoring and Management</a
+        >
+        - An open-source platform for managing and monitoring MySQL performance.
+      </li>
+      <li>
+        <a href="https://www.phpmyadmin.net/">phpMyAdmin</a> - a free software
+        tool written in PHP, intended to handle the administration of MySQL over
+        the Web.
+      </li>
+      <li>
+        <a href="https://github.com/okbob/pspg">pspg</a> - provides a pager with
+        enhanced visualization and navigation for tabular data. Originally
+        implemented for PostgreSQL, but also supports MySQL.
+      </li>
+      <li>
+        <a href="https://github.com/sequelpro/sequelpro">SequelPro</a> - a Mac
+        database management application for working with MySQL databases.
+      </li>
+      <li>
+        <a href="https://github.com/webyog/sqlyog-community/wiki/Downloads"
+          >SQLyog Community edition</a
+        >
+        - SQLyog Community edition. For Windows, works fine under wine in Mac
+        and Linux
+      </li>
+      <li>
+        <a href="https://github.com/dbeaver/dbeaver">DBeaver</a> - A
+        cross-platform SQL and NoSQL database client.
+      </li>
+      <li>
+        <a href="https://github.com/OmniDB/OmniDB"
+          >OmniDB/OmniDB: Web tool for database management</a
+        >
+      </li>
+    </ul>
+    <h2 id="ha">HA</h2>
+    <p><em>High availability solutions</em></p>
+    <ul>
+      <li>
+        <a href="http://galeracluster.com/products/">Galera Cluster</a> - a true
+        Multimaster Cluster based on synchronous replication.
+      </li>
+      <li>
+        <a href="http://code.google.com/p/mysql-master-ha/">MHA</a> - Master
+        High Availability Manager and tools for MySQL.
+      </li>
+      <li>
+        <a href="https://github.com/github/orchestrator">orchestrator</a> -
+        MySQL replication topology management and High Availability solution.
+      </li>
+      <li>
+        <a href="https://github.com/percona/percona-pacemaker-agents/"
+          >Percona Replication Manager</a
+        >
+        - Asynchronous MySQL replication manager agent for Pacemaker. Supports
+        file and GTID based replication, geo-distributed clusters using booth.
+      </li>
+      <li>
+        <a href="https://github.com/signal18/replication-manager"
+          >replication-manager</a
+        >
+        - a high availability solution to manage MariaDB 10.x and MySQL &amp;
+        Percona Server 5.7 GTID replication topologies.
+      </li>
+    </ul>
+    <h2 id="proxy">Proxy</h2>
+    <p><em>Proxies to MySQL</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/mariadb-corporation/MaxScale">MaxScale</a> -
+        open-source, database-centric proxy.
+      </li>
+      <li>
+        <a href="https://github.com/siddontang/mixer">Mixer</a> - a MySQL proxy
+        powered by Go which aims to supply a simple solution for MySQL sharding.
+      </li>
+      <li>
+        <a href="https://launchpad.net/mysql-proxy">MySQL Proxy</a> - A simple
+        program that sits between your client and MySQL server(s) that can
+        monitor, analyze or transform their communication.
+      </li>
+      <li>
+        <a href="https://github.com/renecannao/proxysql">ProxySQL</a> - High
+        performance proxy for MySQL.
+      </li>
+      <li>
+        <a href="https://dev.mysql.com/doc/mysql-router/en/">MySQL Router</a> -
+        MySQL Router is part of InnoDB cluster, and is a lightweight middleware
+        that provides transparent routing between your application and back-end
+        MySQL Servers.
+      </li>
+    </ul>
+    <h2 id="replication">Replication</h2>
+    <p><em>Replication related software</em></p>
+    <h2 id="schema">Schema</h2>
+    <p><em>Add-on schemas</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/shlomi-noach/common_schema"
+          >common_schema</a
+        >
+        - DBA’s framework for MySQL, providing a function library, views library
+        and QueryScript interpreter.
+      </li>
+      <li>
+        <a href="https://github.com/mysql/mysql-sys">sys</a> - A collection of
+        views, functions and procedures to help MySQL administrators get insight
+        in to MySQL Database usage.
+      </li>
+    </ul>
+    <h2 id="security">Security</h2>
+    <p>
+      <em
+        >Tools that prevents leaking of sensitive data from database
+        (encryption, masking and tokenization, honey-pots, etc)</em
+      >
+    </p>
+    <ul>
+      <li>
+        <a href="https://github.com/cossacklabs/acra">Acra</a> - SQL database
+        protection suite: strong selective encryption, SQL injections
+        prevention, intrusion detection system.
+      </li>
+    </ul>
+    <h2 id="server">Server</h2>
+    <p><em>MySQL server flavors</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/MariaDB/server">MariaDB</a> - Community
+        developed fork of MySQL server.
+      </li>
+      <li>
+        <a href="https://github.com/mysql/mysql-server"
+          >MySQL Server &amp; MySQL Cluster</a
+        >
+        - Official Oracle’s MySQL server &amp; MySQL Cluster distribution.
+      </li>
+      <li>
+        <a href="https://launchpad.net/percona-server">Percona Server</a> - An
+        enhanced, drop-in MySQL replacement.
+      </li>
+      <li>
+        <a href="https://github.com/pingcap/tidb">TiDB</a> - A distributed HTAP
+        database compatible with the MySQL protocol.
+      </li>
+    </ul>
+    <h2 id="sharding">Sharding</h2>
+    <p><em>Sharding solutions/frameworks</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/tumblr/jetpants">jetpants</a> - An
+        automation suite for managing large range sharding clusters, by Tumblr.
+      </li>
+      <li>
+        <a href="https://github.com/vitessio/vitess">vitess</a> - vitess
+        provides servers and tools which facilitate scaling of MySQL databases
+        for large scale web services.
+      </li>
+    </ul>
+    <h2 id="toolkits">Toolkits</h2>
+    <p><em>Toolkits, general purpose scripts</em></p>
+    <ul>
+      <li>
+        <a href="https://github.com/github/gh-ost/">gh-ost</a> - GitHub’s online
+        schema migration for MySQL.
+      </li>
+      <li>
+        <a href="https://github.com/siddontang/go-mysql">go-mysql</a> - A pure
+        go library to handle MySQL network protocol and replication.
+      </li>
+      <li>
+        <a href="https://dev.mysql.com/downloads/utilities/">MySQL Utilities</a>
+        - a collection of command-line utilities, written in Python, that are
+        used for maintaining and administering MySQL servers, either
+        individually, or within Replication hierarchies.
+      </li>
+      <li>
+        <a href="http://code.openark.org/forge/openark-kit">openark kit</a> - a
+        set of utilities that solve everyday maintenance tasks, which may be
+        complicated or time consuming to do by hand, written in Python.
+      </li>
+      <li>
+        <a href="https://www.percona.com/software/mysql-tools/percona-toolkit"
+          >Percona Toolkit</a
+        >
+        - a collection of advanced command-line tools to perform a variety of
+        MySQL server and system tasks that are too difficult or complex to
+        perform manually.
+      </li>
+      <li>
+        <a href="https://bitbucket.org/Marc-T/undrop-for-innodb">UnDROP</a> - a
+        tool to recover data from dropped or corrupted InnoDB tables.
+      </li>
+    </ul>
+    <h1 id="resources">Resources</h1>
+    <p>
+      <em
+        >At this stage “resources” will not include websites, blogs, slides,
+        presentation videos, etc. in fear of list size</em
+      >
+    </p>
+    <h2 id="conferences">Conferences</h2>
+    <p><em>Public, recurring conferences on and around MySQL</em></p>
+    <ul>
+      <li>
+        <a href="https://fosdem.org/">FOSDEM</a> - a free event for software
+        developers to meet, share ideas and collaborate. Annually, in Brussels.
+        Offers “MySQL &amp; friends” room.
+      </li>
+      <li>
+        <a href="https://www.oracle.com/openworld/mysql/index.html"
+          >MySQL Central</a
+        >
+        - Oracle’s annual MySQL conference, as part of Oracle Open World.
+      </li>
+      <li>
+        <a href="https://www.percona.com/live/conferences">Percona Live</a> -
+        MySQL &amp; Openstack focused conference.
+      </li>
+      <li>
+        <a href="https://www.socallinuxexpo.org">SCALE</a> - A community
+        organized Linux and Open Source conference held annually in Southern
+        California. The local MySQL community runs a track under the name MySQL
+        Community Day.
+      </li>
+    </ul>
+    <h2 id="e-books">e-books</h2>
+    <p><em>e-books as well as relevant materials on and around MySQL</em></p>
+    <ul>
+      <li>
+        <a href="http://spots.augusta.edu/caubert/db/ln/"
+          >Database Systems Lecture Notes</a
+        >
+        - lecture notes on Database Systems (available in pdf, html, odt and
+        markdown) including a Chapter on SQL that covers basic set-up, exercises
+        and problems.
+      </li>
+      <li>
+        <a href="https://github.com/XD-DENG/SQL-exercise">SQL-exercise</a> -
+        contains several SQL exercises, including the schema description figure,
+        SQL code to build schema, questions and solutions in SQL. Based on
+        wikibook
+        <a href="https://en.wikibooks.org/wiki/SQL_Exercises">SQL Exercises</a>.
+      </li>
+    </ul>
+    <h2 id="media">Media</h2>
+    <p>
+      <em
+        >Public, ongoing video &amp; audio casts. This excludes conference
+        presentations in fear of list size</em
+      >
+    </p>
+    <h2 id="newsletters">Newsletters</h2>
+    <p>
+      <em
+        >Newsletters require an email address, by definition. List below are
+        newsletters that require nothing but an email address</em
+      >
+    </p>
+  </body>
+</html>

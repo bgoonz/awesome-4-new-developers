@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-csv-awesome">
+      Awesome CSV
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      <strong
+        >A carefully curated list of CSV-related tools and resources</strong
+      >
+    </p>
+    <p>
+      <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a>
+      remains the most futuristic data format from the distant past.
+    </p>
+    <p>
+      XML has risen and fallen. JSON is just a flash in the pan. YAML is a
+      poisoned chalice. <strong>CSV will outlast them all.</strong>
+    </p>
+    <p>
+      When the final cockroach breathes her last breath, her dying act will be
+      to scratch her date of death in a CSV file for posterity.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li>
+        <a href="#tools">Tools</a>
+        <ul>
+          <li><a href="#repair-or-validate-csv">Repair or Validate CSV</a></li>
+          <li><a href="#treat-csv-as-sql">Treat CSV as SQL</a></li>
+          <li><a href="#convert-to-or-from-csv">Convert to or from CSV</a></li>
+          <li><a href="#csv---json">CSV &lt;-&gt; JSON</a></li>
+        </ul>
+      </li>
+      <li><a href="#essays">Essays</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#conferences">Conferences</a></li>
+      <li><a href="#standards">Standards</a></li>
+      <li><a href="#meta-other-similar-lists">META: Other similar lists</a></li>
+      <li><a href="#code-of-conduct">Code of Conduct</a></li>
+      <li><a href="#funtribute">Funtribute</a></li>
+      <li><a href="#footnotes">Footnotes</a></li>
+    </ul>
+    <p>Here are some awesome tools for dealing with CSV:</p>
+    <h2 id="tools">Tools</h2>
+    <ul>
+      <li>
+        <a href="https://NimbleText.com/Live">NimbleText/Live</a> - Use patterns
+        to manipulate CSV; the world’s simplest code generator *.
+      </li>
+      <li>
+        <a href="https://www.papaparse.com">PapaParse</a> - A powerful
+        in-browser CSV parser.
+      </li>
+      <li>
+        <a href="https://github.com/d3/d3-dsv">d3-dsv</a> - d3.js parser and
+        formatter module for delimiter-separated values.
+      </li>
+      <li>
+        <a href="http://csvkit.readthedocs.org/en/0.7.3/">CSVKit</a> - CSV
+        utilities that includes csvsql / csvgrep / csvstat and more.
+      </li>
+      <li>
+        <a href="https://github.com/BurntSushi/xsv">XSV</a> - A fast CSV
+        command-line toolkit written in Rust.
+      </li>
+      <li>
+        <a href="https://www.gnu.org/software/sed/manual/sed.html"
+          >sed (gnu tool)</a
+        >
+        - Stream editor.
+      </li>
+      <li>
+        <a href="https://www.gnu.org/software/gawk/manual/gawk.html"
+          >gawk (gnu tool)</a
+        >
+        - Text processing and data extraction using
+        <a
+          href="http://pubs.opengroup.org/onlinepubs/009695399/utilities/awk.html"
+          >awk</a
+        >.
+      </li>
+      <li>
+        <a
+          href="https://github.com/learnbyexample/Command-line-text-processing/blob/master/gnu_awk.md#default-field-separation"
+          >awk by example</a
+        >
+        - Comprehensive examples of using awk.
+      </li>
+      <li>
+        <a href="http://johnkerl.org/miller/doc/">Miller</a> - Like sed / awk /
+        cut / join / sort etc for name-indexed data such as CSV.
+      </li>
+      <li>
+        <a href="https://github.com/wiseio/paratext">ParaText</a> - CSV parsing
+        at 2.5 GB per second.
+      </li>
+      <li>
+        <a href="http://github.com/fizx/csvget/tree/master">CSVGet</a> - Get
+        structured data from sites as CSV.
+      </li>
+      <li>
+        <a href="https://code.google.com/p/csvfix/">CSVfix</a> - A tool for
+        manipulating CSV data.
+      </li>
+      <li>
+        <a href="https://www.tadviewer.com">Tad</a> - A fast free cross-platform
+        CSV viewer.
+      </li>
+      <li>
+        <a
+          href="http://blog.tryolabs.com/2015/02/27/nvd3-tags-a-tiny-library-for-making-charts-from-csv-data/"
+          >Nvd3-tags</a
+        >
+        - A tiny library for making charts from csv data.
+      </li>
+      <li>
+        <a
+          href="https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/import-csv"
+          >Powershell: Import-CSV</a
+        >
+        - Powerful in-built facility for dealing with CSV (<a
+          href="https://gist.github.com/dfinke/786ba9edae1b0265ada10b36a7a11ba9"
+          >example</a
+        >).
+      </li>
+      <li>
+        <a href="https://onlinecsvtools.com/">CSV Tools</a> - A collection of
+        useful CSV utilities.
+      </li>
+      <li>
+        <a href="https://github.com/mcastorina/graph-cli">graph-cli</a> -
+        Flexible command line tool to create graphs from CSV data.
+      </li>
+      <li>
+        <a href="http://www.convertcsv.com/csv-to-sql.htm">CSV to SQL</a> -
+        Online tool to create insert/update/delete etc from CSV data.
+      </li>
+      <li>
+        <a href="https://github.com/kentcb/KBCsv/blob/master/README.md"
+          >C#: kbCSV</a
+        >
+        - An efficient, easy to use .NET parsing and writing library for CSV.
+      </li>
+      <li>
+        <a href="https://github.com/archiecobbs/csvprintf">csvprintf</a> - UNIX
+        command line utility for parsing and formatting output based on CSV
+        files.
+      </li>
+      <li>
+        <a href="https://www.mockaroo.com/">Mockaroo</a> - Random data generator
+        for CSV / JSON / SQL / Excel.
+      </li>
+      <li>
+        <a href="https://www.ronsplace.eu/products/ronseditor"
+          >Ron’s CSV Editor</a
+        >
+        - Handles big files, does miraculous things. A timeless editor for a
+        timeless format.
+      </li>
+      <li>
+        <a
+          href="https://github.com/mechatroner/rainbow_csv#rainbow-csv-in-other-editors"
+          >Rainbow CSV plugins</a
+        >
+        - Collection of text editor plugins for CSV/TSV syntax highlighting.
+        Available for
+        <a href="https://github.com/mechatroner/rainbow_csv">Vim</a>,
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv"
+          >VS Code</a
+        >, <a href="https://atom.io/packages/rainbow-csv">Atom</a>,
+        <a href="https://packagecontrol.io/packages/rainbow_csv"
+          >Sublime Text</a
+        >
+        and other editors.
+      </li>
+      <li>
+        <a href="https://mightymerge.io/">Mighty Merge</a> - join/union csv
+        files.
+      </li>
+    </ul>
+    <h3 id="repair-or-validate-csv">Repair or Validate CSV</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/Clever/csvlint">Csvlint.go</a> - Command
+        line tool for validating CSV files against RFC 4180.
+      </li>
+      <li>
+        <a href="http://www.csvstudio.com/">csvstudio</a> - A smart app to
+        repair syntax errors in very large CSV files.
+      </li>
+      <li>
+        <a href="https://github.com/faradayio/scrubcsv">scrubcsv</a> - Remove
+        bad records from a CSV file and normalize (requires rust)
+      </li>
+      <li>
+        <a
+          href="https://github.com/OpenRefine/reconcile-csv/blob/master/README.md"
+          >reconcile-csv</a
+        >
+        - Find relationships between a set of related CSVs
+      </li>
+    </ul>
+    <h2 id="generate-table-schema">Generate Table Schema</h2>
+    <ul>
+      <li>
+        <a href="https://csv-schema.surge.sh/">CSV Schema</a> — Analyzes a CSV
+        file and generates database table schema, all within the browser
+      </li>
+      <li>Wanted: More tools in this category.</li>
+    </ul>
+    <h3 id="treat-csv-as-sql">Treat CSV as SQL</h3>
+    <ul>
+      <li>
+        <a href="http://dinedal.github.io/textql/">TextQL</a> - Execute SQL
+        against CSV or TSV.
+      </li>
+      <li>
+        <a href="https://simonwillison.net/2018/May/20/datasette-facets/"
+          >Datasette Facets</a
+        >
+        - Faceted browse and a JSON API for any CSV File or SQLite DB.
+      </li>
+      <li>
+        <a href="https://harelba.github.io/q/">q</a> - Run SQL Directly on CSV
+        Files
+      </li>
+      <li>
+        <a href="https://rbql.org">RBQL</a> - Rainbow Query Language, a SQL-like
+        language with JavaScript or Python backend.
+      </li>
+      <li>
+        <a href="https://github.com/dfinke/PSKit#sql-query">PSKit Query</a> —
+        Powershell module lets you run simple queries over objects, including
+        imported with csv
+      </li>
+    </ul>
+    <h3 id="convert-to-or-from-csv">Convert to or from CSV</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/vividvilla/csvtotable">CSV to Table</a> -
+        Convert CSV files to searchable and sortable HTML table.
+      </li>
+    </ul>
+    <h3 id="csv---json">CSV &lt;-&gt; JSON</h3>
+    <ul>
+      <li>
+        <a href="http://www.secretgeek.net/agnes/twoWay.html">Agnes</a> - Two
+        way Csv to Json **.
+      </li>
+      <li>
+        <a href="https://www.csvjson.com/csv2json">csv2json</a> - online tool to
+        convert your CSV or TSV formatted data to JSON and
+        <a href="https://www.csvjson.com/json2csv">vice versa</a>.
+      </li>
+      <li>
+        <a href="https://mango-is.com/tools/csv-to-json/">csv-to-json</a> -
+        Easy, privacy-friendly and offline-first online csv to json converter.
+      </li>
+    </ul>
+    <h2 id="essays">Essays</h2>
+    <blockquote>
+      <p>
+        Once you’ve found the perfect data serialization file format, you stop
+        looking
+      </p>
+      <p>
+        <a href="https://twitter.com/davidwengier/status/1159606464220000257"
+          >David Wengier</a
+        >
+      </p>
+    </blockquote>
+    <ul>
+      <li>
+        <a href="https://blog.datacite.org/thinking-about-csv/"
+          >Thinking about CSV</a
+        >
+        - Martin Fenner.
+      </li>
+      <li>
+        <a href="https://usopendata.org/2015/03/10/csv">In Praise of CSV</a> -
+        Waldo Jaquith.
+      </li>
+      <li>
+        <a href="http://www.secretgeek.net/csv_trouble"
+          >Stop Rolling Your Own CSV Parser!</a
+        >
+        - Leon Bambrick ***.
+      </li>
+      <li>
+        <a
+          href="http://thomasburette.com/blog/2014/05/25/so-you-want-to-write-your-own-CSV-code/"
+          >So You Want To Write Your Own CSV code?</a
+        >
+        - Thomas Burette.
+      </li>
+      <li>
+        <a
+          href="https://donatstudios.com/Falsehoods-Programmers-Believe-About-CSVs"
+          >Falsehoods Programmers Believe About CSVs</a
+        >
+        - Jesse Donat.
+      </li>
+      <li>
+        <a
+          href="https://ronaldduncan.wordpress.com/2009/10/31/text-file-formats-ascii-delimited-text-not-csv-or-tab-delimited-text/"
+          >ASCII Delimited Text - Not CSV or TAB delimited text</a
+        >
+        - Ronald Duncan.
+      </li>
+    </ul>
+    <h2 id="data">Data</h2>
+    <ul>
+      <li>
+        <a href="https://catalog.data.gov/dataset?res_format=CSV"
+          >US Data.gov</a
+        >
+        - 18789+ CSV datasets.
+      </li>
+      <li>
+        <a href="https://data.gov.au/dataset?res_format=CSV"
+          >Australian Government Open Data</a
+        >
+        - 2715+ CSV datasets.
+      </li>
+      <li>
+        <a href="https://datahub.io/collections/reference-data"
+          >Reference data in csv</a
+        >
+        - Easy-to-use reference data in CSV and JSON formats.
+      </li>
+      <li>
+        <a href="https://github.com/awesomedata/awesome-public-datasets"
+          >awesome-public-datasets</a
+        >
+        - A topic-centric list of high-quality open datasets in public domains.
+      </li>
+      <li>
+        <a href="https://data.un.org">United Nations data</a> - Data from the UN
+      </li>
+      <li>
+        <a href="https://www.fakenamegenerator.com/order.php"
+          >Fake Name Generator</a
+        >
+        - Generate fake names with other identity data in bulk for testing.
+      </li>
+    </ul>
+    <h2 id="conferences">Conferences</h2>
+    <ul>
+      <li>
+        <a href="https://csvconf.com/">csv,conf</a> - A community conference for
+        data makers everywhere.
+      </li>
+    </ul>
+    <h2 id="standards">Standards</h2>
+    <blockquote>
+      <p>
+        The wonderful thing about standards is that there are so many of them to
+        choose from.<br />—(Possibly) Grace Hopper.
+      </p>
+    </blockquote>
+    <ul>
+      <li>
+        <a href="https://tools.ietf.org/html/rfc4180">RFC 4180</a> (<a
+          href="http://www.faqs.org/rfcs/rfc4180.html"
+          >html version</a
+        >) - “<em
+          >Common format and MIME Type for Comma-Separated Values (CSV)
+          Files</em
+        >”.
+        <ul>
+          <li>
+            <a href="https://tools.ietf.org/html/rfc4180#section-2"
+              >Definition of the CSV Format</a
+            >
+          </li>
+          <li>
+            <a href="https://tools.ietf.org/html/rfc4180#section-3"
+              >MIME Type Registration of text/csv</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.w3.org/TR/tabular-data-model/"
+          >W3C: Model for Tabular Data and Metadata on the Web</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://digital-preservation.github.io/csv-schema/csv-schema-1.2.html"
+          >CSV Schema Language</a
+        >
+        - A language for defining and validating CSV data.
+      </li>
+      <li>
+        <a href="https://github.com/csvspecs">csv,specs</a> - Comma-Separated
+        Values (CSV) Format Specifications (and Tests) incl. CSV v1.0, CSV v1.1,
+        CSV Strict, CSV &lt;3 Numerics, CSV&lt;3 JSON, CSV &lt;3 YAML.
+      </li>
+      <li>
+        <a href="http://frictionlessdata.io/specs/tabular-data-resource/"
+          >Tabular Data Resource</a
+        >
+        - A
+        <a href="http://frictionlessdata.io/specs/data-resource/"
+          >Data Resource</a
+        >
+        specialized for describing tabular data like CSV files or spreadsheets
+      </li>
+      <li>
+        <a href="https://csvy.org/">CSVY</a> - A standard for adding a YAML
+        header to CSV files to describe their format
+      </li>
+    </ul>
+    <h2 id="meta-other-similar-lists">META: Other similar lists</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/dbohdan/structured-text-tools"
+          >structured-text-tools</a
+        >
+        - List of command line tools for manipulating CSV / XML / HTML / JSON /
+        INI etc.
+      </li>
+      <li>
+        <a
+          href="https://raw.githubusercontent.com/secretGeek/AwesomeCSV/master/awesomecsv.csv"
+          >META-META</a
+        >
+        - <strong>This list as CSV</strong>.
+      </li>
+      <li>
+        <a href="https://nimbletext.com/Live/-971009575/">META-META-META</a> - A
+        NimbleText pattern that produces this markdown page from this list as a
+        CSV.
+      </li>
+    </ul>
+    <h2 id="code-of-conduct">Code of Conduct</h2>
+    <p>See <a href="code-of-conduct.md">Code of Conduct</a></p>
+    <h2 id="funtribute">Funtribute</h2>
+    <p>
+      To experience the fun of contributing, see
+      <a href="contributing.md">Contributing</a>
+    </p>
+    <h2 id="footnotes">Footnotes</h2>
+    <p>
+      <code>*</code> <span id="footnote1"></span> I’m the author of
+      <a href="https://NimbleText.com/Live">NimbleText</a>. Of course I put it
+      first on the list. If I didn’t personally rate it I wouldn’t have spent so
+      much time making and improving it.
+    </p>
+    <p>
+      <code>**</code> <span id="footnote2"></span> I wrote
+      <code>agnes</code> but don’t really endorse it for others to use (thus
+      haven’t migrated the source code to GitHub). It’s slow and non-streaming.
+      I’d go with <code>papa-parse</code>. On the plus side,
+      <code>agnes</code> has a more comprehensive test suite and simpler api
+      than most.
+    </p>
+    <p><code>***</code> <span id="footnote3"></span> Mine too.</p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="http://secretgeek.net">Leon Bambrick</a> has waived all copyright
+      and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

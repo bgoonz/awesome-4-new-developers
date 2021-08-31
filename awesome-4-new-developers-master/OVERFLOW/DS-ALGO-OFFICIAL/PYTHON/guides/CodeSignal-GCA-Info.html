@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CodeSignal-GCA-Info</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p>The test is four problems, which are CodeSignal/HackerRank/Leetcode-style programming challenges. Problem 1 is generally the easiest, progressing to the hardest with problem 4.</p>
+<p>The result score is between 300 and 850 (best). 650 is about the low end for Junior Dev.</p>
+<p>This test is about your problem-solving skill, not about your Googling skill. You are expected to ponder the problems and come up with your own solution. Pasting solutions in from elsewhere and trying to make them work is prohibited. Even googling for another solution is prohibited. (You can, however, search for syntax help.)</p>
+<p>For this reason, you should practice this skill throughout CS. <strong>CS is all about using UPER to solve problems you’ve never seen before without Googling, and the GCA measures this skill</strong>.</p>
+<h2 id="background">Background</h2>
+<p>Since GCA is designed to measure skills that are important for almost all software developers, CodeSignal has aimed to find the common denominator between three different sources of data.</p>
+<ol type="1">
+<li>What are the most common topics taught in different CS programs at 4-year Universities in the US?</li>
+<li>What are the most common topics covered during technical interviews at successful US-based companies?</li>
+<li>What are the most common questions asked on StackOverflow that are about general programming and not specialized domain knowledge?</li>
+</ol>
+<p>CodeSignal has used MIT OCW, EdX, Coursera, and Udacity course catalogs as a source for #1. They’ve used the book <em>Cracking the Coding Interview</em>, CodeSignal Interview Practice Mode, Leetcode, CareerCup, and Glassdoor Interview Questions sections to identify #2. And StackOverflow public API for #3.</p>
+<h2 id="how-to-practice">How to Practice</h2>
+<p>Do the coursework in Lambda CS.</p>
+<ul>
+<li>Try to generally restrict your searching to syntax unless otherwise directed</li>
+<li>Don’t search for problem solutions for the sprint challenges; syntax only</li>
+<li>Same for the GCA, proctor-enforced</li>
+</ul>
+<p>Additional, optional resources:</p>
+<ul>
+<li>Go to the <a href="https://app.codesignal.com/arcade">CodeSignal Arcade</a> and solve questions in <em>The Core</em> without looking up the answer. If you look up the answer, it doesn’t count.
+<ul>
+<li>Solve the first 50 problems
+<ul>
+<li>Except spend your earned coins to skip <em>Corner of 0s and 1s</em></li>
+<li>Some of these are challenging–feel free to buy your way ahead if you need to come back to a hard problem later</li>
+</ul></li>
+<li>Keep solving more for more practice.</li>
+<li>Once you get a few hundred coins, unlock the interview practice and other things in the main menu.</li>
+</ul></li>
+<li><p>Head over to Leetcode and tackle the easy and medium <a href="https://leetcode.com/problemset/algorithms/">leetcode algorithms</a> problems, or problems on your site of choice.</p></li>
+<li><p>Take the <a href="https://app.codesignal.com/standardized-test/GgvonNCksGzjey46c">GCA Practice Test</a> (24-hour cooldown).</p></li>
+</ul>
+<h2 id="scoring">Scoring</h2>
+<p>If you get 100% of the tests passing on a submission for a set of problems, you’ll get a base score, listed in the table below. This base score is modified up or down based on a variety of factors.</p>
+<h3 id="score-modifiers">Score Modifiers</h3>
+<p>The score is modified ±12 points based on three factors:</p>
+<ul>
+<li>Number of attempts
+<ul>
+<li>Your score will be modded if you make more or fewer than the average number of submissions for a particular problem.</li>
+<li>Running the tests doesn’t count as a submission. You must click the <code>Submit</code> button for it to count.</li>
+</ul></li>
+<li>Time taken
+<ul>
+<li>Your score will be modded if you take longer or shorter than the average amount of time to solve a problem.</li>
+</ul></li>
+<li>Code quality
+<ul>
+<li>Your code quality will be automatically judged based on a variety of factors, e.g.: consistent spacing and indentation.</li>
+</ul></li>
+</ul>
+<p>Again, the most the base score will change as determined by these factors is ±12 points.</p>
+<p>Strategy recommendation: don’t worry about the modifiers. Just concentrate on UPER and solving the problem.</p>
+<h3 id="partial-credit">Partial Credit</h3>
+<p>If you submit and pass fewer than 100% of the tests, you’ll receive partial credit for the submission depending on how many tests you did pass. In other words, you won’t achieve the base score for that problem, but will get part way toward the base score.</p>
+<h3 id="scoring-table">Scoring Table</h3>
+<p>If you get 100% of tests passing for the listed questions in the left column, your base score is in the center. On the right is the modifier range, ±12 points from the base score.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Correct Answers</th>
+<th style="text-align: center;">Base Score</th>
+<th style="text-align: center;">Modifier Range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>1 . . .</code></td>
+<td style="text-align: center;">662</td>
+<td style="text-align: center;">650-674</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>. 2 . .</code></td>
+<td style="text-align: center;">700</td>
+<td style="text-align: center;">688-712</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>1 2 . .</code></td>
+<td style="text-align: center;">712</td>
+<td style="text-align: center;">700-724</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>. . 3 .</code></td>
+<td style="text-align: center;">731</td>
+<td style="text-align: center;">719-743</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>1 . 3 .</code></td>
+<td style="text-align: center;">743</td>
+<td style="text-align: center;">731-755</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>. 2 3 .</code></td>
+<td style="text-align: center;">750</td>
+<td style="text-align: center;">738-762</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>1 2 3 .</code></td>
+<td style="text-align: center;">763</td>
+<td style="text-align: center;">751-775</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>. . . 4</code></td>
+<td style="text-align: center;">780</td>
+<td style="text-align: center;">768-792</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>1 . . 4</code></td>
+<td style="text-align: center;">792</td>
+<td style="text-align: center;">780-804</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>. 2 . 4</code></td>
+<td style="text-align: center;">799</td>
+<td style="text-align: center;">787-811</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>. . 3 4</code></td>
+<td style="text-align: center;">805</td>
+<td style="text-align: center;">793-817</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>1 2 . 4</code></td>
+<td style="text-align: center;">812</td>
+<td style="text-align: center;">800-824</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>1 . 3 4</code></td>
+<td style="text-align: center;">818</td>
+<td style="text-align: center;">806-830</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>. 2 3 4</code></td>
+<td style="text-align: center;">825</td>
+<td style="text-align: center;">813-837</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>1 2 3 4</code></td>
+<td style="text-align: center;">837</td>
+<td style="text-align: center;">825-849</td>
+</tr>
+</tbody>
+</table>
+<p>For example, if you get questions 1, 2, and 3 100% correct, but you make a lot of incorrect submissions and take longer than average, you’ll to score closer to 751. If you get them correct in the first submission in record time, you’ll score closer to 775.</p>
+<p>Strategy recommendation: Choose the problem that looks the easiest to tackle first. This is likely question 1, but read them all to find out.</p>
+<h2 id="implementation-problem-solving-and-speed-ratings">Implementation, Problem-Solving, and Speed Ratings</h2>
+<p>In addition to the numeric score, additional ratings are presented. Lambda does not use these ratings, but they are included for your information.</p>
+<p>Speed is your rating compared to the average speed to solve the problems.</p>
+<p>The other two ratings are determined by which problems are solved, as shown below:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Solved Tasks</th>
+<th>Implementation</th>
+<th>Problem-Solving</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>1 . . .</code></td>
+<td>Low</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<td><code>. 2 . .</code></td>
+<td>Fair</td>
+<td>Fair</td>
+</tr>
+<tr class="odd">
+<td><code>1 2 . .</code></td>
+<td>Fair</td>
+<td>Fair</td>
+</tr>
+<tr class="even">
+<td><code>1 2 3 .</code></td>
+<td>Good</td>
+<td>Average</td>
+</tr>
+<tr class="odd">
+<td><code>1 2 . 4</code></td>
+<td>Good</td>
+<td>Good</td>
+</tr>
+<tr class="even">
+<td><code>1 2 3 4</code></td>
+<td>Excellent</td>
+<td>Excellent</td>
+</tr>
+</tbody>
+</table>
+<h2 id="question-1">Question 1</h2>
+<p><em>NOTE: these aren’t definitive or complete lists! They don’t say <em>exactly</em> what will be on the test, and the test questions might require more or less knowledge than listed. The information below is included to give you an idea of the relative difficulty of each question.</em></p>
+<h3 id="expected-knowledge">Expected Knowledge</h3>
+<ul>
+<li>Working with numbers.
+<ul>
+<li>Basic operations with numbers.</li>
+</ul></li>
+<li>Basic string manipulation.
+<ul>
+<li>Splitting a string into substrings.</li>
+<li>Modifying the elements of a string.</li>
+</ul></li>
+<li>Basic array manipulation.
+<ul>
+<li>Iterating over an array.</li>
+</ul></li>
+</ul>
+<h3 id="can-include">Can Include</h3>
+<ul>
+<li>Tasks that require a combination of 2 to 3 basic concepts. For example:
+<ul>
+<li>Iterating over an array and taking into account some condition.</li>
+<li>Splitting a string by some condition.</li>
+</ul></li>
+<li>Should usually be solvable using one loop.</li>
+<li>The task description should clearly state the implementation steps.</li>
+</ul>
+<h2 id="question-2">Question 2</h2>
+<h3 id="expected-knowledge-1">Expected Knowledge</h3>
+<ul>
+<li>Working with numbers.
+<ul>
+<li>Basic operations with numbers.</li>
+<li>Splitting numbers into digits.</li>
+</ul></li>
+<li>Basic string manipulation.
+<ul>
+<li>Splitting a string into substrings.</li>
+<li>Comparing strings.</li>
+<li>Modifying the elements of a string. – Concatenating strings.</li>
+<li>Reversing a string.</li>
+</ul></li>
+<li>Basic array manipulation.
+<ul>
+<li>Iterating over an array.</li>
+<li>Modifying the elements of an array.</li>
+<li>Reversing an array.</li>
+</ul></li>
+</ul>
+<h3 id="can-include-1">Can Include</h3>
+<ul>
+<li>Tasks that require a combination of 3 to 5 basic concepts. For example:
+<ul>
+<li>Splitting a string into substrings, modifying each substring and comparing with other strings.</li>
+<li>Iterating over an array to produce two new arrays given some conditions, modifying the second array and appending it to the beginning of the first array.</li>
+</ul></li>
+<li>Should usually be solvable using one to two nested loops.</li>
+<li>The task description should clearly state the implementation steps.</li>
+</ul>
+<h2 id="question-3">Question 3</h2>
+<h3 id="expected-knowledge-2">Expected Knowledge</h3>
+<ul>
+<li>Includes everything from the previous task.</li>
+<li>Splitting a task into smaller subtasks/functions.</li>
+<li>Manipulating two-dimensional arrays.
+<ul>
+<li>Iterating over the elements in a particular order.</li>
+<li>Modifying values.</li>
+<li>Swapping rows/columns.</li>
+</ul></li>
+<li>Using hashmaps.
+<ul>
+<li>Using built in hashmaps to store strings or integers as keys.</li>
+</ul></li>
+</ul>
+<h3 id="can-include-2">Can Include</h3>
+<ul>
+<li>Implementing a specific comparator for strings.</li>
+<li>Implementing a specific merge function for arrays.</li>
+<li>Other implementation challenges that clearly explain what needs to be done and require translating the instructions into code.</li>
+</ul>
+<h2 id="question-4">Question 4</h2>
+<h3 id="expected-knowledge-3">Expected Knowledge</h3>
+<ul>
+<li>Includes everything from previous tasks.</li>
+<li>Working with trees.
+<ul>
+<li>Storing and traversing trees.</li>
+<li>Transforming trees.</li>
+</ul></li>
+<li>Understanding hashmaps.
+<ul>
+<li>Solving tasks that require understanding the implementation of hashmaps.</li>
+</ul></li>
+<li>Fundamentals of discrete mathematics.</li>
+<li>Brute-force search.
+<ul>
+<li>Checking all possible solutions to find the optimal solution.</li>
+</ul></li>
+</ul>
+<h3 id="can-include-3">Can Include</h3>
+<ul>
+<li>Tasks that require noticing an application of a certain algorithm, data-structure or technique.</li>
+<li>Optimizing some queries with the help of data structures like hashmaps or sets.</li>
+<li>Algorithms on trees like finding the longest path of a tree.</li>
+</ul>
+<h2 id="rules">Rules</h2>
+<ul>
+<li><a href="https://support.codesignal.com/hc/en-us/articles/360051960134-General-Coding-Assessment-Rules-and-Setup">GCA Setup and Proctoring Rules</a></li>
+<li>Additional clarifications to the rules:
+<ul>
+<li>Using scratch paper is allowed, but make it obvious (and maybe even say) that you’re scribbling.</li>
+<li>Using an off-screen whiteboard is allowed, but make it obvious that’s what you’re doing.</li>
+<li>Recommend <em>against</em> referring to written notes since the proctor won’t know what you’re looking at.
+<ul>
+<li>Scan or take photos of your relevant notes so you can view them on-screen.</li>
+</ul></li>
+<li>Prohibited: PythonTutor or any other external IDE, editor, debugger, or environment.
+<ul>
+<li>Exception: You <strong>may</strong> open a simple Python REPL in a terminal to quickly test commands or look up syntax.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="testing-link">Testing Link</h2>
+<ul>
+<li><strong>SIGN IN WITH YOUR LAMBDASTUDENTS EMAIL!</strong> If you’re not sure, go to your CodeSignal profile and make sure it’s set as your primary email.
+<ul>
+<li><strong>IF YOU DON’T, YOUR ATTEMPT WON’T COUNT!</strong></li>
+</ul></li>
+<li>There is a 2-week cooldown (measured down to the minute of your previous submission).</li>
+<li><a href="https://app.codesignal.com/get-certified?invite=TGy6wcugpm4LMFEQX">Take the GCA Now</a>
+<ul>
+<li>If this link fails, DM <code>@Beej</code> on Slack to get it updated.</li>
+</ul></li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://support.codesignal.com/hc/en-us/articles/360040370853-What-is-the-structure-of-the-General-Coding-Assessment-">What to Expect on the GCA</a> including a link to the <a href="https://app.codesignal.com/standardized-test/GgvonNCksGzjey46c">practice test</a></li>
+<li><a href="https://www.notion.so/lambdaschool/GCA-CodeSignal-Assessment-dc9f9d7a5ef24c40a309ad132c672e69">Lambda’s GCA HOWTO and FAQ</a></li>
+</ul>
+</body>
+</html>

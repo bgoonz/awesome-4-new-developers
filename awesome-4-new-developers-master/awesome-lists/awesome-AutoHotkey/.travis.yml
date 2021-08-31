@@ -1,0 +1,7 @@
+language: autohotkey
+rvm:
+  - 2.2
+before_script:
+  - gem install awesome_bot
+script:
+  - awesome_bot README.md --white-list ahkscript,lifehacker,dropbox,autohotkey.com,macrocreator,creativecommons.org

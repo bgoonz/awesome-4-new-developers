@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>readme</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-powershell-awesome-quality-assurance">
+      Awesome PowerShell
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+      <a
+        href="https://github.com/janikvonrotz/awesome-powershell/actions?query=workflow%3A%22Quality+Assurance%22"
+        ><img
+          src="https://github.com/janikvonrotz/awesome-powershell/workflows/Quality%20Assurance/badge.svg?event=schedule"
+          alt="Quality Assurance"
+      /></a>
+    </h1>
+    <p>
+      <a href="https://msdn.microsoft.com/en-us/powershell/"
+        ><img
+          src="https://github.com/PowerShell/PowerShell/raw/master/assets/Powershell_256.png"
+          align="right"
+          width="80"
+      /></a>
+    </p>
+    <p>
+      A curated list of delightful
+      <a href="https://en.wikipedia.org/wiki/PowerShell">PowerShell</a> packages
+      and resources.
+    </p>
+    <p>
+      PowerShell is a cross-platform (Windows, Linux, and macOS) automation and
+      configuration tool that is optimized for dealing with structured data
+      (e.g. JSON, CSV, XML, etc.), REST APIs, and object models. It includes a
+      command-line shell and an associated scripting language.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#api-wrapper">API Wrapper</a></li>
+      <li><a href="#blogs">Blogs</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#build-tools">Build Tools</a></li>
+      <li>
+        <a href="#code-and-package-repositories"
+          >Code and Package Repositories</a
+        >
+      </li>
+      <li><a href="#commandline-productivity">Commandline Productivity</a></li>
+      <li><a href="#communities">Communities</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#documentation-helper">Documentation Helper</a></li>
+      <li><a href="#editors-and-ides">Editors and IDEs</a></li>
+      <li><a href="#frameworks">Frameworks</a></li>
+      <li><a href="#interactive-learning">Interactive Learning</a></li>
+      <li><a href="#logging">Logging</a></li>
+      <li>
+        <a href="#module-development-templates">Module Development Templates</a>
+      </li>
+      <li><a href="#package-managers">Package Managers</a></li>
+      <li><a href="#parallel-processing">Parallel Processing</a></li>
+      <li><a href="#podcasts">Podcasts</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#sharepoint">SharePoint</a></li>
+      <li><a href="#sql-server">SQL Server</a></li>
+      <li><a href="#testing">Testing</a></li>
+      <li><a href="#themes">Themes</a></li>
+      <li><a href="#ui">UI</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#webserver">Webserver</a></li>
+      <li><a href="#misc">Misc</a></li>
+    </ul>
+    <h2 id="api-wrapper">API Wrapper</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/cofonseca/HipChatAdmin">HipChatAdmin</a> - A
+        module for simple integration with Atlassian HipChat via the HipChat
+        API.
+      </li>
+      <li>
+        <a href="https://github.com/pcgeek86/PSGitHub">PSGitHub</a> - Module
+        contains commands to manage GitHub through its REST API.
+      </li>
+      <li>
+        <a href="https://github.com/Iristyle/Posh-GitHub">Posh-GitHub</a> -
+        Cmdlets that expose the GitHub API.
+      </li>
+      <li>
+        <a href="https://github.com/dfinke/Posh-Gist">Posh-Gist</a> - Cmdlets
+        for interacting with GitHub Gist.
+      </li>
+      <li>
+        <a href="https://github.com/dotps1/PSGist">PSGist</a> - A module to work
+        with GitHub Gists.
+      </li>
+      <li>
+        <a href="https://github.com/dotps1/PSAppVeyor">PSAppVeyor</a> - A module
+        to interact with the AppVeyor REST API.
+      </li>
+      <li>
+        <a href="https://github.com/RamblingCookieMonster/PSSlack">PSSlack</a> -
+        Module for simple Slack integration.
+      </li>
+      <li>
+        <a href="https://atlassianps.org/module/ConfluencePS/">ConfluencePS</a>
+        - A module for interacting with Atlassian’s Confluence in powershell (by
+        using the API).
+      </li>
+      <li>
+        <a href="https://atlassianps.org/module/JiraPS/">JiraPS</a> - A module
+        for interacting with Atlassian’s Jira in powershell (by using the API).
+      </li>
+      <li>
+        <a href="https://github.com/mkellerman/PSTelegramAPI">PSTelegramAPI</a>
+        - Module for Telegram APIs
+      </li>
+      <li>
+        <a href="https://github.com/EvotecIT/PSTeams">PSTeams</a> - A module for
+        sending formatted messages to a Microsoft Teams Channel.
+      </li>
+      <li>
+        <a href="https://github.com/sysgoblin/PSURLScanio">PSURLScanio</a> - A
+        module for <a href="https://urlscan.io/">urlscan.io</a> that is a
+        service to scan and analyze websites.
+      </li>
+    </ul>
+    <h2 id="blogs">Blogs</h2>
+    <ul>
+      <li>
+        <a href="https://blogs.msdn.microsoft.com/powershell/"
+          >Windows PowerShell Blog</a
+        >
+        - Official PowerShell Team Blog.
+      </li>
+      <li>
+        <a href="http://learn-powershell.net/"
+          >Learn PowerShell | Achieve More</a
+        >
+        - Personal blog of Boe Prox who moderated for the Scripting Guy.
+      </li>
+      <li>
+        <a href="http://www.powershellmagazine.com/">PowerShellMagazine</a> -
+        Awesome magazine.
+      </li>
+      <li>
+        <a href="https://powershellexplained.com">PowerShellExplained</a> -
+        Personal blog of Kevin Marquette
+      </li>
+      <li>
+        <a href="https://dfinke.github.io/#blog">Doug Finke</a> - Author of
+        <a href="http://shop.oreilly.com/product/0636920024491.do"
+          >PowerShell for Developers</a
+        >.
+      </li>
+      <li>
+        <a href="http://mikefrobbins.com/">Mike F. Robbins</a> - Microsoft MVP.
+        SAPIEN Tech MVP. Co-author of Windows PowerShell TFM 4th Edition.
+      </li>
+      <li>
+        <a href="https://adamtheautomator.com/">Adam the Automator</a> -
+        Engaging, technical content on all things automation, cloud computing
+        and DevOps by Adam Bertram and friends.
+      </li>
+      <li>
+        <a href="https://vexx32.github.io/">Clear-Script</a> - Personal blog of
+        Joel (Sallow) Francis.
+      </li>
+    </ul>
+    <h2 id="books">Books</h2>
+    <ul>
+      <li>
+        <a href="https://www.manning.com/books/exploring-powershell-automation"
+          >Exploring PowerShell Automation</a
+        >
+        - a free eBook sampler that gives you an overview of how to administer
+        your environment.
+      </li>
+      <li>
+        <a href="https://www.manning.com/books/powershell-in-depth"
+          >PowerShell in Depth</a
+        >
+        - The go-to reference for administrators. Every major shell technique,
+        technology, and tactic is explained and demonstrated, providing a
+        comprehensive reference to almost everything an admin would do in the
+        shell.
+      </li>
+      <li>
+        <a
+          href="https://www.manning.com/books/windows-powershell-in-action-third-edition"
+          >Windows PowerShell in Action, Third Edition</a
+        >
+        - The latest revision of the comprehensive reference guide.
+      </li>
+      <li>
+        <a
+          href="https://www.manning.com/books/learn-windows-powershell-in-a-month-of-lunches-third-edition"
+          >Learn Windows PowerShell in a Month of Lunches, Third Edition</a
+        >
+        - An innovative tutorial designed for busy IT professionals. Just set
+        aside one hour a day - lunchtime would be perfect - for a month, and
+        you’ll be automating Windows tasks faster than you ever thought
+        possible.
+      </li>
+      <li>
+        <a
+          href="https://www.manning.com/books/learn-powershell-in-a-month-of-lunches-linux-and-macos-edition"
+          >Learn PowerShell in a Month of Lunches, Linux and macOS Edition</a
+        >
+        - A task-focused tutorial for administering Linux and macOS systems
+        using Microsoft PowerShell.
+      </li>
+      <li>
+        <a
+          href="https://www.manning.com/books/learn-powershell-scripting-in-a-month-of-lunches"
+          >Learn PowerShell Scripting in a Month of Lunches</a
+        >
+        - A guide to the process of developing, testing, and deploying scripts,
+        and the art of toolmaking.
+      </li>
+      <li>
+        <a href="https://leanpub.com/s/4W-ob-YDw2LE2aSMyosCtA.pdf"
+          >The Monad Manifesto, Annotated - Jeffrey Snover</a
+        >
+        - Design and theory behind the language from its creator.
+      </li>
+      <li>
+        <a href="https://leanpub.com/windowspowershellnetworkingguide/read"
+          >Windows PowerShell Networking Guide</a
+        >
+        - Language specific guide to Windows networking.
+      </li>
+      <li>
+        <a href="https://leanpub.com/s/aQDRwmoOi940mX_EB6N7Yg.pdf"
+          >Why PowerShell? - Warren Frame &amp; Don Jones</a
+        >
+        - Use cases for the language.
+      </li>
+      <li>
+        <a href="https://leanpub.com/s/lDl9ZV0QW7zaE4BpitXVig.pdf"
+          >The Big Book of PowerShell Gotchas - Don Jones</a
+        >
+        - Excellent guide to avoiding common pitfalls.
+      </li>
+      <li>
+        <a href="https://leanpub.com/s/znHIFrvBAYRST5nFBiQU5g.pdf"
+          >The Big Book of PowerShell Error Handling - Dave Wyatt</a
+        >
+        - Great reference for error handling techniques.
+      </li>
+      <li>
+        <a href="https://leanpub.com/s/DQLESXQ69TlVFQ9ogjrFLw.pdf"
+          >Secrets of PowerShell Remoting</a
+        >
+        - On all things remoting. Workflow, fan-out, etc.
+      </li>
+      <li>
+        <a
+          href="https://goalkicker.com/PowerShellBook/PowerShellNotesForProfessionals.pdf"
+          >PowerShell Notes for Professionals</a
+        >
+        - Compilation of notes and snippets.
+      </li>
+      <li>
+        <a href="https://nostarch.com/powershellsysadmins"
+          >PowerShell for SysAdmins: Workflow Automation Made Easy</a
+        >
+        - Learn how to manage and automate your desktop and server environments.
+      </li>
+    </ul>
+    <h2 id="build-tools">Build Tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/psake/psake">psake</a> - Build automation
+        tool inspired by rake (aka make in Ruby) and bake (aka make in Boo).
+      </li>
+      <li>
+        <a href="https://github.com/nightroman/Invoke-Build">Invoke-Build</a> -
+        Build and test automation tool inspired by psake.
+      </li>
+      <li>
+        <a href="https://github.com/RamblingCookieMonster/PSDeploy">PSDeploy</a>
+        - Module built for the purpose of simplifying multiple types of
+        deployments.
+      </li>
+      <li>
+        <a href="https://github.com/RamblingCookieMonster/BuildHelpers"
+          >BuildHelpers</a
+        >
+        - Variety of helper functions for CI/CD scenarios.
+      </li>
+      <li>
+        <a href="https://github.com/manojlds/YDeliver">YDeliver</a> - Build and
+        deployment framework aimed at .NET projects.
+      </li>
+    </ul>
+    <h2 id="code-and-package-repositories">Code and Package Repositories</h2>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/search?l=powershell&amp;q=stars%3A%3E1&amp;s=stars&amp;type=Repositories"
+          >GitHub</a
+        >
+        - Looking for an Open Source PowerShell project? It’s probably here.
+      </li>
+      <li>
+        <a href="https://www.powershellgallery.com/">PowerShell Gallery</a> -
+        Official PowerShell package repository, used by PowerShellGet.
+      </li>
+      <li>
+        <a href="https://www.poshtestgallery.com/">PowerShell Test Gallery</a> -
+        A test version of the PowerShell Gallery. Useful when developing new
+        modules.
+      </li>
+    </ul>
+    <h2 id="commandline-productivity">Commandline Productivity</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/dahlbyk/posh-git">posh-git</a> - Set of
+        PowerShell scripts which provide Git/PowerShell integration.
+      </li>
+      <li>
+        <a href="https://github.com/lzybkr/PSReadLine">PSReadLine</a> - Bash
+        inspired readline implementation for PowerShell. Keeps history between
+        sessions, adds reverse-history search and makes the commandline
+        experience much better overall.
+      </li>
+      <li>
+        <a href="https://github.com/lzybkr/TabExpansionPlusPlus"
+          >TabExpansionPlusPlus</a
+        >
+        - PowerShell module to make customizing tab completion easier and add a
+        library of custom argument completers.
+      </li>
+      <li>
+        <a href="https://github.com/tkellogg/Jump-Location">Jump-Location</a> -
+        PowerShell <code>cd</code> that reads your mind.
+        <a href="https://github.com/wting/autojump">Autojump</a> implementation
+        for PowerShell. <strong><code>UNMAINTAINED</code></strong>
+      </li>
+      <li>
+        <a href="https://github.com/vors/ZLocation">Zlocation</a> *
+        <a href="https://github.com/rupa/z">z.sh</a> implementation for
+        PowerShell. Similar to Jump-Location.
+      </li>
+      <li>
+        <a href="https://github.com/nvbn/thefuck">thefuck</a> - Magnificent app
+        which corrects your previous console command (by typing
+        <code>fuck</code>).
+      </li>
+      <li>
+        <a href="https://github.com/manojlds/pslinq">pslinq</a> - LINQ
+        (LINQ2Objects) for PowerShell.
+      </li>
+      <li>
+        <a href="https://github.com/JanJoris/posh-with">posh-with</a> - Command
+        prefixing for continuous workflow using a single tool.
+      </li>
+      <li>
+        <a href="https://gist.github.com/yumura/8df37c22ae1b7942dec7">poco</a>*
+        <a href="https://github.com/peco/peco">peco</a> implementation.
+        Interactive filtering tool.
+      </li>
+      <li>
+        <a href="https://github.com/wtjones/PSDirTag">PSDirTag</a> - DirTags are
+        relative paths that appear as variables in the PowerShell prompt that
+        update as you navigate. Saves keystrokes when navigating folder
+        structures.
+      </li>
+      <li>
+        <a href="https://github.com/PowershellFrameworkCollective/PSUtil"
+          >PSUtil</a
+        >
+        - Designed to make the user’s console life more convenient. It includes
+        shortcuts, aliases, key bindings and convenience functions geared
+        towards greater efficiency and less typing.
+      </li>
+      <li>
+        <a
+          href="https://github.com/PowerShell/Modules/tree/master/Modules/Microsoft.PowerShell.UnixCompleters"
+          >Microsoft.PowerShell.UnixCompleters</a
+        >
+        - Get parameter completion for native Unix utilities. Requires zsh or
+        bash.
+      </li>
+      <li>
+        <a href="https://github.com/RamblingCookieMonster/PSDepend/"
+          >PSDepend</a
+        >
+        - PowerShell Dependency Handler
+      </li>
+      <li>
+        <a href="https://github.com/jdhitsolutions/PSScriptTools"
+          >PSScriptTools</a
+        >
+        - A set of of PowerShell functions you might use to enhance your own
+        functions and scripts or to facilitate working in the console.
+      </li>
+      <li>
+        <a href="https://github.com/ajeetdsouza/zoxide">zoxide</a> - A better
+        way to navigate your filesystem. Written in Rust, cross-shell, and much
+        faster than other autojumpers.
+      </li>
+    </ul>
+    <h2 id="communities">Communities</h2>
+    <ul>
+      <li>
+        <a href="http://powershell.org/">PowerShell.org</a> - Forums, summits,
+        community blog posts, and more.
+      </li>
+      <li>
+        <a href="http://www.reddit.com/r/powershell">/r/PowerShell</a> - Reddit
+        PowerShell community.
+      </li>
+      <li>
+        <a href="https://poshcode.org/slack">Slack PowerShell team</a> - Large
+        chat room dedicated to PowerShell. Bridged with
+        <code>#PowerShell</code> on irc.freenode.net.
+      </li>
+      <li>
+        <a
+          href="https://www.meetup.com/Research-Triangle-PowerShell-Users-Group/"
+          >Research Triangle PowerShell User Group</a
+        >
+        - Very active PowerShell and automation user group. Meets on first and
+        third Wednesdays. All skill levels welcome.
+      </li>
+    </ul>
+    <h2 id="data">Data</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/TomasBouda/hjson-powershell"
+          >hjson-powershell</a
+        >
+        - Simple powershell module for conversion between
+        <a href="https://hjson.github.io/">HJSON</a> and JSON.
+      </li>
+      <li>
+        <a href="https://github.com/dfinke/ImportExcel">ImportExcel</a> - Module
+        to import/export Excel spreadsheets, without Excel.
+      </li>
+      <li>
+        <a href="https://github.com/cloudbase/powershell-yaml"
+          >powershell-yaml</a
+        >
+        - PowerShell CmdLets for YAML format manipulation.
+      </li>
+      <li>
+        <a href="https://github.com/EvotecIT/PSWriteHTML">PSWriteHTML</a> -
+        PSWriteHTML is a PowerShell module allowing you to create HTML easily.
+      </li>
+      <li>
+        <a href="https://github.com/EvotecIT/PSWritePDF">PSWritePDF</a> - Module
+        to create, edit, split, merge PDF files on Windows / Linux and MacOS.
+      </li>
+      <li>
+        <a href="https://github.com/EvotecIT/PSWriteWord">PSWriteWord</a> -
+        Module to create Microsoft Word documents without Microsoft Word
+        installed.
+      </li>
+    </ul>
+    <h2 id="documentation-helper">Documentation Helper</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/PowerShell/platyPS">platyPS</a> - Write
+        PowerShell External Help in Markdown.
+      </li>
+      <li>
+        <a href="https://github.com/gravejester/Invoke-CreateModuleHelpFile"
+          >Invoke-CreateModuleHelpFile</a
+        >
+        - PowerShell function to create a HTML help file for a module and all
+        it’s commands.
+      </li>
+      <li>
+        <a href="https://github.com/iainbrighton/PScribo">PScribo</a> -
+        PowerShell documentation framework what can create HTML, Word, text
+        files based on PowerShell-based DSL (domain specific language).
+      </li>
+    </ul>
+    <h2 id="editors-and-ides">Editors and IDEs</h2>
+    <ul>
+      <li>
+        <a href="https://www.sapien.com/software/powershell_studio"
+          >PowerShell Studio</a
+        >
+        - Powerful PowerShell IDE with module, help, and user interface
+        development tools, high DPI support and regular updates.
+      </li>
+      <li>
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell"
+          >PowerShell for Visual Studio Code</a
+        >
+        - Provides IntelliSense, code navigations, script analysis, script
+        debugging, and more for the
+        <a href="https://code.visualstudio.com">Visual Studio Code</a> editor.
+      </li>
+      <li>
+        <a
+          href="https://ironmansoftware.com/powershell-tools-for-visual-studio/"
+          >PoshTools for Visual Studio</a
+        >
+        - Provides IntelliSense, script debugging, and Pester testing support
+        for PowerShell to Visual Studio.
+      </li>
+      <li>
+        <a
+          href="https://docs.microsoft.com/en-us/powershell/scripting/components/ise/introducing-the-windows-powershell-ise"
+          >PowerShell ISE</a
+        >
+        - Official PowerShell development environment included with Microsoft
+        Windows.
+      </li>
+      <li>
+        <a href="http://www.powertheshell.com/isesteroids/">ISE Steroids</a> -
+        Add-on for the PowerShell ISE which provides a rich set of additional
+        features to complete the ISE development experience.
+      </li>
+      <li>
+        <a
+          href="https://www.idera.com/productssolutions/freetools/powershellplus"
+          >PowerShell Plus</a
+        >
+        - All in one IDE.
+      </li>
+      <li>
+        <a href="https://github.com/SublimeText/PowerShell"
+          >SublimeText package</a
+        >
+        - PowerShell language support for Sublime Text.
+      </li>
+      <li>
+        <a href="https://github.com/jugglingnutcase/language-powershell"
+          >Atom package</a
+        >
+        - PowerShell language support for Atom.
+      </li>
+    </ul>
+    <h2 id="frameworks">Frameworks</h2>
+    <ul>
+      <li>
+        <a href="http://get-carbon.org/">Carbon</a> - DevOps for automating the
+        configuration of Windows computers.
+      </li>
+      <li>
+        <a href="https://github.com/janikvonrotz/PowerShell-PowerUp"
+          >PowerShell PowerUp</a
+        >
+        - Powerful server management framework.
+      </li>
+      <li>
+        <a href="https://github.com/Pscx/Pscx">PSCX</a> - PowerShell Community
+        Extensions - Useful set of additional cmdlets.
+      </li>
+      <li>
+        <a href="https://github.com/PowershellFrameworkCollective/psframework"
+          >PSFramework</a
+        >
+        - Easily add configurations, logging and more to your own PowerShell
+        module.
+      </li>
+      <li>
+        <a href="https://github.com/davehull/Kansa">Kansa</a> - Incident
+        response framework.
+      </li>
+    </ul>
+    <h2 id="interactive-learning">Interactive Learning</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/vexx32/PSKoans">PSKoans</a> - A simple, fun,
+        and interactive way to learn the PowerShell language through Pester unit
+        testing.
+      </li>
+      <li>
+        <a href="https://github.com/Jaykul/Jupyter-PowerShell"
+          >Jupyter-PowerShell</a
+        >
+        - Jupyter Kernel for PowerShell.
+      </li>
+    </ul>
+    <h2 id="logging">Logging</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/PoShLog/PoShLog">PoShLog</a> -
+        Cross-platform, extensible logging module built upon
+        <a href="https://serilog.net">Serilog</a>.
+      </li>
+    </ul>
+    <h2 id="module-development-templates">Module Development Templates</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/PowerShell/Plaster">Plaster</a> - Plaster is
+        a template-based file and project generator written in PowerShell.
+      </li>
+      <li>
+        <a
+          href="https://github.com/PowershellFrameworkCollective/PSModuleDevelopment"
+          >PSModuleDevelopment</a
+        >
+        - Get started using module templates in 2 minutes with this module’s low
+        entry barrier and casual convenience.
+      </li>
+      <li>
+        <a href="https://github.com/techthoughts2/Catesta">Catesta</a> - Catesta
+        is a PowerShell module project generator. It uses templates to rapidly
+        scaffold test and build integration for a variety of CI/CD platforms.
+      </li>
+    </ul>
+    <h2 id="package-managers">Package Managers</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/powershell/powershellget">PowerShellGet</a>
+        - PowerShellGet is the Package Manager for PowerShell. Packages are
+        available on
+        <a href="https://www.PowerShellGallery.com">PowerShellGallery</a>.
+      </li>
+      <li>
+        <a href="https://chocolatey.org/">Chocolatey</a> - The package manager
+        for Windows. The sane way to manage software on Windows.
+      </li>
+      <li>
+        <a href="https://github.com/akamac/GitLabProvider">GitLab</a> - Use a
+        GitLab server as Package Provider.
+      </li>
+      <li>
+        <a href="https://scoop.sh">Scoop</a> - A command-line installer for
+        Windows.
+      </li>
+      <li>
+        <a href="https://psappdeploytoolkit.com/"
+          >PowerShell App Deployment Toolkit</a
+        >
+        - Provides a set of functions to perform common application deployment
+        tasks and to interact with the user during a deployment.
+      </li>
+    </ul>
+    <h2 id="parallel-processing">Parallel Processing</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/proxb/PoshRSJob">PoshRSJob</a> - Provides an
+        alternative to PSJobs with greater performance and less overhead to run
+        commands in the background.
+      </li>
+      <li>
+        <a href="https://github.com/RamblingCookieMonster/Invoke-Parallel"
+          >Invoke-Parallel</a
+        >
+        - This function will take in a script or scriptblock, and run it against
+        specified objects(s) in parallel.
+      </li>
+      <li>
+        <a href="https://github.com/PaulHigin/PSThreadJob">PSThreadJob</a> -
+        Module for running concurrent jobs based on threads rather than
+        processes.
+      </li>
+    </ul>
+    <h2 id="podcasts">Podcasts</h2>
+    <ul>
+      <li>
+        <a href="https://powershell.org/category/podcast/">PowerScripting</a> -
+        Weekly show run by Jon Walz and Hal Rottenberg.
+      </li>
+      <li>
+        <a href="https://powershellnews.podbean.com/"
+          >The PowerShell News Podcast</a
+        >
+        - This podcast is the latest news on PowerShell.
+      </li>
+    </ul>
+    <h2 id="security">Security</h2>
+    <ul>
+      <li>
+        <a
+          href="https://gallery.technet.microsoft.com/scriptcenter/1abd77a5-9c0b-4a2b-acef-90dbb2b84e85"
+          >File System Security</a
+        >
+        - Allows a much easier management of permissions on files and folders.
+      </li>
+      <li>
+        <a href="https://github.com/mattifestation/PowerShellArsenal"
+          >PowerShellArsenal</a
+        >
+        - Module used to aid a reverse engineer.
+      </li>
+      <li>
+        <a href="https://github.com/Veil-Framework/PowerTools">PowerTools</a> -
+        Collection of projects with a focus on offensive operations.
+      </li>
+      <li>
+        <a href="https://github.com/Invoke-IR/PowerForensics">PowerForensics</a>
+        - Popular live disk forensics platform for windows.
+      </li>
+      <li>
+        <a href="https://github.com/PowerShellMafia/PowerSploit">PowerSploit</a>
+        - Post-exploitation framework.
+      </li>
+      <li>
+        <a href="https://github.com/PowerShellEmpire/Empire"
+          >PowerShellEmpire</a
+        >
+        - Post-exploitation agent.
+      </li>
+      <li>
+        <a href="https://github.com/mattifestation/PSReflect">PSReflect</a> -
+        Easily define in-memory enums, structs, and Win32 functions in
+        PowerShell. Useful for attacks,
+        <a
+          href="https://github.com/FuzzySecurity/PowerShell-Suite/tree/master/Bypass-UAC"
+          >example</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/BloodHoundAD/BloodHound">BloodHound</a> -
+        Easily identify highly complex attack paths that would otherwise be
+        impossible to quickly identify.
+      </li>
+      <li>
+        <a href="https://github.com/samratashok/nishang">Nishang</a> - Enables
+        scripting for red team, penetration testing, and offensive security.
+      </li>
+      <li>
+        <a href="https://github.com/Rich5/Harness">Harness</a> - Interactive
+        remote PowerShell Payload.
+      </li>
+      <li>
+        <a href="https://github.com/danielbohannon/Invoke-Obfuscation"
+          >Invoke-Obfuscation</a
+        >
+        - PowerShell Obfuscator.
+      </li>
+      <li>
+        <a href="https://github.com/Cn33liz/p0wnedShell">p0wnedShell</a> -
+        PowerShell Runspace Post Exploitation Toolkit.
+      </li>
+      <li>
+        <a href="https://github.com/NetSPI/PESecurity">PESecurity</a> - Module
+        to check if a Windows binary (EXE/DLL) has been compiled with ASLR, DEP,
+        SafeSEH, StrongNaming, and Authenticode.
+      </li>
+      <li>
+        <a href="https://github.com/nullbind/Powershellery">Powershellery</a> -
+        Powershell scripts used for general hackery.
+      </li>
+      <li>
+        <a href="https://github.com/NetSPI/PowerUpSQL">PowerUpSQL</a> - Toolkit
+        for Attacking SQL Server.
+      </li>
+    </ul>
+    <h2 id="sharepoint">SharePoint</h2>
+    <ul>
+      <li>
+        <a href="https://autospinstaller.com/">AutoSPInstaller</a> - Automated
+        SharePoint 2010-2019 installation script.
+      </li>
+      <li>
+        <a href="https://sharepointpowershell.codeplex.com/"
+          >Client-side SharePoint</a
+        >
+        - API for SharePoint 2010, 2013 and Online.
+      </li>
+      <li>
+        <a href="https://github.com/potatoqualitee/SPReplicator"
+          >SPReplicator</a
+        >
+        - SPReplicator helps replicate SharePoint list data to/from CSV, SQL
+        Server, SharePoint itself and more.
+      </li>
+    </ul>
+    <h2 id="sql-server">SQL Server</h2>
+    <ul>
+      <li>
+        <a href="https://dbachecks.io">dbatools</a> - Helps SQL Server Pros be
+        more productive with instance migrations and much more.
+      </li>
+      <li>
+        <a href="https://github.com/mithrandyr/SimplySql">SimplySql</a> -
+        SimplySql is a module that provides an intuitive set of cmdlets for
+        talking to databases that abstracts the vendor specifics. The basic
+        pattern is to connect to a database, execute one or more sql.
+      </li>
+    </ul>
+    <h2 id="testing">Testing</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/pester/Pester">Pester</a> - PowerShell BDD
+        style testing framework.
+      </li>
+      <li>
+        <a href="https://github.com/equelin/format-pester">Format-Pester</a> -
+        PowerShell module for documenting Pester’s results - exports Pester
+        results to HTML, Word, text files using
+        <a href="https://github.com/iainbrighton/PScribo">PScribo</a>.
+      </li>
+      <li>
+        <a href="https://github.com/adamdriscoll/selenium-powershell"
+          >Selenium</a
+        >
+        - PowerShell module to run a Selenium WebDriver.
+      </li>
+      <li>
+        <a href="https://github.com/PowerShell/PSScriptAnalyzer"
+          >PSScriptAnalyzer</a
+        >
+        - PSScriptAnalyzer provides script analysis and checks for potential
+        code defects in the scripts by applying a group of built-in or
+        customized rules on the scripts being analyzed.
+      </li>
+    </ul>
+    <h2 id="themes">Themes</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/jandedobbeleer/oh-my-posh">Oh-My-Posh</a> -
+        Tons of beautiful theme that can be enabled by one single command
+        (includes many awesome powerline theme).
+      </li>
+      <li>
+        <a href="https://github.com/JustABearOz/PoshColor">PoshColor</a> -
+        Colour output from common commands with support for custom themes.
+      </li>
+      <li>
+        <a href="https://github.com/Jaykul/PowerLine">Powerline</a> - PowerShell
+        Classes for richer output and prompts.
+      </li>
+      <li>
+        <a href="https://github.com/starship/starship">Starship</a> - The
+        minimal, blazing fast, and extremely customizable prompt for any shell.
+      </li>
+    </ul>
+    <h2 id="ui">UI</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/dm3ll3n/AnyBox">AnyBox</a> - Designed to
+        facilitate script input/output with an easily customizable WPF window.
+      </li>
+      <li>
+        <a href="https://github.com/Windos/BurntToast">BurntToast</a> - Module
+        for creating and displaying Toast Notifications on Microsoft Windows 10.
+      </li>
+      <li>
+        <a href="https://github.com/PrateekKumarSingh/graphical">Graphical</a> -
+        Module to plot colorful console 2D Graphs (Scatter, Bar, Line).
+      </li>
+      <li>
+        <a href="https://github.com/PowerShell/GraphicalTools"
+          >GraphicalTools</a
+        >
+        - A module that mixes PowerShell and GUIs! - built on Avalonia and
+        gui.cs.
+      </li>
+      <li>
+        <a href="https://github.com/chrisseroka/ps-menu">PS-Menu</a> - Simple
+        module to render interactive console menu.
+      </li>
+      <li>
+        <a href="https://github.com/EvotecIT/PSWriteColor">PSWriteColor</a> -
+        Write-Color is a wrapper around Write-Host allowing you to create nice
+        looking scripts, with colorized output.
+      </li>
+      <li>
+        <a href="https://github.com/devblackops/Terminal-Icons"
+          >Terminal-Icons</a
+        >
+        - Module to show file and folder icons in the terminal.
+      </li>
+      <li>
+        <a href="https://github.com/gravejester/psInlineProgress"
+          >psInlineProgress</a
+        >
+        - Write inline progress bars in PowerShell.
+      </li>
+    </ul>
+    <h2 id="videos">Videos</h2>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=D15vh-ryJGk"
+          >PowerShell Unplugged with Jeffrey Snover and Don Jones Ignite 2017</a
+        >
+        - The inventor of PowerShell talking about “the latest and coolest
+        PowerShell features to help you automate and manage the hybrid cloud”.
+        Focused on the PowerShell Community.
+      </li>
+      <li>
+        <a
+          href="https://mva.microsoft.com/en-US/training-courses/getting-started-with-powershell-30-jump-start-8276"
+          >Getting Started With PowerShell 3.0 Jump Start</a
+        >
+        - Jump starts series are for IT professionals with no previous
+        experience with PowerShell, and want to learn it fast.
+      </li>
+      <li>
+        <a href="https://channel9.msdn.com/Series/advpowershell3"
+          >Advanced Tools &amp; Scripting with PowerShell 3.0</a
+        >
+        - IT pros, take this advanced PowerShell course to find out how to turn
+        your real time management and automation scripts into useful reusable
+        tools and cmdlets.
+      </li>
+      <li>
+        <a
+          href="https://mva.microsoft.com/en-US/training-courses/whats-new-in-powershell-v5-16434"
+          >What’s New in PowerShell v5</a
+        >
+        - Through description on some of the exciting new features in PowerShell
+        version 5.0.
+      </li>
+      <li>
+        <a
+          href="https://channel9.msdn.com/series/PowerShell-Open-Source-Project"
+          >PowerShell Open Source Project</a
+        >
+        - Collection of videos thoroughly demonstrate how PowerShell open source
+        project runs on Linux.
+      </li>
+      <li>
+        <a
+          href="https://channel9.msdn.com/Blogs/hybrid-it-management/PowerShell-on-Linux-and-Open-Source"
+          >PowerShell on Linux and Open Source</a
+        >
+        - Brief introduction to PowerShell open source project and how it runs
+        on Linux.
+      </li>
+      <li>
+        <a href="https://channel9.msdn.com/Shows/MsftPowerShell">PowerShell</a>
+        - This show will include videos talking about the PowerShell automation
+        platform, Desired State Configuration (DSC), infrastructure as code, and
+        related concepts!! These videos are created by Trevor Sullivan, a
+        Microsoft MVP for Windows PowerShell.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=6CRTahGYnws&amp;list=PL6D474E721138865A"
+          >Learn Windows PowerShell in a Month of Lunches - Don Jones</a
+        >
+        - Video companion to the book of the same title.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=Lni4KjGMgu4"
+          >Best Practices for Script Design - Don Jones</a
+        >
+        - Don Jones discusses script design principles and best practices.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=KprrLkjPq_c"
+          >PowerShell Toolmaking (1 of 3) - Don Jones</a
+        >
+        - Toolmaking (1 of 3) - Don Jones.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=U849a17G7Ro"
+          >PowerShell Toolmaking (2 of 3) - Don Jones</a
+        >
+        - Toolmaking (2 of 3) - Don Jones.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=GXdmjCPYYNM"
+          >PowerShell Toolmaking (3 of 3) - Don Jones</a
+        >
+        - Toolmaking (3 of 3) - Don Jones.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=Hkzd8spCfCU"
+          >Sophisticated Techniques of Plain Text Parsing - Tobias Weltner</a
+        >
+        - Great reference for text parsing.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=j0EX5R2nnRI"
+          >Monad Manifesto Revisited - Jeffrey Snover</a
+        >
+        - Jeffrey Snover reflects on the beginnings of the language and where
+        it’s going.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=VrDjiVbZZE8"
+          >AD Forensics with PowerShell - Ashley McGlone</a
+        >
+        - A lot of AD related scripting and analysis techniques.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=85Yrs5ezxHE&amp;list=PL6ue9e1DXqDv74YTX91gYonfFsweNmrDK"
+          >Windows PowerShell What’s New in V2 - SAPIEN</a
+        >
+        - Old but gold. Most of this is still very relevant.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=IHrGresKu2w&amp;list=PLCGGtLsUjhm2k22nFHHdupAK0hSNZVfXi"
+          >All Things Microsoft PowerShell</a
+        >
+        - Another general language reference.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/rtpsug/"
+          >Research Triangle PowerShell User Group YouTube Channel</a
+        >
+        - large catalog of user group meetings and demos by community members.
+        150+ hours of content.
+      </li>
+    </ul>
+    <h2 id="webserver">Webserver</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/toenuff/flancy">Flancy</a> - Web
+        microframework for Windows PowerShell.
+      </li>
+      <li>
+        <a href="https://github.com/Badgerati/Pode">Pode</a> - Pode is a
+        Cross-Platform PowerShell framework for creating web servers to host
+        REST APIs, Web Sites, and TCP/SMTP Servers.
+      </li>
+      <li>
+        <a href="https://github.com/PowerShell/Polaris">Polaris</a> - A
+        cross-platform, minimalist web framework for PowerShell.
+      </li>
+      <li>
+        <a href="https://github.com/vmware/webcommander">WebCommander</a> - Run
+        scripts and view results, in a friendly web GUI or via a web service.
+      </li>
+      <li>
+        <a href="https://ironmansoftware.com/powershell-universal-dashboard"
+          >Universal Dashboard</a
+        >
+        - Cross-platform module for developing websites and REST APIs.
+      </li>
+    </ul>
+    <h2 id="misc">Misc</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/Microsoft/DbgShell">DbgShell</a> - A
+        PowerShell front-end for the Windows debugger engine.
+      </li>
+      <li>
+        <a href="https://github.com/oising/poke">poke</a> - Crazy cool
+        reflection module for PowerShell. Explore and invoke private APIs like
+        nobody is watching. Useful for security research, testing and quick
+        hacks.
+      </li>
+      <li>
+        <a href="https://github.com/microsoft/WSLab">WSLab</a> - Windows Server
+        rapid lab deployment scripts.
+      </li>
+      <li>
+        <a href="https://github.com/poshbotio/PoshBot">PoshBot</a> -
+        Powershell-based bot framework.
+      </li>
+      <li>
+        <a href="https://github.com/PSKeePass/PoShKeePass">PoShKeePass</a> -
+        Module for working with
+        <a href="https://keepass.info">KeePass</a> databases.
+      </li>
+    </ul>
+  </body>
+</html>

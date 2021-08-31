@@ -1,0 +1,5 @@
+http://elixir-cn.com/,elixir-cn.com,https://github.com/h4cc/awesome-elixir#readme,Elixir error: <HTTPError 502: 'Bad Gateway'> | reason: Bad Gateway
+http://www.inf.ufrgs.br/~alvares/CMP259DCBD/clope.pdf,CLOPE,https://github.com/h4cc/awesome-elixir#readme,Elixir error: <HTTPError 403: 'Forbidden'> | reason: Forbidden
+https://www.govtrack.us/developers,govtrack.us,https://github.com/h4cc/awesome-elixir#readme,Elixir error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://graphql-elixir.org/,GraphQL Elixir,https://github.com/h4cc/awesome-elixir#readme,Elixir error: URLError(gaierror(8, 'nodename nor servname provided, or not known')) | reason: [Errno 8] nodename nor servname provided, or not known
+https://bpe.n2o.space,Doc,https://github.com/h4cc/awesome-elixir#readme,Elixir error: <HTTPError 403: 'Forbidden'> | reason: Forbidden

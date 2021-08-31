@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lambda-Problem-Solving-Framework</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p>Use these steps to solve <em>any</em> problem, programming or otherwise.</p>
+<ol type="1">
+<li><a href="#understand">Understand</a></li>
+<li><a href="#plan">Plan</a></li>
+<li><a href="#execute">Execute</a></li>
+<li><a href="#reflect">Reflect</a></li>
+</ol>
+<p>You’ll find many problems are made up of sub-problems. You can use these steps on the main, outer problem, and use them on the inner sub-problems individually, as well.</p>
+<p>When you get to the end of the sequence, if you have the time, use what you have learned reflecting on the problem to repeat the steps and iterate on your solution.</p>
+<p>In CS you’ll be expected to solve problems you’ve never seen before <em>without searching for the answer</em>. You’ll have to use UPER to find the answer yourself. This mirrors the problem-solving skills you’ll use every day on the job.</p>
+<p>Remember: for most problems, the battle is won or lost with Understand and Plan. Don’t undervalue these steps.</p>
+<hr />
+<p><a name="understand"></a> ## 1. UNDERSTAND: What is the problem asking me to do?</p>
+<p>This is where you transcribe the description of the problem from the page into your head.</p>
+<p>When interviewing, it’s very important that you do this step aloud!</p>
+<p><em>(You aren’t coding during this step, unless it’s small pieces of throwaway code to test a hypothesis.)</em></p>
+<h3 id="questions">Questions</h3>
+<ul>
+<li>What are the <em>inputs</em> your code receives?</li>
+<li>What is the range of input?</li>
+<li>How big can the input be (how much data)?</li>
+<li>What are the <em>outputs</em> your code produces?</li>
+<li>What is the range of output?</li>
+<li>How big can the output be (how much data)?</li>
+<li>How performant must the code be?</li>
+<li>What is missing from the task description?</li>
+<li>Are there third-party stakeholders who should be consulted?</li>
+<li>What assumptions are you making?
+<ul>
+<li>Do these assumptions need to be validated by anyone else on the team?</li>
+</ul></li>
+</ul>
+<h3 id="actions">Actions</h3>
+<ul>
+<li><strong><a href="https://zellwk.com/blog/asking-questions/">Ask questions!</a></strong> If something is missing or unclear in the spec, get it clarified. <strong>This is part of your job as a professional software developer</strong>.
+<ul>
+<li>Be specific.
+<ul>
+<li>What errors did you get?</li>
+<li>What do you think might be wrong?</li>
+</ul></li>
+<li>Be clear and concise.
+<ul>
+<li>Include what you have to.</li>
+<li>Don’t include what you don’t.</li>
+<li>Use unambiguous language.</li>
+</ul></li>
+<li>Show what solutions you’ve attempted so far.</li>
+</ul></li>
+<li>Don’t fear this part of the process. Enjoy it. Think of the problem like a curiosity to be explored, not something that is there to antagonize you.
+<ul>
+<li>Being fearful or antagonized won’t do you any favors at work or in an interview.</li>
+<li>Problem solving is the fun part!</li>
+</ul></li>
+<li>Identify the components of the problem.
+<ul>
+<li>These are pieces that work together to solve it.</li>
+</ul></li>
+<li>If stuck, break the problem into smaller sub-problems. Solve those first using this very framework.
+<ul>
+<li>Once they’re solved, you can compose them together into the main solution.</li>
+</ul></li>
+<li>Rewrite the problem in your own words.</li>
+<li>Diagram how the data flows through the problem.</li>
+<li><em>Think like a villain</em>. What kinds of input might break the program? Where is the description of the problem incomplete?</li>
+<li>Run through tests cases in your head or on paper to make sure the results are what you think they should be.</li>
+<li>If unable to get answers on something that’s unclear in the spec, make your best guess, and document your assumptions and decision.</li>
+</ul>
+<h3 id="youre-done-when">You’re done when</h3>
+<ul>
+<li>You could successfuly explain this problem to someone who hasn’t seen it before. Your explanation should be so thorough that they should be able to start planning an implementation themselves.</li>
+</ul>
+<hr />
+<p><a name="plan"></a> ## 2. PLAN: What steps will I take to solve the problem?</p>
+<p>This is where you take your description of the problem and turn it into a complete, actionable plan to solve that problem.</p>
+<p>If you find shortcomings in your understanding of the problem while you’re planning, briefly drop back to Step 1 until the ambiguity is resolved.</p>
+<p>If you have not yet completed Step 1, you will end up planning to solve the wrong problem!</p>
+<p>When interviewing, it’s very important that you do this step aloud!</p>
+<p><em>(You aren’t coding during this step, unless it’s small pieces of throwaway code to test a hypothesis. Pseudocode should be written during this step, however.)</em></p>
+<h3 id="questions-1">Questions</h3>
+<ul>
+<li>Do you know the answer to a related, similar problem?
+<ul>
+<li>That is, a problem that has similar inputs and outputs.</li>
+<li>What does this problem remind you of, if anything?</li>
+<li>Can that knowledge be brought to bear here?</li>
+</ul></li>
+<li>Does my plan meet the performance requirements?
+<ul>
+<li>What’s the time complexity?</li>
+<li>What’s the space complexity?</li>
+<li>How big can my input data be?</li>
+</ul></li>
+<li>Can sorting the input data ahead of time lead to any improvements in time complexity?</li>
+<li>Does recursion help?
+<ul>
+<li>Is the problem made up of identical subproblems?</li>
+<li>Can you state the problem with itself in its own definition?</li>
+</ul></li>
+<li><em>Think like a villain</em>. Does your plan cover the edge cases?</li>
+</ul>
+<h3 id="actions-1">Actions</h3>
+<ul>
+<li>Solve the problem like a human.
+<ul>
+<li>If you’re sorting something, imagine you have a pile of blocks in front of you that you must physically sort.</li>
+<li>Break down the steps you take into small enough pieces for a computer to understand.</li>
+</ul></li>
+<li>Approach the problem from many angles.</li>
+<li>Get a brute-force solution as quickly as possible, even if it’s not performant enough.
+<ul>
+<li>It can lead you toward better solutions.</li>
+</ul></li>
+<li>Come up with as many possible plans of attack as you can.
+<ul>
+<li>Choose the best one that satisfies performance needs.</li>
+</ul></li>
+<li>Try to solve a simpler version of the problem.
+<ul>
+<li>If the input is a 2D array, can you solve it for a 1D array?</li>
+<li>If you need to count the number of ways you can eat cookies if you can eat 1, 2, or 3 at a time, try to solve it for the number of ways if you could eat 2 at a time. Or 1 at a time.</li>
+<li>The solution to the simpler problem can lead to insights on the more complex problem.</li>
+</ul></li>
+<li>List the nouns and verbs in the problem description.
+<ul>
+<li>Map each one to an algorithm, process, data structure, object, method, function, etc.</li>
+</ul></li>
+<li>Perfect can be the enemy of good.
+<ul>
+<li>Even if your initial workable solution isn’t performant enough, you can iterate later.</li>
+<li>“Premature optimization is the root of all evil.”</li>
+</ul></li>
+</ul>
+<h3 id="youre-done-when-1">You’re done when</h3>
+<ul>
+<li>You have pseudocode that’s detailed enough to convert to real code.</li>
+<li>You are convinced the pseudocode represents a legitimate, working solution.</li>
+</ul>
+<hr />
+<p><a name="execute"></a> ## 3. EXECUTE: How do I implement those steps?</p>
+<p>This is where you take your plan and convert it to actual, working code. This step isn’t necessarily easy, but it’s much easier if you do a good job with Steps 1 and 2, above.</p>
+<p>If you find shortcomings in your plan while you’re implementing the solution, briefly drop back to Step 2 until the ambiguity is resolved.</p>
+<p>If you have not yet completed Step 2, you will spend far longer on this step than you have to.</p>
+<p>Remember: <strong>Minutes of planning can be saved by hours of debugging!</strong></p>
+<h3 id="questions-2">Questions</h3>
+<ul>
+<li><em>Think like a villain</em>. Does your implementation robustly handle all inputs gracefully?</li>
+<li>What language is best to solve this problem?
+<ul>
+<li>Best technically?</li>
+<li>Best for the company?</li>
+</ul></li>
+<li>What is the best way to split this code into functional modules?</li>
+<li>Are any of the modules reusable for later projects?</li>
+<li>Does this functionality already exist?
+<ul>
+<li>Are there built-in libraries I can leverage?</li>
+<li>Are there third-party libraries I can leverage?
+<ul>
+<li>Are the licenses on those third-party libaries compatible with our needs?</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="actions-2">Actions</h3>
+<ul>
+<li>Start a source code control repo (e.g. a git repo) immediately if one doesn’t already exist.</li>
+<li>Convert your pseudocode and outlines into actual code.</li>
+<li>Don’t Repeat Yourself (DRY): Remove redundant code as you write it.</li>
+<li>Document code as you write it.
+<ul>
+<li>Header blocks that contain usage information.</li>
+<li>Comments where necessary.</li>
+</ul></li>
+<li>Write code clearly enough that comments aren’t typically necessary.</li>
+<li>If comments help clarify or summarize a piece of code to a reader, definintely add comments.</li>
+<li>If you write code that’s hackish or kludgy, fix it.
+<ul>
+<li>If you don’t have time to fix it, comment it with:
+<ul>
+<li>Why you couldn’t do it the Right Way (time constraints, etc.)</li>
+<li>What needs to be done to make it Right.</li>
+</ul></li>
+</ul></li>
+<li>Follow the style guide for the company.
+<ul>
+<li>If no style guide is available, follow the style of the existing codebase.</li>
+<li>If there is no existing style guide or codebase, choose the best one you can find.</li>
+</ul></li>
+<li>Write unit tests as required.</li>
+<li>Write end-to-end tests as required.</li>
+</ul>
+<h3 id="youre-done-when-2">You’re done when</h3>
+<ul>
+<li>The program works on good data.</li>
+<li>The program doesn’t fail on bad data or edge cases.</li>
+<li>The program passes all tests.</li>
+</ul>
+<hr />
+<p><a name="reflect"></a> ## 4. REFLECT: Is this implementation as good as I can make it?</p>
+<h3 id="questions-3">Questions</h3>
+<ul>
+<li>Does your solution work in all cases?
+<ul>
+<li>Main case?</li>
+<li>Edge cases?</li>
+</ul></li>
+<li>Is the solution performant enough?</li>
+<li>Is the code documented appropriately?</li>
+<li>In retrospect, what would have done differently? What will you do differently next time?
+<ul>
+<li>What went right?</li>
+<li>What went wrong?</li>
+</ul></li>
+</ul>
+<h3 id="actions-3">Actions</h3>
+<ul>
+<li>Document or implement any changes that still need to be made to the code.</li>
+<li>Document or remove any redundant code that should be refactored.</li>
+<li>Remove unused code.</li>
+<li>Document future shortcomings that will need to be addressed in the medium or long term.</li>
+<li>Identify and document algorithms that should be replaced with algorithms with better time complexity.</li>
+<li>Identify and document or remove redundant or unnecessary computation.</li>
+<li>Document any embarrasing code that needs to be fixed.
+<ul>
+<li>Why you couldn’t do it the Right Way (time constraints, etc.)</li>
+<li>What needs to be done to make it Right.</li>
+</ul></li>
+</ul>
+<h3 id="youre-done-when-3">You’re done when</h3>
+<ul>
+<li>You can’t think of anything else to reflect upon.</li>
+</ul>
+<hr />
+<p>Inspired by [[Polya’s Problem Solving Techniques]].</p>
+</body>
+</html>

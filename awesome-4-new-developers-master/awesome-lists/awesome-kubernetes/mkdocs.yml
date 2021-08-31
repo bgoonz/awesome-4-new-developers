@@ -1,0 +1,81 @@
+# Project information
+site_name: Awesome Kubernetes
+site_description: Resources for Awesome Kubernetes
+site_author: Ramit Surana
+site_url: https://ramitsurana.github.io/awesome-kubernetes/
+
+# Repository
+repo_name: ramitsurana/awesome-kubernetes
+repo_url: https://github.com/ramitsurana/awesome-kubernetes
+
+# Copyright
+copyright: Copyright &copy; 2020 Ramit Surana
+
+# Configuration
+theme:
+  name: material
+  language: en
+  features:
+    - tabs
+    - instant
+  palette:
+    primary: indigo
+    accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    logo: material/library
+    repo: material/ship-wheel
+  favicon: logo.png
+  logo: images/logo.png
+
+# Extras
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/ramitsurana
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/ramitsurana
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/ramitsurana
+
+# Google Analytics
+google_analytics:
+  - UA-71344758-5
+  - auto
+
+nav:
+  - Home: README.md
+  - Articles: articles/articles.md
+  - Installers: installers/installers.md
+  - Releases: releases.md
+  - Case Studies: case-studies/case-studies.md
+  - Official Resources: official-resources/official-resources.md
+  - Applications: applications/applications.md
+  - Projects:
+      - Projects: projects/projects.md
+      - Managed Kubernetes: managed-kubernetes/managed-kubernetes.md
+  - Learning:
+      - Books: learning-resources/books.md
+      - Videos: learning-resources/videos.md
+      - Podcasts: learning-resources/podcasts.md
+      - Slides: learning-resources/slides.md
+      - Certifications: learning-resources/certifications.md
+      - Interactive-Environments: learning-resources/interactive-environments.md
+      - Courses: learning-resources/courses.md
+  - Extras:
+      - Conferences: extras/conferences.md
+      - Amazing People: extras/amazing-people.md
+      - Meetups: extras/meetups.md
+      - Social Media: extras/social-media.md
+      - Raspberry Pi: extras/raspberry-pi.md
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+
+plugins:
+  - search # necessary for search to work

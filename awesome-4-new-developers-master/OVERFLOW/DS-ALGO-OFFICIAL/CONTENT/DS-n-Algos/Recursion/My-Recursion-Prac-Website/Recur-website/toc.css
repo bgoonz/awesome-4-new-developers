@@ -1,0 +1,31 @@
+#ToC {
+  z-index: -1 !important;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12;
+  color: rgb(136, 247, 221);
+  background-color: whitesmoke;
+  border-radius: 15px;
+  position: fixed;
+  top: 0px;
+  right: 0;
+  width: 8%;
+  border: 3px solid gold;
+  padding: 2px;
+  margin: 10px;
+  overflow: auto;
+  overflow-y: scroll;
+  zoom: 0.3;
+  height: 450px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  overflow-wrap: break-word;
+}
+
+div.my_class {
+  resize: both;
+  overflow: auto;
+  /* something other than visible */
+  z-index: -1;
+}

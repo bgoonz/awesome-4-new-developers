@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-jupyter-awesome">
+      Awesome Jupyter
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      A curated list of awesome
+      <a href="http://jupyter.org">Jupyter</a> projects, libraries and
+      resources. Jupyter is an open-source web application that allows you to
+      create and share documents that contain live code, equations,
+      visualizations and narrative text.
+    </p>
+    <h1 align="center" style="border-bottom: 0px">
+      <br />
+      <img
+        width="400"
+        src="https://raw.githubusercontent.com/adebar/awesome-jupyter/master/logo.png"
+        alt="Jupyter logo"
+      />
+      <br />
+      <br />
+    </h1>
+    <p><br /></p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#runtimesfrontends">Runtimes/Frontends</a></li>
+      <li><a href="#collaborationeducation">Collaboration/Education</a></li>
+      <li><a href="#visualization">Visualization</a></li>
+      <li>
+        <a href="#renderingpublishingconversion"
+          >Rendering/Publishing/Conversion</a
+        >
+      </li>
+      <li><a href="#version-control">Version Control</a></li>
+      <li><a href="#jupyterlab-extensions">JupyterLab Extensions</a></li>
+      <li><a href="#testing">Testing</a></li>
+      <li><a href="#domain-specific-projects">Domain-Specific Projects</a></li>
+      <li>
+        <a href="#hosted-notebook-solutions">Hosted Notebook Solutions</a>
+      </li>
+      <li>
+        <a href="#official-resources-and-documentation"
+          >Official Resources and Documentation</a
+        >
+      </li>
+      <li><a href="#community-resources">Community Resources</a></li>
+      <li><a href="#articlesguidestutorials">Articles/Guides/Tutorials</a></li>
+      <li><a href="#contributing">Contributing</a></li>
+    </ul>
+    <hr />
+    <h2 id="runtimesfrontends">Runtimes/Frontends</h2>
+    <ul>
+      <li>
+        <a href="http://beakerx.com/">Beaker</a> - Development environment with
+        seamless data transmission from one language to another.
+      </li>
+      <li>
+        <a href="https://github.com/jupyter/docker-stacks">docker-stacks</a> -
+        Hierarchical stacks of ready-to-run Jupyter applications in Docker.
+      </li>
+      <li>
+        <a href="https://my.guild.ai/docs/jupyter-notebook-experiments/"
+          >Guild AI</a
+        >
+        - Execute notebooks as experiments to capture and compare results over
+        time.
+      </li>
+      <li>
+        <a href="https://github.com/nteract/hydrogen">Hydrogen</a> - Run code
+        inline in Atom using Jupyter kernels.
+      </li>
+      <li>
+        <a href="https://github.com/jupyter/notebook">Jupyter Notebook</a> -
+        Main Jupyter notebook runtime.
+      </li>
+      <li>
+        <a href="https://github.com/jupyterhub/jupyterhub">JupyterHub</a> -
+        Multi-user server for Jupyter.
+      </li>
+      <li>
+        <a href="https://github.com/jupyterlab/jupyterlab">JupyterLab</a> -
+        JupyterLab is the next generation user interface for Jupyter.
+      </li>
+      <li>
+        <a href="https://github.com/tweag/jupyterWith">JupyterWith</a> -
+        Nix-based framework for the definition of declarative and reproducible
+        Jupyter environments.
+      </li>
+      <li>
+        <a href="https://github.com/ShopRunner/jupyter-notify"
+          >ShopRunner/jupyter-notify</a
+        >
+        - Cell magic for browser notification of cell completion.
+      </li>
+      <li>
+        <a href="https://github.com/kaggle/docker-python"
+          >kaggle/docker-python</a
+        >
+        - Kaggle Python docker image that includes datasets and packages.
+      </li>
+      <li>
+        <a href="https://github.com/ml-tooling/ml-workspace">ML Workspace</a> -
+        Docker image that includes Jupyter(Lab) and various packages for data
+        science/machine learning.
+      </li>
+      <li>
+        <a href="https://github.com/nteract/nteract">nteract</a> - Native
+        desktop notebook frontend.
+      </li>
+      <li>
+        <a href="https://github.com/stencila/stencila">Stencila</a> - Native
+        desktop notebook frontend.
+      </li>
+      <li>
+        <a href="https://github.com/voila-dashboards/voila">voila</a> -
+        Notebooks as interactive standalone web applications.
+      </li>
+      <li>
+        <a href="https://code.visualstudio.com/docs/python/jupyter-support"
+          >Visual Studio Code</a
+        >
+        - Native desktop notebook frontend.
+      </li>
+    </ul>
+    <h2 id="collaborationeducation">Collaboration/Education</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/osteele/callgraph">callgraph</a> - Magic to
+        display a function call graph.
+      </li>
+      <li>
+        <a href="https://github.com/IllumiDesk/illumidesk">IllumiDesk</a> -
+        Docker-based JupyterHub + LTI + nbgrader distribution for education.
+      </li>
+      <li>
+        <a href="https://github.com/jiffyclub/ipythonblocks">IPythonBlocks</a> -
+        Practice Python with colored grids in Jupyter.
+      </li>
+      <li>
+        <a href="https://github.com/jupyter/jupyter-drive">jupyter-drive</a> -
+        Google drive for Jupyter.
+      </li>
+      <li>
+        <a href="https://github.com/ibleducation/jupyter-viewer-xblock"
+          >jupyter-viewer-xblock</a
+        >
+        - Fetch and display part of, or an entire Jupyter Notebook in an Open
+        edX XBlock.
+      </li>
+      <li>
+        <a href="https://github.com/ibleducation/jupyter-edx-grader-xblock"
+          >jupyter-edx-grader-xblock</a
+        >
+        - Auto-grade a student assignment created as a Jupyter notebook and
+        write the score in the Open edX gradebook.
+      </li>
+      <li>
+        <a href="https://github.com/jupyterhub/ltiauthenticator"
+          >LTI Launch JupyterHub Authenticator</a
+        >
+        - Authentication via Edx.
+      </li>
+      <li>
+        <a href="https://github.com/parmentelat/nbautoeval">nbautoeval</a> -
+        Create auto-evaluated exercises.
+      </li>
+      <li>
+        <a href="https://github.com/jupyterhub/nbgitpuller">nbgitpuller</a> -
+        Sync a git repository one-way to a local path.
+      </li>
+      <li>
+        <a href="https://github.com/jupyter/nbgrader">nbgrader</a> - Assigning
+        and grading of Jupyter notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/lgpage/nbtutor">nbtutor</a> - Visualize
+        Python code execution (line-by-line).
+      </li>
+    </ul>
+    <h2 id="visualization">Visualization</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/altair-viz/altair">Altair</a> - Declarative
+        visualization library for Python, based on
+        <a href="http://vega.github.io/vega">Vega</a> and
+        <a href="https://github.com/vega/vega-lite">Vega-Lite</a>.
+      </li>
+      <li>
+        <a href="https://bokeh.pydata.org/en/latest/">Bokeh</a> - Interactive
+        visualization library that targets modern web browsers for presentation.
+      </li>
+      <li>
+        <a href="https://github.com/bloomberg/bqplot">bqplot</a> - Grammar of
+        Graphics-based interactive plotting framework for Jupyter.
+      </li>
+      <li>
+        <a href="https://github.com/evidentlyai/evidently">Evidently</a> -
+        Interactive reports to analyze machine learning models during validation
+        or production monitoring.
+      </li>
+      <li>
+        <a href="https://github.com/bsnacks000/IPySigma-Demo">IPySigma</a> -
+        Prototype network visualization frontend for Jupyter notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/nicohlr/ipychart">ipychart</a> - Interactive
+        Chart.js plots in Jupyter.
+      </li>
+      <li>
+        <a href="https://github.com/jupyter-widgets/ipyleaflet">ipyleaflet</a> -
+        Interactive visualization library for Leaflet.js maps in Jupyter
+        notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/QuantStack/ipysheet/">ipysheet</a> -
+        Interactive spreadsheets in Jupyter.
+      </li>
+      <li>
+        <a href="https://github.com/QuantStack/ipytree/">ipytree</a> - Tree UI
+        element for Jupyter.
+      </li>
+      <li>
+        <a href="https://github.com/maartenbreddels/ipywebrtc">ipywebrtc</a> -
+        Video/Audio streaming in Jupyter.
+      </li>
+      <li>
+        <a href="https://github.com/jupyter-widgets/ipywidgets">ipywidgets</a> -
+        UI widgets for Jupyter.
+      </li>
+      <li>
+        <a href="https://github.com/maartenbreddels/ipyvolume">ipyvolume</a> -
+        3D plotting for Python in Jupyter based on widgets and WebGL.
+      </li>
+      <li>
+        <a
+          href="https://github.com/InsightSoftwareConsortium/itk-jupyter-widgets"
+          >itk-jupyter-widgets</a
+        >
+        - Interactive widgets to visualize images in 2D and 3D.
+      </li>
+      <li>
+        <a href="https://github.com/AaronWatters/jp_doodle">jp_doodle</a> -
+        Infrastructure for building special purpose interactive diagrams in 2D
+        and 3D.
+      </li>
+      <li>
+        <a href="https://github.com/krassowski/jupyter-manim">jupyter-manim</a>
+        - Display
+        <a href="https://github.com/3b1b/manim">manim</a> (Mathematical
+        Animation Engine) videos or GIFs in Jupyter notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/pbugnion/gmaps">jupyter-gmaps</a> -
+        Interactive visualization library for Google Maps in Jupyter notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/lux-org/lux">lux</a> - Recommends a set of
+        visualizations whenever a dataframe is printed in a notebook.
+      </li>
+      <li>
+        <a href="http://mpld3.github.io">mpld3</a> - Combining Matplotlib and
+        D3js for interactive data visualizations.
+      </li>
+      <li>
+        <a href="https://github.com/scwilkinson/pd-replicator">pd-replicator</a>
+        - Copy a pandas DataFrame to the clipboard with one click.
+      </li>
+      <li>
+        <a href="https://github.com/pyecharts/pyecharts">pyecharts</a> - Python
+        interface for the
+        <a href="https://github.com/apache/incubator-echarts">ECharts</a>
+        visualization library.
+      </li>
+      <li>
+        <a href="https://github.com/jovyan/pythreejs">pythreejs</a> - Python /
+        ThreeJS bridge utilizing the Jupyter widget infrastructure.
+      </li>
+      <li>
+        <a href="https://github.com/quantopian/qgrid">Qgrid</a> - Interactive
+        grid for sorting, filtering, and editing DataFrames in Jupyter
+        notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/timkpaine/tributary">tributary</a> - Python
+        data streams with Jupyter support.
+      </li>
+      <li>
+        <a href="https://github.com/tqdm/tqdm">tqdm</a> - Fast, extensible
+        progress bar for loops and iterables.
+      </li>
+      <li>
+        <a href="https://github.com/QuantStack/xleaflet">xleaflet</a> - C++
+        Backend for ipyleaflet.
+      </li>
+      <li>
+        <a href="https://github.com/QuantStack/xwebrtc">xwebrtc</a> - C++
+        Backend for ipywebrtc.
+      </li>
+      <li>
+        <a href="https://github.com/QuantStack/xwidgets">xwidgets</a> - C++
+        Backend for ipywidgets.
+      </li>
+    </ul>
+    <h2 id="renderingpublishingconversion">Rendering/Publishing/Conversion</h2>
+    <ul>
+      <li>
+        <a href="http://mybinder.org">Binder</a> - Turn a GitHub repo into a
+        collection of interactive notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/takluyver/bookbook">Bookbook</a> - Bookbook
+        converts a set of notebooks in a directory to HTML or PDF, preserving
+        cross references within and between notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/ideonate/cdsdashboards"
+          >ContainDS Dashboards</a
+        >
+        - JupyterHub extension to host authenticated scripts or notebooks in any
+        framework (Voilà, Streamlit, Plotly Dash etc).
+      </li>
+      <li>
+        <a href="https://github.com/manugraj/ganimede">Ganimede</a> - Store,
+        version, edit and execute notebooks in sandboxes and integrate them
+        directly via REST interfaces.
+      </li>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+          >Jupyter Book</a
+        >
+        - Build publication-quality books and documents from computational
+        material.
+      </li>
+      <li>
+        <a href="https://github.com/mwouts/jupytext">Jupytext</a> - Convert and
+        synchronize notebooks with text formats (e.g. Python or Markdown files)
+        that work well under version control.
+      </li>
+      <li>
+        <a href="https://github.com/kracekumar/jut">jut</a> - CLI to nicely
+        display notebooks in the terminal.
+      </li>
+      <li>
+        <a href="https://github.com/gitjeff05/kapitsa">Kapitsa</a> - CLI to
+        search local Jupyter notebooks.
+      </li>
+      <li>
+        <a href="https://nbconvert.readthedocs.io">nbconvert</a> - Convert
+        Notebooks to other formats.
+      </li>
+      <li>
+        <a href="https://github.com/fastai/nbdev">nbdev</a> - Develop, package
+        and distribute Python packages to PyPI using Jupyter as a
+        <a href="https://en.wikipedia.org/wiki/Literate_programming"
+          >Literate Programing</a
+        >
+        environment.
+      </li>
+      <li>
+        <a href="https://github.com/jhamrick/nbflow">nbflow</a> - One-button
+        reproducible workflows with Jupyter and Scons.
+      </li>
+      <li>
+        <a href="https://www.nbinteract.com">nbinteract</a> - Create interactive
+        webpages from Jupyter notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/conery/nbscan">nbscan</a> - Search for and
+        print cells contents of Jupyter notebooks.
+      </li>
+      <li>
+        <a href="https://getnikola.com">Nikola</a> - Static Site Generator that
+        converts notebooks into websites.
+      </li>
+      <li>
+        <a href="https://github.com/aaren/notedown/">notedown</a> - Convert
+        Jupyter notebooks to markdown (and back).
+      </li>
+      <li>
+        <a href="https://github.com/nteract/papermill">Papermill</a> - Tool for
+        parameterizing, executing, and analyzing Jupyter notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/ploomber/ploomber">Ploomber</a> - Run a
+        collection of notebooks and scripts in a reproducible manner using a
+        <code>pipeline.yaml</code> file.
+      </li>
+      <li>
+        <a href="https://github.com/minodes/pynb">pynb</a> - Jupyter Notebooks
+        as plain Python code with embedded Markdown text.
+      </li>
+      <li>
+        <a href="https://github.com/damianavila/RISE">RISE</a> - Reveal.js
+        Jupyter/IPython Slideshow.
+      </li>
+      <li>
+        <a href="https://github.com/nthiery/rst-to-ipynb">rst2ipynb</a> -
+        Convert standalone reStructuredText files to Jupyter notebook file.
+      </li>
+      <li>
+        <a href="https://github.com/QuantStack/voila">Voila</a> - Rendering of
+        live Jupyter Notebooks with interactive widgets, allowing dashboarding
+        based on Jupyter Notebooks.
+      </li>
+    </ul>
+    <h2 id="version-control">Version Control</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/jupyterlab/jupyterlab-git">git</a> -
+        Extension for git integration.
+      </li>
+      <li>
+        <a href="https://github.com/thoth-station/jupyter-nbrequirements/"
+          >jupyter-nbrequirements</a
+        >
+        - Dependency management and optimization in Jupyter Notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/jupyter/nbdime">nbdime</a> - Tools for
+        diffing and merging of Jupyter notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/nbQA-dev/nbQA">nbQA</a> - Run any standard
+        Python code quality tool on a Jupyter Notebook, from the command-line or
+        via pre-commit.
+      </li>
+      <li>
+        <a href="https://www.reviewnb.com/">ReviewNB</a> - Code reviews for
+        Jupyter Notebooks.
+      </li>
+    </ul>
+    <h2 id="jupyterlab-extensions">JupyterLab Extensions</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/jupyterlab/jupyterlab-celltags">celltags</a>
+        - Extension to organise and execute notebooks using cell tags.
+      </li>
+      <li>
+        <a href="https://github.com/ryantam626/jupyterlab_code_formatter"
+          >code_formatter</a
+        >
+        - A universal code formatter.
+      </li>
+      <li>
+        <a href="https://github.com/jupyterlab/debugger">debugger</a> - A visual
+        debugger for Jupyter notebooks, consoles, and source files.
+      </li>
+      <li>
+        <a href="https://github.com/QuantStack/jupyterlab-drawio">drawio</a> -
+        Extension that displays drawio/mxgraph diagrams.
+      </li>
+      <li>
+        <a href="https://github.com/elyra-ai/elyra">elyra</a> - A visual editor
+        for creating and running notebook (or Python script) pipelines locally
+        or remotely.
+      </li>
+      <li>
+        <a href="https://github.com/krassowski/jupyterlab-go-to-definition"
+          >go-to-definition</a
+        >
+        - Extension for navigating to the definition of a variable or function
+        in JupyterLab.
+      </li>
+      <li>
+        <a href="https://github.com/jupyterlab/jupyterlab-google-drive"
+          >google-drive</a
+        >
+        - Extension for Google Drive integration.
+      </li>
+      <li>
+        <a href="https://github.com/timkpaine/jupyterlab_email"
+          >jupyterlab_email</a
+        >
+        - Email notebooks and their content from within JupyterLab.
+      </li>
+      <li>
+        <a href="https://github.com/gavincyi/jupyterlab-executor"
+          >jupyterlab-executor</a
+        >
+        - Extension to execute scripts from the Jupyterlab file browser.
+      </li>
+      <li>
+        <a href="https://github.com/kyso-io/jupyterlab-extension"
+          >jupyterlab-kyso</a
+        >
+        - Extension to publish notebooks to the
+        <a href="https://kyso.io">Kyso</a> platform from Jupyterlab.
+      </li>
+      <li>
+        <a href="https://github.com/jpmorganchase/jupyterlab_templates"
+          >jupyterlab_templates</a
+        >
+        - Notebook templates in JupyterLab.
+      </li>
+      <li>
+        <a href="https://github.com/jupyterlab/jupyterlab-latex">latex</a> -
+        Extension for live editing of LaTeX documents.
+      </li>
+      <li>
+        <a href="https://github.com/krassowski/jupyterlab-lsp">lsp</a> -
+        IDE-like features (code navigation, hover suggestions, linters,
+        diagnostics, kernel-less autocompletion etc.)
+      </li>
+      <li>
+        <a href="https://github.com/dnanhkhoa/nb_black">nb_black</a> - Extension
+        to keep Python code automatically formatted using
+        <a href="https://github.com/psf/black">black</a>.
+      </li>
+      <li>
+        <a href="https://github.com/jtpio/jupyterlab-python-bytecode"
+          >python-bytecode</a
+        >
+        - Explore CPython Bytecode in JupyterLab.
+      </li>
+      <li>
+        <a href="https://github.com/parente/jupyterlab-quickopen">quickopen</a>
+        - Quickly open a file in JupyterLab by typing part of its name.
+      </li>
+      <li>
+        <a href="https://github.com/jupyterlab/jupyterlab-shortcutui"
+          >shortcutui</a
+        >
+        - An extension for managing keyboard shortcuts.
+      </li>
+      <li>
+        <a href="https://github.com/jupyter-widgets/jupyterlab-sidecar"
+          >sidecar</a
+        >
+        - A sidecar output widget for JupyterLab.
+      </li>
+      <li>
+        <a href="https://github.com/pbugnion/jupyterlab-sql">sql</a> - SQL GUI
+        for JupyterLab.
+      </li>
+      <li>
+        <a href="https://github.com/jtpio/jupyterlab-system-monitor"
+          >system-monitor</a
+        >
+        - Extension to display system metrics.
+      </li>
+      <li>
+        <a href="https://github.com/codota/tabnine-jupyterlab">tabnine</a> -
+        Tabnine AI auto completer extension.
+      </li>
+      <li>
+        <a href="https://github.com/timkpaine/jupyterlab_templates"
+          >templates</a
+        >
+        - Support for Jupyter Notebook templates.
+      </li>
+      <li>
+        <a href="https://github.com/telamonian/theme-darcula">theme-darcula</a>
+        - A handsome Darcula theme for Jupyterlab.
+      </li>
+      <li>
+        <a href="https://github.com/jupyterlab/jupyterlab-toc">toc</a> -
+        Extension that provides a table of contents for notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/jtpio/jupyterlab-topbar">topbar</a> - Top
+        Bar extension for JupyterLab.
+      </li>
+      <li>
+        <a href="https://github.com/lckr/jupyterlab-variableInspector"
+          >variableinspector</a
+        >
+        - Variable inspector extension that shows variables and their values.
+      </li>
+      <li>
+        <a href="https://github.com/jwkvam/jupyterlab-vim">vim</a> - Vim
+        notebook cell bindings.
+      </li>
+      <li>
+        <a href="https://github.com/altair-viz/jupyterlab_voyager">voyager</a> -
+        Extension to view CSV and JSON data in
+        <a href="http://vega.github.io/voyager/">Voyager</a>.
+      </li>
+    </ul>
+    <h2 id="testing">Testing</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/chmp/ipytest">ipytest</a> - Test runner for
+        running unit tests from within a notebook.
+      </li>
+      <li>
+        <a href="https://github.com/computationalmodelling/nbval">nbval</a> -
+        Py.test plugin for validating Jupyter notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/QuantEcon/sphinxcontrib-jupyter"
+          >sphinxcontrib-jupyter</a
+        >
+        - Sphinx Extension for Generating Jupyter Notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/bollwyvl/nosebook">nosebook</a> - Nose
+        plugin for finding and running IPython notebooks as nose tests.
+      </li>
+      <li>
+        <a href="https://github.com/treebeardtech/treebeard">treebeard</a> -
+        GitHub Action for testing/scheduling Jupyter notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/ReviewNB/treon">treon</a> - Easy-to-use test
+        framework for Jupyter Notebooks.
+      </li>
+    </ul>
+    <h2 id="domain-specific-projects">Domain-Specific Projects</h2>
+    <ul>
+      <li>
+        <a href="https://developers.arcgis.com/python/">ArcGIS</a> - Library for
+        working with maps and geospatial data, powered by web GIS.
+      </li>
+      <li>
+        <a href="http://genepattern-notebook.org">GenePattern Notebook</a> -
+        Integrating Genomic Analysis with Interactive Notebooks.
+      </li>
+      <li>
+        <a href="https://github.com/OpenGeoscience/geonotebook">GeoNotebook</a>
+        - Extension for exploratory geospatial analysis.
+      </li>
+      <li>
+        <a href="https://github.com/nir/jupylet">Jupylet</a> - Create 2D and 3D
+        games, graphics, live music and sound interactively in a Jupyter
+        notebook.
+      </li>
+      <li>
+        <a href="https://docs.kepler.gl/docs/keplergl-jupyter">keplergl</a> -
+        Jupyter extension for visual exploration of large-scale geolocation data
+        sets.
+      </li>
+      <li>
+        <a href="https://github.com/parrt/lolviz">lolviz</a> - Data-structure
+        visualization tool for lists of lists, lists, dictionaries.
+      </li>
+      <li>
+        <a href="https://www.quantopian.com/notebooks/survey"
+          >Quantopian Notebooks</a
+        >
+        - Jupyter-based platform for financial research.
+      </li>
+      <li>
+        <a href="https://github.com/BruceSherwood/vpython-jupyter"
+          >vpython-jupyter</a
+        >
+        - VPython 3D engine running in a Jupyter notebook.
+      </li>
+    </ul>
+    <h2 id="hosted-notebook-solutions">Hosted Notebook Solutions</h2>
+    <ul>
+      <li>
+        <a href="https://www.anaconda.com/enterprise/">Anaconda Enterprise</a> -
+        Multi-user collaboration and one-click deployment of models, notebooks,
+        and dashboards.
+      </li>
+      <li>
+        <a href="https://notebooks.azure.com">Azure Notebooks</a> - Jupyter
+        notebooks running in the cloud on Microsoft Azure.
+      </li>
+      <li>
+        <a href="https://cocalc.com">CoCalc</a> - Notebooks with 17 supported
+        kernel types, course management, LaTeX document authoring, simultaneous
+        document editing and integration with the SageMath computer algebra
+        system.
+      </li>
+      <li>
+        <a href="https://www.datascience.com">DataScience.com</a> - Platform for
+        enterprise data science.
+      </li>
+      <li>
+        <a href="https://www.deepnote.com">Deepnote</a> - Jupyter-compatible
+        data science notebook with real-time collaboration, versioning and easy
+        deployment.
+      </li>
+      <li>
+        <a href="https://www.dominodatalab.com">Domino Data Lab</a> - Data
+        science platform with integrated collaboration tools, environment
+        management and compute grid.
+      </li>
+      <li>
+        <a href="https://cloud.google.com/ai-platform-notebooks"
+          >Google Cloud AI Platform Notebooks</a
+        >
+        - Managed JupyterLab notebook instances configured with GPU-enabled
+        machine learning frameworks on Google Cloud Platform.
+      </li>
+      <li>
+        <a
+          href="https://cloud.google.com/dataproc/docs/concepts/components/jupyter"
+          >Google Cloud Dataproc Jupyter component</a
+        >
+        - Jupyter and JupyterLab for Apache Spark using Google Cloud Dataproc.
+      </li>
+      <li>
+        <a href="https://colab.research.google.com">Google Colaboratory</a> -
+        Cloud-based Jupyter environment aimed at machine learning education and
+        research.
+      </li>
+      <li>
+        <a href="https://gryd.us">Gryd</a> - Simple, managed, ready-to-use,
+        cloud based Jupyter notebooks supporting multiple languages.
+      </li>
+      <li>
+        <a href="https://kyso.io">Kyso</a> - Data science platform to publish
+        and share Jupyter notebooks as data blogs and web applications.
+      </li>
+      <li>
+        <a href="https://naas.ai">Naas</a> - JupyterLab environment with magic
+        scheduling/notification functionaltiy and assets/dependency/secrets
+        management.
+      </li>
+      <li>
+        <a href="https://wikitech.wikimedia.org/wiki/PAWS">PAWS</a> - Jupyter
+        notebook deployment customized for interacting with Wikimedia wikis.
+      </li>
+      <li>
+        <a href="https://notebooks.rmotr.com">RMOTR Notebooks</a> -
+        JupyterLab-based data science environment in the cloud.
+      </li>
+      <li>
+        <a href="https://spell.run">Spell.run</a> - End-to-end platform for
+        machine learning and deep learning.
+      </li>
+    </ul>
+    <h2 id="official-resources-and-documentation">
+      Official Resources and Documentation
+    </h2>
+    <ul>
+      <li>
+        <a href="http://jupyterlab.readthedocs.io/en/stable/index.html"
+          >JupyterLab Documentation</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels"
+          >Jupyter kernels</a
+        >
+        - List of all programming languages available as Jupyter kernels.
+      </li>
+      <li>
+        <a href="https://jupyter-client.readthedocs.io/en/latest/kernels.html"
+          >Making kernels for Jupyter</a
+        >
+      </li>
+      <li>
+        <a href="https://try.jupyter.org">Try Jupyter</a> - Try Jupyter in your
+        browser.
+      </li>
+    </ul>
+    <h2 id="community-resources">Community Resources</h2>
+    <ul>
+      <li>
+        Conference Talks -
+        <a href="http://pyvideo.org/search.html?q=jupyter">PyVideo.org</a>,
+        <a
+          href="https://www.youtube.com/playlist?list=PL055Epbe6d5aP6Ru42r7hk68GTSaclYgi"
+          >JupyterCon</a
+        >
+      </li>
+      <li>
+        <a href="https://elc.github.io/jupyter-map/">jupyter-map</a> - Map of
+        university institutions that use Jupyter.
+      </li>
+      <li>
+        Gitter -
+        <a href="https://gitter.im/jupyter/jupyter">Jupyter Gitter Chatroom</a>
+      </li>
+      <li>
+        GitHub - Topics:
+        <a href="https://github.com/topics/jupyter">jupyter</a>,
+        <a href="https://github.com/topics/jupyter-kernels">jupyter-kernels</a>,
+        <a href="https://github.com/topics/jupyter-notebook">jupyter-notebook</a
+        >, <a href="https://github.com/topics/jupyterhub">jupyterhub</a>,
+        <a href="https://github.com/topics/jupyterlab">jupyterlab</a>,
+        <a href="https://github.com/topics/jupyterlab-extension"
+          >jupyterlab-extension</a
+        >
+      </li>
+      <li>
+        GitHub - Search:
+        <a href="https://github.com/search?type=Repositories&amp;q=jupyter"
+          >jupyter</a
+        >
+      </li>
+      <li>
+        Mailing Lists -
+        <a href="https://groups.google.com/forum/#!forum/jupyter"
+          >Jupyter General Mailing List</a
+        >,
+        <a href="https://groups.google.com/forum/#!forum/jupyter-education"
+          >Jupyter in Education Mailing List</a
+        >
+      </li>
+      <li>
+        PyPI -
+        <a href="https://pypi.org/search/?&amp;c=Framework+%3A%3A+Jupyter"
+          ><code>Framework :: Jupyter</code></a
+        >
+        is the PyPI trove classifier for Jupyter projects.
+      </li>
+      <li>
+        Reddit - Subreddits:
+        <a href="https://www.reddit.com/r/IPython/">r/IPython</a>,
+        <a href="https://www.reddit.com/r/Jupyter/">r/Jupyter/</a>
+      </li>
+      <li>
+        Stack Overflow - Tags:
+        <a href="https://stackoverflow.com/questions/tagged/jupyter">jupyter</a
+        >,
+        <a href="https://stackoverflow.com/questions/tagged/jupyter-notebook"
+          >jupyter-notebook</a
+        >
+      </li>
+    </ul>
+    <h2 id="articlesguidestutorials">Articles/Guides/Tutorials</h2>
+    <ul>
+      <li>
+        <a href="http://mbakker7.github.io/exploratory_computing_with_python/"
+          >Exploratory computing with Python</a
+        >
+        - Collection of notebooks covering scientific computing.
+      </li>
+      <li>
+        <a
+          href="https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks"
+          >List of Jupyter notebooks</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/jupyter-naas/awesome-notebooks"
+          >List of Jupyter notebooks II</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/guillaume-chevalier/How-to-Grow-Neat-Software-Architecture-out-of-Jupyter-Notebooks"
+          >How to Grow Neat Software Architecture out of Jupyter Notebooks</a
+        >
+        - Article and
+        <a href="https://www.youtube.com/watch?v=K4QN27IKr0g">video</a> about
+        growing a neat software architecture from notebooks.
+      </li>
+      <li>
+        <a
+          href="https://cloud.google.com/dataproc/docs/tutorials/jupyter-notebook"
+          >Install and run a Jupyter notebook in a Google Cloud Dataproc
+          cluster</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/bokeh/bokeh-notebooks"
+          >Interactive Web Plotting with Bokeh</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/markusschanta/talks/tree/master/2018-03%20-%20JupyterLab%20-%20Full%20Stack%20Quants"
+          >JupyterLab - Your Personal Data Science Workbench</a
+        >
+        - Talk about JupyterLab at Full Stack Quants London.
+      </li>
+      <li>
+        <a href="http://jupyter-contrib-nbextensions.readthedocs.io"
+          >Jupyter Notebook Extensions</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/dunovank/jupyter-themes"
+          >Jupyter Notebook Themes</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/"
+          >Jupyter tips, tricks and shortcuts</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/jrjohansson/scientific-python-lectures"
+          >Lectures on scientific computing with Python</a
+        >
+      </li>
+      <li>
+        <a href="https://the-littlest-jupyterhub.readthedocs.io/en/latest/"
+          >The Littlest JupyterHub</a
+        >
+        - JupyterHub distribution for 1-50 users on a single server; more
+        lightweight than the Zero to JupyterHub setup.
+      </li>
+      <li>
+        <a href="https://github.com/norvig/pytudes">pytudes</a> - List of
+        Jupyter Notebooks by Peter Norvig.
+      </li>
+      <li>
+        <a
+          href="https://www.gitbook.com/book/dansand/resguides-research-with-jupyter/details"
+          >ResGuides: research with Jupyter</a
+        >
+      </li>
+      <li>
+        <a href="http://zero-to-jupyterhub.readthedocs.io/en/latest/"
+          >Zero to JupyterHub</a
+        >
+        - Tutorial to help install and manage JupyterHub.
+      </li>
+    </ul>
+    <h2 id="contributing">Contributing</h2>
+    <p>
+      Your contributions are always welcome! Please take a look at the
+      <a
+        href="https://github.com/adebar/awesome-jupyter/blob/master/CONTRIBUTING.md"
+        >contribution guidelines</a
+      >
+      first.
+    </p>
+  </body>
+</html>

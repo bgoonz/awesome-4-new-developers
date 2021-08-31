@@ -1,0 +1,5 @@
+https://hipstersmoothie.com/blog/next-pages/,Using Next.js with Github Pages,https://github.com/unicodeveloper/awesome-nextjs#readme,Next.js error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://nextjs.org/learn,Learn,https://github.com/unicodeveloper/awesome-nextjs#readme,Next.js error: <HTTPError 308: 'Permanent Redirect'> | reason: Permanent Redirect
+https://zeit.co/blog/next5,Next.js 5: Universal Webpack, CSS Imports, Plugins and Zones,https://github.com/unicodeveloper/awesome-nextjs#readme,Next.js error: <HTTPError 308: 'Permanent Redirect'> | reason: Permanent Redirect
+https://arefaslani.github.io/next-boilerplate,Next Boilerplate,https://github.com/unicodeveloper/awesome-nextjs#readme,Next.js error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://www.manning.com/books/next-js-in-action,Next.js in Action,https://github.com/unicodeveloper/awesome-nextjs#readme,Next.js error: <HTTPError 404: ''> | reason: 

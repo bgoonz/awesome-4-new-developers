@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>readme</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="awesome-gif-awesome">Awesome GIF <a href="https://awesome.re"><img src="https://awesome.re/badge-flat.svg" alt="Awesome" /></a></h1>
+<blockquote>
+<p>A curated list of awesome <a href="https://en.wikipedia.org/wiki/GIF">GIF</a> resources.</p>
+</blockquote>
+<p>A list of tools, scripts, libraries, examples &amp; other resources related to the Graphics Interchange Format (GIF).</p>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#general-tools">General Tools</a></li>
+<li><a href="#utilities">Utilities</a></li>
+<li><a href="#libraries">Libraries</a>
+<ul>
+<li><a href="#actionscript">ActionScript</a></li>
+<li><a href="#c">C++</a></li>
+<li><a href="#c-sharp">C#</a></li>
+<li><a href="#haxe">Haxe</a></li>
+<li><a href="#java">Java</a></li>
+<li><a href="#javascript">JavaScript</a></li>
+<li><a href="#php">PHP</a></li>
+<li><a href="#objective-c">Objective-C</a></li>
+<li><a href="#swift">Swift</a></li>
+</ul></li>
+<li><a href="#gui">GUI</a></li>
+<li><a href="#hosting">Hosting</a></li>
+<li><a href="#online-tools">Online Tools</a></li>
+<li><a href="#community">Community</a></li>
+<li><a href="#niche">Niche</a></li>
+<li><a href="#scripts">Scripts</a>
+<ul>
+<li><a href="#frames-to-gif">Frames to GIF</a></li>
+<li><a href="#gif-to-frames">GIF to frames</a></li>
+<li><a href="#high-quality-gif">High quality GIF</a></li>
+<li><a href="#optimize-gif">Optimize GIF</a></li>
+<li><a href="#lossy-gif-compressor">Lossy GIF compressor</a></li>
+<li><a href="#making-gif-from-video">Making GIF from video</a></li>
+<li><a href="#cinemagraphs">Cinemagraphs</a></li>
+<li><a href="#perfect-loop">Perfect loop</a></li>
+<li><a href="#youtube-video-to-gif">Youtube video to GIF</a></li>
+<li><a href="#grabbing-each-frame-of-an-html5-canvas">Grabbing each frame of an HTML5 canvas</a></li>
+</ul></li>
+<li><a href="#miscellaneous">Miscellaneous</a></li>
+</ul>
+<h3 id="general-tools">General Tools</h3>
+<ul>
+<li><a href="https://www.ffmpeg.org">FFmpeg</a></li>
+<li><a href="http://www.imagemagick.org/script/index.php">ImageMagick</a></li>
+<li><a href="http://www.graphicsmagick.org/">GraphicsMagick</a> - GraphicsMagick is usually faster than ImageMagick.</li>
+<li><a href="http://zulko.github.io/moviepy/">MoviePy</a> - Python module for video editing.</li>
+</ul>
+<h3 id="utilities">Utilities</h3>
+<ul>
+<li><a href="https://github.com/lukechilds/gifgen">Gifgen</a> - Simple high quality GIF encoding</li>
+<li><a href="https://github.com/vvo/gifify">Gifify</a> - Convert any video file to an optimized animated GIF</li>
+<li><a href="https://github.com/jclem/gifify">Gifify (not the same)</a> - convert screen recording into GIF</li>
+<li><a href="https://github.com/kornelski/giflossy">Gifsicle</a> - lossy GIF compressor</li>
+<li><a href="https://github.com/jglovier/gifs">Gifs</a> - storage place for GIFs</li>
+<li><a href="https://github.com/yahoo/gifshot">Gifshot</a> - create animated GIFs from media by Yahoo. (<a href="http://yahoo.github.io/gifshot/">demo</a>)</li>
+<li><a href="https://github.com/videlalvaro/gifsockets">Gifsockets</a> - Real Time communication library using Animated GIFs as a transport</li>
+<li><a href="https://github.com/geelen/x-gif">X-gif</a> - a web component for flexible GIF playback</li>
+<li><a href="https://github.com/yaronn/GifW00t">GifW00t</a> - javascript web recorder</li>
+<li><a href="https://github.com/lelandbatey/gif-machine">gif-machine</a> - GIF creation from Youtube videos</li>
+<li><a href="https://github.com/jbochi/gifstreaming">gifstreaming</a> - Live video streaming server</li>
+<li><a href="https://github.com/dergachev/screengif">Screengif</a> - Create animated GIF screencasts</li>
+<li><a href="https://github.com/sidorares/vnc-over-gif">vnc-over-gif</a> - Serves screen updates as animated GIF over http</li>
+<li><a href="https://github.com/jaipandya/gifdeck">gifdeck</a> - Convert your SlideShares into animated GIFs</li>
+<li><a href="https://github.com/schuyler/gifbot">Gifbot</a> - GIF search for Slack</li>
+<li><a href="https://github.com/FuzzyWobble/GIF-Camera">Gif-camera</a> - create animated GIFs using webcam</li>
+<li><a href="https://github.com/zehfernandes/gifline">Gifline</a> - Chrome extension to put GIFs in your emails</li>
+<li><a href="https://github.com/markjaquith/gifdrop">Gifdrop</a> - Create a repository for your collection of gif images</li>
+<li><a href="https://github.com/node-gh/gh-gif">Gh-gif</a> - NodeGH plugin for commenting on pull requests/issues using GIF reactions</li>
+<li><a href="https://github.com/z24/tty2gif">Tty2gif</a> - record scripts and their outputs into both binary and GIF formats</li>
+<li><a href="https://github.com/desktoppr/giftoppr">Giftoppr</a> - Sync your favourite GIFs with Dropbox</li>
+<li><a href="https://github.com/Fauntleroy/GIFit">Gifit</a> - Chrome extension to make a GIF from a YouTube video</li>
+<li><a href="https://github.com/spite/ccapture.js">Ccapture.js</a> - Capture animations created with HTML5 canvas</li>
+<li><a href="https://getkap.co/">Kap</a> - Beautiful open-source app to capture your screen and export to GIF.</li>
+<li><a href="https://github.com/rotblauer/gifit">Gifit (the other one)</a> - Get a search resulting giphy GIF in markdown in stdout, ala <code>$ gifit kittens</code>.</li>
+<li><a href="https://github.com/ImageOptim/gifski">gifski</a> - High-quality GIF encoder based on libimagequant.</li>
+<li><a href="https://github.com/lettier/gifcurry">Gifcurry</a> - Open-source, Haskell-built editor for GIF makers.</li>
+</ul>
+<h3 id="libraries">Libraries</h3>
+<h4 id="actionscript">ActionScript</h4>
+<ul>
+<li><a href="https://github.com/theturtle32/Flash-Animated-GIF-Library">Flash Animated GIF Library</a> - AS3 library for playing Animated GIFs in Flash</li>
+</ul>
+<h4 id="c">C++</h4>
+<ul>
+<li><a href="https://github.com/pkrumins/node-gif">Node-gif</a> - C++ library to make GIF</li>
+<li><a href="https://github.com/charlietangora/gif-h">Gif-h</a> - C++ one-header library for the creation of animated GIFs</li>
+<li><a href="https://github.com/jesusgollonet/ofxGifEncoder">OfxGifEncoder</a> - C++ openframeworks addon to export animated GIFs</li>
+<li><a href="https://github.com/notnullnotvoid/msf_gif">msf_gif</a> - C/C++ single-header library for creating animated GIFs</li>
+</ul>
+<h3 id="c-sharp">
+C#
+</h2>
+<ul>
+<li><a href="https://github.com/Speiser/dot-screencap">dot-screencap</a> - A simple libary to record your screen and save it as animated GIF</li>
+<li><a href="https://github.com/thomaslevesque/WpfAnimatedGif">WpfAnimatedGif</a> - A simple library to display animated GIF images in WPF</li>
+<li><a href="https://github.com/thomaslevesque/XamlAnimatedGif">XamlAnimatedGif</a> - A simple library to display animated GIF images in XAML apps (WPF, WinRT, Windows Phone)</li>
+<li><a href="https://github.com/mrousavy/AnimatedGif">AnimatedGif</a> - A high performance .NET library for reading and creating animated GIFs</li>
+</ul>
+<h4 id="haxe">Haxe</h4>
+<ul>
+<li><a href="https://github.com/snowkit/gif">Gif</a> - Haxe GIF encoder</li>
+</ul>
+<h4 id="java">Java</h4>
+<ul>
+<li><a href="https://github.com/koral--/android-gif-drawable">Android-gif-drawable</a> - Views and Drawable for displaying animated GIFs on Android</li>
+<li><a href="https://github.com/Hipmob/gifanimateddrawable">gifanimateddrawable</a> - Use an animated GIF as an Android Drawable</li>
+<li><a href="https://github.com/RoiSoleil/GifView">GifView</a> - android library to deal with GIF</li>
+<li><a href="https://github.com/sbakhtiarov/gif-movie-view">Gif Movie View</a> - Android View widget for displaying GIF animations</li>
+<li><a href="https://github.com/felipecsl/GifImageView">GifImageView</a> - Android ImageView that handles animated GIF images</li>
+<li><a href="https://github.com/extrapixel/gif-animation">Gif-animation</a> - Processing library to play and export GIF</li>
+<li><a href="https://github.com/nbadal/android-gif-encoder">Android-gif-encoder</a> - animated GIF encoder for Android</li>
+<li><a href="https://github.com/quackware/GIFDroid">GIFDroid</a> - Android video to GIF converter</li>
+<li><a href="https://github.com/CaptPhunkosis/Android-GifStitch">Android-GifStitch</a> - create and share animated GIFs</li>
+</ul>
+<h4 id="javascript">JavaScript</h4>
+<ul>
+<li><a href="https://github.com/jnordberg/gif.js">Gif.js</a> - Javascript - create GIF from the DOM</li>
+<li><a href="https://github.com/deanm/omggif">Omggif</a> - Javascript - GIF 89a encoder and decoder</li>
+<li><a href="https://github.com/sole/Animated_GIF">Animated_GIF</a> - Javascript library for creating animated GIFs</li>
+<li><a href="https://github.com/krasimir/gifffer">Gifffer</a> JavaScript library that prevents the autoplaying of the animated GIFs</li>
+<li><a href="https://github.com/rubentd/gifplayer">Gifplayer</a> - jquery plugin to play and stop animated GIFs</li>
+<li><a href="https://github.com/shachaf/jsgif">Jsgif</a> - JavaScript GIF parser and player</li>
+<li><a href="https://github.com/tj/node-gify">node-gify</a> - Javascript convert videos to GIFs using ffmpeg and gifsicle</li>
+<li><a href="https://github.com/eugeneware/gifencoder">Gifencoder</a> - Server side animated GIF generation for node.js</li>
+<li><a href="https://github.com/hughsk/gif-video">Gif-video</a> - Javascript Convert a GIF image into an HTML5-ready video</li>
+<li><a href="https://github.com/apankrat/gif-player">Gif-player</a> - On-demand GIF loader/player in Javascript</li>
+<li><a href="https://github.com/Viral-MediaLab/gifgifLab-face">GifgifLab-face</a> - Facial-emotion detectors</li>
+<li><a href="https://github.com/javascipt/node-youtube">node-youtube</a> - Youtube to snapshots and GIFs.</li>
+</ul>
+<h4 id="php">PHP</h4>
+<ul>
+<li><a href="https://github.com/Sybio/GifCreator">GifCreator</a> - PHP class that creates animated GIF from multiple images</li>
+<li><a href="https://github.com/msng/spacer.gif">Spacer.gif</a> - PHP script offering spacer.gif 1x1</li>
+<li><a href="https://github.com/Sybio/GifFrameExtractor">GifFrameExtractor</a> - PHP class that separates all the frames of an animated GIF</li>
+</ul>
+<h4 id="objective-c">Objective-C</h4>
+<ul>
+<li><a href="https://github.com/mattt/AnimatedGIFImageSerialization">AnimatedGIFImageSerialization</a> - decodes an UIImage from Animated GIFs image data</li>
+<li><a href="https://github.com/mayoff/uiimage-from-animated-gif">UIimage from GIF</a> - UIImage category that loads animated GIFs</li>
+<li><a href="https://github.com/cyndibaby905/GIFRefreshControl">GIFRefreshControl</a> - “Twitter music” and “Yahoo! Weather” like pull-to-refresh control</li>
+<li><a href="https://github.com/yfme/UIImageView-PlayGIF">UIImageView-PlayGIF</a> - UIImageView category/subclass for playing GIF</li>
+<li><a href="https://github.com/Flipboard/FLAnimatedImage">FLAnimatedImage</a> - Gif engine for iOS by FlipBoard</li>
+<li><a href="https://github.com/arturogutierrez/Animated-GIF-iPhone">Animated-GIF-iPhone</a> - Support for Animated GIF on iOS</li>
+<li><a href="https://github.com/uzysjung/UzysAnimatedGifPullToRefresh">UzysAnimatedGifPullToRefresh</a> - PullToRefresh using animated GIF to any scrollView</li>
+<li><a href="https://github.com/smileEvday/SvGifView">SvGifView</a> - iOS load and display GIF</li>
+<li><a href="https://github.com/cemolcay/GiFHUD">GifHUD</a> - iOS progress hud for displaying only animated GIF images</li>
+<li><a href="https://github.com/ElvinJin/Video-Background-GIF">Video-Background GIF</a> - iOS Video Background GIF</li>
+<li><a href="https://github.com/kasatani/AnimatedGifExample">AnimatedGifExample</a> - iOS animated and transparent GIFs</li>
+<li><a href="https://github.com/dtorres/OLImageView">OLImageView</a> - iOS OLImage and OLImageView support for animated GIFs</li>
+</ul>
+<h4 id="swift">Swift</h4>
+<ul>
+<li><a href="https://github.com/kirualex/SwiftyGif">SwiftyGif</a> - High performance &amp; easy to use Gif engine</li>
+<li><a href="https://github.com/kaishin/gifu">Gifu</a> - animated GIF support for iOS in Swift</li>
+<li><a href="https://github.com/swiftgif/SwiftGif">SwiftGif</a> - UIImage extension with GIF support</li>
+</ul>
+<h3 id="gui">GUI</h3>
+<ul>
+<li><a href="http://www.glyph.video/">Glyph</a> - tool for generating seamlessly looping GIFs and cinemagraphs from videos</li>
+<li><a href="https://sourceforge.net/projects/qgifer/">Qgifer</a></li>
+<li><a href="https://github.com/orta/GIFs">GIFs</a> - Mac App for finding GIFs</li>
+<li><a href="https://github.com/caraesten/VineGifR">VineGifR</a> - Mac app to turn Vine videos into GIFs</li>
+<li><a href="https://github.com/unixpickle/GifPro">GifPro</a> - GIF encoder for Mac</li>
+<li><a href="https://github.com/Waitsnake/AnimatedGif">AnimatedGif</a> - Mac Screensaver for playing GIFs</li>
+</ul>
+<h3 id="hosting">Hosting</h3>
+<ul>
+<li><a href="https://gfycat.com">Gfycat</a> - Maximum GIF/video length: 15 seconds. Maximum file upload is 300Mb</li>
+<li><a href="https://imgur.com">Imgur</a> - Maximum file upload is 50MB</li>
+</ul>
+<h3 id="online-tools">Online Tools</h3>
+<ul>
+<li><a href="https://imgur.com/vidgif">Vid2gif</a> - Video to GIF by imgur</li>
+<li><a href="https://ezgif.com/">EzGif</a> - Online GIF maker and image editor</li>
+<li><a href="https://giflr.com/">Giflr</a> - A web app for making or remixing animated GIFs</li>
+<li><a href="http://www.gif.gf/labs/face">Gif.gf</a> - Provide a matching GIF for your face</li>
+</ul>
+<h3 id="community">Community</h3>
+<ul>
+<li><a href="https://giphy.com">Giphy.com</a></li>
+<li><a href="https://9gag.com/gif">9gag.com/gif</a></li>
+<li><a href="http://www.reactiongifs.com/">Reactionsgifs</a></li>
+<li><a href="https://www.reddit.com/r/educationalgifs/">Educational Gifs</a></li>
+</ul>
+<h3 id="niche">Niche</h3>
+<ul>
+<li><a href="https://github.com/LindseyB/starwars-dot-gif">Starwars-dot-gif</a> - Python script to generate GIFs from star wars</li>
+</ul>
+<h3 id="scripts">Scripts</h3>
+<h4 id="frames-to-gif">Frames to GIF</h4>
+<p>FFmpeg</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">ffmpeg</span> -f image2 -i image%d.jpg animated.gif</a></code></pre></div>
+<p>Imagemagick</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">convert</span>   -delay 20   -loop 0   frames*.png   animated.gif</a></code></pre></div>
+<p>Bash script (<code>frames2gif.sh</code>) for GraphicsMagick, ImageMagick, FFmpeg</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="co">#!/bin/bash</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">if</span><span class="bu"> [</span> <span class="va">$#</span> <span class="ot">-ne</span> 5<span class="bu"> ]</span>; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="bu">echo</span> <span class="st">&quot;please provide the moviename and directory where to store the frames&quot;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="bu">echo</span> <span class="st">&quot;./frames2gif.sh [directory] [movie.mp4] [filename.gif] [gm|im|ffmpeg] [png|jpg]&quot;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="bu">exit</span> 1</a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">fi</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="kw">if</span><span class="bu"> [</span> <span class="st">&quot;png&quot;</span> <span class="ot">==</span> <span class="st">&quot;</span><span class="va">$5</span><span class="st">&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb3-8" title="8">        <span class="va">suffix=</span><span class="st">&quot;png&quot;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="kw">else</span></a>
+<a class="sourceLine" id="cb3-10" title="10">        <span class="va">suffix=</span><span class="st">&quot;jpg&quot;</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="kw">fi</span></a>
+<a class="sourceLine" id="cb3-12" title="12"></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="va">CONVERT=$(</span><span class="fu">which</span> convert<span class="va">)</span></a>
+<a class="sourceLine" id="cb3-14" title="14">    <span class="va">GM=$(</span><span class="fu">which</span> gm<span class="va">)</span></a>
+<a class="sourceLine" id="cb3-15" title="15">    <span class="va">FFMPEG=$(</span><span class="fu">which</span> ffmpeg<span class="va">)</span></a>
+<a class="sourceLine" id="cb3-16" title="16">    <span class="va">FFPROBE=$(</span><span class="fu">which</span> ffprobe<span class="va">)</span></a>
+<a class="sourceLine" id="cb3-17" title="17">    <span class="va">FPS=$($FFPROBE</span> <span class="ex">-show_streams</span> -select_streams v -i <span class="st">&quot;</span><span class="va">$2</span><span class="st">&quot;</span>  <span class="op">2&gt;</span>/dev/null <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&quot;r_frame_rate&quot;</span> <span class="kw">|</span> <span class="fu">cut</span> -d<span class="st">&#39;=&#39;</span> -f2 <span class="kw">|</span> <span class="fu">cut</span> -d<span class="st">&#39;/&#39;</span> -f1<span class="va">)</span></a>
+<a class="sourceLine" id="cb3-18" title="18">    <span class="bu">echo</span> <span class="st">&quot;FPS: </span><span class="va">${FPS}</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb3-19" title="19"><span class="kw">if</span><span class="bu"> [</span> <span class="st">&quot;im&quot;</span> <span class="ot">==</span> <span class="st">&quot;</span><span class="va">$4</span><span class="st">&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span> <span class="co"># use imagemagick</span></a>
+<a class="sourceLine" id="cb3-20" title="20">    <span class="va">FPS=$(</span><span class="bu">echo</span> <span class="st">&quot;1 / </span><span class="va">${FPS}</span><span class="st"> * 100&quot;</span> <span class="kw">|</span><span class="fu">bc</span> -l<span class="va">)</span></a>
+<a class="sourceLine" id="cb3-21" title="21">    <span class="va">$CONVERT</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">/*.</span><span class="va">${suffix}</span><span class="st">&quot;</span>  <span class="ex">-delay</span> <span class="va">${FPS}</span> -loop 0 <span class="st">&quot;</span><span class="va">$3</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb3-22" title="22"><span class="kw">elif</span><span class="bu"> [</span> <span class="st">&quot;gm&quot;</span> <span class="ot">==</span> <span class="st">&quot;</span><span class="va">$4</span><span class="st">&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span> <span class="co"># use graphicsmagick</span></a>
+<a class="sourceLine" id="cb3-23" title="23">    <span class="va">FPS=$(</span><span class="bu">echo</span> <span class="st">&quot;1 / </span><span class="va">${FPS}</span><span class="st"> * 100&quot;</span> <span class="kw">|</span><span class="fu">bc</span> -l<span class="va">)</span></a>
+<a class="sourceLine" id="cb3-24" title="24">    <span class="va">$GM</span> <span class="ex">convert</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">/*.</span><span class="va">${suffix}</span><span class="st">&quot;</span>  -delay <span class="va">${FPS}</span> -loop 0 <span class="st">&quot;</span><span class="va">$3</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb3-25" title="25"><span class="kw">else</span> <span class="co"># use crappy gif-algorithm from ffmpeg</span></a>
+<a class="sourceLine" id="cb3-26" title="26">    <span class="va">$FFMPEG</span> <span class="ex">-f</span> image2 -framerate <span class="va">${FPS}</span> -i <span class="st">&quot;</span><span class="va">$1</span><span class="st">/%08d.</span><span class="va">${suffix}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">$3</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb3-27" title="27"><span class="kw">fi</span></a></code></pre></div>
+<p>From <a href="https://github.com/graphific/DeepDreamVideo">DeepDreamVideo</a>, <a href="https://github.com/graphific/DeepDreamVideo/blob/master/frames2gif.sh">source</a></p>
+<h4 id="gif-to-frames">GIF to frames</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="ex">ffmpeg</span> -i video.mpg image%d.jpg</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="ex">convert</span> -coalesce animated.gif image%05d.png</a></code></pre></div>
+<h4 id="high-quality-gif">High quality GIF</h4>
+<p>with ffmpeg / based on this <a href="http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html">article</a></p>
+<ul>
+<li>Generate a palette :</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="co">#!/bin/sh</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="va">start_time=</span>30</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="va">duration=</span>3</a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="ex">ffmpeg</span> -y -ss <span class="va">$start_time</span> -t <span class="va">$duration</span> -i input.avi \</a>
+<a class="sourceLine" id="cb6-5" title="5">-vf fps=10,scale=320:-1:flags=lanczos,palettegen palette.png</a></code></pre></div>
+<ul>
+<li>Output the GIF using the palette :</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="co">#!/bin/sh</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="va">start_time=</span>30</a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="va">duration=</span>3</a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="ex">ffmpeg</span> -ss <span class="va">$start_time</span> -t <span class="va">$duration</span> -i input.avi -i palette.png -filter_complex \</a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="st">&quot;fps=10,scale=320:-1:flags=lanczos[x];[x][1:v]paletteuse&quot;</span> output.gif</a></code></pre></div>
+<p><a href="http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html">article</a></p>
+<h4 id="optimize-gif">Optimize GIF</h4>
+<pre><code>convert -layers Optimize output.gif output_optimized.gif</code></pre>
+<h4 id="lossy-gif-compressor">Lossy GIF Compressor</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="ex">./gifsicle</span> -O3 --lossy=80 -o lossy-compressed.gif input.gif</a></code></pre></div>
+<p><a href="https://kornel.ski/lossygif">Lossy Gif</a></p>
+<h4 id="making-gif-from-video">Making GIF from video</h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" title="1"><span class="im">from</span> moviepy.editor <span class="im">import</span> <span class="op">*</span></a>
+<a class="sourceLine" id="cb10-2" title="2"></a>
+<a class="sourceLine" id="cb10-3" title="3">clip <span class="op">=</span> (VideoFileClip(<span class="st">&quot;input.avi&quot;</span>)</a>
+<a class="sourceLine" id="cb10-4" title="4">        .subclip((<span class="dv">4</span>,<span class="fl">00.00</span>),(<span class="dv">5</span>,<span class="fl">00.00</span>))</a>
+<a class="sourceLine" id="cb10-5" title="5">        .resize(<span class="fl">0.3</span>))</a>
+<a class="sourceLine" id="cb10-6" title="6">clip.write_gif(<span class="st">&quot;output.gif&quot;</span>)</a></code></pre></div>
+<p><a href="http://zulko.github.io/blog/2014/01/23/making-animated-gifs-from-video-files-with-python/#converting-a-video-excerpt-into-a-gif">article</a></p>
+<h4 id="cinemagraphs">Cinemagraphs</h4>
+<p>Freezing a region</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" title="1"><span class="im">from</span> moviepy.editor <span class="im">import</span> <span class="op">*</span></a>
+<a class="sourceLine" id="cb11-2" title="2"></a>
+<a class="sourceLine" id="cb11-3" title="3">clip <span class="op">=</span> (VideoFileClip(<span class="st">&quot;input.avi&quot;</span>)</a>
+<a class="sourceLine" id="cb11-4" title="4">        .subclip((<span class="dv">4</span>,<span class="fl">00.00</span>),(<span class="dv">5</span>,<span class="fl">00.00</span>))</a>
+<a class="sourceLine" id="cb11-5" title="5">        .resize(<span class="fl">0.3</span>)</a>
+<a class="sourceLine" id="cb11-6" title="6">        .fx(vfx.freeze_region, outside_region<span class="op">=</span>(<span class="dv">170</span>, <span class="dv">230</span>, <span class="dv">380</span>, <span class="dv">320</span>)))</a>
+<a class="sourceLine" id="cb11-7" title="7">clip.write_gif(<span class="st">&quot;output.gif&quot;</span>, fps<span class="op">=</span><span class="dv">15</span>)</a></code></pre></div>
+<p><a href="http://zulko.github.io/blog/2014/01/23/making-animated-gifs-from-video-files-with-python/#freezing-a-region">article</a></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="ex">ffmpeg</span> \</a>
+<a class="sourceLine" id="cb12-2" title="2">-ss <span class="va">${starttime}</span> -t <span class="va">${duration}</span> -i <span class="va">${vidfile}</span>                         <span class="kw">`</span># <span class="ex">body</span> of loop<span class="kw">`</span> \</a>
+<a class="sourceLine" id="cb12-3" title="3">-ss TODO <span class="va">${starttime}</span> MINUS <span class="va">${duration}</span> -t <span class="va">${fadetime}</span> -i <span class="va">${vidfile}</span>  <span class="kw">`</span># <span class="ex">lead-in</span> for crossfade<span class="kw">`</span> \</a>
+<a class="sourceLine" id="cb12-4" title="4">-loop 1 -i <span class="va">${stillfile}</span>                                               <span class="kw">`</span># <span class="ex">masked</span> still image<span class="kw">`</span> \</a>
+<a class="sourceLine" id="cb12-5" title="5">-filter_complex <span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="st">  [0:v]setpts=PTS-STARTPTS[vid];                                      </span><span class="kw">`</span># <span class="ex">speed</span> adjustment - not needed here, so noop<span class="kw">`</span></a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="st">  color=white,scale=3840x2160,fade=in:st=0:d=</span><span class="va">${fadetime}</span><span class="st">[alpha];      </span><span class="kw">`</span># <span class="ex">crossfade</span> alpha, double length ahead of speed change<span class="kw">`</span></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="st">  [1:v][alpha]alphamerge[am];                                         </span><span class="kw">`</span># <span class="ex">apply</span> alpha to lead-in<span class="kw">`</span></a>
+<a class="sourceLine" id="cb12-9" title="9"><span class="st">  [am]setpts=PTS+(</span><span class="va">${duration}</span><span class="st">-</span><span class="va">${fadetime}</span><span class="st">)/TB[layer2];                  </span><span class="kw">`</span># <span class="ex">speed</span> adjustment and offset for lead-in<span class="kw">`</span></a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="st">  [vid][layer2]overlay[oo];                                           </span><span class="kw">`</span># <span class="ex">overlay</span> for crossfade<span class="kw">`</span></a>
+<a class="sourceLine" id="cb12-11" title="11"><span class="st">  [oo][2:v]overlay=shortest=1[out1];                                  </span><span class="kw">`</span># <span class="ex">overlay</span> still image<span class="kw">`</span></a>
+<a class="sourceLine" id="cb12-12" title="12"><span class="st">  [out1]crop=w=</span><span class="va">${cropfactor}</span><span class="st">*iw:h=</span><span class="va">${cropfactor}</span><span class="st">*ih:y=</span><span class="va">${yoffset}</span><span class="st">*ih,scale=</span><span class="va">${outputwidth}</span><span class="st">:-1, </span><span class="kw">`</span># <span class="ex">crop</span> and scale<span class="kw">`</span></a>
+<a class="sourceLine" id="cb12-13" title="13"><span class="st">  eq=gamma=</span><span class="va">${gamma}</span><span class="st">:contrast=</span><span class="va">${contrast}</span><span class="st">:saturation=</span><span class="va">${saturation}</span><span class="st">,unsharp                   </span><span class="kw">`</span># <span class="ex">final</span> adjustments<span class="kw">`</span></a>
+<a class="sourceLine" id="cb12-14" title="14"><span class="st">&quot;</span> -an output.mp4</a></code></pre></div>
+<p>by <a href="https://bitbucket.org/snippets/rbarnesatl/6jRB">Roger Barnes</a></p>
+<h4 id="perfect-loop">Perfect Loop</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" title="1"><span class="im">import</span> moviepy.editor <span class="im">as</span> mp</a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="im">from</span> moviepy.video.tools.cuts <span class="im">import</span> FramesMatches</a>
+<a class="sourceLine" id="cb13-3" title="3"></a>
+<a class="sourceLine" id="cb13-4" title="4">clip <span class="op">=</span> mp.VideoFileClip(<span class="st">&quot;input.avi&quot;</span>).resize(<span class="fl">0.3</span>)</a>
+<a class="sourceLine" id="cb13-5" title="5">scenes <span class="op">=</span> FramesMatches.from_clip(clip, <span class="dv">10</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb13-6" title="6"></a>
+<a class="sourceLine" id="cb13-7" title="7">selected_scenes <span class="op">=</span> scenes.select_scenes(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb13-8" title="8">selected_scenes.write_gifs(clip.resize(width<span class="op">=</span><span class="dv">450</span>), <span class="st">&quot;./outputs_directory&quot;</span>)</a></code></pre></div>
+<p><a href="http://zulko.github.io/blog/2015/02/01/extracting-perfectly-looping-gifs-from-videos-with-python-and-moviepy/">article</a></p>
+<h4 id="youtube-video-to-gif">Youtube video to GIF</h4>
+<ul>
+<li>Download it via youtube-dl and then convert it.</li>
+</ul>
+<pre><code>youtube-dl https://www.youtube.com/watch?v=V2XpsaLqXc8</code></pre>
+<p><a href="https://rg3.github.io/youtube-dl/">Youtube-dl</a></p>
+<ul>
+<li>with <a href="https://imgur.com/vidgif">vid2gif</a> online - <a href="https://github.com/jimgur/gif">source</a></li>
+</ul>
+<h4 id="grabbing-each-frame-of-an-html5-canvas">Grabbing each frame of an HTML5 Canvas</h4>
+<p>Using <a href="https://phantomjs.org">PhantomJS</a>.</p>
+<p>Example with this <a href="http://www.effectgames.com/demos/canvascycle/?sound=0">canvas</a>.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">var</span> webPage <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;webpage&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">var</span> page <span class="op">=</span> <span class="va">webPage</span>.<span class="at">create</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4"></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="kw">var</span> NB_FRAME <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="kw">var</span> current <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-7" title="7"></a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="va">page</span>.<span class="at">open</span>(<span class="st">&#39;http://www.effectgames.com/demos/canvascycle/?sound=0&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb15-9" title="9"><span class="kw">function</span>(status) <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-10" title="10">  <span class="cf">if</span> (status <span class="op">===</span> <span class="st">&quot;success&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-11" title="11">      <span class="kw">var</span> current <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-12" title="12">      <span class="kw">var</span> grabber <span class="op">=</span> <span class="at">setInterval</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-13" title="13">          <span class="kw">var</span> frame <span class="op">=</span> <span class="va">page</span>.<span class="at">evaluate</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-14" title="14">           <span class="cf">return</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;mycanvas&#39;</span>).<span class="at">toDataURL</span>(<span class="st">&quot;image/png&quot;</span>).<span class="at">split</span>(<span class="st">&quot;,&quot;</span>)[<span class="dv">1</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-15" title="15">          <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-16" title="16">          <span class="va">fs</span>.<span class="at">write</span>(<span class="st">&quot;./frame-&quot;</span> <span class="op">+</span> current <span class="op">+</span> <span class="st">&quot;.png&quot;</span><span class="op">,</span><span class="at">atob</span>(frame)<span class="op">,</span> <span class="st">&#39;wb&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-17" title="17">      <span class="cf">if</span> (<span class="op">++</span>current <span class="op">===</span> NB_FRAME) <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-18" title="18">         <span class="va">window</span>.<span class="at">clearInterval</span>(grabber)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-19" title="19">         <span class="va">phantom</span>.<span class="at">exit</span>(<span class="dv">0</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-20" title="20">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb15-21" title="21">    <span class="op">},</span> <span class="dv">1000</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-22" title="22">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb15-23" title="23"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>or use <a href="https://github.com/spite/ccapture.js">ccapture.js</a>.</p>
+<h3 id="miscellaneous">Miscellaneous</h3>
+<ul>
+<li><a href="https://superuser.com/questions/569924/why-is-the-gif-i-created-so-slow/569967">Why is the GIF I created so slow?</a> - Using ImageMagick to solve problems concerning GIF speed.</li>
+</ul>
+<h2 id="use">Use</h2>
+<p>The best ways to use this list are:</p>
+<ul>
+<li>by browing the <a href="#contents">contents</a></li>
+<li>by using <kbd>command</kbd> + <kbd>F</kbd> to search the contents</li>
+</ul>
+<h2 id="credits">Credits</h2>
+<p><strong><a href="https://davison.io">Craig Davison</a></strong></p>
+<p><a href="https://github.com/davisonio"><img src="https://img.shields.io/github/followers/davisonio.svg?style=social&amp;label=Follow%20@davisonio" alt="GitHub" /></a> <a href="https://twitter.com/davisonio"><img src="https://img.shields.io/twitter/follow/davisonio.svg?style=social" alt="Twitter" /></a></p>
+<p>…and <a href="https://github.com/davisonio/awesome-gif/graphs/contributors">contributors</a>.</p>
+<p><strong><a href="https://github.com/davisonio/awesome-gif/blob/master/contributing.md">Contributions are welcome!</a></strong></p>
+<h2 id="license">License</h2>
+<p>Unless otherwise stated:</p>
+<ul>
+<li>Copyright © 2017+ <a href="https://davison.io">Craig Davison</a>. Licensed under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.</li>
+</ul>
+<p>Based on a <a href="https://github.com/sindresorhus/awesome/issues/872">recovered list</a>:</p>
+<ul>
+<li>Copyright © 2015-2016 <a href="http://ismailbaaj.fr">Ismail Baaj</a>.</li>
+</ul>
+</body>
+</html>

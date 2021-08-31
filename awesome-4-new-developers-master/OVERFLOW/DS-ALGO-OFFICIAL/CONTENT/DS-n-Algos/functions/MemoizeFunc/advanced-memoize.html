@@ -1,0 +1,67 @@
+<p>/** * Memoize a given function by caching the computed result. * The cache of a memoized function can be cleared by
+  deleting the <code>cache</code> * property of the function. <em> </em> <span data-cites="param">@param</span>
+  {function} fn The function to be memoized. * Must be a pure function. * <span data-cites="param">@param</span>
+  {function(args: Array)} [hasher] A custom hash builder. * Is JSON.stringify by default. * <span
+    data-cites="return">@return</span> {function} Returns the memoized function</p>
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a   title="1"><span >export</span> <span >function</span> <span >memoize</span>(fn<span >,</span> hasher) <span >{</span></a>
+<a   title="2">    <span >return</span> <span >function</span> <span >memoize</span>() <span >{</span></a>
+<a   title="3">        <span >if</span> (<span >typeof</span> <span >memoize</span>.<span >cache</span> <span >!==</span> <span >&quot;object&quot;</span>) <span >{</span></a>
+<a   title="4">            <span >memoize</span>.<span >cache</span> <span >=</span> <span >{};</span></a>
+<a   title="5">        <span >}</span></a>
+<a  id=-6" title="6"></a>
+<a   title="7">        <span >const</span> args <span >=</span> []<span >;</span></a>
+<a   title="8">        <span >for</span> (<span >let</span> i <span >=</span> <span >0;</span> i <span >&lt;</span> <span >arguments</span>.<span >length;</span> i<span >++</span>) <span >{</span></a>
+<a   title="9">            args[i] <span >=</span> <span >arguments</span>[i]<span >;</span></a>
+<a  id=-10" title="10">        <span >}</span></a>
+<a   title="11"></a>
+<a  id=-12" title="12">        <span >const</span> hash <span >=</span> hasher <span >?</span> <span >hasher</span>(args) : <span >JSON</span>.<span >stringify</span>(args)<span >;</span></a>
+<a  id=-13" title="13">        <span >if</span> (<span >!</span>(hash <span >in</span> <span >memoize</span>.<span >cache</span>)) <span >{</span></a>
+<a  id=-14" title="14">            <span >memoize</span>.<span >cache</span>[hash] <span >=</span> <span >fn</span>.<span >apply</span>(fn<span >,</span> args)<span >;</span></a>
+<a  id=-15" title="15">        <span >}</span></a>
+<a  id=-16" title="16">        <span >return</span> <span >memoize</span>.<span >cache</span>[hash]<span >;</span></a>
+<a  id=-17" title="17">    <span >};</span></a>
+<a  id=-18" title="18"><span >}</span></a></code></pre></div>
+<p>/** * Memoize a given function by caching all results and the arguments, * and comparing against the arguments of
+  previous results before * executing again. * This is less perormant than <code>memoize</code> which calculates a
+  hash, * which is very fast to compare. Use <code>memoizeCompae</code> only when it is * not possible to create a
+  unique serializable hash from the function * arguments. * The isEqual function must compare two sets of arguments *
+  and return true when equal (can be a deep equality check for example). * <span data-cites="param">@param</span>
+  {function} fn * <span data-cites="param">@param</span> {function(a: <em>, b: </em>) : boolean} isEqual * <span
+    data-cites="returns">@returns</span> {function}</p>
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a   title="1"><span >export</span> <span >function</span> <span >memoizeCompare</span>(fn<span >,</span> isEqual) <span >{</span></a>
+<a  id=-2" title="2">    <span >const</span> memoize <span >=</span> <span >function</span> <span >memoize</span>() <span >{</span></a>
+<a  id=-3" title="3">        <span >const</span> args <span >=</span> []<span >;</span></a>
+<a  id=-4" title="4">        <span >for</span> (<span >let</span> i <span >=</span> <span >0;</span> i <span >&lt;</span> <span >arguments</span>.<span >length;</span> i<span >++</span>) <span >{</span></a>
+<a  id=-5" title="5">            args[i] <span >=</span> <span >arguments</span>[i]<span >;</span></a>
+<a  id=-6" title="6">        <span >}</span></a>
+<a  id=-7" title="7"></a>
+<a  id=-8" title="8">        <span >for</span> (<span >let</span> c <span >=</span> <span >0;</span> c <span >&lt;</span> <span >memoize</span>.<span >cache</span>.<span >length;</span> c<span >++</span>) <span >{</span></a>
+<a  id=-9" title="9">            <span >const</span> cached <span >=</span> <span >memoize</span>.<span >cache</span>[c]<span >;</span></a>
+<a  id=-10" title="10"></a>
+<a  id=-11" title="11">            <span >if</span> (<span >isEqual</span>(args<span >,</span> <span >cached</span>.<span >args</span>)) <span >{</span></a>
+<a id=-12" title="12"> <span>// </span><span>TODO: move this cache entry to the top so recently used entries move
+    up?</span></a>
+<a  id=-13" title="13">                <span >return</span> <span >cached</span>.<span >res;</span></a>
+<a  id=-14" title="14">            <span >}</span></a>
+<a  id=-15" title="15">        <span >}</span></a>
+<a  id=-16" title="16"></a>
+<a  id=-17" title="17">        <span >const</span> res <span >=</span> <span >fn</span>.<span >apply</span>(fn<span >,</span> args)<span >;</span></a>
+<a  id=-18" title="18">        <span >memoize</span>.<span >cache</span>.<span >unshift</span>(<span >{</span> args<span >,</span> res <span >}</span>)<span >;</span></a>
+<a  id=-19" title="19"></a>
+<a  id=-20" title="20">        <span >return</span> res<span >;</span></a>
+<a  id=-21" title="21">    <span >};</span></a>
+<a  id=-22" title="22"></a>
+<a  id=-23" title="23">    <span >memoize</span>.<span >cache</span> <span >=</span> []<span >;</span></a>
+<a  id=-24" title="24"></a>
+<a  id=-25" title="25">    <span >return</span> memoize<span >;</span></a>
+<a  id=-26" title="26"><span >}</span></a></code></pre></div>
+<p>/** * Find the maximum number of arguments expected by a typed function. * <span data-cites="param">@param</span>
+  {function} fn A typed function * <span data-cites="return">@return</span> {number} Returns the maximum number of
+  expected arguments. * Returns -1 when no signatures where found on the function.</p>
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a   title="1"><span >export</span> <span >function</span> <span >maxArgumentCount</span>(fn) <span >{</span></a>
+<a   title="2">   <span >return</span> <span >Object</span>.<span >keys</span>(<span >fn</span>.<span >signatures</span> <span >||</span> <span >{}</span>).<span >reduce</span>(<span >function</span> (args<span >,</span> signature) <span >{</span></a>
+<a title="3"> <span>const</span> count <span>=</span> (<span>signature</span>.<span>match</span>(<span>/,/g</span>)
+  <span>||</span> []).<span>length</span> <span>+</span> <span>1;</span></a>
+<a  id=-4" title="4">       <span >return</span> <span >Math</span>.<span >max</span>(args<span >,</span> count)<span >;</span></a>
+<a  id=-5" title="5">   <span >},</span> <span >-1</span>)<span >;</span></a>
+<a  id=-6" title="6"><span >}</span></a></code></pre></div>

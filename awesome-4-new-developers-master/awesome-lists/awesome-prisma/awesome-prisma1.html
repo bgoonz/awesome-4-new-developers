@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>awesome-prisma1</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-align="center">
+      <pre><code>&lt;img width=&quot;500&quot; src=&quot;logo.svg&quot; alt=&quot;awesome-lint&quot;&gt;</code></pre>
+      <br />
+      <a href="https://awesome.re">
+        <img src="https://awesome.re/badge.svg" alt="Awesome" />
+      </a>
+      <p>
+        This is a collection of awesome resources about
+        <a
+          href="https://www.prisma.io/"
+          title="Build a GraphQL server with any database"
+          >Prisma</a
+        >
+      </p>
+    </div>
+    <p>
+      <a
+        href="https://www.prisma.io/"
+        title="Build a GraphQL server with any database"
+        >Prisma</a
+      >
+      is a performant open-source GraphQL ORM-like layer doing the heavy lifting
+      in your GraphQL server. It turns your database into a GraphQL API which
+      can be consumed by your resolvers via GraphQL bindings.
+    </p>
+    <ul>
+      <li>:hammer: - Hands-on resources, like step-by-step tutorials</li>
+      <li>:open_book: - In-depth resources, like detailed articles</li>
+      <li>:eyes: - Examples and templates</li>
+      <li>:package: - Reusable software packages</li>
+      <li>:movie_camera: - Video tutorial</li>
+    </ul>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#books-general-resources">:books: General Resources</a></li>
+      <li>
+        <a href="#mag-graphql-server-development"
+          >:mag: GraphQL Server Development</a
+        >
+        <ul>
+          <li><a href="#graphql-yoga">GraphQL Yoga</a></li>
+          <li><a href="#server-deployment">Server Deployment</a></li>
+          <li><a href="#graphql-resolvers">GraphQL Resolvers</a></li>
+          <li><a href="#graphql-bindings">GraphQL Bindings</a></li>
+          <li><a href="#authentication">Authentication</a></li>
+          <li><a href="#permissions">Permissions</a></li>
+          <li><a href="#subscriptions">Subscriptions</a></li>
+          <li><a href="#file-handling">File Handling</a></li>
+          <li><a href="#error-handling">Error Handling</a></li>
+          <li><a href="#multi-tenancy">Multi-tenancy</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#small_red_triangle-prisma-server-deployment"
+          >:small_red_triangle: Prisma Server Deployment</a
+        >
+      </li>
+      <li>
+        <a href="#movie_camera-video-tutorials"
+          >:movie_camera: Video tutorials</a
+        >
+      </li>
+      <li>
+        <a href="#family_man_woman_girl_boy-community"
+          >:family_man_woman_girl_boy: Community</a
+        >
+      </li>
+    </ul>
+    <h2 id="books-general-resources">:books: General Resources</h2>
+    <ul>
+      <li>
+        :hammer:
+        <a
+          href="https://www.howtographql.com/"
+          title="The Fullstack Tutorial for GraphQL"
+          >How to GraphQL</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/graphcool/graphql-server-example"
+          title="GraphQL server example (Airbnb clone) using Prisma, `graphql-yoga` &amp; `prisma-binding`."
+          >Reference Example</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/prisma/prisma-examples"
+          title="Wide range of generally useful examples."
+          >Example Collection</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/graphql-boilerplates/"
+          title="Collection of production-ready GraphQL boilerplate projects."
+          >GraphQL Boilerplates</a
+        >
+      </li>
+      <li>
+        :hammer:
+        <a
+          href="https://www.prisma.io/docs/get-started/01-setting-up-prisma-demo-server-JAVASCRIPT-a001/"
+          title="The fastest way to get up and running with Prisma, for backend and frontend developers."
+          >Quickstart</a
+        >
+      </li>
+      <li>
+        :hammer:
+        <a
+          href="https://www.prisma.io/tutorials/"
+          title="Step-by-step tutorials and articles to help people get the most out of the Prisma ecosystem."
+          >Tutorials</a
+        >
+      </li>
+      <li>
+        :open_book:
+        <a
+          href="https://www.prisma.io/docs/understand-prisma/prisma-introduction-what-why-how-j9ff/#what-is-prisma"
+          >What is Prisma</a
+        >
+      </li>
+      <li>
+        :open_book:
+        <a href="https://divu.in/prisma-deep-dive-3162dea2820c"
+          >Prisma Deep Dive Article</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/KATT/shop"
+          title="Full-stack React/Prisma/TS/GraphQL E-Commerce Example"
+          >Prisma Shop Example</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/alan345/naperg"
+          title="Node Apollo Prisma Express React GraphQL"
+          >Boilerplate for a Fullstack GraphQL App with React &amp; Prisma</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/awesome-graphql-space/server-nestjs"
+          title="Bootstrap your Nestjs Prisma app within seconds"
+          >NestJS - Prisma - Apollo 2</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/berstend/graphql-microservice-starter"
+          title="Nextgen backend stack using independent GraphQL services"
+          >Graphql Microservice Starter</a
+        >
+      </li>
+      <li>
+        :package:
+        <a
+          href="https://github.com/mshameer/ran-with-prisma"
+          title="RAN-PRISMA : React . GraphQL . Next.js . Prisma Toolkit"
+          >RAN-PRISMA : React . GraphQL . Next.js . Prisma Toolkit</a
+        >
+      </li>
+      <li>
+        :open_book:
+        <a href="https://prisma.1wire.com/"
+          >Prisma Docs Translated into Chinese</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/DylanMerigaud/react-prisma-typescript-fullstack"
+          >Fullstack Boilerplate using React Apollo Prisma Typescript</a
+        >
+      </li>
+    </ul>
+    <h2 id="mag-graphql-server-development">
+      :mag: GraphQL Server Development
+    </h2>
+    <h3 id="graphql-yoga">GraphQL Yoga</h3>
+    <ul>
+      <li>
+        :package:
+        <a
+          href="https://github.com/prisma/graphql-yoga"
+          title="Fully-featured GraphQL Server with focus on easy setup, performance &amp; great developer experience"
+          >GraphQL Yoga</a
+        >
+      </li>
+      <li>
+        :hammer:
+        <a
+          href="https://www.prisma.io/docs/get-started/03-build-graphql-servers-with-prisma-TYPESCRIPT-t201/"
+          >Build a GraphQL Server with Prisma and graphql-yoga</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a href="https://github.com/prisma/graphql-yoga/tree/master/examples"
+          >Collection of GraphQL Yoga Examples</a
+        >
+      </li>
+    </ul>
+    <h3 id="server-deployment">Server Deployment</h3>
+    <ul>
+      <li>
+        :hammer:
+        <a
+          href="https://www.prisma.io/tutorials/deploy-a-graphql-server-with-apex-up-cs05/"
+          >Deploying a GraphQL Server with Apex Up</a
+        >
+      </li>
+      <li>
+        :hammer:
+        <a
+          href="https://www.prisma.io/tutorials/deploy-a-graphql-server-with-zeit-now-cs04/"
+          >Deploying GraphQL Servers with Zeit Now</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/maxdarque/up-graphql-yoga-server-example"
+          title="Tutorial on how deploy your graphql-yoga server on AWS Lambda with Apex Up"
+          >Apex Up and GraphQL Yoga Example</a
+        >
+      </li>
+      <li>
+        :open_book:
+        <a
+          href="https://techblog.commercetools.com/prisma-horizontal-scaling-a-practical-guide-3a05833d4fc3"
+          title="Prisma Horizontal Scaling: a practical guide"
+          >Prisma Horizontal Scaling</a
+        >
+      </li>
+    </ul>
+    <h3 id="graphql-resolvers">GraphQL Resolvers</h3>
+    <ul>
+      <li>
+        :open_book:
+        <a
+          href="https://www.prisma.io/blog/graphql-server-basics-demystifying-the-info-argument-in-graphql-resolvers-6f26249f613a/"
+          >Demystifying the <code>info</code> argument in GraphQL Resolvers</a
+        >
+      </li>
+      <li>
+        :open_book:
+        <a
+          href="https://www.prisma.io/forum/t/querying-specific-fields-in-db-from-local-service-with-prisma/2075/4"
+          >Different use cases for the <code>info</code> argument</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/graphql-boilerplates/node-graphql-server/issues/35"
+          >Collection of common scenarios</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a href="https://github.com/prisma/prisma-binding/issues/78"
+          >Subscription Resolver Examples</a
+        >
+      </li>
+      <li>
+        :open_book::hammer:
+        <a
+          href="https://medium.com/@jonathancardoso/graphql-mutation-arguments-validation-with-yup-using-graphql-middleware-645822fb748"
+          >GraphQL Mutation Arguments Validation with Yup using
+          graphql-middleware</a
+        >
+      </li>
+    </ul>
+    <h3 id="graphql-bindings">GraphQL Bindings</h3>
+    <ul>
+      <li>
+        :open_book:
+        <a
+          href="https://www.prisma.io/blog/reusing-and-composing-graphql-apis-with-graphql-bindings-80a4aa37cff5/"
+          >Composing GraphQL APIs with GraphQL Bindings</a
+        >
+      </li>
+      <li>
+        :package:
+        <a href="https://github.com/prisma/prisma-binding">Prisma Binding</a>
+      </li>
+      <li>
+        :package:
+        <a href="https://github.com/graphql-binding/graphql-binding"
+          >GraphQL Binding</a
+        >
+      </li>
+    </ul>
+    <h3 id="authentication">Authentication</h3>
+    <ul>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/prisma/prisma-examples/tree/master/node/graphql-auth"
+          >Email &amp; Password Authentication Example</a
+        >
+      </li>
+      <li>
+        :hammer:
+        <a
+          href="https://medium.com/@maticzavadlal/graphcool-1-0-example-series-authentication-282f274b8343"
+          >Authentication with GitHub OAuth2</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a href="https://github.com/harrisrobin/prisma-facebook-auth-example"
+          >Facebook Authentication Example</a
+        >
+      </li>
+    </ul>
+    <h3 id="permissions">Permissions</h3>
+    <ul>
+      <li>
+        :open_book:
+        <a
+          href="https://www.prisma.io/blog/graphql-directive-permissions-authorization-made-easy-54c076b5368e/"
+          >GraphQL Directive Permissions</a
+        >
+      </li>
+      <li>
+        :package:
+        <a href="https://github.com/maticzav/graphql-shield">GraphQL Shield</a>
+      </li>
+    </ul>
+    <h3 id="subscriptions">Subscriptions</h3>
+    <ul>
+      <li>
+        :eyes:
+        <a
+          href="https://github.com/prisma/prisma-examples/tree/master/node/graphql-subscriptions"
+          >Subscriptions Example</a
+        >
+      </li>
+    </ul>
+    <h3 id="file-handling">File Handling</h3>
+    <ul>
+      <li>
+        :open_book:
+        <a
+          href="https://www.prisma.io/forum/t/graphql-file-handling-with-aws-s3-prisma-graphql-yoga/2779"
+          >File Handling with AWS S3, Prisma &amp; graphql-yoga</a
+        >
+      </li>
+      <li>
+        :open_book:
+        <a
+          href="https://medium.com/@maticzavadlal/graphcool-1-0-examples-series-file-api-3b16b4b8785f"
+          >Handling files with Amazon S3 and Prisma</a
+        >
+      </li>
+    </ul>
+    <h3 id="error-handling">Error Handling</h3>
+    <ul>
+      <li>
+        :open_book:
+        <a href="https://dev.to/andre/handling-errors-in-graphql--2ea3"
+          >Handling Errors in GraphQL</a
+        >
+      </li>
+    </ul>
+    <h3 id="multi-tenancy">Multi-tenancy</h3>
+    <ul>
+      <li>
+        :hammer:
+        <a
+          href="https://medium.zenika.com/building-a-multi-tenant-application-with-prisma-11bf890304d6"
+          >Building a multi-tenant application with Prisma</a
+        >
+      </li>
+      <li>
+        :package:
+        <a href="https://github.com/Errorname/prisma-multi-tenant"
+          >prisma-multi-tenant</a
+        >
+      </li>
+    </ul>
+    <h2 id="small_red_triangle-prisma-server-deployment">
+      :small_red_triangle: Prisma Server Deployment
+    </h2>
+    <ul>
+      <li>
+        :hammer:
+        <a
+          href="https://www.prismagraphql.com/docs/tutorials/cluster-deployment/local-(docker)-meemaesh3k"
+          >Local (Docker)</a
+        >
+      </li>
+      <li>
+        :hammer:
+        <a
+          href="https://www.prisma.io/tutorials/deploy-prisma-to-digitalocean-with-docker-machine-ct06"
+          >Digital Ocean (Docker Machine)</a
+        >
+      </li>
+      <li>
+        :hammer:
+        <a
+          href="https://www.prisma.io/tutorials/deploy-prisma-to-digitalocean-ct12/"
+          >Digital Ocean (manual)</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a href="https://github.com/maxdarque/prisma-docker">Prisma Docker</a>
+      </li>
+      <li>
+        :eyes:
+        <a href="https://github.com/akoenig/prisma-docker-compose/"
+          >Prisma Docker Compose</a
+        >
+      </li>
+      <li>
+        :hammer:
+        <a
+          href="https://www.prisma.io/tutorials/deploy-prisma-to-kubernetes-ct13/"
+          >Kubernetes</a
+        >
+      </li>
+      <li>
+        :hammer:
+        <a
+          href="https://www.graph.cool/forum/t/deployment-of-prisma-to-aws-ec2/2880?u=nilan"
+          >Deployment to AWS EC2</a
+        >
+      </li>
+      <li>
+        :eyes:
+        <a
+          href="https://www.graph.cool/forum/t/minimal-serverless-prisma-project-template/2827?u=nilan"
+          >Serverless Template</a
+        >
+      </li>
+      <li>
+        :hammer:
+        <a
+          href="https://www.prisma.io/tutorials/deploy-prisma-to-aws-fargate-ct14/"
+          >AWS Fargate</a
+        >
+      </li>
+    </ul>
+    <h2 id="movie_camera-video-tutorials">:movie_camera: Video tutorials</h2>
+    <ul>
+      <li>
+        :movie_camera:
+        <a
+          href="https://www.youtube.com/watch?v=nyE6shIRzxM&amp;list=PLN3n1USn4xlmqhVdKMurNREwtiUpq-SFy"
+          title="Introduction for an eCommerce app built with React Native and Prisma GraphQL"
+          >React Native and Prisma YouTube Tutorial Series</a
+        >
+      </li>
+      <li>
+        :movie_camera:
+        <a
+          href="https://www.youtube.com/watch?v=-n30pzgnkW0&amp;list=PLs2PzMqLzi7Xmx44xTLfOBCwCAxVgQvE*"
+          title="Overview: Build a ProductHunt GraphQL server with Prisma + GraphQL Yoga"
+          >Build a ProductHunt GraphQL server with Prisma + GraphQL Yoga</a
+        >
+      </li>
+    </ul>
+    <h2 id="family_man_woman_girl_boy-community">
+      :family_man_woman_girl_boy: Community
+    </h2>
+    <ul>
+      <li><a href="https://github.com/prisma/prisma">GitHub</a></li>
+      <li><a href="https://www.prisma.io">Website</a></li>
+      <li><a href="https://www.prisma.io/docs/">Docs</a></li>
+      <li><a href="https://www.prisma.io/tutorials">Tutorials</a></li>
+      <li><a href="https://www.prisma.io/blog/">Blog</a></li>
+      <li><a href="https://www.prisma.io/forum/">Forum</a></li>
+      <li><a href="https://slack.prisma.io/">Slack</a></li>
+      <li><a href="https://twitter.com/prisma">Twitter</a></li>
+    </ul>
+    <h2 id="contribute">Contribute</h2>
+    <p>
+      Contributions welcome! Read the
+      <a href="contributing.md">contribution guidelines</a> first.
+    </p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="http://creativecommons.org/publicdomain/zero/1.0"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law, Catalin Miron has waived all copyright
+      and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-database-tools-awesome">
+      Awesome Database Tools
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>Community driven list of database tools</p>
+    </blockquote>
+    <p>
+      Here we will collect information about awesome useful and awesome
+      experimental tools that simplify working with databases for DBA, DevOps,
+      Developers and mere mortals.
+    </p>
+    <p>
+      Feel free to add information about your own db-tools or your favorite
+      third-party db-tools.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#ide">IDE</a></li>
+      <li><a href="#gui-managersclients">GUI Managers/Clients</a></li>
+      <li><a href="#cli-tools">CLI tools</a></li>
+      <li>
+        <a href="#db-schema-navigation-and-visualization"
+          >DB-schema navigation and visualization</a
+        >
+      </li>
+      <li><a href="#modelers">Modelers</a></li>
+      <li><a href="#migration-tools">Migration tools</a></li>
+      <li><a href="#code-generation-tools">Code generation tools</a></li>
+      <li><a href="#wrappers">Wrappers</a></li>
+      <li><a href="#backup-tools">Backup tools</a></li>
+      <li>
+        <a href="#replicationdata-operation">Replication/Data operation</a>
+      </li>
+      <li><a href="#scripts">Scripts</a></li>
+      <li>
+        <a href="#monitoringstatisticsperfomance"
+          >Monitoring/Statistics/Perfomance</a
+        >
+        <ul>
+          <li><a href="#prometheus">Prometheus</a></li>
+          <li><a href="#zabbix">Zabbix</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#testing">Testing</a>
+        <ul>
+          <li><a href="#data-generator">Data generator</a></li>
+        </ul>
+      </li>
+      <li><a href="#administration">Administration</a></li>
+      <li><a href="#hafailoversharding">HA/Failover/Sharding</a></li>
+      <li><a href="#kubernetes">Kubernetes</a></li>
+      <li><a href="#configuration-tuning">Configuration Tuning</a></li>
+      <li><a href="#devops">DevOps</a></li>
+      <li><a href="#schema-samples">Schema samples</a></li>
+      <li><a href="#reporting">Reporting</a></li>
+      <li><a href="#distributions">Distributions</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#code-formatters">Code formatters</a></li>
+    </ul>
+    <h2 id="ide">IDE</h2>
+    <ul>
+      <li>
+        <a href="https://www.sqlmaestro.com/products/anysql/maestro"
+          >AnySQL Maestro</a
+        >
+        - Premier multi-purpose admin tool for database management, control and
+        development.
+      </li>
+      <li>
+        <a href="https://www.aquafold.com/aquadatastudio">Aqua Data Studio</a> -
+        Aqua Data Studio is productivity software for Database Developers, DBAs,
+        and Analysts.
+      </li>
+      <li>
+        <a href="http://fishcodelib.com/Database.htm">Database .net</a> -
+        Multiple database management tool with support for 20+ databases.
+      </li>
+      <li>
+        <a href="https://www.jetbrains.com/datagrip">DataGrip</a> -
+        Cross-Platform IDE for Databases &amp; SQL by JetBrains.
+      </li>
+      <li>
+        <a href="https://github.com/dbeaver/dbeaver">DBeaver</a> - Free
+        universal database manager and SQL client.
+      </li>
+      <li>
+        <a href="https://www.devart.com/dbforge/mysql/studio"
+          >dbForge Studio for MySQL</a
+        >
+        - Universal IDE for MySQL and MariaDB database development, management,
+        and administration.
+      </li>
+      <li>
+        <a href="https://www.devart.com/dbforge/oracle/studio"
+          >dbForge Studio for Oracle</a
+        >
+        - Powerful IDE for Oracle management, administration, and development.
+      </li>
+      <li>
+        <a href="https://www.devart.com/dbforge/postgresql/studio"
+          >dbForge Studio for PostgreSQL</a
+        >
+        - GUI tool for managing and developing databases and objects.
+      </li>
+      <li>
+        <a href="https://www.devart.com/dbforge/sql/studio"
+          >dbForge Studio for SQL Server</a
+        >
+        - Powerful integrated development environment for SQL Server
+        development, management, administration, data analysis, and reporting.
+      </li>
+      <li>
+        <a href="https://github.com/SouthbankSoftware/dbkoda">dbKoda</a> -
+        Modern (JavaScript/Electron framework), open source IDE for MongoDB. It
+        has features to support development, administration and performance
+        tuning on MongoDB databases.
+      </li>
+      <li>
+        <a href="http://www.ibexpert.net/ibe">IBExpert</a> - Comprehensive GUI
+        tool for Firebird and InterBase.
+      </li>
+      <li>
+        <a href="https://github.com/HeidiSQL/HeidiSQL">HeidiSQL</a> - A
+        lightweight client for managing MySQL, MSSQL and PostgreSQL, written in
+        Delphi.
+      </li>
+      <li>
+        <a href="https://www.mysql.com/products/workbench">MySQL Workbench</a> -
+        MySQL Workbench is a unified visual tool for database architects,
+        developers, and DBAs.
+      </li>
+      <li>
+        <a href="https://www.navicat.com/en/products#navicat">Navicat</a> - A
+        database development tool that allows you to simultaneously connect to
+        MySQL, MariaDB, SQL Server, Oracle, PostgreSQL, and SQLite databases
+        from a single application.
+      </li>
+      <li>
+        <a
+          href="http://www.oracle.com/technetwork/developer-tools/sql-developer"
+          >Oracle SQL Developer</a
+        >
+        - Oracle SQL Developer is a free, integrated development environment
+        that simplifies the development and management of Oracle Database in
+        both traditional and Cloud deployments.
+      </li>
+      <li>
+        <a href="https://www.pgadmin.org">pgAdmin</a> - The most popular and
+        feature rich Open Source administration and development platform for
+        PostgreSQL, the most advanced Open Source database in the world.
+      </li>
+      <li>
+        <a href="https://www.bigsql.org/pgadmin3">pgAdmin3</a> - Long Term
+        Support for pgAdmin3.
+      </li>
+      <li>
+        <a href="https://www.allroundautomations.com/products/pl-sql-developer"
+          >PL/SQL Developer</a
+        >
+        - IDE that is specifically targeted at the development of stored program
+        units for Oracle Databases.
+      </li>
+      <li>
+        <a href="https://www.sqlmaestro.com/products/postgresql/maestro"
+          >PostgreSQL Maestro</a
+        >
+        - Complete and powerful database management, admin and development tool
+        for PostgreSQL.
+      </li>
+      <li>
+        <a href="https://www.quest.com/toad/">Toad</a> - Toad is the premier
+        database solution for developers, admins and data analysts. Manage
+        complex database changes with a single database management tool.
+      </li>
+      <li>
+        <a href="https://www.toadworld.com/products/toad-edge">Toad Edge</a> -
+        Simplified database development tool for MySQL and Postgres.
+      </li>
+      <li>
+        <a href="https://github.com/tora-tool/tora">TOra</a> - TOra is an open
+        source SQL IDE for Oracle, MySQL and PostgreSQL dbs.
+      </li>
+      <li>
+        <a href="https://www.valentina-db.com/en/valentina-studio-overview"
+          >Valentina Studio</a
+        >
+        - Create, administer, query and explore Valentina DB, MySQL, MariaDB,
+        PostgreSQL and SQLite databases for FREE.
+      </li>
+    </ul>
+    <h2 id="gui-managersclients">GUI Managers/Clients</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/vrana/adminer">Adminer</a> - Database
+        management in a single PHP file.
+      </li>
+      <li>
+        <a href="https://github.com/beekeeper-studio/beekeeper-studio"
+          >Beekeeper Studio</a
+        >
+        - Open Source SQL Editor and Database Manager with a privacy commitment
+        in their mission statement.
+      </li>
+      <li>
+        <a href="https://www.dbvis.com">DbVisualizer</a> - Universal database
+        tool for developers, DBAs and analysts.
+      </li>
+      <li>
+        <a href="https://github.com/HouseOps/HouseOps">HouseOps</a> - Enterprise
+        ClickHouse Ops UI for you run querys, monitoring ClickHouse health and
+        make a lot of others thinks.
+      </li>
+      <li>
+        <a href="https://www.jackdb.com">JackDB</a> - Direct SQL access to all
+        your data, no matter where it lives.
+      </li>
+      <li>
+        <a href="https://github.com/Wisser/Jailer">Jailer</a> - Database
+        Subsetting and Relational Data Browsing Tool/Client.
+      </li>
+      <li>
+        <a href="https://github.com/OmniDB/OmniDB">OmniDB</a> - Web tool for
+        database management.
+      </li>
+      <li>
+        <a href="https://github.com/sosedoff/pgweb">Pgweb</a> - Web-based
+        database browser for PostgreSQL, written in Go and works on macOS, Linux
+        and Windows machines.
+      </li>
+      <li>
+        <a href="https://www.phpliteadmin.org">phpLiteAdmin</a> - Web-based
+        SQLite database admin tool written in PHP with support for SQLite3 and
+        SQLite2.
+      </li>
+      <li>
+        <a href="https://github.com/phpmyadmin/phpmyadmin">phpMyAdmin</a> - A
+        web interface for MySQL and MariaDB.
+      </li>
+      <li>
+        <a href="http://www.psequel.com">psequel</a> - PSequel provides a clean
+        and simple interface for you to perform common PostgreSQL tasks quickly.
+      </li>
+      <li>
+        <a href="https://popsql.com">PopSQL</a> - Modern, collaborative SQL
+        editor for your team.
+      </li>
+      <li>
+        <a href="https://eggerapps.at/postico">Postico</a> - A Modern PostgreSQL
+        Client for the Mac.
+      </li>
+      <li>
+        <a href="https://github.com/Studio3T/robomongo">Robo 3T</a> - Robo 3T
+        (formerly Robomongo) is a shell-centric cross-platform MongoDB
+        management tool.
+      </li>
+      <li>
+        <a href="https://github.com/sequelpro/sequelpro">Sequel Pro</a> - Sequel
+        Pro is a fast, easy-to-use Mac database management application for
+        working with MySQL &amp; MariaDB databases.
+      </li>
+      <li>
+        <a href="https://github.com/microsoft/sqlopsstudio"
+          >SQL Operations Studio</a
+        >
+        - A data management tool that enables working with SQL Server, Azure SQL
+        DB and SQL DW from Windows, macOS and Linux.
+      </li>
+      <li>
+        <a href="http://www.sqliteexpert.com/index.html">SQLite Expert</a> -
+        Graphical interface supports all SQLite features.
+      </li>
+      <li>
+        <a href="https://github.com/rickbergfalk/sqlpad">sqlpad</a> - Web-based
+        SQL editor run in your own private cloud.
+      </li>
+      <li>
+        <a href="https://www.macpostgresclient.com">SQLPro</a> - A simple,
+        powerful Postgres manager for macOS.
+      </li>
+      <li>
+        <a href="https://sourceforge.net/projects/squirrel-sql">SQuirreL</a> -
+        Graphical SQL client written in Java that will allow you to view the
+        structure of a JDBC compliant database, browse the data in tables, issue
+        SQL commands etc.
+      </li>
+      <li>
+        <a href="https://github.com/mtxr/vscode-sqltools">SQLTools</a> -
+        Database management for VSCode.
+      </li>
+      <li>
+        <a href="https://www.webyog.com/product/sqlyog">SQLyog</a> - The most
+        complete and easy to use MySQL GUI.
+      </li>
+      <li>
+        <a href="https://github.com/tabixio/tabix">Tabix</a> - SQL Editor &amp;
+        Open source simple business intelligence for Clickhouse.
+      </li>
+      <li>
+        <a href="https://github.com/TablePlus/TablePlus">TablePlus</a> - Modern,
+        native, and friendly GUI tool for relational databases: MySQL,
+        PostgreSQL, SQLite &amp; more.
+      </li>
+      <li>
+        <a href="http://www.teampostgresql.com">TeamPostgreSQL</a> - PostgreSQL
+        Web Administration GUI - use your PostgreSQL databases from anywhere,
+        with rich, lightning-fast AJAX web interface.
+      </li>
+    </ul>
+    <h2 id="cli-tools">CLI tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/catherinedevlin/ipython-sql">ipython-sql</a>
+        - Connect to a database for issue SQL commands within IPython or IPython
+        Notebook.
+      </li>
+      <li>
+        <a href="https://github.com/laixintao/iredis">iredis</a> - A Cli for
+        Redis with AutoCompletion and Syntax Highlighting.
+      </li>
+      <li>
+        <a href="https://github.com/lesovsky/pgcenter">pgcenter</a> - Top-like
+        admin tool for PostgreSQL.
+      </li>
+      <li>
+        <a href="https://github.com/julmon/pg_activity">pg_activity</a> - Top
+        like application for PostgreSQL server activity monitoring.
+      </li>
+      <li>
+        <a href="https://github.com/markwkm/pg_top">pg_top</a> - ‘top’ for
+        PostgreSQL.
+      </li>
+      <li>
+        <a href="https://github.com/okbob/pspg">pspg</a> - Postgres Pager.
+      </li>
+      <li>
+        <a
+          href="http://www.oracle.com/technetwork/developer-tools/sqlcl/overview/index.html"
+          >SQLcl</a
+        >
+        - Oracle SQL Developer Command Line (SQLcl) is a free command line
+        interface for Oracle Database.
+      </li>
+      <li>
+        <a href="https://github.com/xo/usql">usql</a> - A universal command-line
+        interface for PostgreSQL, MySQL, Oracle Database, SQLite3, Microsoft SQL
+        Server,
+        <a href="https://github.com/xo/usql#database-support"
+          >and many other databases</a
+        >
+        including NoSQL and non-relational databases!
+      </li>
+    </ul>
+    <h3 id="dbcli">dbcli</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/dbcli/athenacli">athenacli</a> - AthenaCLI
+        is a CLI tool for AWS Athena service that can do auto-completion and
+        syntax highlighting.
+      </li>
+      <li>
+        <a href="https://github.com/dbcli/litecli">litecli</a> - CLI for SQLite
+        Databases with auto-completion and syntax highlighting.
+      </li>
+      <li>
+        <a href="https://github.com/dbcli/mssql-cli">mssql-cli</a> - A
+        command-line client for SQL Server with auto-completion and syntax
+        highlighting.
+      </li>
+      <li>
+        <a href="https://github.com/dbcli/mycli">mycli</a> - A Terminal Client
+        for MySQL with AutoCompletion and Syntax Highlighting.
+      </li>
+      <li>
+        <a href="https://github.com/dbcli/pgcli">pgcli</a> - Postgres CLI with
+        autocompletion and syntax highlighting.
+      </li>
+      <li>
+        <a href="https://github.com/dbcli/vcli">vcli</a> - Vertica CLI with
+        auto-completion and syntax highlighting.
+      </li>
+    </ul>
+    <h2 id="db-schema-navigation-and-visualization">
+      DB-schema navigation and visualization
+    </h2>
+    <ul>
+      <li>
+        <a href="https://dbdiagram.io">dbdiagram.io</a> - Quick and simple tool
+        for help you draw your database relationship diagrams and flow quickly
+        using simple DSL language.
+      </li>
+      <li>
+        <a href="https://github.com/Alexis-benoist/eralchemy">ERAlchemy</a> -
+        Entity Relation Diagrams generation tool.
+      </li>
+      <li>
+        <a href="https://github.com/schemacrawler/SchemaCrawler"
+          >SchemaCrawler</a
+        >
+        - A free database schema discovery and comprehension tool.
+      </li>
+      <li>
+        <a href="https://github.com/schemaspy/schemaspy">Schema Spy</a> -
+        Generating your database to HTML documentation, including Entity
+        Relationship diagrams.
+      </li>
+      <li>
+        <a href="https://github.com/k1LoW/tbls">tbls</a> - CI-Friendly tool for
+        document a database, written in Go.
+      </li>
+    </ul>
+    <h2 id="modelers">Modelers</h2>
+    <ul>
+      <li>
+        <a href="https://www.navicat.com/en/products/navicat-data-modeler"
+          >Navicat Data Modeler</a
+        >
+        - A powerful and cost-effective database design tool which helps you
+        build high-quality conceptual, logical and physical data models.
+      </li>
+      <li>
+        <a
+          href="http://www.oracle.com/technetwork/developer-tools/datamodeler/overview/index.html"
+          >Oracle SQL Developer Data Modeler</a
+        >
+        - Oracle SQL Developer Data Modeler is a free graphical tool that
+        enhances productivity and simplifies data modeling tasks.
+      </li>
+      <li>
+        <a href="https://github.com/pgmodeler/pgmodeler">pgmodeler</a> - Data
+        modeling tool designed for PostgreSQL.
+      </li>
+    </ul>
+    <h2 id="migration-tools">Migration tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/CourseOrchestra/2bass">2bass</a> - Database
+        configuration-as-code tool that utilizes concept of idempotent DDL
+        scripts.
+      </li>
+      <li>
+        <a href="https://github.com/bytebase/bytebase">Bytebase</a> - Web-based,
+        zero-config, dependency-free database schema change and version control
+        tool for teams.
+      </li>
+      <li>
+        <a href="https://github.com/flyway/flyway">flyway</a> - Database
+        migration tool.
+      </li>
+      <li>
+        <a href="https://github.com/github/gh-ost">gh-ost</a> - Online schema
+        migration for MySQL.
+      </li>
+      <li>
+        <a href="https://github.com/liquibase/liquibase">liquibase</a> -
+        Database-independent library for tracking, managing and applying
+        database schema changes.
+      </li>
+      <li>
+        <a href="https://github.com/djrobstep/migra">migra</a> - Like diff but
+        for PostgreSQL schemas.
+      </li>
+      <li>
+        <a href="https://github.com/salsita/node-pg-migrate">node-pg-migrate</a>
+        - Node.js database migration management built exclusively for postgres.
+        (But can also be used for other DBs conforming to SQL standard -
+        e.g. CockroachDB.)
+      </li>
+      <li>
+        <a href="https://github.com/prisma/migrate">Prisma Migrate</a> -
+        Declarative database schema migration tool that uses a declarative data
+        modeling syntax to describe your database schema.
+      </li>
+      <li>
+        <a href="https://github.com/perseas/Pyrseas">Pyrseas</a> - Provides
+        utilities to describe a PostgreSQL database schema as YAML.
+      </li>
+      <li>
+        <a href="https://github.com/schemahero/schemahero">SchemaHero</a> - A
+        Kubernetes operator for declarative database schema management (gitops
+        for database schemas).
+      </li>
+      <li>
+        <a href="https://github.com/sqitchers/sqitch">Sqitch</a> - Sensible
+        database-native change management for framework-free development and
+        dependable deployment.
+      </li>
+      <li>
+        <a href="https://github.com/rdagumampan/yuniql">yuniql</a> - Yet another
+        schema versioning and migration tool just made with native .NET Core
+        3.0+ and hopefully better.
+      </li>
+    </ul>
+    <h2 id="code-generation-tools">Code generation tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/catherinedevlin/ddl-generator"
+          >ddl-generator</a
+        >
+        - Infers SQL DDL (Data Definition Language) from table data.
+      </li>
+      <li>
+        <a href="https://github.com/qwazer/scheme2ddl">scheme2ddl</a> - Command
+        line util for export Oracle schema to set of ddl init scripts with
+        ability to filter undesirable information, separate DDL in different
+        files, pretty format output.
+      </li>
+    </ul>
+    <h2 id="wrappers">Wrappers</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/dreamfactorysoftware/dreamfactory"
+          >DreamFactory</a
+        >
+        - A open source REST API backend for mobile, web, and IoT applications.
+      </li>
+      <li>
+        <a href="https://github.com/fbsql/fbsql">FBSQL Frontend Backend SQL</a>
+        - Work (secure) with your backend database within HTML.
+      </li>
+      <li>
+        <a href="https://github.com/hasura/graphql-engine"
+          >Hasura GraphQL Engine</a
+        >
+        - Blazing fast, instant realtime GraphQL APIs on Postgres with fine
+        grained access control, also trigger webhooks on database events.
+      </li>
+      <li>
+        <a href="https://github.com/avz/jl-sql">jl-sql</a> - SQL for JSON and
+        CSV streams.
+      </li>
+      <li>
+        <a href="https://github.com/EnterpriseDB/mysql_fdw">mysql_fdw</a> -
+        PostgreSQL foreign data wrapper for MySQL.
+      </li>
+      <li>
+        <a
+          href="http://www.oracle.com/technetwork/developer-tools/rest-data-services"
+          >Oracle REST Data Services</a
+        >
+        - A mid-tier Java application, ORDS maps HTTP(S) verbs (GET, POST, PUT,
+        DELETE, etc.) to database transactions and returns any results formatted
+        using JSON.
+      </li>
+      <li>
+        <a href="https://github.com/prismagraphql/prisma">Prisma</a> - Prisma
+        turns your database into a realtime GraphQL API.
+      </li>
+      <li>
+        <a href="https://github.com/PostgREST/postgrest">PostgREST</a> - REST
+        API for any Postgres database.
+      </li>
+      <li>
+        <a href="https://github.com/prest/prest">prest</a> - Is a way to serve a
+        RESTful API from any databases written in Go.
+      </li>
+      <li>
+        <a href="https://github.com/restsql/restsql">restSQL</a> - SQL generator
+        with Java and HTTP APIs, uses a simple RESTful HTTP API with XML or JSON
+        serialization.
+      </li>
+      <li>
+        <a href="https://github.com/formio/resquel">resquel</a> - Easily convert
+        your SQL database into a REST API.
+      </li>
+      <li>
+        <a href="https://github.com/saltcorn/saltcorn">Saltcorn</a> - Open
+        source no-code builder for web datatabase applications. Server and
+        drag-and-drop UI builder, data stored in PostgreSQL or SQLite.
+      </li>
+      <li>
+        <a href="https://github.com/jeffknupp/sandman2">sandman2</a> -
+        Automatically generate a RESTful API service for your legacy database.
+      </li>
+      <li>
+        <a href="https://github.com/CrocInc/sql-boot">sql-boot</a> - Advanced
+        REST and UI wrapper for your SQL-queries.
+      </li>
+    </ul>
+    <h2 id="backup-tools">Backup tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/pgbackrest/pgbackrest">pgbackrest</a> -
+        Reliable PostgreSQL Backup &amp; Restore.
+      </li>
+      <li>
+        <a href="https://github.com/2ndquadrant-it/barman">BaRMan</a> - Backup
+        and Recovery Manager for PostgreSQL.
+      </li>
+    </ul>
+    <h2 id="replicationdata-operation">Replication/Data operation</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/simonw/datasette">Datasette</a> - A tool for
+        exploring and publishing data.
+      </li>
+      <li>
+        <a href="https://github.com/actiontech/dtle">dtle</a> - Distributed Data
+        Transfer Service for MySQL.
+      </li>
+      <li>
+        <a href="https://github.com/ankane/pgsync">pgsync</a> - Sync Postgres
+        data between databases.
+      </li>
+      <li>
+        <a href="https://github.com/the4thdoctor/pg_chameleon">pg_chameleon</a>
+        - MySQL to PostgreSQL replica system written in Python 3. The system use
+        the library mysql-replication to pull the row images from MySQL which
+        are stored into PostgreSQL as JSONB.
+      </li>
+      <li>
+        <a href="https://github.com/hasura/pgdeltastream">PGDeltaStream</a> - A
+        Golang webserver to stream Postgres changes atleast-once over
+        websockets, using Postgres logical decoding feature.
+      </li>
+      <li>
+        <a href="https://github.com/2ndQuadrant/repmgr">repmgr</a> - The Most
+        Popular Replication Manager for PostgreSQL.
+      </li>
+    </ul>
+    <h2 id="scripts">Scripts</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/pgexperts/pgx_scripts">pgx_scripts</a> - A
+        collection of useful little scripts for database analysis and
+        administration, created by our team at PostgreSQL Experts.
+      </li>
+      <li>
+        <a href="https://github.com/ioguix/pgsql-bloat-estimation"
+          >pgsql-bloat-estimation</a
+        >
+        - Queries to mesure statistical bloat in indexes and tables for
+        PostgreSQL.
+      </li>
+      <li>
+        <a href="https://gitlab.com/depesz/pgWikiDont">pgWikiDont</a> - SQL test
+        that checks if your database follows rules from
+        <a href="https://wiki.postgresql.org/wiki/Don&#39;t_Do_This" class="uri"
+          >https://wiki.postgresql.org/wiki/Don't_Do_This</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/dataegret/pg-utils">pg-utils</a> - Useful
+        PostgreSQL utilities.
+      </li>
+      <li>
+        <a href="https://postgrescheatsheet.com">Postgres cheat sheet</a> -
+        Useful SQL-scripts and commands by &lt;timescale.com&gt;.
+      </li>
+      <li>
+        <a href="https://github.com/NikolayS/postgres_dba">postgres_dba</a> -
+        The missing set of useful tools for Postgres DBAs and all engineers.
+      </li>
+      <li>
+        <a href="https://gist.github.com/rgreenjr/3637525"
+          >postgres_queries_and_commands.sql</a
+        >
+        - Useful PostgreSQL Queries and Commands.
+      </li>
+      <li>
+        <a href="https://github.com/tanelpoder/tpt-oracle">TPT</a> - These
+        sqlplus scripts are for Oracle Database performance optimization &amp;
+        troubleshooting.
+      </li>
+    </ul>
+    <h2 id="monitoringstatisticsperfomance">
+      Monitoring/Statistics/Perfomance
+    </h2>
+    <ul>
+      <li>
+        <a href="https://github.com/akardapolov/ASH-Viewer">ASH Viewer</a> -
+        Provides a graphical view of active session history data within the
+        Oracle and PostgreSQL DB.
+      </li>
+      <li>
+        <a href="https://www.webyog.com/product/monyog">Monyog</a> - Agentless
+        &amp; Cost-effective MySQL Monitoring Tool.
+      </li>
+      <li>
+        <a href="https://github.com/microsoft/mssql-monitoring"
+          >mssql-monitoring</a
+        >
+        - Monitor your SQL Server on Linux performance using collectd, InfluxDB
+        and Grafana.
+      </li>
+      <li>
+        <a href="https://www.navicat.com/en/products/navicat-monitor"
+          >Navicat Monitor</a
+        >
+        - A safe, simple and agentless remote server monitoring tool that is
+        packed with powerful features to make your monitoring effective as
+        possible.
+      </li>
+      <li>
+        <a href="https://github.com/percona/pmm"
+          >Percona Monitoring and Management</a
+        >
+        - Open source platform for managing and monitoring MySQL and MongoDB
+        performance.
+      </li>
+      <li>
+        <a href="https://github.com/pganalyze/collector">pganalyze collector</a>
+        - Pganalyze statistics collector for gathering PostgreSQL metrics and
+        log data.
+      </li>
+      <li>
+        <a href="https://gitlab.com/postgres-ai/postgres-checkup"
+          >postgres-checkup</a
+        >
+        - New-generation diagnostics tool that allows users to do a deep
+        analysis of the health of Postgres databases.
+      </li>
+      <li>
+        <a href="https://pgdash.io">pgDash</a> - Measure and track every aspect
+        of your PostgreSQL databases.
+      </li>
+      <li>
+        <a href="https://github.com/ankane/pghero">PgHero</a> - A performance
+        dashboard for Postgres - health checks, suggested indexes, and more.
+      </li>
+      <li>
+        <a href="https://github.com/rapidloop/pgmetrics">pgmetrics</a> - Collect
+        and display information and stats from a running PostgreSQL server.
+      </li>
+      <li>
+        <a href="https://www.pgmustard.com">pgMustard</a> - A user interface for
+        Postgres explain plans, plus tips to improve performance.
+      </li>
+      <li>
+        <a href="https://github.com/gleu/pgstats">pgstats</a> - Collects
+        PostgreSQL statistics, and either saves them in CSV files or print them
+        on the stdout.
+      </li>
+      <li>
+        <a href="https://github.com/cybertec-postgresql/pgwatch2">pgwatch2</a> -
+        Flexible self-contained PostgreSQL metrics monitoring/dashboarding
+        solution.
+      </li>
+      <li>
+        <a
+          href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/postgresql"
+          >Telegraf PostgreSQL plugin</a
+        >
+        - Provides metrics for your postgres database.
+      </li>
+    </ul>
+    <h3 id="prometheus">Prometheus</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/weaponry/pgscv">pgSCV</a> - Metrics exporter
+        for PostgreSQL and Postgres-related services.
+      </li>
+      <li>
+        <a href="https://github.com/wrouesnel/postgres_exporter"
+          >postgres_exporter</a
+        >
+        - Prometheus exporter for PostgreSQL server metrics.
+      </li>
+    </ul>
+    <h3 id="zabbix">Zabbix</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/postgrespro/mamonsu">Mamonsu</a> -
+        Monitoring agent for PostgreSQL.
+      </li>
+      <li>
+        <a href="http://www.smartmarmot.com/wiki/index.php?title=Orabbix"
+          >Orabbix</a
+        >
+        - Orabbix is a plugin designed to work with Zabbix Enterprise Monitor to
+        provide multi-tiered monitoring, performance and availability reporting
+        and measurement for Oracle Databases, along with server performance
+        metrics.
+      </li>
+      <li>
+        <a href="https://github.com/pg-monz/pg_monz">pg_monz</a> - This is the
+        Zabbix monitoring template for PostgreSQL Database.
+      </li>
+      <li>
+        <a href="https://github.com/bicofino/Pyora">Pyora</a> - Python script to
+        monitor Oracle Databases.
+      </li>
+      <li>
+        <a href="https://github.com/anetrusov/ZabbixDBA">ZabbixDBA</a> -
+        ZabbixDBA is fast, flexible, and continuously developing plugin to
+        monitor your RDBMS.
+      </li>
+    </ul>
+    <h2 id="testing">Testing</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/dbfit/dbfit">DbFit</a> - A database testing
+        framework that supports easy test-driven development of your database
+        code.
+      </li>
+      <li>
+        <a href="https://github.com/dimitri/regresql">RegreSQL</a> - Regression
+        Testing your SQL queries.
+      </li>
+    </ul>
+    <h3 id="data-generator">Data generator</h3>
+    <ul>
+      <li>
+        <a href="https://sourceforge.net/projects/benerator"
+          >Databene Benerator</a
+        >
+        - It is a framework for generating realistic and valid high-volume test
+        data for your system under test (avoiding the Datalite anti-pattern).
+      </li>
+      <li>
+        <a href="https://www.devart.com/dbforge/mysql/data-generator"
+          >dbForge Data Generator for MySQL</a
+        >
+        - Powerful GUI tool for creating massive volumes of realistic test data.
+      </li>
+      <li>
+        <a href="https://www.devart.com/dbforge/oracle/data-generator"
+          >dbForge Data Generator for Oracle</a
+        >
+        - Small but mighty GUI tool for populating Oracle schemas with tons of
+        realistic test data.
+      </li>
+      <li>
+        <a href="https://www.devart.com/dbforge/sql/data-generator"
+          >dbForge Data Generator for SQL Server</a
+        >
+        - Powerful GUI tool for a fast generation of meaningful test data for
+        databases.
+      </li>
+    </ul>
+    <h2 id="administration">Administration</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/dalibo/pgbadger">pgbadger</a> - A fast
+        PostgreSQL Log Analyzer.
+      </li>
+      <li>
+        <a href="https://github.com/Squarespace/pgbedrock">pgbedrock</a> -
+        Manage a Postgres cluster’s roles, role memberships, schema ownership,
+        and privileges.
+      </li>
+      <li>
+        <a href="https://github.com/ankane/pgslice">pgslice</a> - Postgres
+        partitioning as easy as pie.
+      </li>
+    </ul>
+    <h2 id="hafailoversharding">HA/Failover/Sharding</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/citusdata/citus">Citus</a> - Postgres
+        extension that distributes your data and your queries across multiple
+        nodes.
+      </li>
+      <li>
+        <a href="https://github.com/zalando/patroni">patroni</a> - A template
+        for PostgreSQL High Availability with ZooKeeper, etcd, or Consul.
+      </li>
+      <li>
+        <a href="https://github.com/percona/percona-xtradb-cluster"
+          >Percona XtraDB Cluster</a
+        >
+        - A High Scalability Solution for MySQL Clustering and High
+        Availability.
+      </li>
+      <li>
+        <a href="https://github.com/sorintlab/stolon">stolon</a> - Cloud native
+        PostgreSQL manager for PostgreSQL high availability.
+      </li>
+      <li>
+        <a href="https://github.com/citusdata/pg_auto_failover"
+          >pg_auto_failover</a
+        >
+        - Postgres extension and service for automated failover and
+        high-availability.
+      </li>
+      <li>
+        <a href="https://github.com/aiven/pglookout">pglookout</a> - PostgreSQL
+        replication monitoring and failover daemon.
+      </li>
+      <li>
+        <a href="https://github.com/ClusterLabs/PAF"
+          >PostgreSQL Automatic Failover</a
+        >
+        - High-Availibility for Postgres, based on industry references Pacemaker
+        and Corosync.
+      </li>
+      <li>
+        <a href="https://github.com/vitabaks/postgresql_cluster"
+          >postgresql_cluster</a
+        >
+        - PostgreSQL High-Availability Cluster (based on “Patroni” and
+        “DCS(etcd)”). Automating deployment with Ansible.
+      </li>
+      <li>
+        <a href="https://github.com/vitessio/vitess">Vitess</a> - Database
+        clustering system for horizontal scaling of MySQL through generalized
+        sharding.
+      </li>
+    </ul>
+    <h2 id="kubernetes">Kubernetes</h2>
+    <ul>
+      <li>
+        <a href="https://kubedb.com">KubeDB</a> - Making running
+        production-grade databases easy on Kubernetes.
+      </li>
+      <li>
+        <a href="https://github.com/zalando/postgres-operator"
+          >Postgres operator</a
+        >
+        - The Postgres Operator enables highly-available PostgreSQL clusters on
+        Kubernetes (K8s) powered by Patroni.
+      </li>
+      <li>
+        <a href="https://github.com/zalando/spilo">Spilo</a> - HA PostgreSQL
+        Clusters with Docker.
+      </li>
+      <li>
+        <a href="https://gitlab.com/ongresinc/stackgres">StackGres</a> -
+        Enterprise-grade, Full Stack PostgreSQL on Kubernetes.
+      </li>
+    </ul>
+    <h2 id="configuration-tuning">Configuration Tuning</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/major/MySQLTuner-perl">MySQLTuner-perl</a> -
+        Script written in Perl that allows you to review a MySQL installation
+        quickly and make adjustments to increase performance and stability.
+      </li>
+      <li>
+        <a href="https://pgconfigurator.cybertec-postgresql.com"
+          >PGConfigurator</a
+        >
+        - Free online tool to generate an optimized
+        <code>postgresql.conf</code>.
+      </li>
+      <li>
+        <a href="https://github.com/gregs1104/pgtune">pgtune</a> - PostgreSQL
+        configuration wizard.
+      </li>
+      <li>
+        <a href="https://github.com/jfcoz/postgresqltuner"
+          >postgresqltuner.pl</a
+        >
+        - Simple script to analyse your PostgreSQL database configuration, and
+        give tuning advice.
+      </li>
+    </ul>
+    <h2 id="devops">DevOps</h2>
+    <ul>
+      <li>
+        <a href="https://www.dbmaestro.com">DBmaestro</a> - DBmaestro
+        accelerates release cycles &amp; supports agility across the entire IT
+        ecosystem.
+      </li>
+      <li>
+        <a href="https://spawn.cc/">Spawn</a> - Cloud service for creating
+        instant database copies for development and CI. No more local db
+        installs, instant recovery to arbitrary save points, isolated copies for
+        each feature branch or test. Instant provisioning regardless of database
+        size.
+      </li>
+      <li>
+        <a href="https://www.quest.com/products/toad-devops-toolkit/"
+          >Toad DevOps Toolkit</a
+        >
+        - Toad DevOps Toolkit executes key database development functions within
+        your DevOps workflow —without compromising quality, performance or
+        reliability.
+      </li>
+    </ul>
+    <h2 id="schema-samples">Schema samples</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/oracle/db-sample-schemas"
+          >Oracle Database Sample Schemas</a
+        >
+        - Oracle Database Sample Schemas.
+      </li>
+    </ul>
+    <h2 id="reporting">Reporting</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/shzlw/poli">Poli</a> - An easy-to-use SQL
+        reporting application built for SQL lovers.
+      </li>
+    </ul>
+    <h2 id="distributions">Distributions</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/datacharmer/dbdeployer">DBdeployer</a> -
+        Tool that deploys MySQL database servers easily.
+      </li>
+      <li>
+        <a href="https://github.com/sqlcollaborative/dbatools">dbatools</a> -
+        PowerShell module that you may think of like a command-line SQL Server
+        Management Studio.
+      </li>
+      <li>
+        <a href="https://github.com/PostgresApp/PostgresApp">Postgres.app</a> -
+        Full-featured PostgreSQL installation packaged as a standard Mac app.
+      </li>
+      <li>
+        <a href="https://www.bigsql.org">BigSQL</a> - A developer-friendly
+        distribution of Postgres.
+      </li>
+      <li>
+        <a href="https://github.com/credativ/elephant-shed">Elephant Shed</a> -
+        Web-based PostgreSQL management front-end that bundles several utilities
+        and applications for use with PostgreSQL.
+      </li>
+    </ul>
+    <h2 id="security">Security</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/cossacklabs/acra">Acra</a> - Database
+        security suite. Database proxy with field-level encryption, search
+        through encrypted data, SQL injections prevention, intrusion detection,
+        honeypots. Supports client-side and proxy-side (“transparent”)
+        encryption. SQL, NoSQL.
+      </li>
+      <li>
+        <a href="https://github.com/securitybunker/databunker">Databunker</a> -
+        Special GDPR compliant secure vault for customer records built on top of
+        regular DB.
+      </li>
+    </ul>
+    <h2 id="code-formatters">Code formatters</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/antlr/codebuff">CodeBuff</a> -
+        Language-agnostic pretty-printing through machine learning.
+      </li>
+    </ul>
+    <h2 id="contributing">Contributing</h2>
+    <ul>
+      <li>
+        Your contributions are always welcome! Please read the
+        <a href="contributing.md">contribution guidelines</a> first.
+      </li>
+    </ul>
+  </body>
+</html>

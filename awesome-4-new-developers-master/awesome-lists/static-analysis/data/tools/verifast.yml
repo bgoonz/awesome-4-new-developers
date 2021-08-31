@@ -1,0 +1,15 @@
+name: VeriFast
+categories:
+  - linter
+tags:
+  - ocaml
+license: MIT License
+types:
+  - cli
+source: "https://github.com/verifast/verifast"
+homepage: "https://github.com/verifast/verifast"
+description: >-
+  A tool for modular formal verification of correctness properties of single-threaded and multithreaded 
+  C and Java programs annotated with preconditions and postconditions written in separation logic. 
+  To express rich specifications, the programmer can define inductive datatypes, 
+  primitive recursive pure functions over these datatypes, and abstract separation logic predicates.

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>git-cheat-sheet-pt_BR</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="git-cheat-sheet-brazilian-portuguese">
+      Git cheat Sheet Brazilian Portuguese
+    </h1>
+    <h3 id="índice">Índice</h3>
+    <ul>
+      <li><a href="#configuração">Configuração</a></li>
+      <li><a href="#arquivos-de-configuração">Arquivos de Configuração</a></li>
+      <li><a href="#criar">Criar</a></li>
+      <li><a href="#mudanças-locais">Mudanças Locais</a></li>
+      <li><a href="#pesquisa">Pesquisa</a></li>
+      <li><a href="#histórico-de-commits">Histórico de Commits</a></li>
+      <li><a href="#ramos-e-tags">Ramos e Tags</a></li>
+      <li><a href="#atualizar-e-publicar">Atualizar e Publicar</a></li>
+      <li><a href="#mesclar-e-reconstruir">Mesclar e Reconstruir</a></li>
+      <li><a href="#desfazer">Desfazer</a></li>
+      <li><a href="#git-flow">Git Flow</a></li>
+    </ul>
+    <hr />
+    <h2 id="configuração">Configuração</h2>
+    <h5 id="mostrar-a-configuração-atual">Mostrar a configuração atual:</h5>
+    <pre><code>$ git config --list</code></pre>
+    <h5 id="mostrar-a-configuração-do-repositório">
+      Mostrar a configuração do repositório:
+    </h5>
+    <pre><code>$ git config --local --list</code></pre>
+    <h5 id="mostrar-a-configuração-global">Mostrar a configuração global:</h5>
+    <pre><code>$ git config --global --list</code></pre>
+    <h5 id="mostrar-a-configuração-do-sistema">
+      Mostrar a configuração do sistema:
+    </h5>
+    <pre><code>$ git config --system --list</code></pre>
+    <h5
+      id="definir-um-nome-que-seja-identificável-para-crédito-ao-revisar-o-histórico-de-versão"
+    >
+      Definir um nome que seja identificável para crédito ao revisar o histórico
+      de versão:
+    </h5>
+    <pre><code>$ git config --global user.name “[nome sobrenome]”</code></pre>
+    <h5
+      id="definir-um-endereço-de-e-mail-que-será-associado-a-cada-marcador-de-histórico"
+    >
+      Definir um endereço de e-mail que será associado a cada marcador de
+      histórico:
+    </h5>
+    <pre><code>$ git config --global user.email “[email-válido]”</code></pre>
+    <h5
+      id="definir-a-coloração-automática-da-linha-de-comandos-do-git-para-facilitar-a-revisão"
+    >
+      Definir a coloração automática da linha de comandos do Git para facilitar
+      a revisão:
+    </h5>
+    <pre><code>$ git config --global color.ui auto</code></pre>
+    <h5 id="definir-o-editor-global-para-commits">
+      Definir o editor global para <em>commits</em>
+    </h5>
+    <pre><code>$ git config --global core.editor vi</code></pre>
+    <hr />
+    <h2 id="arquivos-de-configuração">Arquivos de Configuração</h2>
+    <h5 id="arquivo-de-configuração-específico-do-repositório-local">
+      Arquivo de configuração específico do repositório [–local]:
+    </h5>
+    <pre><code>&lt;repo&gt;/.git/config</code></pre>
+    <h5 id="arquivo-de-configuração-específico-do-usuário-global">
+      Arquivo de configuração específico do usuário [–global]:
+    </h5>
+    <pre><code>~/.gitconfig</code></pre>
+    <h5 id="arquivo-de-configuração-de-todo-o-sistema-system">
+      Arquivo de configuração de todo o sistema [–system]:
+    </h5>
+    <pre><code>/etc/gitconfig</code></pre>
+    <hr />
+    <h2 id="criar">Criar</h2>
+    <h5 id="clonar-um-repositório-existente">
+      Clonar um repositório existente:
+    </h5>
+    <p>Existem duas maneiras:</p>
+    <p>Via SSH</p>
+    <pre><code>$ git clone ssh://usuario@dominio.com/repo.git</code></pre>
+    <p>Via HTTP</p>
+    <pre><code>$ git clone http://dominio.com/usuario/repo.git</code></pre>
+    <h5 id="criar-um-novo-repositório-local-no-diretório-atual">
+      Criar um novo repositório local no diretório atual:
+    </h5>
+    <pre><code>$ git init</code></pre>
+    <h5 id="criar-um-novo-repositório-local-em-um-diretório-específico">
+      Criar um novo repositório local em um diretório específico:
+    </h5>
+    <pre><code>$ git init &lt;diretorio&gt;</code></pre>
+    <hr />
+    <h2 id="mudanças-locais">Mudanças Locais</h2>
+    <h5 id="mudanças-no-diretório-de-trabalho">
+      Mudanças no diretório de trabalho:
+    </h5>
+    <pre><code>$ git status</code></pre>
+    <h5 id="mudanças-nos-arquivos-monitorados">
+      Mudanças nos arquivos monitorados:
+    </h5>
+    <pre><code>$ git diff</code></pre>
+    <h5 id="ver-as-mudançasdiferenças-de-um-arquivo-específico">
+      Ver as mudanças/diferenças de um arquivo específico:
+    </h5>
+    <pre><code>$ git diff &lt;arquivo&gt;</code></pre>
+    <h5 id="adicionar-todas-as-mudanças-atuais-ao-próximo-commit">
+      Adicionar todas as mudanças atuais ao próximo <em>commit</em>:
+    </h5>
+    <pre><code>$ git add .</code></pre>
+    <h5 id="adicionar-algumas-mudanças-no-arquivo-para-o-próximo-commit">
+      Adicionar algumas mudanças no &lt;arquivo&gt; para o próximo
+      <em>commit</em>:
+    </h5>
+    <pre><code>$ git add -p &lt;arquivo&gt;</code></pre>
+    <h5 id="adicionar-apenas-os-arquivos-mencionados-ao-próximo-commit">
+      Adicionar apenas os arquivos mencionados ao próximo <em>commit</em>:
+    </h5>
+    <pre><code>$ git add &lt;nome-do-arquivo-1&gt; &lt;nome-do-arquivo-2&gt;</code></pre>
+    <h5
+      id="realizar-um-commit-de-todas-as-mudanças-locais-nos-arquivos-monitorados"
+    >
+      Realizar um <em>commit</em> de todas as mudanças locais nos arquivos
+      monitorados:
+    </h5>
+    <pre><code>$ git commit -a</code></pre>
+    <h5 id="realizar-um-commit-das-mudanças-anteriormente-preparadas-staged">
+      Realizar um <em>commit</em> das mudanças anteriormente preparadas
+      (<em>staged</em>):
+    </h5>
+    <pre><code>$ git commit</code></pre>
+    <h5 id="realizar-um-commit-com-mensagem">
+      Realizar um <em>commit</em> com mensagem:
+    </h5>
+    <pre><code>$ git commit -m &#39;mensagem aqui&#39;</code></pre>
+    <h5
+      id="realizar-um-commit-pulando-a-área-de-preparação-staging-area-e-adicionando-uma-mensagem"
+    >
+      Realizar um <em>commit</em> pulando a área de preparação (<em
+        >staging area</em
+      >) e adicionando uma mensagem:
+    </h5>
+    <pre><code>$ git commit -am &#39;mensagem aqui&#39;</code></pre>
+    <h5 id="realizar-um-commit-com-alguma-data-anterior">
+      Realizar um <em>commit</em> com alguma data anterior:
+    </h5>
+    <pre><code>$ git commit --date=&quot;`date --date=&#39;n day ago&#39;`&quot; -am &quot;&lt;Mensagem do commit aqui&gt;&quot;</code></pre>
+    <h5 id="emendar-o-último-commit">
+      Emendar o último <em>commit</em>:<br />
+    </h5>
+    <p>
+      <em
+        ><sub>Não emenda os <em>commits</em> publicados!</sub></em
+      >
+    </p>
+    <pre><code>$ git commit -a --amend</code></pre>
+    <h5
+      id="emendar-com-o-último-commit-mas-usar-a-mensagem-de-log-do-commit-anterior"
+    >
+      Emendar com o último <em>commit</em>, mas usar a mensagem de log do
+      <em>commit</em> anterior:
+    </h5>
+    <p>
+      <em
+        ><sub>Não emenda os <em>commits</em> publicados!</sub></em
+      >
+    </p>
+    <pre class="shell"><code>$ git commit --amend --no-edit</code></pre>
+    <h5 id="alterar-data-do-commit-do-último-commit">
+      Alterar data do <em>commit</em> do último <em>commit</em>:
+    </h5>
+    <pre><code>GIT_COMMITTER_DATE=&quot;data&quot; git commit --amend</code></pre>
+    <h5 id="alterar-data-do-autor-do-último-commit">
+      Alterar data do Autor do último <em>commit</em>:
+    </h5>
+    <pre
+      class="shell"
+    ><code>$ git commit --amend --date=&quot;data&quot;</code></pre>
+    <h5
+      id="mover-as-alterações-não-confirmadas-uncommitted-changes-do-ramo-atual-para-algum-outro-ramo"
+    >
+      Mover as alterações não confirmadas (<em>uncommitted changes</em>) do ramo
+      atual para algum outro ramo:<br />
+    </h5>
+    <pre><code>$ git stash
+$ git checkout ramo2
+$ git stash pop</code></pre>
+    <h5
+      id="restaurar-as-alterações-acumuladas-stashed-changes-de-volta-para-o-ramo-atual"
+    >
+      Restaurar as alterações acumuladas (<em>stashed changes</em>) de volta
+      para o ramo atual:
+    </h5>
+    <pre class="shell"><code>$ git stash apply</code></pre>
+    <h5 id="restaurar-um-stash-particular-de-volta-para-o-ramo-atual">
+      Restaurar um <em>stash</em> particular de volta para o ramo atual:
+    </h5>
+    <ul>
+      <li>
+        O <em>{numero-do-stash}</em> pode ser obtido de
+        <code>git stash list</code>
+      </li>
+    </ul>
+    <pre
+      class="shell"
+    ><code>$ git stash apply stash@{numero-do-stash}</code></pre>
+    <h5 id="remover-o-último-conjunto-de-alterações-acumuladas">
+      Remover o último conjunto de alterações acumuladas:
+    </h5>
+    <pre><code>$ git stash drop</code></pre>
+    <hr />
+    <h2 id="pesquisa">Pesquisa</h2>
+    <h5 id="uma-pesquisa-de-texto-em-todos-os-arquivos-do-diretório">
+      Uma pesquisa de texto em todos os arquivos do diretório:
+    </h5>
+    <pre><code>$ git grep &quot;Olá&quot;</code></pre>
+    <h5 id="um-texto-em-qualquer-versão">Um texto em qualquer versão:</h5>
+    <pre><code>$ git grep &quot;Olá&quot; v2.5</code></pre>
+    <h5 id="mostrar-commits-que-introduziram-uma-palavra-chave-específica">
+      Mostrar <em>commits</em> que introduziram uma palavra-chave específica:
+    </h5>
+    <pre><code>$ git log -S&#39;palavra-chave&#39;</code></pre>
+    <h5
+      id="mostrar-commits-que-introduziram-uma-palavra-chave-específica-usando-uma-expressão-regular"
+    >
+      Mostrar <em>commits</em> que introduziram uma palavra-chave específica
+      (usando uma expressão regular):
+    </h5>
+    <pre><code>$ git log -S&#39;palavra-chave&#39; --pickaxe-regex</code></pre>
+    <hr />
+    <h2 id="histórico-de-commits">Histórico de Commits</h2>
+    <h5
+      id="mostrar-todos-os-commits-começando-pelo-mais-novo-mostrará-o-hash-informações-do-autor-data-do-commit-e-título-do-commit"
+    >
+      Mostrar todos os <em>commits</em>, começando pelo mais novo (mostrará o
+      hash, informações do autor, data do <em>commit</em> e título do
+      <em>commit</em>):
+    </h5>
+    <pre><code>$ git log</code></pre>
+    <h5
+      id="mostrar-todos-os-commits-mostrará-apenas-o-hash-do-commit-e-a-mensagem-do-commit"
+    >
+      Mostrar todos os <em>commits</em> (mostrará apenas o hash do
+      <em>commit</em> e a mensagem do <em>commit</em>)
+    </h5>
+    <pre><code>$ git log --oneline</code></pre>
+    <h5 id="mostrar-todos-os-commits-de-um-usuário-específico">
+      Mostrar todos os <em>commits</em> de um usuário específico:
+    </h5>
+    <pre><code>$ git log --author=&quot;nome-do-usuario&quot;</code></pre>
+    <h5 id="mostrar-alterações-ao-longo-do-tempo-para-um-arquivo-específico">
+      Mostrar alterações ao longo do tempo para um arquivo específico:
+    </h5>
+    <pre><code>$ git log -p &lt;arquivo&gt;</code></pre>
+    <h5
+      id="exibir-commits-que-estão-presentes-apenas-no-remotoramo-no-lado-direito"
+    >
+      Exibir <em>commits</em> que estão presentes apenas no remoto/ramo no lado
+      direito
+    </h5>
+    <pre><code>$ git log --oneline &lt;origin/master&gt;..&lt;remoto/master&gt; --left-right</code></pre>
+    <h5 id="quem-mudou-o-quê-e-quando-no-arquivo">
+      Quem mudou, o quê e quando no &lt;arquivo&gt;:
+    </h5>
+    <pre><code>$ git blame &lt;arquivo&gt;</code></pre>
+    <h5 id="mostrar-log-de-referência">Mostrar log de referência:</h5>
+    <pre><code>$ git reflog show</code></pre>
+    <h5 id="deletar-log-de-referência">Deletar log de referência:</h5>
+    <pre><code>$ git reflog delete</code></pre>
+    <hr />
+    <h2 id="mover-renomear">Mover / Renomear</h2>
+    <h5 id="renomear-um-arquivo">Renomear um arquivo:</h5>
+    <p>Renomear Index.txt para Index.html</p>
+    <pre><code>$ git mv Index.txt Index.html</code></pre>
+    <hr />
+    <h2 id="ramos-e-tags">Ramos e Tags</h2>
+    <h5 id="listar-todos-os-ramos-locais">Listar todos os ramos locais:</h5>
+    <pre><code>$ git branch</code></pre>
+    <h5 id="listar-ramos-locaisremotos">Listar ramos locais/remotos:</h5>
+    <pre><code>$ git branch -a</code></pre>
+    <h5 id="liste-todos-os-ramos-remotos">Liste todos os ramos remotos:</h5>
+    <pre><code>$ git branch -r</code></pre>
+    <h5 id="mudar-ramo-head">Mudar ramo <code>HEAD</code>:</h5>
+    <pre><code>$ git checkout &lt;ramo&gt;</code></pre>
+    <h5 id="atualizar-um-único-arquivo-de-outro-ramo">
+      Atualizar um único arquivo de outro ramo:
+    </h5>
+    <pre><code>$ git checkout &lt;ramo&gt; -- &lt;arquivo&gt;</code></pre>
+    <h5 id="criar-e-mudar-para-um-novo-ramo">
+      Criar e mudar para um novo ramo:
+    </h5>
+    <pre><code>$ git checkout -b &lt;ramo&gt;</code></pre>
+    <h5
+      id="criar-um-novo-ramo-a-partir-de-um-ramo-existente-e-mudar-para-o-novo-ramo"
+    >
+      Criar um novo ramo a partir de um ramo existente e mudar para o novo ramo:
+    </h5>
+    <pre><code>$ git checkout -b &lt;ramo_novo&gt; &lt;ramo_existente&gt;</code></pre>
+    <h5
+      id="criar-um-novo-ramo-a-partir-de-um-commit-existente-e-mudar-para-o-novo-ramo"
+    >
+      Criar um novo ramo a partir de um <em>commit</em> existente e mudar para o
+      novo ramo:
+    </h5>
+    <pre><code>$ git checkout &lt;hash-do-commit&gt; -b &lt;novo_nome_do_ramo&gt;</code></pre>
+    <h5 id="criar-um-novo-ramo-com-base-em-seu-head-atual">
+      Criar um novo ramo com base em seu <code>HEAD</code> atual:
+    </h5>
+    <pre><code>$ git branch &lt;novo-ramo&gt;</code></pre>
+    <h5 id="criar-um-novo-ramo-de-monitoramento-com-base-em-um-ramo-remoto">
+      Criar um novo ramo de monitoramento com base em um ramo remoto:
+    </h5>
+    <pre><code>$ git branch --track &lt;ramo-novo&gt; &lt;ramo-remoto&gt;</code></pre>
+    <h5 id="deletar-um-ramo-local">Deletar um ramo local:</h5>
+    <pre><code>$ git branch -d &lt;ramo&gt;</code></pre>
+    <h5 id="renomear-o-ramo-atual-para-um-novo-nome-de-ramo">
+      Renomear o ramo atual para um novo nome de ramo
+    </h5>
+    <pre
+      class="shell"
+    ><code>$ git branch -m &lt;nome_do_novo_ramo&gt;</code></pre>
+    <h5 id="forçar-a-exclusão-de-um-ramo-local">
+      Forçar a exclusão de um ramo local:
+    </h5>
+    <p>
+      <em><sub>Você perderá as alterações não mescladas!</sub></em>
+    </p>
+    <pre><code>$ git branch -D &lt;ramo&gt;</code></pre>
+    <h5 id="marcar-head-com-uma-tag">
+      Marcar <code>HEAD</code> com uma <em>tag</em>:
+    </h5>
+    <pre><code>$ git tag &lt;nome-da-tag&gt;</code></pre>
+    <h5 id="marcar-head-com-uma-tag-e-abrir-o-editor-para-incluir-uma-mensagem">
+      Marcar <code>HEAD</code> com uma <em>tag</em> e abrir o editor para
+      incluir uma mensagem:
+    </h5>
+    <pre><code>$ git tag -a &lt;nome-da-tag&gt;</code></pre>
+    <h5 id="marcar-head-com-uma-tag-que-inclui-uma-mensagem">
+      Marcar <code>HEAD</code> com uma <em>tag</em> que inclui uma mensagem:
+    </h5>
+    <pre><code>$ git tag &lt;nome-da-tag&gt; -am &#39;mensagem aqui&#39;</code></pre>
+    <h5 id="listar-todas-as-tags">Listar todas as <em>tags</em>:</h5>
+    <pre><code>$ git tag</code></pre>
+    <h5
+      id="listar-todas-as-tags-com-suas-mensagens-mensagem-de-tag-ou-mensagem-de-commit-se-a-tag-não-tiver-mensagem"
+    >
+      Listar todas as <em>tags</em> com suas mensagens (mensagem de
+      <em>tag</em> ou mensagem de <em>commit</em> se a <em>tag</em> não tiver
+      mensagem):
+    </h5>
+    <pre><code>$ git tag -n</code></pre>
+    <hr />
+    <h2 id="atualizar-e-publicar">Atualizar e Publicar</h2>
+    <h5 id="listar-todos-os-remotos-configurados-atualmente">
+      Listar todos os remotos configurados atualmente:
+    </h5>
+    <pre><code>$ git remote -v</code></pre>
+    <h5 id="mostrar-informações-sobre-um-remoto">
+      Mostrar informações sobre um remoto:
+    </h5>
+    <pre><code>$ git remote show &lt;remoto&gt;</code></pre>
+    <h5 id="adicionar-um-novo-repositório-removo-chamado-remoto">
+      Adicionar um novo repositório removo chamado &lt;remoto&gt;:
+    </h5>
+    <pre><code>$ git remote add &lt;remoto&gt; &lt;url&gt;</code></pre>
+    <h5 id="renomear-um-repositório-remoto-de-remoto-para-novo_remoto">
+      Renomear um repositório remoto de &lt;remoto&gt; para &lt;novo_remoto&gt;:
+    </h5>
+    <pre><code>$ git remote rename &lt;remoto&gt; &lt;novo_remoto&gt;</code></pre>
+    <h5 id="remover-um-remoto">Remover um remoto:</h5>
+    <pre><code>$ git remote rm &lt;remoto&gt;</code></pre>
+    <p>
+      <em
+        ><sub
+          >Nota: <code>git remote rm</code> não exclui o repositório remoto do
+          servidor. Ele simplesmente remove o remoto e suas referências de seu
+          repositório local.</sub
+        ></em
+      >
+    </p>
+    <h5 id="baixar-todas-as-alterações-de-remoto-mas-não-integrar-no-head">
+      Baixar todas as alterações de &lt;remoto&gt;, mas não integrar no
+      <code>HEAD</code>:
+    </h5>
+    <pre><code>$ git fetch &lt;remoto&gt;</code></pre>
+    <h5 id="baixar-as-alterações-e-mesclarintegrar-diretamente-no-head">
+      Baixar as alterações e mesclar/integrar diretamente no <code>HEAD</code>:
+    </h5>
+    <pre><code>$ git remote pull &lt;remoto&gt; &lt;url&gt;</code></pre>
+    <h5 id="obter-todas-as-alterações-do-head-para-o-repositório-local">
+      Obter todas as alterações do <code>HEAD</code> para o repositório local:
+    </h5>
+    <pre><code>$ git pull origin master</code></pre>
+    <h5
+      id="obter-todas-as-alterações-do-head-para-o-repositório-local-sem-mesclagem"
+    >
+      Obter todas as alterações do <code>HEAD</code> para o repositório local
+      sem mesclagem:
+    </h5>
+    <pre><code>$ git pull --rebase &lt;remoto&gt; &lt;ramo&gt;</code></pre>
+    <h5 id="publicar-as-alterações-locais-remotamente">
+      Publicar as alterações locais remotamente:
+    </h5>
+    <pre><code>$ git push remote &lt;remoto&gt; &lt;ramo&gt;</code></pre>
+    <h5 id="excluir-um-ramo-no-remoto">Excluir um ramo no remoto:</h5>
+    <pre><code>$ git push &lt;remoto&gt; :&lt;ramo&gt; (desde o Git v1.5.0)</code></pre>
+    <p>OU</p>
+    <pre><code>$ git push &lt;remoto&gt; --delete &lt;ramo&gt; (desde o Git v1.7.0)</code></pre>
+    <h5 id="publicar-suas-tags">Publicar suas <em>tags</em>:</h5>
+    <pre><code>$ git push --tags</code></pre>
+    <h5
+      id="configurar-a-ferramenta-de-mesclagem-globalmente-para-o-meld-editor"
+    >
+      Configurar a ferramenta de mesclagem globalmente para o meld (editor)
+    </h5>
+    <div class="sourceCode" id="cb79">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb79-1" title="1">$ <span class="fu">git</span> config --global merge.tool meld</a></code></pre>
+    </div>
+    <h5
+      id="usar-sua-ferramenta-de-mesclagem-configurada-para-resolver-conflitos"
+    >
+      Usar sua ferramenta de mesclagem configurada para resolver conflitos:
+    </h5>
+    <pre><code>$ git mergetool</code></pre>
+    <hr />
+    <h2 id="mesclar-e-reconstruir">Mesclar e Reconstruir</h2>
+    <h5 id="mesclar-ramo-em-seu-head-atual">
+      Mesclar ramo em seu <code>HEAD</code> atual:
+    </h5>
+    <pre><code>$ git merge &lt;ramo&gt;</code></pre>
+    <h5 id="reconstruir-rebase-seu-head-atual-no-ramo">
+      Reconstruir (rebase) seu <code>HEAD</code> atual no &lt;ramo&gt;:<br />
+    </h5>
+    <p>
+      <em
+        ><sub>Não faz reconstrução de <em>commit</em> publicado!</sub></em
+      >
+    </p>
+    <pre><code>$ git rebase &lt;ramo&gt;</code></pre>
+    <h5 id="abortar-uma-reconstrução">Abortar uma reconstrução:</h5>
+    <pre><code>$ git rebase --abort</code></pre>
+    <h5 id="continuar-uma-reconstrução-após-resolver-os-conflitos">
+      Continuar uma reconstrução após resolver os conflitos:
+    </h5>
+    <pre><code>$ git rebase --continue</code></pre>
+    <h5
+      id="usar-seu-editor-para-resolver-manualmente-os-conflitos-e-depois-de-resolver-marcar-o-arquivo-como-resolvido"
+    >
+      Usar seu editor para resolver manualmente os conflitos e (depois de
+      resolver) marcar o arquivo como resolvido:
+    </h5>
+    <pre><code>$ git add &lt;arquivo-resolvido&gt;</code></pre>
+    <pre><code>$ git rm &lt;arquivo-resolvido&gt;</code></pre>
+    <h5 id="juntando-commits-squashing-commits">
+      Juntando <em>commits</em> (<em>squashing commits</em>):
+    </h5>
+    <pre><code>$ git rebase -i &lt;commit-just-before-first&gt;</code></pre>
+    <p>Agora substitua isso:</p>
+    <pre><code>pick &lt;commit_id&gt;
+pick &lt;commit_id2&gt;
+pick &lt;commit_id3&gt;</code></pre>
+    <p>para isso:</p>
+    <pre><code>pick &lt;commit_id&gt;
+squash &lt;commit_id2&gt;
+squash &lt;commit_id3&gt;</code></pre>
+    <hr />
+    <h2 id="desfazer">Desfazer</h2>
+    <h5 id="descartar-todas-as-mudanças-locais-em-seu-diretório-de-trabalho">
+      Descartar todas as mudanças locais em seu diretório de trabalho:
+    </h5>
+    <pre><code>$ git reset --hard HEAD</code></pre>
+    <h5
+      id="tirar-todos-os-arquivos-da-área-de-preparação-ou-seja-desfazer-o-último-git-add"
+    >
+      Tirar todos os arquivos da área de preparação (ou seja, desfazer o último
+      <code>git add</code>):
+    </h5>
+    <pre><code>$ git reset HEAD</code></pre>
+    <h5 id="descartar-as-alterações-locais-em-um-arquivo-específico">
+      Descartar as alterações locais em um arquivo específico:
+    </h5>
+    <pre><code>$ git checkout HEAD &lt;arquivo&gt;</code></pre>
+    <h5
+      id="reverter-um-commit-produzindo-um-novo-commit-com-alterações-contrárias"
+    >
+      Reverter um <em>commit</em> (produzindo um novo <em>commit</em> com
+      alterações contrárias):
+    </h5>
+    <pre><code>$ git revert &lt;commit&gt;</code></pre>
+    <h5
+      id="redefinir-o-ponteiro-head-para-um-commit-anterior-e-descartar-todas-as-alterações-desde-então"
+    >
+      Redefinir o ponteiro <code>HEAD</code> para um <em>commit</em> anterior e
+      descartar todas as alterações desde então:
+    </h5>
+    <pre><code>$ git reset --hard &lt;commit&gt;</code></pre>
+    <h5 id="redefinir-o-ponteiro-head-para-um-estado-atual-de-um-ramo-remoto">
+      Redefinir o ponteiro <code>HEAD</code> para um estado atual de um ramo
+      remoto:
+    </h5>
+    <pre><code>$ git reset --hard &lt;remoto/ramo&gt; e.g., upstream/master, origin/minha-recurso</code></pre>
+    <h5
+      id="redefinir-o-ponteiro-head-para-um-commit-anterior-e-preservar-todas-as-alterações-como-alterações-não-preparadas-unstaged-changes"
+    >
+      Redefinir o ponteiro <code>HEAD</code> para um <em>commit</em> anterior e
+      preservar todas as alterações como alterações não preparadas (<em
+        >unstaged changes</em
+      >):
+    </h5>
+    <pre><code>$ git reset &lt;commit&gt;</code></pre>
+    <h5
+      id="redefinir-o-ponteiro-head-para-um-commit-anterior-e-preservar-as-alterações-locais-não-confirmadas-committed"
+    >
+      Redefinir o ponteiro <code>HEAD</code> para um <em>commit</em> anterior e
+      preservar as alterações locais não confirmadas (<em>committed</em>):
+    </h5>
+    <pre><code>$ git reset --keep &lt;commit&gt;</code></pre>
+    <h5
+      id="remover-arquivos-que-foram-acidentalmente-confirmados-antes-de-serem-adicionados-a-.gitignore"
+    >
+      Remover arquivos que foram acidentalmente confirmados antes de serem
+      adicionados a .gitignore:
+    </h5>
+    <pre><code>$ git rm -r --cached .
+$ git add .
+$ git commit -m &quot;remove arquivo xyz&quot;</code></pre>
+    <hr />
+    <h2 id="git-flow">Git-Flow</h2>
+    <p>
+      Improved
+      <a href="https://github.com/petervanderdoes/gitflow-avh">Git-flow</a>
+    </p>
+    <h3 id="índice-1">Índice</h3>
+    <ul>
+      <li><a href="#configuração">Configuração</a></li>
+      <li><a href="#começar">Começar</a></li>
+      <li><a href="#features">Recursos</a></li>
+      <li><a href="#fazer-um-lançamento">Fazer um Lançamento</a></li>
+      <li><a href="#correções-rápidas">Correções Rápidas</a></li>
+      <li><a href="#comandos">Comandos</a></li>
+    </ul>
+    <hr />
+    <h3 id="configuração-1">Configuração</h3>
+    <h6
+      id="você-precisa-de-uma-instalação-git-funcional-como-pré-requisito.-o-git-flow-funciona-em-osx-linux-e-windows."
+    >
+      Você precisa de uma instalação git funcional como pré-requisito. O Git
+      flow funciona em OSX, Linux e Windows.
+    </h6>
+    <h5 id="osx-homebrew">OSX Homebrew:</h5>
+    <pre><code>$ brew install git-flow-avh</code></pre>
+    <h5 id="osx-macports">OSX Macports:</h5>
+    <pre><code>$ port install git-flow</code></pre>
+    <h5 id="linux-baseado-em-debian">Linux (baseado em Debian):</h5>
+    <pre><code>$ sudo apt-get install git-flow</code></pre>
+    <h5 id="windows-cygwin">Windows (Cygwin):</h5>
+    <h6 id="você-precisa-do-wget-e-do-util-linux-para-instalar-o-git-flow.">
+      Você precisa do wget e do util-linux para instalar o git-flow.
+    </h6>
+    <div class="sourceCode" id="cb102">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb102-1" title="1">$ <span class="fu">wget</span> -q -O - --no-check-certificate https://raw.githubusercontent.com/petervanderdoes/gitflow/develop/contrib/gitflow-installer.sh install <span class="op">&lt;</span>state<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">bash</span></a></code></pre>
+    </div>
+    <hr />
+    <h3 id="começar">Começar</h3>
+    <h6
+      id="o-git-flow-precisa-ser-inicializado-para-personalizar-a-configuração-do-projeto.-comece-a-usar-o-git-flow-inicializando-o-dentro-de-um-repositório-git-existente"
+    >
+      O Git flow precisa ser inicializado para personalizar a configuração do
+      projeto. Comece a usar o git-flow inicializando-o dentro de um repositório
+      git existente:
+    </h6>
+    <h5 id="inicializar">Inicializar:</h5>
+    <h6
+      id="você-terá-que-responder-a-algumas-perguntas-sobre-as-convenções-de-nomenclatura-de-seus-ramos.-é-recomendável-usar-os-valores-padrão."
+    >
+      Você terá que responder a algumas perguntas sobre as convenções de
+      nomenclatura de seus ramos. É recomendável usar os valores padrão.
+    </h6>
+    <pre class="shell"><code>git flow init</code></pre>
+    <p>OU</p>
+    <h6 id="para-usar-o-padrão">Para usar o padrão</h6>
+    <pre class="shell"><code>git flow init -d</code></pre>
+    <hr />
+    <h3 id="recursos">Recursos</h3>
+    <h6
+      id="desenvolver-novos-recursos-para-os-próximos-lançamentos.-normalmente-existe-apenas-em-repositórios-de-desenvolvedores."
+    >
+      Desenvolver novos recursos para os próximos lançamentos. Normalmente
+      existe apenas em repositórios de desenvolvedores.
+    </h6>
+    <h5 id="começar-um-novo-recurso">Começar um novo recurso:</h5>
+    <h6
+      id="esta-ação-cria-um-novo-ramo-de-recurso-baseado-em-desenvolver-e-muda-para-ele."
+    >
+      Esta ação cria um novo ramo de recurso baseado em ‘desenvolver’ e muda
+      para ele.
+    </h6>
+    <pre><code>git flow feature start MEURECURSO</code></pre>
+    <h5 id="concluir-um-recurso">Concluir um recurso:</h5>
+    <h6
+      id="concluir-o-desenvolvimento-de-um-recurso.-esta-ação-realiza-o-seguinte"
+    >
+      Concluir o desenvolvimento de um recurso. Esta ação realiza o seguinte:
+    </h6>
+    <h6 id="mescla-meurecurso-para-desenvolver.">
+      1) Mescla MEURECURSO para ‘desenvolver’.
+    </h6>
+    <h6 id="remove-o-ramo-do-recurso.">2) Remove o ramo do recurso.</h6>
+    <h6 id="volta-para-o-ramo-desenvolver">
+      3) Volta para o ramo ‘desenvolver’
+    </h6>
+    <pre><code>git flow feature finish MEURECURSO</code></pre>
+    <h5 id="publicar-um-recurso">Publicar um recurso:</h5>
+    <h6
+      id="você-está-desenvolvendo-um-recurso-em-colaboração-publique-um-recurso-no-servidor-remoto-para-que-possa-ser-usado-por-outros-usuários."
+    >
+      Você está desenvolvendo um recurso em colaboração? Publique um recurso no
+      servidor remoto para que possa ser usado por outros usuários.
+    </h6>
+    <pre><code>git flow feature publish MEURECURSO</code></pre>
+    <h5 id="obter-um-recurso-publicado">Obter um recurso publicado:</h5>
+    <h6 id="obter-um-recurso-publicado-por-outro-usuário.">
+      Obter um recurso publicado por outro usuário.
+    </h6>
+    <pre><code>git flow feature pull origin MEURECURSO</code></pre>
+    <h5 id="monitorar-um-recurso-de-origin">Monitorar um recurso de origin:</h5>
+    <h6 id="você-pode-monitorar-um-recurso-em-origin-usando">
+      Você pode monitorar um recurso em origin usando
+    </h6>
+    <pre><code>git flow feature track MEURECURSO</code></pre>
+    <hr />
+    <h3 id="fazer-um-lançamento">Fazer um Lançamento</h3>
+    <h6
+      id="apoio-na-preparação-de-um-novo-lançamento-de-produção.-permitir-pequenas-correções-de-bugs-e-preparar-metadados-para-um-lançamento"
+    >
+      Apoio na preparação de um novo lançamento de produção. Permitir pequenas
+      correções de bugs e preparar metadados para um lançamento
+    </h6>
+    <h5 id="começar-um-lançamento">Começar um lançamento:</h5>
+    <h6
+      id="para-iniciar-uma-versão-use-o-comando-git-flow-release.-ele-cria-um-ramo-de-lançamento-criado-a-partir-do-ramo-desenvolver.-opcionalmente-você-pode-fornecer-um-hash-sha-1-de-commit-base-para-iniciar-o-lançamento.-o-commit-deve-estar-no-ramo-desenvolver."
+    >
+      Para iniciar uma versão, use o comando <code>git flow release</code>. Ele
+      cria um ramo de lançamento criado a partir do ramo ‘desenvolver’.
+      Opcionalmente, você pode fornecer um hash sha-1 de <em>commit</em> [BASE]
+      para iniciar o lançamento. O <em>commit</em> deve estar no ramo
+      ‘desenvolver’.
+    </h6>
+    <pre><code>git flow release start LANÇAMENTO [BASE]</code></pre>
+    <h6
+      id="é-aconselhável-publicar-o-ramo-de-lançamento-depois-de-criá-lo-para-permitir-commits-de-lançamento-por-outros-desenvolvedores.-faça-de-forma-semelhante-à-publicação-de-recursos-com-o-comando"
+    >
+      É aconselhável publicar o ramo de lançamento depois de criá-lo para
+      permitir <em>commits</em> de lançamento por outros desenvolvedores. Faça
+      de forma semelhante à publicação de recursos com o comando:
+    </h6>
+    <pre><code>git flow release publish LANÇAMENTO</code></pre>
+    <h6
+      id="você-pode-monitorar-uma-versão-remota-com-o-comando-git-flow-release-track-lançamento"
+    >
+      (Você pode monitorar uma versão remota com o comando:
+      <code>git flow release track LANÇAMENTO</code>)
+    </h6>
+    <h5 id="concluir-um-lançamento">Concluir um lançamento:</h5>
+    <h6
+      id="concluir-um-lançamento-é-um-dos-grandes-passos-na-ramificação-git.-ele-executa-várias-ações"
+    >
+      Concluir um lançamento é um dos grandes passos na ramificação git. Ele
+      executa várias ações:
+    </h6>
+    <h6 id="mescla-o-ramo-de-lançamento-de-volta-em-master">
+      1) Mescla o ramo de lançamento de volta em ‘master’
+    </h6>
+    <h6 id="marca-o-lançamento-com-seu-nome">
+      2) Marca o lançamento com seu nome
+    </h6>
+    <h6 id="mescla-de-volta-o-lançamento-em-desenvolver">
+      3) Mescla de volta o lançamento em ‘desenvolver’
+    </h6>
+    <h6 id="remove-o-ramo-de-lançamento">4) Remove o ramo de lançamento</h6>
+    <pre><code>git flow release finish LANÇAMENTO</code></pre>
+    <h6 id="não-se-esqueça-de-enviar-suas-tags-com-git-push---tags">
+      Não se esqueça de enviar suas <em>tags</em> com
+      <code>git push --tags</code>
+    </h6>
+    <hr />
+    <h3 id="correções-rápidas">Correções rápidas</h3>
+    <h6
+      id="as-correções-rápidas-hotfixes-surgem-da-necessidade-de-agir-imediatamente-em-um-estado-indesejado-de-uma-versão-de-produção-ao-vivo.-pode-ser-ramificado-a-partir-da-tag-correspondente-no-ramo-master-que-marca-a-versão-de-produção."
+    >
+      As correções rápidas (<em>hotfixes</em>) surgem da necessidade de agir
+      imediatamente em um estado indesejado de uma versão de produção ao vivo.
+      Pode ser ramificado a partir da <em>tag</em> correspondente no ramo
+      <em>master</em> que marca a versão de produção.
+    </h6>
+    <h5 id="início-da-correção-rápida-do-git-flow">
+      Início da correção rápida do Git flow:
+    </h5>
+    <h6
+      id="como-os-outros-comandos-do-git-flow-uma-correção-rápida-é-iniciada-com"
+    >
+      Como os outros comandos do git flow, uma correção rápida é iniciada com
+    </h6>
+    <pre><code>$ git flow hotfix start VERSÃO [NOMEDABASE]</code></pre>
+    <h6
+      id="o-argumento-da-versão-marca-o-novo-nome-de-lançamento-da-correção-rápida.-opcionalmente-você-pode-especificar-um-nome-de-base-para-começar."
+    >
+      O argumento da versão marca o novo nome de lançamento da correção rápida.
+      Opcionalmente, você pode especificar um nome de base para começar.
+    </h6>
+    <h5 id="concluir-uma-correção-rápida">Concluir uma correção rápida:</h5>
+    <h6
+      id="ao-terminar-uma-correção-rápida-ele-é-mesclado-de-volta-ao-desenvolver-e-ao-master.-além-disso-a-mesclagem-do-master-é-marcada-com-a-versão-da-correção-rápida"
+    >
+      Ao terminar uma correção rápida, ele é mesclado de volta ao desenvolver e
+      ao <em>master</em>. Além disso, a mesclagem do <em>master</em> é marcada
+      com a versão da correção rápida
+    </h6>
+    <pre><code>git flow hotfix finish VERSÃO</code></pre>
+    <hr />
+    <h3 id="comandos">Comandos</h3>
+    <p align="center">
+      <img
+        alt="Git"
+        src="../Img/git-flow-commands.png"
+        height="270"
+        width="460"
+      />
+    </p>
+    <hr />
+    <h3 id="esquema-git-flow">Esquema git flow</h3>
+    <p align="center">
+      <img alt="Git" src="../Img/git-flow-commands-without-flow.png" />
+    </p>
+    <hr />
+  </body>
+</html>

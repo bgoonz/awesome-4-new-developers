@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>readme</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <!--lint ignore double-link-->
+    <h1 id="awesome-wp-cli-awesome-awesome-lint">
+      Awesome WP-CLI
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+      <a
+        href="https://github.com/schlessera/awesome-wp-cli/actions?query=workflow%3Aawesome-lint"
+        ><img
+          src="https://github.com/schlessera/awesome-wp-cli/workflows/awesome-lint/badge.svg"
+          alt="awesome-lint"
+      /></a>
+      <a href="https://wp-cli.org/"
+        ><img
+          src="assets/wp-cli-bw-trans-filled-tight@311x160.png"
+          alt="WP-CLI Logo"
+          align="right"
+          height="80"
+      /></a>
+    </h1>
+    <!--lint ignore double-link-->
+    <p>
+      <a href="https://wp-cli.org/">WP-CLI</a> is the command-line interface for
+      WordPress. It offers a complete alternative to the WordPress admin
+      dashboard, often even surpassing its functionality or enabling new use
+      cases. It also comes with a rich ecosystem of third-party commands that
+      are bundled in Composer packages or directly integrated into WordPresss
+      plugins or themes.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#official-links">Official links</a></li>
+      <li>
+        <a href="#third-party-packages">Third-party packages</a>
+        <ul>
+          <li><a href="#package-discovery">Package discovery</a></li>
+          <li><a href="#notable-packages">Notable packages</a></li>
+        </ul>
+      </li>
+      <li><a href="#tutorials--guides">Tutorials &amp; guides</a></li>
+    </ul>
+    <h2 id="official-links">Official links</h2>
+    <p>
+      Everything relevant that is directly part of the official WP-CLI team.
+    </p>
+    <!--lint ignore double-link-->
+    <ul>
+      <li>
+        <a href="https://wp-cli.org/">wp-cli.org</a> - Homepage of the WP-CLI
+        project.
+      </li>
+      <li>
+        <a href="https://make.wordpress.org/cli/handbook/">WP-CLI handbook</a> -
+        Guides on how to use or extend WP-CLI.
+      </li>
+      <li>
+        <a href="https://developer.wordpress.org/cli/commands/"
+          >WP-CLI command reference</a
+        >
+        - Reference documentation for all the official WP-CLI commands.
+      </li>
+      <li>
+        <a href="https://make.wordpress.org/cli/">Make WordPress.org - CLI</a> -
+        Main entry point for contributing to WP-CLI.
+        <ul>
+          <li>
+            <a href="https://make.wordpress.org/cli/handbook/contributing/"
+              >Contributing guide</a
+            >
+            - Everything you need to know to contribute to the tool or its
+            infrastructure.
+          </li>
+          <li>
+            <a href="https://make.wordpress.org/chat/">Official MakeWP Slack</a>
+            - Official Slack team where all international contributions to
+            WordPress and its teams are discussed.
+            <ul>
+              <li>
+                <a href="http://wordpress.slack.com/messages/cli/"
+                  >#cli channel</a
+                >
+                - The official support channel for WP-CLI and the WordPress CLI
+                team.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://make.wordpress.org/cli/good-first-issues/"
+              >Good first issues</a
+            >
+            - List of issues on that are limited in scope and complexity.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://github.com/wp-cli">WP-CLI GitHub organization</a> -
+        Canonical home of the WP-CLI source code.
+        <ul>
+          <li>
+            <a href="https://github.com/wp-cli/wp-cli"
+              >WP-CLI framework repository</a
+            >
+            - The source code for the WP-CLI framework that powers all of the
+            commands.
+          </li>
+          <li>
+            <a href="https://github.com/wp-cli/wp-cli-bundle"
+              >WP-CLI bundle repository</a
+            >
+            - The source for the WP-CLI “binary” and how it is assembled.
+          </li>
+          <li>
+            <a href="https://github.com/wp-cli/wp-cli-tests"
+              >WP-CLI tests repository</a
+            >
+            - The testing framework used throughout all WP-CLI repositories.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="third-party-packages">Third-party packages</h2>
+    <p>Unofficial third-party packages.</p>
+    <h3 id="package-discovery">Package discovery</h3>
+    <p>Ways of searching for third-party packages you can use.</p>
+    <ul>
+      <li>
+        <a href="https://packagist.org/?type=wp-cli-package"
+          >Packagist.org search by WP-CLI package type</a
+        >
+        - Composer packages filtered by type <code>wp-cli-package</code>.
+      </li>
+      <li>
+        <a
+          href="https://github.com/search?q=WP_CLI%3A%3Aadd_command%28+NOT+Akismet_CLI+NOT+elementor+NOT+WordCamp_CLI_Miscellaneous+NOT+W3TotalCache_Command+extension%3Aphp+language%3APHP+-org%3Awp-cli+-path%3Avendor+-path%3Awp-content+-path%3Apublic+-path%3Adeployer+-path%3Aweb+-path%3Asrc%2Fvendor+-path%3Aapp+-path%3Awordpress+-filename%3Aentity-command.php+-filename%3Aclass-wc-cli.php+-filename%3Awp-cli-bp.php+fork%3Afalse+-filename%3Aextension-command.php+-filename%3Acron-command.php+-filename%3Awp-seo-main.php+-path%3Aplugins+-path%3Adata+-path%3Abackup+-path%3Ademo+-path%3Awordcamp.org+-path%3Awordpress.org+-filename%3Alanguage-command.php+-filename%3Aredirection-cli.php+-path%3Athemes+-path%3Alibrary+-filename%3Aeval-command+-filename%3Arole-command+-filename%3Awidget-command+-filename%3Acache-command.php+-path%3Awp-app+-path%3Apublic_html+-filename%3Aqueue.php+-path%3AmyWeb+-path%3Adocroot+-path%3Awebsite&amp;type=Code"
+          >GitHub.com search for WP-CLI integrations</a
+        >
+        - Heavily pre-filtered search for repositories that use
+        <code>WP_CLI::add_command()</code>.
+      </li>
+    </ul>
+    <h3 id="notable-packages">Notable packages</h3>
+    <p>Third-party packages that are commonly useful.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/Yoast/wp-cli-faker">Yoast/wp-cli-faker</a> -
+        Generate fake WordPress and WooCommerce content for testing purposes.
+      </li>
+      <li>
+        <a href="https://github.com/aaemnnosttv/wp-cli-login-command"
+          >aaemnnosttv/wp-cli-login-command</a
+        >
+        - Login to WordPress with secure passwordless magic links.
+      </li>
+      <li>
+        <a href="https://github.com/schlessera/wp-cli-psysh"
+          >schlessera/wp-cli-psysh</a
+        >
+        - Replace WP-CLI shell standard REPL with
+        <a href="http://psysh.org/">PsySH</a>.
+      </li>
+      <li>
+        <a href="https://github.com/php-stubs/wp-cli-stubs"
+          >php-stubs/wp-cli-stubs</a
+        >
+        - WP-CLI function and class declaration stubs for static analysis.
+      </li>
+    </ul>
+    <h2 id="tutorials-guides">Tutorials &amp; guides</h2>
+    <p>
+      Websites, ebooks, PDFs, talks and slide shows about how to make the most
+      out of WP-CLI.
+    </p>
+    <ul>
+      <li>
+        <a href="https://pascalbirchler.com/an-introduction-to-wp-cli/"
+          >An Introduction to WP-CLI</a
+        >
+        - Introductory article that introduces the main concepts and some
+        popular use cases of WP-CLI.
+      </li>
+      <li>
+        <a
+          href="https://wordpress.tv/2017/05/22/alain-schlesser-controlling-wordpress-through-the-command-line-introduction-to-wp-cli/"
+          >Controlling WordPress through the Command Line</a
+        >
+        - Introductory talk that covers the very basics of the command line for
+        people who never used the console before.
+      </li>
+      <li>
+        <a href="https://guides.wp-bullet.com/category/wp-cli/"
+          >WP Bullet WP-CLI Guides</a
+        >
+        - Snippet-based guides that solve specific use cases.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=DlxbRYpZdQg"
+          >Siteground Webinar: Learn How WP-CLI Can Make Your Life Easier</a
+        >
+        - Practical examples on how you can improve your workflows with WP-CLI.
+      </li>
+    </ul>
+    <h2 id="contribute">Contribute</h2>
+    <p>
+      Contributions welcome! Read the
+      <a href="contributing.md">contribution guidelines</a> first.
+    </p>
+  </body>
+</html>

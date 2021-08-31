@@ -1,0 +1,110 @@
+.category {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 80px auto;
+
+  @media all and (max-width: 1111px) {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
+.title {
+  margin: 0 0 10px 30px;
+  padding-top: 50px;
+  color: rgb(77, 77, 77);
+  font-weight: 900;
+  font-size: 50px;
+
+  @media all and (max-width: 1111px) {
+    font-size: 30px;
+  }
+
+  @media all and (min-width: 1400px) {
+    position: sticky;
+    top: 50px;
+    margin: 0 0 10px 20px;
+    padding-right: 15px;
+    font-size: calc((100vw - 1070px * 1) / 12);
+    text-align: right;
+    transform: translate(-100%, 0);
+  }
+
+  @media all and (min-width: 1800px) {
+    padding-right: 30px;
+    font-size: calc((100vw - 1070px) / 12);
+  }
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1095px;
+  padding-left: 30px;
+
+  @media all and (max-width: 1111px) {
+    width: auto;
+    margin: 0 10px;
+    padding-left: 0;
+  }
+
+  @media all and (max-width: 1111px) {
+    flex-direction: column;
+  }
+
+  @media all and (min-width: 1400px) {
+    margin-top: calc((100vw - 1070px * 1) / -8);
+  }
+}
+
+.itemWrapper {
+  position: relative;
+  width: 100%;
+  margin: 0 30px 30px 0;
+  font-family: 'Lato', sans-serif;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.133) 0 1.6px 3.6px 0, rgba(0, 0, 0, 0.11) 0 0.3px 0.9px 0;
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+
+  &:focus-within,
+  &:hover {
+    background-color: rgb(251, 251, 251);
+
+    :global .textCropEffect::after {
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(251, 251, 251));
+    }
+  }
+
+  &:active {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(251, 251, 251));
+    box-shadow: rgba(0, 0, 0, 0.133) 0 3.2px 7.2px 0, rgba(0, 0, 0, 0.11) 0 0.6px 1.8px 0;
+    transform: scale(1.02);
+
+    :global .textCropEffect::after {
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(251, 251, 251));
+    }
+  }
+
+  @media all and (max-width: 1111px) {
+    margin: 0;
+
+    &:not(:last-child) {
+      margin: 0 0 20px 0;
+    }
+  }
+}
+
+@media all and (min-width: 1112px) {
+  .bookCards .itemWrapper {
+    width: 502px;
+  }
+
+  .defaultCards .itemWrapper {
+    width: 325px;
+  }
+
+  .guiCards .itemWrapper {
+    margin-bottom: 45px;
+  }
+}

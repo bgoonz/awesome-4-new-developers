@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-lidar-awesome">
+      Awesome LIDAR
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <p><img src="img/lidar.svg" align="right" width="100" /></p>
+    <blockquote>
+      <p>A curated list of awesome LIDAR sensors and its applications.</p>
+    </blockquote>
+    <p>
+      <a href="https://en.wikipedia.org/wiki/Lidar">LIDAR</a
+      > is a remote sensing sensor that uses laser light to measure the surroundings in ~cm accuracy.
+      The sensory data is usually referred as point cloud which means set of
+      data points in 3D or 2D. The list contains hardwares, datasets, point
+      cloud-processing algorithms, point cloud frameworks, simulators etc.
+    </p>
+    <p>
+      Contributions are welcome! Please
+      <a href="contributing.md">check out</a> our guidelines.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#conventions">Conventions</a></li>
+      <li><a href="#manufacturers">Manufacturers</a></li>
+      <li><a href="#datasets">Datasets</a></li>
+      <li><a href="#libraries">Libraries</a></li>
+      <li><a href="#frameworks">Frameworks</a></li>
+      <li>
+        <a href="#algorithms">Algorithms</a>
+        <ul>
+          <li>
+            <a href="#basic-matching-algorithms">Basic matching algorithms</a>
+          </li>
+          <li><a href="#semantic-segmentation">Semantic segmentation</a></li>
+          <li>
+            <a
+              href="#simultaneous-localization-and-mapping-slam-and-lidar-based-odometry-and-or-mapping-loam"
+              >Simultaneous localization and mapping SLAM and LIDAR-based
+              odometry and or mapping LOAM</a
+            >
+          </li>
+          <li>
+            <a href="#object-detection-and-object-tracking"
+              >Object detection and object tracking</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li><a href="#simulators">Simulators</a></li>
+      <li><a href="#related-awesome">Related awesome</a></li>
+      <li><a href="#others">Others</a></li>
+    </ul>
+    <h2 id="conventions">Conventions</h2>
+    <ul>
+      <li>
+        Any list item with an OctoCat :octocat: has a GitHub repo or
+        organization
+      </li>
+      <li>
+        Any list item with a RedCircle :red_circle: has YouTube videos or
+        channel
+      </li>
+      <li>
+        Any list item with a Paper :newspaper: has a scientific paper or
+        detailed description
+      </li>
+    </ul>
+    <h2 id="manufacturers">Manufacturers</h2>
+    <ul>
+      <li>
+        <a href="https://velodynelidar.com/">Velodyne</a> - Velodyne is a
+        mechanical and solid-state LIDAR manufacturer. The headquarter is in San
+        Jose, California, USA.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/user/VelodyneLiDAR"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/ros-drivers/velodyne"
+              >ROS driver :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://ouster.com/">Ouster</a> - LIDAR manufacturer,
+        specializing in digital-spinning LiDARs. Ouster is headquartered in San
+        Francisco, USA.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/c/Ouster-lidar"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/ouster-lidar"
+              >GitHub organization :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.livoxtech.com/">Livox</a> - LIDAR manufacturer.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/channel/UCnLpB5QxlQUexi40vM12mNQ"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/Livox-SDK"
+              >GitHub organization :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.sick.com/ag/en/">SICK</a> - Sensor and automation
+        manufacturer, the headquarter is located in Waldkirch, Germany.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/user/SICKSensors"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/SICKAG"
+              >GitHub organization :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.hokuyo-aut.jp/">Hokuyo</a> - Sensor and automation
+        manufacturer, headquartered in Osaka, Japan.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/channel/UCYzJXC82IEy-h-io2REin5g"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="http://autonomousdriving.pioneer/en/3d-lidar/">Pioneer</a> -
+        LIDAR manufacturer, specializing in MEMS mirror-based raster scanning
+        LiDARs (3D-LiDAR). Pioneer is headquartered in Tokyo, Japan.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/user/PioneerCorporationPR"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.luminartech.com/">Luminar</a> - LIDAR manufacturer
+        focusing on compact, auto-grade sensors. Luminar is headquartered Palo
+        Alto, California, USA.
+        <ul>
+          <li>
+            <a href="https://vimeo.com/luminartech"
+              >Vimeo channel :red_circle:</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/luminartech"
+              >GitHub organization :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.hesaitech.com/">Hesai</a> - Hesai Technology is a
+        LIDAR manufacturer, founded in Shanghai, China.
+        <ul>
+          <li>
+            <a
+              href="https://www.youtube.com/channel/UCG2_ffm6sdMsK-FX8yOLNYQ/videos"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/HesaiTechnology"
+              >GitHub organization :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="http://www.robosense.ai/">Robosense</a> - RoboSense (Suteng
+        Innovation Technology Co., Ltd.) is a LIDAR sensor, AI algorithm and IC
+        chipset maufactuirer based in Shenzhen and Beijing (China).
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/channel/UCYCK8j678N6d_ayWE_8F3rQ"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/RoboSense-LiDAR"
+              >GitHub organization :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.ibeo-as.com/">Ibeo</a> - Ibeo Automotive Systems
+        GmbH is an automotive industry / environmental detection laserscanner /
+        LIDAR manufacturer, based in Hamburg, Germany.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/c/IbeoAutomotive/"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://innoviz.tech/">Innoviz</a> - Innoviz technologies /
+        specializes in solid-state LIDARs.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/channel/UCVc1KFsu2eb20M8pKFwGiFQ"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://quanergy.com/">Quanenergy</a> - Quanenergy Systems /
+        solid-state and mechanical LIDAR sensors / offers End-to-End solutions
+        in Mapping, Industrial Automation, Transportation and Security. The
+        headquarter is located in Sunnyvale, California, USA.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/c/QuanergySystems"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.cepton.com/index.html">Cepton</a> - Cepton (Cepton
+        Technologies, Inc.) / pioneers in frictionless, and mirrorless design,
+        self-developed MMT (micro motion technology) lidar technology. The
+        headquarter is located in San Jose, California, USA.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/channel/UCUgkBZZ1UWWkkXJ5zD6o8QQ"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.blickfeld.com/">Blickfeld</a> - Blickfeld is a
+        solid-state LIDAR manufacturer for autonomous mobility and IoT, based in
+        München, Germany.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/c/BlickfeldLiDAR"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/Blickfeld"
+              >GitHub organization :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.neuvition.com/">Neuvition</a> - Neuvition is a
+        solid-state LIDAR manufacturer based in Wujiang, China.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/channel/UClFjlekWJo4T5bfzxX0ZW3A"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="datasets">Datasets</h2>
+    <ul>
+      <li>
+        <a href="https://avdata.ford.com/">Ford Dataset</a> - The dataset is
+        time-stamped and contains raw data from all the sensors, calibration
+        values, pose trajectory, ground truth pose, and 3D maps. The data is
+        Robot Operating System (ROS) compatible.
+        <ul>
+          <li>
+            <a href="https://arxiv.org/pdf/2003.07969.pdf">Paper :newspaper:</a>
+          </li>
+          <li>
+            <a href="https://github.com/Ford/AVData"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.a2d2.audi">Audi A2D2 Dataset</a> - The dataset
+        features 2D semantic segmentation, 3D point clouds, 3D bounding boxes,
+        and vehicle bus data.
+        <ul>
+          <li>
+            <a
+              href="https://www.a2d2.audi/content/dam/a2d2/dataset/a2d2-audi-autonomous-driving-dataset.pdf"
+              >Paper :newspaper:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://waymo.com/open/">Waymo Open Dataset</a> - The dataset
+        contains independently-generated labels for lidar and camera data, not
+        simply projections.
+      </li>
+      <li>
+        <a href="https://robotcar-dataset.robots.ox.ac.uk/">Oxford RobotCar</a>
+        - The Oxford RobotCar Dataset contains over 100 repetitions of a
+        consistent route through Oxford, UK, captured over a period of over a
+        year.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/c/ORIOxfordRoboticsInstitute"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://robotcar-dataset.robots.ox.ac.uk/images/RCD_RTK.pdf"
+              >Paper :newspaper:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://epan-utbm.github.io/utbm_robocar_dataset/"
+          >EU Long-term Dataset</a
+        >
+        - This dataset was collected with our robocar (in human driving mode of
+        course), equipped up to eleven heterogeneous sensors, in the downtown
+        (for long-term data) and a suburb (for roundabout data) of Montbéliard
+        in France. The vehicle speed was limited to 50 km/h following the French
+        traffic rules.
+      </li>
+      <li>
+        <a href="https://www.nuscenes.org/">NuScenes</a> - Public large-scale
+        dataset for autonomous driving.
+        <ul>
+          <li>
+            <a href="https://arxiv.org/pdf/1903.11027.pdf">Paper :newspaper:</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://level5.lyft.com/dataset/">Lyft</a> - Public dataset
+        collected by a fleet of Ford Fusion vehicles equipped with LIDAR and
+        camera.
+      </li>
+      <li>
+        <a href="http://www.cvlibs.net/datasets/kitti/raw_data.php">KITTI</a> -
+        Widespread public dataset, pirmarily focusing on computer vision
+        applications, but also contains LIDAR point cloud.
+      </li>
+      <li>
+        <a href="http://semantic-kitti.org/">Semantic KITTI</a> - Dataset for
+        semantic and panoptic scene segmentation.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/watch?v=3qNOXvkpK4I"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="http://cadcd.uwaterloo.ca/"
+          >CADC - Canadian Adverse Driving Conditions Dataset</a
+        >
+        - Public large-scale dataset for autonomous driving in adverse weather
+        conditions (snowy weather).
+        <ul>
+          <li>
+            <a href="https://arxiv.org/pdf/2001.10117.pdf">Paper :newspaper:</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.autodrive.utoronto.ca/uoftped50"
+          >UofTPed50 Dataset</a
+        >
+        - University of Toronto, aUToronto’s self-driving car dataset, which
+        contains GPS/IMU, 3D LIDAR, and Monocular camera data. It can be used
+        for 3D pedestrian detection.
+        <ul>
+          <li>
+            <a href="https://arxiv.org/pdf/1905.08758.pdf">Paper :newspaper:</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://scale.com/open-datasets/pandaset"
+          >PandaSet Open Dataset</a
+        >
+        - Public large-scale dataset for autonomous driving provided by Hesai
+        &amp; Scale. It enables researchers to study challenging urban driving
+        situations using the full sensor suit of a real self-driving-car.
+      </li>
+      <li>
+        <a href="https://developer.volvocars.com/open-datasets/cirrus/"
+          >Cirrus dataset</a
+        >
+        A public datatset from non-uniform distribution of LIDAR scanning
+        patterns with emphasis on long range. In this dataset Luminar Hydra
+        LIDAR is used. The dataset is available at the Volvo Cars Innovation
+        Portal.
+        <ul>
+          <li>
+            <a href="https://arxiv.org/pdf/2012.02938.pdf">Paper :newspaper:</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <ul>
+      <li>
+        <a href="http://www.pointclouds.org/">Point Cloud Library (PCL)</a> -
+        Popular highly parallel programming library, with numerous industrial
+        and research use-cases.
+        <ul>
+          <li>
+            <a href="https://github.com/PointCloudLibrary/pcl"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="http://www.open3d.org/docs/release/">Open3D library</a> -
+        Open3D library contanins 3D data processing and visualization
+        algorithms. It is open-source and supports both C++ and Python.
+        <ul>
+          <li>
+            <a href="https://github.com/intel-isl/Open3D"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://www.youtube.com/channel/UCRJBlASPfPBtPXJSPffJV-w"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1903.02428.pdf"
+          >PyTorch Geometric :newspaper:</a
+        >
+        - A geometric deep learning extension library for PyTorch.
+        <ul>
+          <li>
+            <a href="https://github.com/rusty1s/pytorch_geometric"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://pytorch3d.org/">PyTorch3d</a> - PyTorch3d is a library
+        for deep learning with 3D data written and maintained by the Facebook AI
+        Research Computer Vision Team.
+        <ul>
+          <li>
+            <a href="https://github.com/facebookresearch/pytorch3d"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://kaolin.readthedocs.io/en/latest/">Kaolin</a> - Kaolin
+        is a PyTorch Library for Accelerating 3D Deep Learning Research written
+        by NVIDIA Technologies for game and application developers.
+        <ul>
+          <li>
+            <a href="https://github.com/NVIDIAGameWorks/kaolin/"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://arxiv.org/pdf/1911.05063.pdf">Paper :newspaper:</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://docs.pyvista.org/">PyVista</a> - 3D plotting and mesh
+        analysis through a streamlined interface for the Visualization Toolkit.
+        <ul>
+          <li>
+            <a href="https://github.com/pyvista/pyvista"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://joss.theoj.org/papers/10.21105/joss.01450"
+              >Paper :newspaper:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://pyntcloud.readthedocs.io/en/latest/">pyntcloud</a> -
+        Pyntcloud is a Python 3 library for working with 3D point clouds
+        leveraging the power of the Python scientific stack.
+        <ul>
+          <li>
+            <a href="https://github.com/daavoo/pyntcloud"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://virtual-vehicle.github.io/pointcloudset/"
+          >pointcloudset</a
+        >
+        - Python library for efficient analysis of large datasets of point
+        clouds recorded over time.
+        <ul>
+          <li>
+            <a href="https://github.com/virtual-vehicle/pointcloudset"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="frameworks">Frameworks</h2>
+    <ul>
+      <li>
+        <a href="https://www.autoware.ai/">Autoware</a> - Popular framework in
+        academic and research applications of autonomous vehicles.
+        <ul>
+          <li>
+            <a href="https://gitlab.com/autowarefoundation/autoware.ai"
+              >GitLab repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.researchgate.net/profile/Takuya_Azumi/publication/327198306_Autoware_on_Board_Enabling_Autonomous_Vehicles_with_Embedded_Systems/links/5c9085da45851564fae6dcd0/Autoware-on-Board-Enabling-Autonomous-Vehicles-with-Embedded-Systems.pdf"
+              >Paper :newspaper:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://apollo.auto/">Baidu Apollo</a> - Apollo is a popular
+        framework which accelerates the development, testing, and deployment of
+        Autonomous Vehicles.
+        <ul>
+          <li>
+            <a href="https://github.com/ApolloAuto/apollo"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://www.youtube.com/c/ApolloAuto"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="algorithms">Algorithms</h2>
+    <h3 id="basic-matching-algorithms">Basic matching algorithms</h3>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=uzOCS_gdZuM"
+          >Iterative closest point :red_circle:</a
+        >
+        - The must-have algorithm for feature matching applications (ICP).
+        <ul>
+          <li>
+            <a href="https://github.com/pglira/simpleICP"
+              >GitHub repository :octocat:</a
+            >
+            - simpleICP C++ /Julia / Matlab / Octave / Python implementation.
+          </li>
+          <li>
+            <a href="https://github.com/ethz-asl/libpointmatcher"
+              >GitHub repository :octocat:</a
+            >
+            - libpointmatcher, a modular library implementing the ICP algorithm.
+          </li>
+          <li>
+            <a
+              href="https://link.springer.com/content/pdf/10.1007/s10514-013-9327-2.pdf"
+              >Paper :newspaper:</a
+            >
+            - libpointmatcher: Comparing ICP variants on real-world data sets.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=0YV4a2asb8Y"
+          >Normal distributions transform :red_circle:</a
+        >
+        - More recent massively-parallel approach to feature matching (NDT).
+      </li>
+    </ul>
+    <h3 id="semantic-segmentation">Semantic segmentation</h3>
+    <ul>
+      <li>
+        <a
+          href="https://www.ipb.uni-bonn.de/wp-content/papercite-data/pdf/milioto2019iros.pdf"
+          >RangeNet++ :newspaper:</a
+        >
+        - Fast and Accurate LiDAR Sematnic Segmentation with fully convolutional
+        network.
+        <ul>
+          <li>
+            <a href="https://github.com/PRBonn/rangenet_lib"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=uo3ZuLuFAzk"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/2003.14032.pdf">PolarNet :newspaper:</a>
+        - An Improved Grid Representation for Online LiDAR Point Clouds Semantic
+        Segmentation.
+        <ul>
+          <li>
+            <a href="https://github.com/edwardzhou130/PolarSeg"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=iIhttRSMqjE"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1711.08488.pdf"
+          >Frustum PointNets :newspaper:</a
+        >
+        - Frustum PointNets for 3D Object Detection from RGB-D Data.
+        <ul>
+          <li>
+            <a href="https://github.com/charlesq34/frustum-pointnets"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://larissa.triess.eu/scan-semseg/"
+          >Study of LIDAR Semantic Segmentation</a
+        >
+        - Scan-based Semantic Segmentation of LiDAR Point Clouds: An
+        Experimental Study IV 2020.
+        <ul>
+          <li>
+            <a href="https://arxiv.org/abs/2004.11803">Paper :newspaper:</a>
+          </li>
+          <li>
+            <a href="http://ltriess.github.io/scan-semseg"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3
+      id="simultaneous-localization-and-mapping-slam-and-lidar-based-odometry-and-or-mapping-loam"
+    >
+      Simultaneous localization and mapping SLAM and LIDAR-based odometry and or
+      mapping LOAM
+    </h3>
+    <ul>
+      <li>
+        <a href="https://youtu.be/8ezyhTAEyHs"
+          >LOAM J. Zhang and S. Singh :red_circle:</a
+        >
+        - LOAM: Lidar Odometry and Mapping in Real-time.
+      </li>
+      <li>
+        <a href="https://github.com/RobustFieldAutonomyLab/LeGO-LOAM"
+          >LeGO-LOAM :octocat:</a
+        >
+        - A lightweight and ground optimized lidar odometry and mapping
+        (LeGO-LOAM) system for ROS compatible UGVs.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/watch?v=7uCxLUs9fwQ"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://github.com/cartographer-project/cartographer"
+          >Cartographer :octocat:</a
+        >
+        - Cartographer is ROS compatible system that provides real-time
+        simultaneous localization and mapping (SLAM) in 2D and 3D across
+        multiple platforms and sensor configurations.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/watch?v=29Knm-phAyI"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a
+          href="http://www.ipb.uni-bonn.de/wp-content/papercite-data/pdf/chen2019iros.pdf"
+          >SuMa++ :newspaper:</a
+        >
+        - LiDAR-based Semantic SLAM.
+        <ul>
+          <li>
+            <a href="https://github.com/PRBonn/semantic_suma/"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://youtu.be/uo3ZuLuFAzk"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a
+          href="http://www.ipb.uni-bonn.de/wp-content/papercite-data/pdf/chen2020rss.pdf"
+          >OverlapNet :newspaper:</a
+        >
+        - Loop Closing for LiDAR-based SLAM.
+        <ul>
+          <li>
+            <a href="https://github.com/PRBonn/OverlapNet"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=YTfliBco6aw"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/2007.00258.pdf">LIO-SAM :newspaper:</a> -
+        Tightly-coupled Lidar Inertial Odometry via Smoothing and Mapping.
+        <ul>
+          <li>
+            <a href="https://github.com/TixiaoShan/LIO-SAM"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=A0H8CoORZJU"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h3 id="object-detection-and-object-tracking">
+      Object detection and object tracking
+    </h3>
+    <ul>
+      <li>
+        <a href="https://arxiv.org/abs/1912.04976"
+          >Learning to Optimally Segment Point Clouds :newspaper:</a
+        >
+        - By Peiyun Hu, David Held, and Deva Ramanan at Carnegie Mellon
+        University. IEEE Robotics and Automation Letters, 2020.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/watch?v=wLxIAwIL870"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/peiyunh/opcseg"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1809.05590.pdf"
+          >Leveraging Heteroscedastic Aleatoric Uncertainties for Robust
+          Real-Time LiDAR 3D Object Detection :newspaper:</a
+        >
+        - By Di Feng, Lars Rosenbaum, Fabian Timm, Klaus Dietmayer. 30th IEEE
+        Intelligent Vehicles Symposium, 2019.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/watch?v=2DzH9COLpkU"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1912.04986.pdf"
+          >What You See is What You Get: Exploiting Visibility for 3D Object
+          Detection :newspaper:</a
+        >
+        - By Peiyun Hu, Jason Ziglar, David Held, Deva Ramanan, 2019.
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/watch?v=497OF-otY2k"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/peiyunh/WYSIWYG"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="simulators">Simulators</h2>
+    <ul>
+      <li>
+        <a href="https://www.coppeliarobotics.com/coppeliaSim">CoppeliaSim</a> -
+        Cross-platform general-purpose robotic simulator (formerly known as
+        V-REP).
+        <ul>
+          <li>
+            <a href="https://www.youtube.com/user/VirtualRobotPlatform"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="http://gazebosim.org/">OSRF Gazebo</a> - OGRE-based
+        general-purpose robotic simulator, ROS/ROS2 compatible.
+        <ul>
+          <li>
+            <a href="https://github.com/osrf/gazebo"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://carla.org/">CARLA</a> - Unreal Engine based simulator
+        for automotive applications. Compatible with Autoware, Baidu Apollo and
+        ROS/ROS2.
+        <ul>
+          <li>
+            <a href="https://github.com/carla-simulator/carla"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://www.youtube.com/channel/UC1llP9ekCwt8nEJzMJBQekg"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.lgsvlsimulator.com/">LGSVL</a> - Unity Engine based
+        simulator for automotive applications. Compatible with Autoware, Baidu
+        Apollo and ROS/ROS2.
+        <ul>
+          <li>
+            <a href="https://github.com/lgsvl/simulator"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://www.youtube.com/c/LGSVLSimulator"
+              >YouTube channel :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://microsoft.github.io/AirSim">AirSim</a> - Unreal Engine
+        based simulator for drones and automotive. Compatible with ROS.
+        <ul>
+          <li>
+            <a href="https://github.com/microsoft/AirSim"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=gnz1X3UNM5Y"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="related-awesome">Related awesome</h2>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/Yochengliu/awesome-point-cloud-analysis#readme"
+          >Awesome point cloud analysis :octocat:</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/Kiloreux/awesome-robotics#readme"
+          >Awesome robotics :octocat:</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/jslee02/awesome-robotics-libraries#readme"
+          >Awesome robotics libraries :octocat:</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/fkromer/awesome-ros2#readme"
+          >Awesome ROS2 :octocat:</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/owainlewis/awesome-artificial-intelligence#readme"
+          >Awesome artificial intelligence :octocat:</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/jbhuang0604/awesome-computer-vision#readme"
+          >Awesome computer vision :octocat:</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/josephmisiti/awesome-machine-learning#readme"
+          >Awesome machine learning :octocat:</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/ChristosChristofidis/awesome-deep-learning#readme"
+          >Awesome deep learning :octocat:</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/aikorea/awesome-rl/#readme"
+          >Awesome reinforcement learning :octocat:</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/youngguncho/awesome-slam-datasets#readme"
+          >Awesome SLAM datasets :octocat:</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/kitspace/awesome-electronics#readme"
+          >Awesome electronics :octocat:</a
+        > 
+      </li>
+      <li>
+        <a
+          href="https://github.com/jaredthecoder/awesome-vehicle-security#readme"
+          >Awesome vehicle security and car hacking :octocat:</a
+        >
+      </li>
+    </ul>
+    <h2 id="others">Others</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/marian42/pointcloudprinter"
+          >Pointcloudprinter :octocat:</a
+        >
+        - A tool to turn point cloud data from aerial lidar scans into solid
+        meshes for 3D printing.
+      </li>
+      <li>
+        <a href="https://cloudcompare.org/">CloudCompare</a> - CloudCompare is a
+        free, cross-platform point cloud editor software.
+        <ul>
+          <li>
+            <a href="https://github.com/CloudCompare"
+              >GitHub repository :octocat:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://github.com/keijiro/Pcx">Pcx :octocat:</a> - Point cloud
+        importer/renderer for Unity.
+      </li>
+      <li>
+        <a href="https://github.com/uhlik/bpy">Bpy :octocat:</a> - Point cloud
+        importer/renderer/editor for Blender, Point Cloud visualizer.
+      </li>
+      <li>
+        <a
+          href="https://github.com/Hitachi-Automotive-And-Industry-Lab/semantic-segmentation-editor"
+          >Semantic Segmentation Editor :octocat:</a
+        >
+        - Point cloud and image semantic segmentation editor by Hitachi
+        Automotive And Industry Laboratory, point cloud annotator / labeling.
+      </li>
+      <li>
+        <a href="https://github.com/walzimmer/3d-bat"
+          >3D Bounding Box Annotation Tool :octocat:</a
+        >
+        - 3D BAT: A Semi-Automatic, Web-based 3D Annotation Toolbox for
+        Full-Surround, Multi-Modal Data Streams, point cloud annotator /
+        labeling.
+        <ul>
+          <li>
+            <a href="https://arxiv.org/pdf/1905.00525.pdf">Paper :newspaper:</a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=gSGG4Lw8BSU"
+              >YouTube video :red_circle:</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://github.com/SBCV/Blender-Addon-Photogrammetry-Importer"
+          >Photogrammetry importer :octocat:</a
+        >
+        - Blender addon to import reconstruction results of several libraries.
+      </li>
+    </ul>
+  </body>
+</html>

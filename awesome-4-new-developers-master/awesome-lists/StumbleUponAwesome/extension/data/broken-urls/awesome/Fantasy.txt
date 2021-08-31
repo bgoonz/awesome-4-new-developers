@@ -1,0 +1,2 @@
+https://www.goodreads.com/book/show/1321351.The_Bastards_and_the_Knives,The Bastards and the Knives,https://github.com/RichardLitt/awesome-fantasy#readme,Fantasy error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://www.goodreads.com/series/49673-lightbringer,The Lightbringer Series,https://github.com/RichardLitt/awesome-fantasy#readme,Fantasy error: <HTTPError 404: 'Not Found'> | reason: Not Found

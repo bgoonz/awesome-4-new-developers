@@ -1,0 +1,2 @@
+https://www.blazemeter.com/blog/jmeter-performance-and-tuning-tips,JMeter Performance and Tuning Tips,https://github.com/aliesbelik/awesome-jmeter#readme,JMeter error: <HTTPError 308: 'Unknown'> | reason: Unknown
+http://www.jguru.com/article/server-side/load-testing-with-apache-jmeter.html,Load Testing your Applications with Apache JMeter,https://github.com/aliesbelik/awesome-jmeter#readme,JMeter error: timeout('timed out') | reason: 

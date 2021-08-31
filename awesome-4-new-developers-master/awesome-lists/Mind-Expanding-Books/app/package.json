@@ -1,0 +1,69 @@
+{
+  "name": "gatsby-starter-default",
+  "private": true,
+  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "version": "0.1.0",
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "dependencies": {
+    "bootstrap": "4.5.2",
+    "gatsby": "2.32.13",
+    "gatsby-image": "2.2.27",
+    "gatsby-plugin-google-analytics": "2.3.17",
+    "gatsby-plugin-manifest": "2.12.1",
+    "gatsby-plugin-offline": "3.0.14",
+    "gatsby-plugin-postcss": "2.3.11",
+    "gatsby-plugin-react-helmet": "3.1.11",
+    "gatsby-plugin-sharp": "2.14.4",
+    "gatsby-source-filesystem": "2.1.31",
+    "gatsby-transformer-json": "2.2.13",
+    "gatsby-transformer-sharp": "2.2.21",
+    "prop-types": "15.7.2",
+    "react": "16.10.2",
+    "react-bootstrap": "1.3.0",
+    "react-dom": "16.10.2",
+    "react-helmet": "5.2.1",
+    "react-star-rating-component": "1.4.1",
+    "react-star-ratings": "2.3.0",
+    "slugify": "1.4.5"
+  },
+  "devDependencies": {
+    "eslint": "7.7.0",
+    "eslint-config-airbnb": "18.2.0",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-jsx-a11y": "6.3.1",
+    "eslint-plugin-react": "7.21.4",
+    "eslint-plugin-react-hooks": "4.1.2",
+    "husky": "4.3.0",
+    "lint-staged": "10.2.11",
+    "prettier": "1.19.1",
+    "tailwindcss": "1.7.3"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,json,md}": "prettier --write",
+    "*.js": "eslint --cache --fix"
+  }
+}

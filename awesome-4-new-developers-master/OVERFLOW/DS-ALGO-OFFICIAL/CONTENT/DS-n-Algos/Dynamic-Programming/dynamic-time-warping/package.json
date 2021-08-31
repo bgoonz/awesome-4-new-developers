@@ -1,0 +1,35 @@
+{
+  "name": "dtw",
+  "version": "0.0.1",
+  "description": "Dynamic time warping",
+  "main": "index.js",
+  "dependencies": {
+    "mustache": ">=2.2.1"
+  },
+  "devDependencies": {
+    "jsdox": "*",
+    "mocha": "*",
+    "should": "*"
+  },
+  "scripts": {
+    "test": "mocha tests/*.js",
+    "doc": "jsdox lib/dtw.js --output doc/api/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bgoonz/DS-ALGO-OFFICIAL.git"
+  },
+  "keywords": [
+    "signal",
+    "processing",
+    "dynamic",
+    "time",
+    "warping"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bgoonz/DS-ALGO-OFFICIAL/issues"
+  },
+  "homepage": "https://amazing-mccarthy-aa9929.netlify.app/"
+}

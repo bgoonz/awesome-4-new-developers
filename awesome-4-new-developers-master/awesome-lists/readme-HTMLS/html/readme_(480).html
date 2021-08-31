@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>readme</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-contexture-awesome">
+      Awesome Contexture
+      <a href="https://awesome.re"
+        ><img src="https://awesome.re/badge.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        <a href="https://github.com/smartprocure/contexture">Contexture</a>
+        abstracts queries/filters and results/aggregations from different
+        backing data stores like ElasticSearch and MongoDB.
+      </p>
+    </blockquote>
+    <p>
+      <a href="https://github.com/smartprocure/contexture"
+        ><img src="contexture.png" align="center" width="1000"
+      /></a>
+    </p>
+    <p>
+      Contexture is a tool for running the Contexture DSL, which is primarily
+      about <strong>abstracting queries/filters</strong> and
+      <strong>results/aggregrations</strong>. Each leaf node in a Contexture
+      Tree can affect other leaf nodes (e.g., acting as a filter) and has
+      results of it’s own which are affected by the other nodes. Non leaf nodes
+      describe how leaves relate to each other, e.g. as a boolean join of
+      and/or. Contexture can use different backing data stores such as MongoDB
+      and ElasticSearch.
+    </p>
+    <p>
+      This page represents a curated list of Contexture websites, libraries, and
+      resources. Our goal is to provide Contexture developers, both new and
+      established, a place to discover and document awesome Contexture
+      resources.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#websites">Websites</a></li>
+      <li><a href="#libraries">Libraries</a></li>
+      <li><a href="#documentation">Documentation</a></li>
+      <li><a href="#presentations">Presentations</a></li>
+      <li><a href="#videos">Videos</a></li>
+    </ul>
+    <h2 id="websites">Websites</h2>
+    <ul>
+      <li>
+        <a href="https://contexture.site">contexture-site</a> - Showcase of
+        Contexture searches adapting to diverse datasets such as: car crashes,
+        restaurant locations, COVID-19, SAT scores, school grants, bank
+        failures.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/contexture-imdb"
+          >contexture-imdb</a
+        >
+        - An example usage of Contexture to present a search interface for an
+        ElasticSearch index of movie records based on IMDB.
+      </li>
+      <li>
+        <a href="https://app.govspend.com/">GovSpend</a> - A Contexture
+        web-based tool that makes it easy for government agencies to find a
+        product’s best price, identify and validate vendors, request quotes and
+        connect with peers.
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/smartprocure/contexture">contexture</a> -
+        The core library that exectues the DSL to retrieve data.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/contexture-client"
+          >contexture-client</a
+        >
+        - The client library that manages the DSL, allowing for hyper efficient
+        updates running only what is exactly needed.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/contexture-react"
+          >contexture-react</a
+        >
+        - React components for building Contexture interfaces.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/grey-vest">grey-vest</a> -
+        Component library built for contexture-react.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/contexture-mongo"
+          >contexture-mongo</a
+        >
+        - MongoDB provider for Contexture.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/contexture-elasticsearch"
+          >contexture-elasticsearch</a
+        >
+        - Elasticsearch provider for Contexture.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/contexture-export"
+          >contexture-exports</a
+        >
+        - A library that extends Contexture by allowing developers to export
+        searches into files or any other target.
+      </li>
+      <li>
+        <a href="https://github.com/ltchris/contexture-api">contexture-api</a> -
+        A simple FeathersJS REST API for Contexture.
+      </li>
+    </ul>
+    <h2 id="documentation">Documentation</h2>
+    <ul>
+      <li>
+        <a href="https://docs.contexture.site/">Contexture Docs</a> -
+        Documentation of the entire Contexture ecosystem in one place.
+      </li>
+      <li>
+        <a href="https://smartprocure.github.io/contexture-react"
+          >Contexture React Storybook</a
+        >
+        - Contexture React components documentation and examples.
+      </li>
+      <li>
+        <a href="https://smartprocure.github.io/grey-vest"
+          >GreyVest Storybook</a
+        >
+        - GreyVest component library’s documentation and examples.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/contexture#example-usage"
+          >Contexture</a
+        >
+        - Documentation on Contexture’s core concepts, example usage, and
+        implementation details.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/contexture-client#overview"
+          >Contexture Client</a
+        >
+        - Documentation overview of the Contexture Client’s features, api, and
+        implementation details.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/contexture-elasticsearch#usage"
+          >Contexture ElasticSearch</a
+        >
+        - Usage and API documentation for the Contexture ElasticSearch provider
+        library.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/contexture-mongo#overview"
+          >Contexture MongoDB</a
+        >
+        - Usage and API documentation for the Contexture MongoDB provider
+        library.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/contexture-export#index"
+          >Contexture Exports</a
+        >
+        - Core concepts and usage documentation for the Contexture Exports
+        library.
+      </li>
+    </ul>
+    <h2 id="presentations">Presentations</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/smartprocure/contexture-ec18-talk"
+          >contexture-ec18-talk</a
+        >
+        - Elasticon 2018 talk About Contexture.
+      </li>
+      <li>
+        <a href="https://github.com/smartprocure/dc-talk">DataContexts talk</a>
+        - Older presentation on DataContexts, the precursor to
+        contexture-client.
+      </li>
+    </ul>
+    <h2 id="videos">Videos</h2>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=H1i0SdKLHWc"
+          >Contexture Talk (raw)</a
+        >
+        - This is a raw, unedited version of the talk about Contexture, a
+        toolset for building highly interactive data exploration (aka search)
+        interfaces at the 2018 South Florida Code Camp.
+      </li>
+      <li>
+        <a href="https://youtu.be/ZsXVcHWZwWI">Contexture Talk (screen)</a> -
+        This is a raw, unedited version of the talk about Contexture. This
+        version only shows the screencast.
+      </li>
+    </ul>
+    <h2 id="contribute">Contribute</h2>
+    <p>
+      Contributions welcome! Read the
+      <a href="contributing.md">contribution guidelines</a> first.
+    </p>
+  </body>
+</html>

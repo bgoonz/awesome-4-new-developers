@@ -1,0 +1,8 @@
+https://www.statistik.lmu.de/~leisch/Sweave/,Sweave,https://github.com/qinwf/awesome-R#readme,R error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://gexf.net/format/,GEXF,https://github.com/qinwf/awesome-R#readme,R error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://www.edx.org/course/explore-statistics-r-kix-kiexplorx-0,Explore Statistics with R,https://github.com/qinwf/awesome-R#readme,R error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://www.r-project.org/conferences.html,R Project Conferences,https://github.com/qinwf/awesome-R#readme,R error: <HTTPError 404: 'Not Found'> | reason: Not Found
+https://bitbucket.org/allr/fastr/wiki/Home,fastR,https://github.com/qinwf/awesome-R#readme,R error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://www.omegahat.org/RSPerl/,RSPerl,https://github.com/qinwf/awesome-R#readme,R error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://mcmcpack.berkeley.edu/,MCMCpack,https://github.com/qinwf/awesome-R#readme,R error: <HTTPError 403: 'Forbidden'> | reason: Forbidden
+http://www.rworld.news/blog/,R World News,https://github.com/qinwf/awesome-R#readme,R error: URLError(gaierror(8, 'nodename nor servname provided, or not known')) | reason: [Errno 8] nodename nor servname provided, or not known

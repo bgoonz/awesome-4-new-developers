@@ -1,0 +1,100 @@
+{
+  "projectName": "testing-workshop",
+  "projectOwner": "kentcdodds",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "kentcdodds",
+      "name": "Kent C. Dodds",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1500684?v=3",
+      "profile": "https://kentcdodds.com",
+      "contributions": [
+        "code",
+        "doc",
+        "infra",
+        "test"
+      ]
+    },
+    {
+      "login": "osamajandali",
+      "name": "Osama Jandali",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/13832392?v=4",
+      "profile": "https://github.com/osamajandali",
+      "contributions": [
+        "code",
+        "design"
+      ]
+    },
+    {
+      "login": "stefanivic",
+      "name": "Stefan Ivic",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/3818515?v=4",
+      "profile": "http://stefanivic.me/",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "bodiddlie",
+      "name": "Nick Klepinger",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2413413?v=4",
+      "profile": "https://github.com/bodiddlie",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "abinavseelan",
+      "name": "Abinav Seelan",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/6417910?v=4",
+      "profile": "http://abinavseelan.com",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "fipo",
+      "name": "Philip Sotirov",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2751691?v=4",
+      "profile": "http://philipsotirov.com",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "indiesquidge",
+      "name": "Austin Wood",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3409645?v=4",
+      "profile": "https://github.com/indiesquidge",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "wk32",
+      "name": "WK",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7888225?v=4",
+      "profile": "https://github.com/wk32",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "rjperkins",
+      "name": "Richard Perkins",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/57779301?v=4",
+      "profile": "https://github.com/rjperkins",
+      "contributions": [
+        "test"
+      ]
+    }
+  ],
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true,
+  "contributorsPerLine": 7
+}

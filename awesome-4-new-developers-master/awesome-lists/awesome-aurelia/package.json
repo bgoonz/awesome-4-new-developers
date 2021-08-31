@@ -1,0 +1,30 @@
+{
+  "name": "awesome-aurelia",
+  "version": "1.0.0",
+  "description": "A curated list of amazingly awesome Aurelia libraries.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "markdownlint-cli": "0.3.1"
+  },
+  "scripts": {
+    "test": "markdownlint README.md -c .mdlrc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aurelia-contrib/awesome-aurelia.git"
+  },
+  "keywords": [
+    "aurelia",
+    "awesome"
+  ],
+  "authors": [
+    "Alexandru Badiu",
+    "Behzad Abbaso"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aurelia-contrib/awesome-aurelia/issues"
+  },
+  "homepage": "https://github.com/aurelia-contrib/awesome-aurelia#readme"
+}

@@ -1,0 +1,10 @@
+language: ruby
+
+rvm:
+  - 2.4
+
+install:
+  - make install
+
+check:
+  - make check

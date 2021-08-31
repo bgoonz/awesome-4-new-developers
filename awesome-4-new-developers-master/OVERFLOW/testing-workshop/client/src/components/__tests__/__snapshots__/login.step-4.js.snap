@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot 1`] = `
+.css-0,
+[data-css-0] {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+}
+
+.css-1,
+[data-css-1] {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 200px;
+  max-width: 400px;
+  margin-left: -116px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+}
+
+.css-2,
+[data-css-2] {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-gap: 16px;
+  font-size: 18px;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+  -ms-grid-template-columns: 100px 1fr;
+  -ms-grid-gap: 16px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+}
+
+.css-3,
+[data-css-3] {
+  background: white;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  border-bottom: 5px;
+  width: 100%;
+  min-width: 150px;
+  display: block;
+  padding-left: 10px;
+}
+
+.css-3::-webkit-input-placeholder,
+[data-css-3]::-webkit-input-placeholder {
+  opacity: 0.5;
+}
+
+.css-3::-moz-placeholder,
+[data-css-3]::-moz-placeholder {
+  opacity: 0.5;
+}
+
+.css-3::-ms-input-placeholder,
+[data-css-3]::-ms-input-placeholder {
+  opacity: 0.5;
+}
+
+.css-3::placeholder,
+[data-css-3]::placeholder {
+  opacity: 0.5;
+}
+
+.css-8,
+[data-css-8] {
+  font-size: 13px;
+  font-family: Raleway,sans-serif;
+  background: var(--green);
+  padding: 10px 20px;
+  display: block;
+  margin-left: auto;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+}
+
+.css-8:hover,
+[data-css-8]:hover {
+  box-shadow: var(--shadowHover);
+}
+
+@media only screen and (max-width: 819px) {
+  .css-1,
+  [data-css-1] {
+    margin-left: 0;
+    width: 90%;
+  }
+}
+
+<div>
+  <div
+    class="css-0"
+  >
+    <form
+      class="css-1"
+    >
+      <div
+        class="css-2"
+      >
+        <label
+          for="username-input"
+          style="justify-self: right;"
+        >
+          Username
+        </label>
+        <input
+          class="css-3"
+          id="username-input"
+          name="username"
+          placeholder="Username..."
+          style="flex: 1;"
+        />
+        <label
+          id="password-input"
+          style="justify-self: right;"
+        >
+          Password
+        </label>
+        <input
+          aria-labelledby="password-input"
+          class="css-3"
+          name="password"
+          placeholder="Password..."
+          type="password"
+        />
+      </div>
+      <button
+        class="css-8"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;

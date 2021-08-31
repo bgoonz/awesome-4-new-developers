@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="awesome-cycle.js-awesome">
+      Awesome Cycle.js
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h2>
+    <p>
+      A collection of awesome Cycle.js tools, resources, videos and shiny
+      things.
+    </p>
+    <ul>
+      <li>
+        <a href="#learn">Learn</a>
+        <ul>
+          <li><a href="#documentation">Documentation</a></li>
+          <li><a href="#tutorials">Tutorials</a></li>
+          <li><a href="#videos">Videos</a></li>
+          <li><a href="#slides">Slides</a></li>
+          <li><a href="#example-applications">Example Applications</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#tools">Tools</a>
+        <ul>
+          <li><a href="#cli">CLI</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#libraries">Libraries</a>
+        <ul>
+          <li><a href="#drivers">Drivers</a></li>
+          <li><a href="#boilerplates">Boilerplates</a></li>
+          <li><a href="#testing">Testing</a></li>
+          <li><a href="#debugging">Debugging</a></li>
+          <li><a href="#components">Components</a></li>
+        </ul>
+      </li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+    <hr />
+    <h2 id="learn">Learn</h2>
+    <h3 id="documentation">Documentation</h3>
+    <ul>
+      <li>
+        <a href="http://cycle.js.org/">cycle.js.org</a> - Cycle.js official
+        tutorial and documentation.
+      </li>
+    </ul>
+    <h3 id="tutorials">Tutorials</h3>
+    <ul>
+      <li>
+        <a
+          href="http://thenewstack.io/developers-need-know-mvi-model-view-intent/"
+          >What Developers Need to Know about MVI (Model-View-Intent)</a
+        >
+        - Post on MVI architecture.
+      </li>
+      <li>
+        <a
+          href="https://lucamezzalira.com/2016/05/23/cycle-js-a-reactive-framework/"
+          >Cycle.js: a reactive framework</a
+        >
+        - Introduction to Cycle.js with real time data example.
+      </li>
+      <li>
+        <a
+          href="https://blog.pusher.com/building-realtime-applications-with-cyclejs-and-rxjs/"
+          >Building realtime applications with CycleJS and RxJS</a
+        >
+        - Learn how to build realtime applications with CycleJS and RxJS
+      </li>
+      <li>
+        <a href="http://ivanjov.com/working-with-http-streams-with-cycle-js/"
+          >Working with HTTP Streams with Cycle.js</a
+        >
+        - Learn how to use Cycle.js to handle HTTP requests and responses
+      </li>
+    </ul>
+    <h3 id="videos">Videos</h3>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=1zj7M1LnJV4"
+          >What if the user was a function?</a
+        >
+        - Presentation at JSConf BP2015 by
+        <a href="https://twitter.com/andrestaltz">Andre Staltz</a>
+      </li>
+      <li>
+        <a href="https://vimeo.com/168652278"
+          >Unidirectional data flow architectures</a
+        >
+        - Presentation AtTheFrontend Conference by
+        <a href="https://twitter.com/andrestaltz">Andre Staltz</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=uNZnftSksYg"
+          >Cycle.js and functional reactive user interfaces</a
+        >
+        - Presentation at ReactiveConf 2015 by
+        <a href="http://twitter.com/andrestaltz">Andre Staltz</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=6_ETUyh0tns"
+          >Intro to Functional Reactive Programming with Cycle.js</a
+        >
+        - Presentation by
+        <a href="https://twitter.com/widdnz">Nick Johnstone</a>
+      </li>
+      <li>
+        <a href="https://egghead.io/series/cycle-js-fundamentals"
+          >Cycle.js Fundamentals</a
+        >
+        - Playlist at <a href="https://egghead.io">egghead.io</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=Rj8ZTRVka4E"
+          >Cycle.js was built to solve problems</a
+        >
+        - by Andre Staltz at <a href="http://frontend.fi/">Frontend.fi</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=1ToJ7cxb1R8"
+          >Brains as Building Blocks</a
+        >
+        - by Andre Staltz at <a href="http://cycleconf.com/">CycleConf 2016</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=rbrnyC5fXMM"
+          >Back to the Future, Hot reloading with Cycle.js</a
+        >
+        - by Nick Johnstone at
+        <a href="http://cycleconf.com/">CycleConf 2016</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=-PCq4pXaDZw"
+          >From MVC to FRP</a
+        >
+        - by Gleb Bahmutov at <a href="http://cycleconf.com/">CycleConf 2016</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=Rx5N99TQ52g"
+          >Cycle.js on the bash side</a
+        >
+        - by Hadrien de Cuzey at
+        <a href="http://cycleconf.com/">CycleConf 2016</a>
+      </li>
+      <li>
+        <a href="https://vimeo.com/175121069"
+          >Reactive Programming with Cycle.js</a
+        >
+        - by Luca Mezzalira at <a href="http://2016.jsday.it/">JSDay 2016</a>
+      </li>
+      <li>
+        <a href="https://youtu.be/31URmaeNHSs"
+          >Learning how to ride: an introduction to Cycle.js</a
+        >
+        - by Fernando Macias Pereznieto at
+        <a href="http://www.meetup.com/js-monthly-london/">JS Monthly London</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=9BG0Y3C6WqM"
+          >User Interfaces as Pure Functions of Time</a
+        >
+        - Lightning talk by
+        <a href="http://twitter.com/atomrc">Thomas Belin</a> at
+        <a href="http://dotjs.io/">dotjs 2016</a>
+      </li>
+    </ul>
+    <h3 id="slides">Slides</h3>
+    <ul>
+      <li>
+        <a href="http://slides.com/erykpiast/cycle"
+          >Cycle.js an honestly reactive framework for web user interfaces</a
+        >
+        - by Eryk Napierała
+      </li>
+      <li>
+        <a href="http://www.slideshare.net/aryelukashevski/cyclejs-introduction"
+          >Intro to Cycle.js</a
+        >
+        - by Arye Lukashevki
+      </li>
+      <li>
+        <a
+          href="http://www.slideshare.net/flashplatform/reactive-programming-with-cyclejs"
+          >Reactive Programming with Cycle.js</a
+        >
+        - by Luca Mezzalira
+      </li>
+      <li>
+        <a href="http://lmatteis.github.io/cyclejs-slides/keynote/index.html"
+          >Cycle.js - building apps with streams only</a
+        >
+        - by Luca Matteis
+      </li>
+      <li>
+        <a href="https://slides.com/artfuldev/frp-with-cycle-js"
+          >Functional Reactive Programming with Cycle.js</a
+        >
+        - by Sudarsan Balaji
+      </li>
+      <li>
+        <a
+          href="https://clementd-files.cellar.services.clever-cloud.com/blog/frp-full-cycle-ncrafts.html"
+          >Beyond flux: going full cycle with FRP</a
+        >
+        - by <a href="http://clementd.cleverapps.io/">Clément Delafargue</a>
+      </li>
+    </ul>
+    <h3 id="example-applications">Example Applications</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/cyclejs/cyclejs/tree/master/examples"
+          ><strong>cyclejs/cycle-examples</strong></a
+        >
+        - Official collection of small Cycle.js examples
+      </li>
+      <li>
+        <a href="https://github.com/Widdershin/tricycle"
+          >Widdershin/tricycle ★23</a
+        >
+        - Scratchpad for trying out Cycle.js, relies on Ace Editor with Cycle
+      </li>
+      <li>
+        <a href="https://github.com/cgeorg/todomvp">cgeorg/todomvp ★21</a> -
+        Minimum Viable Pizza, an example webapp written in Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/erykpiast/cyclejs-examples"
+          >erykpiast/cyclejs-examples ★9</a
+        >
+        - Example web applications built with Cycle.js.
+      </li>
+      <li>
+        <a href="https://github.com/grozen/trends-cycle"
+          >grozen/trends-cycle ★3</a
+        >
+        - Slack trend searching written in Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/ivan-kleshnin/cyclejs-examples"
+          >ivan-kleshnin/cyclejs-examples ★120</a
+        >
+        - Collection of CycleJS examples, ES6.
+      </li>
+      <li>
+        <a href="https://github.com/ivan-kleshnin/tetris-game"
+          >ivan-kleshnin/tetris-cyclejs ★12</a
+        >
+        - Tetris game implemented in CycleJS, ES6
+      </li>
+      <li>
+        <a href="https://github.com/phadej/graafi">phadej/graafi ★20</a> -
+        Cycle.js experiment with SVG and global undo/redo http://oleg.fi/graafi/
+      </li>
+      <li>
+        <a href="https://github.com/staltz/matrixmultiplication.xyz"
+          ><strong>staltz/matrixmultiplication.xyz ★548</strong></a
+        >
+        - A interactive matrix multiplication
+        <a href="http://matrixmultiplication.xyz/">webapp</a>
+      </li>
+      <li>
+        <a href="https://github.com/staltz/rxmarbles"
+          ><strong>staltz/rxmarbles ★2,577</strong></a
+        >
+        - Interactive diagrams of Rx Observables http://rxmarbles.com/
+      </li>
+      <li>
+        <a href="https://github.com/MarcCloud/magic-cart"
+          >MarcCloud/magic-cart ★6</a
+        >
+        - Simple shopping cart of a magic creatures store.
+      </li>
+      <li>
+        <a href="https://github.com/foxdonut/cycle-todolist"
+          >foxdonut/cycle-todolist ★11</a
+        >
+        - demonstrates a simple Cycle.js TODO list app with CRUD.
+      </li>
+      <li>
+        <a href="https://github.com/Mercateo/component-check"
+          ><strong>Mercateo/component-check ★468</strong></a
+        >
+        - Common patterns for building Cycle.js components
+      </li>
+      <li>
+        <a href="https://github.com/edge/electron-cycle-media"
+          >edge/electron-cycle-media ★27</a
+        >
+        - Media player written with Cycle.js and Electron.
+      </li>
+      <li>
+        <a href="https://github.com/kibin/cycle-example-who-to-follow"
+          >kibin/cycle-example-who-to-follow ★16</a
+        >
+        - Small example partly implements twitter’s who to follow box using
+        github api.
+      </li>
+      <li>
+        <a href="https://github.com/SkaterDad/cycle-snabbdom-examples"
+          >SkaterDad/cycle-snabbdom-examples ★12</a
+        >
+        - Examples of nested components, using snabbdom-specific animations.
+      </li>
+      <li>
+        <a href="https://github.com/bahmutov/draw-cycle"
+          >bahmutov/draw-cycle ★112</a
+        >
+        - Interactive visualization of counter application showing the data flow
+        inside a MVI component
+        <a href="https://glebbahmutov.com/draw-cycle/"
+          >glebbahmutov.com/draw-cycle</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/andreloureiro/pomocycle"
+          >andreloureiro/pomocycle ★21</a
+        >
+        - A simple Pomodoro timer.
+      </li>
+      <li>
+        <a href="https://github.com/laszlokorte/tams-tools"
+          >laszlokorte/tams-tools ★24</a
+        >
+        - A set of tools for teaching and learning computer science built with
+        cycle.js.
+      </li>
+      <li>
+        <a href="https://github.com/lucamezzalira/jsday-cycle-js"
+          >lucamezzalira/jsday-cycle-js ★16</a
+        >
+        - Reactive Live London Tube trains status example built with Cycle.js.
+      </li>
+      <li>
+        <a href="https://github.com/cyclejs-community/built-with-cycle"
+          >cyclejs-community/built-with-cycle ★9</a
+        >
+        -
+        <a href="http://cyclejs-community.github.io/built-with-cycle"
+          >A website</a
+        >
+        to showcase the cool projects built with Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/class-ideas/cyclejs-hangman"
+          >class-ideas/cyclejs-hangman ★10</a
+        >
+        - A hangman game built with Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/wmaurer/cyclejs-fractals"
+          >wmaurer/cyclejs-fractals ★15</a
+        >
+        - Dancing pythagorean tree fractal - Animating 2048 SVG nodes.
+      </li>
+      <li>
+        <a href="https://github.com/fabiothiroki/cyclejs-starwars"
+          >fabiothiroki/cyclejs-starwars ★2</a
+        >
+        - A Star Wars character search app using Cycle.js, RxJS and Virtual DOM
+        tests.
+      </li>
+      <li>
+        <a href="https://github.com/staltz/mmmmm-mobile/"
+          >staltz/mmmmm-mobile ★124</a
+        >
+        - A React Native + Cycle.js app to implement a social network on Secure
+        Scuttlebutt networks
+      </li>
+      <li>
+        <a href="https://github.com/cyclejs/todomvc-cycle/"
+          >cyclejs/todomvc-cycle ★214</a
+        >
+        - TodoMVC
+        <a href="https://cyclejs.github.io/todomvc-cycle/">example</a>
+        implemented in Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/jefersondaniel/cyclejs-notes/"
+          >jefersondaniel/cyclejs-notes</a
+        >
+        - Notes app using Cycle.js and Orbit.js
+        https://jefersondaniel.com/cyclejs-notes
+      </li>
+      <li>
+        <a href="https://github.com/staltz/dat-installer"
+          >staltz/dat-installer ★77</a
+        >
+        - Download, install, and update Android apps through Dat
+      </li>
+      <li>
+        <a href="https://github.com/usm4n/cycle-hn">usm4n/cycle-hn ★25</a> -
+        Hackernews Clone Using CycleJS
+      </li>
+      <li>
+        <a href="https://github.com/lizraeli/cycle-github-emojis"
+          >lizraeli/cycle-github-emojis</a
+        >
+        - A github emoji viewer made with Cycle.JS
+        <a href="https://github-emoji.levizraelit.com/">webapp</a>
+      </li>
+      <li>
+        <a href="https://github.com/perjerz3434/meetup.com"
+          >perjerz3434/meetup.com ★1</a
+        >
+        - Meetup.com RSVP visualization around the world using CycleJS
+      </li>
+    </ul>
+    <h2 id="tools">Tools</h2>
+    <h3 id="cli">CLI</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/cyclejs-community/create-cycle-app"
+          >cyclejs-community/create-cycle-app ★160</a
+        >
+        - Create Cycle.js apps with no build configuration.
+      </li>
+    </ul>
+    <h2 id="libraries">Libraries</h2>
+    <h3 id="drivers">Drivers</h3>
+    <ul>
+      <li>
+        <span class="citation" data-cites="cycle/http">[@cycle/http]</span
+        >(https://github.com/cyclejs/cyclejs/tree/master/http) - A Cycle.js
+        Driver for making HTTP requests, based on superagent.
+      </li>
+      <li>
+        <a href="https://github.com/cyclejs/cyclejs/tree/master/dom"
+          ><strong
+            ><span class="citation" data-cites="cycle/dom"
+              >@cycle/dom</span
+            ></strong
+          ></a
+        >
+        - A Cycle.js driver to enable interaction with the DOM. The driver is
+        based on snabbdom as the Virtual DOM library.
+      </li>
+      <li>
+        <span class="citation" data-cites="cycle/storage">[@cycle/storage]</span
+        >(https://github.com/cyclejs/storage) - A Cycle.js Driver for using
+        localStorage and sessionStorage.
+      </li>
+      <li>
+        <span class="citation" data-cites="cycle/history">[@cycle/history]</span
+        >(https://github.com/cyclejs/cyclejs/tree/master/history) - This is the
+        standard Cycle.js driver for dealing with the
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API"
+          >History API</a
+        >
+      </li>
+      <li>
+        <span class="citation" data-cites="cycle/isolate">[@cycle/isolate]</span
+        >(https://github.com/cyclejs/cyclejs/tree/master/isolate) - A utility
+        function to make scoped dataflow components in Cycle.js.
+      </li>
+      <li>
+        <span class="citation" data-cites="cycle/time">[@cycle/time]</span
+        >(https://github.com/cyclejs/cyclejs/tree/master/time) - Fast and
+        beautiful tests and time management for Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/cyclejs/cycle-notification-driver"
+          >cyclejs/cycle-notification-driver ★20</a
+        >
+        - A Cycle.js Driver for showing and responding to HTML5 Notifications.
+      </li>
+      <li>
+        <a href="https://github.com/axefrog/cycle-router5"
+          >axefrog/cycle-router5 ★30</a
+        >
+        - A router driver using Router5
+      </li>
+      <li>
+        <a href="https://github.com/cgeorg/cycle-socket.io"
+          >cgeorg/cycle-socket.io ★27</a
+        >
+        - A Cycle driver for Socket.IO clients
+      </li>
+      <li>
+        <a href="https://github.com/secobarbital/cycle-fetch-driver"
+          >secobarbital/cycle-fetch-driver ★2</a
+        >
+        - A Cycle.js Driver for making HTTP requests, using the Fetch API.
+      </li>
+      <li>
+        <a href="https://github.com/r7kamura/cycle-fetcher-driver"
+          >r7kamura/cycle-fetcher-driver ★14</a
+        >
+        - A Cycle.js Driver for making HTTP requests using
+        <a href="https://github.com/r7kamura/stackable-fetcher"
+          >stackable-fetcher</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/benji6/cycle-audio-graph"
+          >benji6/cycle-audio-graph ★12</a
+        >
+        - A Cycle.js Driver for manipulating the Web Audio API using
+        <a href="https://github.com/benji6/virtual-audio-graph"
+          >virtual-audio-graph</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/CyclicMaterials/cycle-hammer-driver"
+          >CyclicMaterials/cycle-hammer-driver ★11</a
+        >
+        - A Cycle.js driver to wrap Hammer.js and detect touch gestures
+      </li>
+      <li>
+        <a href="https://github.com/jessaustin/cycle-sse-driver"
+          >jessaustin/cycle-sse-driver ★6</a
+        >
+        - Source driver for Server-Sent Events/EventSource.
+      </li>
+      <li>
+        <a href="https://github.com/TylorS/cycle-snabbdom"
+          >tylors/cycle-snabbdom ★41</a
+        >
+        - DOM driver using Snabbdom
+      </li>
+      <li>
+        <a href="https://github.com/cyclejs-community/cyclic-router"
+          >cyclejs-community/cyclic-router ★90</a
+        >
+        - Router Driver built for Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/Widdershin/cycle-animation-driver"
+          >Widdershin/cycle-animation-driver ★33</a
+        >
+        - Cycle driver for requestAnimationFrame
+      </li>
+      <li>
+        <a href="https://github.com/dralletje/cycle-firebase"
+          >dralletje/cycle-firebase ★21</a
+        >
+        - A Cycle.js Driver for Firebase
+      </li>
+      <li>
+        <a href="https://github.com/edge/cycle-blessed"
+          >edge/cycle-blessed ★46</a
+        >
+        - A Cycle.js Driver for terminal applications
+      </li>
+      <li>
+        <a href="https://github.com/10clouds/cyclejs-cookie"
+          >10clouds/cyclejs-cookie ★2</a
+        >
+        - Cookies Driver for Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/whitecolor/cycle-async-driver"
+          >whitecolor/cycle-async-driver ★25</a
+        >
+        - Factory for creating async request/response cycle.js drivers
+      </li>
+      <li>
+        <a href="https://github.com/raquelxmoss/cycle-keys"
+          >raquelxmoss/cycle-keys ★35</a
+        >
+        - Driver for keyboard events
+      </li>
+      <li>
+        <a href="https://github.com/rektide/recyclec">rektide/recyclec ★0</a> -
+        Readline driver
+      </li>
+      <li>
+        <a href="https://github.com/goodmind/cycle-telegram"
+          >goodmind/cycle-telegram ★15</a
+        >
+        - A Cycle.js Driver for Telegram Bot API
+      </li>
+      <li>
+        <a href="https://github.com/apoco/cycle-electron-driver"
+          >apoco/cycle-electron-driver ★22</a
+        >
+        - Driver to interact with Electron interface from Cycle.js application
+      </li>
+      <li>
+        <a href="https://github.com/rkrupinski/cyclejs-animated-localstorage"
+          >rkrupinski/cyclejs-animated-localstorage ★12</a
+        >
+        - A Cycle.js driver for animating (srsly) localStorage.
+      </li>
+      <li>
+        <a href="https://github.com/cyclejs-community/cycle-keyboard"
+          >cyclejs-community/cycle-keyboard ★9</a
+        >
+        - A keyboard driver for cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/garrydzeng/cycle-page"
+          >garrydzeng/cycle-page ★3</a
+        >
+        - A tiny client-side router for Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/jbowden1982/cycle-socketcluster"
+          >jbowden1982/cycle-socketcluster ★5</a
+        >
+        - A socketcluster driver for Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/cyclejs-community/redux-cycles"
+          >cyclejs-community/redux-cycles ★599</a
+        >
+        - A Redux middleware that allows you to handle actions lifecycle with
+        Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/JuniperChicago/cycle-gun"
+          >JuniperChicago/cycle-gun ★18</a
+        >
+        - A basic Cycle.js driver wrapping a gun.js instance allowing graph
+        storage and p2p sync
+      </li>
+      <li>
+        <a href="https://github.com/EnigmaCurry/cycle-deepstream"
+          >EnigmaCurry/cycle-deepstream ★8</a
+        >
+        - A Cycle.js driver for
+        <a href="https://deepstream.io">deepstream.io</a>
+      </li>
+      <li>
+        <a href="https://github.com/Alex0007/cycle-express-driver"
+          >Alex0007/cycle-express-driver ★1</a
+        >
+        - A Cycle.js driver for Express.js server
+      </li>
+      <li>
+        <a href="https://github.com/mrpierrot/cycle-node-http-server"
+          >mrpierrot/cycle-node-http-server ★4</a
+        >
+        - A Cycle.js driver for Node.js HTTP(S) server
+      </li>
+      <li>
+        <a href="https://github.com/mrpierrot/cycle-net"
+          >mrpierrot/cycle-net ★0</a
+        >
+        - A Cycle.js driver for Node.js HTTP(S)/WS(S)/Socket.io server
+      </li>
+      <li>
+        <a href="https://github.com/Avalander/cycle-idb"
+          >Avalander/cycle-idb ★4</a
+        >
+        - A Cycle.js driver wrapping IndexedDB
+      </li>
+      <li>
+        <a href="https://github.com/unhappychoice/cycle-pusher"
+          >unhappychoice/cycle-pusher ★1</a
+        >
+        - A Cycle.js driver for <a href="https://pusher.com/">Pusher</a>
+      </li>
+      <li>
+        <a href="https://github.com/helmoski/cycle-selection-driver"
+          >helmoski/cycle-selection-driver</a
+        >
+        - A Cycle.js driver for interacting with the
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Selection"
+          >Selection API</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/mjyc/cycle-robot-drivers/tree/master/3rdparty/cycle-posenet-driver"
+          >mjyc/cycle-posenet-driver ★1</a
+        >
+        - A Cycle.js drivers for pose detection using
+        <a href="https://js.tensorflow.org/">TensorFlow.js</a>-powered
+        <a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet"
+          >PoseNet</a
+        >
+      </li>
+      <li>
+        <span class="citation" data-cites="cycle-robot-drivers/speech"
+          >[@cycle-robot-drivers/speech ★1]</span
+        >(https://github.com/mjyc/cycle-robot-drivers/tree/master/speech) -
+        Cycle.js drivers for speech synthesis and recognition using
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API"
+          >Web Speech API</a
+        >
+      </li>
+      <li>
+        <span class="citation" data-cites="cycle-robot-drivers/sound"
+          >[@cycle-robot-drivers/sound ★1]</span
+        >(https://github.com/mjyc/cycle-robot-drivers/tree/master/sound) - A
+        Cycle.js driver for playing sounds using
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement"
+          >HTMLAudioElement</a
+        >
+      </li>
+    </ul>
+    <h3 id="utilities">Utilities</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/staltz/chai-virtual-dom"
+          >staltz/chai-virtual-dom ★24</a
+        >
+        - Chai assertion helpers to test virtual-dom VTrees
+      </li>
+      <li>
+        <a href="https://github.com/cgeorg/sinject">cgeorg/sinject ★10</a> - a
+        dependency injection tool supporting Cycle’s circular dependencies
+      </li>
+      <li>
+        <a href="https://github.com/erykpiast/cyclejs-group"
+          >erykpiast/cyclejs-group ★20</a
+        >
+        - Utility for CycleJS framework for reducing boilerplate when creating
+        groups of streams.
+      </li>
+      <li>
+        <a href="https://github.com/erykpiast/cyclejs-wc"
+          >erykpiast/cyclejs-wc ★2</a
+        >
+        - Utility for creating Web Components based on Cycle.js
+      </li>
+      <li>
+        <a href="https://github.com/ohanhi/hyperscript-helpers"
+          ><strong>ohanhi/hyperscript-helpers ★390</strong></a
+        >
+        - elm-html inspired helpers for writing hyperscript or
+        virtual-hyperscript.
+      </li>
+      <li>
+        <a href="https://github.com/pH200/cycle-react"
+          ><strong>pH200/cycle-react ★342</strong></a
+        >
+        - use React instead of virtual-dom with a Cycle-like API
+      </li>
+      <li>
+        <a href="https://github.com/MadcapJake/earl-hyperscript"
+          >madcapjake/earlhyperscript ★2</a
+        >
+        - A helper function and macro for using Earl Grey’s
+        <a
+          href="https://breuleux.github.io/earl-grey/doc.html#documentbuildingsyntax"
+          >document-building syntax</a
+        >
+        with Cycle.js.
+      </li>
+      <li>
+        <a href="https://github.com/WorldMaker/cycle-gear"
+          >WorldMaker/cycle-gear ★4</a
+        >
+        - A main function factory for Cycle based upon a formalization of
+        Cycle’s MVI pattern
+      </li>
+      <li>
+        <a href="https://github.com/cyclejs-community/cyclejs-sortable"
+          >SuperManitu/cyclejs-sortable ★15</a
+        >
+        - Make everything sortable via drag and drop in only one line of code!
+      </li>
+      <li>
+        <a href="https://github.com/atomrc/cyclejs-auth0"
+          >atomrc/cyclejs-auth0 ★22</a
+        >
+        - Everything you need to start playing with Auth0 on your Cyclejs app
+        (Driver + component)
+      </li>
+      <li>
+        <a href="https://github.com/staltz/cycle-onionify"
+          ><strong>staltz/cycle-onionify ★244</strong></a
+        >
+        - Fractal state management for Cycle.js apps
+      </li>
+      <li>
+        <a href="https://github.com/maiermic/cycle-storageify"
+          >maiermic/cycle-storageify ★5</a
+        >
+        - Augments your Cycle.js component (main function) by storing its
+        onion-shaped state in local storage
+      </li>
+      <li>
+        <a href="https://github.com/shfrmn/cycle-lot">shfrmn/cycle-lot</a> -
+        Handle dynamic lists of Cycle.js components with ease (full typesript
+        support)
+      </li>
+      <li>
+        <a href="https://powercycle.js.org">sarimarton/powercycle</a> - Static
+        VDOM composition and React-like development on top of Cycle.js
+      </li>
+    </ul>
+    <h3 id="boilerplates">Boilerplates</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/andreloureiro/cyclejs-starter"
+          >andreloureiro/cyclejs-starter ★50</a
+        >
+        - Cycle.js starter template with ES6 and Livereload.
+      </li>
+      <li>
+        <a href="https://github.com/Frikki/generator-cyclejs"
+          >Frikki/generator-cyclejs ★2</a
+        >
+        - Scaffold out a Cycle.js Nested Dialogue module using Yeoman.
+      </li>
+      <li>
+        <a href="https://github.com/edge/cyc"><strong>edge/cyc ★194</strong></a>
+        - Scaffold an isomorphic Cycle.js app in seconds.
+      </li>
+      <li>
+        <a href="https://github.com/Cmdv/cycle-webpack-boilerplate"
+          >cmdv/cycle-webpack-boilerplate ★101</a
+        >
+        - Cycle app with routing, state handling and tests.
+      </li>
+      <li>
+        <a href="https://github.com/Widdershin/cycle-hot-reloading-example"
+          >Widdershin/cycle-hot-reloading-example ★27</a
+        >
+        - A Cycle.js starter project with hot reloading using browserify-hmr
+      </li>
+      <li>
+        <a href="https://github.com/mciparelli/cycle-hmr-example"
+          >mciparelli/cycle-hmr-example ★0</a
+        >
+        - A Cycle.js starter project using browserify and cycle-hmr
+      </li>
+      <li>
+        <a href="https://github.com/cyclejs-community/typescript-starter-cycle"
+          >cycle-community/typescript-starter-cycle ★22</a
+        >
+        - A simple project for getting started with TypeScript in cycle.js,
+        using Webpack. Has settings for Visual Studio Code as candy.
+      </li>
+      <li>
+        <a href="https://github.com/wyqydsyq/unicycle">wyqydsyq/unicycle ★6</a>
+        - A boilerplate universal Cycle app running on a Koa.js server with HMR
+        and ServiceWorkers via Webpack
+      </li>
+      <li>
+        <a href="https://github.com/syarul/cycle-iso">syarul/cycle-iso ★4</a> -
+        A barebone boilerplate Cycle app with data stream base on promises and
+        fetched with Falcor.js
+      </li>
+      <li>
+        <a href="https://github.com/rajasegar/snowpack-cycle">snowpack-cycle</a>
+        - Snowpack app template to create Cycle.js projects with
+        create-snowpack-app
+      </li>
+    </ul>
+    <h3 id="testing">Testing</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/erykpiast/cyclejs-mock"
+          >erykpiast/cyclejs-mock ★22</a
+        >
+        - Utility for testing applications based on CycleJS framework.
+      </li>
+      <li>
+        <a href="https://github.com/jeysal/pretty-format-snabbdom"
+          >jeysal/pretty-format-snabbdom ★0</a
+        >
+        - A
+        <a
+          href="https://github.com/facebook/jest/tree/master/packages/pretty-format"
+          >pretty-format</a
+        >
+        (<a href="https://facebook.github.io/jest/">Jest</a> snapshot) plugin
+        for rendering snapshots of snabbdom VNodes as nicely as those of React
+        elements
+      </li>
+    </ul>
+    <h3 id="debugging">Debugging</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/cyclejs/cycle-time-travel"
+          ><strong>cyclejs/cycle-time-travel ★213</strong></a
+        >
+        - A time travelling debugger for Cycle.js apps. Displays a stream
+        visualizer that you can drag to go back in time.
+      </li>
+    </ul>
+    <h3 id="components">Components</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/erykpiast/autocompleted-select"
+          >erykpiast/autocompleted-select ★10</a
+        >
+        - Select Web Component with autocompletion. Based on RxJS and
+        VirtualDOM.
+      </li>
+      <li>
+        <a href="https://github.com/enten/cyclejs-calendar"
+          >enten/cyclejs-calendar ★11</a
+        >
+        - Calendar component for Cycle.js. Try it online
+        <a href="http://enten.github.io/cyclejs-calendar/example">here</a>.
+      </li>
+      <li>
+        <a href="https://github.com/mciparelli/cyclejs-gravatar"
+          >mciparelli/cyclejs-gravatar ★0</a
+        >
+        - Cycle.js component for rendering a gravatar profile image.
+      </li>
+      <li>
+        <a href="https://github.com/tommy-the-runner/cyclejs-ace-editor"
+          >tommy-the-runner/cyclejs-ace-editor ★0</a
+        >
+        - Cycle.js intergration with Ace Editor using
+        <a href="https://github.com/thlorenz/brace">brace</a>. Check an example
+        <a href="https://tommy-the-runner.github.io/cyclejs-ace-editor/">here</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/raquelxmoss/cycle-color-picker"
+          >raquelxmoss/cycle-color-picker ★44</a
+        >
+        - A Color Picker component for Cycle.js.
+        <a href="https://raquelxmoss.github.io/cycle-color-picker"
+          >Check out the example</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/cyclejs-community/cycle-svg-pan-and-zoom"
+          >cyclejs-community/cycle-svg-pan-and-zoom ★4</a
+        >
+        - A Google Maps style SVG pan and zoom component for Cycle.js
+      </li>
+    </ul>
+    <h2 id="community">Community</h2>
+    <ul>
+      <li>
+        <a href="https://gitter.im/cyclejs/cycle-core">Gitter chat</a> - Ask
+        ‘how do I …?’
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="http://creativecommons.org/publicdomain/zero/1.0/"
+        ><img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" alt="CC0"
+      /></a>
+    </p>
+  </body>
+</html>

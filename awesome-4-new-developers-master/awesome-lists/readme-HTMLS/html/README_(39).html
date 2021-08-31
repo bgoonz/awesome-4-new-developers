@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+
+      span.underline {
+        text-decoration: underline;
+      }
+
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+
+      .sourceCode {
+        overflow: visible;
+      }
+
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+
+      div.sourceCode {
+        margin: 1em 0;
+      }
+
+      pre.sourceCode {
+        margin: 0;
+      }
+
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+
+      div.sourceCode {
+      }
+
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      }
+
+      /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      /* Annotation */
+      code span.at {
+        color: #7d9029;
+      }
+
+      /* Attribute */
+      code span.bn {
+        color: #40a070;
+      }
+
+      /* BaseN */
+      code span.bu {
+      }
+
+      /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      }
+
+      /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      }
+
+      /* Char */
+      code span.cn {
+        color: #880000;
+      }
+
+      /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      }
+
+      /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      }
+
+      /* Documentation */
+      code span.dt {
+        color: #902000;
+      }
+
+      /* DataType */
+      code span.dv {
+        color: #40a070;
+      }
+
+      /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      }
+
+      /* Error */
+      code span.ex {
+      }
+
+      /* Extension */
+      code span.fl {
+        color: #40a070;
+      }
+
+      /* Float */
+      code span.fu {
+        color: #06287e;
+      }
+
+      /* Function */
+      code span.im {
+      }
+
+      /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      }
+
+      /* Keyword */
+      code span.op {
+        color: #666666;
+      }
+
+      /* Operator */
+      code span.ot {
+        color: #007020;
+      }
+
+      /* Other */
+      code span.pp {
+        color: #bc7a00;
+      }
+
+      /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      }
+
+      /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      }
+
+      /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      }
+
+      /* String */
+      code span.va {
+        color: #19177c;
+      }
+
+      /* Variable */
+      code span.vs {
+        color: #4070a0;
+      }
+
+      /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      /* Warning */
+    </style>
+  </head>
+
+  <body>
+    <h2 id="git-tips">git-tips</h2>
+    <blockquote>
+      <p>
+        Collection of <code>git-tips</code>, want to add your tips? Checkout
+        <a href="./contributing.md">contributing.md</a>
+      </p>
+    </blockquote>
+    <p>
+      <a href="http://git.io/git-tips">English</a> |
+      <a href="https://github.com/521xueweihan/git-tips">中文</a> |
+      <a href="https://github.com/Imangazaliev/git-tips">Русский</a> |
+      <a href="https://github.com/mingrammer/git-tips">한국어</a> |
+      <a href="https://github.com/hprobotic/git-tips">Tiếng Việt</a> |
+      <a href="https://github.com/isotai/git-tips">日本語</a> |
+      <a href="https://github.com/amarduwal/git-tips">नेपाली</a> |
+      <a href="https://github.com/mbiesiad/tips">Polski</a> |
+      <a href="https://github.com/javadnikbakht/git-tips">فارسی</a>
+    </p>
+    <h3 id="tools"><strong>Tools:</strong></h3>
+    <ul>
+      <li>
+        <a href="https://www.npmjs.com/package/git-tip">git-tip</a> - A handy
+        CLI to make optimum use of these tips. (<a
+          href="https://github.com/djoudi5/docker-git-tip"
+          >Here in Docker container</a
+        >)
+      </li>
+    </ul>
+    <p>
+      P.S: All these commands are tested on
+      <code>git version 2.7.4 (Apple Git-66)</code>.
+    </p>
+    <!-- @doxie.inject start toc -->
+    <!-- Don’t remove or change the comment above – that can break automatic updates. -->
+    <ul>
+      <li>
+        <a href="#everyday-git-in-twenty-commands-or-so"
+          >Everyday Git in twenty commands or so</a
+        >
+      </li>
+      <li>
+        <a href="#show-helpful-guides-that-come-with-git"
+          >Show helpful guides that come with Git</a
+        >
+      </li>
+      <li><a href="#search-change-by-content">Search change by content</a></li>
+      <li>
+        <a href="#show-changes-over-time-for-specific-file"
+          >Show changes over time for specific file</a
+        >
+      </li>
+      <li>
+        <a href="#remove-sensitive-data-from-history-after-a-push"
+          >Remove sensitive data from history, after a push</a
+        >
+      </li>
+      <li>
+        <a href="#sync-with-remote-overwrite-local-changes"
+          >Sync with remote, overwrite local changes</a
+        >
+      </li>
+      <li>
+        <a href="#list-of-all-files-till-a-commit"
+          >List of all files till a commit</a
+        >
+      </li>
+      <li><a href="#git-reset-first-commit">Git reset first commit</a></li>
+      <li>
+        <a href="#reset-preserve-uncommitted-local-changes"
+          >Reset: preserve uncommitted local changes</a
+        >
+      </li>
+      <li>
+        <a href="#list-all-the-conflicted-files"
+          >List all the conflicted files</a
+        >
+      </li>
+      <li>
+        <a href="#list-of-all-files-changed-in-a-commit"
+          >List of all files changed in a commit</a
+        >
+      </li>
+      <li>
+        <a href="#unstaged-changes-since-last-commit"
+          >Unstaged changes since last commit</a
+        >
+      </li>
+      <li>
+        <a href="#changes-staged-for-commit">Changes staged for commit</a>
+      </li>
+      <li>
+        <a href="#show-both-staged-and-unstaged-changes"
+          >Show both staged and unstaged changes</a
+        >
+      </li>
+      <li>
+        <a href="#list-all-branches-that-are-already-merged-into-master"
+          >List all branches that are already merged into master</a
+        >
+      </li>
+      <li>
+        <a href="#quickly-switch-to-the-previous-branch"
+          >Quickly switch to the previous branch</a
+        >
+      </li>
+      <li>
+        <a href="#remove-branches-that-have-already-been-merged-with-master"
+          >Remove branches that have already been merged with master</a
+        >
+      </li>
+      <li>
+        <a
+          href="#list-all-branches-and-their-upstreams-as-well-as-last-commit-on-branch"
+          >List all branches and their upstreams, as well as last commit on
+          branch</a
+        >
+      </li>
+      <li><a href="#track-upstream-branch">Track upstream branch</a></li>
+      <li><a href="#delete-local-branch">Delete local branch</a></li>
+      <li><a href="#delete-remote-branch">Delete remote branch</a></li>
+      <li><a href="#create-local-tag">Create local tag</a></li>
+      <li><a href="#delete-local-tag">Delete local tag</a></li>
+      <li><a href="#delete-remote-tag">Delete remote tag</a></li>
+      <li>
+        <a href="#undo-local-changes-with-the-last-content-in-head"
+          >Undo local changes with the last content in head</a
+        >
+      </li>
+      <li>
+        <a href="#revert-undo-a-commit-by-creating-a-new-commit"
+          >Revert: Undo a commit by creating a new commit</a
+        >
+      </li>
+      <li>
+        <a href="#reset-discard-commits-advised-for-private-branch"
+          >Reset: Discard commits, advised for private branch</a
+        >
+      </li>
+      <li>
+        <a href="#reword-the-previous-commit-message"
+          >Reword the previous commit message</a
+        >
+      </li>
+      <li>
+        <a href="#see-commit-history-for-just-the-current-branch"
+          >See commit history for just the current branch</a
+        >
+      </li>
+      <li><a href="#amend-author">Amend author.</a></li>
+      <li>
+        <a
+          href="#reset-author-after-author-has-been-changed-in-the-global-config"
+          >Reset author, after author has been changed in the global config.</a
+        >
+      </li>
+      <li><a href="#changing-a-remotes-url">Changing a remote’s URL</a></li>
+      <li>
+        <a href="#get-list-of-all-remote-references"
+          >Get list of all remote references</a
+        >
+      </li>
+      <li>
+        <a href="#get-list-of-all-local-and-remote-branches"
+          >Get list of all local and remote branches</a
+        >
+      </li>
+      <li><a href="#get-only-remote-branches">Get only remote branches</a></li>
+      <li>
+        <a href="#stage-parts-of-a-changed-file-instead-of-the-entire-file"
+          >Stage parts of a changed file, instead of the entire file</a
+        >
+      </li>
+      <li><a href="#get-git-bash-completion">Get git bash completion</a></li>
+      <li>
+        <a href="#what-changed-since-two-weeks"
+          >What changed since two weeks?</a
+        >
+      </li>
+      <li>
+        <a href="#see-all-commits-made-since-forking-from-master"
+          >See all commits made since forking from master</a
+        >
+      </li>
+      <li>
+        <a href="#pick-commits-across-branches-using-cherry-pick"
+          >Pick commits across branches using cherry-pick</a
+        >
+      </li>
+      <li>
+        <a href="#find-out-branches-containing-commit-hash"
+          >Find out branches containing commit-hash</a
+        >
+      </li>
+      <li><a href="#git-aliases">Git Aliases</a></li>
+      <li>
+        <a href="#saving-current-state-of-tracked-files-without-commiting"
+          >Saving current state of tracked files without commiting</a
+        >
+      </li>
+      <li>
+        <a href="#saving-current-state-of-unstaged-changes-to-tracked-files"
+          >Saving current state of unstaged changes to tracked files</a
+        >
+      </li>
+      <li>
+        <a href="#saving-current-state-including-untracked-files"
+          >Saving current state including untracked files</a
+        >
+      </li>
+      <li>
+        <a href="#saving-current-state-with-message"
+          >Saving current state with message</a
+        >
+      </li>
+      <li>
+        <a
+          href="#saving-current-state-of-all-files-ignored-untracked-and-tracked"
+          >Saving current state of all files (ignored, untracked, and
+          tracked)</a
+        >
+      </li>
+      <li>
+        <a href="#show-list-of-all-saved-stashes"
+          >Show list of all saved stashes</a
+        >
+      </li>
+      <li>
+        <a href="#show-the-contents-of-any-stash-in-patch-form"
+          >Show the contents of any stash in patch form</a
+        >
+      </li>
+      <li>
+        <a href="#apply-any-stash-without-deleting-from-the-stashed-list"
+          >Apply any stash without deleting from the stashed list</a
+        >
+      </li>
+      <li>
+        <a href="#apply-last-stashed-state-and-delete-it-from-stashed-list"
+          >Apply last stashed state and delete it from stashed list</a
+        >
+      </li>
+      <li>
+        <a href="#delete-all-stored-stashes">Delete all stored stashes</a>
+      </li>
+      <li>
+        <a href="#grab-a-single-file-from-a-stash"
+          >Grab a single file from a stash</a
+        >
+      </li>
+      <li><a href="#show-all-tracked-files">Show all tracked files</a></li>
+      <li><a href="#show-all-untracked-files">Show all untracked files</a></li>
+      <li><a href="#show-all-ignored-files">Show all ignored files</a></li>
+      <li>
+        <a href="#create-new-working-tree-from-a-repository-git-25"
+          >Create new working tree from a repository (git 2.5)</a
+        >
+      </li>
+      <li>
+        <a href="#create-new-working-tree-from-head-state"
+          >Create new working tree from HEAD state</a
+        >
+      </li>
+      <li>
+        <a href="#untrack-files-without-deleting"
+          >Untrack files without deleting</a
+        >
+      </li>
+      <li>
+        <a
+          href="#before-deleting-untracked-filesdirectory-do-a-dry-run-to-get-the-list-of-these-filesdirectories"
+          >Before deleting untracked files/directory, do a dry run to get the
+          list of these files/directories</a
+        >
+      </li>
+      <li>
+        <a href="#forcefully-remove-untracked-files"
+          >Forcefully remove untracked files</a
+        >
+      </li>
+      <li>
+        <a href="#forcefully-remove-untracked-directory"
+          >Forcefully remove untracked directory</a
+        >
+      </li>
+      <li>
+        <a href="#update-all-the-submodules">Update all the submodules</a>
+      </li>
+      <li>
+        <a
+          href="#show-all-commits-in-the-current-branch-yet-to-be-merged-to-master"
+          >Show all commits in the current branch yet to be merged to master</a
+        >
+      </li>
+      <li><a href="#rename-a-branch">Rename a branch</a></li>
+      <li>
+        <a href="#rebases-feature-to-master-and-merges-it-in-to-master"
+          >Rebases ‘feature’ to ‘master’ and merges it in to master</a
+        >
+      </li>
+      <li>
+        <a href="#archive-the-master-branch"
+          >Archive the <code>master</code> branch</a
+        >
+      </li>
+      <li>
+        <a href="#modify-previous-commit-without-modifying-the-commit-message"
+          >Modify previous commit without modifying the commit message</a
+        >
+      </li>
+      <li>
+        <a
+          href="#prunes-references-to-remove-branches-that-have-been-deleted-in-the-remote"
+          >Prunes references to remove branches that have been deleted in the
+          remote.</a
+        >
+      </li>
+      <li>
+        <a
+          href="#delete-local-branches-that-has-been-squash-and-merged-in-the-remote"
+          >Delete local branches that has been squash and merged in the
+          remote.</a
+        >
+      </li>
+      <li>
+        <a href="#retrieve-the-commit-hash-of-the-initial-revision"
+          >Retrieve the commit hash of the initial revision.</a
+        >
+      </li>
+      <li>
+        <a href="#visualize-the-version-tree">Visualize the version tree.</a>
+      </li>
+      <li>
+        <a
+          href="#visualize-the-tree-including-commits-that-are-only-referenced-from-reflogs"
+          >Visualize the tree including commits that are only referenced from
+          reflogs</a
+        >
+      </li>
+      <li>
+        <a href="#deploying-git-tracked-subfolder-to-gh-pages"
+          >Deploying git tracked subfolder to gh-pages</a
+        >
+      </li>
+      <li>
+        <a href="#adding-a-project-to-repo-using-subtree"
+          >Adding a project to repo using subtree</a
+        >
+      </li>
+      <li>
+        <a
+          href="#get-latest-changes-in-your-repo-for-a-linked-project-using-subtree"
+          >Get latest changes in your repo for a linked project using subtree</a
+        >
+      </li>
+      <li>
+        <a href="#export-a-branch-with-history-to-a-file"
+          >Export a branch with history to a file.</a
+        >
+      </li>
+      <li><a href="#import-from-a-bundle">Import from a bundle</a></li>
+      <li>
+        <a href="#get-the-name-of-current-branch"
+          >Get the name of current branch.</a
+        >
+      </li>
+      <li>
+        <a href="#ignore-one-file-on-commit-eg-changelog"
+          >Ignore one file on commit (e.g. Changelog).</a
+        >
+      </li>
+      <li>
+        <a href="#stash-changes-before-rebasing"
+          >Stash changes before rebasing</a
+        >
+      </li>
+      <li>
+        <a href="#fetch-pull-request-by-id-to-a-local-branch"
+          >Fetch pull request by ID to a local branch</a
+        >
+      </li>
+      <li>
+        <a href="#show-the-most-recent-tag-on-the-current-branch"
+          >Show the most recent tag on the current branch.</a
+        >
+      </li>
+      <li><a href="#show-inline-word-diff">Show inline word diff.</a></li>
+      <li>
+        <a href="#show-changes-using-common-diff-tools"
+          >Show changes using common diff tools.</a
+        >
+      </li>
+      <li>
+        <a href="#dont-consider-changes-for-tracked-file"
+          >Don’t consider changes for tracked file.</a
+        >
+      </li>
+      <li><a href="#undo-assume-unchanged">Undo assume-unchanged.</a></li>
+      <li>
+        <a href="#clean-the-files-from-gitignore"
+          >Clean the files from <code>.gitignore</code>.</a
+        >
+      </li>
+      <li><a href="#restore-deleted-file">Restore deleted file.</a></li>
+      <li>
+        <a href="#restore-file-to-a-specific-commit-hash"
+          >Restore file to a specific commit-hash</a
+        >
+      </li>
+      <li>
+        <a href="#always-rebase-instead-of-merge-on-pull"
+          >Always rebase instead of merge on pull.</a
+        >
+      </li>
+      <li>
+        <a href="#list-all-the-alias-and-configs"
+          >List all the alias and configs.</a
+        >
+      </li>
+      <li><a href="#make-git-case-sensitive">Make git case sensitive.</a></li>
+      <li><a href="#add-custom-editors">Add custom editors.</a></li>
+      <li><a href="#auto-correct-typos">Auto correct typos.</a></li>
+      <li>
+        <a href="#check-if-the-change-was-a-part-of-a-release"
+          >Check if the change was a part of a release.</a
+        >
+      </li>
+      <li>
+        <a href="#dry-run-any-command-that-supports-dry-run-flag-should-do"
+          >Dry run. (any command that supports dry-run flag should do.)</a
+        >
+      </li>
+      <li>
+        <a href="#marks-your-commit-as-a-fix-of-a-previous-commit"
+          >Marks your commit as a fix of a previous commit.</a
+        >
+      </li>
+      <li>
+        <a href="#squash-fixup-commits-normal-commits"
+          >Squash fixup commits normal commits.</a
+        >
+      </li>
+      <li>
+        <a href="#skip-staging-area-during-commit"
+          >Skip staging area during commit.</a
+        >
+      </li>
+      <li><a href="#interactive-staging">Interactive staging.</a></li>
+      <li><a href="#list-ignored-files">List ignored files.</a></li>
+      <li><a href="#status-of-ignored-files">Status of ignored files.</a></li>
+      <li>
+        <a href="#commits-in-branch1-that-are-not-in-branch2"
+          >Commits in Branch1 that are not in Branch2</a
+        >
+      </li>
+      <li><a href="#list-n-last-commits">List n last commits</a></li>
+      <li>
+        <a
+          href="#reuse-recorded-resolution-record-and-reuse-previous-conflicts-resolutions"
+          >Reuse recorded resolution, record and reuse previous conflicts
+          resolutions.</a
+        >
+      </li>
+      <li>
+        <a href="#open-all-conflicted-files-in-an-editor"
+          >Open all conflicted files in an editor.</a
+        >
+      </li>
+      <li>
+        <a href="#count-unpacked-number-of-objects-and-their-disk-consumption"
+          >Count unpacked number of objects and their disk consumption.</a
+        >
+      </li>
+      <li>
+        <a href="#prune-all-unreachable-objects-from-the-object-database"
+          >Prune all unreachable objects from the object database.</a
+        >
+      </li>
+      <li>
+        <a href="#instantly-browse-your-working-repository-in-gitweb"
+          >Instantly browse your working repository in gitweb.</a
+        >
+      </li>
+      <li>
+        <a href="#view-the-gpg-signatures-in-the-commit-log"
+          >View the GPG signatures in the commit log</a
+        >
+      </li>
+      <li>
+        <a href="#remove-entry-in-the-global-config"
+          >Remove entry in the global config.</a
+        >
+      </li>
+      <li>
+        <a href="#checkout-a-new-branch-without-any-history"
+          >Checkout a new branch without any history</a
+        >
+      </li>
+      <li>
+        <a href="#extract-file-from-another-branch"
+          >Extract file from another branch.</a
+        >
+      </li>
+      <li>
+        <a href="#list-only-the-root-and-merge-commits"
+          >List only the root and merge commits.</a
+        >
+      </li>
+      <li>
+        <a href="#change-previous-two-commits-with-an-interactive-rebase"
+          >Change previous two commits with an interactive rebase.</a
+        >
+      </li>
+      <li><a href="#list-all-branch-is-wip">List all branch is WIP</a></li>
+      <li>
+        <a href="#find-guilty-with-binary-search"
+          >Find guilty with binary search</a
+        >
+      </li>
+      <li>
+        <a href="#bypass-pre-commit-and-commit-msg-githooks"
+          >Bypass pre-commit and commit-msg githooks</a
+        >
+      </li>
+      <li>
+        <a
+          href="#list-commits-and-changes-to-a-specific-file-even-through-renaming"
+          >List commits and changes to a specific file (even through
+          renaming)</a
+        >
+      </li>
+      <li><a href="#clone-a-single-branch">Clone a single branch</a></li>
+      <li>
+        <a href="#create-and-switch-new-branch">Create and switch new branch</a>
+      </li>
+      <li>
+        <a href="#ignore-file-mode-changes-on-commits"
+          >Ignore file mode changes on commits</a
+        >
+      </li>
+      <li>
+        <a href="#turn-off-git-colored-terminal-output"
+          >Turn off git colored terminal output</a
+        >
+      </li>
+      <li><a href="#specific-color-settings">Specific color settings</a></li>
+      <li>
+        <a href="#show-all-local-branches-ordered-by-recent-commits"
+          >Show all local branches ordered by recent commits</a
+        >
+      </li>
+      <li>
+        <a
+          href="#find-lines-matching-the-pattern-regex-or-string-in-tracked-files"
+          >Find lines matching the pattern (regex or string) in tracked files</a
+        >
+      </li>
+      <li>
+        <a href="#clone-a-shallow-copy-of-a-repository"
+          >Clone a shallow copy of a repository</a
+        >
+      </li>
+      <li>
+        <a href="#search-commit-log-across-all-branches-for-given-text"
+          >Search Commit log across all branches for given text</a
+        >
+      </li>
+      <li>
+        <a href="#get-first-commit-in-a-branch-from-master"
+          >Get first commit in a branch (from master)</a
+        >
+      </li>
+      <li><a href="#unstaging-staged-file">Unstaging Staged file</a></li>
+      <li>
+        <a href="#force-push-to-remote-repository"
+          >Force push to Remote Repository</a
+        >
+      </li>
+      <li><a href="#adding-remote-name">Adding Remote name</a></li>
+      <li>
+        <a href="#list-all-currently-configured-remotes"
+          >List all currently configured remotes</a
+        >
+      </li>
+      <li>
+        <a
+          href="#show-the-author-time-and-last-revision-made-to-each-line-of-a-given-file"
+          >Show the author, time and last revision made to each line of a given
+          file</a
+        >
+      </li>
+      <li>
+        <a href="#group-commits-by-authors-and-title"
+          >Group commits by authors and title</a
+        >
+      </li>
+      <li>
+        <a href="#forced-push-but-still-ensure-you-dont-overwrite-others-work"
+          >Forced push but still ensure you don’t overwrite other’s work</a
+        >
+      </li>
+      <li>
+        <a href="#show-how-many-lines-does-an-author-contribute"
+          >Show how many lines does an author contribute</a
+        >
+      </li>
+      <li>
+        <a href="#revert-reverting-an-entire-merge"
+          >Revert: Reverting an entire merge</a
+        >
+      </li>
+      <li>
+        <a href="#number-of-commits-in-a-branch"
+          >Number of commits in a branch</a
+        >
+      </li>
+      <li><a href="#alias-git-undo">Alias: git undo</a></li>
+      <li><a href="#add-object-notes">Add object notes</a></li>
+      <li><a href="#show-all-the-git-notes">Show all the git-notes</a></li>
+      <li>
+        <a href="#apply-commit-from-another-repository"
+          >Apply commit from another repository</a
+        >
+      </li>
+      <li><a href="#specific-fetch-reference">Specific fetch reference</a></li>
+      <li>
+        <a href="#find-common-ancestor-of-two-branches"
+          >Find common ancestor of two branches</a
+        >
+      </li>
+      <li>
+        <a href="#list-unpushed-git-commits">List unpushed git commits</a>
+      </li>
+      <li>
+        <a href="#add-everything-but-whitespace-changes"
+          >Add everything, but whitespace changes</a
+        >
+      </li>
+      <li>
+        <a href="#edit-localglobal-git-config"
+          >Edit [local/global] git config</a
+        >
+      </li>
+      <li><a href="#blame-on-certain-range">blame on certain range</a></li>
+      <li>
+        <a href="#show-a-git-logical-variable">Show a Git logical variable.</a>
+      </li>
+      <li><a href="#preformatted-patch-file">Preformatted patch file.</a></li>
+      <li><a href="#get-the-repo-name">Get the repo name.</a></li>
+      <li><a href="#logs-between-date-range">logs between date range</a></li>
+      <li><a href="#exclude-author-from-logs">Exclude author from logs</a></li>
+      <li>
+        <a href="#generates-a-summary-of-pending-changes"
+          >Generates a summary of pending changes</a
+        >
+      </li>
+      <li>
+        <a href="#list-references-in-a-remote-repository"
+          >List references in a remote repository</a
+        >
+      </li>
+      <li><a href="#backup-untracked-files">Backup untracked files.</a></li>
+      <li><a href="#list-all-git-aliases">List all git aliases</a></li>
+      <li><a href="#show-git-status-short">Show git status short</a></li>
+      <li>
+        <a href="#checkout-a-commit-prior-to-a-day-ago"
+          >Checkout a commit prior to a day ago</a
+        >
+      </li>
+      <li>
+        <a
+          href="#push-the-current-branch-to-the-same-name-on-the-remote-repository"
+          >Push the current branch to the same name on the remote repository</a
+        >
+      </li>
+      <li>
+        <a href="#push-a-new-local-branch-to-remote-repository-and-track"
+          >Push a new local branch to remote repository and track</a
+        >
+      </li>
+      <li><a href="#change-a-branch-base">Change a branch base</a></li>
+      <li>
+        <a href="#use-ssh-instead-of-https-for-remotes"
+          >Use SSH instead of HTTPs for remotes</a
+        >
+      </li>
+      <li>
+        <a href="#update-a-submodule-to-the-latest-commit"
+          >Update a submodule to the latest commit</a
+        >
+      </li>
+      <li>
+        <a href="#prevent-auto-replacing-lf-with-crlf"
+          >Prevent auto replacing LF with CRLF</a
+        >
+      </li>
+    </ul>
+    <!-- Don’t remove or change the comment below – that can break automatic updates. More info at <http://npm.im/doxie.inject>. -->
+    <!-- @doxie.inject end toc -->
+    <!-- @doxie.inject start -->
+    <!-- Don’t remove or change the comment above – that can break automatic updates. -->
+    <h2 id="everyday-git-in-twenty-commands-or-so">
+      Everyday Git in twenty commands or so
+    </h2>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">git</span> help everyday</a></code></pre>
+    </div>
+    <h2 id="show-helpful-guides-that-come-with-git">
+      Show helpful guides that come with Git
+    </h2>
+    <div class="sourceCode" id="cb2">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">git</span> help -g</a></code></pre>
+    </div>
+    <h2 id="search-change-by-content">Search change by content</h2>
+    <div class="sourceCode" id="cb3">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">git</span> log -S<span class="st">&#39;&lt;a term in the source&gt;&#39;</span></a></code></pre>
+    </div>
+    <h2 id="show-changes-over-time-for-specific-file">
+      Show changes over time for specific file
+    </h2>
+    <div class="sourceCode" id="cb4">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">git</span> log -p <span class="op">&lt;</span>file_name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="remove-sensitive-data-from-history-after-a-push">
+      Remove sensitive data from history, after a push
+    </h2>
+    <div class="sourceCode" id="cb5">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">git</span> filter-branch --force --index-filter <span class="st">&#39;git rm --cached --ignore-unmatch &lt;path-to-your-file&gt;&#39;</span> --prune-empty --tag-name-filter cat -- --all <span class="kw">&amp;&amp;</span> <span class="fu">git</span> push origin --force --all</a></code></pre>
+    </div>
+    <h2 id="sync-with-remote-overwrite-local-changes">
+      Sync with remote, overwrite local changes
+    </h2>
+    <div class="sourceCode" id="cb6">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">git</span> fetch origin <span class="kw">&amp;&amp;</span> <span class="fu">git</span> reset --hard origin/master <span class="kw">&amp;&amp;</span> <span class="fu">git</span> clean -f -d</a></code></pre>
+    </div>
+    <h2 id="list-of-all-files-till-a-commit">
+      List of all files till a commit
+    </h2>
+    <div class="sourceCode" id="cb7">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">git</span> ls-tree --name-only -r <span class="op">&lt;</span>commit-ish<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="git-reset-first-commit">Git reset first commit</h2>
+    <div class="sourceCode" id="cb8">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">git</span> update-ref -d HEAD</a></code></pre>
+    </div>
+    <h2 id="reset-preserve-uncommitted-local-changes">
+      Reset: preserve uncommitted local changes
+    </h2>
+    <div class="sourceCode" id="cb9">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">git</span> reset --keep <span class="op">&lt;</span>commit<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="list-all-the-conflicted-files">List all the conflicted files</h2>
+    <div class="sourceCode" id="cb10">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">git</span> diff --name-only --diff-filter=U</a></code></pre>
+    </div>
+    <h2 id="list-of-all-files-changed-in-a-commit">
+      List of all files changed in a commit
+    </h2>
+    <div class="sourceCode" id="cb11">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="fu">git</span> diff-tree --no-commit-id --name-only -r <span class="op">&lt;</span>commit-ish<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="unstaged-changes-since-last-commit">
+      Unstaged changes since last commit
+    </h2>
+    <div class="sourceCode" id="cb12">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="fu">git</span> diff</a></code></pre>
+    </div>
+    <h2 id="changes-staged-for-commit">Changes staged for commit</h2>
+    <div class="sourceCode" id="cb13">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1"><span class="fu">git</span> diff --cached</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb14">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"><span class="fu">git</span> diff --staged</a></code></pre>
+    </div>
+    <h2 id="show-both-staged-and-unstaged-changes">
+      Show both staged and unstaged changes
+    </h2>
+    <div class="sourceCode" id="cb15">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1"><span class="fu">git</span> diff HEAD</a></code></pre>
+    </div>
+    <h2 id="list-all-branches-that-are-already-merged-into-master">
+      List all branches that are already merged into master
+    </h2>
+    <div class="sourceCode" id="cb16">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1"><span class="fu">git</span> branch --merged master</a></code></pre>
+    </div>
+    <h2 id="quickly-switch-to-the-previous-branch">
+      Quickly switch to the previous branch
+    </h2>
+    <div class="sourceCode" id="cb17">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" title="1"><span class="fu">git</span> checkout -</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb18">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" title="1"><span class="fu">git</span> checkout @<span class="dt">{-1}</span></a></code></pre>
+    </div>
+    <h2 id="remove-branches-that-have-already-been-merged-with-master">
+      Remove branches that have already been merged with master
+    </h2>
+    <div class="sourceCode" id="cb19">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" title="1"><span class="fu">git</span> branch --merged master <span class="kw">|</span> <span class="fu">grep</span> -v <span class="st">&#39;^\*&#39;</span> <span class="kw">|</span> <span class="fu">xargs</span> -n 1 git branch -d</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb20">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" title="1"><span class="fu">git</span> branch --merged master <span class="kw">|</span> <span class="fu">grep</span> -v <span class="st">&#39;^\*\|  master&#39;</span> <span class="kw">|</span> <span class="fu">xargs</span> -n 1 git branch -d <span class="co"># will not delete master if master is not checked out</span></a></code></pre>
+    </div>
+    <h2
+      id="list-all-branches-and-their-upstreams-as-well-as-last-commit-on-branch"
+    >
+      List all branches and their upstreams, as well as last commit on branch
+    </h2>
+    <div class="sourceCode" id="cb21">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" title="1"><span class="fu">git</span> branch -vv</a></code></pre>
+    </div>
+    <h2 id="track-upstream-branch">Track upstream branch</h2>
+    <div class="sourceCode" id="cb22">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb22-1" title="1"><span class="fu">git</span> branch -u origin/mybranch</a></code></pre>
+    </div>
+    <h2 id="delete-local-branch">Delete local branch</h2>
+    <div class="sourceCode" id="cb23">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb23-1" title="1"><span class="fu">git</span> branch -d <span class="op">&lt;</span>local_branchname<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="delete-remote-branch">Delete remote branch</h2>
+    <div class="sourceCode" id="cb24">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb24-1" title="1"><span class="fu">git</span> push origin --delete <span class="op">&lt;</span>remote_branchname<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb25">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" title="1"><span class="fu">git</span> push origin :<span class="op">&lt;</span>remote_branchname<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb26">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb26-1" title="1"><span class="fu">git</span> branch -dr <span class="op">&lt;</span>remote/branch<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="create-local-tag">Create local tag</h2>
+    <div class="sourceCode" id="cb27">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb27-1" title="1"><span class="fu">git</span> tag <span class="op">&lt;</span>tag-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="delete-local-tag">Delete local tag</h2>
+    <div class="sourceCode" id="cb28">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb28-1" title="1"><span class="fu">git</span> tag -d <span class="op">&lt;</span>tag-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="delete-remote-tag">Delete remote tag</h2>
+    <div class="sourceCode" id="cb29">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb29-1" title="1"><span class="fu">git</span> push origin :refs/tags/<span class="op">&lt;</span>tag-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="undo-local-changes-with-the-last-content-in-head">
+      Undo local changes with the last content in head
+    </h2>
+    <div class="sourceCode" id="cb30">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb30-1" title="1"><span class="fu">git</span> checkout -- <span class="op">&lt;</span>file_name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="revert-undo-a-commit-by-creating-a-new-commit">
+      Revert: Undo a commit by creating a new commit
+    </h2>
+    <div class="sourceCode" id="cb31">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb31-1" title="1"><span class="fu">git</span> revert <span class="op">&lt;</span>commit-ish<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="reset-discard-commits-advised-for-private-branch">
+      Reset: Discard commits, advised for private branch
+    </h2>
+    <div class="sourceCode" id="cb32">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb32-1" title="1"><span class="fu">git</span> reset <span class="op">&lt;</span>commit-ish<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="reword-the-previous-commit-message">
+      Reword the previous commit message
+    </h2>
+    <div class="sourceCode" id="cb33">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb33-1" title="1"><span class="fu">git</span> commit -v --amend</a></code></pre>
+    </div>
+    <h2 id="see-commit-history-for-just-the-current-branch">
+      See commit history for just the current branch
+    </h2>
+    <div class="sourceCode" id="cb34">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb34-1" title="1"><span class="fu">git</span> cherry -v master</a></code></pre>
+    </div>
+    <h2 id="amend-author.">Amend author.</h2>
+    <div class="sourceCode" id="cb35">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb35-1" title="1"><span class="fu">git</span> commit --amend --author=<span class="st">&#39;Author Name &lt;email@address.com&gt;&#39;</span></a></code></pre>
+    </div>
+    <h2 id="reset-author-after-author-has-been-changed-in-the-global-config.">
+      Reset author, after author has been changed in the global config.
+    </h2>
+    <div class="sourceCode" id="cb36">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb36-1" title="1"><span class="fu">git</span> commit --amend --reset-author --no-edit</a></code></pre>
+    </div>
+    <h2 id="changing-a-remotes-url">Changing a remote’s URL</h2>
+    <div class="sourceCode" id="cb37">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb37-1" title="1"><span class="fu">git</span> remote set-url origin <span class="op">&lt;</span>URL<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="get-list-of-all-remote-references">
+      Get list of all remote references
+    </h2>
+    <div class="sourceCode" id="cb38">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb38-1" title="1"><span class="fu">git</span> remote</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb39">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb39-1" title="1"><span class="fu">git</span> remote show</a></code></pre>
+    </div>
+    <h2 id="get-list-of-all-local-and-remote-branches">
+      Get list of all local and remote branches
+    </h2>
+    <div class="sourceCode" id="cb40">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb40-1" title="1"><span class="fu">git</span> branch -a</a></code></pre>
+    </div>
+    <h2 id="get-only-remote-branches">Get only remote branches</h2>
+    <div class="sourceCode" id="cb41">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb41-1" title="1"><span class="fu">git</span> branch -r</a></code></pre>
+    </div>
+    <h2 id="stage-parts-of-a-changed-file-instead-of-the-entire-file">
+      Stage parts of a changed file, instead of the entire file
+    </h2>
+    <div class="sourceCode" id="cb42">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb42-1" title="1"><span class="fu">git</span> add -p</a></code></pre>
+    </div>
+    <h2 id="get-git-bash-completion">Get git bash completion</h2>
+    <div class="sourceCode" id="cb43">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb43-1" title="1"><span class="ex">curl</span> -L http://git.io/vfhol <span class="op">&gt;</span> ~/.git-completion.bash <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&#39;[ -f ~/.git-completion.bash ] &amp;&amp; . ~/.git-completion.bash&#39;</span> <span class="op">&gt;&gt;</span> ~/.bashrc</a></code></pre>
+    </div>
+    <h2 id="what-changed-since-two-weeks">What changed since two weeks?</h2>
+    <div class="sourceCode" id="cb44">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb44-1" title="1"><span class="fu">git</span> log --no-merges --raw --since=<span class="st">&#39;2 weeks ago&#39;</span></a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb45">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb45-1" title="1"><span class="fu">git</span> whatchanged --since=<span class="st">&#39;2 weeks ago&#39;</span></a></code></pre>
+    </div>
+    <h2 id="see-all-commits-made-since-forking-from-master">
+      See all commits made since forking from master
+    </h2>
+    <div class="sourceCode" id="cb46">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb46-1" title="1"><span class="fu">git</span> log --no-merges --stat --reverse master..</a></code></pre>
+    </div>
+    <h2 id="pick-commits-across-branches-using-cherry-pick">
+      Pick commits across branches using cherry-pick
+    </h2>
+    <div class="sourceCode" id="cb47">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb47-1" title="1"><span class="fu">git</span> checkout <span class="op">&lt;</span>branch-name<span class="op">&gt;</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> cherry-pick <span class="op">&lt;</span>commit-ish<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="find-out-branches-containing-commit-hash">
+      Find out branches containing commit-hash
+    </h2>
+    <div class="sourceCode" id="cb48">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb48-1" title="1"><span class="fu">git</span> branch -a --contains <span class="op">&lt;</span>commit-ish<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb49">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb49-1" title="1"><span class="fu">git</span> branch --contains <span class="op">&lt;</span>commit-ish<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="git-aliases">Git Aliases</h2>
+    <div class="sourceCode" id="cb50">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb50-1" title="1"><span class="fu">git</span> config --global alias.<span class="op">&lt;</span>handle<span class="op">&gt;</span> <span class="op">&lt;</span>command<span class="op">&gt;</span> </a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="fu">git</span> config --global alias.st status</a></code></pre>
+    </div>
+    <h2 id="saving-current-state-of-tracked-files-without-commiting">
+      Saving current state of tracked files without commiting
+    </h2>
+    <div class="sourceCode" id="cb51">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb51-1" title="1"><span class="fu">git</span> stash</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb52">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb52-1" title="1"><span class="fu">git</span> stash push</a></code></pre>
+    </div>
+    <h2 id="saving-current-state-of-unstaged-changes-to-tracked-files">
+      Saving current state of unstaged changes to tracked files
+    </h2>
+    <div class="sourceCode" id="cb53">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb53-1" title="1"><span class="fu">git</span> stash -k</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb54">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb54-1" title="1"><span class="fu">git</span> stash --keep-index</a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb55">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb55-1" title="1"><span class="fu">git</span> stash push --keep-index</a></code></pre>
+    </div>
+    <h2 id="saving-current-state-including-untracked-files">
+      Saving current state including untracked files
+    </h2>
+    <div class="sourceCode" id="cb56">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb56-1" title="1"><span class="fu">git</span> stash -u</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb57">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb57-1" title="1"><span class="fu">git</span> stash push -u</a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb58">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb58-1" title="1"><span class="fu">git</span> stash push --include-untracked</a></code></pre>
+    </div>
+    <h2 id="saving-current-state-with-message">
+      Saving current state with message
+    </h2>
+    <div class="sourceCode" id="cb59">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb59-1" title="1"><span class="fu">git</span> stash push -m <span class="op">&lt;</span>message<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb60">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb60-1" title="1"><span class="fu">git</span> stash push --message <span class="op">&lt;</span>message<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="saving-current-state-of-all-files-ignored-untracked-and-tracked">
+      Saving current state of all files (ignored, untracked, and tracked)
+    </h2>
+    <div class="sourceCode" id="cb61">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb61-1" title="1"><span class="fu">git</span> stash -a</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb62">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb62-1" title="1"><span class="fu">git</span> stash --all</a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb63">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb63-1" title="1"><span class="fu">git</span> stash push --all</a></code></pre>
+    </div>
+    <h2 id="show-list-of-all-saved-stashes">Show list of all saved stashes</h2>
+    <div class="sourceCode" id="cb64">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb64-1" title="1"><span class="fu">git</span> stash list</a></code></pre>
+    </div>
+    <h2 id="show-the-contents-of-any-stash-in-patch-form">
+      Show the contents of any stash in patch form
+    </h2>
+    <div class="sourceCode" id="cb65">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb65-1" title="1"><span class="fu">git</span> stash show -p <span class="op">&lt;</span>stash@<span class="dt">{n}</span><span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="apply-any-stash-without-deleting-from-the-stashed-list">
+      Apply any stash without deleting from the stashed list
+    </h2>
+    <div class="sourceCode" id="cb66">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb66-1" title="1"><span class="fu">git</span> stash apply <span class="op">&lt;</span>stash@<span class="dt">{n}</span><span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="apply-last-stashed-state-and-delete-it-from-stashed-list">
+      Apply last stashed state and delete it from stashed list
+    </h2>
+    <div class="sourceCode" id="cb67">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb67-1" title="1"><span class="fu">git</span> stash pop</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb68">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb68-1" title="1"><span class="fu">git</span> stash apply stash@<span class="dt">{0}</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> stash drop stash@<span class="dt">{0}</span></a></code></pre>
+    </div>
+    <h2 id="delete-all-stored-stashes">Delete all stored stashes</h2>
+    <div class="sourceCode" id="cb69">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb69-1" title="1"><span class="fu">git</span> stash clear</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb70">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb70-1" title="1"><span class="fu">git</span> stash drop <span class="op">&lt;</span>stash@<span class="dt">{n}</span><span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="grab-a-single-file-from-a-stash">
+      Grab a single file from a stash
+    </h2>
+    <div class="sourceCode" id="cb71">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb71-1" title="1"><span class="fu">git</span> checkout <span class="op">&lt;</span>stash@<span class="dt">{n}</span><span class="op">&gt;</span> -- <span class="op">&lt;</span>file_path<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb72">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb72-1" title="1"><span class="fu">git</span> checkout stash@<span class="dt">{0}</span> -- <span class="op">&lt;</span>file_path<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="show-all-tracked-files">Show all tracked files</h2>
+    <div class="sourceCode" id="cb73">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb73-1" title="1"><span class="fu">git</span> ls-files -t</a></code></pre>
+    </div>
+    <h2 id="show-all-untracked-files">Show all untracked files</h2>
+    <div class="sourceCode" id="cb74">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb74-1" title="1"><span class="fu">git</span> ls-files --others</a></code></pre>
+    </div>
+    <h2 id="show-all-ignored-files">Show all ignored files</h2>
+    <div class="sourceCode" id="cb75">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb75-1" title="1"><span class="fu">git</span> ls-files --others -i --exclude-standard</a></code></pre>
+    </div>
+    <h2 id="create-new-working-tree-from-a-repository-git-2.5">
+      Create new working tree from a repository (git 2.5)
+    </h2>
+    <div class="sourceCode" id="cb76">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb76-1" title="1"><span class="fu">git</span> worktree add -b <span class="op">&lt;</span>branch-name<span class="op">&gt;</span> <span class="op">&lt;</span>path<span class="op">&gt;</span> <span class="op">&lt;</span>start-point<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="create-new-working-tree-from-head-state">
+      Create new working tree from HEAD state
+    </h2>
+    <div class="sourceCode" id="cb77">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb77-1" title="1"><span class="fu">git</span> worktree add --detach <span class="op">&lt;</span>path<span class="op">&gt;</span> HEAD</a></code></pre>
+    </div>
+    <h2 id="untrack-files-without-deleting">Untrack files without deleting</h2>
+    <div class="sourceCode" id="cb78">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb78-1" title="1"><span class="fu">git</span> rm --cached <span class="op">&lt;</span>file_path<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb79">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb79-1" title="1"><span class="fu">git</span> rm --cached -r <span class="op">&lt;</span>directory_path<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2
+      id="before-deleting-untracked-filesdirectory-do-a-dry-run-to-get-the-list-of-these-filesdirectories"
+    >
+      Before deleting untracked files/directory, do a dry run to get the list of
+      these files/directories
+    </h2>
+    <div class="sourceCode" id="cb80">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb80-1" title="1"><span class="fu">git</span> clean -n</a></code></pre>
+    </div>
+    <h2 id="forcefully-remove-untracked-files">
+      Forcefully remove untracked files
+    </h2>
+    <div class="sourceCode" id="cb81">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb81-1" title="1"><span class="fu">git</span> clean -f</a></code></pre>
+    </div>
+    <h2 id="forcefully-remove-untracked-directory">
+      Forcefully remove untracked directory
+    </h2>
+    <div class="sourceCode" id="cb82">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb82-1" title="1"><span class="fu">git</span> clean -f -d</a></code></pre>
+    </div>
+    <h2 id="update-all-the-submodules">Update all the submodules</h2>
+    <div class="sourceCode" id="cb83">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb83-1" title="1"><span class="fu">git</span> submodule foreach git pull</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb84">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb84-1" title="1"><span class="fu">git</span> submodule update --init --recursive</a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb85">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb85-1" title="1"><span class="fu">git</span> submodule update --remote</a></code></pre>
+    </div>
+    <h2 id="show-all-commits-in-the-current-branch-yet-to-be-merged-to-master">
+      Show all commits in the current branch yet to be merged to master
+    </h2>
+    <div class="sourceCode" id="cb86">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb86-1" title="1"><span class="fu">git</span> cherry -v master</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb87">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb87-1" title="1"><span class="fu">git</span> cherry -v master <span class="op">&lt;</span>branch-to-be-merged<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="rename-a-branch">Rename a branch</h2>
+    <div class="sourceCode" id="cb88">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb88-1" title="1"><span class="fu">git</span> branch -m <span class="op">&lt;</span>new-branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb89">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb89-1" title="1"><span class="fu">git</span> branch -m [<span class="op">&lt;</span>old-branch-name<span class="op">&gt;</span>] <span class="op">&lt;</span>new-branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="rebases-feature-to-master-and-merges-it-in-to-master">
+      Rebases ‘feature’ to ‘master’ and merges it in to master
+    </h2>
+    <div class="sourceCode" id="cb90">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb90-1" title="1"><span class="fu">git</span> rebase master feature <span class="kw">&amp;&amp;</span> <span class="fu">git</span> checkout master <span class="kw">&amp;&amp;</span> <span class="fu">git</span> merge -</a></code></pre>
+    </div>
+    <h2 id="archive-the-master-branch">
+      Archive the <code>master</code> branch
+    </h2>
+    <div class="sourceCode" id="cb91">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb91-1" title="1"><span class="fu">git</span> archive master --format=zip --output=master.zip</a></code></pre>
+    </div>
+    <h2 id="modify-previous-commit-without-modifying-the-commit-message">
+      Modify previous commit without modifying the commit message
+    </h2>
+    <div class="sourceCode" id="cb92">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb92-1" title="1"><span class="fu">git</span> add --all <span class="kw">&amp;&amp;</span> <span class="fu">git</span> commit --amend --no-edit</a></code></pre>
+    </div>
+    <h2
+      id="prunes-references-to-remove-branches-that-have-been-deleted-in-the-remote."
+    >
+      Prunes references to remove branches that have been deleted in the remote.
+    </h2>
+    <div class="sourceCode" id="cb93">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb93-1" title="1"><span class="fu">git</span> fetch -p</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb94">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb94-1" title="1"><span class="fu">git</span> remote prune origin</a></code></pre>
+    </div>
+    <h2
+      id="delete-local-branches-that-has-been-squash-and-merged-in-the-remote."
+    >
+      Delete local branches that has been squash and merged in the remote.
+    </h2>
+    <div class="sourceCode" id="cb95">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb95-1" title="1"><span class="fu">git</span> branch -vv <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;: gone]&#39;</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print &lt;!-- @doxie.inject start --&gt;}&#39;</span> <span class="kw">|</span> <span class="fu">xargs</span> git branch -D</a></code></pre>
+    </div>
+    <h2 id="retrieve-the-commit-hash-of-the-initial-revision.">
+      Retrieve the commit hash of the initial revision.
+    </h2>
+    <div class="sourceCode" id="cb96">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb96-1" title="1"> <span class="fu">git</span> rev-list --reverse HEAD <span class="kw">|</span> <span class="fu">head</span> -1</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb97">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb97-1" title="1"><span class="fu">git</span> rev-list --max-parents=0 HEAD</a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb98">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb98-1" title="1"><span class="fu">git</span> log --pretty=oneline <span class="kw">|</span> <span class="fu">tail</span> -1 <span class="kw">|</span> <span class="fu">cut</span> -c 1-40</a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb99">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb99-1" title="1"><span class="fu">git</span> log --pretty=oneline --reverse <span class="kw">|</span> <span class="fu">head</span> -1 <span class="kw">|</span> <span class="fu">cut</span> -c 1-40</a></code></pre>
+    </div>
+    <h2 id="visualize-the-version-tree.">Visualize the version tree.</h2>
+    <div class="sourceCode" id="cb100">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb100-1" title="1"><span class="fu">git</span> log --pretty=oneline --graph --decorate --all</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb101">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb101-1" title="1"><span class="ex">gitk</span> --all</a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb102">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb102-1" title="1"><span class="fu">git</span> log --graph --pretty=format:<span class="st">&#39;%C(auto) %h | %s | %an | %ar%d&#39;</span></a></code></pre>
+    </div>
+    <h2
+      id="visualize-the-tree-including-commits-that-are-only-referenced-from-reflogs"
+    >
+      Visualize the tree including commits that are only referenced from reflogs
+    </h2>
+    <div class="sourceCode" id="cb103">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb103-1" title="1"><span class="fu">git</span> log --graph --decorate --oneline <span class="va">$(</span><span class="fu">git</span> rev-list --walk-reflogs --all<span class="va">)</span></a></code></pre>
+    </div>
+    <h2 id="deploying-git-tracked-subfolder-to-gh-pages">
+      Deploying git tracked subfolder to gh-pages
+    </h2>
+    <div class="sourceCode" id="cb104">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb104-1" title="1"><span class="fu">git</span> subtree push --prefix subfolder_name origin gh-pages</a></code></pre>
+    </div>
+    <h2 id="adding-a-project-to-repo-using-subtree">
+      Adding a project to repo using subtree
+    </h2>
+    <div class="sourceCode" id="cb105">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb105-1" title="1"><span class="fu">git</span> subtree add --prefix=<span class="op">&lt;</span>directory_name<span class="op">&gt;</span>/<span class="op">&lt;</span>project_name<span class="op">&gt;</span> --squash git@github.com:<span class="op">&lt;</span>username<span class="op">&gt;</span>/<span class="op">&lt;</span>project_name<span class="op">&gt;</span>.git master</a></code></pre>
+    </div>
+    <h2 id="get-latest-changes-in-your-repo-for-a-linked-project-using-subtree">
+      Get latest changes in your repo for a linked project using subtree
+    </h2>
+    <div class="sourceCode" id="cb106">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb106-1" title="1"><span class="fu">git</span> subtree pull --prefix=<span class="op">&lt;</span>directory_name<span class="op">&gt;</span>/<span class="op">&lt;</span>project_name<span class="op">&gt;</span> --squash git@github.com:<span class="op">&lt;</span>username<span class="op">&gt;</span>/<span class="op">&lt;</span>project_name<span class="op">&gt;</span>.git master</a></code></pre>
+    </div>
+    <h2 id="export-a-branch-with-history-to-a-file.">
+      Export a branch with history to a file.
+    </h2>
+    <div class="sourceCode" id="cb107">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb107-1" title="1"><span class="fu">git</span> bundle create <span class="op">&lt;</span>file<span class="op">&gt;</span> <span class="op">&lt;</span>branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="import-from-a-bundle">Import from a bundle</h2>
+    <div class="sourceCode" id="cb108">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb108-1" title="1"><span class="fu">git</span> clone repo.bundle <span class="op">&lt;</span>repo-dir<span class="op">&gt;</span> -b <span class="op">&lt;</span>branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="get-the-name-of-current-branch.">
+      Get the name of current branch.
+    </h2>
+    <div class="sourceCode" id="cb109">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb109-1" title="1"><span class="fu">git</span> rev-parse --abbrev-ref HEAD</a></code></pre>
+    </div>
+    <h2 id="ignore-one-file-on-commit-e.g.-changelog.">
+      Ignore one file on commit (e.g. Changelog).
+    </h2>
+    <div class="sourceCode" id="cb110">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb110-1" title="1"><span class="fu">git</span> update-index --assume-unchanged Changelog<span class="kw">;</span> <span class="fu">git</span> commit -a<span class="kw">;</span> <span class="fu">git</span> update-index --no-assume-unchanged Changelog</a></code></pre>
+    </div>
+    <h2 id="stash-changes-before-rebasing">Stash changes before rebasing</h2>
+    <div class="sourceCode" id="cb111">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb111-1" title="1"><span class="fu">git</span> rebase --autostash</a></code></pre>
+    </div>
+    <h2 id="fetch-pull-request-by-id-to-a-local-branch">
+      Fetch pull request by ID to a local branch
+    </h2>
+    <div class="sourceCode" id="cb112">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb112-1" title="1"><span class="fu">git</span> fetch origin pull/<span class="op">&lt;</span>id<span class="op">&gt;</span>/head:<span class="op">&lt;</span>branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb113">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb113-1" title="1"><span class="fu">git</span> pull origin pull/<span class="op">&lt;</span>id<span class="op">&gt;</span>/head:<span class="op">&lt;</span>branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="show-the-most-recent-tag-on-the-current-branch.">
+      Show the most recent tag on the current branch.
+    </h2>
+    <div class="sourceCode" id="cb114">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb114-1" title="1"><span class="fu">git</span> describe --tags --abbrev=0</a></code></pre>
+    </div>
+    <h2 id="show-inline-word-diff.">Show inline word diff.</h2>
+    <div class="sourceCode" id="cb115">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb115-1" title="1"><span class="fu">git</span> diff --word-diff</a></code></pre>
+    </div>
+    <h2 id="show-changes-using-common-diff-tools.">
+      Show changes using common diff tools.
+    </h2>
+    <div class="sourceCode" id="cb116">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb116-1" title="1"><span class="fu">git</span> difftool [-t <span class="op">&lt;</span>tool<span class="op">&gt;</span>] <span class="op">&lt;</span>commit1<span class="op">&gt;</span> <span class="op">&lt;</span>commit2<span class="op">&gt;</span> <span class="op">&lt;</span>path<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="dont-consider-changes-for-tracked-file.">
+      Don’t consider changes for tracked file.
+    </h2>
+    <div class="sourceCode" id="cb117">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb117-1" title="1"><span class="fu">git</span> update-index --assume-unchanged <span class="op">&lt;</span>file_name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="undo-assume-unchanged.">Undo assume-unchanged.</h2>
+    <div class="sourceCode" id="cb118">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb118-1" title="1"><span class="fu">git</span> update-index --no-assume-unchanged <span class="op">&lt;</span>file_name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="clean-the-files-from-.gitignore.">
+      Clean the files from <code>.gitignore</code>.
+    </h2>
+    <div class="sourceCode" id="cb119">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb119-1" title="1"><span class="fu">git</span> clean -X -f</a></code></pre>
+    </div>
+    <h2 id="restore-deleted-file.">Restore deleted file.</h2>
+    <div class="sourceCode" id="cb120">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb120-1" title="1"><span class="fu">git</span> checkout <span class="op">&lt;</span>deleting_commit<span class="op">&gt;</span> -- <span class="op">&lt;</span>file_path<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="restore-file-to-a-specific-commit-hash">
+      Restore file to a specific commit-hash
+    </h2>
+    <div class="sourceCode" id="cb121">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb121-1" title="1"><span class="fu">git</span> checkout <span class="op">&lt;</span>commit-ish<span class="op">&gt;</span> -- <span class="op">&lt;</span>file_path<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="always-rebase-instead-of-merge-on-pull.">
+      Always rebase instead of merge on pull.
+    </h2>
+    <div class="sourceCode" id="cb122">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb122-1" title="1"><span class="fu">git</span> config --global pull.rebase true</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb123">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb123-1" title="1"><span class="co">#git &lt; 1.7.9</span></a>
+<a class="sourceLine" id="cb123-2" title="2"><span class="fu">git</span> config --global branch.autosetuprebase always</a></code></pre>
+    </div>
+    <h2 id="list-all-the-alias-and-configs.">
+      List all the alias and configs.
+    </h2>
+    <div class="sourceCode" id="cb124">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb124-1" title="1"><span class="fu">git</span> config --list</a></code></pre>
+    </div>
+    <h2 id="make-git-case-sensitive.">Make git case sensitive.</h2>
+    <div class="sourceCode" id="cb125">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb125-1" title="1"><span class="fu">git</span> config --global core.ignorecase false</a></code></pre>
+    </div>
+    <h2 id="add-custom-editors.">Add custom editors.</h2>
+    <div class="sourceCode" id="cb126">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb126-1" title="1"><span class="fu">git</span> config --global core.editor <span class="st">&#39;$EDITOR&#39;</span></a></code></pre>
+    </div>
+    <h2 id="auto-correct-typos.">Auto correct typos.</h2>
+    <div class="sourceCode" id="cb127">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb127-1" title="1"><span class="fu">git</span> config --global help.autocorrect 1</a></code></pre>
+    </div>
+    <h2 id="check-if-the-change-was-a-part-of-a-release.">
+      Check if the change was a part of a release.
+    </h2>
+    <div class="sourceCode" id="cb128">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb128-1" title="1"><span class="fu">git</span> name-rev --name-only <span class="op">&lt;</span>SHA-1<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="dry-run.-any-command-that-supports-dry-run-flag-should-do.">
+      Dry run. (any command that supports dry-run flag should do.)
+    </h2>
+    <div class="sourceCode" id="cb129">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb129-1" title="1"><span class="fu">git</span> clean -fd --dry-run</a></code></pre>
+    </div>
+    <h2 id="marks-your-commit-as-a-fix-of-a-previous-commit.">
+      Marks your commit as a fix of a previous commit.
+    </h2>
+    <div class="sourceCode" id="cb130">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb130-1" title="1"><span class="fu">git</span> commit --fixup <span class="op">&lt;</span>SHA-1<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="squash-fixup-commits-normal-commits.">
+      Squash fixup commits normal commits.
+    </h2>
+    <div class="sourceCode" id="cb131">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb131-1" title="1"><span class="fu">git</span> rebase -i --autosquash</a></code></pre>
+    </div>
+    <h2 id="skip-staging-area-during-commit.">
+      Skip staging area during commit.
+    </h2>
+    <div class="sourceCode" id="cb132">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb132-1" title="1"><span class="fu">git</span> commit --only <span class="op">&lt;</span>file_path<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="interactive-staging.">Interactive staging.</h2>
+    <div class="sourceCode" id="cb133">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb133-1" title="1"><span class="fu">git</span> add -i</a></code></pre>
+    </div>
+    <h2 id="list-ignored-files.">List ignored files.</h2>
+    <div class="sourceCode" id="cb134">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb134-1" title="1"><span class="fu">git</span> check-ignore *</a></code></pre>
+    </div>
+    <h2 id="status-of-ignored-files.">Status of ignored files.</h2>
+    <div class="sourceCode" id="cb135">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb135-1" title="1"><span class="fu">git</span> status --ignored</a></code></pre>
+    </div>
+    <h2 id="commits-in-branch1-that-are-not-in-branch2">
+      Commits in Branch1 that are not in Branch2
+    </h2>
+    <div class="sourceCode" id="cb136">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb136-1" title="1"><span class="fu">git</span> log Branch1 ^Branch2</a></code></pre>
+    </div>
+    <h2 id="list-n-last-commits">List n last commits</h2>
+    <div class="sourceCode" id="cb137">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb137-1" title="1"><span class="fu">git</span> log -<span class="op">&lt;</span>n<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb138">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb138-1" title="1"><span class="fu">git</span> log -n <span class="op">&lt;</span>n<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2
+      id="reuse-recorded-resolution-record-and-reuse-previous-conflicts-resolutions."
+    >
+      Reuse recorded resolution, record and reuse previous conflicts
+      resolutions.
+    </h2>
+    <div class="sourceCode" id="cb139">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb139-1" title="1"><span class="fu">git</span> config --global rerere.enabled 1</a></code></pre>
+    </div>
+    <h2 id="open-all-conflicted-files-in-an-editor.">
+      Open all conflicted files in an editor.
+    </h2>
+    <div class="sourceCode" id="cb140">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb140-1" title="1"><span class="fu">git</span> diff --name-only <span class="kw">|</span> <span class="fu">uniq</span> <span class="kw">|</span> <span class="fu">xargs</span> <span class="va">$EDITOR</span></a></code></pre>
+    </div>
+    <h2 id="count-unpacked-number-of-objects-and-their-disk-consumption.">
+      Count unpacked number of objects and their disk consumption.
+    </h2>
+    <div class="sourceCode" id="cb141">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb141-1" title="1"><span class="fu">git</span> count-objects --human-readable</a></code></pre>
+    </div>
+    <h2 id="prune-all-unreachable-objects-from-the-object-database.">
+      Prune all unreachable objects from the object database.
+    </h2>
+    <div class="sourceCode" id="cb142">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb142-1" title="1"><span class="fu">git</span> gc --prune=now --aggressive</a></code></pre>
+    </div>
+    <h2 id="instantly-browse-your-working-repository-in-gitweb.">
+      Instantly browse your working repository in gitweb.
+    </h2>
+    <div class="sourceCode" id="cb143">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb143-1" title="1"><span class="fu">git</span> instaweb [--local] [--httpd=<span class="op">&lt;</span>httpd<span class="op">&gt;</span>] [--port=<span class="op">&lt;</span>port<span class="op">&gt;</span>] [--browser=<span class="op">&lt;</span>browser<span class="op">&gt;</span>]</a></code></pre>
+    </div>
+    <h2 id="view-the-gpg-signatures-in-the-commit-log">
+      View the GPG signatures in the commit log
+    </h2>
+    <div class="sourceCode" id="cb144">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb144-1" title="1"><span class="fu">git</span> log --show-signature</a></code></pre>
+    </div>
+    <h2 id="remove-entry-in-the-global-config.">
+      Remove entry in the global config.
+    </h2>
+    <div class="sourceCode" id="cb145">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb145-1" title="1"><span class="fu">git</span> config --global --unset <span class="op">&lt;</span>entry-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="checkout-a-new-branch-without-any-history">
+      Checkout a new branch without any history
+    </h2>
+    <div class="sourceCode" id="cb146">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb146-1" title="1"><span class="fu">git</span> checkout --orphan <span class="op">&lt;</span>branch_name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="extract-file-from-another-branch.">
+      Extract file from another branch.
+    </h2>
+    <div class="sourceCode" id="cb147">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb147-1" title="1"><span class="fu">git</span> show <span class="op">&lt;</span>branch_name<span class="op">&gt;</span>:<span class="op">&lt;</span>file_name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="list-only-the-root-and-merge-commits.">
+      List only the root and merge commits.
+    </h2>
+    <div class="sourceCode" id="cb148">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb148-1" title="1"><span class="fu">git</span> log --first-parent</a></code></pre>
+    </div>
+    <h2 id="change-previous-two-commits-with-an-interactive-rebase.">
+      Change previous two commits with an interactive rebase.
+    </h2>
+    <div class="sourceCode" id="cb149">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb149-1" title="1"><span class="fu">git</span> rebase --interactive HEAD~2</a></code></pre>
+    </div>
+    <h2 id="list-all-branch-is-wip">List all branch is WIP</h2>
+    <div class="sourceCode" id="cb150">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb150-1" title="1"><span class="fu">git</span> checkout master <span class="kw">&amp;&amp;</span> <span class="fu">git</span> branch --no-merged</a></code></pre>
+    </div>
+    <h2 id="find-guilty-with-binary-search">Find guilty with binary search</h2>
+    <div class="sourceCode" id="cb151">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb151-1" title="1"><span class="fu">git</span> bisect start                    <span class="co"># Search start </span></a>
+<a class="sourceLine" id="cb151-2" title="2"><span class="fu">git</span> bisect bad                      <span class="co"># Set point to bad commit </span></a>
+<a class="sourceLine" id="cb151-3" title="3"><span class="fu">git</span> bisect good v2.6.13-rc2         <span class="co"># Set point to good commit|tag </span></a>
+<a class="sourceLine" id="cb151-4" title="4"><span class="fu">git</span> bisect bad                      <span class="co"># Say current state is bad </span></a>
+<a class="sourceLine" id="cb151-5" title="5"><span class="fu">git</span> bisect good                     <span class="co"># Say current state is good </span></a>
+<a class="sourceLine" id="cb151-6" title="6"><span class="fu">git</span> bisect reset                    <span class="co"># Finish search </span></a></code></pre>
+    </div>
+    <h2 id="bypass-pre-commit-and-commit-msg-githooks">
+      Bypass pre-commit and commit-msg githooks
+    </h2>
+    <div class="sourceCode" id="cb152">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb152-1" title="1"><span class="fu">git</span> commit --no-verify</a></code></pre>
+    </div>
+    <h2 id="list-commits-and-changes-to-a-specific-file-even-through-renaming">
+      List commits and changes to a specific file (even through renaming)
+    </h2>
+    <div class="sourceCode" id="cb153">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb153-1" title="1"><span class="fu">git</span> log --follow -p -- <span class="op">&lt;</span>file_path<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="clone-a-single-branch">Clone a single branch</h2>
+    <div class="sourceCode" id="cb154">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb154-1" title="1"><span class="fu">git</span> clone -b <span class="op">&lt;</span>branch-name<span class="op">&gt;</span> --single-branch https://github.com/user/repo.git</a></code></pre>
+    </div>
+    <h2 id="create-and-switch-new-branch">Create and switch new branch</h2>
+    <div class="sourceCode" id="cb155">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb155-1" title="1"><span class="fu">git</span> checkout -b <span class="op">&lt;</span>branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb156">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb156-1" title="1"><span class="fu">git</span> branch <span class="op">&lt;</span>branch-name<span class="op">&gt;</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> checkout <span class="op">&lt;</span>branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb157">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb157-1" title="1"><span class="fu">git</span> switch -c <span class="op">&lt;</span>branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="ignore-file-mode-changes-on-commits">
+      Ignore file mode changes on commits
+    </h2>
+    <div class="sourceCode" id="cb158">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb158-1" title="1"><span class="fu">git</span> config core.fileMode false</a></code></pre>
+    </div>
+    <h2 id="turn-off-git-colored-terminal-output">
+      Turn off git colored terminal output
+    </h2>
+    <div class="sourceCode" id="cb159">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb159-1" title="1"><span class="fu">git</span> config --global color.ui false</a></code></pre>
+    </div>
+    <h2 id="specific-color-settings">Specific color settings</h2>
+    <div class="sourceCode" id="cb160">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb160-1" title="1"><span class="fu">git</span> config --global <span class="op">&lt;</span>specific command e.g branch, diff<span class="op">&gt;</span> <span class="op">&lt;</span>true, false or always<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="show-all-local-branches-ordered-by-recent-commits">
+      Show all local branches ordered by recent commits
+    </h2>
+    <div class="sourceCode" id="cb161">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb161-1" title="1"><span class="fu">git</span> for-each-ref --sort=-committerdate --format=<span class="st">&#39;%(refname:short)&#39;</span> refs/heads/</a></code></pre>
+    </div>
+    <h2 id="find-lines-matching-the-pattern-regex-or-string-in-tracked-files">
+      Find lines matching the pattern (regex or string) in tracked files
+    </h2>
+    <div class="sourceCode" id="cb162">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb162-1" title="1"><span class="fu">git</span> grep --heading --line-number <span class="st">&#39;foo bar&#39;</span></a></code></pre>
+    </div>
+    <h2 id="clone-a-shallow-copy-of-a-repository">
+      Clone a shallow copy of a repository
+    </h2>
+    <div class="sourceCode" id="cb163">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb163-1" title="1"><span class="fu">git</span> clone https://github.com/user/repo.git --depth 1</a></code></pre>
+    </div>
+    <h2 id="search-commit-log-across-all-branches-for-given-text">
+      Search Commit log across all branches for given text
+    </h2>
+    <div class="sourceCode" id="cb164">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb164-1" title="1"><span class="fu">git</span> log --all --grep=<span class="st">&#39;&lt;given-text&gt;&#39;</span></a></code></pre>
+    </div>
+    <h2 id="get-first-commit-in-a-branch-from-master">
+      Get first commit in a branch (from master)
+    </h2>
+    <div class="sourceCode" id="cb165">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb165-1" title="1"><span class="fu">git</span> log --oneline master..<span class="op">&lt;</span>branch-name<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">tail</span> -1</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb166">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb166-1" title="1"><span class="fu">git</span> log --reverse master..<span class="op">&lt;</span>branch-name<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">head</span> -6</a></code></pre>
+    </div>
+    <h2 id="unstaging-staged-file">Unstaging Staged file</h2>
+    <div class="sourceCode" id="cb167">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb167-1" title="1"><span class="fu">git</span> reset HEAD <span class="op">&lt;</span>file-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="force-push-to-remote-repository">
+      Force push to Remote Repository
+    </h2>
+    <div class="sourceCode" id="cb168">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb168-1" title="1"><span class="fu">git</span> push -f <span class="op">&lt;</span>remote-name<span class="op">&gt;</span> <span class="op">&lt;</span>branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="adding-remote-name">Adding Remote name</h2>
+    <div class="sourceCode" id="cb169">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb169-1" title="1"><span class="fu">git</span> remote add <span class="op">&lt;</span>remote-nickname<span class="op">&gt;</span> <span class="op">&lt;</span>remote-url<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="list-all-currently-configured-remotes">
+      List all currently configured remotes
+    </h2>
+    <div class="sourceCode" id="cb170">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb170-1" title="1"><span class="fu">git</span> remote -v</a></code></pre>
+    </div>
+    <h2
+      id="show-the-author-time-and-last-revision-made-to-each-line-of-a-given-file"
+    >
+      Show the author, time and last revision made to each line of a given file
+    </h2>
+    <div class="sourceCode" id="cb171">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb171-1" title="1"><span class="fu">git</span> blame <span class="op">&lt;</span>file-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="group-commits-by-authors-and-title">
+      Group commits by authors and title
+    </h2>
+    <div class="sourceCode" id="cb172">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb172-1" title="1"><span class="fu">git</span> shortlog</a></code></pre>
+    </div>
+    <h2 id="forced-push-but-still-ensure-you-dont-overwrite-others-work">
+      Forced push but still ensure you don’t overwrite other’s work
+    </h2>
+    <div class="sourceCode" id="cb173">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb173-1" title="1"><span class="fu">git</span> push --force-with-lease <span class="op">&lt;</span>remote-name<span class="op">&gt;</span> <span class="op">&lt;</span>branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="show-how-many-lines-does-an-author-contribute">
+      Show how many lines does an author contribute
+    </h2>
+    <div class="sourceCode" id="cb174">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb174-1" title="1"><span class="fu">git</span> log --author=<span class="st">&#39;_Your_Name_Here_&#39;</span> --pretty=tformat: --numstat <span class="kw">|</span> <span class="fu">gawk</span> <span class="st">&#39;{ add += &lt;!-- @doxie.inject start --&gt;; subs += &lt;!-- @doxie.inject end --&gt;; loc += &lt;!-- @doxie.inject start --&gt; - &lt;!-- @doxie.inject end --&gt; } END { printf &quot;added lines: %s removed lines: %s total lines: %s</span></a>
+<a class="sourceLine" id="cb174-2" title="2"><span class="st">&quot;, add, subs, loc }&#39;</span> -</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb175">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb175-1" title="1"><span class="fu">git</span> log --author=<span class="st">&#39;_Your_Name_Here_&#39;</span> --pretty=tformat: --numstat <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{ add += &lt;!-- @doxie.inject start --&gt;; subs += &lt;!-- @doxie.inject end --&gt;; loc += &lt;!-- @doxie.inject start --&gt; - &lt;!-- @doxie.inject end --&gt; } END { printf &quot;added lines: %s, removed lines: %s, total lines: %s</span></a>
+<a class="sourceLine" id="cb175-2" title="2"><span class="st">&quot;, add, subs, loc }&#39;</span> - <span class="co"># on Mac OSX</span></a></code></pre>
+    </div>
+    <h2 id="revert-reverting-an-entire-merge">
+      Revert: Reverting an entire merge
+    </h2>
+    <div class="sourceCode" id="cb176">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb176-1" title="1"><span class="fu">git</span> revert -m 1 <span class="op">&lt;</span>commit-ish<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="number-of-commits-in-a-branch">Number of commits in a branch</h2>
+    <div class="sourceCode" id="cb177">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb177-1" title="1"><span class="fu">git</span> rev-list --count <span class="op">&lt;</span>branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="alias-git-undo">Alias: git undo</h2>
+    <div class="sourceCode" id="cb178">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb178-1" title="1"><span class="fu">git</span> config --global alias.undo <span class="st">&#39;!f() { git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; }; f&#39;</span></a></code></pre>
+    </div>
+    <h2 id="add-object-notes">Add object notes</h2>
+    <div class="sourceCode" id="cb179">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb179-1" title="1"><span class="fu">git</span> notes add -m <span class="st">&#39;Note on the previous commit....&#39;</span></a></code></pre>
+    </div>
+    <h2 id="show-all-the-git-notes">Show all the git-notes</h2>
+    <div class="sourceCode" id="cb180">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb180-1" title="1"><span class="fu">git</span> log --show-notes=<span class="st">&#39;*&#39;</span></a></code></pre>
+    </div>
+    <h2 id="apply-commit-from-another-repository">
+      Apply commit from another repository
+    </h2>
+    <div class="sourceCode" id="cb181">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb181-1" title="1"><span class="fu">git</span> --git-dir=<span class="op">&lt;</span>source-dir<span class="op">&gt;</span>/.git format-patch -k -1 --stdout <span class="op">&lt;</span>SHA1<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">git</span> am -3 -k</a></code></pre>
+    </div>
+    <h2 id="specific-fetch-reference">Specific fetch reference</h2>
+    <div class="sourceCode" id="cb182">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb182-1" title="1"><span class="fu">git</span> fetch origin master:refs/remotes/origin/mymaster</a></code></pre>
+    </div>
+    <h2 id="find-common-ancestor-of-two-branches">
+      Find common ancestor of two branches
+    </h2>
+    <div class="sourceCode" id="cb183">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb183-1" title="1"><span class="fu">git</span> merge-base <span class="op">&lt;</span>branch-name<span class="op">&gt;</span> <span class="op">&lt;</span>other-branch-name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="list-unpushed-git-commits">List unpushed git commits</h2>
+    <div class="sourceCode" id="cb184">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb184-1" title="1"><span class="fu">git</span> log --branches --not --remotes</a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb185">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb185-1" title="1"><span class="fu">git</span> log @<span class="dt">{u}</span>..</a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb186">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb186-1" title="1"><span class="fu">git</span> cherry -v</a></code></pre>
+    </div>
+    <h2 id="add-everything-but-whitespace-changes">
+      Add everything, but whitespace changes
+    </h2>
+    <div class="sourceCode" id="cb187">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb187-1" title="1"><span class="fu">git</span> diff --ignore-all-space <span class="kw">|</span> <span class="fu">git</span> apply --cached</a></code></pre>
+    </div>
+    <h2 id="edit-localglobal-git-config">Edit [local/global] git config</h2>
+    <div class="sourceCode" id="cb188">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb188-1" title="1"><span class="fu">git</span> config [--global] --edit</a></code></pre>
+    </div>
+    <h2 id="blame-on-certain-range">blame on certain range</h2>
+    <div class="sourceCode" id="cb189">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb189-1" title="1"><span class="fu">git</span> blame -L <span class="op">&lt;</span>start<span class="op">&gt;</span>,<span class="op">&lt;</span>end<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="show-a-git-logical-variable.">Show a Git logical variable.</h2>
+    <div class="sourceCode" id="cb190">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb190-1" title="1"><span class="fu">git</span> var -l <span class="kw">|</span> <span class="op">&lt;</span><span class="ex">variable</span><span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="preformatted-patch-file.">Preformatted patch file.</h2>
+    <div class="sourceCode" id="cb191">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb191-1" title="1"><span class="fu">git</span> format-patch -M upstream..topic</a></code></pre>
+    </div>
+    <h2 id="get-the-repo-name.">Get the repo name.</h2>
+    <div class="sourceCode" id="cb192">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb192-1" title="1"><span class="fu">git</span> rev-parse --show-toplevel</a></code></pre>
+    </div>
+    <h2 id="logs-between-date-range">logs between date range</h2>
+    <div class="sourceCode" id="cb193">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb193-1" title="1"><span class="fu">git</span> log --since=<span class="st">&#39;FEB 1 2017&#39;</span> --until=<span class="st">&#39;FEB 14 2017&#39;</span></a></code></pre>
+    </div>
+    <h2 id="exclude-author-from-logs">Exclude author from logs</h2>
+    <div class="sourceCode" id="cb194">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb194-1" title="1"><span class="fu">git</span> log --perl-regexp --author=<span class="st">&#39;^((?!excluded-author-regex).*)</span></a></code></pre>
+    </div>
+    <h2 id="generates-a-summary-of-pending-changes">
+      Generates a summary of pending changes
+    </h2>
+    <div class="sourceCode" id="cb195">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb195-1" title="1"><span class="fu">git</span> request-pull v1.0 https://git.ko.xz/project master:for-linus</a></code></pre>
+    </div>
+    <h2 id="list-references-in-a-remote-repository">
+      List references in a remote repository
+    </h2>
+    <div class="sourceCode" id="cb196">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb196-1" title="1"><span class="fu">git</span> ls-remote git://git.kernel.org/pub/scm/git/git.git</a></code></pre>
+    </div>
+    <h2 id="backup-untracked-files.">Backup untracked files.</h2>
+    <div class="sourceCode" id="cb197">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb197-1" title="1"><span class="fu">git</span> ls-files --others -i --exclude-standard <span class="kw">|</span> <span class="fu">xargs</span> zip untracked.zip</a></code></pre>
+    </div>
+    <h2 id="list-all-git-aliases">List all git aliases</h2>
+    <div class="sourceCode" id="cb198">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb198-1" title="1"><span class="fu">git</span> config -l <span class="kw">|</span> <span class="fu">grep</span> alias <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/^alias\.//g&#39;</span></a></code></pre>
+    </div>
+    <p><strong>Alternatives:</strong></p>
+    <div class="sourceCode" id="cb199">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb199-1" title="1"><span class="fu">git</span> config -l <span class="kw">|</span> <span class="fu">grep</span> alias <span class="kw">|</span> <span class="fu">cut</span> -d <span class="st">&#39;.&#39;</span> -f 2</a></code></pre>
+    </div>
+    <h2 id="show-git-status-short">Show git status short</h2>
+    <div class="sourceCode" id="cb200">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb200-1" title="1"><span class="fu">git</span> status --short --branch</a></code></pre>
+    </div>
+    <h2 id="checkout-a-commit-prior-to-a-day-ago">
+      Checkout a commit prior to a day ago
+    </h2>
+    <div class="sourceCode" id="cb201">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb201-1" title="1"><span class="fu">git</span> checkout master@<span class="dt">{yesterday}</span></a></code></pre>
+    </div>
+    <h2 id="push-the-current-branch-to-the-same-name-on-the-remote-repository">
+      Push the current branch to the same name on the remote repository
+    </h2>
+    <div class="sourceCode" id="cb202">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb202-1" title="1"><span class="fu">git</span> push origin HEAD</a></code></pre>
+    </div>
+    <h2 id="push-a-new-local-branch-to-remote-repository-and-track">
+      Push a new local branch to remote repository and track
+    </h2>
+    <div class="sourceCode" id="cb203">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb203-1" title="1"><span class="fu">git</span> push -u origin <span class="op">&lt;</span>branch_name<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="change-a-branch-base">Change a branch base</h2>
+    <div class="sourceCode" id="cb204">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb204-1" title="1"><span class="fu">git</span> rebase --onto <span class="op">&lt;</span>new_base<span class="op">&gt;</span> <span class="op">&lt;</span>old_base<span class="op">&gt;</span></a></code></pre>
+    </div>
+    <h2 id="use-ssh-instead-of-https-for-remotes">
+      Use SSH instead of HTTPs for remotes
+    </h2>
+    <div class="sourceCode" id="cb205">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb205-1" title="1"><span class="fu">git</span> config --global url.<span class="st">&#39;git@github.com:&#39;</span>.insteadOf <span class="st">&#39;https://github.com/&#39;</span></a></code></pre>
+    </div>
+    <h2 id="update-a-submodule-to-the-latest-commit">
+      Update a submodule to the latest commit
+    </h2>
+    <div class="sourceCode" id="cb206">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb206-1" title="1"><span class="bu">cd</span> <span class="op">&lt;</span>path-to-submodule<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb206-2" title="2"><span class="fu">git</span> pull origin <span class="op">&lt;</span>branch<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb206-3" title="3"><span class="bu">cd</span> <span class="op">&lt;</span>root-of-your-main-project<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb206-4" title="4"><span class="fu">git</span> add <span class="op">&lt;</span>path-to-submodule<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb206-5" title="5"><span class="fu">git</span> commit -m <span class="st">&quot;submodule updated&quot;</span></a></code></pre>
+    </div>
+    <h2 id="prevent-auto-replacing-lf-with-crlf">
+      Prevent auto replacing LF with CRLF
+    </h2>
+    <div class="sourceCode" id="cb207">
+      <pre
+        class="sourceCode sh"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb207-1" title="1"><span class="fu">git</span> config --global core.autocrlf false</a></code></pre>
+    </div>
+    <!-- Don’t remove or change the comment below – that can break automatic updates. More info at <http://npm.im/doxie.inject>. -->
+    <!-- @doxie.inject end -->
+  </body>
+</html>

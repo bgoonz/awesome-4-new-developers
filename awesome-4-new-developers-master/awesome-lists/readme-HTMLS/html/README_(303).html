@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/Famolus/awesome-sass/master/awesome-sass-logo-github.png"
+        alt="Awesome Sass"
+      />
+      <figcaption>Awesome Sass</figcaption>
+    </figure>
+    <h1 id="awesome-sass-awesome">
+      Awesome Sass
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        Curated list of awesome <a href="http://sass-lang.com/">Sass</a> and
+        <a href="http://sass-lang.com/">SCSS</a> frameworks, libraries, style
+        guides, articles, and resources.
+      </p>
+    </blockquote>
+    <ul>
+      <li>
+        Use <kbd>command</kbd> + <kbd>F</kbd> or <kbd>ctrl</kbd> +
+        <kbd>F</kbd> to search for a keyword.
+      </li>
+      <li>
+        Contributions welcome, please see
+        <a href="contributing.md">contribution guide</a>.
+      </li>
+    </ul>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#getting-started">Getting Started</a></li>
+      <li><a href="#sass-vs-scss">Sass vs SCSS</a></li>
+      <li><a href="#frameworks">Frameworks</a></li>
+      <li>
+        <a href="#libraries-and-mixins">Libraries and Mixins</a>
+        <ul>
+          <li><a href="#grid">Grid</a></li>
+          <li><a href="#media-queries">Media Queries</a></li>
+          <li><a href="#color">Color</a></li>
+          <li><a href="#typography">Typography</a></li>
+          <li><a href="#animation">Animation</a></li>
+          <li><a href="#miscellaneous">Miscellaneous</a></li>
+        </ul>
+      </li>
+      <li><a href="#style-guides">Style Guides</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+    <h2 id="about">About</h2>
+    <p>
+      <a href="http://sass-lang.com/">Sass</a> is an extension of CSS that adds
+      power and elegance to the basic language. It allows you to use variables,
+      nested rules, mixins, inline imports, and more, all with a fully
+      CSS-compatible syntax. Sass helps keep large stylesheets well-organized,
+      and get small stylesheets up and running quickly.
+    </p>
+    <p>
+      Sass has two syntaxes. The new main syntax (as of Sass 3) is known as
+      “SCSS” (for “Sassy CSS”), and is a superset of CSS’s syntax. This means
+      that every valid CSS stylesheet is valid SCSS as well. SCSS files use the
+      extension <code>.scss</code>.
+    </p>
+    <p>
+      The second, older syntax is known as the indented syntax (or just “Sass”).
+      Inspired by Haml’s terseness, it’s intended for people who prefer
+      conciseness over similarity to CSS. Instead of brackets and semicolons, it
+      uses the indentation of lines to specify blocks. Although no longer the
+      primary syntax, the indented syntax will continue to be supported. Files
+      in the indented syntax use the extension <code>.sass</code>.
+    </p>
+    <h2 id="getting-started">Getting Started</h2>
+    <ul>
+      <li>
+        <a href="http://sass-lang.com/guide">Official Sass and SCSS Guide</a> -
+        Official Sass and SCSS guide.
+      </li>
+      <li>
+        <a href="http://tutorialzine.com/2016/01/learn-sass-in-15-minutes/"
+          >Tutorialzine</a
+        >
+        - Learn SASS in 15 minutes tutorial.
+      </li>
+      <li>
+        <a href="https://www.codecademy.com/learn/learn-sass">Codecademy</a> -
+        Learn Sass with Codecademy.
+      </li>
+      <li>
+        <a href="https://www.lynda.com/SASS-training-tutorials/1435-0.html"
+          >Lynda</a
+        >
+        - Learn how to use Sass, from beginner basics to advanced techniques,
+        with online video tutorials taught by industry experts.
+      </li>
+      <li>
+        <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html"
+          >Official Sass and SCSS Reference</a
+        >
+        - Official Sass and SCSS Documentation Reference.
+      </li>
+      <li>
+        <a href="https://www.sitepoint.com/sass-reference/"
+          >SitePoint Sass and SCSS Reference</a
+        >
+        - SitePoint Sass and SCSS reference.
+      </li>
+    </ul>
+    <h2 id="sass-vs-scss">Sass vs SCSS</h2>
+    <ul>
+      <li>
+        <a href="https://www.sitepoint.com/whats-difference-sass-scss/"
+          >SitePoint</a
+        >
+        - What’s the difference between Sass and SCSS?
+      </li>
+      <li>
+        <a
+          href="http://thesassway.com/editorial/sass-vs-scss-which-syntax-is-better"
+          >The Sass Way</a
+        >
+        - Which syntax is better?
+      </li>
+      <li>
+        <a
+          href="http://stackoverflow.com/questions/5654447/whats-the-difference-between-scss-and-sass"
+          >Stack Overflow</a
+        >
+        - What’s the difference between SCSS and Sass?
+      </li>
+    </ul>
+    <h2 id="frameworks">Frameworks</h2>
+    <ul>
+      <li>
+        <a href="https://avalanche.oberlehner.net">avalanche</a> - Framework for
+        building the foundation for a package based CSS workflow.
+      </li>
+      <li>
+        <a href="https://github.com/twbs/bootstrap">Bootstrap 4</a> - Bootstrap
+        version 4, the most popular HTML, CSS, and JS framework for developing
+        responsive, mobile first projects on the web.
+      </li>
+      <li>
+        <a href="https://github.com/twbs/bootstrap-sass">Bootstrap-sass</a> -
+        Official Sass port of Bootstrap 2 and 3.
+      </li>
+      <li>
+        <a href="https://github.com/jgthms/bulma">Bulma</a> - Modern CSS
+        framework based on Flexbox.
+      </li>
+      <li>
+        <a href="https://github.com/Spiderpig86/Cirrus">Cirrus</a> - A component
+        and utility centric SCSS framework designed for rapid prototyping.
+      </li>
+      <li>
+        <a href="https://github.com/zurb/foundation-sites"
+          >Foundation for Sites</a
+        >
+        - The most advanced responsive front-end framework in the world. Quickly
+        create prototypes and production code for sites that work on any kind of
+        device.
+      </li>
+      <li>
+        <a href="https://bkzl.github.io/hocus-pocus/">Hocus-Pocus</a> -
+        Universal and lightweight stylesheet starter kit that focuses on base
+        html elements and typography.
+      </li>
+      <li>
+        <a href="https://www.iotacss.com">iotaCSS</a> - Open source Sass-based
+        OOCSS framework built for scale.
+      </li>
+      <li>
+        <a href="http://trykickoff.com">Kickoff</a> - Kickoff is a lightweight
+        front-end framework for creating scalable, performant and responsive
+        sites.
+      </li>
+      <li>
+        <a href="http://materializecss.com">Materialize</a> - Modern responsive
+        front-end framework based on Material Design.
+      </li>
+      <li>
+        <a href="http://minicss.org/">mini.css</a> - Minimal, responsive,
+        style-agnostic CSS framework.
+      </li>
+      <li>
+        <a href="http://dropbox.github.io/scooter/">Scooter</a> - SCSS framework
+        built to provide base styles, CSS components, and rapid static
+        prototyping for Dropbox.
+      </li>
+      <li>
+        <a href="http://sierra-library.github.io/">Sierra</a> - Micro SCSS
+        library to help you build websites, without all the arbitrary selectors.
+      </li>
+    </ul>
+    <h2 id="libraries-and-mixins">Libraries and Mixins</h2>
+    <h3 id="grid">Grid</h3>
+    <ul>
+      <li>
+        <a href="http://colourgarden.net/avalanche">Avalanche</a> - Lightweight,
+        responsive, Sass-based, BEM-syntax grid system.
+      </li>
+      <li>
+        <a href="http://csswizardry.com/csswizardry-grids/"
+          >csswizardry-grids</a
+        >
+        - Simple, fluid, nestable, flexible, Sass-based, responsive grid system.
+      </li>
+      <li>
+        <a href="http://necolas.github.io/griddle/">Griddle</a> - Extremely
+        flexable CSS grid constructor.
+      </li>
+      <li>
+        <a href="http://gridlex.devlint.fr/">Gridlex</a> - Flexbox grid system.
+      </li>
+      <li>
+        <a href="https://github.com/mojotech/jeet">Jeet</a> - Simple fractional
+        grid system for Sass and Stylus.
+      </li>
+      <li>
+        <a href="http://neat.bourbon.io/">Neat</a> - Lightweight semantic grid
+        framework built with Sass.
+      </li>
+      <li>
+        <a href="https://dnomak.com/flexiblegs/install/sass/"
+          >Sass Flexible Grid System</a
+        >
+        - Sass flexible grid system.
+      </li>
+      <li>
+        <a href="https://dnomak.com/flexiblegs/install/scss/"
+          >SCSS Flexible Grid System</a
+        >
+        - SCSS flexible grid system.
+      </li>
+      <li>
+        <a href="https://github.com/oddbird/susy">Susy</a> - Responsive layout
+        toolkit for Sass.
+      </li>
+      <li>
+        <a href="http://daneden.github.io/Toast/">Toast</a> - Flexible and
+        lightweight grid framework from the creator of
+        <a href="https://daneden.github.io/animate.css/">animate.css</a>.
+      </li>
+      <li>
+        <a href="https://lucasgruwez.github.io/waffle-grid/">Waffle Grid</a> -
+        Easy to use flexbox grid system.
+      </li>
+    </ul>
+    <h3 id="media-queries">Media Queries</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/at-import/breakpoint">Breakpoint</a> -
+        Breakpoint makes writing media queries in Sass super simple.
+      </li>
+      <li>
+        <a href="https://eduardoboucas.github.io/include-media/"
+          >include-media</a
+        >
+        - Simple, elegant and maintainable media queries.
+      </li>
+      <li>
+        <a href="https://github.com/Dan503/mq-scss">mq-scss</a> - An extreamly
+        powerful but easy to use Sass media query mixin.
+      </li>
+      <li>
+        <a href="http://rafalbromirski.github.io/sass-mediaqueries/"
+          >Sass MediaQueries</a
+        >
+        - Collection of useful media queries mixins for Sass (including iOS
+        devices, TVs and more).
+      </li>
+      <li>
+        <a href="https://github.com/sass-mq/sass-mq">Sass MQ</a> - Sass mixin
+        that helps you compose media queries in an elegant way.
+      </li>
+    </ul>
+    <h3 id="color">Color</h3>
+    <ul>
+      <li>
+        <a href="http://brand-colors.com/">brand-colors</a> - 1100+ collection
+        of popular brand colors available in Sass, Less, Stylus and CSS.
+      </li>
+      <li>
+        <a href="https://github.com/yeun/open-color">Open color</a> - Open color
+        is a color scheme for UI design. Available in CSS, SCSS, LESS, Stylus,
+        Adobe library, Photoshop/Illustrator swatches and Sketch palette.
+      </li>
+      <li>
+        <a href="https://github.com/xi/sass-planifolia">sass-planifolia</a> -
+        Advanced color manipulation and contrast calculation in vanilla Sass.
+      </li>
+      <li>
+        <a href="https://github.com/heygrady/scss-blend-modes"
+          >scss-blend-modes</a
+        >
+        - Using standard color blending functions in Sass.
+      </li>
+    </ul>
+    <h3 id="typography">Typography</h3>
+    <ul>
+      <li>
+        <a href="https://sassline.com/">Sassline</a> - Set text on the web to a
+        baseline grid with Sass &amp; rems using a responsive modular-scale.
+      </li>
+      <li>
+        <a href="https://github.com/hiulit/Sassy-Gridlover">Sassy-Gridlover</a>
+        - Super easy to use Sass mixins to establish a typographic system with
+        modular scale and vertical rhythm. Based on the Gridlover app.
+      </li>
+      <li>
+        <a href="http://kyleshevlin.github.io/shevy/">Shevy</a> - Typography
+        made easy. A vertical rhythm library.
+      </li>
+      <li>
+        <a href="https://github.com/zellwk/typi">Typi</a> - Sass mixin to make
+        responsive typography easy.
+      </li>
+    </ul>
+    <h3 id="animation">Animation</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/geoffgraham/animate.scss">Animate.scss</a> -
+        Port of Dan Eden’s
+        <a href="https://daneden.github.io/animate.css/">Animate.css</a> for
+        SASS.
+      </li>
+      <li>
+        <a href="http://ianlunn.github.io/Hover/">Hover</a> - Collection of CSS3
+        powered hover animated effects to be applied to links, buttons, logos,
+        SVG, featured images and so on. Available in CSS, Sass, and LESS.
+      </li>
+      <li>
+        <a href="https://kf-sass.com">Kf</a> - Sass mixin library for creating
+        keyframe-based animations from maps.
+      </li>
+      <li>
+        <a href="https://github.com/jorenvanhee/sass-burger">Sass Burger</a> -
+        Sass mixin for creating animated hamburger icon.
+      </li>
+      <li>
+        <a href="https://matejkustec.github.io/SpinThatShit/">SpinThatShit</a> -
+        Set of SCSS mixins for single element loaders and spinners.
+      </li>
+    </ul>
+    <h3 id="miscellaneous">Miscellaneous</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/josephfusco/angled-edges">Angled Edges</a> -
+        Sass mixin for creating angled edges on sections by dynamically encoding
+        SVGs.
+      </li>
+      <li>
+        <a href="http://bourbon.io/">Bourbon</a> - Simple and lightweight mixin
+        library for Sass.
+      </li>
+      <li>
+        <a href="https://github.com/hsnaydd/buttono">Buttono</a> - A flexible
+        Sass mixin for creating BEM-style buttons.
+      </li>
+      <li>
+        <a href="https://github.com/alexwolfe/Buttons">Buttons</a> - CSS button
+        library built using Sass and Compass.
+      </li>
+      <li>
+        <a href="https://csstyle.io">csstyle</a> - A SCSS library to help you
+        build modular CSS that generates your selectors for you and deals with
+        specificity automatically.
+      </li>
+      <li>
+        <a href="http://lukyvj.github.io/family.scss/">Family.scss</a> - Set of
+        26 smart Sass mixins which will help you to manage the style of
+        :nth-child’ified elements, in an easy and classy way.
+      </li>
+      <li>
+        <a href="https://gerillass.com/">Gerillass</a> - A Sass mixin library to
+        help you create modern web sites.
+      </li>
+      <li>
+        <a href="http://kylebrumm.com/juice/">Juice</a> - Collection of Sass
+        mixins and functions.
+      </li>
+      <li>
+        <a href="https://github.com/modularscale/modularscale-sass"
+          >Modular Scale</a
+        >
+        - Modular scale calculator built into your Sass.
+      </li>
+      <li>
+        <a href="https://github.com/JohnAlbin/normalize-scss">normalize-scss</a>
+        - Sass/Compass version of Normalize.css, a collection of HTML element
+        and attribute rulesets to normalize styles across all browsers.
+      </li>
+      <li>
+        <a href="https://github.com/lokesh-coder/pretty-checkbox"
+          >Pretty checkbox</a
+        >
+        - SCSS/CSS library to beautify checkbox and radio buttons.
+      </li>
+      <li>
+        <a href="https://github.com/imulus/retinajs">retina.js</a> - JavaScript,
+        SCSS, Sass, Less, and Stylus helpers for rendering high-resolution image
+        variants.
+      </li>
+      <li>
+        <a href="http://oddbird.net/open-source/accoutrement/"
+          >Sass Accoutrement</a
+        >
+        - Accoutrement modules are Sass toolkits that work together to form the
+        central configuration of a project. The tools can be used individually,
+        or integrated for extra power.
+      </li>
+      <li>
+        <a href="https://github.com/salesforce-ux/sass-deprecate"
+          >Sass Deprecate</a
+        >
+        - Sass mixin that helps managing code deprecation.
+      </li>
+      <li>
+        <a href="https://github.com/mastastealth/sass-flex-mixin"
+          >Sass flexbox mixin</a
+        >
+        - Set of mixins for those who want to mess around with flexbox using the
+        native support of current browsers.
+      </li>
+      <li>
+        <a href="https://github.com/davidkpiano/sassdash">Sassdash</a> - The
+        Sass implementation of lodash (<a
+          href="http://davidkpiano.github.io/sassdash"
+          >API documentation</a
+        >).
+      </li>
+      <li>
+        <a href="https://github.com/davidtheclark/scut">Scut</a> - Collection of
+        Sass utilities to ease and improve the implementations of common
+        style-code patterns.
+      </li>
+    </ul>
+    <h2 id="style-guides">Style Guides</h2>
+    <ul>
+      <li>
+        <a href="https://sass-guidelin.es/">Hugo Giraudel’s Sass Guidelines</a>
+        - Guidelines for writing sane, maintainable and scalable Sass.
+      </li>
+      <li>
+        <a href="https://github.com/bigcommerce/sass-style-guide"
+          >BigCommerce Sass Coding Guidelines</a
+        >
+        - Guidelines in use at BigCommerce.
+      </li>
+      <li>
+        <a href="https://github.com/airbnb/css"
+          >Airbnb Sass and CSS Style Guide</a
+        >
+        - Sass and CSS style guide by Airbnb.
+      </li>
+      <li>
+        <a href="https://github.com/dropbox/css-style-guide"
+          >Dropbox (S)CSS Style Guide</a
+        >
+        - Dropbox’s (S)CSS authoring style guide.
+      </li>
+    </ul>
+    <h2 id="articles">Articles</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/HugoGiraudel/awesome-sass"
+          >Hugo Giraudel Personal Awesome Sass List</a
+        >
+        - Records of Hugo Giraudel’s works on Sass.
+      </li>
+      <li>
+        <a
+          href="http://thesassway.com/advanced/cubic-bezier-representation-in-sass"
+          >Cubic Bézier Representation in Sass</a
+        >
+      </li>
+      <li>
+        <a href="http://eng.localytics.com/faster-sass-builds-with-webpack/"
+          >Faster Sass builds with Webpack</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://codeascraft.com/2015/02/02/transitioning-to-scss-at-scale/"
+          >Transitioning to SCSS at Scale</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://blog.prototypr.io/sass-maps-to-ui-components-f14e1f34412e#.9zt0s0rxt"
+          >Sass Maps to UI Components</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://thesassway.com/advanced/inverse-trigonometric-functions-with-sass"
+          >Inverse trigonometric functions with Sass</a
+        >
+      </li>
+      <li>
+        <a href="http://sassbreak.com/stop-arguing-with-your-mixins"
+          >Stop Arguing So Much with Your Mixins</a
+        >
+      </li>
+      <li>
+        <a
+          href="http://hugogiraudel.com/2015/06/18/styling-react-components-in-sass/"
+          >Styling React Components in Sass</a
+        >
+      </li>
+      <li>
+        <a href="https://robots.thoughtbot.com/sass-default"
+          >A Sass !default use case</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://scotch.io/tutorials/aesthetic-sass-3-typography-and-vertical-rhythm"
+          >Aesthetic Sass 3: Typography and Vertical Rhythm</a
+        >
+      </li>
+      <li>
+        <a href="https://www.sitepoint.com/a-tale-of-css-and-sass-precision/"
+          >A Tale of CSS and Sass Precision</a
+        >
+      </li>
+      <li>
+        <a href="https://css-tricks.com/build-style-guide-straight-sass/"
+          >Build a Style Guide Straight from Sass</a
+        >
+      </li>
+      <li>
+        <a href="https://gist.github.com/jareware/4738651"
+          >Advanced SCSS, or, 16 cool things you may not have known your
+          stylesheets could do</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://zendev.com/2018/05/30/the-80-20-approach-to-sustainable-scss.html"
+          >The 80-20 Approach to Sustainable SCSS</a
+        >
+      </li>
+      <li>
+        <a href="https://itnext.io/advanced-use-of-sass-maps-bd5a47ca0d1a"
+          >Advanced Use of Sass Maps</a
+        >
+      </li>
+    </ul>
+    <h2 id="tools">Tools</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/sass/dart-sass">dart-sass</a> - Dart
+        implementation of Sass.
+      </li>
+      <li>
+        <a href="https://diamond.js.org">diamond</a> - Dependency management
+        built for Sass, Less, and CSS.
+      </li>
+      <li>
+        <a href="https://github.com/dahlia/libsass-python">libsass-python</a> -
+        Binding of libsass for Python.
+      </li>
+      <li>
+        <a href="https://github.com/sass/libsass">libsass</a> - C/C++
+        implementation of a Sass compiler.
+      </li>
+      <li>
+        <a href="https://github.com/maoberlehner/node-sass-magic-importer"
+          >node-sass-magic-importer</a
+        >
+        - Custom node-sass importer for selector specific imports, node
+        importing, module importing, globbing support and importing files only
+        once.
+      </li>
+      <li>
+        <a href="https://github.com/sass/node-sass">node-sass</a> - Node.js
+        bindings to libsass.
+      </li>
+      <li>
+        <a href="https://github.com/OctoLinker/browser-extension">OctoLinker</a>
+        - Navigate through <em>.scss and </em>.sass files efficiently with the
+        OctoLinker browser extension for GitHub.
+      </li>
+      <li>
+        <a href="https://github.com/jgranstrom/sass-extract">sass-extract</a> -
+        Extract variables from scss files. Use scss to describe styles for use
+        in javascript by extracting computed styles into js objects. Supports
+        imports and advanced language features.
+      </li>
+      <li>
+        <a href="https://github.com/jtangelder/sass-loader">sass-loader</a> -
+        Sass loader for webpack.
+      </li>
+      <li>
+        <a href="https://github.com/rails/sass-rails">sass-rails</a> - Ruby on
+        Rails stylesheet engine for Sass.
+      </li>
+      <li>
+        <a href="http://sassdoc.com/">SassDoc</a> - Documentation system (like
+        JSDoc for JavaScript) to build pretty and powerful docs in the blink of
+        an eye.
+      </li>
+      <li>
+        <a href="http://scout-app.io/">Scout-App</a> - Process your Sass and
+        SCSS files into CSS without needing any knowledge of the command line.
+      </li>
+      <li>
+        <a href="https://github.com/brigade/scss-lint">scss-lint</a> -
+        Configurable tool for writing clean and consistent SCSS.
+        <a
+          href="https://github.com/brigade/scss-lint#notice-consider-other-tools-before-adopting-scss-lint"
+          >(deprecated)</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/xoofx/SharpScss">SharpScss</a> - P/Invoke
+        .NET wrapper around libsass to convert SCSS to CSS supporting
+        NET2.0/NET3.5/NET4.x+ and CoreCLR platform.
+      </li>
+      <li>
+        <a href="https://stylelint.io/">stylelint</a> - A mighty, modern CSS
+        linter that helps you enforce consistent conventions and avoid errors in
+        your stylesheets. Supports CSS-like syntaxes, including SCSS.
+      </li>
+    </ul>
+    <h2 id="books">Books</h2>
+    <ul>
+      <li>
+        <a
+          href="https://anotheruiguy.gitbooks.io/sassintherealworld_book-i/content/"
+          >Sass in the Real World: Book I of IV</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://anotheruiguy.gitbooks.io/sass-in-the-real-world-book-2-of-4/content/"
+          >Sass in the Real World: Book II of IV</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Jump-Start-Sass-Speed-Weekend/dp/0994182678"
+          >Jump Start Sass: Get Up to Speed With Sass in a Weekend</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Sass-Compass-Designers-Ben-Frain/dp/1849694540"
+          >Sass and Compass for Designers</a
+        >
+      </li>
+    </ul>
+    <h2 id="videos">Videos</h2>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=wz3kElLbEHE">Sass Tutorial</a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/playlist?list=PL2CB1F80266E986EA"
+          >Series of Sass tutorials showing the installing of, the basics, and
+          using key features</a
+        >
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=lJclQekSfSM"
+          >Sass or LESS? What should you use?</a
+        >
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=roywYSEPSvc"
+          >Learn Sass in this Free Crash Course - Give your CSS Superpowers!</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/watch?v=St5B7hnMLjg&amp;list=PL4cUxeGkcC9iEwigam3gTjU_7IA3W2WZA"
+          >The Net Ninja Sass playlist</a
+        >
+      </li>
+    </ul>
+    <h2 id="community">Community</h2>
+    <ul>
+      <li><a href="https://www.reddit.com/r/Sass/">Reddit</a></li>
+      <li>
+        <a href="http://stackoverflow.com/questions/tagged/sass"
+          >Stack Overflow</a
+        >
+      </li>
+      <li>
+        <span class="citation" data-cites="SassCSS">[@SassCSS on Twitter]</span
+        >(https://twitter.com/SassCSS)
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+  </body>
+</html>

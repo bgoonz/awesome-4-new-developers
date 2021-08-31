@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Installing-Python-3</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p><strong>NOTE: pipenv is <em>optional</em>! We don’t use it in CS.</strong> But it’s a neat package manager if you get into more complex Python projects. It can be a headache of an install for some people. You can safely ignore anything about pipenv below if you don’t want to mess with it.</p>
+<p>We’ll want to install Python 3 (version 3.x), which is the runtime for the language itself. The runtime is what allows you to execute Python code and files by typing <code>python [file_or_code_to_execute]</code> in your terminal. You can also open up a Python REPL (Read-Eval-Print Loop) to quickly and easily mess around with Python code once you’ve gotten the runtime installed. If you recall how Node let’s you execute and run JavaScript code locally on your machine instead of having to rely on the browser, the Python runtime pretty much let’s you do the same thing but with Python code.</p>
+<p>Additionally, we’ll be talking about how to install the (optional) pipenv virtual environment manager. Think of it as the <code>npm</code> of Python (though pipenv is also capable of performing a bunch of other tasks as well, most notably running your Python projects in an isolated virtual environment).</p>
+<h2 id="note-for-anaconda-users">Note for Anaconda users</h2>
+<p>Unfortunately, we haven’t found a way to get Anaconda to play nicely with pipenv. If you get them working together, please let your instructor know how you did it.</p>
+<h2 id="testing-the-install">Testing the Install</h2>
+<p>If you can run <code>python</code> or <code>python3</code> and see a 3.7 or later version, you’re good to go:</p>
+<pre><code>$ python3 --version
+Python 3.6.5</code></pre>
+<p>or on some systems, Python 3 is just <code>python</code>:</p>
+<pre><code>$ python --version
+Python 3.6.5</code></pre>
+<p>And optionally try <code>pipenv</code>:</p>
+<pre><code>$ pipenv --version
+pipenv, version [some remotely recent date, probably]</code></pre>
+<p>Otherwise, keep reading. :)</p>
+<h2 id="macos">macOS</h2>
+<p>While macOS comes with Python 2, we need to get Python 3 in there as well.</p>
+<p>If you don’t have Brew installed, <a href="https://brew.sh/">follow the instructions on the brew website</a>.</p>
+<p>Use Brew to install Python and pipenv at the Terminal prompt:</p>
+<pre><code>brew install python pipenv</code></pre>
+<h2 id="windows">Windows</h2>
+<p><em><strong>Note</strong>:</em> Git Bash doesn’t seem to cooperate if you’re trying to install Python on Windows. Try another terminal like Powershell.</p>
+<p>Recommend updating Windows to the latest version.</p>
+<h3 id="windows-store">Windows Store</h3>
+<p>Python 3 is in the Windows Store and can be installed from there.</p>
+<h3 id="official-binaries">Official Binaries</h3>
+<p>When installing the official package, be sure to check the</p>
+<pre><code>[ ] Add to PATH</code></pre>
+<p>checkbox!!</p>
+<p><a href="https://www.python.org/downloads/windows/">Official Package</a></p>
+<h3 id="pipenv">Pipenv</h3>
+<p>This is what worked for Beej. YMMV.</p>
+<ol type="1">
+<li>Install Python, as per above.</li>
+<li>Bring up a shell (cmd.exe or Powershell)</li>
+<li>Run <code>py -m pip</code></li>
+<li><p>Run <code>py -m pip install --user pipenv</code></p>
+<p>At this point, you should be able to always run pipenv with <code>py -m pipenv</code>, but that’s a little inconvenient. Read on for making it easier.</p></li>
+<li><p>You’ll see a message like this in the pipenv install output, but with a slightly different path:</p>
+<pre><code>add C:\Users\username\AppData\Roaming\Python\Python38\Scripts to your path</code></pre></li>
+<li>Select that path (not including any quotes around it), and copy it</li>
+<li>Go to the Start menu, type “environment” and run the program <code>Edit Environment Variables</code></li>
+<li>In the System Properties popup, hit the <code>Advanced</code> tab, then <code>Environment Variables</code></li>
+<li>On the list of environment variables, doubleclick <code>Path</code></li>
+<li>Click <code>New</code></li>
+<li>Paste that path from step 5 into the new entry slot. Make sure there aren’t any quotes around it.</li>
+<li>Click <code>OK</code>, <code>OK</code>, <code>OK</code>.</li>
+<li>Relaunch any shells you have open.</li>
+<li><p>Now you should be able to just run <code>pip</code> and <code>pipenv</code> in Powershell without putting <code>py -m</code> in front of it.</p></li>
+</ol>
+<h4 id="pipenv-official-instructions">Pipenv official instructions</h4>
+<p><a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/#virtualenvironments-ref">Install pipenv per these instructions</a></p>
+<h3 id="chocolatey">Chocolatey</h3>
+<p><a href="https://chocolatey.org/install">Install Chocolatey</a></p>
+<p><a href="https://chocolatey.org/packages/python3">Install Python 3 with Chocolatey</a></p>
+<p><a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/#virtualenvironments-ref">Install pipenv per these instructions</a></p>
+<h3 id="wsl">WSL</h3>
+<p>If you’re running Windows 10+, you might want to install the Windows Subsystem for Linux. This gives you a mini, integrated Linux system inside Windows. You then install and use Python from there.</p>
+<ol type="1">
+<li>Update Windows to latest if you haven’t already.</li>
+<li><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Install WSL from here</a>.</li>
+<li>Go to the Microsoft store and install Ubuntu.</li>
+<li>Run Ubuntu to get a bash shell.</li>
+<li>Make a new username and password. This is completely separate from your Windows username and password, but I made mine the same so that I wouldn’t forget.</li>
+<li><p>Upgrade the Ubuntu system. Run:</p>
+<pre><code>sudo apt-get update
+sudo apt-get upgrade</code></pre>
+Give your newly-entered password if prompted.</li>
+<li>Running <code>python3 --version</code> should give you 3.6 or higher.</li>
+<li><p>Run <code>pip install pipenv</code>.</p></li>
+</ol>
+<p>If you’ve installed VS Code, add the “Remote WSL” extension. This way you can run <code>code</code> from within Ubuntu.</p>
+<p>In the Ubuntu shell, you can run <code>explorer.exe .</code> in any directory to open a Windows Explorer window in that directory.</p>
+<p>Also in Windows Explorer, you can put <code>\\wsl$</code> in the URL bar to see your Ubuntu drive. (If it doesn’t show up, relaunch your Ubuntu shell.)</p>
+<p>If you run into trouble with the above, try the following:</p>
+<ol type="1">
+<li>Open cmd.exe as an administrator and start bash with <code>bash</code>
+<ol type="1">
+<li>Type <code>Python -V' and 'Python3 -V</code>
+<ol type="1">
+<li>If one of these responds with <code>Python 3.6.8</code> use that command from now on</li>
+<li>If neither response is <code>Python 3.6.8</code> but one is a higher version of Python, this means one of two things
+<ol type="1">
+<li>If you have manually installed a higher version of Python, we recommend uninstalling it</li>
+<li>If you have not, it is possible that Microsoft has updated WSL and you will need to adjust these instructions to accommodate</li>
+</ol></li>
+<li>Otherwise, update Ubuntu:
+<ol type="1">
+<li><code>sudo apt-get update</code></li>
+<li><code>sudo apt-get upgrade</code></li>
+</ol></li>
+</ol></li>
+<li>Repeat 2.1 above to determine if you should use <code>Python</code> or <code>Python3</code> when using Python. <em>Note:</em> inside the shell, you will always use <em>Python</em> as the command.</li>
+</ol></li>
+<li>Make sure pip is installed for <em>Python 3</em>
+<ol type="1">
+<li><code>pip --version</code> and <code>pip3 --version</code>. One of these needs to respond with a version that has a version of Python 3 at the end of the line.</li>
+<li>If you only have it for 2.7, you will need to install for 3 with:
+<ol type="1">
+<li><code>sudo apt update &amp;&amp; sudo apt upgrade</code></li>
+<li><code>sudo apt install python3-pip</code></li>
+</ol></li>
+<li>Check versions and commands again. You will likely need to use <code>pip3</code> for the next step, but it’s possible it may be just <code>pip</code>. Use the one with the version associated with Python 3.6.8</li>
+</ol></li>
+<li>Make sure pipenv is installed for Python 3 <code>python3 -m pipenv --version</code>
+<ol type="1">
+<li>If not, install pipenv:
+<ol type="1">
+<li><code>sudo apt update &amp;&amp; sudo apt upgrade</code> (if you didn’t just do this above)</li>
+<li><code>pip3 install --user pipenv</code></li>
+</ol></li>
+<li>Check the version again</li>
+</ol></li>
+<li>Try <code>pipenv shell</code>. If this fails, make sure that every reference in the error refers to Python 3.6. If not, review the above steps
+<ol type="1">
+<li>If the error does refer to 3.6:
+<ol type="1">
+<li>Confirm that <code>python --version</code> refers to 2.7.something</li>
+<li>Confirm that <code>/usr/bin/python3 --version</code> refers to 3.6.8</li>
+<li><code>pipenv --three --python=</code>which python3`<code>*NOTE* that there are backticks (</code>) around <em>which python3</em></li>
+<li>This should create the shell forcing it to use 3.6.8</li>
+</ol></li>
+</ol></li>
+</ol>
+<h2 id="linux">Linux</h2>
+<p>Consult the documentation for your distribution.</p>
+</body>
+</html>

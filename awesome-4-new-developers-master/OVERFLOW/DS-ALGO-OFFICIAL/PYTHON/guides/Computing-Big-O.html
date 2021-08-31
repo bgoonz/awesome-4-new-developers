@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Computing-Big-O</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p>Goal: determine how runtime/number of operations scales up as the input scales up. How much longer does it take to run as the size of the data to process gets bigger?</p>
+<h2 id="steps-to-compute-big-o">Steps to compute Big O</h2>
+<ul>
+<li>Things in sequence that <em>aren’t</em> loops add together</li>
+<li>A single thing inside a loop gets multiplied by the loop</li>
+</ul>
+<ol type="1">
+<li>Go a line at a time, only looking at lines that are executable</li>
+<li>Add all the things in sequence that you can first</li>
+<li>Then multiply by the loops</li>
+<li>Then repeat steps 2-3 as many times as you can</li>
+<li>Then keep the dominant term from the resulting sum(s)</li>
+<li>Then drop constants</li>
+</ol>
+<h2 id="hints">Hints</h2>
+<ul>
+<li>If you have something that’s <code>O(number_of_elements_in_the_data)</code>, we use <code>n</code> as shorthand for <code>number_of_elements_in_the_data</code>, so <code>O(n)</code>.</li>
+<li>Individual statements tend to be <code>O(1)</code>.</li>
+<li>Loop statements tend to be <code>O(how-many-times-they-loop)</code>.</li>
+<li>Anything that doubles the runtime each step is <code>O(2^n)</code> (e.g. naive Fibonacci).</li>
+<li>Anything that triples the runtime each step is <code>O(3^n)</code>.</li>
+<li>Anything that halves the runtime each step is <code>O(log n)</code> (e.g. binary search).</li>
+<li>By <em>dominant term</em> we mean, “thing which is largest given some large value of <em>n</em>, like 10000”. <code>O(n)</code> dominates <code>O(1)</code>. <code>O(n^2)</code> dominates <code>O(n)</code> and <code>O(1)</code>.</li>
+<li>Loops that iterate over entire lists are <code>O(n)</code>, where <code>n</code> is the size of the list.</li>
+<li>But loops that binary search over a list are <code>O(log n)</code>!</li>
+</ul>
+<h2 id="recursion">Recursion</h2>
+<ul>
+<li>Recursive functions are like loops, where the body of the function is the body of the loop.</li>
+<li>You need to figure out how many times the function will call itself, and that’s the Big O that you need to multiply against the Big O of the function body.</li>
+<li>Keep in mind that recursion comes with an inherent memory cost that loops don’t incur, since each recursive call adds an additional execution frame to the stack; in other words, calling a function is not free!</li>
+</ul>
+<h2 id="gotchas">Gotchas</h2>
+<ul>
+<li>Built in functions might incur significant Big O without you noticing. Python’s list <code>.copy()</code> might seem like just a simple <code>O(1)</code> line, but <a href="https://wiki.python.org/moin/TimeComplexity">it’s <code>O(n)</code> under the hood</a>.</li>
+<li>Beware of loops that modify their index in weird ways.</li>
+</ul>
+<h2 id="example">Example</h2>
+<p>Label all statements by their time complexities. Individual statements get their Big O, while loops get the number of times they loop.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">def</span> foo(n):</a>
+<a class="sourceLine" id="cb1-2" title="2">    a <span class="op">=</span> <span class="dv">10</span>                <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    b <span class="op">=</span> <span class="dv">20</span>                <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):    <span class="co"># O(n)</span></a>
+<a class="sourceLine" id="cb1-6" title="6">        a <span class="op">+=</span> b               <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb1-7" title="7">        b <span class="op">+=</span> <span class="dv">1</span>               <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n<span class="op">**</span><span class="dv">2</span>): <span class="co"># O(n^2)</span></a>
+<a class="sourceLine" id="cb1-10" title="10">        a <span class="op">-=</span> <span class="dv">2</span>               <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb1-11" title="11">        <span class="bu">print</span>(a)             <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb1-12" title="12"></a>
+<a class="sourceLine" id="cb1-13" title="13">        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n<span class="op">/</span><span class="dv">2</span>): <span class="co"># O(n/2)</span></a>
+<a class="sourceLine" id="cb1-14" title="14">            <span class="bu">print</span>(k)             <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb1-15" title="15"></a>
+<a class="sourceLine" id="cb1-16" title="16">    <span class="cf">return</span> a <span class="op">+</span> b          <span class="co"># O(1)</span></a></code></pre></div>
+<p>Now we’ll replace the lines of code with their Big O for brevity:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">def</span> foo(n):</a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="co"># O(n)</span></a>
+<a class="sourceLine" id="cb2-6" title="6">        <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb2-7" title="7">        <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9">    <span class="co"># O(n^2)</span></a>
+<a class="sourceLine" id="cb2-10" title="10">        <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb2-11" title="11">        <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb2-12" title="12"></a>
+<a class="sourceLine" id="cb2-13" title="13">        <span class="co"># O(n/2)</span></a>
+<a class="sourceLine" id="cb2-14" title="14">            <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb2-15" title="15"></a>
+<a class="sourceLine" id="cb2-16" title="16">    <span class="co"># O(1)</span></a></code></pre></div>
+<p>Try to add things in sequence, but remember that loops interrupt sequences!</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">def</span> foo(n):</a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="co"># O(2)    -- was O(1) + O(1)</span></a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="co"># O(n)</span></a>
+<a class="sourceLine" id="cb3-5" title="5">        <span class="co"># O(2)    -- was O(1) + O(1)</span></a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="co"># O(n^2)</span></a>
+<a class="sourceLine" id="cb3-8" title="8">        <span class="co"># O(2)    -- was O(1) + O(1)</span></a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10">        <span class="co"># O(n/2)</span></a>
+<a class="sourceLine" id="cb3-11" title="11">            <span class="co"># O(1)</span></a>
+<a class="sourceLine" id="cb3-12" title="12"></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="co"># O(1)</span></a></code></pre></div>
+<p>Now we see if we can multiply any loops by their bodies.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">def</span> foo(n):</a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="co"># O(2)</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="co"># O(2 * n)    -- had body O(2)</span></a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="co"># O(n^2)      -- can&#39;t do this one yet--body has more than one item</span></a>
+<a class="sourceLine" id="cb4-7" title="7">        <span class="co"># O(2)</span></a>
+<a class="sourceLine" id="cb4-8" title="8"></a>
+<a class="sourceLine" id="cb4-9" title="9">        <span class="co"># O(1 * n/2)    -- had body O(1)</span></a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="co"># O(1)</span></a></code></pre></div>
+<p>Let’s try to add any sequences again.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">def</span> foo(n):</a>
+<a class="sourceLine" id="cb5-2" title="2">    <span class="co"># O(2 + 2 * n)</span></a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="co"># O(n^2)</span></a>
+<a class="sourceLine" id="cb5-5" title="5">        <span class="co"># O(2 + 1 * n/2)</span></a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="co"># O(1)</span></a></code></pre></div>
+<p>Now let’s try multiplying loops again</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">def</span> foo(n):</a>
+<a class="sourceLine" id="cb6-2" title="2">    <span class="co"># O(2 + 2 * n)</span></a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="co"># O(n^2 * (2 + 1 * n/2))</span></a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="co"># O(1)</span></a></code></pre></div>
+<p>Add add sequences again:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">def</span> foo(n):</a>
+<a class="sourceLine" id="cb7-2" title="2">    <span class="co"># O((2 + 2 * n) + (n^2 * (2 + 1 * n/2)) + 1)</span></a></code></pre></div>
+<p>Now we’re down to one line. That’s the time complexity, but we need to reduce it.</p>
+<p>Break out your algebra.</p>
+<pre><code>(2 + 2 * n) + (n^2 * (2 + 1 * n/2)) + 1   From the Big O, above
+2 + 2 * n + n^2 * (2 + 1 * n/2) + 1       Lose unnecessary parens
+3 + 2 * n + n^2 * (2 + 1 * n/2)           Add some like terms
+3 + 2 * n + n^2 * (2 + n/2)               1* is does nothing
+3 + 2 * n + 2 * n^2 + n/2 * n^2           Distribute n^2
+3 + 2 * n + 2 * n^2 + 1/2 * n * n^2       Note the n/2 is 1/2*n
+3 + 2 * n + 2 * n^2 + 1/2 * n^3           n * n^2 = n^3
+(3) + (2 * n) + (2 * n^2) + (1/2 * n^3)   Choose the most dominant from the sum
+1/2 * n^3                                 1/2 * n^3 grows fastest, is dominant
+n^3                                       Drop the constant</code></pre>
+<p><code>O(n^3)</code> is the time complexity of this function.</p>
+<p>With practice, you can do this in your head. Looking back, the nested loop <em>must</em> have been where the function spent the most of its time; an experienced dev would see that and just quickly compute the Big O for that function from that nested loop alone.</p>
+<h2 id="example-with-two-variables">Example with two variables</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">def</span> foo(m, n):</a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(m <span class="op">*</span> n):</a>
+<a class="sourceLine" id="cb9-3" title="3">        <span class="bu">print</span>(i)</a></code></pre></div>
+<p>When you have two inputs like this, there’s no way to reduce it farther than <code>O(m*n)</code> (or <code>O(n*m)</code>, same thing). That’s the answer.</p>
+<p>Sometimes when <code>m</code> and <code>n</code> tend to be roughly similar, developers will casually say this is <code>O(n^2)</code>, but it’s really <code>O(m*n)</code>.</p>
+<h2 id="example-with-lists">Example with lists</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">def</span> foo(x):  <span class="co"># x is a list</span></a>
+<a class="sourceLine" id="cb10-2" title="2">    <span class="cf">for</span> i <span class="kw">in</span> x:    <span class="co"># O(n)</span></a>
+<a class="sourceLine" id="cb10-3" title="3">        <span class="bu">print</span>(i)       <span class="co"># O(1)</span></a></code></pre></div>
+<p>In this example, we’re not explicitly passing in an <code>n</code> parameter, but rather a list.</p>
+<p>The list has a number of elements in it, and we refer to this number as <code>n</code> by default.</p>
+<p>The <code>for</code> loop is therefore <code>O(n)</code>, because it will iterate one time for each element in the list.</p>
+<p>Another example:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">def</span> foo(x, y):  <span class="co"># x and y are lists</span></a>
+<a class="sourceLine" id="cb11-2" title="2">    <span class="cf">for</span> i <span class="kw">in</span> x:    <span class="co"># O(n)</span></a>
+<a class="sourceLine" id="cb11-3" title="3">        <span class="cf">for</span> j <span class="kw">in</span> y:    <span class="co"># O(m)</span></a>
+<a class="sourceLine" id="cb11-4" title="4">            <span class="bu">print</span>(i, j)    <span class="co"># O(1)</span></a></code></pre></div>
+<p>Here we’ve used <code>n</code> to represent the number of elements in list <code>x</code>, and <code>m</code> to represent the number in list <code>y</code>.</p>
+<p>We can use our simplification rules and see that the entire function is <code>O(n*m*1)</code>, or <code>O(n*m)</code>. (Or <code>O(n^2)</code> if we’re speaking informally, and assuming that <code>n</code> and <code>m</code> are very similar.)</p>
+<h2 id="example-with-trivial-recursion">Example with trivial recursion</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">def</span> foo(x):   <span class="co"># x is a list</span></a>
+<a class="sourceLine" id="cb12-2" title="2">    <span class="cf">if</span> <span class="bu">len</span>(x) <span class="op">==</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb12-3" title="3">        <span class="cf">return</span></a>
+<a class="sourceLine" id="cb12-4" title="4"></a>
+<a class="sourceLine" id="cb12-5" title="5">    <span class="bu">print</span>(x[<span class="dv">0</span>])</a>
+<a class="sourceLine" id="cb12-6" title="6">    foo(x[<span class="dv">1</span>:])</a></code></pre></div>
+<p>The above function prints out every element in a list. But it’s trickier to see what the Big O is. Our normal rules don’t work entirely well.</p>
+<p>The secret is that recursive functions are like loops on steroids. So you know it’s similar to a loop in that it’s going to perform a number of operations. But how many? <code>n</code>? <code>n^2</code>? We have to figure it out.</p>
+<p>In the above example, each call to <code>foo()</code> results in <em>one</em> more call to <code>foo()</code>. (Because we look in the body of the function and we see it only calls itself once.) And it’s going to keep calling itself a number of times. <em>How many times will <code>foo()</code> call itself?</em></p>
+<p>Here, if we declare that <code>n</code> is the number of elements in list <code>x</code>, <code>foo()</code> calls itself <code>n</code> times, once for each element in <code>x</code>.</p>
+<p>So the recursion itself, acting like a loop, is <code>O(n)</code>.</p>
+<p>We still have to look at the things <em>inside</em> <code>foo()</code> to see what else is going on. The body of <code>foo()</code> becomes like the body of the loop.</p>
+<p>But it looks like in there we only have a couple <code>O(1)</code> things, so the whole thing becomes <code>O(n * (1 + 1))</code>, aka <code>O(2n)</code> AKA <code>O(n)</code>. Final answer.</p>
+<h2 id="example-with-fibonacci">Example with Fibonacci</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">def</span> fib(n):   <span class="co"># Give me the nth Fibonacci number</span></a>
+<a class="sourceLine" id="cb13-2" title="2">    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>:</a>
+<a class="sourceLine" id="cb13-3" title="3">        <span class="cf">return</span> n</a>
+<a class="sourceLine" id="cb13-4" title="4"></a>
+<a class="sourceLine" id="cb13-5" title="5">    <span class="cf">return</span> fib(n<span class="dv">-2</span>) <span class="op">+</span> fib(n<span class="dv">-1</span>)  <span class="co"># Calls itself twice per call!</span></a></code></pre></div>
+<p>Again, think loop on steroids. <code>fib()</code> calls itself… but it calls itself <em>two</em> times per call. …<em>ish</em>.</p>
+<p>We call it <code>1</code> time, it calls itself <code>2</code> times. Those <code>2</code> times call it <code>4</code> times, which call it <code>8</code> times, which call it <code>16</code> times, etc. If you recognize those numbers, you’ll know those are powers of 2. <code>2^0=1</code>, <code>2^1=2</code>, <code>2^2=4</code>, <code>2^3=8</code>, and all the way up to <code>2^n</code>.</p>
+<p>This is an <code>O(2^n)</code> recursive call. (With an <code>O(1)</code> body.)</p>
+<p>Sure, <code>fib(n-2)</code> only calls it <code>1/2 * n</code> times, but we chuck that constant for Big O.</p>
+<p>And the base case won’t necessarily let <code>n</code> get all the way down to zero, but those are just some <code>-1</code>s or <code>-2</code>s, and those terms aren’t dominant in Big O.</p>
+</body>
+</html>

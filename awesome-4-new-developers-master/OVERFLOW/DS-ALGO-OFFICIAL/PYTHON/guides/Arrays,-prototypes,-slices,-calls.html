@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Arrays,-prototypes,-slices,-calls</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p>What’s going on with JS prototypes and with the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments">argument</a> objects? Especially when we have to slice it like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">var</span> args <span class="op">=</span> <span class="va">Array</span>.<span class="va">prototype</span>.<span class="va">slice</span>.<span class="at">call</span>(<span class="kw">arguments</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="question-1">Question 1</h2>
+<p><strong>Why in MDN are things described as <code>Array.prototype.slice()</code> and then used as <code>var sliced = a.slice(1, 3);</code>? What’s the deal with <code>Array.prototype</code>?</strong></p>
+<p>The answer gets into prototypal inheritance, a JS feature. A new <code>Array</code> is an <code>Object</code>, but it doesn’t actually have a <code>slice()</code> method directly on it.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">let</span> a <span class="op">=</span> <span class="kw">new</span> <span class="at">Array</span>()<span class="op">;</span>       <span class="co">// a is [], no problem</span></a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="va">a</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;slice&#39;</span>)<span class="op">;</span> <span class="co">// FALSE! (why?)</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="va">a</span>.<span class="at">slice</span><span class="op">;</span>                   <span class="co">// is [Function: slice]--what? I thought it didn&#39;t have that property!</span></a></code></pre></div>
+<p>What gives? I asked if it had the property, it said no, and then I asked what the property was, and it told me it was a function.</p>
+<p><em>“Do you, or do you not, have that property? May I remind you that you’re under oath.”</em></p>
+<p>The answer is that <code>a</code> doesn’t have a <code>slice</code>, but <code>Array</code>’s <code>prototype</code> object <em>does</em>.</p>
+<p>And if a property can’t be found on an object (like <code>a</code>), then it looks for it in that object’s prototype, which is found in its constructor’s <code>prototype</code> property, namely <code>Array.prototype</code>.</p>
+<p>When you make a new array with <code>new</code> or just in an expression like <code>a = [];</code>, it makes the new array object and sets <code>a</code> to reference it. But it doesn’t attach any of the methods like <code>slice</code> to it. What it <em>does</em> do is set <code>a</code>’s prototype to reference the object in <code>Array.prototype</code>.</p>
+<p>Let’s have a quick look to see if we can find <code>slice</code> there:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="va">Array</span>.<span class="va">prototype</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;slice&#39;</span>)<span class="op">;</span>  <span class="co">// TRUE</span></a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="va">Array</span>.<span class="va">prototype</span>.<span class="at">slice</span><span class="op">;</span>  <span class="co">// it&#39;s a function: [Function: slice]</span></a></code></pre></div>
+<p>Bingo.</p>
+<p>Then, the magic. If you say <code>a.slice</code>, JS first looks to see if <code>a</code> has a <code>slice</code> property. If it does, great, use it. If it doesn’t, <em>look at a’s prototype object to see if it’s there</em>.</p>
+<p>And remember, <code>a</code>’s prototype object is pointed to by <code>Array.prototype</code>.</p>
+<p>So JS looks there, and that’s where it finds <code>slice</code>.</p>
+<p>And that’s why <code>a.slice</code> is valid even though <code>a</code> doesn’t have its own <code>slice</code> property.</p>
+<p>If that’s still a bit mysterious, <a href="http://beej.us/blog/data/javascript-prototypes-inheritance/">check out my blog on prototypal inheritance</a> in JavaScript.</p>
+<h2 id="question-2">Question 2</h2>
+<p><strong>I get that <code>Array.prototype.slice.call(obj);</code> is used to convert an array-like object into an array, but I’m not getting the function of <code>Array</code>, <code>prototype</code>, <code>call</code>. I know that <code>call</code> changes what <code>this</code> refers to, but…</strong></p>
+<p>Be sure you understand the answer to Question 1 before tackling this one.</p>
+<p>Let’s first take a look at how <code>call()</code> works. Every function has a <code>call()</code> function built in.</p>
+<blockquote>
+<p>Technically, the <code>call()</code> function is <code>Function.prototype.call</code>! That’s how every function “has” it automatically, because it’s in the function’s constructor’s <code>prototype</code>.</p>
+</blockquote>
+<p>You can take any function and call it with the <code>call()</code> method.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="at">myFunction</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co">// equivalent to:</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="va">myFunction</span>.<span class="at">call</span>()<span class="op">;</span></a></code></pre></div>
+<p>Why would you do that? <em>Because <code>call()</code> allows you to specify what <code>this</code> will be inside the function</em>. If you don’t pass anything as the first argument to <code>call()</code>, <code>this</code> will be <code>undefined</code> inside the function. If you pass an object, <code>this</code> will refer to that object.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">let</span> myObj <span class="op">=</span> <span class="op">{</span><span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;myobject&quot;</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="va">myFunction</span>.<span class="at">call</span>(myObj)<span class="op">;</span> <span class="co">// Inside myFunction, this == myObj</span></a></code></pre></div>
+<p>Let’s have an example with an actual class:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">class</span> Foo <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="at">printThis</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="kw">let</span> f <span class="op">=</span> <span class="kw">new</span> <span class="at">Foo</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-8" title="8"></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="va">f</span>.<span class="at">printThis</span>()<span class="op">;</span>  <span class="co">// Prints &quot;Foo {}&quot; since f is a Foo object</span></a>
+<a class="sourceLine" id="cb6-10" title="10"></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="va">f</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;printThis&#39;</span>)<span class="op">;</span> <span class="co">// FALSE--it&#39;s on Foo.prototype</span></a>
+<a class="sourceLine" id="cb6-12" title="12"></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="va">Foo</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;printThis&#39;</span>)<span class="op">;</span> <span class="co">// FALSE--it&#39;s on Foo.prototype</span></a>
+<a class="sourceLine" id="cb6-14" title="14"></a>
+<a class="sourceLine" id="cb6-15" title="15"><span class="va">Foo</span>.<span class="va">prototype</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;printThis&#39;</span>)<span class="op">;</span> <span class="co">// TRUE, there it is</span></a>
+<a class="sourceLine" id="cb6-16" title="16"></a>
+<a class="sourceLine" id="cb6-17" title="17"><span class="va">Foo</span>.<span class="va">prototype</span>.<span class="va">printThis</span>.<span class="at">call</span>()<span class="op">;</span>  <span class="co">// Prints &quot;undefined&quot;</span></a>
+<a class="sourceLine" id="cb6-18" title="18"></a>
+<a class="sourceLine" id="cb6-19" title="19"><span class="va">Foo</span>.<span class="va">prototype</span>.<span class="va">printThis</span>.<span class="at">call</span>(f)<span class="op">;</span> <span class="co">// Prints &quot;Foo {}&quot; since f is a Foo object</span></a>
+<a class="sourceLine" id="cb6-20" title="20"></a>
+<a class="sourceLine" id="cb6-21" title="21"><span class="co">// that last line is equivalent to:</span></a>
+<a class="sourceLine" id="cb6-22" title="22"></a>
+<a class="sourceLine" id="cb6-23" title="23"><span class="va">f</span>.<span class="at">printThis</span>()<span class="op">;</span>  <span class="co">// Prints &quot;Foo {}&quot; since f is a Foo object</span></a></code></pre></div>
+<p>See how <code>printThis</code> is on <code>Foo</code>’s <code>prototype</code>? We can call it from there with <code>call()</code>… but if we don’t specify a parameter <code>this</code> is undefined in the function.</p>
+<p>So why can’t we just <code>arguments.slice()</code>? Why do we have to <code>Array.prototype.slice.call(arguments)</code>?</p>
+<p>The answer is that <code>arguments</code> is just an array-like, it’s not an <code>Array</code>. So its prototype is not <code>Array.prototype</code> (which is where <code>slice</code> lives). Its prototype is something else, and it has no <code>slice</code> anywhere.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">Bar</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="kw">arguments</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;slice&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="kw">arguments</span>.<span class="at">slice</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-5" title="5"></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="at">Bar</span>()<span class="op">;</span>  <span class="co">// Prints &quot;false&quot;, &quot;undefined&quot;. There is no slice.</span></a></code></pre></div>
+<p>When you call <code>Array.prototype.slice(arguments)</code>, then <code>arguments</code> becomes <code>this</code> inside the <code>slice()</code> function. It’s just like if you’d called <code>arguments.slice()</code> (but we can’t do that because arguments isn’t an <code>Array</code>).</p>
+<p>And <code>arguments</code> despite not being a real <code>Array</code> still has enough Array-like functionality to be treated like one in general and also by the <code>slice()</code> function.</p>
+<p>Hope that helps!</p>
+</body>
+</html>

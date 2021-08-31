@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>readme</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <p><img src="Awesome Code Review.png" alt="Awesome Code Review" /></p>
+    <h1 id="awesome-code-review-awesome">
+      Awesome Code Review
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        A curated list of tools, articles, books, and any other resource related
+        to <a href="https://en.wikipedia.org/wiki/Code_review">code review</a>
+      </p>
+    </blockquote>
+    <p>
+      Code review is the systematic examination (sometimes referred to as peer
+      review) of computer source code.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#academic-papers">Academic Papers</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#talks-and-podcasts">Talks and Podcasts</a></li>
+      <li><a href="#tools">Tools</a></li>
+    </ul>
+    <h2 id="academic-papers">Academic Papers</h2>
+    <ul>
+      <li>
+        <a
+          href="http://laser.cs.umass.edu/courses/cs521-621.Fall10/documents/PorterSiyetal.pdf"
+          >An experiment to assess the cost-benefits of code inspections in
+          large scale software development (Porter, Siy, Toman &amp; Votta,
+          1997)</a
+        >
+        Early paper that tested a range of then-current review techniques
+        including multi-stage review and code-review-via-meeting that found you
+        can get most of the benefit in an offline, single pass, with two
+        reviewers.
+      </li>
+      <li>
+        <a href="https://dl.acm.org/citation.cfm?id=253234"
+          >Anywhere, anytime code inspections: using the Web to remove
+          inspection bottlenecks in large-scale software development (Perpich,
+          Perry, Porter, Votta &amp; Wade, 1997)</a
+        >
+        One day in the far future the best way to review code will be on the
+        world wide web.
+      </li>
+      <li>
+        <a
+          href="https://www.michaelagreiler.com/wp-content/uploads/2019/02/Characteristics-Of-Useful-Comments.pdf"
+          >Characteristics of Useful Code Reviews: An Empirical Study at
+          Microsoft (Bosu, Greiler, Bird, 2015)</a
+        >
+        This paper reports the findings of a large scale qualitative and
+        quantitative study focusing on understanding which code review comments
+        are considered useful by developers.<br />
+      </li>
+      <li>
+        <a
+          href="https://www.michaelagreiler.com/wp-content/uploads/2019/03/Code-Reviewing-in-the-Trenches-Understanding-Challenges-Best-Practices-and-Tool-Needs.pdf"
+          >Code Reviewing in the Trenches: Understanding Challenges, Best
+          Practices, and Tool Needs (MacLeod, Greiler, Storey, Bird, Czerwonka,
+          2018)</a
+        >
+        A large scale study of over 900 Microsoft developers to understand their
+        code review processes, their motivations to do code reviews, and which
+        pitfalls and best practices they encounter.
+      </li>
+      <li>
+        <a href="https://link.springer.com/chapter/10.1007/978-3-642-59412-0_35"
+          >Design and Code Inspections to Reduce Errors in Program Development
+          (Fagan, 2002)</a
+        >
+        Using a more formal process, particularly with defined roles for each
+        participant and drive a big increase in error detection during review.
+      </li>
+      <li>
+        <a href="http://research.microsoft.com/pubs/238937/barnett2015hdh.pdf"
+          >Helping Developers Help Themselves: Automatic Decomposition of Code
+          Review Changes (Barnett et al. 2015)</a
+        >
+        (<a
+          href="https://blog.acolyer.org/2015/06/26/helping-developers-help-themselves-automatic-decomposition-of-code-review-changes/"
+          >summary on the morning paper</a
+        >) Research into automatically splitting big diffs into smaller diffs
+        leading to better reviews.
+      </li>
+      <li>
+        <a href="https://sback.it/publications/icse2018seip.pdf"
+          >Modern Code Review: A Case Study at Google</a
+        >
+        A study that shows how code reviews work at Google.
+      </li>
+      <li>
+        <a href="https://sback.it/publications/icse2016b.pdf"
+          >Work Practices and Challenges in Pull-Based Development (Gousios et
+          al. 2015)</a
+        >
+        (<a
+          href="https://blog.acolyer.org/2015/06/23/work-practices-and-challenges-in-pull-based-development/"
+          >summary on the morning paper</a
+        >) Field study of how GitHub pull requests are used in the wild.
+      </li>
+    </ul>
+    <h2 id="articles">Articles</h2>
+    <ul>
+      <li>
+        <a
+          href="https://kellysutton.com/2018/10/08/8-tips-for-great-code-reviews.html"
+          >8 Tips for Great Code Reviews</a
+        >
+        A few basic rules for a better code review process.
+      </li>
+      <li>
+        <a href="https://www.giladpeleg.com/blog/better-code-review/"
+          >A Better Code Review</a
+        >
+        Decent set of patterns and anti-patterns for code reviews.
+      </li>
+      <li>
+        <a
+          href="https://medium.freecodecamp.org/a-zen-manifesto-for-effective-code-reviews-e30b5c95204a"
+          >A Zen Manifesto for Effective Code Reviews</a
+        >
+        Practical tips for the submitter and the reviewer to make effective code
+        reviews.
+      </li>
+      <li>
+        <a href="https://twitter.com/bguthrie/status/937750796334174209"
+          >Brian Guthrie’s Feature Branching Rant</a
+        >
+        Twitter thread on the pros and cons of GitHub’s open source first model
+        with regards to “in-company” code review practice.
+      </li>
+      <li>
+        <a
+          href="https://blog.plaid.com/building-an-inclusive-code-review-culture/"
+          >Building an Inclusive Code Review Culture</a
+        >
+        Guidelines to help ensure a collaborative and learning culture
+      </li>
+      <li>
+        <a href="https://codingsans.com/blog/code-review"
+          >Code Review: Create The Culture, Learn The Best Practices</a
+        >
+        Code review tips and best practices from tech leaders.
+      </li>
+      <li>
+        <a href="https://css-tricks.com/code-review-etiquette/"
+          >Code Review Etiquette</a
+        >
+        A few tips helping with positive engagement on code review.
+      </li>
+      <li>
+        <a href="https://phauer.com/2018/code-review-guidelines/"
+          >Code Review Guidelines for Humans</a
+        >
+        Some guidelines for giving and getting code reviews.
+      </li>
+      <li>
+        <a href="https://blog.codinghorror.com/code-reviews-just-do-it/"
+          >Code Reviews: Just Do It</a
+        >
+        Seminal post advocating for peer review of software back in 2006.
+      </li>
+      <li>
+        <a href="https://www.michaelagreiler.com/code-reviews-at-google/"
+          >Code Reviews at Google are lightweight and fast</a
+        >
+        Details on how code review best practices and processes work at Google.
+      </li>
+      <li>
+        <a href="https://hecate.co/blog/code-review-review-is-the-managers-job"
+          >Code Review Review is the Manager’s Job</a
+        >
+        Why management should ensure code review is done and done well.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@otarutunde/comments-during-code-reviews-2cb7791e1ac7"
+          >Comments During Code Reviews</a
+        >
+        Writing good comments during code reviews.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/unpacking-trunk-club/designing-awesome-code-reviews-5a0d9cd867e3"
+          >Designing Awesome Code Reviews</a
+        >
+        Principles for actively designing a code review process.
+      </li>
+      <li>
+        <a
+          href="https://www.developer.com/tech/article.php/3579756/Effective-Code-Reviews-Without-the-Pain.htm"
+          >Effective Code Reviews Without the Pain</a
+        >
+        Another 2006 classic on how to effectively perform a code review.
+      </li>
+      <li>
+        <a
+          href="https://www.netlify.com/blog/2020/03/05/feedback-ladders-how-we-encode-code-reviews-at-netlify/"
+          >Feedback Ladders: How We Encode Code Reviews at Netlify</a
+        >
+        Helpful framwork for reviewers to classify how actionable specific
+        pieces of review feedback are.
+      </li>
+      <li>
+        <a
+          href="https://www.michaelagreiler.com/code-reviews-at-microsoft-how-to-code-review-at-a-large-software-company/"
+          >How Code Reviews work at Microsoft</a
+        >
+        A in-depth analysis on how the code review process looks like at
+        Microsoft.
+      </li>
+      <li>
+        <a
+          href="https://engineering.tumblr.com/post/170040992289/how-i-review-code"
+          >How I review code</a
+        >
+        More personal advice on how to best review a pull request from an
+        engineer at Tumblr.
+      </li>
+      <li>
+        <a href="https://google.github.io/eng-practices/review/reviewer/"
+          >How to do a code review</a
+        >
+        A thorough description of how Google engineers do code reviews, from the
+        Google’s Engineering Practices documentation.
+      </li>
+      <li>
+        <a href="https://mtlynch.io/human-code-reviews-1/"
+          >How to Do Code Reviews Like a Human</a
+        >
+        Techniques that treat the code review as not only a technical process
+        but a social one as well.
+      </li>
+      <li>
+        <a href="https://medium.com/@schrockn/on-code-reviews-b1c7c94d868c"
+          >On Code Review</a
+        >
+        Short article about tooling and personal elements of code review, from
+        an ex-Facebook engineer.
+      </li>
+      <li>
+        <a
+          href="https://kickstarter.engineering/pull-requests-how-to-get-and-give-good-feedback-f573469f0c44"
+          >Pull Requests: How to Get and Give Good Feedback</a
+        >
+        Advice for both sides of the code review process, the reviewer and the
+        reviewee.
+      </li>
+      <li>
+        <a href="https://blog.skyliner.io/ship-small-diffs-741308bec0d1"
+          >Ship Small Diffs</a
+        >
+        Why it’s better to review small changes rather than large ones.
+      </li>
+      <li>
+        <a
+          href="https://graysonkoonce.com/stacked-pull-requests-keeping-github-diffs-small/"
+          >Stacked Pull Requests: Keeping GitHub Diffs Small</a
+        >
+        A step-by-step process to split big PRs and increase review engagement.
+      </li>
+      <li>
+        <a
+          href="https://blog.usejournal.com/the-art-of-humanizing-pull-requests-prs-b520588eb345"
+          >The Art of Humanizing Pull Requests</a
+        >
+        Emoji rich guide to the human side of code review via pull requests.
+      </li>
+      <li>
+        <a
+          href="https://cate.blog/2018/07/03/towards-productive-technical-discussions/"
+          >Towards Productive Technical Discussions</a
+        >
+        Tactical questions and actions to push code review discussions into a
+        more productive territory.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@sandya.sankarram/unlearning-toxic-behaviors-in-a-code-review-culture-b7c295452a3c"
+          >Unlearning Toxic Behaviors in a Code Review Culture</a
+        >
+        A how-to guide for pull requests via how-not-too.
+      </li>
+      <li>
+        <a
+          href="https://medium.freecodecamp.org/why-i-changed-the-way-i-think-about-code-quality-88c5d8d57e68"
+          >Why I changed the way I think about Code Quality</a
+        >
+        Why code quality is about more than just the code.
+      </li>
+    </ul>
+    <h2 id="books">Books</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.goodreads.com/book/show/1563457.Best_Kept_Secrets_of_Peer_Code_Review"
+          >Best Kept Secrets of Peer Code Review</a
+        >
+        Older compilation of 10 essays on the practice of code reviews. Some
+        repetition due to different authors covering the same territory.
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Handbook-Walkthroughs-Inspections-Technical-Reviews/dp/0932633196"
+          >Handbook of Walkthroughs, Inspections, and Technical Reviews</a
+        >
+        Older book covering more formal walkthroughs but covers politics and
+        group dynamics in review well.
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Peer-Reviews-Software-Practical-Guide/dp/0201734850"
+          >Peer Reviews in Software: A Practical Guide</a
+        >
+        A practical guide to formal code inspections as a code review practice.
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/Software-Inspection-Industry-Best-Practice/dp/0818673400"
+          >Software Inspection: An Industry Best Practice</a
+        >
+        Compendium of papers on code review practice.
+      </li>
+      <li>
+        <a href="https://www.codacy.com/ebooks/guide-to-code-reviews"
+          >Ultimate Guide to Code Reviews</a
+        >
+        Codacy sponsored ebook of code review practices based on developer
+        survey.
+      </li>
+      <li>
+        <a href="https://leanpub.com/whattolookforinacodereview"
+          >What to Look for in a Code Review</a
+        >
+        JetBrains sponsored ebook of how to spot coding anti-patterns during
+        review.
+      </li>
+    </ul>
+    <h2 id="talks-and-podcasts">Talks and Podcasts</h2>
+    <ul>
+      <li>
+        <a
+          href="http://confreaks.tv/videos/rubyconf2017-code-reviews-honesty-kindness-inspiration-pick-three"
+          >Code Reviews: Honesty, Kindness, Inspiration: Pick Three - Jacob
+          Stoebel RubyConf 2017</a
+        >
+        How to do effective code review while remaining kind to the original
+        author.
+      </li>
+      <li>
+        <a
+          href="https://confreaks.tv/videos/reddotrubyconf2017-goldilocks-and-the-three-code-reviews"
+          >Goldilocks and the Three Code Reviews - Vaidehi Joshi RedDot Ruby
+          Conf 2017</a
+        >
+        Finding just the right amount of code review by focussing on what is
+        affecting.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=PJjmw9TRB7s"
+          >Implementing a Strong Code-Review Culture - Derek Prior Railsconf
+          2015</a
+        >
+        How to instill a healthy code review culture in a team.
+      </li>
+      <li>
+        <a
+          href="https://www.se-radio.net/2020/02/episode-400-michaela-greiler-on-code-reviews/"
+          >Michaela Greiler on Code Reviews - SE Radio 2020</a
+        >
+        Michaela Greiler discusses the importance of code reviews and how to
+        conduct them on the Software Engineering Radio podcast.
+      </li>
+    </ul>
+    <h2 id="tools">Tools</h2>
+    <ul>
+      <li>
+        <a href="https://www.atlassian.com/software/crucible">Crucible</a>
+        Atlassian’s on-premise code review tool.
+      </li>
+      <li>
+        <a href="https://www.gerritcodereview.com/">Gerrit</a> Open source git
+        code review tool originating out of Google.
+      </li>
+      <li>
+        <a href="https://github.com">GitHub</a> Git hosting and pioneer of the
+        “Pull Request”.
+      </li>
+      <li>
+        <a href="https://gitpod.io">Gitpod</a> Code review pull requests in a
+        full IDE within your browser.
+      </li>
+      <li>
+        <a href="https://www.gitrise.com/">GitRise</a> Slack Reminders for
+        GitHub pull requests
+      </li>
+      <li>
+        <a href="https://lgtm.com">LGTM</a> Automated Git code review for GitHub
+        and Bitbucket pull requests for finding security vulnerabilities and
+        code quality issues.
+      </li>
+      <li>
+        <a href="https://www.phacility.com/phabricator/">Phabricator</a> Open
+        source git/mercurial/svn code review tool originating out of Facebook.
+      </li>
+      <li>
+        <a href="https://www.pullrequest.com/">PullRequest</a> Code review as a
+        service for GitHub pull requests.
+      </li>
+      <li>
+        <a href="https://pullreminders.com">Pull Reminders</a> Automated Slack
+        reminders and metrics for GitHub pull requests.
+      </li>
+      <li>
+        <a href="https://reviewable.io/">Reviewable</a> Code review tool built
+        on top of GitHub pull requests.
+      </li>
+      <li>
+        <a href="https://www.reviewboard.org/">Review Board</a> Open source
+        review tool that is SCM/platform neutral.
+      </li>
+      <li>
+        <a href="https://www.rubberduck.io">Rubberduck</a> Browser extension to
+        adds code-aware navigation to GitHub pull requests.
+      </li>
+      <li>
+        <a href="https://sider.review/">Sider</a> Automated code review service
+        for GitHub.
+      </li>
+      <li>
+        <a href="https://softagram.com/">Softagram</a> Automated code change
+        visualization (and dependency analytics) for pull requests, merge
+        requests (GitLab) and patch sets (Gerrit).
+      </li>
+      <li>
+        <a href="https://sonarcloud.io">SonarCloud</a> Detect code smells, bugs
+        and vulnerabilities in Azure DevOps, Bitbucket and GitHub repositories.
+      </li>
+      <li>
+        <a href="https://www.jetbrains.com/upsource/">Upsource</a> JetBrain’s
+        on-premise git/mercurial/perforce/svn code review tool.
+      </li>
+    </ul>
+    <h2 id="contribute">Contribute</h2>
+    <p>
+      Contributions welcome! Read the
+      <a href="contributing.md">contribution guidelines</a> first.
+    </p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="http://creativecommons.org/publicdomain/zero/1.0"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://johnbarton.co">John Barton</a> has waived all copyright
+      and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

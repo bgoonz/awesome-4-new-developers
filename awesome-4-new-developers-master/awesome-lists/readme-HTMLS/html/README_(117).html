@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-deep-learning-resources-awesome">
+      <a
+        href="https://github.com/guillaume-chevalier/Awesome-Deep-Learning-Resources"
+        >Awesome Deep Learning Resources</a
+      >
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      This is a rough list of my favorite deep learning resources. It has been
+      useful to me for learning how to do deep learning, I use it for revisiting
+      topics or for reference. I (<a
+        href="https://github.com/guillaume-chevalier"
+        >Guillaume Chevalier</a
+      >) have built this list and got through all of the content listed here,
+      carefully.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#trends">Trends</a></li>
+      <li><a href="#online-classes">Online classes</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#posts-and-articles">Posts and Articles</a></li>
+      <li>
+        <a href="#practical-resources">Practical resources</a>
+        <ul>
+          <li>
+            <a href="#librairies-and-implementations"
+              >Librairies and Implementations</a
+            >
+          </li>
+          <li><a href="#some-datasets">Some Datasets</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#other-math-theory">Other Math Theory</a>
+        <ul>
+          <li>
+            <a href="#gradient-descent-algorithms-and-optimization"
+              >Gradient Descent Algorithms and optimization</a
+            >
+          </li>
+          <li>
+            <a href="#complex-numbers-and-digital-signal-processing"
+              >Complex Numbers &amp; Digital Signal Processing</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#papers">Papers</a>
+        <ul>
+          <li>
+            <a href="#recurrent-neural-networks">Recurrent Neural Networks</a>
+          </li>
+          <li>
+            <a href="#convolutional-neural-networks"
+              >Convolutional Neural Networks</a
+            >
+          </li>
+          <li><a href="#attention-mechanisms">Attention Mechanisms</a></li>
+          <li><a href="#other">Other</a></li>
+        </ul>
+      </li>
+      <li><a href="#youtube">YouTube and Videos</a></li>
+      <li><a href="#misc-hubs-and-links">Misc. Hubs and Links</a></li>
+      <li><a href="#license">License</a></li>
+    </ul>
+    <p><a name="trends" /></p>
+    <h2 id="trends">Trends</h2>
+    Here are the all-time
+    <a
+      href="https://www.google.ca/trends/explore?date=all&amp;q=machine%20learning,deep%20learning,data%20science,computer%20programming"
+      >Google Trends</a
+    >, from 2004 up to now, September 2017:
+    <p align="center">
+      <img src="google_trends.png" width="792" height="424" />
+    </p>
+    <p>
+      You might also want to look at Andrej Karpathy’s
+      <a
+        href="https://medium.com/@karpathy/a-peek-at-trends-in-machine-learning-ab8a1085a106"
+        >new post</a
+      >
+      about trends in Machine Learning research.
+    </p>
+    <p>
+      I believe that Deep learning is the key to make computers think more like
+      humans, and has a lot of potential. Some hard automation tasks can be
+      solved easily with that while this was impossible to achieve earlier with
+      classical algorithms.
+    </p>
+    <p>
+      Moore’s Law about exponential progress rates in computer science hardware
+      is now more affecting GPUs than CPUs because of physical limits on how
+      tiny an atomic transistor can be. We are shifting toward parallel
+      architectures [<a
+        href="https://www.quora.com/Does-Moores-law-apply-to-GPUs-Or-only-CPUs"
+        >read more</a
+      >]. Deep learning exploits parallel architectures as such under the hood
+      by using GPUs. On top of that, deep learning algorithms may use Quantum
+      Computing and apply to machine-brain interfaces in the future.
+    </p>
+    <p>
+      I find that the key of intelligence and cognition is a very interesting
+      subject to explore and is not yet well understood. Those technologies are
+      promising.
+    </p>
+    <p><a name="online-classes" /></p>
+    <h2 id="online-classes">Online Classes</h2>
+    <ul>
+      <li>
+        <strong
+          ><a
+            href="https://www.dl-rnn-course.neuraxio.com/start?utm_source=github_awesome"
+            >DL&amp;RNN Course</a
+          >
+          - I created this richely dense course on Deep Learning and Recurrent
+          Neural Networks.</strong
+        >
+      </li>
+      <li>
+        <a href="https://www.coursera.org/learn/machine-learning"
+          >Machine Learning by Andrew Ng on Coursera</a
+        >
+        - Renown entry-level online class with
+        <a
+          href="https://www.coursera.org/account/accomplishments/verify/DXPXHYFNGKG3"
+          >certificate</a
+        >. Taught by: Andrew Ng, Associate Professor, Stanford University; Chief
+        Scientist, Baidu; Chairman and Co-founder, Coursera.
+      </li>
+      <li>
+        <a href="https://www.coursera.org/specializations/deep-learning"
+          >Deep Learning Specialization by Andrew Ng on Coursera</a
+        >
+        - New series of 5 Deep Learning courses by Andrew Ng, now with Python
+        rather than Matlab/Octave, and which leads to a
+        <a
+          href="https://www.coursera.org/account/accomplishments/specialization/U7VNC3ZD9YD8"
+          >specialization certificate</a
+        >.
+      </li>
+      <li>
+        <a href="https://www.udacity.com/course/deep-learning--ud730"
+          >Deep Learning by Google</a
+        >
+        - Good intermediate to advanced-level course covering high-level deep
+        learning concepts, I found it helps to get creative once the basics are
+        acquired.
+      </li>
+      <li>
+        <a
+          href="https://www.udacity.com/course/machine-learning-for-trading--ud501"
+          >Machine Learning for Trading by Georgia Tech</a
+        >
+        - Interesting class for acquiring basic knowledge of machine learning
+        applied to trading and some AI and finance concepts. I especially liked
+        the section on Q-Learning.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PL6Xpj9I5qXYEcOhn7TqghAJ6NAPrNmUBH"
+          >Neural networks class by Hugo Larochelle, Université de Sherbrooke</a
+        >
+        - Interesting class about neural networks available online for free by
+        Hugo Larochelle, yet I have watched a few of those videos.
+      </li>
+      <li>
+        <a href="https://ulaval-damas.github.io/glo4030/"
+          >GLO-4030/7030 Apprentissage par réseaux de neurones profonds</a
+        >
+        - This is a class given by Philippe Giguère, Professor at University
+        Laval. I especially found awesome its rare visualization of the
+        multi-head attention mechanism, which can be contemplated at the
+        <a
+          href="http://www2.ift.ulaval.ca/~pgiguere/cours/DeepLearning/09-Attention.pdf"
+          >slide 28 of week 13’s class</a
+        >.
+      </li>
+      <li>
+        <a href="https://www.neuraxio.com/en/time-series-solution"
+          >Deep Learning &amp; Recurrent Neural Networks (DL&amp;RNN)</a
+        >
+        - The most richly dense, accelerated course on the topic of Deep
+        Learning &amp; Recurrent Neural Networks (scroll at the end).
+      </li>
+    </ul>
+    <p><a name="books" /></p>
+    <h2 id="books">Books</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.amazon.ca/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"
+          >Clean Code</a
+        >
+        - Get back to the basics you fool! Learn how to do Clean Code for your
+        career. This is by far the best book I’ve read even if this list is
+        related to Deep Learning.
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.ca/Clean-Coder-Conduct-Professional-Programmers/dp/0137081073"
+          >Clean Coder</a
+        >
+        - Learn how to be professional as a coder and how to interact with your
+        manager. This is important for any coding career.
+      </li>
+      <li>
+        <a
+          href="https://www.amazon.com/How-Create-Mind-Thought-Revealed/dp/B009VSFXZ4"
+          >How to Create a Mind</a
+        >
+        - The audio version is nice to listen to while commuting. This book is
+        motivating about reverse-engineering the mind and thinking on how to
+        code AI.
+      </li>
+      <li>
+        <a href="http://neuralnetworksanddeeplearning.com/index.html"
+          >Neural Networks and Deep Learning</a
+        >
+        - This book covers many of the core concepts behind neural networks and
+        deep learning.
+      </li>
+      <li>
+        <a href="http://www.deeplearningbook.org/"
+          >Deep Learning - An MIT Press book</a
+        >
+        - Yet halfway through the book, it contains satisfying math content on
+        how to think about actual deep learning.
+      </li>
+      <li>
+        <a
+          href="https://books.google.ca/books?hl=en&amp;as_coll=4&amp;num=100&amp;uid=103409002069648430166&amp;source=gbs_slider_cls_metadata_4_mylibrary_title"
+          >Some other books I have read</a
+        >
+        - Some books listed here are less related to deep learning but are still
+        somehow relevant to this list.
+      </li>
+    </ul>
+    <p><a name="posts-and-articles" /></p>
+    <h2 id="posts-and-articles">Posts and Articles</h2>
+    <ul>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Predictions_made_by_Ray_Kurzweil"
+          >Predictions made by Ray Kurzweil</a
+        >
+        - List of mid to long term futuristic predictions made by Ray Kurzweil.
+      </li>
+      <li>
+        <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/"
+          >The Unreasonable Effectiveness of Recurrent Neural Networks</a
+        >
+        - MUST READ post by Andrej Karpathy - this is what motivated me to learn
+        RNNs, it demonstrates what it can achieve in the most basic form of NLP.
+      </li>
+      <li>
+        <a href="http://colah.github.io/posts/2014-03-NN-Manifolds-Topology/"
+          >Neural Networks, Manifolds, and Topology</a
+        >
+        - Fresh look on how neurons map information.
+      </li>
+      <li>
+        <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/"
+          >Understanding LSTM Networks</a
+        >
+        - Explains the LSTM cells’ inner workings, plus, it has interesting
+        links in conclusion.
+      </li>
+      <li>
+        <a href="http://distill.pub/2016/augmented-rnns/"
+          >Attention and Augmented Recurrent Neural Networks</a
+        >
+        - Interesting for visual animations, it is a nice intro to attention
+        mechanisms as an example.
+      </li>
+      <li>
+        <a href="http://benanne.github.io/2014/08/05/spotify-cnns.html"
+          >Recommending music on Spotify with deep learning</a
+        >
+        - Awesome for doing clustering on audio - post by an intern at Spotify.
+      </li>
+      <li>
+        <a
+          href="https://research.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html"
+          >Announcing SyntaxNet: The World’s Most Accurate Parser Goes Open
+          Source</a
+        >
+        - Parsey McParseface’s birth, a neural syntax tree parser.
+      </li>
+      <li>
+        <a
+          href="https://research.googleblog.com/2016/08/improving-inception-and-image.html"
+          >Improving Inception and Image Classification in TensorFlow</a
+        >
+        - Very interesting CNN architecture (e.g.: the inception-style
+        convolutional layers is promising and efficient in terms of reducing the
+        number of parameters).
+      </li>
+      <li>
+        <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/"
+          >WaveNet: A Generative Model for Raw Audio</a
+        >
+        - Realistic talking machines: perfect voice generation.
+      </li>
+      <li>
+        <a href="https://twitter.com/fchollet">François Chollet’s Twitter</a> -
+        Author of Keras - has interesting Twitter posts and innovative ideas.
+      </li>
+      <li>
+        <a href="http://waitbutwhy.com/2017/04/neuralink.html"
+          >Neuralink and the Brain’s Magical Future</a
+        >
+        - Thought provoking article about the future of the brain and
+        brain-computer interfaces.
+      </li>
+      <li>
+        <a
+          href="http://vooban.com/en/tips-articles-geek-stuff/migrating-to-git-lfs-for-developing-deep-learning-applications-with-large-files/"
+          >Migrating to Git LFS for Developing Deep Learning Applications with
+          Large Files</a
+        >
+        - Easily manage huge files in your private Git projects.
+      </li>
+      <li>
+        <a href="https://blog.keras.io/the-future-of-deep-learning.html"
+          >The future of deep learning</a
+        >
+        - François Chollet’s thoughts on the future of deep learning.
+      </li>
+      <li>
+        <a
+          href="http://vooban.com/en/tips-articles-geek-stuff/discover-structure-behind-data-with-decision-trees/"
+          >Discover structure behind data with decision trees</a
+        >
+        - Grow decision trees and visualize them, infer the hidden logic behind
+        data.
+      </li>
+      <li>
+        <a
+          href="http://vooban.com/en/tips-articles-geek-stuff/hyperopt-tutorial-for-optimizing-neural-networks-hyperparameters/"
+          >Hyperopt tutorial for Optimizing Neural Networks’ Hyperparameters</a
+        >
+        - Learn to slay down hyperparameter spaces automatically rather than by
+        hand.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@surmenok/estimating-optimal-learning-rate-for-a-deep-neural-network-ce32f2556ce0"
+          >Estimating an Optimal Learning Rate For a Deep Neural Network</a
+        >
+        - Clever trick to estimate an optimal learning rate prior any single
+        full training.
+      </li>
+      <li>
+        <a href="http://nlp.seas.harvard.edu/2018/04/03/attention.html"
+          >The Annotated Transformer</a
+        >
+        - Good for understanding the “Attention Is All You Need” (AIAYN) paper.
+      </li>
+      <li>
+        <a href="http://jalammar.github.io/illustrated-transformer/"
+          >The Illustrated Transformer</a
+        >
+        - Also good for understanding the “Attention Is All You Need” (AIAYN)
+        paper.
+      </li>
+      <li>
+        <a href="https://blog.openai.com/language-unsupervised/"
+          >Improving Language Understanding with Unsupervised Learning</a
+        >
+        - SOTA across many NLP tasks from unsupervised pretraining on huge
+        corpus.
+      </li>
+      <li>
+        <a href="https://thegradient.pub/nlp-imagenet/"
+          >NLP’s ImageNet moment has arrived</a
+        >
+        - All hail NLP’s ImageNet moment.
+      </li>
+      <li>
+        <a href="https://jalammar.github.io/illustrated-bert/"
+          >The Illustrated BERT, ELMo, and co. (How NLP Cracked Transfer
+          Learning)</a
+        >
+        - Understand the different approaches used for NLP’s ImageNet moment.
+      </li>
+      <li>
+        <a href="http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod"
+          >Uncle Bob’s Principles Of OOD</a
+        >
+        - Not only the SOLID principles are needed for doing clean code, but the
+        furtherless known REP, CCP, CRP, ADP, SDP and SAP principles are very
+        important for developping huge software that must be bundled in
+        different separated packages.
+      </li>
+      <li>
+        <a
+          href="https://venturebeat.com/2019/07/19/why-do-87-of-data-science-projects-never-make-it-into-production/"
+          >Why do 87% of data science projects never make it into production?</a
+        >
+        - Data is not to be overlooked, and communication between teams and data
+        scientists is important to integrate solutions properly.
+      </li>
+      <li>
+        <a
+          href="https://towardsdatascience.com/what-is-the-main-reason-most-ml-projects-fail-515d409a161f"
+          >The real reason most ML projects fail</a
+        >
+        - Focus on clear business objectives, avoid pivots of algorithms unless
+        you have really clean code, and be able to know when what you coded is
+        “good enough”.
+      </li>
+      <li>
+        <a
+          href="https://www.umaneo.com/post/the-solid-principles-applied-to-machine-learning"
+          >SOLID Machine Learning</a
+        >
+        - The SOLID principles applied to Machine Learning.
+      </li>
+    </ul>
+    <p><a name="practical-resources" /></p>
+    <h2 id="practical-resources">Practical Resources</h2>
+    <p><a name="librairies-and-implementations" /></p>
+    <h3 id="librairies-and-implementations">Librairies and Implementations</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/Neuraxio/Neuraxle"
+          >Neuraxle, a framwework for machine learning pipelines</a
+        >
+        - The best framework for structuring and deploying your machine learning
+        projects, and which is also compatible with most framework (e.g.:
+        Scikit-Learn, TensorFlow, PyTorch, Keras, and so forth).
+      </li>
+      <li>
+        <a href="https://github.com/tensorflow/tensorflow"
+          >TensorFlow’s GitHub repository</a
+        >
+        - Most known deep learning framework, both high-level and low-level
+        while staying flexible.
+      </li>
+      <li>
+        <a href="https://github.com/tensorflow/skflow">skflow</a> - TensorFlow
+        wrapper à la scikit-learn.
+      </li>
+      <li>
+        <a href="https://keras.io/">Keras</a> - Keras is another intersting deep
+        learning framework like TensorFlow, it is mostly high-level.
+      </li>
+      <li>
+        <a href="https://github.com/carpedm20">carpedm20’s repositories</a> -
+        Many interesting neural network architectures are implemented by the
+        Korean guy Taehoon Kim, A.K.A. carpedm20.
+      </li>
+      <li>
+        <a href="https://github.com/carpedm20/NTM-tensorflow"
+          >carpedm20/NTM-tensorflow</a
+        >
+        - Neural Turing Machine TensorFlow implementation.
+      </li>
+      <li>
+        <a
+          href="http://oduerr.github.io/blog/2016/04/06/Deep-Learning_for_lazybones"
+          >Deep learning for lazybones</a
+        >
+        - Transfer learning tutorial in TensorFlow for vision from high-level
+        embeddings of a pretrained CNN, AlexNet 2012.
+      </li>
+      <li>
+        <a
+          href="https://github.com/guillaume-chevalier/LSTM-Human-Activity-Recognition"
+          >LSTM for Human Activity Recognition (HAR)</a
+        >
+        - Tutorial of mine on using LSTMs on time series for classification.
+      </li>
+      <li>
+        <a
+          href="https://github.com/guillaume-chevalier/HAR-stacked-residual-bidir-LSTMs"
+          >Deep stacked residual bidirectional LSTMs for HAR</a
+        >
+        - Improvements on the previous project.
+      </li>
+      <li>
+        <a
+          href="https://github.com/guillaume-chevalier/seq2seq-signal-prediction"
+          >Sequence to Sequence (seq2seq) Recurrent Neural Network (RNN) for
+          Time Series Prediction</a
+        >
+        - Tutorial of mine on how to predict temporal sequences of numbers -
+        that may be multichannel.
+      </li>
+      <li>
+        <a
+          href="https://github.com/guillaume-chevalier/Hyperopt-Keras-CNN-CIFAR-100"
+          >Hyperopt for a Keras CNN on CIFAR-100</a
+        >
+        - Auto (meta) optimizing a neural net (and its architecture) on the
+        CIFAR-100 dataset.
+      </li>
+      <li>
+        <a
+          href="https://github.com/guillaume-chevalier?direction=desc&amp;page=1&amp;q=machine+OR+deep+OR+learning+OR+rnn+OR+lstm+OR+cnn&amp;sort=stars&amp;tab=stars&amp;utf8=%E2%9C%93"
+          >ML / DL repositories I starred</a
+        >
+        - GitHub is full of nice code samples &amp; projects.
+      </li>
+      <li>
+        <a
+          href="https://github.com/guillaume-chevalier/Smoothly-Blend-Image-Patches"
+          >Smoothly Blend Image Patches</a
+        >
+        - Smooth patch merger for
+        <a
+          href="https://vooban.com/en/tips-articles-geek-stuff/satellite-image-segmentation-workflow-with-u-net/"
+          >semantic segmentation with a U-Net</a
+        >.
+      </li>
+      <li>
+        <a
+          href="https://github.com/guillaume-chevalier/SGNN-Self-Governing-Neural-Networks-Projection-Layer"
+          >Self Governing Neural Networks (SGNN): the Projection Layer</a
+        >
+        - With this, you can use words in your deep learning models without
+        training nor loading embeddings.
+      </li>
+      <li>
+        <a href="https://github.com/Neuraxio/Neuraxle">Neuraxle</a> - Neuraxle
+        is a Machine Learning (ML) library for building neat pipelines,
+        providing the right abstractions to both ease research, development, and
+        deployment of your ML applications.
+      </li>
+      <li>
+        <a
+          href="https://github.com/Neuraxio/Kata-Clean-Machine-Learning-From-Dirty-Code"
+          >Clean Machine Learning, a Coding Kata</a
+        >
+        - Learn the good design patterns to use for doing Machine Learning the
+        good way, by practicing.
+      </li>
+    </ul>
+    <p><a name="some-datasets" /></p>
+    <h3 id="some-datasets">Some Datasets</h3>
+    <p>
+      Those are resources I have found that seems interesting to develop models
+      onto.
+    </p>
+    <ul>
+      <li>
+        <a href="https://archive.ics.uci.edu/ml/datasets.html"
+          >UCI Machine Learning Repository</a
+        >
+        - TONS of datasets for ML.
+      </li>
+      <li>
+        <a
+          href="http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html"
+          >Cornell Movie–Dialogs Corpus</a
+        >
+        - This could be used for a chatbot.
+      </li>
+      <li>
+        <a href="https://rajpurkar.github.io/SQuAD-explorer/"
+          >SQuAD The Stanford Question Answering Dataset</a
+        >
+        - Question answering dataset that can be explored online, and a list of
+        models performing well on that dataset.
+      </li>
+      <li>
+        <a href="http://www.openslr.org/12/">LibriSpeech ASR corpus</a> - Huge
+        free English speech dataset with balanced genders and speakers, that
+        seems to be of high quality.
+      </li>
+      <li>
+        <a href="https://github.com/caesar0301/awesome-public-datasets"
+          >Awesome Public Datasets</a
+        >
+        - An awesome list of public datasets.
+      </li>
+      <li>
+        <a href="https://arxiv.org/abs/1803.05449"
+          >SentEval: An Evaluation Toolkit for Universal Sentence
+          Representations</a
+        >
+        - A Python framework to benchmark your sentence representations on many
+        datasets (NLP tasks).
+      </li>
+      <li>
+        <a href="https://arxiv.org/abs/1705.06476"
+          >ParlAI: A Dialog Research Software Platform</a
+        >
+        - Another Python framework to benchmark your sentence representations on
+        many datasets (NLP tasks).
+      </li>
+    </ul>
+    <p><a name="other-math-theory" /></p>
+    <h2 id="other-math-theory">Other Math Theory</h2>
+    <p><a name="gradient-descent-algorithms-and-optimization" /></p>
+    <h3 id="gradient-descent-algorithms-optimization-theory">
+      Gradient Descent Algorithms &amp; Optimization Theory
+    </h3>
+    <ul>
+      <li>
+        <a href="http://neuralnetworksanddeeplearning.com/chap2.html"
+          >Neural Networks and Deep Learning, ch.2</a
+        >
+        - Overview on how does the backpropagation algorithm works.
+      </li>
+      <li>
+        <a href="http://neuralnetworksanddeeplearning.com/chap4.html"
+          >Neural Networks and Deep Learning, ch.4</a
+        >
+        - A visual proof that neural nets can compute any function.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b#.mr5wq61fb"
+          >Yes you should understand backprop</a
+        >
+        - Exposing backprop’s caveats and the importance of knowing that while
+        training models.
+      </li>
+      <li>
+        <a
+          href="http://briandolhansky.com/blog/2013/9/27/artificial-neural-networks-backpropagation-part-4"
+          >Artificial Neural Networks: Mathematics of Backpropagation</a
+        >
+        - Picturing backprop, mathematically.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=56TYLaQN4N8"
+          >Deep Learning Lecture 12: Recurrent Neural Nets and LSTMs</a
+        >
+        - Unfolding of RNN graphs is explained properly, and potential problems
+        about gradient descent algorithms are exposed.
+      </li>
+      <li>
+        <a
+          href="http://sebastianruder.com/content/images/2016/09/saddle_point_evaluation_optimizers.gif"
+          >Gradient descent algorithms in a saddle point</a
+        >
+        - Visualize how different optimizers interacts with a saddle points.
+      </li>
+      <li>
+        <a
+          href="https://devblogs.nvidia.com/wp-content/uploads/2015/12/NKsFHJb.gif"
+          >Gradient descent algorithms in an almost flat landscape</a
+        >
+        - Visualize how different optimizers interacts with an almost flat
+        landscape.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=F6GSRDoB-Cg"
+          >Gradient Descent</a
+        >
+        - Okay, I already listed Andrew NG’s Coursera class above, but this
+        video especially is quite pertinent as an introduction and defines the
+        gradient descent algorithm.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=YovTqTY-PYY"
+          >Gradient Descent: Intuition</a
+        >
+        - What follows from the previous video: now add intuition.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=gX6fZHgfrow"
+          >Gradient Descent in Practice 2: Learning Rate</a
+        >
+        - How to adjust the learning rate of a neural network.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=u73PU6Qwl1I"
+          >The Problem of Overfitting</a
+        >
+        - A good explanation of overfitting and how to address that problem.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=ewogYw5oCAI"
+          >Diagnosing Bias vs Variance</a
+        >
+        - Understanding bias and variance in the predictions of a neural net and
+        how to address those problems.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1706.02515.pdf"
+          >Self-Normalizing Neural Networks</a
+        >
+        - Appearance of the incredible SELU activation function.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1606.04474.pdf"
+          >Learning to learn by gradient descent by gradient descent</a
+        >
+        - RNN as an optimizer: introducing the L2L optimizer, a meta-neural
+        network.
+      </li>
+    </ul>
+    <p><a name="complex-numbers-and-digital-signal-processing" /></p>
+    <h3 id="complex-numbers-digital-signal-processing">
+      Complex Numbers &amp; Digital Signal Processing
+    </h3>
+    <p>
+      Okay, signal processing might not be directly related to deep learning,
+      but studying it is interesting to have more intuition in developing neural
+      architectures based on signal.
+    </p>
+    <ul>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Window_function"
+          >Window Functions</a
+        >
+        - Wikipedia page that lists some of the known window functions - note
+        that the
+        <a
+          href="https://en.wikipedia.org/wiki/Window_function#Hann%E2%80%93Poisson_window"
+          >Hann-Poisson window</a
+        >
+        is specially interesting for greedy hill-climbing algorithms (like
+        gradient descent for example).
+      </li>
+      <li>
+        <a href="https://acko.net/files/gltalks/toolsforthought/"
+          >MathBox, Tools for Thought Graphical Algebra and Fourier Analysis</a
+        >
+        - New look on Fourier analysis.
+      </li>
+      <li>
+        <a href="http://acko.net/blog/how-to-fold-a-julia-fractal/"
+          >How to Fold a Julia Fractal</a
+        >
+        - Animations dealing with complex numbers and wave equations.
+      </li>
+      <li>
+        <a href="http://acko.net/blog/animate-your-way-to-glory/"
+          >Animate Your Way to Glory, Math and Physics in Motion</a
+        >
+        - Convergence methods in physic engines, and applied to interaction
+        design.
+      </li>
+      <li>
+        <a href="http://acko.net/blog/animate-your-way-to-glory-pt2/"
+          >Animate Your Way to Glory - Part II, Math and Physics in Motion</a
+        >
+        - Nice animations for rotation and rotation interpolation with
+        Quaternions, a mathematical object for handling 3D rotations.
+      </li>
+      <li>
+        <a
+          href="https://github.com/guillaume-chevalier/filtering-stft-and-laplace-transform"
+          >Filtering signal, plotting the STFT and the Laplace transform</a
+        >
+        - Simple Python demo on signal processing.
+      </li>
+    </ul>
+    <p><a name="papers" /></p>
+    <h2 id="papers">Papers</h2>
+    <p><a name="recurrent-neural-networks" /></p>
+    <h3 id="recurrent-neural-networks">Recurrent Neural Networks</h3>
+    <ul>
+      <li>
+        <a href="https://arxiv.org/pdf/1404.7828v4.pdf"
+          >Deep Learning in Neural Networks: An Overview</a
+        >
+        - You_Again’s summary/overview of deep learning, mostly about RNNs.
+      </li>
+      <li>
+        <a href="http://www.di.ufpe.br/~fnj/RNA/bibliografia/BRNN.pdf"
+          >Bidirectional Recurrent Neural Networks</a
+        >
+        - Better classifications with RNNs with bidirectional scanning on the
+        time axis.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1406.1078v3.pdf"
+          >Learning Phrase Representations using RNN Encoder-Decoder for
+          Statistical Machine Translation</a
+        >
+        - Two networks in one combined into a seq2seq (sequence to sequence)
+        Encoder-Decoder architecture. RNN Encoder–Decoder with 1000 hidden
+        units. Adadelta optimizer.
+      </li>
+      <li>
+        <a
+          href="http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf"
+          >Sequence to Sequence Learning with Neural Networks</a
+        >
+        - 4 stacked LSTM cells of 1000 hidden size with reversed input
+        sentences, and with beam search, on the WMT’14 English to French
+        dataset.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1602.02410.pdf"
+          >Exploring the Limits of Language Modeling</a
+        >
+        - Nice recursive models using word-level LSTMs on top of a
+        character-level CNN using an overkill amount of GPU power.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1703.01619.pdf"
+          >Neural Machine Translation and Sequence-to-sequence Models: A
+          Tutorial</a
+        >
+        - Interesting overview of the subject of NMT, I mostly read part 8 about
+        RNNs with attention as a refresher.
+      </li>
+      <li>
+        <a href="https://cs224d.stanford.edu/reports/PradhanLongpre.pdf"
+          >Exploring the Depths of Recurrent Neural Networks with Stochastic
+          Residual Learning</a
+        >
+        - Basically, residual connections can be better than stacked RNNs in the
+        presented case of sentiment analysis.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1601.06759.pdf"
+          >Pixel Recurrent Neural Networks</a
+        >
+        - Nice for photoshop-like “content aware fill” to fill missing patches
+        in images.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1603.08983v4.pdf"
+          >Adaptive Computation Time for Recurrent Neural Networks</a
+        >
+        - Let RNNs decide how long they compute. I would love to see how well
+        would it combines to Neural Turing Machines. Interesting interactive
+        visualizations on the subject can be found
+        <a href="http://distill.pub/2016/augmented-rnns/">here</a>.
+      </li>
+    </ul>
+    <p><a name="convolutional-neural-networks" /></p>
+    <h3 id="convolutional-neural-networks">Convolutional Neural Networks</h3>
+    <ul>
+      <li>
+        <a href="http://yann.lecun.com/exdb/publis/pdf/jarrett-iccv-09.pdf"
+          >What is the Best Multi-Stage Architecture for Object Recognition?</a
+        >
+        - Awesome for the use of “local contrast normalization”.
+      </li>
+      <li>
+        <a href="http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf"
+          >ImageNet Classification with Deep Convolutional Neural Networks</a
+        >
+        - AlexNet, 2012 ILSVRC, breakthrough of the ReLU activation function.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1311.2901v3.pdf"
+          >Visualizing and Understanding Convolutional Networks</a
+        >
+        - For the “deconvnet layer”.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1511.07289v1.pdf"
+          >Fast and Accurate Deep Network Learning by Exponential Linear
+          Units</a
+        >
+        - ELU activation function for CIFAR vision tasks.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1409.1556v6.pdf"
+          >Very Deep Convolutional Networks for Large-Scale Image Recognition</a
+        >
+        - Interesting idea of stacking multiple 3x3 conv+ReLU before pooling for
+        a bigger filter size with just a few parameters. There is also a nice
+        table for “ConvNet Configuration”.
+      </li>
+      <li>
+        <a
+          href="http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Szegedy_Going_Deeper_With_2015_CVPR_paper.pdf"
+          >Going Deeper with Convolutions</a
+        >
+        - GoogLeNet: Appearance of “Inception” layers/modules, the idea is of
+        parallelizing conv layers into many mini-conv of different size with
+        “same” padding, concatenated on depth.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1505.00387v2.pdf">Highway Networks</a> -
+        Highway networks: residual connections.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1502.03167v3.pdf"
+          >Batch Normalization: Accelerating Deep Network Training by Reducing
+          Internal Covariate Shift</a
+        >
+        - Batch normalization (BN): to normalize a layer’s output by also
+        summing over the entire batch, and then performing a linear rescaling
+        and shifting of a certain trainable amount.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1505.04597.pdf"
+          >U-Net: Convolutional Networks for Biomedical Image Segmentation</a
+        >
+        - The U-Net is an encoder-decoder CNN that also has skip-connections,
+        good for image segmentation at a per-pixel level.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1512.03385v1.pdf"
+          >Deep Residual Learning for Image Recognition</a
+        >
+        - Very deep residual layers with batch normalization layers - a.k.a.
+        “how to overfit any vision dataset with too many layers and make any
+        vision model work properly at recognition given enough data”.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1602.07261v2.pdf"
+          >Inception-v4, Inception-ResNet and the Impact of Residual Connections
+          on Learning</a
+        >
+        - For improving GoogLeNet with residual connections.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1609.03499v2.pdf"
+          >WaveNet: a Generative Model for Raw Audio</a
+        >
+        - Epic raw voice/music generation with new architectures based on
+        dilated causal convolutions to capture more audio length.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1610.07584v2.pdf"
+          >Learning a Probabilistic Latent Space of Object Shapes via 3D
+          Generative-Adversarial Modeling</a
+        >
+        - 3D-GANs for 3D model generation and fun 3D furniture arithmetics from
+        embeddings (think like word2vec word arithmetics with 3D furniture
+        representations).
+      </li>
+      <li>
+        <a href="https://research.fb.com/publications/ImageNet1kIn1h/"
+          >Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour</a
+        >
+        - Incredibly fast distributed training of a CNN.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1608.06993.pdf"
+          >Densely Connected Convolutional Networks</a
+        >
+        - Best Paper Award at CVPR 2017, yielding improvements on
+        state-of-the-art performances on CIFAR-10, CIFAR-100 and SVHN datasets,
+        this new neural network architecture is named DenseNet.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1611.09326.pdf"
+          >The One Hundred Layers Tiramisu: Fully Convolutional DenseNets for
+          Semantic Segmentation</a
+        >
+        - Merges the ideas of the U-Net and the DenseNet, this new neural
+        network is especially good for huge datasets in image segmentation.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1703.05175.pdf"
+          >Prototypical Networks for Few-shot Learning</a
+        >
+        - Use a distance metric in the loss to determine to which class does an
+        object belongs to from a few examples.
+      </li>
+    </ul>
+    <p><a name="attention-mechanisms" /></p>
+    <h3 id="attention-mechanisms">Attention Mechanisms</h3>
+    <ul>
+      <li>
+        <a href="https://arxiv.org/pdf/1409.0473.pdf"
+          >Neural Machine Translation by Jointly Learning to Align and
+          Translate</a
+        >
+        - Attention mechanism for LSTMs! Mostly, figures and formulas and their
+        explanations revealed to be useful to me. I gave a talk on that paper
+        <a href="https://www.youtube.com/watch?v=QuvRWevJMZ4">here</a>.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1410.5401v2.pdf"
+          >Neural Turing Machines</a
+        >
+        - Outstanding for letting a neural network learn an algorithm with
+        seemingly good generalization over long time dependencies. Sequences
+        recall problem.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1502.03044.pdf"
+          >Show, Attend and Tell: Neural Image Caption Generation with Visual
+          Attention</a
+        >
+        - LSTMs’ attention mechanisms on CNNs feature maps does wonders.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1506.03340v3.pdf"
+          >Teaching Machines to Read and Comprehend</a
+        >
+        - A very interesting and creative work about textual question answering,
+        what a breakthrough, there is something to do with that.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1508.04025.pdf"
+          >Effective Approaches to Attention-based Neural Machine Translation</a
+        >
+        - Exploring different approaches to attention mechanisms.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1606.04080.pdf"
+          >Matching Networks for One Shot Learning</a
+        >
+        - Interesting way of doing one-shot learning with low-data by using an
+        attention mechanism and a query to compare an image to other images for
+        classification.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1609.08144.pdf"
+          >Google’s Neural Machine Translation System: Bridging the Gap between
+          Human and Machine Translation</a
+        >
+        - In 2016: stacked residual LSTMs with attention mechanisms on
+        encoder/decoder are the best for NMT (Neural Machine Translation).
+      </li>
+      <li>
+        <a
+          href="http://www.nature.com/articles/nature20101.epdf?author_access_token=ImTXBI8aWbYxYQ51Plys8NRgN0jAjWel9jnR3ZoTv0MggmpDmwljGswxVdeocYSurJ3hxupzWuRNeGvvXnoO8o4jTJcnAyhGuZzXJ1GEaD-Z7E6X_a9R-xqJ9TfJWBqz"
+          >Hybrid computing using a neural network with dynamic external
+          memory</a
+        >
+        - Improvements on differentiable memory based on NTMs: now it is the
+        Differentiable Neural Computer (DNC).
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1703.03906.pdf"
+          >Massive Exploration of Neural Machine Translation Architectures</a
+        >
+        - That yields intuition about the boundaries of what works for doing NMT
+        within a framed seq2seq problem formulation.
+      </li>
+      <li>
+        <a href="https://arxiv.org/pdf/1712.05884.pdf"
+          >Natural TTS Synthesis by Conditioning WaveNet on Mel Spectrogram
+          Predictions</a
+        >
+        - A <a href="https://arxiv.org/pdf/1609.03499v2.pdf">WaveNet</a> used as
+        a vocoder can be conditioned on generated Mel Spectrograms from the
+        Tacotron 2 LSTM neural network with attention to generate neat audio
+        from text.
+      </li>
+      <li>
+        <a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>
+        (AIAYN) - Introducing multi-head self-attention neural networks with
+        positional encoding to do sentence-level NLP without any RNN nor CNN -
+        this paper is a must-read (also see
+        <a href="http://nlp.seas.harvard.edu/2018/04/03/attention.html"
+          >this explanation</a
+        >
+        and
+        <a href="http://jalammar.github.io/illustrated-transformer/"
+          >this visualization</a
+        >
+        of the paper).
+      </li>
+    </ul>
+    <p><a name="other" /></p>
+    <h3 id="other">Other</h3>
+    <ul>
+      <li>
+        <a href="https://arxiv.org/abs/1708.00630"
+          >ProjectionNet: Learning Efficient On-Device Deep Networks Using
+          Neural Projections</a
+        >
+        - Replace word embeddings by word projections in your deep neural
+        networks, which doesn’t require a pre-extracted dictionnary nor storing
+        embedding matrices.
+      </li>
+      <li>
+        <a href="http://aclweb.org/anthology/D18-1105"
+          >Self-Governing Neural Networks for On-Device Short Text
+          Classification</a
+        >
+        - This paper is the sequel to the ProjectionNet just above. The SGNN is
+        elaborated on the ProjectionNet, and the optimizations are detailed more
+        in-depth (also see my
+        <a
+          href="https://github.com/guillaume-chevalier/SGNN-Self-Governing-Neural-Networks-Projection-Layer"
+          >attempt to reproduce the paper in code</a
+        >
+        and watch
+        <a href="https://vimeo.com/305197775">the talks’ recording</a>).
+      </li>
+      <li>
+        <a href="https://arxiv.org/abs/1606.04080"
+          >Matching Networks for One Shot Learning</a
+        >
+        - Classify a new example from a list of other examples (without
+        definitive categories) and with low-data per classification task, but
+        lots of data for lots of similar classification tasks - it seems better
+        than siamese networks. To sum up: with Matching Networks, you can
+        optimize directly for a cosine similarity between examples (like a
+        self-attention product would match) which is passed to the softmax
+        directly. I guess that Matching Networks could probably be used as with
+        negative-sampling softmax training in word2vec’s CBOW or Skip-gram
+        without having to do any context embedding lookups.
+      </li>
+    </ul>
+    <p><a name="youtube" /></p>
+    <h2 id="youtube-and-videos">YouTube and Videos</h2>
+    <ul>
+      <li>
+        <a href="https://www.youtube.com/watch?v=QuvRWevJMZ4"
+          >Attention Mechanisms in Recurrent Neural Networks (RNNs) - IGGG</a
+        >
+        - A talk for a reading group on attention mechanisms (Paper: Neural
+        Machine Translation by Jointly Learning to Align and Translate).
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLlXfTHzgMRULkodlIEqfgTS-H1AY_bNtq"
+          >Tensor Calculus and the Calculus of Moving Surfaces</a
+        >
+        - Generalize properly how Tensors work, yet just watching a few videos
+        already helps a lot to grasp the concepts.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLlp-GWNOd6m4C_-9HxuHg2_ZeI2Yzwwqt"
+          >Deep Learning &amp; Machine Learning (Advanced topics)</a
+        >
+        - A list of videos about deep learning that I found interesting or
+        useful, this is a mix of a bit of everything.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLlp-GWNOd6m6gSz0wIcpvl4ixSlS-HEmr"
+          >Signal Processing Playlist</a
+        >
+        - A YouTube playlist I composed about DFT/FFT, STFT and the Laplace
+        transform - I was mad about my software engineering bachelor not
+        including signal processing classes (except a bit in the quantum physics
+        class).
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/playlist?list=PLlp-GWNOd6m7vLOsW20xAJ81-65C-Ys6k"
+          >Computer Science</a
+        >
+        - Yet another YouTube playlist I composed, this time about various CS
+        topics.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/channel/UCWN3xxRkmTPmbKwht9FuE5A/videos?view=0&amp;sort=p&amp;flow=grid"
+          >Siraj’s Channel</a
+        >
+        - Siraj has entertaining, fast-paced video tutorials about deep
+        learning.
+      </li>
+      <li>
+        <a
+          href="https://www.youtube.com/user/keeroyz/videos?sort=p&amp;view=0&amp;flow=grid"
+          >Two Minute Papers’ Channel</a
+        >
+        - Interesting and shallow overview of some research papers, for example
+        about WaveNet or Neural Style Transfer.
+      </li>
+      <li>
+        <a
+          href="https://www.coursera.org/learn/neural-networks-deep-learning/lecture/dcm5r/geoffrey-hinton-interview"
+          >Geoffrey Hinton interview</a
+        >
+        - Andrew Ng interviews Geoffrey Hinton, who talks about his research and
+        breaktroughs, and gives advice for students.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=K4QN27IKr0g"
+          >Growing Neat Software Architecture from Jupyter Notebooks</a
+        >
+        - A primer on how to structure your Machine Learning projects when using
+        Jupyter Notebooks.
+      </li>
+    </ul>
+    <p><a name="misc-hubs-and-links" /></p>
+    <h2 id="misc.-hubs-links">Misc. Hubs &amp; Links</h2>
+    <ul>
+      <li>
+        <a href="https://news.ycombinator.com/news">Hacker News</a> - Maybe how
+        I discovered ML - Interesting trends appear on that site way before they
+        get to be a big deal.
+      </li>
+      <li>
+        <a href="http://www.datatau.com/">DataTau</a> - This is a hub similar to
+        Hacker News, but specific to data science.
+      </li>
+      <li>
+        <a href="http://www.naver.com/">Naver</a> - This is a Korean search
+        engine - best used with Google Translate, ironically. Surprisingly,
+        sometimes deep learning search results and comprehensible advanced math
+        content shows up more easily there than on Google search.
+      </li>
+      <li>
+        <a href="http://www.arxiv-sanity.com/">Arxiv Sanity Preserver</a> -
+        arXiv browser with TF/IDF features.
+      </li>
+      <li>
+        <a href="https://github.com/Neuraxio/Awesome-Neuraxle"
+          >Awesome Neuraxle</a
+        >
+        - An awesome list for Neuraxle, a ML Framework for coding clean
+        production-level ML pipelines.
+      </li>
+    </ul>
+    <p><a name="license" /></p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/cc-zero.svg"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://github.com/guillaume-chevalier">Guillaume Chevalier</a>
+      has waived all copyright and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

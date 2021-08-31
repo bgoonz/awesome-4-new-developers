@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h2 id="memory-management">Memory Management</h2>
+<ul>
+<li><p><a href="https://researcher.watson.ibm.com/researcher/files/us-bacon/Bacon04Unified.pdf">A Unified Theory of Garbage Collection</a></p></li>
+<li><p><a href="https://cs.brown.edu/~sk/Publications/Papers/Published/cgkmf-teach-gc/paper.pdf">Teaching Garbage Collection without Implementing Compilers or Interpreters</a></p></li>
+<li><p><a href="http://user.it.uu.se/~kostis/Papers/ismm04.pdf">Message Analysis Guided Allocation and Low Pause Incremental GC in a Concurrent Language</a></p></li>
+<li><p><a href="http://researcher.watson.ibm.com/researcher/files/us-bacon/Bacon12AndThen.pdf">And Then There Were None: A Stall-Free Real-Time Garbage Collector for Reconfigurable Hardware</a></p></li>
+<li><a href="https://www.usenix.org/legacy/publications/library/proceedings/bos94/bonwick.html">The Slab Allocator: An Object-Caching Kernel Memory Allocator</a>
+<ul>
+<li><a href="https://www.usenix.org/legacy/publications/library/proceedings/bos94/full_papers/bonwick.a">ASCII version</a></li>
+<li><a href="https://www.usenix.org/legacy/publications/library/proceedings/bos94/full_papers/bonwick.ps">POSTSCRIPT version</a></li>
+</ul></li>
+<li><p>:scroll: <a href="http://www.icg.tugraz.at/Members/steinber/scatteralloc-1">ScatterAlloc: Massively Parallel Dynamic Memory Allocation for the GPU</a></p>
+<p>Presents a useful algorithm as well as considerations relevant to designing algorithms for GPUs.</p></li>
+<li><p><a href="making-lockless-synchronization-fast.pdf">:scroll:</a> <a href="http://www.rdrop.com/users/paulmck/RCU/hart_ipdps06.pdf">Making Lockless Synchronization Fast: Performance Implications of Memory Reclamation</a></p>
+<p>Multicore systems are ubiquitous but modern concurrent programming techniques still do not see wide-spread adoption. Most concurrent software (developed in low-level languages) still relies on error-prone and unscalable memory management techniques for correctness despite the introduction of superior methods over 30 years ago. Safe memory reclamation allows for performant and robust memory management that is also suitable for advanced concurrent programming techniques such as non-blocking synchronization. If properly used, safe memory reclamation techniques allow improved performance and simplicity without the complexity of full-blown garbage collection. This paper provides a terrific overview of common safe memory reclamation mechanisms and then explores their performance implications.</p></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-git-addons-awesome">
+      Awesome git addons
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>A curated list of add-ons that extend/enhance the git CLI.</p>
+    <pre><code>$ git bla
+Something awesome happens!</code></pre>
+    <blockquote>
+      <p>
+        <em
+          >“You don’t have to know everything. You simply need to know where to
+          find it when necessary.” (John Brunner)</em
+        >
+      </p>
+    </blockquote>
+    <p>
+      Inspired by the
+      <a href="https://github.com/sindresorhus/awesome">awesome</a> list thing.
+    </p>
+    <p>
+      <strong>Note</strong>: Some of the commands may not work out of the box.
+      You might need to run a post install script to add aliases or add them
+      manually.
+    </p>
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ul>
+      <li><a href="#git-extras">Git Extras</a></li>
+      <li><a href="#gitflow-avh-edition">Git Flow</a></li>
+      <li><a href="#git-up">Git Up</a></li>
+      <li><a href="#hub">Hub</a></li>
+      <li><a href="#git-deploy">Git Deploy</a></li>
+      <li><a href="#git-cal">Git Cal</a></li>
+      <li><a href="#git-hooks">Git Hooks</a></li>
+      <li><a href="#git-imerge">Git Imerge</a></li>
+      <li><a href="#git-issue">Git Issue</a></li>
+      <li><a href="#git-lfs">Git Large File Storage</a></li>
+      <li><a href="#git-now">Git Now</a></li>
+      <li><a href="#git-plus">Git Plus</a></li>
+      <li><a href="#git-test">Git Test</a></li>
+      <li><a href="#legit">Legit</a></li>
+      <li><a href="#git-when-merged">Git When Merged</a></li>
+      <li><a href="#git-playback">Git Playback</a></li>
+      <li><a href="#git-branch-status">Git Branch Status</a></li>
+      <li><a href="#git-open">Git Open</a></li>
+      <li><a href="#git-my">Git My</a></li>
+      <li><a href="#git-ink">Git Ink</a></li>
+      <li><a href="#recursive-blame">Recursive Blame</a></li>
+      <li><a href="#hyper-blame">Git Hyper Blame</a></li>
+      <li><a href="#git-word-blame">Git Word Blame</a></li>
+      <li><a href="#git-fire">Git Fire</a></li>
+      <li><a href="#git-town">Git Town</a></li>
+      <li><a href="#git-blame-someone-else">Git blame-someone-else</a></li>
+      <li><a href="#diff-so-fancy">Diff So Fancy</a></li>
+      <li><a href="#git-stats">Git Stats</a></li>
+      <li><a href="#git-secret">Git Secret</a></li>
+      <li><a href="#git-secrets">Git Secrets</a></li>
+      <li><a href="#git-fixup">git-fixup</a></li>
+      <li><a href="#git-recent">git-recent</a></li>
+      <li>
+        <a href="#git-interactive-rebase-tool">git-interactive-rebase-tool</a>
+      </li>
+      <li><a href="#git-fiddle">git-fiddle</a></li>
+      <li><a href="#git-user">git-user</a></li>
+      <li><a href="#gitsome">gitsome</a></li>
+      <li><a href="#git-hound">Git Hound</a></li>
+      <li><a href="#git-recall">git-recall</a></li>
+      <li><a href="#git-standup">git-standup</a></li>
+      <li><a href="#commitizen">Commitizen</a></li>
+      <li><a href="#git-fresh">git-fresh</a></li>
+      <li><a href="#git-fs">git-fs</a></li>
+      <li><a href="#git-url">Git Url</a></li>
+      <li><a href="#git-signatures">Git Signatures</a></li>
+      <li><a href="#git-profile">Git Profile</a></li>
+      <li><a href="#git-revise">git revise</a></li>
+      <li><a href="#filter-repo">filter-repo</a></li>
+    </ul>
+    <h2 id="git-extras">
+      <a href="https://github.com/tj/git-extras">git-extras</a>
+    </h2>
+    <h3 id="squash">squash</h3>
+    <pre><code>$ git squash fixed-cursor-styling &quot;Fixed cursor styling&quot;
+$ git squash 95b7c52
+$ git squash HEAD~3</code></pre>
+    <h3 id="summary">summary</h3>
+    <pre><code>$ git summary
+
+ project  : git
+ repo age : 10 years
+ active   : 11868 days
+ commits  : 40530
+ files    : 2825
+ authors  :
+ 15401  Junio C Hamano                  38.0%
+  1844  Jeff King                       4.5%</code></pre>
+    <h3 id="line-summary">line-summary</h3>
+    <pre><code>$ git line-summary
+
+ project  : gulp
+ lines    : 3900
+ authors  :
+ 1040 Contra                    26.7%
+  828 Sindre Sorhus             21.2%</code></pre>
+    <h3 id="effort">effort</h3>
+    <pre><code>$ git effort
+
+  file                                          commits    active days
+
+  .gitattributes............................... 3          3
+  .gitignore................................... 265        226
+  .mailmap..................................... 47         40</code></pre>
+    <h3 id="authors">authors</h3>
+    <pre><code>$ git authors
+Contra &lt;contra@maricopa.edu&gt;
+Eric Schoffstall &lt;contra@wearefractal.com&gt;
+Sindre Sorhus &lt;sindresorhus@gmail.com&gt;</code></pre>
+    <h3 id="changelog">changelog</h3>
+    <pre><code>$ git changelog
+## 3.9.0
+
+- add babel support
+- add transpiler fallback support
+- add support for some renamed transpilers (livescript, etc)
+- add JSCS
+- update dependecies (liftoff, interpret)
+- documentation tweaks
+
+## 3.8.11
+
+- fix node 0.12/iojs problems
+- add node 0.12 and iojs to travis
+- update dependencies (liftoff, v8flags)
+- documentation tweaks</code></pre>
+    <h3 id="commits-since">commits-since</h3>
+    <pre><code>$ git commits-since yesterday
+... changes since yesterday
+TJ Holowaychuk - Fixed readme</code></pre>
+    <h3 id="count">count</h3>
+    <pre><code>$ git count
+total 855</code></pre>
+    <h3 id="create-branch">create-branch</h3>
+    <pre><code>$ git create-branch development
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/tj/git-extras.git
+ * [new branch]      HEAD -&gt; development
+Branch development set up to track remote branch development from origin.
+Switched to a new branch &#39;development&#39;</code></pre>
+    <h3 id="delete-branch">delete-branch</h3>
+    <pre><code>$ git delete-branch integration
+Deleted branch integration (was bfb8522).
+Deleted remote-tracking branch remote/integration (was bfb8522).
+To git@github.com:remote/gulp.git
+ - [deleted]         integration</code></pre>
+    <h3 id="delete-submodule">delete-submodule</h3>
+    <pre><code>$ git delete-submodule lib/foo</code></pre>
+    <h3 id="delete-tag">delete-tag</h3>
+    <pre><code>$ git delete-tag v0.1.1
+Deleted tag &#39;v0.1.1&#39; (was 9fde751)
+To https://github.com/tj/git-extras.git
+ - [deleted]         v0.1.1</code></pre>
+    <h3 id="delete-merged-branches">delete-merged-branches</h3>
+    <pre><code>$ git delete-merged-branches
+Deleted feature/themes (was c029ab3).
+Deleted feature/live_preview (was a81b002).
+Deleted feature/dashboard (was 923befa).</code></pre>
+    <h3 id="fresh-branch">fresh-branch</h3>
+    <pre><code>$ git fresh-branch docs
+Removing .DS_Store
+Removing .editorconfig
+Removing .gitignore</code></pre>
+    <h3 id="guilt">guilt</h3>
+    <pre><code>$ git guilt `git log --until=&quot;3 weeks ago&quot; --format=&quot;%H&quot; -n 1` HEAD
+Paul Schreiber                +++++++++++++++++++++++++++++++++++++++++++++(349)
+spacewander                   +++++++++++++++++++++++++++++++++++++++++++++(113)
+Mark Eissler                  ++++++++++++++++++++++++++</code></pre>
+    <h3 id="merge-into">merge-into</h3>
+    <pre><code>$ git merge-into master
+Switched to branch &#39;master&#39;
+Your branch is up-to-date with &#39;origin/master&#39;.
+Updating 9fde751..e62edfa
+Fast-forward
+ 234 | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 234
+Switched to branch &#39;development&#39;</code></pre>
+    <h3 id="graft">graft</h3>
+    <pre><code>$ git graft development
+Your branch is up-to-date with &#39;origin/master&#39;.
+Merge made by the &#39;recursive&#39; strategy.
+ package.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+Deleted branch development (was 64b3563).</code></pre>
+    <h3 id="alias">alias</h3>
+    <pre><code>$ git alias last &quot;cat-file commit HEAD&quot;
+$ git alias
+last = cat-file commit HEAD</code></pre>
+    <h3 id="ignore">ignore</h3>
+    <pre><code>$ git ignore build &quot;*.o&quot; &quot;*.log&quot;
+... added &#39;build&#39;
+... added &#39;*.o&#39;
+... added &#39;*.log&#39;</code></pre>
+    <h3 id="info">info</h3>
+    <pre><code>$ git info
+
+    ## Remote URLs:
+
+    origin              git@github.com:sampleAuthor/git-extras.git (fetch)
+    origin              git@github.com:sampleAuthor/git-extras.git (push)
+
+    ## Remote Branches:
+
+    origin/HEAD -&gt; origin/master
+    origin/myBranch
+
+    ## Local Branches:
+
+    myBranch
+    * master
+
+    ## Most Recent Commit:
+
+    commit e3952df2c172c6f3eb533d8d0b1a6c77250769a7
+    Author: Sample Author &lt;sampleAuthor@gmail.com&gt;
+
+    Added git-info command.
+
+    Type &#39;git log&#39; for more commits, or &#39;git show &lt;commit id&gt;&#39; for full commit details.
+
+    ## Configuration (.git/config):
+
+    color.diff=auto
+    color.status=auto</code></pre>
+    <h3 id="fork">fork</h3>
+    <pre><code>$ git fork LearnBoost/expect.js</code></pre>
+    <h3 id="release">release</h3>
+    <pre><code>$ git release 0.1.0
+... releasing 0.1.0
+On branch development
+Your branch is up-to-date with &#39;origin/development&#39;.
+nothing to commit, working directory clean
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/tj/git-extras.git
+   9fde751..e62edfa  master -&gt; master
+Counting objects: 1, done.
+Writing objects: 100% (1/1), 166 bytes | 0 bytes/s, done.
+Total 1 (delta 0), reused 0 (delta 0)
+To https://github.com/tj/git-extras.git
+ * [new tag]         0.1.0 -&gt; 0.1.0
+... complete</code></pre>
+    <h3 id="contrib">contrib</h3>
+    <pre><code>$ git contrib visionmedia
+visionmedia (18):
+  Export STATUS_CODES
+  Replaced several Array.prototype.slice.call() calls with Array.prototype.unshift.call()
+  Moved help msg to node-repl</code></pre>
+    <h3 id="repl">repl</h3>
+    <pre><code>$ git repl
+
+git&gt; ls-files
+History.md
+Makefile</code></pre>
+    <h3 id="undo">undo</h3>
+    <pre><code>$ git undo
+Unstaged changes after reset:
+M   package.json
+M   readme.md</code></pre>
+    <h3 id="gh-pages">gh-pages</h3>
+    <pre><code>$ git gh-pages</code></pre>
+    <h3 id="scp">scp</h3>
+    <pre><code>$ git scp staging HEAD</code></pre>
+    <h3 id="setup">setup</h3>
+    <pre><code>$ git setup
+Initialized empty Git repository in /GitHub/test/gulp/.git/
+[master (root-commit) 9469797] Initial commit
+ 69 files changed, 3900 insertions(+)
+ create mode 100644 .editorconfig
+ create mode 100644 .gitignore
+ create mode 100644 .jscsrc</code></pre>
+    <h3 id="touch">touch</h3>
+    <pre><code>$ git touch index.js</code></pre>
+    <h3 id="obliterate">obliterate</h3>
+    <pre><code>$ git obliterate secrets.json
+Rewrite 2357a4334051a6d1733037406ab7538255030d0b (1/981)rm &#39;secrets.json&#39;
+Rewrite b5f62b2746c23150917d346bd0c50c467f01eb03 (2/981)rm &#39;secrets.json&#39;
+Rewrite 3cd94f3395c2701848f6ff626a0a4f883d8a8433 (3/981)rm &#39;secrets.json&#39;</code></pre>
+    <h3 id="featurerefactorbugchore">feature|refactor|bug|chore</h3>
+    <pre><code>$ git feature dependencies
+$ git feature finish dependencies
+Already up-to-date.
+Deleted branch feature/dependencies (was f0fc4c7).
+Deleted remote-tracking branch origin/feature/dependencies (was f0fc4c7).
+To git@github.com:stevemao/gulp.git
+ - [deleted]         feature/dependencies</code></pre>
+    <h3 id="local-commits">local-commits</h3>
+    <pre><code>$ git local-commits
+commit 5f00a3c1bb71876ebdca059fac96b7185dea5467
+Merge: 7ad3ef9 841af4e
+Author: Blaine Bublitz &lt;blaine@iceddev.com&gt;
+Date:   Thu Aug 20 11:35:15 2015 -0700
+
+    Merge pull request #1211 from JimiHFord/patch-1
+
+    Update guidelines.md
+
+commit 841af4ee7aaf55b505354d0e86d7fb876d745e26
+Author: Jimi Ford &lt;JimiHFord@users.noreply.github.com&gt;
+Date:   Thu Aug 20 11:55:38 2015 -0400
+
+    Update guidelines.md
+
+    fixed typo</code></pre>
+    <h3 id="archive-file">archive-file</h3>
+    <pre><code>$ git archive-file
+Building archive on branch &quot;master&quot;
+Saved to &quot;gulp.v3.9.0-36-g47cb6b0.zip&quot; ( 60K)</code></pre>
+    <h3 id="missing">missing</h3>
+    <pre><code>$ git missing master
+&lt; d14b8f0 only on current checked out branch
+&gt; 97ef387 only on master</code></pre>
+    <h3 id="lock">lock</h3>
+    <pre><code>$ git lock config/database.yml</code></pre>
+    <h3 id="locked">locked</h3>
+    <pre><code>$ git locked
+config/database.yml</code></pre>
+    <h3 id="unlock">unlock</h3>
+    <pre><code>$ git unlock config/database.yml</code></pre>
+    <h3 id="reset-file">reset-file</h3>
+    <pre><code>$ git reset-file README.md HEAD^
+Reset &#39;README.md&#39; to HEAD^</code></pre>
+    <h3 id="pr">pr</h3>
+    <pre><code>$ git pr 226
+From https://github.com/tj/git-extras
+ * [new ref]       refs/pulls/226/head -&gt; pr/226
+Switched to branch &#39;pr/226&#39;</code></pre>
+    <h3 id="root">root</h3>
+    <pre><code>$ git root
+/GitHub/git</code></pre>
+    <h3 id="delta">delta</h3>
+    <pre><code>$ git delta
+README.md</code></pre>
+    <h3 id="merge-repo">merge-repo</h3>
+    <pre><code>$ git merge-repo git@github.com:tj/git-extras.git master .
+git fetch git@github.com:tj/git-extras.git master
+warning: no common commits
+remote: Counting objects: 3507, done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 3507 (delta 1), reused 0 (delta 0), pack-reused 3502
+Receiving objects: 100% (3507/3507), 821.12 KiB | 286.00 KiB/s, done.
+Resolving deltas: 100% (1986/1986), done.
+From github.com:tj/git-extras
+ * branch            master     -&gt; FETCH_HEAD
+Added dir &#39;git-merge-repo.E95m0gj&#39;
+No local changes to save</code></pre>
+    <h3 id="psykorebase">psykorebase</h3>
+    <pre><code>$ git psykorebase master
+$ git psykorebase --continue
+$ git psykorebase master feature</code></pre>
+    <h2 id="gitflow-avh-edition">
+      <a href="https://github.com/petervanderdoes/gitflow-avh"
+        >gitflow (AVH Edition)</a
+      >
+    </h2>
+    <h3 id="flow-init">flow init</h3>
+    <pre><code>$ git flow init
+
+Which branch should be used for bringing forth production releases?
+   - changelog
+   - master
+Branch name for production releases: [master]
+
+Which branch should be used for integration of the &quot;next release&quot;?
+   - changelog
+Branch name for &quot;next release&quot; development: [master]
+Production and integration branches should differ.</code></pre>
+    <h3 id="flow-feature">flow feature</h3>
+    <pre><code>$ git flow feature
+$ git flow feature start awesome-feature
+$ git flow feature finish awesome-feature
+$ git flow feature delete awesome-feature
+
+$ git flow feature publish awesome-feature
+$ git flow feature pull remote awesome-feature</code></pre>
+    <h3 id="flow-release">flow release</h3>
+    <pre><code>$ git flow release
+$ git flow release start awesome-release
+$ git flow release finish awesome-release
+$ git flow release delete awesome-release</code></pre>
+    <h3 id="flow-hotfix">flow hotfix</h3>
+    <pre><code>$ git flow hotfix
+$ git flow hotfix start awesome-release
+$ git flow hotfix finish awesome-release
+$ git flow hotfix delete awesome-release</code></pre>
+    <h3 id="flow-support">flow support</h3>
+    <pre><code>$ git flow support</code></pre>
+    <h2 id="git-up"><a href="https://github.com/aanand/git-up">git-up</a></h2>
+    <pre><code>$ git up
+Fetching origin
+4.0       fast-forwarding...
+changelog ahead of upstream
+master    fast-forwarding...
+returning to 4.0</code></pre>
+    <h2 id="hub"><a href="https://github.com/github/hub">hub</a></h2>
+    <h3 id="clone">clone</h3>
+    <pre><code>$ git clone schacon/ticgit
+&gt; git clone git://github.com/schacon/ticgit.git
+
+$ git clone -p schacon/ticgit
+&gt; git clone git@github.com:schacon/ticgit.git
+
+$ git clone resque
+&gt; git clone git@github.com/YOUR_USER/resque.git</code></pre>
+    <h3 id="remote-add">remote add</h3>
+    <pre><code>$ git remote add rtomayko
+&gt; git remote add rtomayko git://github.com/rtomayko/CURRENT_REPO.git
+
+$ git remote add -p rtomayko
+&gt; git remote add rtomayko git@github.com:rtomayko/CURRENT_REPO.git
+
+$ git remote add origin
+&gt; git remote add origin git://github.com/YOUR_USER/CURRENT_REPO.git</code></pre>
+    <h3 id="fetch">fetch</h3>
+    <pre><code>$ git fetch mislav
+&gt; git remote add mislav git://github.com/mislav/REPO.git
+&gt; git fetch mislav
+
+$ git fetch mislav,xoebus
+&gt; git remote add mislav ...
+&gt; git remote add xoebus ...
+&gt; git fetch --multiple mislav xoebus</code></pre>
+    <h3 id="cherry-pick">cherry-pick</h3>
+    <pre><code>$ git cherry-pick https://github.com/mislav/REPO/commit/SHA
+&gt; git remote add -f --no-tags mislav git://github.com/mislav/REPO.git
+&gt; git cherry-pick SHA
+
+$ git cherry-pick mislav@SHA
+&gt; git remote add -f --no-tags mislav git://github.com/mislav/CURRENT_REPO.git
+&gt; git cherry-pick SHA
+
+$ git cherry-pick mislav@SHA
+&gt; git fetch mislav
+&gt; git cherry-pick SHA</code></pre>
+    <h3 id="am">am</h3>
+    <pre><code>$ git am https://github.com/github/hub/pull/55
+[ downloads patch via API ]
+&gt; git am /tmp/55.patch
+
+$ git am --ignore-whitespace https://github.com/davidbalbert/hub/commit/fdb9921
+[ downloads patch via API ]
+&gt; git am --ignore-whitespace /tmp/fdb9921.patch</code></pre>
+    <h3 id="apply">apply</h3>
+    <pre><code>$ git apply https://gist.github.com/8da7fb575debd88c54cf
+[ downloads patch via API ]
+&gt; git apply /tmp/gist-8da7fb575debd88c54cf.txt</code></pre>
+    <h3 id="fork-1">fork</h3>
+    <pre><code>$ git fork
+[ repo forked on GitHub ]
+&gt; git remote add -f YOUR_USER git@github.com:YOUR_USER/CURRENT_REPO.git</code></pre>
+    <h3 id="pull-request">pull-request</h3>
+    <pre><code>$ git pull-request
+[ opens text editor to edit title &amp; body for the request ]
+[ opened pull request on GitHub for &quot;YOUR_USER:feature&quot; ]</code></pre>
+    <h3 id="checkout">checkout</h3>
+    <pre><code>$ git checkout https://github.com/github/hub/pull/73
+&gt; git remote add -f --no-tags -t feature mislav git://github.com/mislav/hub.git
+&gt; git checkout --track -B mislav-feature mislav/feature</code></pre>
+    <h3 id="merge">merge</h3>
+    <pre><code>$ git merge https://github.com/github/hub/pull/73
+&gt; git fetch git://github.com/mislav/hub.git +refs/heads/feature:refs/remotes/mislav/feature
+&gt; git merge mislav/feature --no-ff -m &#39;Merge pull request #73 from mislav/feature...&#39;</code></pre>
+    <h3 id="create">create</h3>
+    <pre><code>$ git create
+[ repo created on GitHub ]
+&gt; git remote add origin git@github.com:YOUR_USER/CURRENT_REPO.git</code></pre>
+    <h3 id="init">init</h3>
+    <pre><code>$ git init -g
+&gt; git init
+&gt; git remote add origin git@github.com:YOUR_USER/REPO.git</code></pre>
+    <h3 id="push">push</h3>
+    <pre><code>$ git push origin,staging,qa bert_timeout
+&gt; git push origin bert_timeout
+&gt; git push staging bert_timeout
+&gt; git push qa bert_timeout</code></pre>
+    <h3 id="browse">browse</h3>
+    <pre><code>$ git browse
+&gt; open https://github.com/YOUR_USER/CURRENT_REPO</code></pre>
+    <h3 id="compare">compare</h3>
+    <pre><code>$ git compare refactor
+&gt; open https://github.com/CURRENT_REPO/compare/refactor</code></pre>
+    <h3 id="submodule">submodule</h3>
+    <pre><code>$ git submodule add wycats/bundler vendor/bundler
+&gt; git submodule add git://github.com/wycats/bundler.git vendor/bundler</code></pre>
+    <h3 id="ci-status">ci-status</h3>
+    <pre><code>$ git ci-status
+success</code></pre>
+    <h2 id="git-deploy">
+      <a href="https://github.com/mislav/git-deploy">git-deploy</a>
+    </h2>
+    <pre><code>$ git remote add production &quot;user@example.com:/apps/mynewapp&quot;
+$ git deploy setup -r &quot;production&quot;
+$ git deploy init
+$ git push production master</code></pre>
+    <h2 id="git-cal">
+      <a href="https://github.com/k4rthik/git-cal">git-cal</a>
+    </h2>
+    <figure>
+      <img
+        src="https://cloud.githubusercontent.com/assets/6316590/12465623/17d828ea-c023-11e5-8077-2e9a284defd6.png"
+        alt="68747470733a2f2f7261772e6769746875622e636f6d2f6b34727468696b2f6769742d63616c2f6d61737465722f73637265656e73686f74732f696d67322e706e67"
+      />
+      <figcaption>
+        68747470733a2f2f7261772e6769746875622e636f6d2f6b34727468696b2f6769742d63616c2f6d61737465722f73637265656e73686f74732f696d67322e706e67
+      </figcaption>
+    </figure>
+    <h2 id="git-hooks">
+      <a href="https://github.com/icefox/git-hooks">git-hooks</a>
+    </h2>
+    <pre><code>$ git hooks --install
+$ git hooks
+Git hooks ARE installed in this repository.
+
+Listing User, Project, and Global hooks:
+---
+/Users/stevemao/.git_hooks:
+
+/GitHub/git-hooks/git_hooks:
+commit-msg/signed-off-by    - Checks commit message for presence of Signed-off-by line.
+pre-commit/bsd  - Check for the BSD license.
+
+/GitHub/git-hooks/.githooks:</code></pre>
+    <h2 id="git-imerge">
+      <a href="https://github.com/mhagger/git-imerge">git-imerge</a>
+    </h2>
+    <h3 id="imerge-start">imerge start</h3>
+    <pre><code>$ git imerge start --name=next --goal=merge --first-parent 4.0
+Attempting automerge of 1-1...success.
+Attempting automerge of 1-29...success.
+Attempting automerge of 1-44...success.
+Attempting automerge of 1-51...success.</code></pre>
+    <h3 id="imerge-merge">imerge merge</h3>
+    <pre><code>$ git imerge merge 4.0
+Attempting automerge of 1-1...success.
+Attempting automerge of 1-6...success.
+Attempting automerge of 1-9...success.
+Attempting automerge of 1-10...success.</code></pre>
+    <h3 id="imerge-rebase">imerge rebase</h3>
+    <pre><code>$ git imerge rebase 4.0
+The following commits on the to-be-merged branch are merge commits:
+    8e4931ae15971a14897cf347ac50b7d7fe125ac4
+    d7c772142ce663a20210db73d9ad17cc8d59e0d6
+    856df83c77b33029d2ddfb8eecd08efedeadc027</code></pre>
+    <h3 id="imerge-continue">imerge continue</h3>
+    <pre><code>$ git add --all
+$ git commit
+[imerge/next e442618] imerge &#39;next&#39;: manual merge 10-26
+$ git imerge continue
+Merge has been recorded for merge 10-26.
+Attempting automerge of 10-27...success.
+Attempting automerge of 10-42...failure.
+Attempting automerge of 10-34...failure.
+Attempting automerge of 10-30...success.
+Recording autofilled block MergeState(&#39;next&#39;, tip1=&#39;master&#39;, tip2=&#39;4.0&#39;, goal=&#39;merge&#39;)[18:20,34:58].
+Merge is complete!</code></pre>
+    <h3 id="imerge-finish">imerge finish</h3>
+    <pre><code>$ git imerge finish
+Previous HEAD position was fcbe161... imerge &#39;next&#39;: automatic merge 19-57
+Switched to branch &#39;next&#39;
+[next 23362e6] Merge 4.0 into master (using imerge)
+ Date: Wed Sep 2 10:59:56 2015 +1000</code></pre>
+    <h3 id="imerge-diagram">imerge diagram</h3>
+    <pre><code>$ git imerge diagram
+********************
+*????????.?????????|
+*????????.?????????|
+*????????.?????????|
+*????????...-------+
+*????????.*|#???????</code></pre>
+    <h3 id="imerge-list">imerge list</h3>
+    <pre><code>$ git imerge list
+* next</code></pre>
+    <h3 id="imerge-init">imerge init</h3>
+    <pre><code>$ git imerge init --name=next --goal=merge --first-parent 4.0</code></pre>
+    <h3 id="imerge-record">imerge record</h3>
+    <pre><code>$ git imerge record
+Merge has been recorded for merge 10-26.
+Attempting automerge of 10-27...success.
+Attempting automerge of 10-42...failure.
+Attempting automerge of 10-34...failure.</code></pre>
+    <h3 id="imerge-autofill">imerge autofill</h3>
+    <pre><code>$ git imerge autofill
+Attempting automerge of 1-1...success.
+Attempting automerge of 1-29...success.
+Attempting automerge of 1-44...success.</code></pre>
+    <h3 id="imerge-simplify">imerge simplify</h3>
+    <pre><code>$ git imerge simplify
+Previous HEAD position was 4d19598... imerge &#39;next&#39;: automatic merge 20-57
+Switched to branch &#39;next&#39;
+[next 6c308aa] Merge 4.0 into master (using imerge)
+ Date: Wed Sep 2 13:37:31 2015 +1000</code></pre>
+    <h3 id="imerge-remove">imerge remove</h3>
+    <pre><code>$ git imerge remove</code></pre>
+    <h3 id="imerge-reparent">imerge reparent</h3>
+    <pre><code>$ git imerge reparent
+67ebc0e6517ac791de6699453b71d2c7fd81ffcd</code></pre>
+    <h2 id="git-issue">
+      <a href="https://github.com/dspinellis/git-issue">git-issue</a>
+    </h2>
+    <h3 id="initialize-issue-repository">Initialize issue repository</h3>
+    <pre><code>$ git issue init
+Initialized empty Issues repository in /home/dds/src/gi/.issues
+$ git issue new -s &#39;New issue entered from the command line&#39;
+Added issue e6a95c9</code></pre>
+    <h3 id="create-a-new-issue-opens-editor-window">
+      Create a new issue (opens editor window)
+    </h3>
+    <pre><code>$ git issue new
+Added issue 7dfa5b7</code></pre>
+    <h3 id="list-open-issues">List open issues</h3>
+    <pre><code>$ git issue list
+7dfa5b7 An issue entered from the editor
+e6a95c9 New issue entered from the command line</code></pre>
+    <h3 id="add-an-issue-comment-opens-editor-window">
+      Add an issue comment (opens editor window)
+    </h3>
+    <pre><code>$ git issue comment e6a95c9
+Added comment 8c0d5b3</code></pre>
+    <h3 id="add-tag-to-an-issue">Add tag to an issue</h3>
+    <pre><code>$ git issue tag e6a9 urgent
+Added tag urgent</code></pre>
+    <h3 id="add-two-more-tags">Add two more tags</h3>
+    <pre><code>$ git issue tag e6a9 gui crash
+Added tag gui
+Added tag crash</code></pre>
+    <h3 id="remove-a-tag">Remove a tag</h3>
+    <pre><code>$ git issue tag -r e6a9 urgent
+Removed tag urgent</code></pre>
+    <h3 id="assign-issue">Assign issue</h3>
+    <pre><code>$ git issue assign e6a9 joe@example.com
+Assigned to joe@example.com</code></pre>
+    <h3 id="add-issue-watcher">Add issue watcher</h3>
+    <pre><code>$ git issue watcher e6a9 jane@example.com
+Added watcher jane@example.com</code></pre>
+    <h3 id="list-issues-tagged-as-gui">List issues tagged as gui</h3>
+    <pre><code>$ git issue list gui
+e6a95c9 New issue entered from the command line</code></pre>
+    <h3 id="push-issues-repository-to-a-server">
+      Push issues repository to a server
+    </h3>
+    <pre><code>$ git issue git remote add origin git@github.com:dspinellis/gi-example.git
+$ git issue git push -u origin master
+Counting objects: 60, done.
+Compressing objects: 100% (50/50), done.
+Writing objects: 100% (60/60), 5.35 KiB | 0 bytes/s, done.
+Total 60 (delta 8), reused 0 (delta 0)
+To git@github.com:dspinellis/gi-example.git
+ * [new branch]      master -&gt; master
+Branch master set up to track remote branch master from origin.</code></pre>
+    <h3 id="clone-issues-repository-from-server">
+      Clone issues repository from server
+    </h3>
+    <pre><code>$ git issue clone git@github.com:dspinellis/gi-example.git my-issues
+Cloning into &#39;.issues&#39;...
+remote: Counting objects: 60, done.
+remote: Compressing objects: 100% (42/42), done.
+remote: Total 60 (delta 8), reused 60 (delta 8), pack-reused 0
+Receiving objects: 100% (60/60), 5.35 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (8/8), done.
+Checking connectivity... done.
+Cloned git@github.com:dspinellis/gi-example.git into my-issues</code></pre>
+    <h3 id="list-open-issues-1">List open issues</h3>
+    <pre><code>$ git issue list
+7dfa5b7 An issue entered from the editor
+e6a95c9 New issue entered from the command line</code></pre>
+    <h3 id="create-new-issue">Create new issue</h3>
+    <pre><code>$ git issue new -s &#39;Issue added on another host&#39;
+Added issue abc9adc</code></pre>
+    <h3 id="push-changes-to-server">Push changes to server</h3>
+    <pre><code>$ git issue push
+Counting objects: 7, done.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (7/7), 767 bytes | 0 bytes/s, done.
+Total 7 (delta 0), reused 0 (delta 0)
+To git@github.com:dspinellis/gi-example.git
+   d6be890..740f9a0  master -&gt; master</code></pre>
+    <h3 id="show-issue-added-on-the-other-host">
+      Show issue added on the other host
+    </h3>
+    <pre><code>$ git issue show 7dfa5b7
+issue 7dfa5b7f4591ecaa8323716f229b84ad40f5275b
+Author: Diomidis Spinellis &lt;dds@aueb.gr&gt;
+Date:   Fri, 29 Jan 2016 01:03:24 +0200
+Tags:   open
+
+    An issue entered from the editor
+
+    Here is a longer description.</code></pre>
+    <h3 id="show-issue-and-comments">Show issue and comments</h3>
+    <pre><code>$ git issue show -c e6a95c9
+issue e6a95c91b31ded8fc229a41cc4bd7d281ce6e0f1
+Author: Diomidis Spinellis &lt;dds@aueb.gr&gt;
+Date:   Fri, 29 Jan 2016 01:03:20 +0200
+Tags:   open urgent gui crash
+Watchers:       jane@example.com
+Assigned-to: joe@example.com
+
+    New issue entered from the command line
+
+comment 8c0d5b3d77bf93b937cb11038b129f927d49e34a
+Author: Diomidis Spinellis &lt;dds@aueb.gr&gt;
+Date:   Fri, 29 Jan 2016 01:03:57 +0200
+
+    First comment regarding the issue.</code></pre>
+    <h3 id="pull-in-remote-changes-on-the-original-host">
+      Pull in remote changes (on the original host)
+    </h3>
+    <pre><code>$ git issue pull
+remote: Counting objects: 7, done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 7 (delta 0), reused 7 (delta 0), pack-reused 0
+Unpacking objects: 100% (7/7), done.
+From github.com:dspinellis/gi-example
+   d6be890..740f9a0  master     -&gt; origin/master
+Updating d6be890..740f9a0
+Fast-forward
+ issues/ab/c9adc61025a3cb73b0c67470b65cefc133a8d0/description | 1 +
+ issues/ab/c9adc61025a3cb73b0c67470b65cefc133a8d0/tags        | 1 +
+ 2 files changed, 2 insertions(+)
+ create mode 100644 issues/ab/c9adc61025a3cb73b0c67470b65cefc133a8d0/description
+ create mode 100644 issues/ab/c9adc61025a3cb73b0c67470b65cefc133a8d0/tags</code></pre>
+    <h3 id="list-open-issues-2">List open issues</h3>
+    <pre><code>$ git issue list
+7dfa5b7 An issue entered from the editor
+abc9adc Issue added on another host
+e6a95c9 New issue entered from the command line</code></pre>
+    <h3 id="sub-command-auto-completion">Sub-command auto-completion</h3>
+    <pre><code>$ git issue [Tab]
+assign   clone    comment  git      init     log      pull     show     watcher
+attach   close    edit     help     list     new      push     tag</code></pre>
+    <h3 id="issue-sha-auto-completion">Issue Sha auto-completion</h3>
+    <pre><code>$ git issue show [Tab]
+7dfa5b7 - An issue entered from the editor
+e6a95c9 - New issue entered from the command line</code></pre>
+    <h2 id="git-lfs">
+      <a href="https://github.com/github/git-lfs">git-lfs</a>
+    </h2>
+    <pre><code>$ git lfs track &quot;*.mp3&quot;
+Tracking *.mp3
+
+$ git lfs track &quot;*.zip&quot;
+Tracking *.zip
+
+$ git lfs track
+Listing tracked paths
+    *.mp3 (.gitattributes)
+    *.zip (.gitattributes)
+
+$ git lfs untrack &quot;*.zip&quot;
+Untracking *.zip
+
+$ git lfs track
+Listing tracked paths
+    *.mp3 (.gitattributes)</code></pre>
+    <h2 id="git-now"><a href="https://github.com/iwata/git-now">git-now</a></h2>
+    <pre><code>$ git now
+[master 1bd9ce8] [from now] 2015/08/27 10:39:10
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git log
+commit 1bd9ce878a76140f7db95afd9cfd4d7befbc7243
+Author: Steve Mao &lt;maochenyan@gmail.com&gt;
+Date:   Thu Aug 27 10:39:10 2015 +1000
+
+    [from now] 2015/08/27 10:39:10
+
+    diff --git a/package.json b/package.json
+    index 8768569..540523a 100644
+    --- a/package.json
+    +++ b/package.json
+    @@ -1,7 +1,7 @@
+     {
+       &quot;name&quot;: &quot;gulp&quot;,
+       &quot;description&quot;: &quot;The streaming build system&quot;,
+    -  &quot;version&quot;: &quot;3.9.0&quot;,
+    +  &quot;version&quot;: &quot;3.10.0&quot;,
+       &quot;homepage&quot;: &quot;http://gulpjs.com&quot;,
+       &quot;repository&quot;: &quot;gulpjs/gulp&quot;,
+       &quot;author&quot;: &quot;Fractal &lt;contact@wearefractal.com&gt; (http://wearefractal.com/)&quot;,</code></pre>
+    <h2 id="git-plus">
+      <a href="https://github.com/tkrajina/git-plus">git-plus</a>
+    </h2>
+    <h3 id="multi">multi</h3>
+    <pre><code>$ git multi
+--------------------------------------------------------------------------------
+Executing git status -s
+--------------------------------------------------------------------------------
+chalk:
+     M package.json
+
+gulp:
+     D index.js</code></pre>
+    <h3 id="relation">relation</h3>
+    <pre><code>$ git relation origin/4.0
+HEAD and origin/4.0 DIVERGED, common point is 657213a52d5e9c19b85df6a42f76341a98c08ae8
+
+Commits from 657213a52d5e9c19b85df6a42f76341a98c08ae8 to HEAD:
+Error retrieving log 657213a52d5e9c19b85df6a42f76341a98c08ae8..HEAD</code></pre>
+    <h3 id="old-branches">old-branches</h3>
+    <pre><code>$ git old-branches -d 10
+Branch 4.0 is older than 10 days (139.86)!</code></pre>
+    <h3 id="recent">recent</h3>
+    <pre><code>$ git recent
+      3.64 days: master
+     11.63 days: dev</code></pre>
+    <h2 id="git-test">
+      <a href="https://github.com/spotify/git-test">git-test</a>
+    </h2>
+    <pre><code>$ git test -v
+4.0 ^origin/4.0 ^origin/master will test        2 commits
+iter commit  tree    result
+0000 57af4b0 f5ef0d8 pass (cached)
+0001 10ed389 434370f pass</code></pre>
+    <h2 id="legit">
+      <a href="https://github.com/kennethreitz/legit">legit</a>
+    </h2>
+    <h3 id="branches">branches</h3>
+    <pre><code>$ git branches
+   4.0                        (published)
+   development                (unpublished)
+   everything-is-not-awesome  (published)
+*  master                     (published)
+   old-master                 (published)</code></pre>
+    <h3 id="sync">sync</h3>
+    <pre><code>$ git sync
+Pulling commits from the server.
+First, rewinding head to replay your work on top of it...
+Fast-forwarded 4.0 to origin/4.0.
+Pushing commits to the server.</code></pre>
+    <h3 id="switch">switch</h3>
+    <pre><code>$ git switch master
+Saving local changes.
+Saved working directory and index state On developement: Legit: stashing before switching branches.
+HEAD is now at f0fc4c7 Merge branch &#39;development&#39;
+Switching to master.
+Your branch is up-to-date with &#39;origin/master&#39;.
+Restoring local changes.
+On branch master
+Your branch is up-to-date with &#39;origin/master&#39;.
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+    modified:   package.json
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+Dropped stash@{0} (86f5dc9066ff9f69c01c77e2f5a55643ad19f8f2)</code></pre>
+    <h3 id="publish">publish</h3>
+    <pre><code>$ git publish
+   4.0                        (published)
+   changelog                  (published)
+   everything-is-not-awesome  (published)
+*  master                     (unpublished)
+Branch None not found, using current branch master
+Publishing master.
+Branch master set up to track remote branch master from origin.</code></pre>
+    <h3 id="unpublish">unpublish</h3>
+    <pre><code>$ git unpublish master
+Unpublishing master.</code></pre>
+    <h2 id="git-when-merged">
+      <a href="https://github.com/mhagger/git-when-merged">git-when-merged</a>
+    </h2>
+    <pre><code>$ git when-merged a2c9e695ecf3600f21fa731e705fd1a0503632d9
+refs/heads/master                      5a2ec1b1a6633f830bd4a2b1daab578c062e6975
+$ git when-merged HEAD
+refs/heads/master                      Commit is directly on this branch.</code></pre>
+    <h2 id="git-playback">
+      <a href="https://github.com/jianli/git-playback">git-playback</a>
+    </h2>
+    <pre><code>$ git playback README.md</code></pre>
+    <p>
+      <img
+        src="https://camo.githubusercontent.com/9abe1d2de474dbc0d1ad4f48acf9e954ff0d0b30/68747470733a2f2f7261772e6769746875622e636f6d2f6a69616e6c692f6769742d706c61796261636b2f6d61737465722f616e696d6174696f6e2e676966"
+      />
+    </p>
+    <h2 id="git-branch-status">
+      <a href="https://github.com/alexdavid/git-branch-status"
+        >git-branch-status</a
+      >
+    </h2>
+    <pre><code>$ git branch-status
+ 4.0       [57 ahead and 38 behind master]    [up to date with origin/4.0]
+ master    [current branch]                   [1 ahead of origin/master]</code></pre>
+    <h2 id="git-open">
+      <a href="https://github.com/paulirish/git-open">git-open</a>
+    </h2>
+    <pre><code>$ git open
+&gt; open https://github.com/REMOTE_ORIGIN_USER/CURRENT_REPO/tree/CURRENT_BRANCH
+
+$ git open upstream
+&gt; open https://github.com/REMOTE_UPSTREAM_USER/CURRENT_REPO/tree/CURRENT_BRANCH
+
+$ git open upstream master
+&gt; open https://github.com/REMOTE_UPSTREAM_USER/CURRENT_REPO/tree/master</code></pre>
+    <h2 id="git-my">
+      <a href="https://github.com/davidosomething/git-my">git-my</a>
+    </h2>
+    <pre><code>$ git my
+
++------------------------------------------------------------------------------+
+| your name&#39;s remote branches in git@repo:repopath/reponame.git                |
++------------------------------------------------------------------------------+
+
+   local copy?  in master?  branch name
+  ................[merged]. EC-242
+  .....[local]....[merged]. commonjs-lazyload
+  .....[local]............. enqueue-gpt
+  ......................... defunct-ios-app-nag
+  .....[local]............. factor-bundles</code></pre>
+    <h2 id="git-ink">
+      <a href="https://github.com/davidosomething/git-ink">git-ink</a>
+    </h2>
+    <pre><code>$ git ink
+
+• enqueue-gpt ........................................... 2015-08-31
+• factor-bundles ........................................ 2015-10-14
+    - Pull out more modules into node_modules
+    - Works but does not provide any gains
+• hbsfy ................................................. 2015-10-21
+✓ master ................................................ 2015-10-22
+• nda-ads4 .............................................. 2015-10-22
+• remove-equalize_content_height ........................ 2015-10-21
+• remove-exorcise ....................................... 2015-10-21
+    - Need to DRY up exorcise function
+    - Does not map properly when uglified
+    - Need to undo postCSS mapping changes
+• rm-convert_dates-order ................................ 2015-10-22
+• sass-lint ............................................. 2015-10-14
+    - module does not work</code></pre>
+    <h2 id="recursive-blame">
+      <a href="https://github.com/scottgonzalez/recursive-blame"
+        >recursive-blame</a
+      >
+    </h2>
+    <pre><code>$ git recursive-blame version package.json
+
+Commit: 247479d017f138c26be27c64a0ce27f5f21fc0af
+Author: Jeff Cross &lt;middlefloor@gmail.com&gt;
+Date:   Tue Oct 13 15:58:13 2015 -0700 (7 weeks ago)
+Path:   package.json
+Match:  1 of 1
+
+    chore(release): bump angular version to alpha.42
+
+1) {
+2)   &quot;name&quot;: &quot;angular&quot;,
+3)   &quot;version&quot;: &quot;2.0.0-alpha.42&quot;,
+4)   &quot;branchPattern&quot;: &quot;2.0.*&quot;,
+5)   &quot;description&quot;: &quot;Angular 2 - a web framework for modern web apps&quot;,
+6)   &quot;homepage&quot;: &quot;https://github.com/angular/angular&quot;,
+7)   &quot;bugs&quot;: &quot;https://github.com/angular/angular/issues&quot;,
+
+Next action [r,n,p,c,d,q,?]? r
+
+Commit: bb9d299b3860f6d579192828451ccd7ace70e1d8
+Author: Igor Minar &lt;igor@angularjs.org&gt;
+Date:   Tue Oct 13 12:28:03 2015 -0700 (7 weeks ago)
+Path:   package.json
+Match:  1 of 1
+
+    chore(release): bump angular version to alpha.41
+
+1) {
+2)   &quot;name&quot;: &quot;angular&quot;,
+3)   &quot;version&quot;: &quot;2.0.0-alpha.41&quot;,
+4)   &quot;branchPattern&quot;: &quot;2.0.*&quot;,
+5)   &quot;description&quot;: &quot;Angular 2 - a web framework for modern web apps&quot;,
+6)   &quot;homepage&quot;: &quot;https://github.com/angular/angular&quot;,
+7)   &quot;bugs&quot;: &quot;https://github.com/angular/angular/issues&quot;,</code></pre>
+    <h2 id="hyper-blame">
+      <a
+        href="https://commondatastorage.googleapis.com/chrome-infra-docs/flat/depot_tools/docs/html/git-hyper-blame.html"
+        >hyper-blame</a
+      >
+    </h2>
+    <pre><code>$ git hyper-blame -i 3ddda43c ipsum.txt
+c6eb3bfa (lorem 2014-08-11 23:15:57 +0000  1) LOREM IPSUM DOLOR SIT AMET, CONSECTETUR
+134200d1 (lorem 2014-04-10 08:54:46 +0000 2*) ADIPISCING ELIT, SED DO EIUSMOD TEMPOR
+a34a1d0d (ipsum 2014-04-11 11:25:04 +0000 3*) INCIDIDUNT UT LABORE ET DOLORE MAGNA
+134200d1 (lorem 2014-04-10 08:54:46 +0000 4*) ALIQUA. UT ENIM AD MINIM VENIAM, QUIS
+c6eb3bfa (lorem 2014-08-11 23:15:57 +0000  5) NOSTRUD EXERCITATION ULLAMCO LABORIS
+0f0d17bd (dolor 2014-06-02 11:31:48 +0000 6*) NISI UT ALIQUIP EX EA COMMODO CONSEQUAT.</code></pre>
+    <h2 id="git-word-blame">
+      <a href="https://framagit.org/mdamien/git-word-blame">git-word-blame</a>
+    </h2>
+    <pre><code>$ git word-blame README.md
+results in /tmp/word-blame-output/
+ - author_stats.tsv
+ - commit_stats.tsv
+ - word-blame-by-commit.html
+ - word-blame-by-author.html
+ - text-output</code></pre>
+    <figure>
+      <img
+        src="https://user-images.githubusercontent.com/1469823/57202569-0247eb00-6fa7-11e9-8549-f55d81299fab.png"
+        alt="git word-blame on this README"
+      />
+      <figcaption>git word-blame on this README</figcaption>
+    </figure>
+    <h2 id="git-fire">
+      <a href="https://github.com/qw3rtman/git-fire">git-fire</a>
+    </h2>
+    <pre><code>$ git fire
+Switched to a new branch &#39;fire-master-maochenyan@gmail.com-1451379915&#39;
+On branch fire-master-maochenyan@gmail.com-1451379915
+nothing to commit, working directory clean
+Counting objects: 2, done.
+Writing objects: 100% (2/2), 168 bytes | 0 bytes/s, done.
+Total 2 (delta 0), reused 0 (delta 0)
+To git@bitbucket.org:maochenyan/fire.git
+ * [new branch]      fire-master-maochenyan@gmail.com-1451379915 -&gt; fire-master-maochenyan@gmail.com-1451379915
+Branch fire-master-maochenyan@gmail.com-1451379915 set up to track remote branch fire-master-maochenyan@gmail.com-1451379915 from origin.
+
+
+Leave building!</code></pre>
+    <h2 id="git-town">
+      <a href="https://github.com/Originate/git-town">git-town</a>
+    </h2>
+    <p>TBD - PR Welcome!</p>
+    <h2 id="git-blame-someone-else">
+      <a href="https://github.com/jayphelps/git-blame-someone-else"
+        >git-blame-someone-else</a
+      >
+    </h2>
+    <pre><code>$ git blame-someone-else &#39;Steve Mao &lt;maochenyan@gmail.com&gt;&#39; 2efb4e3a061a2e8aaa58033e9c13c3e0e5fcde4b
+Steve Mao  is now the author of 2efb4e3. You&#39;re officially an asshole.</code></pre>
+    <h2 id="diff-so-fancy">
+      <a href="https://github.com/so-fancy/diff-so-fancy">diff-so-fancy</a>
+    </h2>
+    <pre><code>$ git dsf</code></pre>
+    <figure>
+      <img
+        src="https://user-images.githubusercontent.com/3429760/32387617-44c873da-c082-11e7-829c-6160b853adcb.png"
+        alt="diff-highlight vs diff-so-fancy"
+      />
+      <figcaption>diff-highlight vs diff-so-fancy</figcaption>
+    </figure>
+    <h2 id="git-stats">
+      <a href="https://github.com/IonicaBizau/git-stats">git-stats</a>
+    </h2>
+    <p><img src="http://i.imgur.com/PpM0i3v.png" /></p>
+    <h2 id="git-secret">
+      <a href="https://github.com/sobolevn/git-secret">git-secret</a>
+    </h2>
+    <h3 id="git-secret-init">git secret init</h3>
+    <pre><code>$ git secret init
+&#39;.gitsecret/&#39; created.</code></pre>
+    <h3 id="git-secret-tell">git secret tell</h3>
+    <pre><code>$ git secret tell my@email.com
+done. my@email.com added as a person who knows the secret.
+cleaning up...</code></pre>
+    <h3 id="git-secret-add">git secret add</h3>
+    <pre><code>$ git secret add hideme.txt
+1 items added.</code></pre>
+    <h3 id="git-secret-list">git secret list</h3>
+    <pre><code>$ git secret list
+hideme.txt</code></pre>
+    <h3 id="git-secret-hide">git secret hide</h3>
+    <pre><code>$ git secret hide
+done. all 1 files are hidden.</code></pre>
+    <h3 id="git-secret-reveal">git secret reveal</h3>
+    <pre><code>$ git secret reveal
+
+You need a passphrase to unlock the secret key for
+user: &quot;Test User &lt;my@email.com&gt;&quot;
+2048-bit RSA key, ID #######, created 2015-01-01 (main key ID #######)
+
+gpg: gpg-agent is not available in this session
+File `hideme.txt&#39; exists. Overwrite? (y/N) y
+done. all 1 files are revealed.</code></pre>
+    <h2 id="git-secrets">
+      <a href="https://github.com/awslabs/git-secrets">git-secrets</a>
+    </h2>
+    <blockquote>
+      <p>
+        Prevents you from committing passwords and other sensitive information
+        to a git repository.
+      </p>
+    </blockquote>
+    <p>TBD - PR Welcome!</p>
+    <h2 id="git-fixup">
+      <a href="https://github.com/keis/git-fixup">git-fixup</a>
+    </h2>
+    <pre><code>$ git diff --cached -U0
+diff --git a/README.md b/README.md
+index 0c700d1..7a57cef 100644
+--- a/README.md
++++ b/README.md
+@@ -1330 +1330 @@ $ git secret hide
+-done. all 1 files are hidden.
++done. all 3 files are hidden.
+$ git fixup 6d623f6525dd94b4aaea6f6ae2e7a59edc39bdb8
+24aa3d9c10cc02fe813dc83d1ac792cc2e7d705d [F] add screenshot of git-stats &lt;maochenyan@gmail.com&gt;
+6d623f6525dd94b4aaea6f6ae2e7a59edc39bdb8 [L] changed gif with text &lt;mail@sobolevn.me&gt;</code></pre>
+    <h2 id="git-recent">
+      <a href="https://github.com/paulirish/git-recent">git-recent</a>
+    </h2>
+    <pre><code>$ git recent</code></pre>
+    <figure>
+      <img
+        src="https://cloud.githubusercontent.com/assets/39191/17446638/039d4cee-5aff-11e6-9e11-4294f0020513.png"
+        alt="git-recent screenshot"
+      />
+      <figcaption>git-recent screenshot</figcaption>
+    </figure>
+    <h2 id="git-interactive-rebase-tool">
+      <a href="https://github.com/MitMaro/git-interactive-rebase-tool"
+        >git-interactive-rebase-tool</a
+      >
+    </h2>
+    <pre><code>$ git rebase -i master</code></pre>
+    <figure>
+      <img
+        src="https://raw.githubusercontent.com/MitMaro/git-interactive-rebase-tool/master/docs/assets/images/git-interactive-rebase-demo.gif"
+        alt="git-interactive-rebase-tool screenshot"
+      />
+      <figcaption>git-interactive-rebase-tool screenshot</figcaption>
+    </figure>
+    <h2 id="git-fiddle">
+      <a href="https://github.com/felixSchl/git-fiddle">git-fiddle</a>
+    </h2>
+    <pre><code>$ git fiddle -h
+git-fiddle
+
+Edit commit meta information during an *interactive* rebase.
+
+`git-fiddle(1)&#39; is a lightweight wrapper around `git-rebase(1)&#39; that
+annotates each commit with it&#39;s *author* date, the author name, as well
+as the commit message. Changes to any of these will then be applied
+using an &#39;exec&#39; script during the git-rebase sequence.
+
+Usage:
+  $SCRIPT [--[no-]-fiddle-messages] [args...]
+
+Options:
+  --[no-]fiddle-messages Do not edit commit messages. Useful for quick edits
+                         to author or date. This value can also be set using
+                         `git config fiddle.messages`.
+  [args...]              These arguments are passed verbatim to git-rebase.</code></pre>
+    <h2 id="git-user">
+      <a href="https://github.com/gesquive/git-user">git-user</a>
+    </h2>
+    <pre><code># add a work profile for Henry
+$ git user add work &quot;Dr. Henry Jekyll&quot; henry@jekyll.com
+Added profile &#39;work&#39;
+
+# add a personal profile for Edward
+$ git user add home &quot;Edward Hyde&quot; hyde@night.com
+Added profile &#39;home&#39;
+
+# list out our saved profiles
+$ git user list
+Global Profile:
+  User: Henry &lt;hjekyll@gmail.com&gt;
+
+Saved Profiles:
+  home: Edward Hyde &lt;hyde@night.com&gt;
+  work: Dr. Henry Jekyll &lt;henry@jekyll.com&gt;
+
+# set the current git repository user to the home profile
+$ git user set home
+The user for the &#39;project&#39; repository has been set too &#39;Edward Hyde &lt;hyde@night.com&gt;&#39;
+
+# list profiles again, notice how the current repository profile is now set
+$ git user
+Project Profile:
+  Path: /path/to/git/project
+  User: Edward Hyde &lt;hyde@night.com&gt;
+
+Saved Profiles:
+  home: Edward Hyde &lt;hyde@night.com&gt;
+  work: Dr. Henry Jekyll &lt;henry@jekyll.com&gt;</code></pre>
+    <h2 id="gitsome">
+      <a href="https://github.com/donnemartin/gitsome">gitsome</a>
+    </h2>
+    <p>TBD - PR Welcome!</p>
+    <h2 id="git-hound">
+      <a href="https://github.com/ezekg/git-hound">git-hound</a>
+    </h2>
+    <p>TBD - PR Welcome!</p>
+    <h2 id="git-recall">
+      <a href="https://github.com/Fakerr/git-recall">git-recall</a>
+    </h2>
+    <p>
+      <img
+        src="https://camo.githubusercontent.com/eb306717b95724c33dd0de91faa535a4818cc7d0/687474703a2f2f696d6775722e636f6d2f7a7577324c71572e676966"
+      />
+    </p>
+    <pre><code>$ git recall
+# By default (without options), the command will display commits from yesterday and
+# for the current user.
+
+$ git recall -d 5 -a &quot;Doge&quot;
+# Show all Doge&#39;s commits from 5 days ago.
+
+$ git recall -d 5 -a &quot;all&quot;
+# Show commits of all contributors from 5 days ago.
+
+$ git recall -f
+# Fetch commits beforehand.</code></pre>
+    <h2 id="git-standup">
+      <a href="https://github.com/kamranahmedse/git-standup">git-standup</a>
+    </h2>
+    <pre><code>$ git standup
+2f50b39c - docs(commit messages): use commitizen to generate Conventional Commits (12 hours ago) &lt;Steve Mao&gt;
+9af3600e - fix tests (12 hours ago) &lt;Steve Mao&gt;
+7f17ba97 - docs: title case (12 hours ago) &lt;Steve Mao&gt;
+a6d6203c - do not scroll when search is open (12 hours ago) &lt;Steve Mao&gt;
+53fe681a - chore(pkg): add repo url (12 hours ago) &lt;Steve Mao&gt;
+5e952ac0 - subtitle should be generic (13 hours ago) &lt;Steve Mao&gt;
+adbc5423 - add ci/cd to readme. (13 hours ago) &lt;Steve Mao&gt;
+a1097116 - add versioning to readme (14 hours ago) &lt;Steve Mao&gt;
+6b6e7465 - add test coverage (15 hours ago) &lt;Steve Mao&gt;</code></pre>
+    <h2 id="commitizen">
+      <a href="https://github.com/commitizen/cz-cli">commitizen</a>
+    </h2>
+    <pre><code>$ git cz
+cz-cli@2.9.6, cz-conventional-changelog@1.2.0
+
+
+Line 1 will be cropped at 100 characters. All other lines will be wrapped after 100 characters.
+
+? Select the type of change that you&#39;re committing: (Use arrow keys)
+❯ feat:     A new feature
+  fix:      A bug fix
+  docs:     Documentation only changes
+  style:    Changes that do not affect the meaning of the code (white-space, formatting, missing semi
+-colons, etc)
+  refactor: A code change that neither fixes a bug nor adds a feature
+  perf:     A code change that improves performance
+  test:     Adding missing tests or correcting existing tests</code></pre>
+    <h2 id="git-fresh">
+      <a href="https://github.com/imsky/git-fresh">git-fresh</a>
+    </h2>
+    <p>TBD - PR Welcome!</p>
+    <h2 id="git-fs">
+      <a href="https://github.com/freddi301/git-fs">git-fs</a>
+    </h2>
+    <pre><code>$ git fs
+Mounting readonly filesystem on ./git/fs</code></pre>
+    <h2 id="git-url">
+      <a href="https://github.com/zdharma/git-url">git-url</a>
+    </h2>
+    <h3 id="git-url-1">git url</h3>
+    <pre><code>$ cd ~/github/git-url.git
+$ git url
+Encoding... INPUT is next paragraph:
+
+Protocol:  https
+Site:      github.com
+Repo:      zdharma/git-url
+Revision:  master
+
+gitu://ҝjȩMżEäḝЃȣϟṈӛŀї
+
+$ git url -r v1.0
+Encoding... INPUT is next paragraph:
+
+Protocol:  https
+Site:      github.com
+Repo:      zdharma/git-url
+Revision:  v1.0
+
+gitu://ŪĪАϔEäḝЃȣϟṈӛŀї
+
+$ git url -q -p lib/common.sh   # -q - quiet, -p - path
+gitu://eḶȸṋ0oǗȟЗÛjȩMżEäḝЃȣϟṈӛŀї
+
+$ git url //eḶȸṋ0oǗȟЗÛjȩMżEäḝЃȣϟṈӛŀї
+Decoding... OUTPUT is:
+
+Protocol:  https
+Site:      github.com
+Repo:      zdharma/git-url
+Revision:  master
+File:      lib/common.sh
+
+https://github.com/zdharma/git-url</code></pre>
+    <h3 id="git-guclone">git guclone</h3>
+    <pre><code>$ git guclone ŪĪАϔEäḝЃȣϟṈӛŀї
+Cloning URL https://github.com/zdharma/git-url for revision v1.0
+
+Cloning into &#39;git-url&#39;...
+remote: Counting objects: 144, done.
+remote: Compressing objects: 100% (111/111), done.
+remote: Total 144 (delta 71), reused 102 (delta 32), pack-reused 0
+Receiving objects: 100% (144/144), 116.43 KiB | 125.00 KiB/s, done.
+Resolving deltas: 100% (71/71), done.
+
+Checking out revision/reference v1.0... OK
+HEAD is at: 5d10a204, created directory git-url</code></pre>
+    <h2 id="git-signatures">
+      <a href="https://github.com/hashbang/git-signatures">git-signatures</a>
+    </h2>
+    <h3 id="signatures-add-push">signatures add –push</h3>
+    <pre><code>$ git signatures add --push v1.0.0
+Updated tag &#39;v1.0.0&#39; (was 4de5afd)
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 906 bytes | 906.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To git@github.com:jsmith/test-signatures
+   4b5300d..5b1f2cd  refs/notes/signatures -&gt; refs/notes/signatures
+ + 4de5afd...5b1f2cd v1.0.0 -&gt; v1.0.0 (forced update)</code></pre>
+    <h3 id="signatures-verify">signatures verify</h3>
+    <pre><code>$ git signatures verify v1.0.0</code></pre>
+    <h3 id="signatures-verify-min-count-2">signatures verify –min-count 2</h3>
+    <pre><code>$ git signatures verify --min-count 2 v1.0.0
+Failed to find enough verified signatures to satisfy: min_count=2
+
+Signature verification could fail simply because your local gnupg
+keychain and trustdb does not contain the required keys.
+
+For detailed signature status run:
+
+&gt; git signatures show</code></pre>
+    <h3 id="signatures-show">signatures show</h3>
+    <pre><code>$ git signatures show v1.0.0
+ Public Key ID    | Status     | Trust     | Date                         | Signer Name
+=======================================================================================================================
+01234567890ABCDEF | VALIDSIG   | ULTIMATE  | Sat Nov 10 13:16:10 EST 2018 | Steve Mao &lt;maochenyan@gmail.com&gt;</code></pre>
+    <h2 id="git-profile">
+      <a href="https://github.com/dm3ch/git-profile-manager">git-profile</a>
+    </h2>
+    <h3 id="add-a-work-profile">add a work profile</h3>
+    <pre><code>$ git profile add work
+Name: Name Surname
+Email: name@work-domain.com
+Signing Key:
+Profile work added successfully</code></pre>
+    <h3 id="add-a-personal-profile">add a personal profile</h3>
+    <pre><code>$ git profile add home -n &quot;Name Surname&quot; -e name@gmail.com
+Profile home added successfully</code></pre>
+    <h3 id="list-out-our-saved-profiles">list out our saved profiles</h3>
+    <pre><code>$ git profile list
+Existing profiles:
+work
+home</code></pre>
+    <h3 id="set-the-current-git-repository-user-to-the-home-profile">
+      set the current git repository user to the home profile
+    </h3>
+    <pre><code>$ git profile use work</code></pre>
+    <p>Currently there will be no output in case of success</p>
+    <h2 id="git-revise">
+      <a href="https://github.com/mystor/git-revise">git-revise</a>
+    </h2>
+    <p>TBD - PR Welcome!</p>
+    <h2 id="filter-repo">
+      <a href="https://github.com/newren/git-filter-repo">filter-repo</a>
+    </h2>
+    <p>TBD - PR Welcome!</p>
+    <h2 id="license">License</h2>
+    <p>
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/"
+        ><img
+          src="https://i.creativecommons.org/p/zero/1.0/88x31.png"
+          alt="CC0"
+      /></a>
+    </p>
+    <p>
+      To the extent possible under law,
+      <a href="https://github.com/stevemao">Steve Mao</a> has waived all
+      copyright and related or neighboring rights to this work.
+    </p>
+  </body>
+</html>

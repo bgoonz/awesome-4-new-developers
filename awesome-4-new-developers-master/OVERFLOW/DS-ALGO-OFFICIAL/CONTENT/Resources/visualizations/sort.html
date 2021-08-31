@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Structurex</title>
+    <link rel="stylesheet" href="src/sort/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div id="header-inner">
+        <a href="#" id="logo"></a>
+        <a class="navbar-brand" rel="home" href="#" title="logo">
+          <img src="src/assets/logo.png" width="65" height="80" />
+        </a>
+        <div class="container blue circleBehind">
+          <a href="#">Sorting</a>
+          <a href="search.html">Searching</a>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div id="array_container"></div>
+    </section>
+
+    <section>
+      <div id="array_container2">
+        <button class="b1" onclick="sorting(1)">Bubble Sort</button>
+        <button class="b1" onclick="sorting(2)">Insertion Sort</button>
+        <button class="b1" onclick="sorting(3)">Selection Sort</button>
+        <button class="b1" onclick="sorting(4)">Merge Sort</button>
+        <button class="b1" onclick="sorting(5)">Quick Sort</button>
+        <button class="b1" onclick="sorting(6)">Heap Sort</button>
+      </div>
+    </section>
+
+    <section>
+      <div id="array_container3">
+        <label for="values">Number of values:</label>
+        <select name="values" id="values" onchange="changeN()">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50" selected>50</option>
+          <option value="100">100</option>
+        </select>
+        <label for="speed">Speed:</label>
+        <select name="speed" id="speed" onchange="changeSpeed()">
+          <option value="8">0.5x</option>
+          <option value="4" selected>1x</option>
+          <option value="3">1.5x</option>
+          <option value="2">2x</option>
+          <option value="1">4x</option>
+        </select>
+      </div>
+    </section>
+
+    <script src="src/sort/js/index.js"></script>
+    <script src="src/sort/js/heapSort.js"></script>
+    <script src="src/sort/js/selectionSort.js"></script>
+    <script src="src/sort/js/insertionSort.js"></script>
+    <script src="src/sort/js/mergeSort.js"></script>
+    <script src="src/sort/js/quickSort.js"></script>
+    <script src="src/sort/js/bubbleSort.js"></script>
+  </body>
+</html>

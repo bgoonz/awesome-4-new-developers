@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Javascript photo gallery</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta
+      name="description"
+      content="Made with WOW Slider - Create beautiful, responsive image sliders in a few clicks. Awesome skins and animations. Javascript photo gallery"
+    />
+
+    <!-- Start WOWSlider.com HEAD section -->
+    <!-- add to the <head> of your page -->
+    <link rel="stylesheet" type="text/css" href="engine1/style.css" />
+    <script type="text/javascript" src="engine1/jquery.js"></script>
+    <!-- End WOWSlider.com HEAD section -->
+  </head>
+
+  <body style="background-color: #d7d7d7; margin: auto">
+    <!-- Start WOWSlider.com BODY section -->
+    <!-- add to the <body> 
+                                
+                                
+                                <a href="https://github.com/bgoonz/DS-ALGO-OFFICIAL" class="github-corner"
+                                aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250"
+                                    style="z-index: 100000; fill:#194ccdaf; color:#fff; position: fixed; top: 20px; border: 0; left: 20px; transform: scale(-1.5, 1.5);"
+                                    aria-hidden="true">
+                                    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+                                    <path
+                                        d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                                        fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+                                    </path>
+                                    <path
+                                        d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                                        fill="currentColor" class="octo-body"></path>
+                                </svg></a>
+                                
+                                
+                               
+ of your page -->
+    <div id="wowslider-container1">
+      <div class="ws_images">
+        <ul>
+          <li>
+            <img
+              src="data1/images/graph.png"
+              alt="graph"
+              title="graph"
+              id="wows1_0"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/graphmd.png"
+              alt="graph-md"
+              title="graph-md"
+              id="wows1_1"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/histogram.png"
+              alt="histogram"
+              title="histogram"
+              id="wows1_2"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/histogram_area.png"
+              alt="histogram_area"
+              title="histogram_area"
+              id="wows1_3"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/image001.png"
+              alt="image001"
+              title="image001"
+              id="wows1_4"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/insertionsort.jpg"
+              alt="InsertionSort"
+              title="InsertionSort"
+              id="wows1_5"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/leavesdepthheight.png"
+              alt="leaves-depth-height"
+              title="leaves-depth-height"
+              id="wows1_6"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/linkedlist.png"
+              alt="linked-list"
+              title="linked-list"
+              id="wows1_7"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/maximumsumcircularsubarray.png"
+              alt="maximum-sum-circular-subarray"
+              title="maximum-sum-circular-subarray"
+              id="wows1_8"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/mergesort.jpg"
+              alt="MergeSort"
+              title="MergeSort"
+              id="wows1_9"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/obj2array.jpg"
+              alt="obj2Array"
+              title="obj2Array"
+              id="wows1_10"
+            />
+          </li>
+          <li>
+            <img src="data1/images/ok.png" alt="ok" title="ok" id="wows1_11" />
+          </li>
+          <li>
+            <img
+              src="data1/images/pascaltriangleanimated2.jpg"
+              alt="PascalTriangleAnimated2"
+              title="PascalTriangleAnimated2"
+              id="wows1_12"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/postorder.png"
+              alt="post-order"
+              title="post-order"
+              id="wows1_13"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/preandinordertraversal.png"
+              alt="pre-and-in-order-traversal"
+              title="pre-and-in-order-traversal"
+              id="wows1_14"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/queue.jpg"
+              alt="queue"
+              title="queue"
+              id="wows1_15"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/queue_0.png"
+              alt="queue"
+              title="queue"
+              id="wows1_16"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/quicksort.jpg"
+              alt="QuickSort"
+              title="QuickSort"
+              id="wows1_17"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/rainwatertrap.png"
+              alt="rainwatertrap"
+              title="rainwatertrap"
+              id="wows1_18"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/recursionflow.jpg"
+              alt="recursion-flow"
+              title="recursion-flow"
+              id="wows1_19"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/robot_maze.png"
+              alt="robot_maze"
+              title="robot_maze"
+              id="wows1_20"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/selectionsort.jpg"
+              alt="SelectionSort"
+              title="SelectionSort"
+              id="wows1_21"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/slldiagram.png"
+              alt="SLL-diagram"
+              title="SLL-diagram"
+              id="wows1_22"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/stack.jpg"
+              alt="stack"
+              title="stack"
+              id="wows1_23"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/stack_0.png"
+              alt="stack"
+              title="stack"
+              id="wows1_24"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/traversals.png"
+              alt="traversals"
+              title="traversals"
+              id="wows1_25"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/tree.png"
+              alt="tree"
+              title="tree"
+              id="wows1_26"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/weightedorunweighted.png"
+              alt="weighted-or-unweighted"
+              title="weighted-or-unweighted"
+              id="wows1_27"
+            />
+          </li>
+          <li>
+            <img src="data1/images/ya.png" alt="ya" title="ya" id="wows1_28" />
+          </li>
+          <li>
+            <img src="data1/images/2.png" alt="2" title="2" id="wows1_29" />
+          </li>
+          <li>
+            <img src="data1/images/3.png" alt="3" title="3" id="wows1_30" />
+          </li>
+          <li>
+            <img
+              src="data1/images/8queens.png"
+              alt="8-queens"
+              title="8-queens"
+              id="wows1_31"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/200pxtelephonekeypad2.svg.png"
+              alt="200px-Telephone-keypad2.svg"
+              title="200px-Telephone-keypad2.svg"
+              id="wows1_32"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/250pxsudokubyl2g20050714.svg.png"
+              alt="250px-Sudoku-by-L2G-20050714.svg"
+              title="250px-Sudoku-by-L2G-20050714.svg"
+              id="wows1_33"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/250pxsudokubyl2g20050714_solution.svg.png"
+              alt="250px-Sudoku-by-L2G-20050714_solution.svg"
+              title="250px-Sudoku-by-L2G-20050714_solution.svg"
+              id="wows1_34"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/1604180981115.png"
+              alt="1604180981115"
+              title="1604180981115"
+              id="wows1_35"
+            />
+          </li>
+          <li>
+            <img src="data1/images/a1.png" alt="a1" title="a1" id="wows1_36" />
+          </li>
+          <li>
+            <img
+              src="data1/images/arr1.png"
+              alt="arr1"
+              title="arr1"
+              id="wows1_37"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/array.png"
+              alt="array"
+              title="array"
+              id="wows1_38"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/arrayinmemory.png"
+              alt="array-in-memory"
+              title="array-in-memory"
+              id="wows1_39"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/balance_1.jpg"
+              alt="balance_1"
+              title="balance_1"
+              id="wows1_40"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/balance_2.jpg"
+              alt="balance_2"
+              title="balance_2"
+              id="wows1_41"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/binarytree.png"
+              alt="binary-tree"
+              title="binary-tree"
+              id="wows1_42"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/bstmidele.png"
+              alt="bst-mid-ele"
+              title="bst-mid-ele"
+              id="wows1_43"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/bubblesort.jpg"
+              alt="BubbleSort"
+              title="BubbleSort"
+              id="wows1_44"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/bvstrda.png"
+              alt="b-vs-trda"
+              title="b-vs-trda"
+              id="wows1_45"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/del_node_1.jpg"
+              alt="del_node_1"
+              title="del_node_1"
+              id="wows1_46"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/del_node_supp.jpg"
+              alt="del_node_supp"
+              title="del_node_supp"
+              id="wows1_47"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/dfs.png"
+              alt="dfs"
+              title="dfs"
+              id="wows1_48"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/directedorundirectedcycles.png"
+              alt="directed-or-undirected-cycles"
+              title="directed-or-undirected-cycles"
+              id="wows1_49"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/error.png"
+              alt="error"
+              title="error"
+              id="wows1_50"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/fib_memoized.png"
+              alt="fib_memoized"
+              title="fib_memoized"
+              id="wows1_51"
+            />
+          </li>
+          <li>
+            <img
+              src="data1/images/fib_tree.png"
+              alt="fib_tree"
+              title="fib_tree"
+              id="wows1_52"
+            />
+          </li>
+          <li>
+            <a href="http://wowslider.net"
+              ><img
+                src="data1/images/fib_tree_duplicates.png"
+                alt="image slider"
+                title="fib_tree_duplicates"
+                id="wows1_53"
+            /></a>
+          </li>
+          <li>
+            <img
+              src="data1/images/githubrepomenubarwiki.png"
+              alt="github-repo-menu-bar-wiki"
+              title="github-repo-menu-bar-wiki"
+              id="wows1_54"
+            />
+          </li>
+        </ul>
+      </div>
+      <div class="ws_bullets">
+        <div>
+          <a href="#" title="graph"
+            ><span><img src="data1/tooltips/graph.png" alt="graph" />1</span></a
+          >
+          <a href="#" title="graph-md"
+            ><span
+              ><img src="data1/tooltips/graphmd.png" alt="graph-md" />2</span
+            ></a
+          >
+          <a href="#" title="histogram"
+            ><span
+              ><img src="data1/tooltips/histogram.png" alt="histogram" />3</span
+            ></a
+          >
+          <a href="#" title="histogram_area"
+            ><span
+              ><img
+                src="data1/tooltips/histogram_area.png"
+                alt="histogram_area"
+              />4</span
+            ></a
+          >
+          <a href="#" title="image001"
+            ><span
+              ><img src="data1/tooltips/image001.png" alt="image001" />5</span
+            ></a
+          >
+          <a href="#" title="InsertionSort"
+            ><span
+              ><img
+                src="data1/tooltips/insertionsort.jpg"
+                alt="InsertionSort"
+              />6</span
+            ></a
+          >
+          <a href="#" title="leaves-depth-height"
+            ><span
+              ><img
+                src="data1/tooltips/leavesdepthheight.png"
+                alt="leaves-depth-height"
+              />7</span
+            ></a
+          >
+          <a href="#" title="linked-list"
+            ><span
+              ><img
+                src="data1/tooltips/linkedlist.png"
+                alt="linked-list"
+              />8</span
+            ></a
+          >
+          <a href="#" title="maximum-sum-circular-subarray"
+            ><span
+              ><img
+                src="data1/tooltips/maximumsumcircularsubarray.png"
+                alt="maximum-sum-circular-subarray"
+              />9</span
+            ></a
+          >
+          <a href="#" title="MergeSort"
+            ><span
+              ><img
+                src="data1/tooltips/mergesort.jpg"
+                alt="MergeSort"
+              />10</span
+            ></a
+          >
+          <a href="#" title="obj2Array"
+            ><span
+              ><img
+                src="data1/tooltips/obj2array.jpg"
+                alt="obj2Array"
+              />11</span
+            ></a
+          >
+          <a href="#" title="ok"
+            ><span><img src="data1/tooltips/ok.png" alt="ok" />12</span></a
+          >
+          <a href="#" title="PascalTriangleAnimated2"
+            ><span
+              ><img
+                src="data1/tooltips/pascaltriangleanimated2.jpg"
+                alt="PascalTriangleAnimated2"
+              />13</span
+            ></a
+          >
+          <a href="#" title="post-order"
+            ><span
+              ><img
+                src="data1/tooltips/postorder.png"
+                alt="post-order"
+              />14</span
+            ></a
+          >
+          <a href="#" title="pre-and-in-order-traversal"
+            ><span
+              ><img
+                src="data1/tooltips/preandinordertraversal.png"
+                alt="pre-and-in-order-traversal"
+              />15</span
+            ></a
+          >
+          <a href="#" title="queue"
+            ><span
+              ><img src="data1/tooltips/queue.jpg" alt="queue" />16</span
+            ></a
+          >
+          <a href="#" title="queue"
+            ><span
+              ><img src="data1/tooltips/queue_0.png" alt="queue" />17</span
+            ></a
+          >
+          <a href="#" title="QuickSort"
+            ><span
+              ><img
+                src="data1/tooltips/quicksort.jpg"
+                alt="QuickSort"
+              />18</span
+            ></a
+          >
+          <a href="#" title="rainwatertrap"
+            ><span
+              ><img
+                src="data1/tooltips/rainwatertrap.png"
+                alt="rainwatertrap"
+              />19</span
+            ></a
+          >
+          <a href="#" title="recursion-flow"
+            ><span
+              ><img
+                src="data1/tooltips/recursionflow.jpg"
+                alt="recursion-flow"
+              />20</span
+            ></a
+          >
+          <a href="#" title="robot_maze"
+            ><span
+              ><img
+                src="data1/tooltips/robot_maze.png"
+                alt="robot_maze"
+              />21</span
+            ></a
+          >
+          <a href="#" title="SelectionSort"
+            ><span
+              ><img
+                src="data1/tooltips/selectionsort.jpg"
+                alt="SelectionSort"
+              />22</span
+            ></a
+          >
+          <a href="#" title="SLL-diagram"
+            ><span
+              ><img
+                src="data1/tooltips/slldiagram.png"
+                alt="SLL-diagram"
+              />23</span
+            ></a
+          >
+          <a href="#" title="stack"
+            ><span
+              ><img src="data1/tooltips/stack.jpg" alt="stack" />24</span
+            ></a
+          >
+          <a href="#" title="stack"
+            ><span
+              ><img src="data1/tooltips/stack_0.png" alt="stack" />25</span
+            ></a
+          >
+          <a href="#" title="traversals"
+            ><span
+              ><img
+                src="data1/tooltips/traversals.png"
+                alt="traversals"
+              />26</span
+            ></a
+          >
+          <a href="#" title="tree"
+            ><span><img src="data1/tooltips/tree.png" alt="tree" />27</span></a
+          >
+          <a href="#" title="weighted-or-unweighted"
+            ><span
+              ><img
+                src="data1/tooltips/weightedorunweighted.png"
+                alt="weighted-or-unweighted"
+              />28</span
+            ></a
+          >
+          <a href="#" title="ya"
+            ><span><img src="data1/tooltips/ya.png" alt="ya" />29</span></a
+          >
+          <a href="#" title="2"
+            ><span><img src="data1/tooltips/2.png" alt="2" />30</span></a
+          >
+          <a href="#" title="3"
+            ><span><img src="data1/tooltips/3.png" alt="3" />31</span></a
+          >
+          <a href="#" title="8-queens"
+            ><span
+              ><img src="data1/tooltips/8queens.png" alt="8-queens" />32</span
+            ></a
+          >
+          <a href="#" title="200px-Telephone-keypad2.svg"
+            ><span
+              ><img
+                src="data1/tooltips/200pxtelephonekeypad2.svg.png"
+                alt="200px-Telephone-keypad2.svg"
+              />33</span
+            ></a
+          >
+          <a href="#" title="250px-Sudoku-by-L2G-20050714.svg"
+            ><span
+              ><img
+                src="data1/tooltips/250pxsudokubyl2g20050714.svg.png"
+                alt="250px-Sudoku-by-L2G-20050714.svg"
+              />34</span
+            ></a
+          >
+          <a href="#" title="250px-Sudoku-by-L2G-20050714_solution.svg"
+            ><span
+              ><img
+                src="data1/tooltips/250pxsudokubyl2g20050714_solution.svg.png"
+                alt="250px-Sudoku-by-L2G-20050714_solution.svg"
+              />35</span
+            ></a
+          >
+          <a href="#" title="1604180981115"
+            ><span
+              ><img
+                src="data1/tooltips/1604180981115.png"
+                alt="1604180981115"
+              />36</span
+            ></a
+          >
+          <a href="#" title="a1"
+            ><span><img src="data1/tooltips/a1.png" alt="a1" />37</span></a
+          >
+          <a href="#" title="arr1"
+            ><span><img src="data1/tooltips/arr1.png" alt="arr1" />38</span></a
+          >
+          <a href="#" title="array"
+            ><span
+              ><img src="data1/tooltips/array.png" alt="array" />39</span
+            ></a
+          >
+          <a href="#" title="array-in-memory"
+            ><span
+              ><img
+                src="data1/tooltips/arrayinmemory.png"
+                alt="array-in-memory"
+              />40</span
+            ></a
+          >
+          <a href="#" title="balance_1"
+            ><span
+              ><img
+                src="data1/tooltips/balance_1.jpg"
+                alt="balance_1"
+              />41</span
+            ></a
+          >
+          <a href="#" title="balance_2"
+            ><span
+              ><img
+                src="data1/tooltips/balance_2.jpg"
+                alt="balance_2"
+              />42</span
+            ></a
+          >
+          <a href="#" title="binary-tree"
+            ><span
+              ><img
+                src="data1/tooltips/binarytree.png"
+                alt="binary-tree"
+              />43</span
+            ></a
+          >
+          <a href="#" title="bst-mid-ele"
+            ><span
+              ><img
+                src="data1/tooltips/bstmidele.png"
+                alt="bst-mid-ele"
+              />44</span
+            ></a
+          >
+          <a href="#" title="BubbleSort"
+            ><span
+              ><img
+                src="data1/tooltips/bubblesort.jpg"
+                alt="BubbleSort"
+              />45</span
+            ></a
+          >
+          <a href="#" title="b-vs-trda"
+            ><span
+              ><img src="data1/tooltips/bvstrda.png" alt="b-vs-trda" />46</span
+            ></a
+          >
+          <a href="#" title="del_node_1"
+            ><span
+              ><img
+                src="data1/tooltips/del_node_1.jpg"
+                alt="del_node_1"
+              />47</span
+            ></a
+          >
+          <a href="#" title="del_node_supp"
+            ><span
+              ><img
+                src="data1/tooltips/del_node_supp.jpg"
+                alt="del_node_supp"
+              />48</span
+            ></a
+          >
+          <a href="#" title="dfs"
+            ><span><img src="data1/tooltips/dfs.png" alt="dfs" />49</span></a
+          >
+          <a href="#" title="directed-or-undirected-cycles"
+            ><span
+              ><img
+                src="data1/tooltips/directedorundirectedcycles.png"
+                alt="directed-or-undirected-cycles"
+              />50</span
+            ></a
+          >
+          <a href="#" title="error"
+            ><span
+              ><img src="data1/tooltips/error.png" alt="error" />51</span
+            ></a
+          >
+          <a href="#" title="fib_memoized"
+            ><span
+              ><img
+                src="data1/tooltips/fib_memoized.png"
+                alt="fib_memoized"
+              />52</span
+            ></a
+          >
+          <a href="#" title="fib_tree"
+            ><span
+              ><img src="data1/tooltips/fib_tree.png" alt="fib_tree" />53</span
+            ></a
+          >
+          <a href="#" title="fib_tree_duplicates"
+            ><span
+              ><img
+                src="data1/tooltips/fib_tree_duplicates.png"
+                alt="fib_tree_duplicates"
+              />54</span
+            ></a
+          >
+          <a href="#" title="github-repo-menu-bar-wiki"
+            ><span
+              ><img
+                src="data1/tooltips/githubrepomenubarwiki.png"
+                alt="github-repo-menu-bar-wiki"
+              />55</span
+            ></a
+          >
+        </div>
+      </div>
+      <div class="ws_script" style="position: absolute; left: -99%">
+        <a href="http://wowslider.net">javascript photo gallery</a> by
+        WOWSlider.com v9.0
+      </div>
+      <div class="ws_shadow"></div>
+    </div>
+    <script type="text/javascript" src="engine1/wowslider.js"></script>
+    <script type="text/javascript" src="engine1/script.js"></script>
+    <!-- End WOWSlider.com BODY section -->
+  </body>
+</html>

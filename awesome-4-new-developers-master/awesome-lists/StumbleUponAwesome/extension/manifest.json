@@ -1,0 +1,53 @@
+{
+  "name": "StumbleUponAwesome",
+  "version": "1.1.2",
+  "description": "An awesome internet discovery button. Like StumbleUpon, but for developers, tech and science lovers.",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "images/icon_16.png",
+    "images/icon_32.png",
+    "images/icon_128.png",
+    "images/rabbithole.gif",
+    "images/rabbithole.png",
+    "images/rabbithole_small.png",
+    "images/spiral.png",
+    "images/close.svg"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["styles.css"],
+      "run_at": "document_idle",
+      "js": ["content.js"]
+    }
+  ],
+  "permissions": ["storage", "contextMenus"],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon_16.png",
+      "32": "images/icon_32.png",
+      "48": "images/icon_48.png",
+      "128": "images/icon_128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon_16.png",
+    "32": "images/icon_32.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+Shift+S",
+        "mac": "Alt+Shift+S",
+        "chromeos": "Alt+Shift+S",
+        "linux": "Alt+Shift+S"
+      }
+    }
+  },
+  "manifest_version": 2
+}

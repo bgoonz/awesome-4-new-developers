@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README.ko</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="github-치트-시트-awesome">
+      GitHub 치트 시트
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <p>
+      Git과 GitHub에서 꽤 유용하지만 숨겨져 있는 기능들에 대해 다룹니다. 이 치트
+      시트는 <a href="https://github.com/holman">Zach Holman</a>이 Aloha Ruby
+      Conference 2012에서 발표한
+      <a href="http://confreaks.tv/videos/aloharuby2012-git-and-github-secrets"
+        >Git과 GitHub의 비밀들</a
+      >
+      (<a href="https://speakerdeck.com/holman/git-and-github-secrets"
+        >슬라이드</a
+      >)과 WDCNZ 2013에서 발표한
+      <a href="https://vimeo.com/72955426"
+        >Git과 GitHub에 대한 더 많은 비밀들</a
+      >
+      (<a href="https://speakerdeck.com/holman/more-git-and-github-secrets"
+        >슬라이드</a
+      >)에서 영감을 받아 작성되었습니다.
+    </p>
+    <p>
+      <em
+        >단축주소:
+        <a href="http://git.io/sheet"><code>http://git.io/sheet</code></a></em
+      >
+    </p>
+    <p>
+      <em
+        >Read this in other languages: <a href="README.md">English</a>,
+        <a href="README.ko.md">한국어</a>, <a href="README.ja.md">日本語</a>,
+        <a href="README.zh-cn.md">简体中文</a>,
+        <a href="README.zh-tw.md">正體中文</a>.</em
+      >
+    </p>
+    <h1 id="목록">목록</h1>
+    <ul>
+      <li><a href="#github">GitHub</a></li>
+      <li><a href="#ignore-whitespace">Ignore Whitespace</a></li>
+      <li><a href="#adjust-tab-space">Adjust Tab Space</a></li>
+      <li><a href="#commit-history-by-author">Commit History by Author</a></li>
+      <li><a href="#cloning-a-repository">Cloning a Repository</a></li>
+      <li>
+        <a href="#branch">Branch</a>
+        <ul>
+          <li>
+            <a href="#compare-all-branches-to-another-branch"
+              >Compare all Branches to Another Branch</a
+            >
+          </li>
+          <li><a href="#comparing-branches">Comparing Branches</a></li>
+          <li>
+            <a href="#compare-branches-across-forked-repositories"
+              >Compare Branches across Forked Repositories</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li><a href="#gists">Gists</a></li>
+      <li><a href="#gitio">Git.io</a></li>
+      <li><a href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
+      <li>
+        <a href="#line-highlighting-in-repositories"
+          >Line Highlighting in Repositories</a
+        >
+      </li>
+      <li>
+        <a href="#closing-issues-via-commit-messages"
+          >Closing Issues via Commit Messages</a
+        >
+      </li>
+      <li><a href="#cross-link-issues">Cross-Link Issues</a></li>
+      <li><a href="#locking-conversations">Locking Conversations</a></li>
+      <li>
+        <a href="#ci-status-on-pull-requests">CI Status on Pull Requests</a>
+      </li>
+      <li><a href="#filters">Filters</a></li>
+      <li>
+        <a href="#syntax-highlighting-in-markdown-files"
+          >Syntax Highlighting in Markdown Files</a
+        >
+      </li>
+      <li><a href="#emojis">Emojis</a></li>
+      <li>
+        <a href="#imagesgifs">Images/GIFs</a>
+        <ul>
+          <li>
+            <a href="#embedding-images-in-github-wiki"
+              >Embedding Images in GitHub Wiki</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li><a href="#quick-quoting">Quick Quoting</a></li>
+      <li>
+        <a href="#pasting-clipboard-image-to-comments"
+          >Pasting Clipboard Image to Comments</a
+        >
+      </li>
+      <li><a href="#quick-licensing">Quick Licensing</a></li>
+      <li>
+        <a href="#task-lists">Task Lists</a>
+        <ul>
+          <li>
+            <a href="#task-lists-in-markdown-documents"
+              >Task Lists in Markdown Documents</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li><a href="#relative-links">Relative Links</a></li>
+      <li>
+        <a href="#metadata-and-plugin-support-for-github-pages"
+          >Metadata and Plugin Support for GitHub Pages</a
+        >
+      </li>
+      <li>
+        <a href="#viewing-yaml-metadata-in-your-documents"
+          >Viewing YAML Metadata in your Documents</a
+        >
+      </li>
+      <li><a href="#rendering-tabular-data">Rendering Tabular Data</a></li>
+      <li><a href="#rendering-pdf">Rendering PDF</a></li>
+      <li><a href="#revert-a-pull-request">Revert a Pull Request</a></li>
+      <li>
+        <a href="#diffs">Diffs</a>
+        <ul>
+          <li><a href="#rendered-prose-diffs">Rendered Prose Diffs</a></li>
+          <li><a href="#diffable-maps">Diffable Maps</a></li>
+          <li>
+            <a href="#expanding-context-in-diffs">Expanding Context in Diffs</a>
+          </li>
+          <li>
+            <a href="#diff-or-patch-of-pull-request"
+              >Diff or Patch of Pull Request</a
+            >
+          </li>
+          <li>
+            <a href="#rendering-and-diffing-images"
+              >Rendering and diffing images</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li><a href="#hub">Hub</a></li>
+      <li>
+        <a href="#contribution-guidelines">Contribution Guidelines</a>
+        <ul>
+          <li><a href="#contributing-file">CONTRIBUTING file</a></li>
+          <li><a href="#issue_template-file">ISSUE_TEMPLATE file</a></li>
+          <li>
+            <a href="#pull_request_template-file">PULL_REQUEST_TEMPLATE file</a>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#octicons">Octicons</a></li>
+      <li>
+        <a href="#github-resources">GitHub Resources</a>
+        <ul>
+          <li><a href="#github-talks">GitHub Talks</a></li>
+        </ul>
+      </li>
+      <li><a href="#git">Git</a></li>
+      <li>
+        <a href="#remove-all-deleted-files-from-the-working-tree"
+          >Remove All Deleted Files from the Working Tree</a
+        >
+      </li>
+      <li><a href="#previous-branch">Previous Branch</a></li>
+      <li><a href="#stripspace">Stripspace</a></li>
+      <li><a href="#ssh-keys">SSH keys</a></li>
+      <li>
+        <a href="#checking-out-pull-requests">Checking out Pull Requests</a>
+      </li>
+      <li><a href="#empty-commits">Empty Commits</a></li>
+      <li><a href="#styled-git-status">Styled Git Status</a></li>
+      <li><a href="#styled-git-log">Styled Git Log</a></li>
+      <li><a href="#git-query">Git Query</a></li>
+      <li><a href="#git-grep">Git Grep</a></li>
+      <li><a href="#merged-branches">Merged Branches</a></li>
+      <li><a href="#fixup-and-autosquash">Fixup and Autosquash</a></li>
+      <li>
+        <a href="#web-server-for-browsing-local-repositories"
+          >Web Server for Browsing Local Repositories</a
+        >
+      </li>
+      <li>
+        <a href="#git-configurations">Git Configurations</a>
+        <ul>
+          <li><a href="#aliases">Aliases</a></li>
+          <li><a href="#auto-correct">Auto-Correct</a></li>
+          <li><a href="#color">Color</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#git-resources">Git Resources</a>
+        <ul>
+          <li><a href="#git-books">Git Books</a></li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="github">GitHub</h2>
+    <h3 id="ignore-whitespace">Ignore Whitespace</h3>
+    <p>
+      <code>?w=1</code>를 diff URL에 추가하면 변경된 코드만 볼 수 있도록, 공백만
+      바뀐 수정을 제거할 수 있습니다.
+    </p>
+    <figure>
+      <img
+        src="https://camo.githubusercontent.com/797184940defadec00393e6559b835358a863eeb/68747470733a2f2f6769746875622d696d616765732e73332e616d617a6f6e6177732e636f6d2f626c6f672f323031312f736563726574732f776869746573706163652e706e67"
+        alt="Diff without whitespace"
+      />
+      <figcaption>Diff without whitespace</figcaption>
+    </figure>
+    <p>
+      <a href="https://github.com/blog/967-github-secrets"
+        ><em>GitHub의 비밀을 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="adjust-tab-space">Adjust Tab Space</h3>
+    <p>
+      diff나 파일 URL에 <code>?ts=4</code>를 덧붙이면 탭 문자의 크기를 기본값인
+      공백 8개 대신 4개로 보여줍니다. <code>ts</code> 뒤의 숫자는 설정에 맞게
+      변경 하실 수 있습니다. gist나 raw 파일 보기에는 적용 되지 않습니다만,
+      <a
+        href="https://chrome.google.com/webstore/detail/github-tab-size/ofjbgncegkdemndciafljngjbdpfmbkn"
+        >크롬 확장 프로그램</a
+      >이나 으로 자동화 할 수 있습니다.
+    </p>
+    <p>
+      여기에 있는 Go 소스 파일은 <code>?ts=4</code>를 붙이기 전에는 이렇습니다.
+    </p>
+    <figure>
+      <img
+        src="http://i.imgur.com/GIT1Fr0.png"
+        alt="Before, tab space example"
+      />
+      <figcaption>Before, tab space example</figcaption>
+    </figure>
+    <p>그리고 <code>?ts=4</code>를 붙인 다음에는 이렇게 됩니다.</p>
+    <figure>
+      <img
+        src="http://i.imgur.com/70FL4H9.png"
+        alt="After, tab space example"
+      />
+      <figcaption>After, tab space example</figcaption>
+    </figure>
+    <h3 id="commit-history-by-author">Commit History by Author</h3>
+    <p>
+      특정 커미터가 한 모든 커밋을 보고 싶다면 URL에
+      <code>?author={user}</code>를 추가하세요.
+    </p>
+    <pre><code>https://github.com/rails/rails/commits/master?author=dhh</code></pre>
+    <figure>
+      <img src="http://i.imgur.com/S7AE29b.png" alt="DHH commit history" />
+      <figcaption>DHH commit history</figcaption>
+    </figure>
+    <p>
+      <a
+        href="https://help.github.com/articles/differences-between-commit-views"
+        ><em>커밋 뷰간의 차이에 대해 더 읽어보세요.</em></a
+      >
+    </p>
+    <h3 id="cloning-a-repository">Cloning a Repository</h3>
+    <p>저장소를 클론할 때, 맨 뒤의 <code>.git</code>은 생략할 수 있습니다.</p>
+    <div class="sourceCode" id="cb2">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1">$ <span class="fu">git</span> clone https://github.com/tiimgreen/github-cheat-sheet</a></code></pre>
+    </div>
+    <p>
+      <a href="http://git-scm.com/docs/git-clone"
+        ><em>Git <code>clone</code> 명령에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="branch">Branch</h3>
+    <h4 id="compare-all-branches-to-another-branch">
+      Compare all Branches to Another Branch
+    </h4>
+    <p>
+      저장소의
+      <a href="https://github.com/tiimgreen/github-cheat-sheet/branches"
+        >브랜치</a
+      >
+      페이지는, 커밋 버튼의 뒤에 있습니다.
+    </p>
+    <pre><code>https://github.com/{user}/{repo}/branches</code></pre>
+    <p>… 메인 브랜치에 머지되지 않은 모든 브랜치의 리스트를 볼 수 있습니다.</p>
+    <p>
+      여기에서 버튼 클릭으로 비교 페이지에 접속하거나 브랜치를 삭제할 수
+      있습니다.
+    </p>
+    <figure>
+      <img
+        src="http://i.imgur.com/0FEe30z.png"
+        alt="Compare branches not merged into master in rails/rails repo - https://github.com/rails/rails/branches"
+      />
+      <figcaption>
+        Compare branches not merged into master in rails/rails repo -
+        https://github.com/rails/rails/branches
+      </figcaption>
+    </figure>
+    <h4 id="comparing-branches">Comparing Branches</h4>
+    <p>GitHub에서 브랜치 비교를 하시려면, URL을 이런 식으로 바꾸세요.</p>
+    <pre><code>https://github.com/{user}/{repo}/compare/{range}</code></pre>
+    <p>
+      <code>{range}</code>는 <code>master...4-1-stable</code>과 같이 적습니다.
+    </p>
+    <p>예를 들어</p>
+    <pre><code>https://github.com/rails/rails/compare/master...4-1-stable</code></pre>
+    <figure>
+      <img
+        src="http://i.imgur.com/tIRCOsK.png"
+        alt="Rails branch compare example"
+      />
+      <figcaption>Rails branch compare example</figcaption>
+    </figure>
+    <p><code>{range}</code>는 이렇게 적을 수도 있습니다.</p>
+    <pre><code>https://github.com/rails/rails/compare/master@{1.day.ago}...master
+https://github.com/rails/rails/compare/master@{2014-10-04}...master</code></pre>
+    <p>
+      <em>날짜는 <code>YYYY-MM-DD</code> 형식으로 적습니다</em>
+    </p>
+    <figure>
+      <img src="http://i.imgur.com/5dtzESz.png" alt="Another compare example" />
+      <figcaption>Another compare example</figcaption>
+    </figure>
+    <p>
+      브랜치는 <code>diff</code>나 <code>patch</code> 뷰로도 확인할 수 있습니다.
+    </p>
+    <pre><code>https://github.com/rails/rails/compare/master...4-1-stable.diff
+https://github.com/rails/rails/compare/master...4-1-stable.patch</code></pre>
+    <p>
+      <a href="https://help.github.com/articles/comparing-commits-across-time"
+        ><em>시간으로 커밋을 비교하는 법에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h4 id="compare-branches-across-forked-repositories">
+      Compare branches across forked repositories
+    </h4>
+    <p>포크된 저장소 간의 브랜치를 비교하려면 URL을 이렇게 변경하세요.</p>
+    <pre><code>https://github.com/{user}/{repo}/compare/{foreign-user}:{branch}...{own-branch}</code></pre>
+    <p>예를 들면</p>
+    <pre><code>https://github.com/rails/rails/compare/byroot:idempotent-counter-caches...master</code></pre>
+    <figure>
+      <img src="http://i.imgur.com/Q1W6qcB.png" alt="Forked branch compare" />
+      <figcaption>Forked branch compare</figcaption>
+    </figure>
+    <h3 id="gists">Gists</h3>
+    <p>
+      <a href="https://gist.github.com/">Gist</a>는 본격적인 저장소를 만들지
+      않고, 작은 코드 조각과 일할 수 있는 쉬운 방법입니다.
+    </p>
+    <figure>
+      <img src="http://i.imgur.com/VkKI1LC.png?1" alt="Gist" />
+      <figcaption>Gist</figcaption>
+    </figure>
+    <p>
+      <a href="https://gist.github.com/tiimgreen/10545817.pibb">이렇게</a> Gist
+      URL 뒤에 <code>.pibb</code>를 넣으면 다른 사이트에 첨부할 수 있는
+      <em>HTML 온리</em> 버전을 만들 수 있습니다.
+    </p>
+    <p>Gist는 저장소처럼 취급할 수 있고 클론도 됩니다.</p>
+    <div class="sourceCode" id="cb10">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1">$ <span class="fu">git</span> clone https://gist.github.com/tiimgreen/10545817</a></code></pre>
+    </div>
+    <figure>
+      <img src="http://i.imgur.com/BcFzabp.png" alt="Gists" />
+      <figcaption>Gists</figcaption>
+    </figure>
+    <p>이는 Gists에서도 수정하고 업데이트를 푸시할 수 있다는 의미입니다.</p>
+    <div class="sourceCode" id="cb11">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1">$ <span class="fu">git</span> commit</a>
+<a class="sourceLine" id="cb11-2" title="2">$ <span class="fu">git</span> push</a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="ex">Username</span> for <span class="st">&#39;https://gist.github.com&#39;</span>:</a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="ex">Password</span> for <span class="st">&#39;https://tiimgreen@gist.github.com&#39;</span>:</a></code></pre>
+    </div>
+    <p>
+      하지만, Gists는 디렉터리를 지원하지 않습니다. 모든 파일은 저장소의 루트에
+      넣을 필요가 있습니다.
+      <a href="https://help.github.com/articles/creating-gists"
+        ><em>Gist를 만드는 법에 대해 더 읽어보세요.</em></a
+      >
+    </p>
+    <h3 id="git.io">Git.io</h3>
+    <p>
+      <a href="http://git.io">Git.io</a>는 GitHub를 위한 간단한 URL
+      단축기입니다.
+    </p>
+    <figure>
+      <img src="http://i.imgur.com/6JUfbcG.png?1" alt="Git.io" />
+      <figcaption>Git.io</figcaption>
+    </figure>
+    <p>Curl으로 순수 HTTP를 통해 사용하실 수도 있습니다.</p>
+    <div class="sourceCode" id="cb12">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1">$ <span class="ex">curl</span> -i http://git.io -F <span class="st">&quot;url=https://github.com/...&quot;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="ex">HTTP/1.1</span> 201 Created</a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="ex">Location</span>: http://git.io/abc123</a>
+<a class="sourceLine" id="cb12-4" title="4"></a>
+<a class="sourceLine" id="cb12-5" title="5">$ <span class="ex">curl</span> -i http://git.io/abc123</a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="ex">HTTP/1.1</span> 302 Found</a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="ex">Location</span>: https://github.com/...</a></code></pre>
+    </div>
+    <p>
+      <a href="https://github.com/blog/985-git-io-github-url-shortener"
+        ><em>Git.io에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="keyboard-shortcuts">Keyboard Shortcuts</h3>
+    <p>저장소 페이지에서 단축키를 사용하면 쉽게 이동할 수 있습니다.</p>
+    <ul>
+      <li><code>t</code>를 누르면 파일 탐색 페이지로 이동합니다.</li>
+      <li><code>w</code>를 누르면 브랜치 선택 페이지로 이동합니다.</li>
+      <li>
+        <code>s</code>를 누르면 현재 저장소의 검색창으로 포커스가 이동합니다.
+        백스페이스를 누르면 채워져 있는 “This repository”를 지워 GitHub 전체에서
+        검색할 수 있게 됩니다.
+      </li>
+      <li><code>l</code>을 누르면 이슈의 라벨을 수정할 수 있습니다.</li>
+      <li>
+        <strong>파일을 보고 있을 때</strong> (예를 들어
+        <code
+          >https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.md</code
+        >) <code>y</code>를 누르면 URL을 지금 보고 있는 페이지를 사실상
+        고정하도록 합니다. 코드가 바뀐다고 해도 이번에 본 내용을 다시 볼 수
+        있습니다.
+      </li>
+    </ul>
+    <p>
+      지금 페이지에서 쓸 수 있는 모든 단축키를 보시려면 <code>?</code>를
+      누르세요.
+    </p>
+    <figure>
+      <img src="http://i.imgur.com/y5ZfNEm.png" alt="Keyboard shortcuts" />
+      <figcaption>Keyboard shortcuts</figcaption>
+    </figure>
+    <p>
+      <a href="https://help.github.com/articles/search-syntax/"
+        ><em>사용할 수 있는 검색 문법에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="line-highlighting-in-repos">Line Highlighting in Repos</h3>
+    <p>
+      코드 파일 URL의 끝에 <code>#L52</code>를 추가하거나 줄 번호를 클릭하면 그
+      줄 번호를 하이라이트합니다.
+    </p>
+    <p>
+      <code>#L53-L60</code>처럼 범위 지정도 가능합니다. 범위를 지정하려면
+      <code>shift</code>키를 누른 채 두 라인을 클릭하면 됩니다.
+    </p>
+    <pre><code>https://github.com/rails/rails/blob/master/activemodel/lib/active_model.rb#L53-L60</code></pre>
+    <figure>
+      <img src="http://i.imgur.com/8AhjrCz.png" alt="Line Highlighting" />
+      <figcaption>Line Highlighting</figcaption>
+    </figure>
+    <h3 id="closing-issues-with-commits">Closing Issues with Commits</h3>
+    <p>
+      어떤 커밋이 이슈를 고쳤다면, <code>fix/fixes/fixed</code>,
+      <code>close/closes/closed</code>, <code>resolve/resolves/resolved</code>를
+      키워드로 해당 이슈가 마스터 브랜치에 커밋 될 때 닫을 수 있습니다.
+    </p>
+    <div class="sourceCode" id="cb14">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1">$ <span class="fu">git</span> commit -m <span class="st">&quot;Fix screwup, fixes #12&quot;</span></a></code></pre>
+    </div>
+    <p>이렇게 하면 이슈를 닫고 클로징 커밋으로 참조하게 합니다.</p>
+    <figure>
+      <img src="http://i.imgur.com/Uh1gZdx.png" alt="Closing Repo" />
+      <figcaption>Closing Repo</figcaption>
+    </figure>
+    <p>
+      <a
+        href="https://help.github.com/articles/closing-issues-via-commit-messages"
+        ><em>커밋 메시지로 이슈 닫기에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="cross-link-issues">Cross-Link Issues</h3>
+    <p>
+      같은 저장소의 다른 이슈를 링크하기 원한다면, <code>#</code> 뒤에 이슈
+      번호만 입력하시면 자동으로 링크됩니다.
+    </p>
+    <p>
+      다른 저장소의 이슈를 링크하고 싶다면
+      <code>{user}/{repo}#이슈_번호</code>로 할 수 있습니다. (예
+      <code>tiimgreen/toc#12</code>)
+    </p>
+    <figure>
+      <img
+        src="https://camo.githubusercontent.com/447e39ab8d96b553cadc8d31799100190df230a8/68747470733a2f2f6769746875622d696d616765732e73332e616d617a6f6e6177732e636f6d2f626c6f672f323031312f736563726574732f7265666572656e6365732e706e67"
+        alt="Cross-Link Issues"
+      />
+      <figcaption>Cross-Link Issues</figcaption>
+    </figure>
+    <h3 id="locking-conversations">Locking Conversations</h3>
+    <p>풀 리퀘스트와 이슈는 저장소의 주인이나 협업자가 잠글 수 있습니다.</p>
+    <figure>
+      <img
+        src="https://cloud.githubusercontent.com/assets/2723/3221693/bf54dd44-f00d-11e3-8eb6-bb51e825bc2c.png"
+        alt="Lock conversation"
+      />
+      <figcaption>Lock conversation</figcaption>
+    </figure>
+    <p>
+      이는 프로젝트의 협업자가 아닌 사람은 더 이상 댓글을 달 수 없게 된다는
+      말입니다.
+    </p>
+    <figure>
+      <img
+        src="https://cloud.githubusercontent.com/assets/2723/3221775/d6e513b0-f00e-11e3-9721-2131cb37c906.png"
+        alt="Comments locked"
+      />
+      <figcaption>Comments locked</figcaption>
+    </figure>
+    <p>
+      <a href="https://github.com/blog/1847-locking-conversations"
+        ><em>대화 잠그기에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="ci-status-on-pull-requests">CI Status on Pull Requests</h3>
+    <p>
+      정확히 설정되었다면, 풀 리퀘스트를 받거나 풀 리퀘스트에 새로운 커밋을 할
+      때마다, <a href="https://travis-ci.org/">Travis CI</a>가 풀 리퀘스트를
+      빌드 할 것입니다.
+      <a href="http://docs.travis-ci.com/user/getting-started/"
+        >Travis CI 시작하기</a
+      >를 좀 더 읽어보세요.
+    </p>
+    <p>
+      <a href="https://github.com/octokit/octokit.rb/pull/452"
+        ><img
+          src="https://cloud.githubusercontent.com/assets/1687642/2700187/3a88838c-c410-11e3-9a46-e65e2a0458cd.png"
+          alt="Travis CI status"
+      /></a>
+    </p>
+    <p>
+      <a href="https://github.com/blog/1227-commit-status-api"
+        ><em>커밋 상태 API에 대해 좀 더 읽어보세요.</em></a
+      >
+    </p>
+    <h3 id="filters">Filters</h3>
+    <p>이슈, 풀 리퀘스트 둘 다 유저 인터페이스에서 필터링이 가능합니다.</p>
+    <p>
+      레일스 저장소
+      <a href="https://github.com/rails/rails/issues" class="uri"
+        >https://github.com/rails/rails/issues</a
+      >에서, “activerecord” 라벨을 선택하여 다음 필터를 만들 수 있습니다.
+    </p>
+    <p><code>is:issue label:activerecord</code></p>
+    <p>하지만, activerecord 라벨이 없는 모든 이슈를 찾을 수도 있습니다.</p>
+    <p><code>is:issue -label:activerecord</code></p>
+    <p>덧붙여, 풀 리퀘스트에도 동작합니다.</p>
+    <p><code>is:pr -label:activerecord</code></p>
+    <p>
+      GitHub는 열리거나 닫힌 이슈와 풀 리퀘스트를 위한 탭이 있습니다만 머지된 풀
+      리퀘스트도 볼 수 있습니다. 다음 필터를 입력하기만 하면 됩니다.
+    </p>
+    <p><code>is:merged</code></p>
+    <p>
+      <a href="https://help.github.com/articles/searching-issues"
+        ><em>이슈 검색에 대해 좀 더 읽어보세요.</em></a
+      >
+    </p>
+    <p>마지막으로 이제 상태 API의 상태에 의한 필터도 가능해졌습니다.</p>
+    <p>성공 상태의 풀 리퀘스트는 이렇게 검색합니다.</p>
+    <p><code>status:success</code></p>
+    <p>
+      <a href="https://github.com/blog/2014-filter-pull-requests-by-status"
+        ><em>상태 API 검색에 대해 좀 더 읽어보세요.</em></a
+      >
+    </p>
+    <h3 id="syntax-highlighting-in-markdown-files">
+      Syntax Highlighting in Markdown Files
+    </h3>
+    <p>
+      마크다운에서 예를 들어, 루비 코드를 신텍스 하이라이트 하려면 이렇게
+      합니다.
+    </p>
+    <pre><code>```ruby
+require &#39;tabbit&#39;
+table = Tabbit.new(&#39;Name&#39;, &#39;Email&#39;)
+table.add_row(&#39;Tim Green&#39;, &#39;tiimgreen@gmail.com&#39;)
+puts table.to_s
+```</code></pre>
+    <p>이렇게 보입니다.</p>
+    <div class="sourceCode" id="cb16">
+      <pre
+        class="sourceCode ruby"
+      ><code class="sourceCode ruby"><a class="sourceLine" id="cb16-1" title="1">require <span class="st">&#39;tabbit&#39;</span></a>
+<a class="sourceLine" id="cb16-2" title="2">table = <span class="dt">Tabbit</span>.new(<span class="st">&#39;Name&#39;</span>, <span class="st">&#39;Email&#39;</span>)</a>
+<a class="sourceLine" id="cb16-3" title="3">table.add_row(<span class="st">&#39;Tim Green&#39;</span>, <span class="st">&#39;tiimgreen@gmail.com&#39;</span>)</a>
+<a class="sourceLine" id="cb16-4" title="4">puts table.to_s</a></code></pre>
+    </div>
+    <p>
+      GitHub는 <a href="https://github.com/github/linguist">Linguist</a>를
+      사용해 언어를 감지하고 신택스를 하이라이트합니다.
+      <a
+        href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml"
+        >언어 YAML 파일</a
+      >을 정독하시면 어떤 키워드가 유효한지 확인하실 수 있습니다.
+    </p>
+    <p>
+      <a href="https://help.github.com/articles/github-flavored-markdown"
+        ><em>GitHub Flavored 마크다운에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="emojis">Emojis</h3>
+    <p>
+      에모지는 풀 리퀘스트, 이슈, 커밋 메시지, 저장소 설명 등에
+      <code>:에모지의_이름:</code>으로 넣을 수 있습니다.
+    </p>
+    <p>
+      GitHub에서 사용 가능한 에모지의 전 목록은
+      <a href="http://www.emoji-cheat-sheet.com/">emoji-cheat-sheet.com</a>나
+      <a href="https://github.com/scotch-io/All-GitHub-Emoji-Icons"
+        >scotch-io/All-GitHub-Emoji-Icons</a
+      >에서 확인하실 수 있습니다. 편리한 에모지 검색 엔진은
+      <a href="http://emoji.muan.co/">emoji.muan.co</a>에 있습니다.
+    </p>
+    <p>GitHub에서 많이 사용하는 에모지 탑 5위는 이렇습니다.</p>
+    <ol type="1">
+      <li><code>:shipit:</code></li>
+      <li><code>:sparkles:</code></li>
+      <li><code>:-1:</code></li>
+      <li><code>:+1:</code></li>
+      <li><code>:clap:</code></li>
+    </ol>
+    <h3 id="imagesgifs">Images/GIFs</h3>
+    <p>댓글이나 README 등에 이미지와 GIF를 넣을 수 있습니다.</p>
+    <pre><code>![Alt Text](http://www.sheawong.com/wp-content/uploads/2013/08/keephatin.gif)</code></pre>
+    <p>저장소에 있는 이미지는 직접 불러서 사용할 수 있습니다.</p>
+    <pre><code>![Alt Text](https://github.com/{user}/{repo}/raw/master/path/to/image.gif)</code></pre>
+    <figure>
+      <img
+        src="http://www.sheawong.com/wp-content/uploads/2013/08/keephatin.gif"
+        alt="Peter don’t care"
+      />
+      <figcaption>Peter don’t care</figcaption>
+    </figure>
+    <p>
+      모든 이미지는 GitHub에서 캐시합니다. 그래서 호스트가 죽어도 이미지는
+      여전히 남습니다.
+    </p>
+    <h4 id="embedding-images-in-github-wiki">
+      Embedding Images in GitHub Wiki
+    </h4>
+    <p>
+      이미지를 위키 페이지에 넣는 방법은 여럿 있습니다. 위에 보이는 일반
+      마크다운 문법도 있지만, 이미지에 높이와 넓이를 지정할 수 있는 문법도
+      있습니다.
+    </p>
+    <div class="sourceCode" id="cb19">
+      <pre
+        class="sourceCode markdown"
+      ><code class="sourceCode markdown"><a class="sourceLine" id="cb19-1" title="1">[[ http://www.sheawong.com/wp-content/uploads/2013/08/keephatin.gif | height = 100px ]]</a></code></pre>
+    </div>
+    <p>이렇게 보입니다.</p>
+    <figure>
+      <img src="http://i.imgur.com/J5bMf7S.png" alt="Just a screenshot" />
+      <figcaption>Just a screenshot</figcaption>
+    </figure>
+    <h3 id="quick-quoting">Quick Quoting</h3>
+    <p>
+      스레드에 답글을 달 때 전에 누가 말한 어떤 내용을 인용하고 싶다면, 텍스트를
+      하이라이트하고 <code>r</code>을 누르세요. 이렇게 하면 내용을 텍스트 박스에
+      인용 포맷으로 복사해 줍니다.
+    </p>
+    <figure>
+      <img
+        src="https://f.cloud.github.com/assets/296432/124483/b0fa6204-6ef0-11e2-83c3-256c37fa7abc.gif"
+        alt="Quick Quote"
+      />
+      <figcaption>Quick Quote</figcaption>
+    </figure>
+    <p>
+      <a href="https://github.com/blog/1399-quick-quotes"
+        ><em>빠른 인용에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="pasting-clipboard-image-to-comments">
+      Pasting Clipboard Image to Comments
+    </h3>
+    <p><em>(크롬에서만 동작합니다)</em></p>
+    <p>
+      스크린샷을 찍고 클립보드에 복사한 경우 (mac:
+      <code>cmd-ctrl-shift-4</code>), 간단히 이미지를 댓글 영역에 붙여넣을(<code
+        >cmd-v / ctrl-v</code
+      >) 수 있고 이는 자동으로 GitHub에 업로드 됩니다.
+    </p>
+    <figure>
+      <img
+        src="https://cloud.githubusercontent.com/assets/39191/5794265/39c9b65a-9f1b-11e4-9bc7-04e41f59ea5f.png"
+        alt="Pasting Clipboard Image to Comments"
+      />
+      <figcaption>Pasting Clipboard Image to Comments</figcaption>
+    </figure>
+    <p>
+      <a href="https://help.github.com/articles/issue-attachments"
+        ><em>issue attachments에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="quick-licensing">Quick Licensing</h3>
+    <p>
+      저장소를 만들 때, GitHub는 만들어진 저작권을 추가할 수 있는 옵션을
+      제공합니다.
+    </p>
+    <figure>
+      <img src="http://i.imgur.com/Chqj4Fg.png" alt="License" />
+      <figcaption>License</figcaption>
+    </figure>
+    <p>
+      이미 있는 저장소에도 웹 인터페이스에서 새 파일을 만들어 추가할 수
+      있습니다. 이름에 <code>LICENSE</code>를 입력하면 옵션으로 템플릿을 사용할
+      수 있습니다.
+    </p>
+    <figure>
+      <img src="http://i.imgur.com/fTjQict.png" alt="License" />
+      <figcaption>License</figcaption>
+    </figure>
+    <p><code>.gitignore</code>에도 똑같이 적용됩니다.</p>
+    <p>
+      <a href="https://help.github.com/articles/open-source-licensing"
+        ><em>오픈 소스 저작권에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="task-lists">Task Lists</h3>
+    <p>
+      이슈와 풀 리퀘스트에서 아래의 문법으로 체크박스를 넣을 수
+      있습니다.(스페이스에 주의하세요.)
+    </p>
+    <pre><code>- [ ] Be awesome
+- [ ] Prepare dinner
+  - [ ] Research recipe
+  - [ ] Buy ingredients
+  - [ ] Cook recipe
+- [ ] Sleep</code></pre>
+    <figure>
+      <img src="http://i.imgur.com/jJBXhsY.png" alt="Task List" />
+      <figcaption>Task List</figcaption>
+    </figure>
+    <p>체크박스를 클릭하면, 순수 마크다운에서 갱신이 이루어집니다.</p>
+    <pre><code>- [x] Be awesome
+- [ ] Prepare dinner
+  - [x] Research recipe
+  - [x] Buy ingredients
+  - [ ] Cook recipe
+- [ ] Sleep</code></pre>
+    <p>
+      <a href="https://help.github.com/articles/writing-on-github#task-lists"
+        ><em>할 일 목록에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h4 id="task-lists-in-markdown-documents">
+      Task Lists in Markdown Documents
+    </h4>
+    <p>
+      이제 마크다운 문서에서 <strong>읽기 전용</strong> 체크리스트를 넣을 수
+      있습니다.
+    </p>
+    <pre><code>- [ ] Mercury
+- [x] Venus
+- [x] Earth
+  - [x] Moon
+- [x] Mars
+  - [ ] Deimos
+  - [ ] Phobos</code></pre>
+    <ul>
+      <li>[ ] Mercury</li>
+      <li>[x] Venus</li>
+      <li>
+        [x] Earth
+        <ul>
+          <li>[x] Moon</li>
+        </ul>
+      </li>
+      <li>
+        [x] Mars
+        <ul>
+          <li>[ ] Deimos</li>
+          <li>[ ] Phobos</li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      <a
+        href="https://github.com/blog/1825-task-lists-in-all-markdown-documents"
+        ><em>마크다운 문서에서의 할 일 목록에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="relative-links">Relative Links</h3>
+    <p>상대 경로 링크는 마크다운 파일이 내부 콘텐츠로 링크될 때 추천합니다.</p>
+    <div class="sourceCode" id="cb23">
+      <pre
+        class="sourceCode markdown"
+      ><code class="sourceCode markdown"><a class="sourceLine" id="cb23-1" title="1"><span class="ot">[Link to a header](#awesome-section)</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="ot">[Link to a file](docs/readme)</span></a></code></pre>
+    </div>
+    <p>
+      절대 경로 링크는 URL이 변경 될 때마다 변경해야 합니다. (예를 들어 저장소
+      이름 변경, 아이디 변경, 프로젝트 포크) 상대 경로 링크를 사용하면 문서를
+      쉽게 스스로 독립적으로 만들 수 있습니다.
+    </p>
+    <p>
+      <a href="https://help.github.com/articles/relative-links-in-readmes"
+        ><em>상대 경로 링크에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="metadata-and-plugin-support-for-github-pages">
+      Metadata and Plugin Support for GitHub Pages
+    </h3>
+    <p>
+      지킬로 작성된 페이지와 포스트에서, 저장소 정보는 예를 들어
+      <code>{{ site.github.project_title }}</code>처럼
+      <code>site.github</code> 이름 공간으로 사용하고 표시할 수 있습니다.
+    </p>
+    <p>
+      Jemoji와 jekyll-mentions 플러그인은 GitHub.com에서처럼
+      <a href="#emojis">emoji</a>와
+      <span class="citation" data-cites="mentions">[@mentions]</span
+      >(https://github.com/blog/821)를 지킬 포스트와 페이지에서 사용하게 합니다.
+    </p>
+    <p>
+      <a
+        href="https://github.com/blog/1797-repository-metadata-and-plugin-support-for-github-pages"
+        ><em
+          >저장소 메타 데이터와 GitHub 페이지의 플러그인 지원에 대해 더 읽어
+          보세요.</em
+        ></a
+      >
+    </p>
+    <h3 id="viewing-yaml-metadata-in-your-documents">
+      Viewing YAML Metadata in your Documents
+    </h3>
+    <p>
+      <a href="http://jekyllrb.com/">Jekyll</a>이나
+      <a href="http://pages.github.com/">GitHub Pages</a> 같은 많은 블로그에서
+      포스트의 처음에 YAML 포멧의 메타데이터를 필요로 합니다. GitHub는 이 메타
+      정보를 읽기 편하게 테이블로 표시해 줍니다.
+    </p>
+    <figure>
+      <img
+        src="https://camo.githubusercontent.com/47245aa16728e242f74a9a324ce0d24c0b916075/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f36343035302f313232383236372f65303439643063362d323761302d313165332d396464382d6131636432323539393334342e706e67"
+        alt="YAML metadata"
+      />
+      <figcaption>YAML metadata</figcaption>
+    </figure>
+    <p>
+      <a
+        href="https://github.com/blog/1647-viewing-yaml-metadata-in-your-documents"
+        ><em>문서에서 YAML 메타데이터 보기에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="rendering-tabular-data">Rendering Tabular Data</h3>
+    <p>
+      GitHub는 <code>.csv</code>(comma-separated)와
+      <code>.tsv</code>(tab-separated) 파일에 대해 표(tabular) 데이터 보기를
+      지원합니다.
+    </p>
+    <figure>
+      <img
+        src="https://camo.githubusercontent.com/1b6dd0157ffb45d9939abf14233a0cb13b3b4dfe/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f3238323735392f3937363436322f33323038336463652d303638642d313165332d393262322d3566323863313061353035392e706e67"
+        alt="Tabular data"
+      />
+      <figcaption>Tabular data</figcaption>
+    </figure>
+    <p>
+      <a href="https://github.com/blog/1601-see-your-csvs"
+        ><em>표 데이터 표시에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="rendering-pdf">Rendering PDF</h3>
+    <p>GitHub에서 PDF를 렌더할 수 있습니다.</p>
+    <figure>
+      <img
+        src="https://cloud.githubusercontent.com/assets/1000669/7492902/f8493160-f42e-11e4-8cea-1cb4f02757e7.png"
+        alt="PDF"
+      />
+      <figcaption>PDF</figcaption>
+    </figure>
+    <p>
+      <a href="https://github.com/blog/1974-pdf-viewing"
+        ><em>PDF 렌더링에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="revert-a-pull-request">Revert a Pull Request</h3>
+    <p>
+      풀 리퀘스트가 머지된 후에, 아무 도움이 안되거나 머지가 잘못된 결정이었다는
+      걸 눈치 챌 때가 있습니다.
+    </p>
+    <p>
+      풀 리퀘스트 페이지의 커밋의 오른쪽에 있는 <strong>Revert</strong> 버튼을
+      클릭하면 이 풀 리퀘스트를 되돌리는 풀 리퀘스트를 만들어 되돌릴 수
+      있습니다.
+    </p>
+    <figure>
+      <img
+        src="https://camo.githubusercontent.com/0d3350caf2bb1cba53123ffeafc00ca702b1b164/68747470733a2f2f6769746875622d696d616765732e73332e616d617a6f6e6177732e636f6d2f68656c702f70756c6c5f72657175657374732f7265766572742d70756c6c2d726571756573742d6c696e6b2e706e67"
+        alt="Revert button"
+      />
+      <figcaption>Revert button</figcaption>
+    </figure>
+    <p>
+      <a href="https://github.com/blog/1857-introducing-the-revert-button"
+        ><em>풀 리퀘스트 되돌리기에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="diffs">Diffs</h3>
+    <h4 id="rendered-prose-diffs">Rendered Prose Diffs</h4>
+    <p>
+      GitHub에서 지원하는 산문(prose) 파일(예를 들어 Markdown)이 있는 커밋과 풀
+      리퀘스트에서는 <em>source</em>와 <em>rendered</em> 뷰 기능을 사용할 수
+      있습니다.
+    </p>
+    <figure>
+      <img
+        src="https://github-images.s3.amazonaws.com/help/repository/rendered_prose_diff.png"
+        alt="Source / Rendered view"
+      />
+      <figcaption>Source / Rendered view</figcaption>
+    </figure>
+    <p>
+      “rendered” 버튼을 클릭하시면 렌더된 문서에서 변경을 확인하실 수 있습니다.
+      렌더된 산문(prose) 뷰는 문장을 추가, 삭제, 변경했을 때 유용합니다.
+    </p>
+    <figure>
+      <img
+        src="https://f.cloud.github.com/assets/17715/2003056/3997edb4-862b-11e3-90be-5e9586edecd7.png"
+        alt="Rendered Prose Diffs"
+      />
+      <figcaption>Rendered Prose Diffs</figcaption>
+    </figure>
+    <p>
+      <a href="https://github.com/blog/1784-rendered-prose-diffs"
+        ><em>렌더된 산문(prose) diff에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h4 id="diffable-maps">Diffable Maps</h4>
+    <p>
+      지오데이터가 포함된 커밋이나 풀 리퀘스트를 볼 때마다 GitHub는 무엇이 변경
+      되었는지 시각적으로 보여줍니다.
+    </p>
+    <p>
+      <a
+        href="https://github.com/benbalter/congressional-districts/commit/2233c76ca5bb059582d796f053775d8859198ec5"
+        ><img
+          src="https://f.cloud.github.com/assets/282759/2090660/63f2e45a-8e97-11e3-9d8b-d4c8078b004e.gif"
+          alt="Diffable Maps"
+      /></a>
+    </p>
+    <p>
+      <a href="https://github.com/blog/1772-diffable-more-customizable-maps"
+        ><em>diff 가능한 맵에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h4 id="expanding-context-in-diffs">Expanding Context in Diffs</h4>
+    <p>
+      diff의 닫아둔 곳의 <em>펼침</em> 버튼을 클릭하면, 문맥을 더 볼 수
+      있습니다. 전체 파일을 표시할 때까지 계속 <em>펼칠</em> 수 있으며,
+      GitHub에서 diff가 표시되는 장소라면 어디서든 사용가능합니다.
+    </p>
+    <figure>
+      <img
+        src="https://f.cloud.github.com/assets/22635/1610539/863c1f64-5584-11e3-82bf-151b406a272f.gif"
+        alt="Expanding Context in Diffs"
+      />
+      <figcaption>Expanding Context in Diffs</figcaption>
+    </figure>
+    <p>
+      <a href="https://github.com/blog/1705-expanding-context-in-diffs"
+        ><em>diff에서의 문맥 확장에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h4 id="diff-or-patch-of-pull-request">Diff or Patch of Pull Request</h4>
+    <p>
+      URL 뒤에 <code>.diff</code>나 <code>.patch</code>를 붙이면 풀 리퀘스트의
+      diff를 얻을 수 있습니다. 예를 들면
+    </p>
+    <pre><code>https://github.com/tiimgreen/github-cheat-sheet/pull/15
+https://github.com/tiimgreen/github-cheat-sheet/pull/15.diff
+https://github.com/tiimgreen/github-cheat-sheet/pull/15.patch</code></pre>
+    <p>
+      <code>.diff</code> 확장자는 이런 내용의 평범한(plain) 텍스트를 줍니다.
+    </p>
+    <pre><code>diff --git a/README.md b/README.md
+index 88fcf69..8614873 100644
+--- a/README.md
++++ b/README.md
+@@ -28,6 +28,7 @@ All the hidden and not hidden features of Git and GitHub. This cheat sheet was i
+ - [Merged Branches](#merged-branches)
+ - [Quick Licensing](#quick-licensing)
+ - [TODO Lists](#todo-lists)
++- [Relative Links](#relative-links)
+ - [.gitconfig Recommendations](#gitconfig-recommendations)
+     - [Aliases](#aliases)
+     - [Auto-correct](#auto-correct)
+@@ -381,6 +382,19 @@ When they are clicked, they will be updated in the pure Markdown:
+ - [ ] Sleep
+
+(...)</code></pre>
+    <h4 id="rendering-and-diffing-images">Rendering and diffing images</h4>
+    <p>
+      GitHub는 PNG, JPG, GIF, PSD를 포함한 여러 일반적인 이미지 형식을 표시할 수
+      있습니다. 추가적으로 이미지 형식의 diff를 표시하는 여러 방법을 제공합니다.
+    </p>
+    <p>
+      [<img
+        src="https://cloud.githubusercontent.com/assets/2546/3165594/55f2798a-eb56-11e3-92e7-b79ad791a697.gif"
+        alt="Diffable PSD"
+      />](https://github.com/blog/1845-psd-viewing-diffing
+    </p>
+    <p>
+      <a href="https://help.github.com/articles/rendering-and-diffing-images"
+        ><em>이미지 diff에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="hub">Hub</h3>
+    <p>
+      <a href="https://github.com/github/hub">Hub</a>는 GitHub를 좀 더 쉽게
+      사용할 수 있도록 추가 기능 및 명령을 제공하는 커맨드 라인 Git 래퍼입니다.
+    </p>
+    <p>이렇게 할 수 있습니다.</p>
+    <div class="sourceCode" id="cb26">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb26-1" title="1">$ <span class="ex">hub</span> clone tiimgreen/toc</a></code></pre>
+    </div>
+    <p>
+      <a href="https://github.com/github/hub#commands"
+        ><em>Hub가 제공하는 더 멋진 기능들을 확인해 보세요.</em></a
+      >
+    </p>
+    <h3 id="contribution-guidelines">Contribution Guidelines</h3>
+    <p>
+      GitHub는 프로젝트에 기여하는 사용자를 위한 세 가지 각기 다른 파일을
+      지원합니다. 이 파일은 저장소의 제일 위나 그 아래의
+      <code>.github</code> 디렉터리에 위치할 수 있습니다.
+    </p>
+    <h3 id="contributing-file">CONTRIBUTING File</h3>
+    <p>
+      저장소의 제일 위나 그 아래의 <code>.github</code> 디렉터리에
+      <code>CONTRIBUTING</code>이나 <code>CONTRIBUTING.md</code> 파일을 넣어두면
+      기여자가 이슈를 만들거나 풀 리퀘스트를 만들 때 링크로 보여줍니다.
+    </p>
+    <figure>
+      <img
+        src="https://camo.githubusercontent.com/71995d6b0e620a9ef1ded00a04498241c69dd1bf/68747470733a2f2f6769746875622d696d616765732e73332e616d617a6f6e6177732e636f6d2f736b697463682f6973737565732d32303132303931332d3136323533392e6a7067"
+        alt="Contributing Guidelines"
+      />
+      <figcaption>Contributing Guidelines</figcaption>
+    </figure>
+    <p>
+      <a href="https://github.com/blog/1184-contributing-guidelines"
+        ><em>기여하기에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="issue_template-file">ISSUE_TEMPLATE file</h3>
+    <p>
+      프로젝트의 새로운 이슈에 사용될 템플릿을 지정할 수 있습니다. 사용자가 새
+      이슈를 생성하면 이슈 창이 이 파일의 내용으로 채워집니다. 저장소의 제일
+      위나 그 아래의 <code>.github</code> 디렉터리에
+      <code>ISSUE_TEMPLATE</code>이나 <code>ISSUE_TEMPLATE.md</code> 파일을 넣어
+      두세요.
+    </p>
+    <p>
+      <a href="https://github.com/blog/2111-issue-and-pull-request-templates"
+        ><em>이슈 템플릿에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <p>
+      <a href="https://www.talater.com/open-source-templates/"
+        >이슈 템플릿 파일 생성기</a
+      >
+    </p>
+    <figure>
+      <img
+        src="https://cloud.githubusercontent.com/assets/25792/13120859/733479fe-d564-11e5-8a1f-a03f95072f7a.png"
+        alt="GitHub Issue template"
+      />
+      <figcaption>GitHub Issue template</figcaption>
+    </figure>
+    <h3 id="pull_request_template-file">PULL_REQUEST_TEMPLATE file</h3>
+    <p>
+      프로젝트의 새로운 풀 리퀘스트에 사용될 템플릿을 지정할 수 있습니다.
+      사용자가 새 풀 리퀘스트를 생성하면 텍스트 영역이 이 파일의 내용으로
+      채워집니다. 저장소의 제일 위나 <code>.github</code> 디렉터리에
+      <code>PULL_REQUEST_TEMPLATE</code>이나
+      <code>PULL_REQUEST_TEMPLATE.md</code> 파일을 넣어 두세요.
+    </p>
+    <p>
+      <a href="https://github.com/blog/2111-issue-and-pull-request-templates"
+        ><em>풀 리퀘스트 템플릿에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <p>
+      <a href="https://www.talater.com/open-source-templates/"
+        >풀 리퀘스트 템플릿 파일 생성기</a
+      >
+    </p>
+    <h3 id="octicons">Octicons</h3>
+    <p>GitHub 아이콘(옥티콘)이 이제 오픈소스가 되었습니다.</p>
+    <figure>
+      <img
+        src="https://og.github.com/octicons/octicons@1200x630.png"
+        alt="Octicons"
+      />
+      <figcaption>Octicons</figcaption>
+    </figure>
+    <p>
+      <a href="https://octicons.github.com"
+        ><em>GitHub 옥티콘에 대해 더 읽어보세요.</em></a
+      >
+    </p>
+    <h3 id="github-resources">GitHub Resources</h3>
+    <table>
+      <colgroup>
+        <col style="width: 55%" />
+        <col style="width: 44%" />
+      </colgroup>
+      <thead>
+        <tr class="header">
+          <th>Title</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>GitHub Explore</td>
+          <td>https://github.com/explore</td>
+        </tr>
+        <tr class="even">
+          <td>GitHub Blog</td>
+          <td>https://github.com/blog</td>
+        </tr>
+        <tr class="odd">
+          <td>GitHub Help</td>
+          <td>https://help.github.com/</td>
+        </tr>
+        <tr class="even">
+          <td>GitHub Training</td>
+          <td>https://training.github.com/</td>
+        </tr>
+        <tr class="odd">
+          <td>GitHub Developer</td>
+          <td>https://developer.github.com/</td>
+        </tr>
+        <tr class="even">
+          <td>
+            GitHub Education (Free Micro Account and other stuff for students)
+          </td>
+          <td>https://education.github.com/</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4 id="github-talks">GitHub Talks</h4>
+    <table>
+      <colgroup>
+        <col style="width: 55%" />
+        <col style="width: 44%" />
+      </colgroup>
+      <thead>
+        <tr class="header">
+          <th>Title</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>How GitHub Uses GitHub to Build GitHub</td>
+          <td>https://www.youtube.com/watch?v=qyz3jkOBbQY</td>
+        </tr>
+        <tr class="even">
+          <td>Introduction to Git with Scott Chacon of GitHub</td>
+          <td>https://www.youtube.com/watch?v=ZDR433b0HJY</td>
+        </tr>
+        <tr class="odd">
+          <td>How GitHub No Longer Works</td>
+          <td>https://www.youtube.com/watch?v=gXD1ITW7iZI</td>
+        </tr>
+        <tr class="even">
+          <td>Git and GitHub Secrets</td>
+          <td>https://www.youtube.com/watch?v=Foz9yvMkvlA</td>
+        </tr>
+        <tr class="odd">
+          <td>More Git and GitHub Secrets</td>
+          <td>https://www.youtube.com/watch?v=p50xsL-iVgU</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2 id="git">Git</h2>
+    <h3 id="remove-all-deleted-files-from-the-working-tree">
+      Remove All Deleted Files from the Working Tree
+    </h3>
+    <p>
+      <code>/bin/rm</code>을 사용해 대량의 파일을 지울 때, 하나씩 제거할 필요
+      없이 밑의 명령어를 사용해 작업 디렉터리와 인덱스에서 지울 수 있습니다.
+    </p>
+    <div class="sourceCode" id="cb27">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb27-1" title="1">$ <span class="fu">git</span> rm <span class="va">$(</span><span class="fu">git</span> ls-files -d<span class="va">)</span></a></code></pre>
+    </div>
+    <p>예를 들어</p>
+    <div class="sourceCode" id="cb28">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb28-1" title="1">$ <span class="fu">git</span> status</a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="ex">On</span> branch master</a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="ex">Changes</span> not staged for commit:</a>
+<a class="sourceLine" id="cb28-4" title="4">    <span class="ex">deleted</span>:    a</a>
+<a class="sourceLine" id="cb28-5" title="5">    <span class="ex">deleted</span>:    c</a>
+<a class="sourceLine" id="cb28-6" title="6"></a>
+<a class="sourceLine" id="cb28-7" title="7">$ <span class="fu">git</span> rm <span class="va">$(</span><span class="fu">git</span> ls-files -d<span class="va">)</span></a>
+<a class="sourceLine" id="cb28-8" title="8"><span class="fu">rm</span> <span class="st">&#39;a&#39;</span></a>
+<a class="sourceLine" id="cb28-9" title="9"><span class="fu">rm</span> <span class="st">&#39;c&#39;</span></a>
+<a class="sourceLine" id="cb28-10" title="10"></a>
+<a class="sourceLine" id="cb28-11" title="11">$ <span class="fu">git</span> status</a>
+<a class="sourceLine" id="cb28-12" title="12"><span class="ex">On</span> branch master</a>
+<a class="sourceLine" id="cb28-13" title="13"><span class="ex">Changes</span> to be committed:</a>
+<a class="sourceLine" id="cb28-14" title="14">    <span class="ex">deleted</span>:    a</a>
+<a class="sourceLine" id="cb28-15" title="15">    <span class="ex">deleted</span>:    c</a></code></pre>
+    </div>
+    <h3 id="previous-branch">Previous Branch</h3>
+    <p>Git에서 이전 브랜치로 돌아가는 건 이렇게 할 수 있습니다.</p>
+    <div class="sourceCode" id="cb29">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb29-1" title="1">$ <span class="fu">git</span> checkout -</a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="co"># Switched to branch &#39;master&#39;</span></a>
+<a class="sourceLine" id="cb29-3" title="3"></a>
+<a class="sourceLine" id="cb29-4" title="4">$ <span class="fu">git</span> checkout -</a>
+<a class="sourceLine" id="cb29-5" title="5"><span class="co"># Switched to branch &#39;next&#39;</span></a>
+<a class="sourceLine" id="cb29-6" title="6"></a>
+<a class="sourceLine" id="cb29-7" title="7">$ <span class="fu">git</span> checkout -</a>
+<a class="sourceLine" id="cb29-8" title="8"><span class="co"># Switched to branch &#39;master&#39;</span></a></code></pre>
+    </div>
+    <p>
+      <a
+        href="http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging"
+        ><em>Git 브랜치에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="stripspace">Stripspace</h3>
+    <p>Git Stripspace는 이런 일을 합니다.</p>
+    <ul>
+      <li>줄 끝의 공백을 제거</li>
+      <li>빈줄을 줄임</li>
+      <li>파일 끝에 빈 줄을 추가</li>
+    </ul>
+    <p>커맨드를 실행 할 때 파일을 반드시 이런식으로 넘겨줘야 합니다.</p>
+    <div class="sourceCode" id="cb30">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb30-1" title="1">$ <span class="fu">git</span> stripspace <span class="op">&lt;</span> README.md</a></code></pre>
+    </div>
+    <p>
+      <a href="http://git-scm.com/docs/git-stripspace"
+        ><em>Git <code>stripspace</code> 커맨드에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="ssh-keys">SSH keys</h3>
+    <p>
+      아래 주소를 방문하면 공개 ssh 키의 목록을 일반 텍스트 형식으로 볼 수
+      있습니다.
+    </p>
+    <pre><code>https://github.com/{user}.keys</code></pre>
+    <p>
+      예:
+      <a href="https://github.com/tiimgreen.keys"
+        >https://github.com/tiimgreen.keys</a
+      >
+    </p>
+    <p>
+      <a
+        href="https://changelog.com/github-exposes-public-ssh-keys-for-its-users/"
+        ><em>공개 ssh 키 접근에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="checking-out-pull-requests">Checking out Pull Requests</h3>
+    <p>
+      풀 리퀘스트는 GitHub 저장소에서 사용하는 특별한 브랜치로 여러 방법으로
+      로컬로 가져올 수 있습니다.
+    </p>
+    <p>
+      빠르게 <code>diff</code>나 <code>merge</code>를 하기 위해 특정 풀
+      리퀘스트를 임시로 <code>FETCH_HEAD</code>로 가져오려면 이렇게 합니다.
+    </p>
+    <div class="sourceCode" id="cb32">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb32-1" title="1">$ <span class="fu">git</span> fetch origin refs/pull/[PR-Number]/head</a></code></pre>
+    </div>
+    <p>
+      모든 풀 리퀘스트 브랜치를 refspec에 의한 로컬 리모트 브랜치로 받을 수도
+      있습니다.
+    </p>
+    <div class="sourceCode" id="cb33">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb33-1" title="1">$ <span class="fu">git</span> fetch origin <span class="st">&#39;+refs/pull/*/head:refs/remotes/origin/pr/*&#39;</span></a></code></pre>
+    </div>
+    <p>
+      밑의 줄들을 저장소의 <code>.git/config</code>에 추가하여, 리모트의 풀
+      리퀘스트를 자동으로 가져오게도 할 수 있습니다.
+    </p>
+    <pre><code>[remote &quot;origin&quot;]
+    fetch = +refs/heads/*:refs/remotes/origin/*
+    url = git@github.com:tiimgreen/github-cheat-sheet.git</code></pre>
+    <pre><code>[remote &quot;origin&quot;]
+    fetch = +refs/heads/*:refs/remotes/origin/*
+    url = git@github.com:tiimgreen/github-cheat-sheet.git
+    fetch = +refs/pull/*/head:refs/remotes/origin/pr/*</code></pre>
+    <p>
+      포크 기반의 풀 리퀘스트 기여를 위해, 풀 리퀘스트의 리모트 브랜치를
+      <code>checkout</code>해 로컬 브랜치를 만드는 것은 유용합니다.
+    </p>
+    <div class="sourceCode" id="cb36">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb36-1" title="1">$ <span class="fu">git</span> checkout pr/42 pr-42</a></code></pre>
+    </div>
+    <p>
+      여러 저장소를 다루어야 한다면, 전역 Git 설정에서 풀 리퀘스트를
+      받을(fetching) 수 있도록 설정 할 수도 있습니다.
+    </p>
+    <div class="sourceCode" id="cb37">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb37-1" title="1"><span class="fu">git</span> config --global --add remote.origin.fetch <span class="st">&quot;+refs/pull/*/head:refs/remotes/origin/pr/*&quot;</span></a></code></pre>
+    </div>
+    <p>이렇게 하면 모든 저장소에서 짧은 명령어를 사용 할 수 있습니다.</p>
+    <div class="sourceCode" id="cb38">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb38-1" title="1"><span class="fu">git</span> fetch origin</a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb39">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb39-1" title="1"><span class="fu">git</span> checkout pr/42</a></code></pre>
+    </div>
+    <p>
+      <a
+        href="https://help.github.com/articles/checking-out-pull-requests-locally"
+        ><em
+          >풀 리퀘스트를 로컬로 체크아웃 하는 방법에 대해 더 읽어 보세요.</em
+        ></a
+      >
+    </p>
+    <h3 id="empty-commits">Empty Commits</h3>
+    <p>
+      <code>--allow-empty</code>를 추가하시면 코드의 변경 없이 커밋을 넣을 수
+      있습니다.
+    </p>
+    <div class="sourceCode" id="cb40">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb40-1" title="1">$ <span class="fu">git</span> commit -m <span class="st">&quot;Big-ass commit&quot;</span> --allow-empty</a></code></pre>
+    </div>
+    <p>있을 법한 사용법에는 이런 것들이 있습니다.</p>
+    <ul>
+      <li>한 뭉치의 일을 시작하기 전에 주석으로 사용</li>
+      <li>코드와 관련없는 프로젝트 수정을 할때 주석으로 사용</li>
+      <li>저장소를 사용하는 사람과의 대화</li>
+      <li>
+        저장소의 첫 커밋으로 사용
+        <code>git commit -m "Initial commit" --allow-empty</code>
+      </li>
+    </ul>
+    <h3 id="styled-git-status">Styled Git Status</h3>
+    <div class="sourceCode" id="cb41">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb41-1" title="1">$ <span class="fu">git</span> status</a></code></pre>
+    </div>
+    <figure>
+      <img src="http://i.imgur.com/qjPyvXb.png" alt="git status" />
+      <figcaption>git status</figcaption>
+    </figure>
+    <p><code>-sb</code>를 추가하면</p>
+    <div class="sourceCode" id="cb42">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb42-1" title="1">$ <span class="fu">git</span> status -sb</a></code></pre>
+    </div>
+    <p>이렇게 바뀝니다.</p>
+    <figure>
+      <img src="http://i.imgur.com/K0OY3nm.png" alt="git status -sb" />
+      <figcaption>git status -sb</figcaption>
+    </figure>
+    <p>
+      <a href="http://git-scm.com/docs/git-status"
+        ><em>Git <code>status</code> 커맨드에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="styled-git-log">Styled Git Log</h3>
+    <p>이 명령을 실행하면</p>
+    <div class="sourceCode" id="cb43">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb43-1" title="1">$ <span class="fu">git</span> log --all --graph --pretty=format:<span class="st">&#39;%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39;</span> --abbrev-commit --date=relative</a></code></pre>
+    </div>
+    <p>이렇게 보입니다.</p>
+    <figure>
+      <img
+        src="http://i.imgur.com/58eOtkW.png"
+        alt="git log –all –graph –pretty=format:‘%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit –date=relative"
+      />
+      <figcaption>
+        git log –all –graph –pretty=format:‘%Cred%h%Creset -%C(auto)%d%Creset %s
+        %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit
+        –date=relative
+      </figcaption>
+    </figure>
+    <p>
+      <a href="http://stackoverflow.com/users/88355/palesz">Palesz</a> 님
+      고맙습니다.
+    </p>
+    <p>
+      NOTE: 이 명령을 알리아스(단축 명령)로 넣을 수 있습니다.
+      <a href="#aliases">여기</a>의 소개를 보세요.
+    </p>
+    <p>
+      <a href="http://git-scm.com/docs/git-log"
+        ><em>Git <code>log</code> 커맨드에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="git-query">Git Query</h3>
+    <p>
+      Git 쿼리는 모든 이전 커밋 메시지에서 검색해 가장 최근의 쿼리에 맞는 커밋을
+      찾아줍니다.
+    </p>
+    <div class="sourceCode" id="cb44">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb44-1" title="1">$ <span class="fu">git</span> show :/query</a></code></pre>
+    </div>
+    <p>
+      <code>query</code>에는 검색하고 싶은 말을 (대소문자를 구분해) 넣으세요.
+      주어진 검색어가 있는 가장 마지막 커밋을 표시하고 변경된 라인을 보여줍니다.
+    </p>
+    <div class="sourceCode" id="cb45">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb45-1" title="1">$ <span class="fu">git</span> show :/typo</a></code></pre>
+    </div>
+    <figure>
+      <img src="http://i.imgur.com/icaGiNt.png" alt="git show :/query" />
+      <figcaption>git show :/query</figcaption>
+    </figure>
+    <p>
+      <em>나오려면 <code>q</code>를 누르세요.</em>
+    </p>
+    <h3 id="git-grep">Git Grep</h3>
+    <p>Git Grep은 패턴과 일치하는 줄의 목록을 반환합니다.</p>
+    <p>다음 명령을 실행해 보세요.</p>
+    <div class="sourceCode" id="cb46">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb46-1" title="1">$ <span class="fu">git</span> grep aliases</a></code></pre>
+    </div>
+    <p><em>aliases</em> 문자열이 포함된 모든 파일을 보여줍니다.</p>
+    <figure>
+      <img src="http://i.imgur.com/DL2zpQ9.png" alt="git grep aliases" />
+      <figcaption>git grep aliases</figcaption>
+    </figure>
+    <p>
+      <em>나오려면 <code>q</code>를 누르세요.</em>
+    </p>
+    <p>여러 플래그를 이용해서 좀 더 복잡한 검색을 할 수 있습니다. 예를 들면,</p>
+    <ul>
+      <li><code>-e</code> 다음 파라미터는 패턴 (e.g. regex)</li>
+      <li>
+        <code>--and</code>, <code>--or</code>, <code>--not</code>으로 여러
+        패턴을 조합
+      </li>
+    </ul>
+    <p>이렇게 사용할 수 있습니다.</p>
+    <div class="sourceCode" id="cb47">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb47-1" title="1"> $ <span class="fu">git</span> grep -e pattern --and -e anotherpattern</a></code></pre>
+    </div>
+    <p>
+      <a href="http://git-scm.com/docs/git-grep"
+        ><em>Git <code>grep</code> 커맨드에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="merged-branches">Merged Branches</h3>
+    <div class="sourceCode" id="cb48">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb48-1" title="1">$ <span class="fu">git</span> branch --merged</a></code></pre>
+    </div>
+    <p>이 명령어는 현재 브랜치에 머지된 모든 브랜치의 목록을 보여줍니다.</p>
+    <p>거꾸로</p>
+    <div class="sourceCode" id="cb49">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb49-1" title="1">$ <span class="fu">git</span> branch --no-merged</a></code></pre>
+    </div>
+    <p>이 명령어는 현재 브랜치에 머지되지 않은 브랜치의 목록을 보여줍니다.</p>
+    <p>
+      <a href="http://git-scm.com/docs/git-branch"
+        ><em>Git <code>branch</code> 커맨드에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="fixup-and-autosquash">Fixup and Autosquash</h3>
+    <p>
+      이전(HEAD의 한 개 이상 전의) 커밋에 잘못된 부분이 있다면, 예를 들어
+      <code>abcde</code>라면, 문제를 수정하고 밑의 커맨드를 입력해 고칠 수
+      있습니다.
+    </p>
+    <div class="sourceCode" id="cb50">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb50-1" title="1">$ <span class="fu">git</span> commit --fixup=abcde</a>
+<a class="sourceLine" id="cb50-2" title="2">$ <span class="fu">git</span> rebase abcde^ --autosquash -i</a></code></pre>
+    </div>
+    <p>
+      <a href="http://git-scm.com/docs/git-commit"
+        ><em>Git <code>commit</code> 커맨드에 대해 더 읽어 보세요.</em></a
+      >
+      <a href="http://git-scm.com/docs/git-rebase"
+        ><em>Git <code>rebase</code> 커맨드에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="web-server-for-browsing-local-repositories">
+      Web Server for Browsing Local Repositories
+    </h3>
+    <p>
+      Git <code>instaweb</code> 커맨드을 사용하면, 즉석에서
+      <code>gitweb</code> 안에서 작업중인 저장소를 둘러 볼 수 있습니다. 이
+      커맨드는 <code>gitweb</code>과 로컬 저장소를 브라우징 하기 위한 웹 서버를
+      설정하는 스크립트입니다.
+    </p>
+    <div class="sourceCode" id="cb51">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb51-1" title="1">$ <span class="fu">git</span> instaweb</a></code></pre>
+    </div>
+    <p>Opens:</p>
+    <figure>
+      <img src="http://i.imgur.com/Dxekmqc.png" alt="Git instaweb" />
+      <figcaption>Git instaweb</figcaption>
+    </figure>
+    <p>
+      <a href="http://git-scm.com/docs/git-instaweb"
+        ><em>Git <code>instaweb</code> 커맨드에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="git-configurations">Git Configurations</h3>
+    <p><code>.gitconfig</code>는 모든 설정이 들어있는 파일입니다.</p>
+    <h4 id="aliases">Aliases</h4>
+    <p>
+      알리아스는 커스텀 Git 명령어를 등록할 수 있는 헬퍼입니다. 예를 들어
+      <code>git a</code>로 <code>git add --all</code>를 실행하게 할 수 있습니다.
+    </p>
+    <p>
+      알리아스를 추가하려면 <code>~/.gitconfig</code>를 찾아 다음 포맷으로
+      입력하거나
+    </p>
+    <pre><code>[alias]
+  co = checkout
+  cm = commit
+  p = push
+  # Show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v</code></pre>
+    <p>커맨드 라인에서 다음 명령을 입력합니다.</p>
+    <div class="sourceCode" id="cb53">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb53-1" title="1">$ <span class="fu">git</span> config --global alias.new_alias git_function</a></code></pre>
+    </div>
+    <p>예를 들면</p>
+    <div class="sourceCode" id="cb54">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb54-1" title="1">$ <span class="fu">git</span> config --global alias.cm commit</a></code></pre>
+    </div>
+    <p>여러 함수를 알리아스하려면 따옴표를 이용하세요.</p>
+    <div class="sourceCode" id="cb55">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb55-1" title="1">$ <span class="fu">git</span> config --global alias.ac <span class="st">&#39;add -A . &amp;&amp; commit&#39;</span></a></code></pre>
+    </div>
+    <p>여기 몇 가지 유용한 알리아스가 있습니다.</p>
+    <table>
+      <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+      </colgroup>
+      <thead>
+        <tr class="header">
+          <th>Alias</th>
+          <th>Current Command</th>
+          <th>What to Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td><code>git cm</code></td>
+          <td><code>git commit</code></td>
+          <td><code>git config --global alias.cm commit</code></td>
+        </tr>
+        <tr class="even">
+          <td><code>git co</code></td>
+          <td><code>git checkout</code></td>
+          <td><code>git config --global alias.co checkout</code></td>
+        </tr>
+        <tr class="odd">
+          <td><code>git ac</code></td>
+          <td><code>git add . -A</code> <code>git commit</code></td>
+          <td>
+            <code
+              >git config --global alias.ac '!git add -A &amp;&amp; git
+              commit'</code
+            >
+          </td>
+        </tr>
+        <tr class="even">
+          <td><code>git st</code></td>
+          <td><code>git status -sb</code></td>
+          <td><code>git config --global alias.st 'status -sb'</code></td>
+        </tr>
+        <tr class="odd">
+          <td><code>git tags</code></td>
+          <td><code>git tag -l</code></td>
+          <td><code>git config --global alias.tags 'tag -l'</code></td>
+        </tr>
+        <tr class="even">
+          <td><code>git branches</code></td>
+          <td><code>git branch -a</code></td>
+          <td><code>git config --global alias.branches 'branch -a'</code></td>
+        </tr>
+        <tr class="odd">
+          <td><code>git cleanup</code></td>
+          <td>
+            <code
+              >git branch --merged \| grep -v '*' \| xargs git branch -d</code
+            >
+          </td>
+          <td>
+            <code
+              >git config --global alias.cleanup "!git branch --merged \| grep
+              -v '*' \| xargs git branch -d"</code
+            >
+          </td>
+        </tr>
+        <tr class="even">
+          <td><code>git remotes</code></td>
+          <td><code>git remote -v</code></td>
+          <td><code>git config --global alias.remotes 'remote -v'</code></td>
+        </tr>
+        <tr class="odd">
+          <td><code>git lg</code></td>
+          <td>
+            <code
+              >git log --color --graph --pretty=format:'%Cred%h%Creset
+              -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold
+              blue)&lt;%an&gt;%Creset' --abbrev-commit --</code
+            >
+          </td>
+          <td>
+            <code
+              >git config --global alias.lg "log --color --graph
+              --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s
+              %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit
+              --"</code
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <em
+        >일부 알리아스는
+        <span class="citation" data-cites="mathiasbynens">[@mathiasbynens]</span
+        >(https://github.com/mathiasbynens) 님의 dotfiles에서
+        가져왔습니다.(https://github.com/mathiasbynens/dotfiles/blob/master/.gitconfig)</em
+      >
+    </p>
+    <h4 id="auto-correct">Auto-correct</h4>
+    <p>현재 <code>git comit</code>를 치면 이런 결과를 보실 수 있습니다.</p>
+    <div class="sourceCode" id="cb56">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb56-1" title="1">$ <span class="fu">git</span> comit -m <span class="st">&quot;Message&quot;</span></a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="co"># git: &#39;comit&#39; is not a git command. See &#39;git --help&#39;.</span></a>
+<a class="sourceLine" id="cb56-3" title="3"></a>
+<a class="sourceLine" id="cb56-4" title="4"><span class="co"># Did you mean this?</span></a>
+<a class="sourceLine" id="cb56-5" title="5"><span class="co">#   commit</span></a></code></pre>
+    </div>
+    <p>
+      <code>comit</code>을 쳤을 때 <code>commit</code>을 부르려면, 자동 교정을
+      켜두세요.
+    </p>
+    <div class="sourceCode" id="cb57">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb57-1" title="1">$ <span class="fu">git</span> config --global help.autocorrect 1</a></code></pre>
+    </div>
+    <p>이제 이런 결과를 보실 수 있습니다.</p>
+    <div class="sourceCode" id="cb58">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb58-1" title="1">$ <span class="fu">git</span> comit -m <span class="st">&quot;Message&quot;</span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="co"># </span><span class="al">WARNING</span><span class="co">: You called a Git command named &#39;comit&#39;, which does not exist.</span></a>
+<a class="sourceLine" id="cb58-3" title="3"><span class="co"># Continuing under the assumption that you meant &#39;commit&#39;</span></a>
+<a class="sourceLine" id="cb58-4" title="4"><span class="co"># in 0.1 seconds automatically...</span></a></code></pre>
+    </div>
+    <h4 id="color">Color</h4>
+    <p>Git 커맨드 라인에 색을 넣으려면 이렇게 하세요.</p>
+    <div class="sourceCode" id="cb59">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb59-1" title="1">$ <span class="fu">git</span> config --global color.ui 1</a></code></pre>
+    </div>
+    <p>
+      <a href="http://git-scm.com/docs/git-config"
+        ><em>Git <code>config</code> 커맨드에 대해 더 읽어 보세요.</em></a
+      >
+    </p>
+    <h3 id="git-resources">Git Resources</h3>
+    <table>
+      <colgroup>
+        <col style="width: 55%" />
+        <col style="width: 44%" />
+      </colgroup>
+      <thead>
+        <tr class="header">
+          <th>Title</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>Official Git Site</td>
+          <td>http://git-scm.com/</td>
+        </tr>
+        <tr class="even">
+          <td>Official Git Video Tutorials</td>
+          <td>http://git-scm.com/videos</td>
+        </tr>
+        <tr class="odd">
+          <td>Code School Try Git</td>
+          <td>http://try.github.com/</td>
+        </tr>
+        <tr class="even">
+          <td>Introductory Reference &amp; Tutorial for Git</td>
+          <td>http://gitref.org/</td>
+        </tr>
+        <tr class="odd">
+          <td>Official Git Tutorial</td>
+          <td>http://git-scm.com/docs/gittutorial</td>
+        </tr>
+        <tr class="even">
+          <td>Everyday Git</td>
+          <td>http://git-scm.com/docs/everyday</td>
+        </tr>
+        <tr class="odd">
+          <td>Git Immersion</td>
+          <td>http://gitimmersion.com/</td>
+        </tr>
+        <tr class="even">
+          <td>Git for Computer Scientists</td>
+          <td>http://eagain.net/articles/git-for-computer-scientists/</td>
+        </tr>
+        <tr class="odd">
+          <td>Git Magic</td>
+          <td>http://www-cs-students.stanford.edu/~blynn/gitmagic/</td>
+        </tr>
+        <tr class="even">
+          <td>Git Visualization Playground</td>
+          <td>http://onlywei.github.io/explain-git-with-d3/#freeplay</td>
+        </tr>
+        <tr class="odd">
+          <td>Learn Git Branching</td>
+          <td>http://pcottle.github.io/learnGitBranching/</td>
+        </tr>
+        <tr class="even">
+          <td>A collection of useful .gitignore templates</td>
+          <td>https://github.com/github/gitignore</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4 id="git-books">Git Books</h4>
+    <table>
+      <colgroup>
+        <col style="width: 55%" />
+        <col style="width: 44%" />
+      </colgroup>
+      <thead>
+        <tr class="header">
+          <th>Title</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>Pragmatic Version Control Using Git</td>
+          <td>
+            http://www.pragprog.com/titles/tsgit/pragmatic-version-control-using-git
+          </td>
+        </tr>
+        <tr class="even">
+          <td>Pro Git</td>
+          <td>http://git-scm.com/book</td>
+        </tr>
+        <tr class="odd">
+          <td>Git Internals PluralSight</td>
+          <td>https://github.com/pluralsight/git-internals-pdf</td>
+        </tr>
+        <tr class="even">
+          <td>Git in the Trenches</td>
+          <td>http://cbx33.github.com/gitt/</td>
+        </tr>
+        <tr class="odd">
+          <td>Version Control with Git</td>
+          <td>
+            http://www.amazon.com/Version-Control-Git-collaborative-development/dp/1449316387
+          </td>
+        </tr>
+        <tr class="even">
+          <td>Pragmatic Guide to Git</td>
+          <td>http://www.pragprog.com/titles/pg_git/pragmatic-guide-to-git</td>
+        </tr>
+        <tr class="odd">
+          <td>Git: Version Control for Everyone</td>
+          <td>http://www.packtpub.com/git-version-control-for-everyone/book</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4 id="git-videos">Git Videos</h4>
+    <table>
+      <colgroup>
+        <col style="width: 55%" />
+        <col style="width: 44%" />
+      </colgroup>
+      <thead>
+        <tr class="header">
+          <th>Title</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>Linus Torvalds on Git</td>
+          <td>https://www.youtube.com/watch?v=4XpnKHJAok8</td>
+        </tr>
+        <tr class="even">
+          <td>Introduction to Git with Scott Chacon</td>
+          <td>https://www.youtube.com/watch?v=ZDR433b0HJY</td>
+        </tr>
+        <tr class="odd">
+          <td>Git From the Bits Up</td>
+          <td>https://www.youtube.com/watch?v=MYP56QJpDr4</td>
+        </tr>
+        <tr class="even">
+          <td>Graphs, Hashes, and Compression, Oh My!</td>
+          <td>https://www.youtube.com/watch?v=ig5E8CcdM9g</td>
+        </tr>
+        <tr class="odd">
+          <td>GitHub Training &amp; Guides</td>
+          <td>
+            https://www.youtube.com/watch?list=PLg7s6cbtAD15G8lNyoaYDuKZSKyJrgwB-&amp;v=FyfwLX4HAxM
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h4 id="git-articles">Git Articles</h4>
+    <table>
+      <thead>
+        <tr class="header">
+          <th>Title</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>GitHub Flow</td>
+          <td>http://scottchacon.com/2011/08/31/github-flow.html</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

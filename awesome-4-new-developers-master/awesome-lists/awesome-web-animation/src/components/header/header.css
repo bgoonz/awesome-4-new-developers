@@ -1,0 +1,48 @@
+.header {
+  margin: 17vh 0 -1.5vw 0;
+  overflow: hidden;
+
+  @media all and (max-width: 540px) {
+    margin: 30px 0 10px 0;
+  }
+}
+
+.appTitle {
+  position: relative;
+  color: rgb(140, 124, 165);
+  font-weight: 600;
+  font-size: 1.2vw;
+  line-height: 1.2;
+  line-height: 1.8;
+  text-align: center;
+}
+
+strong {
+  position: relative;
+  display: block;
+  font-weight: 900;
+  font-size: 7.2vw;
+  filter: drop-shadow(0 -0.015em 0 white) drop-shadow(-0.015em 0 0 white)
+    drop-shadow(0.015em 0 0 white);
+
+  @media all and (max-width: 540px) {
+    font-size: 11vw;
+  }
+}
+
+.sub {
+  position: absolute;
+  top: 3.5vw;
+  left: 50%;
+  margin-bottom: 0;
+  padding: 30px 0;
+  color: rgb(95, 95, 95);
+  font-size: 4.2vw;
+  transform: translate(-50%, -50%);
+  opacity: 0.085;
+
+  @media all and (max-width: 540px) {
+    font-size: 8vw;
+    opacity: 0.15;
+  }
+}

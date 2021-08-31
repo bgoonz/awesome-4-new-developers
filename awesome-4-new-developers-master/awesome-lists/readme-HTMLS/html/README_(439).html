@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-recursion-schemes-awesome">
+      Awesome Recursion Schemes
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        A curation of useful resources for learning about and using recursion
+        schemes.
+      </p>
+    </blockquote>
+    <p>
+      Recursion schemes are simple, composable combinators, that automate the
+      process of traversing and recursing through nested data structures.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#introductions">Introductions</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#papers">Papers</a></li>
+      <li><a href="#presentations">Presentations</a></li>
+      <li><a href="#cheat-sheets">Cheat Sheets</a></li>
+      <li><a href="#podcasts">Podcasts</a></li>
+      <li><a href="#implementations">Implementations</a></li>
+    </ul>
+    <h2 id="introductions">Introductions</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/passy/awesome-recursion-schemes"
+          >Awesome Recursion Schemes</a
+        >
+        - A curation of useful resources for learning about and using recursion
+        schemes.
+      </li>
+      <li>
+        <a href="https://jtobin.io/practical-recursion-schemes"
+          >Practical Recursion Schemes</a
+        >
+        - Introduction to pattern functors, fix points, anamorphisms,
+        catamorphisms, paramorphisms and hylomorphisms, requiring very little
+        prior knowledge.
+      </li>
+      <li>
+        <a
+          href="http://blog.sumtypeofway.com/an-introduction-to-recursion-schemes/"
+          >An Introduction to Recursion Schemes</a
+        >
+        - Three-part series in which you discover recursion schemes from scratch
+        and implement a small subset of Edward Kmett’s library.
+      </li>
+      <li>
+        <a
+          href="https://www.schoolofhaskell.com/user/bartosz/understanding-algebras"
+          >Understanding Algebras</a
+        >
+        - Bartosz Milewski explains F-algebras and shows how to use them in the
+        context of catamorphisms.
+      </li>
+      <li>
+        <a
+          href="https://medium.com/@JosephJnk/recursion-schemes-in-javascript-and-flow-with-static-land-recursision-schemes-97cf10599fb7"
+          >Recursion Schemes in JavaScript and Flow</a
+        >
+        - Series introducing recursion schemes and related concepts in
+        JavaScript, aimed at developers with a minimal functional programming
+        background.
+      </li>
+    </ul>
+    <h2 id="articles">Articles</h2>
+    <ul>
+      <li>
+        <a href="http://comonad.com/reader/2009/recursion-schemes/"
+          >Recursion Schemes: A Field Guide (Redux)</a
+        >
+        - List of various recursion schemes with code samples.
+      </li>
+      <li>
+        <a href="https://wiki.haskell.org/Catamorphisms">Catamorphisms</a> -
+        Definition on the Haskell Wiki.
+      </li>
+      <li>
+        <a
+          href="https://www.schoolofhaskell.com/user/edwardk/recursion-schemes/catamorphisms"
+          >Catamorphisms</a
+        >
+        - Short definition with code on School of Haskell by Edward Kmett.
+      </li>
+      <li>
+        <a href="https://jtobin.io/rotating-squares">Rotating Squares</a> -
+        Using a hylomorphism to rotate a quadtree by Jared Tobin.
+      </li>
+      <li>
+        <a href="http://blog.sumtypeofway.com/recursion-schemes-part-v/"
+          >Recursion Schemes, Part V: Hello, Hylomorphisms</a
+        >
+      </li>
+      <li>
+        <a href="https://jtobin.io/promorphisms-pre-post"
+          >Promorphisms, Pre and Post</a
+        >
+        - Practical examples of pre- and postpromorphisms by Jared Tobin.
+      </li>
+      <li>
+        <a href="https://jtobin.io/time-traveling-recursion"
+          >Time Traveling Recursion Schemes</a
+        >
+        - Exploring histo and futu by example by Jared Tobin.
+      </li>
+      <li>
+        <a
+          href="http://blog.sumtypeofway.com/recursion-schemes-part-iv-time-is-of-the-essence/"
+          >Recursion Schemes, Part IV: Time is of the Essence</a
+        >
+        - Practical article about histomorphism and the futumorphism.
+      </li>
+      <li>
+        <a
+          href="https://github.com/sellout/recursion-scheme-talk/blob/master/cheat%20sheet.pdf"
+          >Cheat Sheet</a
+        >
+        - Map of various recursion schemes and their duals.
+      </li>
+      <li>
+        <a
+          href="http://logji.blogspot.co.uk/2012/02/correcting-visitor-pattern.html"
+          >Correcting the Visitor pattern</a
+        >
+        - Showing that the Visitor pattern implements an f-algebra for use with
+        a catamorphism (in Java).
+      </li>
+      <li>
+        <a href="https://free.cofree.io/2017/11/13/recursion/"
+          >Recursion Schemes in Scala</a
+        >
+        - Introduces the fixpoint combinator, anamorphism, catamorphism,
+        hylomorphism, paramorphism, apomorphism, histomorphism, dynamorphism and
+        futumorphism.
+      </li>
+      <li>
+        <a href="https://duplode.github.io/posts/whats-in-a-fold.html"
+          >What’s in a Fold: The Basic Catamorphism in recursion-schemes</a
+        >
+        - Introduces catamorphism as a generalization of fold.
+      </li>
+    </ul>
+    <h3 id="hylomorphisms-in-the-wild">Hylomorphisms in the Wild</h3>
+    <p>
+      Articles by Bartosz Milewski about solving small, practical problems by
+      applying a hylomorphism.
+    </p>
+    <ul>
+      <li>
+        <a
+          href="https://bartoszmilewski.com/2017/12/29/stalking-a-hylomorphism-in-the-wild/"
+          >Stalking a Hylomorphism in the Wild</a
+        >
+        - Advent of Code 2017, Domino challenge
+      </li>
+      <li>
+        <a
+          href="https://bartoszmilewski.com/2018/12/20/open-season-on-hylomorphisms/"
+          >Open Seasons on Hylomorphisms</a
+        >
+        - Advent of Code 2018, String comparison challenge
+      </li>
+    </ul>
+    <h2 id="papers">Papers</h2>
+    <ul>
+      <li>
+        <a href="http://maartenfokkinga.github.io/utwente/mmf91m.pdf"
+          >Functional Programming with Bananas, Lenses, Envelopes and Barbed
+          Wire, 1991, Meijer et al.</a
+        >
+        - The original paper most of this is based on.
+      </li>
+      <li>
+        <a href="http://www.cs.ox.ac.uk/ralf.hinze/publications/Sorting.pdf"
+          >A Duality of Sorts, 2013, Hinze et al.</a
+        >
+        - Shows that many basic sorting algorithms exist as a pair, and that
+        these pairs arise naturally out of the duality between folds and
+        unfolds.
+      </li>
+      <li>
+        <a href="http://www.cs.ox.ac.uk/people/daniel.james/sorting/sorting.pdf"
+          >Sorting with Bialgebras and Distributive Laws, 2012, Hinze et al.</a
+        >
+        - Shows how paramorphisms and apomorphisms can be used for more
+        efficient implementations of sorting algorithms.
+      </li>
+      <li>
+        <a
+          href="http://research.microsoft.com/en-us/um/people/simonpj/Papers/hmap/hmap.ps"
+          >Scrap your boilerplate: a practical design pattern for generic
+          programming, 2003, SPJ et al.</a
+        >
+        - Design pattern for writing programs that traverse data structures
+        built from rich mutually-recursive data types.
+      </li>
+    </ul>
+    <h2 id="presentations">Presentations</h2>
+    <ul>
+      <li>
+        <a href="http://www.timphilipwilliams.com/slides.html"
+          >Slidedecks by Tim Philip Williams</a
+        >
+        - “Recursion Schemes by Example” and “Exotic Tools for Exotic Trades”
+        provide concise definitions as well as practical examples of many
+        recursion schemes.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=9EGYSb9vov8"
+          >Unifying Structured Recursion Schemes</a
+        >
+        - 12 min presentation by Ralf Hinze, Nicolas Wu, and Jeremy Gibbons.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=Zw9KeP3OzpU"
+          >Recursion Schemes</a
+        >
+        - Presented by Tim Williams at the London Haskell meetup.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=PK4SOaAGVfg"
+          >F-algebras or: How I Learned to Stop Worrying and Love the Type
+          System</a
+        >
+        - Presented by Anthony Burzillo at the NYC Haskell User’s Group.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=i5A2Amfcir8"
+          >A Gentle Introduction to Recursion Schemes</a
+        >
+        - Presented by Jean Remi Desjardins at Lambdaconf 2016.
+      </li>
+      <li>
+        <a href="https://github.com/sellout/recursion-scheme-talk"
+          >recursion-scheme-talk</a
+        >
+        - Collection of slide decks about recursion schemes.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=5Kr7IykGMzU"
+          >Bracer: Transforming Real-World Languages with Coproducts and
+          Recursion Schemes</a
+        >
+        - High-level talk about structuring programs with coproducts and
+        recursion schemes by Patrick Thomson.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=24UoRaoKLjM"
+          >Recursion: Where Functional Programming Hits Bottom</a
+        >
+        - Introduction to recursive fix point data structures and recursion
+        schemes in Haskell and Scala by Greg Pfeil.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=-98fR9VmLbQ"
+          >Programming with algebras</a
+        >
+        - Bartosz Milewski’s article in talk form, presented at LambdaCon.
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=XZ9nPZbaYfE&amp;t=3s"
+          >Peeling the Banana: Recursion Schemes from First Principles</a
+        >
+        - Zainab Ali’s Introductory talk presented at LambdaWorld.
+      </li>
+    </ul>
+    <h2 id="cheat-sheets">Cheat Sheets</h2>
+    <ul>
+      <li>
+        <a
+          href="https://ipfs.io/ipfs/QmTppu1VDAQWsdiyVSZX6qb8PErdpwzNP2oKfEhcgaBvWR/guide-to-morphisms.pdf"
+          >The Hitchhiker’s Guide to Morphisms</a
+        >
+        - Overview of different morphisms including a printable PDF.
+      </li>
+    </ul>
+    <h2 id="podcasts">Podcasts</h2>
+    <ul>
+      <li>
+        <a href="http://www.magicreadalong.com/">Magic Read Along</a> - Casual
+        discussions about category theory that often bring up recursion schemes,
+        including
+        <a href="http://www.magicreadalong.com/episode/33">episode 33</a> which
+        talks about Histomorphisms and Futumorphisms.
+      </li>
+      <li>
+        <a href="https://scala.love/">Scala Love</a> - Podcast about Scala that
+        brings up recursion schemes in
+        <a href="https://scala.love/happy-valentin/">the second episode</a>.
+      </li>
+      <li>
+        <a href="https://www.haskellcast.com/">The Haskell Cast</a> - Recursion
+        schemes come up in
+        <a
+          href="https://www.haskellcast.com/episode/013-john-wiegley-on-categories-and-compilers"
+          >Episode 13 with John Wiegley</a
+        >.
+      </li>
+    </ul>
+    <h2 id="implementations">Implementations</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/ekmett/recursion-schemes/"
+          >recursion-schemes</a
+        >
+        for Haskell - The canonical implementation by Edward Kmett.
+      </li>
+      <li>
+        <a href="https://github.com/slamdata/matryoshka">Matryoshka</a> for
+        Scala using Scalaz - Generalized folds, unfolds, and traversals for
+        fixed point data structures.
+      </li>
+      <li>
+        <a href="https://github.com/andyscott/droste">andyscott/droste</a> for
+        Scala using Cats - Generalized folds, unfolds, and traversals for fixed
+        point data structures.
+      </li>
+      <li>
+        <a href="https://github.com/vmchale/recursion_schemes/"
+          >recursion_schemes</a
+        >
+        for Idris, based off Edward Kmett’s Haskell library.
+      </li>
+      <li>
+        <a href="https://github.com/slamdata/purescript-matryoshka"
+          >purescript-matryoshka</a
+        >
+        for PureScript - Work-in-process port of matryoshka.
+      </li>
+      <li>
+        <a href="https://github.com/vmchale/recursion">recursion</a> for ATS -
+        Demonstration of recursion schemes in ATS.
+      </li>
+      <li>
+        <a href="https://github.com/sellout/dada">dada</a> for Dhall - a library
+        for recursion schemes in Dhall.
+      </li>
+      <li>
+        <a href="https://github.com/JosephJNK/static-land-recursion-schemes"
+          >static-land-recursion-schemes</a
+        >
+        for JavaScript/Flow - Schemes for data structures written in the style
+        of
+        <a href="https://github.com/gcanti/flow-static-land">flow-static-land</a
+        >.
+      </li>
+      <li>
+        <a href="https://github.com/aedans/Katalyst">Katalyst</a> for Kotlin - a
+        re-envisioning based off Matryoshka using lightweight higher kinded
+        polymorphism.
+      </li>
+    </ul>
+    <h2 id="license">License</h2>
+    <p>
+      This content is licensed under
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>.
+    </p>
+  </body>
+</html>

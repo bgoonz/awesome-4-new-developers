@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="awesome-scientific-writing-awesome">
+      Awesome Scientific Writing
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img src="https://awesome.re/badge-flat.svg" alt="Awesome"
+      /></a>
+    </h1>
+    <blockquote>
+      <p>
+        Scientific writing can extend beyond LaTeX, made possible by formats,
+        such as
+        <a href="https://daringfireball.net/projects/markdown/">Markdown</a>
+        (and its many flavours),
+        <a href="https://docutils.sourceforge.io/rst.html">reStructuredText</a>
+        and <a href="https://jupyter.org/">Jupyter notebooks</a>.
+      </p>
+    </blockquote>
+    <p>
+      :bookmark: means ability to <strong>seamlessly cite references</strong>.
+    </p>
+    <p>
+      :link: means ability to
+      <strong>cross-reference figures and sections within the document</strong>.
+    </p>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="#word-processors">Word Processors</a></li>
+      <li><a href="#bibliography">Bibliography</a></li>
+      <li><a href="#illustrations">Illustrations</a></li>
+      <li><a href="#converters-and-filters">Converters and Filters</a></li>
+      <li>
+        <a href="#spell-checking-and-linting">Spell Checking and Linting</a>
+      </li>
+      <li>
+        <a href="#templates">Templates</a>
+        <ul>
+          <li><a href="#articles">Articles</a></li>
+          <li><a href="#presentations">Presentations</a></li>
+          <li><a href="#books">Books</a></li>
+        </ul>
+      </li>
+      <li><a href="#tutorials">Tutorials</a></li>
+      <li><a href="#other-lists">Other Lists</a></li>
+    </ul>
+    <h2 id="word-processors">Word Processors</h2>
+    <ul>
+      <li>
+        <a href="https://atom.io">Atom</a> - Popular IDE with Markdown support.
+        <ul>
+          <li>
+            <a href="https://github.com/shd101wyy/markdown-preview-enhanced"
+              >Markdown Preview Enhanced for Atom</a
+            >
+            - Pandoc integration and utilities for Atom.
+          </li>
+          <li>
+            <a href="https://github.com/apcshields/autocomplete-bibtex"
+              >Autocomplete BibTeX for Atom</a
+            >
+            - BibTeX support for Atom.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://marktext.app/">Marktext</a> - Markdown text editor.
+      </li>
+      <li>
+        <a href="https://github.com/rstudio/rstudio">R Studio</a> - IDE for R.
+        <ul>
+          <li>
+            <a href="https://github.com/rstudio/bookdown">bookdown</a> - R
+            package to facilitate writing books and long-form articles, reports
+            with R Markdown :bookmark: :link:.
+          </li>
+          <li>
+            <a href="https://rmarkdown.rstudio.com/">R Markdown</a> - R package
+            to write R next to Markdown :bookmark: :link:.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.vim.org/">Vim</a> - Command line text editor.
+        <ul>
+          <li>
+            <a href="https://github.com/msprev/fzf-bibtex/#readme"
+              >fzf-bibtex</a
+            >
+            - BibTeX source with Vim integration which uses fzf (a fuzzy finder
+            implemented in Go).
+          </li>
+          <li>
+            <a href="https://github.com/vim-pandoc/vim-pandoc">vim-pandoc</a> -
+            Pandoc integration and utilities for Vim.
+          </li>
+          <li>
+            <a href="https://github.com/vim-pandoc/vim-pandoc-syntax"
+              >vim-pandoc-syntax</a
+            >
+            - Pandoc syntax highlighting for Vim.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://code.visualstudio.com/">Visual Studio Code</a> -
+        Popular IDE with Markdown support.
+        <ul>
+          <li>
+            <a href="https://github.com/yzhang-gh/vscode-markdown/#readme"
+              >Markdown All in One</a
+            >
+            - Extension for enhanced Markdown support in VSCode, such as preview
+            and auto completion to name a few.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://www.zettlr.com/">Zettlr</a> - Markdown editor which
+        integrates CSL, BibLaTeX, Pandoc and many other tools :bookmark: :link:.
+      </li>
+    </ul>
+    <h2 id="bibliography">Bibliography</h2>
+    <p>Reference managers to generate citations, BibTeX, and BibLaTeX files.</p>
+    <ul>
+      <li>
+        <a href="https://editor.citationstyles.org/"
+          >Citation Style Language (CSL) styles</a
+        >
+        - Crowdsourced repository with over 9000 free CSL citation styles and an
+        online editor to create new ones.
+      </li>
+      <li>
+        <a href="https://www.jabref.org/">JabRef</a> - Open source bibliography
+        reference manager.
+      </li>
+      <li>
+        <a href="https://www.zotero.org/">Zotero</a> - FOSS tool to collect,
+        organize, cite, and share research.
+        <ul>
+          <li>
+            <a href="https://retorque.re/zotero-better-bibtex/"
+              >Better BibTeX for Zotero</a
+            >
+            - Enhanced BibTeX / BibLaTeX integration for Zotero.
+          </li>
+          <li>
+            <a href="http://zotfile.com/">ZotFile for Zotero</a> - Enhanced PDF
+            file management for Zotero.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://zbib.org/">ZoteroBib</a> - Online bibliography
+        reference manager.
+      </li>
+    </ul>
+    <h2 id="illustrations">Illustrations</h2>
+    <p>
+      Drawing illustrations themselves has driven many a scientist mad.
+      Fortunately, there are formal languages with which one can create
+      beautiful graphics.
+    </p>
+    <ul>
+      <li>
+        <a href="https://www.diagrams.net/">diagrams.net</a> - Open source,
+        online, desktop and container deployable diagramming software.
+      </li>
+      <li>
+        <a href="https://graphviz.org/">graphviz</a> - Visualization software
+        for graphs and networks which uses a domain-specific DOT language.
+      </li>
+      <li>
+        <a href="https://mermaid-js.github.io/mermaid-live-editor/"
+          >Mermaid Live Editor</a
+        >
+        - Define simple diagrams instead of drawing them.
+      </li>
+      <li>
+        <a href="https://vega.github.io/vega-lite/examples/">Vega Lite</a> -
+        Define charts and more complex diagrams.
+      </li>
+      <li>
+        <a href="https://plantuml.com/">PlantUML</a> - Define UML diagrams
+        instead of drawing them.
+      </li>
+    </ul>
+    <h2 id="converters-and-filters">Converters and Filters</h2>
+    <p>Supplementary files and tools.</p>
+    <ul>
+      <li>
+        <a href="https://cicero.xyz/">Cicero</a> - Python package which renders
+        HTML presentations from Markdown source using remark or reveal.js
+        :link:.
+      </li>
+      <li>
+        <a href="https://docutils.sourceforge.io/docs/">docutils</a> - Python
+        package which can convert reStructuredText into various formats and
+        provides command-line tools to do it :link:.
+      </li>
+      <li>
+        <a href="https://jupyterbook.org/">Jupyter Book</a> - A static site
+        generator which converts a collection of CommonMark, MyST markdown and
+        Jupyter notebooks into a HTML website.
+      </li>
+      <li>
+        <a href="https://myst-parser.readthedocs.io/en/latest/">MyST</a> -
+        Markedly Structured Text, a superset of CommonMark markdown with
+        reStructuredText like features.
+      </li>
+      <li>
+        <a href="https://nbconvert.readthedocs.io/en/latest/">nbconvert</a> -
+        Convert Jupyter notebooks into <code>reveal.js</code> presentations,
+        PDF, HTML, Markdown, reStructuredText and more.
+        <ul>
+          <li>
+            <a href="https://github.com/takluyver/bookbook/#readme">bookbook</a>
+            - Experimental Python package which extends
+            <code>nbconvert</code> and adds the ability to cross reference
+            within and across notebooks :link:.
+          </li>
+          <li>
+            <a href="https://github.com/chrisjsewell/ipypublish/#readme"
+              >ipypublish</a
+            >
+            - Workflow for creating and editing publication ready scientific
+            reports and presentations, from one or more Jupyter Notebooks,
+            without leaving the browser :bookmark: :link:.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="https://pandoc.org/MANUAL">pandoc</a> - Haskell library for
+        converting from one markup format to another, and a command-line tool
+        that uses this library :bookmark: :link:.
+        <ul>
+          <li>
+            <a href="https://github.com/smathot/academicmarkdown#readme"
+              >Academic Markdown</a
+            >
+            - Python wrapper over Pandoc with specialized extensions to parse
+            certain elements, making it a superset of Pandoc Markdown flavour
+            :bookmark: :link:.
+          </li>
+          <li>
+            <a href="https://github.com/jgm/pandoc/wiki/Pandoc-Filters"
+              >Pandoc filters</a
+            >
+            - List of addons to pandoc which implement extra features such as
+            citations and cross-references.
+          </li>
+          <li>
+            <a href="http://scorreia.com/software/panflute/">Panflute</a> -
+            Pythonic alternative to John MacFarlane’s pandocfilters.
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2 id="spell-checking-and-linting">Spell Checking and Linting</h2>
+    <ul>
+      <li>
+        <a href="http://aspell.net/">GNU Aspell</a> - Command line spell
+        checker.
+      </li>
+      <li>
+        <a href="http://hunspell.github.io/">Hunspell</a> - Command line spell
+        checker.
+      </li>
+      <li>
+        <a href="https://languagetool.org/">LanguageTool</a> - Open source
+        grammar, style and spell Checker.
+      </li>
+      <li>
+        <a href="https://github.com/markdownlint/markdownlint"
+          >Markdown lint tool</a
+        >
+        - Markdown linter.
+      </li>
+      <li><a href="http://proselint.com/">proselint</a> - Linter for prose.</li>
+      <li>
+        <a href="https://github.com/remarkjs/remark-lint">remarklint</a> -
+        Markdown linter.
+      </li>
+      <li>
+        <a href="https://github.com/twolfson/restructuredtext-lint"
+          >restructuredtext-lint</a
+        >
+        - reStructuredText linter.
+      </li>
+      <li>
+        <a href="https://textlint.github.io/">textlint</a> - Pluggable linting
+        tool for text and Markdown.
+      </li>
+      <li>
+        <a href="https://sylvainhalle.github.io/textidote/">textidote</a> -
+        Spelling, grammar and style checking on LaTeX documents.
+      </li>
+      <li>
+        <a href="https://errata-ai.github.io/vale/">Vale</a> - Free, open-source
+        linter for prose built with speed and extensibility in mind.
+      </li>
+      <li>
+        <a href="https://github.com/btford/write-good">write-good</a> - Naive
+        linter for English prose.
+      </li>
+    </ul>
+    <h2 id="templates">Templates</h2>
+    <p>Reusable minimalist examples.</p>
+    <h3 id="articles">Articles</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/davecap/markdown-latex-boilerplate/#readme"
+          >Pandoc Markdown-LaTeX Boilerplate</a
+        >
+        - Demonstrate how to integrate Pandoc with an existing LaTeX template
+        which requires some boilerplate code (i.e. LaTeX preamble), thus
+        avoiding the <code>latexmk</code> dependency.
+      </li>
+      <li>
+        <a href="https://github.com/JensErat/scientific-markdown/#readme"
+          >scientific-markdown</a
+        >
+        - Example for use of Markdown for scientific publications using Pandoc
+        and <code>latexmk</code>.
+      </li>
+      <li>
+        <a href="https://github.com/svmiller/svm-r-markdown-templates/"
+          >Steve’s R Markdown Templates</a
+        >
+        - Academic manuscript, memos, Beamer presentation, syllabus and CV.
+      </li>
+    </ul>
+    <h3 id="presentations">Presentations</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/jez/pandoc-starter/#readme"
+          >pandoc-starter</a
+        >
+        - Templates for articles, Beamer presentations etc. using Markdown files
+        and Makefiles for getting started with Pandoc.
+      </li>
+      <li>
+        <a href="https://github.com/cgroll/slides/#readme">slides</a> - Demo for
+        generating <code>reveal.js</code> presentations using Pandoc.
+      </li>
+    </ul>
+    <h3 id="books">Books</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/rstudio/bookdown-demo/#readme"
+          >bookdown-demo</a
+        >
+        - Minimal example of a book based on R Markdown and bookdown.
+      </li>
+      <li>
+        <a href="https://github.com/Wandmalfarbe/pandoc-latex-template"
+          >Eisvogel</a
+        >
+        - Clean academic pandoc LaTeX template.
+      </li>
+      <li>
+        <a href="https://github.com/tompollard/phd_thesis_markdown#readme"
+          >Template for writing a PhD thesis in Markdown</a
+        >
+        - Clean organization of files to provide a framework for writing a PhD
+        thesis in mostly Markdown with a little bit of LaTeX, and compiled with
+        Pandoc.
+      </li>
+    </ul>
+    <h2 id="tutorials">Tutorials</h2>
+    <p>How to generate articles and presentations for scientific purposes.</p>
+    <ul>
+      <li>
+        <a href="https://github.com/clawpack/riemann_book/#readme"
+          >Book on Riemann solvers</a
+        >
+        - This example uses a custom <code>nbconvert</code> template and shows
+        how to store your notebooks with no output (for version control) while
+        automatically executing them before running <code>bookbook</code>, so
+        that PDF and HTML versions include the output.
+      </li>
+      <li>
+        <a
+          href="https://programminghistorian.org/en/lessons/sustainable-authorship-in-plain-text-using-pandoc-and-markdown"
+          >Dennis Tenen and Grant Wythoff</a
+        >
+        - Sustainable Authorship in Plain Text using Pandoc and Markdown.
+      </li>
+      <li>
+        <a href="https://github.com/katrinleinweber/PhD-thesis/#readme"
+          >Katrin Leinweber’s Ph.D. thesis</a
+        >
+        - Automated work flow involving several tools, but primarily Pandoc,
+        <code>latexmk</code> and Academic Markdown.
+      </li>
+      <li>
+        <a href="http://u.arizona.edu/~selisker/post/workflow/"
+          >Scott Selisker</a
+        >
+        - Plain Text Workflow for Academic Writing with Atom.
+      </li>
+      <li>
+        <a href="https://github.com/jupyter4edu/jupyter-edu-book/#readme"
+          >Teaching and learning with Jupyter</a
+        >
+        - Book written in R Markdown, bookdown and also rendered as HTML, PDF
+        and EPUB.
+      </li>
+      <li>
+        <a
+          href="https://www.draketo.de/english/emacs/writing-papers-in-org-mode-acpd"
+          >Writing scientific papers for ACPD using Emacs Org-mode</a
+        >
+        - Detailed tutorial on authoring a paper by seamlessly integrating with
+        LaTeX commands within Org-mode.
+      </li>
+    </ul>
+    <h2 id="other-lists">Other Lists</h2>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/markusschanta/awesome-jupyter/#renderingpublishingconversion"
+          >Awesome Jupyter</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/egeerardyn/awesome-LaTeX/#readme"
+          >Awesome LaTeX</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/BubuAnabelas/awesome-markdown/#readme"
+          >Awesome Markdown</a
+        >
+      </li>
+      <li>
+        <a href="https://codeberg.org/teaserbot-labs/delightful-open-science"
+          >Delightful Open Science</a
+        >
+      </li>
+    </ul>
+    <h3 id="contribute">Contribute</h3>
+    <p>
+      Contributions welcome! Read the
+      <a href="CONTRIBUTING.md">contribution guidelines</a> first.
+    </p>
+  </body>
+</html>

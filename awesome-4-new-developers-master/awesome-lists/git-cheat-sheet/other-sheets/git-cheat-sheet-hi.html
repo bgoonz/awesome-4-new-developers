@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>git-cheat-sheet-hi</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="git-cheat-sheet-hindi-awesome">
+      Git Cheat Sheet Hindi
+      <a href="https://github.com/sindresorhus/awesome"
+        ><img
+          src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"
+          alt="Awesome"
+      /></a>
+    </h1>
+    <h3 id="सूची">सूची</h3>
+    <ul>
+      <li><a href="#सेटअप-(व्यवस्था)">सेटअप (व्यवस्था)</a></li>
+      <li><a href="#कॉन्फ़िगरेशन-फ़ाइलें">कॉन्फ़िगरेशन फ़ाइलें</a></li>
+      <li><a href="#निर्माण">निर्माण</a></li>
+      <li><a href="#स्थानीय-परिवर्तन">स्थानीय परिवर्तन</a></li>
+      <li><a href="#खोज">खोज</a></li>
+      <li><a href="#कमिट-इतिहास">कमिट इतिहास</a></li>
+      <li><a href="#चाल-औरऔर-नाम-बदलें">चाल और नाम बदलें</a></li>
+      <li><a href="#शाखाएं-और-टैग">शाखाएं और टैग</a></li>
+      <li><a href="#अद्यतन-और-प्रकाशित-करें">अद्यतन और प्रकाशित करें</a></li>
+      <li><a href="#मर्ज-और-रिबेस">मर्ज और रिबेस</a></li>
+      <li><a href="#पूर्ववत">पूर्ववत</a></li>
+    </ul>
+    <hr />
+    <h2 id="सेटअप-व्यवस्था">सेटअप (व्यवस्था)</h2>
+    <h5 id="वर्तमान-कॉन्फ़िगरेशन-दिखाएं">वर्तमान कॉन्फ़िगरेशन दिखाएं:</h5>
+    <pre class="shell"><code>git config --list</code></pre>
+    <h5 id="रिपॉजिटरी-भंडार-गृह-कॉन्फ़िगरेशन-दिखाएं">
+      रिपॉजिटरी (भंडार गृह) कॉन्फ़िगरेशन दिखाएं:
+    </h5>
+    <pre class="shell"><code>git config --local --list</code></pre>
+    <h5 id="वैश्विक-कॉन्फ़िगरेशन-दिखाएं">वैश्विक कॉन्फ़िगरेशन दिखाएं:</h5>
+    <pre class="shell"><code>git config --global --list</code></pre>
+    <h5 id="सिस्टम-कॉन्फ़िगरेशन-दिखाएं">सिस्टम कॉन्फ़िगरेशन दिखाएं:</h5>
+    <pre class="shell"><code>git config --system --list</code></pre>
+    <h5
+      id="संस्करण-इतिहास-की-समीक्षा-करते-समय-एक-नाम-निर्धारित-करें-जो-क्रेडिट-के-लिए-पहचाने-जाने-योग्य-हो"
+    >
+      संस्करण इतिहास की समीक्षा करते समय एक नाम निर्धारित करें जो क्रेडिट के लिए
+      पहचाने जाने योग्य हो:
+    </h5>
+    <pre
+      class="shell"
+    ><code>git config --global user.name “[firstname lastname]”</code></pre>
+    <h5 id="एक-ईमेल-पता-सेट-करें-जो-प्रत्येक-इतिहास-मार्कर-के-साथ-जुड़ा-होगा">
+      एक ईमेल पता सेट करें जो प्रत्येक इतिहास मार्कर के साथ जुड़ा होगा:
+    </h5>
+    <pre
+      class="shell"
+    ><code>git config --global user.email “[valid-email]”</code></pre>
+    <h5 id="आसान-समीक्षा-के-लिए-git-के-लिए-स्वचालित-कमांड-लाइन-रंग-सेट-करें">
+      आसान समीक्षा के लिए Git के लिए स्वचालित कमांड लाइन रंग सेट करें:
+    </h5>
+    <pre class="shell"><code>git config --global color.ui auto</code></pre>
+    <h5 id="प्रतिबद्ध-के-लिए-वैश्विक-संपादक-सेट-करें">
+      प्रतिबद्ध के लिए वैश्विक संपादक सेट करें
+    </h5>
+    <pre class="shell"><code>git config --global core.editor vi</code></pre>
+    <hr />
+    <h2 id="कॉन्फ़िगरेशन-फ़ाइलें">कॉन्फ़िगरेशन फ़ाइलें</h2>
+    <h5 id="रिपॉजिटरी-भंडार-गृह-विशिष्ट-कॉन्फ़िगरेशन-फ़ाइल---local-स्थानीय">
+      रिपॉजिटरी (भंडार गृह) विशिष्ट कॉन्फ़िगरेशन फ़ाइल - [–local] (स्थानीय):
+    </h5>
+    <pre class="shell"><code>&lt;repo&gt;/.git/config</code></pre>
+    <h5 id="उपयोगकर्ता-विशिष्ट-कॉन्फ़िगरेशन-फ़ाइल---global-वैश्विक">
+      उपयोगकर्ता-विशिष्ट कॉन्फ़िगरेशन फ़ाइल - [–global] (वैश्विक):
+    </h5>
+    <pre class="shell"><code>~/.gitconfig</code></pre>
+    <h5 id="सिस्टम-वाइड-कॉन्फ़िगरेशन-फ़ाइल---system-सिस्टम">
+      सिस्टम-वाइड कॉन्फ़िगरेशन फ़ाइल - [–system] (सिस्टम):
+    </h5>
+    <pre class="shell"><code>/etc/gitconfig</code></pre>
+    <hr />
+    <h2 id="निर्माण">निर्माण</h2>
+    <h5 id="एक-मौजूदा-भंडार-का-क्लोन">एक मौजूदा भंडार का क्लोन:</h5>
+    <p>ये करने के दो तरीके है:</p>
+    <p>एस.एस.एच. के माध्यम से:</p>
+    <pre
+      class="shell"
+    ><code>git clone ssh://user@domain.com/repo.git</code></pre>
+    <p>एचटीटीपी के माध्यम से:</p>
+    <pre
+      class="shell"
+    ><code>git clone http://domain.com/user/repo.git</code></pre>
+    <h5 id="एक-नई-स्थानीय-रिपॉजिटरी-भंडार-बनाएं">
+      एक नई स्थानीय रिपॉजिटरी (भंडार) बनाएं:
+    </h5>
+    <pre class="shell"><code>git init</code></pre>
+    <h5 id="एक-विशिष्ट-निर्देशिका-में-एक-नया-स्थानीय-भंडार-बनाएँ">
+      एक विशिष्ट निर्देशिका में एक नया स्थानीय भंडार बनाएँ:
+    </h5>
+    <pre class="shell"><code>git init &lt;directory&gt;</code></pre>
+    <hr />
+    <h2 id="स्थानीय-परिवर्तन">स्थानीय परिवर्तन</h2>
+    <h5 id="कार्य-फ़ोल्डर-में-परिवर्तन">कार्य फ़ोल्डर में परिवर्तन:</h5>
+    <pre class="shell"><code>git status</code></pre>
+    <h5 id="ट्रैक-फ़ाइलों-में-परिवर्तन">ट्रैक फ़ाइलों में परिवर्तन:</h5>
+    <pre class="shell"><code>git diff</code></pre>
+    <h5 id="अगले-कमिट-करने-के-लिए-नई-फ़ाइलों-को-जोड़ना">
+      अगले कमिट करने के लिए नई फ़ाइलों को जोड़ना:
+    </h5>
+    <pre class="shell"><code>git add .</code></pre>
+    <h5 id="अगले-कमिट-करने-के-लिए-में-कुछ-बदलाव-जोड़ना">
+      अगले कमिट करने के लिए <फ़ाइल> में कुछ बदलाव जोड़ना:
+    </h5>
+    <pre class="shell"><code>git add -p &lt;file&gt;</code></pre>
+    <h5 id="ट्रैक-फ़ाइलों-में-सभी-परिवर्तन-के-लिए-कमिट">
+      ट्रैक फ़ाइलों में सभी परिवर्तन के लिए कमिट:
+    </h5>
+    <pre class="shell"><code>git commit -a</code></pre>
+    <h5 id="पिछले-परिवर्तन-के-लिए-कमिट">पिछले परिवर्तन के लिए कमिट:</h5>
+    <pre class="shell"><code>git commit</code></pre>
+    <h5 id="संदेश-के-साथ-कमिट">संदेश के साथ कमिट:</h5>
+    <pre class="shell"><code>git commit -m &#39;message here&#39;</code></pre>
+    <h5 id="पिछले-कुछ-तारीख-के-लिए-कमिट">पिछले कुछ तारीख के लिए कमिट:</h5>
+    <pre
+      class="shell"
+    ><code>git commit --date=&quot;`date --date=&#39;n day ago&#39;`&quot; -am &quot;Commit Message&quot;</code></pre>
+    <h5 id="पिछली-कमिट-बदलें">पिछली कमिट बदलें:</h5>
+    <p><em>प्रकाशित कमिट का संशोधन मत करें!</em></p>
+    <pre class="shell"><code>git commit --amend</code></pre>
+    <h5
+      id="पिछली-कमिट-के-साथ-संशोधन-करें-लेकिन-पिछली-कमिट-लॉग-संदेश-का-उपयोग-करें"
+    >
+      पिछली कमिट के साथ संशोधन करें लेकिन पिछली कमिट लॉग संदेश का उपयोग करें
+    </h5>
+    <p><em>प्रकाशित कमिट का संशोधन मत करें!</em></p>
+    <pre class="shell"><code>git commit --amend --no-edit</code></pre>
+    <h5 id="पिछली-कमिट-की-कमेंटरी-तारीख-बदलें">
+      पिछली कमिट की कमेंटरी तारीख बदलें
+    </h5>
+    <pre
+      class="shell"
+    ><code>GIT_COMMITTER_DATE=&quot;date&quot; git commit --amend</code></pre>
+    <h5 id="पिछली-कमिट-के-लेखक-की-तारीख-बदलें">
+      पिछली कमिट के लेखक की तारीख बदलें
+    </h5>
+    <pre
+      class="shell"
+    ><code>git commit --amend --date=&quot;date&quot;</code></pre>
+    <h5
+      id="न-किए-गए-कमिट-परिवर्तन-को-वर्तमान-शाखा-से-किसी-अन्य-शाखा-में-परिवर्तन-करें"
+    >
+      न किए गए कमिट परिवर्तन को वर्तमान शाखा से किसी अन्य शाखा में परिवर्तन
+      करें:
+    </h5>
+    <pre class="shell"><code>git stash
+git checkout branch2
+git stash pop</code></pre>
+    <h5 id="वर्तमान-शाखा-में-वापस-किए-गए-परिवर्तनों-को-पुनर्स्थापित-करें">
+      वर्तमान शाखा में वापस किए गए परिवर्तनों को पुनर्स्थापित करें:
+    </h5>
+    <pre class="shell"><code>git stash apply</code></pre>
+    <h4 id="वर्तमान-शाखा-में-वापस-विशेष-रोक-को-पुनर्स्थापित-करें">
+      वर्तमान शाखा में वापस विशेष रोक को पुनर्स्थापित करें:
+    </h4>
+    <ul>
+      <li>
+        <em>{स्टैश_संख्या}</em> <code>git stash list</code> से प्राप्त किया जा
+        सकता है
+      </li>
+    </ul>
+    <pre class="shell"><code>git stash apply stash@{stash_number}</code></pre>
+    <h5 id="अंतिम-चरण-स्टैश-में-परिवर्तनों-को-निकालें">
+      अंतिम चरण (स्टैश) में परिवर्तनों को निकालें:
+    </h5>
+    <pre class="shell"><code>git stash drop</code></pre>
+    <hr />
+    <h2 id="खोज">खोज</h2>
+    <h5 id="फ़ोल्डर-में-सभी-फाइलों-पर-एक-खोज">
+      फ़ोल्डर में सभी फाइलों पर एक खोज:
+    </h5>
+    <pre class="shell"><code>git grep &quot;hello&quot;</code></pre>
+    <h5 id="एक-खोज-के-किसी-भी-संस्करण-में">एक खोज के किसी भी संस्करण में:</h5>
+    <pre class="shell"><code>git grep &quot;hello&quot; v2.5</code></pre>
+    <hr />
+    <h2 id="कमिट-इतिहास">कमिट इतिहास</h2>
+    <h5 id="नवीनतम-के-साथ-शुरू-सब-कमिट-दिखाएँ">
+      नवीनतम के साथ शुरू, सब कमिट दिखाएँ:
+    </h5>
+    <pre class="shell"><code>git log</code></pre>
+    <h5 id="सब-कमिट-दिखाएँ-कोई-लेखक-जानकारी-नहीं">
+      सब कमिट दिखाएँ (कोई लेखक जानकारी नहीं):
+    </h5>
+    <pre class="shell"><code>git log --oneline</code></pre>
+    <h5 id="एक-विशिष्ट-लेखक-के-सभी-कमिट-दिखाएँ">
+      एक विशिष्ट लेखक के सभी कमिट दिखाएँ:
+    </h5>
+    <pre class="shell"><code>git log --author=&quot;username&quot;</code></pre>
+    <h5 id="एक-विशिष्ट-फ़ाइल-के-लिए-समय-के-साथ-परिवर्तन-दिखाएँ">
+      एक विशिष्ट फ़ाइल के लिए समय के साथ परिवर्तन दिखाएँ:
+    </h5>
+    <pre class="shell"><code>git log -p &lt;file&gt;</code></pre>
+    <h5 id="एक-फाइल-में-कौन-क्या-बदला">एक फाइल में कौन क्या बदला:</h5>
+    <pre class="shell"><code>git blame &lt;file&gt;</code></pre>
+    <h5
+      id="उन-प्रदर्शनों-को-प्रदर्शित-करें-जो-केवल-दाईं-ओर-दूरस्थ-शाखा-में-मौजूद-हैं"
+    >
+      उन प्रदर्शनों को प्रदर्शित करें जो केवल दाईं ओर दूरस्थ / शाखा में मौजूद
+      हैं:
+    </h5>
+    <pre
+      class="shell"
+    ><code>git log --oneline &lt;origin/master&gt;..&lt;remote/master&gt; --left-right</code></pre>
+    <h5 id="संदर्भ-लॉग-दिखाएं">संदर्भ लॉग दिखाएं:</h5>
+    <pre class="shell"><code>git reflog show</code></pre>
+    <h5 id="संदर्भ-लॉग-हटाएं">संदर्भ लॉग हटाएं:</h5>
+    <pre class="shell"><code>git reflog delete</code></pre>
+    <hr />
+    <h2 id="चाल-और-नाम-बदलें">चाल और नाम बदलें</h2>
+    <h5 id="फ़ाइल-का-नाम-बदलें">फ़ाइल का नाम बदलें:</h5>
+    <p>Index.txt को Index.html में बदलें</p>
+    <pre class="shell"><code>git mv Index.txt Index.html</code></pre>
+    <hr />
+    <h2 id="शाखाएं-और-टैग">शाखाएं और टैग</h2>
+    <h5 id="सभी-स्थानीय-शाखाओं-की-सूची">सभी स्थानीय शाखाओं की सूची:</h5>
+    <pre class="shell"><code>git branch</code></pre>
+    <h5 id="सिर-शाखा-बदलने">सिर शाखा बदलने:</h5>
+    <pre class="shell"><code>git checkout &lt;branch&gt;</code></pre>
+    <h5 id="नई-शाखा-बनाएँ-और-उस-पर-जाने">नई शाखा बनाएँ और उस पर जाने:</h5>
+    <pre class="shell"><code>git checkout -b &lt;new-branch&gt;</code></pre>
+    <h4 id="मौजूदा-प्रतिबद्ध-कमिट-से-एक-नई-शाखा-की-जाँच-करें-और-बनाएँ">
+      मौजूदा प्रतिबद्ध (कमिट) से एक नई शाखा की जाँच करें और बनाएँ:
+    </h4>
+    <pre
+      class="shell"
+    ><code>git checkout &lt;commit-hash&gt; -b &lt;new_branch_name&gt;</code></pre>
+    <h5 id="अपने-वर्तमान-हेड-head-के-आधार-पर-एक-नई-शाखा-बनाएँ">
+      अपने वर्तमान हेड (HEAD) के आधार पर एक नई शाखा बनाएँ:
+    </h5>
+    <pre class="shell"><code>git branch &lt;new-branch&gt;</code></pre>
+    <h5 id="एक-रिमोट-शाखा-पर-आधारित-एक-नए-ट्रैकिंग-शाखा-बनाएँ">
+      एक रिमोट शाखा पर आधारित एक नए ट्रैकिंग शाखा बनाएँ:
+    </h5>
+    <pre
+      class="shell"
+    ><code>git branch --track &lt;new-branch&gt; &lt;remote-branch&gt;</code></pre>
+    <h5 id="स्थानीय-शाखा-हटाना">स्थानीय शाखा हटाना:</h5>
+    <pre class="shell"><code>git branch -d &lt;branch&gt;</code></pre>
+    <h5 id="नई-शाखा-के-नाम-पर-वर्तमान-शाखा-का-नाम-बदलें">
+      नई शाखा के नाम पर वर्तमान शाखा का नाम बदलें:
+    </h5>
+    <pre class="shell"><code>git branch -m &lt;new_branch_name&gt;</code></pre>
+    <h5 id="स्थानीय-शाखा-जबर्दस्ती-हटाएं">स्थानीय शाखा जबर्दस्ती हटाएं</h5>
+    <p><em>आप मर्ज ना किए गए बदलाव खो देंगे!</em></p>
+    <pre class="shell"><code>git branch -D &lt;branch&gt;</code></pre>
+    <h5 id="एक-टैग-के-साथ-head-को-चिह्नित-करें">
+      एक टैग के साथ <code>HEAD</code> को चिह्नित करें:
+    </h5>
+    <pre class="shell"><code>git tag &lt;tag-name&gt;</code></pre>
+    <h5
+      id="एक-टैग-के-साथ-head-को-चिह्नित-करें-और-संदेश-को-शामिल-करने-के-लिए-संपादक-खोलें"
+    >
+      एक टैग के साथ <code>HEAD</code> को चिह्नित करें और संदेश को शामिल करने के
+      लिए संपादक खोलें:
+    </h5>
+    <pre class="shell"><code>git tag -a &lt;tag-name&gt;</code></pre>
+    <h5
+      id="एक-टैग-के-साथ-head-को-चिह्नित-करें-और-संदेश-को-शामिल-करने-के-लिए-संपादक-खोलें-1"
+    >
+      एक टैग के साथ <code>HEAD</code> को चिह्नित करें और संदेश को शामिल करने के
+      लिए संपादक खोलें:
+    </h5>
+    <pre
+      class="shell"
+    ><code>git tag &lt;tag-name&gt; -am &#39;message here&#39;</code></pre>
+    <h5 id="सभी-टैग-सूचीबद्ध-करें">सभी टैग सूचीबद्ध करें:</h5>
+    <pre class="shell"><code>git tag</code></pre>
+    <h5 id="सभी-संदेशों-को-उनके-संदेशों-के-साथ-सूचीबद्ध-करें">
+      सभी संदेशों को उनके संदेशों के साथ सूचीबद्ध करें:
+    </h5>
+    <pre class="shell"><code>git tag -n</code></pre>
+    <hr />
+    <h2 id="अद्यतन-और-प्रकाशित-करें">अद्यतन और प्रकाशित करें</h2>
+    <h5 id="सभी-वर्तमान-कॉन्फ़िगर-किए-गए-रिमोट-को-सूचीबद्ध-करें">
+      सभी वर्तमान कॉन्फ़िगर किए गए रिमोट को सूचीबद्ध करें:
+    </h5>
+    <pre class="shell"><code>git remote -v</code></pre>
+    <h5 id="रिमोट-के-बारे-में-जानकारी-दिखाएं">
+      रिमोट के बारे में जानकारी दिखाएं:
+    </h5>
+    <pre class="shell"><code>git remote show &lt;remote&gt;</code></pre>
+    <h5 id="नया-दूरस्थ-रिपॉजिटरी-जोड़ें">नया दूरस्थ रिपॉजिटरी जोड़ें:</h5>
+    <pre
+      class="shell"
+    ><code>git remote add &lt;remote&gt; &lt;url&gt;</code></pre>
+    <h5 id="दूरस्थ-रिपॉजिटरी-का-नाम-बदलें">दूरस्थ रिपॉजिटरी का नाम बदलें:</h5>
+    <pre
+      class="shell"
+    ><code>git remote rename &lt;remote&gt; &lt;new_remote&gt;</code></pre>
+    <h5 id="एक-रिमोट-निकालें">एक रिमोट निकालें:</h5>
+    <pre class="shell"><code>git remote rm &lt;remote&gt;</code></pre>
+    <p>
+      <em
+        >नोट: <code>git remote rm</code> सर्वर से दूरस्थ रिपॉजिटरी को डिलीट नहीं
+        करता है। यह केवल आपके स्थानीय रिपॉजिटरी से रिमोट और उसके संदर्भों को हटा
+        देता है।</em
+      >
+    </p>
+    <h5 id="रिमोट-से-सभी-परिवर्तन-डाउनलोड-करें-लेकिन-head-में-एकीकृत-न-हों">
+      रिमोट से सभी परिवर्तन डाउनलोड करें, लेकिन HEAD में एकीकृत न हों:
+    </h5>
+    <pre class="shell"><code>git fetch &lt;remote&gt;</code></pre>
+    <h5 id="परिवर्तन-डाउनलोड-करें-और-सीधे-head-में-विलय-एकीकृत-करें">
+      परिवर्तन डाउनलोड करें और सीधे HEAD में विलय / एकीकृत करें:
+    </h5>
+    <pre
+      class="shell"
+    ><code>git remote pull &lt;remote&gt; &lt;url&gt;</code></pre>
+    <h5 id="head-से-स्थानीय-रिपॉजिटरी-में-सभी-परिवर्तन-प्राप्त-करें">
+      HEAD से स्थानीय रिपॉजिटरी में सभी परिवर्तन प्राप्त करें:
+    </h5>
+    <pre class="shell"><code>git pull origin master</code></pre>
+    <h5 id="मग-के-बिना-head-से-स्थानीय-रिपॉजिटरी-में-सभी-परिवर्तन-प्राप्त-करें">
+      मग के बिना HEAD से स्थानीय रिपॉजिटरी में सभी परिवर्तन प्राप्त करें:
+    </h5>
+    <pre
+      class="shell"
+    ><code>git pull --rebase &lt;remote&gt; &lt;branch&gt;</code></pre>
+    <h5 id="दूरस्थ-पर-स्थानीय-परिवर्तन-प्रकाशित-करें">
+      दूरस्थ पर स्थानीय परिवर्तन प्रकाशित करें:
+    </h5>
+    <pre
+      class="shell"
+    ><code>git push remote &lt;remote&gt; &lt;branch&gt;</code></pre>
+    <h5 id="रिमोट-पर-एक-शाखा-हटाएँ">रिमोट पर एक शाखा हटाएँ:</h5>
+    <pre
+      class="shell"
+    ><code>git push &lt;remote&gt; :&lt;branch&gt; (since Git v1.5.0)</code></pre>
+    <p>या</p>
+    <pre
+      class="shell"
+    ><code>git push &lt;remote&gt; --delete &lt;branch&gt; (since Git v1.7.0)</code></pre>
+    <h5 id="अपने-टैग-प्रकाशित-करें">अपने टैग प्रकाशित करें:</h5>
+    <pre class="shell"><code>git push --tags</code></pre>
+    <hr />
+    <h2 id="मर्ज-और-रिबेस">मर्ज और रिबेस</h2>
+    <h5 id="एक-शाखा-मर्ज">एक शाखा मर्ज:</h5>
+    <pre class="shell"><code>git merge &lt;branch&gt;</code></pre>
+    <h5 id="अपने-वर्तमान-head-को-एक-शाखा-पर-पुनः-स्थापित-करें">
+      अपने वर्तमान HEAD को एक शाखा पर पुनः स्थापित करें
+    </h5>
+    <p><em>प्रकाशित कमिट का संशोधन मत करें!</em></p>
+    <pre class="shell"><code>git rebase &lt;branch&gt;</code></pre>
+    <h5 id="रिबेस-छोड़ना">रिबेस छोड़ना:</h5>
+    <pre class="shell"><code>git rebase --abort</code></pre>
+    <h5 id="संघर्ष-को-हल-करने-के-बाद-एक-रिबेस-जारी">
+      संघर्ष को हल करने के बाद एक रिबेस जारी:
+    </h5>
+    <pre class="shell"><code>git rebase --continue</code></pre>
+    <h5
+      id="संघर्ष-का-समाधान-करने-के-लिए-अपने-से-कॉन्फ़िगर-मर्ज-उपकरण-का-उपयोग-करें"
+    >
+      संघर्ष का समाधान करने के लिए अपने से कॉन्फ़िगर मर्ज उपकरण का उपयोग करें:
+    </h5>
+    <pre class="shell"><code>git mergetool</code></pre>
+    <h5
+      id="सुलझाया-के-रूप-में-मैन्युअल-निशान-फ़ाइल-हल-करने-के-बाद-संघर्षों-और-हल-करने-के-लिए-अपने-संपादक-का-उपयोग-करें"
+    >
+      सुलझाया के रूप में मैन्युअल निशान फ़ाइल (हल करने के बाद) संघर्षों और हल
+      करने के लिए अपने संपादक का उपयोग करें:
+    </h5>
+    <pre class="shell"><code>git add &lt;resolved-file&gt;</code></pre>
+    <pre class="shell"><code>git rm &lt;resolved-file&gt;</code></pre>
+    <h5 id="कमिट-को-स्क्वाश-करें">कमिट को स्क्वाश करें:</h5>
+    <pre
+      class="shell"
+    ><code>git rebase -i &lt;commit-just-before-first&gt;</code></pre>
+    <hr />
+    <h2 id="पूर्ववत">पूर्ववत</h2>
+    <h5 id="अपने-कार्य-निर्देशिका-में-सभी-स्थानीय-परिवर्तनों-को-छोड़ें">
+      अपने कार्य निर्देशिका में सभी स्थानीय परिवर्तनों को छोड़ें:
+    </h5>
+    <pre class="shell"><code>git reset --hard HEAD</code></pre>
+    <h5 id="मचान-क्षेत्र-से-बाहर-सभी-फ़ाइलों-को-प्राप्त-पिछले-git-add-पूर्ववत">
+      मचान क्षेत्र से बाहर सभी फ़ाइलों को प्राप्त (पिछले
+      <code>git add</code> पूर्ववत):
+    </h5>
+    <pre class="shell"><code>git reset HEAD</code></pre>
+    <h5 id="एक-विशिष्ट-फ़ाइल-में-स्थानीय-परिवर्तनों-को-छोड़ें">
+      एक विशिष्ट फ़ाइल में स्थानीय परिवर्तनों को छोड़ें:
+    </h5>
+    <pre class="shell"><code>git checkout HEAD &lt;file&gt;</code></pre>
+    <h5 id="कमिट-एक-वापस-लाएं">कमिट एक वापस लाएं:</h5>
+    <pre class="shell"><code>git revert &lt;commit&gt;</code></pre>
+    <h5
+      id="अपने-head-पॉइंटर-को-पिछली-प्रतिबद्धताओं-पर-रीसेट-करें-और-तब-से-सभी-परिवर्तनों-को-छोड़-दें"
+    >
+      अपने HEAD पॉइंटर को पिछली प्रतिबद्धताओं पर रीसेट करें और तब से सभी
+      परिवर्तनों को छोड़ दें:
+    </h5>
+    <pre class="shell"><code>git reset --hard &lt;commit&gt;</code></pre>
+    <h5
+      id="अपने-head-पॉइंटर-को-पिछली-प्रतिबद्धताओं-पर-रीसेट-करें-और-सभी-परिवर्तनों-को-बिना-किसी-बदलाव-के-संरक्षित-करें"
+    >
+      अपने HEAD पॉइंटर को पिछली प्रतिबद्धताओं पर रीसेट करें और सभी परिवर्तनों को
+      बिना किसी बदलाव के संरक्षित करें:
+    </h5>
+    <pre class="shell"><code>git reset &lt;commit&gt;</code></pre>
+    <h5
+      id="अपने-head-पॉइंटर-को-पिछली-कमिट-में-रीसेट-करें-और-अनचाहे-स्थानीय-परिवर्तनों-को-संरक्षित-करें"
+    >
+      अपने HEAD पॉइंटर को पिछली कमिट में रीसेट करें और अनचाहे स्थानीय परिवर्तनों
+      को संरक्षित करें:
+    </h5>
+    <pre class="shell"><code>git reset --keep &lt;commit&gt;</code></pre>
+    <h5 id="अपने-head-पॉइंटर-को-किसी-दूरस्थ-शाखा-वर्तमान-स्थिति-पर-रीसेट-करें">
+      अपने HEAD पॉइंटर को किसी दूरस्थ शाखा वर्तमान स्थिति पर रीसेट करें:
+    </h5>
+    <pre
+      class="shell"
+    ><code>git reset --hard &lt;remote/branch&gt; e.g., upstream/master, origin/my-feature</code></pre>
+    <h5
+      id="उन-फ़ाइलों-को-हटा-दें-जो-गलती-से-.gitignore-मैं-पहले-ही-जोड़-दिए-गए-थे"
+    >
+      उन फ़ाइलों को हटा दें जो गलती से .gitignore मैं पहले ही जोड़ दिए गए थे:
+    </h5>
+    <pre class="shell"><code>git rm -r --cached .
+git add .
+git commit -m &quot;remove xyz file&quot;</code></pre>
+    <hr />
+  </body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A description of the page and its contents" />
+    <link rel="stylesheet" href="./../../../assets/style.css" />
+    <link rel="stylesheet" href="./../../../assets/prism.css" />
+    <script async src="./../../../assets/prism.js"></script>
+    <title>Page Title</title>
+    <link rel="stylesheet" href="./../../../assets/style.css" />
+    <link rel="stylesheet" href="./../../../assets/prism.css" />
+    <script async src="./../../../assets/prism.js"></script>
+  </head>
+
+  <body>
+
+
+    <a href="https://github.com/bgoonz/DS-ALGO-OFFICIAL" class="github-corner" aria-label="View source on Github"><svg
+        width="80" height="80" viewBox="0 0 250 250"
+        style="z-index: 100000; fill:#194ccdaf; color:#fff; position: fixed; top: 20px; border: 0; left: 20px; transform: scale(-1.5, 1.5);"
+        aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+          fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+        </path>
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+          fill="currentColor" class="octo-body"></path>
+      </svg></a>
+
+
+
+
+    <h1 id="array.prototype.every">Array.prototype.every()</h1>
+    <blockquote>
+      <p>The every() method tests whether all elements in the array pass the test implemented by the provided function.
+        It
+        returns a Boolean value.</p>
+    </blockquote>
+    <p>The <strong><code>every()</code></strong> method tests whether all elements in the array pass the test
+      implemented
+      by the provided function. It returns a Boolean value.</p>
+    <p>The source for this interactive example is stored in a GitHub repository. If you'd like to contribute to the
+      interactive examples project, please clone <a class="btn"
+        href="https://github.com/mdn/interactive-examples">https://github.com/mdn/interactive-examples</a> and send us a
+      pull request.</p>
+    <h2 id="syntax">Syntax</h2>
+    <p>arr.every(callback(element[, index[, array]])[, thisArg])</p>
+    <h3 id="parameters">Parameters</h3>
+    <p><code>callback</code></p>
+    <p>A function to test for each element, taking three arguments:</p>
+    <p><code>element</code></p>
+    <p>The current element being processed in the array.</p>
+    <p><code>index</code> Optional</p>
+    <p>The index of the current element being processed in the array.</p>
+    <p><code>array</code> Optional</p>
+    <p>The array <code>every</code> was called upon.</p>
+    <p><code>thisArg</code> Optional</p>
+    <p>A value to use as <code>this</code> when executing <code>callback</code>.</p>
+    <h3 id="return-value">Return value</h3>
+    <p><strong><code>true</code></strong> if the <code>callback</code> function returns a <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Glossary/truthy">truthy</a> value for every
+      array element. Otherwise, <strong><code>false</code></strong>.</p>
+    <h2 id="description">Description</h2>
+    <p>The <code>every</code> method executes the provided <code>callback</code> function once for each element present
+      in
+      the array until it finds the one where <code>callback</code> returns a <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Glossary/falsy">falsy</a> value. If such an
+      element is found, the <code>every</code> method immediately returns <code>false</code>. Otherwise, if
+      <code>callback</code> returns a <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Glossary/truthy">truthy</a> value for all
+      elements, <code>every</code> returns <code>true</code>.
+    </p>
+    <p><strong>Caution</strong>: Calling this method on an empty array will return <code>true</code> for any condition!
+    </p>
+    <p><code>callback</code> is invoked only for array indexes which have assigned values. It is not invoked for indexes
+      which have been deleted, or which have never been assigned values.</p>
+    <p><code>callback</code> is invoked with three arguments: the value of the element, the index of the element, and
+      the
+      Array object being traversed.</p>
+    <p>If a <code>thisArg</code> parameter is provided to <code>every</code>, it will be used as callback's
+      <code>this</code> value. Otherwise, the value <code>undefined</code> will be used as its <code>this</code> value.
+      The
+      <code>this</code> value ultimately observable by <code>callback</code> is determined according to <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/this">the
+        usual rules for determining the <code>this</code> seen by a function</a>.
+    </p>
+    <p><code>every</code> does not mutate the array on which it is called.</p>
+    <p>The range of elements processed by <code>every</code> is set before the first invocation of
+      <code>callback</code>.
+      Therefore, <code>callback</code> will not run on elements that are appended to the array after the call to
+      <code>every</code> begins. If existing elements of the array are changed, their value as passed to
+      <code>callback</code> will be the value at the time <code>every</code> visits them. Elements that are deleted are
+      not visited.
+    </p>
+    <p><code>every</code> acts like the "for all" quantifier in mathematics. In particular, for an empty array, it
+      returns
+      <code>true</code>. (It is <a class="btn" href="https://en.wikipedia.org/wiki/Vacuous_truth">vacuously true</a>
+      that
+      all elements of the <a class="btn" href="https://en.wikipedia.org/wiki/Empty_set#Properties">empty set</a> satisfy
+      any
+      given condition.)
+    </p>
+    <h2 id="polyfill">Polyfill</h2>
+    <p><code>every</code> was added to the ECMA-262 standard in the 5th edition, and it may not be present in other
+      implementations of the standard. You can work around this by inserting the following code at the beginning of your
+      scripts, allowing use of <code>every</code> in implementations which do not natively support it.</p>
+    <p>This algorithm is exactly the one specified in ECMA-262, 5th edition, assuming <code>Object</code> and
+      <code>TypeError</code> have their original values, and that <code>callbackfn.call</code> evaluates to the original
+      value of <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call"><code>Function.prototype.call</code></a>.
+    </p>
+    pre data-role="codeBlock" data-info="js" class="language-javascript"><code>if (!Array.prototype.every) {
+      Array.prototype.every = function(callbackfn, thisArg) {
+      &#39;use strict&#39;;
+      var T, k;
+
+      if (this == null) {
+      throw new TypeError(&#39;this is null or not defined&#39;);
+      }
+
+
+
+      var O = Object(this);
+
+
+
+
+      var len = O.length &gt;&gt;&gt; 0;
+
+
+      if (typeof callbackfn !== &#39;function&#39; &amp;&amp; Object.prototype.toString.call(callbackfn) !==
+      &#39;[object
+      Function]&#39;) {
+      throw new TypeError();
+      }
+
+
+      if (arguments.length &gt; 1) {
+      T = thisArg;
+      }
+
+
+      k = 0;
+
+
+      while (k &lt; len) {
+
+      var kValue;
+
+
+
+
+
+
+
+      if (k in O) {
+      var testResult;
+
+
+      kValue = O[k];
+
+
+
+
+
+      if(T) testResult = callbackfn.call(T, kValue, k, O);
+      else testResult = callbackfn(kValue,k,O)
+
+
+      if (!testResult) {
+      return false;
+      }
+      }
+      k++;
+      }
+      return true;
+      };
+      }</code></pre>
+    <h2 id="examples">Examples</h2>
+    <h3 id="testing-size-of-all-array-elements">Testing size of all array elements</h3>
+    <p>The following example tests whether all elements in the array are bigger than 10.</p>
+    pre data-role="codeBlock" data-info="js" class="language-javascript"><code>function isBigEnough(element, index,
+      array)
+      {
+      return element &gt;= 10;
+      }
+      [12, 5, 8, 130, 44].every(isBigEnough);
+      [12, 54, 18, 130, 44].every(isBigEnough); </code></pre>
+    <h3 id="using-arrow-functions">Using arrow functions</h3>
+    <p><a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">Arrow
+        functions</a> provide a shorter syntax for the same test.</p>
+    pre data-role="codeBlock" data-info="js" class="language-javascript"><code>[12, 5, 8, 130, 44].every(x =&gt; x &gt;=
+      10);
+      [12, 54, 18, 130, 44].every(x =&gt; x &gt;= 10); </code></pre>
+    <h3 id="affecting-initial-array-modifying-appending-and-deleting">Affecting Initial Array (modifying, appending, and
+      deleting)</h3>
+    <p>The following examples tests the behaviour of the <code>every</code> method when the array is modified.</p>
+    pre data-role="codeBlock" data-info="js" class="language-javascript"><code>let arr = [1, 2, 3, 4];
+      arr.every( (elem, index, arr) =&gt; {
+      arr[index+1] -= 1
+      console.log(`[${arr}][${index}] -&gt; ${elem}`)
+      return elem &lt; 2
+      })
+
+
+
+
+
+
+
+
+
+
+
+      arr = [1, 2, 3];
+      arr.every( (elem, index, arr) =&gt; {
+      arr.push(&#39;new&#39;)
+      console.log(`[${arr}][${index}] -&gt; ${elem}`)
+      return elem &lt; 4
+      })
+
+
+
+
+
+
+
+
+
+
+      arr = [1, 2, 3, 4];
+      arr.every( (elem, index, arr) =&gt; {
+      arr.pop()
+      console.log(`[${arr}][${index}] -&gt; ${elem}`)
+      return elem &lt; 4
+      })</code></pre>
+    <h2 id="specifications">Specifications</h2>
+    <table>
+      <colgroup>
+        <col style="width: 100%" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Specification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>[ECMAScript (ECMA-262)</td>
+        </tr>
+        <tr>
+          <td>The definition of ‘Array.prototype.every' in that
+            specification.](https://tc39.es/ecma262/#sec-array.prototype.every)</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2 id="browser-compatibility">Browser compatibility</h2>
+    <p>The compatibility table in this page is generated from structured data. If you'd like to contribute to the data,
+      please check out <a class="btn"
+        href="https://github.com/mdn/browser-compat-data">https://github.com/mdn/browser-compat-data</a> and send us a
+      pull
+      request.</p>
+    <p><a class="btn" href="https://github.com/mdn/browser-compat-data">Update compatibility data on GitHub</a></p>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Desktop</th>
+          <th>Mobile</th>
+          <th>Server</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>Chrome</td>
+          <td>Edge</td>
+          <td>Firefox</td>
+        </tr>
+        <tr>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>every</code></td>
+          <td>Chrome Full support 1</td>
+          <td>Edge Full support 12</td>
+          <td>Firefox Full support 1.5</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4 id="what-happens-next">What happens next?</h4>
+    <p>Our team will review your report. Once we verify the information you have supplied we will update this browser
+      compatability table accordingly.</p>
+    <h4 id="can-i-keep-track-of-my-report">Can I keep track of my report?</h4>
+    <p>You can join the GitHub repository to see updates and commits for this table data:</p>
+    <p><a class="btn" href="https://github.com/mdn/browser-compat-data">https://github.com/mdn/browser-compat-data</a>
+    </p>
+    <p>Our goal is to provide accurate, real values for all our compatibility data tables. Notifying MDN of inaccurate
+      data or supplying new data pushes us further towards our goal of providing 100% real values to the developer
+      community.<br />
+      Thank you for helping.</p>
+    <p>Please select the browser or browsers which are affected.</p>
+    <p>Briefly outline the issue you are highlighting. Minimum 10 and maximum 1,000 characters.</p>
+    <p>Browser documentation and release notes are good supporting items to accompany your message. A demo hosted on
+      services like Codepen or JSBin are perfect for providing real examples of your findings.</p>
+    <p>Connection error:Sorry, we can't seem to reach the server. We are working to fix the problem. Please try again
+      later.</p>
+    <h3 id="legend">Legend</h3>
+    <p>Full support</p>
+    <p>Full support</p>
+    <h2 id="see-also">See also</h2>
+    <ul>
+      <li><a class="btn"
+          href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach"><code>Array.prototype.forEach()</code></a>
+      </li>
+      <li><a class="btn"
+          href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some"><code>Array.prototype.some()</code></a>
+      </li>
+      <li><a class="btn"
+          href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find"><code>Array.prototype.find()</code></a>
+      </li>
+      <li><a class="btn"
+          href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/every"><code>TypedArray.prototype.every()</code></a>
+      </li>
+    </ul>
+    <p><a class="btn"
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every">Source</a>
+    </p>
+
+  </body>
+
+</html>

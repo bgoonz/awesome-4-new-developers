@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>How-Unix-Pipes-are-Implemented</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p>In the shell, you can do something like</p>
+<pre><code>ls -la / | wc</code></pre>
+<p>The pipe <code>|</code> symbol says “let’s take the output from <code>ls -la /</code> and pipe it into the input of <code>wc</code>. (<code>wc</code> is”word count"–tells you how many characters, words, and lines its input has.)</p>
+<p>Steps are:</p>
+<ol type="1">
+<li>Create a pipe with <code>pipe()</code>.</li>
+<li>Fork a child process to run <code>wc</code>. (The parent process will run <code>ls -la /</code>.)</li>
+<li>In the child:
+<ol type="1">
+<li>Use <code>dup2()</code> to hook file descriptor <code>0</code> (<code>stdin</code>) up to the “read” end of the pipe <code>fd[0]</code>. This makes it so that whenever the child process reads from <code>stdin</code>, it actually reads from the pipe.</li>
+<li>Use <code>execlp()</code> to run <code>wc</code>. <code>wc</code> will read from <code>stdin</code> as per usual, but unbeknownst to it, we’ve hooked that up to the pipe.</li>
+</ol></li>
+<li>In the parent:
+<ol type="1">
+<li>Use <code>dup2()</code> to hook file descriptor <code>1</code> (<code>stdout</code>) up to the “write” end of the pipe <code>fd[1]</code>. This makes it so that whenever the parent process writes to <code>stdout</code>, it actually writes into the pipe.</li>
+<li>Use <code>execlp()</code> to run <code>ls -la /</code>. <code>ls</code> will write to <code>stdout</code> as per usual, but unbeknownst to it, we’ve hooked that up to the pipe.</li>
+</ol></li>
+</ol>
+<p>That’s it!</p>
+<p>Source code:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" title="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co"> * Pipe example</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co"> *</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co"> * Runs the command: ls -la / | wc</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co"> *</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co"> * Try running the above command on the command line to see if the</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co"> * output matches.</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co"> */</span></a>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="pp">#include </span><span class="im">&lt;unistd.h&gt;</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="pp">#include </span><span class="im">&lt;errno.h&gt;</span></a>
+<a class="sourceLine" id="cb2-14" title="14"></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="dt">int</span> main(<span class="dt">void</span>)</a>
+<a class="sourceLine" id="cb2-16" title="16">{</a>
+<a class="sourceLine" id="cb2-17" title="17">    <span class="dt">int</span> fd[<span class="dv">2</span>];</a>
+<a class="sourceLine" id="cb2-18" title="18"></a>
+<a class="sourceLine" id="cb2-19" title="19">    <span class="co">// Make the pipe for communication</span></a>
+<a class="sourceLine" id="cb2-20" title="20">    pipe(fd);</a>
+<a class="sourceLine" id="cb2-21" title="21"></a>
+<a class="sourceLine" id="cb2-22" title="22">    <span class="co">// Fork a child process</span></a>
+<a class="sourceLine" id="cb2-23" title="23">    pid_t pid = fork();</a>
+<a class="sourceLine" id="cb2-24" title="24"></a>
+<a class="sourceLine" id="cb2-25" title="25">    <span class="cf">if</span> (pid == -<span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb2-26" title="26">        perror(<span class="st">&quot;fork&quot;</span>);</a>
+<a class="sourceLine" id="cb2-27" title="27">        exit(<span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb2-28" title="28">    }</a>
+<a class="sourceLine" id="cb2-29" title="29"></a>
+<a class="sourceLine" id="cb2-30" title="30">    <span class="cf">if</span> (pid == <span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb2-31" title="31">        <span class="co">// Child process</span></a>
+<a class="sourceLine" id="cb2-32" title="32"></a>
+<a class="sourceLine" id="cb2-33" title="33">        <span class="co">// Hook up standard input to the &quot;read&quot; end of the pipe</span></a>
+<a class="sourceLine" id="cb2-34" title="34">        dup2(fd[<span class="dv">0</span>], <span class="dv">0</span>);</a>
+<a class="sourceLine" id="cb2-35" title="35"></a>
+<a class="sourceLine" id="cb2-36" title="36">        <span class="co">// Close the &quot;write&quot; end of the pipe for the child.</span></a>
+<a class="sourceLine" id="cb2-37" title="37">        <span class="co">// Parent still has it open; child doesn&#39;t need it.</span></a>
+<a class="sourceLine" id="cb2-38" title="38">        close(fd[<span class="dv">1</span>]);</a>
+<a class="sourceLine" id="cb2-39" title="39"></a>
+<a class="sourceLine" id="cb2-40" title="40">        <span class="co">// Run &quot;wc&quot;</span></a>
+<a class="sourceLine" id="cb2-41" title="41">        execlp(<span class="st">&quot;wc&quot;</span>, <span class="st">&quot;wc&quot;</span>, NULL);</a>
+<a class="sourceLine" id="cb2-42" title="42"></a>
+<a class="sourceLine" id="cb2-43" title="43">        <span class="co">// We only get here if exec() fails</span></a>
+<a class="sourceLine" id="cb2-44" title="44">        perror(<span class="st">&quot;exec wc&quot;</span>);</a>
+<a class="sourceLine" id="cb2-45" title="45">        exit(<span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb2-46" title="46">    } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb2-47" title="47">        <span class="co">// Parent process</span></a>
+<a class="sourceLine" id="cb2-48" title="48"></a>
+<a class="sourceLine" id="cb2-49" title="49">        <span class="co">// Hook up standard output to the &quot;write&quot; end of the pipe</span></a>
+<a class="sourceLine" id="cb2-50" title="50">        dup2(fd[<span class="dv">1</span>], <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb2-51" title="51"></a>
+<a class="sourceLine" id="cb2-52" title="52">        <span class="co">// Close the &quot;read&quot; end of the pipe for the parent.</span></a>
+<a class="sourceLine" id="cb2-53" title="53">        <span class="co">// Child still has it open; parent doesn&#39;t need it.</span></a>
+<a class="sourceLine" id="cb2-54" title="54">        close(fd[<span class="dv">0</span>]);</a>
+<a class="sourceLine" id="cb2-55" title="55"></a>
+<a class="sourceLine" id="cb2-56" title="56">        <span class="co">// Run &quot;ls -la /&quot;</span></a>
+<a class="sourceLine" id="cb2-57" title="57">        execlp(<span class="st">&quot;ls&quot;</span>, <span class="st">&quot;ls&quot;</span>, <span class="st">&quot;-la&quot;</span>, <span class="st">&quot;/&quot;</span>, NULL);</a>
+<a class="sourceLine" id="cb2-58" title="58"></a>
+<a class="sourceLine" id="cb2-59" title="59">        <span class="co">// We only get here if exec() fails</span></a>
+<a class="sourceLine" id="cb2-60" title="60">        perror(<span class="st">&quot;exec ls&quot;</span>);</a>
+<a class="sourceLine" id="cb2-61" title="61">        exit(<span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb2-62" title="62">    }</a>
+<a class="sourceLine" id="cb2-63" title="63"></a>
+<a class="sourceLine" id="cb2-64" title="64">    <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb2-65" title="65">}</a></code></pre></div>
+</body>
+</html>

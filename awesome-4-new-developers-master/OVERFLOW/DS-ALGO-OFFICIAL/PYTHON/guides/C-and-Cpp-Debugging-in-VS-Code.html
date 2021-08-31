@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>C-and-Cpp-Debugging-in-VS-Code</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>First, <a href="https://github.com/LambdaSchool/CS-Wiki/wiki/Getting-Your-C-Compiler-Installed">install your compiler.</a></p>
+<p>Then, go to the extensions panel in VS Code and search for <code>C/C++</code>. Choose the extension by Microsoft (ms-vscode.cpptools).</p>
+<p>Install that extension and restart VSC.</p>
+<p><a href="https://github.com/LambdaSchool/CS-Wiki/tree/master/vscdebugc">Here is an example project</a>.</p>
+<h2 id="building-the-project-in-vs-code">Building the Project in VS Code</h2>
+<p><em><strong>Currently, this build process only works for MacOS and Linux. It is unknown if it will work on Windows 10 with WSL. See below for additional instructions on compiling in Windows 7 with Cygwin.</strong></em></p>
+<p>What we want to be able to do is build the project with CTRL-SHIFT-B (or COMMAND-SHIFT-B).</p>
+<p>The <code>tasks.json</code> file controls which tasks VSC can run. The one we’re interested in is the Default Build Task.</p>
+<ol type="1">
+<li>With VSC open to your root project directory, hit CTRL-SHIFT-P (or COMMAND-SHIFT-P).</li>
+<li>Type <code>tasks</code> and choose “Tasks: Configure Default Build Task”.</li>
+<li>Choose “Create tasks.json file from template”.</li>
+<li>Choose “Others”.</li>
+</ol>
+<p>At this point you should be editing <code>tasks.json</code>.</p>
+<ol type="1">
+<li>Change the <code>label</code> to something representative, like <code>Build</code></li>
+<li>Change the <code>command</code> to the command you want to run, like <code>gcc -Wall -o foo foo.c</code> or <code>make</code></li>
+<li>Hit CTRL-SHIFT-P (or COMMAND-SHIFT-P) again.</li>
+<li>Type <code>default</code> and choose “Tasks: Configure Default Build Task” again.</li>
+<li>Select the value you put in for <code>label</code> in step 1.</li>
+<li>Save <code>tasks.json</code>.</li>
+</ol>
+<p>At this point, your <code>tasks.json</code> should look something like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="co">// See https://go.microsoft.com/fwlink/?LinkId=733558</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="co">// for the documentation about the tasks.json format</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="st">&quot;version&quot;</span><span class="op">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="st">&quot;tasks&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-7" title="7">      <span class="st">&quot;label&quot;</span><span class="op">:</span> <span class="st">&quot;Build&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">      <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;shell&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-9" title="9">      <span class="st">&quot;command&quot;</span><span class="op">:</span> <span class="st">&quot;make&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-10" title="10">      <span class="st">&quot;group&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-11" title="11">        <span class="st">&quot;kind&quot;</span><span class="op">:</span> <span class="st">&quot;build&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-12" title="12">        <span class="st">&quot;isDefault&quot;</span><span class="op">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb1-13" title="13">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-14" title="14">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-15" title="15">  ]</a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="op">}</span></a></code></pre></div>
+<p>Now you should be able to hit CTRL-SHIFT-B (or COMMAND-SHIFT-B) and see a build.</p>
+<h3 id="adding-problems-panel-support-optional">Adding PROBLEMS Panel Support (OPTIONAL)</h3>
+<p>Adding a <em>Problem Matcher</em> will automatically extract error information from the build and put it in the PROBLEMS panel to make it easier to jump to those line numbers.</p>
+<p>Here is a <code>tasks.json</code> file with a <a href="https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher"><code>problemMatcher</code> for C/C++</a> added in:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="co">// See https://go.microsoft.com/fwlink/?LinkId=733558</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="co">// for the documentation about the tasks.json format</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="st">&quot;version&quot;</span><span class="op">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="st">&quot;tasks&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-7" title="7">      <span class="st">&quot;label&quot;</span><span class="op">:</span> <span class="st">&quot;Build&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-8" title="8">      <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;shell&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-9" title="9">      <span class="st">&quot;command&quot;</span><span class="op">:</span> <span class="st">&quot;make&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-10" title="10">      <span class="st">&quot;group&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-11" title="11">        <span class="st">&quot;kind&quot;</span><span class="op">:</span> <span class="st">&quot;build&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-12" title="12">        <span class="st">&quot;isDefault&quot;</span><span class="op">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb2-13" title="13">      <span class="op">},</span></a>
+<a class="sourceLine" id="cb2-14" title="14">      <span class="st">&quot;problemMatcher&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-15" title="15">        <span class="st">&quot;owner&quot;</span><span class="op">:</span> <span class="st">&quot;cpp&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-16" title="16">        <span class="st">&quot;fileLocation&quot;</span><span class="op">:</span> [<span class="st">&quot;relative&quot;</span><span class="op">,</span> <span class="st">&quot;${workspaceFolder}&quot;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb2-17" title="17">        <span class="st">&quot;pattern&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-18" title="18">          <span class="st">&quot;regexp&quot;</span><span class="op">:</span> <span class="st">&quot;^(.*):(</span><span class="sc">\\</span><span class="st">d+):(</span><span class="sc">\\</span><span class="st">d+):</span><span class="sc">\\</span><span class="st">s+(warning|error):</span><span class="sc">\\</span><span class="st">s+(.*)$&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-19" title="19">          <span class="st">&quot;file&quot;</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-20" title="20">          <span class="st">&quot;line&quot;</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-21" title="21">          <span class="st">&quot;column&quot;</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-22" title="22">          <span class="st">&quot;severity&quot;</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-23" title="23">          <span class="st">&quot;message&quot;</span><span class="op">:</span> <span class="dv">5</span></a>
+<a class="sourceLine" id="cb2-24" title="24">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-25" title="25">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-26" title="26">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-27" title="27">  ]</a>
+<a class="sourceLine" id="cb2-28" title="28"><span class="op">}</span></a></code></pre></div>
+<p><code>tasks.json</code> will be found in the <code>.vscode/</code> directory in the project workspace.</p>
+<h3 id="compiling-in-windowscygwin">Compiling in Windows/Cygwin</h3>
+<p>We need to complete a few more setup items to be able to compile using the Cygwin Bash terminal. We will be able to build programs, but the above build shortcut and problem matcher will not work. <strong>Please let us know if you have found a workaround!</strong></p>
+<ol type="1">
+<li>We need to install two additional packages for Cygwin. Open cmd.exe as an administrator (not the Cygwin terminal).</li>
+<li>Navigate to the directory where you saved the installer.</li>
+<li>Run the following command: <code>setup-x86_64.exe -q -P chere -P gdb</code>.
+<ul>
+<li>If this step is not performed, the bash terminal will crash on open in VS Code.</li>
+</ul></li>
+<li>Press <code>Ctrl + Shift + P</code> and type in <code>Open User Settings</code>. Click on the result. This will open a file called <code>User Settings</code></li>
+<li>Add the following lines to your settings. Note that items in this object are comma separated.</li>
+</ol>
+<blockquote>
+<pre><code>        &quot;terminal.integrated.shell.windows&quot;: &quot;C:\\cygwin64\\bin\\bash.exe&quot;,
+        &quot;terminal.integrated.shellArgs.windows&quot;: [&quot;/bin/xhere&quot;,&quot;/bin/bash&quot;]</code></pre>
+</blockquote>
+<ol start="6" type="1">
+<li>Verify that there are no errors indicated by squiggles, then save and close the file.</li>
+</ol>
+<p>These steps are necessary for each new project you work on:</p>
+<ol type="1">
+<li>Open your project in VS Code. If you don’t have another one yet, use the project linked above to make sure this works.<br />
+</li>
+<li>Open a file with an <code>#include</code> statement at the top. Open .c if you are using the example project.</li>
+<li>The lines with <code>#include</code> statements will have green squiggles underneath them. Click on one, then click on the lightbulb that appears on the left side.</li>
+<li>Select <code>Edit "includePath" Settings</code>. This will create and open a file called <code>c_cpp_properties.json</code>.</li>
+<li>Scroll to the <code>"Win32"</code> section. Under <code>"includePath"</code> <strong>AND</strong> the <code>"path"</code> part of <code>"browse"</code>, add the following:</li>
+</ol>
+<blockquote>
+<pre><code>        &quot;C:/cygwin64/lib/gcc/x86_64-pc-cygwin/6.4.0/include&quot;,
+        &quot;C:/cygwin64/lib/gcc/x86_64-pc-cygwin/6.4.0/include/c++/*&quot;,
+        &quot;C:/cygwin64/lib/gcc/x86_64-pc-cygwin/6.4.0/include/c++/tr1/&quot;,
+        &quot;C:/cygwin64/lib/gcc/x86_64-pc-cygwin/6.4.0/include/c++/tr2/&quot;,
+        &quot;C:/cygwin64/lib/gcc/x86_64-pc-cygwin/6.4.0/include/c++/bits/&quot;,
+        &quot;C:/cygwin64/lib/gcc/x86_64-pc-cygwin/6.4.0/include/c++/x86_64-pc-cygwin/&quot;,</code></pre>
+</blockquote>
+<ol start="6" type="1">
+<li>Verify that this has worked by returning to <code>hello.c</code>.
+<ul>
+<li>The squiggles under any <code>#include</code>s should be gone.</li>
+<li>Start to type <code>printf()</code>. If Intellisense is working, the function should pop up.</li>
+</ul></li>
+</ol>
+<p>To compile and run your program, you cannot use the <code>Ctrl + Shift + B</code> shortcut. Instead: 1. Open the terminal (View -&gt; Integrated Terminal). 2. Navigate to the folder containing your project. * To get to your Windows directory from bash, type <code>cd cygdrive/c/Users/YourUserName</code> 3. If there is a makefile set up, you can navigate to the location with that file and simply enter the command <code>make</code>. * In the demo, this is located in <code>/CS-Wiki/vscdebugc</code> 4. Otherwise, enter <code>gcc -Wall -Wextra -o foo foo.c</code> * In the demo, this command would be <code>gcc -Wall -Wextra -o hello hello.c</code>. 5. Other than a slight hitch in the terminal, it may appear that nothing has happened when compiling a small program. If this is the first time compiling, foo.exe will appear in the Explorer. * It can be useful to keep a window open so that you can easily see the last updated time and verify that the build completed. 6. To run your new program, type <code>./foo.exe</code> in the terminal.</p>
+<h2 id="debugging-the-project-in-vs-code">Debugging the Project in VS Code</h2>
+<p><strong>IMPORTANT</strong>: You <em>must</em> build your C code with the <code>-g</code> switch to <code>gcc</code> or <code>clang</code>. This causes debugging information to be included in the binary.</p>
+<h3 id="setting-up-the-debugger">Setting up the Debugger</h3>
+<p>To set up debugging, perform the following steps:</p>
+<ol type="1">
+<li>Open the debugging panel (with the “anti-bug” symbol on the left).</li>
+<li>Where it says "No Configurations on the top, pull down that menu.</li>
+<li>Choose “Add Configuration”.</li>
+<li>Choose C++</li>
+<li>It’ll pop up an editor for <code>launch.json</code>. Edit the <code>name</code> to be something you like, e.g. “My Server”</li>
+<li>Change <code>program</code> to be the name of your binary from the build step, e.g. <code>"${workspaceFolder}/myserver"</code></li>
+<li>Change <code>miDebuggerPath</code> to the location of gdb.exe. This will be somewhere in your compiler folder.</li>
+<li><p>If you are using <code>fork()</code>, it might be helpful to modify GDB’s <code>detach-on-fork</code> setting to <code>off</code> in <code>setupCommands</code>.<code>text</code>, for example:</p>
+<p><code>"text": "-enable-pretty-printing -gdb-set detach-on-fork off",</code></p></li>
+<li><p>Save <code>launch.json</code>.</p></li>
+</ol>
+<p>Example <code>launch.json</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="co">// Use IntelliSense to learn about possible attributes.</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="co">// Hover to view descriptions of existing attributes.</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="co">// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="st">&quot;version&quot;</span><span class="op">:</span> <span class="st">&quot;0.2.0&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  <span class="st">&quot;configurations&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb5-7" title="7"></a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-9" title="9">      <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Hello world&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-10" title="10">      <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;cppdbg&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-11" title="11">      <span class="st">&quot;request&quot;</span><span class="op">:</span> <span class="st">&quot;launch&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-12" title="12">      <span class="st">&quot;program&quot;</span><span class="op">:</span> <span class="st">&quot;${workspaceFolder}/hello&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-13" title="13">      <span class="st">&quot;args&quot;</span><span class="op">:</span> []<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-14" title="14">      <span class="st">&quot;stopAtEntry&quot;</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-15" title="15">      <span class="st">&quot;cwd&quot;</span><span class="op">:</span> <span class="st">&quot;${workspaceFolder}&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-16" title="16">      <span class="st">&quot;environment&quot;</span><span class="op">:</span> []<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-17" title="17">      <span class="st">&quot;externalConsole&quot;</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-18" title="18">      <span class="st">&quot;MIMode&quot;</span><span class="op">:</span> <span class="st">&quot;gdb&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-19" title="19">      <span class="st">&quot;miDebuggerPath&quot;</span><span class="op">:</span> <span class="st">&quot;/path/to/gdb&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-20" title="20">      <span class="st">&quot;setupCommands&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb5-21" title="21">        <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-22" title="22">          <span class="st">&quot;description&quot;</span><span class="op">:</span> <span class="st">&quot;Enable pretty-printing for gdb and add better child debugging&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-23" title="23">          <span class="st">&quot;text&quot;</span><span class="op">:</span> <span class="st">&quot;-enable-pretty-printing -gdb-set detach-on-fork off&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-24" title="24">          <span class="st">&quot;ignoreFailures&quot;</span><span class="op">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb5-25" title="25">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-26" title="26">      ]</a>
+<a class="sourceLine" id="cb5-27" title="27">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-28" title="28">  ]</a>
+<a class="sourceLine" id="cb5-29" title="29"><span class="op">}</span></a></code></pre></div>
+<p><code>launch.json</code> will be found in the <code>.vscode/</code> directory in the project workspace.</p>
+<h3 id="intellisense-in-windowswsl">Intellisense in Windows/WSL</h3>
+<p>Follow <a href="https://github.com/Microsoft/vscode-cpptools/blob/master/Documentation/LanguageServer/Windows%20Subsystem%20for%20Linux.md">the instructions on this page</a>.</p>
+<p>Note that if <code>&lt;stdio.h&gt;</code> fails to highlight, you might need to add a final <code>/*</code> to the last line in the <code>includePath</code> section:</p>
+<pre><code>&quot;${localappdata}/Packages/CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc/LocalState/rootfs/usr/include/*&quot;</code></pre>
+<h3 id="running-the-debugger">Running the Debugger</h3>
+<ol type="1">
+<li>Perform a build.</li>
+<li>In the editor for the file you wish to debug, click just left of the line number where you want a breakpoint. A red dot will appear.</li>
+<li>In the debugger panel, click the green run arrow at the top, or select <code>Debug</code>→<code>Start Debugging</code>, or hit <code>F5</code>.</li>
+<li>The run should break on the line with the breakpoint.</li>
+</ol>
+<p><strong>If the run doesn’t break on the line you specified you probably didn’t compile with the <code>-g</code> switch for <code>gcc</code> or <code>clang</code>. Make sure to rebuild.</strong></p>
+<h4 id="variables">Variables</h4>
+<p>The debugging panel will show local variables in the <code>VARIABLES</code> pane. You can add expressions to watch in the <code>WATCH</code> pane, e.g.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb7-1" title="1">node-&gt;next-&gt;val</a></code></pre></div>
+<p>If you have a <code>char a[1000]</code> that you want to view as a string instead of an array, add this to the <code>WATCH</code> section:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb8-1" title="1">(<span class="dt">char</span> *)a</a></code></pre></div>
+<h4 id="console-io">Console I/O</h4>
+<p>Console input and output will be in another window that pops up. It might hide behind the VSCode window, so look for it there.</p>
+<h4 id="controls">Controls</h4>
+<p>Once you’ve hit the breakpoint, you can do one of these main things:</p>
+<ul>
+<li><strong>Continue</strong>: <code>F5</code> or green arrow. Keep running to the next breakpoint or the end.</li>
+<li><strong>Step Over</strong>: <code>F10</code> or “jump over” icon. Execute this line and go to the next without entering any functions.</li>
+<li><strong>Step Into</strong>: <code>F11</code> or “down arrow” icon. If this line is a function call, step into that function.</li>
+<li><strong>Step Out</strong>: <code>SHIFT-F11</code> or “up arrow” icon. Continue running until you get out of this function.</li>
+</ul>
+<p>See the “Debug” pulldown menu for all options.</p>
+<p>Happy hacking!</p>
+</body>
+</html>

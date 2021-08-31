@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>git-cheat-sheet-pl</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="git-cheat-sheet-polish">Git Cheat Sheet Polish</h1>
+    <h3 id="indeks">Indeks</h3>
+    <ul>
+      <li><a href="#konfiguracja">Konfiguracja</a></li>
+      <li><a href="#pliki-konfiguracyjne">Pliki Konfiguracyjne</a></li>
+      <li><a href="#tworzenie">Tworzenie</a></li>
+      <li><a href="#zmiany-lokalne">Zmiany Lokalne</a></li>
+      <li><a href="#wyszukiwanie">Wyszukiwanie</a></li>
+      <li><a href="#historia-commitów">Historia Commitów</a></li>
+      <li><a href="#gałęzie--tagi">Gałęzie &amp; Tagi</a></li>
+      <li><a href="#uaktualnij--opublikuj">Uaktualnij &amp; Opublikuj</a></li>
+      <li><a href="#połącz--rebase">Połącz &amp; Rebase</a></li>
+      <li><a href="#cofnij">Cofnij</a></li>
+      <li><a href="#git-flow">Git Flow</a></li>
+    </ul>
+    <hr />
+    <h2 id="konfiguracja">Konfiguracja</h2>
+    <h5 id="wyświetl-aktualną-konfigurację">Wyświetl aktualną konfigurację:</h5>
+    <pre><code>$ git config --list</code></pre>
+    <h5 id="wyświetl-konfigurację-repozytorium">
+      Wyświetl konfigurację repozytorium:
+    </h5>
+    <pre><code>$ git config --local --list</code></pre>
+    <h5 id="wyświetl-konfigurację-globalną">Wyświetl konfigurację globalną:</h5>
+    <pre><code>$ git config --global --list</code></pre>
+    <h5 id="wyświetl-konfigurację-systemową">
+      Wyświetl konfigurację systemową:
+    </h5>
+    <pre><code>$ git config --system --list</code></pre>
+    <h5
+      id="ustaw-nazwę-do-rozpoznawania-autorstwa-podczas-przeglądu-historii-wersji"
+    >
+      Ustaw nazwę do rozpoznawania autorstwa, podczas przeglądu historii wersji:
+    </h5>
+    <pre><code>$ git config --global user.name “[imię nazwisko]”</code></pre>
+    <h5
+      id="ustaw-adres-email-który-będzie-przypisany-do-każdego-znacznika-historii"
+    >
+      Ustaw adres email, który będzie przypisany do każdego znacznika historii:
+    </h5>
+    <pre><code>$ git config --global user.email “[poprawny-email]”</code></pre>
+    <h5
+      id="ustaw-automatyczne-kolorowanie-wiersza-poleceń-git-aby-ułatwić-przegląd"
+    >
+      Ustaw automatyczne kolorowanie wiersza poleceń Git, aby ułatwić przegląd:
+    </h5>
+    <pre><code>$ git config --global color.ui auto</code></pre>
+    <h5 id="ustaw-edytor-globalny-dla-commitów">
+      Ustaw edytor globalny dla commitów:
+    </h5>
+    <pre><code>$ git config --global core.editor vi</code></pre>
+    <hr />
+    <h2 id="pliki-konfiguracyjne">Pliki Konfiguracyjne</h2>
+    <h5 id="plik-konfiguracyjny-dla-określonego-repozytorium-local">
+      Plik konfiguracyjny dla określonego repozytorium [–local]:
+    </h5>
+    <pre><code>&lt;repo&gt;/.git/config</code></pre>
+    <h5 id="własny-plik-konfiguracyjny-global">
+      Własny plik konfiguracyjny [–global]:
+    </h5>
+    <pre><code>~/.gitconfig</code></pre>
+    <h5 id="globalny-plik-konfiguracyjny-system">
+      Globalny plik konfiguracyjny [–system]:
+    </h5>
+    <pre><code>/etc/gitconfig</code></pre>
+    <hr />
+    <h2 id="tworzenie">Tworzenie</h2>
+    <h5 id="sklonuj-istniejące-repozytorium">
+      Sklonuj istniejące repozytorium:
+    </h5>
+    <p>Istnieją dwa sposoby:</p>
+    <p>Przez SSH</p>
+    <pre><code>$ git clone ssh://nazwa@domena.com/repo.git</code></pre>
+    <p>Przez HTTP</p>
+    <pre><code>$ git clone http://domena.com/nazwa/repo.git</code></pre>
+    <h5 id="utwórz-nowe-repozytorium-lokalne-w-bieżącej-lokalizacji">
+      Utwórz nowe repozytorium lokalne w bieżącej lokalizacji:
+    </h5>
+    <pre><code>$ git init</code></pre>
+    <h5 id="utwórz-nowe-repozytorium-lokalne-w-konkretnej-lokalizacji">
+      Utwórz nowe repozytorium lokalne w konkretnej lokalizacji:
+    </h5>
+    <pre><code>$ git init &lt;ścieżka&gt;</code></pre>
+    <hr />
+    <h2 id="zmiany-lokalne">Zmiany Lokalne</h2>
+    <h5 id="zmiany-w-katalogu-roboczym">Zmiany w katalogu roboczym:</h5>
+    <pre><code>$ git status</code></pre>
+    <h5 id="zmiany-w-śledzonych-plikach">Zmiany w śledzonych plikach:</h5>
+    <pre><code>$ git diff</code></pre>
+    <h5 id="zobacz-zmianyróżnice-w-danym-pliku">
+      Zobacz zmiany/różnice w danym pliku:
+    </h5>
+    <pre><code>$ git diff &lt;plik&gt;</code></pre>
+    <h5 id="dodaj-wszystkie-bieżące-zmiany-do-następnego-commitu">
+      Dodaj wszystkie bieżące zmiany do następnego commitu:
+    </h5>
+    <pre><code>$ git add .</code></pre>
+    <h5 id="dodaj-kilka-zmian-w-plik-do-następnego-commitu">
+      Dodaj kilka zmian w &lt;plik&gt; do następnego commitu:
+    </h5>
+    <pre><code>$ git add -p &lt;plik&gt;</code></pre>
+    <h5 id="dodaj-tylko-wymienione-pliki-do-następnego-commitu">
+      Dodaj tylko wymienione pliki do następnego commitu:
+    </h5>
+    <pre><code>$ git add &lt;nazwapliku1&gt; &lt;nazwapliku2&gt;</code></pre>
+    <h5 id="wykonaj-commit-z-wszystkimi-zmianami-w-śledzonych-plikach">
+      Wykonaj commit z wszystkimi zmianami w śledzonych plikach:
+    </h5>
+    <pre><code>$ git commit -a</code></pre>
+    <h5 id="wykonaj-commit-wcześniej-dodanych-plików">
+      Wykonaj commit wcześniej dodanych plików:
+    </h5>
+    <pre><code>$ git commit</code></pre>
+    <h5 id="wykonaj-commit-z-wiadomością">Wykonaj commit z wiadomością:</h5>
+    <pre><code>$ git commit -m &#39;twoja wiadomość&#39;</code></pre>
+    <h5 id="wykonaj-commit-omijając-staging-area-i-dodaj-wiadomość">
+      Wykonaj commit omijając staging area i dodaj wiadomość:
+    </h5>
+    <pre><code>$ git commit -am &#39;twoja wiadomość&#39;</code></pre>
+    <h5 id="wykonaj-commit-z-wcześniejszą-datą">
+      Wykonaj commit z wcześniejszą datą:
+    </h5>
+    <pre><code>$ git commit --date=&quot;`date --date=&#39;n dzień temu&#39;`&quot; -am &quot;&lt;twoja wiadomość&gt;&quot;</code></pre>
+    <h5 id="zmodyfikuj-ostatni-commit">Zmodyfikuj ostatni commit:<br /></h5>
+    <p>
+      <em><sub>Nie modyfikuj opublikowanych commitów!</sub></em>
+    </p>
+    <pre><code>$ git commit -a --amend</code></pre>
+    <h5 id="zmodyfikuj-ostatni-commit-ale-pozostaw-poprzednią-wiadomość">
+      Zmodyfikuj ostatni commit, ale pozostaw poprzednią wiadomość:
+    </h5>
+    <p>
+      <em><sub>Nie modyfikuj opublikowanych commitów!</sub></em>
+    </p>
+    <pre class="shell"><code>$ git commit --amend --no-edit</code></pre>
+    <h5 id="zmień-czas-commitera-ostatniego-commitu">
+      Zmień czas commitera ostatniego commitu:
+    </h5>
+    <pre><code>GIT_COMMITTER_DATE=&quot;date&quot; git commit --amend</code></pre>
+    <h5 id="zmień-czas-autora-ostatniego-commitu">
+      Zmień czas autora ostatniego commitu:
+    </h5>
+    <pre
+      class="shell"
+    ><code>$ git commit --amend --date=&quot;date&quot;</code></pre>
+    <h5 id="przenieś-niecommitowane-zmiany-z-bieżącej-gałęzi-do-innej-gałęzi">
+      Przenieś niecommitowane zmiany z bieżącej gałęzi do innej gałęzi:<br />
+    </h5>
+    <pre><code>$ git stash
+$ git checkout gałąź2
+$ git stash pop</code></pre>
+    <h5 id="przywróć-przechowywane-zmiany-z-powrotem-do-bieżącej-gałęzi">
+      Przywróć przechowywane zmiany z powrotem do bieżącej gałęzi:
+    </h5>
+    <pre class="shell"><code>$ git stash apply</code></pre>
+    <h4 id="przywróć-dany-stash-z-powrotem-do-bieżącej-gałęzi">
+      Przywróć dany stash z powrotem do bieżącej gałęzi:
+    </h4>
+    <ul>
+      <li>
+        <em>{numer_stashu}</em> można uzyskać poprzez
+        <code>git stash list</code>
+      </li>
+    </ul>
+    <pre class="shell"><code>$ git stash apply stash@{numer_stashu}</code></pre>
+    <h5 id="usuń-ostatni-zestaw-przechowywanych-zmian">
+      Usuń ostatni zestaw przechowywanych zmian:
+    </h5>
+    <pre><code>$ git stash drop</code></pre>
+    <hr />
+    <h2 id="wyszukiwanie">Wyszukiwanie</h2>
+    <h5 id="wyszukiwanie-tekstu-we-wszystkich-plikach-w-katalogu">
+      Wyszukiwanie tekstu we wszystkich plikach w katalogu:
+    </h5>
+    <pre><code>$ git grep &quot;Cześć&quot;</code></pre>
+    <h5 id="w-dowolnej-wersji-wyszukiwania-tekstu">
+      W dowolnej wersji wyszukiwania tekstu:
+    </h5>
+    <pre><code>$ git grep &quot;Cześć&quot; v2.5</code></pre>
+    <h5 id="wyświetl-commity-które-wprowadziły-określone-słowo-kluczowe">
+      Wyświetl commity, które wprowadziły określone słowo kluczowe:
+    </h5>
+    <pre><code>$ git log -S &#39;słowo kluczowe&#39;</code></pre>
+    <h5
+      id="wyświetl-commity-które-wprowadziły-określone-słowo-kluczowe-używając-wyrażenia-regularnego"
+    >
+      Wyświetl commity, które wprowadziły określone słowo kluczowe (używając
+      wyrażenia regularnego):
+    </h5>
+    <pre><code>$ git log -S &#39;słowo kluczowe&#39; --pickaxe-regex</code></pre>
+    <hr />
+    <h2 id="historia-commitów">Historia Commitów</h2>
+    <h5
+      id="wyświetl-wszystkie-commity-zaczynając-od-najnowszego-wyświetli-hash-informacje-o-autorze-datę-commitu-i-tytuł-commitu"
+    >
+      Wyświetl wszystkie commity, zaczynając od najnowszego (wyświetli hash,
+      informacje o autorze, datę commitu i tytuł commitu):
+    </h5>
+    <pre><code>$ git log</code></pre>
+    <h5
+      id="wyświetl-wszystkie-commity-wyświetli-tylko-hash-commitu-i-wiadomość-commitu"
+    >
+      Wyświetl wszystkie commity (wyświetli tylko hash commitu i wiadomość
+      commitu):
+    </h5>
+    <pre><code>$ git log --oneline</code></pre>
+    <h5 id="wyświetl-wszystkie-commity-określonego-użytkownika">
+      Wyświetl wszystkie commity określonego użytkownika:
+    </h5>
+    <pre><code>$ git log --author=&quot;użytkownik&quot;</code></pre>
+    <h5 id="wyświetl-zmiany-w-czasie-dla-określonego-pliku">
+      Wyświetl zmiany w czasie dla określonego pliku:
+    </h5>
+    <pre><code>$ git log -p &lt;plik&gt;</code></pre>
+    <h5 id="wyświetl-commity-które-są-tylko-w-remotebranch-po-prawej-stronie">
+      Wyświetl commity które są tylko w remote/branch po prawej stronie:
+    </h5>
+    <pre><code>$ git log --oneline &lt;origin/master&gt;..&lt;remote/master&gt; --left-right</code></pre>
+    <h5 id="kto-zmienił-co-i-kiedy-w-plik">
+      Kto zmienił, co i kiedy w &lt;plik&gt;:
+    </h5>
+    <pre><code>$ git blame &lt;plik&gt;</code></pre>
+    <h5 id="wyświetl-dziennik-referencji">Wyświetl dziennik referencji:</h5>
+    <pre><code>$ git reflog show</code></pre>
+    <h5 id="usuń-dziennik-referencji">Usuń dziennik referencji:</h5>
+    <pre><code>$ git reflog delete</code></pre>
+    <hr />
+    <h2 id="przenieś-zmień-nazwę">Przenieś / Zmień nazwę</h2>
+    <h5 id="zmień-nazwę-pliku">Zmień nazwę pliku:</h5>
+    <p>Zmień nazwę z Index.txt na Index.html</p>
+    <pre><code>$ git mv Index.txt Index.html</code></pre>
+    <hr />
+    <h2 id="gałęzie-tagi">Gałęzie &amp; Tagi</h2>
+    <h5 id="wymień-wszystkie-lokalne-gałęzie">
+      Wymień wszystkie lokalne gałęzie:
+    </h5>
+    <pre><code>$ git branch</code></pre>
+    <h4 id="wymień-lokalnezdalne-gałęzie">Wymień lokalne/zdalne gałęzie:</h4>
+    <pre><code>$ git branch -a</code></pre>
+    <h5 id="wymień-wszystkie-zdalne-gałęzie">
+      Wymień wszystkie zdalne gałęzie:
+    </h5>
+    <pre><code>$ git branch -r</code></pre>
+    <h5 id="zmień-gałąź-head">Zmień gałąź HEAD:</h5>
+    <pre><code>$ git checkout &lt;gałąź&gt;</code></pre>
+    <h5 id="przełącz-pojedynczy-plik-z-innej-gałęzi">
+      Przełącz pojedynczy plik z innej gałęzi:
+    </h5>
+    <pre><code>$ git checkout &lt;gałąź&gt; -- &lt;nazwapliku&gt;</code></pre>
+    <h5 id="utwórz-i-zmień-na-nową-gałąź">Utwórz i zmień na nową gałąź:</h5>
+    <pre><code>$ git checkout -b &lt;gałąź&gt;</code></pre>
+    <h5 id="zmień-na-poprzednią-gałąź-bez-podawania-konkretnej-nazwy">
+      Zmień na poprzednią gałąź, bez podawania konkretnej nazwy:
+    </h5>
+    <pre><code>$ git checkout -</code></pre>
+    <h5
+      id="utwórz-nową-gałąź-z-istniejącej-już-gałęzi-i-przełącz-na-nową-gałąź"
+    >
+      Utwórz nową gałąź z istniejącej już gałęzi i przełącz na nową gałąź:
+    </h5>
+    <pre><code>$ git checkout -b &lt;nowa_gałąź&gt; &lt;istniejąca_gałąź&gt;</code></pre>
+    <h4 id="przełącz-i-utwórz-nową-galąź-z-istniejącego-commitu">
+      Przełącz i utwórz nową galąź z istniejącego commitu:
+    </h4>
+    <pre><code>$ git checkout &lt;hash-commitu&gt; -b &lt;nazwa_nowej_gałęzi&gt;</code></pre>
+    <h5 id="utwórz-nową-gałąź-na-podstawie-aktualnej-gałęzi-head">
+      Utwórz nową gałąź na podstawie aktualnej gałęzi HEAD:
+    </h5>
+    <pre><code>$ git branch &lt;nowa-gałąź&gt;</code></pre>
+    <h5 id="utwórz-nową-gałąź-śledzącą-na-podstawie-gałęzi-zdalnej">
+      Utwórz nową gałąź śledzącą na podstawie gałęzi zdalnej:
+    </h5>
+    <pre><code>$ git branch --track &lt;nowa-gałąź&gt; &lt;gałąź-zdalna&gt;</code></pre>
+    <h5 id="usuń-gałąź-lokalną">Usuń gałąź lokalną:</h5>
+    <pre><code>$ git branch -d &lt;gałąź&gt;</code></pre>
+    <h5 id="zmień-nazwę-obecnej-gałęzi">Zmień nazwę obecnej gałęzi:</h5>
+    <pre
+      class="shell"
+    ><code>$ git branch -m &lt;nowa_nazwa_gałęzi&gt;</code></pre>
+    <h5 id="wymuś-usunięcie-gałęzi-lokalnej">
+      Wymuś usunięcie gałęzi lokalnej:
+    </h5>
+    <p>
+      <em><sub>Utracisz niepołączone zmiany!</sub></em>
+    </p>
+    <pre><code>$ git branch -D &lt;branch&gt;</code></pre>
+    <h5 id="oznacz-head-tagiem">Oznacz <code>HEAD</code> tagiem:</h5>
+    <pre><code>$ git tag &lt;nazwa-tagu&gt;</code></pre>
+    <h5 id="oznacz-head-tagiem-i-otwórz-edytor-aby-napisać-wiadomość">
+      Oznacz <code>HEAD</code> tagiem i otwórz edytor, aby napisać wiadomość:
+    </h5>
+    <pre><code>$ git tag -a &lt;nazwa-tagu&gt;</code></pre>
+    <h5 id="oznacz-head-tagiem-z-wiadomością">
+      Oznacz <code>HEAD</code> tagiem z wiadomością:
+    </h5>
+    <pre><code>$ git tag &lt;nazwa-tagu&gt; -am &#39;twoja wiadomość&#39;</code></pre>
+    <h5 id="wyświetl-wszystkie-tagi">Wyświetl wszystkie tagi:</h5>
+    <pre><code>$ git tag</code></pre>
+    <h5
+      id="wyświetl-wszystkie-tagi-wraz-z-ich-wiadomościami-wiadomość-tagu-lub-wiadomość-commitu-jeśli-tag-nie-ma-wiadomości"
+    >
+      Wyświetl wszystkie tagi wraz z ich wiadomościami (wiadomość tagu lub
+      wiadomość commitu jeśli tag nie ma wiadomości):
+    </h5>
+    <pre><code>$ git tag -n</code></pre>
+    <hr />
+    <h2 id="uaktualnij-opublikuj">Uaktualnij &amp; Opublikuj</h2>
+    <h5 id="wyświetl-wszystkie-obecnie-skonfigurowane-repozytoria-zdalne">
+      Wyświetl wszystkie obecnie skonfigurowane repozytoria zdalne:
+    </h5>
+    <pre><code>$ git remote -v</code></pre>
+    <h5 id="wyświetl-informacje-o-repozytorium">
+      Wyświetl informacje o repozytorium:
+    </h5>
+    <pre><code>$ git remote show &lt;repozytorium&gt;</code></pre>
+    <h5 id="dodaj-nowe-zdalne-repozytorium-o-nazwie-repozytorium">
+      Dodaj nowe zdalne repozytorium o nazwie &lt;repozytorium&gt;:
+    </h5>
+    <pre><code>$ git remote add &lt;repozytorium&gt; &lt;url&gt;</code></pre>
+    <h5
+      id="zmień-nazwę-zdalnego-repozytoriumy-z-repozytorium-na-nowe_repozytorium"
+    >
+      Zmień nazwę zdalnego repozytoriumy, z &lt;repozytorium&gt; na
+      &lt;nowe_repozytorium&gt;:
+    </h5>
+    <pre><code>$ git remote rename &lt;repozytorium&gt; &lt;nowe_repozytorium&gt;</code></pre>
+    <h5 id="usuń-repozytorium">Usuń repozytorium:</h5>
+    <pre><code>$ git remote rm &lt;repozytorium&gt;</code></pre>
+    <p>
+      <em
+        ><sub
+          >Uwaga: git remote rm nie usuwa zdalnego repozytorium z serwera. Po
+          prostu usuwa zdalne repozytorium i jego referencje z lokalnego
+          repozytorium.</sub
+        ></em
+      >
+    </p>
+    <h5
+      id="pobierz-wszystkie-zmiany-z-repozytorium-ale-nie-integruj-ich-z-head"
+    >
+      Pobierz wszystkie zmiany z &lt;repozytorium&gt;, ale nie integruj ich z
+      HEAD:
+    </h5>
+    <pre><code>$ git fetch &lt;repozytorium&gt;</code></pre>
+    <h5 id="pobierz-zmian-i-bezpośrednio-połączzintegruj-z-head">
+      Pobierz zmian i bezpośrednio połącz/zintegruj z HEAD:
+    </h5>
+    <pre><code>$ git remote pull &lt;repozytorium&gt; &lt;url&gt;</code></pre>
+    <h5 id="pobierz-wszystkie-zmiany-z-head-do-lokalnego-repozytorium">
+      Pobierz wszystkie zmiany z HEAD do lokalnego repozytorium:
+    </h5>
+    <pre><code>$ git pull origin master</code></pre>
+    <h5
+      id="pobierz-wszystkie-zmiany-z-head-do-lokalnego-repozytorium-bez-łączenia-ich"
+    >
+      Pobierz wszystkie zmiany z HEAD do lokalnego repozytorium bez łączenia
+      ich:
+    </h5>
+    <pre><code>$ git pull --rebase &lt;repozytorium&gt; &lt;gałąź&gt;</code></pre>
+    <h5 id="opublikuj-lokalne-zmiany-w-repozytorium-zdalnym">
+      Opublikuj lokalne zmiany w repozytorium zdalnym:
+    </h5>
+    <pre><code>$ git push remote &lt;repozytorium&gt; &lt;gałąź&gt;</code></pre>
+    <h5 id="usuń-gałąź-w-repozytorium-zdalnym">
+      Usuń gałąź w repozytorium zdalnym:
+    </h5>
+    <pre><code>$ git push &lt;repozytorium&gt; :&lt;gałąź&gt; (od Git v1.5.0)</code></pre>
+    <p>lub</p>
+    <pre><code>$ git push &lt;repozytorium&gt; --delete &lt;gałąź&gt; (od Git v1.7.0)</code></pre>
+    <h5 id="opublikuj-swoje-tagi">Opublikuj swoje tagi:</h5>
+    <pre><code>$ git push --tags</code></pre>
+    <hr />
+    <h4 id="ustaw-globalne-narzędzie-do-scalania-jako-meld-edytor">
+      Ustaw globalne narzędzie do scalania jako Meld (edytor):
+    </h4>
+    <div class="sourceCode" id="cb80">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb80-1" title="1">$ <span class="fu">git</span> config --global merge.tool meld</a></code></pre>
+    </div>
+    <h5 id="uzyj-narzędzia-meld-aby-rozwiązywać-konflikty">
+      Uzyj narzędzia Meld, aby rozwiązywać konflikty:
+    </h5>
+    <pre><code>$ git mergetool</code></pre>
+    <h2 id="połącz-rebase">Połącz &amp; Rebase</h2>
+    <h5 id="połącz-gałąź-z-aktualnym-head">Połącz gałąź z aktualnym HEAD:</h5>
+    <pre><code>$ git merge &lt;gałąź&gt;</code></pre>
+    <h4 id="wyświetl-połączone-gałęzie">Wyświetl połączone gałęzie:</h4>
+    <pre><code>$ git branch --merged</code></pre>
+    <h5 id="zrebaseuj-obecny-head-w-gałąź">
+      Zrebase’uj obecny HEAD w &lt;gałąź&gt;:<br />
+    </h5>
+    <p>
+      <em><sub>Nie rebase’uj opublikowanych commitów!</sub></em>
+    </p>
+    <pre><code>$ git rebase &lt;gałąź&gt;</code></pre>
+    <h5 id="przerwij-rebase">Przerwij rebase:</h5>
+    <pre><code>$ git rebase --abort</code></pre>
+    <h5 id="kontynuuj-rebase-po-rozwiązaniu-konfliktów">
+      Kontynuuj rebase po rozwiązaniu konfliktów:
+    </h5>
+    <pre><code>$ git rebase --continue</code></pre>
+    <h5
+      id="użyj-swojego-edytora-do-ręcznego-rozwiązywania-konfliktów-i-po-rozwiązaniu-oznacz-plik-jako-rozwiązany"
+    >
+      Użyj swojego edytora do ręcznego rozwiązywania konfliktów i (po
+      rozwiązaniu) oznacz plik jako rozwiązany:
+    </h5>
+    <pre><code>$ git add &lt;rozwiązany-plik&gt;</code></pre>
+    <pre><code>$ git rm &lt;rozwiązany-plik&gt;</code></pre>
+    <h5 id="łączenie-commitów">Łączenie commitów:</h5>
+    <pre><code>$ git rebase -i &lt;commit-just-before-first&gt;</code></pre>
+    <p>Teraz zastąp to,</p>
+    <pre><code>pick &lt;commit_id&gt;
+pick &lt;commit_id2&gt;
+pick &lt;commit_id3&gt;</code></pre>
+    <p>tym,</p>
+    <pre><code>pick &lt;commit_id&gt;
+squash &lt;commit_id2&gt;
+squash &lt;commit_id3&gt;</code></pre>
+    <hr />
+    <h2 id="cofnij">Cofnij</h2>
+    <h5 id="odrzuć-wszystkie-lokalne-zmiany-w-twoim-katalogu-roboczym">
+      Odrzuć wszystkie lokalne zmiany w twoim katalogu roboczym:
+    </h5>
+    <pre><code>$ git reset --hard HEAD</code></pre>
+    <h5 id="usuń-wszystkie-pliki-ze-staging-areaczyli-cofnij-ostatnie-git-add">
+      Usuń wszystkie pliki ze staging area(czyli cofnij ostatnie
+      <code>git add</code>):
+    </h5>
+    <pre><code>$ git reset HEAD</code></pre>
+    <h5 id="odrzuć-lokalne-zmiany-w-określonym-pliku">
+      Odrzuć lokalne zmiany w określonym pliku:
+    </h5>
+    <pre><code>$ git checkout HEAD &lt;plik&gt;</code></pre>
+    <h5 id="cofnij-commit-tworząc-nowy-commit-z-przeciwnymi-zmianami">
+      Cofnij commit (tworząc nowy commit z przeciwnymi zmianami):
+    </h5>
+    <pre><code>$ git revert &lt;commit&gt;</code></pre>
+    <h5
+      id="zresetuj-wskaźnik-head-do-poprzedniego-commitu-i-odrzuć-wszystkie-zmiany-od-tego-czasu"
+    >
+      Zresetuj wskaźnik HEAD do poprzedniego commitu i odrzuć wszystkie zmiany
+      od tego czasu:
+    </h5>
+    <pre><code>$ git reset --hard &lt;commit&gt;</code></pre>
+    <h5 id="zresetuj-wskaźnik-head-do-bieżącego-stanu-zdalnej-gałęzi">
+      Zresetuj wskaźnik HEAD do bieżącego stanu zdalnej gałęzi:
+    </h5>
+    <pre><code>$ git reset --hard &lt;repozytorium/gałąź&gt; np., upstream/master, origin/my-feature</code></pre>
+    <h5
+      id="zresetuj-wskaźnik-head-do-poprzedniego-commitu-i-zachowaj-wszystkie-zmiany-jako-zmiany-niestageowane"
+    >
+      Zresetuj wskaźnik HEAD do poprzedniego commitu i zachowaj wszystkie zmiany
+      jako zmiany niestage’owane:
+    </h5>
+    <pre><code>$ git reset &lt;commit&gt;</code></pre>
+    <h5
+      id="zresetuj-wskaźnik-head-do-poprzedniego-commitu-i-zachowaj-niecommitowane-zmiany-lokalne"
+    >
+      Zresetuj wskaźnik HEAD do poprzedniego commitu i zachowaj niecommitowane
+      zmiany lokalne:
+    </h5>
+    <pre><code>$ git reset --keep &lt;commit&gt;</code></pre>
+    <h5
+      id="usuń-pliki-które-zostały-przypadkowo-zcommitowane-przed-dodaniem-ich-do-.gitignore"
+    >
+      Usuń pliki, które zostały przypadkowo zcommitowane przed dodaniem ich do
+      .gitignore:
+    </h5>
+    <pre><code>$ git rm -r --cached .
+$ git add .
+$ git commit -m &quot;remove xyz file&quot;</code></pre>
+    <hr />
+    <h2 id="git-flow">Git-Flow</h2>
+    <p>
+      Poprawione
+      <a href="https://github.com/petervanderdoes/gitflow-avh">Git-flow</a>
+    </p>
+    <h3 id="indeks-1">Indeks</h3>
+    <ul>
+      <li><a href="#instalacja">Instalacja</a></li>
+      <li><a href="#pierwsze-kroki">Pierwsze Kroki</a></li>
+      <li><a href="#funkcjonalności">Funkcjonalności</a></li>
+      <li><a href="#utwórz-wydanie">Utwórz Wydanie</a></li>
+      <li><a href="#hotfiksy">Hotfiksy</a></li>
+      <li><a href="#komendy">Komendy</a></li>
+    </ul>
+    <hr />
+    <h3 id="instalacja">Instalacja</h3>
+    <h6
+      id="musisz-mieć-działającą-instalację-git-jako-warunek-wstępny.-git-flow-działa-na-osx-linuxie-i-windowsie."
+    >
+      Musisz mieć działającą instalację git jako warunek wstępny. Git flow
+      działa na OSX, Linuxie i Windowsie.
+    </h6>
+    <h5 id="osx-homebrew">OSX Homebrew:</h5>
+    <pre><code>$ brew install git-flow-avh</code></pre>
+    <h5 id="osx-macports">OSX Macports:</h5>
+    <pre><code>$ port install git-flow</code></pre>
+    <h5 id="linux-oparty-na-debianie">Linux (oparty na Debianie):</h5>
+    <pre><code>$ sudo apt-get install git-flow</code></pre>
+    <h5 id="windows-cygwin">Windows (Cygwin):</h5>
+    <h6 id="potrzebujesz-wget-oraz-util-linux-żeby-zainstalować-git-flow.">
+      Potrzebujesz wget oraz util-linux żeby zainstalować git-flow.
+    </h6>
+    <div class="sourceCode" id="cb104">
+      <pre
+        class="sourceCode bash"
+      ><code class="sourceCode bash"><a class="sourceLine" id="cb104-1" title="1">$ <span class="fu">wget</span> -q -O - --no-check-certificate https://raw.githubusercontent.com/petervanderdoes/gitflow/develop/contrib/gitflow-installer.sh install <span class="op">&lt;</span>state<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">bash</span></a></code></pre>
+    </div>
+    <hr />
+    <h3 id="pierwsze-kroki">Pierwsze Kroki</h3>
+    <h6
+      id="git-flow-musi-zostać-zainicjowany-aby-dostosować-konfigurację-projektu-do-własnych-potrzeb.-zacznij-używać-git-flow-inicjalizując-go-wewnątrz-istniejącego-repozytorium-git"
+    >
+      Git flow musi zostać zainicjowany, aby dostosować konfigurację projektu do
+      własnych potrzeb. Zacznij używać git-flow inicjalizując go wewnątrz
+      istniejącego repozytorium git:
+    </h6>
+    <h5 id="inicjalizacja">Inicjalizacja:</h5>
+    <h6
+      id="będziesz-musiał-odpowiedzieć-na-kilka-pytań-dotyczących-konwencji-nazewnictwa-dla-twoich-gałęzi.-zaleca-się-używanie-wartości-domyślnych."
+    >
+      Będziesz musiał odpowiedzieć na kilka pytań dotyczących konwencji
+      nazewnictwa dla twoich gałęzi. Zaleca się używanie wartości domyślnych.
+    </h6>
+    <pre class="shell"><code>git flow init</code></pre>
+    <p>lub ###### Żeby użyć ustawień domyślnych</p>
+    <pre class="shell"><code>git flow init -d</code></pre>
+    <hr />
+    <h3 id="funkcjonalności">Funkcjonalności</h3>
+    <h6
+      id="twórz-nowe-funkcjonalności-dla-nadchodzących-wydań.-zazwyczaj-istnieją-tylko-w-repozytoriach-deweloperów."
+    >
+      Twórz nowe funkcjonalności dla nadchodzących wydań. Zazwyczaj istnieją
+      tylko w repozytoriach deweloperów.
+    </h6>
+    <h5 id="utwórz-nową-funkcjonalność">Utwórz nową funkcjonalność:</h5>
+    <h6
+      id="ta-czynnośc-tworzy-nową-gałąź-funkcjonalności-wzorowaną-na-develop-i-zmienia-na-tę-gałąź."
+    >
+      Ta czynnośc tworzy nową gałąź funkcjonalności wzorowaną na ‘develop’ i
+      zmienia na tę gałąź.
+    </h6>
+    <pre><code>git flow feature start MOJAFUNKCJA</code></pre>
+    <h5 id="ukończ-funkcjonalność">Ukończ funkcjonalność:</h5>
+    <h6
+      id="dokończ-tworzenie-funkcjonalności.-ta-czynność-wykonuje-następujące-zadania"
+    >
+      Dokończ tworzenie funkcjonalności. Ta czynność wykonuje następujące
+      zadania:
+    </h6>
+    <h6 id="łączy-mojafunkcja-w-develop.">1) Łączy MOJAFUNKCJA w ‘develop’.</h6>
+    <h6 id="usuwa-gałąź-funkcjonalności.">2) Usuwa gałąź funkcjonalności.</h6>
+    <h6 id="zmienia-z-powrotem-na-gałąź-develop.">
+      3) Zmienia z powrotem na gałąź ‘develop’.
+    </h6>
+    <pre><code>git flow feature finish MOJAFUNKCJA</code></pre>
+    <h5 id="publikowanie-funkcji">Publikowanie funkcji:</h5>
+    <h6
+      id="tworzysz-funkcjonalność-w-ramach-współpracy-opublikuj-funkcjonalność-na-zdalnym-serwerze-aby-mogli-z-niej-korzystać-inni-użytkownicy."
+    >
+      Tworzysz funkcjonalność w ramach współpracy? Opublikuj funkcjonalność na
+      zdalnym serwerze, aby mogli z niej korzystać inni użytkownicy.
+    </h6>
+    <pre><code>git flow feature publish MOJAFUNKCJA</code></pre>
+    <h5 id="pobieranie-opublikowanej-funkcji">
+      Pobieranie opublikowanej funkcji:
+    </h5>
+    <h6 id="pobierz-funkcję-opublikowaną-przez-innego-użytkownika.">
+      Pobierz funkcję opublikowaną przez innego użytkownika.
+    </h6>
+    <pre><code>git flow feature pull origin MOJAFUNKCJA</code></pre>
+    <h5 id="śledź-funkcję-na-origin">Śledź funkcję na origin:</h5>
+    <h6 id="możesz-śledzić-funkcję-na-origin-używając">
+      Możesz śledzić funkcję na origin używając:
+    </h6>
+    <pre><code>git flow feature track MOJAFUNKCJA</code></pre>
+    <hr />
+    <h3 id="utwórz-wydanie">Utwórz Wydanie</h3>
+    <h6
+      id="wspiera-przygotowanie-nowego-wydania-produkcyjnego.-umożliwia-poprawki-drobnych-błędów-i-przygotowanie-meta-danych-do-wydania."
+    >
+      Wspiera przygotowanie nowego wydania produkcyjnego. Umożliwia poprawki
+      drobnych błędów i przygotowanie meta-danych do wydania.
+    </h6>
+    <h5 id="rozpocznij-wydanie">Rozpocznij wydanie:</h5>
+    <h6
+      id="aby-rozpocząć-wydanie-użyj-polecenia-git-flow-release.-tworzy-ono-gałąź-wydania-utworzoną-z-gałęzi-develop.-opcjonalnie-możesz-podać-hash-sha-1-commitu-base-od-którego-rozpocznie-się-wydanie.-commit-musi-znajdować-się-w-gałęzi-develop."
+    >
+      Aby rozpocząć wydanie, użyj polecenia git flow release. Tworzy ono gałąź
+      wydania utworzoną z gałęzi ‘develop’. Opcjonalnie możesz podać hash SHA-1
+      commitu [BASE], od którego rozpocznie się wydanie. Commit musi znajdować
+      się w gałęzi ‘develop’.
+    </h6>
+    <pre><code>git flow release start RELEASE [BASE]</code></pre>
+    <h6
+      id="rozsądnie-jest-opublikować-gałąź-release-po-jej-utworzeniu-aby-umożliwić-commitowanie-wydania-innym-developerom.-zrób-to-podobnie-do-publikowania-funkcji-za-pomocą-polecenia"
+    >
+      Rozsądnie jest opublikować gałąź release po jej utworzeniu, aby umożliwić
+      commitowanie wydania innym developerom. Zrób to podobnie do publikowania
+      funkcji za pomocą polecenia:
+    </h6>
+    <pre><code>git flow release publish RELEASE</code></pre>
+    <h6
+      id="możesz-śledzić-zdalne-wydanie-za-pomocą-komendy-git-flow-release-track-release"
+    >
+      (Możesz śledzić zdalne wydanie za pomocą komendy:
+      <code>git flow release track RELEASE</code>)
+    </h6>
+    <h5 id="kończenie-wydania">Kończenie wydania:</h5>
+    <h6
+      id="kończenie-wydania-jest-jednym-z-głównych-kroków-w-rozgałęzianiu-git.-wykonuje-on-kilka-czynności"
+    >
+      Kończenie wydania jest jednym z głównych kroków w rozgałęzianiu git.
+      Wykonuje on kilka czynności:
+    </h6>
+    <h6 id="łączy-gałąź-wydania-z-powrotem-w-gałąź-master">
+      1) Łączy gałąź wydania z powrotem w gałąź ‘master’
+    </h6>
+    <h6 id="taguje-wydanie-jego-nazwą">2) Taguje wydanie jego nazwą</h6>
+    <h6 id="łączy-gałąź-wydania-z-powrotem-w-gałąź-develop">
+      3) Łączy gałąź wydania z powrotem w gałąź ‘develop’
+    </h6>
+    <h6 id="usuwa-gałąź-wydania">4) Usuwa gałąź wydania</h6>
+    <pre><code>git flow release finish RELEASE</code></pre>
+    <h6 id="nie-zapomnij-spushować-swoich-tagów-używając-git-push---tags">
+      Nie zapomnij spushować swoich tagów używając <code>git push --tags</code>
+    </h6>
+    <hr />
+    <h3 id="hotfiksy">Hotfiksy</h3>
+    <h6
+      id="hotfiksy-powstają-w-wyniku-konieczności-natychmiastowego-działania-w-przypadku-niepożądanego-stanu-wersji-produkcyjnej.-mogą-być-odgałęzione-od-odpowiedniego-znacznika-na-gałęzi-głównej-która-oznacza-wersję-produkcyjną."
+    >
+      Hotfiksy powstają w wyniku konieczności natychmiastowego działania w
+      przypadku niepożądanego stanu wersji produkcyjnej. Mogą być odgałęzione od
+      odpowiedniego znacznika na gałęzi głównej, która oznacza wersję
+      produkcyjną.
+    </h6>
+    <h5 id="początek-git-flow-hotfiksa">Początek Git flow hotfiksa:</h5>
+    <h6 id="tak-jak-inne-komendy-git-flow-hotfiks-rozpoczyna-się">
+      Tak jak inne komendy git flow, hotfiks rozpoczyna się:
+    </h6>
+    <pre><code>$ git flow hotfix start VERSION [BASENAME]</code></pre>
+    <h6
+      id="argument-version-oznacza-nazwę-nowego-wydania-hotfiksa.-opcjonalnie-możesz-określić-nazwę-bazową-od-której-chcesz-rozpocząć."
+    >
+      Argument “version” oznacza nazwę nowego wydania hotfiksa. Opcjonalnie
+      możesz określić nazwę bazową, od której chcesz rozpocząć.
+    </h6>
+    <h5 id="kończenie-hotfiksa">Kończenie hotfiksa:</h5>
+    <h6
+      id="po-ukończeniu-hotfiksa-zostaje-on-scalony-z-powrotem-do-wersji-rozwojowej-i-głównej.-dodatkowo-główne-złączenie-jest-oznaczane-wersją-hotfiksa."
+    >
+      Po ukończeniu hotfiksa zostaje on scalony z powrotem do wersji rozwojowej
+      i głównej. Dodatkowo główne złączenie jest oznaczane wersją hotfiksa.
+    </h6>
+    <pre><code>git flow hotfix finish VERSION</code></pre>
+    <hr />
+    <h3 id="komendy">Komendy</h3>
+    <p align="center">
+      <img
+        alt="Git"
+        src="./Img/git-flow-commands.png"
+        height="270"
+        width="460"
+      />
+    </p>
+    <hr />
+    <h3 id="schemat-git-flow">Schemat Git flow</h3>
+    <p align="center">
+      <img alt="Git" src="Img/git-flow-commands-without-flow.png" />
+    </p>
+    <hr />
+  </body>
+</html>

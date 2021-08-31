@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>rich-text-editors</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="rich-text-editors">Rich Text Editors</h1>
+    <p>
+      <strong
+        >Context: <a href="../README.md">frontend-dev-bookmarks</a> / User
+        Interface Components</strong
+      >
+    </p>
+    <p>
+      A rich text editor is the interface for editing rich text within web
+      browsers. The aim is to reduce the effort for users trying to express
+      their formatting directly as valid HTML markup.
+    </p>
+    <p>
+      <a href="http://frontend.directory/"
+        ><img
+          src="https://img.shields.io/badge/frontend-directory-blue.svg?style=flat-square"
+          alt="frontend.directory"
+      /></a>
+      <a href="https://gitter.im/dypsilon/frontend-dev-bookmarks"
+        ><img
+          src="https://img.shields.io/gitter/room/dypsilon/frontend-dev-bookmarks.svg?style=flat-square&amp;maxAge=2592000"
+          alt="Gitter"
+      /></a>
+      <a href="https://twitter.com/FrontendDir"
+        ><img
+          src="https://img.shields.io/badge/follow-twitter-55acee.svg?style=flat-square"
+          alt="Twitter"
+      /></a>
+    </p>
+    <table style="width: 58%">
+      <colgroup>
+        <col style="width: 58%" />
+      </colgroup>
+      <tbody>
+        <tr class="odd">
+          <td>
+            + <strong>Content Sanitizers</strong>: Rich text editors often
+            produce unclean input when you copy &amp; paste some content into
+            them. Content sanitizers help you clean up the text. +
+            <strong
+              ><a href="http://willemmulder.github.io/FilteredPaste.js/"
+                >FilteredPaste.js</a
+              ></strong
+            >: A jQuery plugin that filters any pasted input so that your
+            application gets clean input, without any tags or attributes that
+            you don’t want. +
+            <strong
+              ><a href="https://github.com/gbirke/sanitize.js"
+                >Sanitize.js</a
+              ></strong
+            >: Sanitize.js is a whitelist-based HTML sanitizer. Given a list of
+            acceptable elements and attributes, Sanitize.js will remove all
+            unacceptable HTML from a DOM node. +
+            <strong
+              ><a href="https://github.com/guardian/html-janitor"
+                >html-janitor</a
+              ></strong
+            >: Cleans up your markup and allows you to take control of your
+            HTML. HTMLJanitor uses a defined whitelist to limit HTML it is given
+            to a defined subset. +
+            <strong><a href="http://createjs.org/">Create.js</a></strong
+            >: Create.js is a comprehensive web editing interface for Content
+            Management Systems. It is designed to provide a modern, fully
+            browser-based HTML5 environment for managing content +
+            <strong
+              ><a href="http://will-hart.github.io/demarcate.js/"
+                >Demarcate</a
+              ></strong
+            >: demarcate.js lets you edit directly in a page and generate
+            Markdown back from the HTML elements. +
+            <strong><a href="http://hallojs.org/">Hallo</a></strong
+            >: Hallo is the simplest web editor imaginable. Instead of cluttered
+            forms or toolbars, you edit your web content as it is. Just you,
+            your web design, and your content. +
+            <strong>Inspired by Medium</strong>: Medium.com has a great and
+            simple rich text editor built in. This libraries try to clone its
+            behavior. +
+            <strong
+              ><a href="https://github.com/jakiestfu/Medium.js"
+                >Medium.js</a
+              ></strong
+            >: A tiny JavaScript library for making contenteditable beautiful
+            (Like Medium’s editor) +
+            <strong><a href="http://sofish.github.io/pen/">Pen</a></strong
+            >: Rich text editor inspired by Medium and backed by Markdown. +
+            <strong
+              ><a href="https://github.com/mduvall/grande.js"
+                >grande.js</a
+              ></strong
+            >: A small Javascript library that implements features from Medium’s
+            editing experience. +
+            <strong
+              ><a href="https://github.com/yabwe/medium-editor"
+                >medium-editor</a
+              ></strong
+            >: Medium.com WYSIWYG editor clone. Uses contenteditable API to
+            implement a rich text solution. +
+            <strong
+              ><a href="https://github.com/JoelOtter/kajero">Kajero</a></strong
+            >: Interactive JavaScript notebooks with markdown support and clever
+            graphing. +
+            <strong
+              ><a href="http://markitup.jaysalvat.com/">MarkItUp</a></strong
+            >: markItUp! is a JavaScript plugin built on the jQuery library. It
+            allows you to turn any textarea into a markup editor. +
+            <strong
+              ><a href="http://jejacks0n.github.io/mercury/"
+                >Mercury Editor</a
+              ></strong
+            >: Mercury is a full featured HTML5 editor. It was built from the
+            ground up to help your team get the most out of content editing in
+            modern browsers. +
+            <strong
+              ><a href="https://github.com/quilljs/quill/">Quill</a></strong
+            >: Quill is a modern rich text editor built for compatibility and
+            extensibility. It was created by Jason Chen and Byron Milligan and
+            open sourced by Salesforce.com. +
+            <strong
+              ><a href="https://github.com/guardian/scribe">Scribe</a></strong
+            >: A rich text editor framework for the web platform, with patches
+            for browser inconsistencies and sensible defaults. Developed by The
+            Guardian. +
+            <strong
+              ><a
+                href="https://www.theguardian.com/info/developer-blog/2014/mar/20/inside-the-guardians-cms-meet-scribe-an-extensible-rich-text-editor"
+                >Inside the Guardian’s CMS: meet Scribe, an extensible rich text
+                editor</a
+              ></strong
+            >: The team behind the Guardian’s digital content management system
+            talk about how and why they built and open sourced Scribe. +
+            <strong><a href="http://substance.io/">Substance</a></strong
+            >: Substance is a JavaScript library for web-based content editing.
+            It provides building blocks for realizing custom text editors and
+            web-based publishing systems. +
+            <strong
+              ><a
+                href="https://medium.com/@_mql/build-your-own-editor-with-substance-7790eb600109"
+                >Build your own editor with Substance</a
+              ></strong
+            >: This article describes the philosophy behind Substance and how to
+            get started. +
+            <strong><a href="http://textangular.com/">TextAngular</a></strong
+            >: A Lightweight, Two-Way-Bound Angular.js Text-Editor. +
+            <strong
+              ><a href="http://xing.github.io/wysihtml5/">WYSIHTML5</a></strong
+            >: wysihtml5 is an open source rich text editor based on HTML5
+            technology and the progressive-enhancement approach. It aims to
+            generate fully valid HTML5 markup by preventing unmaintainable tag
+            soups and inline styles. +
+            <strong
+              ><a href="https://github.com/Voog/wysihtml">Voog fork</a></strong
+            >: wysihtml is an extended and less strict approach on
+            xing/wysihtml5 open source rich text editor based on HTML5
+            technology. The code is completely library agnostic: No jQuery,
+            Prototype or similar is required. +
+            <strong
+              ><a href="https://github.com/zohararad/wysihtml5n"
+                >WYSIHTML5 Enhanced</a
+              ></strong
+            >: WYSIHTML5 Enhanced is a rich-text editor, based on the wonderful
+            wysihtml5 editor, with a bit of help from Twitter Bootstrap,
+            Font-Awesome, Jcrop and HTML5’s Drag &amp; Drop and File API. +
+            <strong
+              ><a href="https://github.com/bootstrap-wysiwyg/bootstrap3-wysiwyg"
+                >bootstrap3-wysiwyg</a
+              ></strong
+            >: Bootstrap-wysihtml5 is a javascript plugin that makes it easy to
+            create simple, beautiful wysiwyg editors with the help of wysihtml5
+            and Twitter Bootstrap. +
+            <strong
+              ><a href="http://vitalets.github.io/x-editable/"
+                >X-editable</a
+              ></strong
+            >: This library allows you to create editable elements on your page.
+            It can be used with any engine (bootstrap, jquery-ui, jquery only)
+            and includes both popup and inline modes.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h1 id="license">License</h1>
+    <p>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        ><img
+          alt="Creative Commons License"
+          style="border-width: 0"
+          src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a
+      ><br />This work is licensed under a
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International License</a
+      >.
+    </p>
+    <p>
+      Please provide a link back to this repository. This is not necessary for
+      GitHub forks.
+    </p>
+  </body>
+</html>

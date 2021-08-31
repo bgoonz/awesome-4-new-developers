@@ -1,0 +1,9 @@
+http://demo-iless.rhcloud.com/,ILess,https://github.com/LucasBassetti/awesome-less#readme,Less error: URLError(gaierror(8, 'nodename nor servname provided, or not known')) | reason: [Errno 8] nodename nor servname provided, or not known
+http://less2css.org/,Less2CSS,https://github.com/LucasBassetti/awesome-less#readme,Less error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://www.lesscss.de,German,https://github.com/LucasBassetti/awesome-less#readme,Less error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://bertzzie.com/post/7/dokumentasi-less-bahasa-indonesia,Indonesian,https://github.com/LucasBassetti/awesome-less#readme,Less error: <HTTPError 526: 'Origin SSL Certificate Error'> | reason: Origin SSL Certificate Error
+http://less-ja.studiomohawk.com/,Japanese,https://github.com/LucasBassetti/awesome-less#readme,Less error: URLError(gaierror(8, 'nodename nor servname provided, or not known')) | reason: [Errno 8] nodename nor servname provided, or not known
+http://precess.co/,Precess,https://github.com/LucasBassetti/awesome-less#readme,Less error: <HTTPError 500: 'Internal Server Error'> | reason: Internal Server Error
+http://less.eten.vn/,Vietnamese,https://github.com/LucasBassetti/awesome-less#readme,Less error: <HTTPError 404: 'Not Found'> | reason: Not Found
+http://pdf.th7.cn/down/files/1508/Less%20Web%20Development%20Essentials,%202nd%20Edition.pdf,Less Web Development Essentials,https://github.com/LucasBassetti/awesome-less#readme,Less error: URLError(gaierror(8, 'nodename nor servname provided, or not known')) | reason: [Errno 8] nodename nor servname provided, or not known
+http://jbst.eu/,JBST,https://github.com/LucasBassetti/awesome-less#readme,Less error: timeout('timed out') | reason: 

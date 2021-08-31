@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Useful-vim-commands</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p>This is a collection of command examples that are <strong>commonly used by instructors</strong> here at Lambda School.</p>
+<p>This is <em>not</em> a complete reference or a tutorial. It is just the commands that we commonly use in order to edit quickly. See the <a href="#see-also">links</a> for more in-depth information.</p>
+<ul>
+<li><code>[ESC]</code> means to hit the escape key.</li>
+<li><code>[RET]</code> means to hit the return key.</li>
+<li><code>CTRL-x</code> means hold down control and <code>x</code>.</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="http://www.openvim.com/">OpenVim Tutorial</a></li>
+<li><a href="https://vim-adventures.com/">Vim Adventures</a></li>
+<li><a href="http://users.ece.utexas.edu/~adnan/vimqrc.html">Vim Reference Card (utexas)</a></li>
+<li><a href="https://vim.rtorr.com/">Vim Reference Card (rtorr)</a></li>
+<li><a href="http://tnerual.eriogerg.free.fr/vim.html">Vim Quick Reference Card (vimqrc)</a></li>
+</ul>
+<h2 id="editing">Editing</h2>
+<ul>
+<li><code>I</code>: insert at the beginning of the line</li>
+<li><code>A</code>: append starting at end of line</li>
+<li><code>D</code>: delete to end of line</li>
+<li><code>C</code>: change from here to end of line</li>
+<li><code>rX</code>: replace the current character with character <em>X</em></li>
+<li><code>R</code>: start replacing characters from the cursor on</li>
+<li><code>~</code>: change the case of a character</li>
+<li><code>dd</code>: delete (cut) the current line</li>
+<li><code>dw</code>: delete the current word</li>
+<li><code>d$</code>: delete from cursor to end of line</li>
+<li><code>dtX</code>: delete all characters up to the next occurrence of <em>X</em> in the line</li>
+<li><code>dTX</code>: delete all characters down to the previous occurrence of <em>X</em> in the line</li>
+<li><code>ctX</code>: change the characters from the cursor to the next occurrence of <em>X</em> in the line</li>
+</ul>
+<h2 id="moving">Moving</h2>
+<ul>
+<li><code>h</code> <code>j</code> <code>k</code> <code>l</code>: move the cursor left, down, up, and right faster than reaching for the arrow keys</li>
+<li><code>$</code>: move to end of line</li>
+<li><code>^</code>: move to the first non-space character in the line</li>
+<li><code>0</code>: move to the beginning of the line</li>
+<li><code>tX</code>: move to the next <em>X</em> character in the line</li>
+<li><code>TX</code>: move to just after the previous <em>X</em> character in the line</li>
+<li><code>e</code>: move to the end of the next (or current) word</li>
+<li><code>b</code>: move to the beginning of the previous (or current) word</li>
+<li><code>w</code>: move to the beginning of the next (or current) word</li>
+<li><code>CTRL-f</code>: move forward a page (page down)</li>
+<li><code>CTRL-b</code>: move backward a page (page up)</li>
+<li><code>*</code>: move to the next occurrence of the word under the cursor</li>
+<li><code>#</code>: move to the previous occurrence of a word under the cursor</li>
+<li><code>%</code>: move to the open/close brace/bracket/paren paired with the one under the cursor</li>
+<li><code>/foo[RET]</code>: search for the next occurrence of <code>foo</code> in the file</li>
+<li><code>?foo[RET]</code>: search for the previous occurrence of <code>foo</code> in the file</li>
+<li><code>n</code>: repeat the last search</li>
+<li><code>N</code>: repeat the last search, but in the other direction</li>
+</ul>
+<h2 id="markers">Markers</h2>
+<ul>
+<li><code>ma</code>: set marker <code>a</code> at the cursor location (can use any letter a-z)</li>
+<li><code>`a</code>: jump to marker <code>a</code> (can use any letter a-z)</li>
+</ul>
+<h2 id="visual-blocks">Visual Blocks</h2>
+<ul>
+<li><code>v</code>: start a cursor-oriented visual block</li>
+<li><code>V</code>: start a line-oriented visual block</li>
+<li><code>CTRL-v</code>: start a rectangular visual block</li>
+</ul>
+<p>Once a block is selected:</p>
+<ul>
+<li><code>c</code>: change the block to different text (with rectangular blocks, this makes one cursor per line)</li>
+<li><code>d</code>: delete the block</li>
+<li><code>y</code>: yank (copy) the block</li>
+<li><code>:s/foo/bar/g[RET]</code>: replace all occurrences of <code>foo</code> with <code>bar</code> in the block (this will show up as <code>:'&lt;,'&gt;</code> when you first start typing)</li>
+</ul>
+<h2 id="search-and-replace">Search and Replace</h2>
+<p>The following use <a href="http://vimregex.com/">regexes</a>:</p>
+<ul>
+<li><code>:s/foo/bar[RET]</code>: replace the first occurrence of <code>foo</code> with <code>bar</code> on the current line</li>
+<li><code>:s/foo/bar/g[RET]</code>: replace all occurrences of <code>foo</code> with <code>bar</code> on the current line</li>
+<li><code>:%s/foo/bar/g[RET]</code>: replace all occurrence of <code>foo</code> with <code>bar</code> on all lines in the file</li>
+</ul>
+<h2 id="cutcopypaste">Cut/Copy/Paste</h2>
+<ul>
+<li><code>dd</code>: delete (cut) the current line</li>
+<li><code>dw</code>: delete the current word</li>
+<li><code>d$</code>: delete from cursor to end of line</li>
+<li><code>dtX</code>: delete all characters up to the next occurrence of <em>X</em> in the line</li>
+<li><code>dTX</code>: delete all characters down to the previous occurrence of <em>X</em> in the line</li>
+<li><code>x</code>: delete the character under the cursor</li>
+<li><code>yy</code>: copy the current line</li>
+<li><code>yw</code>: copy the current word</li>
+<li><code>y$</code>: copy from cursor to end of line</li>
+<li><code>p</code>: paste after cursor position</li>
+<li><code>P</code>: paste before cursor position</li>
+</ul>
+<p>GUI-based vims often support <code>COMMAND-c</code>/<code>CTRL-c</code> and <code>COMMAND-v</code>/<code>CTRL-v</code> for copying and pasting from the system buffer. (Note that the system copy/paste buffer is different from that used by the <code>y</code> and <code>p</code> commands.) If you’re using the console-based vim, you might have to select the text to copy with the mouse if you want to copy it to the system copy/paste buffer.</p>
+<h2 id="counting">Counting</h2>
+<ul>
+<li><code>20ix[ESC]</code>: insert 20 <code>x</code> characters</li>
+<li><code>15~</code>: change the case of the next 15 characters</li>
+<li><code>5k</code>: move the cursor up 5 lines</li>
+<li><code>12yy</code>: copy 12 lines</li>
+</ul>
+<h2 id="saving-and-quitting">Saving and Quitting</h2>
+<ul>
+<li><code>:q[RET]</code>: quit unless the file has been modified</li>
+<li><code>:q![RET]</code>: quit even if the file has been modified, discarding changes</li>
+<li><code>ZZ</code>: save the file (only if it has been modified) and quit</li>
+<li><code>:qa[RET]</code>: quit all open tabs</li>
+<li><code>:qa![RET]</code>: quit all open tabs even if the files have been modified, discarding changes</li>
+</ul>
+<h2 id="misc">Misc</h2>
+<ul>
+<li><code>.</code>: repeat the last edit command, e.g. <code>AHello[ESC]j.</code> will add <code>Hello</code> to the end of the current and next line</li>
+<li><code>xp</code>: transpose the character under the cursor with the next one; not really a special command–simply <code>x</code> to cut the current character under the cursor followed by <code>p</code> to paste it after the cursor position</li>
+<li><code>!!ls[RET]</code>: run the <code>ls</code> command and insert its output into the document (can run any command)</li>
+<li><code>:sh[RET]</code>: spawn an interactive shell (hit <code>CTRL-d</code> or type <code>exit[RET]</code> to get back to vim)</li>
+</ul>
+<h2 id="tabs">Tabs</h2>
+<ul>
+<li>WIP</li>
+<li><code>:q[RET]</code>: close the current window or tab (if multiple windows or tabs are open)</li>
+</ul>
+<h2 id="split-screenwindows">Split Screen/Windows</h2>
+<ul>
+<li>WIP</li>
+<li><code>:q[RET]</code>: close the current window or tab (if multiple windows or tabs are open)</li>
+</ul>
+<h2 id="macros">Macros</h2>
+<ul>
+<li>WIP</li>
+</ul>
+</body>
+</html>

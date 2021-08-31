@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="pandoc" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=yes"
+        />
+        <title>free-programming-books-zh</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <h2 id="目录">目录</h2>
+        <ul>
+            <li>
+                <a href="#语言无关">语言无关</a>
+                <ul>
+                    <li><a href="#版本控制">版本控制</a></li>
+                    <li><a href="#编程艺术">编程艺术</a></li>
+                    <li><a href="#编辑器">编辑器</a></li>
+                    <li><a href="#编译原理">编译原理</a></li>
+                    <li><a href="#操作系统">操作系统</a></li>
+                    <li><a href="#程序员杂谈">程序员杂谈</a></li>
+                    <li><a href="#大数据">大数据</a></li>
+                    <li><a href="#分布式系统">分布式系统</a></li>
+                    <li><a href="#管理和监控">管理和监控</a></li>
+                    <li><a href="#函数式概念">函数式概念</a></li>
+                    <li><a href="#计算机图形学">计算机图形学</a></li>
+                    <li><a href="#其它">其它</a></li>
+                    <li><a href="#软件开发方法">软件开发方法</a></li>
+                    <li><a href="#设计模式">设计模式</a></li>
+                    <li><a href="#数据库">数据库</a></li>
+                    <li><a href="#项目相关">项目相关</a></li>
+                    <li><a href="#在线教育">在线教育</a></li>
+                    <li><a href="#正则表达式">正则表达式</a></li>
+                    <li><a href="#智能系统">智能系统</a></li>
+                    <li><a href="#ide">IDE</a></li>
+                    <li><a href="#web">Web</a></li>
+                    <li><a href="#web服务器">WEB服务器</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#语言相关">语言相关</a>
+                <ul>
+                    <li><a href="#android">Android</a></li>
+                    <li><a href="#awk">AWK</a></li>
+                    <li><a href="#c">C</a></li>
+                    <li><a href="#c-sharp">C#</a></li>
+                    <li><a href="#cpp">C++</a></li>
+                    <li><a href="#coffeescript">CoffeeScript</a></li>
+                    <li><a href="#dart">Dart</a></li>
+                    <li><a href="#elasticsearch">Elasticsearch</a></li>
+                    <li><a href="#elixir">Elixir</a></li>
+                    <li><a href="#erlang">Erlang</a></li>
+                    <li><a href="#fortran">Fortran</a></li>
+                    <li><a href="#golang">Golang</a></li>
+                    <li><a href="#haskell">Haskell</a></li>
+                    <li><a href="#html--css">HTML / CSS</a></li>
+                    <li><a href="#http">HTTP</a></li>
+                    <li><a href="#ios">iOS</a></li>
+                    <li><a href="#java">Java</a></li>
+                    <li>
+                        <a href="#javascript">JavaScript</a>
+                        <ul>
+                            <li><a href="#angularjs">AngularJS</a></li>
+                            <li><a href="#backbonejs">Backbone.js</a></li>
+                            <li><a href="#d3js">D3.js</a></li>
+                            <li><a href="#electronjs">Electron.js</a></li>
+                            <li><a href="#extjs">ExtJS</a></li>
+                            <li><a href="#impressjs">impress.js</a></li>
+                            <li><a href="#jquery">jQuery</a></li>
+                            <li><a href="#nodejs">Node.js</a></li>
+                            <li><a href="#reactjs">React.js</a></li>
+                            <li><a href="#vuejs">Vue.js</a></li>
+                            <li><a href="#zeptojs">Zepto.js</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#latex">LaTeX</a></li>
+                    <li><a href="#lisp">LISP</a></li>
+                    <li><a href="#lua">Lua</a></li>
+                    <li><a href="#markdown">Markdown</a></li>
+                    <li><a href="#mysql">MySQL</a></li>
+                    <li><a href="#nosql">NoSQL</a></li>
+                    <li><a href="#perl">Perl</a></li>
+                    <li>
+                        <a href="#php">PHP</a>
+                        <ul>
+                            <li><a href="#laravel">Laravel</a></li>
+                            <li><a href="#symfony">Symfony</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#postgresql">PostgreSQL</a></li>
+                    <li>
+                        <a href="#python">Python</a>
+                        <ul>
+                            <li><a href="#django">Django</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#r">R</a></li>
+                    <li><a href="#restructuredtext">reStructuredText</a></li>
+                    <li><a href="#ruby">Ruby</a></li>
+                    <li><a href="#rust">Rust</a></li>
+                    <li><a href="#scala">Scala</a></li>
+                    <li><a href="#scheme">Scheme</a></li>
+                    <li><a href="#scratch">Scratch</a></li>
+                    <li><a href="#shell">Shell</a></li>
+                    <li><a href="#swift">Swift</a></li>
+                    <li><a href="#typescript">TypeScript</a></li>
+                    <li>
+                        <a href="#vba-microsoft-visual-basic-applications"
+                            >VBA</a
+                        >
+                    </li>
+                    <li><a href="#vim">Vim</a></li>
+                    <li><a href="#visual-prolog">Visual Prolog</a></li>
+                    <li><a href="#webassembly">WebAssembly</a></li>
+                </ul>
+            </li>
+        </ul>
+        <h2 id="语言无关">语言无关</h2>
+        <h3 id="版本控制">版本控制</h3>
+        <ul>
+            <li>
+                <a href="http://igit.linuxtoy.org/index.html">沉浸式学 Git</a>
+            </li>
+            <li>
+                <a href="http://backlogtool.com/git-guide/cn/"
+                    >猴子都能懂的GIT入门</a
+                >
+            </li>
+            <li>
+                <a href="https://learngitbranching.js.org">学习 Git 分支</a>
+            </li>
+            <li>
+                <a href="http://rogerdudler.github.io/git-guide/index.zh.html"
+                    >Git - 简易指南</a
+                >
+            </li>
+            <li><a href="http://gitref.justjavac.com">Git 参考手册</a></li>
+            <li>
+                <a href="https://github.com/flyhigher139/Git-Cheat-Sheet"
+                    >Git-Cheat-Sheet</a
+                >
+                - flyhigher139
+            </li>
+            <li>
+                <a href="http://gitbook.liuhui998.com"
+                    >Git Community Book 中文版</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html"
+                    >git-flow 备忘清单</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_cn/"
+                    >Git magic</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_cn/"
+                    >Git Magic</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000"
+                    >Git教程</a
+                >
+                - 廖雪峰
+            </li>
+            <li>
+                <a href="https://github.com/waylau/github-help"
+                    >Github帮助文档</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://snowdream86.gitbooks.io/github-cheat-sheet/content/zh/"
+                    >GitHub秘籍</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/gotgit/gotgithub">Got GitHub</a>
+            </li>
+            <li>
+                <a href="http://www.worldhello.net/gotgithub/index.html"
+                    >GotGitHub</a
+                >
+            </li>
+            <li>
+                <a href="https://zh-hginit.readthedocs.io/en/latest/"
+                    >HgInit (中文版)</a
+                >
+            </li>
+            <li>
+                <a href="https://www.mercurial-scm.org/wiki/ChineseTutorial"
+                    >Mercurial 使用教程</a
+                >
+            </li>
+            <li><a href="https://git-scm.com/book/zh/v2">Pro Git</a></li>
+            <li>
+                <a href="https://bingohuang.gitbooks.io/progit2/content"
+                    >Pro Git 第二版 中文版</a
+                >
+                - Bingo Huang
+            </li>
+            <li>
+                <a href="http://svnbook.red-bean.com/nightly/zh/index.html"
+                    >svn 手册</a
+                >
+            </li>
+        </ul>
+        <h3 id="编程艺术">编程艺术</h3>
+        <ul>
+            <li>
+                <a href="http://www.kancloud.cn/kancloud/intro-to-prog/52592"
+                    >编程入门指南</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/julycoding/The-Art-Of-Programming-by-July"
+                    >程序员编程艺术</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://www.oschina.net/translate/what-every-programmer-should-know-about-memory-part1"
+                    >每个程序员都应该了解的内存知识 (第一部分)</a
+                >
+            </li>
+        </ul>
+        <h3 id="编辑器">编辑器</h3>
+        <ul>
+            <li>
+                <a href="http://learnvimscriptthehardway.onefloweroneworld.com"
+                    >笨方法学Vimscript 中译本</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/yangyangwithgnu/use_vim_as_ide"
+                    >所需即所获：像 IDE 一样使用 vim</a
+                >
+            </li>
+            <li>
+                <a href="http://exvim.github.io/docs-zh/intro/"
+                    >exvim–vim 改良成IDE项目</a
+                >
+            </li>
+            <li><a href="https://github.com/vimcn/vimcdoc">Vim中文文档</a></li>
+        </ul>
+        <h3 id="编译原理">编译原理</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/DeathKing/Learning-SICP"
+                    >《计算机程序的结构和解释》公开课 翻译项目</a
+                >
+            </li>
+        </ul>
+        <h3 id="操作系统">操作系统</h3>
+        <ul>
+            <li>
+                <a href="http://i.linuxtoy.org/docs/guide/index.html"
+                    >开源世界旅行手册</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/tobegit3hub/understand_linux_process"
+                    >理解Linux进程</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md"
+                    >命令行的艺术</a
+                >
+            </li>
+            <li>
+                <a href="http://cn.linux.vbird.org/linux_server/"
+                    >鸟哥的 Linux 私房菜 服务器架设篇</a
+                >
+            </li>
+            <li>
+                <a href="http://cn.linux.vbird.org/linux_basic/linux_basic.php"
+                    >鸟哥的 Linux 私房菜 基础学习篇</a
+                >
+            </li>
+            <li>
+                <a href="https://tinylab.gitbooks.io/elinux/content/zh/"
+                    >嵌入式 Linux 知识库 (eLinux.org 中文版)</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/yeasy/docker_practice"
+                    >Docker — 从入门到实践</a
+                >
+            </li>
+            <li>
+                <a href="http://yuedu.baidu.com/ebook/d817967416fc700abb68fca1"
+                    >Docker入门实战</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/widuu/chinese_docker"
+                    >Docker中文指南</a
+                >
+            </li>
+            <li>
+                <a href="http://www.freebsd.org/doc/zh_CN.UTF-8/books/handbook/"
+                    >FreeBSD 使用手册</a
+                >
+            </li>
+            <li>
+                <a href="http://works.jinbuguo.com/lfs/lfs62/index.html"
+                    >Linux 构建指南</a
+                >
+            </li>
+            <li>
+                <a href="http://sourceforge.net/projects/elpi/"
+                    >Linux 系统高级编程</a
+                >
+            </li>
+            <li>
+                <a href="https://tinylab.gitbooks.io/linux-doc/content/zh-cn/"
+                    >Linux Documentation (中文版)</a
+                >
+            </li>
+            <li>
+                <a href="http://happypeter.github.io/LGCB/book/"
+                    >Linux Guide for Complete Beginners</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/me115/linuxtools_rst"
+                    >Linux工具快速教程</a
+                >
+            </li>
+            <li>
+                <a href="https://aaaaaashu.gitbooks.io/mac-dev-setup/content/"
+                    >Mac 开发配置手册</a
+                >
+            </li>
+            <li>
+                <a href="http://pages.cs.wisc.edu/~remzi/OSTEP/"
+                    >Operating Systems: Three Easy Pieces</a
+                >
+            </li>
+            <li>
+                <a href="http://billie66.github.io/TLCL/index.html"
+                    >The Linux Command Line</a
+                >
+            </li>
+            <li>
+                <a href="http://wiki.ubuntu.org.cn/UbuntuManual"
+                    >Ubuntu 参考手册</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://www.gitbook.com/book/objectkuan/ucore-docs/details"
+                    >uCore Lab: Operating System Course in Tsinghua
+                    University</a
+                >
+            </li>
+            <li>
+                <a href="http://cb.vu/unixtoolbox_zh_CN.xhtml">UNIX TOOLBOX</a>
+            </li>
+        </ul>
+        <h3 id="程序员杂谈">程序员杂谈</h3>
+        <ul>
+            <li>
+                <a href="http://www.kancloud.cn/kancloud/a-programmer-prepares"
+                    >程序员的自我修养</a
+                >
+            </li>
+        </ul>
+        <h3 id="大数据">大数据</h3>
+        <ul>
+            <li>
+                <a href="http://dataminingguide.books.yourtion.com"
+                    >面向程序员的数据挖掘指南</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/linyiqun/DataMiningAlgorithm"
+                    >数据挖掘中经典的算法实现和详细的注释</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://aiyanbo.gitbooks.io/spark-programming-guide-zh-cn/content/"
+                    >Spark 编程指南简体中文版</a
+                >
+            </li>
+        </ul>
+        <h3 id="分布式系统">分布式系统</h3>
+        <ul>
+            <li>
+                <a href="http://dcaoyuan.github.io/papers/pdfs/Scalability.pdf"
+                    >走向分布式</a
+                >
+                (PDF)
+            </li>
+        </ul>
+        <h3 id="管理和监控">管理和监控</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://www.gitbook.com/book/fuxiaopang/learnelasticsearch/details"
+                    >ElasticSearch 权威指南</a
+                >
+            </li>
+            <li>
+                <a href="http://es.xiaoleilu.com"
+                    >Elasticsearch 权威指南（中文版）</a
+                >
+            </li>
+            <li><a href="http://kibana.logstash.es">ELKstack 中文指南</a></li>
+            <li>
+                <a href="https://github.com/chenryn/logstash-best-practice-cn"
+                    >Logstash 最佳实践</a
+                >
+            </li>
+            <li>
+                <a href="http://udn.yyuap.com/doc/mastering-elasticsearch/"
+                    >Mastering Elasticsearch(中文版)</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://www.gitbook.com/book/wizardforcel/puppet-27-cookbook/details"
+                    >Puppet 2.7 Cookbook 中文版</a
+                >
+            </li>
+        </ul>
+        <h3 id="函数式概念">函数式概念</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://github.com/justinyhuang/Functional-Programming-For-The-Rest-of-Us-Cn"
+                    >傻瓜函数编程</a
+                >
+            </li>
+        </ul>
+        <h3 id="计算机图形学">计算机图形学</h3>
+        <ul>
+            <li>
+                <a href="https://learnopengl-cn.github.io">LearnOpenGL CN</a>
+            </li>
+            <li>
+                <a href="https://github.com/zilongshanren/opengl-tutorials"
+                    >OpenGL 教程</a
+                >
+            </li>
+        </ul>
+        <h3 id="其它">其它</h3>
+        <ul>
+            <li><a href="http://ifeve.com/perfbook/">深入理解并行编程</a></li>
+            <li>
+                <a href="https://community.emc.com/docs/DOC-16067"
+                    >SAN 管理入门系列</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://sketchcn.com/sketch-chinese-user-manual.html#introduce"
+                    >Sketch 中文手册</a
+                >
+            </li>
+        </ul>
+        <h3 id="软件开发方法">软件开发方法</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://github.com/justinyhuang/Functional-Programming-For-The-Rest-of-Us-Cn"
+                    >傻瓜函数编程</a
+                >
+                (《Functional Programming For The Rest of Us》中文版)
+            </li>
+            <li>
+                <a
+                    href="http://www.infoq.com/cn/minibooks/scrum-xp-from-the-trenches"
+                    >硝烟中的 Scrum 和 XP</a
+                >
+            </li>
+        </ul>
+        <h3 id="设计模式">设计模式</h3>
+        <ul>
+            <li>
+                <a href="http://blog.csdn.net/lovelion/article/details/17517213"
+                    >史上最全设计模式导学目录</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/me115/design_patterns"
+                    >图说设计模式</a
+                >
+            </li>
+        </ul>
+        <h3 id="数据库">数据库</h3>
+        <!-- Waiting to add in -->
+        <h3 id="项目相关">项目相关</h3>
+        <ul>
+            <li><a href="https://github.com/ecomfe/spec">编码规范</a></li>
+            <li>
+                <a href="http://www.ituring.com.cn/book/1143">开源软件架构</a>
+            </li>
+            <li>
+                <a href="https://wizardforcel.gitbooks.io/ibm-j-ap"
+                    >让开发自动化系列专栏</a
+                >
+            </li>
+            <li>
+                <a href="https://wizardforcel.gitbooks.io/ibm-j-cq"
+                    >追求代码质量</a
+                >
+            </li>
+            <li>
+                <a href="http://docs.huihoo.com/gnu/linux/gmake.html"
+                    >GNU make 指南</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/waylau/Gradle-2-User-Guide"
+                    >Gradle 2 用户指南</a
+                >
+            </li>
+            <li>
+                <a href="http://yuedu.baidu.com/ebook/f23af265998fcc22bcd10da2"
+                    >Gradle 中文使用文档</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20170616013024/http://local.joelonsoftware.com/wiki/Chinese_(Simplified)"
+                    >Joel谈软件</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/fool2fish/selenium-doc"
+                    >selenium 中文文档</a
+                >
+            </li>
+        </ul>
+        <h3 id="在线教育">在线教育</h3>
+        <ul>
+            <li><a href="http://edu.51cto.com">51CTO学院</a></li>
+            <li><a href="http://yun.itheima.com">黑马程序员</a></li>
+            <li><a href="http://www.hubwiz.com">汇智网</a></li>
+            <li><a href="http://www.jikexueyuan.com">极客学院</a></li>
+            <li><a href="http://www.jisuanke.com">计蒜客</a></li>
+            <li><a href="http://www.imooc.com/course/list">慕课网</a></li>
+            <li>
+                <a href="https://www.codecademy.com/?locale_code=zh"
+                    >Codecademy</a
+                >
+            </li>
+            <li><a href="https://www.codeschool.com">CodeSchool</a></li>
+            <li>
+                <a
+                    href="https://www.coursera.org/courses?orderby=upcoming&amp;lngs=zh"
+                    >Coursera</a
+                >
+            </li>
+            <li>
+                <a href="https://learnxinyminutes.com">Learn X in Y minutes</a>
+            </li>
+            <li><a href="https://www.shiyanlou.com">shiyanlou</a></li>
+            <li><a href="https://teamtreehouse.com">TeamTreeHouse</a></li>
+            <li><a href="https://www.udacity.com">Udacity</a></li>
+            <li><a href="https://www.xuetangx.com">xuetangX</a></li>
+        </ul>
+        <h3 id="正则表达式">正则表达式</h3>
+        <ul>
+            <li>
+                <a href="http://www.runoob.com/regexp/regexp-tutorial.html"
+                    >正则表达式-菜鸟教程</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20161119141236/http://deerchao.net:80/tutorials/regex/regex.htm"
+                    >正则表达式30分钟入门教程</a
+                >
+            </li>
+        </ul>
+        <h3 id="智能系统">智能系统</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/phodal/designiot"
+                    >一步步搭建物联网系统</a
+                >
+            </li>
+        </ul>
+        <h3 id="ide">IDE</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/judasn/IntelliJ-IDEA-Tutorial"
+                    >IntelliJ IDEA 简体中文专题教程</a
+                >
+            </li>
+        </ul>
+        <h3 id="web">Web</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://www.gitbook.com/book/juntao/3-web-designs-in-3-weeks/details"
+                    >3 Web Designs in 3 Weeks</a
+                >
+            </li>
+            <li>
+                <a href="http://www.20thingsilearned.com/zh-CN/home"
+                    >关于浏览器和网络的 20 项须知</a
+                >
+            </li>
+            <li>
+                <a href="http://jinlong.github.io/2013/08/29/devtoolsecrets/"
+                    >浏览器开发工具的秘密</a
+                >
+            </li>
+            <li>
+                <a href="http://coderlmn.github.io/code-standards/"
+                    >前端代码规范 及 最佳实践</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/fouber/blog/issues/2"
+                    >前端开发体系建设日记</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/hacke2/hacke2.github.io/issues/3"
+                    >前端资源分享（二）</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/hacke2/hacke2.github.io/issues/1"
+                    >前端资源分享（一）</a
+                >
+            </li>
+            <li>
+                <a href="https://community.emc.com/thread/194901"
+                    >一站式学习Wireshark</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/hoosin/mobile-web-favorites"
+                    >移动前端开发收藏夹</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/AlloyTeam/Mars"
+                    >移动Web前端知识库</a
+                >
+            </li>
+            <li>
+                <a href="http://deerchao.net/tutorials/regex/regex.htm"
+                    >正则表达式30分钟入门教程</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/CN-Chrome-DevTools/CN-Chrome-DevTools"
+                    >Chrome 开发者工具中文手册</a
+                >
+            </li>
+            <li>
+                <a href="http://www.ituring.com.cn/minibook/950"
+                    >Chrome扩展及应用开发</a
+                >
+            </li>
+            <li>
+                <a href="http://open.chrome.360.cn/extension_dev/overview.html"
+                    >Chrome扩展开发文档</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/phodal/growth-ebook"
+                    >Growth: 全栈增长工程师指南</a
+                >
+            </li>
+            <li><a href="http://www.gruntjs.net">Grunt中文文档</a></li>
+            <li>
+                <a href="https://github.com/nimojs/gulp-book">Gulp 入门指南</a>
+            </li>
+            <li><a href="http://www.gulpjs.com.cn/docs/">gulp中文文档</a></li>
+            <li>
+                <a href="https://github.com/bolasblack/http-api-guide"
+                    >HTTP 接口设计指北</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://yuedu.baidu.com/ebook/478d1a62376baf1ffc4fad99?pn=1"
+                    >HTTP/2.0 中文翻译</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://www.gitbook.com/book/ye11ow/http2-explained/details"
+                    >http2讲解</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/darcyliu/google-styleguide/blob/master/JSONStyleGuide.md"
+                    >JSON风格指南</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://man.lupaworld.com/content/network/wireshark/index.html"
+                    >Wireshark用户手册</a
+                >
+            </li>
+        </ul>
+        <h3 id="web服务器">WEB服务器</h3>
+        <ul>
+            <li>
+                <a href="http://works.jinbuguo.com/apache/menu22/index.html"
+                    >Apache 中文手册</a
+                >
+            </li>
+            <li>
+                <a href="http://www.ttlsa.com/nginx/nginx-stu-pdf/"
+                    >Nginx教程从入门到精通</a
+                >
+                - 运维生存时间 (PDF)
+            </li>
+            <li>
+                <a href="http://tengine.taobao.org/book/index.html"
+                    >Nginx开发从入门到精通</a
+                >
+                - 淘宝团队
+            </li>
+        </ul>
+        <h2 id="语言相关">语言相关</h2>
+        <h3 id="android">Android</h3>
+        <ul>
+            <li>
+                <a href="http://www.apkbus.com/design/index.html"
+                    >Android Design(中文版)</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/CharonChui/AndroidNote"
+                    >Android Note(开发过程中积累的知识点)</a
+                >
+            </li>
+            <li>
+                <a href="http://leanote.com/blog/post/561658f938f41126b2000298"
+                    >Android6.0新特性详解</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/bboyfeiyu/android-tech-frontier"
+                    >Android开发技术前线(android-tech-frontier)</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://hukai.me/android-training-course-in-chinese/index.html"
+                    >Google Android官方培训课程中文版</a
+                >
+            </li>
+            <li>
+                Google Material Design 正體中文版 (<a
+                    href="https://wcc723.gitbooks.io/google_design_translate/content/style-icons.html"
+                    >译本一</a
+                >，<a href="https://github.com/1sters/material_design_zh"
+                    >译本二</a
+                >)
+            </li>
+            <li>
+                <a href="http://wiki.jikexueyuan.com/project/material-design/"
+                    >Material Design 中文版</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/FX-Max/Point-of-Android"
+                    >Point-of-Android</a
+                >
+            </li>
+        </ul>
+        <h3 id="awk">AWK</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/wuzhouhui/awk">awk程序设计语言</a>
+            </li>
+            <li>
+                <a href="http://awk.readthedocs.org/en/latest/index.html"
+                    >awk中文指南</a
+                >
+            </li>
+        </ul>
+        <h3 id="c">C</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/limingth/NCCL">新概念 C 语言教程</a>
+            </li>
+            <li>
+                <a
+                    href="https://firebasestorage.googleapis.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-ME5zR-03ZEHgp2kv7bW%2F-MF9EIY-s19_w19_Unae%2F-MF9F-HCs1nLOkY1mLVi%2FBeej-cn-20140429.zip?alt=media&amp;token=de27f96b-2aed-4c97-8879-649638c7559f"
+                    >Beej’s Guide to Network Programming 簡體中文版</a
+                >
+                - B. Hall, 廖亚伦译 (PDF)
+            </li>
+            <li>
+                <a href="http://c-faq-chn.sourceforge.net/ccfaq/ccfaq.html"
+                    >C 语言常见问题集</a
+                >
+            </li>
+            <li>
+                <a href="http://docs.linuxtone.org/ebooks/C&amp;CPP/c/"
+                    >Linux C 编程一站式学习</a
+                >
+            </li>
+        </ul>
+        <h3 id="c-sharp">C Sharp</h3>
+        <ul>
+            <li>
+                <a href="http://book.douban.com/subject/24827879/"
+                    >精通C#(第6版)</a
+                >
+            </li>
+        </ul>
+        <h3 id="cpp">C++</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://github.com/hellogcc/100-gcc-tips/blob/master/src/index.md"
+                    >100个gcc小技巧</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/hellogcc/100-gdb-tips/blob/master/src/index.md"
+                    >100个gdb小技巧</a
+                >
+            </li>
+            <li>
+                <a href="http://www.nowamagic.net/librarys/books/contents/c"
+                    >简单易懂的C魔法</a
+                >
+            </li>
+            <li>
+                <a href="http://www.ituring.com.cn/book/1203"
+                    >像计算机科学家一样思考（C++版)</a
+                >
+                (《How To Think Like a Computer Scientist: C++ Version》中文版)
+            </li>
+            <li>
+                <a href="https://tinylab.gitbooks.io/cbook/content/"
+                    >C 语言编程透视</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/andycai/cprimer">C/C++ Primer</a> -
+                andycai
+            </li>
+            <li>
+                <a
+                    href="https://github.com/forhappy/Cplusplus-Concurrency-In-Practice"
+                    >C++ 并发编程指南</a
+                >
+            </li>
+            <li>
+                <a href="http://www.sunistudio.com/cppfaq/"
+                    >C++ FAQ LITE(中文版)</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/Mooophy/Cpp-Primer"
+                    >C++ Primer 5th Answers</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/wuye9036/CppTemplateTutorial"
+                    >C++ Template 进阶指南</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/leeyiw/cgdb-manual-in-chinese"
+                    >CGDB中文手册</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20170615174144/http://sewm.pku.edu.cn/src/paradise/reference/CMake%20Practice.pdf"
+                    >Cmake 实践</a
+                >
+                (PDF)
+            </li>
+            <li>
+                <a href="http://docs.huihoo.com/gnu/linux/gmake.html"
+                    >GNU make 指南</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://zh-google-styleguide.readthedocs.org/en/latest/google-cpp-styleguide/contents/"
+                    >Google C++ 风格指南</a
+                >
+            </li>
+            <li><a href="https://github.com/anjuke/zguide-cn">ZMQ 指南</a></li>
+        </ul>
+        <h3 id="coffeescript">CoffeeScript</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://github.com/elrrrrrrr/coffeescript-style-guide/blob/master/README-ZH.md"
+                    >CoffeeScript 编程风格指南</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/geekplux/coffeescript-style-guide"
+                    >CoffeeScript 编码风格指南</a
+                >
+            </li>
+            <li><a href="http://coffee-script.org">CoffeeScript 中文</a></li>
+        </ul>
+        <h3 id="dart">Dart</h3>
+        <ul>
+            <li>
+                <a href="http://dart.lidian.info/wiki/Language_Tour"
+                    >Dart 语言导览</a
+                >
+            </li>
+        </ul>
+        <h3 id="elasticsearch">Elasticsearch</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://github.com/looly/elasticsearch-definitive-guide-cn"
+                    >Elasticsearch 权威指南</a
+                >
+                （《Elasticsearch the definitive guide》中文版）
+            </li>
+            <li>
+                <a href="http://udn.yyuap.com/doc/mastering-elasticsearch/"
+                    >Mastering Elasticsearch(中文版)</a
+                >
+            </li>
+        </ul>
+        <h3 id="elixir">Elixir</h3>
+        <ul>
+            <li>
+                <a href="https://elixirschool.com/cn/">Elixir 编程语言教程</a>
+                (Elixir School)
+            </li>
+            <li>
+                <a href="https://github.com/Ljzn/ElixrGettingStartedChinese"
+                    >Elixir Getting Started 中文翻译</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/Ljzn/MetaProgrammingInElixirChinese"
+                    >Elixir元编程与DSL 中文翻译</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://mydearxym.gitbooks.io/phoenix-doc-in-chinese/content/"
+                    >Phoenix 框架中文文档</a
+                >
+            </li>
+        </ul>
+        <h3 id="erlang">Erlang</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/liancheng/cpie-cn"
+                    >Erlang 并发编程</a
+                >
+                (《Concurrent Programming in Erlang (Part I)》中文版)
+            </li>
+        </ul>
+        <h3 id="fortran">Fortran</h3>
+        <ul>
+            <li>
+                <a href="http://micro.ustc.edu.cn/Fortran/ZJDing/"
+                    >Fortran77和90/95编程入门</a
+                >
+            </li>
+        </ul>
+        <h3 id="golang">Golang</h3>
+        <ul>
+            <li>
+                <a href="http://go.ctolib.com/docs/read/magical-go-c-index.html"
+                    >神奇的 Go 语言</a
+                >
+            </li>
+            <li><a href="http://mikespook.com/learning-go/">学习Go语言</a></li>
+            <li>
+                <a href="https://github.com/Unknwon/go-fundamental-programming"
+                    >Go 编程基础</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/golang-china/golangdoc.translations"
+                    >Go 官方文档翻译</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/songleo/the-little-go-book_ZH_CN"
+                    >Go 简易教程</a
+                >
+                - Song Song Li (《<a
+                    href="https://github.com/karlseguin/the-little-go-book"
+                    >The Little Go Book</a
+                >
+                - Karl Seguin》中文版)
+            </li>
+            <li>
+                <a href="https://github.com/Unknwon/the-way-to-go_ZH_CN"
+                    >Go 入门指南</a
+                >
+                (《The Way to Go》中文版)
+            </li>
+            <li>
+                <a href="https://github.com/chai2010/go-ast-book"
+                    >Go 语法树入门</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/polaris1119/The-Golang-Standard-Library-by-Example"
+                    >Go 语言标准库</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/chai2010/advanced-go-programming-book"
+                    >Go 语言高级编程（Advanced Go Programming）</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/rujews/go-in-action-notes"
+                    >Go 语言实战笔记</a
+                >
+            </li>
+            <li>
+                <a href="https://tour.go-zh.org/list">Go 指南</a> (《A Tour of
+                Go》中文版)
+            </li>
+            <li>
+                <a
+                    href="https://github.com/astaxie/build-web-application-with-golang"
+                    >Go Web 编程</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/hyper-carrot/go_command_tutorial"
+                    >Go命令教程</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/astaxie/Go-in-Action">Go实战开发</a>
+            </li>
+            <li>
+                <a href="https://github.com/achun/Go-Blog-In-Action"
+                    >Go语言博客实践</a
+                >
+            </li>
+            <li>
+                <a href="http://blog.csdn.net/dc_726/article/details/46565241"
+                    >Java程序员的Golang入门指南</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/astaxie/NPWG_zh"
+                    >Network programming with Go 中文翻译版本</a
+                >
+            </li>
+            <li>
+                <a href="http://gorevel.cn/docs/manual/index.html"
+                    >Revel 框架手册</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/kevingo/the-little-go-book"
+                    >The Little Go Book 繁體中文翻譯版</a
+                >
+                - Karl Seguin, KevinGo, Jie Peng (<a
+                    href="https://kevingo.gitbooks.io/the-little-go-book/"
+                    >HTML</a
+                >)
+            </li>
+        </ul>
+        <h3 id="groovy">Groovy</h3>
+        <ul>
+            <li>
+                <a href="http://www.ibm.com/developerworks/cn/java/j-pg/"
+                    >实战 Groovy 系列</a
+                >
+            </li>
+        </ul>
+        <h3 id="haskell">Haskell</h3>
+        <ul>
+            <li>
+                <a href="https://learnyouahaskell.mno2.org">Haskell 趣学指南</a>
+            </li>
+            <li>
+                <a href="http://cnhaskell.com">Real World Haskell 中文版</a>
+            </li>
+        </ul>
+        <h3 id="html-css">HTML / CSS</h3>
+        <ul>
+            <li>
+                <a href="http://alloyteam.github.io/CodeGuide/">前端代码规范</a>
+                - 腾讯AlloyTeam团队
+            </li>
+            <li>
+                <a
+                    href="https://github.com/chadluo/CSS-Guidelines/blob/master/README.md"
+                    >通用 CSS 笔记、建议与指导</a
+                >
+            </li>
+            <li><a href="http://zh.learnlayout.com">学习CSS布局</a></li>
+            <li>
+                <a href="https://bootstrap.hexschool.com"
+                    >Bootstrap 4 繁體中文手冊</a
+                >
+                - 六角學院
+            </li>
+            <li>
+                <a href="https://github.com/waylau/css3-tutorial"
+                    >CSS3 Tutorial 《CSS3 教程》</a
+                >
+            </li>
+            <li><a href="http://css.doyoe.com">CSS参考手册</a></li>
+            <li>
+                <a href="http://yanxyz.github.io/emmet-docs/">Emmet 文档</a>
+            </li>
+            <li>
+                <a href="http://www.w3school.com.cn/html5/index.asp"
+                    >HTML5 教程</a
+                >
+            </li>
+            <li>
+                <a href="http://codeguide.bootcss.com">HTML和CSS编码规范</a>
+            </li>
+            <li>
+                <a href="http://sass-guidelin.es/zh/">Sass Guidelines 中文</a>
+            </li>
+        </ul>
+        <h3 id="ios">iOS</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/jkyin/Subtitle"
+                    >网易斯坦福大学公开课：iOS 7应用开发字幕文件</a
+                >
+            </li>
+            <li>
+                <a href="http://nilsun.github.io/apple-watch/"
+                    >Apple Watch开发初探</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://zh-google-styleguide.readthedocs.org/en/latest/google-objc-styleguide/"
+                    >Google Objective-C Style Guide 中文版</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://isux.tencent.com/ios-human-interface-guidelines-ui-design-basics-ios7.html"
+                    >iOS7人机界面指南</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/qinjx/30min_guides/blob/master/ios.md"
+                    >iOS开发60分钟入门</a
+                >
+            </li>
+            <li>
+                <a href="http://wileam.com/iphone-6-screen-cn/"
+                    >iPhone 6 屏幕揭秘</a
+                >
+            </li>
+        </ul>
+        <h3 id="java">Java</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://github.com/alibaba/p3c/blob/master/Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%EF%BC%88%E5%B5%A9%E5%B1%B1%E7%89%88%EF%BC%89.pdf"
+                    >阿里巴巴 Java 开发手册</a
+                >
+                (PDF)
+            </li>
+            <li>
+                <a href="https://github.com/waylau/RestDemo"
+                    >用jersey构建REST服务</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/waylau/activiti-5.x-user-guide"
+                    >Activiti 5.x 用户指南</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/waylau/apache-mina-2.x-user-guide"
+                    >Apache MINA 2 用户指南</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/waylau/apache-shiro-1.2.x-reference"
+                    >Apache Shiro 用户指南</a
+                >
+            </li>
+            <li>
+                <a href="http://hawstein.com/2014/01/20/google-java-style/"
+                    >Google Java编程风格指南</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/waylau/h2-database-doc"
+                    >H2 Database 教程</a
+                >
+            </li>
+            <li>
+                <a href="https://java.quanke.name">Java 编程思想</a> - quanke
+            </li>
+            <li>
+                <a href="https://github.com/waylau/java-code-conventions"
+                    >Java 编码规范</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/waylau/servlet-3.1-specification"
+                    >Java Servlet 3.1 规范</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/waylau/Jersey-2.x-User-Guide"
+                    >Jersey 2.x 用户指南</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/waylau/jsse-reference-guide"
+                    >JSSE 参考指南</a
+                >
+            </li>
+            <li>
+                <a href="http://mybatis.github.io/mybatis-3/zh/index.html"
+                    >MyBatis中文文档</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/waylau/netty-4-user-guide"
+                    >Netty 4.x 用户指南</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/waylau/essential-netty-in-action"
+                    >Netty 实战(精髓)</a
+                >
+            </li>
+            <li>
+                <a href="http://nutzbook.wendal.net">Nutz-book Nutz烹调向导</a>
+            </li>
+            <li>
+                <a href="https://nutzam.com/core/nutz_preface.html">Nutz文档</a>
+            </li>
+            <li>
+                <a href="https://github.com/waylau/rest-in-action">REST 实战</a>
+            </li>
+            <li>
+                <a
+                    href="https://github.com/qibaoguang/Spring-Boot-Reference-Guide"
+                    >Spring Boot参考指南</a
+                >
+                (:construction: <em>翻译中</em>)
+            </li>
+            <li>
+                <a href="https://github.com/waylau/spring-framework-4-reference"
+                    >Spring Framework 4.x参考文档</a
+                >
+            </li>
+        </ul>
+        <h3 id="javascript">JavaScript</h3>
+        <ul>
+            <li>
+                <a
+                    href="http://justjavac.com/named-function-expressions-demystified.html"
+                    >命名函数表达式探秘</a
+                >
+                - kangax、为之漫笔(翻译)
+                (原始地址无法打开，所以此处地址为justjavac博客上的备份)
+            </li>
+            <li>
+                <a
+                    href="https://github.com/getify/You-Dont-Know-JS/tree/1ed-zh-CN"
+                    >你不知道的Javascript</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html"
+                    >深入理解JavaScript系列</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://www.oschina.net/translate/learning-javascript-design-patterns"
+                    >学用 JavaScript 设计模式</a
+                >
+                - 开源中国
+            </li>
+            <li>
+                <a href="https://github.com/adamlu/javascript-style-guide"
+                    >Airbnb JavaScript 规范</a
+                >
+            </li>
+            <li>
+                <a href="http://es6.ruanyifeng.com">ECMAScript 6 入门</a> -
+                阮一峰
+            </li>
+            <li>
+                <a
+                    href="http://bq69.com/blog/articles/script/868/google-javascript-style-guide.html"
+                    >Google JavaScript 代码风格指南</a
+                >
+            </li>
+            <li>
+                <a href="http://javascript.ruanyifeng.com"
+                    >JavaScript 标准参考教程（alpha）</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/justjavac/12-javascript-quirks"
+                    >javascript 的 12 个怪癖</a
+                >
+            </li>
+            <li>
+                <a href="http://bonsaiden.github.io/JavaScript-Garden/zh/"
+                    >JavaScript 秘密花园</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/jayli/javascript-patterns"
+                    >《JavaScript 模式》</a
+                >
+                (《JavaScript patterns》译本)
+            </li>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20170112164945/http://typeof.net/s/jsmech/"
+                    >Javascript 原理</a
+                >
+            </li>
+            <li>
+                <a href="http://liubin.github.io/promises-book/"
+                    >JavaScript Promise迷你书</a
+                >
+            </li>
+            <li>
+                <a href="http://pij.robinqu.me">Javascript编程指南</a> (<a
+                    href="https://github.com/RobinQu/Programing-In-Javascript"
+                    >源码</a
+                >)
+            </li>
+            <li>
+                <a href="http://icodeit.org/jsccp/">JavaScript核心概念及实践</a>
+                (PDF)
+            </li>
+        </ul>
+        <h4 id="angularjs">AngularJS</h4>
+        <ul>
+            <li>
+                <a
+                    href="https://github.com/xufei/Make-Your-Own-AngularJS/blob/master/01.md"
+                    >构建自己的AngularJS</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://www.waylau.com/build-angularjs-app-with-yeoman-in-windows/"
+                    >在Windows环境下用Yeoman构建AngularJS项目</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/zensh/AngularjsTutorial_cn"
+                    >AngularJS入门教程</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/mgechev/angularjs-style-guide/blob/master/README-zh-cn.md"
+                    >AngularJS最佳实践和风格指南</a
+                >
+            </li>
+        </ul>
+        <h4 id="backbone.js">Backbone.js</h4>
+        <ul>
+            <li>
+                <a
+                    href="http://www.the5fire.com/backbone-js-tutorials-pdf-download.html"
+                    >Backbone.js入门教程</a
+                >
+                (PDF)
+            </li>
+            <li>
+                <a href="https://github.com/the5fire/backbonejs-learning-note"
+                    >Backbone.js入门教程第二版</a
+                >
+            </li>
+            <li>
+                <a href="http://www.css88.com/doc/backbone/"
+                    >Backbone.js中文文档</a
+                >
+            </li>
+        </ul>
+        <h4 id="d3.js">D3.js</h4>
+        <ul>
+            <li>
+                <a href="http://www.cnblogs.com/winleisure/tag/D3.js/"
+                    >楚狂人的D3教程</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/mbostock/d3/wiki/API--%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C"
+                    >官方API文档</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://blog.csdn.net/zhang__tianxu/article/category/1623437"
+                    >张天旭的D3教程</a
+                >
+            </li>
+            <li>
+                <a href="http://d3.decembercafe.org">Learning D3.JS</a> -
+                十二月咖啡馆
+            </li>
+        </ul>
+        <h4 id="deno">Deno</h4>
+        <ul>
+            <li><a href="https://deno-tutorial.js.org">Deno 钻研之术</a></li>
+            <li>
+                <a href="https://chenshenhai.com/deno_note">Deno进阶开发笔记</a>
+                - 大深海
+            </li>
+        </ul>
+        <h4 id="electron.js">Electron.js</h4>
+        <ul>
+            <li>
+                <a href="https://wizardforcel.gitbooks.io/electron-doc/content"
+                    >Electron 中文文档</a
+                >
+                - WizardForcel
+            </li>
+            <li>
+                <a href="https://www.w3cschool.cn/electronmanual"
+                    >Electron 中文文档</a
+                >
+                - W3Cschool
+            </li>
+        </ul>
+        <h4 id="extjs">ExtJS</h4>
+        <ul>
+            <li>
+                <a href="http://extjs-doc-cn.github.io/ext4api/"
+                    >Ext4.1.0 中文文档</a
+                >
+            </li>
+        </ul>
+        <h4 id="impress.js">impress.js</h4>
+        <ul>
+            <li>
+                <a
+                    href="https://github.com/kokdemo/impress.js-tutorial-in-Chinese"
+                    >impress.js的中文教程</a
+                >
+            </li>
+        </ul>
+        <h4 id="jquery">jQuery</h4>
+        <ul>
+            <li>
+                <a
+                    href="http://www.nowamagic.net/librarys/books/contents/jquery"
+                    >简单易懂的JQuery魔法</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://i5ting.github.io/How-to-write-jQuery-plugin/build/jquery.plugin.html"
+                    >How to write jQuery plugin</a
+                >
+            </li>
+        </ul>
+        <h4 id="node.js">Node.js</h4>
+        <ul>
+            <li>
+                <a href="http://nqdeng.github.io/7-days-nodejs/"
+                    >七天学会NodeJS</a
+                >
+                - 阿里团队
+            </li>
+            <li>
+                <a href="https://github.com/nswbmw/N-blog"
+                    >使用 Express + MongoDB 搭建多人博客</a
+                >
+            </li>
+            <li><a href="http://expressjs.jser.us">express.js 中文文档</a></li>
+            <li>
+                <a href="http://javascript.ruanyifeng.com/nodejs/express.html"
+                    >Express框架</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/guo-yu/koa-guide">koa 中文文档</a>
+                 *
+                <a
+                    href="http://nodejs.ctolib.com/docs/sfile/jstraining/engineering.html"
+                    >JavaScript全栈工程师培训材料</a
+                >
+            </li>
+            <li>
+                <a href="https://www.npmjs.com/package/learnyounode-zh-cn"
+                    >Learn You The Node.js For Much Win! (中文版)</a
+                >
+            </li>
+            <li>
+                <a href="http://i5ting.github.io/node-debug-tutorial/"
+                    >Node debug 三法三例</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/alsotang/node-lessons"
+                    >Node.js 包教不包会</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/jollen/nodejs-fullstack-lessons"
+                    >Node.js Fullstack《從零到一的進撃》</a
+                >
+            </li>
+            <li>
+                <a href="http://www.nodebeginner.org/index-zh-cn.html"
+                    >Node入门</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/nodejs-tw/nodejs-wiki-book"
+                    >Nodejs Wiki Book</a
+                >
+                (繁体中文)
+            </li>
+            <li>
+                <a href="https://www.gitbook.com/book/0532/nodejs/details"
+                    >nodejs中文文档</a
+                >
+            </li>
+            <li>
+                <a href="https://www.gitbook.com/book/0532/nodejs/details"
+                    >The NodeJS 中文文档</a
+                >
+                - 社区翻译
+            </li>
+        </ul>
+        <h4 id="react.js">React.js</h4>
+        <ul>
+            <li>
+                <a href="https://github.com/theJian/build-a-hn-front-page"
+                    >Learn React &amp; Webpack by building the Hacker News front
+                    page</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/hateonion/react-bits-CN"
+                    >React-Bits 中文文档</a
+                >
+            </li>
+            <li>
+                <a href="http://wiki.jikexueyuan.com/project/react-native/"
+                    >React Native 中文文档(含最新Android内容)</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/fakefish/react-webpack-cookbook"
+                    >React webpack-cookbook</a
+                >
+            </li>
+            <li>
+                <a href="http://fraserxu.me/intro-to-react/"
+                    >React.js 入门教程</a
+                >
+            </li>
+            <li>
+                <a href="https://discountry.github.io/react/"
+                    >React.js 中文文档</a
+                >
+            </li>
+        </ul>
+        <h4 id="vue.js">Vue.js</h4>
+        <ul>
+            <li><a href="https://cn.vuejs.org/v2/guide/">Vue.js中文文档</a></li>
+        </ul>
+        <h4 id="zepto.js">Zepto.js</h4>
+        <ul>
+            <li>
+                <a href="http://css88.com/doc/zeptojs_api">Zepto.js 中文文档</a>
+            </li>
+        </ul>
+        <h3 id="latex">LaTeX</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://github.com/49951331/graduate-project-102pj/blob/master/docs/latex123.pdf"
+                    >大家來學 LaTeX</a
+                >
+                (PDF)
+            </li>
+            <li>
+                <a href="http://ctan.org/pkg/lshort-zh-cn"
+                    >一份不太简短的 LaTeX2ε 介绍</a
+                >
+            </li>
+            <li>
+                <a href="http://www.dralpha.com/zh/tech/tech.htm">LaTeX 笔记</a>
+            </li>
+        </ul>
+        <h3 id="lisp">LISP</h3>
+        <ul>
+            <li>
+                <a href="http://acl.readthedocs.org/en/latest/"
+                    >ANSI Common Lisp 中文翻译版</a
+                >
+            </li>
+            <li>
+                <a href="http://www.ituring.com.cn/minibook/862"
+                    >Common Lisp 高级编程技术</a
+                >
+                (《On Lisp》中文版)
+            </li>
+        </ul>
+        <h3 id="lua">Lua</h3>
+        <ul>
+            <li>
+                <a href="http://www.w3cschool.cc/manual/lua53doc/contents.html"
+                    >Lua 5.3 参考手册</a
+                >
+            </li>
+        </ul>
+        <h3 id="markdown">Markdown</h3>
+        <ul>
+            <li>
+                <a href="http://www.jianshu.com/p/q81RER"
+                    >献给写作者的 Markdown 新手指南</a
+                >
+            </li>
+            <li><a href="https://markdown.tw">Markdown 語法說明</a></li>
+        </ul>
+        <h3 id="mysql">MySQL</h3>
+        <ul>
+            <li>
+                <a
+                    href="http://www.cnblogs.com/mr-wid/archive/2013/05/09/3068229.html"
+                    >21分钟MySQL入门教程</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html"
+                    >MySQL索引背后的数据结构及算法原理</a
+                >
+            </li>
+        </ul>
+        <h3 id="nosql">NoSQL</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/huangz1990/annotated_redis_source"
+                    >带有详细注释的 Redis 2.6 代码</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/huangz1990/redis-3.0-annotated"
+                    >带有详细注释的 Redis 3.0 代码</a
+                >
+            </li>
+            <li><a href="http://disque.huangz.me">Disque 使用教程</a></li>
+            <li><a href="http://redisdoc.com">Redis 命令参考</a></li>
+            <li><a href="http://redisbook.com">Redis 设计与实现</a></li>
+            <li>
+                <a
+                    href="https://github.com/justinyhuang/the-little-mongodb-book-cn/blob/master/mongodb.md"
+                    >The Little MongoDB Book</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/JasonLai256/the-little-redis-book/blob/master/cn/redis.md"
+                    >The Little Redis Book</a
+                >
+            </li>
+        </ul>
+        <h3 id="perl">Perl</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/fayland/chinese-perl-book"
+                    >Master Perl Today</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://web.archive.org/web/20150326073235/http://net.pku.edu.cn/~yhf/tutorial/perl/perl.html"
+                    >Perl 5 教程</a
+                >
+            </li>
+            <li><a href="http://www.yiibai.com/perl">Perl 教程</a></li>
+        </ul>
+        <h3 id="php">PHP</h3>
+        <ul>
+            <li>
+                <a href="http://www.php-internals.com/book/"
+                    >深入理解 PHP 内核</a
+                >
+            </li>
+            <li>
+                <a href="https://codeigniter.org.tw/userguide3"
+                    >CodeIgniter 使用手冊</a
+                >
+            </li>
+            <li><a href="http://docs.phpcomposer.com">Composer中文文档</a></li>
+            <li><a href="http://www.myleftstudio.com">Phalcon7中文文档</a></li>
+            <li>
+                <a href="http://wulijun.github.io/php-the-right-way/"
+                    >PHP 之道</a
+                >
+            </li>
+            <li><a href="https://psr.phphub.org">PHP标准规范中文版</a></li>
+            <li><a href="http://php.net/manual/zh/">PHP中文手册</a></li>
+            <li>
+                <a href="http://www.yiichina.com/doc/guide/2.0">Yii2中文文档</a>
+            </li>
+        </ul>
+        <h4 id="laravel">Laravel</h4>
+        <ul>
+            <li>
+                <a href="http://d.laravel-china.org/docs/5.4"
+                    >Laravel 5.4 中文文档</a
+                >
+            </li>
+            <li>
+                <a href="https://learnku.com/docs/laravel/6.x"
+                    >Laravel 6 中文文档</a
+                >
+            </li>
+            <li>
+                <a href="https://learnku.com/docs/laravel/7.x"
+                    >Laravel 7 中文文档</a
+                >
+            </li>
+            <li>
+                <a href="https://learnku.com/docs/laravel/8.x"
+                    >Laravel 8 中文文档</a
+                >
+            </li>
+        </ul>
+        <h4 id="symfony">Symfony</h4>
+        <ul>
+            <li>
+                <a href="https://wusuopu.gitbooks.io/symfony2_tutorial/content"
+                    >Symfony 2 实例教程</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://symfony.com/doc/5.0/the-fast-track/zh_CN/index.html"
+                    >Symfony 5 快速开发</a
+                >
+            </li>
+        </ul>
+        <h3 id="postgresql">PostgreSQL</h3>
+        <ul>
+            <li>
+                <a
+                    href="http://works.jinbuguo.com/postgresql/menu823/index.html"
+                    >PostgreSQL 8.2.3 中文文档</a
+                >
+            </li>
+            <li>
+                <a href="http://www.postgres.cn/docs/9.3/index.html"
+                    >PostgreSQL 9.3.1 中文文档</a
+                >
+            </li>
+            <li>
+                <a href="http://www.postgres.cn/docs/9.4/index.html"
+                    >PostgreSQL 9.4.4 中文文档</a
+                >
+            </li>
+            <li>
+                <a href="http://www.postgres.cn/docs/9.5/index.html"
+                    >PostgreSQL 9.5.3 中文文档</a
+                >
+            </li>
+            <li>
+                <a href="http://www.postgres.cn/docs/9.6/index.html"
+                    >PostgreSQL 9.6.0 中文文档</a
+                >
+            </li>
+        </ul>
+        <h3 id="python">Python</h3>
+        <ul>
+            <li>
+                <a href="https://bop.molun.net">简明 Python 教程</a> - Swaroop C
+                H、沈洁元(翻译)、漠伦(翻译)
+            </li>
+            <li>
+                <a href="https://www.cnblogs.com/derek1184405959/p/8579428.html"
+                    >人生苦短，我用python</a
+                >
+                - (内含丰富的笔记以及各类教程)
+            </li>
+            <li>
+                <a href="https://github.com/jiechic/diveintopython3"
+                    >深入 Python 3</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://www.ctolib.com/docs/sfile/think-python-2e/0.html"
+                    >像计算机科学家一样思考Python</a
+                >
+                - Allen B. Downey、大胖哥(翻译)
+            </li>
+            <li>
+                <a href="http://www.osgeo.cn/matplotlib/"
+                    >Matplotlib 3.0.3 中文文档</a
+                >
+                - (Online)
+            </li>
+            <li>
+                <a href="http://www.osgeo.cn/numpy/">Numpy 1.16 中文文档</a> -
+                (Online)
+            </li>
+            <li>
+                <a href="http://docspy3zh.readthedocs.org/en/latest/"
+                    >Python 3 文档(简体中文) 3.2.2 documentation</a
+                >
+            </li>
+            <li>
+                <a href="http://www.osgeo.cn/cpython/"
+                    >Python 3.8.0a3中文文档</a
+                >
+                - (目前在线最全的中文文档了，Online)
+            </li>
+            <li>
+                <a href="http://www.pythondoc.com">Python 中文学习大本营</a>
+            </li>
+            <li>
+                <a href="https://pythonguidecn.readthedocs.io/zh/latest/"
+                    >Python 最佳实践指南</a
+                >
+            </li>
+            <li>
+                <a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/"
+                    >Python Cookbook第三版</a
+                >
+                - David Beazley、Brian K.Jones、熊能(翻译)
+            </li>
+            <li>
+                <a
+                    href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000"
+                    >Python教程 - 廖雪峰的官方网站</a
+                >
+            </li>
+            <li>
+                <a href="https://interpy.eastlakeside.com">Python进阶</a> -
+                eastlakeside
+            </li>
+            <li>
+                <a href="http://funhacks.net/explore-python">Python之旅</a> -
+                Ethan
+            </li>
+            <li>
+                <a href="http://www.osgeo.cn/tornado/">Tornado 6.1 中文文档</a>
+                - (网络上其他的都是较旧版本的，Online)
+            </li>
+        </ul>
+        <h4 id="django">Django</h4>
+        <ul>
+            <li>
+                <a href="https://www.yiyibooks.cn/xx/Django_1.11.6/index.html"
+                    >Django 1.11.6 中文文档</a
+                >
+            </li>
+            <li>
+                <a href="http://www.osgeo.cn/django/">Django 2.2.1 中文文档</a>
+                - (这个很新，也很全，Online)
+            </li>
+            <li>
+                <a href="https://www.dusaiphoto.com/article/detail/2"
+                    >Django 搭建个人博客教程 (2.1)</a
+                >
+                - (杜赛) (HTML)
+            </li>
+            <li>
+                <a href="http://djangobook.py3k.cn/2.0/">Django book 2.0</a>
+            </li>
+            <li>
+                <a href="https://tutorial.djangogirls.org/zh/"
+                    >Django Girls 教程 (1.11)</a
+                >
+                (HTML)
+            </li>
+        </ul>
+        <h3 id="r">R</h3>
+        <ul>
+            <li>
+                <a href="http://cran.r-project.org/doc/contrib/Liu-FAQ.pdf"
+                    >153分钟学会 R</a
+                >
+                (PDF)
+            </li>
+            <li>
+                <a
+                    href="http://cran.r-project.org/doc/contrib/Xu-Statistics_and_R.pdf"
+                    >统计学与 R 读书笔记</a
+                >
+                (PDF)
+            </li>
+            <li>
+                <a href="http://yanping.me/shiny-tutorial/"
+                    >用 R 构建 Shiny 应用程序</a
+                >
+                (《Building ‘Shiny’ Applications with R》中文版)
+            </li>
+            <li>
+                <a
+                    href="http://cran.r-project.org/doc/contrib/Ding-R-intro_cn.pdf"
+                    >R 导论</a
+                >
+                (《An Introduction to R》中文版) (PDF)
+            </li>
+        </ul>
+        <h3 id="restructuredtext">reStructuredText</h3>
+        <ul>
+            <li>
+                <a href="http://www.pythondoc.com/sphinx/rest.html"
+                    >reStructuredText 入门</a
+                >
+            </li>
+        </ul>
+        <h3 id="ruby">Ruby</h3>
+        <ul>
+            <li><a href="http://lrthw.github.io">笨方法学 Ruby</a></li>
+            <li>
+                <a
+                    href="https://github.com/JuanitoFatas/rails-style-guide/blob/master/README-zhCN.md"
+                    >Rails 风格指南</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md"
+                    >Ruby 风格指南</a
+                >
+            </li>
+            <li>
+                <a href="https://ihower.tw/rails4/">Ruby on Rails 实战圣经</a>
+            </li>
+            <li>
+                <a href="http://guides.ruby-china.org">Ruby on Rails 指南</a>
+            </li>
+            <li>
+                <a href="http://www.sinatrarb.com/intro-zh.html">Sinatra</a>
+            </li>
+        </ul>
+        <h3 id="rust">Rust</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/rustcc/rust-by-example/"
+                    >通过例子学习 Rust</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/KaiserY/rust-book-chinese"
+                    >Rust 官方教程</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/photino/rust-notes"
+                    >Rust 语言学习笔记</a
+                >
+            </li>
+            <li>
+                <a href="https://github.com/rustcc/RustPrimer">RustPrimer</a>
+            </li>
+        </ul>
+        <h3 id="scala">Scala</h3>
+        <ul>
+            <li>
+                <a href="http://twitter.github.io/effectivescala/index-cn.html"
+                    >Effective Scala</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://www.gitbook.com/book/windor/beginners-guide-to-scala/details"
+                    >Scala 初学者指南</a
+                >
+                (《The Neophyte’s Guide to Scala》中文版)
+            </li>
+            <li>
+                <a href="http://twitter.github.io/scala_school/zh_cn/index.html"
+                    >Scala 课堂</a
+                >
+                (Twitter的Scala中文教程)
+            </li>
+        </ul>
+        <h3 id="scheme">Scheme</h3>
+        <ul>
+            <li>
+                <a href="http://deathking.github.io/yast-cn/"
+                    >Scheme 入门教程</a
+                >
+                (《Yet Another Scheme Tutorial》中文版)
+            </li>
+        </ul>
+        <h3 id="scratch">Scratch</h3>
+        <ul>
+            <li>
+                <a href="http://cccgchinese.strikingly.com">创意计算课程指南</a>
+            </li>
+        </ul>
+        <h3 id="shell">Shell</h3>
+        <ul>
+            <li>
+                <a href="https://tinylab.gitbooks.io/shellbook/content"
+                    >Shell 编程范例</a
+                >
+                - 泰晓科技
+            </li>
+            <li>
+                <a
+                    href="http://wiki.ubuntu.org.cn/Shell%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80"
+                    >Shell 编程基础</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://github.com/qinjx/30min_guides/blob/master/shell.md"
+                    >Shell 脚本编程30分钟入门</a
+                >
+            </li>
+            <li><a href="http://me.52fhy.com/shell-book/">shell-book</a></li>
+            <li>
+                <a href="http://billie66.github.io/TLCL/book/"
+                    >The Linux Command Line 中文版</a
+                >
+            </li>
+        </ul>
+        <h3 id="swift">Swift</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://www.gitbook.com/book/numbbbbb/-the-swift-programming-language-/details"
+                    >《The Swift Programming Language》中文版</a
+                >
+            </li>
+        </ul>
+        <h3 id="typescript">TypeScript</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://www.runoob.com/w3cnote/getting-started-with-typescript.html"
+                    >TypeScript 入门教程</a
+                >
+            </li>
+            <li><a href="https://www.tslang.cn">TypeScript 中文网</a></li>
+            <li>
+                <a href="https://github.com/jkchao/typescript-book-chinese"
+                    >TypeScript Deep Dive 中文版</a
+                >
+            </li>
+        </ul>
+        <h3 id="vba-microsoft-visual-basic-applications">
+            VBA (Microsoft Visual Basic Applications)
+        </h3>
+        <ul>
+            <li>
+                <a href="https://github.com/Youchien/concise-excel-vba"
+                    >简明Excel VBA</a
+                >
+            </li>
+        </ul>
+        <h3 id="vim">Vim</h3>
+        <ul>
+            <li>
+                <a href="http://www.study-area.org/tips/vim/index.html"
+                    >大家來學 VIM</a
+                >
+            </li>
+        </ul>
+        <h3 id="visual-prolog">Visual Prolog</h3>
+        <ul>
+            <li>
+                <a
+                    href="http://wiki.visual-prolog.com/index.php?title=Visual_Prolog_for_Tyros_in_Chinese"
+                    >Visual Prolog 7边练边学</a
+                >
+            </li>
+            <li>
+                <a
+                    href="http://wiki.visual-prolog.com/index.php?title=A_Beginners_Guide_to_Visual_Prolog_in_Chinese"
+                    >Visual Prolog 7初学指南</a
+                >
+            </li>
+        </ul>
+        <h3 id="webassembly">WebAssembly</h3>
+        <ul>
+            <li>
+                <a href="https://github.com/3dgen/cppwasm-book"
+                    >C/C++面向WebAssembly编程</a
+                >
+            </li>
+        </ul>
+    </body>
+</html>

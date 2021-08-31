@@ -1,0 +1,1 @@
+https://blogs.msdn.microsoft.com/vcblog/2016/03/31/cc-extension-for-visual-studio-code/,official blog post,https://github.com/viatsko/awesome-vscode#readme,Visual Studio Code error: <HTTPError 404: 'Not Found'> | reason: Not Found

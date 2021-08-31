@@ -1,0 +1,2316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    * { padding: 0; margin: 0; }
+    body {
+        font-family: sans-serif;
+        text-rendering: optimizespeed;
+        background-color: #ffffff;
+    }
+    a {
+        color: #006ed3;
+        text-decoration: none;
+    }
+    a:hover,
+    h1 a:hover {
+        color: #319cff;
+    }
+    header,
+    #summary {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    th:first-child,
+    td:first-child {
+        width: 5%;
+    }
+    th:last-child,
+    td:last-child {
+        width: 5%;
+    }
+    header {
+        padding-top: 25px;
+        padding-bottom: 15px;
+        background-color: #f2f2f2;
+    }
+    h1 {
+        font-size: 20px;
+        font-weight: normal;
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        color: #999;
+    }
+    h1 a {
+        color: #000;
+        margin: 0 4px;
+    }
+    h1 a:hover {
+        text-decoration: underline;
+    }
+    h1 a:first-child {
+        margin: 0;
+    }
+    main {
+        display: block;
+    }
+    .meta {
+        font-size: 12px;
+        font-family: Verdana, sans-serif;
+        border-bottom: 1px solid #9C9C9C;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .meta-item {
+        margin-right: 1em;
+    }
+    #filter {
+        padding: 4px;
+        border: 1px solid #CCC;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    tr {
+        border-bottom: 1px dashed #dadada;
+    }
+    tbody tr:hover {
+        background-color: #ffffec;
+    }
+    th,
+    td {
+        text-align: left;
+        padding: 10px 0;
+    }
+    th {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-size: 16px;
+        white-space: nowrap;
+    }
+    th a {
+        color: black;
+    }
+    th svg {
+        vertical-align: middle;
+    }
+    td {
+        white-space: nowrap;
+        font-size: 14px;
+    }
+    td:nth-child(2) {
+        width: 80%;
+    }
+    td:nth-child(3) {
+        padding: 0 20px 0 20px;
+    }
+    th:nth-child(4),
+    td:nth-child(4) {
+        text-align: right;
+    }
+    td:nth-child(2) svg {
+        position: absolute;
+    }
+    td .name {
+        margin-left: 1.75em;
+        word-break: break-all;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+    }
+    td .goup {
+        margin-left: 1.75em;
+        padding: 0;
+        word-break: break-all;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+    }
+    .icon {
+        margin-right: 5px;
+    }
+    tr.clickable { 
+        cursor: pointer; 
+    } 
+    tr.clickable a { 
+        display: block; 
+    } 
+    @media (max-width: 600px) {
+        * {
+            font-size: 1.06rem;
+        }
+        .hideable {
+            display: none;
+        }
+        td:nth-child(2) {
+            width: auto;
+        }
+        th:nth-child(3),
+        td:nth-child(3) {
+            padding-right: 5%;
+            text-align: right;
+        }
+        h1 {
+            color: #000;
+        }
+        h1 a {
+            margin: 0;
+        }
+        #filter {
+            max-width: 100px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="0" width="0" style="position: absolute;">
+    <defs>
+        <!-- Go-up -->
+        <g id="go-up">
+            <path d="M10,9V5L3,12L10,19V14.9C15,14.9 18.5,16.5 21,20C20,15 17,10 10,9Z" fill="#696969"/>
+        </g>
+        <!-- Folder -->
+        <g id="folder" fill-rule="nonzero" fill="none">
+            <path d="M285.22 37.55h-142.6L110.9 0H31.7C14.25 0 0 16.9 0 37.55v75.1h316.92V75.1c0-20.65-14.26-37.55-31.7-37.55z" fill="#FFA000"/>
+            <path d="M285.22 36H31.7C14.25 36 0 50.28 0 67.74v158.7c0 17.47 14.26 31.75 31.7 31.75H285.2c17.44 0 31.7-14.3 31.7-31.75V67.75c0-17.47-14.26-31.75-31.7-31.75z" fill="#FFCA28"/>
+        </g>
+        <g id="folder-shortcut" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="folder-shortcut-group" fill-rule="nonzero">
+                <g id="folder-shortcut-shape">
+                    <path d="M285.224876,37.5486902 L142.612438,37.5486902 L110.920785,0 L31.6916529,0 C14.2612438,0 0,16.8969106 0,37.5486902 L0,112.646071 L316.916529,112.646071 L316.916529,75.0973805 C316.916529,54.4456008 302.655285,37.5486902 285.224876,37.5486902 Z" id="Shape" fill="#FFA000"></path>
+                    <path d="M285.224876,36 L31.6916529,36 C14.2612438,36 0,50.2838568 0,67.7419039 L0,226.451424 C0,243.909471 14.2612438,258.193328 31.6916529,258.193328 L285.224876,258.193328 C302.655285,258.193328 316.916529,243.909471 316.916529,226.451424 L316.916529,67.7419039 C316.916529,50.2838568 302.655285,36 285.224876,36 Z" id="Shape" fill="#FFCA28"></path>
+                </g>
+                <path d="M126.154134,250.559184 C126.850974,251.883673 127.300549,253.006122 127.772602,254.106122 C128.469442,255.206122 128.919016,256.104082 129.638335,257.002041 C130.559962,258.326531 131.728855,259 133.100057,259 C134.493737,259 135.415364,258.55102 136.112204,257.67551 C136.809044,257.002041 137.258619,255.902041 137.258619,254.577551 C137.258619,253.904082 137.258619,252.804082 137.033832,251.457143 C136.786566,249.908163 136.561779,249.032653 136.561779,248.583673 C136.089726,242.814286 135.864939,237.920408 135.864939,233.273469 C135.864939,225.057143 136.786566,217.514286 138.180246,210.846939 C139.798713,204.202041 141.889234,198.634694 144.429328,193.763265 C147.216689,188.869388 150.678411,184.873469 154.836973,181.326531 C158.995535,177.779592 163.626149,174.883673 168.481552,172.661224 C173.336954,170.438776 179.113983,168.665306 185.587852,167.340816 C192.061722,166.218367 198.760378,165.342857 205.481514,164.669388 C212.18017,164.220408 219.598146,163.995918 228.162535,163.995918 L246.055591,163.995918 L246.055591,195.514286 C246.055591,197.736735 246.752431,199.510204 248.370899,201.059184 C250.214153,202.608163 252.079886,203.506122 254.372715,203.506122 C256.463236,203.506122 258.531277,202.608163 260.172223,201.059184 L326.102289,137.797959 C327.720757,136.24898 328.642384,134.47551 328.642384,132.253061 C328.642384,130.030612 327.720757,128.257143 326.102289,126.708163 L260.172223,63.4469388 C258.553756,61.8979592 256.463236,61 254.395194,61 C252.079886,61 250.236632,61.8979592 248.393377,63.4469388 C246.77491,64.9959184 246.07807,66.7693878 246.07807,68.9918367 L246.07807,100.510204 L228.162535,100.510204 C166.863084,100.510204 129.166282,117.167347 115.274437,150.459184 C110.666301,161.54898 108.350993,175.310204 108.350993,191.742857 C108.350993,205.279592 113.903236,223.912245 124.760454,247.438776 C125.00772,248.112245 125.457294,249.010204 126.154134,250.559184 Z" id="Shape" fill="#FFFFFF" transform="translate(218.496689, 160.000000) scale(-1, 1) translate(-218.496689, -160.000000) "></path>
+            </g>
+        </g>
+        <!-- File -->
+        <g id="file" stroke="#000" stroke-width="25" fill="#FFF" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 24.12v274.76c0 6.16 5.87 11.12 13.17 11.12H239c7.3 0 13.17-4.96 13.17-11.12V136.15S132.6 13 128.37 13H26.17C18.87 13 13 17.96 13 24.12z"/>
+            <path d="M129.37 13L129 113.9c0 10.58 7.26 19.1 16.27 19.1H249L129.37 13z"/>
+        </g>
+        <g id="file-shortcut" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="file-shortcut-group" transform="translate(13.000000, 13.000000)">
+                <g id="file-shortcut-shape" stroke="#000000" stroke-width="25" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M0,11.1214886 L0,285.878477 C0,292.039924 5.87498876,296.999983 13.1728373,296.999983 L225.997983,296.999983 C233.295974,296.999983 239.17082,292.039942 239.17082,285.878477 L239.17082,123.145388 C239.17082,123.145388 119.58541,2.84217094e-14 115.369423,2.84217094e-14 L13.1728576,2.84217094e-14 C5.87500907,-1.71479982e-05 0,4.96022995 0,11.1214886 Z" id="rect1171"></path>
+                    <path d="M116.37005,0 L116,100.904964 C116,111.483663 123.258008,120 132.273377,120 L236,120 L116.37005,0 L116.37005,0 Z" id="rect1794"></path>
+                </g>
+                <path d="M47.803141,294.093878 C48.4999811,295.177551 48.9495553,296.095918 49.4216083,296.995918 C50.1184484,297.895918 50.5680227,298.630612 51.2873415,299.365306 C52.2089688,300.44898 53.3778619,301 54.7490634,301 C56.1427436,301 57.0643709,300.632653 57.761211,299.916327 C58.4580511,299.365306 58.9076254,298.465306 58.9076254,297.381633 C58.9076254,296.830612 58.9076254,295.930612 58.6828382,294.828571 C58.4355724,293.561224 58.2107852,292.844898 58.2107852,292.477551 C57.7387323,287.757143 57.5139451,283.753061 57.5139451,279.95102 C57.5139451,273.228571 58.4355724,267.057143 59.8292526,261.602041 C61.44772,256.165306 63.5382403,251.610204 66.0783349,247.62449 C68.8656954,243.620408 72.3274172,240.35102 76.4859792,237.44898 C80.6445412,234.546939 85.2751561,232.177551 90.1305582,230.359184 C94.9859603,228.540816 100.76299,227.089796 107.236859,226.006122 C113.710728,225.087755 120.409385,224.371429 127.13052,223.820408 C133.829177,223.453061 141.247152,223.269388 149.811542,223.269388 L167.704598,223.269388 L167.704598,249.057143 C167.704598,250.87551 168.401438,252.326531 170.019905,253.593878 C171.86316,254.861224 173.728893,255.595918 176.021722,255.595918 C178.112242,255.595918 180.180284,254.861224 181.82123,253.593878 L247.751296,201.834694 C249.369763,200.567347 250.291391,199.116327 250.291391,197.297959 C250.291391,195.479592 249.369763,194.028571 247.751296,192.761224 L181.82123,141.002041 C180.202763,139.734694 178.112242,139 176.044201,139 C173.728893,139 171.885639,139.734694 170.042384,141.002041 C168.423917,142.269388 167.727077,143.720408 167.727077,145.538776 L167.727077,171.326531 L149.811542,171.326531 C88.5120908,171.326531 50.8152886,184.955102 36.9234437,212.193878 C32.3153075,221.267347 30,232.526531 30,245.971429 C30,257.046939 35.5522422,272.291837 46.4094607,291.540816 C46.6567266,292.091837 47.1063009,292.826531 47.803141,294.093878 Z" id="Shape-Copy" fill="#000000" fill-rule="nonzero" transform="translate(140.145695, 220.000000) scale(-1, 1) translate(-140.145695, -220.000000) "></path>
+            </g>
+        </g>
+    </defs>
+    </svg>
+<header>
+    <h1>rosetta-code</h1>
+                 </header>
+                 <main>
+                 <div class="listing">
+                     <table aria-describedby="summary">
+                         <thead>
+                         <tr>
+                             <th></th>
+                             <th>Name</th>
+                             <th>Size</th>
+                             <th class="hideable">
+                                 Modified
+                             </th>
+                             <th class="hideable"></th>
+                         </tr>
+                         </thead>
+                         <tbody>
+                         <tr class="clickable">
+                             <td></td>
+                             <td><a href=".."><svg width="1.5em" height="1em" version="1.1" viewBox="0 0 24 24"><use xlink:href="#go-up"></use></svg>
+                 <span class="goup">..</span></a></td>
+                             <td>&mdash;</td>
+                             <td class="hideable">&mdash;</td>
+                             <td class="hideable"></td>
+                         </tr>
+                 
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="100-doors.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">100-doors.md</span>
+                </a>
+            </td>
+            <td data-order="1686">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="24-game.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">24-game.md</span>
+                </a>
+            </td>
+            <td data-order="6138">5 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="9-billion-names-of-god-the-integer.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">9-billion-names-of-god-the-integer.md</span>
+                </a>
+            </td>
+            <td data-order="2563">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="abc-problem.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">abc-problem.md</span>
+                </a>
+            </td>
+            <td data-order="2436">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="abundant-deficient-and-perfect-number-classifications.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">abundant-deficient-and-perfect-number-classifications.md</span>
+                </a>
+            </td>
+            <td data-order="2045">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="accumulator-factory.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">accumulator-factory.md</span>
+                </a>
+            </td>
+            <td data-order="1583">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="ackermann-function.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">ackermann-function.md</span>
+                </a>
+            </td>
+            <td data-order="1366">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="align-columns.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">align-columns.md</span>
+                </a>
+            </td>
+            <td data-order="6598">6 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="amicable-pairs.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">amicable-pairs.md</span>
+                </a>
+            </td>
+            <td data-order="2750">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="averages-mode.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">averages-mode.md</span>
+                </a>
+            </td>
+            <td data-order="1499">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="averages-pythagorean-means.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">averages-pythagorean-means.md</span>
+                </a>
+            </td>
+            <td data-order="4187">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="averages-root-mean-square.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">averages-root-mean-square.md</span>
+                </a>
+            </td>
+            <td data-order="1121">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="babbage-problem.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">babbage-problem.md</span>
+                </a>
+            </td>
+            <td data-order="1931">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="balanced-brackets.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">balanced-brackets.md</span>
+                </a>
+            </td>
+            <td data-order="3003">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="circles-of-given-radius-through-two-points.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">circles-of-given-radius-through-two-points.md</span>
+                </a>
+            </td>
+            <td data-order="4525">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="closest-pair-problem.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">closest-pair-problem.md</span>
+                </a>
+            </td>
+            <td data-order="10136">9 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="combinations.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">combinations.md</span>
+                </a>
+            </td>
+            <td data-order="2210">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="comma-quibbling.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">comma-quibbling.md</span>
+                </a>
+            </td>
+            <td data-order="2650">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="compare-a-list-of-strings.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">compare-a-list-of-strings.md</span>
+                </a>
+            </td>
+            <td data-order="2211">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="convert-seconds-to-compound-duration.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">convert-seconds-to-compound-duration.md</span>
+                </a>
+            </td>
+            <td data-order="3561">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="count-occurrences-of-a-substring.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">count-occurrences-of-a-substring.md</span>
+                </a>
+            </td>
+            <td data-order="1745">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="count-the-coins.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">count-the-coins.md</span>
+                </a>
+            </td>
+            <td data-order="1748">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="cramers-rule.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">cramers-rule.md</span>
+                </a>
+            </td>
+            <td data-order="5448">5 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="cumulative-standard-deviation.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">cumulative-standard-deviation.md</span>
+                </a>
+            </td>
+            <td data-order="1940">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="cusip.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">cusip.md</span>
+                </a>
+            </td>
+            <td data-order="2312">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="cut-a-rectangle.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">cut-a-rectangle.md</span>
+                </a>
+            </td>
+            <td data-order="5772">5 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="date-format.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">date-format.md</span>
+                </a>
+            </td>
+            <td data-order="2534">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="date-manipulation.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">date-manipulation.md</span>
+                </a>
+            </td>
+            <td data-order="2803">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="day-of-the-week.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">day-of-the-week.md</span>
+                </a>
+            </td>
+            <td data-order="1780">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="deal-cards-for-freecell.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">deal-cards-for-freecell.md</span>
+                </a>
+            </td>
+            <td data-order="6162">6 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="deepcopy.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">deepcopy.md</span>
+                </a>
+            </td>
+            <td data-order="1467">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="define-a-primitive-data-type.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">define-a-primitive-data-type.md</span>
+                </a>
+            </td>
+            <td data-order="2572">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="department-numbers.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">department-numbers.md</span>
+                </a>
+            </td>
+            <td data-order="2573">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="discordian-date.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">discordian-date.md</span>
+                </a>
+            </td>
+            <td data-order="4778">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="dot-product.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">dot-product.md</span>
+                </a>
+            </td>
+            <td data-order="1496">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="element-wise-operations.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">element-wise-operations.md</span>
+                </a>
+            </td>
+            <td data-order="3118">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="emirp-primes.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">emirp-primes.md</span>
+                </a>
+            </td>
+            <td data-order="2731">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="entropy.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">entropy.md</span>
+                </a>
+            </td>
+            <td data-order="1794">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="equilibrium-index.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">equilibrium-index.md</span>
+                </a>
+            </td>
+            <td data-order="2673">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="ethiopian-multiplication.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">ethiopian-multiplication.md</span>
+                </a>
+            </td>
+            <td data-order="2953">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="euler-method.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">euler-method.md</span>
+                </a>
+            </td>
+            <td data-order="3991">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="evaluate-binomial-coefficients.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">evaluate-binomial-coefficients.md</span>
+                </a>
+            </td>
+            <td data-order="1110">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="execute-a-markov-algorithm.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">execute-a-markov-algorithm.md</span>
+                </a>
+            </td>
+            <td data-order="7763">7 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="execute-brain.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">execute-brain.md</span>
+                </a>
+            </td>
+            <td data-order="5254">5 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="extensible-prime-generator.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">extensible-prime-generator.md</span>
+                </a>
+            </td>
+            <td data-order="3020">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="factorial.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">factorial.md</span>
+                </a>
+            </td>
+            <td data-order="1058">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="factors-of-a-mersenne-number.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">factors-of-a-mersenne-number.md</span>
+                </a>
+            </td>
+            <td data-order="4633">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="factors-of-an-integer.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">factors-of-an-integer.md</span>
+                </a>
+            </td>
+            <td data-order="1219">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="farey-sequence.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">farey-sequence.md</span>
+                </a>
+            </td>
+            <td data-order="2715">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="fibonacci-n-step-number-sequences.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">fibonacci-n-step-number-sequences.md</span>
+                </a>
+            </td>
+            <td data-order="4943">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="fibonacci-sequence.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">fibonacci-sequence.md</span>
+                </a>
+            </td>
+            <td data-order="1097">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="fibonacci-word.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">fibonacci-word.md</span>
+                </a>
+            </td>
+            <td data-order="3093">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="fizzbuzz.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">fizzbuzz.md</span>
+                </a>
+            </td>
+            <td data-order="1723">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="fractran.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">fractran.md</span>
+                </a>
+            </td>
+            <td data-order="3749">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="gamma-function.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">gamma-function.md</span>
+                </a>
+            </td>
+            <td data-order="1954">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="gaussian-elimination.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">gaussian-elimination.md</span>
+                </a>
+            </td>
+            <td data-order="4709">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="general-fizzbuzz.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">general-fizzbuzz.md</span>
+                </a>
+            </td>
+            <td data-order="2885">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="generate-lower-case-ascii-alphabet.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">generate-lower-case-ascii-alphabet.md</span>
+                </a>
+            </td>
+            <td data-order="1797">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="generator-exponential.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">generator-exponential.md</span>
+                </a>
+            </td>
+            <td data-order="2704">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="gray-code.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">gray-code.md</span>
+                </a>
+            </td>
+            <td data-order="2456">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="greatest-common-divisor.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">greatest-common-divisor.md</span>
+                </a>
+            </td>
+            <td data-order="1036">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="greatest-subsequential-sum.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">greatest-subsequential-sum.md</span>
+                </a>
+            </td>
+            <td data-order="2530">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="hailstone-sequence.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">hailstone-sequence.md</span>
+                </a>
+            </td>
+            <td data-order="2110">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="happy-numbers.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">happy-numbers.md</span>
+                </a>
+            </td>
+            <td data-order="2020">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="harshad-or-niven-series.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">harshad-or-niven-series.md</span>
+                </a>
+            </td>
+            <td data-order="1862">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="hash-from-two-arrays.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">hash-from-two-arrays.md</span>
+                </a>
+            </td>
+            <td data-order="2462">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="hash-join.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">hash-join.md</span>
+                </a>
+            </td>
+            <td data-order="10368">10 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="heronian-triangles.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">heronian-triangles.md</span>
+                </a>
+            </td>
+            <td data-order="5042">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="hofstadter-figure-figure-sequences.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">hofstadter-figure-figure-sequences.md</span>
+                </a>
+            </td>
+            <td data-order="3070">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="hofstadter-q-sequence.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">hofstadter-q-sequence.md</span>
+                </a>
+            </td>
+            <td data-order="2003">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="i-before-e-except-after-c.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">i-before-e-except-after-c.md</span>
+                </a>
+            </td>
+            <td data-order="2154">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="iban.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">iban.md</span>
+                </a>
+            </td>
+            <td data-order="2888">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="identity-matrix.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">identity-matrix.md</span>
+                </a>
+            </td>
+            <td data-order="1779">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="iterated-digits-squaring.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">iterated-digits-squaring.md</span>
+                </a>
+            </td>
+            <td data-order="1604">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="jaro-distance.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">jaro-distance.md</span>
+                </a>
+            </td>
+            <td data-order="3610">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="jortsort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">jortsort.md</span>
+                </a>
+            </td>
+            <td data-order="2039">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="josephus-problem.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">josephus-problem.md</span>
+                </a>
+            </td>
+            <td data-order="2185">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="k-d-tree.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">k-d-tree.md</span>
+                </a>
+            </td>
+            <td data-order="11453">11 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="kaprekar-numbers.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">kaprekar-numbers.md</span>
+                </a>
+            </td>
+            <td data-order="2362">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="knapsack-problem-0-1.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">knapsack-problem-0-1.md</span>
+                </a>
+            </td>
+            <td data-order="7828">7 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="knapsack-problem-bounded.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">knapsack-problem-bounded.md</span>
+                </a>
+            </td>
+            <td data-order="10480">10 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="knapsack-problem-continuous.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">knapsack-problem-continuous.md</span>
+                </a>
+            </td>
+            <td data-order="6615">6 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="knapsack-problem-unbounded.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">knapsack-problem-unbounded.md</span>
+                </a>
+            </td>
+            <td data-order="5672">5 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="knights-tour.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">knights-tour.md</span>
+                </a>
+            </td>
+            <td data-order="5619">5 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="largest-int-from-concatenated-ints.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">largest-int-from-concatenated-ints.md</span>
+                </a>
+            </td>
+            <td data-order="1658">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="last-friday-of-each-month.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">last-friday-of-each-month.md</span>
+                </a>
+            </td>
+            <td data-order="1534">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="last-letter-first-letter.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">last-letter-first-letter.md</span>
+                </a>
+            </td>
+            <td data-order="4917">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="leap-year.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">leap-year.md</span>
+                </a>
+            </td>
+            <td data-order="1155">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="least-common-multiple.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">least-common-multiple.md</span>
+                </a>
+            </td>
+            <td data-order="2013">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="left-factorials.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">left-factorials.md</span>
+                </a>
+            </td>
+            <td data-order="2084">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="letter-frequency.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">letter-frequency.md</span>
+                </a>
+            </td>
+            <td data-order="4634">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="levenshtein-distance.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">levenshtein-distance.md</span>
+                </a>
+            </td>
+            <td data-order="2822">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="linear-congruential-generator.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">linear-congruential-generator.md</span>
+                </a>
+            </td>
+            <td data-order="2829">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="long-multiplication.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">long-multiplication.md</span>
+                </a>
+            </td>
+            <td data-order="3002">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="longest-common-subsequence.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">longest-common-subsequence.md</span>
+                </a>
+            </td>
+            <td data-order="2325">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="longest-increasing-subsequence.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">longest-increasing-subsequence.md</span>
+                </a>
+            </td>
+            <td data-order="2763">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="longest-string-challenge.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">longest-string-challenge.md</span>
+                </a>
+            </td>
+            <td data-order="2164">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="look-and-say-sequence.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">look-and-say-sequence.md</span>
+                </a>
+            </td>
+            <td data-order="2121">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="loop-over-multiple-arrays-simultaneously.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">loop-over-multiple-arrays-simultaneously.md</span>
+                </a>
+            </td>
+            <td data-order="2434">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="lu-decomposition.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">lu-decomposition.md</span>
+                </a>
+            </td>
+            <td data-order="8884">8 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="lucas-lehmer-test.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">lucas-lehmer-test.md</span>
+                </a>
+            </td>
+            <td data-order="1948">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="ludic-numbers.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">ludic-numbers.md</span>
+                </a>
+            </td>
+            <td data-order="4303">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="luhn-test-of-credit-card-numbers.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">luhn-test-of-credit-card-numbers.md</span>
+                </a>
+            </td>
+            <td data-order="3112">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="lychrel-numbers.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">lychrel-numbers.md</span>
+                </a>
+            </td>
+            <td data-order="3480">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="lzw-compression.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">lzw-compression.md</span>
+                </a>
+            </td>
+            <td data-order="4441">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="s-expressions.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">s-expressions.md</span>
+                </a>
+            </td>
+            <td data-order="3061">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sailors-coconuts-and-a-monkey-problem.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sailors-coconuts-and-a-monkey-problem.md</span>
+                </a>
+            </td>
+            <td data-order="3204">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="search-a-list-of-records.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">search-a-list-of-records.md</span>
+                </a>
+            </td>
+            <td data-order="2477">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sedols.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sedols.md</span>
+                </a>
+            </td>
+            <td data-order="1802">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="self-describing-numbers.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">self-describing-numbers.md</span>
+                </a>
+            </td>
+            <td data-order="2288">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="self-referential-sequence.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">self-referential-sequence.md</span>
+                </a>
+            </td>
+            <td data-order="4962">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="semiprime.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">semiprime.md</span>
+                </a>
+            </td>
+            <td data-order="2460">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="set-consolidation.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">set-consolidation.md</span>
+                </a>
+            </td>
+            <td data-order="5211">5 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="set-of-real-numbers.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">set-of-real-numbers.md</span>
+                </a>
+            </td>
+            <td data-order="6974">6 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sha-1.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sha-1.md</span>
+                </a>
+            </td>
+            <td data-order="4140">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sha-256.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sha-256.md</span>
+                </a>
+            </td>
+            <td data-order="10023">9 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sort-an-array-of-composite-structures.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sort-an-array-of-composite-structures.md</span>
+                </a>
+            </td>
+            <td data-order="2951">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sort-disjoint-sublist.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sort-disjoint-sublist.md</span>
+                </a>
+            </td>
+            <td data-order="2492">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sort-stability.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sort-stability.md</span>
+                </a>
+            </td>
+            <td data-order="3435">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sort-using-a-custom-comparator.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sort-using-a-custom-comparator.md</span>
+                </a>
+            </td>
+            <td data-order="2386">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sorting-algorithms-bead-sort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sorting-algorithms-bead-sort.md</span>
+                </a>
+            </td>
+            <td data-order="2698">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sorting-algorithms-bogosort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sorting-algorithms-bogosort.md</span>
+                </a>
+            </td>
+            <td data-order="2456">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sorting-algorithms-cocktail-sort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sorting-algorithms-cocktail-sort.md</span>
+                </a>
+            </td>
+            <td data-order="3408">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sorting-algorithms-comb-sort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sorting-algorithms-comb-sort.md</span>
+                </a>
+            </td>
+            <td data-order="4418">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sorting-algorithms-gnome-sort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sorting-algorithms-gnome-sort.md</span>
+                </a>
+            </td>
+            <td data-order="2484">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sorting-algorithms-pancake-sort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sorting-algorithms-pancake-sort.md</span>
+                </a>
+            </td>
+            <td data-order="2780">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sorting-algorithms-permutation-sort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sorting-algorithms-permutation-sort.md</span>
+                </a>
+            </td>
+            <td data-order="2491">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sorting-algorithms-shell-sort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sorting-algorithms-shell-sort.md</span>
+                </a>
+            </td>
+            <td data-order="2475">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sorting-algorithms-stooge-sort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sorting-algorithms-stooge-sort.md</span>
+                </a>
+            </td>
+            <td data-order="2419">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sorting-algorithms-strand-sort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sorting-algorithms-strand-sort.md</span>
+                </a>
+            </td>
+            <td data-order="2360">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="soundex.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">soundex.md</span>
+                </a>
+            </td>
+            <td data-order="3307">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="spiral-matrix.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">spiral-matrix.md</span>
+                </a>
+            </td>
+            <td data-order="1843">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="split-a-character-string-based-on-change-of-character.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">split-a-character-string-based-on-change-of-character.md</span>
+                </a>
+            </td>
+            <td data-order="2723">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="state-name-puzzle.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">state-name-puzzle.md</span>
+                </a>
+            </td>
+            <td data-order="6156">6 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="stern-brocot-sequence.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">stern-brocot-sequence.md</span>
+                </a>
+            </td>
+            <td data-order="2660">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="straddling-checkerboard.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">straddling-checkerboard.md</span>
+                </a>
+            </td>
+            <td data-order="5641">5 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="stream-merge.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">stream-merge.md</span>
+                </a>
+            </td>
+            <td data-order="2587">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="strip-control-codes-and-extended-characters-from-a-string.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">strip-control-codes-and-extended-characters-from-a-string.md</span>
+                </a>
+            </td>
+            <td data-order="2013">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="subleq.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">subleq.md</span>
+                </a>
+            </td>
+            <td data-order="4693">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sudoku.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sudoku.md</span>
+                </a>
+            </td>
+            <td data-order="9376">9 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sum-digits-of-an-integer.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sum-digits-of-an-integer.md</span>
+                </a>
+            </td>
+            <td data-order="1509">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sum-multiples-of-3-and-5.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sum-multiples-of-3-and-5.md</span>
+                </a>
+            </td>
+            <td data-order="1144">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sum-of-a-series.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sum-of-a-series.md</span>
+                </a>
+            </td>
+            <td data-order="1667">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sum-of-squares.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sum-of-squares.md</span>
+                </a>
+            </td>
+            <td data-order="1234">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sum-to-100.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sum-to-100.md</span>
+                </a>
+            </td>
+            <td data-order="3862">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="sutherland-hodgman-polygon-clipping.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">sutherland-hodgman-polygon-clipping.md</span>
+                </a>
+            </td>
+            <td data-order="4811">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="symmetric-difference.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">symmetric-difference.md</span>
+                </a>
+            </td>
+            <td data-order="2744">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="taxicab-numbers.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">taxicab-numbers.md</span>
+                </a>
+            </td>
+            <td data-order="3262">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="tokenize-a-string-with-escaping.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">tokenize-a-string-with-escaping.md</span>
+                </a>
+            </td>
+            <td data-order="2974">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="top-rank-per-group.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">top-rank-per-group.md</span>
+                </a>
+            </td>
+            <td data-order="6280">6 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="topological-sort.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">topological-sort.md</span>
+                </a>
+            </td>
+            <td data-order="4921">4 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="towers-of-hanoi.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">towers-of-hanoi.md</span>
+                </a>
+            </td>
+            <td data-order="2283">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="vector-cross-product.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">vector-cross-product.md</span>
+                </a>
+            </td>
+            <td data-order="1313">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="vector-dot-product.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">vector-dot-product.md</span>
+                </a>
+            </td>
+            <td data-order="1880">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="word-frequency.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">word-frequency.md</span>
+                </a>
+            </td>
+            <td data-order="3823">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="word-wrap.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">word-wrap.md</span>
+                </a>
+            </td>
+            <td data-order="2473">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="y-combinator.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">y-combinator.md</span>
+                </a>
+            </td>
+            <td data-order="2227">2 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="zeckendorf-number-representation.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">zeckendorf-number-representation.md</span>
+                </a>
+            </td>
+            <td data-order="3966">3 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="zhang-suen-thinning-algorithm.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">zhang-suen-thinning-algorithm.md</span>
+                </a>
+            </td>
+            <td data-order="10418">10 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+        <tr class="file">
+            <td></td>
+            <td>
+                <a href="zig-zag-matrix.md">
+                    <svg width="1.5em" height="1em" version="1.1" viewBox="0 0 265 323"><use xlink:href="#file"></use></svg>
+                    <span class="name">zig-zag-matrix.md</span>
+                </a>
+            </td>
+            <td data-order="2024">1 KB</td>
+            <td class="hideable"><time datetime="2021-08-31T01:03:41">Tue Aug 31 01:03:41 2021</time></td>
+            <td class="hideable"></td>
+        </tr>
+
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

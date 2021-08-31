@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A description of the page and its contents" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Page Title</title>
+  <link rel="stylesheet" href="./../../../assets/style.css" />
+  <link rel="stylesheet" href="./../../../assets/prism.css" />
+  <script async src="./../../../assets/prism.js"></script>
+</head>
+
+<body>
+
+
+  <a href="https://github.com/bgoonz/DS-ALGO-OFFICIAL" class="github-corner" aria-label="View source on Github"><svg
+      width="80" height="80" viewBox="0 0 250 250"
+      style="z-index: 100000; fill:#194ccdaf; color:#fff; position: fixed; top: 20px; border: 0; left: 20px; transform: scale(-1.5, 1.5);"
+      aria-hidden="true">
+      <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+      <path
+        d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+        fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+      </path>
+      <path
+        d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+        fill="currentColor" class="octo-body"></path>
+    </svg></a>
+
+
+
+
+  <h1 id="dom-onevent-handlers">DOM onevent handlers</h1>
+  <blockquote>
+    <p>The Web platform provides several ways to be notified of DOM events. Two common approaches are addEventListener()
+      and the specific onevent handlers.</p>
+  </blockquote>
+  <p>The Web platform provides several ways to be notified of <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/Events">DOM events</a>. Two common
+    approaches are <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/EventTarget/addEventListener"><code>addEventListener()</code></a>
+    and the specific <code>on_event_</code> handlers. This page focuses on how the latter work.</p>
+  <h2 id="registering-onevent-handlers">Registering onevent handlers</h2>
+  <p>The <strong><code>on_event_</code></strong> handlers are properties on certain DOM elements to manage how that
+    element reacts to events. Elements can be interactive (links, buttons, images, forms, and so forth) or
+    non-interactive (such as the base <code>&lt;body&gt;</code> element). Events are actions like:</p>
+  <ul>
+    <li>Being clicked</li>
+    <li>Detecting pressed keys</li>
+    <li>Getting focus</li>
+  </ul>
+  <p>The <code>on_event_</code> handler is usually named with the event it reacts to, like <code>on_click_</code>,
+    <code>on_keypress_</code>, <code>on_focus_</code>, etc.</p>
+  <p>You can specify an <code>on_&lt;…&gt;_</code> event handler for a particular event (such as
+    <code>[click](chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/Events/click
+      "/en-US/docs/Web/Events/click")</code>) for a given object in different ways:</p>
+  <ul>
+    <li>Adding an HTML <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Glossary/attribute">attribute</a> named
+      <code>on_&lt;eventtype&gt;_</code>:<br />
+      <code>&lt;button **onclick="handleClick()"**&gt;</code>,</li>
+    <li>Or by setting the corresponding <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Glossary/property/JavaScript">property</a>
+      from
+      JavaScript:<br />
+      <code>document.querySelector("button")**.onclick = function(event) { … }**</code>.</li>
+  </ul>
+  <p>An <code>on_event_</code> event handler property serves as a placeholder of sorts, to which a single event handler
+    can be assigned. In order to allow multiple handlers to be installed for the same event on a given object, you can
+    call its <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/EventTarget/addEventListener"><code>addEventListener()</code></a>
+    method, which manages a list of handlers for the given event on the object. A handler can then be removed from the
+    object by calling its <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/EventTarget/removeEventListener"><code>removeEventListener()</code></a>
+    function.</p>
+  <p>When an event occurs that applies to an element, each of its event handlers is called to allow them to handle the
+    event, one after another. You don't need to call them yourself, although you can do so in many cases to easily
+    simulate an event taking place. For example, given a button object <code>myButton</code>, you can do
+    <code>myButton.onclick(myEventObject)</code> to call the event handler directly. If the event handler doesn't access
+    any data from the event object, you can leave out the event when calling <code>onclick()</code>.</p>
+  <p>This continues until every handler has been called, unless one of the event handlers explicitly halts the
+    processing
+    of the event by calling <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/Event/stopPropagation"><code>stopPropagation()</code></a>
+    on the event object itself.</p>
+  <h3 id="non-element-objects">Non-element objects</h3>
+  <p>Event handlers can also be set with properties on non-element objects that generate events, like <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/Window"><code>window</code></a>, <a
+      class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/Document"><code>document</code></a>,
+    <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/XMLHttpRequest"><code>XMLHttpRequest</code></a>,
+    and others. For example, for the <code>progress</code> event on instances of <code>XMLHttpRequest</code>:</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>const xhr = new XMLHttpRequest();
+    xhr.onprogress = function() { … };</code></pre>
+  <h2 id="html-onevent-attributes">HTML onevent attributes</h2>
+  <p>HTML elements have attributes named <code>on_event_</code> which can be used to register a handler for an event
+    directly within the HTML code. When the element is built from the HTML, the value of its <code>on_event_</code>
+    attributes are copied to the DOM object that represents the element, so that accessing the attributes' values using
+    JavaScript will get the value set in the HTML.</p>
+  <p>Further changes to the HTML attribute value can be done via the <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/Element/setAttribute"><code>setAttribute</code></a>
+    method; Making changes to the JavaScript property will have no effect.</p>
+  <h3 id="html">HTML</h3>
+  <p>Given this HTML document:</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>&lt;p&gt;Demonstrating quirks of
+    &lt;code&gt;on&lt;em&gt;event&lt;/em&gt;&lt;/code&gt; HTML attributes on
+    &lt;a onclick=&quot;log(&#39;Click!&#39;)&quot;&gt;these three words&lt;/a&gt;.
+    &lt;/p&gt;
+
+    &lt;div&gt;&lt;/div&gt;</code></pre>
+  <h3 id="javascript">JavaScript</h3>
+  <p>Then this JavaScript demonstrates that the value of the HTML attribute is unaffected by changes to the JavaScript
+    object's property.</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>let logElement =
+    document.querySelector(&#39;div&#39;);
+    let el = document.querySelector(&quot;a&quot;);
+
+    function log(msg) { logElement.innerHTML += `${msg}&lt;br&gt;` };
+    function anchorOnClick(event) { log(&quot;Changed onclick handler&quot;) };
+
+
+    log(`Element&#39;s onclick as a JavaScript property: &lt;code&gt; ${el.onclick.toString()} &lt;/code&gt;`);
+
+
+    log(&#39;&lt;br&gt;Changing onclick handler using &lt;strong&gt; onclick property &lt;/strong&gt; &#39;);
+
+    el.onclick = anchorOnClick;
+
+    log(`Changed the property to: &lt;code&gt; ${el.onclick.toString()} &lt;/code&gt;`);
+    log(`But the HTML attribute is unchanged: &lt;code&gt; ${el.getAttribute(&quot;onclick&quot;)}
+    &lt;/code&gt;&lt;br&gt;`);
+
+
+    log(&#39;&lt;hr/&gt;&lt;br&gt; Changing onclick handler using &lt;strong&gt; setAttribute method &lt;/strong&gt;
+    &#39;);
+    el.setAttribute(&quot;onclick&quot;, &#39;anchorOnClick(event)&#39;);
+
+    log(`Changed the property to: &lt;code&gt; ${el.onclick.toString()} &lt;/code&gt;`);
+    log(`Now even the HTML attribute has changed: &lt;code&gt; ${el.getAttribute(&quot;onclick&quot;)}
+    &lt;/code&gt;&lt;br&gt;`);</code></pre>
+  <h3 id="result">Result</h3>
+  <p>For historical reasons, some attributes/properties on the <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/HTML/Element/body"
+      title="The HTML &lt;body&gt; Element represents the content of an HTML document. There can be only one &lt;body&gt; element in a document."><code>&lt;body&gt;</code></a>
+    and <a class="btn" href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/HTML/Element/frameset"
+      title="The HTML &lt;frameset&gt; element is used to contain &lt;frame&gt; elements."><code>&lt;frameset&gt;</code></a>
+    elements instead set event handlers on their parent <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/Window"><code>Window</code></a>
+    object.
+    (The HTML specification names these: <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/GlobalEventHandlers/onblur"><code>onblur</code></a>,
+    <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/GlobalEventHandlers/onerror"><code>onerror</code></a>,
+    <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/GlobalEventHandlers/onfocus"><code>onfocus</code></a>,
+    <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/GlobalEventHandlers/onload"><code>onload</code></a>,
+    and <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/GlobalEventHandlers/onscroll"><code>onscroll</code></a>.)
+  </p>
+  <h3 id="event-handlers-parameters-this-binding-and-the-return-value">Event handler's parameters, this binding, and the
+    return value</h3>
+  <p>When the event handler is specified as <strong>an HTML attribute</strong>, the specified code is wrapped into a
+    function with <strong>the following parameters</strong>:</p>
+  <ul>
+    <li><code>event</code> — for all event handlers except <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/GlobalEventHandlers/onerror"><code>onerror</code></a>.
+    </li>
+    <li><code>event</code>, <code>source</code>, <code>lineno</code>, <code>colno</code>, and <code>error</code> for the
+      <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/GlobalEventHandlers/onerror"><code>onerror</code></a>
+      event handler. Note that the <code>event</code> parameter actually contains the error message as a string.</li>
+  </ul>
+  <p>When the event handler is invoked, the <code>this</code> keyword inside the handler is set to the DOM element on
+    which the handler is registered. For more details, see <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/this#In_an_inline_event_handler">the
+      <code>this</code> keyword documentation</a>.</p>
+  <p>The return value from the handler determines if the event is canceled. The specific handling of the return value
+    depends on the kind of event; for details, see <a class="btn"
+      href="https://html.spec.whatwg.org/multipage/webappapis.html#the-event-handler-processing-algorithm">"The event
+      handler processing algorithm" in the HTML specification</a>.</p>
+  <h3 id="when-the-event-handler-is-invoked">When the event handler is invoked</h3>
+  <p>TBD (non-capturing listener)</p>
+  <h3 id="terminology">Terminology</h3>
+  <p>The term <strong>event handler</strong> may refer to:</p>
+  <ul>
+    <li>Any function or object that is registered to be notified of events</li>
+    <li>Or more specifically, to the mechanism of registering event listeners via <code>on…</code> attributes in HTML or
+      properties in Web APIs, such as <code>&lt;button onclick="alert(this)"&gt;</code> or <code>window.onload =
+        function() { … }</code>.</li>
+  </ul>
+  <p>When discussing the various methods of listening to events:</p>
+  <ul>
+    <li><strong>Event listener</strong> refers to a function or object registered via <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/API/EventTarget/addEventListener"><code>EventTarget.addEventListener()</code></a>
+    </li>
+    <li><strong>Event handler</strong> refers to a function registered via <code>on…</code> attributes or properties
+    </li>
+  </ul>
+  <h2 id="specifications">Specifications</h2>
+  <table>
+    <colgroup>
+      <col style="width: 33%" />
+      <col style="width: 33%" />
+      <col style="width: 33%" />
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Specification</th>
+        <th>Status</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>[HTML Living Standard</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>The definition of ‘event handlers' in that
+          specification.](https://html.spec.whatwg.org/multipage/webappapis.html#event-handler-attributes)</td>
+        <td>Living Standard</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>[HTML5</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>The definition of ‘event handlers' in that
+          specification.](https://www.w3.org/TR/html52/webappapis.html#event-handler-attributes)</td>
+        <td>Recommendation</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h2 id="browser-compatibility">Browser compatibility</h2>
+  <h4 id="detecting-the-presence-of-event-handler-properties">Detecting the presence of event handler properties</h4>
+  <p>You can detect the presence of an event handler property with the JavaScript <a class="btn"
+      href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Operators/in"><code>in</code></a>
+    operator. For example:</p>
+  pre data-role="codeBlock" data-info="js" class="language-javascript"><code>if (&quot;onsomenewfeature&quot; in window)
+    {
+
+    }</code></pre>
+  <h4 id="event-handlers-and-prototypes">Event handlers and prototypes</h4>
+  <p>You can't set or access the values of any IDL-defined attributes on DOM prototype objects. That means you can't,
+    for
+    example, change <code>Window.prototype.onload</code>. In the past, event handlers (<code>onload</code>, etc.)
+    weren't
+    implemented as IDL attributes in Gecko, so you were able to do this for those. Now you can't. This improves
+    compatibility.</p>
+  <p><a class="btn" href="https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Event_handlers">Source</a></p>
+
+</body>
+
+</html>

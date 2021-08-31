@@ -1,0 +1,13 @@
+---
+version: ~> 1.0
+
+os: linux
+dist: bionic
+
+language: ruby
+
+install:
+  - gem install awesome_bot
+
+script:
+  - awesome_bot README.md --allow-redirect --white-list "creativecommons.org,objective-see.com"

@@ -1,0 +1,54 @@
+.infoBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 35px;
+  margin-top: auto;
+  color: gray;
+  font-size: 10px;
+  border-top: 1px rgba(0, 0, 0, 0.06) solid;
+
+  @media all and (max-width: 540px) {
+    flex-wrap: wrap;
+    height: auto;
+    margin-top: 20px;
+    padding: 5px 0;
+  }
+}
+
+.infoItem {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  margin-right: 20px;
+
+  @media all and (max-width: 540px) {
+    padding: 5px 0;
+  }
+
+  @media all and (max-width: 360px) {
+    margin-right: 10px;
+  }
+
+  &.primary {
+    color: rgb(107, 107, 107);
+    font-weight: bold;
+  }
+
+  &.issues {
+    margin-right: 0;
+  }
+}
+
+.row {
+  display: flex;
+}
+
+.icon {
+  height: 10px;
+  margin: -1px 4px 0 0;
+}
+
+.accent {
+  font-weight: bold;
+}
