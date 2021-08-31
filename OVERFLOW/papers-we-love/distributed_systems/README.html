@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="distributed-systems">Distributed Systems</h1>
+<ul>
+<li>General Papers</li>
+<li>Topics
+<ul>
+<li><a href="#datastores">Datastores</a></li>
+<li><a href="#physics">Physics</a></li>
+<li><a href="#testing-verification-and-correctness">Testing, Verification, and Correctness</a></li>
+</ul></li>
+</ul>
+<h2 id="external-papers">External Papers</h2>
+<ul>
+<li><p><a href="a-note-on-distributed-computing.pdf">:scroll:</a> <a href="http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=5A960A7B16A7BB42A99D7B6EFC30FB25?doi=10.1.1.41.7628&amp;rep=rep1&amp;type=pdf">A Note on Distributed Computing</a></p></li>
+<li><p><a href="http://diyhpl.us/~bryan/papers2/distributed/distributed-systems/zab.totally-ordered-broadcast-protocol.2008.pdf">A simple totally ordered broadcast protocol</a></p></li>
+<li><p><a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-28.pdf">Above the Clouds: A Berkeley View of Cloud Computing</a></p></li>
+<li><p><a href="http://pdos.csail.mit.edu/papers/chord:sigcomm01/chord_sigcomm.pdf">Chord: A Scalable Peer-to-peer Lookup Service for Internet Applications</a></p></li>
+<li><p><a href="http://notes.stephenholiday.com/Kafka.pdf">Kafka: a Distributed Messaging System for Log Processing</a></p></li>
+<li><p><a href="http://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/43438.pdf">Large-scale cluster management at Google with Borg</a></p></li>
+<li><p><a href="http://cs.brown.edu/~mph/HerlihyW90/p463-herlihy.pdf">Linearizability: A Correctness Condition for Concurrent Objects</a></p></li>
+<li><p><a href="https://www.cs.cornell.edu/fbs/publications/SMSurvey.pdf">Implementing Fault-Tolerant Services Using the State Machine Approach: A Tutorial</a></p></li>
+<li><p><a href="http://people.cs.umass.edu/~emery/pubs/berger-asplos2000.pdf">Hoard: A Scalable Memory Allocator for Multithreaded Applications</a></p></li>
+<li><p><a href="http://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/41378.pdf">MillWheel: Fault-Tolerant Stream Processing at Internet Scale</a></p></li>
+<li><p><a href="http://research.google.com/pubs/archive/41684.pdf">Omega: flexible, scalable schedulers for large compute clusters</a></p></li>
+<li><p><a href="http://research.microsoft.com/apps/pubs/default.aspx?id=210931">Orleans: Distributed Virtual Actors for Programmability and Scalability</a></p></li>
+<li><p><a href="http://www.cs.utexas.edu/users/lorenzo/corsi/cs380d/papers/paper2-1.pdf">Paxos Made Live - An Engineering Perspective</a></p></li>
+<li><p><a href="http://www.itu.dk/stud/speciale/bepjea/xwebtex/litt/practical-byzantine-fault-tolerance-and-proactive-recovery.pdf">Practical Byzantine Fault Tolerance and Proactive Recovery</a></p></li>
+<li><p><a href="http://kowshik.github.io/JPregel/pregel_paper.pdf">Pregel: A System for Large-Scale Graph Processing</a></p></li>
+<li><p><a href="http://sigops.org/sosp/sosp13/papers/p151-mashtizadeh.pdf">Replication, History, and Grafting in the Ori File System</a></p></li>
+<li><p><a href="http://nms.lcs.mit.edu/papers/ron-sosp2001.pdf">Resilient Overlay Networks</a></p></li>
+<li><p><a href="http://www.mshah.org/papers/sosp_2007_aguilera.pdf">Sinfonia: A New Paradigm for Building Scalable Distributed Systems</a></p></li>
+<li><p><a href="http://people.csail.mit.edu/matei/papers/2013/sosp_sparrow.pdf">Sparrow: Distributed, Low Latency Scheduling</a></p></li>
+<li><p><a href="http://www.andrew.cmu.edu/course/15-749/READINGS/required/resilience/lamport82.pdf">The Byzantine Generals Problem</a></p></li>
+<li><p><a href="https://swirlds.com/downloads/SWIRLDS-TR-2016-01.pdf">Hashgraph Consensus: Fair, Fast, Byzantine Fault Tolerance</a></p></li>
+<li><p><a href="the-chubby-lock-service-for-loosely-coupled-distributed-systems.pdf">:scroll:</a> <a href="http://static.googleusercontent.com/media/research.google.com/en/us/archive/chubby-osdi06.pdf">The Chubby Lock Service for Loosely-Coupled Distributed Systems</a></p></li>
+<li><p><a href="join-calculus.pdf">:scroll:</a> <a href="http://research.microsoft.com/en-us/um/people/fournet/papers/join-tutorial.pdf">The Join Calculus: a Language for Distributed Mobile Programming</a></p></li>
+<li><p><a href="http://research.microsoft.com/en-us/um/people/lamport/pubs/lamport-paxos.pdf">The Part-Time Parliament</a></p></li>
+<li><p><a href="https://www.cs.cmu.edu/~dga/papers/epaxos-sosp2013.pdf">There Is More Consensus in Egalitarian Parliaments</a></p></li>
+<li><p><a href="http://www.cs.berkeley.edu/~franklin/Papers/p315-franklin.pdf">Transactional Client-Server Cache Consistency: Alternatives and Performance</a></p></li>
+<li><p><a href="http://db.disi.unitn.eu/pages/VLDBProgram/pdf/industry/p871-curtiss.pdf">Unicorn: A System for Searching the Social Graph</a></p></li>
+<li><p><a href="http://unikernel.org/files/2013-asplos-mirage.pdf">Unikernels: Library Operating Systems for the Cloud</a></p></li>
+<li><p><a href="http://www.cs.utexas.edu/~shmat/courses/cs395t_fall04/chaum81.pdf">Untraceable Electronic Mail, Return Addresses, and Digital Pseudonyms</a></p></li>
+<li><p><a href="http://www.pmg.csail.mit.edu/papers/vr.pdf">Viewstamped Replication: A New Primary Copy Method to Support Highly-Available Distributed Systems</a></p></li>
+<li><p><a href="http://research.microsoft.com/pubs/80693/vl2-sigcomm09-final.pdf">VL2: A Scalable and Flexible Data Center Network</a></p></li>
+</ul>
+<h2 id="other-hosted-papers">Other Hosted Papers</h2>
+<ul>
+<li><p>:scroll: <a href="a-history-of-the-virtual-synchrony-replication-model.pdf">A History of the Virtual Synchrony Replication Model</a></p></li>
+<li><p>:scroll: <a href="a-hundred-impossibility-proofs-for-distributed-computing.pdf">A Hundred Impossibility Proofs for Distributed Systems</a></p></li>
+<li><p>:scroll: <a href="a-response-to-cheriton-and-skeens-criticism-of-causal-and-totally-ordered-communication.pdf">A response to Cheriton and Skeen’s Criticism of Causal and Totally Ordered Communication</a></p></li>
+<li><p>:scroll: <a href="a-universal-modular-actor-formalism-for-artificial-intelligence.pdf">A Universal Modular ACTOR Formalism for Artificial Intelligence</a></p></li>
+<li><p>:scroll: <a href="a-versatile-scheme-for-routing-highly-variable-traffic-in-service-overlays-and-ip.pdf">A Versatile Scheme for Routing Highly Variable Traffic in Service Overlays and IP Backbones</a></p></li>
+<li><p>:scroll: <a href="beehive-lookup-performance-for-power-law-query-distributions-in-peer-to-peer-overlays.pdf">Beehive: O(1) Lookup Performance for Power-Law Query Distributions in Peer-to-Peer Overlays</a></p></li>
+<li><p>:scroll: <a href="byzantine-chain-replication.pdf">Byzantine Chain Replication</a></p></li>
+<li><p>:scroll: <a href="byzantine-fault-tolerant-distributed-commit-protocol.pdf">A Byzantine Fault Tolerant Distributed Commit Protocol</a></p></li>
+<li><p>:scroll: <a href="brewers-conjecture.pdf">Brewer’s Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services</a></p></li>
+<li><p>:scroll: <a href="chain-replication-for-supporting-high-throughput-and-availability.pdf">Chain Replication for Supporting High Throughput and Availability</a></p></li>
+<li><p>:scroll: <a href="commodifying-replicated-state-machines-with-openreplica.pdf">Commodifying Replicated State Machines with OpenReplica</a></p></li>
+<li><p>:scroll: <a href="consensus-in-presence-of-partial-synchrony.pdf">￼Consensusin the Presenceof Partial Synchrony</a></p></li>
+<li><p>:scroll: <a href="consistent-global-states-of-distributed-systems-fundamental-concepts-and-mechanisms.pdf">Consistent Global States of Distributed Systems: Fundamental Concepts and Mechanisms</a></p></li>
+<li><p>:scroll: <a href="consistent-hashing-and-random-trees.pdf">Consistent Hashing and Random Trees: Distributed Caching Protocols for Relieving Hot Spots on the World Wide Web</a></p></li>
+<li><p>:scroll: <a href="copysets-reducing-the-frequency-of-data-loss-in-cloud-storage.pdf">Copysets: Reducing the Frequency of Data Loss in Cloud Storage</a></p></li>
+<li><p>:scroll: <a href="dapper-a-large-scale-distributed-tracing-infrastructure.pdf">Dapper, a Large-Scale Distributed Systems Tracing Infrastructure</a></p></li>
+<li><p>:scroll: <a href="distributed-snapshots-determining-global-states-of-distributed-systems.pdf">￼Distributed Snapshots: Determining Global States of Distributed Systems</a></p></li>
+<li><p>:scroll: <a href="eluding-carnivores-file-sharing-with-strong-anonymity.pdf">Eluding Carnivores: File Sharing with Strong Anonymity</a></p></li>
+<li><p>:scroll: <a href="end-to-end-arguments-in-system-design.pdf">End-to-end arguments in system design</a></p></li>
+<li><p>:scroll: <a href="epidemic-algorithms-for-replicated-database-maintenance.pdf">Epidemic Algorithms for Replicated Database Maintenance</a></p></li>
+<li><p>:scroll: <a href="harvest-yield-and-scalable-tolerant-systems.pdf">Harvest, Yield, and Scalable Tolerant Systems</a></p></li>
+<li><p>:scroll: <a href="herbivore-a-scalable-and-efficient-protocol-for-anonymous.pdf">Herbivore: A Scalable and Efficient Protocol for Anonymous Communication</a></p></li>
+<li><p>:scroll: <a href="high-level-specifications--lessons-from-industry.pdf">High-Level Specifications: Lessons from Industry</a></p></li>
+<li><p>:scroll: <a href="how-the-hidden-hand-shapes-the-market-for-software-reliability.pdf">How the Hidden Hand Shapes the Market for Software Reliability</a></p></li>
+<li><p>:scroll: <a href="implementing-the-omega-failure-detector-in-crash-recovery-failure-model.pdf">Implementing the Omega failure detector in the crash-recovery failure model</a></p></li>
+<li><p>:scroll: <a href="impossibility-of-consensus-with-one-faulty-process.pdf">Impossibility of Distributed Consensuswith One Faulty Process</a></p></li>
+<li><p>:scroll: <a href="in-search-of-an-understandable-consensus-algorithm.pdf">In Search of an Understandable Consensus Algorithm</a></p></li>
+<li><p>:scroll: <a href="kelips-building-an-efficient-and-stable-p2p-dht-through-increased-memory-and-background-overhead.pdf">Kelips*: Building an Efficient and Stable P2P DHT Through Increased Memory and Background Overhead</a></p></li>
+<li><p>:scroll: <a href="large-scale-incremental-processing-using-distributed-transactions-and-notifications.pdf">Large-scale Incremental Processing Using Distributed Transactions and Notifications</a></p></li>
+<li><p>:scroll: <a href="life-beyond-distributed-transactions-an-apostates-opinion.pdf">Life beyond Distributed Transactions: an Apostate’s Opinion</a></p></li>
+<li><p>:scroll: <a href="mapreduce-simplified-data-processing-on-large-clusters.pdf">MapReduce: Simplified Data Processing on Large Clusters</a></p></li>
+<li><p>:scroll: <a href="mesos-a-platform-for-fine-grained-resource-sharing-in-the-data-center.pdf">Mesos: A Platform for Fine-Grained Resource Sharing in the Data Center</a></p></li>
+<li><p>:scroll: <a href="oblivious-routing-of-highly-variable-traffic-in-service-overlays-and-ip-backbones.pdf">Oblivious routing of highly variable traffic in service overlays and IP backbones</a></p></li>
+<li><p>:scroll: <a href="on-proof-and-progress-in-mathematics.pdf">On proof and progress in mathematics</a></p></li>
+<li><p>:scroll: <a href="p5-a-protocal-for-scalable-anonymous-communication.pdf">P5: A Protocol for Scalable Anonymous Communication</a></p></li>
+<li><p>:scroll: <a href="pastry-scalable-decentralized-object-location-and-routing-for-large-scale-peer-to-peer-systems.pdf">Pastry: Scalable, decentralized object location and routing for large-scale peer-to-peer systems</a></p></li>
+<li><p>:scroll: <a href="paxos-made-moderately-complex.pdf">Paxos Made Moderately Complex</a></p></li>
+<li><p>:scroll: <a href="paxos-made-simple.pdf">Paxos Made Simple</a></p></li>
+<li><p>:scroll: <a href="self-stabilizing-systems-in-spite-of-distributed-control.pdf">Self-stabilizing Systems in Spite of Distributed Control</a></p></li>
+<li><p>:scroll: <a href="sift-design-and-analysis-of-a-fault-tolerant-computer-for-aircraft-contro.pdf">SIFT: Design and Analysis of a Fault-Tolerant Computer for Aircraft Control</a></p></li>
+<li><p>:scroll: <a href="signal-%26-collect-graph-algorithms-for-the-(semantic)-web.pdf">Signal/Collect: Graph Algorithms for the (Semantic) Web</a></p></li>
+<li><p>:scroll: <a href="solution-of-a-problem-in-concurrent-programming-control.pdf">Slution of a Problem in Concurrent Programming Control</a></p></li>
+<li><p>:scroll: <a href="sparse-partitions.pdf">Sparse Partitions</a></p></li>
+<li><p>:scroll: <a href="stronger-semantics-for-low-latency-geo-replicated-storage.pdf">Stronger Semantics for Low-Latency Geo-Replicated Storage</a></p></li>
+<li><p>:scroll: <a href="the-akamai-network.pdf">The Akamai Network: A Platform for High-Performance Internet Applications</a></p></li>
+<li><p>:scroll: <a href="the-dining-cryptographers-problem.pdf">The Dining CryptographersProblem: Unconditional Sender and Recipient Untraceability</a></p></li>
+<li><p>:scroll: <a href="tor-the-second-generation-onion-router.pdf">Tor: The Second-Generation Onion Router</a></p></li>
+<li><p>:scroll: <a href="towards-a-cloud-computing-research-agenda.pdf">Towards a cloud computing research agenda</a></p></li>
+<li><p>:scroll: <a href="understanding-the-limitations-of-causally-and-totally-ordered-communication.pdf">Understanding the Limitations of Causally and Totally Ordered Communication</a></p></li>
+<li><p>:scroll: <a href="viewing-control-structures-as-patterns-of-passing-messages.pdf">￼￼￼￼￼￼￼￼￼￼Viewing Control Structures as Patterns of Passing Messages</a></p></li>
+<li><p>:scroll: <a href="warp-multi-key-transactions-for-key-value-stores.pdf">Warp: Multi-Key Transactions for Key-Value Stores</a></p></li>
+<li><p>:scroll: <a href="zab-high-performance-broadcast-for-primary-backup-systems.pdf">Zab: High-performance broadcast for primary-backup systems</a></p></li>
+<li><p>:scroll: <a href="zookeeper-wait-free-coordination-for-internet-scale-systems.pdf">ZooKeeper: Wait-free coordination for Internet-scale systems</a></p></li>
+<li><p>:scroll: <a href="tiered-replication-a-cost-effective-alternative-to-full-cluster-geo-replication.pdf">Tiered Replication: A Cost-effective Alternative to Full Cluster Geo-replication</a></p></li>
+</ul>
+<h2 id="topics">Topics</h2>
+<h3 id="datastores">Datastores</h3>
+<ul>
+<li><p><a href="http://cs.yale.edu/homes/thomson/publications/calvin-sigmod12.pdf">Calvin: Fast Distributed Transactions for Partitioned Database Systems</a></p></li>
+<li><p><a href="http://www-bcf.usc.edu/~wyattllo/papers/f4-osdi14.pdf">f4: Facebook’s Warm BLOB Storage System</a></p></li>
+<li><p><a href="http://cs-www.cs.yale.edu/homes/dna/papers/determinism-vldb10.pdf">The Case for Determinism in Database Systems</a></p></li>
+<li><p><a href="http://cs-www.cs.yale.edu/homes/dna/papers/abadi-pacelc.pdf">Consistency Tradeoffs in Modern Distributed Database System Design</a></p></li>
+<li><p><a href="http://sites.computer.org/debull/A13june/calvin1.pdf">Modularity and Scalability in Calvin</a></p></li>
+<li><p><a href="http://cs-www.cs.yale.edu/homes/dna/papers/vll-vldb13.pdf">Lightweight Locking for Main Memory Database Systems</a></p></li>
+<li><p><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.161.6751&amp;rep=rep1&amp;type=pdf">Cassandra - A Decentralized Structured Storage System</a></p></li>
+<li><p><a href="http://www.ssrc.ucsc.edu/Papers/weil-sc06.pdf">CRUSH: Controlled, Scalable, Decentralized Placement of Replicated Data</a></p></li>
+<li><p><a href="http://www.cs.cmu.edu/~dga/papers/cops-sosp2011.pdf">Don’t Settle for Eventual: Scalable Causal Consistency for Wide-Area Storage with COPS</a></p></li>
+<li><p><a href="http://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/36632.pdf">Dremel: Interactive Analysis of Web-Scale Datasets</a></p></li>
+<li><p><a href="http://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/41344.pdf">F1: A Distributed SQL Database That Scales</a></p></li>
+<li><p><a href="http://www.ics.uci.edu/~yingyib/papers/HaLoop_camera_ready.pdf">HaLoop: Efficient Iterative Data Processing on Large Clusters</a></p></li>
+<li><p><a href="https://cs.uwaterloo.ca/~bernard/hyperdex.pdf">HyperDex: A Distributed, Searchable Key-Value Store</a></p></li>
+<li><p><a href="http://www.few.vu.nl/~kgr700/sdd1.pdf">Introduction to a System for Distributed Databases SDD-1</a></p></li>
+<li><p><a href="http://www.erlang.org/download/armstrong_thesis_2003.pdf">Making Reliable Distributed Systems in the Presence of Software Errors</a></p></li>
+<li><p><a href="http://zoo.cs.yale.edu/classes/cs422/2013/bib/terry95managing.pdf">Managing Update Conflicts in Bayou, a Weakly Connected Replicated Storage System</a></p></li>
+<li><p><a href="http://www.cs.duke.edu/courses/cps399.28/current/papers/sigmod07-YangDasdanEtAl-map_reduce_merge.pdf">Map-Reduce-Merge: Simplified Relational Data Processing on Large Clusters</a></p></li>
+<li><p><a href="https://amplab.cs.berkeley.edu/wp-content/uploads/2013/03/mdcc-eurosys13.pdf">MDCC: Multi-Data Center Consistency</a></p></li>
+<li><p><a href="http://pages.cs.wisc.edu/~remzi/Classes/739/Spring2004/Papers/optimistic-survey.pdf">Optimistic replication</a></p></li>
+<li><p><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.21.2707&amp;rep=rep1&amp;type=pdf">The Dangers of Replication and a Solution</a></p></li>
+<li><p><a href="http://research.microsoft.com/pubs/79348/presto27-greenberg.pdf">Towards a Next Generation Data Center Architecture: Scalability and Commoditization</a></p></li>
+<li><p>:scroll: <a href="../datastores/bigtable-a-distributed-storage-system-for-structured-data.pdf">Bigtable: A Distributed Storage System for Structured Data</a></p></li>
+<li><p>:scroll: <a href="../datastores/database-metatheory--asking-the-big-queries.pdf">Database Metatheory: Asking Big Queries</a></p></li>
+<li><p>:scroll: <a href="../datastores/dynamo-amazons-highly-available-key-value-store.pdf">Dynamo: Amazon’s Highly Available Key-value Store</a></p></li>
+<li><p>:scroll: <a href="../datastores/flat-datacenter-storage.pdf">Flat Datacenter Storage</a></p></li>
+<li><p>:scroll: <a href="../datastores/freenet-a-distributed-anonymous-information-and-retrieval-system.pdf">Freenet: A Distributed Anonymous Information Storage and Retrieval System</a></p></li>
+<li><p>:scroll: <a href="../datastores/megastore-providing-scalable-highly-available-storage-for-interactive-services.pdf">Megastore: Providing Scalable, Highly Available Storage for Interactive Services</a></p></li>
+<li><p>:scroll: <a href="../datastores/network-challenges-of-data-recovery-in-erasure-coded-distributed-storage-systems.pdf">A Solution to the Network Challenges of Data Recovery in Erasure-coded Distributed Storage Systems: A Study on the Facebook Warehouse Cluster</a></p></li>
+<li><p>:scroll: <a href="../datastores/rados-a-scalable-reliable-storage-service-for-petabyte-scale-storage-clusters.pdf">RADOS: A Scalable, Reliable Storage Service for Petabyte-scale Storage Clusters</a></p></li>
+<li><p>:scroll: <a href="../datastores/spanner-google&#39;s-globally-distributed-database.pdf">Spanner: Google’s Globally-Distributed Database</a></p></li>
+<li><p>:scroll: <a href="../datastores/tao-facebook-distributed-datastore.pdf">TAO: Facebooks Distributed Data Store for the Social Graph’</a></p></li>
+<li><p>:scroll: <a href="../datastores/transactional-storage-for-geo-replicated-systems.pdf">Transactional storage for geo-replicated systems</a></p></li>
+<li><p>:scroll: <a href="../datastores/warp-multi-key-transactions-for-key-value-stores.pdf">Warp: Multi-Key Transactions for Key-Value Stores</a></p></li>
+<li><p>:scroll: <a href="../datastores/spartan-a-distributed-array-framework-with-smart-tiling.pdf">Spartan: A distributed array framework with smart tiling</a></p></li>
+</ul>
+<h3 id="physics">Physics</h3>
+<ul>
+<li><p>:scroll: <a href="../physics/on-the-electrodynamics-of-moving-bodies.pdf">“On the Electrodynamics of Moving Bodies” (1905) — Einstein</a></p>
+<p>By solving the <a href="http://en.wikipedia.org/wiki/Moving_magnet_and_conductor_problem">asymmetries</a> that arise in Maxwell’s equations, Einstein’s 1905 paper set the stage for current distributed systems work by demonstrating that there is no absolute frame of reference and by providing an upper bound on the speed of communication.</p></li>
+</ul>
+<h3 id="testing-verification-and-correctness"><a name="testing-verification-and-correctness"></a>Testing, Verification, and Correctness</h3>
+<ul>
+<li><p>:scroll: <a href="https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-yuan.pdf">Simple Testing Can Prevent Most Critical Failures: An Analysis of Production Failures in Distributed Data-Intensive Systems</a></p></li>
+<li><p>:scroll: <a href="http://research.microsoft.com/pubs/255833/IronFleet-twocol.pdf">IronFleet: Proving Practical Distributed Systems Correct</a></p></li>
+</ul>
+</body>
+</html>
