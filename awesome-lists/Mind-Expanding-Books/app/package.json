@@ -36,7 +36,7 @@
     "husky": "4.3.0",
     "lint-staged": "10.2.11",
     "prettier": "1.19.1",
-    "tailwindcss": "1.7.3"
+    "tailwindcss": "2.2.9"
   },
   "keywords": [
     "gatsby"
