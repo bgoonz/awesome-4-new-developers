@@ -303,21 +303,13 @@ find ./ -iname "*.docx" -type f -exec sh -c 'pandoc "${0}" -o "${0%.docx}.md"' {
 
 ```sh
 sudo apt install tree 
-
 sudo apt install pandoc -y
-
 sudo apt install rename -y
-
 sudo apt install black -y
-
 sudo apt install wget -y
-
 npm i lebab -g
-
 npm i prettier -g
-
- npm i -g recursive-install
-
+npm i npm-recursive-install -g
 
 
 ```
