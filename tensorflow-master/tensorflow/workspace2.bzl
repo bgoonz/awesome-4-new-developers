@@ -131,11 +131,11 @@ def _tf_repositories():
     # LINT.IfChange
     tf_http_archive(
         name = "XNNPACK",
-        sha256 = "482c8025a1aea51e9b89c331743dd145d9be6cef29a01f9b1491d42186871c0e",
-        strip_prefix = "XNNPACK-0049e892b94750489f5397c13a255e384817a9fd",
+        sha256 = "48a12729dd182cedeaad5c77b8b9753bc6ea9b91a43c44ca30effb2cdfbb6897",
+        strip_prefix = "XNNPACK-aae722a9f01cb1a05cce736730639abb9c4456ca",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/XNNPACK/archive/0049e892b94750489f5397c13a255e384817a9fd.zip",
-            "https://github.com/google/XNNPACK/archive/0049e892b94750489f5397c13a255e384817a9fd.zip",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/XNNPACK/archive/aae722a9f01cb1a05cce736730639abb9c4456ca.zip",
+            "https://github.com/google/XNNPACK/archive/aae722a9f01cb1a05cce736730639abb9c4456ca.zip",
         ],
     )
     # LINT.ThenChange(//tensorflow/lite/tools/cmake/modules/xnnpack.cmake)
@@ -152,11 +152,11 @@ def _tf_repositories():
 
     tf_http_archive(
         name = "pthreadpool",
-        sha256 = "b96413b10dd8edaa4f6c0a60c6cf5ef55eebeef78164d5d69294c8173457f0ec",
-        strip_prefix = "pthreadpool-b8374f80e42010941bda6c85b0e3f1a1bd77a1e0",
+        sha256 = "ec47d402b43ad763b2a33727f2459144397e8c4f1f4fae9b064576240c562557",
+        strip_prefix = "pthreadpool-1787867f6183f056420e532eec640cba25efafea",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/Maratyszcza/pthreadpool/archive/b8374f80e42010941bda6c85b0e3f1a1bd77a1e0.zip",
-            "https://github.com/Maratyszcza/pthreadpool/archive/b8374f80e42010941bda6c85b0e3f1a1bd77a1e0.zip",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/Maratyszcza/pthreadpool/archive/1787867f6183f056420e532eec640cba25efafea.zip",
+            "https://github.com/Maratyszcza/pthreadpool/archive/1787867f6183f056420e532eec640cba25efafea.zip",
         ],
     )
 
@@ -277,12 +277,12 @@ def _tf_repositories():
 
     tf_http_archive(
         name = "com_googlesource_code_re2",
-        sha256 = "27f4cc00e2ae4d3976f437e899b054767a27dd0a1665cd0374f393ec1038f9bc",
-        strip_prefix = "re2-b3cdad8966513c9ccb7cca2c7059ff236938d506",
+        sha256 = "53f3e02c5a22240cd9b625945b8512742fc7a1509119e269b5fd3748f6c84646",
+        strip_prefix = "re2-7272283b3842bd1d24d25ce0a6e40b63caec3fe6",
         system_build_file = "//third_party/systemlibs:re2.BUILD",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/re2/archive/b3cdad8966513c9ccb7cca2c7059ff236938d506.tar.gz",
-            "https://github.com/google/re2/archive/b3cdad8966513c9ccb7cca2c7059ff236938d506.tar.gz",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/google/re2/archive/7272283b3842bd1d24d25ce0a6e40b63caec3fe6.tar.gz",
+            "https://github.com/google/re2/archive/7272283b3842bd1d24d25ce0a6e40b63caec3fe6.tar.gz",
         ],
     )
 
