@@ -19,7 +19,7 @@
         "@types/react-dom": "17.0.6",
         "@types/react-router": "5.1.14",
         "@types/react-router-dom": "5.1.7",
-        "autoprefixer": "10.2.6",
+        "autoprefixer": "10.3.3",
         "copy-webpack-plugin": "9.0.0",
         "css-loader": "5.2.6",
         "html-webpack-plugin": "5.3.1",

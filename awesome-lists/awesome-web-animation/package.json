@@ -63,7 +63,7 @@
   "devDependencies": {
     "@babel/cli": "7.7.4",
     "@babel/core": "7.7.4",
-    "autoprefixer": "9.7.2",
+    "autoprefixer": "10.3.3",
     "babel-eslint": "10.0.3",
     "basic": "2.0.3",
     "csscomb": "4.3.0",
