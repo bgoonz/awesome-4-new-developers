@@ -1,5 +1,4 @@
-<img src="./assets/logo.svg" alt="Tailwind CSS logo" width="100" />  
-
+<img src="./assets/logo.svg" alt="Tailwind CSS logo" width="100" />
 
 ## Awesome Tailwind CSS
 

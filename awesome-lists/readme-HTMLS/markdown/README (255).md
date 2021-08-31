@@ -1,7 +1,6 @@
 [![](https://awesome.re/badge-flat.svg)](https://awesome.re)
 
 <img src="media/jamstack-full-logo.svg" alt="Jamstack" width="500" />  
-  
 
 
 **Jamstack**: noun ’jam-stak’&lt;br /&gt; Modern web development architecture based on client-side JavaScript, reusable APIs, and prebuilt Markup.
