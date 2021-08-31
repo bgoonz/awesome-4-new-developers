@@ -1,4 +1,5 @@
 ## developer-roadmap
+
 > 2021-yilda Web dasturchi "yo'l xaritasi"
 
 [![](https://img.shields.io/badge/-Roadmaps%20-0a0a0a.svg?style=flat&colorA=0a0a0a)](http://roadmap.sh)
@@ -21,5 +22,6 @@
 
 ![](./img/devops.png)
 
-## 🚦 
+## 🚦
+
 Agar siz biron bir yo'l xaritasini yaxshilash mumkin deb hisoblasangiz, uni Issue'larda muhokama qilishdan qo'rqmang.

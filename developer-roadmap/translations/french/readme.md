@@ -1,4 +1,5 @@
 ## developer-roadmap
+
 > Roadmap pour devenir développeur web en 2021
 
 [![](https://img.shields.io/badge/-Roadmaps%20-0a0a0a.svg?style=flat&colorA=0a0a0a)](http://roadmap.sh)
@@ -22,4 +23,5 @@
 ![](./img/devops-map.png)
 
 ## Contributors
-* [@LeratClarisse](https://github.com/LeratClarisse)
+
+- [@LeratClarisse](https://github.com/LeratClarisse)

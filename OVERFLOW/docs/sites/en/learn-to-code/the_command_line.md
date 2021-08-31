@@ -40,8 +40,7 @@
 # Making a directory
 
 - when you type `mkdir` ("make dir") it creates a new SUBDIRECTORY inside the current directory
-        mkdir code
-
+  mkdir code
 
 # Changing directories
 

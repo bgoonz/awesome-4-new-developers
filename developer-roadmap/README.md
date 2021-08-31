@@ -9,7 +9,7 @@
 
 Below you find a set of charts demonstrating the paths that you can take and the technologies that you would want to adopt in order to become a frontend, backend or a devops. I made these charts for an old professor of mine who wanted something to share with his college students to give them a perspective; sharing them here to help the community.
 
-***
+---
 
 <p align="center">
 		<sup>Special Announcement:</sup>
@@ -23,7 +23,7 @@ Below you find a set of charts demonstrating the paths that you can take and the
 		<sub>I plan on covering the roadmaps and put more content there<br><a href="https://www.youtube.com/channel/UCA0H2KIWgWTwpTFjSxp0now?sub_confirmation=1">Subscribe to the channel</a>.</sub>
 </p>
 
-***
+---
 
 <h3 align="center"><strong>Purpose of these Roadmaps</strong></h3>
 
@@ -33,7 +33,7 @@ Below you find a set of charts demonstrating the paths that you can take and the
 
 > These roadmaps cover everything that is there to learn for the paths listed below. Don't feel overwhelmed, you don't need to learn it all in the beginning if you are just getting started. We are working on the beginner versions of these and will [release it soon](https://roadmap.sh) after we are done with the 2021 release of the Backend and DevOps roadmaps.
 
-***
+---
 
 If you think that these can be improved in any way, please do suggest.
 
@@ -47,7 +47,7 @@ If you think that these can be improved in any way, please do suggest.
 
 ![Frontend Roadmap](./img/frontend.png?year-2021-2)
 
-## Back-end Roadmap 
+## Back-end Roadmap
 
 [![](https://img.shields.io/badge/-Download%20PDF%20-0a0a0a.svg?style=flat&colorA=0a0a0a)](https://gum.co/backend-roadmap) [![](https://img.shields.io/badge/-Shareable%20Link%20-0a0a0a.svg?style=flat&colorA=0a0a0a)](https://roadmap.sh/backend)
 
@@ -97,7 +97,6 @@ If you think any of the roadmaps can be improved, feel free to discuss it in the
 </div>
 
 <br>
-
 
 ## License
 

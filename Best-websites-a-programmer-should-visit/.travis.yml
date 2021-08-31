@@ -1,6 +1,6 @@
 language: ruby
 node_js:
-  - 'node'
+  - "node"
 rvm:
   - 2.2
 env:
@@ -14,4 +14,3 @@ before_script:
 script:
   - awesome-lint
   - awesome_bot README.md --white-list $(paste -d, -s white_listed_sites.txt) --allow-ssl --allow-redirect
-

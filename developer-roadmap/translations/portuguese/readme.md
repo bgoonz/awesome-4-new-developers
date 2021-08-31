@@ -8,7 +8,7 @@
 
 Abaixo você encontra um conjunto de gráficos demonstrando os caminhos que você pode que você pode tomar e as tecnologias que você pode querer adotar a fim de se tornar um(a) desenvolvedor(a) frontend, backend ou um(a) DevOps. Eu ([kamranahmeds](https://github.com/kamranahmedse)) fiz esses gráficos para um velho professor meu que queria algo para compartilhar com seus alunos da faculdade para dar a eles uma perspectiva; os compartilho aqui para ajudar a comunidade.
 
-***
+---
 
 <p align="center">
 		<sup>Anúncio especial:</sup>
@@ -22,7 +22,7 @@ Abaixo você encontra um conjunto de gráficos demonstrando os caminhos que voc�
 		<sub>Eu planejo cobrir os roteiros e colocar mais conteúdo lá<br><a href="https://www.youtube.com/channel/UCA0H2KIWgWTwpTFjSxp0now?sub_confirmation=1">Se inscreva no canal</a>.</sub>
 </p>
 
-***
+---
 
 <h3 align="center"><strong>Propósito desses Roteiros</strong></h3>
 
@@ -32,7 +32,7 @@ Abaixo você encontra um conjunto de gráficos demonstrando os caminhos que voc�
 
 > Estes roteiros cobrem tudo que tem para aprender para os caminhos listados abaixo. Não se sinta sobrecarregado(a), você não precisa aprender tudo no começo se você está apenas começando. Nós estamos trabalhando nas versões iniciantes dessas e [serão lançadas em breve](https://roadmap.sh) depois que nós tivermos terminado com o lançamento dos roteiros de Backend e DevOps de 2021.
 
-***
+---
 
 Se você acha que estes podem ser melhorados de qualquer jeito, por favor sugira como.
 
@@ -40,7 +40,7 @@ Se você acha que estes podem ser melhorados de qualquer jeito, por favor sugira
 
 ![](./img/intro-map.png)
 
-## Roteiro Frontend 
+## Roteiro Frontend
 
 ![](./img/frontend-map.png)
 
@@ -64,7 +64,7 @@ Se você acredita que os roteiros podem ser melhorados, sinta-se livre para disc
 - Discuta ideias em issues
 - Espalhe a palavra
 - Entre em contato com qualquer feedback [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/kamranahmedse.svg?style=social&label=Follow%20%40kamranahmedse)](https://twitter.com/kamranahmedse)
- 
+
 ## Licença
 
 Dê uma olhada no [arquivo de licença](https://github.com/kamranahmedse/developer-roadmap/blob/master/LICENSE) para detalhes

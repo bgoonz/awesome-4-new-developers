@@ -1,4 +1,3 @@
-
 ![Web Developer Roadmap - 2021](https://i.imgur.com/NNyc9QM.png)
 
 > Plan działania, aby zostać web developerem w 2021 r.
@@ -10,7 +9,7 @@
 
 Poniżej znajduje się zestaw wykresów pokazujących ścieżki, którymi możesz podążać, a także technologie, które warto abyś poznał, aby stać się programistą frontend, backend lub DevOps'em. Zrobiłem te wykresy dla mojego dawnego profesora, który chciał się czymś podzielić ze swoimi studentami, aby dać im perspektywę przyszłości; udostępniajam je tutaj, aby pomóc społeczności.
 
-***
+---
 
 <p align="center">
 		<sup>Ogłoszenie specjalne:</sup>
@@ -24,7 +23,7 @@ Poniżej znajduje się zestaw wykresów pokazujących ścieżki, którymi możes
 		<sub>Planuję opisać plany działania i umieścić tam więcej treści<br><a href="https://www.youtube.com/channel/UCA0H2KIWgWTwpTFjSxp0now?sub_confirmation=1">Subskrybuj kanał</a>.</sub>
 </p>
 
-***
+---
 
 <h3 align="center"><strong>Cel tych planów działania</strong></h3>
 
@@ -34,7 +33,7 @@ Poniżej znajduje się zestaw wykresów pokazujących ścieżki, którymi możes
 
 > Te plany działania obejmują wszystko, czego można się nauczyć na wymienionych poniżej ścieżkach. Nie czuj się przytłoczony, nie musisz uczyć się wszystkiego na początku, jeśli dopiero zaczynasz. Pracujemy nad ich początkowymi wersjami i będziemy [wydawać je wkrótce](https://roadmap.sh) po zakończeniu prac nad wydaniem 'Backend and DevOps roadmaps' w 2021 r.
 
-***
+---
 
 Jeśli uważasz, że można je poprawić w jakikolwiek sposób, proszę zasugeruj co ulepszyć.
 
@@ -72,11 +71,11 @@ Jeśli uważasz, że któryś z planów może zostać ulepszony, nie krępuj si�
 - Omów pomysły w issues
 - Podaj dalej
 - Podziel się dowolnym feedbackiem [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/kamranahmedse.svg?style=social&label=Follow%20%40kamranahmedse)](https://twitter.com/kamranahmedse)
- 
+
 ## Licencja
 
 Zapoznaj się z plikiem [license](./LICENSE), aby uzyskać więcej szczegółów
 
-___________________________________________
+---
 
 Stworzone przez @[kamranahmedse](https://github.com/kamranahmedse) polska wersja od @[mbiesiad](https://github.com/mbiesiad/)
