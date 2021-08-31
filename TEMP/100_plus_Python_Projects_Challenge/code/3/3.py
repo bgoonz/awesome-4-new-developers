@@ -3,8 +3,10 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 
 
-def get_position(image_width, image_height, text_width, text_height, position_id=9, margin=10):
-    '''
+def get_position(
+    image_width, image_height, text_width, text_height, position_id=9, margin=10
+):
+    """
     Get the position of the text by the position_id
     1: top left, 2: top center, 3: top right
     4: middle left, 5: middle center, 6: middle right
@@ -16,7 +18,7 @@ def get_position(image_width, image_height, text_width, text_height, position_id
     :param position_id: position_id
     :param margin: the text position margin value to the image
     :return: text position tuple
-    '''
+    """
     margin = 10
     if position_id == 1:
         return (margin, margin)
@@ -27,7 +29,10 @@ def get_position(image_width, image_height, text_width, text_height, position_id
     elif position_id == 4:
         return (margin, image_height // 2 - text_height // 2)
     elif position_id == 5:
-        return (image_width // 2 - text_width // 2, image_height // 2 - text_height // 2)
+        return (
+            image_width // 2 - text_width // 2,
+            image_height // 2 - text_height // 2,
+        )
     elif position_id == 6:
         return (image_width - text_width - margin, image_height // 2 - text_height // 2)
     elif position_id == 7:
@@ -38,8 +43,15 @@ def get_position(image_width, image_height, text_width, text_height, position_id
         return (image_width - text_width - margin, image_height - text_height - margin)
 
 
-def add_watermark(filename, text, font_name='Roboto-Italic.ttf', font_size=20, font_opacity=50, position_id=9):
-    '''
+def add_watermark(
+    filename,
+    text,
+    font_name="Roboto-Italic.ttf",
+    font_size=20,
+    font_opacity=50,
+    position_id=9,
+):
+    """
     Add watermark function
     :param filename: origin image filename
     :param text: watermark text
@@ -48,7 +60,7 @@ def add_watermark(filename, text, font_name='Roboto-Italic.ttf', font_size=20, f
     :param font_opacity: font opacity, default is 50
     :param position_id: position id, defalut is 9 (bottom right)
     :return:
-    '''
+    """
     # get an image
     with Image.open(filename).convert("RGBA") as base:
         # make a blank image for the text, initialized to transparent text color
@@ -61,30 +73,37 @@ def add_watermark(filename, text, font_name='Roboto-Italic.ttf', font_size=20, f
         # get the text widht and height
         text_width, text_height = d.textsize(text, font=fnt)
         # get the text position of the image
-        pos = get_position(base.size[0], base.size[1], text_width, text_height, position_id=position_id)
+        pos = get_position(
+            base.size[0], base.size[1], text_width, text_height, position_id=position_id
+        )
         # draw text with opacity
         d.text(pos, text, font=fnt, fill=(255, 255, 255, 256 * font_opacity // 100))
         out = Image.alpha_composite(base, txt)
 
         # save the image file
-        out_filename = 'watermark/{}'.format(os.path.basename(filename))
-        if not os.path.exists('watermark'):
-            os.makedirs('watermark')
-        out.save(out_filename, 'PNG')
+        out_filename = "watermark/{}".format(os.path.basename(filename))
+        if not os.path.exists("watermark"):
+            os.makedirs("watermark")
+        out.save(out_filename, "PNG")
 
 
-if __name__ == '__main__':
-    text = input('Please input a watermark text: ').strip()
-    font_size = int(input('Please input the font size: [20]') or '20')
-    font_opacity = int(input('Please input the font opacity: [50]') or '50')
+if __name__ == "__main__":
+    text = input("Please input a watermark text: ").strip()
+    font_size = int(input("Please input the font size: [20]") or "20")
+    font_opacity = int(input("Please input the font opacity: [50]") or "50")
     # 1: top left, 2: top center, 3: top right
     # 4: middle left, 5: middle center, 6: middle right
     # 7: bottom left, 8: bottom center, 9: bottom right
-    position_id = int(input('Please input the position: [9]') or '9')
+    position_id = int(input("Please input the position: [9]") or "9")
 
-    for f in os.listdir('images'):
-        if f.endswith('.png'):
-            filename = 'images/{}'.format(f)
-            print('add watermark for {}'.format(filename))
-            add_watermark(filename=filename, text=text, font_size=font_size, font_opacity=font_opacity,
-                          position_id=position_id)
+    for f in os.listdir("images"):
+        if f.endswith(".png"):
+            filename = "images/{}".format(f)
+            print("add watermark for {}".format(filename))
+            add_watermark(
+                filename=filename,
+                text=text,
+                font_size=font_size,
+                font_opacity=font_opacity,
+                position_id=position_id,
+            )

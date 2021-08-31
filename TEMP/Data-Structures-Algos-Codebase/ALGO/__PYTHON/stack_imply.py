@@ -3,8 +3,8 @@ import sys
 
 class Stack:
     # initialize the constructor of empty array
-    def __init__(self,arr,limit):
-        self.arr=arr
+    def __init__(self, arr, limit):
+        self.arr = arr
         self.arr = []
         self.limit = limit
 
@@ -19,7 +19,7 @@ class Stack:
         if len(self.arr) <= self.limit - 1:
             self.arr.append(i)
         else:
-            # limit of stack exceeds stack overflow 
+            # limit of stack exceeds stack overflow
             print("elements are : ")
             for i in range(len(self.arr)):
                 print(self.arr[i])
@@ -45,7 +45,7 @@ class Stack:
 
 
 # initialize the object
-sta = Stack([],4)
+sta = Stack([], 4)
 
 # pushing an element to the array
 sta.push(1)
@@ -65,5 +65,5 @@ sta.print_elements()
 # popping an element from the array
 sta.pop()
 
-# checking if the array is empty or not 
+# checking if the array is empty or not
 sta.is_empty()

@@ -1,13 +1,14 @@
 def getphonebook(n):
     phonebook = {}
     for x in range(n):
-        line = input().strip().split(' ')
+        line = input().strip().split(" ")
         name = line[0]
         number = line[1]
-        phonebook[name]=number
+        phonebook[name] = number
     return phonebook
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     numberofentries = int(input())
     phonebook = getphonebook(numberofentries)
 
@@ -15,8 +16,8 @@ if __name__ == '__main__':
         try:
             name = input()
             if name in phonebook.keys():
-                print(name,'=',phonebook[name],sep='')
+                print(name, "=", phonebook[name], sep="")
             else:
-                print('Not found')
+                print("Not found")
         except EOFError as eof:
             break

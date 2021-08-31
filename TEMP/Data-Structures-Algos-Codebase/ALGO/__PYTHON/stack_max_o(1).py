@@ -21,13 +21,13 @@ class Stack:
 
         # if len(self.arr) <= self.limit - 1:
         if len(self.arr) == 1:
-            self.max_array.append(self.arr[len(self.arr)-1])
-        elif self.arr[len(self.arr)-1] < self.max_array[len(self.max_array)-1]:
-            self.max_array.append(self.max_array[len(self.max_array)-1])
+            self.max_array.append(self.arr[len(self.arr) - 1])
+        elif self.arr[len(self.arr) - 1] < self.max_array[len(self.max_array) - 1]:
+            self.max_array.append(self.max_array[len(self.max_array) - 1])
         else:
-            self.max_array.append(self.arr[len(self.arr)-1])
+            self.max_array.append(self.arr[len(self.arr) - 1])
 
-        print("max value is : "+str(self.max_array[len(self.max_array)-1]))
+        print("max value is : " + str(self.max_array[len(self.max_array) - 1]))
 
     # defining an method to pop an element from the array
     def pop(self):
@@ -38,7 +38,6 @@ class Stack:
     def top(self):
         n = len(self.arr)
         return self.arr[n]
-
 
 
 # initialize the object
@@ -68,5 +67,3 @@ print("-------------------")
 # sta.print_elements()
 # popping the element from the array
 # sta.pop()
-
-

@@ -2,6 +2,7 @@ class Student(Person):
     def __init__(self, firstName, lastName, idNumber, scores):
         Person.__init__(self, firstName, lastName, idNumber)
         self.scores = scores
+
     def calculate(self):
         average = sum(scores) / len(scores)
         if 90 <= average <= 100:

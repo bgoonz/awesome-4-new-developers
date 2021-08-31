@@ -7,7 +7,7 @@ def SortAnagram(arr):
         for j in i:
             stage.append(j)
         stage.sort()
-        temp.append(''.join(stage))
+        temp.append("".join(stage))
         stage = []
 
     for index, value in enumerate(temp):

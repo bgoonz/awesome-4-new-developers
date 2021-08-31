@@ -6,10 +6,10 @@
 
 
 def Dis_array(arr):
-    dup=[]
+    dup = []
     for i in arr:
-        length=len(str(i))
-        i=str(i)
+        length = len(str(i))
+        i = str(i)
         for j in range(length):
             if i[j] in dup:
                 pass
@@ -18,5 +18,6 @@ def Dis_array(arr):
 
     print(dup)
 
-arr=[131, 11, 48]
+
+arr = [131, 11, 48]
 Dis_array(arr)

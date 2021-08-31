@@ -2,13 +2,13 @@ import speech_recognition as sr
 
 
 def recognize_speech_from_mic(recognizer, microphone):
-    '''
+    """
     Transcribe speech from recorded from `microphone`.
     :param recognizer:
     :param microphone:
     :return: `None` if speech could not be transcribed, otherwise a string containing the transcribed text
-    '''
-    print('Please read the English sentence')
+    """
+    print("Please read the English sentence")
     # adjust the recognizer sensitivity to ambient noise and record audio
     # from the microphone
     with microphone as source:
@@ -25,9 +25,9 @@ def recognize_speech_from_mic(recognizer, microphone):
     return text
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # input a English word or sentence
-    text = input('Please input a English word or sentence: ').strip()
+    text = input("Please input a English word or sentence: ").strip()
 
     # create recognizer and mic instances
     recognizer = sr.Recognizer()
@@ -42,6 +42,8 @@ if __name__ == '__main__':
         speech_text = recognize_speech_from_mic(recognizer, microphone)
 
     if speech_text:
-        print('{} {}'.format(speech_text, '✓'))
+        print("{} {}".format(speech_text, "✓"))
     else:
-        print('Please try the speech recognization service later or change another one.')
+        print(
+            "Please try the speech recognization service later or change another one."
+        )

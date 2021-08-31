@@ -2,6 +2,7 @@ import unittest
 
 """solution to the array pair sum problem"""
 
+
 def array_pair_sum_iterative(arr, k):
     """
     returns the array of pairs using an iterative method.
@@ -28,7 +29,7 @@ def array_pair_sum_sort(arr, k):
     arr.sort()
 
     for i in range(len(arr)):
-        if k - arr[i] in arr[i+1:]:
+        if k - arr[i] in arr[i + 1 :]:
             result.append([arr[i], k - arr[i]])
 
     return result
@@ -55,7 +56,6 @@ def array_pair_sum_hash_table(arr, k):
 
 # Unit tests
 class array_pair_sum_tests(unittest.TestCase):
-
     def setUp(self):
         self.arr1 = [3, 4, 5, 6, 7]
         self.arr2 = [3, 4, 5, 4, 4]
@@ -63,21 +63,15 @@ class array_pair_sum_tests(unittest.TestCase):
         self.result2 = [[3, 5], [4, 4], [4, 4], [4, 4]]
 
     def test_one(self):
-        self.assertEqual(
-            array_pair_sum_iterative(self.arr1, 10), self.result1)
-        self.assertEqual(
-            array_pair_sum_sort(self.arr1, 10), self.result1)
-        self.assertEqual(
-            array_pair_sum_hash_table(self.arr1, 10), self.result1)
+        self.assertEqual(array_pair_sum_iterative(self.arr1, 10), self.result1)
+        self.assertEqual(array_pair_sum_sort(self.arr1, 10), self.result1)
+        self.assertEqual(array_pair_sum_hash_table(self.arr1, 10), self.result1)
 
     def test_two(self):
-        self.assertEqual(
-            array_pair_sum_iterative(self.arr2, 8), self.result2)
-        self.assertEqual(
-            array_pair_sum_sort(self.arr2, 8), self.result2)
-        self.assertEqual(
-            array_pair_sum_hash_table(self.arr2, 8), self.result2)
+        self.assertEqual(array_pair_sum_iterative(self.arr2, 8), self.result2)
+        self.assertEqual(array_pair_sum_sort(self.arr2, 8), self.result2)
+        self.assertEqual(array_pair_sum_hash_table(self.arr2, 8), self.result2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

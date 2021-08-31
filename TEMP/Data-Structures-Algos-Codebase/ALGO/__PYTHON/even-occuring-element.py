@@ -9,5 +9,5 @@ def even_occuring_element(arr):
             dict[num] = 1
 
     for num in dict:
-        if not dict[num] & 1: # bitwise check for parity.
+        if not dict[num] & 1:  # bitwise check for parity.
             return num

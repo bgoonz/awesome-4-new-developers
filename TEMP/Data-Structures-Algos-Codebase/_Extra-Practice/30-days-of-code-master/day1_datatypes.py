@@ -1,6 +1,6 @@
 i = 4
 d = 4.0
-s = 'HackerRank'
+s = "HackerRank"
 
 
 # Declare second integer, double, and String variables.

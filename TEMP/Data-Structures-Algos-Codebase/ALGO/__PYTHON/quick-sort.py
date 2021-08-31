@@ -1,12 +1,13 @@
 from random import randint
 
+
 def quickSort(lst):
     # List of 0 or 1 items is already sorted
     if len(lst) <= 1:
         return lst
     else:
         # Pivot can be chosen randomly
-        pivotIndex = randint(0, len(lst)-1)
+        pivotIndex = randint(0, len(lst) - 1)
         pivot = lst[pivotIndex]
         # Elements lower than and greater than pivot
         lesser, greater = [], []
@@ -22,6 +23,6 @@ def quickSort(lst):
                     lesser.append(el)
                 else:
                     greater.append(el)
-                    
+
         # Sort lesser and greater, concatenate results
         return quickSort(lesser) + [pivot] + quickSort(greater)
