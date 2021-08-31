@@ -328,11 +328,11 @@ def _tf_repositories():
     tf_http_archive(
         name = "com_google_googleapis",
         build_file = "//third_party/googleapis:googleapis.BUILD",
-        sha256 = "185bf0e92fab1122e0a7e79aaaf67e11b66c995d00d60fa174b18c8789832de2",
-        strip_prefix = "googleapis-68e5bf3045d7b3ef55f473494a0cd4566491f899",
+        sha256 = "f51ee19e78a52bcf4a104a403b855c8ecabd154d72a38f4ea5ba6bca90396f9f",
+        strip_prefix = "googleapis-2127126597ea49fb0f5a5c23a2223312f3c32835",
         urls = [
-            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/googleapis/googleapis/archive/68e5bf3045d7b3ef55f473494a0cd4566491f899.zip",
-            "https://github.com/googleapis/googleapis/archive/68e5bf3045d7b3ef55f473494a0cd4566491f899.zip",
+            "https://storage.googleapis.com/mirror.tensorflow.org/github.com/googleapis/googleapis/archive/2127126597ea49fb0f5a5c23a2223312f3c32835.zip",
+            "https://github.com/googleapis/googleapis/archive/2127126597ea49fb0f5a5c23a2223312f3c32835.zip",
         ],
     )
 
