@@ -47,7 +47,7 @@
     "dotenv": "6.2.0",
     "express-flash": "0.0.2",
     "express-session": "1.17.2",
-    "express-validator": "6.12.0",
+    "express-validator": "6.12.1",
     "helmet": "3.23.3",
     "helmet-csp": "2.10.0",
     "jsonwebtoken": "8.5.1",
