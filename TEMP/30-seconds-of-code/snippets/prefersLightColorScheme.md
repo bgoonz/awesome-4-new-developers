@@ -13,7 +13,7 @@ Checks if the user color scheme preference is `light`.
 const prefersLightColorScheme = () =>
   window &&
   window.matchMedia &&
-  window.matchMedia('(prefers-color-scheme: light)').matches;
+  window.matchMedia("(prefers-color-scheme: light)").matches;
 ```
 
 ```js

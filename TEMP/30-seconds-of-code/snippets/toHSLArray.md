@@ -11,9 +11,9 @@ Converts an `hsl()` color string to an array of values.
 - Use `Array.prototype.map()` in combination with `Number` to convert them into an array of numeric values.
 
 ```js
-const toHSLArray = hslStr => hslStr.match(/\d+/g).map(Number);
+const toHSLArray = (hslStr) => hslStr.match(/\d+/g).map(Number);
 ```
 
 ```js
-toHSLArray('hsl(50, 10%, 10%)'); // [50, 10, 10]
+toHSLArray("hsl(50, 10%, 10%)"); // [50, 10, 10]
 ```

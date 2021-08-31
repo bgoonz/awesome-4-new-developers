@@ -24,6 +24,6 @@ const findFirstN = (arr, matcher, n = 1) => {
 ```
 
 ```js
-findFirstN([1, 2, 4, 6], n => n % 2 === 0, 2); // [2, 4]
-findFirstN([1, 2, 4, 6], n => n % 2 === 0, 5); // [2, 4, 6]
+findFirstN([1, 2, 4, 6], (n) => n % 2 === 0, 2); // [2, 4]
+findFirstN([1, 2, 4, 6], (n) => n % 2 === 0, 5); // [2, 4, 6]
 ```

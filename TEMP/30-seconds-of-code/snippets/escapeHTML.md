@@ -11,21 +11,21 @@ Escapes a string for use in HTML.
 - Use the callback function to replace each character instance with its associated escaped character using a dictionary (object).
 
 ```js
-const escapeHTML = str =>
+const escapeHTML = (str) =>
   str.replace(
     /[&<>'"]/g,
-    tag =>
+    (tag) =>
       ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        "'": '&#39;',
-        '"': '&quot;'
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;",
       }[tag] || tag)
   );
 ```
 
 ```js
-escapeHTML('<a href="#">Me & you</a>'); 
+escapeHTML('<a href="#">Me & you</a>');
 // '&lt;a href=&quot;#&quot;&gt;Me &amp; you&lt;/a&gt;'
 ```

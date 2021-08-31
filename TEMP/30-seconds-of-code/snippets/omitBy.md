@@ -14,10 +14,10 @@ Omits the key-value pairs corresponding to the keys of the object for which the 
 ```js
 const omitBy = (obj, fn) =>
   Object.keys(obj)
-    .filter(k => !fn(obj[k], k))
+    .filter((k) => !fn(obj[k], k))
     .reduce((acc, key) => ((acc[key] = obj[key]), acc), {});
 ```
 
 ```js
-omitBy({ a: 1, b: '2', c: 3 }, x => typeof x === 'number'); // { b: '2' }
+omitBy({ a: 1, b: "2", c: 3 }, (x) => typeof x === "number"); // { b: '2' }
 ```

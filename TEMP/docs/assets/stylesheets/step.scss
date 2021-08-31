@@ -6,7 +6,7 @@ span.prefix {
 
 h1 {
   padding-top: 30px;
-  font-family: "Aleo Regular" ;
+  font-family: "Aleo Regular";
 }
 
 .step h1 {
@@ -48,17 +48,18 @@ img.noborder {
   margin: 1em;
   background-color: #f5e1f0;
   font-style: italic;
-  padding: .25em 1em;
+  padding: 0.25em 1em;
 }
 
-.important, .tip {
-  padding: .5em 1em;
+.important,
+.tip {
+  padding: 0.5em 1em;
   margin: 1em 0;
 }
 
 .important {
-  background-color: #FFEBDD;
-  border: solid 5px #E65D00;
+  background-color: #ffebdd;
+  border: solid 5px #e65d00;
   border-radius: 4px;
   min-height: 43px;
 }
@@ -68,24 +69,26 @@ img.noborder {
 }
 
 .important > i {
-  color: #E65D00;
+  color: #e65d00;
   float: left;
 }
 
-.important > i, .tip > i, .discussion > i {
+.important > i,
+.tip > i,
+.discussion > i {
   padding-right: 20px;
 }
 
 .tip {
   padding: 1em;
-  background-color: #F7FDFF;
-  border: solid 5px #006E92;
+  background-color: #f7fdff;
+  border: solid 5px #006e92;
   border-radius: 4px;
   min-height: 43px;
 }
 
 .tip > i {
-  color: #006E92;
+  color: #006e92;
   float: left;
 }
 
@@ -99,20 +102,21 @@ img.noborder {
 
 .tip span.prefix {
   font-weight: bold;
-  color: #E77902;
+  color: #e77902;
 }
 
 .discussion_box {
   padding: 1em;
-  background-color: #FFF5AE;
+  background-color: #fff5ae;
   border-radius: 4px;
   margin: 30px 0 10px 0;
 }
 
-.discussion_box > h4, .error_box > h4 {
+.discussion_box > h4,
+.error_box > h4 {
   text-align: center;
   margin: 0;
-  font-family: 'Aleo Regular';
+  font-family: "Aleo Regular";
   font-weight: 100;
   font-size: 1.2em;
 }
@@ -173,19 +177,19 @@ table.bordered tr {
 }
 
 .goals > h1:before {
-  background-color: #FECACD;
+  background-color: #fecacd;
 }
 
 .steps > h1:before {
-  background-color: #FBFFCA;
+  background-color: #fbffca;
 }
 
 .challenge > h1:before {
-  background-color: #FFD188;
+  background-color: #ffd188;
 }
 
 .explanation > h1:before {
-  background-color: #C8FFC9;
+  background-color: #c8ffc9;
 }
 
 .overview > h1:before {
@@ -193,7 +197,7 @@ table.bordered tr {
 }
 
 .deploying > h1:before {
-  background-color: #B0DEE7;
+  background-color: #b0dee7;
 }
 
 .further-reading > h1:before {
@@ -201,19 +205,19 @@ table.bordered tr {
 }
 
 .requirements > h1:before {
-  background-color: #93B5DA;
+  background-color: #93b5da;
 }
 
 .discussion > h1:before {
-  background-color: #92F59A;
+  background-color: #92f59a;
 }
 
 .hints > h1:before {
-  background-color: #86DFD4;
+  background-color: #86dfd4;
 }
 
 .tools_and_references > h1:before {
-  background-color: #C8A9E0;
+  background-color: #c8a9e0;
 }
 
 .console > pre {
@@ -296,7 +300,7 @@ table.bordered tr {
 }
 
 .vertically-centered > *:first-child,
-.vertically-centered > *:first-child > *:first-child { 
+.vertically-centered > *:first-child > *:first-child {
   margin-top: 0;
 }
 
@@ -318,7 +322,7 @@ table.bordered tr {
   min-height: 145px;
 }
 
-.half-width:last-child{
+.half-width:last-child {
   margin-right: 0;
 }
 
@@ -342,4 +346,3 @@ table.bordered tr {
   margin-left: auto;
   margin-right: auto;
 }
-

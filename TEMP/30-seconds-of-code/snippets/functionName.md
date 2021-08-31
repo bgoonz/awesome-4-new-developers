@@ -11,7 +11,7 @@ Logs the name of a function.
 - Return the given function `fn`.
 
 ```js
-const functionName = fn => (console.debug(fn.name), fn);
+const functionName = (fn) => (console.debug(fn.name), fn);
 ```
 
 ```js

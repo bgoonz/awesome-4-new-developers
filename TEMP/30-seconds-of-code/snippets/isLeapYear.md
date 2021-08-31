@@ -11,7 +11,7 @@ Checks if the given `year` is a leap year.
 - Use `Date.prototype.getMonth()` to check if the month is equal to `1`.
 
 ```js
-const isLeapYear = year => new Date(year, 1, 29).getMonth() === 1;
+const isLeapYear = (year) => new Date(year, 1, 29).getMonth() === 1;
 ```
 
 ```js

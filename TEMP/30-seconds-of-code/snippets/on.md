@@ -14,7 +14,7 @@ Adds an event listener to an element with the ability to use event delegation.
 
 ```js
 const on = (el, evt, fn, opts = {}) => {
-  const delegatorFn = e =>
+  const delegatorFn = (e) =>
     e.target.matches(opts.target) && fn.call(e.target, e);
   el.addEventListener(
     evt,
@@ -26,10 +26,10 @@ const on = (el, evt, fn, opts = {}) => {
 ```
 
 ```js
-const fn = () => console.log('!');
-on(document.body, 'click', fn); // logs '!' upon clicking the body
-on(document.body, 'click', fn, { target: 'p' });
+const fn = () => console.log("!");
+on(document.body, "click", fn); // logs '!' upon clicking the body
+on(document.body, "click", fn, { target: "p" });
 // logs '!' upon clicking a `p` element child of the body
-on(document.body, 'click', fn, { options: true });
+on(document.body, "click", fn, { options: true });
 // use capturing instead of bubbling
 ```

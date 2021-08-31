@@ -13,7 +13,7 @@ Sorts an array of numbers, using the insertion sort algorithm.
 - Use `Array.prototype.splice()` to insert the current element into the accumulator.
 
 ```js
-const insertionSort = arr =>
+const insertionSort = (arr) =>
   arr.reduce((acc, x) => {
     if (!acc.length) return [x];
     acc.some((y, j) => {

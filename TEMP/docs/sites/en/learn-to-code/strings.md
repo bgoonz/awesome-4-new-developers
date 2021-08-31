@@ -38,8 +38,7 @@ Definitely try these out in irb! It's pretty fun.
 
 # LAB: Playing With Strings
 
-* What is the reverse of "stressed"?
-* How many characters long is your name?
-* What does your name look like, repeated 1000 times?
-* What is the tenth character of "Matz is nice"? (Trick question!)
-
+- What is the reverse of "stressed"?
+- How many characters long is your name?
+- What does your name look like, repeated 1000 times?
+- What is the tenth character of "Matz is nice"? (Trick question!)

@@ -14,14 +14,14 @@
 - if conditions
 - functions
 - exception handle
-- SpeechRecognition package (need to install by `pip install SpeechRecognition`) it support these speech recognitions: 
-    - `recognize_bing()`: [Microsoft Bing Speech](https://azure.microsoft.com/en-us/services/cognitive-services/speech/)
-    - `recognize_google()`: [Google Web Speech API](https://w3c.github.io/speech-api/speechapi.html)
-    - `recognize_google_cloud()`: [Google Cloud Speech](https://cloud.google.com/speech/) - requires installation of the google-cloud-speech package
-    - `recognize_houndify()`: [Houndify](https://www.houndify.com/) by SoundHound
-    - `recognize_ibm()`: [IBM Speech to Text](https://www.ibm.com/watson/services/speech-to-text/)
-    - `recognize_sphinx()`: [CMU Sphinx](https://cmusphinx.github.io/) - requires installing PocketSphinx
-    - `recognize_wit()`: [Wit.ai](https://wit.ai/)
+- SpeechRecognition package (need to install by `pip install SpeechRecognition`) it support these speech recognitions:
+  - `recognize_bing()`: [Microsoft Bing Speech](https://azure.microsoft.com/en-us/services/cognitive-services/speech/)
+  - `recognize_google()`: [Google Web Speech API](https://w3c.github.io/speech-api/speechapi.html)
+  - `recognize_google_cloud()`: [Google Cloud Speech](https://cloud.google.com/speech/) - requires installation of the google-cloud-speech package
+  - `recognize_houndify()`: [Houndify](https://www.houndify.com/) by SoundHound
+  - `recognize_ibm()`: [IBM Speech to Text](https://www.ibm.com/watson/services/speech-to-text/)
+  - `recognize_sphinx()`: [CMU Sphinx](https://cmusphinx.github.io/) - requires installing PocketSphinx
+  - `recognize_wit()`: [Wit.ai](https://wit.ai/)
 - pyaudio package (need to install by `pip install pyaudio`)
 
 ## A reference code
@@ -33,8 +33,8 @@ import speech_recognition as sr
 def recognize_speech_from_mic(recognizer, microphone):
     '''
     Transcribe speech from recorded from `microphone`.
-    :param recognizer: 
-    :param microphone: 
+    :param recognizer:
+    :param microphone:
     :return: `None` if speech could not be transcribed, otherwise a string containing the transcribed text
     '''
     print('Please read the English sentence')
@@ -88,8 +88,7 @@ python 4.py
 
 ![](images/challenge_4_en.png)
 
-----
-
+---
 
 # 检测英语口语
 
@@ -99,22 +98,22 @@ python 4.py
 2. 程序运行时，会让你输入一句英语，然后你需要对着麦克风读出这句英语；
 3. 程序会判断你读的对不对，如果不对会让你重读，直到读对为止。
 
-## Python编程知识点
+## Python 编程知识点
 
-- while循环
+- while 循环
 - 用户输入字符串
 - 字符串小写
 - 条件判断
 - 自定义函数
 - 异常处理
-- SpeechRecognition 模块 (安装： `pip install SpeechRecognition`) it support these speech recognitions: 
-    - `recognize_bing()`: [Microsoft Bing Speech](https://azure.microsoft.com/en-us/services/cognitive-services/speech/)
-    - `recognize_google()`: [Google Web Speech API](https://w3c.github.io/speech-api/speechapi.html)
-    - `recognize_google_cloud()`: [Google Cloud Speech](https://cloud.google.com/speech/) - 需要安装`google-cloud-speech`模块
-    - `recognize_houndify()`: [Houndify](https://www.houndify.com/) by SoundHound
-    - `recognize_ibm()`: [IBM Speech to Text](https://www.ibm.com/watson/services/speech-to-text/)
-    - `recognize_sphinx()`: [CMU Sphinx](https://cmusphinx.github.io/) - 需要安装`PocketSphinx`模块
-    - `recognize_wit()`: [Wit.ai](https://wit.ai/)
+- SpeechRecognition 模块 (安装： `pip install SpeechRecognition`) it support these speech recognitions:
+  - `recognize_bing()`: [Microsoft Bing Speech](https://azure.microsoft.com/en-us/services/cognitive-services/speech/)
+  - `recognize_google()`: [Google Web Speech API](https://w3c.github.io/speech-api/speechapi.html)
+  - `recognize_google_cloud()`: [Google Cloud Speech](https://cloud.google.com/speech/) - 需要安装`google-cloud-speech`模块
+  - `recognize_houndify()`: [Houndify](https://www.houndify.com/) by SoundHound
+  - `recognize_ibm()`: [IBM Speech to Text](https://www.ibm.com/watson/services/speech-to-text/)
+  - `recognize_sphinx()`: [CMU Sphinx](https://cmusphinx.github.io/) - 需要安装`PocketSphinx`模块
+  - `recognize_wit()`: [Wit.ai](https://wit.ai/)
 - pyaudio 模块 (安装： `pip install pyaudio`)
 
 ## 参考代码
@@ -167,7 +166,8 @@ if __name__ == '__main__':
         print('语音识别服务暂不可用，请稍后再试。')
 
 ```
-> 注意：本代码使用的是google语音识别，有些地区可能无法正常使用，请注册并使用其他的如微软Bing等语音识别服务等。
+
+> 注意：本代码使用的是 google 语音识别，有些地区可能无法正常使用，请注册并使用其他的如微软 Bing 等语音识别服务等。
 
 ## 运行测试
 
@@ -179,4 +179,3 @@ python 4.py
 ```
 
 ![image-20210508095608400](images/challenge_4_cn.png)
-

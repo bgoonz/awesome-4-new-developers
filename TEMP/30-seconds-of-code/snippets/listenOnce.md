@@ -16,9 +16,7 @@ const listenOnce = (el, evt, fn) =>
 ```
 
 ```js
-listenOnce(
-  document.getElementById('my-id'),
-  'click',
-  () => console.log('Hello world')
+listenOnce(document.getElementById("my-id"), "click", () =>
+  console.log("Hello world")
 ); // 'Hello world' will only be logged on the first click
 ```

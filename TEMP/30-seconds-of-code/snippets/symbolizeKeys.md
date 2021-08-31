@@ -10,7 +10,7 @@ Creates a new object, converting each key to a `Symbol`.
 - Use `Array.prototype.reduce()` and `Symbol()` to create a new object where each key is converted to a `Symbol`.
 
 ```js
-const symbolizeKeys = obj =>
+const symbolizeKeys = (obj) =>
   Object.keys(obj).reduce(
     (acc, key) => ({ ...acc, [Symbol(key)]: obj[key] }),
     {}
@@ -18,6 +18,6 @@ const symbolizeKeys = obj =>
 ```
 
 ```js
-symbolizeKeys({ id: 10, name: 'apple' });
+symbolizeKeys({ id: 10, name: "apple" });
 // { [Symbol(id)]: 10, [Symbol(name)]: 'apple' }
 ```

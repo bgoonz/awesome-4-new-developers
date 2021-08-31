@@ -6,9 +6,9 @@ available over the Internet.
 There are three hosting options, depending on how much of a challenge you are looking
 for:
 
-* Use a static site hosting service
-* Use git and Github Pages
-* Roll your own with a hosting provider
+- Use a static site hosting service
+- Use git and Github Pages
+- Roll your own with a hosting provider
 
 ### Using a Static Site Hosting Service
 

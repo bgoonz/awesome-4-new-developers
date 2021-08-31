@@ -17,6 +17,6 @@ const triggerEvent = (el, eventType, detail) =>
 ```
 
 ```js
-triggerEvent(document.getElementById('myId'), 'click');
-triggerEvent(document.getElementById('myId'), 'click', { username: 'bob' });
+triggerEvent(document.getElementById("myId"), "click");
+triggerEvent(document.getElementById("myId"), "click", { username: "bob" });
 ```

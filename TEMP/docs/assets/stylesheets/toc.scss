@@ -96,7 +96,8 @@
     display: block !important;
   }
 
-  .toc, .toc.page-list {
+  .toc,
+  .toc.page-list {
     display: none;
     position: absolute;
     right: 0;

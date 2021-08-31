@@ -14,11 +14,11 @@ Flattens an object with the paths for keys.
 - You should always omit the second argument, `prefix`, unless you want every key to have a prefix.
 
 ```js
-const flattenObject = (obj, prefix = '') =>
+const flattenObject = (obj, prefix = "") =>
   Object.keys(obj).reduce((acc, k) => {
-    const pre = prefix.length ? `${prefix}.` : '';
+    const pre = prefix.length ? `${prefix}.` : "";
     if (
-      typeof obj[k] === 'object' &&
+      typeof obj[k] === "object" &&
       obj[k] !== null &&
       Object.keys(obj[k]).length > 0
     )

@@ -15,15 +15,15 @@ Generates all permutations of a string (contains duplicates).
 - ⚠️ **WARNING**: The execution time increases exponentially with each character. Anything more than 8 to 10 characters will cause your environment to hang as it tries to solve all the different combinations.
 
 ```js
-const stringPermutations = str => {
+const stringPermutations = (str) => {
   if (str.length <= 2) return str.length === 2 ? [str, str[1] + str[0]] : [str];
   return str
-    .split('')
+    .split("")
     .reduce(
       (acc, letter, i) =>
         acc.concat(
           stringPermutations(str.slice(0, i) + str.slice(i + 1)).map(
-            val => letter + val
+            (val) => letter + val
           )
         ),
       []
@@ -32,5 +32,5 @@ const stringPermutations = str => {
 ```
 
 ```js
-stringPermutations('abc'); // ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+stringPermutations("abc"); // ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
 ```

@@ -13,7 +13,7 @@ Opens or closes an element in fullscreen mode.
 - Omit the first element, `mode`, to open the element in fullscreen mode by default.
 
 ```js
-const fullscreen = (mode = true, el = 'body') =>
+const fullscreen = (mode = true, el = "body") =>
   mode
     ? document.querySelector(el).requestFullscreen()
     : document.exitFullscreen();

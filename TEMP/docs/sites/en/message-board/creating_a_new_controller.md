@@ -16,7 +16,7 @@ We will start with index, which can be used to display the main page in your app
 
 **3\.** Create your first controller called **HomeController**.
 
-Create a controller file in the app/controller folder. *The file should always be named with lower case letters and underscores.*
+Create a controller file in the app/controller folder. _The file should always be named with lower case letters and underscores._
 
 ```
 app/controllers/home_controller.rb
@@ -35,13 +35,13 @@ end
 
 **5\.** Create your first view, to be associated with the `Home` controller and the `index` action.
 
-Create a new folder in app/views. *The folder name should always be lower case and the name of your controller.*
+Create a new folder in app/views. _The folder name should always be lower case and the name of your controller._
 
 ```
 app/views/home
 ```
 
-Create a file for your first action in the app/views/home folder. *The filename should always be lower case and the name of the action.*
+Create a file for your first action in the app/views/home folder. _The filename should always be lower case and the name of the action._
 
 ```
 app/views/home/index.html.rb
@@ -74,6 +74,3 @@ NOTE: This says that the base url with /about on the end will direct to the `abo
 **7\.** Go back to your project in the browser and confirm that on the root path you now see the content from your index.html.erb file instead of the default Rails welcome page.
 
 **8\.** Add an `about` action to the Home controller and test that you can see it at the /about path in the web browser.
-
-
-    

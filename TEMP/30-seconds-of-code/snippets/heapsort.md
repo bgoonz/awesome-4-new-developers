@@ -14,7 +14,7 @@ Sorts an array of numbers, using the heapsort algorithm.
 - Use a `for` loop to repeatedly narrow down the considered range, using `heapify` and swapping values as necessary in order to sort the cloned array.
 
 ```js
-const heapsort = arr => {
+const heapsort = (arr) => {
   const a = [...arr];
   let l = a.length;
 

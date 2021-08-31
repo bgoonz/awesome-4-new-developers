@@ -12,7 +12,7 @@ Calculates the distance between two points in any number of dimensions.
 
 ```js
 const euclideanDistance = (a, b) =>
-  Math.hypot(...Object.keys(a).map(k => b[k] - a[k]));
+  Math.hypot(...Object.keys(a).map((k) => b[k] - a[k]));
 ```
 
 ```js

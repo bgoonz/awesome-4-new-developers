@@ -19,9 +19,12 @@ const indexOn = (arr, key) =>
 ```
 
 ```js
-indexOn([
-  { id: 10, name: 'apple' },
-  { id: 20, name: 'orange' }
-], 'id');
+indexOn(
+  [
+    { id: 10, name: "apple" },
+    { id: 20, name: "orange" },
+  ],
+  "id"
+);
 // { '10': { name: 'apple' }, '20': { name: 'orange' } }
 ```

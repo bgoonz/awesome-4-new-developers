@@ -11,21 +11,21 @@ Unescapes escaped HTML characters.
 - Use the function's callback to replace each escaped character instance with its associated unescaped character using a dictionary (object).
 
 ```js
-const unescapeHTML = str =>
+const unescapeHTML = (str) =>
   str.replace(
     /&amp;|&lt;|&gt;|&#39;|&quot;/g,
-    tag =>
+    (tag) =>
       ({
-        '&amp;': '&',
-        '&lt;': '<',
-        '&gt;': '>',
-        '&#39;': "'",
-        '&quot;': '"'
+        "&amp;": "&",
+        "&lt;": "<",
+        "&gt;": ">",
+        "&#39;": "'",
+        "&quot;": '"',
       }[tag] || tag)
   );
 ```
 
 ```js
-unescapeHTML('&lt;a href=&quot;#&quot;&gt;Me &amp; you&lt;/a&gt;');
+unescapeHTML("&lt;a href=&quot;#&quot;&gt;Me &amp; you&lt;/a&gt;");
 // '<a href="#">Me & you</a>'
 ```

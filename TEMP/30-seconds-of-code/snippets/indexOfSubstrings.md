@@ -25,7 +25,7 @@ const indexOfSubstrings = function* (str, searchValue) {
 ```
 
 ```js
-[...indexOfSubstrings('tiktok tok tok tik tok tik', 'tik')]; // [0, 15, 23]
-[...indexOfSubstrings('tutut tut tut', 'tut')]; // [0, 2, 6, 10]
-[...indexOfSubstrings('hello', 'hi')]; // []
+[...indexOfSubstrings("tiktok tok tok tik tok tik", "tik")]; // [0, 15, 23]
+[...indexOfSubstrings("tutut tut tut", "tut")]; // [0, 2, 6, 10]
+[...indexOfSubstrings("hello", "hi")]; // []
 ```

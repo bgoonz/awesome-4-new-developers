@@ -12,7 +12,7 @@ Sorts an array of numbers, using the selection sort algorithm.
 - Use `Array.prototype.slice()` and `Array.prototype.reduce()` to find the index of the minimum element in the subarray to the right of the current index and perform a swap, if necessary.
 
 ```js
-const selectionSort = arr => {
+const selectionSort = (arr) => {
   const a = [...arr];
   for (let i = 0; i < a.length; i++) {
     const min = a

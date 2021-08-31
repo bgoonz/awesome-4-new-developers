@@ -15,11 +15,11 @@ Calculates the date of `n` days from the given date, returning its string repres
 const addDaysToDate = (date, n) => {
   const d = new Date(date);
   d.setDate(d.getDate() + n);
-  return d.toISOString().split('T')[0];
+  return d.toISOString().split("T")[0];
 };
 ```
 
 ```js
-addDaysToDate('2020-10-15', 10); // '2020-10-25'
-addDaysToDate('2020-10-15', -10); // '2020-10-05'
+addDaysToDate("2020-10-15", 10); // '2020-10-25'
+addDaysToDate("2020-10-15", -10); // '2020-10-05'
 ```

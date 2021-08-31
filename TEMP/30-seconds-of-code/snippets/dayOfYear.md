@@ -12,7 +12,7 @@ Gets the day of the year (number in the range 1-366) from a `Date` object.
 - Use `Math.floor()` to appropriately round the resulting day count to an integer.
 
 ```js
-const dayOfYear = date =>
+const dayOfYear = (date) =>
   Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
 ```
 

@@ -6,9 +6,9 @@ Sinatra is a Web Application Framework. It includes a Web Server and lets you wr
 
 # Hi, Sinatra
 
-1. install Sinatra by running `gem install sinatra` on the command line
+1.  install Sinatra by running `gem install sinatra` on the command line
 
-2. create a file called `hi.rb` containing this:
+2.  create a file called `hi.rb` containing this:
 
         require 'sinatra'
 
@@ -16,7 +16,7 @@ Sinatra is a Web Application Framework. It includes a Web Server and lets you wr
           "Hi!"
         end
 
-3. run `ruby hi.rb`
+3.  run `ruby hi.rb`
 
 Now open a Web Browser (like Firefox or Chrome or Safari or Internet Explorer) and enter the following URL into the address bar:
 
@@ -62,6 +62,4 @@ they see this:
 
 # Detour: Deploying to Heroku
 
-* Railsbridge pages describing account setup & <a href="/installfest/deploy_a_rails_app">deploy</a> steps
-
-
+- Railsbridge pages describing account setup & <a href="/installfest/deploy_a_rails_app">deploy</a> steps

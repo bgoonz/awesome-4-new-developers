@@ -15,21 +15,21 @@ Returns a promise.
 - Finally, use `Array.prototype.join()` to combine values in the array of `hexes` into a string.
 
 ```js
-const hashBrowser = val =>
+const hashBrowser = (val) =>
   crypto.subtle
-    .digest('SHA-256', new TextEncoder('utf-8').encode(val))
-    .then(h => {
+    .digest("SHA-256", new TextEncoder("utf-8").encode(val))
+    .then((h) => {
       let hexes = [],
         view = new DataView(h);
       for (let i = 0; i < view.byteLength; i += 4)
-        hexes.push(('00000000' + view.getUint32(i).toString(16)).slice(-8));
-      return hexes.join('');
+        hexes.push(("00000000" + view.getUint32(i).toString(16)).slice(-8));
+      return hexes.join("");
     });
 ```
 
 ```js
 hashBrowser(
-  JSON.stringify({ a: 'a', b: [1, 2, 3, 4], foo: { c: 'bar' } })
+  JSON.stringify({ a: "a", b: [1, 2, 3, 4], foo: { c: "bar" } })
 ).then(console.log);
 // '04aa106279f5977f59f9067fa9712afc4aedc6f5862a8defc34552d8c7206393'
 ```

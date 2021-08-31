@@ -51,8 +51,8 @@ def asr(audio_data):
 def recognize_speech_from_mic(recognizer, microphone):
     '''
     Transcribe speech from recorded from `microphone`.
-    :param recognizer: 
-    :param microphone: 
+    :param recognizer:
+    :param microphone:
     :return: `None` if speech could not be transcribed, otherwise a string containing the transcribed text
     '''
     print('Please read the English sentence')
@@ -106,8 +106,7 @@ python 5.py
 
 ![](images/challenge_5_en.png)
 
-----
-
+---
 
 # 检测英语口语（使用百度云语音识别）
 
@@ -118,15 +117,15 @@ python 5.py
 3. 程序会判断你读的对不对，如果不对会让你重读，直到读对为止；
 4. 使用百度云语音识别：https://ai.baidu.com/tech/speech/asr。
 
-## Python编程知识点
+## Python 编程知识点
 
-- while循环
+- while 循环
 - 用户输入字符串
 - 字符串小写
 - 条件判断
 - 自定义函数
 - 异常处理
-- SpeechRecognition 模块 (安装： `pip install SpeechRecognition`) 
+- SpeechRecognition 模块 (安装： `pip install SpeechRecognition`)
 - pyaudio 模块 (安装： `pip install pyaudio`)
 - baidu-aip 模块(安装： `pip install baidu-aip`)
 
@@ -202,6 +201,7 @@ if __name__ == '__main__':
         print('语音识别服务暂不可用，请稍后再试。')
 
 ```
+
 ## 运行测试
 
 - 使用 `pip install requirements.txt` 安装模块: `pyaudio` ，`SpeechRecognition`，`baidu-aip`
@@ -212,4 +212,3 @@ python 5.py
 ```
 
 ![](images/challenge_5_cn.png)
-

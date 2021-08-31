@@ -11,7 +11,7 @@ Checks if all elements in an array are unique.
 - Use `Array.prototype.length` and `Set.prototype.size` to compare the length of the unique values to the original array.
 
 ```js
-const allUnique = arr => arr.length === new Set(arr).size;
+const allUnique = (arr) => arr.length === new Set(arr).size;
 ```
 
 ```js

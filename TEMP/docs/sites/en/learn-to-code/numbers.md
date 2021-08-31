@@ -4,21 +4,21 @@
 
 The following operations work on numbers:
 
-  * + -- addition
-  * - -- subtraction
-  * * -- multiplication
-  * / -- division
-  * % -- modulus
-  * ** -- exponentiation
+- - -- addition
+- - -- subtraction
+- - -- multiplication
+- / -- division
+- % -- modulus
+- \*\* -- exponentiation
 
 # LAB: Playing With Numbers
 
 Answer the following questions using irb:
 
-* How many seconds are in an hour?
-* How many minutes are in a week?
-* How many seconds old are you?
-* How many years old is someone who is 1 billion seconds old?
+- How many seconds are in an hour?
+- How many minutes are in a week?
+- How many seconds old are you?
+- How many years old is someone who is 1 billion seconds old?
 
 # Order of operations
 
@@ -28,10 +28,10 @@ Q: What is 1 plus 2 times 3?
 
 Q: What is 1 plus 2 times 3?
 
-A: *It depends!*
+A: _It depends!_
 
-  * `(1 + 2) * 3` is 9
-  * `1 + (2 * 3)` is 7
+- `(1 + 2) * 3` is 9
+- `1 + (2 * 3)` is 7
 
 # Parentheses Are Free
 
@@ -91,8 +91,8 @@ Each is useful in different situations.
 
 Without getting into too much detail, the two main number types in Ruby are:
 
-* `Fixnum` - for *integers* like 12 or -1023
-* `Float` - for *decimals* like 3.14
+- `Fixnum` - for _integers_ like 12 or -1023
+- `Float` - for _decimals_ like 3.14
 
 (Other number types include Complex, Rational, and Bignum.)
 
@@ -100,8 +100,8 @@ Without getting into too much detail, the two main number types in Ruby are:
 
 You can convert from one type of number to another by sending a message:
 
-* `to_i` turns a Float into a Fixnum
-* `to_f` turns a Fixnum into a Float
+- `to_i` turns a Float into a Fixnum
+- `to_f` turns a Fixnum into a Float
 
 Try this:
 
@@ -132,7 +132,7 @@ Whoa! What just happened?
 
 # Integer Arithmetic
 
-7 and 8 are *Integers*
+7 and 8 are _Integers_
 
 so the result is an Integer
 
@@ -140,17 +140,16 @@ so the result is an Integer
 
 but there is no integer between 0 and 1
 
-so the computer has to *round down* to 0
+so the computer has to _round down_ to 0
 
 # Floating Point Arithmetic
 
     7.0/8.0
 
-7.0 and 8.0 are *Floats*
+7.0 and 8.0 are _Floats_
 
 so the result is a Float
 
 and `0.875` can fit in a float
 
 # Okay, that's enough math!
-

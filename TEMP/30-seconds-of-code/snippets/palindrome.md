@@ -12,12 +12,12 @@ Checks if the given string is a palindrome.
 - Use `Array.prototype.reverse()`, `String.prototype.join('')` and compare the result to the normalized string.
 
 ```js
-const palindrome = str => {
-  const s = str.toLowerCase().replace(/[\W_]/g, '');
-  return s === [...s].reverse().join('');
+const palindrome = (str) => {
+  const s = str.toLowerCase().replace(/[\W_]/g, "");
+  return s === [...s].reverse().join("");
 };
 ```
 
 ```js
-palindrome('taco cat'); // true
+palindrome("taco cat"); // true
 ```

@@ -12,8 +12,9 @@ Checks if the first iterable is a subset of the second one, excluding duplicate 
 
 ```js
 const subSet = (a, b) => {
-  const sA = new Set(a), sB = new Set(b);
-  return [...sA].every(v => sB.has(v));
+  const sA = new Set(a),
+    sB = new Set(b);
+  return [...sA].every((v) => sB.has(v));
 };
 ```
 

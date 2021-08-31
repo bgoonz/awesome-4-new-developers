@@ -12,10 +12,10 @@ Parses an HTTP Cookie header string, returning an object of all cookie name-valu
 - Use `Array.prototype.reduce()` and `decodeURIComponent()` to create an object with all key-value pairs.
 
 ```js
-const parseCookie = str =>
+const parseCookie = (str) =>
   str
-    .split(';')
-    .map(v => v.split('='))
+    .split(";")
+    .map((v) => v.split("="))
     .reduce((acc, v) => {
       acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim());
       return acc;
@@ -23,6 +23,6 @@ const parseCookie = str =>
 ```
 
 ```js
-parseCookie('foo=bar; equation=E%3Dmc%5E2');
+parseCookie("foo=bar; equation=E%3Dmc%5E2");
 // { foo: 'bar', equation: 'E=mc^2' }
 ```

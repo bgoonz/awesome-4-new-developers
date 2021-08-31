@@ -11,7 +11,7 @@ Finds all unique values in an array.
 - Use the spread operator (`...`) to convert it back to an array.
 
 ```js
-const uniqueElements = arr => [...new Set(arr)];
+const uniqueElements = (arr) => [...new Set(arr)];
 ```
 
 ```js

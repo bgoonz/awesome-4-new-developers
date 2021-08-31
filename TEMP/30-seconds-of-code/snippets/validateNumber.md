@@ -13,13 +13,13 @@ Checks if the given value is a number.
 - Use `Number()` and the loose equality operator (`==`) to check if the coercion holds.
 
 ```js
-const validateNumber = n => {
+const validateNumber = (n) => {
   const num = parseFloat(n);
   return !Number.isNaN(num) && Number.isFinite(num) && Number(n) == n;
-}
+};
 ```
 
 ```js
-validateNumber('10'); // true
-validateNumber('a'); // false
+validateNumber("10"); // true
+validateNumber("a"); // false
 ```

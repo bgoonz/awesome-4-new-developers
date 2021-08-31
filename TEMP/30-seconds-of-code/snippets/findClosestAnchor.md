@@ -12,13 +12,13 @@ Finds the anchor node closest to the given `node`, if any.
 - If no matching node is found, return `null`.
 
 ```js
-const findClosestAnchor = node => {
+const findClosestAnchor = (node) => {
   for (let n = node; n.parentNode; n = n.parentNode)
-    if (n.nodeName.toLowerCase() === 'a') return n;
+    if (n.nodeName.toLowerCase() === "a") return n;
   return null;
 };
 ```
 
 ```js
-findClosestAnchor(document.querySelector('a > span')); // a
+findClosestAnchor(document.querySelector("a > span")); // a
 ```

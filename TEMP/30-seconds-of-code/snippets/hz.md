@@ -21,7 +21,9 @@ const hz = (fn, iterations = 100) => {
 ```
 
 ```js
-const numbers = Array(10000).fill().map((_, i) => i);
+const numbers = Array(10000)
+  .fill()
+  .map((_, i) => i);
 
 const sumReduce = () => numbers.reduce((acc, n) => acc + n, 0);
 const sumForLoop = () => {

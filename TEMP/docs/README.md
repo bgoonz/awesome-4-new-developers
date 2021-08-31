@@ -10,10 +10,10 @@ Each subproject (a "site") comprises files stored under the "sites" directory; f
 
 These files can be in any of these formats:
 
-* `.step` for [StepFile](step_file_reference.md)
-* `.md` for [Markdown](http://daringfireball.net/projects/markdown/syntax)
-* `.mw` for MediaWiki (temporary)
-* `.deck.md` for [deck.rb](https://github.com/alexch/deck.rb)
+- `.step` for [StepFile](step_file_reference.md)
+- `.md` for [Markdown](http://daringfireball.net/projects/markdown/syntax)
+- `.mw` for MediaWiki (temporary)
+- `.deck.md` for [deck.rb](https://github.com/alexch/deck.rb)
 
 (If multiple files exist with the same base name, `.step` is preferred over `.md`, and `.md` over `.mw`.)
 
@@ -66,7 +66,7 @@ Check out [CONTRIBUTING.md](CONTRIBUTING.md) to see how to join our [list of con
 
 ## License
 
-The documentation (including anything under the `sites` subdir as well as some hardcoded text elsewhere) is licensed under a Creative Commons license ([CC-BY,  specifically](http://creativecommons.org/licenses/by/3.0/)), which means you're welcome to share, remix, or use our content commercially. We just ask for attribution.
+The documentation (including anything under the `sites` subdir as well as some hardcoded text elsewhere) is licensed under a Creative Commons license ([CC-BY, specifically](http://creativecommons.org/licenses/by/3.0/)), which means you're welcome to share, remix, or use our content commercially. We just ask for attribution.
 
 The code is licensed under an [MIT license](http://opensource.org/licenses/MIT), like Ruby itself. Copyright (c) 2010-2014 by RailsBridge.
 
@@ -74,4 +74,3 @@ The code is licensed under an [MIT license](http://opensource.org/licenses/MIT),
 
 - [StepFile Reference](step_file_reference.md)
 - Workshop organizers: See http://docs.railsbridge.org/workshop for example slide decks you can use in your opening/closing presentations.
-

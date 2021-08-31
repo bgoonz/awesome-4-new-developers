@@ -11,7 +11,7 @@ Returns the elements that exist in both arrays, using a provided comparator func
 
 ```js
 const intersectionWith = (a, b, comp) =>
-  a.filter(x => b.findIndex(y => comp(x, y)) !== -1);
+  a.filter((x) => b.findIndex((y) => comp(x, y)) !== -1);
 ```
 
 ```js

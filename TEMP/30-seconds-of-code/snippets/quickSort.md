@@ -15,7 +15,7 @@ Sorts an array of numbers, using the quicksort algorithm.
 - Recursively call `quickSort()` on the created subarrays.
 
 ```js
-const quickSort = arr => {
+const quickSort = (arr) => {
   const a = [...arr];
   if (a.length < 2) return a;
   const pivotIndex = Math.floor(arr.length / 2);

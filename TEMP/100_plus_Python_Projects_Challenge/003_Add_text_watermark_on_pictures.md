@@ -70,7 +70,7 @@ def add_watermark(filename, text, font_name='Roboto-Italic.ttf', font_size=20, f
     :param font_size: font size, default is 20
     :param font_opacity: font opacity, default is 50
     :param position_id: position id, defalut is 9 (bottom right)
-    :return: 
+    :return:
     '''
     # get an image
     with Image.open(filename).convert("RGBA") as base:
@@ -141,19 +141,19 @@ python 3.py
 ## 项目需求
 
 1. 在命令行窗口运行；
-2. 程序运行时，会提示输入水印的文字，以及水印文字大小，透明度和位置，文字大小默认值为20，透明度默认为50%，位置默认为右下角。使用数字1-9分别代表左上、中上、右上、中左、正中、中右、下左、下中、下右；
-3. 程序会给当前目录下的images目录中所有png文件增加水印，并保存到watermark目录中。
+2. 程序运行时，会提示输入水印的文字，以及水印文字大小，透明度和位置，文字大小默认值为 20，透明度默认为 50%，位置默认为右下角。使用数字 1-9 分别代表左上、中上、右上、中左、正中、中右、下左、下中、下右；
+3. 程序会给当前目录下的 images 目录中所有 png 文件增加水印，并保存到 watermark 目录中。
 
-## Python编程知识点
+## Python 编程知识点
 
-- for循环
+- for 循环
 - 用户输入字符串
 - 条件判断
 - 自定义函数
 - 元组
 - 打开、保存图片文件
-- 图片RGBA概念
-- os模块
+- 图片 RGBA 概念
+- os 模块
 - PIL 模块 (需要使用`pip install pillow`安装)
 
 ## 参考代码
@@ -209,7 +209,7 @@ def add_watermark(filename, text, font_name='Roboto-Italic.ttf', font_size=20, f
     :param font_size: 字体大小，默认值为20px
     :param font_opacity: 透明度，默认为50%
     :param position_id: 位置ID，1-9，默认是9（右下）
-    :return: 
+    :return:
     '''
     # 打开原图片文件
     with Image.open(filename).convert("RGBA") as base:
@@ -264,7 +264,7 @@ if __name__ == '__main__':
 python 3.py
 ```
 
-- 程序会将`images`目录中所有png图片增加水印并保存到`watermark`目录中
+- 程序会将`images`目录中所有 png 图片增加水印并保存到`watermark`目录中
 
 ![](images/challenge_3_1.png)
 
@@ -276,5 +276,4 @@ python 3.py
 
 ![](images/challenge_3_5.png)
 
-> 注意，如果要增加汉字水印，请使用一个汉字字体，使用Roboto-Italic.ttf无法显示汉字。
-
+> 注意，如果要增加汉字水印，请使用一个汉字字体，使用 Roboto-Italic.ttf 无法显示汉字。

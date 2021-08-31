@@ -4,7 +4,6 @@
 
 **[Explain what this list is about and why it should be included here.]**
 
-
 # By submitting this pull request I confirm I've read and complied with the below requirements.
 
 Failure to properly do so will just result in the pull request being closed and everyone's time wasted. Please read it twice. Most people miss many things.

@@ -15,7 +15,7 @@ Finds all the ancestors of an element up until the element matched by the specif
 const getParentsUntil = (el, selector) => {
   let parents = [],
     _el = el.parentNode;
-  while (_el && typeof _el.matches === 'function') {
+  while (_el && typeof _el.matches === "function") {
     parents.unshift(_el);
     if (_el.matches(selector)) return parents;
     else _el = _el.parentNode;
@@ -25,6 +25,6 @@ const getParentsUntil = (el, selector) => {
 ```
 
 ```js
-getParentsUntil(document.querySelector('#home-link'), 'header');
+getParentsUntil(document.querySelector("#home-link"), "header");
 // [header, nav, ul, li]
 ```

@@ -12,13 +12,13 @@ Checks if the passed value is an object or not.
 - Otherwise, return an object of a type that corresponds to the given value.
 
 ```js
-const isObject = obj => obj === Object(obj);
+const isObject = (obj) => obj === Object(obj);
 ```
 
 ```js
 isObject([1, 2, 3, 4]); // true
 isObject([]); // true
-isObject(['Hello!']); // true
+isObject(["Hello!"]); // true
 isObject({ a: 1 }); // true
 isObject({}); // true
 isObject(true); // false

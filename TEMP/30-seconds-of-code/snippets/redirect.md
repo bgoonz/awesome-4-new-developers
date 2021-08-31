@@ -16,5 +16,5 @@ const redirect = (url, asLink = true) =>
 ```
 
 ```js
-redirect('https://google.com');
+redirect("https://google.com");
 ```

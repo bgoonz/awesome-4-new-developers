@@ -11,8 +11,8 @@ Creates an array with the unique values filtered out.
 - Use `Array.prototype.filter()` to create an array containing only the non-unique values.
 
 ```js
-const filterUnique = arr =>
-  [...new Set(arr)].filter(i => arr.indexOf(i) !== arr.lastIndexOf(i));
+const filterUnique = (arr) =>
+  [...new Set(arr)].filter((i) => arr.indexOf(i) !== arr.lastIndexOf(i));
 ```
 
 ```js

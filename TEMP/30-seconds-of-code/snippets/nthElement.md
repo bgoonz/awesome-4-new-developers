@@ -17,6 +17,6 @@ const nthElement = (arr, n = 0) =>
 ```
 
 ```js
-nthElement(['a', 'b', 'c'], 1); // 'b'
-nthElement(['a', 'b', 'b'], -3); // 'a'
+nthElement(["a", "b", "c"], 1); // 'b'
+nthElement(["a", "b", "b"], -3); // 'a'
 ```

@@ -12,8 +12,9 @@ Checks if the first iterable is a superset of the second one, excluding duplicat
 
 ```js
 const superSet = (a, b) => {
-  const sA = new Set(a), sB = new Set(b);
-  return [...sB].every(v => sA.has(v));
+  const sA = new Set(a),
+    sB = new Set(b);
+  return [...sB].every((v) => sA.has(v));
 };
 ```
 

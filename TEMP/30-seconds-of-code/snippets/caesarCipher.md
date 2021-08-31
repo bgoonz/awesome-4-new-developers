@@ -26,11 +26,11 @@ const caesarCipher = (str, shift, decrypt = false) => {
         return String.fromCharCode(((c - 97 + n) % 26) + 97);
       return l;
     })
-    .join('');
+    .join("");
 };
 ```
 
 ```js
-caesarCipher('Hello World!', -3); // 'Ebiil Tloia!'
-caesarCipher('Ebiil Tloia!', 23, true); // 'Hello World!'
+caesarCipher("Hello World!", -3); // 'Ebiil Tloia!'
+caesarCipher("Ebiil Tloia!", 23, true); // 'Hello World!'
 ```

@@ -13,9 +13,7 @@ Creates an array of `n`-tuples of consecutive elements.
 
 ```js
 const aperture = (n, arr) =>
-  n > arr.length
-    ? []
-    : arr.slice(n - 1).map((v, i) => arr.slice(i, i + n));
+  n > arr.length ? [] : arr.slice(n - 1).map((v, i) => arr.slice(i, i + n));
 ```
 
 ```js

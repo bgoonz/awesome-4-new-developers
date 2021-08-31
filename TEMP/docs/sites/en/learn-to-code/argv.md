@@ -2,9 +2,9 @@
 
 # ARGV
 
-There is a magic array named `ARGV`. 
+There is a magic array named `ARGV`.
 
-It contains the *command line arguments* to the program.
+It contains the _command line arguments_ to the program.
 
 If the user types:
 
@@ -30,7 +30,7 @@ and run it a few times, e.g.
 
 # LAB: Hello, Everyone!
 
-Change `hello.rb` to say hello to *every one* of its command line arguments.
+Change `hello.rb` to say hello to _every one_ of its command line arguments.
 
 For instance:
 
@@ -49,6 +49,3 @@ e.g.
     6
 
 Do you remember how to convert a string to an integer?
-
-
-

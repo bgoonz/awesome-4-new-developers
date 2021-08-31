@@ -11,7 +11,7 @@ Creates a `Date` object from a Unix timestamp.
 - Use `new Date()` to create a new `Date` object.
 
 ```js
-const fromTimestamp = timestamp => new Date(timestamp * 1000);
+const fromTimestamp = (timestamp) => new Date(timestamp * 1000);
 ```
 
 ```js

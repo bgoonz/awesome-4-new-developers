@@ -24,7 +24,7 @@ Add an awesome badge to the top of your list, right next to the title. [Example]
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://awesome.re)
 ```
 
-*The badges should not be modified in any way.*
+_The badges should not be modified in any way._
 
 ## Awesome mentioned badge
 
@@ -48,11 +48,11 @@ Example:
 
 If you're an Awesome list maintainer, you could encourage projects in your list to add the badge.
 
-*The badges should not be modified in any way.*
+_The badges should not be modified in any way._
 
 ## Comment on why something is awesome
 
-Apart from suggesting a particular item on your list, you should also inform your readers *why* it's on the list and how they will benefit from it.
+Apart from suggesting a particular item on your list, you should also inform your readers _why_ it's on the list and how they will benefit from it.
 
 ## Make it clear what the list is about
 
@@ -64,7 +64,7 @@ Ensure your list is grammatically correct, typo-free and has no Markdown formatt
 
 ## Choose an appropriate license
 
-Keep in mind that if you [haven't selected a license](https://choosealicense.com/no-license/), it basically means the people are *not* allowed to reproduce, distribute or create derivative works.
+Keep in mind that if you [haven't selected a license](https://choosealicense.com/no-license/), it basically means the people are _not_ allowed to reproduce, distribute or create derivative works.
 
 [Creative Commons licenses](https://creativecommons.org/) are perfect for this purpose. **We would recommend [`CC0`](https://creativecommons.org/publicdomain/zero/1.0/).** Code licenses like MIT, BSD, GPL, and so forth are not recommended.
 

@@ -2,16 +2,16 @@
 
 # Arrays
 
-* An ARRAY is a CONTAINER
-  * an object that contains other objects
-* It's a list of objects
+- An ARRAY is a CONTAINER
+  - an object that contains other objects
+- It's a list of objects
 
 # What makes an array an array
 
-* You can put any objects inside it
-* In any order
-* They stay in order
-* Duplicates are fine
+- You can put any objects inside it
+- In any order
+- They stay in order
+- Duplicates are fine
 
 # Creating an array
 
@@ -19,10 +19,10 @@
 
 # Array Indexes
 
-* Every slot in the array has a serial number
-* You can retrieve any item in an array by its INDEX
-* An index is a number from 0 to infinity
-  * actually to the size of the array
+- Every slot in the array has a serial number
+- You can retrieve any item in an array by its INDEX
+- An index is a number from 0 to infinity
+  - actually to the size of the array
 
 # Array Indexes Exercise
 
@@ -37,9 +37,9 @@ Why or why not?
 
 # Start At Zero
 
-When counting, 
+When counting,
 
-humans start at one, 
+humans start at one,
 
 but **computers start at zero**.
 
@@ -78,11 +78,11 @@ Note that `to_s` doesn't work right on arrays:
       puts fruit
     end
 
-* `each` is like `while` for arrays
-* `fruits.each do` means "for each item inside this array, do this"
-* `|fruit|` means "put the current item into a variable named `fruit`"
-* `puts fruit` means "print out the value of this variable"
-* `end` means "we're done with the loop now" :-)
+- `each` is like `while` for arrays
+- `fruits.each do` means "for each item inside this array, do this"
+- `|fruit|` means "put the current item into a variable named `fruit`"
+- `puts fruit` means "print out the value of this variable"
+- `end` means "we're done with the loop now" :-)
 
 # Lab: reverse fruit
 
@@ -111,7 +111,7 @@ The `include?` method checks if an object is inside an array or not.
 
     fruits.include? "apple"
     true
-    
+
     fruits.include? "pizza"
     false
 
@@ -120,7 +120,3 @@ The `include?` method checks if an object is inside an array or not.
 I'd like you to **refactor** your old `hello.rb` program to use the `include?` method to check if someone is your enemy.
 
 # TODO: more array labs
-
-
-
-

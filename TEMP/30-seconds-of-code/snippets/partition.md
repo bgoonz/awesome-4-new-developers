@@ -23,10 +23,10 @@ const partition = (arr, fn) =>
 
 ```js
 const users = [
-  { user: 'barney', age: 36, active: false },
-  { user: 'fred', age: 40, active: true },
+  { user: "barney", age: 36, active: false },
+  { user: "fred", age: 40, active: true },
 ];
-partition(users, o => o.active);
+partition(users, (o) => o.active);
 // [
 //   [{ user: 'fred', age: 40, active: true }],
 //   [{ user: 'barney', age: 36, active: false }]

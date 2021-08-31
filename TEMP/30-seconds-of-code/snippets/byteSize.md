@@ -11,10 +11,10 @@ Returns the length of a string in bytes.
 - Use `Blob.size` to get the length of the string in bytes.
 
 ```js
-const byteSize = str => new Blob([str]).size;
+const byteSize = (str) => new Blob([str]).size;
 ```
 
 ```js
-byteSize('😀'); // 4
-byteSize('Hello World'); // 11
+byteSize("😀"); // 4
+byteSize("Hello World"); // 11
 ```

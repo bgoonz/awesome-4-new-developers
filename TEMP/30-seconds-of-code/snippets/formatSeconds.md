@@ -13,17 +13,17 @@ Returns the ISO format of the given number of seconds.
 - Use `String.prototype.join(':')` to combine the values into a string.
 
 ```js
-const formatSeconds = s => {
+const formatSeconds = (s) => {
   const [hour, minute, second, sign] =
     s > 0
-      ? [s / 3600, (s / 60) % 60, s % 60, '']
-      : [-s / 3600, (-s / 60) % 60, -s % 60, '-'];
+      ? [s / 3600, (s / 60) % 60, s % 60, ""]
+      : [-s / 3600, (-s / 60) % 60, -s % 60, "-"];
 
   return (
     sign +
     [hour, minute, second]
-      .map(v => `${Math.floor(v)}`.padStart(2, '0'))
-      .join(':')
+      .map((v) => `${Math.floor(v)}`.padStart(2, "0"))
+      .join(":")
   );
 };
 ```

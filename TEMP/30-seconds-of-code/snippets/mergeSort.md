@@ -14,7 +14,7 @@ Sorts an array of numbers, using the merge sort algorithm.
 - Finally, use `Array.from()` and `Array.prototype.shift()` to combine the two sorted subarrays into one.
 
 ```js
-const mergeSort = arr => {
+const mergeSort = (arr) => {
   if (arr.length < 2) return arr;
   const mid = Math.floor(arr.length / 2);
   const l = mergeSort(arr.slice(0, mid));

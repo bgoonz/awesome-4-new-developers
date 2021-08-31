@@ -55,22 +55,21 @@ Please save the Python as 2.py and run it in console：
 
 ![image-20210505170938660](images/challenge2_en.png)
 
-
 # 中英文翻译
 
 ## 项目需求
 
 1. 在命令行窗口运行
 2. 当程序运行时，会要求我们输入中文或者英文单词或者句子，然后程序会自动翻译成对应的英语或者中文
-3. 当输入q字母，程序不再询问并结束
+3. 当输入 q 字母，程序不再询问并结束
 
-## Python编程知识点
+## Python 编程知识点
 
-- while循环
+- while 循环
 - 用户输入字符串
 - 条件判断
 - 字典数据
-- http post请求
+- http post 请求
 - requests 模块 (需要使用`pip install requests`安装)
 
 ## 参考代码
@@ -108,11 +107,11 @@ while True:
 ```
 
 ## 运行测试
-将代码保存为2.py，然后在控制台运行：
+
+将代码保存为 2.py，然后在控制台运行：
 
 ```
 python 2.py
 ```
 
 ![image-20210505171540819](images/challenge2_cn.png)
-

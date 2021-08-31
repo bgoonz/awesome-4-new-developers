@@ -22,12 +22,12 @@ To stop it, hold down the CONTROL key and press the C key.
 
 ![One Infinite Loop](img/one-infinite-loop.jpg)
 
-*Fun Fact:* The address of Apple HQ is
+_Fun Fact:_ The address of Apple HQ is
 
     1 Infinite Loop
     Cupertino, CA 95014
 
-*Image from the Wikimedia Commons, licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license. Attribution: Joe Ravi*
+_Image from the Wikimedia Commons, licensed under the Creative Commons Attribution-Share Alike 3.0 Unported license. Attribution: Joe Ravi_
 
 # LAB: Infinite Hello
 
@@ -74,9 +74,9 @@ Change your `food.rb` program so that if the user types "return" -- meaning the 
 
 # LAB: Good Food, Bad Food
 
-* Change `food.rb` so that it doesn't love every food.
-* If it's a food you like (let's say, pizza), make it print "Yum! I love pizza."
-* If it's a food you like (let's say, cabbage), make it print "Yuck! I hate cabbage."
+- Change `food.rb` so that it doesn't love every food.
+- If it's a food you like (let's say, pizza), make it print "Yum! I love pizza."
+- If it's a food you like (let's say, cabbage), make it print "Yuck! I hate cabbage."
 
 # times
 
@@ -90,9 +90,9 @@ Try this in IRB:
 
 Let's unpack this:
 
-* `3.times do` means what it sounds like: "do this three times"
-* `end` means this is the end of what I want you to do
-* and of course, `puts` means "show this on the terminal"
+- `3.times do` means what it sounds like: "do this three times"
+- `end` means this is the end of what I want you to do
+- and of course, `puts` means "show this on the terminal"
 
 # Counting in a loop
 
@@ -166,10 +166,10 @@ The magic word `while` combines `loop` and `break`.
       count = count + 1
     end
 
-* The `while` statement keeps checking the expression
+- The `while` statement keeps checking the expression
 
-  * if it's `true` then it loops back
-  * if it's `false` then it stops looping and goes on to the rest of the program
+  - if it's `true` then it loops back
+  - if it's `false` then it stops looping and goes on to the rest of the program
 
 This is fairly complicated, so let's stop here and make sure to understand everything that's happening in this little program.
 
@@ -177,7 +177,7 @@ This is fairly complicated, so let's stop here and make sure to understand every
 
     count = 1
 
-creates a *variable* named `count` and sets its value to `1`.
+creates a _variable_ named `count` and sets its value to `1`.
 
     while count <= 4
 
@@ -193,11 +193,11 @@ prints the current value of count (and the word "potato").
 
       count = count + 1
 
-*increments* the `count` variable... it was `1`, so now it's `2`
+_increments_ the `count` variable... it was `1`, so now it's `2`
 
     end
 
-goes *back to the `while` line* and checks again
+goes _back to the `while` line_ and checks again
 
 # `while` breakdown (pt.2)
 
@@ -215,7 +215,7 @@ Write a program called `potato.rb` that prints the entire potato poem, accuratel
 
 # Lab: Adder
 
-Write a program named `adder.rb` that keeps a *running total*.
+Write a program named `adder.rb` that keeps a _running total_.
 
 For example:
 
@@ -228,5 +228,3 @@ For example:
     Total: 7
     -5
     Total: 2
-
-

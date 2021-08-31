@@ -4,7 +4,9 @@ $railsbridge_darkerblue: #428bca;
 
 $header-height: 50px;
 
-nav *, nav *:before, nav *:after {
+nav *,
+nav *:before,
+nav *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -50,11 +52,13 @@ nav *, nav *:before, nav *:after {
   }
 
   li {
-    a, &.current {
+    a,
+    &.current {
       padding: 3px 25px;
       color: #333;
     }
-    &.current, &.category {
+    &.current,
+    &.category {
       font-weight: bold;
     }
     &.category {
@@ -103,7 +107,8 @@ nav *, nav *:before, nav *:after {
     left: auto;
   }
 
-  li, li a {
+  li,
+  li a {
     font-size: 18px;
   }
 

@@ -20,5 +20,5 @@ const findClosestMatchingNode = (node, selector) => {
 ```
 
 ```js
-findClosestMatchingNode(document.querySelector('span'), 'body'); // body
+findClosestMatchingNode(document.querySelector("span"), "body"); // body
 ```

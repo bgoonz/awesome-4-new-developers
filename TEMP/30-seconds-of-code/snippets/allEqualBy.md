@@ -14,7 +14,7 @@ Checks if all elements in an array are equal, based on the provided mapping func
 ```js
 const allEqualBy = (arr, fn) => {
   const eql = fn(arr[0]);
-  return arr.every(val => fn(val) === eql);
+  return arr.every((val) => fn(val) === eql);
 };
 ```
 

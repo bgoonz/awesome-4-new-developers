@@ -12,7 +12,7 @@ Checks if a numeric array is sorted.
 - Use `Math.sign()` to covert the final value of `direction` to `-1` (descending order) or `1` (ascending order).
 
 ```js
-const isSorted = arr => {
+const isSorted = (arr) => {
   if (arr.length <= 1) return 0;
   const direction = arr[1] - arr[0];
   for (let i = 2; i < arr.length; i++) {

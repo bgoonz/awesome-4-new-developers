@@ -12,11 +12,11 @@ Runs the callback whenever the user has stopped scrolling.
 - Use `clearTimeout()` to clear the timeout if a new `'scroll'` event is fired in under `150` ms.
 
 ```js
-const onScrollStop = callback => {
+const onScrollStop = (callback) => {
   let isScrolling;
   window.addEventListener(
-    'scroll',
-    e => {
+    "scroll",
+    (e) => {
       clearTimeout(isScrolling);
       isScrolling = setTimeout(() => {
         callback();
@@ -29,6 +29,6 @@ const onScrollStop = callback => {
 
 ```js
 onScrollStop(() => {
-  console.log('The user has stopped scrolling');
+  console.log("The user has stopped scrolling");
 });
 ```

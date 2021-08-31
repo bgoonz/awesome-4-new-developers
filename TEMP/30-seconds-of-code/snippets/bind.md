@@ -11,15 +11,17 @@ Creates a function that invokes `fn` with a given context, optionally prepending
 - Use the spread operator (`...`) to prepend any additional supplied parameters to the arguments.
 
 ```js
-const bind = (fn, context, ...boundArgs) => (...args) =>
-  fn.apply(context, [...boundArgs, ...args]);
+const bind =
+  (fn, context, ...boundArgs) =>
+  (...args) =>
+    fn.apply(context, [...boundArgs, ...args]);
 ```
 
 ```js
 function greet(greeting, punctuation) {
-  return greeting + ' ' + this.user + punctuation;
+  return greeting + " " + this.user + punctuation;
 }
-const freddy = { user: 'fred' };
+const freddy = { user: "fred" };
 const freddyBound = bind(greet, freddy);
-console.log(freddyBound('hi', '!')); // 'hi fred!'
+console.log(freddyBound("hi", "!")); // 'hi fred!'
 ```

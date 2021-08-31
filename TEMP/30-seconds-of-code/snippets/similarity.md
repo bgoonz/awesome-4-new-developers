@@ -11,7 +11,7 @@ Returns an array of elements that appear in both arrays.
 - Use `Array.prototype.filter()` to remove them.
 
 ```js
-const similarity = (arr, values) => arr.filter(v => values.includes(v));
+const similarity = (arr, values) => arr.filter((v) => values.includes(v));
 ```
 
 ```js

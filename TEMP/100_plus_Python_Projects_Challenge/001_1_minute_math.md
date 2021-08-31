@@ -63,9 +63,9 @@ if __name__ =='__main__':
             ans = int(input('{} = '.format(a_op_b)))
         except:
             ans = ''
-		
+
         # To check if correct or not
-        if time.time() - start_time <= 60: 
+        if time.time() - start_time <= 60:
             if c == ans:
                 print('Correct! Time remain {} seconds.'.format(int(60 - (time.time() - start_time))))
                 correct = correct + 1
@@ -90,17 +90,17 @@ python 1.py
 
 ![Chanllenge 1](images/challenge1_1.png)
 
-----
+---
 
-# 1分钟数学运算
+# 1 分钟数学运算
 
 ## 项目需求
 
 - 直接在控制台使用命令行运行
-- 程序运行之后倒计时1分钟之后结束
-- 随机出100以内的2个整数加减乘除运算题目（除法确保能够除尽，但除数不能为0）
+- 程序运行之后倒计时 1 分钟之后结束
+- 随机出 100 以内的 2 个整数加减乘除运算题目（除法确保能够除尽，但除数不能为 0）
 - 每出一道题目，由玩家给出答案，然后程序判断对错，接着出下一题，并且显示剩余时间
-- 1分钟时间结束，显示总题数和正确率（正确率精确到小数点后2位），并将之前的题目和答案显示出来
+- 1 分钟时间结束，显示总题数和正确率（正确率精确到小数点后 2 位），并将之前的题目和答案显示出来
 
 ## 项目练习
 
@@ -175,7 +175,7 @@ if __name__ =='__main__':
 
 ## 测试运行
 
-将代码保存为1.py，然后在控制台运行：
+将代码保存为 1.py，然后在控制台运行：
 
 ```
 python 1.py

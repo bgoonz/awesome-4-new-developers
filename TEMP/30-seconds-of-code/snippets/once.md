@@ -12,9 +12,9 @@ Ensures a function is called only once.
 - Allow the function to be supplied with an arbitrary number of arguments using the rest/spread (`...`) operator.
 
 ```js
-const once = fn => {
+const once = (fn) => {
   let called = false;
-  return function(...args) {
+  return function (...args) {
     if (called) return;
     called = true;
     return fn.apply(this, args);
@@ -23,9 +23,9 @@ const once = fn => {
 ```
 
 ```js
-const startApp = function(event) {
+const startApp = function (event) {
   console.log(this, event); // document.body, MouseEvent
 };
-document.body.addEventListener('click', once(startApp));
+document.body.addEventListener("click", once(startApp));
 // only runs `startApp` once upon click
 ```

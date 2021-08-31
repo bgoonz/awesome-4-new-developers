@@ -12,7 +12,7 @@ Determines if the current runtime environment is Node.js.
 
 ```js
 const isNode = () =>
-  typeof process !== 'undefined' &&
+  typeof process !== "undefined" &&
   !!process.versions &&
   !!process.versions.node;
 ```

@@ -17,6 +17,6 @@ const words = (str, pattern = /[^a-zA-Z-]+/) =>
 ```
 
 ```js
-words('I love javaScript!!'); // ['I', 'love', 'javaScript']
-words('python, javaScript & coffee'); // ['python', 'javaScript', 'coffee']
+words("I love javaScript!!"); // ['I', 'love', 'javaScript']
+words("python, javaScript & coffee"); // ['python', 'javaScript', 'coffee']
 ```

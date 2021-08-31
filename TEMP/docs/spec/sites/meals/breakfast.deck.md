@@ -1,10 +1,10 @@
 # Eggs
 
-* scrambled
-* fried
+- scrambled
+- fried
 
 # Cereal
 
-* Frosted Mini-Wheats
-* Corn Flakes
-* Raisin Bran
+- Frosted Mini-Wheats
+- Corn Flakes
+- Raisin Bran

@@ -11,7 +11,7 @@ Returns the head of an array.
 - Use `arr[0]` if possible to return the first element, otherwise return `undefined`.
 
 ```js
-const head = arr => (arr && arr.length ? arr[0] : undefined);
+const head = (arr) => (arr && arr.length ? arr[0] : undefined);
 ```
 
 ```js

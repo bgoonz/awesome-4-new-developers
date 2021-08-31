@@ -13,7 +13,7 @@ Calculates the difference between two arrays, without filtering duplicate values
 ```js
 const difference = (a, b) => {
   const s = new Set(b);
-  return a.filter(x => !s.has(x));
+  return a.filter((x) => !s.has(x));
 };
 ```
 

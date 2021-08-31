@@ -11,7 +11,7 @@ Finds the distance from a given element to the top of the document.
 - Add `HTMLElement.offsetTop` for each element and return the result.
 
 ```js
-const getVerticalOffset = el => {
+const getVerticalOffset = (el) => {
   let offset = el.offsetTop,
     _el = el;
   while (_el.offsetParent) {
@@ -23,5 +23,5 @@ const getVerticalOffset = el => {
 ```
 
 ```js
-getVerticalOffset('.my-element'); // 120
+getVerticalOffset(".my-element"); // 120
 ```

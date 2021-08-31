@@ -11,14 +11,14 @@ Smoothly scrolls the element on which it's called into the visible area of the b
 - Use `{ behavior: 'smooth' }` to scroll smoothly.
 
 ```js
-const smoothScroll = element =>
+const smoothScroll = (element) =>
   document.querySelector(element).scrollIntoView({
-    behavior: 'smooth'
+    behavior: "smooth",
   });
 ```
 
 ```js
-smoothScroll('#fooBar'); // scrolls smoothly to the element with the id fooBar
-smoothScroll('.fooBar');
+smoothScroll("#fooBar"); // scrolls smoothly to the element with the id fooBar
+smoothScroll(".fooBar");
 // scrolls smoothly to the first element with a class of fooBar
 ```

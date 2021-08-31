@@ -12,7 +12,7 @@ Returns every element that exists in any of the two arrays at least once, using 
 ```js
 const unionWith = (a, b, comp) =>
   Array.from(
-    new Set([...a, ...b.filter(x => a.findIndex(y => comp(x, y)) === -1)])
+    new Set([...a, ...b.filter((x) => a.findIndex((y) => comp(x, y)) === -1)])
   );
 ```
 

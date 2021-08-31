@@ -14,7 +14,7 @@ Calculates the date after adding the given number of business days.
 
 ```js
 const addWeekDays = (startDate, count) =>
-  Array.from({ length: count }).reduce(date => {
+  Array.from({ length: count }).reduce((date) => {
     date = new Date(date.setDate(date.getDate() + 1));
     if (date.getDay() % 6 === 0)
       date = new Date(date.setDate(date.getDate() + (date.getDay() / 6 + 1)));
@@ -23,6 +23,6 @@ const addWeekDays = (startDate, count) =>
 ```
 
 ```js
-addWeekDays(new Date('Oct 09, 2020'), 5); // 'Oct 16, 2020'
-addWeekDays(new Date('Oct 12, 2020'), 5); // 'Oct 19, 2020'
+addWeekDays(new Date("Oct 09, 2020"), 5); // 'Oct 16, 2020'
+addWeekDays(new Date("Oct 12, 2020"), 5); // 'Oct 19, 2020'
 ```

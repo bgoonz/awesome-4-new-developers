@@ -1,17 +1,16 @@
 <script>
 export default {
   functional: true,
-  render (h, { props, slots }) {
-    return h('div',
+  render(h, { props, slots }) {
+    return h(
+      "div",
       {
-        class: ['videoWrapper']
+        class: ["videoWrapper"],
       },
-      [
-        slots().default
-      ]
-    )
-  }
-}
+      [slots().default]
+    );
+  },
+};
 </script>
 
 <style lang="stylus">

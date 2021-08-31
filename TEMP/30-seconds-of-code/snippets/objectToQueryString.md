@@ -13,22 +13,22 @@ Generates a query string from the key-value pairs of the given object.
 - Return the `queryString` or an empty string when the `queryParameters` are falsy.
 
 ```js
-const objectToQueryString = queryParameters => {
+const objectToQueryString = (queryParameters) => {
   return queryParameters
     ? Object.entries(queryParameters).reduce(
         (queryString, [key, val], index) => {
-          const symbol = queryString.length === 0 ? '?' : '&';
+          const symbol = queryString.length === 0 ? "?" : "&";
           queryString +=
-            typeof val === 'string' ? `${symbol}${key}=${val}` : '';
+            typeof val === "string" ? `${symbol}${key}=${val}` : "";
           return queryString;
         },
-        ''
+        ""
       )
-    : '';
+    : "";
 };
 ```
 
 ```js
-objectToQueryString({ page: '1', size: '2kg', key: undefined });
+objectToQueryString({ page: "1", size: "2kg", key: undefined });
 // '?page=1&size=2kg'
 ```

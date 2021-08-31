@@ -21,7 +21,7 @@ Installs gems listed in the `Gemfile`
 Create a new rails project called `NAME`
 
     rails new NAME
-    
+
 Auto-generate routes (this can also be done manually)
 
     rails generate scaffold
@@ -74,6 +74,6 @@ Commit the files you've added to the local repository.
 
     git commit -m "Describe what has changed, and why" .
 
-Push *committed* changes to the remote server.
+Push _committed_ changes to the remote server.
 
     git push

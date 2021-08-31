@@ -12,13 +12,13 @@ Rails implements a very specific notion of the **Model/View/Controller** pattern
   
 <h3 id="view">View</h3>
 
-* display the data for human (or machine) consumption
-* webpages are views
+- display the data for human (or machine) consumption
+- webpages are views
 
 <h3 id="controller">Controller</h3>
 
-* acts as the glue between the models and the views
-* combines data from multiple models
-* summarizes and filters data
+- acts as the glue between the models and the views
+- combines data from multiple models
+- summarizes and filters data
 
-In MVC, models, views, and controllers have very specific jobs.  Separating responsibilities like this make it easy to maintain and extend rails applications.  When responsibilities become muddied it gets much harder to debug issues and add new functionality.
+In MVC, models, views, and controllers have very specific jobs. Separating responsibilities like this make it easy to maintain and extend rails applications. When responsibilities become muddied it gets much harder to debug issues and add new functionality.

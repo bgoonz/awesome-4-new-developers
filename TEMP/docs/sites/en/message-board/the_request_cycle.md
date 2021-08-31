@@ -9,4 +9,3 @@
 1. With the data the controller got from the model, it uses the view to make some HTML.
 1. Rails packages up the response and gives it to the web server.
 1. The web server delivers the response to the browser to display a cool website to the user.
-

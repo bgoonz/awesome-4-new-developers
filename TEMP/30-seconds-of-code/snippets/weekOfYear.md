@@ -13,7 +13,7 @@ Returns the zero-indexed week of the year that a date corresponds to.
 - `-0` is returned if the given `date` is before the first Monday of the year.
 
 ```js
-const weekOfYear = date => {
+const weekOfYear = (date) => {
   const startOfYear = new Date(date.getFullYear(), 0, 1);
   startOfYear.setDate(startOfYear.getDate() + (startOfYear.getDay() % 7));
   return Math.round((date - startOfYear) / (7 * 24 * 3600 * 1000));
@@ -21,5 +21,5 @@ const weekOfYear = date => {
 ```
 
 ```js
-weekOfYear(new Date('2021-06-18')); // 23
+weekOfYear(new Date("2021-06-18")); // 23
 ```

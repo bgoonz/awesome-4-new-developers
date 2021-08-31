@@ -22,11 +22,11 @@ Think of memory as a giant warehouse.
 
 If memory is a giant warehouse...
 
-...and *objects* are **boxes** in that warehouse
+...and _objects_ are **boxes** in that warehouse
 
-...then a *value* is the **contents** of a box
+...then a _value_ is the **contents** of a box
 
-...and a *variable* is a **label** you stick on the outside of the box
+...and a _variable_ is a **label** you stick on the outside of the box
 
 # Variables are documentation
 
@@ -47,12 +47,12 @@ or this:
 
 Let's spend a few minutes just playing around in IRB. Some things to try:
 
-* write a poem
-* YELL THE POEM
-* calculate 2 + 2 and more complicated things
-* assign your best friend to a variable
-* reverse your best friend's name
-* get a new best friend and reverse her too
+- write a poem
+- YELL THE POEM
+- calculate 2 + 2 and more complicated things
+- assign your best friend to a variable
+- reverse your best friend's name
+- get a new best friend and reverse her too
 
 # The Pointer Metaphor
 
@@ -69,11 +69,11 @@ You can assign and reassign variables at will.
     color = "blue"
     fruit = "berry"
     color + fruit
-    
+
     color = "black"
     color + fruit
-    
-Changing a variable (using ASSIGNMENT) just changes the name of an object. It does *not* change the data inside the object.
+
+Changing a variable (using ASSIGNMENT) just changes the name of an object. It does _not_ change the data inside the object.
 
 # Many pointers can point to the same thing
 
@@ -84,19 +84,19 @@ Changing a variable (using ASSIGNMENT) just changes the name of an object. It do
 
 After this both `snack` and `fruit`...
 
-  * are *pointing* to the same *object*
-  * have the same *value*
+- are _pointing_ to the same _object_
+- have the same _value_
 
 # Return values are new
 
-most messages return *new* values
+most messages return _new_ values
 
     fruit = "banana"
     snack = fruit.upcase
 
 ![fruit-banana-snack-banana](img/fruit-banana-snack-banana.svg)
 
-`"banana"` and `"BANANA"` are two *different objects* in memory
+`"banana"` and `"BANANA"` are two _different objects_ in memory
 
 # Changing Values
 
@@ -106,9 +106,8 @@ Most messages do not change the data inside the object.
     color
 
 But some messages do change the data!
-    
+
     color.upcase!
     color
 
 This can be dangerous so sometimes those messages end with a BANG (exclamation point).
-

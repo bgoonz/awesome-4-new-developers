@@ -92,10 +92,10 @@ If you think any of the roadmaps can be improved, please do open a PR with any u
 
 > Have a look at the [contribution docs](./contributing.md) for how to update any of the roadmaps
 
-* Open pull request with improvements
-* Discuss ideas in issues
-* Spread the word
-* Reach out with any feedback
+- Open pull request with improvements
+- Discuss ideas in issues
+- Spread the word
+- Reach out with any feedback
 
 ## Supported By
 

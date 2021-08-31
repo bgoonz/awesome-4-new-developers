@@ -14,12 +14,12 @@ Redirects the page to HTTPS if it's currently in HTTP.
 
 ```js
 const httpsRedirect = () => {
-  if (location.protocol !== 'https:')
-    location.replace('https://' + location.href.split('//')[1]);
+  if (location.protocol !== "https:")
+    location.replace("https://" + location.href.split("//")[1]);
 };
 ```
 
 ```js
-httpsRedirect(); 
+httpsRedirect();
 // If you are on http://mydomain.com, you are redirected to https://mydomain.com
 ```

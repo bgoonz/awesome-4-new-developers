@@ -20,5 +20,5 @@ const dropRightWhile = (arr, func) => {
 ```
 
 ```js
-dropRightWhile([1, 2, 3, 4], n => n < 3); // [1, 2]
+dropRightWhile([1, 2, 3, 4], (n) => n < 3); // [1, 2]
 ```

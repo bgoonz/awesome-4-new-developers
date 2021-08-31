@@ -13,8 +13,8 @@ Returns the unique symmetric difference between two arrays, not containing dupli
 ```js
 const uniqueSymmetricDifference = (a, b) => [
   ...new Set([
-    ...a.filter(v => !b.includes(v)),
-    ...b.filter(v => !a.includes(v)),
+    ...a.filter((v) => !b.includes(v)),
+    ...b.filter((v) => !a.includes(v)),
   ]),
 ];
 ```

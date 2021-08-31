@@ -2,10 +2,10 @@
 
 # Functions
 
-* just like a VARIABLE is a name for a chunk of data
-* a FUNCTION is a name for a chunk of code
-* if you have some code you want to run again and again
-  * or just run once, but keep it organized
+- just like a VARIABLE is a name for a chunk of data
+- a FUNCTION is a name for a chunk of code
+- if you have some code you want to run again and again
+  - or just run once, but keep it organized
 
 # For example
 
@@ -15,13 +15,13 @@ Here's a silly function:
       x + y
     end
 
-* `def` means "define a function"
-* `add` is the *name* of the function
-* `x, y` are the *parameters* of the function
-* `x + y` is the *body* of the function
-  * also the *return value*
+- `def` means "define a function"
+- `add` is the _name_ of the function
+- `x, y` are the _parameters_ of the function
+- `x + y` is the _body_ of the function
+  - also the _return value_
 
-Lab: write a `multiply` method and use it to multiply 123 * 456
+Lab: write a `multiply` method and use it to multiply 123 \* 456
 
 # Rant!!!
 
@@ -50,9 +50,7 @@ Lab: capitalize a few things
       string.split(' ').map(&:capitalize).join(' ')
     end
 
-* The funny `&:` means "send this message"
-* `map(&:capitalize)` means "send the message `capitalize` to every item in the array"
+- The funny `&:` means "send this message"
+- `map(&:capitalize)` means "send the message `capitalize` to every item in the array"
 
 # LAB: titleize your favorite movies
-
-

@@ -12,13 +12,10 @@ Returns an array of lines from the specified file.
 - Use `String.prototype.split(\n)` to create an array of lines from the contents of the file.
 
 ```js
-const fs = require('fs');
+const fs = require("fs");
 
-const readFileLines = filename =>
-  fs
-    .readFileSync(filename)
-    .toString('UTF8')
-    .split('\n');
+const readFileLines = (filename) =>
+  fs.readFileSync(filename).toString("UTF8").split("\n");
 ```
 
 ```js
@@ -29,6 +26,6 @@ contents of test.txt :
   line3
   ___________________________
 */
-let arr = readFileLines('test.txt');
+let arr = readFileLines("test.txt");
 console.log(arr); // ['line1', 'line2', 'line3']
 ```

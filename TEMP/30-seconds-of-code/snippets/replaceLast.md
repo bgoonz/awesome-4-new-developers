@@ -17,9 +17,9 @@ Replaces the last occurence of a pattern in a string.
 ```js
 const replaceLast = (str, pattern, replacement) => {
   const match =
-    typeof pattern === 'string'
+    typeof pattern === "string"
       ? pattern
-      : (str.match(new RegExp(pattern.source, 'g')) || []).slice(-1)[0];
+      : (str.match(new RegExp(pattern.source, "g")) || []).slice(-1)[0];
   if (!match) return str;
   const last = str.lastIndexOf(match);
   return last !== -1
@@ -29,8 +29,8 @@ const replaceLast = (str, pattern, replacement) => {
 ```
 
 ```js
-replaceLast('abcabdef', 'ab', 'gg'); // 'abcggdef'
-replaceLast('abcabdef', /ab/, 'gg'); // 'abcggdef'
-replaceLast('abcabdef', 'ad', 'gg'); // 'abcabdef'
-replaceLast('abcabdef', /ad/, 'gg'); // 'abcabdef'
+replaceLast("abcabdef", "ab", "gg"); // 'abcggdef'
+replaceLast("abcabdef", /ab/, "gg"); // 'abcggdef'
+replaceLast("abcabdef", "ad", "gg"); // 'abcabdef'
+replaceLast("abcabdef", /ad/, "gg"); // 'abcabdef'
 ```

@@ -12,15 +12,16 @@ Performs right-to-left function composition.
 
 ```js
 const compose = (...fns) =>
-  fns.reduce((f, g) => (...args) => f(g(...args)));
+  fns.reduce(
+    (f, g) =>
+      (...args) =>
+        f(g(...args))
+  );
 ```
 
 ```js
-const add5 = x => x + 5;
+const add5 = (x) => x + 5;
 const multiply = (x, y) => x * y;
-const multiplyAndAdd5 = compose(
-  add5,
-  multiply
-);
+const multiplyAndAdd5 = compose(add5, multiply);
 multiplyAndAdd5(5, 2); // 15
 ```

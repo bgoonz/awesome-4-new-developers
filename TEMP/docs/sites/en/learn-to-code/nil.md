@@ -2,13 +2,13 @@
 
 # Nil
 
-*nil* is a magic object
+_nil_ is a magic object
 
 # There Is No Spoon
 
 ![](img/spoon.jpg)
 
-*nil* is the object that means "there is no object"
+_nil_ is the object that means "there is no object"
 
 # Experiment
 
@@ -16,15 +16,15 @@
     fruit = nil
     fruit.reverse
 
-*Read the error!*
+_Read the error!_
 
 # Errors are good
 
 They tell you
 
-* you made a mistake
-* what that mistake was
-* (sometimes) how to fix it
+- you made a mistake
+- what that mistake was
+- (sometimes) how to fix it
 
 Interpret this error:
 
@@ -33,8 +33,6 @@ Interpret this error:
 
 # Fail Fast, Fail Often
 
-* Ruby has a "fail fast" philosophy
-* Is this a good idea?
-* Why or why not?
-
-
+- Ruby has a "fail fast" philosophy
+- Is this a good idea?
+- Why or why not?

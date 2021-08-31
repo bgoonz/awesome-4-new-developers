@@ -11,10 +11,10 @@ Removes an element from the DOM.
 - Use `Element.removeChild()` to remove the given element from its parent node.
 
 ```js
-const removeElement = el => el.parentNode.removeChild(el);
+const removeElement = (el) => el.parentNode.removeChild(el);
 ```
 
 ```js
-removeElement(document.querySelector('#my-element'));
+removeElement(document.querySelector("#my-element"));
 // Removes #my-element from the DOM
 ```

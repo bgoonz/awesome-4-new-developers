@@ -14,7 +14,7 @@ Sorts an array of numbers, using the bubble sort algorithm.
 - If `swapped` is `false` after an iteration, no more changes are needed, so the cloned array is returned.
 
 ```js
-const bubbleSort = arr => {
+const bubbleSort = (arr) => {
   let swapped = false;
   const a = [...arr];
   for (let i = 1; i < a.length; i++) {

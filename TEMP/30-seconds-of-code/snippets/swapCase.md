@@ -13,12 +13,12 @@ Creates a string with uppercase characters converted to lowercase and vice versa
 - Note that it is not necessarily true that `swapCase(swapCase(str)) === str`.
 
 ```js
-const swapCase = str =>
+const swapCase = (str) =>
   [...str]
-    .map(c => (c === c.toLowerCase() ? c.toUpperCase() : c.toLowerCase()))
-    .join('');
+    .map((c) => (c === c.toLowerCase() ? c.toUpperCase() : c.toLowerCase()))
+    .join("");
 ```
 
 ```js
-swapCase('Hello world!'); // 'hELLO WORLD!'
+swapCase("Hello world!"); // 'hELLO WORLD!'
 ```

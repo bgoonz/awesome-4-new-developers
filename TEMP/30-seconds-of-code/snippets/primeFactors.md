@@ -11,7 +11,7 @@ Finds the prime factors of a given number using the trial division algorithm.
 - If the current factor, `f`, exactly divides `n`, add `f` to the factors array and divide `n` by `f`. Otherwise, increment `f` by one.
 
 ```js
-const primeFactors = n => {
+const primeFactors = (n) => {
   let a = [],
     f = 2;
   while (n > 1) {

@@ -25,10 +25,6 @@ fs.readFile(filename, (err, text) => {
   );
 });
 
-
-
 //----------------------------
 
-let arr2html= function (arr, fileName, callback) {
-  
-}
+let arr2html = function (arr, fileName, callback) {};

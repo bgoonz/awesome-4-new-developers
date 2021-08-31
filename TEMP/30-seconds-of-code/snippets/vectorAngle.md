@@ -21,4 +21,3 @@ const vectorAngle = (x, y) => {
 ```js
 vectorAngle([3, 4], [4, 3]); // 0.283794109208328
 ```
-
