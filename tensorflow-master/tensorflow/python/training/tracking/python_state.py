@@ -29,7 +29,7 @@ from tensorflow.python.util.tf_export import tf_export
 @tf_export("train.experimental.PythonState")
 @six.add_metaclass(abc.ABCMeta)
 class PythonState(base.Trackable):
-  """A mixin for putting Python state in an object-based checkpoint.
+    """A mixin for putting Python state in an object-based checkpoint.
 
   This is an abstract class which allows extensions to TensorFlow's object-based
   checkpointing (see `tf.train.Checkpoint`). For example a wrapper for NumPy
@@ -74,19 +74,20 @@ class PythonState(base.Trackable):
   ```
   """
 
-  @abc.abstractmethod
-  def serialize(self):
-    """Callback to serialize the object. Returns a string."""
+    @abc.abstractmethod
+    def serialize(self):
+        """Callback to serialize the object. Returns a string."""
 
-  @abc.abstractmethod
-  def deserialize(self, string_value):
-    """Callback to deserialize the object."""
+    @abc.abstractmethod
+    def deserialize(self, string_value):
+        """Callback to deserialize the object."""
 
-  def _gather_saveables_for_checkpoint(self):
-    """Specify callbacks for saving and restoring `array`."""
-    return {
-        "py_state": functools.partial(
-            base.PythonStringStateSaveable,
-            state_callback=self.serialize,
-            restore_callback=self.deserialize)
+    def _gather_saveables_for_checkpoint(self):
+        """Specify callbacks for saving and restoring `array`."""
+        return {
+            "py_state": functools.partial(
+                base.PythonStringStateSaveable,
+                state_callback=self.serialize,
+                restore_callback=self.deserialize,
+            )
         }

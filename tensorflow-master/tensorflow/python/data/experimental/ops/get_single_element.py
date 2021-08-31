@@ -25,7 +25,7 @@ from tensorflow.python.util.tf_export import tf_export
 @deprecation.deprecated(None, "Use `tf.data.Dataset.get_single_element()`.")
 @tf_export("data.experimental.get_single_element")
 def get_single_element(dataset):
-  """Returns the single element of the `dataset` as a nested structure of tensors.
+    """Returns the single element of the `dataset` as a nested structure of tensors.
 
   The function enables you to use a `tf.data.Dataset` in a stateless
   "tensor-in tensor-out" expression, without creating an iterator.
@@ -143,7 +143,7 @@ def get_single_element(dataset):
     InvalidArgumentError: (at runtime) if `dataset` does not contain exactly
       one element.
   """
-  if not isinstance(dataset, dataset_ops.DatasetV2):
-    raise TypeError("`dataset` must be a `tf.data.Dataset` object.")
+    if not isinstance(dataset, dataset_ops.DatasetV2):
+        raise TypeError("`dataset` must be a `tf.data.Dataset` object.")
 
-  return dataset.get_single_element()
+    return dataset.get_single_element()

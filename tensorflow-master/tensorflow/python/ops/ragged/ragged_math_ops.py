@@ -35,19 +35,16 @@ from tensorflow.python.util import dispatch
 from tensorflow.python.util.tf_export import tf_export
 
 
-#===============================================================================
+# ===============================================================================
 # ragged.range
-#===============================================================================
+# ===============================================================================
 # pylint: disable=redefined-builtin
-@tf_export('ragged.range')
+@tf_export("ragged.range")
 @dispatch.add_dispatch_support
-def range(starts,
-          limits=None,
-          deltas=1,
-          dtype=None,
-          name=None,
-          row_splits_dtype=dtypes.int64):
-  """Returns a `RaggedTensor` containing the specified sequences of numbers.
+def range(
+    starts, limits=None, deltas=1, dtype=None, name=None, row_splits_dtype=dtypes.int64
+):
+    """Returns a `RaggedTensor` containing the specified sequences of numbers.
 
   Each row of the returned `RaggedTensor` contains a single sequence:
 
@@ -92,39 +89,42 @@ def range(starts,
   Returns:
     A `RaggedTensor` of type `dtype` with `ragged_rank=1`.
   """
-  row_splits_dtype = dtypes.as_dtype(row_splits_dtype)
-  if limits is None:
-    starts, limits = 0, starts
+    row_splits_dtype = dtypes.as_dtype(row_splits_dtype)
+    if limits is None:
+        starts, limits = 0, starts
 
-  with ops.name_scope(name, 'RaggedRange', [starts, limits, deltas]) as name:
-    starts = ops.convert_to_tensor(starts, dtype=dtype, name='starts')
-    limits = ops.convert_to_tensor(limits, dtype=dtype, name='limits')
-    deltas = ops.convert_to_tensor(deltas, dtype=dtype, name='deltas')
+    with ops.name_scope(name, "RaggedRange", [starts, limits, deltas]) as name:
+        starts = ops.convert_to_tensor(starts, dtype=dtype, name="starts")
+        limits = ops.convert_to_tensor(limits, dtype=dtype, name="limits")
+        deltas = ops.convert_to_tensor(deltas, dtype=dtype, name="deltas")
 
-    # infer dtype if not explicitly provided
-    if dtype is None:
-      starts, limits, deltas = _infer_matching_dtype(
-          [starts, limits, deltas],
-          [dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64])
+        # infer dtype if not explicitly provided
+        if dtype is None:
+            starts, limits, deltas = _infer_matching_dtype(
+                [starts, limits, deltas],
+                [dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64],
+            )
 
-    result = gen_ragged_math_ops.ragged_range(
-        starts, limits, deltas, Tsplits=row_splits_dtype, name=name)
-    return ragged_tensor.RaggedTensor.from_row_splits(
-        result.rt_dense_values, result.rt_nested_splits, validate=False)
+        result = gen_ragged_math_ops.ragged_range(
+            starts, limits, deltas, Tsplits=row_splits_dtype, name=name
+        )
+        return ragged_tensor.RaggedTensor.from_row_splits(
+            result.rt_dense_values, result.rt_nested_splits, validate=False
+        )
 
 
 def _infer_matching_dtype(tensors, dtype_hierarchy):
-  """Infers a matching dtype for tensors, and casts them to that dtype."""
-  assert all(t.dtype in dtype_hierarchy for t in tensors)
-  inferred_dtype = max([t.dtype for t in tensors], key=dtype_hierarchy.index)
-  return [math_ops.cast(t, inferred_dtype) for t in tensors]
+    """Infers a matching dtype for tensors, and casts them to that dtype."""
+    assert all(t.dtype in dtype_hierarchy for t in tensors)
+    inferred_dtype = max([t.dtype for t in tensors], key=dtype_hierarchy.index)
+    return [math_ops.cast(t, inferred_dtype) for t in tensors]
 
 
-ops.no_gradient('RaggedRange')
+ops.no_gradient("RaggedRange")
 
-#===============================================================================
+# ===============================================================================
 # ragged_segment_<AGGREGATE>
-#===============================================================================
+# ===============================================================================
 
 # Docstring template used for the raggged_segment_<AGGREGATE> ops.
 _RAGGED_SEGMENT_DOCSTRING = """\
@@ -157,13 +157,10 @@ Computes the %(combination)s along segments of a RaggedTensor.
 """
 
 
-def _ragged_segment_aggregate(unsorted_segment_op,
-                              data,
-                              segment_ids,
-                              num_segments,
-                              separator=None,
-                              name=None):
-  """Aggregates along segments of a RaggedTensor using `unsorted_segment_op`.
+def _ragged_segment_aggregate(
+    unsorted_segment_op, data, segment_ids, num_segments, separator=None, name=None
+):
+    """Aggregates along segments of a RaggedTensor using `unsorted_segment_op`.
 
   Returns a RaggedTensor `output` with `num_segments` rows, where the row
   `output[i]` is formed by combining all rows of `data` whose corresponding
@@ -195,162 +192,183 @@ def _ragged_segment_aggregate(unsorted_segment_op,
   Raises:
     ValueError: If segment_ids.shape is not a prefix of data.shape.
   """
-  if not (ragged_tensor.is_ragged(data) or
-          ragged_tensor.is_ragged(segment_ids)):
-    if separator is not None:
-      # It uses unsorted_segment_join.
-      return unsorted_segment_op(data, segment_ids, num_segments, separator,
-                                 name)
-    else:
-      return unsorted_segment_op(data, segment_ids, num_segments, name)
+    if not (ragged_tensor.is_ragged(data) or ragged_tensor.is_ragged(segment_ids)):
+        if separator is not None:
+            # It uses unsorted_segment_join.
+            return unsorted_segment_op(data, segment_ids, num_segments, separator, name)
+        else:
+            return unsorted_segment_op(data, segment_ids, num_segments, name)
 
-  with ops.name_scope(name, 'RaggedSegment',
-                      [data, segment_ids, num_segments]) as name:
-    data = ragged_tensor.convert_to_tensor_or_ragged_tensor(data, name='data')
-    segment_ids = ragged_tensor.convert_to_tensor_or_ragged_tensor(
-        segment_ids, name='segment_ids')
-    data, segment_ids = ragged_tensor.match_row_splits_dtypes(data, segment_ids)
-    if segment_ids.dtype not in (dtypes.int32, dtypes.int64):
-      raise ValueError('segment_ids must have dtype int32 or int64.')
+    with ops.name_scope(
+        name, "RaggedSegment", [data, segment_ids, num_segments]
+    ) as name:
+        data = ragged_tensor.convert_to_tensor_or_ragged_tensor(data, name="data")
+        segment_ids = ragged_tensor.convert_to_tensor_or_ragged_tensor(
+            segment_ids, name="segment_ids"
+        )
+        data, segment_ids = ragged_tensor.match_row_splits_dtypes(data, segment_ids)
+        if segment_ids.dtype not in (dtypes.int32, dtypes.int64):
+            raise ValueError("segment_ids must have dtype int32 or int64.")
 
-    if ragged_tensor.is_ragged(segment_ids):
-      if not ragged_tensor.is_ragged(data):
-        raise ValueError('segment_ids.shape must be a prefix of data.shape, '
-                         'but segment_ids is ragged and data is not.')
-      check_splits = check_ops.assert_equal(
-          segment_ids.row_splits,
-          data.row_splits,
-          message='segment_ids.shape must be a prefix of data.shape')
-      with ops.control_dependencies([check_splits]):
-        return _ragged_segment_aggregate(unsorted_segment_op, data.values,
-                                         segment_ids.values, num_segments,
-                                         separator)
+        if ragged_tensor.is_ragged(segment_ids):
+            if not ragged_tensor.is_ragged(data):
+                raise ValueError(
+                    "segment_ids.shape must be a prefix of data.shape, "
+                    "but segment_ids is ragged and data is not."
+                )
+            check_splits = check_ops.assert_equal(
+                segment_ids.row_splits,
+                data.row_splits,
+                message="segment_ids.shape must be a prefix of data.shape",
+            )
+            with ops.control_dependencies([check_splits]):
+                return _ragged_segment_aggregate(
+                    unsorted_segment_op,
+                    data.values,
+                    segment_ids.values,
+                    num_segments,
+                    separator,
+                )
 
-    # Find the length of each row in data.  (shape=[data_nrows])
-    data_row_lengths = data.row_splits[1:] - data.row_splits[:-1]
+        # Find the length of each row in data.  (shape=[data_nrows])
+        data_row_lengths = data.row_splits[1:] - data.row_splits[:-1]
 
-    # Find the length that each output row will have.  The length of the row
-    # corresponding to segment `id` is `max(data_row_lengths[i])` where
-    # `segment_ids[i]=id`.  (shape=[output_nrows])
-    output_row_lengths = math_ops.maximum(
-        math_ops.unsorted_segment_max(data_row_lengths, segment_ids,
-                                      num_segments), 0)
+        # Find the length that each output row will have.  The length of the row
+        # corresponding to segment `id` is `max(data_row_lengths[i])` where
+        # `segment_ids[i]=id`.  (shape=[output_nrows])
+        output_row_lengths = math_ops.maximum(
+            math_ops.unsorted_segment_max(data_row_lengths, segment_ids, num_segments),
+            0,
+        )
 
-    # Build the splits tensor for the output RaggedTensor.
-    output_splits = array_ops.concat([
-        array_ops.zeros([1], output_row_lengths.dtype),
-        math_ops.cumsum(output_row_lengths)
-    ],
-                                     axis=0)
+        # Build the splits tensor for the output RaggedTensor.
+        output_splits = array_ops.concat(
+            [
+                array_ops.zeros([1], output_row_lengths.dtype),
+                math_ops.cumsum(output_row_lengths),
+            ],
+            axis=0,
+        )
 
-    # For each row in `data`, find the start & limit position where that row's
-    # values will be aggregated in output.values.
-    data_row_to_out_row_start = array_ops.gather(output_splits, segment_ids)
-    data_row_to_out_row_limit = data_row_to_out_row_start + data_row_lengths
+        # For each row in `data`, find the start & limit position where that row's
+        # values will be aggregated in output.values.
+        data_row_to_out_row_start = array_ops.gather(output_splits, segment_ids)
+        data_row_to_out_row_limit = data_row_to_out_row_start + data_row_lengths
 
-    # For each value in `data.values`, find the position where it will
-    # aggregated in `output.values`.
-    # Get the target output values index for each data values index.
-    data_val_to_out_val_index = range(data_row_to_out_row_start,
-                                      data_row_to_out_row_limit).values
+        # For each value in `data.values`, find the position where it will
+        # aggregated in `output.values`.
+        # Get the target output values index for each data values index.
+        data_val_to_out_val_index = range(
+            data_row_to_out_row_start, data_row_to_out_row_limit
+        ).values
 
-    # Recursively aggregate the values.
-    output_values = _ragged_segment_aggregate(unsorted_segment_op, data.values,
-                                              data_val_to_out_val_index,
-                                              output_splits[-1], separator)
-    return ragged_tensor.RaggedTensor.from_row_splits(
-        output_values, output_splits, validate=False)
+        # Recursively aggregate the values.
+        output_values = _ragged_segment_aggregate(
+            unsorted_segment_op,
+            data.values,
+            data_val_to_out_val_index,
+            output_splits[-1],
+            separator,
+        )
+        return ragged_tensor.RaggedTensor.from_row_splits(
+            output_values, output_splits, validate=False
+        )
 
 
 def segment_sum(data, segment_ids, num_segments, name=None):
-  # For docs, see: _RAGGED_SEGMENT_DOCSTRING
-  return _ragged_segment_aggregate(
-      math_ops.unsorted_segment_sum,
-      data=data,
-      segment_ids=segment_ids,
-      num_segments=num_segments,
-      name=(name or 'RaggedSegmentSum'))
+    # For docs, see: _RAGGED_SEGMENT_DOCSTRING
+    return _ragged_segment_aggregate(
+        math_ops.unsorted_segment_sum,
+        data=data,
+        segment_ids=segment_ids,
+        num_segments=num_segments,
+        name=(name or "RaggedSegmentSum"),
+    )
 
 
 def segment_prod(data, segment_ids, num_segments, name=None):
-  # For docs, see: _RAGGED_SEGMENT_DOCSTRING
-  return _ragged_segment_aggregate(
-      math_ops.unsorted_segment_prod,
-      data=data,
-      segment_ids=segment_ids,
-      num_segments=num_segments,
-      name=(name or 'RaggedSegmentProd'))
+    # For docs, see: _RAGGED_SEGMENT_DOCSTRING
+    return _ragged_segment_aggregate(
+        math_ops.unsorted_segment_prod,
+        data=data,
+        segment_ids=segment_ids,
+        num_segments=num_segments,
+        name=(name or "RaggedSegmentProd"),
+    )
 
 
 def segment_min(data, segment_ids, num_segments, name=None):
-  # For docs, see: _RAGGED_SEGMENT_DOCSTRING
-  return _ragged_segment_aggregate(
-      math_ops.unsorted_segment_min,
-      data=data,
-      segment_ids=segment_ids,
-      num_segments=num_segments,
-      name=(name or 'RaggedSegmentMin'))
+    # For docs, see: _RAGGED_SEGMENT_DOCSTRING
+    return _ragged_segment_aggregate(
+        math_ops.unsorted_segment_min,
+        data=data,
+        segment_ids=segment_ids,
+        num_segments=num_segments,
+        name=(name or "RaggedSegmentMin"),
+    )
 
 
 def segment_max(data, segment_ids, num_segments, name=None):
-  # For docs, see: _RAGGED_SEGMENT_DOCSTRING
-  return _ragged_segment_aggregate(
-      math_ops.unsorted_segment_max,
-      data=data,
-      segment_ids=segment_ids,
-      num_segments=num_segments,
-      name=(name or 'RaggedSegmentMax'))
+    # For docs, see: _RAGGED_SEGMENT_DOCSTRING
+    return _ragged_segment_aggregate(
+        math_ops.unsorted_segment_max,
+        data=data,
+        segment_ids=segment_ids,
+        num_segments=num_segments,
+        name=(name or "RaggedSegmentMax"),
+    )
 
 
 def segment_mean(data, segment_ids, num_segments, name=None):
-  """For docs, see: _RAGGED_SEGMENT_DOCSTRING."""
-  with ops.name_scope(name, 'RaggedSegmentMean',
-                      [data, segment_ids, num_segments]):
-    total = segment_sum(data, segment_ids, num_segments)
-    ones = ragged_tensor.RaggedTensor.from_nested_row_splits(
-        array_ops.ones_like(data.flat_values),
-        data.nested_row_splits,
-        validate=False)
-    count = segment_sum(ones, segment_ids, num_segments)
-    if ragged_tensor.is_ragged(total):
-      return total.with_flat_values(total.flat_values / count.flat_values)
-    else:
-      return total / count
+    """For docs, see: _RAGGED_SEGMENT_DOCSTRING."""
+    with ops.name_scope(name, "RaggedSegmentMean", [data, segment_ids, num_segments]):
+        total = segment_sum(data, segment_ids, num_segments)
+        ones = ragged_tensor.RaggedTensor.from_nested_row_splits(
+            array_ops.ones_like(data.flat_values),
+            data.nested_row_splits,
+            validate=False,
+        )
+        count = segment_sum(ones, segment_ids, num_segments)
+        if ragged_tensor.is_ragged(total):
+            return total.with_flat_values(total.flat_values / count.flat_values)
+        else:
+            return total / count
 
 
 def segment_sqrt_n(data, segment_ids, num_segments, name=None):
-  """For docs, see: _RAGGED_SEGMENT_DOCSTRING."""
-  with ops.name_scope(name, 'RaggedSegmentSqrtN',
-                      [data, segment_ids, num_segments]):
-    total = segment_sum(data, segment_ids, num_segments)
-    ones = ragged_tensor.RaggedTensor.from_nested_row_splits(
-        array_ops.ones_like(data.flat_values),
-        data.nested_row_splits,
-        validate=False)
-    count = segment_sum(ones, segment_ids, num_segments)
-    if ragged_tensor.is_ragged(total):
-      return total.with_flat_values(total.flat_values /
-                                    math_ops.sqrt(count.flat_values))
-    else:
-      return total / math_ops.sqrt(count)
+    """For docs, see: _RAGGED_SEGMENT_DOCSTRING."""
+    with ops.name_scope(name, "RaggedSegmentSqrtN", [data, segment_ids, num_segments]):
+        total = segment_sum(data, segment_ids, num_segments)
+        ones = ragged_tensor.RaggedTensor.from_nested_row_splits(
+            array_ops.ones_like(data.flat_values),
+            data.nested_row_splits,
+            validate=False,
+        )
+        count = segment_sum(ones, segment_ids, num_segments)
+        if ragged_tensor.is_ragged(total):
+            return total.with_flat_values(
+                total.flat_values / math_ops.sqrt(count.flat_values)
+            )
+        else:
+            return total / math_ops.sqrt(count)
 
 
 def _set_ragged_segment_docstring(func, combination, combined):
-  func.__doc__ = _RAGGED_SEGMENT_DOCSTRING % dict(
-      combination=combination, combined=combined)
+    func.__doc__ = _RAGGED_SEGMENT_DOCSTRING % dict(
+        combination=combination, combined=combined
+    )
 
 
-_set_ragged_segment_docstring(segment_sum, 'sum', 'summed')
-_set_ragged_segment_docstring(segment_prod, 'product', 'multiplied')
-_set_ragged_segment_docstring(segment_min, 'minimum', 'minimized')
-_set_ragged_segment_docstring(segment_max, 'maximum', 'maximized')
-_set_ragged_segment_docstring(segment_mean, 'mean', 'averaged')
-_set_ragged_segment_docstring(segment_sqrt_n, 'sum divided by sqrt(N)',
-                              'summed')
+_set_ragged_segment_docstring(segment_sum, "sum", "summed")
+_set_ragged_segment_docstring(segment_prod, "product", "multiplied")
+_set_ragged_segment_docstring(segment_min, "minimum", "minimized")
+_set_ragged_segment_docstring(segment_max, "maximum", "maximized")
+_set_ragged_segment_docstring(segment_mean, "mean", "averaged")
+_set_ragged_segment_docstring(segment_sqrt_n, "sum divided by sqrt(N)", "summed")
 
-#===============================================================================
+# ===============================================================================
 # ragged_reduce_<AGGREGATE>
-#===============================================================================
+# ===============================================================================
 
 # Docstring template used for ragged_reduce_<AGGREGATE> ops.
 _RAGGED_REDUCE_DOCSTRING = """\
@@ -448,14 +466,10 @@ _RAGGED_REDUCE_ANY_EXAMPLE = """
 """
 
 
-def ragged_reduce_aggregate(reduce_op,
-                            unsorted_segment_op,
-                            rt_input,
-                            axis,
-                            keepdims,
-                            separator=None,
-                            name=None):
-  """Aggregates across axes of a RaggedTensor using the given `Tensor` ops.
+def ragged_reduce_aggregate(
+    reduce_op, unsorted_segment_op, rt_input, axis, keepdims, separator=None, name=None
+):
+    """Aggregates across axes of a RaggedTensor using the given `Tensor` ops.
 
   Reduces `rt_input` along the dimensions given in `axis`.  The rank of the
   tensor is reduced by 1 for each entry in `axis`.  If `axis` is not specified,
@@ -493,242 +507,291 @@ def ragged_reduce_aggregate(reduce_op,
   Raises:
     ValueError: If `axis` contains a `Tensor` whose value is not constant.
   """
-  if not ragged_tensor.is_ragged(rt_input):
-    if separator is None:
-      return reduce_op(rt_input, axis, keepdims=keepdims, name=name)
-    else:
-      # When separator is not None, We infer that dtype is string and
-      # reduce_join will be called.
-      return reduce_op(
-          rt_input, axis, keepdims=keepdims, name=name, separator=separator)
+    if not ragged_tensor.is_ragged(rt_input):
+        if separator is None:
+            return reduce_op(rt_input, axis, keepdims=keepdims, name=name)
+        else:
+            # When separator is not None, We infer that dtype is string and
+            # reduce_join will be called.
+            return reduce_op(
+                rt_input, axis, keepdims=keepdims, name=name, separator=separator
+            )
 
-  if isinstance(axis, ops.Tensor):
-    axis = tensor_util.constant_value(axis)
+    if isinstance(axis, ops.Tensor):
+        axis = tensor_util.constant_value(axis)
+        if axis is None:
+            raise ValueError("axis must be known at graph construction time.")
+        if isinstance(axis, np.ndarray):
+            axis = axis.tolist()
+
+    # When reducing all axes, just ignore splits & reduce the inner values.
     if axis is None:
-      raise ValueError('axis must be known at graph construction time.')
-    if isinstance(axis, np.ndarray):
-      axis = axis.tolist()
+        result = reduce_op(rt_input.flat_values, None, keepdims=keepdims, name=name)
+        if keepdims:
+            # Expand the result to the input number of dimensions.
+            for _ in rt_input.shape[1:]:
+                result = array_ops.expand_dims(result, axis=0)
+        return result
 
-  # When reducing all axes, just ignore splits & reduce the inner values.
-  if axis is None:
-    result = reduce_op(rt_input.flat_values, None, keepdims=keepdims, name=name)
-    if keepdims:
-      # Expand the result to the input number of dimensions.
-      for _ in rt_input.shape[1:]:
-        result = array_ops.expand_dims(result, axis=0)
-    return result
+    with ops.name_scope(name, "RaggedReduce", [rt_input, axis]):
+        if isinstance(axis, (tuple, list)):
+            if not axis:
+                return rt_input
+            elif len(axis) == 1:
+                axis = axis[0]
+            else:
+                # When reducing multiple axes, as we reduce one at a time (see below),
+                # the negative axis has to be converted to positive at the first run
+                # as the sort with negative axis will have different orders.
+                # See GitHub issue 27497.
+                axis = [
+                    array_ops.get_positive_axis(
+                        a, rt_input.shape.ndims, "axis[%s]" % i, "rank(input_tensor)"
+                    )
+                    for i, a in enumerate(axis)
+                ]
+                # When reducing multiple axes, just reduce one at a time.  This is less
+                # efficient, and only works for associative ops.  (In particular, it
+                # does not work for reduce_mean.)  However, reducing multiple axes at
+                # once will probably require a nontrivial c++ op.
+                axis = sorted(axis)
+                inner_reduced = ragged_reduce_aggregate(
+                    reduce_op,
+                    unsorted_segment_op,
+                    rt_input,
+                    axis[-1],
+                    keepdims,
+                    separator,
+                )
+                return ragged_reduce_aggregate(
+                    reduce_op,
+                    unsorted_segment_op,
+                    inner_reduced,
+                    axis[:-1],
+                    keepdims,
+                    separator,
+                )
 
-  with ops.name_scope(name, 'RaggedReduce', [rt_input, axis]):
-    if isinstance(axis, (tuple, list)):
-      if not axis:
-        return rt_input
-      elif len(axis) == 1:
-        axis = axis[0]
-      else:
-        # When reducing multiple axes, as we reduce one at a time (see below),
-        # the negative axis has to be converted to positive at the first run
-        # as the sort with negative axis will have different orders.
-        # See GitHub issue 27497.
-        axis = [
-            array_ops.get_positive_axis(a, rt_input.shape.ndims, 'axis[%s]' % i,
-                                        'rank(input_tensor)')
-            for i, a in enumerate(axis)
-        ]
-        # When reducing multiple axes, just reduce one at a time.  This is less
-        # efficient, and only works for associative ops.  (In particular, it
-        # does not work for reduce_mean.)  However, reducing multiple axes at
-        # once will probably require a nontrivial c++ op.
-        axis = sorted(axis)
-        inner_reduced = ragged_reduce_aggregate(reduce_op, unsorted_segment_op,
-                                                rt_input, axis[-1], keepdims,
-                                                separator)
-        return ragged_reduce_aggregate(reduce_op, unsorted_segment_op,
-                                       inner_reduced, axis[:-1], keepdims,
-                                       separator)
+        rt_input = ragged_tensor.convert_to_tensor_or_ragged_tensor(
+            rt_input, name="rt_input"
+        )
 
-    rt_input = ragged_tensor.convert_to_tensor_or_ragged_tensor(
-        rt_input, name='rt_input')
+        axis = array_ops.get_positive_axis(
+            axis, rt_input.shape.ndims, ndims_name="rank(input_tensor)"
+        )
 
-    axis = array_ops.get_positive_axis(
-        axis, rt_input.shape.ndims, ndims_name='rank(input_tensor)')
-
-    if axis == 0:
-      # out[i_1, i_2, ..., i_N] = sum_{j} rt_input[j, i_1, i_2, ..., i_N]
-      row_lengths = rt_input.row_splits[1:] - rt_input.row_splits[:-1]
-      num_segments = math_ops.maximum(math_ops.reduce_max(row_lengths), 0)
-      segment_ids = range(row_lengths).values
-      result = _ragged_segment_aggregate(unsorted_segment_op, rt_input.values,
-                                         segment_ids, num_segments, separator)
-      if keepdims:
-        result = array_ops.expand_dims(result, axis=0)
-      return result
-    elif axis == 1:
-      # out[i_0, i_1, i_2, ..., i_N] = sum_{j} rt_input[i_0, j, i_2, ..., i_N]
-      num_segments = array_ops.shape(rt_input.row_splits)[0] - 1
-      segment_ids = segment_id_ops.row_splits_to_segment_ids(
-          rt_input.row_splits)
-      result = _ragged_segment_aggregate(unsorted_segment_op, rt_input.values,
-                                         segment_ids, num_segments, separator)
-      if keepdims:
-        result = array_ops.expand_dims(result, axis=1)
-      return result
-    else:
-      # out[i_0, ..., i_[axis-1], i_axis+1], ..., i_N] =
-      #     sum_{j} rt_input [i_0, ..., i_[axis-1], j, i_axis+1], ..., i_N]
-      return rt_input.with_values(
-          ragged_reduce_aggregate(reduce_op, unsorted_segment_op,
-                                  rt_input.values, axis - 1, keepdims,
-                                  separator))
+        if axis == 0:
+            # out[i_1, i_2, ..., i_N] = sum_{j} rt_input[j, i_1, i_2, ..., i_N]
+            row_lengths = rt_input.row_splits[1:] - rt_input.row_splits[:-1]
+            num_segments = math_ops.maximum(math_ops.reduce_max(row_lengths), 0)
+            segment_ids = range(row_lengths).values
+            result = _ragged_segment_aggregate(
+                unsorted_segment_op,
+                rt_input.values,
+                segment_ids,
+                num_segments,
+                separator,
+            )
+            if keepdims:
+                result = array_ops.expand_dims(result, axis=0)
+            return result
+        elif axis == 1:
+            # out[i_0, i_1, i_2, ..., i_N] = sum_{j} rt_input[i_0, j, i_2, ..., i_N]
+            num_segments = array_ops.shape(rt_input.row_splits)[0] - 1
+            segment_ids = segment_id_ops.row_splits_to_segment_ids(rt_input.row_splits)
+            result = _ragged_segment_aggregate(
+                unsorted_segment_op,
+                rt_input.values,
+                segment_ids,
+                num_segments,
+                separator,
+            )
+            if keepdims:
+                result = array_ops.expand_dims(result, axis=1)
+            return result
+        else:
+            # out[i_0, ..., i_[axis-1], i_axis+1], ..., i_N] =
+            #     sum_{j} rt_input [i_0, ..., i_[axis-1], j, i_axis+1], ..., i_N]
+            return rt_input.with_values(
+                ragged_reduce_aggregate(
+                    reduce_op,
+                    unsorted_segment_op,
+                    rt_input.values,
+                    axis - 1,
+                    keepdims,
+                    separator,
+                )
+            )
 
 
 def reduce_sum(input_tensor, axis=None, keepdims=None, name=None):
-  """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
+    """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
 
-  return ragged_reduce_aggregate(
-      reduce_op=math_ops.reduce_sum,
-      unsorted_segment_op=math_ops.unsorted_segment_sum,
-      rt_input=input_tensor,
-      axis=axis,
-      keepdims=keepdims,
-      name=(name or 'RaggedReduceSum'))
+    return ragged_reduce_aggregate(
+        reduce_op=math_ops.reduce_sum,
+        unsorted_segment_op=math_ops.unsorted_segment_sum,
+        rt_input=input_tensor,
+        axis=axis,
+        keepdims=keepdims,
+        name=(name or "RaggedReduceSum"),
+    )
 
 
 def reduce_prod(input_tensor, axis=None, keepdims=None, name=None):
-  """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
-  return ragged_reduce_aggregate(
-      reduce_op=math_ops.reduce_prod,
-      unsorted_segment_op=math_ops.unsorted_segment_prod,
-      rt_input=input_tensor,
-      axis=axis,
-      keepdims=keepdims,
-      name=(name or 'RaggedReduceProd'))
+    """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
+    return ragged_reduce_aggregate(
+        reduce_op=math_ops.reduce_prod,
+        unsorted_segment_op=math_ops.unsorted_segment_prod,
+        rt_input=input_tensor,
+        axis=axis,
+        keepdims=keepdims,
+        name=(name or "RaggedReduceProd"),
+    )
 
 
 def reduce_min(input_tensor, axis=None, keepdims=None, name=None):
-  """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
-  return ragged_reduce_aggregate(
-      reduce_op=math_ops.reduce_min,
-      unsorted_segment_op=math_ops.unsorted_segment_min,
-      rt_input=input_tensor,
-      axis=axis,
-      keepdims=keepdims,
-      name=(name or 'RaggedReduceMin'))
+    """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
+    return ragged_reduce_aggregate(
+        reduce_op=math_ops.reduce_min,
+        unsorted_segment_op=math_ops.unsorted_segment_min,
+        rt_input=input_tensor,
+        axis=axis,
+        keepdims=keepdims,
+        name=(name or "RaggedReduceMin"),
+    )
 
 
 def reduce_max(input_tensor, axis=None, keepdims=None, name=None):
-  """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
-  return ragged_reduce_aggregate(
-      reduce_op=math_ops.reduce_max,
-      unsorted_segment_op=math_ops.unsorted_segment_max,
-      rt_input=input_tensor,
-      axis=axis,
-      keepdims=keepdims,
-      name=(name or 'RaggedReduceMax'))
+    """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
+    return ragged_reduce_aggregate(
+        reduce_op=math_ops.reduce_max,
+        unsorted_segment_op=math_ops.unsorted_segment_max,
+        rt_input=input_tensor,
+        axis=axis,
+        keepdims=keepdims,
+        name=(name or "RaggedReduceMax"),
+    )
 
 
 def reduce_mean(input_tensor, axis=None, keepdims=None, name=None):
-  """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
-  with ops.name_scope(name, 'RaggedReduceMean', [input_tensor, axis]):
-    total = reduce_sum(input_tensor, axis, keepdims)
-    if ragged_tensor.is_ragged(input_tensor):
-      ones = ragged_tensor.RaggedTensor.from_nested_row_splits(
-          array_ops.ones_like(input_tensor.flat_values),
-          input_tensor.nested_row_splits,
-          validate=False)
-    else:
-      ones = array_ops.ones_like(input_tensor)
-    count = reduce_sum(ones, axis, keepdims)
-    if ragged_tensor.is_ragged(total):
-      return ragged_tensor.RaggedTensor.from_nested_row_splits(
-          total.flat_values / count.flat_values,
-          total.nested_row_splits,
-          validate=False)
-    else:
-      return total / count
+    """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
+    with ops.name_scope(name, "RaggedReduceMean", [input_tensor, axis]):
+        total = reduce_sum(input_tensor, axis, keepdims)
+        if ragged_tensor.is_ragged(input_tensor):
+            ones = ragged_tensor.RaggedTensor.from_nested_row_splits(
+                array_ops.ones_like(input_tensor.flat_values),
+                input_tensor.nested_row_splits,
+                validate=False,
+            )
+        else:
+            ones = array_ops.ones_like(input_tensor)
+        count = reduce_sum(ones, axis, keepdims)
+        if ragged_tensor.is_ragged(total):
+            return ragged_tensor.RaggedTensor.from_nested_row_splits(
+                total.flat_values / count.flat_values,
+                total.nested_row_splits,
+                validate=False,
+            )
+        else:
+            return total / count
 
 
 def reduce_variance(input_tensor, axis=None, keepdims=False, name=None):
-  """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
-  with ops.name_scope(name, 'RaggedReduceVariance', [input_tensor, axis]):
-    square_of_input = math_ops.square(input_tensor)
-    mean_of_square = reduce_mean(square_of_input, axis=axis, keepdims=keepdims)
-    mean = reduce_mean(input_tensor, axis=axis, keepdims=keepdims)
-    square_of_mean = math_ops.square(mean)
-    return mean_of_square - square_of_mean
+    """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
+    with ops.name_scope(name, "RaggedReduceVariance", [input_tensor, axis]):
+        square_of_input = math_ops.square(input_tensor)
+        mean_of_square = reduce_mean(square_of_input, axis=axis, keepdims=keepdims)
+        mean = reduce_mean(input_tensor, axis=axis, keepdims=keepdims)
+        square_of_mean = math_ops.square(mean)
+        return mean_of_square - square_of_mean
 
 
 def reduce_std(input_tensor, axis=None, keepdims=False, name=None):
-  """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
-  with ops.name_scope(name, 'RaggedReduceStd', [input_tensor, axis]):
-    variance = reduce_variance(input_tensor, axis=axis, keepdims=keepdims)
-    return math_ops.sqrt(variance)
+    """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
+    with ops.name_scope(name, "RaggedReduceStd", [input_tensor, axis]):
+        variance = reduce_variance(input_tensor, axis=axis, keepdims=keepdims)
+        return math_ops.sqrt(variance)
 
 
 def _cast(input_tensor, dtype):
-  return ragged_functional_ops.map_flat_values(math_ops.cast, input_tensor,
-                                               dtype)
+    return ragged_functional_ops.map_flat_values(math_ops.cast, input_tensor, dtype)
 
 
 def reduce_all(input_tensor, axis=None, keepdims=None, name=None):
-  """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
-  with ops.name_scope(name, 'RaggedReduceAll', [input_tensor, axis]):
-    return _cast(
-        reduce_prod(_cast(input_tensor, dtypes.int32), axis, keepdims),
-        dtypes.bool)
+    """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
+    with ops.name_scope(name, "RaggedReduceAll", [input_tensor, axis]):
+        return _cast(
+            reduce_prod(_cast(input_tensor, dtypes.int32), axis, keepdims), dtypes.bool
+        )
 
 
 def reduce_any(input_tensor, axis=None, keepdims=None, name=None):
-  """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
-  with ops.name_scope(name, 'RaggedReduceAny', [input_tensor, axis]):
-    return _cast(
-        reduce_sum(_cast(input_tensor, dtypes.int32), axis, keepdims),
-        dtypes.bool)
+    """For docs, see: _RAGGED_REDUCE_DOCSTRING."""
+    with ops.name_scope(name, "RaggedReduceAny", [input_tensor, axis]):
+        return _cast(
+            reduce_sum(_cast(input_tensor, dtypes.int32), axis, keepdims), dtypes.bool
+        )
 
 
 def _set_ragged_reduce_docstring(func, combination, combined, default, example):
-  func.__doc__ = _RAGGED_REDUCE_DOCSTRING % dict(
-      combination=combination,
-      combined=combined,
-      default=default,
-      example=example)
+    func.__doc__ = _RAGGED_REDUCE_DOCSTRING % dict(
+        combination=combination, combined=combined, default=default, example=example
+    )
 
 
-_set_ragged_reduce_docstring(reduce_sum, 'sum', 'summed', '0',
-                             _RAGGED_REDUCE_SUM_EXAMPLE)
-_set_ragged_reduce_docstring(reduce_prod, 'product', 'multiplied', '1',
-                             _RAGGED_REDUCE_PROD_EXAMPLE)
-_set_ragged_reduce_docstring(reduce_min, 'minimum', 'minimized',
-                             '`input_tensor.dtype.min`',
-                             _RAGGED_REDUCE_MIN_EXAMPLE)
-_set_ragged_reduce_docstring(reduce_max, 'maximum', 'maximized',
-                             '`input_tensor.dtype.max`',
-                             _RAGGED_REDUCE_MAX_EXAMPLE)
-_set_ragged_reduce_docstring(reduce_mean, 'mean', 'averaged', 'NaN',
-                             _RAGGED_REDUCE_MEAN_EXAMPLE)
-_set_ragged_reduce_docstring(reduce_variance, 'variance', 'averaged', 'NaN',
-                             _RAGGED_REDUCE_VARIANCE_EXAMPLE)
-_set_ragged_reduce_docstring(reduce_std, 'std', 'averaged', 'NaN',
-                             _RAGGED_REDUCE_STD_EXAMPLE)
-_set_ragged_reduce_docstring(reduce_all, 'logical and', 'and-ed', 'True',
-                             _RAGGED_REDUCE_ALL_EXAMPLE)
-_set_ragged_reduce_docstring(reduce_any, 'logical or', 'or-ed', 'False',
-                             _RAGGED_REDUCE_ANY_EXAMPLE)
+_set_ragged_reduce_docstring(
+    reduce_sum, "sum", "summed", "0", _RAGGED_REDUCE_SUM_EXAMPLE
+)
+_set_ragged_reduce_docstring(
+    reduce_prod, "product", "multiplied", "1", _RAGGED_REDUCE_PROD_EXAMPLE
+)
+_set_ragged_reduce_docstring(
+    reduce_min,
+    "minimum",
+    "minimized",
+    "`input_tensor.dtype.min`",
+    _RAGGED_REDUCE_MIN_EXAMPLE,
+)
+_set_ragged_reduce_docstring(
+    reduce_max,
+    "maximum",
+    "maximized",
+    "`input_tensor.dtype.max`",
+    _RAGGED_REDUCE_MAX_EXAMPLE,
+)
+_set_ragged_reduce_docstring(
+    reduce_mean, "mean", "averaged", "NaN", _RAGGED_REDUCE_MEAN_EXAMPLE
+)
+_set_ragged_reduce_docstring(
+    reduce_variance, "variance", "averaged", "NaN", _RAGGED_REDUCE_VARIANCE_EXAMPLE
+)
+_set_ragged_reduce_docstring(
+    reduce_std, "std", "averaged", "NaN", _RAGGED_REDUCE_STD_EXAMPLE
+)
+_set_ragged_reduce_docstring(
+    reduce_all, "logical and", "and-ed", "True", _RAGGED_REDUCE_ALL_EXAMPLE
+)
+_set_ragged_reduce_docstring(
+    reduce_any, "logical or", "or-ed", "False", _RAGGED_REDUCE_ANY_EXAMPLE
+)
 
 
-#===============================================================================
+# ===============================================================================
 # ragged.matmul
-#===============================================================================
-def matmul(a,
-           b,
-           transpose_a=False,
-           transpose_b=False,
-           adjoint_a=False,
-           adjoint_b=False,
-           a_is_sparse=False,
-           b_is_sparse=False,
-           output_type=None,
-           name=None):
-  """Multiplies matrix `a` by matrix `b`.
+# ===============================================================================
+def matmul(
+    a,
+    b,
+    transpose_a=False,
+    transpose_b=False,
+    adjoint_a=False,
+    adjoint_b=False,
+    a_is_sparse=False,
+    b_is_sparse=False,
+    output_type=None,
+    name=None,
+):
+    """Multiplies matrix `a` by matrix `b`.
 
   If all transpose or adjoint attributes are `False` then:
 
@@ -757,87 +820,90 @@ def matmul(a,
     each inner-most matrix is the product of the corresponding matrices in `a`
     and `b`.
   """
-  if transpose_a and adjoint_a:
-    raise ValueError('Only one of transpose_a and adjoint_a can be True.')
-  if transpose_b and adjoint_b:
-    raise ValueError('Only one of transpose_b and adjoint_b can be True.')
+    if transpose_a and adjoint_a:
+        raise ValueError("Only one of transpose_a and adjoint_a can be True.")
+    if transpose_b and adjoint_b:
+        raise ValueError("Only one of transpose_b and adjoint_b can be True.")
 
-  kwargs = dict(
-      transpose_a=transpose_a,
-      transpose_b=transpose_b,
-      adjoint_a=adjoint_a,
-      adjoint_b=adjoint_b,
-      a_is_sparse=a_is_sparse,
-      b_is_sparse=b_is_sparse,
-      output_type=output_type)
+    kwargs = dict(
+        transpose_a=transpose_a,
+        transpose_b=transpose_b,
+        adjoint_a=adjoint_a,
+        adjoint_b=adjoint_b,
+        a_is_sparse=a_is_sparse,
+        b_is_sparse=b_is_sparse,
+        output_type=output_type,
+    )
 
-  with ops.name_scope(name, 'RaggedMatMul', [a, b]) as name:
-    a = ragged_tensor.convert_to_tensor_or_ragged_tensor(a, name='a')
-    b = ragged_tensor.convert_to_tensor_or_ragged_tensor(b, name='b')
+    with ops.name_scope(name, "RaggedMatMul", [a, b]) as name:
+        a = ragged_tensor.convert_to_tensor_or_ragged_tensor(a, name="a")
+        b = ragged_tensor.convert_to_tensor_or_ragged_tensor(b, name="b")
 
-    a_is_ragged = isinstance(a, ragged_tensor.RaggedTensor)
-    b_is_ragged = isinstance(b, ragged_tensor.RaggedTensor)
-    if not (a_is_ragged or b_is_ragged):
-      return math_ops.matmul(a, b, **kwargs)
+        a_is_ragged = isinstance(a, ragged_tensor.RaggedTensor)
+        b_is_ragged = isinstance(b, ragged_tensor.RaggedTensor)
+        if not (a_is_ragged or b_is_ragged):
+            return math_ops.matmul(a, b, **kwargs)
 
-    if a.dtype != b.dtype:
-      raise ValueError('`a` and `b` must have the same dtype.')
+        if a.dtype != b.dtype:
+            raise ValueError("`a` and `b` must have the same dtype.")
 
-    # TODO(edloper): Support broadcasting inputs.  (Broadcast support is not
-    # documented by https://www.tensorflow.org/api_docs/python/tf/linalg/matmul,
-    # but it is supported by the op.)
+        # TODO(edloper): Support broadcasting inputs.  (Broadcast support is not
+        # documented by https://www.tensorflow.org/api_docs/python/tf/linalg/matmul,
+        # but it is supported by the op.)
 
-    # Find the rank of the input tensors.
-    if a.shape.rank is None:
-      if b.shape.rank is None:
-        raise ValueError('matmul requires at least one input to have known '
-                         'rank if either input is ragged.')
-      rank = b.shape.rank
-    else:
-      if b.shape.rank is not None and a.shape.rank != b.shape.rank:
-        raise ValueError('`a` and `b` must have the same rank.')
-      rank = a.shape.rank
+        # Find the rank of the input tensors.
+        if a.shape.rank is None:
+            if b.shape.rank is None:
+                raise ValueError(
+                    "matmul requires at least one input to have known "
+                    "rank if either input is ragged."
+                )
+            rank = b.shape.rank
+        else:
+            if b.shape.rank is not None and a.shape.rank != b.shape.rank:
+                raise ValueError("`a` and `b` must have the same rank.")
+            rank = a.shape.rank
 
-    # At least one of `a` and `b` is ragged; and ragged tensors always have
-    # rank>=2.
-    if rank < 2:
-      # This can happen if e.g. `a` is a 1D dense tensor and `b` is a
-      # ragged tensor with unknown rank.  Since ragged tensors always have
-      # `rank>=2`, this implies that `a` and `b` have different ranks.
-      raise ValueError('`a` and `b` must have the same rank.')
+        # At least one of `a` and `b` is ragged; and ragged tensors always have
+        # rank>=2.
+        if rank < 2:
+            # This can happen if e.g. `a` is a 1D dense tensor and `b` is a
+            # ragged tensor with unknown rank.  Since ragged tensors always have
+            # `rank>=2`, this implies that `a` and `b` have different ranks.
+            raise ValueError("`a` and `b` must have the same rank.")
 
-    # Rank>3: We have multiple batch dimensions.  Merge them into a single
-    # batch dimension, recursively call `matmul`, and then restore the original
-    # batch dimension (using a.row_splits).
-    if rank > 3:
-      shape_err = 'Batch dimensions of `a` and `b` do not have the same size.'
-      if not a_is_ragged:
-        a = ragged_tensor.RaggedTensor.from_tensor(a, ragged_rank=1)
-      if not b_is_ragged:
-        b = ragged_tensor.RaggedTensor.from_tensor(b, ragged_rank=1)
-      with ops.control_dependencies([
-          check_ops.assert_equal(a.row_splits, b.row_splits, message=shape_err)
-      ]):
-        flat_result = matmul(a.values, b.values, **kwargs)
-        return a.with_values(flat_result)
+        # Rank>3: We have multiple batch dimensions.  Merge them into a single
+        # batch dimension, recursively call `matmul`, and then restore the original
+        # batch dimension (using a.row_splits).
+        if rank > 3:
+            shape_err = "Batch dimensions of `a` and `b` do not have the same size."
+            if not a_is_ragged:
+                a = ragged_tensor.RaggedTensor.from_tensor(a, ragged_rank=1)
+            if not b_is_ragged:
+                b = ragged_tensor.RaggedTensor.from_tensor(b, ragged_rank=1)
+            with ops.control_dependencies(
+                [check_ops.assert_equal(a.row_splits, b.row_splits, message=shape_err)]
+            ):
+                flat_result = matmul(a.values, b.values, **kwargs)
+                return a.with_values(flat_result)
 
-    if rank == 2:
-      return _matmul_2d(a, b, **kwargs)
+        if rank == 2:
+            return _matmul_2d(a, b, **kwargs)
 
-    assert rank == 3  # I.e., we have a single batch dimension.
+        assert rank == 3  # I.e., we have a single batch dimension.
 
-    a_ragged_rank = a.ragged_rank if a_is_ragged else 0
-    if a_ragged_rank == 1 and not (b_is_ragged or transpose_a or adjoint_a):
-      # If `a.shape=[B, (I), J]` and `b.shape=[B, J, K], then we can compute
-      # the result with a single dense `matmul`.
-      return _matmul_3d_with_batch_dim_folding(a, b, **kwargs)
-    else:
-      # Otherwie, fall back on using `map_fn`.
-      return _matmul_3d_with_map_fn(a, b, **kwargs)
+        a_ragged_rank = a.ragged_rank if a_is_ragged else 0
+        if a_ragged_rank == 1 and not (b_is_ragged or transpose_a or adjoint_a):
+            # If `a.shape=[B, (I), J]` and `b.shape=[B, J, K], then we can compute
+            # the result with a single dense `matmul`.
+            return _matmul_3d_with_batch_dim_folding(a, b, **kwargs)
+        else:
+            # Otherwie, fall back on using `map_fn`.
+            return _matmul_3d_with_map_fn(a, b, **kwargs)
 
 
 def _matmul_2d(a, b, **kwargs):
-  """Multiplies potentially ragged 2D tensors.
+    """Multiplies potentially ragged 2D tensors.
 
   Args:
     a: A 2D Tensor or RaggedTensor with `shape=[I, J]`
@@ -847,30 +913,31 @@ def _matmul_2d(a, b, **kwargs):
   Returns:
     A 2D Tensor with `shape=[I, K]`.
   """
-  # multiplying `a` and `b` is only well-defined if `a` and `b` are
-  # actually uniform (and just happened to be stored as ragged tensors).
-  # Check that they're uniform, convert them to tf.Tensor.
-  ragged_err = ('The matrices in `a` and `b` may not be '
-                'ragged in their innermost dimension.')
-  checks = []
-  if isinstance(a, ragged_tensor.RaggedTensor):
-    original_size = array_ops.size(a.flat_values)
-    a = a.to_tensor()
-    checks.append(
-        check_ops.assert_equal(
-            original_size, array_ops.size(a), message=ragged_err))
-  if isinstance(b, ragged_tensor.RaggedTensor):
-    original_size = array_ops.size(b.flat_values)
-    b = b.to_tensor()
-    checks.append(
-        check_ops.assert_equal(
-            original_size, array_ops.size(b), message=ragged_err))
-  with ops.control_dependencies(checks):
-    return math_ops.matmul(a, b, **kwargs)
+    # multiplying `a` and `b` is only well-defined if `a` and `b` are
+    # actually uniform (and just happened to be stored as ragged tensors).
+    # Check that they're uniform, convert them to tf.Tensor.
+    ragged_err = (
+        "The matrices in `a` and `b` may not be " "ragged in their innermost dimension."
+    )
+    checks = []
+    if isinstance(a, ragged_tensor.RaggedTensor):
+        original_size = array_ops.size(a.flat_values)
+        a = a.to_tensor()
+        checks.append(
+            check_ops.assert_equal(original_size, array_ops.size(a), message=ragged_err)
+        )
+    if isinstance(b, ragged_tensor.RaggedTensor):
+        original_size = array_ops.size(b.flat_values)
+        b = b.to_tensor()
+        checks.append(
+            check_ops.assert_equal(original_size, array_ops.size(b), message=ragged_err)
+        )
+    with ops.control_dependencies(checks):
+        return math_ops.matmul(a, b, **kwargs)
 
 
 def _matmul_3d_with_map_fn(a, b, **kwargs):
-  """Multiplies batches of 2D matrices using map_fn.
+    """Multiplies batches of 2D matrices using map_fn.
 
   `output[n, i, k]` = sum_j (a[n, i, j] * b[n, j, k])` (for all `n`, `i`, `k`).
 
@@ -886,48 +953,50 @@ def _matmul_3d_with_map_fn(a, b, **kwargs):
   Returns:
     A 3D RaggedTensor with `shape=[B, (I), (K)]`.
   """
-  if isinstance(b, ragged_tensor.RaggedTensor) and b.ragged_rank == 2:
-    output_ragged_rank = 2
-  else:
-    output_ragged_rank = 1
+    if isinstance(b, ragged_tensor.RaggedTensor) and b.ragged_rank == 2:
+        output_ragged_rank = 2
+    else:
+        output_ragged_rank = 1
 
-  def single_batch_matmul(x):
-    out = _matmul_2d(x[0], x[1], **kwargs)
-    if output_ragged_rank == 2:
-      out = ragged_tensor.RaggedTensor.from_tensor(out)
-    return out
+    def single_batch_matmul(x):
+        out = _matmul_2d(x[0], x[1], **kwargs)
+        if output_ragged_rank == 2:
+            out = ragged_tensor.RaggedTensor.from_tensor(out)
+        return out
 
-  fn_out_shape = None  # Figure out proper shape.
-  row_splits_dtype = (
-      a.row_splits.dtype
-      if isinstance(a, ragged_tensor.RaggedTensor) else b.row_splits.dtype)
-  output_type = kwargs['output_type']
-  if output_type is None:
-    output_type = a.dtype
-  spec = ragged_tensor.RaggedTensorSpec(
-      shape=fn_out_shape,
-      dtype=output_type,
-      ragged_rank=output_ragged_rank - 1,
-      row_splits_dtype=row_splits_dtype)
-  result = map_fn.map_fn(
-      single_batch_matmul, elems=(a, b), fn_output_signature=spec)
+    fn_out_shape = None  # Figure out proper shape.
+    row_splits_dtype = (
+        a.row_splits.dtype
+        if isinstance(a, ragged_tensor.RaggedTensor)
+        else b.row_splits.dtype
+    )
+    output_type = kwargs["output_type"]
+    if output_type is None:
+        output_type = a.dtype
+    spec = ragged_tensor.RaggedTensorSpec(
+        shape=fn_out_shape,
+        dtype=output_type,
+        ragged_rank=output_ragged_rank - 1,
+        row_splits_dtype=row_splits_dtype,
+    )
+    result = map_fn.map_fn(single_batch_matmul, elems=(a, b), fn_output_signature=spec)
 
-  # map_fn loses shape information; restore it, where possible.
-  # pylint: disable=protected-access
-  if kwargs.get('transpose_a') or kwargs.get('adjoint_a'):
-    result._set_shape(a.shape[:-2] + a.shape[-1:] + [None])
-  else:
-    result._set_shape(a.shape[:-2] + a.shape[-2:-1] + [None])
-  if kwargs.get('transpose_b') or kwargs.get('adjoint_b'):
-    result._set_shape(b.shape[:-2] + [None] + b.shape[-2:-1])
-  else:
-    result._set_shape(b.shape[:-2] + [None] + b.shape[-1:])
+    # map_fn loses shape information; restore it, where possible.
+    # pylint: disable=protected-access
+    if kwargs.get("transpose_a") or kwargs.get("adjoint_a"):
+        result._set_shape(a.shape[:-2] + a.shape[-1:] + [None])
+    else:
+        result._set_shape(a.shape[:-2] + a.shape[-2:-1] + [None])
+    if kwargs.get("transpose_b") or kwargs.get("adjoint_b"):
+        result._set_shape(b.shape[:-2] + [None] + b.shape[-2:-1])
+    else:
+        result._set_shape(b.shape[:-2] + [None] + b.shape[-1:])
 
-  return result
+    return result
 
 
 def _matmul_3d_with_batch_dim_folding(a, b, **kwargs):
-  """Multiply batches of 2D matrices where only `a.shape[1]` is ragged.
+    """Multiply batches of 2D matrices where only `a.shape[1]` is ragged.
 
   Args:
     a: A RaggedTensor with `shape=[B, (I), J]`.  (ragged_rank must be 1.)
@@ -938,21 +1007,21 @@ def _matmul_3d_with_batch_dim_folding(a, b, **kwargs):
   Returns:
     A RaggedTensor with `shape=[B, (I), K].
   """
-  # reshaped_a.shape = [sum(i_1, i_2, ..., i_B), 1, J]
-  reshaped_a = array_ops.expand_dims(a.values, 1)
-  # reshaped_b.shape = [sum(i_1, i_2, ..., i_B), J, K]
-  reshaped_b = array_ops.repeat(b, a.row_lengths(), axis=0)
-  # flat_result.shape = [sum(i_1, i_2, ..., i_B), 1, K]
-  flat_result = math_ops.matmul(reshaped_a, reshaped_b, **kwargs)
-  # result.shape = [B, (I), K]
-  return a.with_values(array_ops.squeeze(flat_result, axis=1))
+    # reshaped_a.shape = [sum(i_1, i_2, ..., i_B), 1, J]
+    reshaped_a = array_ops.expand_dims(a.values, 1)
+    # reshaped_b.shape = [sum(i_1, i_2, ..., i_B), J, K]
+    reshaped_b = array_ops.repeat(b, a.row_lengths(), axis=0)
+    # flat_result.shape = [sum(i_1, i_2, ..., i_B), 1, K]
+    flat_result = math_ops.matmul(reshaped_a, reshaped_b, **kwargs)
+    # result.shape = [B, (I), K]
+    return a.with_values(array_ops.squeeze(flat_result, axis=1))
 
 
-#===============================================================================
+# ===============================================================================
 # ragged.softmax
-#===============================================================================
+# ===============================================================================
 def softmax(logits, axis=None, name=None):
-  """Computes softmax activations.
+    """Computes softmax activations.
 
   Used for multi-class predictions. The sum of all outputs generated by softmax
   is 1.
@@ -984,10 +1053,10 @@ def softmax(logits, axis=None, name=None):
     InvalidArgumentError: if `logits` is empty or `axis` is beyond the last
       dimension of `logits`.
   """
-  if axis is None:
-    axis = -1
+    if axis is None:
+        axis = -1
 
-  with ops.name_scope(name, 'RaggedSoftmax', [logits]) as name:
-    logits_exp = math_ops.exp(logits)
-    denominator = reduce_sum(logits_exp, axis=axis, keepdims=True)
-    return math_ops.divide(logits_exp, denominator)
+    with ops.name_scope(name, "RaggedSoftmax", [logits]) as name:
+        logits_exp = math_ops.exp(logits)
+        denominator = reduce_sum(logits_exp, axis=axis, keepdims=True)
+        return math_ops.divide(logits_exp, denominator)

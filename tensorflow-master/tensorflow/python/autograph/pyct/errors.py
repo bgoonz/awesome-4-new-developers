@@ -20,10 +20,12 @@ from __future__ import print_function
 
 
 class PyCTError(Exception):
-  """Base class for all exceptions."""
-  pass
+    """Base class for all exceptions."""
+
+    pass
 
 
 class UnsupportedLanguageElementError(PyCTError, NotImplementedError):
-  """Raised for code patterns that AutoGraph does not support."""
-  pass
+    """Raised for code patterns that AutoGraph does not support."""
+
+    pass

@@ -19,10 +19,10 @@ from __future__ import print_function
 
 
 class SaveSpec(object):
-  """Class used to describe tensor slices that need to be saved."""
+    """Class used to describe tensor slices that need to be saved."""
 
-  def __init__(self, tensor, slice_spec, name, dtype=None, device=None):
-    """Creates a `SaveSpec` object.
+    def __init__(self, tensor, slice_spec, name, dtype=None, device=None):
+        """Creates a `SaveSpec` object.
 
     Args:
       tensor: the tensor to save or callable that produces a tensor to save.
@@ -34,33 +34,34 @@ class SaveSpec(object):
       device: The device generating and consuming this tensor. Required if
         `tensor` is callable. Used to group objects to save by device.
     """
-    self._tensor = tensor
-    self.slice_spec = slice_spec
-    self.name = name
-    if callable(self._tensor):
-      if dtype is None or device is None:
-        raise AssertionError(
-            "When passing a callable `tensor` to a SaveSpec, an explicit "
-            "dtype and device must be provided.")
-      self.dtype = dtype
-      self.device = device
-    else:
-      self.dtype = tensor.dtype
-      if device is not None:
-        self.device = device
-      else:
-        self.device = tensor.device
+        self._tensor = tensor
+        self.slice_spec = slice_spec
+        self.name = name
+        if callable(self._tensor):
+            if dtype is None or device is None:
+                raise AssertionError(
+                    "When passing a callable `tensor` to a SaveSpec, an explicit "
+                    "dtype and device must be provided."
+                )
+            self.dtype = dtype
+            self.device = device
+        else:
+            self.dtype = tensor.dtype
+            if device is not None:
+                self.device = device
+            else:
+                self.device = tensor.device
 
-  @property
-  def tensor(self):
-    return self._tensor() if callable(self._tensor) else self._tensor
+    @property
+    def tensor(self):
+        return self._tensor() if callable(self._tensor) else self._tensor
 
 
 class SaveableObject(object):
-  """Base class for saving and restoring saveable objects."""
+    """Base class for saving and restoring saveable objects."""
 
-  def __init__(self, op, specs, name):
-    """Creates a `SaveableObject` object.
+    def __init__(self, op, specs, name):
+        """Creates a `SaveableObject` object.
 
     Args:
       op: the "producer" object that this class wraps; it produces a list of
@@ -69,22 +70,22 @@ class SaveableObject(object):
         save under this object. All Tensors must be on the same device.
       name: the name to save the object under.
     """
-    self.op = op
-    self.specs = specs
-    self.name = name
+        self.op = op
+        self.specs = specs
+        self.name = name
 
-  @property
-  def optional_restore(self):
-    """A hint to restore assertions that this object is optional."""
-    return False  # Default to required
+    @property
+    def optional_restore(self):
+        """A hint to restore assertions that this object is optional."""
+        return False  # Default to required
 
-  @property
-  def device(self):
-    """The device for SaveSpec Tensors."""
-    return self.specs[0].device
+    @property
+    def device(self):
+        """The device for SaveSpec Tensors."""
+        return self.specs[0].device
 
-  def restore(self, restored_tensors, restored_shapes):
-    """Restores this object from 'restored_tensors'.
+    def restore(self, restored_tensors, restored_shapes):
+        """Restores this object from 'restored_tensors'.
 
     Args:
       restored_tensors: the tensors that were loaded from a checkpoint
@@ -98,5 +99,5 @@ class SaveableObject(object):
       ValueError: If the object cannot be restored using the provided
         parameters.
     """
-    # pylint: disable=unused-argument
-    raise ValueError("Calling an abstract method.")
+        # pylint: disable=unused-argument
+        raise ValueError("Calling an abstract method.")

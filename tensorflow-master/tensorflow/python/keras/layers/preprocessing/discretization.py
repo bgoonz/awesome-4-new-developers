@@ -35,7 +35,7 @@ from tensorflow.python.util.tf_export import keras_export
 
 
 def summarize(values, epsilon):
-  """Reduce a 1D sequence of values to a summary.
+    """Reduce a 1D sequence of values to a summary.
 
   This algorithm is based on numpy.quantiles but modified to allow for
   intermediate steps between multiple data sets. It first finds the target
@@ -54,21 +54,21 @@ def summarize(values, epsilon):
       interpolated partition values, the second is the weights (counts).
   """
 
-  values = array_ops.reshape(values, [-1])
-  values = sort_ops.sort(values)
-  elements = math_ops.cast(array_ops.size(values), dtypes.float32)
-  num_buckets = 1. / epsilon
-  increment = math_ops.cast(elements / num_buckets, dtypes.int32)
-  start = increment
-  step = math_ops.maximum(increment, 1)
-  boundaries = values[start::step]
-  weights = array_ops.ones_like(boundaries)
-  weights = weights * math_ops.cast(step, dtypes.float32)
-  return array_ops.stack([boundaries, weights])
+    values = array_ops.reshape(values, [-1])
+    values = sort_ops.sort(values)
+    elements = math_ops.cast(array_ops.size(values), dtypes.float32)
+    num_buckets = 1.0 / epsilon
+    increment = math_ops.cast(elements / num_buckets, dtypes.int32)
+    start = increment
+    step = math_ops.maximum(increment, 1)
+    boundaries = values[start::step]
+    weights = array_ops.ones_like(boundaries)
+    weights = weights * math_ops.cast(step, dtypes.float32)
+    return array_ops.stack([boundaries, weights])
 
 
 def compress(summary, epsilon):
-  """Compress a summary to within `epsilon` accuracy.
+    """Compress a summary to within `epsilon` accuracy.
 
   The compression step is needed to keep the summary sizes small after merging,
   and also used to return the final target boundaries. It finds the new bins
@@ -84,28 +84,29 @@ def compress(summary, epsilon):
       A 2-D `np.ndarray` that is a compressed summary. First column is the
       interpolated partition values, the second is the weights (counts).
   """
-  # TODO(b/184863356): remove the numpy escape hatch here.
-  return script_ops.numpy_function(
-      lambda s: _compress_summary_numpy(s, epsilon), [summary], dtypes.float32)
+    # TODO(b/184863356): remove the numpy escape hatch here.
+    return script_ops.numpy_function(
+        lambda s: _compress_summary_numpy(s, epsilon), [summary], dtypes.float32
+    )
 
 
 def _compress_summary_numpy(summary, epsilon):
-  """Compress a summary with numpy."""
-  if summary.shape[1] * epsilon < 1:
-    return summary
+    """Compress a summary with numpy."""
+    if summary.shape[1] * epsilon < 1:
+        return summary
 
-  percents = epsilon + np.arange(0.0, 1.0, epsilon)
-  cum_weights = summary[1].cumsum()
-  cum_weight_percents = cum_weights / cum_weights[-1]
-  new_bins = np.interp(percents, cum_weight_percents, summary[0])
-  cum_weights = np.interp(percents, cum_weight_percents, cum_weights)
-  new_weights = cum_weights - np.concatenate((np.array([0]), cum_weights[:-1]))
-  summary = np.stack((new_bins, new_weights))
-  return summary.astype(np.float32)
+    percents = epsilon + np.arange(0.0, 1.0, epsilon)
+    cum_weights = summary[1].cumsum()
+    cum_weight_percents = cum_weights / cum_weights[-1]
+    new_bins = np.interp(percents, cum_weight_percents, summary[0])
+    cum_weights = np.interp(percents, cum_weight_percents, cum_weights)
+    new_weights = cum_weights - np.concatenate((np.array([0]), cum_weights[:-1]))
+    summary = np.stack((new_bins, new_weights))
+    return summary.astype(np.float32)
 
 
 def merge_summaries(prev_summary, next_summary, epsilon):
-  """Weighted merge sort of summaries.
+    """Weighted merge sort of summaries.
 
   Given two summaries of distinct data, this function merges (and compresses)
   them to stay within `epsilon` error tolerance.
@@ -119,18 +120,18 @@ def merge_summaries(prev_summary, next_summary, epsilon):
       A 2-D `np.ndarray` that is a merged summary. First column is the
       interpolated partition values, the second is the weights (counts).
   """
-  merged = array_ops.concat((prev_summary, next_summary), axis=1)
-  merged = array_ops.gather_v2(merged, sort_ops.argsort(merged[0]), axis=1)
-  return compress(merged, epsilon)
+    merged = array_ops.concat((prev_summary, next_summary), axis=1)
+    merged = array_ops.gather_v2(merged, sort_ops.argsort(merged[0]), axis=1)
+    return compress(merged, epsilon)
 
 
 def get_bin_boundaries(summary, num_bins):
-  return compress(summary, 1.0 / num_bins)[0, :-1]
+    return compress(summary, 1.0 / num_bins)[0, :-1]
 
 
 @keras_export("keras.layers.experimental.preprocessing.Discretization")
 class Discretization(base_preprocessing_layer.PreprocessingLayer):
-  """Buckets data into discrete ranges.
+    """Buckets data into discrete ranges.
 
   This layer will place each element of its input data into one of several
   contiguous ranges and output an integer index indicating which range each
@@ -176,141 +177,153 @@ class Discretization(base_preprocessing_layer.PreprocessingLayer):
          [1, 3, 3, 1]])>
   """
 
-  def __init__(self,
-               bin_boundaries=None,
-               num_bins=None,
-               epsilon=0.01,
-               **kwargs):
-    # bins is a deprecated arg for setting bin_boundaries or num_bins that still
-    # has some usage.
-    if "bins" in kwargs:
-      logging.warning(
-          "bins is deprecated, please use bin_boundaries or num_bins instead.")
-      if isinstance(kwargs["bins"], int) and num_bins is None:
-        num_bins = kwargs["bins"]
-      elif bin_boundaries is None:
-        bin_boundaries = kwargs["bins"]
-      del kwargs["bins"]
-    super().__init__(streaming=True, **kwargs)
-    if num_bins is not None and num_bins < 0:
-      raise ValueError("`num_bins` must be must be greater than or equal to 0. "
-                       "You passed `num_bins={}`".format(num_bins))
-    if num_bins is not None and bin_boundaries is not None:
-      raise ValueError("Both `num_bins` and `bin_boundaries` should not be "
-                       "set. You passed `num_bins={}` and "
-                       "`bin_boundaries={}`".format(num_bins, bin_boundaries))
-    bin_boundaries = self._convert_to_list(bin_boundaries)
-    self.input_bin_boundaries = bin_boundaries
-    self.bin_boundaries = bin_boundaries if bin_boundaries is not None else []
-    self.num_bins = num_bins
-    self.epsilon = epsilon
+    def __init__(self, bin_boundaries=None, num_bins=None, epsilon=0.01, **kwargs):
+        # bins is a deprecated arg for setting bin_boundaries or num_bins that still
+        # has some usage.
+        if "bins" in kwargs:
+            logging.warning(
+                "bins is deprecated, please use bin_boundaries or num_bins instead."
+            )
+            if isinstance(kwargs["bins"], int) and num_bins is None:
+                num_bins = kwargs["bins"]
+            elif bin_boundaries is None:
+                bin_boundaries = kwargs["bins"]
+            del kwargs["bins"]
+        super().__init__(streaming=True, **kwargs)
+        if num_bins is not None and num_bins < 0:
+            raise ValueError(
+                "`num_bins` must be must be greater than or equal to 0. "
+                "You passed `num_bins={}`".format(num_bins)
+            )
+        if num_bins is not None and bin_boundaries is not None:
+            raise ValueError(
+                "Both `num_bins` and `bin_boundaries` should not be "
+                "set. You passed `num_bins={}` and "
+                "`bin_boundaries={}`".format(num_bins, bin_boundaries)
+            )
+        bin_boundaries = self._convert_to_list(bin_boundaries)
+        self.input_bin_boundaries = bin_boundaries
+        self.bin_boundaries = bin_boundaries if bin_boundaries is not None else []
+        self.num_bins = num_bins
+        self.epsilon = epsilon
 
-  def build(self, input_shape):
-    super().build(input_shape)
+    def build(self, input_shape):
+        super().build(input_shape)
 
-    if self.input_bin_boundaries is not None:
-      return
+        if self.input_bin_boundaries is not None:
+            return
 
-    # Summary contains two equal length vectors of bins at index 0 and weights
-    # at index 1.
-    self.summary = self.add_weight(
-        name="summary",
-        shape=(2, None),
-        dtype=dtypes.float32,
-        initializer=lambda shape, dtype: [[], []],  # pylint: disable=unused-arguments
-        trainable=False)
+        # Summary contains two equal length vectors of bins at index 0 and weights
+        # at index 1.
+        self.summary = self.add_weight(
+            name="summary",
+            shape=(2, None),
+            dtype=dtypes.float32,
+            initializer=lambda shape, dtype: [
+                [],
+                [],
+            ],  # pylint: disable=unused-arguments
+            trainable=False,
+        )
 
-  def update_state(self, data):
-    if self.input_bin_boundaries is not None:
-      raise ValueError(
-          "Cannot adapt a Discretization layer that has been initialized with "
-          "`bin_boundaries`, use `num_bins` instead. You passed "
-          "`bin_boundaries={}`.".format(self.input_bin_boundaries))
+    def update_state(self, data):
+        if self.input_bin_boundaries is not None:
+            raise ValueError(
+                "Cannot adapt a Discretization layer that has been initialized with "
+                "`bin_boundaries`, use `num_bins` instead. You passed "
+                "`bin_boundaries={}`.".format(self.input_bin_boundaries)
+            )
 
-    if not self.built:
-      raise RuntimeError("`build` must be called before `update_state`.")
+        if not self.built:
+            raise RuntimeError("`build` must be called before `update_state`.")
 
-    data = ops.convert_to_tensor_v2_with_dispatch(data)
-    if data.dtype != dtypes.float32:
-      data = math_ops.cast(data, dtypes.float32)
-    summary = summarize(data, self.epsilon)
-    self.summary.assign(merge_summaries(summary, self.summary, self.epsilon))
+        data = ops.convert_to_tensor_v2_with_dispatch(data)
+        if data.dtype != dtypes.float32:
+            data = math_ops.cast(data, dtypes.float32)
+        summary = summarize(data, self.epsilon)
+        self.summary.assign(merge_summaries(summary, self.summary, self.epsilon))
 
-  def merge_state(self, layers):
-    for l in layers + [self]:
-      if l.input_bin_boundaries is not None:
-        raise ValueError(
-            "Cannot merge Discretization layer {} that has been initialized "
-            "with `bin_boundaries`, use `num_bins` instead. You passed "
-            "`bin_boundaries={}`.".format(l.name, l.input_bin_boundaries))
-      if not l.built:
-        raise ValueError(
-            "Cannot merge Discretization layer {}, it has no state. You need "
-            "to call `adapt` on this layer before merging.".format(l.name))
+    def merge_state(self, layers):
+        for l in layers + [self]:
+            if l.input_bin_boundaries is not None:
+                raise ValueError(
+                    "Cannot merge Discretization layer {} that has been initialized "
+                    "with `bin_boundaries`, use `num_bins` instead. You passed "
+                    "`bin_boundaries={}`.".format(l.name, l.input_bin_boundaries)
+                )
+            if not l.built:
+                raise ValueError(
+                    "Cannot merge Discretization layer {}, it has no state. You need "
+                    "to call `adapt` on this layer before merging.".format(l.name)
+                )
 
-    summary = self.summary
-    for l in layers:
-      summary = merge_summaries(summary, l.summary, self.epsilon)
-    self.summary.assign(summary)
-    self.finalize_state()
+        summary = self.summary
+        for l in layers:
+            summary = merge_summaries(summary, l.summary, self.epsilon)
+        self.summary.assign(summary)
+        self.finalize_state()
 
-  def finalize_state(self):
-    if self.input_bin_boundaries is not None or not self.built:
-      return
+    def finalize_state(self):
+        if self.input_bin_boundaries is not None or not self.built:
+            return
 
-    # The bucketize op only support list boundaries.
-    self.bin_boundaries = self._convert_to_list(
-        get_bin_boundaries(self.summary, self.num_bins))
+        # The bucketize op only support list boundaries.
+        self.bin_boundaries = self._convert_to_list(
+            get_bin_boundaries(self.summary, self.num_bins)
+        )
 
-  def reset_state(self):  # pylint: disable=method-hidden
-    if self.input_bin_boundaries is not None or not self.built:
-      return
+    def reset_state(self):  # pylint: disable=method-hidden
+        if self.input_bin_boundaries is not None or not self.built:
+            return
 
-    self.summary.assign([[], []])
+        self.summary.assign([[], []])
 
-  def get_config(self):
-    config = super().get_config()
-    config.update({
-        "bin_boundaries": self.input_bin_boundaries,
-        "num_bins": self.num_bins,
-        "epsilon": self.epsilon,
-    })
-    return config
+    def get_config(self):
+        config = super().get_config()
+        config.update(
+            {
+                "bin_boundaries": self.input_bin_boundaries,
+                "num_bins": self.num_bins,
+                "epsilon": self.epsilon,
+            }
+        )
+        return config
 
-  def compute_output_shape(self, input_shape):
-    return input_shape
+    def compute_output_shape(self, input_shape):
+        return input_shape
 
-  def compute_output_signature(self, input_spec):
-    output_shape = self.compute_output_shape(input_spec.shape.as_list())
-    output_dtype = dtypes.int64
-    if isinstance(input_spec, sparse_tensor.SparseTensorSpec):
-      return sparse_tensor.SparseTensorSpec(
-          shape=output_shape, dtype=output_dtype)
-    return tensor_spec.TensorSpec(shape=output_shape, dtype=output_dtype)
+    def compute_output_signature(self, input_spec):
+        output_shape = self.compute_output_shape(input_spec.shape.as_list())
+        output_dtype = dtypes.int64
+        if isinstance(input_spec, sparse_tensor.SparseTensorSpec):
+            return sparse_tensor.SparseTensorSpec(
+                shape=output_shape, dtype=output_dtype
+            )
+        return tensor_spec.TensorSpec(shape=output_shape, dtype=output_dtype)
 
-  def call(self, inputs):
-    def bucketize(inputs):
-      return gen_math_ops.Bucketize(
-          input=inputs, boundaries=self.bin_boundaries)
+    def call(self, inputs):
+        def bucketize(inputs):
+            return gen_math_ops.Bucketize(input=inputs, boundaries=self.bin_boundaries)
 
-    if tf_utils.is_ragged(inputs):
-      integer_buckets = ragged_functional_ops.map_flat_values(bucketize, inputs)
-      # Ragged map_flat_values doesn't touch the non-values tensors in the
-      # ragged composite tensor. If this op is the only op a Keras model,
-      # this can cause errors in Graph mode, so wrap the tensor in an identity.
-      return array_ops.identity(integer_buckets)
-    elif tf_utils.is_sparse(inputs):
-      return sparse_tensor.SparseTensor(
-          indices=array_ops.identity(inputs.indices),
-          values=bucketize(inputs.values),
-          dense_shape=array_ops.identity(inputs.dense_shape))
-    else:
-      return bucketize(inputs)
+        if tf_utils.is_ragged(inputs):
+            integer_buckets = ragged_functional_ops.map_flat_values(bucketize, inputs)
+            # Ragged map_flat_values doesn't touch the non-values tensors in the
+            # ragged composite tensor. If this op is the only op a Keras model,
+            # this can cause errors in Graph mode, so wrap the tensor in an identity.
+            return array_ops.identity(integer_buckets)
+        elif tf_utils.is_sparse(inputs):
+            return sparse_tensor.SparseTensor(
+                indices=array_ops.identity(inputs.indices),
+                values=bucketize(inputs.values),
+                dense_shape=array_ops.identity(inputs.dense_shape),
+            )
+        else:
+            return bucketize(inputs)
 
-  def _convert_to_list(self, inputs):
-    if tensor_util.is_tensor(inputs):
-      inputs = inputs.numpy()
-    if isinstance(inputs, (np.ndarray)):
-      inputs = inputs.tolist()
-      inputs = list(inputs)
-    return inputs
+    def _convert_to_list(self, inputs):
+        if tensor_util.is_tensor(inputs):
+            inputs = inputs.numpy()
+        if isinstance(inputs, (np.ndarray)):
+            inputs = inputs.tolist()
+            inputs = list(inputs)
+        return inputs

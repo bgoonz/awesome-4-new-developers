@@ -26,7 +26,7 @@ import abc
 
 
 class Layer(object, metaclass=abc.ABCMeta):
-  """This is the class from which all layers inherit.
+    """This is the class from which all layers inherit.
 
   A layer is a callable object that takes as input one or more tensors and
   that outputs one or more tensors. It involves *computation*, defined
@@ -193,4 +193,5 @@ class Layer(object, metaclass=abc.ABCMeta):
   precision is used, layers may have different computation and variable dtypes.
   See `tf.keras.mixed_precision.Policy` for details on layer dtypes.
   """
-  pass
+
+    pass

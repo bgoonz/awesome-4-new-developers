@@ -29,11 +29,13 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export("data.experimental.TFRecordWriter")
 @deprecation.deprecated(
-    None, "To write TFRecords to disk, use `tf.io.TFRecordWriter`. To save "
+    None,
+    "To write TFRecords to disk, use `tf.io.TFRecordWriter`. To save "
     "and load the contents of a dataset, use `tf.data.experimental.save` "
-    "and `tf.data.experimental.load`")
+    "and `tf.data.experimental.load`",
+)
 class TFRecordWriter(object):
-  """Writes a dataset to a TFRecord file.
+    """Writes a dataset to a TFRecord file.
 
   The elements of the dataset must be scalar strings. To serialize dataset
   elements as strings, you can use the `tf.io.serialize_tensor` function.
@@ -74,8 +76,8 @@ class TFRecordWriter(object):
   ```
   """
 
-  def __init__(self, filename, compression_type=None):
-    """Initializes a `TFRecordWriter`.
+    def __init__(self, filename, compression_type=None):
+        """Initializes a `TFRecordWriter`.
 
     Args:
       filename: a string path indicating where to write the TFRecord data.
@@ -83,16 +85,16 @@ class TFRecordWriter(object):
         to use when writing the file. See `tf.io.TFRecordCompressionType` for
         what types of compression are available. Defaults to `None`.
     """
-    self._filename = ops.convert_to_tensor(
-        filename, dtypes.string, name="filename")
-    self._compression_type = convert.optional_param_to_tensor(
-        "compression_type",
-        compression_type,
-        argument_default="",
-        argument_dtype=dtypes.string)
+        self._filename = ops.convert_to_tensor(filename, dtypes.string, name="filename")
+        self._compression_type = convert.optional_param_to_tensor(
+            "compression_type",
+            compression_type,
+            argument_default="",
+            argument_dtype=dtypes.string,
+        )
 
-  def write(self, dataset):
-    """Writes a dataset to a TFRecord file.
+    def write(self, dataset):
+        """Writes a dataset to a TFRecord file.
 
     An operation that writes the content of the specified dataset to the file
     specified in the constructor.
@@ -111,16 +113,20 @@ class TFRecordWriter(object):
       TypeError: if `dataset` is not a `tf.data.Dataset`.
       TypeError: if the elements produced by the dataset are not scalar strings.
     """
-    if not isinstance(dataset, dataset_ops.DatasetV2):
-      raise TypeError("`dataset` must be a `tf.data.Dataset` object.")
-    if not dataset_ops.get_structure(dataset).is_compatible_with(
-        tensor_spec.TensorSpec([], dtypes.string)):
-      raise TypeError(
-          "`dataset` must produce scalar `DT_STRING` tensors whereas it "
-          "produces shape {0} and types {1}".format(
-              dataset_ops.get_legacy_output_shapes(dataset),
-              dataset_ops.get_legacy_output_types(dataset)))
-    # pylint: disable=protected-access
-    dataset = dataset._apply_debug_options()
-    return gen_experimental_dataset_ops.dataset_to_tf_record(
-        dataset._variant_tensor, self._filename, self._compression_type)
+        if not isinstance(dataset, dataset_ops.DatasetV2):
+            raise TypeError("`dataset` must be a `tf.data.Dataset` object.")
+        if not dataset_ops.get_structure(dataset).is_compatible_with(
+            tensor_spec.TensorSpec([], dtypes.string)
+        ):
+            raise TypeError(
+                "`dataset` must produce scalar `DT_STRING` tensors whereas it "
+                "produces shape {0} and types {1}".format(
+                    dataset_ops.get_legacy_output_shapes(dataset),
+                    dataset_ops.get_legacy_output_types(dataset),
+                )
+            )
+        # pylint: disable=protected-access
+        dataset = dataset._apply_debug_options()
+        return gen_experimental_dataset_ops.dataset_to_tf_record(
+            dataset._variant_tensor, self._filename, self._compression_type
+        )

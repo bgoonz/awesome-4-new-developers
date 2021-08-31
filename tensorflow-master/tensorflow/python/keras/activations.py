@@ -31,15 +31,13 @@ from tensorflow.python.util.tf_export import keras_export
 # the name of `softmax_v2`.
 # This dict maps the activation function name from its v2 version to its
 # canonical name.
-_TF_ACTIVATIONS_V2 = {
-    'softmax_v2': 'softmax',
-}
+_TF_ACTIVATIONS_V2 = {"softmax_v2": "softmax"}
 
 
-@keras_export('keras.activations.softmax')
+@keras_export("keras.activations.softmax")
 @dispatch.add_dispatch_support
 def softmax(x, axis=-1):
-  """Softmax converts a vector of values to a probability distribution.
+    """Softmax converts a vector of values to a probability distribution.
 
   The elements of the output vector are in range (0, 1) and sum to 1.
 
@@ -76,27 +74,28 @@ def softmax(x, axis=-1):
 
   >>> layer = tf.keras.layers.Dense(32, activation=tf.keras.activations.softmax)
   """
-  if x.shape.rank > 1:
-    if isinstance(axis, int):
-      output = nn.softmax(x, axis=axis)
+    if x.shape.rank > 1:
+        if isinstance(axis, int):
+            output = nn.softmax(x, axis=axis)
+        else:
+            # nn.softmax does not support tuple axis.
+            e = math_ops.exp(x - math_ops.reduce_max(x, axis=axis, keepdims=True))
+            s = math_ops.reduce_sum(e, axis=axis, keepdims=True)
+            output = e / s
     else:
-      # nn.softmax does not support tuple axis.
-      e = math_ops.exp(x - math_ops.reduce_max(x, axis=axis, keepdims=True))
-      s = math_ops.reduce_sum(e, axis=axis, keepdims=True)
-      output = e / s
-  else:
-    raise ValueError('Cannot apply softmax to a tensor that is 1D. '
-                     'Received input: %s' % (x,))
+        raise ValueError(
+            "Cannot apply softmax to a tensor that is 1D. " "Received input: %s" % (x,)
+        )
 
-  # Cache the logits to use for crossentropy loss.
-  output._keras_logits = x  # pylint: disable=protected-access
-  return output
+    # Cache the logits to use for crossentropy loss.
+    output._keras_logits = x  # pylint: disable=protected-access
+    return output
 
 
-@keras_export('keras.activations.elu')
+@keras_export("keras.activations.elu")
 @dispatch.add_dispatch_support
 def elu(x, alpha=1.0):
-  """Exponential Linear Unit.
+    """Exponential Linear Unit.
 
   The exponential linear unit (ELU) with `alpha > 0` is:
   `x` if `x > 0` and
@@ -140,13 +139,13 @@ def elu(x, alpha=1.0):
       [Fast and Accurate Deep Network Learning by Exponential Linear Units
       (ELUs) (Clevert et al, 2016)](https://arxiv.org/abs/1511.07289)
   """
-  return backend.elu(x, alpha)
+    return backend.elu(x, alpha)
 
 
-@keras_export('keras.activations.selu')
+@keras_export("keras.activations.selu")
 @dispatch.add_dispatch_support
 def selu(x):
-  """Scaled Exponential Linear Unit (SELU).
+    """Scaled Exponential Linear Unit (SELU).
 
   The Scaled Exponential Linear Unit (SELU) activation function is defined as:
 
@@ -194,13 +193,13 @@ def selu(x):
   References:
       - [Klambauer et al., 2017](https://arxiv.org/abs/1706.02515)
   """
-  return nn.selu(x)
+    return nn.selu(x)
 
 
-@keras_export('keras.activations.softplus')
+@keras_export("keras.activations.softplus")
 @dispatch.add_dispatch_support
 def softplus(x):
-  """Softplus activation function, `softplus(x) = log(exp(x) + 1)`.
+    """Softplus activation function, `softplus(x) = log(exp(x) + 1)`.
 
   Example Usage:
 
@@ -216,13 +215,13 @@ def softplus(x):
   Returns:
       The softplus activation: `log(exp(x) + 1)`.
   """
-  return math_ops.softplus(x)
+    return math_ops.softplus(x)
 
 
-@keras_export('keras.activations.softsign')
+@keras_export("keras.activations.softsign")
 @dispatch.add_dispatch_support
 def softsign(x):
-  """Softsign activation function, `softsign(x) = x / (abs(x) + 1)`.
+    """Softsign activation function, `softsign(x) = x / (abs(x) + 1)`.
 
   Example Usage:
 
@@ -237,13 +236,13 @@ def softsign(x):
   Returns:
       The softsign activation: `x / (abs(x) + 1)`.
   """
-  return nn.softsign(x)
+    return nn.softsign(x)
 
 
-@keras_export('keras.activations.swish')
+@keras_export("keras.activations.swish")
 @dispatch.add_dispatch_support
 def swish(x):
-  """Swish activation function, `swish(x) = x * sigmoid(x)`.
+    """Swish activation function, `swish(x) = x * sigmoid(x)`.
 
   Swish activation function which returns `x*sigmoid(x)`.
   It is a smooth, non-monotonic function that consistently matches
@@ -268,13 +267,13 @@ def swish(x):
   Reference:
     - [Ramachandran et al., 2017](https://arxiv.org/abs/1710.05941)
   """
-  return nn.swish(x)
+    return nn.swish(x)
 
 
-@keras_export('keras.activations.relu')
+@keras_export("keras.activations.relu")
 @dispatch.add_dispatch_support
-def relu(x, alpha=0., max_value=None, threshold=0):
-  """Applies the rectified linear unit activation function.
+def relu(x, alpha=0.0, max_value=None, threshold=0):
+    """Applies the rectified linear unit activation function.
 
   With default values, this returns the standard ReLU activation:
   `max(x, 0)`, the element-wise maximum of 0 and the input tensor.
@@ -309,13 +308,13 @@ def relu(x, alpha=0., max_value=None, threshold=0):
       transformed by the relu activation function.
       Tensor will be of the same shape and dtype of input `x`.
   """
-  return backend.relu(x, alpha=alpha, max_value=max_value, threshold=threshold)
+    return backend.relu(x, alpha=alpha, max_value=max_value, threshold=threshold)
 
 
-@keras_export('keras.activations.gelu', v1=[])
+@keras_export("keras.activations.gelu", v1=[])
 @dispatch.add_dispatch_support
 def gelu(x, approximate=False):
-  """Applies the Gaussian error linear unit (GELU) activation function.
+    """Applies the Gaussian error linear unit (GELU) activation function.
 
   Gaussian error linear unit (GELU) computes
   `x * P(X <= x)`, where `P(X) ~ N(0, 1)`.
@@ -349,13 +348,13 @@ def gelu(x, approximate=False):
   Reference:
     - [Gaussian Error Linear Units (GELUs)](https://arxiv.org/abs/1606.08415)
   """
-  return nn.gelu(x, approximate)
+    return nn.gelu(x, approximate)
 
 
-@keras_export('keras.activations.tanh')
+@keras_export("keras.activations.tanh")
 @dispatch.add_dispatch_support
 def tanh(x):
-  """Hyperbolic tangent activation function.
+    """Hyperbolic tangent activation function.
 
   For example:
 
@@ -371,13 +370,13 @@ def tanh(x):
       Tensor of same shape and dtype of input `x`, with tanh activation:
       `tanh(x) = sinh(x)/cosh(x) = ((exp(x) - exp(-x))/(exp(x) + exp(-x)))`.
   """
-  return nn.tanh(x)
+    return nn.tanh(x)
 
 
-@keras_export('keras.activations.sigmoid')
+@keras_export("keras.activations.sigmoid")
 @dispatch.add_dispatch_support
 def sigmoid(x):
-  """Sigmoid activation function, `sigmoid(x) = 1 / (1 + exp(-x))`.
+    """Sigmoid activation function, `sigmoid(x) = 1 / (1 + exp(-x))`.
 
   Applies the sigmoid activation function. For small values (<-5),
   `sigmoid` returns a value close to zero, and for large values (>5)
@@ -401,16 +400,16 @@ def sigmoid(x):
   Returns:
       Tensor with the sigmoid activation: `1 / (1 + exp(-x))`.
   """
-  output = nn.sigmoid(x)
-  # Cache the logits to use for crossentropy loss.
-  output._keras_logits = x  # pylint: disable=protected-access
-  return output
+    output = nn.sigmoid(x)
+    # Cache the logits to use for crossentropy loss.
+    output._keras_logits = x  # pylint: disable=protected-access
+    return output
 
 
-@keras_export('keras.activations.exponential')
+@keras_export("keras.activations.exponential")
 @dispatch.add_dispatch_support
 def exponential(x):
-  """Exponential activation function.
+    """Exponential activation function.
 
   For example:
 
@@ -425,13 +424,13 @@ def exponential(x):
   Returns:
       Tensor with exponential activation: `exp(x)`.
   """
-  return math_ops.exp(x)
+    return math_ops.exp(x)
 
 
-@keras_export('keras.activations.hard_sigmoid')
+@keras_export("keras.activations.hard_sigmoid")
 @dispatch.add_dispatch_support
 def hard_sigmoid(x):
-  """Hard sigmoid activation function.
+    """Hard sigmoid activation function.
 
   A faster approximation of the sigmoid activation.
   Piecewise linear approximation of the sigmoid function.
@@ -454,13 +453,13 @@ def hard_sigmoid(x):
       - `if x > 2.5: return 1`
       - `if -2.5 <= x <= 2.5: return 0.2 * x + 0.5`
   """
-  return backend.hard_sigmoid(x)
+    return backend.hard_sigmoid(x)
 
 
-@keras_export('keras.activations.linear')
+@keras_export("keras.activations.linear")
 @dispatch.add_dispatch_support
 def linear(x):
-  """Linear activation function (pass-through).
+    """Linear activation function (pass-through).
 
   For example:
 
@@ -475,13 +474,13 @@ def linear(x):
   Returns:
       The input, unmodified.
   """
-  return x
+    return x
 
 
-@keras_export('keras.activations.serialize')
+@keras_export("keras.activations.serialize")
 @dispatch.add_dispatch_support
 def serialize(activation):
-  """Returns the string identifier of an activation function.
+    """Returns the string identifier of an activation function.
 
   Args:
       activation : Function object.
@@ -503,10 +502,9 @@ def serialize(activation):
   Raises:
       ValueError: The input function is not a valid one.
   """
-  if (hasattr(activation, '__name__') and
-      activation.__name__ in _TF_ACTIVATIONS_V2):
-    return _TF_ACTIVATIONS_V2[activation.__name__]
-  return serialize_keras_object(activation)
+    if hasattr(activation, "__name__") and activation.__name__ in _TF_ACTIVATIONS_V2:
+        return _TF_ACTIVATIONS_V2[activation.__name__]
+    return serialize_keras_object(activation)
 
 
 # Add additional globals so that deserialize can find these common activation
@@ -517,10 +515,10 @@ relu6 = nn.relu6
 silu = nn.swish
 
 
-@keras_export('keras.activations.deserialize')
+@keras_export("keras.activations.deserialize")
 @dispatch.add_dispatch_support
 def deserialize(name, custom_objects=None):
-  """Returns activation function given a string identifier.
+    """Returns activation function given a string identifier.
 
   Args:
     name: The name of the activation function.
@@ -545,25 +543,26 @@ def deserialize(name, custom_objects=None):
       ValueError: `Unknown activation function` if the input string does not
       denote any defined Tensorflow activation function.
   """
-  globs = globals()
+    globs = globals()
 
-  # only replace missing activations
-  advanced_activations_globs = advanced_activations.get_globals()
-  for key, val in advanced_activations_globs.items():
-    if key not in globs:
-      globs[key] = val
+    # only replace missing activations
+    advanced_activations_globs = advanced_activations.get_globals()
+    for key, val in advanced_activations_globs.items():
+        if key not in globs:
+            globs[key] = val
 
-  return deserialize_keras_object(
-      name,
-      module_objects=globs,
-      custom_objects=custom_objects,
-      printable_module_name='activation function')
+    return deserialize_keras_object(
+        name,
+        module_objects=globs,
+        custom_objects=custom_objects,
+        printable_module_name="activation function",
+    )
 
 
-@keras_export('keras.activations.get')
+@keras_export("keras.activations.get")
 @dispatch.add_dispatch_support
 def get(identifier):
-  """Returns function.
+    """Returns function.
 
   Args:
       identifier: Function or string
@@ -590,16 +589,16 @@ def get(identifier):
       ValueError: Input is an unknown function or string, i.e., the input does
       not denote any defined function.
   """
-  if identifier is None:
-    return linear
-  if isinstance(identifier, str):
-    identifier = str(identifier)
-    return deserialize(identifier)
-  elif isinstance(identifier, dict):
-    return deserialize(identifier)
-  elif callable(identifier):
-    return identifier
-  else:
-    raise TypeError(
-        'Could not interpret activation function identifier: {}'.format(
-            identifier))
+    if identifier is None:
+        return linear
+    if isinstance(identifier, str):
+        identifier = str(identifier)
+        return deserialize(identifier)
+    elif isinstance(identifier, dict):
+        return deserialize(identifier)
+    elif callable(identifier):
+        return identifier
+    else:
+        raise TypeError(
+            "Could not interpret activation function identifier: {}".format(identifier)
+        )

@@ -28,9 +28,9 @@ from tensorflow.python.util.tf_export import tf_export
 enabled = False
 
 
-@tf_export('profiler.experimental.Trace', v1=[])
+@tf_export("profiler.experimental.Trace", v1=[])
 class Trace(object):
-  """Context manager that generates a trace event in the profiler.
+    """Context manager that generates a trace event in the profiler.
 
   A trace event will start when entering the context, and stop and save the
   result to the profiler when exiting the context. Open TensorBoard Profile tab
@@ -51,8 +51,8 @@ class Trace(object):
   ```
   """
 
-  def __init__(self, name, **kwargs):
-    """Creates a trace event in the profiler.
+    def __init__(self, name, **kwargs):
+        """Creates a trace event in the profiler.
 
     Args:
       name: The name of the trace event.
@@ -78,18 +78,18 @@ class Trace(object):
       The example above uses the keyword argument "step_num" to specify the
       training step being traced.
     """
-    if enabled:
-      # Creating _pywrap_traceme.TraceMe starts the clock.
-      self._traceme = _pywrap_traceme.TraceMe(name, **kwargs)
-    else:
-      self._traceme = None
+        if enabled:
+            # Creating _pywrap_traceme.TraceMe starts the clock.
+            self._traceme = _pywrap_traceme.TraceMe(name, **kwargs)
+        else:
+            self._traceme = None
 
-  def __enter__(self):
-    # Starting the TraceMe clock here would require an extra Python->C++ call.
-    return self
+    def __enter__(self):
+        # Starting the TraceMe clock here would require an extra Python->C++ call.
+        return self
 
-  def set_metadata(self, **kwargs):
-    """Sets metadata in this trace event.
+    def set_metadata(self, **kwargs):
+        """Sets metadata in this trace event.
 
     Args:
       **kwargs: metadata in key-value pairs.
@@ -119,16 +119,16 @@ class Trace(object):
     create the trace after jit_compile(), because we want
     to measure the entire duration of call()).
     """
-    if self._traceme and kwargs:
-      self._traceme.SetMetadata(**kwargs)
+        if self._traceme and kwargs:
+            self._traceme.SetMetadata(**kwargs)
 
-  def __exit__(self, exc_type, exc_val, exc_tb):
-    if self._traceme:
-      self._traceme.Stop()
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self._traceme:
+            self._traceme.Stop()
 
 
 def trace_wrapper(trace_name, **trace_kwargs):
-  """Decorator alternative to `with Trace(): ...`.  It's faster.
+    """Decorator alternative to `with Trace(): ...`.  It's faster.
 
   Args:
     trace_name: The name of the trace event.
@@ -153,15 +153,14 @@ def trace_wrapper(trace_name, **trace_kwargs):
     ```
   """
 
-  def inner_wrapper(func):
+    def inner_wrapper(func):
+        @functools.wraps(func)
+        def wrapped(*args, **kwargs):
+            if enabled:
+                with Trace(trace_name, **trace_kwargs):
+                    return func(*args, **kwargs)
+            return func(*args, **kwargs)
 
-    @functools.wraps(func)
-    def wrapped(*args, **kwargs):
-      if enabled:
-        with Trace(trace_name, **trace_kwargs):
-          return func(*args, **kwargs)
-      return func(*args, **kwargs)
+        return wrapped
 
-    return wrapped
-
-  return inner_wrapper
+    return inner_wrapper

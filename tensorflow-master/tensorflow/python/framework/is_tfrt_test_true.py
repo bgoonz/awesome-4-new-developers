@@ -26,5 +26,5 @@ from __future__ import print_function
 
 
 def is_tfrt_enabled():
-  """Returns true to state TFRT should be enabled for Tensorflow tests."""
-  return True
+    """Returns true to state TFRT should be enabled for Tensorflow tests."""
+    return True

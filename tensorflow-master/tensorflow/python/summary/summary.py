@@ -29,10 +29,13 @@ from google.protobuf import json_format as _json_format
 # pylint: disable=unused-import
 from tensorflow.core.framework.summary_pb2 import Summary
 from tensorflow.core.framework.summary_pb2 import SummaryDescription
-from tensorflow.core.framework.summary_pb2 import SummaryMetadata as _SummaryMetadata  # pylint: enable=unused-import
+from tensorflow.core.framework.summary_pb2 import (
+    SummaryMetadata as _SummaryMetadata,
+)  # pylint: enable=unused-import
 from tensorflow.core.util.event_pb2 import Event
 from tensorflow.core.util.event_pb2 import SessionLog
 from tensorflow.core.util.event_pb2 import TaggedRunMetadata
+
 # pylint: enable=unused-import
 
 from tensorflow.python.distribute import summary_op_util as _distribute_summary_op_util
@@ -41,22 +44,25 @@ from tensorflow.python.framework import constant_op as _constant_op
 from tensorflow.python.framework import dtypes as _dtypes
 from tensorflow.python.framework import ops as _ops
 from tensorflow.python.ops import gen_logging_ops as _gen_logging_ops
-from tensorflow.python.ops import gen_summary_ops as _gen_summary_ops  # pylint: disable=unused-import
+from tensorflow.python.ops import (
+    gen_summary_ops as _gen_summary_ops,
+)  # pylint: disable=unused-import
 from tensorflow.python.ops import summary_op_util as _summary_op_util
 
 # exports FileWriter, FileWriterCache
 # pylint: disable=unused-import
 from tensorflow.python.summary.writer.writer import FileWriter
 from tensorflow.python.summary.writer.writer_cache import FileWriterCache
+
 # pylint: enable=unused-import
 
 from tensorflow.python.util import compat as _compat
 from tensorflow.python.util.tf_export import tf_export
 
 
-@tf_export(v1=['summary.scalar'])
+@tf_export(v1=["summary.scalar"])
 def scalar(name, tensor, collections=None, family=None):
-  """Outputs a `Summary` protocol buffer containing a single scalar value.
+    """Outputs a `Summary` protocol buffer containing a single scalar value.
 
   The generated Summary has a Tensor.proto containing the input Tensor.
 
@@ -102,18 +108,17 @@ def scalar(name, tensor, collections=None, family=None):
 
   @end_compatibility
   """
-  if _distribute_summary_op_util.skip_summary():
-    return _constant_op.constant('')
-  with _summary_op_util.summary_scope(
-      name, family, values=[tensor]) as (tag, scope):
-    val = _gen_logging_ops.scalar_summary(tags=tag, values=tensor, name=scope)
-    _summary_op_util.collect(val, collections, [_ops.GraphKeys.SUMMARIES])
-  return val
+    if _distribute_summary_op_util.skip_summary():
+        return _constant_op.constant("")
+    with _summary_op_util.summary_scope(name, family, values=[tensor]) as (tag, scope):
+        val = _gen_logging_ops.scalar_summary(tags=tag, values=tensor, name=scope)
+        _summary_op_util.collect(val, collections, [_ops.GraphKeys.SUMMARIES])
+    return val
 
 
-@tf_export(v1=['summary.image'])
+@tf_export(v1=["summary.image"])
 def image(name, tensor, max_outputs=3, collections=None, family=None):
-  """Outputs a `Summary` protocol buffer with images.
+    """Outputs a `Summary` protocol buffer with images.
 
   The summary has up to `max_outputs` summary values containing images. The
   images are built from `tensor` which must be 4-D with shape `[batch_size,
@@ -183,20 +188,20 @@ def image(name, tensor, max_outputs=3, collections=None, family=None):
 
   @end_compatibility
   """
-  if _distribute_summary_op_util.skip_summary():
-    return _constant_op.constant('')
-  with _summary_op_util.summary_scope(
-      name, family, values=[tensor]) as (tag, scope):
-    val = _gen_logging_ops.image_summary(
-        tag=tag, tensor=tensor, max_images=max_outputs, name=scope)
-    _summary_op_util.collect(val, collections, [_ops.GraphKeys.SUMMARIES])
-  return val
+    if _distribute_summary_op_util.skip_summary():
+        return _constant_op.constant("")
+    with _summary_op_util.summary_scope(name, family, values=[tensor]) as (tag, scope):
+        val = _gen_logging_ops.image_summary(
+            tag=tag, tensor=tensor, max_images=max_outputs, name=scope
+        )
+        _summary_op_util.collect(val, collections, [_ops.GraphKeys.SUMMARIES])
+    return val
 
 
-@tf_export(v1=['summary.histogram'])
+@tf_export(v1=["summary.histogram"])
 def histogram(name, values, collections=None, family=None):
-  # pylint: disable=line-too-long
-  """Outputs a `Summary` protocol buffer with a histogram.
+    # pylint: disable=line-too-long
+    """Outputs a `Summary` protocol buffer with a histogram.
 
   Adding a histogram summary makes it possible to visualize your data's
   distribution in TensorBoard. You can see a detailed explanation of the
@@ -250,22 +255,20 @@ def histogram(name, values, collections=None, family=None):
 
   @end_compatibility
   """
-  if _distribute_summary_op_util.skip_summary():
-    return _constant_op.constant('')
-  with _summary_op_util.summary_scope(
-      name, family, values=[values],
-      default_name='HistogramSummary') as (tag, scope):
-    val = _gen_logging_ops.histogram_summary(
-        tag=tag, values=values, name=scope)
-    _summary_op_util.collect(val, collections, [_ops.GraphKeys.SUMMARIES])
-  return val
+    if _distribute_summary_op_util.skip_summary():
+        return _constant_op.constant("")
+    with _summary_op_util.summary_scope(
+        name, family, values=[values], default_name="HistogramSummary"
+    ) as (tag, scope):
+        val = _gen_logging_ops.histogram_summary(tag=tag, values=values, name=scope)
+        _summary_op_util.collect(val, collections, [_ops.GraphKeys.SUMMARIES])
+    return val
 
 
-@tf_export(v1=['summary.audio'])
-def audio(name, tensor, sample_rate, max_outputs=3, collections=None,
-          family=None):
-  # pylint: disable=line-too-long
-  """Outputs a `Summary` protocol buffer with audio.
+@tf_export(v1=["summary.audio"])
+def audio(name, tensor, sample_rate, max_outputs=3, collections=None, family=None):
+    # pylint: disable=line-too-long
+    """Outputs a `Summary` protocol buffer with audio.
 
   The summary has up to `max_outputs` summary values containing audio. The
   audio is built from `tensor` which must be 3-D with shape `[batch_size,
@@ -333,22 +336,29 @@ def audio(name, tensor, sample_rate, max_outputs=3, collections=None,
 
   @end_compatibility
   """
-  if _distribute_summary_op_util.skip_summary():
-    return _constant_op.constant('')
-  with _summary_op_util.summary_scope(
-      name, family=family, values=[tensor]) as (tag, scope):
-    sample_rate = _ops.convert_to_tensor(
-        sample_rate, dtype=_dtypes.float32, name='sample_rate')
-    val = _gen_logging_ops.audio_summary_v2(
-        tag=tag, tensor=tensor, max_outputs=max_outputs,
-        sample_rate=sample_rate, name=scope)
-    _summary_op_util.collect(val, collections, [_ops.GraphKeys.SUMMARIES])
-  return val
+    if _distribute_summary_op_util.skip_summary():
+        return _constant_op.constant("")
+    with _summary_op_util.summary_scope(name, family=family, values=[tensor]) as (
+        tag,
+        scope,
+    ):
+        sample_rate = _ops.convert_to_tensor(
+            sample_rate, dtype=_dtypes.float32, name="sample_rate"
+        )
+        val = _gen_logging_ops.audio_summary_v2(
+            tag=tag,
+            tensor=tensor,
+            max_outputs=max_outputs,
+            sample_rate=sample_rate,
+            name=scope,
+        )
+        _summary_op_util.collect(val, collections, [_ops.GraphKeys.SUMMARIES])
+    return val
 
 
-@tf_export(v1=['summary.text'])
+@tf_export(v1=["summary.text"])
 def text(name, tensor, collections=None):
-  """Summarizes textual data.
+    """Summarizes textual data.
 
   Text data summarized via this plugin will be visible in the Text Dashboard
   in TensorBoard. The standard TensorBoard Text Dashboard will render markdown
@@ -396,29 +406,35 @@ def text(name, tensor, collections=None):
 
   @end_compatibility
   """
-  if tensor.dtype != _dtypes.string:
-    raise ValueError('Expected tensor %s to have dtype string, got %s' %
-                     (tensor.name, tensor.dtype))
+    if tensor.dtype != _dtypes.string:
+        raise ValueError(
+            "Expected tensor %s to have dtype string, got %s"
+            % (tensor.name, tensor.dtype)
+        )
 
-  summary_metadata = _SummaryMetadata(
-      plugin_data=_SummaryMetadata.PluginData(plugin_name='text'))
-  t_summary = tensor_summary(
-      name=name,
-      tensor=tensor,
-      summary_metadata=summary_metadata,
-      collections=collections)
-  return t_summary
+    summary_metadata = _SummaryMetadata(
+        plugin_data=_SummaryMetadata.PluginData(plugin_name="text")
+    )
+    t_summary = tensor_summary(
+        name=name,
+        tensor=tensor,
+        summary_metadata=summary_metadata,
+        collections=collections,
+    )
+    return t_summary
 
 
-@tf_export(v1=['summary.tensor_summary'])
-def tensor_summary(name,
-                   tensor,
-                   summary_description=None,
-                   collections=None,
-                   summary_metadata=None,
-                   family=None,
-                   display_name=None):
-  """Outputs a `Summary` protocol buffer with a serialized tensor.proto.
+@tf_export(v1=["summary.tensor_summary"])
+def tensor_summary(
+    name,
+    tensor,
+    summary_description=None,
+    collections=None,
+    summary_metadata=None,
+    family=None,
+    display_name=None,
+):
+    """Outputs a `Summary` protocol buffer with a serialized tensor.proto.
 
   Args:
     name: A name for the generated node. If display_name is not set, it will
@@ -442,34 +458,34 @@ def tensor_summary(name,
     buffer.
   """
 
-  if summary_metadata is None:
-    summary_metadata = _SummaryMetadata()
+    if summary_metadata is None:
+        summary_metadata = _SummaryMetadata()
 
-  if summary_description is not None:
-    summary_metadata.summary_description = summary_description
+    if summary_description is not None:
+        summary_metadata.summary_description = summary_description
 
-  if display_name is not None:
-    summary_metadata.display_name = display_name
+    if display_name is not None:
+        summary_metadata.display_name = display_name
 
-  serialized_summary_metadata = summary_metadata.SerializeToString()
+    serialized_summary_metadata = summary_metadata.SerializeToString()
 
-  if _distribute_summary_op_util.skip_summary():
-    return _constant_op.constant('')
-  with _summary_op_util.summary_scope(
-      name, family, values=[tensor]) as (tag, scope):
-    val = _gen_logging_ops.tensor_summary_v2(
-        tensor=tensor,
-        tag=tag,
-        name=scope,
-        serialized_summary_metadata=serialized_summary_metadata)
-    _summary_op_util.collect(val, collections, [_ops.GraphKeys.SUMMARIES])
-  return val
+    if _distribute_summary_op_util.skip_summary():
+        return _constant_op.constant("")
+    with _summary_op_util.summary_scope(name, family, values=[tensor]) as (tag, scope):
+        val = _gen_logging_ops.tensor_summary_v2(
+            tensor=tensor,
+            tag=tag,
+            name=scope,
+            serialized_summary_metadata=serialized_summary_metadata,
+        )
+        _summary_op_util.collect(val, collections, [_ops.GraphKeys.SUMMARIES])
+    return val
 
 
-@tf_export(v1=['summary.merge'])
+@tf_export(v1=["summary.merge"])
 def merge(inputs, collections=None, name=None):
-  # pylint: disable=line-too-long
-  """Merges summaries.
+    # pylint: disable=line-too-long
+    """Merges summaries.
 
   This op creates a
   [`Summary`](https://www.tensorflow.org/code/tensorflow/core/framework/summary.proto)
@@ -534,23 +550,24 @@ def merge(inputs, collections=None, name=None):
 
   @end_compatibility
   """
-  # pylint: enable=line-too-long
-  if _context.executing_eagerly():
-    raise RuntimeError(
-        'Merging tf.summary.* ops is not compatible with eager execution. '
-        'Use tf.contrib.summary instead.')
-  if _distribute_summary_op_util.skip_summary():
-    return _constant_op.constant('')
-  name = _summary_op_util.clean_tag(name)
-  with _ops.name_scope(name, 'Merge', inputs):
-    val = _gen_logging_ops.merge_summary(inputs=inputs, name=name)
-    _summary_op_util.collect(val, collections, [])
-  return val
+    # pylint: enable=line-too-long
+    if _context.executing_eagerly():
+        raise RuntimeError(
+            "Merging tf.summary.* ops is not compatible with eager execution. "
+            "Use tf.contrib.summary instead."
+        )
+    if _distribute_summary_op_util.skip_summary():
+        return _constant_op.constant("")
+    name = _summary_op_util.clean_tag(name)
+    with _ops.name_scope(name, "Merge", inputs):
+        val = _gen_logging_ops.merge_summary(inputs=inputs, name=name)
+        _summary_op_util.collect(val, collections, [])
+    return val
 
 
-@tf_export(v1=['summary.merge_all'])
+@tf_export(v1=["summary.merge_all"])
 def merge_all(key=_ops.GraphKeys.SUMMARIES, scope=None, name=None):
-  """Merges all summaries collected in the default graph.
+    """Merges all summaries collected in the default graph.
 
   Args:
     key: `GraphKey` used to collect the summaries.  Defaults to
@@ -607,20 +624,21 @@ def merge_all(key=_ops.GraphKeys.SUMMARIES, scope=None, name=None):
 
   @end_compatibility
   """
-  if _context.executing_eagerly():
-    raise RuntimeError(
-        'Merging tf.summary.* ops is not compatible with eager execution. '
-        'Use tf.contrib.summary instead.')
-  summary_ops = _ops.get_collection(key, scope=scope)
-  if not summary_ops:
-    return None
-  else:
-    return merge(summary_ops, name=name)
+    if _context.executing_eagerly():
+        raise RuntimeError(
+            "Merging tf.summary.* ops is not compatible with eager execution. "
+            "Use tf.contrib.summary instead."
+        )
+    summary_ops = _ops.get_collection(key, scope=scope)
+    if not summary_ops:
+        return None
+    else:
+        return merge(summary_ops, name=name)
 
 
-@tf_export(v1=['summary.get_summary_description'])
+@tf_export(v1=["summary.get_summary_description"])
 def get_summary_description(node_def):
-  """Given a TensorSummary node_def, retrieve its SummaryDescription.
+    """Given a TensorSummary node_def, retrieve its SummaryDescription.
 
   When a Summary op is instantiated, a SummaryDescription of associated
   metadata is stored in its NodeDef. This method retrieves the description.
@@ -640,9 +658,9 @@ def get_summary_description(node_def):
   @end_compatibility
   """
 
-  if node_def.op != 'TensorSummary':
-    raise ValueError("Can't get_summary_description on %s" % node_def.op)
-  description_str = _compat.as_str_any(node_def.attr['description'].s)
-  summary_description = SummaryDescription()
-  _json_format.Parse(description_str, summary_description)
-  return summary_description
+    if node_def.op != "TensorSummary":
+        raise ValueError("Can't get_summary_description on %s" % node_def.op)
+    description_str = _compat.as_str_any(node_def.attr["description"].s)
+    summary_description = SummaryDescription()
+    _json_format.Parse(description_str, summary_description)
+    return summary_description

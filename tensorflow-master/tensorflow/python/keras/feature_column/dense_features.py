@@ -27,9 +27,9 @@ from tensorflow.python.keras.saving.saved_model import json_utils
 from tensorflow.python.util.tf_export import keras_export
 
 
-@keras_export(v1=['keras.layers.DenseFeatures'])
+@keras_export(v1=["keras.layers.DenseFeatures"])
 class DenseFeatures(kfc._BaseFeaturesLayer):  # pylint: disable=protected-access
-  """A layer that produces a dense `Tensor` based on given `feature_columns`.
+    """A layer that produces a dense `Tensor` based on given `feature_columns`.
 
   Generally a single example in training data is described with FeatureColumns.
   At the first layer of the model, this column-oriented data should be converted
@@ -66,13 +66,10 @@ class DenseFeatures(kfc._BaseFeaturesLayer):  # pylint: disable=protected-access
   ```
   """
 
-  def __init__(self,
-               feature_columns,
-               trainable=True,
-               name=None,
-               partitioner=None,
-               **kwargs):
-    """Constructs a DenseFeatures layer.
+    def __init__(
+        self, feature_columns, trainable=True, name=None, partitioner=None, **kwargs
+    ):
+        """Constructs a DenseFeatures layer.
 
     Args:
       feature_columns: An iterable containing the FeatureColumns to use as
@@ -90,34 +87,35 @@ class DenseFeatures(kfc._BaseFeaturesLayer):  # pylint: disable=protected-access
     Raises:
       ValueError: if an item in `feature_columns` is not a `DenseColumn`.
     """
-    super(DenseFeatures, self).__init__(
-        feature_columns=feature_columns,
-        trainable=trainable,
-        name=name,
-        partitioner=partitioner,
-        expected_column_type=fc.DenseColumn,
-        **kwargs)
+        super(DenseFeatures, self).__init__(
+            feature_columns=feature_columns,
+            trainable=trainable,
+            name=name,
+            partitioner=partitioner,
+            expected_column_type=fc.DenseColumn,
+            **kwargs
+        )
 
-  @property
-  def _is_feature_layer(self):
-    return True
+    @property
+    def _is_feature_layer(self):
+        return True
 
-  @property
-  def _tracking_metadata(self):
-    """String stored in metadata field in the SavedModel proto.
+    @property
+    def _tracking_metadata(self):
+        """String stored in metadata field in the SavedModel proto.
 
     Returns:
       A serialized JSON storing information necessary for recreating this layer.
     """
-    metadata = json.loads(super(DenseFeatures, self)._tracking_metadata)
-    metadata['_is_feature_layer'] = True
-    return json.dumps(metadata, default=json_utils.get_json_type)
+        metadata = json.loads(super(DenseFeatures, self)._tracking_metadata)
+        metadata["_is_feature_layer"] = True
+        return json.dumps(metadata, default=json_utils.get_json_type)
 
-  def _target_shape(self, input_shape, total_elements):
-    return (input_shape[0], total_elements)
+    def _target_shape(self, input_shape, total_elements):
+        return (input_shape[0], total_elements)
 
-  def call(self, features, cols_to_output_tensors=None, training=None):
-    """Returns a dense tensor corresponding to the `feature_columns`.
+    def call(self, features, cols_to_output_tensors=None, training=None):
+        """Returns a dense tensor corresponding to the `feature_columns`.
 
     Example usage:
 
@@ -152,23 +150,26 @@ class DenseFeatures(kfc._BaseFeaturesLayer):  # pylint: disable=protected-access
     Raises:
       ValueError: If features are not a dictionary.
     """
-    if training is None:
-      training = backend.learning_phase()
-    if not isinstance(features, dict):
-      raise ValueError('We expected a dictionary here. Instead we got: ',
-                       features)
-    transformation_cache = fc.FeatureTransformationCache(features)
-    output_tensors = []
-    for column in self._feature_columns:
-      with backend.name_scope(column.name):
-        try:
-          tensor = column.get_dense_tensor(
-              transformation_cache, self._state_manager, training=training)
-        except TypeError:
-          tensor = column.get_dense_tensor(transformation_cache,
-                                           self._state_manager)
-        processed_tensors = self._process_dense_tensor(column, tensor)
-        if cols_to_output_tensors is not None:
-          cols_to_output_tensors[column] = processed_tensors
-        output_tensors.append(processed_tensors)
-    return self._verify_and_concat_tensors(output_tensors)
+        if training is None:
+            training = backend.learning_phase()
+        if not isinstance(features, dict):
+            raise ValueError(
+                "We expected a dictionary here. Instead we got: ", features
+            )
+        transformation_cache = fc.FeatureTransformationCache(features)
+        output_tensors = []
+        for column in self._feature_columns:
+            with backend.name_scope(column.name):
+                try:
+                    tensor = column.get_dense_tensor(
+                        transformation_cache, self._state_manager, training=training
+                    )
+                except TypeError:
+                    tensor = column.get_dense_tensor(
+                        transformation_cache, self._state_manager
+                    )
+                processed_tensors = self._process_dense_tensor(column, tensor)
+                if cols_to_output_tensors is not None:
+                    cols_to_output_tensors[column] = processed_tensors
+                output_tensors.append(processed_tensors)
+        return self._verify_and_concat_tensors(output_tensors)

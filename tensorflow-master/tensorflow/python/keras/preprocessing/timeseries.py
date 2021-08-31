@@ -23,9 +23,11 @@ from tensorflow.python.ops import math_ops
 from tensorflow.python.util.tf_export import keras_export
 
 
-@keras_export('keras.utils.timeseries_dataset_from_array',
-              'keras.preprocessing.timeseries_dataset_from_array',
-              v1=[])
+@keras_export(
+    "keras.utils.timeseries_dataset_from_array",
+    "keras.preprocessing.timeseries_dataset_from_array",
+    v1=[],
+)
 def timeseries_dataset_from_array(
     data,
     targets,
@@ -36,8 +38,9 @@ def timeseries_dataset_from_array(
     shuffle=False,
     seed=None,
     start_index=None,
-    end_index=None):
-  """Creates a dataset of sliding windows over a timeseries provided as array.
+    end_index=None,
+):
+    """Creates a dataset of sliding windows over a timeseries provided as array.
 
   This function takes in a sequence of data-points gathered at
   equal intervals, along with time series parameters such as
@@ -144,89 +147,101 @@ def timeseries_dataset_from_array(
     break
   ```
   """
-  if start_index and (start_index < 0 or start_index >= len(data)):
-    raise ValueError('start_index must be higher than 0 and lower than the '
-                     'length of the data. Got: start_index=%s '
-                     'for data of length %s.' % (start_index, len(data)))
-  if end_index:
-    if start_index and end_index <= start_index:
-      raise ValueError('end_index must be higher than start_index. Got: '
-                       'start_index=%s, end_index=%s.' %
-                       (start_index, end_index))
-    if end_index >= len(data):
-      raise ValueError('end_index must be lower than the length of the data. '
-                       'Got: end_index=%s' % (end_index,))
-    if end_index <= 0:
-      raise ValueError('end_index must be higher than 0. '
-                       'Got: end_index=%s' % (end_index,))
+    if start_index and (start_index < 0 or start_index >= len(data)):
+        raise ValueError(
+            "start_index must be higher than 0 and lower than the "
+            "length of the data. Got: start_index=%s "
+            "for data of length %s." % (start_index, len(data))
+        )
+    if end_index:
+        if start_index and end_index <= start_index:
+            raise ValueError(
+                "end_index must be higher than start_index. Got: "
+                "start_index=%s, end_index=%s." % (start_index, end_index)
+            )
+        if end_index >= len(data):
+            raise ValueError(
+                "end_index must be lower than the length of the data. "
+                "Got: end_index=%s" % (end_index,)
+            )
+        if end_index <= 0:
+            raise ValueError(
+                "end_index must be higher than 0. " "Got: end_index=%s" % (end_index,)
+            )
 
-  # Validate strides
-  if sampling_rate <= 0 or sampling_rate >= len(data):
-    raise ValueError(
-        'sampling_rate must be higher than 0 and lower than '
-        'the length of the data. Got: '
-        'sampling_rate=%s for data of length %s.' % (sampling_rate, len(data)))
-  if sequence_stride <= 0 or sequence_stride >= len(data):
-    raise ValueError(
-        'sequence_stride must be higher than 0 and lower than '
-        'the length of the data. Got: sequence_stride=%s '
-        'for data of length %s.' % (sequence_stride, len(data)))
+    # Validate strides
+    if sampling_rate <= 0 or sampling_rate >= len(data):
+        raise ValueError(
+            "sampling_rate must be higher than 0 and lower than "
+            "the length of the data. Got: "
+            "sampling_rate=%s for data of length %s." % (sampling_rate, len(data))
+        )
+    if sequence_stride <= 0 or sequence_stride >= len(data):
+        raise ValueError(
+            "sequence_stride must be higher than 0 and lower than "
+            "the length of the data. Got: sequence_stride=%s "
+            "for data of length %s." % (sequence_stride, len(data))
+        )
 
-  if start_index is None:
-    start_index = 0
-  if end_index is None:
-    end_index = len(data)
+    if start_index is None:
+        start_index = 0
+    if end_index is None:
+        end_index = len(data)
 
-  # Determine the lowest dtype to store start positions (to lower memory usage).
-  num_seqs = end_index - start_index - (sequence_length * sampling_rate) + 1
-  if targets is not None:
-    num_seqs = min(num_seqs, len(targets))
-  if num_seqs < 2147483647:
-    index_dtype = 'int32'
-  else:
-    index_dtype = 'int64'
+    # Determine the lowest dtype to store start positions (to lower memory usage).
+    num_seqs = end_index - start_index - (sequence_length * sampling_rate) + 1
+    if targets is not None:
+        num_seqs = min(num_seqs, len(targets))
+    if num_seqs < 2147483647:
+        index_dtype = "int32"
+    else:
+        index_dtype = "int64"
 
-  # Generate start positions
-  start_positions = np.arange(0, num_seqs, sequence_stride, dtype=index_dtype)
-  if shuffle:
-    if seed is None:
-      seed = np.random.randint(1e6)
-    rng = np.random.RandomState(seed)
-    rng.shuffle(start_positions)
+    # Generate start positions
+    start_positions = np.arange(0, num_seqs, sequence_stride, dtype=index_dtype)
+    if shuffle:
+        if seed is None:
+            seed = np.random.randint(1e6)
+        rng = np.random.RandomState(seed)
+        rng.shuffle(start_positions)
 
-  sequence_length = math_ops.cast(sequence_length, dtype=index_dtype)
-  sampling_rate = math_ops.cast(sampling_rate, dtype=index_dtype)
+    sequence_length = math_ops.cast(sequence_length, dtype=index_dtype)
+    sampling_rate = math_ops.cast(sampling_rate, dtype=index_dtype)
 
-  positions_ds = dataset_ops.Dataset.from_tensors(start_positions).repeat()
+    positions_ds = dataset_ops.Dataset.from_tensors(start_positions).repeat()
 
-  # For each initial window position, generates indices of the window elements
-  indices = dataset_ops.Dataset.zip(
-      (dataset_ops.Dataset.range(len(start_positions)), positions_ds)).map(
-          lambda i, positions: math_ops.range(  # pylint: disable=g-long-lambda
-              positions[i],
-              positions[i] + sequence_length * sampling_rate,
-              sampling_rate),
-          num_parallel_calls=dataset_ops.AUTOTUNE)
-
-  dataset = sequences_from_indices(data, indices, start_index, end_index)
-  if targets is not None:
+    # For each initial window position, generates indices of the window elements
     indices = dataset_ops.Dataset.zip(
-        (dataset_ops.Dataset.range(len(start_positions)), positions_ds)).map(
-            lambda i, positions: positions[i],
-            num_parallel_calls=dataset_ops.AUTOTUNE)
-    target_ds = sequences_from_indices(
-        targets, indices, start_index, end_index)
-    dataset = dataset_ops.Dataset.zip((dataset, target_ds))
-  if shuffle:
-    # Shuffle locally at each iteration
-    dataset = dataset.shuffle(buffer_size=batch_size * 8, seed=seed)
-  dataset = dataset.batch(batch_size)
-  return dataset
+        (dataset_ops.Dataset.range(len(start_positions)), positions_ds)
+    ).map(
+        lambda i, positions: math_ops.range(  # pylint: disable=g-long-lambda
+            positions[i], positions[i] + sequence_length * sampling_rate, sampling_rate
+        ),
+        num_parallel_calls=dataset_ops.AUTOTUNE,
+    )
+
+    dataset = sequences_from_indices(data, indices, start_index, end_index)
+    if targets is not None:
+        indices = dataset_ops.Dataset.zip(
+            (dataset_ops.Dataset.range(len(start_positions)), positions_ds)
+        ).map(
+            lambda i, positions: positions[i], num_parallel_calls=dataset_ops.AUTOTUNE
+        )
+        target_ds = sequences_from_indices(targets, indices, start_index, end_index)
+        dataset = dataset_ops.Dataset.zip((dataset, target_ds))
+    if shuffle:
+        # Shuffle locally at each iteration
+        dataset = dataset.shuffle(buffer_size=batch_size * 8, seed=seed)
+    dataset = dataset.batch(batch_size)
+    return dataset
 
 
 def sequences_from_indices(array, indices_ds, start_index, end_index):
-  dataset = dataset_ops.Dataset.from_tensors(array[start_index : end_index])
-  dataset = dataset_ops.Dataset.zip((dataset.repeat(), indices_ds)).map(
-      lambda steps, inds: array_ops.gather(steps, inds),  # pylint: disable=unnecessary-lambda
-      num_parallel_calls=dataset_ops.AUTOTUNE)
-  return dataset
+    dataset = dataset_ops.Dataset.from_tensors(array[start_index:end_index])
+    dataset = dataset_ops.Dataset.zip((dataset.repeat(), indices_ds)).map(
+        lambda steps, inds: array_ops.gather(
+            steps, inds
+        ),  # pylint: disable=unnecessary-lambda
+        num_parallel_calls=dataset_ops.AUTOTUNE,
+    )
+    return dataset

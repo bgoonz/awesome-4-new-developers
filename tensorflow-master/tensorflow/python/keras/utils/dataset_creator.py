@@ -20,9 +20,9 @@ from tensorflow.python.distribute import distribute_lib
 from tensorflow.python.util.tf_export import keras_export
 
 
-@keras_export('keras.utils.experimental.DatasetCreator', v1=[])
+@keras_export("keras.utils.experimental.DatasetCreator", v1=[])
 class DatasetCreator(object):
-  """Object that returns a `tf.data.Dataset` upon invoking.
+    """Object that returns a `tf.data.Dataset` upon invoking.
 
   `tf.keras.utils.experimental.DatasetCreator` is designated as a supported type
   for `x`, or the input, in `tf.keras.Model.fit`. Pass an instance of this class
@@ -80,22 +80,26 @@ class DatasetCreator(object):
       information.
   """
 
-  def __init__(self, dataset_fn, input_options=None):
-    if not callable(dataset_fn):
-      raise TypeError('`dataset_fn` for `DatasetCreator` must be a `callable`.')
-    if input_options and (not isinstance(input_options,
-                                         distribute_lib.InputOptions)):
-      raise TypeError('`input_options` for `DatasetCreator` must be a '
-                      '`tf.distribute.InputOptions`.')
+    def __init__(self, dataset_fn, input_options=None):
+        if not callable(dataset_fn):
+            raise TypeError("`dataset_fn` for `DatasetCreator` must be a `callable`.")
+        if input_options and (
+            not isinstance(input_options, distribute_lib.InputOptions)
+        ):
+            raise TypeError(
+                "`input_options` for `DatasetCreator` must be a "
+                "`tf.distribute.InputOptions`."
+            )
 
-    self.dataset_fn = dataset_fn
-    self.input_options = input_options
+        self.dataset_fn = dataset_fn
+        self.input_options = input_options
 
-  def __call__(self, *args, **kwargs):
-    # When a `DatasetCreator` is invoked, it forwards args/kwargs straight to
-    # the callable.
-    dataset = self.dataset_fn(*args, **kwargs)
-    if not isinstance(dataset, dataset_ops.DatasetV2):
-      raise TypeError('The `callable` provided to `DatasetCreator` must return '
-                      'a Dataset.')
-    return dataset
+    def __call__(self, *args, **kwargs):
+        # When a `DatasetCreator` is invoked, it forwards args/kwargs straight to
+        # the callable.
+        dataset = self.dataset_fn(*args, **kwargs)
+        if not isinstance(dataset, dataset_ops.DatasetV2):
+            raise TypeError(
+                "The `callable` provided to `DatasetCreator` must return " "a Dataset."
+            )
+        return dataset

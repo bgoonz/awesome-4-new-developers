@@ -24,9 +24,9 @@ from tensorflow.python.ops import math_ops
 from tensorflow.python.util.tf_export import keras_export
 
 
-@keras_export('keras.layers.GaussianNoise')
+@keras_export("keras.layers.GaussianNoise")
 class GaussianNoise(Layer):
-  """Apply additive zero-centered Gaussian noise.
+    """Apply additive zero-centered Gaussian noise.
 
   This is useful to mitigate overfitting
   (you could see it as a form of random data augmentation).
@@ -52,35 +52,35 @@ class GaussianNoise(Layer):
     Same shape as input.
   """
 
-  def __init__(self, stddev, **kwargs):
-    super(GaussianNoise, self).__init__(**kwargs)
-    self.supports_masking = True
-    self.stddev = stddev
+    def __init__(self, stddev, **kwargs):
+        super(GaussianNoise, self).__init__(**kwargs)
+        self.supports_masking = True
+        self.stddev = stddev
 
-  def call(self, inputs, training=None):
+    def call(self, inputs, training=None):
+        def noised():
+            return inputs + backend.random_normal(
+                shape=array_ops.shape(inputs),
+                mean=0.0,
+                stddev=self.stddev,
+                dtype=inputs.dtype,
+            )
 
-    def noised():
-      return inputs + backend.random_normal(
-          shape=array_ops.shape(inputs),
-          mean=0.,
-          stddev=self.stddev,
-          dtype=inputs.dtype)
+        return backend.in_train_phase(noised, inputs, training=training)
 
-    return backend.in_train_phase(noised, inputs, training=training)
+    def get_config(self):
+        config = {"stddev": self.stddev}
+        base_config = super(GaussianNoise, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
-  def get_config(self):
-    config = {'stddev': self.stddev}
-    base_config = super(GaussianNoise, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
-
-  @tf_utils.shape_type_conversion
-  def compute_output_shape(self, input_shape):
-    return input_shape
+    @tf_utils.shape_type_conversion
+    def compute_output_shape(self, input_shape):
+        return input_shape
 
 
-@keras_export('keras.layers.GaussianDropout')
+@keras_export("keras.layers.GaussianDropout")
 class GaussianDropout(Layer):
-  """Apply multiplicative 1-centered Gaussian noise.
+    """Apply multiplicative 1-centered Gaussian noise.
 
   As it is a regularization layer, it is only active at training time.
 
@@ -103,38 +103,39 @@ class GaussianDropout(Layer):
     Same shape as input.
   """
 
-  def __init__(self, rate, **kwargs):
-    super(GaussianDropout, self).__init__(**kwargs)
-    self.supports_masking = True
-    self.rate = rate
+    def __init__(self, rate, **kwargs):
+        super(GaussianDropout, self).__init__(**kwargs)
+        self.supports_masking = True
+        self.rate = rate
 
-  def call(self, inputs, training=None):
-    if 0 < self.rate < 1:
+    def call(self, inputs, training=None):
+        if 0 < self.rate < 1:
 
-      def noised():
-        stddev = np.sqrt(self.rate / (1.0 - self.rate))
-        return inputs * backend.random_normal(
-            shape=array_ops.shape(inputs),
-            mean=1.0,
-            stddev=stddev,
-            dtype=inputs.dtype)
+            def noised():
+                stddev = np.sqrt(self.rate / (1.0 - self.rate))
+                return inputs * backend.random_normal(
+                    shape=array_ops.shape(inputs),
+                    mean=1.0,
+                    stddev=stddev,
+                    dtype=inputs.dtype,
+                )
 
-      return backend.in_train_phase(noised, inputs, training=training)
-    return inputs
+            return backend.in_train_phase(noised, inputs, training=training)
+        return inputs
 
-  def get_config(self):
-    config = {'rate': self.rate}
-    base_config = super(GaussianDropout, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {"rate": self.rate}
+        base_config = super(GaussianDropout, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
-  @tf_utils.shape_type_conversion
-  def compute_output_shape(self, input_shape):
-    return input_shape
+    @tf_utils.shape_type_conversion
+    def compute_output_shape(self, input_shape):
+        return input_shape
 
 
-@keras_export('keras.layers.AlphaDropout')
+@keras_export("keras.layers.AlphaDropout")
 class AlphaDropout(Layer):
-  """Applies Alpha Dropout to the input.
+    """Applies Alpha Dropout to the input.
 
   Alpha Dropout is a `Dropout` that keeps mean and variance of inputs
   to their original values, in order to ensure the self-normalizing property
@@ -162,47 +163,50 @@ class AlphaDropout(Layer):
     Same shape as input.
   """
 
-  def __init__(self, rate, noise_shape=None, seed=None, **kwargs):
-    super(AlphaDropout, self).__init__(**kwargs)
-    self.rate = rate
-    self.noise_shape = noise_shape
-    self.seed = seed
-    self.supports_masking = True
+    def __init__(self, rate, noise_shape=None, seed=None, **kwargs):
+        super(AlphaDropout, self).__init__(**kwargs)
+        self.rate = rate
+        self.noise_shape = noise_shape
+        self.seed = seed
+        self.supports_masking = True
 
-  def _get_noise_shape(self, inputs):
-    return self.noise_shape if self.noise_shape else array_ops.shape(inputs)
+    def _get_noise_shape(self, inputs):
+        return self.noise_shape if self.noise_shape else array_ops.shape(inputs)
 
-  def call(self, inputs, training=None):
-    if 0. < self.rate < 1.:
-      noise_shape = self._get_noise_shape(inputs)
+    def call(self, inputs, training=None):
+        if 0.0 < self.rate < 1.0:
+            noise_shape = self._get_noise_shape(inputs)
 
-      def dropped_inputs(inputs=inputs, rate=self.rate, seed=self.seed):  # pylint: disable=missing-docstring
-        alpha = 1.6732632423543772848170429916717
-        scale = 1.0507009873554804934193349852946
-        alpha_p = -alpha * scale
+            def dropped_inputs(
+                inputs=inputs, rate=self.rate, seed=self.seed
+            ):  # pylint: disable=missing-docstring
+                alpha = 1.6732632423543772848170429916717
+                scale = 1.0507009873554804934193349852946
+                alpha_p = -alpha * scale
 
-        kept_idx = math_ops.greater_equal(
-            backend.random_uniform(noise_shape, seed=seed), rate)
-        kept_idx = math_ops.cast(kept_idx, inputs.dtype)
+                kept_idx = math_ops.greater_equal(
+                    backend.random_uniform(noise_shape, seed=seed), rate
+                )
+                kept_idx = math_ops.cast(kept_idx, inputs.dtype)
 
-        # Get affine transformation params
-        a = ((1 - rate) * (1 + rate * alpha_p**2))**-0.5
-        b = -a * alpha_p * rate
+                # Get affine transformation params
+                a = ((1 - rate) * (1 + rate * alpha_p ** 2)) ** -0.5
+                b = -a * alpha_p * rate
 
-        # Apply mask
-        x = inputs * kept_idx + alpha_p * (1 - kept_idx)
+                # Apply mask
+                x = inputs * kept_idx + alpha_p * (1 - kept_idx)
 
-        # Do affine transformation
-        return a * x + b
+                # Do affine transformation
+                return a * x + b
 
-      return backend.in_train_phase(dropped_inputs, inputs, training=training)
-    return inputs
+            return backend.in_train_phase(dropped_inputs, inputs, training=training)
+        return inputs
 
-  def get_config(self):
-    config = {'rate': self.rate}
-    base_config = super(AlphaDropout, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {"rate": self.rate}
+        base_config = super(AlphaDropout, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
-  @tf_utils.shape_type_conversion
-  def compute_output_shape(self, input_shape):
-    return input_shape
+    @tf_utils.shape_type_conversion
+    def compute_output_shape(self, input_shape):
+        return input_shape

@@ -21,7 +21,9 @@ from __future__ import print_function
 from tensorflow.python.framework import config
 from tensorflow.python.platform import tf_logging
 from tensorflow.python.training import optimizer
-from tensorflow.python.training.experimental import loss_scale_optimizer as loss_scale_optimizer_v1
+from tensorflow.python.training.experimental import (
+    loss_scale_optimizer as loss_scale_optimizer_v1,
+)
 from tensorflow.python.training.experimental import mixed_precision_global_state
 from tensorflow.python.util import deprecation
 from tensorflow.python.util.tf_export import tf_export
@@ -30,14 +32,13 @@ from tensorflow.python.util.tf_export import tf_export
 # A mapping between optimizers and the corresponding wrapper class that will be
 # used for mixed precision.
 _REGISTERED_WRAPPER_OPTIMIZER_CLS = {
-    optimizer.Optimizer:
-        loss_scale_optimizer_v1.MixedPrecisionLossScaleOptimizer,
+    optimizer.Optimizer: loss_scale_optimizer_v1.MixedPrecisionLossScaleOptimizer
 }
 
 
-@tf_export('__internal__.mixed_precision.register_loss_scale_wrapper', v1=[])
+@tf_export("__internal__.mixed_precision.register_loss_scale_wrapper", v1=[])
 def register_loss_scale_wrapper(optimizer_cls, wrapper_cls):
-  """Registers a loss scale optimizer wrapper.
+    """Registers a loss scale optimizer wrapper.
 
   `tf.compat.v1.mixed_precision.enable_mixed_precision_graph_rewrite`
   automatically wraps an optimizer with an optimizer wrapper that performs loss
@@ -52,34 +53,42 @@ def register_loss_scale_wrapper(optimizer_cls, wrapper_cls):
       constructor should take two arguments: The inner optimizer and a
       `tf.compat.v1.mixed_precision.LossScale`.
   """
-  _REGISTERED_WRAPPER_OPTIMIZER_CLS[optimizer_cls] = wrapper_cls
+    _REGISTERED_WRAPPER_OPTIMIZER_CLS[optimizer_cls] = wrapper_cls
 
 
 def _wrap_optimizer(opt, loss_scale):
-  """Wraps an optimizer with a LossScaleOptimizer."""
+    """Wraps an optimizer with a LossScaleOptimizer."""
 
-  for wrapper_optimizer in _REGISTERED_WRAPPER_OPTIMIZER_CLS.values():
-    if isinstance(opt, wrapper_optimizer):
-      raise ValueError('"opt" must not already be an instance of a {cls}. '
-                       '`enable_mixed_precision_graph_rewrite` will '
-                       'automatically wrap the optimizer with a '
-                       '{cls}.'
-                       .format(cls=wrapper_optimizer.__name__))
+    for wrapper_optimizer in _REGISTERED_WRAPPER_OPTIMIZER_CLS.values():
+        if isinstance(opt, wrapper_optimizer):
+            raise ValueError(
+                '"opt" must not already be an instance of a {cls}. '
+                "`enable_mixed_precision_graph_rewrite` will "
+                "automatically wrap the optimizer with a "
+                "{cls}.".format(cls=wrapper_optimizer.__name__)
+            )
 
-  for optimizer_cls, wrapper_cls in _REGISTERED_WRAPPER_OPTIMIZER_CLS.items():
-    if isinstance(opt, optimizer_cls):
-      return wrapper_cls(opt, loss_scale)
+    for optimizer_cls, wrapper_cls in _REGISTERED_WRAPPER_OPTIMIZER_CLS.items():
+        if isinstance(opt, optimizer_cls):
+            return wrapper_cls(opt, loss_scale)
 
-  raise ValueError('"opt" must be an instance of a tf.train.Optimizer or a '
-                   'tf.keras.optimizers.Optimizer, but got: %s' % opt)
+    raise ValueError(
+        '"opt" must be an instance of a tf.train.Optimizer or a '
+        "tf.keras.optimizers.Optimizer, but got: %s" % opt
+    )
 
 
 @deprecation.deprecated_endpoints(
-    'train.experimental.enable_mixed_precision_graph_rewrite')
-@tf_export(v1=['mixed_precision.enable_mixed_precision_graph_rewrite',
-               'train.experimental.enable_mixed_precision_graph_rewrite'])
-def enable_mixed_precision_graph_rewrite_v1(opt, loss_scale='dynamic'):
-  """Enable mixed precision via a graph rewrite.
+    "train.experimental.enable_mixed_precision_graph_rewrite"
+)
+@tf_export(
+    v1=[
+        "mixed_precision.enable_mixed_precision_graph_rewrite",
+        "train.experimental.enable_mixed_precision_graph_rewrite",
+    ]
+)
+def enable_mixed_precision_graph_rewrite_v1(opt, loss_scale="dynamic"):
+    """Enable mixed precision via a graph rewrite.
 
   Mixed precision is the use of both float32 and float16 data types when
   training a model to improve performance. This is achieved via a graph rewrite
@@ -184,38 +193,46 @@ def enable_mixed_precision_graph_rewrite_v1(opt, loss_scale='dynamic'):
   Returns:
     A version of `opt` that will use loss scaling to prevent underflow.
   """
-  if mixed_precision_global_state.is_using_mixed_precision_policy():
-    raise ValueError(
-        'The mixed precision graph rewrite cannot be enabled, because the '
-        'global Keras dtype Policy has been set to a mixed precision policy. '
-        'At most, one of the following can be called:\n\n'
-        '  1. tf.keras.mixed_precision.experimental.set_policy() with a mixed '
-        'precision policy (You called this first)\n\n'
-        '  2. tf.train.experimental.enable_mixed_precision_graph_rewrite() '
-        '(You called this second)\n'
-        'You called both functions, which is an error, because both functions '
-        'enable you to use mixed precision. If in doubt which function to use, '
-        'use the first, as it supports Eager execution and is more '
-        'customizable.')
+    if mixed_precision_global_state.is_using_mixed_precision_policy():
+        raise ValueError(
+            "The mixed precision graph rewrite cannot be enabled, because the "
+            "global Keras dtype Policy has been set to a mixed precision policy. "
+            "At most, one of the following can be called:\n\n"
+            "  1. tf.keras.mixed_precision.experimental.set_policy() with a mixed "
+            "precision policy (You called this first)\n\n"
+            "  2. tf.train.experimental.enable_mixed_precision_graph_rewrite() "
+            "(You called this second)\n"
+            "You called both functions, which is an error, because both functions "
+            "enable you to use mixed precision. If in doubt which function to use, "
+            "use the first, as it supports Eager execution and is more "
+            "customizable."
+        )
 
-  if mixed_precision_global_state.non_mixed_precision_session_created():
-    # TODO(reedwm): Give the stacktrace of the existing Sessions. And if the
-    # Sessions have already been closed, do not raise this error message.
-    tf_logging.warn('You already have existing Sessions that do not use mixed '
-                    'precision. enable_mixed_precision_graph_rewrite() will '
-                    'not affect these Sessions.')
-  opt = _wrap_optimizer(opt, loss_scale)
-  config.set_optimizer_experimental_options({'auto_mixed_precision': True})
-  mixed_precision_global_state.set_mixed_precision_graph_rewrite_enabled(True)
-  return opt
+    if mixed_precision_global_state.non_mixed_precision_session_created():
+        # TODO(reedwm): Give the stacktrace of the existing Sessions. And if the
+        # Sessions have already been closed, do not raise this error message.
+        tf_logging.warn(
+            "You already have existing Sessions that do not use mixed "
+            "precision. enable_mixed_precision_graph_rewrite() will "
+            "not affect these Sessions."
+        )
+    opt = _wrap_optimizer(opt, loss_scale)
+    config.set_optimizer_experimental_options({"auto_mixed_precision": True})
+    mixed_precision_global_state.set_mixed_precision_graph_rewrite_enabled(True)
+    return opt
 
 
 @deprecation.deprecated_endpoints(
-    'train.experimental.disable_mixed_precision_graph_rewrite')
-@tf_export(v1=['mixed_precision.disable_mixed_precision_graph_rewrite',
-               'train.experimental.disable_mixed_precision_graph_rewrite'])
+    "train.experimental.disable_mixed_precision_graph_rewrite"
+)
+@tf_export(
+    v1=[
+        "mixed_precision.disable_mixed_precision_graph_rewrite",
+        "train.experimental.disable_mixed_precision_graph_rewrite",
+    ]
+)
 def disable_mixed_precision_graph_rewrite_v1():
-  """Disables the mixed precision graph rewrite.
+    """Disables the mixed precision graph rewrite.
 
   After this is called, the mixed precision graph rewrite will no longer run for
   new Sessions, and so float32 operations will no longer be converted to float16
@@ -235,11 +252,12 @@ def disable_mixed_precision_graph_rewrite_v1():
   as `enable_mixed_precision_graph_rewrite` and
   `disable_mixed_precision_graph_rewrite` have no effect on existing sessions.
   """
-  # We only have a separate V1 version of this function, because the V1
-  # docstring mentions sessions.
-  if (not
-      mixed_precision_global_state.is_mixed_precision_graph_rewrite_enabled()):
-    tf_logging.warn('disable_mixed_precision_graph_rewrite() called when mixed '
-                    'precision is already disabled.')
-  config.set_optimizer_experimental_options({'auto_mixed_precision': False})
-  mixed_precision_global_state.set_mixed_precision_graph_rewrite_enabled(False)
+    # We only have a separate V1 version of this function, because the V1
+    # docstring mentions sessions.
+    if not mixed_precision_global_state.is_mixed_precision_graph_rewrite_enabled():
+        tf_logging.warn(
+            "disable_mixed_precision_graph_rewrite() called when mixed "
+            "precision is already disabled."
+        )
+    config.set_optimizer_experimental_options({"auto_mixed_precision": False})
+    mixed_precision_global_state.set_mixed_precision_graph_rewrite_enabled(False)

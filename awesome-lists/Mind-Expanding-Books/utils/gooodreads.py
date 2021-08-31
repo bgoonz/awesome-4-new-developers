@@ -7,8 +7,14 @@ import requests
 
 from bs4 import BeautifulSoup
 
-from config import GOODREADS_PUBLIC_API_KEY, GOOGLE_SEARCH_RAPIDAPI_HOST, GOOGLE_SEARCH_RAPIDAPI_KEY, GOOGLE_BOOK_API_KEY
+from config import (
+    GOODREADS_PUBLIC_API_KEY,
+    GOOGLE_SEARCH_RAPIDAPI_HOST,
+    GOOGLE_SEARCH_RAPIDAPI_KEY,
+    GOOGLE_BOOK_API_KEY,
+)
 from googlesearch import search
+
 
 def get_details(book_object):
 
@@ -45,7 +51,7 @@ def get_details(book_object):
             if GOOGLE_BOOK_API_KEY.strip(" "):
                 # Attempt to use Google Book API
                 url = "https://www.googleapis.com/books/v1/volumes?q={}+inauthor:{}&key={}".format(
-                    book_object["title"], book_object["author"], GOOGLE_BOOK_API_KEY,
+                    book_object["title"], book_object["author"], GOOGLE_BOOK_API_KEY
                 )
                 response = requests.request("GET", url)
 
@@ -53,14 +59,16 @@ def get_details(book_object):
                     if "description" in item["volumeInfo"]:
                         book_object["description"] = item["volumeInfo"]["description"]
                         break
-            
+
         print("Fetching amazon link")
-        
-        url = "https://google-search3.p.rapidapi.com/api/v1/search/q=site:amazon.com {} {}".format(book_object["title"], book_object["author"])
+
+        url = "https://google-search3.p.rapidapi.com/api/v1/search/q=site:amazon.com {} {}".format(
+            book_object["title"], book_object["author"]
+        )
 
         headers = {
-            'x-rapidapi-host': GOOGLE_SEARCH_RAPIDAPI_HOST,
-            'x-rapidapi-key': GOOGLE_SEARCH_RAPIDAPI_KEY,
+            "x-rapidapi-host": GOOGLE_SEARCH_RAPIDAPI_HOST,
+            "x-rapidapi-key": GOOGLE_SEARCH_RAPIDAPI_KEY,
         }
 
         response = requests.request("GET", url, headers=headers)

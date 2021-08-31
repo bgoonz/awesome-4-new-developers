@@ -37,7 +37,7 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export(v1=["losses.Reduction"])
 class Reduction(object):
-  """Types of loss reduction.
+    """Types of loss reduction.
 
   Contains the following values:
 
@@ -50,31 +50,32 @@ class Reduction(object):
   * `SUM_BY_NONZERO_WEIGHTS`: Same as `SUM_OVER_NONZERO_WEIGHTS`. DEPRECATED.
   """
 
-  NONE = "none"
-  SUM = "weighted_sum"
-  SUM_OVER_BATCH_SIZE = "weighted_sum_over_batch_size"
-  MEAN = "weighted_mean"
-  SUM_BY_NONZERO_WEIGHTS = "weighted_sum_by_nonzero_weights"
-  SUM_OVER_NONZERO_WEIGHTS = SUM_BY_NONZERO_WEIGHTS
+    NONE = "none"
+    SUM = "weighted_sum"
+    SUM_OVER_BATCH_SIZE = "weighted_sum_over_batch_size"
+    MEAN = "weighted_mean"
+    SUM_BY_NONZERO_WEIGHTS = "weighted_sum_by_nonzero_weights"
+    SUM_OVER_NONZERO_WEIGHTS = SUM_BY_NONZERO_WEIGHTS
 
-  @classmethod
-  def all(cls):
-    return (
-        cls.NONE,
-        cls.SUM,
-        cls.MEAN,
-        cls.SUM_OVER_BATCH_SIZE,
-        cls.SUM_OVER_NONZERO_WEIGHTS,
-        cls.SUM_BY_NONZERO_WEIGHTS)
+    @classmethod
+    def all(cls):
+        return (
+            cls.NONE,
+            cls.SUM,
+            cls.MEAN,
+            cls.SUM_OVER_BATCH_SIZE,
+            cls.SUM_OVER_NONZERO_WEIGHTS,
+            cls.SUM_BY_NONZERO_WEIGHTS,
+        )
 
-  @classmethod
-  def validate(cls, key):
-    if key not in cls.all():
-      raise ValueError("Invalid Reduction Key %s." % key)
+    @classmethod
+    def validate(cls, key):
+        if key not in cls.all():
+            raise ValueError("Invalid Reduction Key %s." % key)
 
 
 def _safe_mean(losses, num_present):
-  """Computes a safe mean of the losses.
+    """Computes a safe mean of the losses.
 
   Args:
     losses: `Tensor` whose elements contain individual loss measurements.
@@ -84,12 +85,12 @@ def _safe_mean(losses, num_present):
     A scalar representing the mean of `losses`. If `num_present` is zero,
       then zero is returned.
   """
-  total_loss = math_ops.reduce_sum(losses)
-  return math_ops.div_no_nan(total_loss, num_present, name="value")
+    total_loss = math_ops.reduce_sum(losses)
+    return math_ops.div_no_nan(total_loss, num_present, name="value")
 
 
 def _num_present(losses, weights, per_batch=False):
-  """Computes the number of elements in the loss function induced by `weights`.
+    """Computes the number of elements in the loss function induced by `weights`.
 
   A given weights tensor induces different numbers of usable elements in the
   `losses` tensor. The `weights` tensor is broadcast across `losses` for all
@@ -110,38 +111,46 @@ def _num_present(losses, weights, per_batch=False):
       `per_batch` is `True`, the value is returned as a tensor of size
       `[batch_size]`. Otherwise, a single scalar tensor is returned.
   """
-  if ((isinstance(weights, float) and weights != 0.0) or
-      (context.executing_eagerly() and weights._rank() == 0  # pylint: disable=protected-access
-       and not math_ops.equal(weights, 0.0))):
-    return _num_elements(losses)
-  with ops.name_scope(None, "num_present", (losses, weights)) as scope:
-    weights = math_ops.cast(weights, dtype=dtypes.float32)
-    present = array_ops.where(
-        math_ops.equal(weights, 0.0),
-        array_ops.zeros_like(weights),
-        array_ops.ones_like(weights))
-    present = weights_broadcast_ops.broadcast_weights(present, losses)
-    if per_batch:
-      return math_ops.reduce_sum(
-          present,
-          axis=math_ops.range(1, array_ops.rank(present)),
-          keepdims=True,
-          name=scope)
-    return math_ops.reduce_sum(present, name=scope)
+    if (isinstance(weights, float) and weights != 0.0) or (
+        context.executing_eagerly()
+        and weights._rank() == 0  # pylint: disable=protected-access
+        and not math_ops.equal(weights, 0.0)
+    ):
+        return _num_elements(losses)
+    with ops.name_scope(None, "num_present", (losses, weights)) as scope:
+        weights = math_ops.cast(weights, dtype=dtypes.float32)
+        present = array_ops.where(
+            math_ops.equal(weights, 0.0),
+            array_ops.zeros_like(weights),
+            array_ops.ones_like(weights),
+        )
+        present = weights_broadcast_ops.broadcast_weights(present, losses)
+        if per_batch:
+            return math_ops.reduce_sum(
+                present,
+                axis=math_ops.range(1, array_ops.rank(present)),
+                keepdims=True,
+                name=scope,
+            )
+        return math_ops.reduce_sum(present, name=scope)
 
 
 def _num_elements(losses):
-  """Computes the number of elements in `losses` tensor."""
-  with ops.name_scope(None, "num_elements", values=[losses]) as scope:
-    return math_ops.cast(array_ops.size(losses, name=scope), dtype=losses.dtype)
+    """Computes the number of elements in `losses` tensor."""
+    with ops.name_scope(None, "num_elements", values=[losses]) as scope:
+        return math_ops.cast(array_ops.size(losses, name=scope), dtype=losses.dtype)
 
 
 @tf_export(v1=["losses.compute_weighted_loss"])
 @dispatch.add_dispatch_support
 def compute_weighted_loss(
-    losses, weights=1.0, scope=None, loss_collection=ops.GraphKeys.LOSSES,
-    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS):
-  """Computes the weighted loss.
+    losses,
+    weights=1.0,
+    scope=None,
+    loss_collection=ops.GraphKeys.LOSSES,
+    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS,
+):
+    """Computes the weighted loss.
 
   Args:
     losses: `Tensor` of shape `[batch_size, d1, ... dN]`.
@@ -173,55 +182,65 @@ def compute_weighted_loss(
   holding on to the return value or collecting losses via a `tf.keras.Model`.
   @end_compatibility
   """
-  Reduction.validate(reduction)
-  with ops.name_scope(scope, "weighted_loss", (losses, weights)):
-    # Save the `reduction` argument for loss normalization when distributing
-    # to multiple replicas. Used only for estimator + v1 optimizer flow.
-    ops.get_default_graph()._last_loss_reduction = reduction  # pylint: disable=protected-access
+    Reduction.validate(reduction)
+    with ops.name_scope(scope, "weighted_loss", (losses, weights)):
+        # Save the `reduction` argument for loss normalization when distributing
+        # to multiple replicas. Used only for estimator + v1 optimizer flow.
+        ops.get_default_graph()._last_loss_reduction = (
+            reduction
+        )  # pylint: disable=protected-access
 
-    def compute_loss(losses, weights, loss_collection, reduction):
-      losses = ops.convert_to_tensor(losses)
-      input_dtype = losses.dtype
-      losses = math_ops.cast(losses, dtype=dtypes.float32)
-      weights = math_ops.cast(weights, dtype=dtypes.float32)
-      weighted_losses = math_ops.multiply(losses, weights)
-      if reduction == Reduction.NONE:
-        loss = weighted_losses
-      else:
-        loss = math_ops.reduce_sum(weighted_losses)
-        if reduction == Reduction.MEAN:
-          loss = _safe_mean(
-              loss, math_ops.reduce_sum(array_ops.ones_like(losses) * weights))
-        elif (reduction == Reduction.SUM_BY_NONZERO_WEIGHTS or
-              reduction == Reduction.SUM_OVER_NONZERO_WEIGHTS):
-          loss = _safe_mean(loss, _num_present(losses, weights))
-        elif reduction == Reduction.SUM_OVER_BATCH_SIZE:
-          loss = _safe_mean(loss, _num_elements(losses))
+        def compute_loss(losses, weights, loss_collection, reduction):
+            losses = ops.convert_to_tensor(losses)
+            input_dtype = losses.dtype
+            losses = math_ops.cast(losses, dtype=dtypes.float32)
+            weights = math_ops.cast(weights, dtype=dtypes.float32)
+            weighted_losses = math_ops.multiply(losses, weights)
+            if reduction == Reduction.NONE:
+                loss = weighted_losses
+            else:
+                loss = math_ops.reduce_sum(weighted_losses)
+                if reduction == Reduction.MEAN:
+                    loss = _safe_mean(
+                        loss, math_ops.reduce_sum(array_ops.ones_like(losses) * weights)
+                    )
+                elif (
+                    reduction == Reduction.SUM_BY_NONZERO_WEIGHTS
+                    or reduction == Reduction.SUM_OVER_NONZERO_WEIGHTS
+                ):
+                    loss = _safe_mean(loss, _num_present(losses, weights))
+                elif reduction == Reduction.SUM_OVER_BATCH_SIZE:
+                    loss = _safe_mean(loss, _num_elements(losses))
 
-      # Convert the result back to the input type.
-      loss = math_ops.cast(loss, input_dtype)
-      util.add_loss(loss, loss_collection)
-      return loss
+            # Convert the result back to the input type.
+            loss = math_ops.cast(loss, input_dtype)
+            util.add_loss(loss, loss_collection)
+            return loss
 
-    # Skip the assert_broadcastable in XLA context because asserts are not
-    # supported so it only causes unnecessary ops. Also skip it because it uses
-    # a DenseToDenseSetOperation op that is incompatible with XLA when
-    # the shape(s) are dynamic.
-    if control_flow_ops.get_enclosing_xla_context() is not None:
-      return compute_loss(losses, weights, loss_collection, reduction)
-    else:
-      with ops.control_dependencies(
-          (weights_broadcast_ops.assert_broadcastable(weights, losses),)):
-        return compute_loss(losses, weights, loss_collection, reduction)
+        # Skip the assert_broadcastable in XLA context because asserts are not
+        # supported so it only causes unnecessary ops. Also skip it because it uses
+        # a DenseToDenseSetOperation op that is incompatible with XLA when
+        # the shape(s) are dynamic.
+        if control_flow_ops.get_enclosing_xla_context() is not None:
+            return compute_loss(losses, weights, loss_collection, reduction)
+        else:
+            with ops.control_dependencies(
+                (weights_broadcast_ops.assert_broadcastable(weights, losses),)
+            ):
+                return compute_loss(losses, weights, loss_collection, reduction)
 
 
 @tf_export(v1=["losses.absolute_difference"])
 @dispatch.add_dispatch_support
 def absolute_difference(
-    labels, predictions, weights=1.0, scope=None,
+    labels,
+    predictions,
+    weights=1.0,
+    scope=None,
     loss_collection=ops.GraphKeys.LOSSES,
-    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS):
-  """Adds an Absolute Difference loss to the training procedure.
+    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS,
+):
+    """Adds an Absolute Difference loss to the training procedure.
 
   `weights` acts as a coefficient for the loss. If a scalar is provided, then
   the loss is simply scaled by the given value. If `weights` is a `Tensor` of
@@ -255,29 +274,36 @@ def absolute_difference(
   holding on to the return value or collecting losses via a `tf.keras.Model`.
   @end_compatibility
   """
-  if labels is None:
-    raise ValueError("labels must not be None.")
-  if predictions is None:
-    raise ValueError("predictions must not be None.")
-  with ops.name_scope(scope, "absolute_difference",
-                      (predictions, labels, weights)) as scope:
-    predictions = math_ops.cast(predictions, dtype=dtypes.float32)
-    labels = math_ops.cast(labels, dtype=dtypes.float32)
-    predictions.get_shape().assert_is_compatible_with(labels.get_shape())
-    losses = math_ops.abs(math_ops.subtract(predictions, labels))
-    return compute_weighted_loss(
-        losses, weights, scope, loss_collection, reduction=reduction)
+    if labels is None:
+        raise ValueError("labels must not be None.")
+    if predictions is None:
+        raise ValueError("predictions must not be None.")
+    with ops.name_scope(
+        scope, "absolute_difference", (predictions, labels, weights)
+    ) as scope:
+        predictions = math_ops.cast(predictions, dtype=dtypes.float32)
+        labels = math_ops.cast(labels, dtype=dtypes.float32)
+        predictions.get_shape().assert_is_compatible_with(labels.get_shape())
+        losses = math_ops.abs(math_ops.subtract(predictions, labels))
+        return compute_weighted_loss(
+            losses, weights, scope, loss_collection, reduction=reduction
+        )
 
 
 @tf_export(v1=["losses.cosine_distance"])
 @dispatch.add_dispatch_support
 @deprecated_args(None, "dim is deprecated, use axis instead", "dim")
 def cosine_distance(
-    labels, predictions, axis=None, weights=1.0, scope=None,
+    labels,
+    predictions,
+    axis=None,
+    weights=1.0,
+    scope=None,
     loss_collection=ops.GraphKeys.LOSSES,
     reduction=Reduction.SUM_BY_NONZERO_WEIGHTS,
-    dim=None):
-  """Adds a cosine-distance loss to the training procedure.
+    dim=None,
+):
+    """Adds a cosine-distance loss to the training procedure.
 
   Note that the function assumes that `predictions` and `labels` are already
   unit-normalized.
@@ -307,31 +333,38 @@ def cosine_distance(
   holding on to the return value or collecting losses via a `tf.keras.Model`.
   @end_compatibility
   """
-  axis = deprecated_argument_lookup("axis", axis, "dim", dim)
-  if axis is None:
-    raise ValueError("You must specify 'axis'.")
-  if labels is None:
-    raise ValueError("labels must not be None.")
-  if predictions is None:
-    raise ValueError("predictions must not be None.")
-  with ops.name_scope(scope, "cosine_distance_loss",
-                      (predictions, labels, weights)) as scope:
-    predictions = math_ops.cast(predictions, dtype=dtypes.float32)
-    labels = math_ops.cast(labels, dtype=dtypes.float32)
-    predictions.get_shape().assert_is_compatible_with(labels.get_shape())
+    axis = deprecated_argument_lookup("axis", axis, "dim", dim)
+    if axis is None:
+        raise ValueError("You must specify 'axis'.")
+    if labels is None:
+        raise ValueError("labels must not be None.")
+    if predictions is None:
+        raise ValueError("predictions must not be None.")
+    with ops.name_scope(
+        scope, "cosine_distance_loss", (predictions, labels, weights)
+    ) as scope:
+        predictions = math_ops.cast(predictions, dtype=dtypes.float32)
+        labels = math_ops.cast(labels, dtype=dtypes.float32)
+        predictions.get_shape().assert_is_compatible_with(labels.get_shape())
 
-    radial_diffs = math_ops.multiply(predictions, labels)
-    losses = 1 - math_ops.reduce_sum(radial_diffs, axis=(axis,), keepdims=True)
-    return compute_weighted_loss(
-        losses, weights, scope, loss_collection, reduction=reduction)
+        radial_diffs = math_ops.multiply(predictions, labels)
+        losses = 1 - math_ops.reduce_sum(radial_diffs, axis=(axis,), keepdims=True)
+        return compute_weighted_loss(
+            losses, weights, scope, loss_collection, reduction=reduction
+        )
 
 
 @tf_export(v1=["losses.hinge_loss"])
 @dispatch.add_dispatch_support
-def hinge_loss(labels, logits, weights=1.0, scope=None,
-               loss_collection=ops.GraphKeys.LOSSES,
-               reduction=Reduction.SUM_BY_NONZERO_WEIGHTS):
-  """Adds a hinge loss to the training procedure.
+def hinge_loss(
+    labels,
+    logits,
+    weights=1.0,
+    scope=None,
+    loss_collection=ops.GraphKeys.LOSSES,
+    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS,
+):
+    """Adds a hinge loss to the training procedure.
 
   Args:
     labels: The ground truth output tensor. Its shape should match the shape of
@@ -360,29 +393,37 @@ def hinge_loss(labels, logits, weights=1.0, scope=None,
   holding on to the return value or collecting losses via a `tf.keras.Model`.
   @end_compatibility
   """
-  if labels is None:
-    raise ValueError("labels must not be None.")
-  if logits is None:
-    raise ValueError("logits must not be None.")
-  with ops.name_scope(scope, "hinge_loss", (logits, labels, weights)) as scope:
-    logits = math_ops.cast(logits, dtype=dtypes.float32)
-    labels = math_ops.cast(labels, dtype=dtypes.float32)
-    logits.get_shape().assert_is_compatible_with(labels.get_shape())
-    # We first need to convert binary labels to -1/1 labels (as floats).
-    all_ones = array_ops.ones_like(labels)
-    labels = math_ops.subtract(2 * labels, all_ones)
-    losses = nn_ops.relu(
-        math_ops.subtract(all_ones, math_ops.multiply(labels, logits)))
-    return compute_weighted_loss(
-        losses, weights, scope, loss_collection, reduction=reduction)
+    if labels is None:
+        raise ValueError("labels must not be None.")
+    if logits is None:
+        raise ValueError("logits must not be None.")
+    with ops.name_scope(scope, "hinge_loss", (logits, labels, weights)) as scope:
+        logits = math_ops.cast(logits, dtype=dtypes.float32)
+        labels = math_ops.cast(labels, dtype=dtypes.float32)
+        logits.get_shape().assert_is_compatible_with(labels.get_shape())
+        # We first need to convert binary labels to -1/1 labels (as floats).
+        all_ones = array_ops.ones_like(labels)
+        labels = math_ops.subtract(2 * labels, all_ones)
+        losses = nn_ops.relu(
+            math_ops.subtract(all_ones, math_ops.multiply(labels, logits))
+        )
+        return compute_weighted_loss(
+            losses, weights, scope, loss_collection, reduction=reduction
+        )
 
 
 @tf_export(v1=["losses.huber_loss"])
 @dispatch.add_dispatch_support
-def huber_loss(labels, predictions, weights=1.0, delta=1.0, scope=None,
-               loss_collection=ops.GraphKeys.LOSSES,
-               reduction=Reduction.SUM_BY_NONZERO_WEIGHTS):
-  """Adds a [Huber Loss](https://en.wikipedia.org/wiki/Huber_loss) term to the training procedure.
+def huber_loss(
+    labels,
+    predictions,
+    weights=1.0,
+    delta=1.0,
+    scope=None,
+    loss_collection=ops.GraphKeys.LOSSES,
+    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS,
+):
+    """Adds a [Huber Loss](https://en.wikipedia.org/wiki/Huber_loss) term to the training procedure.
 
   For each value x in `error=labels-predictions`, the following is calculated:
 
@@ -427,39 +468,47 @@ def huber_loss(labels, predictions, weights=1.0, delta=1.0, scope=None,
   holding on to the return value or collecting losses via a `tf.keras.Model`.
   @end_compatibility
   """
-  if labels is None:
-    raise ValueError("labels must not be None.")
-  if predictions is None:
-    raise ValueError("predictions must not be None.")
-  with ops.name_scope(scope, "huber_loss",
-                      (predictions, labels, weights)) as scope:
-    predictions = math_ops.cast(predictions, dtype=dtypes.float32)
-    labels = math_ops.cast(labels, dtype=dtypes.float32)
-    predictions.get_shape().assert_is_compatible_with(labels.get_shape())
-    error = math_ops.subtract(predictions, labels)
-    abs_error = math_ops.abs(error)
-    quadratic = math_ops.minimum(abs_error, delta)
-    # The following expression is the same in value as
-    # tf.maximum(abs_error - delta, 0), but importantly the gradient for the
-    # expression when abs_error == delta is 0 (for tf.maximum it would be 1).
-    # This is necessary to avoid doubling the gradient, since there is already a
-    # nonzero contribution to the gradient from the quadratic term.
-    linear = math_ops.subtract(abs_error, quadratic)
-    losses = math_ops.add(
-        math_ops.multiply(
-            ops.convert_to_tensor(0.5, dtype=quadratic.dtype),
-            math_ops.multiply(quadratic, quadratic)),
-        math_ops.multiply(delta, linear))
-    return compute_weighted_loss(
-        losses, weights, scope, loss_collection, reduction=reduction)
+    if labels is None:
+        raise ValueError("labels must not be None.")
+    if predictions is None:
+        raise ValueError("predictions must not be None.")
+    with ops.name_scope(scope, "huber_loss", (predictions, labels, weights)) as scope:
+        predictions = math_ops.cast(predictions, dtype=dtypes.float32)
+        labels = math_ops.cast(labels, dtype=dtypes.float32)
+        predictions.get_shape().assert_is_compatible_with(labels.get_shape())
+        error = math_ops.subtract(predictions, labels)
+        abs_error = math_ops.abs(error)
+        quadratic = math_ops.minimum(abs_error, delta)
+        # The following expression is the same in value as
+        # tf.maximum(abs_error - delta, 0), but importantly the gradient for the
+        # expression when abs_error == delta is 0 (for tf.maximum it would be 1).
+        # This is necessary to avoid doubling the gradient, since there is already a
+        # nonzero contribution to the gradient from the quadratic term.
+        linear = math_ops.subtract(abs_error, quadratic)
+        losses = math_ops.add(
+            math_ops.multiply(
+                ops.convert_to_tensor(0.5, dtype=quadratic.dtype),
+                math_ops.multiply(quadratic, quadratic),
+            ),
+            math_ops.multiply(delta, linear),
+        )
+        return compute_weighted_loss(
+            losses, weights, scope, loss_collection, reduction=reduction
+        )
 
 
 @tf_export(v1=["losses.log_loss"])
 @dispatch.add_dispatch_support
-def log_loss(labels, predictions, weights=1.0, epsilon=1e-7, scope=None,
-             loss_collection=ops.GraphKeys.LOSSES,
-             reduction=Reduction.SUM_BY_NONZERO_WEIGHTS):
-  """Adds a Log Loss term to the training procedure.
+def log_loss(
+    labels,
+    predictions,
+    weights=1.0,
+    epsilon=1e-7,
+    scope=None,
+    loss_collection=ops.GraphKeys.LOSSES,
+    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS,
+):
+    """Adds a Log Loss term to the training procedure.
 
   `weights` acts as a coefficient for the loss. If a scalar is provided, then
   the loss is simply scaled by the given value. If `weights` is a tensor of size
@@ -494,30 +543,29 @@ def log_loss(labels, predictions, weights=1.0, epsilon=1e-7, scope=None,
   holding on to the return value or collecting losses via a `tf.keras.Model`.
   @end_compatibility
   """
-  if labels is None:
-    raise ValueError("labels must not be None.")
-  if predictions is None:
-    raise ValueError("predictions must not be None.")
-  with ops.name_scope(scope, "log_loss",
-                      (predictions, labels, weights)) as scope:
-    predictions = math_ops.cast(predictions, dtype=dtypes.float32)
-    labels = math_ops.cast(labels, dtype=dtypes.float32)
-    predictions.get_shape().assert_is_compatible_with(labels.get_shape())
-    losses = -math_ops.multiply(
-        labels,
-        math_ops.log(predictions + epsilon)) - math_ops.multiply(
-            (1 - labels), math_ops.log(1 - predictions + epsilon))
-    return compute_weighted_loss(
-        losses, weights, scope, loss_collection, reduction=reduction)
+    if labels is None:
+        raise ValueError("labels must not be None.")
+    if predictions is None:
+        raise ValueError("predictions must not be None.")
+    with ops.name_scope(scope, "log_loss", (predictions, labels, weights)) as scope:
+        predictions = math_ops.cast(predictions, dtype=dtypes.float32)
+        labels = math_ops.cast(labels, dtype=dtypes.float32)
+        predictions.get_shape().assert_is_compatible_with(labels.get_shape())
+        losses = -math_ops.multiply(
+            labels, math_ops.log(predictions + epsilon)
+        ) - math_ops.multiply((1 - labels), math_ops.log(1 - predictions + epsilon))
+        return compute_weighted_loss(
+            losses, weights, scope, loss_collection, reduction=reduction
+        )
 
 
 # TODO(b/37208492): Add reduction arg.
 @tf_export(v1=["losses.mean_pairwise_squared_error"])
 @dispatch.add_dispatch_support
 def mean_pairwise_squared_error(
-    labels, predictions, weights=1.0, scope=None,
-    loss_collection=ops.GraphKeys.LOSSES):
-  """Adds a pairwise-errors-squared loss to the training procedure.
+    labels, predictions, weights=1.0, scope=None, loss_collection=ops.GraphKeys.LOSSES
+):
+    """Adds a pairwise-errors-squared loss to the training procedure.
 
   Unlike `mean_squared_error`, which is a measure of the differences between
   corresponding elements of `predictions` and `labels`,
@@ -563,70 +611,81 @@ def mean_pairwise_squared_error(
   holding on to the return value or collecting losses via a `tf.keras.Model`.
   @end_compatibility
   """
-  if labels is None:
-    raise ValueError("labels must not be None.")
-  if predictions is None:
-    raise ValueError("predictions must not be None.")
-  with ops.name_scope(scope, "mean_pairwise_squared_error",
-                      (predictions, labels, weights)) as scope:
-    weights = math_ops.cast(weights, dtype=dtypes.float32)
-    labels = math_ops.cast(labels, dtype=dtypes.float32)
+    if labels is None:
+        raise ValueError("labels must not be None.")
+    if predictions is None:
+        raise ValueError("predictions must not be None.")
+    with ops.name_scope(
+        scope, "mean_pairwise_squared_error", (predictions, labels, weights)
+    ) as scope:
+        weights = math_ops.cast(weights, dtype=dtypes.float32)
+        labels = math_ops.cast(labels, dtype=dtypes.float32)
 
-    def compute_loss(labels, predictions, weights, loss_collection):
-      predictions = math_ops.cast(predictions, dtype=dtypes.float32)
-      predictions.get_shape().assert_is_compatible_with(labels.get_shape())
+        def compute_loss(labels, predictions, weights, loss_collection):
+            predictions = math_ops.cast(predictions, dtype=dtypes.float32)
+            predictions.get_shape().assert_is_compatible_with(labels.get_shape())
 
-      diffs = math_ops.subtract(predictions, labels)
+            diffs = math_ops.subtract(predictions, labels)
 
-      axis = math_ops.range(1, array_ops.rank(diffs))
+            axis = math_ops.range(1, array_ops.rank(diffs))
 
-      sum_squares_diff_per_batch = math_ops.reduce_sum(
-          math_ops.square(diffs), axis=axis, keepdims=True)
-      num_present_per_batch = _num_present(diffs, weights, per_batch=True)
+            sum_squares_diff_per_batch = math_ops.reduce_sum(
+                math_ops.square(diffs), axis=axis, keepdims=True
+            )
+            num_present_per_batch = _num_present(diffs, weights, per_batch=True)
 
-      term1 = 2.0 * math_ops.div_no_nan(
-          sum_squares_diff_per_batch,
-          math_ops.maximum(num_present_per_batch - 1, 0),
-          name="value")
+            term1 = 2.0 * math_ops.div_no_nan(
+                sum_squares_diff_per_batch,
+                math_ops.maximum(num_present_per_batch - 1, 0),
+                name="value",
+            )
 
-      sum_diff = math_ops.reduce_sum(diffs, axis=axis, keepdims=True)
-      term2 = 2.0 * math_ops.div_no_nan(
-          math_ops.square(sum_diff),
-          math_ops.maximum(
-              math_ops.multiply(num_present_per_batch,
-                                num_present_per_batch - 1), 0),
-          name="value")
+            sum_diff = math_ops.reduce_sum(diffs, axis=axis, keepdims=True)
+            term2 = 2.0 * math_ops.div_no_nan(
+                math_ops.square(sum_diff),
+                math_ops.maximum(
+                    math_ops.multiply(num_present_per_batch, num_present_per_batch - 1),
+                    0,
+                ),
+                name="value",
+            )
 
-      weighted_losses = math_ops.multiply(term1 - term2, weights)
-      loss = math_ops.reduce_sum(weighted_losses)
+            weighted_losses = math_ops.multiply(term1 - term2, weights)
+            loss = math_ops.reduce_sum(weighted_losses)
 
-      mean_loss = array_ops.where(
-          math_ops.reduce_sum(num_present_per_batch) > 0,
-          loss,
-          array_ops.zeros_like(loss),
-          name="value")
-      util.add_loss(mean_loss, loss_collection)
-      return mean_loss
+            mean_loss = array_ops.where(
+                math_ops.reduce_sum(num_present_per_batch) > 0,
+                loss,
+                array_ops.zeros_like(loss),
+                name="value",
+            )
+            util.add_loss(mean_loss, loss_collection)
+            return mean_loss
 
-    # Skip the assert_broadcastable in XLA context because asserts are not
-    # supported so it only causes unnecessary ops. Also skip it because it uses
-    # a DenseToDenseSetOperation op that is incompatible with XLA when
-    # the shape(s) are dynamic.
-    if control_flow_ops.get_enclosing_xla_context() is not None:
-      return compute_loss(labels, predictions, weights, loss_collection)
-    else:
-      with ops.control_dependencies(
-          (weights_broadcast_ops.assert_broadcastable(weights, labels),)):
-        return compute_loss(labels, predictions, weights, loss_collection)
+        # Skip the assert_broadcastable in XLA context because asserts are not
+        # supported so it only causes unnecessary ops. Also skip it because it uses
+        # a DenseToDenseSetOperation op that is incompatible with XLA when
+        # the shape(s) are dynamic.
+        if control_flow_ops.get_enclosing_xla_context() is not None:
+            return compute_loss(labels, predictions, weights, loss_collection)
+        else:
+            with ops.control_dependencies(
+                (weights_broadcast_ops.assert_broadcastable(weights, labels),)
+            ):
+                return compute_loss(labels, predictions, weights, loss_collection)
 
 
 @tf_export(v1=["losses.mean_squared_error"])
 @dispatch.add_dispatch_support
 def mean_squared_error(
-    labels, predictions, weights=1.0, scope=None,
+    labels,
+    predictions,
+    weights=1.0,
+    scope=None,
     loss_collection=ops.GraphKeys.LOSSES,
-    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS):
-  """Adds a Sum-of-Squares loss to the training procedure.
+    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS,
+):
+    """Adds a Sum-of-Squares loss to the training procedure.
 
   `weights` acts as a coefficient for the loss. If a scalar is provided, then
   the loss is simply scaled by the given value. If `weights` is a tensor of size
@@ -756,27 +815,34 @@ def mean_squared_error(
 
   @end_compatibility
   """
-  if labels is None:
-    raise ValueError("labels must not be None.")
-  if predictions is None:
-    raise ValueError("predictions must not be None.")
-  with ops.name_scope(scope, "mean_squared_error",
-                      (predictions, labels, weights)) as scope:
-    predictions = math_ops.cast(predictions, dtype=dtypes.float32)
-    labels = math_ops.cast(labels, dtype=dtypes.float32)
-    predictions.get_shape().assert_is_compatible_with(labels.get_shape())
-    losses = math_ops.squared_difference(predictions, labels)
-    return compute_weighted_loss(
-        losses, weights, scope, loss_collection, reduction=reduction)
+    if labels is None:
+        raise ValueError("labels must not be None.")
+    if predictions is None:
+        raise ValueError("predictions must not be None.")
+    with ops.name_scope(
+        scope, "mean_squared_error", (predictions, labels, weights)
+    ) as scope:
+        predictions = math_ops.cast(predictions, dtype=dtypes.float32)
+        labels = math_ops.cast(labels, dtype=dtypes.float32)
+        predictions.get_shape().assert_is_compatible_with(labels.get_shape())
+        losses = math_ops.squared_difference(predictions, labels)
+        return compute_weighted_loss(
+            losses, weights, scope, loss_collection, reduction=reduction
+        )
 
 
 @tf_export(v1=["losses.sigmoid_cross_entropy"])
 @dispatch.add_dispatch_support
 def sigmoid_cross_entropy(
-    multi_class_labels, logits, weights=1.0, label_smoothing=0, scope=None,
+    multi_class_labels,
+    logits,
+    weights=1.0,
+    label_smoothing=0,
+    scope=None,
     loss_collection=ops.GraphKeys.LOSSES,
-    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS):
-  """Creates a cross-entropy loss using tf.nn.sigmoid_cross_entropy_with_logits.
+    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS,
+):
+    """Creates a cross-entropy loss using tf.nn.sigmoid_cross_entropy_with_logits.
 
   `weights` acts as a coefficient for the loss. If a scalar is provided,
   then the loss is simply scaled by the given value. If `weights` is a
@@ -815,34 +881,42 @@ def sigmoid_cross_entropy(
   holding on to the return value or collecting losses via a `tf.keras.Model`.
   @end_compatibility
   """
-  if multi_class_labels is None:
-    raise ValueError("multi_class_labels must not be None.")
-  if logits is None:
-    raise ValueError("logits must not be None.")
-  with ops.name_scope(scope, "sigmoid_cross_entropy_loss",
-                      (logits, multi_class_labels, weights)) as scope:
-    logits = ops.convert_to_tensor(logits)
-    multi_class_labels = math_ops.cast(multi_class_labels, logits.dtype)
-    logits.get_shape().assert_is_compatible_with(multi_class_labels.get_shape())
+    if multi_class_labels is None:
+        raise ValueError("multi_class_labels must not be None.")
+    if logits is None:
+        raise ValueError("logits must not be None.")
+    with ops.name_scope(
+        scope, "sigmoid_cross_entropy_loss", (logits, multi_class_labels, weights)
+    ) as scope:
+        logits = ops.convert_to_tensor(logits)
+        multi_class_labels = math_ops.cast(multi_class_labels, logits.dtype)
+        logits.get_shape().assert_is_compatible_with(multi_class_labels.get_shape())
 
-    if label_smoothing > 0:
-      multi_class_labels = (multi_class_labels * (1 - label_smoothing) +
-                            0.5 * label_smoothing)
+        if label_smoothing > 0:
+            multi_class_labels = (
+                multi_class_labels * (1 - label_smoothing) + 0.5 * label_smoothing
+            )
 
-    losses = nn.sigmoid_cross_entropy_with_logits(labels=multi_class_labels,
-                                                  logits=logits,
-                                                  name="xentropy")
-    return compute_weighted_loss(
-        losses, weights, scope, loss_collection, reduction=reduction)
+        losses = nn.sigmoid_cross_entropy_with_logits(
+            labels=multi_class_labels, logits=logits, name="xentropy"
+        )
+        return compute_weighted_loss(
+            losses, weights, scope, loss_collection, reduction=reduction
+        )
 
 
 @tf_export(v1=["losses.softmax_cross_entropy"])
 @dispatch.add_dispatch_support
 def softmax_cross_entropy(
-    onehot_labels, logits, weights=1.0, label_smoothing=0, scope=None,
+    onehot_labels,
+    logits,
+    weights=1.0,
+    label_smoothing=0,
+    scope=None,
     loss_collection=ops.GraphKeys.LOSSES,
-    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS):
-  r"""Creates a cross-entropy loss using tf.nn.softmax_cross_entropy_with_logits_v2.
+    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS,
+):
+    r"""Creates a cross-entropy loss using tf.nn.softmax_cross_entropy_with_logits_v2.
 
   `weights` acts as a coefficient for the loss. If a scalar is provided,
   then the loss is simply scaled by the given value. If `weights` is a
@@ -968,36 +1042,42 @@ def softmax_cross_entropy(
 
   @end_compatibility
   """
-  if onehot_labels is None:
-    raise ValueError("onehot_labels must not be None.")
-  if logits is None:
-    raise ValueError("logits must not be None.")
-  with ops.name_scope(scope, "softmax_cross_entropy_loss",
-                      (logits, onehot_labels, weights)) as scope:
-    logits = ops.convert_to_tensor(logits)
-    onehot_labels = math_ops.cast(onehot_labels, logits.dtype)
-    logits.get_shape().assert_is_compatible_with(onehot_labels.get_shape())
+    if onehot_labels is None:
+        raise ValueError("onehot_labels must not be None.")
+    if logits is None:
+        raise ValueError("logits must not be None.")
+    with ops.name_scope(
+        scope, "softmax_cross_entropy_loss", (logits, onehot_labels, weights)
+    ) as scope:
+        logits = ops.convert_to_tensor(logits)
+        onehot_labels = math_ops.cast(onehot_labels, logits.dtype)
+        logits.get_shape().assert_is_compatible_with(onehot_labels.get_shape())
 
-    if label_smoothing > 0:
-      num_classes = math_ops.cast(
-          array_ops.shape(onehot_labels)[-1], logits.dtype)
-      smooth_positives = 1.0 - label_smoothing
-      smooth_negatives = label_smoothing / num_classes
-      onehot_labels = onehot_labels * smooth_positives + smooth_negatives
+        if label_smoothing > 0:
+            num_classes = math_ops.cast(
+                array_ops.shape(onehot_labels)[-1], logits.dtype
+            )
+            smooth_positives = 1.0 - label_smoothing
+            smooth_negatives = label_smoothing / num_classes
+            onehot_labels = onehot_labels * smooth_positives + smooth_negatives
 
-    onehot_labels = array_ops.stop_gradient(
-        onehot_labels, name="labels_stop_gradient")
-    losses = nn.softmax_cross_entropy_with_logits_v2(
-        labels=onehot_labels, logits=logits, name="xentropy")
+        onehot_labels = array_ops.stop_gradient(
+            onehot_labels, name="labels_stop_gradient"
+        )
+        losses = nn.softmax_cross_entropy_with_logits_v2(
+            labels=onehot_labels, logits=logits, name="xentropy"
+        )
 
-    return compute_weighted_loss(
-        losses, weights, scope, loss_collection, reduction=reduction)
+        return compute_weighted_loss(
+            losses, weights, scope, loss_collection, reduction=reduction
+        )
 
 
 # TODO(ptucker): Merge this with similar method in metrics_impl.
 def _remove_squeezable_dimensions(
-    labels, predictions, weights=None, expected_rank_diff=0):
-  """Internal version of _remove_squeezable_dimensions which handles weights.
+    labels, predictions, weights=None, expected_rank_diff=0
+):
+    """Internal version of _remove_squeezable_dimensions which handles weights.
 
   Squeezes `predictions` and `labels` if their ranks differ from expected by
   exactly 1.
@@ -1017,41 +1097,48 @@ def _remove_squeezable_dimensions(
     Tuple of `predictions`, `labels` and `weights`, possibly with the last
     dimension squeezed.
   """
-  labels, predictions = confusion_matrix.remove_squeezable_dimensions(
-      labels, predictions, expected_rank_diff=expected_rank_diff)
+    labels, predictions = confusion_matrix.remove_squeezable_dimensions(
+        labels, predictions, expected_rank_diff=expected_rank_diff
+    )
 
-  if weights is not None:
-    weights = ops.convert_to_tensor(weights)
-    labels_rank = labels.get_shape().ndims
-    weights_shape = weights.get_shape()
-    weights_rank = weights_shape.ndims
+    if weights is not None:
+        weights = ops.convert_to_tensor(weights)
+        labels_rank = labels.get_shape().ndims
+        weights_shape = weights.get_shape()
+        weights_rank = weights_shape.ndims
 
-    if (labels_rank is not None) and (weights_rank is not None):
-      # Use static rank.
-      rank_diff = weights_rank - labels_rank
-      if rank_diff == 1:
-        weights = array_ops.squeeze(weights, [-1])
-      return labels, predictions, weights
+        if (labels_rank is not None) and (weights_rank is not None):
+            # Use static rank.
+            rank_diff = weights_rank - labels_rank
+            if rank_diff == 1:
+                weights = array_ops.squeeze(weights, [-1])
+            return labels, predictions, weights
 
-    # Use dynamic rank.
-    rank_diff = array_ops.rank(weights) - array_ops.rank(labels)
-    if (weights_rank is None) or (
-        weights_rank > 0 and weights_shape.dims[-1].is_compatible_with(1)):
-      weights = control_flow_ops.cond(
-          math_ops.equal(1, rank_diff),
-          lambda: array_ops.squeeze(weights, [-1]),
-          lambda: weights)
+        # Use dynamic rank.
+        rank_diff = array_ops.rank(weights) - array_ops.rank(labels)
+        if (weights_rank is None) or (
+            weights_rank > 0 and weights_shape.dims[-1].is_compatible_with(1)
+        ):
+            weights = control_flow_ops.cond(
+                math_ops.equal(1, rank_diff),
+                lambda: array_ops.squeeze(weights, [-1]),
+                lambda: weights,
+            )
 
-  return labels, predictions, weights
+    return labels, predictions, weights
 
 
 @tf_export(v1=["losses.sparse_softmax_cross_entropy"])
 @dispatch.add_dispatch_support
 def sparse_softmax_cross_entropy(
-    labels, logits, weights=1.0, scope=None,
+    labels,
+    logits,
+    weights=1.0,
+    scope=None,
     loss_collection=ops.GraphKeys.LOSSES,
-    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS):
-  """Cross-entropy loss using `tf.nn.sparse_softmax_cross_entropy_with_logits`.
+    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS,
+):
+    """Cross-entropy loss using `tf.nn.sparse_softmax_cross_entropy_with_logits`.
 
   `weights` acts as a coefficient for the loss. If a scalar is provided,
   then the loss is simply scaled by the given value. If `weights` is a
@@ -1086,19 +1173,22 @@ def sparse_softmax_cross_entropy(
   holding on to the return value or collecting losses via a `tf.keras.Model`.
   @end_compatibility
   """
-  if labels is None:
-    raise ValueError("labels must not be None.")
-  if logits is None:
-    raise ValueError("logits must not be None.")
-  with ops.name_scope(scope, "sparse_softmax_cross_entropy_loss",
-                      (logits, labels, weights)) as scope:
-    # As documented above in Args, labels contain class IDs and logits contains
-    # 1 probability per class ID, so we expect rank(logits) - rank(labels) == 1;
-    # therefore, expected_rank_diff=1.
-    labels, logits, weights = _remove_squeezable_dimensions(
-        labels, logits, weights, expected_rank_diff=1)
-    losses = nn.sparse_softmax_cross_entropy_with_logits(labels=labels,
-                                                         logits=logits,
-                                                         name="xentropy")
-    return compute_weighted_loss(
-        losses, weights, scope, loss_collection, reduction=reduction)
+    if labels is None:
+        raise ValueError("labels must not be None.")
+    if logits is None:
+        raise ValueError("logits must not be None.")
+    with ops.name_scope(
+        scope, "sparse_softmax_cross_entropy_loss", (logits, labels, weights)
+    ) as scope:
+        # As documented above in Args, labels contain class IDs and logits contains
+        # 1 probability per class ID, so we expect rank(logits) - rank(labels) == 1;
+        # therefore, expected_rank_diff=1.
+        labels, logits, weights = _remove_squeezable_dimensions(
+            labels, logits, weights, expected_rank_diff=1
+        )
+        losses = nn.sparse_softmax_cross_entropy_with_logits(
+            labels=labels, logits=logits, name="xentropy"
+        )
+        return compute_weighted_loss(
+            losses, weights, scope, loss_collection, reduction=reduction
+        )

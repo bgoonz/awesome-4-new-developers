@@ -32,24 +32,24 @@ _COMPONENTS_TO_STRING_CACHE = {}
 
 
 def _as_str_or_none(inp):
-  return None if inp is None else str(inp)
+    return None if inp is None else str(inp)
 
 
 def _as_int_or_none(inp):
-  return None if inp is None else int(inp)
+    return None if inp is None else int(inp)
 
 
 def _as_device_str_or_none(device_type):
-  # For backwards compatibility only, we support lowercase variants of
-  # cpu and gpu but turn them into uppercase here.
-  if device_type in ("cpu", "gpu"):
-    return device_type.upper()
-  return _as_str_or_none(device_type)
+    # For backwards compatibility only, we support lowercase variants of
+    # cpu and gpu but turn them into uppercase here.
+    if device_type in ("cpu", "gpu"):
+        return device_type.upper()
+    return _as_str_or_none(device_type)
 
 
 @tf_export("DeviceSpec", v1=[])
 class DeviceSpecV2(object):
-  """Represents a (possibly partial) specification for a TensorFlow device.
+    """Represents a (possibly partial) specification for a TensorFlow device.
 
   `DeviceSpec`s are used throughout TensorFlow to describe where state is stored
   and computations occur. Using `DeviceSpec` allows you to parse device spec
@@ -105,16 +105,20 @@ class DeviceSpecV2(object):
   * Device index: The device index.
   """
 
-  __slots__ = ("_job", "_replica", "_task", "_device_type", "_device_index",
-               "_as_string", "_hash")
+    __slots__ = (
+        "_job",
+        "_replica",
+        "_task",
+        "_device_type",
+        "_device_index",
+        "_as_string",
+        "_hash",
+    )
 
-  def __init__(self,
-               job=None,
-               replica=None,
-               task=None,
-               device_type=None,
-               device_index=None):
-    """Create a new `DeviceSpec` object.
+    def __init__(
+        self, job=None, replica=None, task=None, device_type=None, device_index=None
+    ):
+        """Create a new `DeviceSpec` object.
 
     Args:
       job: string.  Optional job name.
@@ -124,31 +128,32 @@ class DeviceSpecV2(object):
       device_index: int.  Optional device index.  If left unspecified, device
         represents 'any' device_index.
     """
-    self._job = _as_str_or_none(job)
-    self._replica = _as_int_or_none(replica)
-    self._task = _as_int_or_none(task)
-    self._device_type = _as_device_str_or_none(device_type)
-    self._device_index = _as_int_or_none(device_index)
-    self._as_string = self._components_to_string(
-        job=self._job,
-        replica=self._replica,
-        task=self._task,
-        device_type=self._device_type,
-        device_index=self._device_index)
-    self._hash = hash(self.to_string())
+        self._job = _as_str_or_none(job)
+        self._replica = _as_int_or_none(replica)
+        self._task = _as_int_or_none(task)
+        self._device_type = _as_device_str_or_none(device_type)
+        self._device_index = _as_int_or_none(device_index)
+        self._as_string = self._components_to_string(
+            job=self._job,
+            replica=self._replica,
+            task=self._task,
+            device_type=self._device_type,
+            device_index=self._device_index,
+        )
+        self._hash = hash(self.to_string())
 
-  def to_string(self):
-    """Return a string representation of this `DeviceSpec`.
+    def to_string(self):
+        """Return a string representation of this `DeviceSpec`.
 
     Returns:
       a string of the form
       /job:<name>/replica:<id>/task:<id>/device:<device_type>:<id>.
     """
-    return self._as_string
+        return self._as_string
 
-  @classmethod
-  def from_string(cls, spec):
-    """Construct a `DeviceSpec` from a string.
+    @classmethod
+    def from_string(cls, spec):
+        """Construct a `DeviceSpec` from a string.
 
     Args:
       spec: a string of the form
@@ -159,10 +164,10 @@ class DeviceSpecV2(object):
     Returns:
       A DeviceSpec.
     """
-    return cls(*cls._string_to_components(spec))
+        return cls(*cls._string_to_components(spec))
 
-  def parse_from_string(self, spec):
-    """Parse a `DeviceSpec` name into its components.
+    def parse_from_string(self, spec):
+        """Parse a `DeviceSpec` name into its components.
 
     **2.x behavior change**:
 
@@ -214,10 +219,10 @@ class DeviceSpecV2(object):
     Raises:
       ValueError: if the spec was not valid.
     """
-    return self.from_string(spec)
+        return self.from_string(spec)
 
-  def make_merged_spec(self, dev):
-    """Returns a new DeviceSpec which incorporates `dev`.
+    def make_merged_spec(self, dev):
+        """Returns a new DeviceSpec which incorporates `dev`.
 
     When combining specs, `dev` will take precedence over the current spec.
     So for instance:
@@ -238,10 +243,10 @@ class DeviceSpecV2(object):
     Returns:
       A new `DeviceSpec` which combines `self` and `dev`
     """
-    return self.__class__(*self._get_combined_properties(dev))
+        return self.__class__(*self._get_combined_properties(dev))
 
-  def replace(self, **kwargs):
-    """Convenience method for making a new DeviceSpec by overriding fields.
+    def replace(self, **kwargs):
+        """Convenience method for making a new DeviceSpec by overriding fields.
 
     For instance:
     ```
@@ -256,39 +261,40 @@ class DeviceSpecV2(object):
     Returns:
       A DeviceSpec with the fields specified in kwargs overridden.
     """
-    init_kwargs = dict(
-        job=self.job,
-        replica=self.replica,
-        task=self.task,
-        device_type=self.device_type,
-        device_index=self.device_index)
+        init_kwargs = dict(
+            job=self.job,
+            replica=self.replica,
+            task=self.task,
+            device_type=self.device_type,
+            device_index=self.device_index,
+        )
 
-    # Explicitly provided kwargs take precedence.
-    init_kwargs.update(kwargs)
-    return self.__class__(**init_kwargs)
+        # Explicitly provided kwargs take precedence.
+        init_kwargs.update(kwargs)
+        return self.__class__(**init_kwargs)
 
-  @property
-  def job(self):
-    return self._job
+    @property
+    def job(self):
+        return self._job
 
-  @property
-  def replica(self):
-    return self._replica
+    @property
+    def replica(self):
+        return self._replica
 
-  @property
-  def task(self):
-    return self._task
+    @property
+    def task(self):
+        return self._task
 
-  @property
-  def device_type(self):
-    return self._device_type
+    @property
+    def device_type(self):
+        return self._device_type
 
-  @property
-  def device_index(self):
-    return self._device_index
+    @property
+    def device_index(self):
+        return self._device_index
 
-  def _get_combined_properties(self, dev):
-    """Combine the current DeviceSpec with another DeviceSpec.
+    def _get_combined_properties(self, dev):
+        """Combine the current DeviceSpec with another DeviceSpec.
 
     The combination of DeviceSpecs is will give priority to dev.
 
@@ -299,26 +305,26 @@ class DeviceSpecV2(object):
       A tuple of (job, replica, task, device_type, device_index) which
       represents the combination of self and dev.
     """
-    return (
-        dev.job if dev.job is not None else self.job,
-        dev.replica if dev.replica is not None else self.replica,
-        dev.task if dev.task is not None else self.task,
-        dev.device_type if dev.device_type is not None else self.device_type,
-        dev.device_index if dev.device_index is not None else self.device_index,
-    )
+        return (
+            dev.job if dev.job is not None else self.job,
+            dev.replica if dev.replica is not None else self.replica,
+            dev.task if dev.task is not None else self.task,
+            dev.device_type if dev.device_type is not None else self.device_type,
+            dev.device_index if dev.device_index is not None else self.device_index,
+        )
 
-  @staticmethod
-  def _get_valid_device_types():
-    valid_device_types = set({})
-    physical_devices = pywrap_tfe.TF_ListPluggablePhysicalDevices()
-    for device in physical_devices:
-      valid_device_types.add(device.decode().split(":")[1])
-    valid_device_types = valid_device_types | _VALID_DEVICE_TYPES
-    return valid_device_types
+    @staticmethod
+    def _get_valid_device_types():
+        valid_device_types = set({})
+        physical_devices = pywrap_tfe.TF_ListPluggablePhysicalDevices()
+        for device in physical_devices:
+            valid_device_types.add(device.decode().split(":")[1])
+        valid_device_types = valid_device_types | _VALID_DEVICE_TYPES
+        return valid_device_types
 
-  @staticmethod
-  def _string_to_components(spec=None):
-    """Stateless portion of device spec string parsing.
+    @staticmethod
+    def _string_to_components(spec=None):
+        """Stateless portion of device spec string parsing.
 
     Args:
       spec: An optional string specifying a device specification.
@@ -328,76 +334,82 @@ class DeviceSpecV2(object):
       must go through attribute setters of DeviceSpec, and should therefore NOT
       be used directly.
     """
-    cached_result = _STRING_TO_COMPONENTS_CACHE.get(spec)
-    if cached_result is not None:
-      return cached_result
+        cached_result = _STRING_TO_COMPONENTS_CACHE.get(spec)
+        if cached_result is not None:
+            return cached_result
 
-    raw_spec = spec  # keep a copy of the original to update the cache
-    job, replica, task, device_type, device_index = None, None, None, None, None
+        raw_spec = spec  # keep a copy of the original to update the cache
+        job, replica, task, device_type, device_index = None, None, None, None, None
 
-    spec = spec or ""
-    splits = [x.split(":") for x in spec.split("/")]
-    valid_device_types = DeviceSpecV2._get_valid_device_types()
-    for y in splits:
-      ly = len(y)
-      if y:
-        # NOTE(taylorrobie): these will go through setters later.
-        if ly == 2 and y[0] == "job":
-          job = y[1]
-        elif ly == 2 and y[0] == "replica":
-          replica = y[1]
-        elif ly == 2 and y[0] == "task":
-          task = y[1]
-        elif ((ly == 1 or ly == 2) and (y[0].upper() in valid_device_types)):
-          if device_type is not None:
-            raise ValueError(f"Multiple device types are not allowed "
-                             f"while parsing the device spec: {spec}.")
-          device_type = y[0].upper()
-          if ly == 2 and y[1] != "*":
-            device_index = int(y[1])
-        elif ly == 3 and y[0] == "device":
-          if device_type is not None:
-            raise ValueError(f"Multiple device types are not allowed "
-                             f"while parsing the device spec: {spec}.")
-          device_type = y[1]
-          if y[2] != "*":
-            device_index = int(y[2])
-        elif ly and y[0] != "":  # pylint: disable=g-explicit-bool-comparison
-          raise ValueError(f"Unknown attribute '{y[0]}' is encountered "
-                           f"while parsing the device spec: '{spec}'.")
+        spec = spec or ""
+        splits = [x.split(":") for x in spec.split("/")]
+        valid_device_types = DeviceSpecV2._get_valid_device_types()
+        for y in splits:
+            ly = len(y)
+            if y:
+                # NOTE(taylorrobie): these will go through setters later.
+                if ly == 2 and y[0] == "job":
+                    job = y[1]
+                elif ly == 2 and y[0] == "replica":
+                    replica = y[1]
+                elif ly == 2 and y[0] == "task":
+                    task = y[1]
+                elif (ly == 1 or ly == 2) and (y[0].upper() in valid_device_types):
+                    if device_type is not None:
+                        raise ValueError(
+                            f"Multiple device types are not allowed "
+                            f"while parsing the device spec: {spec}."
+                        )
+                    device_type = y[0].upper()
+                    if ly == 2 and y[1] != "*":
+                        device_index = int(y[1])
+                elif ly == 3 and y[0] == "device":
+                    if device_type is not None:
+                        raise ValueError(
+                            f"Multiple device types are not allowed "
+                            f"while parsing the device spec: {spec}."
+                        )
+                    device_type = y[1]
+                    if y[2] != "*":
+                        device_index = int(y[2])
+                elif ly and y[0] != "":  # pylint: disable=g-explicit-bool-comparison
+                    raise ValueError(
+                        f"Unknown attribute '{y[0]}' is encountered "
+                        f"while parsing the device spec: '{spec}'."
+                    )
 
-    output = (job, replica, task, device_type, device_index)
-    _STRING_TO_COMPONENTS_CACHE[raw_spec] = output
-    return output
+        output = (job, replica, task, device_type, device_index)
+        _STRING_TO_COMPONENTS_CACHE[raw_spec] = output
+        return output
 
-  @staticmethod
-  def _components_to_string(job, replica, task, device_type, device_index):
-    """Stateless portion of `to_string` (separated to allow caching)."""
-    key = (job, replica, task, device_type, device_index)
-    cached_result = _COMPONENTS_TO_STRING_CACHE.get(key)
-    if cached_result is not None:
-      return cached_result
+    @staticmethod
+    def _components_to_string(job, replica, task, device_type, device_index):
+        """Stateless portion of `to_string` (separated to allow caching)."""
+        key = (job, replica, task, device_type, device_index)
+        cached_result = _COMPONENTS_TO_STRING_CACHE.get(key)
+        if cached_result is not None:
+            return cached_result
 
-    output = []
-    if job is not None:
-      output.append("/job:" + job)
-    if replica is not None:
-      output.append("/replica:" + str(replica))
-    if task is not None:
-      output.append("/task:" + str(task))
-    if device_type is not None:
-      device_index_string = "*"
-      if device_index is not None:
-        # Unlike the others, device_index is stored as an int.
-        device_index_string = str(device_index)
-      output.append("/device:%s:%s" % (device_type, device_index_string))
+        output = []
+        if job is not None:
+            output.append("/job:" + job)
+        if replica is not None:
+            output.append("/replica:" + str(replica))
+        if task is not None:
+            output.append("/task:" + str(task))
+        if device_type is not None:
+            device_index_string = "*"
+            if device_index is not None:
+                # Unlike the others, device_index is stored as an int.
+                device_index_string = str(device_index)
+            output.append("/device:%s:%s" % (device_type, device_index_string))
 
-    output = "".join(output)
-    _COMPONENTS_TO_STRING_CACHE[key] = output
-    return output
+        output = "".join(output)
+        _COMPONENTS_TO_STRING_CACHE[key] = output
+        return output
 
-  def __eq__(self, other):
-    """Checks if the `other` DeviceSpec is same as the current instance, eg have
+    def __eq__(self, other):
+        """Checks if the `other` DeviceSpec is same as the current instance, eg have
 
        same value for all the internal fields.
 
@@ -409,66 +421,73 @@ class DeviceSpecV2(object):
       as the current instance.
       Return `False` otherwise.
     """
-    return (isinstance(other, self.__class__) and
-            self.to_string() == other.to_string())
+        return (
+            isinstance(other, self.__class__) and self.to_string() == other.to_string()
+        )
 
-  def __hash__(self):
-    return self._hash
+    def __hash__(self):
+        return self._hash
 
 
 @tf_export(v1=["DeviceSpec"])  # pylint: disable=missing-docstring
 class DeviceSpecV1(DeviceSpecV2):
-  __doc__ = DeviceSpecV2.__doc__
-  __slots__ = DeviceSpecV2.__slots__
+    __doc__ = DeviceSpecV2.__doc__
+    __slots__ = DeviceSpecV2.__slots__
 
-  @DeviceSpecV2.job.setter
-  def job(self, job):
-    self._job = _as_str_or_none(job)
-    self._as_string, self._hash = None, None
+    @DeviceSpecV2.job.setter
+    def job(self, job):
+        self._job = _as_str_or_none(job)
+        self._as_string, self._hash = None, None
 
-  @DeviceSpecV2.replica.setter
-  def replica(self, replica):
-    self._replica = _as_int_or_none(replica)
-    self._as_string, self._hash = None, None
+    @DeviceSpecV2.replica.setter
+    def replica(self, replica):
+        self._replica = _as_int_or_none(replica)
+        self._as_string, self._hash = None, None
 
-  @DeviceSpecV2.task.setter
-  def task(self, task):
-    self._task = _as_int_or_none(task)
-    self._as_string, self._hash = None, None
+    @DeviceSpecV2.task.setter
+    def task(self, task):
+        self._task = _as_int_or_none(task)
+        self._as_string, self._hash = None, None
 
-  @DeviceSpecV2.device_type.setter
-  def device_type(self, device_type):
-    self._device_type = _as_device_str_or_none(device_type)
-    self._as_string, self._hash = None, None
+    @DeviceSpecV2.device_type.setter
+    def device_type(self, device_type):
+        self._device_type = _as_device_str_or_none(device_type)
+        self._as_string, self._hash = None, None
 
-  @DeviceSpecV2.device_index.setter
-  def device_index(self, device_index):
-    self._device_index = _as_int_or_none(device_index)
-    self._as_string, self._hash = None, None
+    @DeviceSpecV2.device_index.setter
+    def device_index(self, device_index):
+        self._device_index = _as_int_or_none(device_index)
+        self._as_string, self._hash = None, None
 
-  def __hash__(self):
-    if self._hash is None:
-      self._hash = hash(self.to_string())
-    return self._hash
+    def __hash__(self):
+        if self._hash is None:
+            self._hash = hash(self.to_string())
+        return self._hash
 
-  def to_string(self):
-    if self._as_string is None:
-      self._as_string = self._components_to_string(
-          job=self.job,
-          replica=self.replica,
-          task=self.task,
-          device_type=self.device_type,
-          device_index=self.device_index)
-    return self._as_string
+    def to_string(self):
+        if self._as_string is None:
+            self._as_string = self._components_to_string(
+                job=self.job,
+                replica=self.replica,
+                task=self.task,
+                device_type=self.device_type,
+                device_index=self.device_index,
+            )
+        return self._as_string
 
-  def parse_from_string(self, spec):
-    (self.job, self.replica, self.task, self.device_type,
-     self.device_index) = self._string_to_components(spec)
+    def parse_from_string(self, spec):
+        (
+            self.job,
+            self.replica,
+            self.task,
+            self.device_type,
+            self.device_index,
+        ) = self._string_to_components(spec)
 
-    return self
+        return self
 
-  def merge_from(self, dev):
-    """Merge the properties of "dev" into this `DeviceSpec`.
+    def merge_from(self, dev):
+        """Merge the properties of "dev" into this `DeviceSpec`.
 
     Note: Will be removed in TensorFlow 2.x since DeviceSpecs will become
           immutable.
@@ -476,9 +495,14 @@ class DeviceSpecV1(DeviceSpecV2):
     Args:
       dev: a `DeviceSpec`.
     """
-    (self.job, self.replica, self.task, self.device_type,
-     self.device_index) = self._get_combined_properties(dev)
+        (
+            self.job,
+            self.replica,
+            self.task,
+            self.device_type,
+            self.device_index,
+        ) = self._get_combined_properties(dev)
 
-  # Use parent class docstrings for public methods.
-  to_string.__doc__ = DeviceSpecV2.to_string.__doc__
-  parse_from_string.__doc__ = DeviceSpecV2.parse_from_string.__doc__
+    # Use parent class docstrings for public methods.
+    to_string.__doc__ = DeviceSpecV2.to_string.__doc__
+    parse_from_string.__doc__ = DeviceSpecV2.parse_from_string.__doc__

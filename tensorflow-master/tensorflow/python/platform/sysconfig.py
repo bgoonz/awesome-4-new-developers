@@ -30,69 +30,72 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 # pylint: disable=g-import-not-at-top
-@tf_export('sysconfig.get_include')
+@tf_export("sysconfig.get_include")
 def get_include():
-  """Get the directory containing the TensorFlow C++ header files.
+    """Get the directory containing the TensorFlow C++ header files.
 
   Returns:
     The directory as string.
   """
-  # Import inside the function.
-  # sysconfig is imported from the tensorflow module, so having this
-  # import at the top would cause a circular import, resulting in
-  # the tensorflow module missing symbols that come after sysconfig.
-  import tensorflow as tf
-  return _os_path.join(_os_path.dirname(tf.__file__), 'include')
+    # Import inside the function.
+    # sysconfig is imported from the tensorflow module, so having this
+    # import at the top would cause a circular import, resulting in
+    # the tensorflow module missing symbols that come after sysconfig.
+    import tensorflow as tf
+
+    return _os_path.join(_os_path.dirname(tf.__file__), "include")
 
 
-@tf_export('sysconfig.get_lib')
+@tf_export("sysconfig.get_lib")
 def get_lib():
-  """Get the directory containing the TensorFlow framework library.
+    """Get the directory containing the TensorFlow framework library.
 
   Returns:
     The directory as string.
   """
-  import tensorflow as tf
-  return _os_path.join(_os_path.dirname(tf.__file__))
+    import tensorflow as tf
+
+    return _os_path.join(_os_path.dirname(tf.__file__))
 
 
-@tf_export('sysconfig.get_compile_flags')
+@tf_export("sysconfig.get_compile_flags")
 def get_compile_flags():
-  """Get the compilation flags for custom operators.
+    """Get the compilation flags for custom operators.
 
   Returns:
     The compilation flags.
   """
-  flags = []
-  flags.append('-I%s' % get_include())
-  flags.append('-D_GLIBCXX_USE_CXX11_ABI=%d' % _CXX11_ABI_FLAG)
-  flags.append('-DEIGEN_MAX_ALIGN_BYTES=%d' %
-               pywrap_tf_session.get_eigen_max_align_bytes())
-  return flags
+    flags = []
+    flags.append("-I%s" % get_include())
+    flags.append("-D_GLIBCXX_USE_CXX11_ABI=%d" % _CXX11_ABI_FLAG)
+    flags.append(
+        "-DEIGEN_MAX_ALIGN_BYTES=%d" % pywrap_tf_session.get_eigen_max_align_bytes()
+    )
+    return flags
 
 
-@tf_export('sysconfig.get_link_flags')
+@tf_export("sysconfig.get_link_flags")
 def get_link_flags():
-  """Get the link flags for custom operators.
+    """Get the link flags for custom operators.
 
   Returns:
     The link flags.
   """
-  is_mac = _platform.system() == 'Darwin'
-  ver = _VERSION.split('.')[0]
-  flags = []
-  if not _MONOLITHIC_BUILD:
-    flags.append('-L%s' % get_lib())
-    if is_mac:
-      flags.append('-ltensorflow_framework.%s' % ver)
-    else:
-      flags.append('-l:libtensorflow_framework.so.%s' % ver)
-  return flags
+    is_mac = _platform.system() == "Darwin"
+    ver = _VERSION.split(".")[0]
+    flags = []
+    if not _MONOLITHIC_BUILD:
+        flags.append("-L%s" % get_lib())
+        if is_mac:
+            flags.append("-ltensorflow_framework.%s" % ver)
+        else:
+            flags.append("-l:libtensorflow_framework.so.%s" % ver)
+    return flags
 
 
-@tf_export('sysconfig.get_build_info')
+@tf_export("sysconfig.get_build_info")
 def get_build_info():
-  """Get a dictionary describing TensorFlow's build environment.
+    """Get a dictionary describing TensorFlow's build environment.
 
   Values are generated when TensorFlow is compiled, and are static for each
   TensorFlow package. The return value is a dictionary with string keys such as:
@@ -112,4 +115,4 @@ def get_build_info():
   Returns:
     A Dictionary describing TensorFlow's build environment.
   """
-  return build_info.build_info
+    return build_info.build_info

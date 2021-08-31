@@ -66,10 +66,9 @@ _ACCUMULATOR_DOCUMENT_COUNTS = "document_counts"
 _ACCUMULATOR_NUM_DOCUMENTS = "num_documents"
 
 
-@keras_export(
-    "keras.layers.experimental.preprocessing.TextVectorization", v1=[])
+@keras_export("keras.layers.experimental.preprocessing.TextVectorization", v1=[])
 class TextVectorization(base_preprocessing_layer.CombinerPreprocessingLayer):
-  """Text vectorization layer.
+    """Text vectorization layer.
 
   This layer has basic options for managing text in a Keras model. It
   transforms a batch of strings (one example = one string) into either a list of
@@ -222,138 +221,153 @@ class TextVectorization(base_preprocessing_layer.CombinerPreprocessingLayer):
   ['', '[UNK]', 'earth', 'wind', 'and', 'fire']
 
   """
-  # TODO(momernick): Add an examples section to the docstring.
 
-  def __init__(self,
-               max_tokens=None,
-               standardize=LOWER_AND_STRIP_PUNCTUATION,
-               split=SPLIT_ON_WHITESPACE,
-               ngrams=None,
-               output_mode=INT,
-               output_sequence_length=None,
-               pad_to_max_tokens=False,
-               vocabulary=None,
-               **kwargs):
+    # TODO(momernick): Add an examples section to the docstring.
 
-    # This layer only applies to string processing, and so should only have
-    # a dtype of 'string'.
-    if "dtype" in kwargs and kwargs["dtype"] != dtypes.string:
-      raise ValueError("TextVectorization may only have a dtype of string.")
-    elif "dtype" not in kwargs:
-      kwargs["dtype"] = dtypes.string
+    def __init__(
+        self,
+        max_tokens=None,
+        standardize=LOWER_AND_STRIP_PUNCTUATION,
+        split=SPLIT_ON_WHITESPACE,
+        ngrams=None,
+        output_mode=INT,
+        output_sequence_length=None,
+        pad_to_max_tokens=False,
+        vocabulary=None,
+        **kwargs
+    ):
 
-    # 'standardize' must be one of (None, LOWER_AND_STRIP_PUNCTUATION, callable)
-    layer_utils.validate_string_arg(
-        standardize,
-        allowable_strings=(LOWER_AND_STRIP_PUNCTUATION),
-        layer_name="TextVectorization",
-        arg_name="standardize",
-        allow_none=True,
-        allow_callables=True)
+        # This layer only applies to string processing, and so should only have
+        # a dtype of 'string'.
+        if "dtype" in kwargs and kwargs["dtype"] != dtypes.string:
+            raise ValueError("TextVectorization may only have a dtype of string.")
+        elif "dtype" not in kwargs:
+            kwargs["dtype"] = dtypes.string
 
-    # 'split' must be one of (None, SPLIT_ON_WHITESPACE, callable)
-    layer_utils.validate_string_arg(
-        split,
-        allowable_strings=(SPLIT_ON_WHITESPACE),
-        layer_name="TextVectorization",
-        arg_name="split",
-        allow_none=True,
-        allow_callables=True)
+        # 'standardize' must be one of (None, LOWER_AND_STRIP_PUNCTUATION, callable)
+        layer_utils.validate_string_arg(
+            standardize,
+            allowable_strings=(LOWER_AND_STRIP_PUNCTUATION),
+            layer_name="TextVectorization",
+            arg_name="standardize",
+            allow_none=True,
+            allow_callables=True,
+        )
 
-    # Support deprecated names for output_modes.
-    if output_mode == "binary":
-      output_mode = MULTI_HOT
-    if output_mode == "tf-idf":
-      output_mode = TF_IDF
-    # 'output_mode' must be one of (None, INT, COUNT, MULTI_HOT, TF_IDF)
-    layer_utils.validate_string_arg(
-        output_mode,
-        allowable_strings=(INT, COUNT, MULTI_HOT, TF_IDF),
-        layer_name="TextVectorization",
-        arg_name="output_mode",
-        allow_none=True)
+        # 'split' must be one of (None, SPLIT_ON_WHITESPACE, callable)
+        layer_utils.validate_string_arg(
+            split,
+            allowable_strings=(SPLIT_ON_WHITESPACE),
+            layer_name="TextVectorization",
+            arg_name="split",
+            allow_none=True,
+            allow_callables=True,
+        )
 
-    # 'ngrams' must be one of (None, int, tuple(int))
-    if not (ngrams is None or
-            isinstance(ngrams, int) or
-            isinstance(ngrams, tuple) and
-            all(isinstance(item, int) for item in ngrams)):
-      raise ValueError(("`ngrams` must be None, an integer, or a tuple of "
-                        "integers. Got %s") % (ngrams,))
+        # Support deprecated names for output_modes.
+        if output_mode == "binary":
+            output_mode = MULTI_HOT
+        if output_mode == "tf-idf":
+            output_mode = TF_IDF
+        # 'output_mode' must be one of (None, INT, COUNT, MULTI_HOT, TF_IDF)
+        layer_utils.validate_string_arg(
+            output_mode,
+            allowable_strings=(INT, COUNT, MULTI_HOT, TF_IDF),
+            layer_name="TextVectorization",
+            arg_name="output_mode",
+            allow_none=True,
+        )
 
-    # 'output_sequence_length' must be one of (None, int) and is only
-    # set if output_mode is INT.
-    if (output_mode == INT and not (isinstance(output_sequence_length, int) or
-                                    (output_sequence_length is None))):
-      raise ValueError("`output_sequence_length` must be either None or an "
-                       "integer when `output_mode` is 'int'. "
-                       "Got %s" % output_sequence_length)
+        # 'ngrams' must be one of (None, int, tuple(int))
+        if not (
+            ngrams is None
+            or isinstance(ngrams, int)
+            or isinstance(ngrams, tuple)
+            and all(isinstance(item, int) for item in ngrams)
+        ):
+            raise ValueError(
+                ("`ngrams` must be None, an integer, or a tuple of " "integers. Got %s")
+                % (ngrams,)
+            )
 
-    if output_mode != INT and output_sequence_length is not None:
-      raise ValueError("`output_sequence_length` must not be set if "
-                       "`output_mode` is not 'int'.")
+        # 'output_sequence_length' must be one of (None, int) and is only
+        # set if output_mode is INT.
+        if output_mode == INT and not (
+            isinstance(output_sequence_length, int) or (output_sequence_length is None)
+        ):
+            raise ValueError(
+                "`output_sequence_length` must be either None or an "
+                "integer when `output_mode` is 'int'. "
+                "Got %s" % output_sequence_length
+            )
 
-    self._max_tokens = max_tokens
-    self._standardize = standardize
-    self._split = split
-    self._ngrams_arg = ngrams
-    if isinstance(ngrams, int):
-      self._ngrams = tuple(range(1, ngrams + 1))
-    else:
-      self._ngrams = ngrams
+        if output_mode != INT and output_sequence_length is not None:
+            raise ValueError(
+                "`output_sequence_length` must not be set if "
+                "`output_mode` is not 'int'."
+            )
 
-    self._output_mode = output_mode
-    self._output_sequence_length = output_sequence_length
-    vocabulary_size = 0
-    # IndexLookup needs to keep track the current vocab size outside of its
-    # layer weights. We persist it as a hidden part of the config during
-    # serialization.
-    if "vocabulary_size" in kwargs:
-      vocabulary_size = kwargs["vocabulary_size"]
-      del kwargs["vocabulary_size"]
+        self._max_tokens = max_tokens
+        self._standardize = standardize
+        self._split = split
+        self._ngrams_arg = ngrams
+        if isinstance(ngrams, int):
+            self._ngrams = tuple(range(1, ngrams + 1))
+        else:
+            self._ngrams = ngrams
 
-    super(TextVectorization, self).__init__(
-        combiner=None,
-        **kwargs)
+        self._output_mode = output_mode
+        self._output_sequence_length = output_sequence_length
+        vocabulary_size = 0
+        # IndexLookup needs to keep track the current vocab size outside of its
+        # layer weights. We persist it as a hidden part of the config during
+        # serialization.
+        if "vocabulary_size" in kwargs:
+            vocabulary_size = kwargs["vocabulary_size"]
+            del kwargs["vocabulary_size"]
 
-    self._index_lookup_layer = string_lookup.StringLookup(
-        max_tokens=max_tokens,
-        vocabulary=vocabulary,
-        pad_to_max_tokens=pad_to_max_tokens,
-        mask_token="",
-        output_mode=output_mode if output_mode is not None else INT,
-        vocabulary_size=vocabulary_size)
+        super(TextVectorization, self).__init__(combiner=None, **kwargs)
 
-  def _assert_same_type(self, expected_type, values, value_name):
-    if dtypes.as_dtype(expected_type) != dtypes.as_dtype(values.dtype):
-      raise RuntimeError("Expected %s type %s, got %s" %
-                         (value_name, expected_type, values.dtype))
+        self._index_lookup_layer = string_lookup.StringLookup(
+            max_tokens=max_tokens,
+            vocabulary=vocabulary,
+            pad_to_max_tokens=pad_to_max_tokens,
+            mask_token="",
+            output_mode=output_mode if output_mode is not None else INT,
+            vocabulary_size=vocabulary_size,
+        )
 
-  def compute_output_shape(self, input_shape):
-    if self._output_mode != INT:
-      return tensor_shape.TensorShape([input_shape[0], self._max_tokens])
+    def _assert_same_type(self, expected_type, values, value_name):
+        if dtypes.as_dtype(expected_type) != dtypes.as_dtype(values.dtype):
+            raise RuntimeError(
+                "Expected %s type %s, got %s"
+                % (value_name, expected_type, values.dtype)
+            )
 
-    if self._output_mode == INT and self._split is None:
-      if len(input_shape) <= 1:
-        input_shape = tuple(input_shape) + (1,)
-      return tensor_shape.TensorShape(input_shape)
+    def compute_output_shape(self, input_shape):
+        if self._output_mode != INT:
+            return tensor_shape.TensorShape([input_shape[0], self._max_tokens])
 
-    if self._output_mode == INT and self._split is not None:
-      input_shape = list(input_shape)
-      if len(input_shape) <= 1:
-        input_shape = input_shape + [self._output_sequence_length]
-      else:
-        input_shape[1] = self._output_sequence_length
-      return tensor_shape.TensorShape(input_shape)
+        if self._output_mode == INT and self._split is None:
+            if len(input_shape) <= 1:
+                input_shape = tuple(input_shape) + (1,)
+            return tensor_shape.TensorShape(input_shape)
 
-  def compute_output_signature(self, input_spec):
-    output_shape = self.compute_output_shape(input_spec.shape.as_list())
-    output_dtype = (dtypes.int64 if self._output_mode == INT
-                    else backend.floatx())
-    return tensor_spec.TensorSpec(shape=output_shape, dtype=output_dtype)
+        if self._output_mode == INT and self._split is not None:
+            input_shape = list(input_shape)
+            if len(input_shape) <= 1:
+                input_shape = input_shape + [self._output_sequence_length]
+            else:
+                input_shape[1] = self._output_sequence_length
+            return tensor_shape.TensorShape(input_shape)
 
-  def adapt(self, data, reset_state=True):
-    """Fits the state of the preprocessing layer to the dataset.
+    def compute_output_signature(self, input_spec):
+        output_shape = self.compute_output_shape(input_spec.shape.as_list())
+        output_dtype = dtypes.int64 if self._output_mode == INT else backend.floatx()
+        return tensor_spec.TensorSpec(shape=output_shape, dtype=output_dtype)
+
+    def adapt(self, data, reset_state=True):
+        """Fits the state of the preprocessing layer to the dataset.
 
     Overrides the default adapt method to apply relevant preprocessing to the
     inputs before passing to the combiner.
@@ -365,42 +379,46 @@ class TextVectorization(base_preprocessing_layer.CombinerPreprocessingLayer):
         the layer at the start of the call to `adapt`. This must be True for
         this layer, which does not support repeated calls to `adapt`.
     """
-    if not reset_state:
-      raise ValueError("TextVectorization does not support streaming adapts.")
+        if not reset_state:
+            raise ValueError("TextVectorization does not support streaming adapts.")
 
-    # Build the layer explicitly with the original data shape instead of relying
-    # on an implicit call to `build` in the base layer's `adapt`, since
-    # preprocessing changes the input shape.
-    if isinstance(data, (list, tuple, np.ndarray)):
-      data = ops.convert_to_tensor_v2_with_dispatch(data)
+        # Build the layer explicitly with the original data shape instead of relying
+        # on an implicit call to `build` in the base layer's `adapt`, since
+        # preprocessing changes the input shape.
+        if isinstance(data, (list, tuple, np.ndarray)):
+            data = ops.convert_to_tensor_v2_with_dispatch(data)
 
-    if isinstance(data, ops.Tensor):
-      if data.shape.rank == 1:
-        data = array_ops.expand_dims(data, axis=-1)
-      self.build(data.shape)
-      preprocessed_inputs = self._preprocess(data)
-    elif isinstance(data, dataset_ops.DatasetV2):
-      # TODO(momernick): Replace this with a more V2-friendly API.
-      shape = dataset_ops.get_legacy_output_shapes(data)
-      if not isinstance(shape, tensor_shape.TensorShape):
-        raise ValueError("The dataset passed to 'adapt' must contain a single "
-                         "tensor value.")
-      if shape.rank == 0:
-        data = data.map(lambda tensor: array_ops.expand_dims(tensor, 0))
-        shape = dataset_ops.get_legacy_output_shapes(data)
-      if shape.rank == 1:
-        data = data.map(lambda tensor: array_ops.expand_dims(tensor, -1))
-      self.build(dataset_ops.get_legacy_output_shapes(data))
-      preprocessed_inputs = data.map(self._preprocess)
-    else:
-      raise ValueError(
-          "adapt() requires a Dataset or an array as input, got {}".format(
-              type(data)))
+        if isinstance(data, ops.Tensor):
+            if data.shape.rank == 1:
+                data = array_ops.expand_dims(data, axis=-1)
+            self.build(data.shape)
+            preprocessed_inputs = self._preprocess(data)
+        elif isinstance(data, dataset_ops.DatasetV2):
+            # TODO(momernick): Replace this with a more V2-friendly API.
+            shape = dataset_ops.get_legacy_output_shapes(data)
+            if not isinstance(shape, tensor_shape.TensorShape):
+                raise ValueError(
+                    "The dataset passed to 'adapt' must contain a single "
+                    "tensor value."
+                )
+            if shape.rank == 0:
+                data = data.map(lambda tensor: array_ops.expand_dims(tensor, 0))
+                shape = dataset_ops.get_legacy_output_shapes(data)
+            if shape.rank == 1:
+                data = data.map(lambda tensor: array_ops.expand_dims(tensor, -1))
+            self.build(dataset_ops.get_legacy_output_shapes(data))
+            preprocessed_inputs = data.map(self._preprocess)
+        else:
+            raise ValueError(
+                "adapt() requires a Dataset or an array as input, got {}".format(
+                    type(data)
+                )
+            )
 
-    self._index_lookup_layer.adapt(preprocessed_inputs)
+        self._index_lookup_layer.adapt(preprocessed_inputs)
 
-  def get_vocabulary(self, include_special_tokens=True):
-    """Returns the current vocabulary of the layer.
+    def get_vocabulary(self, include_special_tokens=True):
+        """Returns the current vocabulary of the layer.
 
     Args:
       include_special_tokens: If True, the returned vocabulary will include
@@ -408,42 +426,42 @@ class TextVectorization(base_preprocessing_layer.CombinerPreprocessingLayer):
         equal the term's index when calling the layer. If False, the returned
         vocabulary will not include any padding or OOV tokens.
     """
-    return self._index_lookup_layer.get_vocabulary(include_special_tokens)
+        return self._index_lookup_layer.get_vocabulary(include_special_tokens)
 
-  def vocabulary_size(self):
-    """Gets the current size of the layer's vocabulary.
+    def vocabulary_size(self):
+        """Gets the current size of the layer's vocabulary.
 
     Returns:
       The integer size of the voculary, including optional mask and oov indices.
     """
-    return self._index_lookup_layer.vocabulary_size()
+        return self._index_lookup_layer.vocabulary_size()
 
-  def get_config(self):
-    # This does not include the 'vocabulary' arg, since if the vocab was passed
-    # at init time it's now stored in variable state - we don't need to
-    # pull it off disk again.
-    config = {
-        "max_tokens": self._index_lookup_layer.max_tokens,
-        "standardize": self._standardize,
-        "split": self._split,
-        "ngrams": self._ngrams_arg,
-        "output_mode": self._output_mode,
-        "output_sequence_length": self._output_sequence_length,
-        "pad_to_max_tokens": self._index_lookup_layer.pad_to_max_tokens,
-        "vocabulary_size": self._index_lookup_layer.vocabulary_size(),
-    }
-    base_config = super(TextVectorization, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        # This does not include the 'vocabulary' arg, since if the vocab was passed
+        # at init time it's now stored in variable state - we don't need to
+        # pull it off disk again.
+        config = {
+            "max_tokens": self._index_lookup_layer.max_tokens,
+            "standardize": self._standardize,
+            "split": self._split,
+            "ngrams": self._ngrams_arg,
+            "output_mode": self._output_mode,
+            "output_sequence_length": self._output_sequence_length,
+            "pad_to_max_tokens": self._index_lookup_layer.pad_to_max_tokens,
+            "vocabulary_size": self._index_lookup_layer.vocabulary_size(),
+        }
+        base_config = super(TextVectorization, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
-  def count_params(self):
-    # This method counts the number of scalars in the weights of this layer.
-    # Since this layer doesn't have any /actual/ weights (in that there's
-    # nothing in this layer that can be trained - we only use the weight
-    # abstraction for ease of saving!) we return 0.
-    return 0
+    def count_params(self):
+        # This method counts the number of scalars in the weights of this layer.
+        # Since this layer doesn't have any /actual/ weights (in that there's
+        # nothing in this layer that can be trained - we only use the weight
+        # abstraction for ease of saving!) we return 0.
+        return 0
 
-  def set_vocabulary(self, vocabulary, idf_weights=None):
-    """Sets vocabulary (and optionally document frequency) data for this layer.
+    def set_vocabulary(self, vocabulary, idf_weights=None):
+        """Sets vocabulary (and optionally document frequency) data for this layer.
 
     This method sets the vocabulary and idf weights for this layer directly,
     instead of analyzing a dataset through 'adapt'. It should be used whenever
@@ -465,108 +483,122 @@ class TextVectorization(base_preprocessing_layer.CombinerPreprocessingLayer):
         if `pad_to_max_tokens` is False and the layer itself has already been
         called.
     """
-    self._index_lookup_layer.set_vocabulary(vocabulary, idf_weights=idf_weights)
+        self._index_lookup_layer.set_vocabulary(vocabulary, idf_weights=idf_weights)
 
-  def build(self, input_shape):
-    # We have to use 'and not ==' here, because input_shape[1] !/== 1 can result
-    # in None for undefined shape axes. If using 'and !=', this causes the
-    # expression to evaluate to False instead of True if the shape is undefined;
-    # the expression needs to evaluate to True in that case.
-    if self._split is not None:
-      if input_shape.ndims > 1 and not input_shape[-1] == 1:  # pylint: disable=g-comparison-negation
-        raise RuntimeError(
-            "When using TextVectorization to tokenize strings, the innermost "
-            "dimension of the input array must be 1, got shape "
-            "{}".format(input_shape))
+    def build(self, input_shape):
+        # We have to use 'and not ==' here, because input_shape[1] !/== 1 can result
+        # in None for undefined shape axes. If using 'and !=', this causes the
+        # expression to evaluate to False instead of True if the shape is undefined;
+        # the expression needs to evaluate to True in that case.
+        if self._split is not None:
+            if (
+                input_shape.ndims > 1 and not input_shape[-1] == 1
+            ):  # pylint: disable=g-comparison-negation
+                raise RuntimeError(
+                    "When using TextVectorization to tokenize strings, the innermost "
+                    "dimension of the input array must be 1, got shape "
+                    "{}".format(input_shape)
+                )
 
-    super(TextVectorization, self).build(input_shape)
+        super(TextVectorization, self).build(input_shape)
 
-  def _set_state_variables(self, updates):
-    if not self.built:
-      raise RuntimeError("_set_state_variables() must be called after build().")
-    if self._output_mode == TF_IDF:
-      self.set_vocabulary(updates[_VOCAB_NAME], idf_weights=updates[_IDF_NAME])
-    else:
-      self.set_vocabulary(updates[_VOCAB_NAME])
+    def _set_state_variables(self, updates):
+        if not self.built:
+            raise RuntimeError("_set_state_variables() must be called after build().")
+        if self._output_mode == TF_IDF:
+            self.set_vocabulary(updates[_VOCAB_NAME], idf_weights=updates[_IDF_NAME])
+        else:
+            self.set_vocabulary(updates[_VOCAB_NAME])
 
-  def _preprocess(self, inputs):
-    if self._standardize == LOWER_AND_STRIP_PUNCTUATION:
-      if tf_utils.is_ragged(inputs):
-        lowercase_inputs = ragged_functional_ops.map_flat_values(
-            gen_string_ops.string_lower, inputs)
-        # Depending on configuration, we may never touch the non-data tensor
-        # in the ragged inputs tensor. If that is the case, and this is the
-        # only layer in the keras model, running it will throw an error.
-        # To get around this, we wrap the result in an identity.
-        lowercase_inputs = array_ops.identity(lowercase_inputs)
-      else:
-        lowercase_inputs = gen_string_ops.string_lower(inputs)
-      inputs = string_ops.regex_replace(lowercase_inputs, DEFAULT_STRIP_REGEX,
-                                        "")
-    elif callable(self._standardize):
-      inputs = self._standardize(inputs)
-    elif self._standardize is not None:
-      raise ValueError(("%s is not a supported standardization. "
+    def _preprocess(self, inputs):
+        if self._standardize == LOWER_AND_STRIP_PUNCTUATION:
+            if tf_utils.is_ragged(inputs):
+                lowercase_inputs = ragged_functional_ops.map_flat_values(
+                    gen_string_ops.string_lower, inputs
+                )
+                # Depending on configuration, we may never touch the non-data tensor
+                # in the ragged inputs tensor. If that is the case, and this is the
+                # only layer in the keras model, running it will throw an error.
+                # To get around this, we wrap the result in an identity.
+                lowercase_inputs = array_ops.identity(lowercase_inputs)
+            else:
+                lowercase_inputs = gen_string_ops.string_lower(inputs)
+            inputs = string_ops.regex_replace(lowercase_inputs, DEFAULT_STRIP_REGEX, "")
+        elif callable(self._standardize):
+            inputs = self._standardize(inputs)
+        elif self._standardize is not None:
+            raise ValueError(
+                (
+                    "%s is not a supported standardization. "
+                    "TextVectorization supports the following options "
+                    "for `standardize`: None, "
+                    "'lower_and_strip_punctuation', or a "
+                    "Callable."
+                )
+                % self._standardize
+            )
+
+        if self._split is not None:
+            # If we are splitting, we validate that the 1st axis is of dimension 1 and
+            # so can be squeezed out. We do this here instead of after splitting for
+            # performance reasons - it's more expensive to squeeze a ragged tensor.
+            if inputs.shape.ndims > 1:
+                inputs = array_ops.squeeze(inputs, axis=-1)
+            if self._split == SPLIT_ON_WHITESPACE:
+                # This treats multiple whitespaces as one whitespace, and strips leading
+                # and trailing whitespace.
+                inputs = ragged_string_ops.string_split_v2(inputs)
+            elif callable(self._split):
+                inputs = self._split(inputs)
+            else:
+                raise ValueError(
+                    (
+                        "%s is not a supported splitting."
                         "TextVectorization supports the following options "
-                        "for `standardize`: None, "
-                        "'lower_and_strip_punctuation', or a "
-                        "Callable.") % self._standardize)
+                        "for `split`: None, 'whitespace', or a Callable."
+                    )
+                    % self._split
+                )
 
-    if self._split is not None:
-      # If we are splitting, we validate that the 1st axis is of dimension 1 and
-      # so can be squeezed out. We do this here instead of after splitting for
-      # performance reasons - it's more expensive to squeeze a ragged tensor.
-      if inputs.shape.ndims > 1:
-        inputs = array_ops.squeeze(inputs, axis=-1)
-      if self._split == SPLIT_ON_WHITESPACE:
-        # This treats multiple whitespaces as one whitespace, and strips leading
-        # and trailing whitespace.
-        inputs = ragged_string_ops.string_split_v2(inputs)
-      elif callable(self._split):
-        inputs = self._split(inputs)
-      else:
-        raise ValueError(
-            ("%s is not a supported splitting."
-             "TextVectorization supports the following options "
-             "for `split`: None, 'whitespace', or a Callable.") % self._split)
+        # Note that 'inputs' here can be either ragged or dense depending on the
+        # configuration choices for this Layer. The strings.ngrams op, however, does
+        # support both ragged and dense inputs.
+        if self._ngrams is not None:
+            inputs = ragged_string_ops.ngrams(
+                inputs, ngram_width=self._ngrams, separator=" "
+            )
 
-    # Note that 'inputs' here can be either ragged or dense depending on the
-    # configuration choices for this Layer. The strings.ngrams op, however, does
-    # support both ragged and dense inputs.
-    if self._ngrams is not None:
-      inputs = ragged_string_ops.ngrams(
-          inputs, ngram_width=self._ngrams, separator=" ")
+        return inputs
 
-    return inputs
+    def call(self, inputs):
+        if isinstance(inputs, (list, tuple, np.ndarray)):
+            inputs = ops.convert_to_tensor_v2_with_dispatch(inputs)
 
-  def call(self, inputs):
-    if isinstance(inputs, (list, tuple, np.ndarray)):
-      inputs = ops.convert_to_tensor_v2_with_dispatch(inputs)
+        inputs = self._preprocess(inputs)
 
-    inputs = self._preprocess(inputs)
+        # If we're not doing any output processing, return right away.
+        if self._output_mode is None:
+            return inputs
 
-    # If we're not doing any output processing, return right away.
-    if self._output_mode is None:
-      return inputs
+        lookup_data = self._index_lookup_layer(inputs)
+        if self._output_mode == INT:
 
-    lookup_data = self._index_lookup_layer(inputs)
-    if self._output_mode == INT:
+            # Maybe trim the output (NOOP if self._output_sequence_length is None).
+            output_tensor = lookup_data[..., : self._output_sequence_length]
 
-      # Maybe trim the output (NOOP if self._output_sequence_length is None).
-      output_tensor = lookup_data[..., :self._output_sequence_length]
+            output_shape = output_tensor.shape.as_list()
+            output_shape[-1] = self._output_sequence_length
 
-      output_shape = output_tensor.shape.as_list()
-      output_shape[-1] = self._output_sequence_length
+            # If it is a ragged tensor, convert it to dense with correct shape.
+            if tf_utils.is_ragged(output_tensor):
+                return output_tensor.to_tensor(default_value=0, shape=output_shape)
 
-      # If it is a ragged tensor, convert it to dense with correct shape.
-      if tf_utils.is_ragged(output_tensor):
-        return output_tensor.to_tensor(default_value=0, shape=output_shape)
+            if self._output_sequence_length is None:
+                return output_tensor
 
-      if self._output_sequence_length is None:
-        return output_tensor
+            padding, _ = array_ops.required_space_to_batch_paddings(
+                output_tensor.shape, output_shape
+            )
+            return array_ops.pad(output_tensor, padding)
 
-      padding, _ = array_ops.required_space_to_batch_paddings(
-          output_tensor.shape, output_shape)
-      return array_ops.pad(output_tensor, padding)
-
-    return lookup_data
+        return lookup_data

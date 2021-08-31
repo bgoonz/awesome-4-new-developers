@@ -27,10 +27,10 @@ from tensorflow.python.util.tf_export import keras_export
 from tensorflow.python.util.tf_export import tf_export
 
 
-@keras_export(v1=['keras.__internal__.legacy.layers.BatchNormalization'])
-@tf_export(v1=['layers.BatchNormalization'])
+@keras_export(v1=["keras.__internal__.legacy.layers.BatchNormalization"])
+@tf_export(v1=["layers.BatchNormalization"])
 class BatchNormalization(batch_normalization_v1.BatchNormalization, base.Layer):
-  """Batch Normalization layer from (Ioffe et al., 2015).
+    """Batch Normalization layer from (Ioffe et al., 2015).
 
   Keras APIs handle BatchNormalization updates to the moving_mean and
   moving_variance as part of their `fit()` and `evaluate()` loops. However, if a
@@ -122,84 +122,89 @@ class BatchNormalization(batch_normalization_v1.BatchNormalization, base.Layer):
       ([pdf](http://papers.nips.cc/paper/6790-batch-renormalization-towards-reducing-minibatch-dependence-in-batch-normalized-models.pdf))
   """
 
-  def __init__(self,
-               axis=-1,
-               momentum=0.99,
-               epsilon=1e-3,
-               center=True,
-               scale=True,
-               beta_initializer=init_ops.zeros_initializer(),
-               gamma_initializer=init_ops.ones_initializer(),
-               moving_mean_initializer=init_ops.zeros_initializer(),
-               moving_variance_initializer=init_ops.ones_initializer(),
-               beta_regularizer=None,
-               gamma_regularizer=None,
-               beta_constraint=None,
-               gamma_constraint=None,
-               renorm=False,
-               renorm_clipping=None,
-               renorm_momentum=0.99,
-               fused=None,
-               trainable=True,
-               virtual_batch_size=None,
-               adjustment=None,
-               name=None,
-               **kwargs):
-    super(BatchNormalization, self).__init__(
-        axis=axis,
-        momentum=momentum,
-        epsilon=epsilon,
-        center=center,
-        scale=scale,
-        beta_initializer=beta_initializer,
-        gamma_initializer=gamma_initializer,
-        moving_mean_initializer=moving_mean_initializer,
-        moving_variance_initializer=moving_variance_initializer,
-        beta_regularizer=beta_regularizer,
-        gamma_regularizer=gamma_regularizer,
-        beta_constraint=beta_constraint,
-        gamma_constraint=gamma_constraint,
-        renorm=renorm,
-        renorm_clipping=renorm_clipping,
-        renorm_momentum=renorm_momentum,
-        fused=fused,
-        trainable=trainable,
-        virtual_batch_size=virtual_batch_size,
-        adjustment=adjustment,
-        name=name,
-        **kwargs)
+    def __init__(
+        self,
+        axis=-1,
+        momentum=0.99,
+        epsilon=1e-3,
+        center=True,
+        scale=True,
+        beta_initializer=init_ops.zeros_initializer(),
+        gamma_initializer=init_ops.ones_initializer(),
+        moving_mean_initializer=init_ops.zeros_initializer(),
+        moving_variance_initializer=init_ops.ones_initializer(),
+        beta_regularizer=None,
+        gamma_regularizer=None,
+        beta_constraint=None,
+        gamma_constraint=None,
+        renorm=False,
+        renorm_clipping=None,
+        renorm_momentum=0.99,
+        fused=None,
+        trainable=True,
+        virtual_batch_size=None,
+        adjustment=None,
+        name=None,
+        **kwargs
+    ):
+        super(BatchNormalization, self).__init__(
+            axis=axis,
+            momentum=momentum,
+            epsilon=epsilon,
+            center=center,
+            scale=scale,
+            beta_initializer=beta_initializer,
+            gamma_initializer=gamma_initializer,
+            moving_mean_initializer=moving_mean_initializer,
+            moving_variance_initializer=moving_variance_initializer,
+            beta_regularizer=beta_regularizer,
+            gamma_regularizer=gamma_regularizer,
+            beta_constraint=beta_constraint,
+            gamma_constraint=gamma_constraint,
+            renorm=renorm,
+            renorm_clipping=renorm_clipping,
+            renorm_momentum=renorm_momentum,
+            fused=fused,
+            trainable=trainable,
+            virtual_batch_size=virtual_batch_size,
+            adjustment=adjustment,
+            name=name,
+            **kwargs
+        )
 
-  def call(self, inputs, training=False):
-    return super(BatchNormalization, self).call(inputs, training=training)
+    def call(self, inputs, training=False):
+        return super(BatchNormalization, self).call(inputs, training=training)
 
 
-@keras_export(v1=['keras.__internal__.legacy.layers.batch_normalization'])
-@tf_export(v1=['layers.batch_normalization'])
-def batch_normalization(inputs,
-                        axis=-1,
-                        momentum=0.99,
-                        epsilon=1e-3,
-                        center=True,
-                        scale=True,
-                        beta_initializer=init_ops.zeros_initializer(),
-                        gamma_initializer=init_ops.ones_initializer(),
-                        moving_mean_initializer=init_ops.zeros_initializer(),
-                        moving_variance_initializer=init_ops.ones_initializer(),
-                        beta_regularizer=None,
-                        gamma_regularizer=None,
-                        beta_constraint=None,
-                        gamma_constraint=None,
-                        training=False,
-                        trainable=True,
-                        name=None,
-                        reuse=None,
-                        renorm=False,
-                        renorm_clipping=None,
-                        renorm_momentum=0.99,
-                        fused=None,
-                        virtual_batch_size=None,
-                        adjustment=None):
-  """Functional interface for the batch normalization layer from_config(Ioffe et al., 2015).
+@keras_export(v1=["keras.__internal__.legacy.layers.batch_normalization"])
+@tf_export(v1=["layers.batch_normalization"])
+def batch_normalization(
+    inputs,
+    axis=-1,
+    momentum=0.99,
+    epsilon=1e-3,
+    center=True,
+    scale=True,
+    beta_initializer=init_ops.zeros_initializer(),
+    gamma_initializer=init_ops.ones_initializer(),
+    moving_mean_initializer=init_ops.zeros_initializer(),
+    moving_variance_initializer=init_ops.ones_initializer(),
+    beta_regularizer=None,
+    gamma_regularizer=None,
+    beta_constraint=None,
+    gamma_constraint=None,
+    training=False,
+    trainable=True,
+    name=None,
+    reuse=None,
+    renorm=False,
+    renorm_clipping=None,
+    renorm_momentum=0.99,
+    fused=None,
+    virtual_batch_size=None,
+    adjustment=None,
+):
+    """Functional interface for the batch normalization layer from_config(Ioffe et al., 2015).
 
   Note: when training, the moving_mean and moving_variance need to be updated.
   By default the update ops are placed in `tf.GraphKeys.UPDATE_OPS`, so they
@@ -306,38 +311,40 @@ def batch_normalization(inputs,
       2017](http://papers.nips.cc/paper/6790-batch-renormalization-towards-reducing-minibatch-dependence-in-batch-normalized-models)
       ([pdf](http://papers.nips.cc/paper/6790-batch-renormalization-towards-reducing-minibatch-dependence-in-batch-normalized-models.pdf))
   """
-  warnings.warn(
-      '`tf.layers.batch_normalization` is deprecated and '
-      'will be removed in a future version. '
-      'Please use `tf.keras.layers.BatchNormalization` instead. '
-      'In particular, `tf.control_dependencies(tf.GraphKeys.UPDATE_OPS)` '
-      'should not be used (consult the `tf.keras.layers.BatchNormalization` '
-      'documentation).')
-  layer = BatchNormalization(
-      axis=axis,
-      momentum=momentum,
-      epsilon=epsilon,
-      center=center,
-      scale=scale,
-      beta_initializer=beta_initializer,
-      gamma_initializer=gamma_initializer,
-      moving_mean_initializer=moving_mean_initializer,
-      moving_variance_initializer=moving_variance_initializer,
-      beta_regularizer=beta_regularizer,
-      gamma_regularizer=gamma_regularizer,
-      beta_constraint=beta_constraint,
-      gamma_constraint=gamma_constraint,
-      renorm=renorm,
-      renorm_clipping=renorm_clipping,
-      renorm_momentum=renorm_momentum,
-      fused=fused,
-      trainable=trainable,
-      virtual_batch_size=virtual_batch_size,
-      adjustment=adjustment,
-      name=name,
-      _reuse=reuse,
-      _scope=name)
-  return layer.apply(inputs, training=training)
+    warnings.warn(
+        "`tf.layers.batch_normalization` is deprecated and "
+        "will be removed in a future version. "
+        "Please use `tf.keras.layers.BatchNormalization` instead. "
+        "In particular, `tf.control_dependencies(tf.GraphKeys.UPDATE_OPS)` "
+        "should not be used (consult the `tf.keras.layers.BatchNormalization` "
+        "documentation)."
+    )
+    layer = BatchNormalization(
+        axis=axis,
+        momentum=momentum,
+        epsilon=epsilon,
+        center=center,
+        scale=scale,
+        beta_initializer=beta_initializer,
+        gamma_initializer=gamma_initializer,
+        moving_mean_initializer=moving_mean_initializer,
+        moving_variance_initializer=moving_variance_initializer,
+        beta_regularizer=beta_regularizer,
+        gamma_regularizer=gamma_regularizer,
+        beta_constraint=beta_constraint,
+        gamma_constraint=gamma_constraint,
+        renorm=renorm,
+        renorm_clipping=renorm_clipping,
+        renorm_momentum=renorm_momentum,
+        fused=fused,
+        trainable=trainable,
+        virtual_batch_size=virtual_batch_size,
+        adjustment=adjustment,
+        name=name,
+        _reuse=reuse,
+        _scope=name,
+    )
+    return layer.apply(inputs, training=training)
 
 
 # Aliases

@@ -28,7 +28,7 @@ from tensorflow.python.util import deprecation
 
 
 def _inplace_helper(x, i, v, op):
-  """Applies an inplace op on (x, i, v).
+    """Applies an inplace op on (x, i, v).
 
   op is one of gen_array_ops.alias_inplace_update,
   gen_array_ops.alias_inplace_add, or gen_array_ops.alias_inplace_sub.
@@ -50,26 +50,30 @@ def _inplace_helper(x, i, v, op):
     Returns x.
 
   """
-  x = ops.convert_to_tensor(x)
-  v = ops.convert_to_tensor(v, x.dtype)
-  if i is None:
-    # Full tensor.
-    return array_ops.reshape(
-        op(array_ops.reshape(x, [1, -1]), [0], array_ops.reshape(v, [1, -1])),
-        array_ops.shape(x))
-  i = math_ops.cast(i, dtypes.int32)
-  if i.get_shape().ndims == 0:
-    # Single 0-dim update.
-    return op(x, array_ops.reshape(i, [1]), array_ops.expand_dims(v, 0))
-  return op(x, i, v)
+    x = ops.convert_to_tensor(x)
+    v = ops.convert_to_tensor(v, x.dtype)
+    if i is None:
+        # Full tensor.
+        return array_ops.reshape(
+            op(array_ops.reshape(x, [1, -1]), [0], array_ops.reshape(v, [1, -1])),
+            array_ops.shape(x),
+        )
+    i = math_ops.cast(i, dtypes.int32)
+    if i.get_shape().ndims == 0:
+        # Single 0-dim update.
+        return op(x, array_ops.reshape(i, [1]), array_ops.expand_dims(v, 0))
+    return op(x, i, v)
 
 
 @deprecation.deprecated(
     None,
-    ('Prefer tf.tensor_scatter_nd_update, which offers the same functionality '
-     'with well-defined read-write semantics.'))
+    (
+        "Prefer tf.tensor_scatter_nd_update, which offers the same functionality "
+        "with well-defined read-write semantics."
+    ),
+)
 def alias_inplace_update(x, i, v):
-  """Applies an inplace update on input x at index i with value v. Aliases x.
+    """Applies an inplace update on input x at index i with value v. Aliases x.
 
   If i is None, x and v must be the same shape. Computes
     x = v;
@@ -87,15 +91,18 @@ def alias_inplace_update(x, i, v):
     Returns x.
 
   """
-  return _inplace_helper(x, i, v, gen_array_ops.inplace_update)
+    return _inplace_helper(x, i, v, gen_array_ops.inplace_update)
 
 
 @deprecation.deprecated(
     None,
-    ('Prefer tf.tensor_scatter_nd_add, which offers the same functionality '
-     'with well-defined read-write semantics.'))
+    (
+        "Prefer tf.tensor_scatter_nd_add, which offers the same functionality "
+        "with well-defined read-write semantics."
+    ),
+)
 def alias_inplace_add(x, i, v):
-  """Applies an inplace add on input x at index i with value v. Aliases x.
+    """Applies an inplace add on input x at index i with value v. Aliases x.
 
   If i is None, x and v must be the same shape. Computes
     x += v;
@@ -113,15 +120,18 @@ def alias_inplace_add(x, i, v):
     Returns x.
 
   """
-  return _inplace_helper(x, i, v, gen_array_ops.inplace_add)
+    return _inplace_helper(x, i, v, gen_array_ops.inplace_add)
 
 
 @deprecation.deprecated(
     None,
-    ('Prefer tf.tensor_scatter_nd_sub, which offers the same functionality '
-     'with well-defined read-write semantics.'))
+    (
+        "Prefer tf.tensor_scatter_nd_sub, which offers the same functionality "
+        "with well-defined read-write semantics."
+    ),
+)
 def alias_inplace_sub(x, i, v):
-  """Applies an inplace sub on input x at index i with value v. Aliases x.
+    """Applies an inplace sub on input x at index i with value v. Aliases x.
 
   If i is None, x and v must be the same shape. Computes
     x -= v;
@@ -139,11 +149,11 @@ def alias_inplace_sub(x, i, v):
     Returns x.
 
   """
-  return _inplace_helper(x, i, v, gen_array_ops.inplace_sub)
+    return _inplace_helper(x, i, v, gen_array_ops.inplace_sub)
 
 
 def empty_like(x, init=None):
-  """Returns a non-initialized tensor with the same shape and dtype as x.
+    """Returns a non-initialized tensor with the same shape and dtype as x.
 
   Args:
     x: A Tensor.
@@ -157,16 +167,19 @@ def empty_like(x, init=None):
     arbitrary data.
 
   """
-  x = ops.convert_to_tensor(x)
-  return gen_array_ops.empty(array_ops.shape(x), x.dtype, init=init)
+    x = ops.convert_to_tensor(x)
+    return gen_array_ops.empty(array_ops.shape(x), x.dtype, init=init)
 
 
 @deprecation.deprecated(
     None,
-    ('Prefer tf.tensor_scatter_nd_update, which offers the same functionality '
-     'with well-defined read-write semantics.'))
+    (
+        "Prefer tf.tensor_scatter_nd_update, which offers the same functionality "
+        "with well-defined read-write semantics."
+    ),
+)
 def inplace_update(x, i, v):
-  """Applies an inplace update on input x at index i with value v.
+    """Applies an inplace update on input x at index i with value v.
 
   Note that this function is not actually inplace - it allocates
   a copy of x.  The utility is not avoiding memory copies but rather
@@ -188,15 +201,18 @@ def inplace_update(x, i, v):
     Returns y, which is guaranteed not to be an alias of x.
 
   """
-  return alias_inplace_update(gen_array_ops.deep_copy(x), i, v)
+    return alias_inplace_update(gen_array_ops.deep_copy(x), i, v)
 
 
 @deprecation.deprecated(
     None,
-    ('Prefer tf.tensor_scatter_nd_add, which offers the same functionality '
-     'with well-defined read-write semantics.'))
+    (
+        "Prefer tf.tensor_scatter_nd_add, which offers the same functionality "
+        "with well-defined read-write semantics."
+    ),
+)
 def inplace_add(x, i, v):
-  """Applies an inplace add on input x at index i with value v.
+    """Applies an inplace add on input x at index i with value v.
 
   Note that this function is not actually inplace - it allocates
   a copy of x.  The utility is not avoiding memory copies but rather
@@ -218,15 +234,18 @@ def inplace_add(x, i, v):
     Returns y, which is guaranteed not to be an alias of x.
 
   """
-  return alias_inplace_add(gen_array_ops.deep_copy(x), i, v)
+    return alias_inplace_add(gen_array_ops.deep_copy(x), i, v)
 
 
 @deprecation.deprecated(
     None,
-    ('Prefer tf.tensor_scatter_nd_sub, which offers the same functionality '
-     'with well-defined read-write semantics.'))
+    (
+        "Prefer tf.tensor_scatter_nd_sub, which offers the same functionality "
+        "with well-defined read-write semantics."
+    ),
+)
 def inplace_sub(x, i, v):
-  """Applies an inplace sub on input x at index i with value v.
+    """Applies an inplace sub on input x at index i with value v.
 
   Note that this function is not actually inplace - it allocates
   a copy of x.  The utility is not avoiding memory copies but rather
@@ -248,6 +267,7 @@ def inplace_sub(x, i, v):
     Returns y, which is guaranteed not to be an alias of x.
 
   """
-  return alias_inplace_sub(gen_array_ops.deep_copy(x), i, v)
+    return alias_inplace_sub(gen_array_ops.deep_copy(x), i, v)
+
 
 empty = gen_array_ops.empty

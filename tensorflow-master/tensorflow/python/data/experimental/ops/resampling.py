@@ -24,7 +24,7 @@ from tensorflow.python.util.tf_export import tf_export
 @deprecation.deprecated(None, "Use `tf.data.Dataset.rejection_resample(...)`.")
 @tf_export("data.experimental.rejection_resample")
 def rejection_resample(class_func, target_dist, initial_dist=None, seed=None):
-  """A transformation that resamples a dataset to achieve a target distribution.
+    """A transformation that resamples a dataset to achieve a target distribution.
 
   **NOTE** Resampling is performed via rejection sampling; some fraction
   of the input values will be dropped.
@@ -42,13 +42,15 @@ def rejection_resample(class_func, target_dist, initial_dist=None, seed=None):
     A `Dataset` transformation function, which can be passed to
     `tf.data.Dataset.apply`.
   """
-  def _apply_fn(dataset):
-    """Function from `Dataset` to `Dataset` that applies the transformation."""
 
-    return dataset.rejection_resample(
-        class_func=class_func,
-        target_dist=target_dist,
-        initial_dist=initial_dist,
-        seed=seed)
+    def _apply_fn(dataset):
+        """Function from `Dataset` to `Dataset` that applies the transformation."""
 
-  return _apply_fn
+        return dataset.rejection_resample(
+            class_func=class_func,
+            target_dist=target_dist,
+            initial_dist=initial_dist,
+            seed=seed,
+        )
+
+    return _apply_fn

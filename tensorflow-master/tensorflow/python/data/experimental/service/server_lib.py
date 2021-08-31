@@ -30,11 +30,20 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export("data.experimental.service.DispatcherConfig")
 class DispatcherConfig(
-    collections.namedtuple("DispatcherConfig", [
-        "port", "protocol", "work_dir", "fault_tolerant_mode",
-        "worker_addresses", "job_gc_check_interval_ms", "job_gc_timeout_ms"
-    ])):
-  """Configuration class for tf.data service dispatchers.
+    collections.namedtuple(
+        "DispatcherConfig",
+        [
+            "port",
+            "protocol",
+            "work_dir",
+            "fault_tolerant_mode",
+            "worker_addresses",
+            "job_gc_check_interval_ms",
+            "job_gc_timeout_ms",
+        ],
+    )
+):
+    """Configuration class for tf.data service dispatchers.
 
   Fields:
     port: Specifies the port to bind to. A value of 0 indicates that the server
@@ -67,29 +76,37 @@ class DispatcherConfig(
       the time it takes to reclaim the resources from expired jobs.
   """
 
-  def __new__(cls,
-              port=0,
-              protocol=None,
-              work_dir=None,
-              fault_tolerant_mode=False,
-              worker_addresses=None,
-              job_gc_check_interval_ms=None,
-              job_gc_timeout_ms=None):
-    if protocol is None:
-      protocol = _pywrap_utils.TF_DATA_DefaultProtocol()
-    if job_gc_check_interval_ms is None:
-      job_gc_check_interval_ms = 10 * 60 * 1000  # 10 minutes.
-    if job_gc_timeout_ms is None:
-      job_gc_timeout_ms = 5 * 60 * 1000  # 5 minutes.
-    return super(DispatcherConfig,
-                 cls).__new__(cls, port, protocol, work_dir,
-                              fault_tolerant_mode, worker_addresses,
-                              job_gc_check_interval_ms, job_gc_timeout_ms)
+    def __new__(
+        cls,
+        port=0,
+        protocol=None,
+        work_dir=None,
+        fault_tolerant_mode=False,
+        worker_addresses=None,
+        job_gc_check_interval_ms=None,
+        job_gc_timeout_ms=None,
+    ):
+        if protocol is None:
+            protocol = _pywrap_utils.TF_DATA_DefaultProtocol()
+        if job_gc_check_interval_ms is None:
+            job_gc_check_interval_ms = 10 * 60 * 1000  # 10 minutes.
+        if job_gc_timeout_ms is None:
+            job_gc_timeout_ms = 5 * 60 * 1000  # 5 minutes.
+        return super(DispatcherConfig, cls).__new__(
+            cls,
+            port,
+            protocol,
+            work_dir,
+            fault_tolerant_mode,
+            worker_addresses,
+            job_gc_check_interval_ms,
+            job_gc_timeout_ms,
+        )
 
 
 @tf_export("data.experimental.service.DispatchServer", v1=[])
 class DispatchServer(object):
-  """An in-process tf.data service dispatch server.
+    """An in-process tf.data service dispatch server.
 
   A `tf.data.experimental.service.DispatchServer` coordinates a cluster of
   `tf.data.experimental.service.WorkerServer`s. When the workers start, they
@@ -127,8 +144,8 @@ class DispatchServer(object):
   ```
   """
 
-  def __init__(self, config=None, start=True):
-    """Creates a new dispatch server.
+    def __init__(self, config=None, start=True):
+        """Creates a new dispatch server.
 
     Args:
       config: (Optional.) A `tf.data.experimental.service.DispatcherConfig`
@@ -137,26 +154,29 @@ class DispatchServer(object):
       start: (Optional.) Boolean, indicating whether to start the server after
         creating it. Defaults to True.
     """
-    config = config or DispatcherConfig()
-    if config.fault_tolerant_mode and not config.work_dir:
-      raise ValueError(
-          "Cannot enable fault tolerant mode without configuring a work_dir")
-    self._config = config
-    config_proto = service_config_pb2.DispatcherConfig(
-        port=config.port,
-        protocol=config.protocol,
-        work_dir=config.work_dir,
-        fault_tolerant_mode=config.fault_tolerant_mode,
-        worker_addresses=config.worker_addresses,
-        job_gc_check_interval_ms=config.job_gc_check_interval_ms,
-        job_gc_timeout_ms=config.job_gc_timeout_ms)
-    self._server = _pywrap_server_lib.TF_DATA_NewDispatchServer(
-        config_proto.SerializeToString())
-    if start:
-      self._server.start()
+        config = config or DispatcherConfig()
+        if config.fault_tolerant_mode and not config.work_dir:
+            raise ValueError(
+                "Cannot enable fault tolerant mode without configuring a work_dir"
+            )
+        self._config = config
+        config_proto = service_config_pb2.DispatcherConfig(
+            port=config.port,
+            protocol=config.protocol,
+            work_dir=config.work_dir,
+            fault_tolerant_mode=config.fault_tolerant_mode,
+            worker_addresses=config.worker_addresses,
+            job_gc_check_interval_ms=config.job_gc_check_interval_ms,
+            job_gc_timeout_ms=config.job_gc_timeout_ms,
+        )
+        self._server = _pywrap_server_lib.TF_DATA_NewDispatchServer(
+            config_proto.SerializeToString()
+        )
+        if start:
+            self._server.start()
 
-  def start(self):
-    """Starts this server.
+    def start(self):
+        """Starts this server.
 
     >>> dispatcher = tf.data.experimental.service.DispatchServer(start=False)
     >>> dispatcher.start()
@@ -165,10 +185,10 @@ class DispatchServer(object):
       tf.errors.OpError: Or one of its subclasses if an error occurs while
         starting the server.
     """
-    self._server.start()
+        self._server.start()
 
-  def join(self):
-    """Blocks until the server has shut down.
+    def join(self):
+        """Blocks until the server has shut down.
 
     This is useful when starting a dedicated dispatch process.
 
@@ -182,11 +202,11 @@ class DispatchServer(object):
       tf.errors.OpError: Or one of its subclasses if an error occurs while
         joining the server.
     """
-    self._server.join()
+        self._server.join()
 
-  @property
-  def target(self):
-    """Returns a target that can be used to connect to the server.
+    @property
+    def target(self):
+        """Returns a target that can be used to connect to the server.
 
     >>> dispatcher = tf.data.experimental.service.DispatchServer()
     >>> dataset = tf.data.Dataset.range(10)
@@ -196,41 +216,50 @@ class DispatchServer(object):
     The returned string will be in the form protocol://address, e.g.
     "grpc://localhost:5050".
     """
-    return "{0}://localhost:{1}".format(self._config.protocol,
-                                        self._server.bound_port())
+        return "{0}://localhost:{1}".format(
+            self._config.protocol, self._server.bound_port()
+        )
 
-  def _stop(self):
-    """Stops the server.
+    def _stop(self):
+        """Stops the server.
 
     Raises:
       tf.errors.OpError: Or one of its subclasses if an error occurs while
         stopping the server.
     """
-    self._server.stop()
+        self._server.stop()
 
-  def __del__(self):
-    self._stop()
+    def __del__(self):
+        self._stop()
 
-  @property
-  def _address(self):
-    """Returns the address of the server.
+    @property
+    def _address(self):
+        """Returns the address of the server.
 
     The returned string will be in the form address:port, e.g. "localhost:1000".
     """
-    return "localhost:{0}".format(self._server.bound_port())
+        return "localhost:{0}".format(self._server.bound_port())
 
-  def _num_workers(self):
-    """Returns the number of workers registered with the dispatcher."""
-    return self._server.num_workers()
+    def _num_workers(self):
+        """Returns the number of workers registered with the dispatcher."""
+        return self._server.num_workers()
 
 
 @tf_export("data.experimental.service.WorkerConfig")
 class WorkerConfig(
-    collections.namedtuple("WorkerConfig", [
-        "dispatcher_address", "worker_address", "port", "protocol",
-        "heartbeat_interval_ms", "dispatcher_timeout_ms"
-    ])):
-  """Configuration class for tf.data service dispatchers.
+    collections.namedtuple(
+        "WorkerConfig",
+        [
+            "dispatcher_address",
+            "worker_address",
+            "port",
+            "protocol",
+            "heartbeat_interval_ms",
+            "dispatcher_timeout_ms",
+        ],
+    )
+):
+    """Configuration class for tf.data service dispatchers.
 
   Fields:
     dispatcher_address: Specifies the address of the dispatcher.
@@ -250,31 +279,38 @@ class WorkerConfig(
       dispatcher before giving up and reporting an error. Defaults to 1 hour.
   """
 
-  def __new__(cls,
-              dispatcher_address,
-              worker_address=None,
-              port=0,
-              protocol=None,
-              heartbeat_interval_ms=None,
-              dispatcher_timeout_ms=None):
-    if worker_address is None:
-      worker_address = "localhost:%port%"
-    if protocol is None:
-      protocol = _pywrap_utils.TF_DATA_DefaultProtocol()
-    if heartbeat_interval_ms is None:
-      heartbeat_interval_ms = 30 * 1000  # 30 seconds
-    if dispatcher_timeout_ms is None:
-      dispatcher_timeout_ms = 60 * 60 * 1000  # 1 hour
+    def __new__(
+        cls,
+        dispatcher_address,
+        worker_address=None,
+        port=0,
+        protocol=None,
+        heartbeat_interval_ms=None,
+        dispatcher_timeout_ms=None,
+    ):
+        if worker_address is None:
+            worker_address = "localhost:%port%"
+        if protocol is None:
+            protocol = _pywrap_utils.TF_DATA_DefaultProtocol()
+        if heartbeat_interval_ms is None:
+            heartbeat_interval_ms = 30 * 1000  # 30 seconds
+        if dispatcher_timeout_ms is None:
+            dispatcher_timeout_ms = 60 * 60 * 1000  # 1 hour
 
-    return super(WorkerConfig,
-                 cls).__new__(cls, dispatcher_address, worker_address, port,
-                              protocol, heartbeat_interval_ms,
-                              dispatcher_timeout_ms)
+        return super(WorkerConfig, cls).__new__(
+            cls,
+            dispatcher_address,
+            worker_address,
+            port,
+            protocol,
+            heartbeat_interval_ms,
+            dispatcher_timeout_ms,
+        )
 
 
 @tf_export("data.experimental.service.WorkerServer", v1=[])
 class WorkerServer(object):
-  """An in-process tf.data service worker server.
+    """An in-process tf.data service worker server.
 
   A `tf.data.experimental.service.WorkerServer` performs `tf.data.Dataset`
   processing for user-defined datasets, and provides the resulting elements over
@@ -302,43 +338,45 @@ class WorkerServer(object):
   ```
   """
 
-  def __init__(self, config, start=True):
-    """Creates a new worker server.
+    def __init__(self, config, start=True):
+        """Creates a new worker server.
 
     Args:
       config: A `tf.data.experimental.service.WorkerConfig` configration.
       start: (Optional.) Boolean, indicating whether to start the server after
         creating it. Defaults to True.
     """
-    if config.dispatcher_address is None:
-      raise ValueError("must specify a dispatcher_address")
-    if isinstance(config, service_config_pb2.WorkerConfig):
-      config_proto = config
-    else:
-      config_proto = service_config_pb2.WorkerConfig(
-          dispatcher_address=config.dispatcher_address,
-          worker_address=config.worker_address,
-          port=config.port,
-          protocol=config.protocol,
-          heartbeat_interval_ms=config.heartbeat_interval_ms,
-          dispatcher_timeout_ms=config.dispatcher_timeout_ms,
-          data_transfer_protocol=None)
-    self._server = _pywrap_server_lib.TF_DATA_NewWorkerServer(
-        config_proto.SerializeToString())
-    if start:
-      self._server.start()
+        if config.dispatcher_address is None:
+            raise ValueError("must specify a dispatcher_address")
+        if isinstance(config, service_config_pb2.WorkerConfig):
+            config_proto = config
+        else:
+            config_proto = service_config_pb2.WorkerConfig(
+                dispatcher_address=config.dispatcher_address,
+                worker_address=config.worker_address,
+                port=config.port,
+                protocol=config.protocol,
+                heartbeat_interval_ms=config.heartbeat_interval_ms,
+                dispatcher_timeout_ms=config.dispatcher_timeout_ms,
+                data_transfer_protocol=None,
+            )
+        self._server = _pywrap_server_lib.TF_DATA_NewWorkerServer(
+            config_proto.SerializeToString()
+        )
+        if start:
+            self._server.start()
 
-  def start(self):
-    """Starts this server.
+    def start(self):
+        """Starts this server.
 
     Raises:
       tf.errors.OpError: Or one of its subclasses if an error occurs while
         starting the server.
     """
-    self._server.start()
+        self._server.start()
 
-  def join(self):
-    """Blocks until the server has shut down.
+    def join(self):
+        """Blocks until the server has shut down.
 
     This is useful when starting a dedicated worker process.
 
@@ -354,28 +392,28 @@ class WorkerServer(object):
       tf.errors.OpError: Or one of its subclasses if an error occurs while
         joining the server.
     """
-    self._server.join()
+        self._server.join()
 
-  def _stop(self):
-    """Stops the server.
+    def _stop(self):
+        """Stops the server.
 
     Raises:
       tf.errors.OpError: Or one of its subclasses if an error occurs while
         stopping the server.
     """
-    self._server.stop()
+        self._server.stop()
 
-  def __del__(self):
-    self._stop()
+    def __del__(self):
+        self._stop()
 
-  @property
-  def _address(self):
-    """Returns the address of the server.
+    @property
+    def _address(self):
+        """Returns the address of the server.
 
     The returned string will be in the form address:port, e.g. "localhost:1000".
     """
-    return "localhost:{0}".format(self._server.bound_port())
+        return "localhost:{0}".format(self._server.bound_port())
 
-  def _num_tasks(self):
-    """Returns the number of tasks currently being executed on the worker."""
-    return self._server.num_tasks()
+    def _num_tasks(self):
+        """Returns the number of tasks currently being executed on the worker."""
+        return self._server.num_tasks()

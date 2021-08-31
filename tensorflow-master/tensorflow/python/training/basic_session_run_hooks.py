@@ -52,24 +52,24 @@ _STEPS_PER_RUN_VAR = "steps_per_run"
 
 
 class _HookTimer(object):
-  """Base timer for determining when Hooks should trigger.
+    """Base timer for determining when Hooks should trigger.
 
   Should not be instantiated directly.
   """
 
-  def __init__(self):
-    pass
+    def __init__(self):
+        pass
 
-  def reset(self):
-    """Resets the timer."""
-    pass
+    def reset(self):
+        """Resets the timer."""
+        pass
 
-  def should_trigger_for_step(self, step):
-    """Return true if the timer should trigger for the specified step."""
-    raise NotImplementedError
+    def should_trigger_for_step(self, step):
+        """Return true if the timer should trigger for the specified step."""
+        raise NotImplementedError
 
-  def update_last_triggered_step(self, step):
-    """Update the last triggered time and step number.
+    def update_last_triggered_step(self, step):
+        """Update the last triggered time and step number.
 
     Args:
       step: The current step.
@@ -80,39 +80,39 @@ class _HookTimer(object):
       `elapsed_steps` is the number of steps between the current trigger and
       the last one. Both values will be set to `None` on the first trigger.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def last_triggered_step(self):
-    """Returns the last triggered time step or None if never triggered."""
-    raise NotImplementedError
+    def last_triggered_step(self):
+        """Returns the last triggered time step or None if never triggered."""
+        raise NotImplementedError
 
 
 @tf_export(v1=["train.SecondOrStepTimer"])
 class SecondOrStepTimer(_HookTimer):
-  """Timer that triggers at most once every N seconds or once every N steps.
+    """Timer that triggers at most once every N seconds or once every N steps.
 
   This symbol is also exported to v2 in tf.estimator namespace. See
   https://github.com/tensorflow/estimator/blob/master/tensorflow_estimator/python/estimator/hooks/basic_session_run_hooks.py
   """
 
-  def __init__(self, every_secs=None, every_steps=None):
-    self.reset()
-    self._every_secs = every_secs
-    self._every_steps = every_steps
+    def __init__(self, every_secs=None, every_steps=None):
+        self.reset()
+        self._every_secs = every_secs
+        self._every_steps = every_steps
 
-    if self._every_secs is None and self._every_steps is None:
-      raise ValueError("Either every_secs or every_steps should be provided.")
-    if (self._every_secs is not None) and (self._every_steps is not None):
-      raise ValueError("Can not provide both every_secs and every_steps.")
+        if self._every_secs is None and self._every_steps is None:
+            raise ValueError("Either every_secs or every_steps should be provided.")
+        if (self._every_secs is not None) and (self._every_steps is not None):
+            raise ValueError("Can not provide both every_secs and every_steps.")
 
-    super(SecondOrStepTimer, self).__init__()
+        super(SecondOrStepTimer, self).__init__()
 
-  def reset(self):
-    self._last_triggered_step = None
-    self._last_triggered_time = None
+    def reset(self):
+        self._last_triggered_step = None
+        self._last_triggered_time = None
 
-  def should_trigger_for_step(self, step):
-    """Return true if the timer should trigger for the specified step.
+    def should_trigger_for_step(self, step):
+        """Return true if the timer should trigger for the specified step.
 
     Args:
       step: Training step to trigger on.
@@ -122,57 +122,57 @@ class SecondOrStepTimer(_HookTimer):
       trigger exceeds `every_secs`, or if the difference between the current
       step and the last triggered step exceeds `every_steps`. False otherwise.
     """
-    if self._last_triggered_step is None:
-      return True
+        if self._last_triggered_step is None:
+            return True
 
-    if self._last_triggered_step == step:
-      return False
+        if self._last_triggered_step == step:
+            return False
 
-    if self._every_secs is not None:
-      if time.time() >= self._last_triggered_time + self._every_secs:
-        return True
+        if self._every_secs is not None:
+            if time.time() >= self._last_triggered_time + self._every_secs:
+                return True
 
-    if self._every_steps is not None:
-      if step >= self._last_triggered_step + self._every_steps:
-        return True
+        if self._every_steps is not None:
+            if step >= self._last_triggered_step + self._every_steps:
+                return True
 
-    return False
+        return False
 
-  def update_last_triggered_step(self, step):
-    current_time = time.time()
-    if self._last_triggered_time is None:
-      elapsed_secs = None
-      elapsed_steps = None
-    else:
-      elapsed_secs = current_time - self._last_triggered_time
-      elapsed_steps = step - self._last_triggered_step
+    def update_last_triggered_step(self, step):
+        current_time = time.time()
+        if self._last_triggered_time is None:
+            elapsed_secs = None
+            elapsed_steps = None
+        else:
+            elapsed_secs = current_time - self._last_triggered_time
+            elapsed_steps = step - self._last_triggered_step
 
-    self._last_triggered_time = current_time
-    self._last_triggered_step = step
-    return (elapsed_secs, elapsed_steps)
+        self._last_triggered_time = current_time
+        self._last_triggered_step = step
+        return (elapsed_secs, elapsed_steps)
 
-  def last_triggered_step(self):
-    return self._last_triggered_step
+    def last_triggered_step(self):
+        return self._last_triggered_step
 
 
 class NeverTriggerTimer(_HookTimer):
-  """Timer that never triggers."""
+    """Timer that never triggers."""
 
-  def should_trigger_for_step(self, step):
-    _ = step
-    return False
+    def should_trigger_for_step(self, step):
+        _ = step
+        return False
 
-  def update_last_triggered_step(self, step):
-    _ = step
-    return (None, None)
+    def update_last_triggered_step(self, step):
+        _ = step
+        return (None, None)
 
-  def last_triggered_step(self):
-    return None
+    def last_triggered_step(self):
+        return None
 
 
 @tf_export(v1=["train.LoggingTensorHook"])
 class LoggingTensorHook(session_run_hook.SessionRunHook):
-  """Prints the given tensors every N local steps, every N seconds, or at end.
+    """Prints the given tensors every N local steps, every N seconds, or at end.
 
   The tensors will be printed to the log, with `INFO` severity. If you are not
   seeing the logs, you might want to add the following line after your imports:
@@ -193,13 +193,15 @@ class LoggingTensorHook(session_run_hook.SessionRunHook):
 
   """
 
-  def __init__(self,
-               tensors,
-               every_n_iter=None,
-               every_n_secs=None,
-               at_end=False,
-               formatter=None):
-    """Initializes a `LoggingTensorHook`.
+    def __init__(
+        self,
+        tensors,
+        every_n_iter=None,
+        every_n_secs=None,
+        at_end=False,
+        formatter=None,
+    ):
+        """Initializes a `LoggingTensorHook`.
 
     Args:
       tensors: `dict` that maps string-valued tags to tensors/tensor names, or
@@ -217,74 +219,74 @@ class LoggingTensorHook(session_run_hook.SessionRunHook):
     Raises:
       ValueError: if `every_n_iter` is non-positive.
     """
-    only_log_at_end = (
-        at_end and (every_n_iter is None) and (every_n_secs is None))
-    if (not only_log_at_end and
-        (every_n_iter is None) == (every_n_secs is None)):
-      raise ValueError(
-          "either at_end and/or exactly one of every_n_iter and every_n_secs "
-          "must be provided.")
-    if every_n_iter is not None and every_n_iter <= 0:
-      raise ValueError("invalid every_n_iter=%s." % every_n_iter)
-    if not isinstance(tensors, dict):
-      self._tag_order = tensors
-      tensors = {item: item for item in tensors}
-    else:
-      self._tag_order = sorted(tensors.keys())
-    self._tensors = tensors
-    self._formatter = formatter
-    self._timer = (
-        NeverTriggerTimer() if only_log_at_end else SecondOrStepTimer(
-            every_secs=every_n_secs, every_steps=every_n_iter))
-    self._log_at_end = at_end
+        only_log_at_end = at_end and (every_n_iter is None) and (every_n_secs is None)
+        if not only_log_at_end and (every_n_iter is None) == (every_n_secs is None):
+            raise ValueError(
+                "either at_end and/or exactly one of every_n_iter and every_n_secs "
+                "must be provided."
+            )
+        if every_n_iter is not None and every_n_iter <= 0:
+            raise ValueError("invalid every_n_iter=%s." % every_n_iter)
+        if not isinstance(tensors, dict):
+            self._tag_order = tensors
+            tensors = {item: item for item in tensors}
+        else:
+            self._tag_order = sorted(tensors.keys())
+        self._tensors = tensors
+        self._formatter = formatter
+        self._timer = (
+            NeverTriggerTimer()
+            if only_log_at_end
+            else SecondOrStepTimer(every_secs=every_n_secs, every_steps=every_n_iter)
+        )
+        self._log_at_end = at_end
 
-  def begin(self):
-    self._timer.reset()
-    self._iter_count = 0
-    # Convert names to tensors if given
-    self._current_tensors = {
-        tag: _as_graph_element(tensor)
-        for (tag, tensor) in self._tensors.items()
-    }
+    def begin(self):
+        self._timer.reset()
+        self._iter_count = 0
+        # Convert names to tensors if given
+        self._current_tensors = {
+            tag: _as_graph_element(tensor) for (tag, tensor) in self._tensors.items()
+        }
 
-  def before_run(self, run_context):  # pylint: disable=unused-argument
-    self._should_trigger = self._timer.should_trigger_for_step(self._iter_count)
-    if self._should_trigger:
-      return SessionRunArgs(self._current_tensors)
-    else:
-      return None
+    def before_run(self, run_context):  # pylint: disable=unused-argument
+        self._should_trigger = self._timer.should_trigger_for_step(self._iter_count)
+        if self._should_trigger:
+            return SessionRunArgs(self._current_tensors)
+        else:
+            return None
 
-  def _log_tensors(self, tensor_values):
-    original = np.get_printoptions()
-    np.set_printoptions(suppress=True)
-    elapsed_secs, _ = self._timer.update_last_triggered_step(self._iter_count)
-    if self._formatter:
-      logging.info(self._formatter(tensor_values))
-    else:
-      stats = []
-      for tag in self._tag_order:
-        stats.append("%s = %s" % (tag, tensor_values[tag]))
-      if elapsed_secs is not None:
-        logging.info("%s (%.3f sec)", ", ".join(stats), elapsed_secs)
-      else:
-        logging.info("%s", ", ".join(stats))
-    np.set_printoptions(**original)
+    def _log_tensors(self, tensor_values):
+        original = np.get_printoptions()
+        np.set_printoptions(suppress=True)
+        elapsed_secs, _ = self._timer.update_last_triggered_step(self._iter_count)
+        if self._formatter:
+            logging.info(self._formatter(tensor_values))
+        else:
+            stats = []
+            for tag in self._tag_order:
+                stats.append("%s = %s" % (tag, tensor_values[tag]))
+            if elapsed_secs is not None:
+                logging.info("%s (%.3f sec)", ", ".join(stats), elapsed_secs)
+            else:
+                logging.info("%s", ", ".join(stats))
+        np.set_printoptions(**original)
 
-  def after_run(self, run_context, run_values):
-    _ = run_context
-    if self._should_trigger:
-      self._log_tensors(run_values.results)
+    def after_run(self, run_context, run_values):
+        _ = run_context
+        if self._should_trigger:
+            self._log_tensors(run_values.results)
 
-    self._iter_count += 1
+        self._iter_count += 1
 
-  def end(self, session):
-    if self._log_at_end:
-      values = session.run(self._current_tensors)
-      self._log_tensors(values)
+    def end(self, session):
+        if self._log_at_end:
+            values = session.run(self._current_tensors)
+            self._log_tensors(values)
 
 
 def get_or_create_steps_per_run_variable():
-  """Gets or creates the steps_per_run variable.
+    """Gets or creates the steps_per_run variable.
 
   In Estimator, the user provided computation, the model_fn, is wrapped
   inside a tf.while_loop for peak performance. The iterations of the loop are
@@ -311,30 +313,31 @@ def get_or_create_steps_per_run_variable():
   Raises:
     RuntimeError: If multi steps_per_run variables were found.
   """
-  graph = ops.get_default_graph()
-  collection_name = "{}_{}".format(_HOOKS, _STEPS_PER_RUN_VAR)
-  steps_per_run_vars = graph.get_collection(collection_name)
-  if len(steps_per_run_vars) == 1:
-    return steps_per_run_vars[0]
-  elif len(steps_per_run_vars) > 1:
-    raise RuntimeError("Multiple steps_per_run_var in collection.")
+    graph = ops.get_default_graph()
+    collection_name = "{}_{}".format(_HOOKS, _STEPS_PER_RUN_VAR)
+    steps_per_run_vars = graph.get_collection(collection_name)
+    if len(steps_per_run_vars) == 1:
+        return steps_per_run_vars[0]
+    elif len(steps_per_run_vars) > 1:
+        raise RuntimeError("Multiple steps_per_run_var in collection.")
 
-  with variable_scope.variable_scope(_HOOKS, reuse=variable_scope.AUTO_REUSE):
-    return variable_scope.get_variable(
-        _STEPS_PER_RUN_VAR,
-        initializer=init_ops.ones_initializer(),
-        shape=[],
-        dtype=dtypes.int32,
-        trainable=False,
-        collections=[collection_name, ops.GraphKeys.LOCAL_VARIABLES],
-        use_resource=True)
+    with variable_scope.variable_scope(_HOOKS, reuse=variable_scope.AUTO_REUSE):
+        return variable_scope.get_variable(
+            _STEPS_PER_RUN_VAR,
+            initializer=init_ops.ones_initializer(),
+            shape=[],
+            dtype=dtypes.int32,
+            trainable=False,
+            collections=[collection_name, ops.GraphKeys.LOCAL_VARIABLES],
+            use_resource=True,
+        )
 
 
 class _MultiStepStopAtStepHook(session_run_hook.SessionRunHook):
-  """Hook that requests stop at a specified step."""
+    """Hook that requests stop at a specified step."""
 
-  def __init__(self, num_steps=None, last_step=None, steps_per_run=1):
-    """Initializes a `MultiStepStopAtStepHook`.
+    def __init__(self, num_steps=None, last_step=None, steps_per_run=1):
+        """Initializes a `MultiStepStopAtStepHook`.
 
     This hook requests stop after either a number of steps have been
     executed or a last step has been reached. Only one of the two options can be
@@ -357,46 +360,45 @@ class _MultiStepStopAtStepHook(session_run_hook.SessionRunHook):
     Raises:
       ValueError: If one of the arguments is invalid.
     """
-    if num_steps is None and last_step is None:
-      raise ValueError("One of num_steps or last_step must be specified.")
-    if num_steps is not None and last_step is not None:
-      raise ValueError("Only one of num_steps or last_step can be specified.")
-    if steps_per_run is None or steps_per_run < 1:
-      raise ValueError("steps_per_run should be greater than 0")
-    self._num_steps = num_steps
-    self._last_step = last_step
-    self._steps_per_run_initial_value = steps_per_run
+        if num_steps is None and last_step is None:
+            raise ValueError("One of num_steps or last_step must be specified.")
+        if num_steps is not None and last_step is not None:
+            raise ValueError("Only one of num_steps or last_step can be specified.")
+        if steps_per_run is None or steps_per_run < 1:
+            raise ValueError("steps_per_run should be greater than 0")
+        self._num_steps = num_steps
+        self._last_step = last_step
+        self._steps_per_run_initial_value = steps_per_run
 
-  def begin(self):
-    self._global_step_tensor = training_util.get_global_step()
-    if self._global_step_tensor is None:
-      raise RuntimeError("Global step should be created to use StopAtStepHook.")
-    self._steps_per_run_variable = get_or_create_steps_per_run_variable()
+    def begin(self):
+        self._global_step_tensor = training_util.get_global_step()
+        if self._global_step_tensor is None:
+            raise RuntimeError("Global step should be created to use StopAtStepHook.")
+        self._steps_per_run_variable = get_or_create_steps_per_run_variable()
 
-  def _update_steps_per_run_variable(self, global_step, session):
-    steps = min(self._last_step - global_step,
-                self._steps_per_run_initial_value)
-    self._steps_per_run_variable.load(steps, session=session)
+    def _update_steps_per_run_variable(self, global_step, session):
+        steps = min(self._last_step - global_step, self._steps_per_run_initial_value)
+        self._steps_per_run_variable.load(steps, session=session)
 
-  def after_create_session(self, session, coord):
-    global_step = session.run(self._global_step_tensor)
-    if self._last_step is None:
-      self._last_step = global_step + self._num_steps
-    self._update_steps_per_run_variable(global_step, session)
+    def after_create_session(self, session, coord):
+        global_step = session.run(self._global_step_tensor)
+        if self._last_step is None:
+            self._last_step = global_step + self._num_steps
+        self._update_steps_per_run_variable(global_step, session)
 
-  def after_run(self, run_context, run_values):
-    # Global step cannot be retrieved via SessionRunArgs and before_run due to
-    # race condition in hook execution.
-    global_step = run_context.session.run(self._global_step_tensor)
-    if global_step >= self._last_step:
-      run_context.request_stop()
-    else:
-      self._update_steps_per_run_variable(global_step, run_context.session)
+    def after_run(self, run_context, run_values):
+        # Global step cannot be retrieved via SessionRunArgs and before_run due to
+        # race condition in hook execution.
+        global_step = run_context.session.run(self._global_step_tensor)
+        if global_step >= self._last_step:
+            run_context.request_stop()
+        else:
+            self._update_steps_per_run_variable(global_step, run_context.session)
 
 
 @tf_export(v1=["train.StopAtStepHook"])
 class StopAtStepHook(session_run_hook.SessionRunHook):
-  """Hook that requests stop at a specified step.
+    """Hook that requests stop at a specified step.
 
   @compatibility(TF2)
   Please check this [notebook][notebook] on how to migrate the API to TF2.
@@ -406,8 +408,8 @@ class StopAtStepHook(session_run_hook.SessionRunHook):
   @end_compatibility
   """
 
-  def __init__(self, num_steps=None, last_step=None):
-    """Initializes a `StopAtStepHook`.
+    def __init__(self, num_steps=None, last_step=None):
+        """Initializes a `StopAtStepHook`.
 
     This hook requests stop after either a number of steps have been
     executed or a last step has been reached. Only one of the two options can be
@@ -425,42 +427,44 @@ class StopAtStepHook(session_run_hook.SessionRunHook):
     Raises:
       ValueError: If one of the arguments is invalid.
     """
-    if num_steps is None and last_step is None:
-      raise ValueError("One of num_steps or last_step must be specified.")
-    if num_steps is not None and last_step is not None:
-      raise ValueError("Only one of num_steps or last_step can be specified.")
-    self._num_steps = num_steps
-    self._last_step = last_step
+        if num_steps is None and last_step is None:
+            raise ValueError("One of num_steps or last_step must be specified.")
+        if num_steps is not None and last_step is not None:
+            raise ValueError("Only one of num_steps or last_step can be specified.")
+        self._num_steps = num_steps
+        self._last_step = last_step
 
-  def begin(self):
-    self._global_step_tensor = training_util._get_or_create_global_step_read()  # pylint: disable=protected-access
-    if self._global_step_tensor is None:
-      raise RuntimeError("Global step should be created to use StopAtStepHook.")
+    def begin(self):
+        self._global_step_tensor = (
+            training_util._get_or_create_global_step_read()
+        )  # pylint: disable=protected-access
+        if self._global_step_tensor is None:
+            raise RuntimeError("Global step should be created to use StopAtStepHook.")
 
-  def after_create_session(self, session, coord):
-    if self._last_step is None:
-      global_step = session.run(self._global_step_tensor)
-      self._last_step = global_step + self._num_steps
+    def after_create_session(self, session, coord):
+        if self._last_step is None:
+            global_step = session.run(self._global_step_tensor)
+            self._last_step = global_step + self._num_steps
 
-  def before_run(self, run_context):  # pylint: disable=unused-argument
-    return SessionRunArgs(self._global_step_tensor)
+    def before_run(self, run_context):  # pylint: disable=unused-argument
+        return SessionRunArgs(self._global_step_tensor)
 
-  def after_run(self, run_context, run_values):
-    global_step = run_values.results + 1
-    if global_step >= self._last_step:
-      # Check latest global step to ensure that the targeted last step is
-      # reached. global_step read tensor is the value of global step
-      # before running the operation. We're not sure whether current session.run
-      # incremented the global_step or not. Here we're checking it.
+    def after_run(self, run_context, run_values):
+        global_step = run_values.results + 1
+        if global_step >= self._last_step:
+            # Check latest global step to ensure that the targeted last step is
+            # reached. global_step read tensor is the value of global step
+            # before running the operation. We're not sure whether current session.run
+            # incremented the global_step or not. Here we're checking it.
 
-      step = run_context.session.run(self._global_step_tensor)
-      if step >= self._last_step:
-        run_context.request_stop()
+            step = run_context.session.run(self._global_step_tensor)
+            if step >= self._last_step:
+                run_context.request_stop()
 
 
 @tf_export(v1=["train.CheckpointSaverListener"])
 class CheckpointSaverListener(object):
-  """Interface for listeners that take action before or after checkpoint save.
+    """Interface for listeners that take action before or after checkpoint save.
 
   `CheckpointSaverListener` triggers only in steps when `CheckpointSaverHook` is
   triggered, and provides callbacks at the following points:
@@ -512,33 +516,35 @@ class CheckpointSaverListener(object):
   their own evaluation, which may be wasteful of resources.
   """
 
-  def begin(self):
-    pass
+    def begin(self):
+        pass
 
-  def before_save(self, session, global_step_value):
-    pass
+    def before_save(self, session, global_step_value):
+        pass
 
-  def after_save(self, session, global_step_value):
-    pass
+    def after_save(self, session, global_step_value):
+        pass
 
-  def end(self, session, global_step_value):
-    pass
+    def end(self, session, global_step_value):
+        pass
 
 
 @tf_export(v1=["train.CheckpointSaverHook"])
 class CheckpointSaverHook(session_run_hook.SessionRunHook):
-  """Saves checkpoints every N steps or seconds."""
+    """Saves checkpoints every N steps or seconds."""
 
-  def __init__(self,
-               checkpoint_dir,
-               save_secs=None,
-               save_steps=None,
-               saver=None,
-               checkpoint_basename="model.ckpt",
-               scaffold=None,
-               listeners=None,
-               save_graph_def=True):
-    """Initializes a `CheckpointSaverHook`.
+    def __init__(
+        self,
+        checkpoint_dir,
+        save_secs=None,
+        save_steps=None,
+        saver=None,
+        checkpoint_basename="model.ckpt",
+        scaffold=None,
+        listeners=None,
+        save_graph_def=True,
+    ):
+        """Initializes a `CheckpointSaverHook`.
 
     Args:
       checkpoint_dir: `str`, base directory for the checkpoint files.
@@ -559,250 +565,268 @@ class CheckpointSaverHook(session_run_hook.SessionRunHook):
       ValueError: One of `save_steps` or `save_secs` should be set.
       ValueError: At most one of `saver` or `scaffold` should be set.
     """
-    logging.info("Create CheckpointSaverHook.")
-    if saver is not None and scaffold is not None:
-      raise ValueError("You cannot provide both saver and scaffold.")
-    self._saver = saver
-    self._checkpoint_dir = checkpoint_dir
-    self._save_path = os.path.join(checkpoint_dir, checkpoint_basename)
-    self._scaffold = scaffold
-    self._timer = SecondOrStepTimer(
-        every_secs=save_secs, every_steps=save_steps)
-    self._listeners = listeners or []
-    self._steps_per_run = 1
-    self._save_graph_def = save_graph_def
+        logging.info("Create CheckpointSaverHook.")
+        if saver is not None and scaffold is not None:
+            raise ValueError("You cannot provide both saver and scaffold.")
+        self._saver = saver
+        self._checkpoint_dir = checkpoint_dir
+        self._save_path = os.path.join(checkpoint_dir, checkpoint_basename)
+        self._scaffold = scaffold
+        self._timer = SecondOrStepTimer(every_secs=save_secs, every_steps=save_steps)
+        self._listeners = listeners or []
+        self._steps_per_run = 1
+        self._save_graph_def = save_graph_def
 
-  def _set_steps_per_run(self, steps_per_run):
-    self._steps_per_run = steps_per_run
+    def _set_steps_per_run(self, steps_per_run):
+        self._steps_per_run = steps_per_run
 
-  def begin(self):
-    self._summary_writer = SummaryWriterCache.get(self._checkpoint_dir)
-    self._global_step_tensor = training_util._get_or_create_global_step_read()  # pylint: disable=protected-access
-    if self._global_step_tensor is None:
-      raise RuntimeError(
-          "Global step should be created to use CheckpointSaverHook.")
-    for l in self._listeners:
-      l.begin()
+    def begin(self):
+        self._summary_writer = SummaryWriterCache.get(self._checkpoint_dir)
+        self._global_step_tensor = (
+            training_util._get_or_create_global_step_read()
+        )  # pylint: disable=protected-access
+        if self._global_step_tensor is None:
+            raise RuntimeError(
+                "Global step should be created to use CheckpointSaverHook."
+            )
+        for l in self._listeners:
+            l.begin()
 
-  def after_create_session(self, session, coord):
-    global_step = session.run(self._global_step_tensor)
-    if self._save_graph_def:
-      # We do write graph and saver_def at the first call of before_run.
-      # We cannot do this in begin, since we let other hooks to change graph and
-      # add variables in begin. Graph is finalized after all begin calls.
-      training_util.write_graph(
-          ops.get_default_graph().as_graph_def(add_shapes=True),
-          self._checkpoint_dir, "graph.pbtxt")
-    saver_def = self._get_saver().saver_def if self._get_saver() else None
-    graph = ops.get_default_graph()
-    meta_graph_def = meta_graph.create_meta_graph_def(
-        graph_def=graph.as_graph_def(add_shapes=True), saver_def=saver_def)
-    self._summary_writer.add_graph(graph)
-    self._summary_writer.add_meta_graph(meta_graph_def)
-    # The checkpoint saved here is the state at step "global_step".
-    self._save(session, global_step)
-    self._timer.update_last_triggered_step(global_step)
-
-  def before_run(self, run_context):  # pylint: disable=unused-argument
-    return SessionRunArgs(self._global_step_tensor)
-
-  def after_run(self, run_context, run_values):
-    stale_global_step = run_values.results
-    if self._timer.should_trigger_for_step(stale_global_step +
-                                           self._steps_per_run):
-      # get the real value after train op.
-      global_step = run_context.session.run(self._global_step_tensor)
-      if self._timer.should_trigger_for_step(global_step):
+    def after_create_session(self, session, coord):
+        global_step = session.run(self._global_step_tensor)
+        if self._save_graph_def:
+            # We do write graph and saver_def at the first call of before_run.
+            # We cannot do this in begin, since we let other hooks to change graph and
+            # add variables in begin. Graph is finalized after all begin calls.
+            training_util.write_graph(
+                ops.get_default_graph().as_graph_def(add_shapes=True),
+                self._checkpoint_dir,
+                "graph.pbtxt",
+            )
+        saver_def = self._get_saver().saver_def if self._get_saver() else None
+        graph = ops.get_default_graph()
+        meta_graph_def = meta_graph.create_meta_graph_def(
+            graph_def=graph.as_graph_def(add_shapes=True), saver_def=saver_def
+        )
+        self._summary_writer.add_graph(graph)
+        self._summary_writer.add_meta_graph(meta_graph_def)
+        # The checkpoint saved here is the state at step "global_step".
+        self._save(session, global_step)
         self._timer.update_last_triggered_step(global_step)
-        if self._save(run_context.session, global_step):
-          run_context.request_stop()
 
-  def end(self, session):
-    last_step = session.run(self._global_step_tensor)
-    if last_step != self._timer.last_triggered_step():
-      self._save(session, last_step)
-    for l in self._listeners:
-      l.end(session, last_step)
+    def before_run(self, run_context):  # pylint: disable=unused-argument
+        return SessionRunArgs(self._global_step_tensor)
 
-  def _save(self, session, step):
-    """Saves the latest checkpoint, returns should_stop."""
-    logging.info("Calling checkpoint listeners before saving checkpoint %d...",
-                 step)
-    for l in self._listeners:
-      l.before_save(session, step)
+    def after_run(self, run_context, run_values):
+        stale_global_step = run_values.results
+        if self._timer.should_trigger_for_step(stale_global_step + self._steps_per_run):
+            # get the real value after train op.
+            global_step = run_context.session.run(self._global_step_tensor)
+            if self._timer.should_trigger_for_step(global_step):
+                self._timer.update_last_triggered_step(global_step)
+                if self._save(run_context.session, global_step):
+                    run_context.request_stop()
 
-    logging.info("Saving checkpoints for %d into %s.", step, self._save_path)
-    self._get_saver().save(session, self._save_path, global_step=step,
-                           write_meta_graph=self._save_graph_def)
-    self._summary_writer.add_session_log(
-        SessionLog(
-            status=SessionLog.CHECKPOINT, checkpoint_path=self._save_path),
-        step)
-    logging.info("Calling checkpoint listeners after saving checkpoint %d...",
-                 step)
-    should_stop = False
-    for l in self._listeners:
-      if l.after_save(session, step):
+    def end(self, session):
+        last_step = session.run(self._global_step_tensor)
+        if last_step != self._timer.last_triggered_step():
+            self._save(session, last_step)
+        for l in self._listeners:
+            l.end(session, last_step)
+
+    def _save(self, session, step):
+        """Saves the latest checkpoint, returns should_stop."""
         logging.info(
-            "A CheckpointSaverListener requested that training be stopped. "
-            "listener: {}".format(l))
-        should_stop = True
-    return should_stop
+            "Calling checkpoint listeners before saving checkpoint %d...", step
+        )
+        for l in self._listeners:
+            l.before_save(session, step)
 
-  def _get_saver(self):
-    if self._saver is not None:
-      return self._saver
-    elif self._scaffold is not None:
-      return self._scaffold.saver
+        logging.info("Saving checkpoints for %d into %s.", step, self._save_path)
+        self._get_saver().save(
+            session,
+            self._save_path,
+            global_step=step,
+            write_meta_graph=self._save_graph_def,
+        )
+        self._summary_writer.add_session_log(
+            SessionLog(status=SessionLog.CHECKPOINT, checkpoint_path=self._save_path),
+            step,
+        )
+        logging.info("Calling checkpoint listeners after saving checkpoint %d...", step)
+        should_stop = False
+        for l in self._listeners:
+            if l.after_save(session, step):
+                logging.info(
+                    "A CheckpointSaverListener requested that training be stopped. "
+                    "listener: {}".format(l)
+                )
+                should_stop = True
+        return should_stop
 
-    # Get saver from the SAVERS collection if present.
-    collection_key = ops.GraphKeys.SAVERS
-    savers = ops.get_collection(collection_key)
-    if not savers:
-      raise RuntimeError(
-          "No items in collection {}. Please add a saver to the collection "
-          "or provide a saver or scaffold.".format(collection_key))
-    elif len(savers) > 1:
-      raise RuntimeError(
-          "More than one item in collection {}. "
-          "Please indicate which one to use by passing it to the constructor."
-          .format(collection_key))
+    def _get_saver(self):
+        if self._saver is not None:
+            return self._saver
+        elif self._scaffold is not None:
+            return self._scaffold.saver
 
-    self._saver = savers[0]
-    return savers[0]
+        # Get saver from the SAVERS collection if present.
+        collection_key = ops.GraphKeys.SAVERS
+        savers = ops.get_collection(collection_key)
+        if not savers:
+            raise RuntimeError(
+                "No items in collection {}. Please add a saver to the collection "
+                "or provide a saver or scaffold.".format(collection_key)
+            )
+        elif len(savers) > 1:
+            raise RuntimeError(
+                "More than one item in collection {}. "
+                "Please indicate which one to use by passing it to the constructor.".format(
+                    collection_key
+                )
+            )
+
+        self._saver = savers[0]
+        return savers[0]
 
 
 @tf_export(v1=["train.StepCounterHook"])
 class StepCounterHook(session_run_hook.SessionRunHook):
-  """Hook that counts steps per second."""
+    """Hook that counts steps per second."""
 
-  def __init__(self,
-               every_n_steps=100,
-               every_n_secs=None,
-               output_dir=None,
-               summary_writer=None):
+    def __init__(
+        self, every_n_steps=100, every_n_secs=None, output_dir=None, summary_writer=None
+    ):
 
-    if (every_n_steps is None) == (every_n_secs is None):
-      raise ValueError(
-          "exactly one of every_n_steps and every_n_secs should be provided.")
-    self._timer = SecondOrStepTimer(
-        every_steps=every_n_steps, every_secs=every_n_secs)
+        if (every_n_steps is None) == (every_n_secs is None):
+            raise ValueError(
+                "exactly one of every_n_steps and every_n_secs should be provided."
+            )
+        self._timer = SecondOrStepTimer(
+            every_steps=every_n_steps, every_secs=every_n_secs
+        )
 
-    self._summary_writer = summary_writer
-    self._output_dir = output_dir
-    self._last_global_step = None
-    self._steps_per_run = 1
+        self._summary_writer = summary_writer
+        self._output_dir = output_dir
+        self._last_global_step = None
+        self._steps_per_run = 1
 
-  def _set_steps_per_run(self, steps_per_run):
-    self._steps_per_run = steps_per_run
+    def _set_steps_per_run(self, steps_per_run):
+        self._steps_per_run = steps_per_run
 
-  def begin(self):
-    if self._summary_writer is None and self._output_dir:
-      self._summary_writer = SummaryWriterCache.get(self._output_dir)
-    self._global_step_tensor = training_util._get_or_create_global_step_read()  # pylint: disable=protected-access
-    if self._global_step_tensor is None:
-      raise RuntimeError(
-          "Global step should be created to use StepCounterHook.")
-    self._summary_tag = training_util.get_global_step().op.name + "/sec"
+    def begin(self):
+        if self._summary_writer is None and self._output_dir:
+            self._summary_writer = SummaryWriterCache.get(self._output_dir)
+        self._global_step_tensor = (
+            training_util._get_or_create_global_step_read()
+        )  # pylint: disable=protected-access
+        if self._global_step_tensor is None:
+            raise RuntimeError("Global step should be created to use StepCounterHook.")
+        self._summary_tag = training_util.get_global_step().op.name + "/sec"
 
-  def before_run(self, run_context):  # pylint: disable=unused-argument
-    return SessionRunArgs(self._global_step_tensor)
+    def before_run(self, run_context):  # pylint: disable=unused-argument
+        return SessionRunArgs(self._global_step_tensor)
 
-  def _log_and_record(self, elapsed_steps, elapsed_time, global_step):
-    steps_per_sec = elapsed_steps / elapsed_time
-    if self._summary_writer is not None:
-      summary = Summary(value=[
-          Summary.Value(tag=self._summary_tag, simple_value=steps_per_sec)
-      ])
-      self._summary_writer.add_summary(summary, global_step)
-    logging.info("%s: %g", self._summary_tag, steps_per_sec)
+    def _log_and_record(self, elapsed_steps, elapsed_time, global_step):
+        steps_per_sec = elapsed_steps / elapsed_time
+        if self._summary_writer is not None:
+            summary = Summary(
+                value=[Summary.Value(tag=self._summary_tag, simple_value=steps_per_sec)]
+            )
+            self._summary_writer.add_summary(summary, global_step)
+        logging.info("%s: %g", self._summary_tag, steps_per_sec)
 
-  def after_run(self, run_context, run_values):
-    _ = run_context
+    def after_run(self, run_context, run_values):
+        _ = run_context
 
-    stale_global_step = run_values.results
-    if self._timer.should_trigger_for_step(stale_global_step +
-                                           self._steps_per_run):
-      # get the real value after train op.
-      global_step = run_context.session.run(self._global_step_tensor)
-      if self._timer.should_trigger_for_step(global_step):
-        elapsed_time, elapsed_steps = self._timer.update_last_triggered_step(
-            global_step)
-        if elapsed_time is not None:
-          self._log_and_record(elapsed_steps, elapsed_time, global_step)
+        stale_global_step = run_values.results
+        if self._timer.should_trigger_for_step(stale_global_step + self._steps_per_run):
+            # get the real value after train op.
+            global_step = run_context.session.run(self._global_step_tensor)
+            if self._timer.should_trigger_for_step(global_step):
+                elapsed_time, elapsed_steps = self._timer.update_last_triggered_step(
+                    global_step
+                )
+                if elapsed_time is not None:
+                    self._log_and_record(elapsed_steps, elapsed_time, global_step)
 
-    # Check whether the global step has been increased. Here, we do not use the
-    # timer.last_triggered_step as the timer might record a different global
-    # step value such that the comparison could be unreliable. For simplicity,
-    # we just compare the stale_global_step with previously recorded version.
-    if stale_global_step == self._last_global_step:
-      # Here, we give a warning in the first 5 times if we have observed that
-      # the global step has not been increased. For some Optimizers, the global
-      # step is not increased each time by design. For example,
-      # SyncReplicaOptimizer doesn't increase the global step in worker's main
-      # train step.
-      logging.log_first_n(
-          logging.WARN,
-          "It seems that global step (tf.train.get_global_step) has not "
-          "been increased. Current value (could be stable): %s vs previous "
-          "value: %s. You could increase the global step by passing "
-          "tf.train.get_global_step() to Optimizer.apply_gradients or "
-          "Optimizer.minimize.", 5, stale_global_step, self._last_global_step)
+        # Check whether the global step has been increased. Here, we do not use the
+        # timer.last_triggered_step as the timer might record a different global
+        # step value such that the comparison could be unreliable. For simplicity,
+        # we just compare the stale_global_step with previously recorded version.
+        if stale_global_step == self._last_global_step:
+            # Here, we give a warning in the first 5 times if we have observed that
+            # the global step has not been increased. For some Optimizers, the global
+            # step is not increased each time by design. For example,
+            # SyncReplicaOptimizer doesn't increase the global step in worker's main
+            # train step.
+            logging.log_first_n(
+                logging.WARN,
+                "It seems that global step (tf.train.get_global_step) has not "
+                "been increased. Current value (could be stable): %s vs previous "
+                "value: %s. You could increase the global step by passing "
+                "tf.train.get_global_step() to Optimizer.apply_gradients or "
+                "Optimizer.minimize.",
+                5,
+                stale_global_step,
+                self._last_global_step,
+            )
 
-    self._last_global_step = stale_global_step
+        self._last_global_step = stale_global_step
 
 
 @tf_export(v1=["train.NanLossDuringTrainingError"])
 class NanLossDuringTrainingError(RuntimeError):
-
-  def __str__(self):
-    return "NaN loss during training."
+    def __str__(self):
+        return "NaN loss during training."
 
 
 @tf_export(v1=["train.NanTensorHook"])
 class NanTensorHook(session_run_hook.SessionRunHook):
-  """Monitors the loss tensor and stops training if loss is NaN.
+    """Monitors the loss tensor and stops training if loss is NaN.
 
   Can either fail with exception or just stop training.
   """
 
-  def __init__(self, loss_tensor, fail_on_nan_loss=True):
-    """Initializes a `NanTensorHook`.
+    def __init__(self, loss_tensor, fail_on_nan_loss=True):
+        """Initializes a `NanTensorHook`.
 
     Args:
       loss_tensor: `Tensor`, the loss tensor.
       fail_on_nan_loss: `bool`, whether to raise exception when loss is NaN.
     """
-    self._loss_tensor = loss_tensor
-    self._fail_on_nan_loss = fail_on_nan_loss
+        self._loss_tensor = loss_tensor
+        self._fail_on_nan_loss = fail_on_nan_loss
 
-  def before_run(self, run_context):  # pylint: disable=unused-argument
-    return SessionRunArgs(self._loss_tensor)
+    def before_run(self, run_context):  # pylint: disable=unused-argument
+        return SessionRunArgs(self._loss_tensor)
 
-  def after_run(self, run_context, run_values):
-    if np.isnan(run_values.results):
-      failure_message = "Model diverged with loss = NaN."
-      if self._fail_on_nan_loss:
-        logging.error(failure_message)
-        raise NanLossDuringTrainingError
-      else:
-        logging.warning(failure_message)
-        # We don't raise an error but we request stop without an exception.
-        run_context.request_stop()
+    def after_run(self, run_context, run_values):
+        if np.isnan(run_values.results):
+            failure_message = "Model diverged with loss = NaN."
+            if self._fail_on_nan_loss:
+                logging.error(failure_message)
+                raise NanLossDuringTrainingError
+            else:
+                logging.warning(failure_message)
+                # We don't raise an error but we request stop without an exception.
+                run_context.request_stop()
 
 
 @tf_export(v1=["train.SummarySaverHook"])
 class SummarySaverHook(session_run_hook.SessionRunHook):
-  """Saves summaries every N steps."""
+    """Saves summaries every N steps."""
 
-  def __init__(self,
-               save_steps=None,
-               save_secs=None,
-               output_dir=None,
-               summary_writer=None,
-               scaffold=None,
-               summary_op=None):
-    """Initializes a `SummarySaverHook`.
+    def __init__(
+        self,
+        save_steps=None,
+        save_secs=None,
+        output_dir=None,
+        summary_writer=None,
+        scaffold=None,
+        summary_op=None,
+    ):
+        """Initializes a `SummarySaverHook`.
 
     Args:
       save_steps: `int`, save summaries every N steps. Exactly one of
@@ -822,87 +846,89 @@ class SummarySaverHook(session_run_hook.SessionRunHook):
     Raises:
       ValueError: Exactly one of scaffold or summary_op should be set.
     """
-    if ((scaffold is None and summary_op is None) or
-        (scaffold is not None and summary_op is not None)):
-      raise ValueError(
-          "Exactly one of scaffold or summary_op must be provided.")
-    self._summary_op = summary_op
-    self._summary_writer = summary_writer
-    self._output_dir = output_dir
-    self._scaffold = scaffold
-    self._timer = SecondOrStepTimer(
-        every_secs=save_secs, every_steps=save_steps)
-    # TODO(mdan): Throw an error if output_dir and summary_writer are None.
+        if (scaffold is None and summary_op is None) or (
+            scaffold is not None and summary_op is not None
+        ):
+            raise ValueError("Exactly one of scaffold or summary_op must be provided.")
+        self._summary_op = summary_op
+        self._summary_writer = summary_writer
+        self._output_dir = output_dir
+        self._scaffold = scaffold
+        self._timer = SecondOrStepTimer(every_secs=save_secs, every_steps=save_steps)
+        # TODO(mdan): Throw an error if output_dir and summary_writer are None.
 
-  def begin(self):
-    if self._summary_writer is None and self._output_dir:
-      self._summary_writer = SummaryWriterCache.get(self._output_dir)
-    self._next_step = None
-    self._global_step_tensor = training_util._get_or_create_global_step_read()  # pylint: disable=protected-access
-    if self._global_step_tensor is None:
-      raise RuntimeError(
-          "Global step should be created to use SummarySaverHook.")
+    def begin(self):
+        if self._summary_writer is None and self._output_dir:
+            self._summary_writer = SummaryWriterCache.get(self._output_dir)
+        self._next_step = None
+        self._global_step_tensor = (
+            training_util._get_or_create_global_step_read()
+        )  # pylint: disable=protected-access
+        if self._global_step_tensor is None:
+            raise RuntimeError("Global step should be created to use SummarySaverHook.")
 
-  def before_run(self, run_context):  # pylint: disable=unused-argument
-    self._request_summary = (
-        self._next_step is None or
-        self._timer.should_trigger_for_step(self._next_step))
-    requests = {"global_step": self._global_step_tensor}
-    if self._request_summary:
-      if self._get_summary_op() is not None:
-        requests["summary"] = self._get_summary_op()
+    def before_run(self, run_context):  # pylint: disable=unused-argument
+        self._request_summary = (
+            self._next_step is None
+            or self._timer.should_trigger_for_step(self._next_step)
+        )
+        requests = {"global_step": self._global_step_tensor}
+        if self._request_summary:
+            if self._get_summary_op() is not None:
+                requests["summary"] = self._get_summary_op()
 
-    return SessionRunArgs(requests)
+        return SessionRunArgs(requests)
 
-  def after_run(self, run_context, run_values):
-    _ = run_context
-    if not self._summary_writer:
-      return
+    def after_run(self, run_context, run_values):
+        _ = run_context
+        if not self._summary_writer:
+            return
 
-    stale_global_step = run_values.results["global_step"]
-    global_step = stale_global_step + 1
-    if self._next_step is None or self._request_summary:
-      global_step = run_context.session.run(self._global_step_tensor)
+        stale_global_step = run_values.results["global_step"]
+        global_step = stale_global_step + 1
+        if self._next_step is None or self._request_summary:
+            global_step = run_context.session.run(self._global_step_tensor)
 
-    if self._next_step is None:
-      self._summary_writer.add_session_log(
-          SessionLog(status=SessionLog.START), global_step)
+        if self._next_step is None:
+            self._summary_writer.add_session_log(
+                SessionLog(status=SessionLog.START), global_step
+            )
 
-    if self._request_summary:
-      self._timer.update_last_triggered_step(global_step)
-      if "summary" in run_values.results:
-        for summary in run_values.results["summary"]:
-          self._summary_writer.add_summary(summary, global_step)
+        if self._request_summary:
+            self._timer.update_last_triggered_step(global_step)
+            if "summary" in run_values.results:
+                for summary in run_values.results["summary"]:
+                    self._summary_writer.add_summary(summary, global_step)
 
-    self._next_step = global_step + 1
+        self._next_step = global_step + 1
 
-  def end(self, session=None):
-    if self._summary_writer:
-      self._summary_writer.flush()
+    def end(self, session=None):
+        if self._summary_writer:
+            self._summary_writer.flush()
 
-  def _get_summary_op(self):
-    """Fetches the summary op either from self._summary_op or self._scaffold.
+    def _get_summary_op(self):
+        """Fetches the summary op either from self._summary_op or self._scaffold.
 
     Returns:
       Returns a list of summary `Tensor`.
     """
-    summary_op = None
-    if self._summary_op is not None:
-      summary_op = self._summary_op
-    elif self._scaffold.summary_op is not None:
-      summary_op = self._scaffold.summary_op
+        summary_op = None
+        if self._summary_op is not None:
+            summary_op = self._summary_op
+        elif self._scaffold.summary_op is not None:
+            summary_op = self._scaffold.summary_op
 
-    if summary_op is None:
-      return None
+        if summary_op is None:
+            return None
 
-    if not isinstance(summary_op, list):
-      return [summary_op]
-    return summary_op
+        if not isinstance(summary_op, list):
+            return [summary_op]
+        return summary_op
 
 
 @tf_export(v1=["train.GlobalStepWaiterHook"])
 class GlobalStepWaiterHook(session_run_hook.SessionRunHook):
-  """Delays execution until global step reaches `wait_until_step`.
+    """Delays execution until global step reaches `wait_until_step`.
 
   This hook delays execution until global step reaches to `wait_until_step`. It
   is used to gradually start workers in distributed settings. One example usage
@@ -910,51 +936,59 @@ class GlobalStepWaiterHook(session_run_hook.SessionRunHook):
   task_id=0 is the chief.
   """
 
-  def __init__(self, wait_until_step):
-    """Initializes a `GlobalStepWaiterHook`.
+    def __init__(self, wait_until_step):
+        """Initializes a `GlobalStepWaiterHook`.
 
     Args:
       wait_until_step: an `int` shows until which global step should we wait.
     """
-    self._wait_until_step = wait_until_step
+        self._wait_until_step = wait_until_step
 
-  def begin(self):
-    self._worker_is_started = False
-    self._global_step_tensor = training_util._get_or_create_global_step_read()  # pylint: disable=protected-access
-    if self._global_step_tensor is None:
-      raise RuntimeError(
-          "Global step should be created to use _GlobalStepWaiterHook.")
+    def begin(self):
+        self._worker_is_started = False
+        self._global_step_tensor = (
+            training_util._get_or_create_global_step_read()
+        )  # pylint: disable=protected-access
+        if self._global_step_tensor is None:
+            raise RuntimeError(
+                "Global step should be created to use _GlobalStepWaiterHook."
+            )
 
-  def before_run(self, run_context):
-    if self._worker_is_started:
-      return None
+    def before_run(self, run_context):
+        if self._worker_is_started:
+            return None
 
-    if self._wait_until_step <= 0:
-      self._worker_is_started = True
-      return None
+        if self._wait_until_step <= 0:
+            self._worker_is_started = True
+            return None
 
-    logging.info("Waiting for global step %d before starting training.",
-                 self._wait_until_step)
-    last_logged_step = 0
-    while True:
-      current_step = run_context.session.run(self._global_step_tensor)
-      if current_step >= self._wait_until_step:
-        self._worker_is_started = True
-        return None
-      if current_step - last_logged_step > 1000:
         logging.info(
-            "Waiting for global step %d before starting training. "
-            "Current step is %d.", self._wait_until_step, current_step)
-        last_logged_step = current_step
-      time.sleep(0.5)
+            "Waiting for global step %d before starting training.",
+            self._wait_until_step,
+        )
+        last_logged_step = 0
+        while True:
+            current_step = run_context.session.run(self._global_step_tensor)
+            if current_step >= self._wait_until_step:
+                self._worker_is_started = True
+                return None
+            if current_step - last_logged_step > 1000:
+                logging.info(
+                    "Waiting for global step %d before starting training. "
+                    "Current step is %d.",
+                    self._wait_until_step,
+                    current_step,
+                )
+                last_logged_step = current_step
+            time.sleep(0.5)
 
 
 @tf_export(v1=["train.FinalOpsHook"])
 class FinalOpsHook(session_run_hook.SessionRunHook):
-  """A hook which evaluates `Tensors` at the end of a session."""
+    """A hook which evaluates `Tensors` at the end of a session."""
 
-  def __init__(self, final_ops, final_ops_feed_dict=None):
-    """Initializes `FinalOpHook` with ops to run at the end of the session.
+    def __init__(self, final_ops, final_ops_feed_dict=None):
+        """Initializes `FinalOpHook` with ops to run at the end of the session.
 
     Args:
       final_ops: A single `Tensor`, a list of `Tensors` or a dictionary of names
@@ -962,58 +996,59 @@ class FinalOpsHook(session_run_hook.SessionRunHook):
       final_ops_feed_dict: A feed dictionary to use when running
         `final_ops_dict`.
     """
-    self._final_ops = final_ops
-    self._final_ops_feed_dict = final_ops_feed_dict
-    self._final_ops_values = None
+        self._final_ops = final_ops
+        self._final_ops_feed_dict = final_ops_feed_dict
+        self._final_ops_values = None
 
-  @property
-  def final_ops_values(self):
-    return self._final_ops_values
+    @property
+    def final_ops_values(self):
+        return self._final_ops_values
 
-  def end(self, session):
-    if self._final_ops is not None:
-      try:
-        self._final_ops_values = session.run(
-            self._final_ops, feed_dict=self._final_ops_feed_dict)
-      except (errors.OutOfRangeError, StopIteration) as e:
-        logging.warning(
-            "An OutOfRangeError or StopIteration exception is raised by the "
-            "code in FinalOpsHook. This typically means the Ops running by the "
-            "FinalOpsHook have a dependency back to some input source, which "
-            "should not happen. For example, for metrics in "
-            "tf.estimator.Estimator, all metrics functions return two Ops: "
-            "`value_op` and  `update_op`. Estimator.evaluate calls the "
-            "`update_op` for each batch of the data in input source and, once "
-            "it is exhausted, it call the `value_op` to get the metric values. "
-            "The `value_op` here should have dependency back to variables "
-            "reading only, rather than reading another batch from input. "
-            "Otherwise, the `value_op`, executed by `FinalOpsHook`, triggers "
-            "another data reading, which ends OutOfRangeError/StopIteration. "
-            "Please fix that.")
-        raise e
+    def end(self, session):
+        if self._final_ops is not None:
+            try:
+                self._final_ops_values = session.run(
+                    self._final_ops, feed_dict=self._final_ops_feed_dict
+                )
+            except (errors.OutOfRangeError, StopIteration) as e:
+                logging.warning(
+                    "An OutOfRangeError or StopIteration exception is raised by the "
+                    "code in FinalOpsHook. This typically means the Ops running by the "
+                    "FinalOpsHook have a dependency back to some input source, which "
+                    "should not happen. For example, for metrics in "
+                    "tf.estimator.Estimator, all metrics functions return two Ops: "
+                    "`value_op` and  `update_op`. Estimator.evaluate calls the "
+                    "`update_op` for each batch of the data in input source and, once "
+                    "it is exhausted, it call the `value_op` to get the metric values. "
+                    "The `value_op` here should have dependency back to variables "
+                    "reading only, rather than reading another batch from input. "
+                    "Otherwise, the `value_op`, executed by `FinalOpsHook`, triggers "
+                    "another data reading, which ends OutOfRangeError/StopIteration. "
+                    "Please fix that."
+                )
+                raise e
 
 
 @tf_export(v1=["train.FeedFnHook"])
 class FeedFnHook(session_run_hook.SessionRunHook):
-  """Runs `feed_fn` and sets the `feed_dict` accordingly."""
+    """Runs `feed_fn` and sets the `feed_dict` accordingly."""
 
-  def __init__(self, feed_fn):
-    """Initializes a `FeedFnHook`.
+    def __init__(self, feed_fn):
+        """Initializes a `FeedFnHook`.
 
     Args:
       feed_fn: function that takes no arguments and returns `dict` of `Tensor`
         to feed.
     """
-    self.feed_fn = feed_fn
+        self.feed_fn = feed_fn
 
-  def before_run(self, run_context):  # pylint: disable=unused-argument
-    return session_run_hook.SessionRunArgs(
-        fetches=None, feed_dict=self.feed_fn())
+    def before_run(self, run_context):  # pylint: disable=unused-argument
+        return session_run_hook.SessionRunArgs(fetches=None, feed_dict=self.feed_fn())
 
 
 @tf_export(v1=["train.ProfilerHook"])
 class ProfilerHook(session_run_hook.SessionRunHook):
-  """Captures CPU/GPU profiling information every N steps or seconds.
+    """Captures CPU/GPU profiling information every N steps or seconds.
 
   This produces files called "timeline-<step>.json", which are in Chrome
   Trace format.
@@ -1022,13 +1057,15 @@ class ProfilerHook(session_run_hook.SessionRunHook):
   https://github.com/catapult-project/catapult/blob/master/tracing/README.md
   """
 
-  def __init__(self,
-               save_steps=None,
-               save_secs=None,
-               output_dir="",
-               show_dataflow=True,
-               show_memory=False):
-    """Initializes a hook that takes periodic profiling snapshots.
+    def __init__(
+        self,
+        save_steps=None,
+        save_secs=None,
+        output_dir="",
+        show_dataflow=True,
+        show_memory=False,
+    ):
+        """Initializes a hook that takes periodic profiling snapshots.
 
     `options.run_metadata` argument of `tf.Session.Run` is used to collect
     metadata about execution. This hook sets the metadata and dumps it in Chrome
@@ -1046,75 +1083,89 @@ class ProfilerHook(session_run_hook.SessionRunHook):
       show_memory: `bool`, if True, add object snapshot events to the trace
         showing the sizes and lifetimes of tensors.
     """
-    self._output_file = os.path.join(output_dir, "timeline-{}.json")
-    self._file_writer = SummaryWriterCache.get(output_dir)
-    self._show_dataflow = show_dataflow
-    self._show_memory = show_memory
-    self._timer = SecondOrStepTimer(
-        every_secs=save_secs, every_steps=save_steps)
+        self._output_file = os.path.join(output_dir, "timeline-{}.json")
+        self._file_writer = SummaryWriterCache.get(output_dir)
+        self._show_dataflow = show_dataflow
+        self._show_memory = show_memory
+        self._timer = SecondOrStepTimer(every_secs=save_secs, every_steps=save_steps)
 
-  def begin(self):
-    self._next_step = None
-    self._global_step_tensor = training_util._get_or_create_global_step_read()  # pylint: disable=protected-access
-    if self._global_step_tensor is None:
-      raise RuntimeError("Global step should be created to use ProfilerHook.")
+    def begin(self):
+        self._next_step = None
+        self._global_step_tensor = (
+            training_util._get_or_create_global_step_read()
+        )  # pylint: disable=protected-access
+        if self._global_step_tensor is None:
+            raise RuntimeError("Global step should be created to use ProfilerHook.")
 
-  def before_run(self, run_context):
-    self._request_summary = (
-        self._next_step is not None and
-        self._timer.should_trigger_for_step(self._next_step))
-    requests = {"global_step": self._global_step_tensor}
-    opts = (
-        config_pb2.RunOptions(trace_level=config_pb2.RunOptions.FULL_TRACE)
-        if self._request_summary else None)
+    def before_run(self, run_context):
+        self._request_summary = (
+            self._next_step is not None
+            and self._timer.should_trigger_for_step(self._next_step)
+        )
+        requests = {"global_step": self._global_step_tensor}
+        opts = (
+            config_pb2.RunOptions(trace_level=config_pb2.RunOptions.FULL_TRACE)
+            if self._request_summary
+            else None
+        )
 
-    return SessionRunArgs(requests, options=opts)
+        return SessionRunArgs(requests, options=opts)
 
-  def after_run(self, run_context, run_values):
-    stale_global_step = run_values.results["global_step"]
-    if self._next_step is None:
-      # Update the timer so that it does not activate until N steps or seconds
-      # have passed.
-      self._timer.update_last_triggered_step(stale_global_step)
-    global_step = stale_global_step + 1
-    if self._request_summary:
-      global_step = run_context.session.run(self._global_step_tensor)
-      self._timer.update_last_triggered_step(global_step)
-      self._save(global_step, self._output_file.format(global_step),
-                 run_values.run_metadata.step_stats)
-      self._file_writer.add_run_metadata(run_values.run_metadata,
-                                         "step_%d" % global_step)
+    def after_run(self, run_context, run_values):
+        stale_global_step = run_values.results["global_step"]
+        if self._next_step is None:
+            # Update the timer so that it does not activate until N steps or seconds
+            # have passed.
+            self._timer.update_last_triggered_step(stale_global_step)
+        global_step = stale_global_step + 1
+        if self._request_summary:
+            global_step = run_context.session.run(self._global_step_tensor)
+            self._timer.update_last_triggered_step(global_step)
+            self._save(
+                global_step,
+                self._output_file.format(global_step),
+                run_values.run_metadata.step_stats,
+            )
+            self._file_writer.add_run_metadata(
+                run_values.run_metadata, "step_%d" % global_step
+            )
 
-    self._next_step = global_step + 1
+        self._next_step = global_step + 1
 
-  def _save(self, step, save_path, step_stats):
-    logging.info("Saving timeline for %d into '%s'.", step, save_path)
-    with gfile.Open(save_path, "w") as f:
-      trace = timeline.Timeline(step_stats)
-      f.write(
-          trace.generate_chrome_trace_format(
-              show_dataflow=self._show_dataflow, show_memory=self._show_memory))
+    def _save(self, step, save_path, step_stats):
+        logging.info("Saving timeline for %d into '%s'.", step, save_path)
+        with gfile.Open(save_path, "w") as f:
+            trace = timeline.Timeline(step_stats)
+            f.write(
+                trace.generate_chrome_trace_format(
+                    show_dataflow=self._show_dataflow, show_memory=self._show_memory
+                )
+            )
 
 
 def _as_graph_element(obj):
-  """Retrieves Graph element."""
-  graph = ops.get_default_graph()
-  if not isinstance(obj, six.string_types):
-    if not hasattr(obj, "graph") or obj.graph != graph:
-      raise ValueError("Passed %s should have graph attribute that is equal "
-                       "to current graph %s." % (obj, graph))
-    return obj
-  if ":" in obj:
-    element = graph.as_graph_element(obj)
-  else:
-    element = graph.as_graph_element(obj + ":0")
-    # Check that there is no :1 (e.g. it's single output).
-    try:
-      graph.as_graph_element(obj + ":1")
-    except (KeyError, ValueError):
-      pass
+    """Retrieves Graph element."""
+    graph = ops.get_default_graph()
+    if not isinstance(obj, six.string_types):
+        if not hasattr(obj, "graph") or obj.graph != graph:
+            raise ValueError(
+                "Passed %s should have graph attribute that is equal "
+                "to current graph %s." % (obj, graph)
+            )
+        return obj
+    if ":" in obj:
+        element = graph.as_graph_element(obj)
     else:
-      raise ValueError("Name %s is ambiguous, "
-                       "as this `Operation` has multiple outputs "
-                       "(at least 2)." % obj)
-  return element
+        element = graph.as_graph_element(obj + ":0")
+        # Check that there is no :1 (e.g. it's single output).
+        try:
+            graph.as_graph_element(obj + ":1")
+        except (KeyError, ValueError):
+            pass
+        else:
+            raise ValueError(
+                "Name %s is ambiguous, "
+                "as this `Operation` has multiple outputs "
+                "(at least 2)." % obj
+            )
+    return element

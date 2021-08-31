@@ -40,7 +40,7 @@ _PLUGIN_ASSET_PREFIX = "__tensorboard_plugin_asset__"
 
 
 def get_plugin_asset(plugin_asset_cls, graph=None):
-  """Acquire singleton PluginAsset instance from a graph.
+    """Acquire singleton PluginAsset instance from a graph.
 
   PluginAssets are always singletons, and are stored in tf Graph collections.
   This way, they can be defined anywhere the graph is being constructed, and
@@ -59,30 +59,33 @@ def get_plugin_asset(plugin_asset_cls, graph=None):
     ValueError: If we have a plugin name collision, or if we unexpectedly find
       the wrong number of items in a collection.
   """
-  if graph is None:
-    graph = ops.get_default_graph()
-  if not plugin_asset_cls.plugin_name:
-    raise ValueError("Class %s has no plugin_name" % plugin_asset_cls.__name__)
+    if graph is None:
+        graph = ops.get_default_graph()
+    if not plugin_asset_cls.plugin_name:
+        raise ValueError("Class %s has no plugin_name" % plugin_asset_cls.__name__)
 
-  name = _PLUGIN_ASSET_PREFIX + plugin_asset_cls.plugin_name
-  container = graph.get_collection(name)
-  if container:
-    if len(container) != 1:
-      raise ValueError("Collection for %s had %d items, expected 1" %
-                       (name, len(container)))
-    instance = container[0]
-    if not isinstance(instance, plugin_asset_cls):
-      raise ValueError("Plugin name collision between classes %s and %s" %
-                       (plugin_asset_cls.__name__, instance.__class__.__name__))
-  else:
-    instance = plugin_asset_cls()
-    graph.add_to_collection(name, instance)
-    graph.add_to_collection(_PLUGIN_ASSET_PREFIX, plugin_asset_cls.plugin_name)
-  return instance
+    name = _PLUGIN_ASSET_PREFIX + plugin_asset_cls.plugin_name
+    container = graph.get_collection(name)
+    if container:
+        if len(container) != 1:
+            raise ValueError(
+                "Collection for %s had %d items, expected 1" % (name, len(container))
+            )
+        instance = container[0]
+        if not isinstance(instance, plugin_asset_cls):
+            raise ValueError(
+                "Plugin name collision between classes %s and %s"
+                % (plugin_asset_cls.__name__, instance.__class__.__name__)
+            )
+    else:
+        instance = plugin_asset_cls()
+        graph.add_to_collection(name, instance)
+        graph.add_to_collection(_PLUGIN_ASSET_PREFIX, plugin_asset_cls.plugin_name)
+    return instance
 
 
 def get_all_plugin_assets(graph=None):
-  """Retrieve all PluginAssets stored in the graph collection.
+    """Retrieve all PluginAssets stored in the graph collection.
 
   Args:
     graph: Optionally, the graph to get assets from. If unspecified, the default
@@ -96,22 +99,23 @@ def get_all_plugin_assets(graph=None):
       PluginAssets.
 
   """
-  if graph is None:
-    graph = ops.get_default_graph()
+    if graph is None:
+        graph = ops.get_default_graph()
 
-  out = []
-  for name in graph.get_collection(_PLUGIN_ASSET_PREFIX):
-    collection = graph.get_collection(_PLUGIN_ASSET_PREFIX + name)
-    if len(collection) != 1:
-      raise ValueError("Collection for %s had %d items, expected 1" %
-                       (name, len(collection)))
-    out.append(collection[0])
-  return out
+    out = []
+    for name in graph.get_collection(_PLUGIN_ASSET_PREFIX):
+        collection = graph.get_collection(_PLUGIN_ASSET_PREFIX + name)
+        if len(collection) != 1:
+            raise ValueError(
+                "Collection for %s had %d items, expected 1" % (name, len(collection))
+            )
+        out.append(collection[0])
+    return out
 
 
 @six.add_metaclass(abc.ABCMeta)
 class PluginAsset(object):
-  """This abstract base class allows TensorBoard to serialize assets to disk.
+    """This abstract base class allows TensorBoard to serialize assets to disk.
 
   Plugin authors are expected to extend the PluginAsset class, so that it:
   - has a unique plugin_name
@@ -128,11 +132,11 @@ class PluginAsset(object):
     PluginAsset instance provides its contents to be written to disk.
   """
 
-  plugin_name = None
+    plugin_name = None
 
-  @abc.abstractmethod
-  def assets(self):
-    """Provide all of the assets contained by the PluginAsset instance.
+    @abc.abstractmethod
+    def assets(self):
+        """Provide all of the assets contained by the PluginAsset instance.
 
     The assets method should return a dictionary structured as
     {asset_name: asset_contents}. asset_contents is a string.
@@ -140,4 +144,4 @@ class PluginAsset(object):
     This method will be called by the tf.compat.v1.summary.FileWriter when it
     is time to write the assets out to disk.
     """
-    raise NotImplementedError()
+        raise NotImplementedError()

@@ -24,9 +24,9 @@ from tensorflow.python.keras.utils.data_utils import get_file
 from tensorflow.python.util.tf_export import keras_export
 
 
-@keras_export('keras.datasets.cifar100.load_data')
-def load_data(label_mode='fine'):
-  """Loads the CIFAR100 dataset.
+@keras_export("keras.datasets.cifar100.load_data")
+def load_data(label_mode="fine"):
+    """Loads the CIFAR100 dataset.
 
   This is a dataset of 50,000 32x32 color training images and
   10,000 test images, labeled over 100 fine-grained classes that are
@@ -65,29 +65,29 @@ def load_data(label_mode='fine'):
   assert y_test.shape == (10000, 1)
   ```
   """
-  if label_mode not in ['fine', 'coarse']:
-    raise ValueError('`label_mode` must be one of `"fine"`, `"coarse"`.')
+    if label_mode not in ["fine", "coarse"]:
+        raise ValueError('`label_mode` must be one of `"fine"`, `"coarse"`.')
 
-  dirname = 'cifar-100-python'
-  origin = 'https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz'
-  path = get_file(
-      dirname,
-      origin=origin,
-      untar=True,
-      file_hash=
-      '85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7')
+    dirname = "cifar-100-python"
+    origin = "https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz"
+    path = get_file(
+        dirname,
+        origin=origin,
+        untar=True,
+        file_hash="85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7",
+    )
 
-  fpath = os.path.join(path, 'train')
-  x_train, y_train = load_batch(fpath, label_key=label_mode + '_labels')
+    fpath = os.path.join(path, "train")
+    x_train, y_train = load_batch(fpath, label_key=label_mode + "_labels")
 
-  fpath = os.path.join(path, 'test')
-  x_test, y_test = load_batch(fpath, label_key=label_mode + '_labels')
+    fpath = os.path.join(path, "test")
+    x_test, y_test = load_batch(fpath, label_key=label_mode + "_labels")
 
-  y_train = np.reshape(y_train, (len(y_train), 1))
-  y_test = np.reshape(y_test, (len(y_test), 1))
+    y_train = np.reshape(y_train, (len(y_train), 1))
+    y_test = np.reshape(y_test, (len(y_test), 1))
 
-  if backend.image_data_format() == 'channels_last':
-    x_train = x_train.transpose(0, 2, 3, 1)
-    x_test = x_test.transpose(0, 2, 3, 1)
+    if backend.image_data_format() == "channels_last":
+        x_train = x_train.transpose(0, 2, 3, 1)
+        x_test = x_test.transpose(0, 2, 3, 1)
 
-  return (x_train, y_train), (x_test, y_test)
+    return (x_train, y_train), (x_test, y_test)

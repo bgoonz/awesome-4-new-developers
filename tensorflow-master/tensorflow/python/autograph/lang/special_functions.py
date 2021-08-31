@@ -29,36 +29,37 @@ from tensorflow.python.framework import tensor_util
 
 
 def _validate_list_constructor(elements, element_dtype, element_shape):
-  """Validates the inputs of tensor_list."""
-  if element_dtype is not None and element_shape is not None:
-    return
-  if tensor_util.is_tf_type(elements):
-    return
-  if isinstance(elements, (list, tuple)):
-    if elements:
-      return
-    else:
-      raise ValueError(
-          'element_dtype and element_shape are required when elements are'
-          ' empty')
+    """Validates the inputs of tensor_list."""
+    if element_dtype is not None and element_shape is not None:
+        return
+    if tensor_util.is_tf_type(elements):
+        return
+    if isinstance(elements, (list, tuple)):
+        if elements:
+            return
+        else:
+            raise ValueError(
+                "element_dtype and element_shape are required when elements are"
+                " empty"
+            )
 
-  raise ValueError(
-      'unknown type for elements: {}; only Tensor, list and tuple are'
-      ' allowed'.format(type(elements)))
+    raise ValueError(
+        "unknown type for elements: {}; only Tensor, list and tuple are"
+        " allowed".format(type(elements))
+    )
 
 
 def match_staging_level(value, like_value):
-  """Casts a value to be staged at the same level as another."""
-  if tensor_util.is_tf_type(like_value):
-    return constant_op.constant(value)
-  return value
+    """Casts a value to be staged at the same level as another."""
+    if tensor_util.is_tf_type(like_value):
+        return constant_op.constant(value)
+    return value
 
 
-def tensor_list(elements,
-                element_dtype=None,
-                element_shape=None,
-                use_tensor_array=False):
-  """Creates an tensor list and populates it with the given elements.
+def tensor_list(
+    elements, element_dtype=None, element_shape=None, use_tensor_array=False
+):
+    """Creates an tensor list and populates it with the given elements.
 
   This function provides a more uniform access to tensor lists and tensor
   arrays, and allows optional initialization.
@@ -80,17 +81,19 @@ def tensor_list(elements,
   Raises:
     ValueError: for invalid arguments
   """
-  _validate_list_constructor(elements, element_dtype, element_shape)
-  if use_tensor_array:
-    return data_structures.tf_tensor_array_new(elements, element_dtype,
-                                               element_shape)
-  else:
-    return data_structures.tf_tensor_list_new(elements, element_dtype,
-                                              element_shape)
+    _validate_list_constructor(elements, element_dtype, element_shape)
+    if use_tensor_array:
+        return data_structures.tf_tensor_array_new(
+            elements, element_dtype, element_shape
+        )
+    else:
+        return data_structures.tf_tensor_list_new(
+            elements, element_dtype, element_shape
+        )
 
 
 def stack(list_or_tensor, element_dtype=None, strict=True):
-  """Stacks the input, if it admits the notion of stacking.
+    """Stacks the input, if it admits the notion of stacking.
 
   For example, a list of tensors can be stacked into a larger tensor. This
   function is similar to tf.stack, but it accepts non-lists and lists of
@@ -110,13 +113,17 @@ def stack(list_or_tensor, element_dtype=None, strict=True):
   Raises:
     ValueError: if strict=True and the input is not stackable.
   """
-  if strict:
-    def raise_error(x):
-      raise ValueError('%s must be stackable when strict=True' % x)
-    original_call = raise_error
-  else:
-    original_call = lambda x: x
-  return data_structures.list_stack(
-      list_or_tensor,
-      data_structures.ListStackOpts(
-          element_dtype=element_dtype, original_call=original_call))
+    if strict:
+
+        def raise_error(x):
+            raise ValueError("%s must be stackable when strict=True" % x)
+
+        original_call = raise_error
+    else:
+        original_call = lambda x: x
+    return data_structures.list_stack(
+        list_or_tensor,
+        data_structures.ListStackOpts(
+            element_dtype=element_dtype, original_call=original_call
+        ),
+    )

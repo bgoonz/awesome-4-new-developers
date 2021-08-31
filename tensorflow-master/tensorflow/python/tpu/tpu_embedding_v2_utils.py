@@ -38,115 +38,127 @@ from tensorflow.python.types import core
 from tensorflow.python.util.tf_export import tf_export
 
 
-TableVariable = TypeVar("TableVariable", sharded_variable.ShardedVariable,
-                        tf_variables.Variable)
+TableVariable = TypeVar(
+    "TableVariable", sharded_variable.ShardedVariable, tf_variables.Variable
+)
 SlotVarCreationFnType = Callable[
     [TableVariable, List[Text], List[init_ops_v2.Initializer]],
-    Dict[Text, TableVariable]]
+    Dict[Text, TableVariable],
+]
 ClipValueType = Union[Tuple[float, float], float]
 
 
 @six.add_metaclass(abc.ABCMeta)
 class _Optimizer(object):
-  """Base class for all optimizers, with common parameters."""
+    """Base class for all optimizers, with common parameters."""
 
-  def __init__(
-      self,
-      learning_rate: Union[float, Callable[[], float]],
-      use_gradient_accumulation: bool,
-      clip_weight_min: Optional[float],
-      clip_weight_max: Optional[float],
-      weight_decay_factor: Optional[float],
-      multiply_weight_decay_factor_by_learning_rate: bool,
-      clipvalue: Optional[ClipValueType] = None,
-      slot_variable_creation_fn: Optional[SlotVarCreationFnType] = None):
-    self.learning_rate = learning_rate
-    self.use_gradient_accumulation = use_gradient_accumulation
-    self.clip_weight_min = clip_weight_min
-    self.clip_weight_max = clip_weight_max
-    if not use_gradient_accumulation and clipvalue is not None:
-      raise ValueError(
-          f"When `use_gradient_accumulation` is False, gradient clipping "
-          f"cannot be used and `clipvalue` should be left as None. "
-          f"Received value {clipvalue} for argument `clipvalue`.")
-    if clipvalue is None:
-      clipvalue = (None, None)
-    elif not isinstance(clipvalue, tuple):
-      clipvalue = (-1. * clipvalue, clipvalue)
-    self.clip_gradient_min, self.clip_gradient_max = clipvalue
+    def __init__(
+        self,
+        learning_rate: Union[float, Callable[[], float]],
+        use_gradient_accumulation: bool,
+        clip_weight_min: Optional[float],
+        clip_weight_max: Optional[float],
+        weight_decay_factor: Optional[float],
+        multiply_weight_decay_factor_by_learning_rate: bool,
+        clipvalue: Optional[ClipValueType] = None,
+        slot_variable_creation_fn: Optional[SlotVarCreationFnType] = None,
+    ):
+        self.learning_rate = learning_rate
+        self.use_gradient_accumulation = use_gradient_accumulation
+        self.clip_weight_min = clip_weight_min
+        self.clip_weight_max = clip_weight_max
+        if not use_gradient_accumulation and clipvalue is not None:
+            raise ValueError(
+                f"When `use_gradient_accumulation` is False, gradient clipping "
+                f"cannot be used and `clipvalue` should be left as None. "
+                f"Received value {clipvalue} for argument `clipvalue`."
+            )
+        if clipvalue is None:
+            clipvalue = (None, None)
+        elif not isinstance(clipvalue, tuple):
+            clipvalue = (-1.0 * clipvalue, clipvalue)
+        self.clip_gradient_min, self.clip_gradient_max = clipvalue
 
-    self.weight_decay_factor = weight_decay_factor
-    self.multiply_weight_decay_factor_by_learning_rate = (
-        multiply_weight_decay_factor_by_learning_rate)
+        self.weight_decay_factor = weight_decay_factor
+        self.multiply_weight_decay_factor_by_learning_rate = (
+            multiply_weight_decay_factor_by_learning_rate
+        )
 
-    if (slot_variable_creation_fn is not None and
-        not callable(slot_variable_creation_fn)):
-      raise ValueError(
-          f"Argument `slot_variable_creation_fn` must be either None or a "
-          f"callable. Received: {slot_variable_creation_fn}")
-    self.slot_variable_creation_fn = slot_variable_creation_fn
+        if slot_variable_creation_fn is not None and not callable(
+            slot_variable_creation_fn
+        ):
+            raise ValueError(
+                f"Argument `slot_variable_creation_fn` must be either None or a "
+                f"callable. Received: {slot_variable_creation_fn}"
+            )
+        self.slot_variable_creation_fn = slot_variable_creation_fn
 
-  @abc.abstractmethod
-  def _slot_names(self) -> List[Text]:
-    """Returns the name of all the slot variables.
+    @abc.abstractmethod
+    def _slot_names(self) -> List[Text]:
+        """Returns the name of all the slot variables.
 
     This does not include the 'parameters' variable and these names must match
     the names of the slots variables as used in the corresponding
     `tpu_ops.load_tpu_embedding_*` ops.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  @abc.abstractmethod
-  def _slot_initializers(self) -> List[init_ops_v2.Initializer]:
-    """Returns initializers for slot variables.
+    @abc.abstractmethod
+    def _slot_initializers(self) -> List[init_ops_v2.Initializer]:
+        """Returns initializers for slot variables.
 
     This returns a parallel list to self._slot_names().
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def _set_optimization_parameters(
-      self, parameters: optimization_parameters_pb2.OptimizationParameters):
-    """Sets the optimizer fields in the OptimizationParameters."""
-    if self.use_gradient_accumulation:
-      parameters.gradient_accumulation_status = (
-          optimization_parameters_pb2.GradientAccumulationStatus.ENABLED)
-    else:
-      parameters.gradient_accumulation_status = (
-          optimization_parameters_pb2.GradientAccumulationStatus.DISABLED)
+    def _set_optimization_parameters(
+        self, parameters: optimization_parameters_pb2.OptimizationParameters
+    ):
+        """Sets the optimizer fields in the OptimizationParameters."""
+        if self.use_gradient_accumulation:
+            parameters.gradient_accumulation_status = (
+                optimization_parameters_pb2.GradientAccumulationStatus.ENABLED
+            )
+        else:
+            parameters.gradient_accumulation_status = (
+                optimization_parameters_pb2.GradientAccumulationStatus.DISABLED
+            )
 
-    if self.clip_weight_min is not None:
-      parameters.clipping_limits.lower.value = self.clip_weight_min
+        if self.clip_weight_min is not None:
+            parameters.clipping_limits.lower.value = self.clip_weight_min
 
-    if self.clip_weight_max is not None:
-      parameters.clipping_limits.upper.value = self.clip_weight_max
+        if self.clip_weight_max is not None:
+            parameters.clipping_limits.upper.value = self.clip_weight_max
 
-    if self.clip_gradient_min is not None:
-      parameters.gradient_clipping_limits.lower.value = self.clip_gradient_min
+        if self.clip_gradient_min is not None:
+            parameters.gradient_clipping_limits.lower.value = self.clip_gradient_min
 
-    if self.clip_gradient_max is not None:
-      parameters.gradient_clipping_limits.upper.value = self.clip_gradient_max
+        if self.clip_gradient_max is not None:
+            parameters.gradient_clipping_limits.upper.value = self.clip_gradient_max
 
-    if self.weight_decay_factor:
-      parameters.weight_decay_factor = self.weight_decay_factor
-      if self.multiply_weight_decay_factor_by_learning_rate:
-        parameters.multiply_weight_decay_factor_by_learning_rate = True
+        if self.weight_decay_factor:
+            parameters.weight_decay_factor = self.weight_decay_factor
+            if self.multiply_weight_decay_factor_by_learning_rate:
+                parameters.multiply_weight_decay_factor_by_learning_rate = True
 
-  @abc.abstractmethod
-  def _load(self) -> Callable[..., ops.Operation]:
-    """Returns the load function for the optimizer."""
-    raise NotImplementedError
+    @abc.abstractmethod
+    def _load(self) -> Callable[..., ops.Operation]:
+        """Returns the load function for the optimizer."""
+        raise NotImplementedError
 
-  @abc.abstractmethod
-  def _retrieve(self) -> Callable[..., core.Tensor]:
-    """Returns the retrieve function for the optimizer."""
-    raise NotImplementedError
+    @abc.abstractmethod
+    def _retrieve(self) -> Callable[..., core.Tensor]:
+        """Returns the retrieve function for the optimizer."""
+        raise NotImplementedError
 
-  def _create_slots(
-      self, table: "TableConfig",
-      variable_creator: Callable[[Text, init_ops_v2.Initializer],
-                                 tf_variables.Variable]
-  ) -> Dict[Text, tf_variables.Variable]:
-    """Creates slot variables for table.
+    def _create_slots(
+        self,
+        table: "TableConfig",
+        variable_creator: Callable[
+            [Text, init_ops_v2.Initializer], tf_variables.Variable
+        ],
+    ) -> Dict[Text, tf_variables.Variable]:
+        """Creates slot variables for table.
 
     Args:
       table: The table variable to create slots for.
@@ -156,20 +168,20 @@ class _Optimizer(object):
     Returns:
       A dict of variables, keyed by self._slot_names().
     """
-    if self.slot_variable_creation_fn is not None:
-      return self.slot_variable_creation_fn(table, self._slot_names(),
-                                            self._slot_initializers())
-    else:
-      slots = {}
-      for slot, initializer in zip(self._slot_names(),
-                                   self._slot_initializers()):
-        slots[slot] = variable_creator(slot, initializer)
-      return slots
+        if self.slot_variable_creation_fn is not None:
+            return self.slot_variable_creation_fn(
+                table, self._slot_names(), self._slot_initializers()
+            )
+        else:
+            slots = {}
+            for slot, initializer in zip(self._slot_names(), self._slot_initializers()):
+                slots[slot] = variable_creator(slot, initializer)
+            return slots
 
 
 @tf_export("tpu.experimental.embedding.SGD")
 class SGD(_Optimizer):
-  """Optimization parameters for stochastic gradient descent for TPU embeddings.
+    """Optimization parameters for stochastic gradient descent for TPU embeddings.
 
   Pass this to `tf.tpu.experimental.embedding.TPUEmbedding` via the `optimizer`
   argument to set the global optimizer and its parameters:
@@ -214,14 +226,16 @@ class SGD(_Optimizer):
   algorithm.
   """
 
-  def __init__(self,
-               learning_rate: Union[float, Callable[[], float]] = 0.01,
-               clip_weight_min: Optional[float] = None,
-               clip_weight_max: Optional[float] = None,
-               weight_decay_factor: Optional[float] = None,
-               multiply_weight_decay_factor_by_learning_rate: bool = None,
-               clipvalue: Optional[ClipValueType] = None):
-    """Optimization parameters for stochastic gradient descent.
+    def __init__(
+        self,
+        learning_rate: Union[float, Callable[[], float]] = 0.01,
+        clip_weight_min: Optional[float] = None,
+        clip_weight_max: Optional[float] = None,
+        weight_decay_factor: Optional[float] = None,
+        multiply_weight_decay_factor_by_learning_rate: bool = None,
+        clipvalue: Optional[ClipValueType] = None,
+    ):
+        """Optimization parameters for stochastic gradient descent.
 
     Args:
       learning_rate: The learning rate. It should be a floating point value or a
@@ -243,34 +257,40 @@ class SGD(_Optimizer):
         'tensorflow/core/protobuf/tpu/optimization_parameters.proto' for more
         information on gradient accumulation and its impact on tpu embeddings.
     """
-    use_gradient_accumulation = clipvalue is not None
+        use_gradient_accumulation = clipvalue is not None
 
-    super(SGD, self).__init__(
-        learning_rate, use_gradient_accumulation, clip_weight_min,
-        clip_weight_max, weight_decay_factor,
-        multiply_weight_decay_factor_by_learning_rate, clipvalue)
+        super(SGD, self).__init__(
+            learning_rate,
+            use_gradient_accumulation,
+            clip_weight_min,
+            clip_weight_max,
+            weight_decay_factor,
+            multiply_weight_decay_factor_by_learning_rate,
+            clipvalue,
+        )
 
-  def _slot_names(self) -> List[Text]:
-    return []
+    def _slot_names(self) -> List[Text]:
+        return []
 
-  def _slot_initializers(self) -> List[init_ops_v2.Initializer]:
-    return []
+    def _slot_initializers(self) -> List[init_ops_v2.Initializer]:
+        return []
 
-  def _set_optimization_parameters(
-      self, parameters: optimization_parameters_pb2.OptimizationParameters):
-    super(SGD, self)._set_optimization_parameters(parameters)
-    parameters.stochastic_gradient_descent.SetInParent()
+    def _set_optimization_parameters(
+        self, parameters: optimization_parameters_pb2.OptimizationParameters
+    ):
+        super(SGD, self)._set_optimization_parameters(parameters)
+        parameters.stochastic_gradient_descent.SetInParent()
 
-  def _load(self) -> Callable[..., ops.Operation]:
-    return tpu_ops.load_tpu_embedding_stochastic_gradient_descent_parameters
+    def _load(self) -> Callable[..., ops.Operation]:
+        return tpu_ops.load_tpu_embedding_stochastic_gradient_descent_parameters
 
-  def _retrieve(self) -> Callable[..., core.Tensor]:
-    return tpu_ops.retrieve_tpu_embedding_stochastic_gradient_descent_parameters
+    def _retrieve(self) -> Callable[..., core.Tensor]:
+        return tpu_ops.retrieve_tpu_embedding_stochastic_gradient_descent_parameters
 
 
 @tf_export("tpu.experimental.embedding.Adagrad")
 class Adagrad(_Optimizer):
-  """Optimization parameters for Adagrad with TPU embeddings.
+    """Optimization parameters for Adagrad with TPU embeddings.
 
   Pass this to `tf.tpu.experimental.embedding.TPUEmbedding` via the `optimizer`
   argument to set the global optimizer and its parameters:
@@ -315,18 +335,19 @@ class Adagrad(_Optimizer):
   algorithm.
   """
 
-  def __init__(
-      self,
-      learning_rate: Union[float, Callable[[], float]] = 0.001,
-      initial_accumulator_value: float = 0.1,
-      use_gradient_accumulation: bool = True,
-      clip_weight_min: Optional[float] = None,
-      clip_weight_max: Optional[float] = None,
-      weight_decay_factor: Optional[float] = None,
-      multiply_weight_decay_factor_by_learning_rate: bool = None,
-      slot_variable_creation_fn: Optional[SlotVarCreationFnType] = None,
-      clipvalue: Optional[ClipValueType] = None):
-    """Optimization parameters for Adagrad.
+    def __init__(
+        self,
+        learning_rate: Union[float, Callable[[], float]] = 0.001,
+        initial_accumulator_value: float = 0.1,
+        use_gradient_accumulation: bool = True,
+        clip_weight_min: Optional[float] = None,
+        clip_weight_max: Optional[float] = None,
+        weight_decay_factor: Optional[float] = None,
+        multiply_weight_decay_factor_by_learning_rate: bool = None,
+        slot_variable_creation_fn: Optional[SlotVarCreationFnType] = None,
+        clipvalue: Optional[ClipValueType] = None,
+    ):
+        """Optimization parameters for Adagrad.
 
     Args:
       learning_rate: The learning rate. It should be a floating point value or a
@@ -352,38 +373,45 @@ class Adagrad(_Optimizer):
         max) to set a separate maximum or minimum. If one of the two entries is
         None, then there will be no clipping that direction.
     """
-    super(Adagrad, self).__init__(
-        learning_rate, use_gradient_accumulation, clip_weight_min,
-        clip_weight_max, weight_decay_factor,
-        multiply_weight_decay_factor_by_learning_rate, clipvalue,
-        slot_variable_creation_fn)
-    if initial_accumulator_value <= 0:
-      raise ValueError(
-          f"Argument `initial_accumulator_value` must be a positive float. "
-          f"Received: {initial_accumulator_value}")
-    self.initial_accumulator_value = initial_accumulator_value
+        super(Adagrad, self).__init__(
+            learning_rate,
+            use_gradient_accumulation,
+            clip_weight_min,
+            clip_weight_max,
+            weight_decay_factor,
+            multiply_weight_decay_factor_by_learning_rate,
+            clipvalue,
+            slot_variable_creation_fn,
+        )
+        if initial_accumulator_value <= 0:
+            raise ValueError(
+                f"Argument `initial_accumulator_value` must be a positive float. "
+                f"Received: {initial_accumulator_value}"
+            )
+        self.initial_accumulator_value = initial_accumulator_value
 
-  def _slot_names(self) -> List[Text]:
-    return ["accumulators"]
+    def _slot_names(self) -> List[Text]:
+        return ["accumulators"]
 
-  def _slot_initializers(self) -> List[init_ops_v2.Initializer]:
-    return [init_ops_v2.Constant(self.initial_accumulator_value)]
+    def _slot_initializers(self) -> List[init_ops_v2.Initializer]:
+        return [init_ops_v2.Constant(self.initial_accumulator_value)]
 
-  def _set_optimization_parameters(
-      self, parameters: optimization_parameters_pb2.OptimizationParameters):
-    super(Adagrad, self)._set_optimization_parameters(parameters)
-    parameters.adagrad.SetInParent()
+    def _set_optimization_parameters(
+        self, parameters: optimization_parameters_pb2.OptimizationParameters
+    ):
+        super(Adagrad, self)._set_optimization_parameters(parameters)
+        parameters.adagrad.SetInParent()
 
-  def _load(self) -> Callable[..., ops.Operation]:
-    return tpu_ops.load_tpu_embedding_adagrad_parameters
+    def _load(self) -> Callable[..., ops.Operation]:
+        return tpu_ops.load_tpu_embedding_adagrad_parameters
 
-  def _retrieve(self) -> Callable[..., core.Tensor]:
-    return tpu_ops.retrieve_tpu_embedding_adagrad_parameters
+    def _retrieve(self) -> Callable[..., core.Tensor]:
+        return tpu_ops.retrieve_tpu_embedding_adagrad_parameters
 
 
 @tf_export("tpu.experimental.embedding.FTRL")
 class FTRL(_Optimizer):
-  """Optimization parameters for FTRL with TPU embeddings.
+    """Optimization parameters for FTRL with TPU embeddings.
 
   See Algorithm 1 of this
   [paper](https://research.google.com/pubs/archive/41159.pdf).
@@ -431,24 +459,25 @@ class FTRL(_Optimizer):
   algorithm.
   """
 
-  def __init__(
-      self,
-      learning_rate: Union[float, Callable[[], float]] = 0.001,
-      learning_rate_power: float = -0.5,
-      l1_regularization_strength: float = 0.0,
-      l2_regularization_strength: float = 0.0,
-      beta: float = 0.0,
-      initial_accumulator_value: float = 0.1,
-      use_gradient_accumulation: bool = True,
-      clip_weight_min: Optional[float] = None,
-      clip_weight_max: Optional[float] = None,
-      weight_decay_factor: Optional[float] = None,
-      multiply_weight_decay_factor_by_learning_rate: bool = None,
-      slot_variable_creation_fn: Optional[SlotVarCreationFnType] = None,
-      clipvalue: Optional[ClipValueType] = None,
-      multiply_linear_by_learning_rate: bool = False,
-      allow_zero_accumulator: bool = False):
-    """Optimization parameters for Adagrad.
+    def __init__(
+        self,
+        learning_rate: Union[float, Callable[[], float]] = 0.001,
+        learning_rate_power: float = -0.5,
+        l1_regularization_strength: float = 0.0,
+        l2_regularization_strength: float = 0.0,
+        beta: float = 0.0,
+        initial_accumulator_value: float = 0.1,
+        use_gradient_accumulation: bool = True,
+        clip_weight_min: Optional[float] = None,
+        clip_weight_max: Optional[float] = None,
+        weight_decay_factor: Optional[float] = None,
+        multiply_weight_decay_factor_by_learning_rate: bool = None,
+        slot_variable_creation_fn: Optional[SlotVarCreationFnType] = None,
+        clipvalue: Optional[ClipValueType] = None,
+        multiply_linear_by_learning_rate: bool = False,
+        allow_zero_accumulator: bool = False,
+    ):
+        """Optimization parameters for Adagrad.
 
     Args:
       learning_rate: The learning rate. It should be a floating point value or a
@@ -496,52 +525,60 @@ class FTRL(_Optimizer):
         performance; this only needs to be set if you are using an initial
         accumulator value of zero, which is uncommon.
     """
-    super().__init__(learning_rate, use_gradient_accumulation, clip_weight_min,
-                     clip_weight_max, weight_decay_factor,
-                     multiply_weight_decay_factor_by_learning_rate, clipvalue,
-                     slot_variable_creation_fn)
-    if initial_accumulator_value <= 0:
-      raise ValueError(
-          f"Argument `initial_accumulator_value` must be a positive float. "
-          f"Received: {initial_accumulator_value}")
-    self.initial_accumulator_value = initial_accumulator_value
-    self.learning_rate_power = learning_rate_power
-    self.l1_regularization_strength = l1_regularization_strength
-    self.l2_regularization_strength = l2_regularization_strength
-    self.beta = beta
-    self.multiply_linear_by_learning_rate = multiply_linear_by_learning_rate
-    self.allow_zero_accumulator = allow_zero_accumulator
+        super().__init__(
+            learning_rate,
+            use_gradient_accumulation,
+            clip_weight_min,
+            clip_weight_max,
+            weight_decay_factor,
+            multiply_weight_decay_factor_by_learning_rate,
+            clipvalue,
+            slot_variable_creation_fn,
+        )
+        if initial_accumulator_value <= 0:
+            raise ValueError(
+                f"Argument `initial_accumulator_value` must be a positive float. "
+                f"Received: {initial_accumulator_value}"
+            )
+        self.initial_accumulator_value = initial_accumulator_value
+        self.learning_rate_power = learning_rate_power
+        self.l1_regularization_strength = l1_regularization_strength
+        self.l2_regularization_strength = l2_regularization_strength
+        self.beta = beta
+        self.multiply_linear_by_learning_rate = multiply_linear_by_learning_rate
+        self.allow_zero_accumulator = allow_zero_accumulator
 
-  def _slot_names(self) -> List[Text]:
-    return ["accumulators", "linears"]
+    def _slot_names(self) -> List[Text]:
+        return ["accumulators", "linears"]
 
-  def _slot_initializers(self) -> List[init_ops_v2.Initializer]:
-    return [
-        init_ops_v2.Constant(self.initial_accumulator_value),
-        init_ops_v2.Constant()
-    ]
+    def _slot_initializers(self) -> List[init_ops_v2.Initializer]:
+        return [
+            init_ops_v2.Constant(self.initial_accumulator_value),
+            init_ops_v2.Constant(),
+        ]
 
-  def _set_optimization_parameters(
-      self, parameters: optimization_parameters_pb2.OptimizationParameters):
-    super()._set_optimization_parameters(parameters)
-    ftrl = parameters.ftrl
-    ftrl.l1 = self.l1_regularization_strength
-    ftrl.l2 = self.l2_regularization_strength
-    ftrl.lr_power = self.learning_rate_power
-    ftrl.beta = self.beta
-    ftrl.multiply_linear_by_lr = self.multiply_linear_by_learning_rate
-    ftrl.allow_zero_accumulator = self.allow_zero_accumulator
+    def _set_optimization_parameters(
+        self, parameters: optimization_parameters_pb2.OptimizationParameters
+    ):
+        super()._set_optimization_parameters(parameters)
+        ftrl = parameters.ftrl
+        ftrl.l1 = self.l1_regularization_strength
+        ftrl.l2 = self.l2_regularization_strength
+        ftrl.lr_power = self.learning_rate_power
+        ftrl.beta = self.beta
+        ftrl.multiply_linear_by_lr = self.multiply_linear_by_learning_rate
+        ftrl.allow_zero_accumulator = self.allow_zero_accumulator
 
-  def _load(self) -> Callable[..., ops.Operation]:
-    return tpu_ops.load_tpu_embedding_ftrl_parameters
+    def _load(self) -> Callable[..., ops.Operation]:
+        return tpu_ops.load_tpu_embedding_ftrl_parameters
 
-  def _retrieve(self) -> Callable[..., core.Tensor]:
-    return tpu_ops.retrieve_tpu_embedding_ftrl_parameters
+    def _retrieve(self) -> Callable[..., core.Tensor]:
+        return tpu_ops.retrieve_tpu_embedding_ftrl_parameters
 
 
 @tf_export("tpu.experimental.embedding.Adam")
 class Adam(_Optimizer):
-  """Optimization parameters for Adam with TPU embeddings.
+    """Optimization parameters for Adam with TPU embeddings.
 
   Pass this to `tf.tpu.experimental.embedding.TPUEmbedding` via the `optimizer`
   argument to set the global optimizer and its parameters:
@@ -590,22 +627,23 @@ class Adam(_Optimizer):
   algorithm.
   """
 
-  def __init__(
-      self,
-      learning_rate: Union[float, Callable[[], float]] = 0.001,
-      beta_1: float = 0.9,
-      beta_2: float = 0.999,
-      epsilon: float = 1e-07,
-      lazy_adam: bool = True,
-      sum_inside_sqrt: bool = True,
-      use_gradient_accumulation: bool = True,
-      clip_weight_min: Optional[float] = None,
-      clip_weight_max: Optional[float] = None,
-      weight_decay_factor: Optional[float] = None,
-      multiply_weight_decay_factor_by_learning_rate: bool = None,
-      slot_variable_creation_fn: Optional[SlotVarCreationFnType] = None,
-      clipvalue: Optional[ClipValueType] = None):
-    """Optimization parameters for Adam.
+    def __init__(
+        self,
+        learning_rate: Union[float, Callable[[], float]] = 0.001,
+        beta_1: float = 0.9,
+        beta_2: float = 0.999,
+        epsilon: float = 1e-07,
+        lazy_adam: bool = True,
+        sum_inside_sqrt: bool = True,
+        use_gradient_accumulation: bool = True,
+        clip_weight_min: Optional[float] = None,
+        clip_weight_max: Optional[float] = None,
+        weight_decay_factor: Optional[float] = None,
+        multiply_weight_decay_factor_by_learning_rate: bool = None,
+        slot_variable_creation_fn: Optional[SlotVarCreationFnType] = None,
+        clipvalue: Optional[ClipValueType] = None,
+    ):
+        """Optimization parameters for Adam.
 
     See 'tensorflow/core/protobuf/tpu/optimization_parameters.proto' for a
     complete description of these parameters and their impacts on the optimizer
@@ -644,56 +682,65 @@ class Adam(_Optimizer):
         max) to set a separate maximum or minimum. If one of the two entries is
         None, then there will be no clipping that direction.
     """
-    super(Adam, self).__init__(
-        learning_rate, use_gradient_accumulation, clip_weight_min,
-        clip_weight_max, weight_decay_factor,
-        multiply_weight_decay_factor_by_learning_rate, clipvalue,
-        slot_variable_creation_fn)
-    if beta_1 < 0. or beta_1 >= 1.:
-      raise ValueError(
-          f"Argument `beta_1` must be >= 0 and < 1. Received: {beta_1}.")
-    if beta_2 < 0. or beta_2 >= 1.:
-      raise ValueError(
-          f"Argument `beta_2` must be >= 0 and < 1. Received: {beta_1}.")
-    if epsilon <= 0.:
-      raise ValueError("epsilon must be positive; got {}.".format(epsilon))
-    if not use_gradient_accumulation and not lazy_adam:
-      raise ValueError(
-          "When disabling lazy Adam (`lazy_adam=False`), "
-          "gradient accumulation must be used. "
-          "Set `use_gradient_accumulation` to False.")
+        super(Adam, self).__init__(
+            learning_rate,
+            use_gradient_accumulation,
+            clip_weight_min,
+            clip_weight_max,
+            weight_decay_factor,
+            multiply_weight_decay_factor_by_learning_rate,
+            clipvalue,
+            slot_variable_creation_fn,
+        )
+        if beta_1 < 0.0 or beta_1 >= 1.0:
+            raise ValueError(
+                f"Argument `beta_1` must be >= 0 and < 1. Received: {beta_1}."
+            )
+        if beta_2 < 0.0 or beta_2 >= 1.0:
+            raise ValueError(
+                f"Argument `beta_2` must be >= 0 and < 1. Received: {beta_1}."
+            )
+        if epsilon <= 0.0:
+            raise ValueError("epsilon must be positive; got {}.".format(epsilon))
+        if not use_gradient_accumulation and not lazy_adam:
+            raise ValueError(
+                "When disabling lazy Adam (`lazy_adam=False`), "
+                "gradient accumulation must be used. "
+                "Set `use_gradient_accumulation` to False."
+            )
 
-    self.beta_1 = beta_1
-    self.beta_2 = beta_2
-    self.epsilon = epsilon
-    self.lazy_adam = lazy_adam
-    self.sum_inside_sqrt = sum_inside_sqrt
+        self.beta_1 = beta_1
+        self.beta_2 = beta_2
+        self.epsilon = epsilon
+        self.lazy_adam = lazy_adam
+        self.sum_inside_sqrt = sum_inside_sqrt
 
-  def _slot_names(self) -> List[Text]:
-    return ["momenta", "velocities"]
+    def _slot_names(self) -> List[Text]:
+        return ["momenta", "velocities"]
 
-  def _slot_initializers(self) -> List[init_ops_v2.Initializer]:
-    return [init_ops_v2.Constant(), init_ops_v2.Constant()]
+    def _slot_initializers(self) -> List[init_ops_v2.Initializer]:
+        return [init_ops_v2.Constant(), init_ops_v2.Constant()]
 
-  def _set_optimization_parameters(
-      self, parameters: optimization_parameters_pb2.OptimizationParameters):
-    super(Adam, self)._set_optimization_parameters(parameters)
-    parameters.adam.beta1 = self.beta_1
-    parameters.adam.beta2 = self.beta_2
-    parameters.adam.epsilon = self.epsilon
-    parameters.adam.use_non_lazy_adam = not self.lazy_adam
-    parameters.adam.use_sum_inside_sqrt = self.sum_inside_sqrt
+    def _set_optimization_parameters(
+        self, parameters: optimization_parameters_pb2.OptimizationParameters
+    ):
+        super(Adam, self)._set_optimization_parameters(parameters)
+        parameters.adam.beta1 = self.beta_1
+        parameters.adam.beta2 = self.beta_2
+        parameters.adam.epsilon = self.epsilon
+        parameters.adam.use_non_lazy_adam = not self.lazy_adam
+        parameters.adam.use_sum_inside_sqrt = self.sum_inside_sqrt
 
-  def _load(self) -> Callable[..., ops.Operation]:
-    return tpu_ops.load_tpu_embedding_adam_parameters
+    def _load(self) -> Callable[..., ops.Operation]:
+        return tpu_ops.load_tpu_embedding_adam_parameters
 
-  def _retrieve(self) -> Callable[..., core.Tensor]:
-    return tpu_ops.retrieve_tpu_embedding_adam_parameters
+    def _retrieve(self) -> Callable[..., core.Tensor]:
+        return tpu_ops.retrieve_tpu_embedding_adam_parameters
 
 
 @tf_export("tpu.experimental.embedding.TableConfig")
 class TableConfig(object):
-  """Configuration data for one embedding table.
+    """Configuration data for one embedding table.
 
   This class holds the configuration data for a single embedding table. It is
   used as the `table` parameter of a
@@ -728,14 +775,16 @@ class TableConfig(object):
 
   """
 
-  def __init__(self,
-               vocabulary_size: int,
-               dim: int,
-               initializer: Optional[Callable[[Any], None]],
-               optimizer: Optional[_Optimizer] = None,
-               combiner: Text = "mean",
-               name: Optional[Text] = None):
-    """Embedding table configuration.
+    def __init__(
+        self,
+        vocabulary_size: int,
+        dim: int,
+        initializer: Optional[Callable[[Any], None]],
+        optimizer: Optional[_Optimizer] = None,
+        combiner: Text = "mean",
+        name: Optional[Text] = None,
+    ):
+        """Embedding table configuration.
 
     Args:
       vocabulary_size: Size of the table's vocabulary (number of rows).
@@ -766,63 +815,70 @@ class TableConfig(object):
       ValueError: if `initializer` is specified and is not callable.
       ValueError: if `combiner` is not supported.
     """
-    if not isinstance(vocabulary_size, int) or vocabulary_size < 1:
-      raise ValueError(
-          f"Argument `vocabulary_size` must be an int and must be >= 1. "
-          f"Received: {vocabulary_size}")
+        if not isinstance(vocabulary_size, int) or vocabulary_size < 1:
+            raise ValueError(
+                f"Argument `vocabulary_size` must be an int and must be >= 1. "
+                f"Received: {vocabulary_size}"
+            )
 
-    if not isinstance(dim, int) or dim < 1:
-      raise ValueError(
-          f"Argument `dim` (embedding dimension) "
-          f"must be an int and must be >= 1. Received: {dim}")
+        if not isinstance(dim, int) or dim < 1:
+            raise ValueError(
+                f"Argument `dim` (embedding dimension) "
+                f"must be an int and must be >= 1. Received: {dim}"
+            )
 
-    if (initializer is not None) and (not callable(initializer)):
-      raise ValueError(
-          f"Argument `initializer` must be a callable (or None). "
-          f"Received: {initializer}")
-    if initializer is None:
-      initializer = init_ops_v2.TruncatedNormal(mean=0.0,
-                                                stddev=1/math.sqrt(dim))
-    accepted_combiners = ("mean", "sum", "sqrtn")
-    if combiner not in accepted_combiners:
-      raise ValueError(
-          f"Argument `combiner` must be one of {accepted_combiners}. "
-          f"Received: {combiner}")
+        if (initializer is not None) and (not callable(initializer)):
+            raise ValueError(
+                f"Argument `initializer` must be a callable (or None). "
+                f"Received: {initializer}"
+            )
+        if initializer is None:
+            initializer = init_ops_v2.TruncatedNormal(
+                mean=0.0, stddev=1 / math.sqrt(dim)
+            )
+        accepted_combiners = ("mean", "sum", "sqrtn")
+        if combiner not in accepted_combiners:
+            raise ValueError(
+                f"Argument `combiner` must be one of {accepted_combiners}. "
+                f"Received: {combiner}"
+            )
 
-    self.vocabulary_size = vocabulary_size
-    self.dim = dim
-    self.initializer = initializer
-    self.optimizer = optimizer
-    self.combiner = combiner
-    self.name = name
+        self.vocabulary_size = vocabulary_size
+        self.dim = dim
+        self.initializer = initializer
+        self.optimizer = optimizer
+        self.combiner = combiner
+        self.name = name
 
-  def __repr__(self):
-    # If using the default initializer, just print "None" for clarity.
-    initializer = self.initializer
+    def __repr__(self):
+        # If using the default initializer, just print "None" for clarity.
+        initializer = self.initializer
 
-    if isinstance(initializer, init_ops_v2.TruncatedNormal):
-      # PY2 type checking can't infer type of initializer even after if.
-      initializer = typing.cast(init_ops_v2.TruncatedNormal, initializer)
-      if (initializer.mean == 0.0
-          and math.isclose(initializer.stddev, 1/math.sqrt(self.dim))):  # pytype: disable=module-attr (math.isclose not in PY2)
-        initializer = None
+        if isinstance(initializer, init_ops_v2.TruncatedNormal):
+            # PY2 type checking can't infer type of initializer even after if.
+            initializer = typing.cast(init_ops_v2.TruncatedNormal, initializer)
+            if initializer.mean == 0.0 and math.isclose(
+                initializer.stddev, 1 / math.sqrt(self.dim)
+            ):  # pytype: disable=module-attr (math.isclose not in PY2)
+                initializer = None
 
-    return (
-        "TableConfig(vocabulary_size={vocabulary_size!r}, dim={dim!r}, "
-        "initializer={initializer!r}, optimizer={optimizer!r}, "
-        "combiner={combiner!r}, name={name!r})".format(
-            vocabulary_size=self.vocabulary_size,
-            dim=self.dim,
-            initializer=initializer,
-            optimizer=self.optimizer,
-            combiner=self.combiner,
-            name=self.name,)
-    )
+        return (
+            "TableConfig(vocabulary_size={vocabulary_size!r}, dim={dim!r}, "
+            "initializer={initializer!r}, optimizer={optimizer!r}, "
+            "combiner={combiner!r}, name={name!r})".format(
+                vocabulary_size=self.vocabulary_size,
+                dim=self.dim,
+                initializer=initializer,
+                optimizer=self.optimizer,
+                combiner=self.combiner,
+                name=self.name,
+            )
+        )
 
 
 @tf_export("tpu.experimental.embedding.FeatureConfig")
 class FeatureConfig(object):
-  """Configuration data for one embedding feature.
+    """Configuration data for one embedding feature.
 
   This class holds the configuration data for a single embedding feature. The
   main use is to assign features to `tf.tpu.experimental.embedding.TableConfig`s
@@ -861,12 +917,14 @@ class FeatureConfig(object):
   will be `(batch_size, max_sequence_length, dim)`.
   """
 
-  def __init__(self,
-               table: TableConfig,
-               max_sequence_length: int = 0,
-               validate_weights_and_indices: bool = True,
-               name: Optional[Text] = None):
-    """Feature configuration.
+    def __init__(
+        self,
+        table: TableConfig,
+        max_sequence_length: int = 0,
+        validate_weights_and_indices: bool = True,
+        name: Optional[Text] = None,
+    ):
+        """Feature configuration.
 
     Args:
       table: An instance of `tf.tpu.experimental.embedding.TableConfig`,
@@ -888,48 +946,55 @@ class FeatureConfig(object):
         `tf.tpu.experimental.embedding.TableConfig`.
       ValueError: if `max_sequence_length` not an integer or is negative.
     """
-    if not isinstance(table, TableConfig):
-      raise ValueError(f"Argument `table` has invalid type {type(table)}. "
-                       "Expected `tf.tpu.experimental.embedding.TableConfig`.")
+        if not isinstance(table, TableConfig):
+            raise ValueError(
+                f"Argument `table` has invalid type {type(table)}. "
+                "Expected `tf.tpu.experimental.embedding.TableConfig`."
+            )
 
-    if not isinstance(max_sequence_length, int) or max_sequence_length < 0:
-      raise ValueError(
-          f"Argument `max_sequence_length` must be an int and must be >= 0. "
-          f"Received: {max_sequence_length}")
+        if not isinstance(max_sequence_length, int) or max_sequence_length < 0:
+            raise ValueError(
+                f"Argument `max_sequence_length` must be an int and must be >= 0. "
+                f"Received: {max_sequence_length}"
+            )
 
-    self.table = table
-    self.max_sequence_length = max_sequence_length
-    self.name = name
+        self.table = table
+        self.max_sequence_length = max_sequence_length
+        self.name = name
 
-    if not isinstance(
-        validate_weights_and_indices, bool):
-      raise ValueError(
-          f"Argument `validate_weights_and_indices` must be a boolean. "
-          f"Received: {validate_weights_and_indices}")
+        if not isinstance(validate_weights_and_indices, bool):
+            raise ValueError(
+                f"Argument `validate_weights_and_indices` must be a boolean. "
+                f"Received: {validate_weights_and_indices}"
+            )
 
-    self.validate_weights_and_indices = validate_weights_and_indices
+        self.validate_weights_and_indices = validate_weights_and_indices
 
-  def __repr__(self):
-    return ("FeatureConfig(table={table!r}, "
+    def __repr__(self):
+        return (
+            "FeatureConfig(table={table!r}, "
             "max_sequence_length={max_sequence_length!r}, "
             "validate_weights_and_indices={"
             "validate_weights_and_indices!r}, name={name!r})".format(
                 table=self.table,
                 max_sequence_length=self.max_sequence_length,
                 validate_weights_and_indices=self.validate_weights_and_indices,
-                name=self.name))
+                name=self.name,
+            )
+        )
 
 
 def log_tpu_embedding_configuration(
-    config: tpu_embedding_configuration_pb2.TPUEmbeddingConfiguration) -> None:
-  """Logs a TPUEmbeddingConfiguration proto across multiple statements.
+    config: tpu_embedding_configuration_pb2.TPUEmbeddingConfiguration
+) -> None:
+    """Logs a TPUEmbeddingConfiguration proto across multiple statements.
 
   Args:
     config: TPUEmbeddingConfiguration proto to log.  Necessary because
       logging.info has a maximum length to each log statement, which
       particularly large configs can exceed.
   """
-  logging.info("Beginning log of TPUEmbeddingConfiguration.")
-  for line in str(config).splitlines():
-    logging.info(line)
-  logging.info("Done with log of TPUEmbeddingConfiguration.")
+    logging.info("Beginning log of TPUEmbeddingConfiguration.")
+    for line in str(config).splitlines():
+        logging.info(line)
+    logging.info("Done with log of TPUEmbeddingConfiguration.")

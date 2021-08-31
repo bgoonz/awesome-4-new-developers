@@ -20,7 +20,9 @@ from tensorflow.python.framework import dtypes
 from tensorflow.python.keras import backend
 from tensorflow.python.keras.engine import base_layer_utils
 from tensorflow.python.keras.mixed_precision import device_compatibility_check
-from tensorflow.python.keras.mixed_precision import loss_scale as keras_loss_scale_module
+from tensorflow.python.keras.mixed_precision import (
+    loss_scale as keras_loss_scale_module,
+)
 from tensorflow.python.keras.utils import generic_utils
 from tensorflow.python.platform import tf_logging
 from tensorflow.python.training.experimental import mixed_precision_global_state
@@ -28,9 +30,9 @@ from tensorflow.python.util.tf_export import keras_export
 
 
 # pylint: disable=g-classes-have-attributes
-@keras_export('keras.mixed_precision.Policy', v1=[])
+@keras_export("keras.mixed_precision.Policy", v1=[])
 class Policy(object):
-  """A dtype policy for a Keras layer.
+    """A dtype policy for a Keras layer.
 
   A dtype policy determines a layer's computation and variable dtypes. Each
   layer has a policy. Policies can be passed to the `dtype` argument of layer
@@ -184,19 +186,21 @@ class Policy(object):
   a float32 tensor with a float16 tensor.
   """
 
-  def __init__(self, name):
-    if isinstance(name, dtypes.DType):
-      raise TypeError("'name' must be a string, not a DType. "
-                      "Instead, pass DType.name. Got: %s" % (name.name,))
-    elif not isinstance(name, str):
-      raise TypeError("'name' must be a string, but got: %s" % (name,))
-    self._name = name
-    self._compute_dtype, self._variable_dtype = self._parse_name(name)
-    if name in ('mixed_float16', 'mixed_bloat16'):
-      device_compatibility_check.log_device_compatibility_check(name)
+    def __init__(self, name):
+        if isinstance(name, dtypes.DType):
+            raise TypeError(
+                "'name' must be a string, not a DType. "
+                "Instead, pass DType.name. Got: %s" % (name.name,)
+            )
+        elif not isinstance(name, str):
+            raise TypeError("'name' must be a string, but got: %s" % (name,))
+        self._name = name
+        self._compute_dtype, self._variable_dtype = self._parse_name(name)
+        if name in ("mixed_float16", "mixed_bloat16"):
+            device_compatibility_check.log_device_compatibility_check(name)
 
-  def _parse_name(self, name):
-    """Parses a Policy name into a compute and variable dtype.
+    def _parse_name(self, name):
+        """Parses a Policy name into a compute and variable dtype.
 
     Args:
       name: The name of the policy:
@@ -204,48 +208,54 @@ class Policy(object):
     Returns:
       The (compute_dtype, variable_dtype) pair.
     """
-    if name.endswith('_float32_vars'):
-      error_msg = ('Policies ending in \'_float32_vars\' have been removed '
-                   'from TensorFlow.')
-      if name in ('infer_float32_vars', 'infer_with_float32_vars'):
-        error_msg += (' Please use the \'mixed_float16\' or \'mixed_bfloat16\' '
-                      'policy instead.')
-      elif name == 'float16_with_float32_vars':
-        error_msg += (' Please use the \'mixed_float16\' policy instead.')
-      elif name == 'bfloat16_with_float32_vars':
-        error_msg += (' Please use the \'mixed_bfloat16\' policy instead.')
-      error_msg += ' Got policy name: \'%s\'' % name
-      raise ValueError(error_msg)
+        if name.endswith("_float32_vars"):
+            error_msg = (
+                "Policies ending in '_float32_vars' have been removed "
+                "from TensorFlow."
+            )
+            if name in ("infer_float32_vars", "infer_with_float32_vars"):
+                error_msg += (
+                    " Please use the 'mixed_float16' or 'mixed_bfloat16' "
+                    "policy instead."
+                )
+            elif name == "float16_with_float32_vars":
+                error_msg += " Please use the 'mixed_float16' policy instead."
+            elif name == "bfloat16_with_float32_vars":
+                error_msg += " Please use the 'mixed_bfloat16' policy instead."
+            error_msg += " Got policy name: '%s'" % name
+            raise ValueError(error_msg)
 
-    if name == 'mixed_float16':
-      return 'float16', 'float32'
-    elif name == 'mixed_bfloat16':
-      return 'bfloat16', 'float32'
-    elif name == '_infer':
-      # The "_infer" policy exists only for compatibility with TF 1, where
-      # "_infer" is the default. The behavior matches the behavior of TF 1's
-      # behavior before policies were introduced. With "_infer", the computation
-      # and variable dtype are inferred from the first input the first time the
-      # layer is called. Once the layer is called for the first time, the
-      # layer's policy will change to the dtype of the first input, and it will
-      # no longer have the "_infer" policy.
-      #
-      # The infer policy should be considered an implementation detail and may
-      # be removed in the future.
-      return None, None
+        if name == "mixed_float16":
+            return "float16", "float32"
+        elif name == "mixed_bfloat16":
+            return "bfloat16", "float32"
+        elif name == "_infer":
+            # The "_infer" policy exists only for compatibility with TF 1, where
+            # "_infer" is the default. The behavior matches the behavior of TF 1's
+            # behavior before policies were introduced. With "_infer", the computation
+            # and variable dtype are inferred from the first input the first time the
+            # layer is called. Once the layer is called for the first time, the
+            # layer's policy will change to the dtype of the first input, and it will
+            # no longer have the "_infer" policy.
+            #
+            # The infer policy should be considered an implementation detail and may
+            # be removed in the future.
+            return None, None
 
-    try:
-      dtype = dtypes.as_dtype(name).name
-    except TypeError:
-      error = ("Cannot convert value %s to a mixed precision Policy. "
-               "Valid policies include 'mixed_float16', 'mixed_bfloat16', "
-               "and the name of any dtype such as 'float32'." % (name,))
-      raise ValueError(error)
-    return dtype, dtype
+        try:
+            dtype = dtypes.as_dtype(name).name
+        except TypeError:
+            error = (
+                "Cannot convert value %s to a mixed precision Policy. "
+                "Valid policies include 'mixed_float16', 'mixed_bfloat16', "
+                "and the name of any dtype such as 'float32'." % (name,)
+            )
+            raise ValueError(error)
+        return dtype, dtype
 
-  @property
-  def variable_dtype(self):
-    """The variable dtype of this policy.
+    @property
+    def variable_dtype(self):
+        """The variable dtype of this policy.
 
     This is the dtype layers will create their variables in, unless a layer
     explicitly chooses a different dtype. If this is different than
@@ -257,11 +267,11 @@ class Policy(object):
     Returns:
       The variable dtype of this policy, as a string.
     """
-    return self._variable_dtype
+        return self._variable_dtype
 
-  @property
-  def compute_dtype(self):
-    """The compute dtype of this policy.
+    @property
+    def compute_dtype(self):
+        """The compute dtype of this policy.
 
     This is the dtype layers will do their computations in. Typically layers
     output tensors with the compute dtype as well.
@@ -285,33 +295,33 @@ class Policy(object):
     Returns:
       The compute dtype of this policy, as a string.
     """
-    return self._compute_dtype
+        return self._compute_dtype
 
-  @property
-  def name(self):
-    """Returns the name of this policy."""
-    return self._name
+    @property
+    def name(self):
+        """Returns the name of this policy."""
+        return self._name
 
-  def __repr__(self):
-    return '<Policy "%s">' % self._name
+    def __repr__(self):
+        return '<Policy "%s">' % self._name
 
-  def get_config(self):
-    return {'name': self.name}
+    def get_config(self):
+        return {"name": self.name}
 
-  @classmethod
-  def from_config(cls, config, custom_objects=None):
-    del custom_objects
-    if 'loss_scale' in config:
-      config = config.copy()
-      # Policy.get_config in TensorFlow 2.3 and below had a loss_scale. We
-      # silently drop it.
-      del config['loss_scale']
-    return cls(**config)
+    @classmethod
+    def from_config(cls, config, custom_objects=None):
+        del custom_objects
+        if "loss_scale" in config:
+            config = config.copy()
+            # Policy.get_config in TensorFlow 2.3 and below had a loss_scale. We
+            # silently drop it.
+            del config["loss_scale"]
+        return cls(**config)
 
 
-@keras_export('keras.mixed_precision.experimental.Policy', v1=[])
+@keras_export("keras.mixed_precision.experimental.Policy", v1=[])
 class PolicyV1(Policy):
-  """A deprecated dtype policy for a Keras layer.
+    """A deprecated dtype policy for a Keras layer.
 
   Warning: This class is now deprecated and will be removed soon. Please use the
   non-experimental class `tf.keras.mixed_precision.Policy` instead.
@@ -332,8 +342,8 @@ class PolicyV1(Policy):
   removed.
   """
 
-  def __init__(self, name, loss_scale='auto'):
-    """Constructs the policy.
+    def __init__(self, name, loss_scale="auto"):
+        """Constructs the policy.
 
     The `name` argument determines the compute and variable dtype, the default
     loss scale, and has no additional effect on the Policy. The compute and
@@ -356,50 +366,49 @@ class PolicyV1(Policy):
         `tf.keras.Model`s, not layers, use the loss scale, and it is only used
         during `Model.fit`, `Model.train_on_batch`, and other similar methods.
     """
-    super(PolicyV1, self).__init__(name)
-    if loss_scale == 'auto':
-      loss_scale = 'dynamic' if name == 'mixed_float16' else None
-      self._using_default_loss_scale = True
-    else:
-      self._using_default_loss_scale = False
-    if loss_scale and self._compute_dtype not in (None, 'float16'):
-      tf_logging.warning(
-          'Creating a Policy with a loss scale is only useful for '
-          'float16 policies. You passed loss_scale=%r for policy '
-          '%s. Consider not passing any loss_scale instead.' %
-          (loss_scale, name))
-    self._loss_scale = keras_loss_scale_module.get(loss_scale)
+        super(PolicyV1, self).__init__(name)
+        if loss_scale == "auto":
+            loss_scale = "dynamic" if name == "mixed_float16" else None
+            self._using_default_loss_scale = True
+        else:
+            self._using_default_loss_scale = False
+        if loss_scale and self._compute_dtype not in (None, "float16"):
+            tf_logging.warning(
+                "Creating a Policy with a loss scale is only useful for "
+                "float16 policies. You passed loss_scale=%r for policy "
+                "%s. Consider not passing any loss_scale instead." % (loss_scale, name)
+            )
+        self._loss_scale = keras_loss_scale_module.get(loss_scale)
 
-  @property
-  def loss_scale(self):
-    """Returns the loss scale of this Policy.
+    @property
+    def loss_scale(self):
+        """Returns the loss scale of this Policy.
 
     Returns:
       A `tf.compat.v1.mixed_precision.experimental.LossScale`, or None.
     """
-    return self._loss_scale
+        return self._loss_scale
 
-  def __repr__(self):
-    return '<PolicyV1 "%s", loss_scale=%s>' % (self._name, self.loss_scale)
+    def __repr__(self):
+        return '<PolicyV1 "%s", loss_scale=%s>' % (self._name, self.loss_scale)
 
-  def get_config(self):
-    config = {
-        'name': self.name
-    }
-    if not self._using_default_loss_scale:
-      # We only include the loss scale if the default loss scale is not used.
-      # This allows us to change the loss scale config format without breaking
-      # users who use the default loss scale.
-      config['loss_scale'] = keras_loss_scale_module.serialize(self.loss_scale)
-    return config
+    def get_config(self):
+        config = {"name": self.name}
+        if not self._using_default_loss_scale:
+            # We only include the loss scale if the default loss scale is not used.
+            # This allows us to change the loss scale config format without breaking
+            # users who use the default loss scale.
+            config["loss_scale"] = keras_loss_scale_module.serialize(self.loss_scale)
+        return config
 
-  @classmethod
-  def from_config(cls, config, custom_objects=None):
-    if 'loss_scale' in config and isinstance(config['loss_scale'], dict):
-      config = config.copy()
-      config['loss_scale'] = keras_loss_scale_module.deserialize(
-          config['loss_scale'], custom_objects=custom_objects)
-    return cls(**config)
+    @classmethod
+    def from_config(cls, config, custom_objects=None):
+        if "loss_scale" in config and isinstance(config["loss_scale"], dict):
+            config = config.copy()
+            config["loss_scale"] = keras_loss_scale_module.deserialize(
+                config["loss_scale"], custom_objects=custom_objects
+            )
+        return cls(**config)
 
 
 # The current global policy in effect. If None, it means the current value of
@@ -409,10 +418,13 @@ class PolicyV1(Policy):
 _global_policy = None
 
 
-@keras_export('keras.mixed_precision.global_policy',
-              'keras.mixed_precision.experimental.global_policy', v1=[])
+@keras_export(
+    "keras.mixed_precision.global_policy",
+    "keras.mixed_precision.experimental.global_policy",
+    v1=[],
+)
 def global_policy():
-  """Returns the global dtype policy.
+    """Returns the global dtype policy.
 
   The global policy is the default `tf.keras.mixed_precision.Policy` used for
   layers, if no policy is passed to the layer constructor. If no policy has been
@@ -435,34 +447,38 @@ def global_policy():
   Returns:
     The global Policy.
   """
-  if _global_policy is None:
-    if base_layer_utils.v2_dtype_behavior_enabled():
-      return Policy(backend.floatx())
-    else:
-      return Policy('_infer')
-  return _global_policy
+    if _global_policy is None:
+        if base_layer_utils.v2_dtype_behavior_enabled():
+            return Policy(backend.floatx())
+        else:
+            return Policy("_infer")
+    return _global_policy
 
 
 def _check_if_mixed_precision_graph_rewrite_is_enabled(policy):
-  if mixed_precision_global_state.is_mixed_precision_graph_rewrite_enabled():
-    raise ValueError(
-        'The global dtype policy cannot be set to "{policy.name}", because the '
-        'mixed precision graph rewrite has already been enabled.\n'
-        'At most, one of the following can be called:\n\n'
-        '  1. tf.compat.v1.train.enable_mixed_precision_graph_rewrite() '
-        '(You called this first)\n'
-        '  2. tf.keras.mixed_precision.experimental.set_policy() with a mixed '
-        'precision policy (You called this second)\n\n'
-        'You called both functions, which is an error, because both functions '
-        'enable you to use mixed precision. If in doubt which function to use, '
-        'use the second, as it supports Eager execution and is more '
-        'customizable.'.format(policy=policy))
+    if mixed_precision_global_state.is_mixed_precision_graph_rewrite_enabled():
+        raise ValueError(
+            'The global dtype policy cannot be set to "{policy.name}", because the '
+            "mixed precision graph rewrite has already been enabled.\n"
+            "At most, one of the following can be called:\n\n"
+            "  1. tf.compat.v1.train.enable_mixed_precision_graph_rewrite() "
+            "(You called this first)\n"
+            "  2. tf.keras.mixed_precision.experimental.set_policy() with a mixed "
+            "precision policy (You called this second)\n\n"
+            "You called both functions, which is an error, because both functions "
+            "enable you to use mixed precision. If in doubt which function to use, "
+            "use the second, as it supports Eager execution and is more "
+            "customizable.".format(policy=policy)
+        )
 
 
-@keras_export('keras.mixed_precision.set_global_policy',
-              'keras.mixed_precision.experimental.set_policy', v1=[])
+@keras_export(
+    "keras.mixed_precision.set_global_policy",
+    "keras.mixed_precision.experimental.set_policy",
+    v1=[],
+)
 def set_policy(policy):
-  """Sets the global dtype policy.
+    """Sets the global dtype policy.
 
   The global policy is the default `tf.keras.mixed_precision.Policy` used for
   layers, if no policy is passed to the layer constructor.
@@ -496,32 +512,39 @@ def set_policy(policy):
       be None, in which case the global policy will be constructed from
       `tf.keras.backend.floatx()`
   """
-  global _global_policy
-  if not base_layer_utils.v2_dtype_behavior_enabled():
-    raise ValueError('The global policy can only be set in TensorFlow 2 or if '
-                     'V2 dtype behavior has been set. To enable V2 dtype '
-                     'behavior, call '
-                     '"tf.compat.v1.keras.layers.enable_v2_dtype_behavior()"')
-  if policy is not None and not isinstance(policy, Policy):
-    policy = Policy(policy)
-  is_mixed_policy = (policy is not None and
-                     policy.compute_dtype != policy.variable_dtype)
-  if is_mixed_policy:
-    _check_if_mixed_precision_graph_rewrite_is_enabled(policy)
-  if (policy is not None and policy.compute_dtype is not None and
-      not dtypes.as_dtype(policy.compute_dtype).is_floating):
-    raise ValueError('set_policy can only be used to set the global policy to '
-                     'floating-point policies, such as "float32" and '
-                     '"mixed_float16", but got policy: %s'
-                     % (policy.name,))
-  _global_policy = policy
-  mixed_precision_global_state.set_using_mixed_precision_policy(is_mixed_policy)
+    global _global_policy
+    if not base_layer_utils.v2_dtype_behavior_enabled():
+        raise ValueError(
+            "The global policy can only be set in TensorFlow 2 or if "
+            "V2 dtype behavior has been set. To enable V2 dtype "
+            "behavior, call "
+            '"tf.compat.v1.keras.layers.enable_v2_dtype_behavior()"'
+        )
+    if policy is not None and not isinstance(policy, Policy):
+        policy = Policy(policy)
+    is_mixed_policy = (
+        policy is not None and policy.compute_dtype != policy.variable_dtype
+    )
+    if is_mixed_policy:
+        _check_if_mixed_precision_graph_rewrite_is_enabled(policy)
+    if (
+        policy is not None
+        and policy.compute_dtype is not None
+        and not dtypes.as_dtype(policy.compute_dtype).is_floating
+    ):
+        raise ValueError(
+            "set_policy can only be used to set the global policy to "
+            'floating-point policies, such as "float32" and '
+            '"mixed_float16", but got policy: %s' % (policy.name,)
+        )
+    _global_policy = policy
+    mixed_precision_global_state.set_using_mixed_precision_policy(is_mixed_policy)
 
 
 # TODO(reedwm): Make this thread local
 @contextlib.contextmanager
 def policy_scope(policy):
-  """A context manager that sets the global Policy under it.
+    """A context manager that sets the global Policy under it.
 
   Args:
     policy: A Policy, or a string that will be converted to a Policy..
@@ -529,24 +552,24 @@ def policy_scope(policy):
   Yields:
     Nothing.
   """
-  old_policy = _global_policy
-  try:
-    set_policy(policy)
-    yield
-  finally:
-    set_policy(old_policy)
+    old_policy = _global_policy
+    try:
+        set_policy(policy)
+        yield
+    finally:
+        set_policy(old_policy)
 
 
 def _is_convertible_to_dtype(dtype):
-  try:
-    dtypes.as_dtype(dtype)
-    return True
-  except TypeError:
-    return False
+    try:
+        dtypes.as_dtype(dtype)
+        return True
+    except TypeError:
+        return False
 
 
 def _policy_equivalent_to_dtype(policy):
-  """Returns True if the Policy is equivalent to a single dtype.
+    """Returns True if the Policy is equivalent to a single dtype.
 
   A policy is equivalent to a single dtype if the policy's compute and variable
   dtypes are the same and the policy's type is Policy and not a subclass of
@@ -560,30 +583,34 @@ def _policy_equivalent_to_dtype(policy):
   Returns:
     True, if the policy is equivalent to a single dtype.
   """
-  # We use type() instead of isinstance because a subclass of Policy is never
-  # equivalent to a dtype.
-  return (type(policy) == Policy and  # pylint: disable=unidiomatic-typecheck
-          list(policy.get_config().keys()) == ['name'] and
-          (policy.name == '_infer' or _is_convertible_to_dtype(policy.name)))
+    # We use type() instead of isinstance because a subclass of Policy is never
+    # equivalent to a dtype.
+    return (
+        type(policy) == Policy
+        and list(policy.get_config().keys())  # pylint: disable=unidiomatic-typecheck
+        == ["name"]
+        and (policy.name == "_infer" or _is_convertible_to_dtype(policy.name))
+    )
 
 
 def serialize(policy):
-  if _policy_equivalent_to_dtype(policy):
-    # We return either None or the policy name for compatibility with older
-    # versions of Keras. If the policy name is returned, it is a dtype string
-    # such as 'float32'.
-    return None if policy.name == '_infer' else policy.name
-  return generic_utils.serialize_keras_object(policy)
+    if _policy_equivalent_to_dtype(policy):
+        # We return either None or the policy name for compatibility with older
+        # versions of Keras. If the policy name is returned, it is a dtype string
+        # such as 'float32'.
+        return None if policy.name == "_infer" else policy.name
+    return generic_utils.serialize_keras_object(policy)
 
 
 def deserialize(config, custom_objects=None):
-  if isinstance(config, str) and _is_convertible_to_dtype(config):
-    return Policy(config)
-  if config is None:
-    return Policy('_infer')
-  module_objects = {'Policy': Policy, 'PolicyV1': Policy}
-  return generic_utils.deserialize_keras_object(
-      config,
-      module_objects=module_objects,
-      custom_objects=custom_objects,
-      printable_module_name='dtype policy')
+    if isinstance(config, str) and _is_convertible_to_dtype(config):
+        return Policy(config)
+    if config is None:
+        return Policy("_infer")
+    module_objects = {"Policy": Policy, "PolicyV1": Policy}
+    return generic_utils.deserialize_keras_object(
+        config,
+        module_objects=module_objects,
+        custom_objects=custom_objects,
+        printable_module_name="dtype policy",
+    )

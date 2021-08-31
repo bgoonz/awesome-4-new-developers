@@ -32,9 +32,9 @@ from tensorflow.python.util.tf_export import keras_export
 # pylint: disable=protected-access
 
 
-@keras_export('keras.experimental.SequenceFeatures')
+@keras_export("keras.experimental.SequenceFeatures")
 class SequenceFeatures(kfc._BaseFeaturesLayer):
-  """A layer for sequence input.
+    """A layer for sequence input.
 
     All `feature_columns` must be sequence dense columns with the same
     `sequence_length`. The output of this method can be fed into sequence
@@ -81,13 +81,8 @@ class SequenceFeatures(kfc._BaseFeaturesLayer):
     ```
   """
 
-  def __init__(
-      self,
-      feature_columns,
-      trainable=True,
-      name=None,
-      **kwargs):
-    """"Constructs a SequenceFeatures layer.
+    def __init__(self, feature_columns, trainable=True, name=None, **kwargs):
+        """"Constructs a SequenceFeatures layer.
 
     Args:
       feature_columns: An iterable of dense sequence columns. Valid columns are
@@ -102,22 +97,23 @@ class SequenceFeatures(kfc._BaseFeaturesLayer):
       ValueError: If any of the `feature_columns` is not a
         `SequenceDenseColumn`.
     """
-    super(SequenceFeatures, self).__init__(
-        feature_columns=feature_columns,
-        trainable=trainable,
-        name=name,
-        expected_column_type=fc.SequenceDenseColumn,
-        **kwargs)
+        super(SequenceFeatures, self).__init__(
+            feature_columns=feature_columns,
+            trainable=trainable,
+            name=name,
+            expected_column_type=fc.SequenceDenseColumn,
+            **kwargs
+        )
 
-  @property
-  def _is_feature_layer(self):
-    return True
+    @property
+    def _is_feature_layer(self):
+        return True
 
-  def _target_shape(self, input_shape, total_elements):
-    return (input_shape[0], input_shape[1], total_elements)
+    def _target_shape(self, input_shape, total_elements):
+        return (input_shape[0], input_shape[1], total_elements)
 
-  def call(self, features, training=None):
-    """Returns sequence input corresponding to the `feature_columns`.
+    def call(self, features, training=None):
+        """Returns sequence input corresponding to the `feature_columns`.
 
     Args:
       features: A dict mapping keys to tensors.
@@ -141,42 +137,46 @@ class SequenceFeatures(kfc._BaseFeaturesLayer):
     Raises:
       ValueError: If features are not a dictionary.
     """
-    if not isinstance(features, dict):
-      raise ValueError('We expected a dictionary here. Instead we got: ',
-                       features)
-    if training is None:
-      training = backend.learning_phase()
-    transformation_cache = fc.FeatureTransformationCache(features)
-    output_tensors = []
-    sequence_lengths = []
+        if not isinstance(features, dict):
+            raise ValueError(
+                "We expected a dictionary here. Instead we got: ", features
+            )
+        if training is None:
+            training = backend.learning_phase()
+        transformation_cache = fc.FeatureTransformationCache(features)
+        output_tensors = []
+        sequence_lengths = []
 
-    for column in self._feature_columns:
-      with backend.name_scope(column.name):
-        try:
-          dense_tensor, sequence_length = column.get_sequence_dense_tensor(
-              transformation_cache, self._state_manager, training=training)
-        except TypeError:
-          dense_tensor, sequence_length = column.get_sequence_dense_tensor(
-              transformation_cache, self._state_manager)
-        # Flattens the final dimension to produce a 3D Tensor.
-        output_tensors.append(self._process_dense_tensor(column, dense_tensor))
-        sequence_lengths.append(sequence_length)
+        for column in self._feature_columns:
+            with backend.name_scope(column.name):
+                try:
+                    dense_tensor, sequence_length = column.get_sequence_dense_tensor(
+                        transformation_cache, self._state_manager, training=training
+                    )
+                except TypeError:
+                    dense_tensor, sequence_length = column.get_sequence_dense_tensor(
+                        transformation_cache, self._state_manager
+                    )
+                # Flattens the final dimension to produce a 3D Tensor.
+                output_tensors.append(self._process_dense_tensor(column, dense_tensor))
+                sequence_lengths.append(sequence_length)
 
-    # Check and process sequence lengths.
-    kfc._verify_static_batch_size_equality(    # pylint: disable=protected-access
-        sequence_lengths, self._feature_columns)
-    sequence_length = _assert_all_equal_and_return(sequence_lengths)
+        # Check and process sequence lengths.
+        kfc._verify_static_batch_size_equality(  # pylint: disable=protected-access
+            sequence_lengths, self._feature_columns
+        )
+        sequence_length = _assert_all_equal_and_return(sequence_lengths)
 
-    return self._verify_and_concat_tensors(output_tensors), sequence_length
+        return self._verify_and_concat_tensors(output_tensors), sequence_length
 
 
 def _assert_all_equal_and_return(tensors, name=None):
-  """Asserts that all tensors are equal and returns the first one."""
-  with backend.name_scope(name or 'assert_all_equal'):
-    if len(tensors) == 1:
-      return tensors[0]
-    assert_equal_ops = []
-    for t in tensors[1:]:
-      assert_equal_ops.append(check_ops.assert_equal(tensors[0], t))
-    with ops.control_dependencies(assert_equal_ops):
-      return array_ops.identity(tensors[0])
+    """Asserts that all tensors are equal and returns the first one."""
+    with backend.name_scope(name or "assert_all_equal"):
+        if len(tensors) == 1:
+            return tensors[0]
+        assert_equal_ops = []
+        for t in tensors[1:]:
+            assert_equal_ops.append(check_ops.assert_equal(tensors[0], t))
+        with ops.control_dependencies(assert_equal_ops):
+            return array_ops.identity(tensors[0])

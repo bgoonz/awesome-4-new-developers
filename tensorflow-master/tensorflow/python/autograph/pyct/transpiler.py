@@ -35,10 +35,16 @@ from tensorflow.python.autograph.pyct import transformer
 from tensorflow.python.autograph.utils import ag_logging as logging
 
 
-def _wrap_into_factory(nodes, entity_name, inner_factory_name,
-                       outer_factory_name, closure_vars, factory_args,
-                       future_features):
-  """Wraps an AST into the body of a factory with consistent lexical context.
+def _wrap_into_factory(
+    nodes,
+    entity_name,
+    inner_factory_name,
+    outer_factory_name,
+    closure_vars,
+    factory_args,
+    future_features,
+):
+    """Wraps an AST into the body of a factory with consistent lexical context.
 
   The AST is expected to define some symbol with a name given by `entity_name`.
 
@@ -104,27 +110,28 @@ def _wrap_into_factory(nodes, entity_name, inner_factory_name,
   Returns:
     ast.AST
   """
-  dummy_closure_defs = []
-  for var_name in closure_vars:
-    template = """
+    dummy_closure_defs = []
+    for var_name in closure_vars:
+        template = """
       var_name = None
     """
-    dummy_closure_defs.extend(templates.replace(template, var_name=var_name))
+        dummy_closure_defs.extend(templates.replace(template, var_name=var_name))
 
-  if future_features:
-    future_imports = gast.ImportFrom(
-        module='__future__',
-        names=[gast.alias(name=name, asname=None) for name in future_features],
-        level=0)
-  else:
-    future_imports = []
+    if future_features:
+        future_imports = gast.ImportFrom(
+            module="__future__",
+            names=[gast.alias(name=name, asname=None) for name in future_features],
+            level=0,
+        )
+    else:
+        future_imports = []
 
-  factory_args = [
-      gast.Name(name, ctx=gast.Param(), annotation=None, type_comment=None)
-      for name in factory_args
-  ]
+    factory_args = [
+        gast.Name(name, ctx=gast.Param(), annotation=None, type_comment=None)
+        for name in factory_args
+    ]
 
-  template = """
+    template = """
     future_imports
     def outer_factory_name():
       dummy_closure_defs
@@ -133,22 +140,23 @@ def _wrap_into_factory(nodes, entity_name, inner_factory_name,
         return entity_name
       return inner_factory_name
   """
-  return templates.replace(
-      template,
-      dummy_closure_defs=dummy_closure_defs,
-      entity_defs=nodes,
-      entity_name=entity_name,
-      factory_args=factory_args,
-      future_imports=future_imports,
-      inner_factory_name=inner_factory_name,
-      outer_factory_name=outer_factory_name)
+    return templates.replace(
+        template,
+        dummy_closure_defs=dummy_closure_defs,
+        entity_defs=nodes,
+        entity_name=entity_name,
+        factory_args=factory_args,
+        future_imports=future_imports,
+        inner_factory_name=inner_factory_name,
+        outer_factory_name=outer_factory_name,
+    )
 
 
 class _PythonFnFactory(object):
-  """Helper object that wraps a Python function factory."""
+    """Helper object that wraps a Python function factory."""
 
-  def __init__(self, name, freevars, extra_locals):
-    """Creates a new factory for a Python function.
+    def __init__(self, name, freevars, extra_locals):
+        """Creates a new factory for a Python function.
 
     Args:
       name: The function name.
@@ -156,76 +164,81 @@ class _PythonFnFactory(object):
       extra_locals: Dict[Text, Any], names and values for custom variables that
         are accessible to the generated code as local variables.
     """
-    self._name = name
-    self._freevars = freevars
-    self._extra_locals = extra_locals
+        self._name = name
+        self._freevars = freevars
+        self._extra_locals = extra_locals
 
-    self._unbound_factory = None
-    self.module = None
-    self.source_map = None
+        self._unbound_factory = None
+        self.module = None
+        self.source_map = None
 
-  def create(self,
-             nodes,
-             namer,
-             inner_factory_name='inner_factory',
-             outer_factory_name='outer_factory',
-             future_features=()):
-    """Initializes a function."""
-    if self._unbound_factory is not None:
-      raise ValueError('double initialization; create a new object instead')
+    def create(
+        self,
+        nodes,
+        namer,
+        inner_factory_name="inner_factory",
+        outer_factory_name="outer_factory",
+        future_features=(),
+    ):
+        """Initializes a function."""
+        if self._unbound_factory is not None:
+            raise ValueError("double initialization; create a new object instead")
 
-    inner_factory_name = namer.new_symbol(inner_factory_name, ())
-    outer_factory_name = namer.new_symbol(outer_factory_name, ())
-    nodes = _wrap_into_factory(nodes, self._name, inner_factory_name,
-                               outer_factory_name, self._freevars,
-                               self._extra_locals.keys(), future_features)
+        inner_factory_name = namer.new_symbol(inner_factory_name, ())
+        outer_factory_name = namer.new_symbol(outer_factory_name, ())
+        nodes = _wrap_into_factory(
+            nodes,
+            self._name,
+            inner_factory_name,
+            outer_factory_name,
+            self._freevars,
+            self._extra_locals.keys(),
+            future_features,
+        )
 
-    module, _, source_map = loader.load_ast(
-        nodes, include_source_map=True)
-    outer_factory = getattr(module, outer_factory_name)
-    self._unbound_factory = outer_factory()
-    self.module = module
-    self.source_map = source_map
+        module, _, source_map = loader.load_ast(nodes, include_source_map=True)
+        outer_factory = getattr(module, outer_factory_name)
+        self._unbound_factory = outer_factory()
+        self.module = module
+        self.source_map = source_map
 
-  def instantiate(self,
-                  globals_,
-                  closure,
-                  defaults=None,
-                  kwdefaults=None):
-    """Creates a new function instance."""
-    if self._unbound_factory is None:
-      raise ValueError('call create first')
+    def instantiate(self, globals_, closure, defaults=None, kwdefaults=None):
+        """Creates a new function instance."""
+        if self._unbound_factory is None:
+            raise ValueError("call create first")
 
-    factory_code = self._unbound_factory.__code__
-    factory_freevars = factory_code.co_freevars
-    closure_map = dict(zip(self._freevars, closure))
-    factory_closure = tuple(
-        closure_map[name] for name in factory_code.co_freevars)
-    if len(factory_closure) != len(closure):
-      raise ValueError(
-          'closure mismatch, requested {}, but source function had {}'.format(
-              self._freevars, factory_freevars))
+        factory_code = self._unbound_factory.__code__
+        factory_freevars = factory_code.co_freevars
+        closure_map = dict(zip(self._freevars, closure))
+        factory_closure = tuple(closure_map[name] for name in factory_code.co_freevars)
+        if len(factory_closure) != len(closure):
+            raise ValueError(
+                "closure mismatch, requested {}, but source function had {}".format(
+                    self._freevars, factory_freevars
+                )
+            )
 
-    bound_factory = types.FunctionType(
-        code=factory_code,
-        globals=globals_,
-        name=self._name,
-        argdefs=(),
-        closure=factory_closure)
+        bound_factory = types.FunctionType(
+            code=factory_code,
+            globals=globals_,
+            name=self._name,
+            argdefs=(),
+            closure=factory_closure,
+        )
 
-    # The lint override is a false positive.
-    new_fn = bound_factory(**self._extra_locals)  # pylint:disable=not-callable
+        # The lint override is a false positive.
+        new_fn = bound_factory(**self._extra_locals)  # pylint:disable=not-callable
 
-    if defaults:
-      new_fn.__defaults__ = defaults
-    if kwdefaults:
-      new_fn.__kwdefaults__ = kwdefaults
+        if defaults:
+            new_fn.__defaults__ = defaults
+        if kwdefaults:
+            new_fn.__kwdefaults__ = kwdefaults
 
-    return new_fn
+        return new_fn
 
 
 class GenericTranspiler(object):
-  """A generic transpiler for Python functions.
+    """A generic transpiler for Python functions.
 
   Its interface is the `transform` API, which can process Python function
   objects. Internally, it handles parsing.
@@ -248,16 +261,16 @@ class GenericTranspiler(object):
       # result is the output
   """
 
-  def get_transformed_name(self, node):
-    """Returns a name for the output function. Subclasses may override this."""
-    if isinstance(node, gast.Lambda):
-      return 'lam'
-    elif isinstance(node, gast.FunctionDef):
-      return node.name
-    raise ValueError('Unknown node type {}'.format(node))
+    def get_transformed_name(self, node):
+        """Returns a name for the output function. Subclasses may override this."""
+        if isinstance(node, gast.Lambda):
+            return "lam"
+        elif isinstance(node, gast.FunctionDef):
+            return node.name
+        raise ValueError("Unknown node type {}".format(node))
 
-  def transform_ast(self, node, ctx):
-    """Performs an actual transformation of a function's AST.
+    def transform_ast(self, node, ctx):
+        """Performs an actual transformation of a function's AST.
 
     Subclasses must implement this method, and do not usually call it.
 
@@ -265,10 +278,10 @@ class GenericTranspiler(object):
       node: One or more ast.AST nodes representing the AST to be transformed.
       ctx: transformer.Context.
     """
-    raise NotImplementedError('subclasses must override this')
+        raise NotImplementedError("subclasses must override this")
 
-  def transform(self, obj, user_context):
-    """Transforms a Python object.
+    def transform(self, obj, user_context):
+        """Transforms a Python object.
 
     Users typically call this method.
 
@@ -282,23 +295,23 @@ class GenericTranspiler(object):
     Raises:
       NotImplementedError: if the type of obj is not handled.
     """
-    if inspect.isfunction(obj) or inspect.ismethod(obj):
-      return self.transform_function(obj, user_context)
+        if inspect.isfunction(obj) or inspect.ismethod(obj):
+            return self.transform_function(obj, user_context)
 
-    raise NotImplementedError('Non-function: {}'.format(type(obj)))
+        raise NotImplementedError("Non-function: {}".format(type(obj)))
 
-  def _erase_arg_defaults(self, node):
-    """Erase arg default expressions, which would otherwise be unbound."""
-    args = node.args
-    for i in range(len(args.defaults)):
-      args.defaults[i] = parser.parse_expression('None')
-    for i, d in enumerate(args.kw_defaults):
-      if d is not None:
-        args.kw_defaults[i] = parser.parse_expression('None')
-    return node
+    def _erase_arg_defaults(self, node):
+        """Erase arg default expressions, which would otherwise be unbound."""
+        args = node.args
+        for i in range(len(args.defaults)):
+            args.defaults[i] = parser.parse_expression("None")
+        for i, d in enumerate(args.kw_defaults):
+            if d is not None:
+                args.kw_defaults[i] = parser.parse_expression("None")
+        return node
 
-  def transform_module(self, mod, user_context):
-    """Transforms a module.
+    def transform_module(self, mod, user_context):
+        """Transforms a module.
 
     Subclasses may override this method. The return value is opaque.
 
@@ -315,18 +328,18 @@ class GenericTranspiler(object):
       `transformer.Context` containing information about the transformation
       process.
     """
-    result = []
-    for member in mod.__dict__.values():
-      if inspect.ismodule(member):
-        continue  # Not transforming modules recursively.
-      try:
-        result.append(self.transform(member, user_context))
-      except NotImplementedError:
-        pass  # Skip unsupported elements.
-    return result
+        result = []
+        for member in mod.__dict__.values():
+            if inspect.ismodule(member):
+                continue  # Not transforming modules recursively.
+            try:
+                result.append(self.transform(member, user_context))
+            except NotImplementedError:
+                pass  # Skip unsupported elements.
+        return result
 
-  def transform_function(self, fn, user_context):
-    """Transforms a function.
+    def transform_function(self, fn, user_context):
+        """Transforms a function.
 
     Subclasses may override this method. The return value is opaque.
 
@@ -342,31 +355,32 @@ class GenericTranspiler(object):
       together with a `transformer.Context` containing information about the
       transformation process.
     """
-    future_features = inspect_utils.getfutureimports(fn)
-    node, source = parser.parse_entity(fn, future_features=future_features)
-    logging.log(3, 'Source code of %s:\n\n%s\n', fn, source)
+        future_features = inspect_utils.getfutureimports(fn)
+        node, source = parser.parse_entity(fn, future_features=future_features)
+        logging.log(3, "Source code of %s:\n\n%s\n", fn, source)
 
-    origin_info.resolve_entity(node, source, fn)
+        origin_info.resolve_entity(node, source, fn)
 
-    namespace = inspect_utils.getnamespace(fn)
-    namer = naming.Namer(namespace)
-    new_name = namer.new_symbol(self.get_transformed_name(node), ())
-    entity_info = transformer.EntityInfo(
-        name=new_name,
-        source_code=source,
-        source_file='<fragment>',
-        future_features=future_features,
-        namespace=namespace)
-    context = transformer.Context(entity_info, namer, user_context)
+        namespace = inspect_utils.getnamespace(fn)
+        namer = naming.Namer(namespace)
+        new_name = namer.new_symbol(self.get_transformed_name(node), ())
+        entity_info = transformer.EntityInfo(
+            name=new_name,
+            source_code=source,
+            source_file="<fragment>",
+            future_features=future_features,
+            namespace=namespace,
+        )
+        context = transformer.Context(entity_info, namer, user_context)
 
-    node = self._erase_arg_defaults(node)
-    result = self.transform_ast(node, context)
+        node = self._erase_arg_defaults(node)
+        result = self.transform_ast(node, context)
 
-    return result, context
+        return result, context
 
 
 class PyToPy(GenericTranspiler):
-  """A generic Python-to-Python transpiler.
+    """A generic Python-to-Python transpiler.
 
   Its `transform` method offers a function-in, function-out interface.
   Internally, it takes care of parsing, caching and loading of the translated
@@ -395,12 +409,12 @@ class PyToPy(GenericTranspiler):
   symbols by overriding `get_extra_locals`.
   """
 
-  def __init__(self):
-    self._cache_lock = threading.RLock()
-    self._cache = cache.CodeObjectCache()
+    def __init__(self):
+        self._cache_lock = threading.RLock()
+        self._cache = cache.CodeObjectCache()
 
-  def get_extra_locals(self):
-    """Returns extra static local variables to be made to transformed code.
+    def get_extra_locals(self):
+        """Returns extra static local variables to be made to transformed code.
 
     Subclasses must override this.
 
@@ -408,10 +422,10 @@ class PyToPy(GenericTranspiler):
       extra_locals: A Dict[Text, Any] containing additional variables to make
         available to the transformed code.
     """
-    raise NotImplementedError('subclasses must override this')
+        raise NotImplementedError("subclasses must override this")
 
-  def get_caching_key(self, user_context):
-    """Returns a unique key to use for caching.
+    def get_caching_key(self, user_context):
+        """Returns a unique key to use for caching.
 
     Subclasses must override this.
 
@@ -425,16 +439,17 @@ class PyToPy(GenericTranspiler):
     Returns:
       extra_locals: A hashable.
     """
-    raise NotImplementedError('subclasses must override this')
+        raise NotImplementedError("subclasses must override this")
 
-  def _cached_factory(self, fn, cache_subkey):
-    cached_factory = self._cache[fn][cache_subkey]
-    logging.log(3, 'Cache hit for %s subkey %s: %s', fn, cache_subkey,
-                cached_factory)
-    return cached_factory
+    def _cached_factory(self, fn, cache_subkey):
+        cached_factory = self._cache[fn][cache_subkey]
+        logging.log(
+            3, "Cache hit for %s subkey %s: %s", fn, cache_subkey, cached_factory
+        )
+        return cached_factory
 
-  def transform_function(self, fn, user_context):
-    """Transforms a function. See GenericTranspiler.trasnform_function.
+    def transform_function(self, fn, user_context):
+        """Transforms a function. See GenericTranspiler.trasnform_function.
 
     This overload wraps the parent's `transform_function`, adding caching and
     facilities to instantiate the output as a Python object. It also
@@ -452,48 +467,57 @@ class PyToPy(GenericTranspiler):
         * The source map as a
             Dict[origin_info.LineLocation, origin_info.OriginInfo]
     """
-    cache_subkey = self.get_caching_key(user_context)
+        cache_subkey = self.get_caching_key(user_context)
 
-    if self._cache.has(fn, cache_subkey):
-      # Fast path: use a lock-free check.
-      factory = self._cached_factory(fn, cache_subkey)
-
-    else:
-      with self._cache_lock:
-        # Check again under lock.
         if self._cache.has(fn, cache_subkey):
-          factory = self._cached_factory(fn, cache_subkey)
+            # Fast path: use a lock-free check.
+            factory = self._cached_factory(fn, cache_subkey)
 
         else:
-          logging.log(1, '%s is not cached for subkey %s', fn, cache_subkey)
-          # TODO(mdan): Confusing overloading pattern. Fix.
-          nodes, ctx = super(PyToPy, self).transform_function(fn, user_context)
+            with self._cache_lock:
+                # Check again under lock.
+                if self._cache.has(fn, cache_subkey):
+                    factory = self._cached_factory(fn, cache_subkey)
 
-          if isinstance(nodes, gast.Lambda):
-            nodes = gast.Assign(
-                targets=[
-                    gast.Name(
-                        ctx.info.name,
-                        ctx=gast.Store(),
-                        annotation=None,
-                        type_comment=None)
-                ],
-                value=nodes)
-          else:
-            nodes.name = ctx.info.name
+                else:
+                    logging.log(1, "%s is not cached for subkey %s", fn, cache_subkey)
+                    # TODO(mdan): Confusing overloading pattern. Fix.
+                    nodes, ctx = super(PyToPy, self).transform_function(
+                        fn, user_context
+                    )
 
-          if logging.has_verbosity(2):
-            logging.log(2, 'Transformed %s:\n\n%s\n', fn, parser.unparse(nodes))
+                    if isinstance(nodes, gast.Lambda):
+                        nodes = gast.Assign(
+                            targets=[
+                                gast.Name(
+                                    ctx.info.name,
+                                    ctx=gast.Store(),
+                                    annotation=None,
+                                    type_comment=None,
+                                )
+                            ],
+                            value=nodes,
+                        )
+                    else:
+                        nodes.name = ctx.info.name
 
-          factory = _PythonFnFactory(
-              ctx.info.name, fn.__code__.co_freevars, self.get_extra_locals())
-          factory.create(
-              nodes, ctx.namer, future_features=ctx.info.future_features)
-          self._cache[fn][cache_subkey] = factory
+                    if logging.has_verbosity(2):
+                        logging.log(
+                            2, "Transformed %s:\n\n%s\n", fn, parser.unparse(nodes)
+                        )
 
-    transformed_fn = factory.instantiate(
-        globals_=fn.__globals__,
-        closure=fn.__closure__ or (),
-        defaults=fn.__defaults__,
-        kwdefaults=getattr(fn, '__kwdefaults__', None))
-    return transformed_fn, factory.module, factory.source_map
+                    factory = _PythonFnFactory(
+                        ctx.info.name, fn.__code__.co_freevars, self.get_extra_locals()
+                    )
+                    factory.create(
+                        nodes, ctx.namer, future_features=ctx.info.future_features
+                    )
+                    self._cache[fn][cache_subkey] = factory
+
+        transformed_fn = factory.instantiate(
+            globals_=fn.__globals__,
+            closure=fn.__closure__ or (),
+            defaults=fn.__defaults__,
+            kwdefaults=getattr(fn, "__kwdefaults__", None),
+        )
+        return transformed_fn, factory.module, factory.source_map

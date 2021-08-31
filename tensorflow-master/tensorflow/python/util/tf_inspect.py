@@ -31,9 +31,10 @@ from tensorflow.python.util import tf_decorator
 # provided ArgSpec/FullArgSpec and instead return the signature of the
 # inner-most function.
 def signature(obj, *, follow_wrapped=True):
-  """TFDecorator-aware replacement for inspect.signature."""
-  return _inspect.signature(
-      tf_decorator.unwrap(obj)[1], follow_wrapped=follow_wrapped)
+    """TFDecorator-aware replacement for inspect.signature."""
+    return _inspect.signature(
+        tf_decorator.unwrap(obj)[1], follow_wrapped=follow_wrapped
+    )
 
 
 Parameter = _inspect.Parameter
@@ -42,32 +43,42 @@ Signature = _inspect.Signature
 ArgSpec = _inspect.ArgSpec
 
 
-if hasattr(_inspect, 'FullArgSpec'):
-  FullArgSpec = _inspect.FullArgSpec  # pylint: disable=invalid-name
+if hasattr(_inspect, "FullArgSpec"):
+    FullArgSpec = _inspect.FullArgSpec  # pylint: disable=invalid-name
 else:
-  FullArgSpec = collections.namedtuple('FullArgSpec', [
-      'args', 'varargs', 'varkw', 'defaults', 'kwonlyargs', 'kwonlydefaults',
-      'annotations'
-  ])
+    FullArgSpec = collections.namedtuple(
+        "FullArgSpec",
+        [
+            "args",
+            "varargs",
+            "varkw",
+            "defaults",
+            "kwonlyargs",
+            "kwonlydefaults",
+            "annotations",
+        ],
+    )
 
 
 def _convert_maybe_argspec_to_fullargspec(argspec):
-  if isinstance(argspec, FullArgSpec):
-    return argspec
-  return FullArgSpec(
-      args=argspec.args,
-      varargs=argspec.varargs,
-      varkw=argspec.keywords,
-      defaults=argspec.defaults,
-      kwonlyargs=[],
-      kwonlydefaults=None,
-      annotations={})
+    if isinstance(argspec, FullArgSpec):
+        return argspec
+    return FullArgSpec(
+        args=argspec.args,
+        varargs=argspec.varargs,
+        varkw=argspec.keywords,
+        defaults=argspec.defaults,
+        kwonlyargs=[],
+        kwonlydefaults=None,
+        annotations={},
+    )
 
-if hasattr(_inspect, 'getfullargspec'):
-  _getfullargspec = _inspect.getfullargspec  # pylint: disable=invalid-name
 
-  def _getargspec(target):
-    """A python3 version of getargspec.
+if hasattr(_inspect, "getfullargspec"):
+    _getfullargspec = _inspect.getfullargspec  # pylint: disable=invalid-name
+
+    def _getargspec(target):
+        """A python3 version of getargspec.
 
     Calls `getfullargspec` and assigns args, varargs,
     varkw, and defaults to a python 2/3 compatible `ArgSpec`.
@@ -82,18 +93,21 @@ if hasattr(_inspect, 'getfullargspec'):
       An ArgSpec with args, varargs, keywords, and defaults parameters
       from FullArgSpec.
     """
-    fullargspecs = getfullargspec(target)
-    argspecs = ArgSpec(
-        args=fullargspecs.args,
-        varargs=fullargspecs.varargs,
-        keywords=fullargspecs.varkw,
-        defaults=fullargspecs.defaults)
-    return argspecs
-else:
-  _getargspec = _inspect.getargspec
+        fullargspecs = getfullargspec(target)
+        argspecs = ArgSpec(
+            args=fullargspecs.args,
+            varargs=fullargspecs.varargs,
+            keywords=fullargspecs.varkw,
+            defaults=fullargspecs.defaults,
+        )
+        return argspecs
 
-  def _getfullargspec(target):
-    """A python2 version of getfullargspec.
+
+else:
+    _getargspec = _inspect.getargspec
+
+    def _getfullargspec(target):
+        """A python2 version of getfullargspec.
 
     Args:
       target: the target object to inspect.
@@ -101,16 +115,16 @@ else:
     Returns:
       A FullArgSpec with empty kwonlyargs, kwonlydefaults and annotations.
     """
-    return _convert_maybe_argspec_to_fullargspec(getargspec(target))
+        return _convert_maybe_argspec_to_fullargspec(getargspec(target))
 
 
 def currentframe():
-  """TFDecorator-aware replacement for inspect.currentframe."""
-  return _inspect.stack()[1][0]
+    """TFDecorator-aware replacement for inspect.currentframe."""
+    return _inspect.stack()[1][0]
 
 
 def getargspec(obj):
-  """TFDecorator-aware replacement for `inspect.getargspec`.
+    """TFDecorator-aware replacement for `inspect.getargspec`.
 
   Note: `getfullargspec` is recommended as the python 2/3 compatible
   replacement for this function.
@@ -128,41 +142,42 @@ def getargspec(obj):
       ArgSpec.
     TypeError: For objects of unsupported types.
   """
-  if isinstance(obj, functools.partial):
-    return _get_argspec_for_partial(obj)
+    if isinstance(obj, functools.partial):
+        return _get_argspec_for_partial(obj)
 
-  decorators, target = tf_decorator.unwrap(obj)
+    decorators, target = tf_decorator.unwrap(obj)
 
-  spec = next((d.decorator_argspec
-               for d in decorators
-               if d.decorator_argspec is not None), None)
-  if spec:
-    return spec
-
-  try:
-    # Python3 will handle most callables here (not partial).
-    return _getargspec(target)
-  except TypeError:
-    pass
-
-  if isinstance(target, type):
-    try:
-      return _getargspec(target.__init__)
-    except TypeError:
-      pass
+    spec = next(
+        (d.decorator_argspec for d in decorators if d.decorator_argspec is not None),
+        None,
+    )
+    if spec:
+        return spec
 
     try:
-      return _getargspec(target.__new__)
+        # Python3 will handle most callables here (not partial).
+        return _getargspec(target)
     except TypeError:
-      pass
+        pass
 
-  # The `type(target)` ensures that if a class is received we don't return
-  # the signature of its __call__ method.
-  return _getargspec(type(target).__call__)
+    if isinstance(target, type):
+        try:
+            return _getargspec(target.__init__)
+        except TypeError:
+            pass
+
+        try:
+            return _getargspec(target.__new__)
+        except TypeError:
+            pass
+
+    # The `type(target)` ensures that if a class is received we don't return
+    # the signature of its __call__ method.
+    return _getargspec(type(target).__call__)
 
 
 def _get_argspec_for_partial(obj):
-  """Implements `getargspec` for `functools.partial` objects.
+    """Implements `getargspec` for `functools.partial` objects.
 
   Args:
     obj: The `functools.partial` object
@@ -172,84 +187,90 @@ def _get_argspec_for_partial(obj):
     ValueError: When callable's signature can not be expressed with
       ArgSpec.
   """
-  # When callable is a functools.partial object, we construct its ArgSpec with
-  # following strategy:
-  # - If callable partial contains default value for positional arguments (ie.
-  # object.args), then final ArgSpec doesn't contain those positional arguments.
-  # - If callable partial contains default value for keyword arguments (ie.
-  # object.keywords), then we merge them with wrapped target. Default values
-  # from callable partial takes precedence over those from wrapped target.
-  #
-  # However, there is a case where it is impossible to construct a valid
-  # ArgSpec. Python requires arguments that have no default values must be
-  # defined before those with default values. ArgSpec structure is only valid
-  # when this presumption holds true because default values are expressed as a
-  # tuple of values without keywords and they are always assumed to belong to
-  # last K arguments where K is number of default values present.
-  #
-  # Since functools.partial can give default value to any argument, this
-  # presumption may no longer hold in some cases. For example:
-  #
-  # def func(m, n):
-  #   return 2 * m + n
-  # partialed = functools.partial(func, m=1)
-  #
-  # This example will result in m having a default value but n doesn't. This is
-  # usually not allowed in Python and can not be expressed in ArgSpec correctly.
-  #
-  # Thus, we must detect cases like this by finding first argument with default
-  # value and ensures all following arguments also have default values. When
-  # this is not true, a ValueError is raised.
+    # When callable is a functools.partial object, we construct its ArgSpec with
+    # following strategy:
+    # - If callable partial contains default value for positional arguments (ie.
+    # object.args), then final ArgSpec doesn't contain those positional arguments.
+    # - If callable partial contains default value for keyword arguments (ie.
+    # object.keywords), then we merge them with wrapped target. Default values
+    # from callable partial takes precedence over those from wrapped target.
+    #
+    # However, there is a case where it is impossible to construct a valid
+    # ArgSpec. Python requires arguments that have no default values must be
+    # defined before those with default values. ArgSpec structure is only valid
+    # when this presumption holds true because default values are expressed as a
+    # tuple of values without keywords and they are always assumed to belong to
+    # last K arguments where K is number of default values present.
+    #
+    # Since functools.partial can give default value to any argument, this
+    # presumption may no longer hold in some cases. For example:
+    #
+    # def func(m, n):
+    #   return 2 * m + n
+    # partialed = functools.partial(func, m=1)
+    #
+    # This example will result in m having a default value but n doesn't. This is
+    # usually not allowed in Python and can not be expressed in ArgSpec correctly.
+    #
+    # Thus, we must detect cases like this by finding first argument with default
+    # value and ensures all following arguments also have default values. When
+    # this is not true, a ValueError is raised.
 
-  n_prune_args = len(obj.args)
-  partial_keywords = obj.keywords or {}
+    n_prune_args = len(obj.args)
+    partial_keywords = obj.keywords or {}
 
-  args, varargs, keywords, defaults = getargspec(obj.func)
+    args, varargs, keywords, defaults = getargspec(obj.func)
 
-  # Pruning first n_prune_args arguments.
-  args = args[n_prune_args:]
+    # Pruning first n_prune_args arguments.
+    args = args[n_prune_args:]
 
-  # Partial function may give default value to any argument, therefore length
-  # of default value list must be len(args) to allow each argument to
-  # potentially be given a default value.
-  no_default = object()
-  all_defaults = [no_default] * len(args)
+    # Partial function may give default value to any argument, therefore length
+    # of default value list must be len(args) to allow each argument to
+    # potentially be given a default value.
+    no_default = object()
+    all_defaults = [no_default] * len(args)
 
-  if defaults:
-    all_defaults[-len(defaults):] = defaults
+    if defaults:
+        all_defaults[-len(defaults) :] = defaults
 
-  # Fill in default values provided by partial function in all_defaults.
-  for kw, default in six.iteritems(partial_keywords):
-    if kw in args:
-      idx = args.index(kw)
-      all_defaults[idx] = default
-    elif not keywords:
-      raise ValueError(f'{obj} does not have a **kwargs parameter, but '
-                       f'contains an unknown partial keyword {kw}.')
+    # Fill in default values provided by partial function in all_defaults.
+    for kw, default in six.iteritems(partial_keywords):
+        if kw in args:
+            idx = args.index(kw)
+            all_defaults[idx] = default
+        elif not keywords:
+            raise ValueError(
+                f"{obj} does not have a **kwargs parameter, but "
+                f"contains an unknown partial keyword {kw}."
+            )
 
-  # Find first argument with default value set.
-  first_default = next(
-      (idx for idx, x in enumerate(all_defaults) if x is not no_default), None)
+    # Find first argument with default value set.
+    first_default = next(
+        (idx for idx, x in enumerate(all_defaults) if x is not no_default), None
+    )
 
-  # If no default values are found, return ArgSpec with defaults=None.
-  if first_default is None:
-    return ArgSpec(args, varargs, keywords, None)
+    # If no default values are found, return ArgSpec with defaults=None.
+    if first_default is None:
+        return ArgSpec(args, varargs, keywords, None)
 
-  # Checks if all arguments have default value set after first one.
-  invalid_default_values = [
-      args[i] for i, j in enumerate(all_defaults)
-      if j is no_default and i > first_default
-  ]
+    # Checks if all arguments have default value set after first one.
+    invalid_default_values = [
+        args[i]
+        for i, j in enumerate(all_defaults)
+        if j is no_default and i > first_default
+    ]
 
-  if invalid_default_values:
-    raise ValueError(f'{obj} has some keyword-only arguments, which are not'
-                     f' supported: {invalid_default_values}.')
+    if invalid_default_values:
+        raise ValueError(
+            f"{obj} has some keyword-only arguments, which are not"
+            f" supported: {invalid_default_values}."
+        )
 
-  return ArgSpec(args, varargs, keywords, tuple(all_defaults[first_default:]))
+    return ArgSpec(args, varargs, keywords, tuple(all_defaults[first_default:]))
 
 
 def getfullargspec(obj):
-  """TFDecorator-aware replacement for `inspect.getfullargspec`.
+    """TFDecorator-aware replacement for `inspect.getfullargspec`.
 
   This wrapper emulates `inspect.getfullargspec` in[^)]* Python2.
 
@@ -262,16 +283,16 @@ def getfullargspec(obj):
     callable is not decorated, `inspect.getfullargspec()` will be called
     directly on the callable.
   """
-  decorators, target = tf_decorator.unwrap(obj)
+    decorators, target = tf_decorator.unwrap(obj)
 
-  for d in decorators:
-    if d.decorator_argspec is not None:
-      return _convert_maybe_argspec_to_fullargspec(d.decorator_argspec)
-  return _getfullargspec(target)
+    for d in decorators:
+        if d.decorator_argspec is not None:
+            return _convert_maybe_argspec_to_fullargspec(d.decorator_argspec)
+    return _getfullargspec(target)
 
 
 def getcallargs(*func_and_positional, **named):
-  """TFDecorator-aware replacement for inspect.getcallargs.
+    """TFDecorator-aware replacement for inspect.getcallargs.
 
   Args:
     *func_and_positional: A callable, possibly decorated, followed by any
@@ -286,33 +307,33 @@ def getcallargs(*func_and_positional, **named):
   it. If no attached decorators modify argspec, the final unwrapped target's
   argspec will be used.
   """
-  func = func_and_positional[0]
-  positional = func_and_positional[1:]
-  argspec = getfullargspec(func)
-  call_args = named.copy()
-  this = getattr(func, 'im_self', None) or getattr(func, '__self__', None)
-  if ismethod(func) and this:
-    positional = (this,) + positional
-  remaining_positionals = [arg for arg in argspec.args if arg not in call_args]
-  call_args.update(dict(zip(remaining_positionals, positional)))
-  default_count = 0 if not argspec.defaults else len(argspec.defaults)
-  if default_count:
-    for arg, value in zip(argspec.args[-default_count:], argspec.defaults):
-      if arg not in call_args:
-        call_args[arg] = value
-  if argspec.kwonlydefaults is not None:
-    for k, v in argspec.kwonlydefaults.items():
-      if k not in call_args:
-        call_args[k] = v
-  return call_args
+    func = func_and_positional[0]
+    positional = func_and_positional[1:]
+    argspec = getfullargspec(func)
+    call_args = named.copy()
+    this = getattr(func, "im_self", None) or getattr(func, "__self__", None)
+    if ismethod(func) and this:
+        positional = (this,) + positional
+    remaining_positionals = [arg for arg in argspec.args if arg not in call_args]
+    call_args.update(dict(zip(remaining_positionals, positional)))
+    default_count = 0 if not argspec.defaults else len(argspec.defaults)
+    if default_count:
+        for arg, value in zip(argspec.args[-default_count:], argspec.defaults):
+            if arg not in call_args:
+                call_args[arg] = value
+    if argspec.kwonlydefaults is not None:
+        for k, v in argspec.kwonlydefaults.items():
+            if k not in call_args:
+                call_args[k] = v
+    return call_args
 
 
 def getframeinfo(*args, **kwargs):
-  return _inspect.getframeinfo(*args, **kwargs)
+    return _inspect.getframeinfo(*args, **kwargs)
 
 
 def getdoc(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.getdoc.
+    """TFDecorator-aware replacement for inspect.getdoc.
 
   Args:
     object: An object, possibly decorated.
@@ -323,91 +344,93 @@ def getdoc(object):  # pylint: disable=redefined-builtin
   The outermost-decorated object is intended to have the most complete
   documentation, so the decorated parameter is not unwrapped.
   """
-  return _inspect.getdoc(object)
+    return _inspect.getdoc(object)
 
 
 def getfile(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.getfile."""
-  unwrapped_object = tf_decorator.unwrap(object)[1]
+    """TFDecorator-aware replacement for inspect.getfile."""
+    unwrapped_object = tf_decorator.unwrap(object)[1]
 
-  # Work around for the case when object is a stack frame
-  # and only .pyc files are used. In this case, getfile
-  # might return incorrect path. So, we get the path from f_globals
-  # instead.
-  if (hasattr(unwrapped_object, 'f_globals') and
-      '__file__' in unwrapped_object.f_globals):
-    return unwrapped_object.f_globals['__file__']
-  return _inspect.getfile(unwrapped_object)
+    # Work around for the case when object is a stack frame
+    # and only .pyc files are used. In this case, getfile
+    # might return incorrect path. So, we get the path from f_globals
+    # instead.
+    if (
+        hasattr(unwrapped_object, "f_globals")
+        and "__file__" in unwrapped_object.f_globals
+    ):
+        return unwrapped_object.f_globals["__file__"]
+    return _inspect.getfile(unwrapped_object)
 
 
 def getmembers(object, predicate=None):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.getmembers."""
-  return _inspect.getmembers(object, predicate)
+    """TFDecorator-aware replacement for inspect.getmembers."""
+    return _inspect.getmembers(object, predicate)
 
 
 def getmodule(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.getmodule."""
-  return _inspect.getmodule(object)
+    """TFDecorator-aware replacement for inspect.getmodule."""
+    return _inspect.getmodule(object)
 
 
 def getmro(cls):
-  """TFDecorator-aware replacement for inspect.getmro."""
-  return _inspect.getmro(cls)
+    """TFDecorator-aware replacement for inspect.getmro."""
+    return _inspect.getmro(cls)
 
 
 def getsource(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.getsource."""
-  return _inspect.getsource(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.getsource."""
+    return _inspect.getsource(tf_decorator.unwrap(object)[1])
 
 
 def getsourcefile(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.getsourcefile."""
-  return _inspect.getsourcefile(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.getsourcefile."""
+    return _inspect.getsourcefile(tf_decorator.unwrap(object)[1])
 
 
 def getsourcelines(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.getsourcelines."""
-  return _inspect.getsourcelines(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.getsourcelines."""
+    return _inspect.getsourcelines(tf_decorator.unwrap(object)[1])
 
 
 def isbuiltin(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.isbuiltin."""
-  return _inspect.isbuiltin(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.isbuiltin."""
+    return _inspect.isbuiltin(tf_decorator.unwrap(object)[1])
 
 
 def isclass(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.isclass."""
-  return _inspect.isclass(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.isclass."""
+    return _inspect.isclass(tf_decorator.unwrap(object)[1])
 
 
 def isfunction(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.isfunction."""
-  return _inspect.isfunction(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.isfunction."""
+    return _inspect.isfunction(tf_decorator.unwrap(object)[1])
 
 
 def isframe(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.ismodule."""
-  return _inspect.isframe(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.ismodule."""
+    return _inspect.isframe(tf_decorator.unwrap(object)[1])
 
 
 def isgenerator(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.isgenerator."""
-  return _inspect.isgenerator(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.isgenerator."""
+    return _inspect.isgenerator(tf_decorator.unwrap(object)[1])
 
 
 def isgeneratorfunction(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.isgeneratorfunction."""
-  return _inspect.isgeneratorfunction(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.isgeneratorfunction."""
+    return _inspect.isgeneratorfunction(tf_decorator.unwrap(object)[1])
 
 
 def ismethod(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.ismethod."""
-  return _inspect.ismethod(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.ismethod."""
+    return _inspect.ismethod(tf_decorator.unwrap(object)[1])
 
 
 def isanytargetmethod(object):  # pylint: disable=redefined-builtin
-  # pylint: disable=g-doc-args,g-doc-return-or-yield
-  """Checks if `object` or a TF Decorator wrapped target contains self or cls.
+    # pylint: disable=g-doc-args,g-doc-return-or-yield
+    """Checks if `object` or a TF Decorator wrapped target contains self or cls.
 
   This function could be used along with `tf_inspect.getfullargspec` to
   determine if the first argument of `object` argspec is self or cls. If the
@@ -426,31 +449,31 @@ def isanytargetmethod(object):  # pylint: disable=redefined-builtin
     A bool indicates if `object` or any target along the chain of TF decorators
     is a method.
   """
-  decorators, target = tf_decorator.unwrap(object)
-  for decorator in decorators:
-    if _inspect.ismethod(decorator.decorated_target):
-      return True
+    decorators, target = tf_decorator.unwrap(object)
+    for decorator in decorators:
+        if _inspect.ismethod(decorator.decorated_target):
+            return True
 
-  # TODO(b/194845243): Implement the long term solution with inspect.signature.
-  # A functools.partial object is not a function or method. But if the wrapped
-  # func is a method, the argspec will contain self/cls.
-  while isinstance(target, functools.partial):
-    target = target.func
+    # TODO(b/194845243): Implement the long term solution with inspect.signature.
+    # A functools.partial object is not a function or method. But if the wrapped
+    # func is a method, the argspec will contain self/cls.
+    while isinstance(target, functools.partial):
+        target = target.func
 
-  # `target` is a method or an instance with __call__
-  return callable(target) and not _inspect.isfunction(target)
+    # `target` is a method or an instance with __call__
+    return callable(target) and not _inspect.isfunction(target)
 
 
 def ismodule(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.ismodule."""
-  return _inspect.ismodule(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.ismodule."""
+    return _inspect.ismodule(tf_decorator.unwrap(object)[1])
 
 
 def isroutine(object):  # pylint: disable=redefined-builtin
-  """TFDecorator-aware replacement for inspect.isroutine."""
-  return _inspect.isroutine(tf_decorator.unwrap(object)[1])
+    """TFDecorator-aware replacement for inspect.isroutine."""
+    return _inspect.isroutine(tf_decorator.unwrap(object)[1])
 
 
 def stack(context=1):
-  """TFDecorator-aware replacement for inspect.stack."""
-  return _inspect.stack(context)[1:]
+    """TFDecorator-aware replacement for inspect.stack."""
+    return _inspect.stack(context)[1:]

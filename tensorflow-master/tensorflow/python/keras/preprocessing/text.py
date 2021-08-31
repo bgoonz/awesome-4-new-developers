@@ -17,19 +17,20 @@
 
 from keras_preprocessing import text
 
-from tensorflow.python.keras.preprocessing.text_dataset import text_dataset_from_directory  # pylint: disable=unused-import
+from tensorflow.python.keras.preprocessing.text_dataset import (
+    text_dataset_from_directory,
+)  # pylint: disable=unused-import
 from tensorflow.python.util.tf_export import keras_export
 
 hashing_trick = text.hashing_trick
 Tokenizer = text.Tokenizer
 
 
-@keras_export('keras.preprocessing.text.text_to_word_sequence')
-def text_to_word_sequence(input_text,
-                          filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
-                          lower=True,
-                          split=' '):
-  """Converts a text to a sequence of words (or tokens).
+@keras_export("keras.preprocessing.text.text_to_word_sequence")
+def text_to_word_sequence(
+    input_text, filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n', lower=True, split=" "
+):
+    """Converts a text to a sequence of words (or tokens).
 
   This function transforms a string of text into a list of words
   while ignoring `filters` which include punctuations by default.
@@ -49,17 +50,16 @@ def text_to_word_sequence(input_text,
   Returns:
       A list of words (or tokens).
   """
-  return text.text_to_word_sequence(
-      input_text, filters=filters, lower=lower, split=split)
+    return text.text_to_word_sequence(
+        input_text, filters=filters, lower=lower, split=split
+    )
 
 
-@keras_export('keras.preprocessing.text.one_hot')
-def one_hot(input_text,
-            n,
-            filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
-            lower=True,
-            split=' '):
-  r"""One-hot encodes a text into a list of word indexes of size `n`.
+@keras_export("keras.preprocessing.text.one_hot")
+def one_hot(
+    input_text, n, filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n', lower=True, split=" "
+):
+    r"""One-hot encodes a text into a list of word indexes of size `n`.
 
   This function receives as input a string of text and returns a
   list of encoded integers each corresponding to a word (or token)
@@ -81,16 +81,15 @@ def one_hot(input_text,
       List of integers in `[1, n]`. Each integer encodes a word
       (unicity non-guaranteed).
   """
-  return text.one_hot(input_text, n, filters=filters, lower=lower, split=split)
+    return text.one_hot(input_text, n, filters=filters, lower=lower, split=split)
 
 
 # text.tokenizer_from_json is only available if keras_preprocessing >= 1.1.0
 try:
-  tokenizer_from_json = text.tokenizer_from_json
-  keras_export('keras.preprocessing.text.tokenizer_from_json')(
-      tokenizer_from_json)
+    tokenizer_from_json = text.tokenizer_from_json
+    keras_export("keras.preprocessing.text.tokenizer_from_json")(tokenizer_from_json)
 except AttributeError:
-  pass
+    pass
 
-keras_export('keras.preprocessing.text.hashing_trick')(hashing_trick)
-keras_export('keras.preprocessing.text.Tokenizer')(Tokenizer)
+keras_export("keras.preprocessing.text.hashing_trick")(hashing_trick)
+keras_export("keras.preprocessing.text.Tokenizer")(Tokenizer)

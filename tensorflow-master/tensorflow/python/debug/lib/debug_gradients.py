@@ -35,12 +35,12 @@ _gradient_debuggers = {}
 
 
 def _tensor_to_grad_debug_op_name(tensor, grad_debugger_uuid):
-  op_name, slot = debug_graphs.parse_node_or_tensor_name(tensor.name)
-  return "%s_%d/%s%s" % (op_name, slot, _GRADIENT_DEBUG_TAG, grad_debugger_uuid)
+    op_name, slot = debug_graphs.parse_node_or_tensor_name(tensor.name)
+    return "%s_%d/%s%s" % (op_name, slot, _GRADIENT_DEBUG_TAG, grad_debugger_uuid)
 
 
 def _parse_grad_debug_op_name(op_name):
-  """Parse the name of a debug gradient op.
+    """Parse the name of a debug gradient op.
 
   Args:
     op_name: the name of the debug gradient op.
@@ -50,69 +50,71 @@ def _parse_grad_debug_op_name(op_name):
     2) Name of the original tensor whose gradient is debugged by the debug
        gradient op.
   """
-  name_items = op_name.split("/")
-  assert len(name_items) > 1
-  assert name_items[-1].startswith(_GRADIENT_DEBUG_TAG)
+    name_items = op_name.split("/")
+    assert len(name_items) > 1
+    assert name_items[-1].startswith(_GRADIENT_DEBUG_TAG)
 
-  grad_debugger_uuid = name_items[-1][len(_GRADIENT_DEBUG_TAG):]
-  if "_" in grad_debugger_uuid:
-    grad_debugger_uuid = grad_debugger_uuid[:grad_debugger_uuid.index("_")]
-  orig_tensor_slot = int(name_items[-2][name_items[-2].rfind("_") + 1:])
-  orig_base_op_name = name_items[-2][:name_items[-2].rfind("_")]
-  orig_tensor_name = ("/".join(name_items[:-2] + [orig_base_op_name]) +
-                      ":%d" % orig_tensor_slot)
+    grad_debugger_uuid = name_items[-1][len(_GRADIENT_DEBUG_TAG) :]
+    if "_" in grad_debugger_uuid:
+        grad_debugger_uuid = grad_debugger_uuid[: grad_debugger_uuid.index("_")]
+    orig_tensor_slot = int(name_items[-2][name_items[-2].rfind("_") + 1 :])
+    orig_base_op_name = name_items[-2][: name_items[-2].rfind("_")]
+    orig_tensor_name = (
+        "/".join(name_items[:-2] + [orig_base_op_name]) + ":%d" % orig_tensor_slot
+    )
 
-  return grad_debugger_uuid, orig_tensor_name
+    return grad_debugger_uuid, orig_tensor_name
 
 
 class GradientsDebugger(object):
-  """Gradients Debugger.
+    """Gradients Debugger.
 
   Allows retrieval of gradient tensors created by TensorFlow's automatic
   differentiation algorithm, i.e., `tf.gradients` and optimizer classes that
   use it.
   """
-  # TODO(cais): Add examples code in the doc string?
 
-  def __init__(self, y_tensor=None):
-    """Constructor of GradientsDebugger.
+    # TODO(cais): Add examples code in the doc string?
+
+    def __init__(self, y_tensor=None):
+        """Constructor of GradientsDebugger.
 
     Args:
       y_tensor: optional: the `tf.Tensor` to be differentiated, i.e., the tensor
         on the numerator of the differentiation.
     """
 
-    self._uuid = uuid.uuid4().hex
-    _gradient_debuggers[self._uuid] = self
+        self._uuid = uuid.uuid4().hex
+        _gradient_debuggers[self._uuid] = self
 
-    # A dict mapping x-tensor names to gradient tensor. x-tensor refers to the
-    # independent tf.Tensor, i.e., the tensor on the denominator of the
-    # differentiation.
-    self._gradient_tensors = {}
-    self._y_tensor = y_tensor
+        # A dict mapping x-tensor names to gradient tensor. x-tensor refers to the
+        # independent tf.Tensor, i.e., the tensor on the denominator of the
+        # differentiation.
+        self._gradient_tensors = {}
+        self._y_tensor = y_tensor
 
-    self._graph = None
-    if y_tensor:
-      self._graph = y_tensor.graph
+        self._graph = None
+        if y_tensor:
+            self._graph = y_tensor.graph
 
-    self._is_active_context = False
+        self._is_active_context = False
 
-  @property
-  def y_tensor(self):
-    return self._y_tensor
+    @property
+    def y_tensor(self):
+        return self._y_tensor
 
-  @property
-  def graph(self):
-    return self._graph
+    @property
+    def graph(self):
+        return self._graph
 
-  def __enter__(self):
-    self._is_active_context = True
+    def __enter__(self):
+        self._is_active_context = True
 
-  def __exit__(self, unused_type, unused_value, unused_traceback):
-    self._is_active_context = False
+    def __exit__(self, unused_type, unused_value, unused_traceback):
+        self._is_active_context = False
 
-  def identify_gradient(self, input_tensor):
-    """Create a debug identity tensor that registers and forwards gradients.
+    def identify_gradient(self, input_tensor):
+        """Create a debug identity tensor that registers and forwards gradients.
 
     The side effect of this method is that when gradient tensor(s) are created
     with respect to the any paths that include the `input_tensor`, the gradient
@@ -152,24 +154,26 @@ class GradientsDebugger(object):
       ValueError: If an op with name that duplicates the gradient-debugging op
         already exists in the graph (highly unlikely).
     """
-    # TODO(cais): Allow overriding gradient.
-    # TODO(cais): Implement value_stack.
-    grad_debug_op_name = _tensor_to_grad_debug_op_name(input_tensor, self._uuid)
-    # pylint: disable=protected-access
-    identity_op = (
-        gen_array_ops.debug_gradient_ref_identity
-        if input_tensor.dtype._is_ref_dtype else
-        gen_array_ops.debug_gradient_identity)
-    # pylint: enable=protected-access
-    debug_grad_identity = identity_op(input_tensor, name=grad_debug_op_name)
-    assert debug_grad_identity.dtype == input_tensor.dtype
-    if debug_grad_identity.op.name != grad_debug_op_name:
-      raise ValueError(
-          "The graph already contains an op named %s" % grad_debug_op_name)
-    return debug_grad_identity
+        # TODO(cais): Allow overriding gradient.
+        # TODO(cais): Implement value_stack.
+        grad_debug_op_name = _tensor_to_grad_debug_op_name(input_tensor, self._uuid)
+        # pylint: disable=protected-access
+        identity_op = (
+            gen_array_ops.debug_gradient_ref_identity
+            if input_tensor.dtype._is_ref_dtype
+            else gen_array_ops.debug_gradient_identity
+        )
+        # pylint: enable=protected-access
+        debug_grad_identity = identity_op(input_tensor, name=grad_debug_op_name)
+        assert debug_grad_identity.dtype == input_tensor.dtype
+        if debug_grad_identity.op.name != grad_debug_op_name:
+            raise ValueError(
+                "The graph already contains an op named %s" % grad_debug_op_name
+            )
+        return debug_grad_identity
 
-  def watch_gradients_by_tensors(self, graph, tensors):
-    """Watch gradient tensors by x-tensor(s).
+    def watch_gradients_by_tensors(self, graph, tensors):
+        """Watch gradient tensors by x-tensor(s).
 
     The side effect of this method is that when gradient tensor(s) are created
     with respect to the any paths that include the `x_tensor`s, the gradient
@@ -212,17 +216,17 @@ class GradientsDebugger(object):
       The GradientsDebugger instance itself.
     """
 
-    if not isinstance(tensors, list):
-      tensors = [tensors]
+        if not isinstance(tensors, list):
+            tensors = [tensors]
 
-    tensor_name_regex = []
-    for tensor in tensors:
-      tensor_name_regex.append(re.escape(tensor.name) + "$")
-    tensor_name_regex = "(" + "|".join(tensor_name_regex) + ")"
-    return self.watch_gradients_by_tensor_names(graph, tensor_name_regex)
+        tensor_name_regex = []
+        for tensor in tensors:
+            tensor_name_regex.append(re.escape(tensor.name) + "$")
+        tensor_name_regex = "(" + "|".join(tensor_name_regex) + ")"
+        return self.watch_gradients_by_tensor_names(graph, tensor_name_regex)
 
-  def watch_gradients_by_tensor_names(self, graph, tensor_name_regex):
-    """Watch gradient tensors by name(s) of the x-tensor(s).
+    def watch_gradients_by_tensor_names(self, graph, tensor_name_regex):
+        """Watch gradient tensors by name(s) of the x-tensor(s).
 
     The side effect of this method is that when gradient tensor(s) are created
     with respect to the x-tensors, the gradient tensor(s) will be registered
@@ -264,49 +268,50 @@ class GradientsDebugger(object):
     Returns:
       The GradientsDebugger instance itself.
     """
-    tensor_name_pattern = re.compile(tensor_name_regex)
-    with graph.as_default():
-      for op in graph.get_operations():
-        for output in op.outputs:
-          if tensor_name_pattern.match(output.name):
-            debug_op = self.identify_gradient(output)
+        tensor_name_pattern = re.compile(tensor_name_regex)
+        with graph.as_default():
+            for op in graph.get_operations():
+                for output in op.outputs:
+                    if tensor_name_pattern.match(output.name):
+                        debug_op = self.identify_gradient(output)
 
-            # Make a copy of output.consumers() since we'll modify the consumers
-            # TODO(skyewm): this is unnecessary once the C API is enabled
-            for consumer in list(output.consumers()):
-              if consumer == debug_op.op:
-                continue
+                        # Make a copy of output.consumers() since we'll modify the consumers
+                        # TODO(skyewm): this is unnecessary once the C API is enabled
+                        for consumer in list(output.consumers()):
+                            if consumer == debug_op.op:
+                                continue
 
-              # Locate the slot index of the original input.
-              for i, consumer_input in enumerate(consumer.inputs):
-                if consumer_input == output:
-                  consumer._update_input(i, debug_op)  # pylint: disable=protected-access
-    return self
+                            # Locate the slot index of the original input.
+                            for i, consumer_input in enumerate(consumer.inputs):
+                                if consumer_input == output:
+                                    consumer._update_input(
+                                        i, debug_op
+                                    )  # pylint: disable=protected-access
+        return self
 
-  def _check_same_graph(self, tensor):
-    if self._graph is None:
-      self._graph = tensor.graph
-    elif self._graph != tensor.graph:
-      raise ValueError(
-          "The graph of the value (%s) is not the same as the graph %s" %
-          (tensor.graph, self._graph))
+    def _check_same_graph(self, tensor):
+        if self._graph is None:
+            self._graph = tensor.graph
+        elif self._graph != tensor.graph:
+            raise ValueError(
+                "The graph of the value (%s) is not the same as the graph %s"
+                % (tensor.graph, self._graph)
+            )
 
-  def register_gradient_tensor(self,
-                               x_tensor_name,
-                               gradient_tensor):
-    """Register the gradient tensor for an x-tensor.
+    def register_gradient_tensor(self, x_tensor_name, gradient_tensor):
+        """Register the gradient tensor for an x-tensor.
 
     Args:
       x_tensor_name: (`str`) the name of the independent `tf.Tensor`, i.e.,
         the tensor on the denominator of the differentiation.
       gradient_tensor: the gradient `tf.Tensor`.
     """
-    if len(_gradient_debuggers) == 1 or self._is_active_context:
-      self._check_same_graph(gradient_tensor)
-      self._gradient_tensors[x_tensor_name] = gradient_tensor
+        if len(_gradient_debuggers) == 1 or self._is_active_context:
+            self._check_same_graph(gradient_tensor)
+            self._gradient_tensors[x_tensor_name] = gradient_tensor
 
-  def gradient_tensor(self, x_tensor):
-    """Get the gradient tensor of an x-tensor.
+    def gradient_tensor(self, x_tensor):
+        """Get the gradient tensor of an x-tensor.
 
     Args:
       x_tensor: (`tf.Tensor`, `tf.Variable` or `str`) The x-tensor object or its
@@ -321,56 +326,58 @@ class GradientsDebugger(object):
       LookupError: If the `x_tensor` has not been registered with a gradient
         tensor.
     """
-    x_tensor_name = self._get_tensor_name(x_tensor)
-    if x_tensor_name not in self._gradient_tensors:
-      raise LookupError(
-          "This GradientsDebugger has not received any gradient tensor for "
-          "x-tensor %s" % x_tensor_name)
-    return self._gradient_tensors[x_tensor_name]
+        x_tensor_name = self._get_tensor_name(x_tensor)
+        if x_tensor_name not in self._gradient_tensors:
+            raise LookupError(
+                "This GradientsDebugger has not received any gradient tensor for "
+                "x-tensor %s" % x_tensor_name
+            )
+        return self._gradient_tensors[x_tensor_name]
 
-  def gradient_tensors(self):
-    """Get the gradient tensors that this object is aware of.
+    def gradient_tensors(self):
+        """Get the gradient tensors that this object is aware of.
 
     Returns:
       A dict mapping x-tensor names to gradient tensor objects. x-tensor refers
       to the tensors on the denominator of the differentation.
     """
-    return self._gradient_tensors
+        return self._gradient_tensors
 
-  def _get_tensor_name(self, tensor):
-    if isinstance(tensor, (ops.Tensor, variables.Variable)):
-      return tensor.name
-    elif isinstance(tensor, six.string_types):
-      return tensor
-    else:
-      raise TypeError(
-          "x_tensor must be a str or tf.Tensor or tf.Variable, "
-          "but instead has type %s" % type(tensor))
+    def _get_tensor_name(self, tensor):
+        if isinstance(tensor, (ops.Tensor, variables.Variable)):
+            return tensor.name
+        elif isinstance(tensor, six.string_types):
+            return tensor
+        else:
+            raise TypeError(
+                "x_tensor must be a str or tf.Tensor or tf.Variable, "
+                "but instead has type %s" % type(tensor)
+            )
 
 
 def clear_gradient_debuggers():
-  """Clear all globally registered gradient debuggers."""
-  _gradient_debuggers.clear()
+    """Clear all globally registered gradient debuggers."""
+    _gradient_debuggers.clear()
 
 
 @ops.RegisterGradient("DebugGradientIdentity")
 def _identify_gradient_grad(op, dy):
-  """Gradient function for the DebugIdentity op."""
-  # TODO(cais): Allow overriding gradient.
-  grad_debugger_uuid, orig_tensor_name = _parse_grad_debug_op_name(op.name)
-  grad_debugger = _gradient_debuggers[grad_debugger_uuid]
-  grad_debugger.register_gradient_tensor(orig_tensor_name, dy)
-  return dy
+    """Gradient function for the DebugIdentity op."""
+    # TODO(cais): Allow overriding gradient.
+    grad_debugger_uuid, orig_tensor_name = _parse_grad_debug_op_name(op.name)
+    grad_debugger = _gradient_debuggers[grad_debugger_uuid]
+    grad_debugger.register_gradient_tensor(orig_tensor_name, dy)
+    return dy
 
 
 @ops.RegisterGradient("DebugGradientRefIdentity")
 def _identify_gradient_grad_ref(op, dy):
-  """Gradient function for the DebugIdentity op."""
-  return _identify_gradient_grad(op, dy)
+    """Gradient function for the DebugIdentity op."""
+    return _identify_gradient_grad(op, dy)
 
 
 def gradient_values_from_dump(grad_debugger, x_tensor, dump):
-  """Find gradient values from a `DebugDumpDir` object.
+    """Find gradient values from a `DebugDumpDir` object.
 
   Args:
     grad_debugger: the `tf_debug.GradientsDebugger` instance to be used.
@@ -395,23 +402,28 @@ def gradient_values_from_dump(grad_debugger, x_tensor, dump):
       does not match the `tf.Graph` object of the `dump`.
     TypeError: If `x_tensor` is not a `tf.Tensor`, `tf.Variable` or `str`.
   """
-  # TODO(cais): Use this method in LocalCLIDebugWrapperSession to present the
-  # gradient tensors to the TFDBG CLI.
+    # TODO(cais): Use this method in LocalCLIDebugWrapperSession to present the
+    # gradient tensors to the TFDBG CLI.
 
-  # If possible, verify that the Python graph of the dump and that of this
-  # GradientsDebugger match.
-  if (dump.python_graph and grad_debugger.graph and
-      dump.python_graph != grad_debugger.graph):
-    raise ValueError(
-        "This GradientsDebugger instance has a graph (%s) that differs from "
-        "the graph of the DebugDumpDir object (%s)." %
-        (grad_debugger.graph, dump.python_graph))
+    # If possible, verify that the Python graph of the dump and that of this
+    # GradientsDebugger match.
+    if (
+        dump.python_graph
+        and grad_debugger.graph
+        and dump.python_graph != grad_debugger.graph
+    ):
+        raise ValueError(
+            "This GradientsDebugger instance has a graph (%s) that differs from "
+            "the graph of the DebugDumpDir object (%s)."
+            % (grad_debugger.graph, dump.python_graph)
+        )
 
-  gradient_tensor = grad_debugger.gradient_tensor(x_tensor)
-  node_name, output_slot = debug_graphs.parse_node_or_tensor_name(
-      gradient_tensor.name)
+    gradient_tensor = grad_debugger.gradient_tensor(x_tensor)
+    node_name, output_slot = debug_graphs.parse_node_or_tensor_name(
+        gradient_tensor.name
+    )
 
-  try:
-    return dump.get_tensors(node_name, output_slot, "DebugIdentity")
-  except debug_data.WatchKeyDoesNotExistInDebugDumpDirError:
-    return []
+    try:
+        return dump.get_tensors(node_name, output_slot, "DebugIdentity")
+    except debug_data.WatchKeyDoesNotExistInDebugDumpDirError:
+        return []

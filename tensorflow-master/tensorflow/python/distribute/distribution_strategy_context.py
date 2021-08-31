@@ -30,8 +30,8 @@ from tensorflow.python.util.tf_export import tf_export
 # There is a circular dependency between this and the `distribute_lib` module.
 # So we load it lazily to work around this.
 distribute_lib = LazyLoader(
-    "distribute_lib", globals(),
-    "tensorflow.python.distribute.distribute_lib")
+    "distribute_lib", globals(), "tensorflow.python.distribute.distribute_lib"
+)
 
 # ------------------------------------------------------------------------------
 # Internal API for setting the current thread mode as being either in a
@@ -39,49 +39,53 @@ distribute_lib = LazyLoader(
 
 
 class _ThreadMode(object):
-
-  def __init__(self, dist, cross, replica):
-    self.strategy = dist
-    self.cross_replica_context = cross
-    self.replica_context = replica
+    def __init__(self, dist, cross, replica):
+        self.strategy = dist
+        self.cross_replica_context = cross
+        self.replica_context = replica
 
 
 class _CrossReplicaThreadMode(_ThreadMode):
-
-  def __init__(self, strategy):
-    _ThreadMode.__init__(self, strategy, strategy, None)
+    def __init__(self, strategy):
+        _ThreadMode.__init__(self, strategy, strategy, None)
 
 
 class _InReplicaThreadMode(_ThreadMode):
-
-  def __init__(self, replica_ctx):
-    _ThreadMode.__init__(self, replica_ctx.strategy, None, replica_ctx)
+    def __init__(self, replica_ctx):
+        _ThreadMode.__init__(self, replica_ctx.strategy, None, replica_ctx)
 
 
 def _push_per_thread_mode(context):
-  ops.get_default_graph()._distribution_strategy_stack.append(context)  # pylint: disable=protected-access
+    ops.get_default_graph()._distribution_strategy_stack.append(
+        context
+    )  # pylint: disable=protected-access
 
 
 def _pop_per_thread_mode():
-  ops.get_default_graph()._distribution_strategy_stack.pop(-1)  # pylint: disable=protected-access
+    ops.get_default_graph()._distribution_strategy_stack.pop(
+        -1
+    )  # pylint: disable=protected-access
 
 
 class _DefaultReplicaThreadMode(_ThreadMode):
-  """Type of default value returned by `_get_per_thread_mode()`.
+    """Type of default value returned by `_get_per_thread_mode()`.
 
   Used when the thread-local stack is empty.
   """
 
-  def __init__(self):
-    _ThreadMode.__init__(self, _get_default_strategy(), None,
-                         _get_default_replica_context())
+    def __init__(self):
+        _ThreadMode.__init__(
+            self, _get_default_strategy(), None, _get_default_replica_context()
+        )
 
 
 def _get_per_thread_mode():
-  try:
-    return ops.get_default_graph()._distribution_strategy_stack[-1]  # pylint: disable=protected-access
-  except (AttributeError, IndexError):
-    return _get_default_replica_mode()
+    try:
+        return ops.get_default_graph()._distribution_strategy_stack[
+            -1
+        ]  # pylint: disable=protected-access
+    except (AttributeError, IndexError):
+        return _get_default_replica_mode()
 
 
 _variable_sync_on_read_context = threading.local()
@@ -90,7 +94,7 @@ _variable_sync_on_read_context = threading.local()
 @tf_export("__internal__.distribute.variable_sync_on_read_context", v1=[])
 @contextlib.contextmanager
 def variable_sync_on_read_context():
-  """A context that forces SyncOnReadVariable to aggregate upon reading.
+    """A context that forces SyncOnReadVariable to aggregate upon reading.
 
   This context is useful if one wants to read the aggregated value out of a
   SyncOnReadVariable in replica context. By default the aggregation is turned
@@ -128,18 +132,19 @@ def variable_sync_on_read_context():
   Yields:
     Context manager for aggregating SyncOnReadVariable upon reading.
   """
-  try:
-    _variable_sync_on_read_context.entered = True
-    yield
-  finally:
-    _variable_sync_on_read_context.entered = False
+    try:
+        _variable_sync_on_read_context.entered = True
+        yield
+    finally:
+        _variable_sync_on_read_context.entered = False
 
 
 def in_variable_sync_on_read_context():
-  try:
-    return _variable_sync_on_read_context.entered
-  except AttributeError:
-    return False
+    try:
+        return _variable_sync_on_read_context.entered
+    except AttributeError:
+        return False
+
 
 # ------------------------------------------------------------------------------
 # Public API for accessing the current thread mode
@@ -147,7 +152,7 @@ def in_variable_sync_on_read_context():
 
 @tf_export("distribute.get_replica_context")
 def get_replica_context():
-  """Returns the current `tf.distribute.ReplicaContext` or `None`.
+    """Returns the current `tf.distribute.ReplicaContext` or `None`.
 
   Returns `None` if in a cross-replica context.
 
@@ -190,11 +195,11 @@ def get_replica_context():
     * `get_replica_context()` returns non-`None`, or
     * `tf.distribute.is_cross_replica_context()` returns True.
   """
-  return _get_per_thread_mode().replica_context
+    return _get_per_thread_mode().replica_context
 
 
 def get_cross_replica_context():
-  """Returns the current tf.distribute.Strategy if in a cross-replica context.
+    """Returns the current tf.distribute.Strategy if in a cross-replica context.
 
   DEPRECATED: Please use `in_cross_replica_context()` and
   `get_strategy()` instead.
@@ -206,12 +211,12 @@ def get_cross_replica_context():
     Exactly one of `get_replica_context()` and `get_cross_replica_context()`
     will return `None` in a particular block.
   """
-  return _get_per_thread_mode().cross_replica_context
+    return _get_per_thread_mode().cross_replica_context
 
 
 @tf_export("distribute.in_cross_replica_context")
 def in_cross_replica_context():
-  """Returns `True` if in a cross-replica context.
+    """Returns `True` if in a cross-replica context.
 
   See `tf.distribute.get_replica_context` for details.
 
@@ -231,12 +236,12 @@ def in_cross_replica_context():
     `None`), or `False` if in a replica context (`get_replica_context()` returns
     non-`None`).
   """
-  return _get_per_thread_mode().cross_replica_context is not None
+    return _get_per_thread_mode().cross_replica_context is not None
 
 
 @tf_export("distribute.get_strategy")
 def get_strategy():
-  """Returns the current `tf.distribute.Strategy` object.
+    """Returns the current `tf.distribute.Strategy` object.
 
   Typically only used in a cross-replica context:
 
@@ -251,12 +256,12 @@ def get_strategy():
     it returns `strategy`, otherwise it returns the default (single-replica)
     `tf.distribute.Strategy` object.
   """
-  return _get_per_thread_mode().strategy
+    return _get_per_thread_mode().strategy
 
 
 @tf_export("distribute.has_strategy")
 def has_strategy():
-  """Return if there is a current non-default `tf.distribute.Strategy`.
+    """Return if there is a current non-default `tf.distribute.Strategy`.
 
   ```
   assert not tf.distribute.has_strategy()
@@ -267,17 +272,17 @@ def has_strategy():
   Returns:
     True if inside a `with strategy.scope():`.
   """
-  return get_strategy() is not _get_default_strategy()
+    return get_strategy() is not _get_default_strategy()
 
 
 def get_strategy_and_replica_context():
-  per_thread_mode = _get_per_thread_mode()
-  return (per_thread_mode.strategy, per_thread_mode.replica_context)
+    per_thread_mode = _get_per_thread_mode()
+    return (per_thread_mode.strategy, per_thread_mode.replica_context)
 
 
 @tf_export("distribute.experimental_set_strategy")
 def experimental_set_strategy(strategy):
-  """Set a `tf.distribute.Strategy` as current without `with strategy.scope()`.
+    """Set a `tf.distribute.Strategy` as current without `with strategy.scope()`.
 
   ```
   tf.distribute.experimental_set_strategy(strategy1)
@@ -311,17 +316,24 @@ def experimental_set_strategy(strategy):
   Raises:
     RuntimeError: If called inside a `with strategy.scope():`.
   """
-  old_scope = ops.get_default_graph()._global_distribute_strategy_scope  # pylint: disable=protected-access
-  if old_scope is not None:
-    old_scope.__exit__(None, None, None)
-    ops.get_default_graph()._global_distribute_strategy_scope = None  # pylint: disable=protected-access
-  if has_strategy():
-    raise RuntimeError(
-        "Must not be called inside a `tf.distribute.Strategy` scope.")
-  if strategy is not None:
-    new_scope = strategy.scope()
-    new_scope.__enter__()
-    ops.get_default_graph()._global_distribute_strategy_scope = new_scope  # pylint: disable=protected-access
+    old_scope = (
+        ops.get_default_graph()._global_distribute_strategy_scope
+    )  # pylint: disable=protected-access
+    if old_scope is not None:
+        old_scope.__exit__(None, None, None)
+        ops.get_default_graph()._global_distribute_strategy_scope = (
+            None
+        )  # pylint: disable=protected-access
+    if has_strategy():
+        raise RuntimeError(
+            "Must not be called inside a `tf.distribute.Strategy` scope."
+        )
+    if strategy is not None:
+        new_scope = strategy.scope()
+        new_scope.__enter__()
+        ops.get_default_graph()._global_distribute_strategy_scope = (
+            new_scope
+        )  # pylint: disable=protected-access
 
 
 # ------------------------------------------------------------------------------
@@ -330,12 +342,12 @@ def experimental_set_strategy(strategy):
 
 @contextlib.contextmanager
 def enter_or_assert_strategy(strategy):
-  if has_strategy():
-    _assert_strategy(strategy)
-    yield
-  else:
-    with strategy.scope():
-      yield
+    if has_strategy():
+        _assert_strategy(strategy)
+        yield
+    else:
+        with strategy.scope():
+            yield
 
 
 # ------------------------------------------------------------------------------
@@ -343,11 +355,7 @@ def enter_or_assert_strategy(strategy):
 # We create them lazily in a function so that we can workaround the circular
 # dependency on distribute_lib. See lazy loader at the top of this file.
 
-_defaults = {
-    "strategy": None,
-    "replica_context": None,
-    "replica_mode": None
-}
+_defaults = {"strategy": None, "replica_context": None, "replica_mode": None}
 # Note: These need to be different locks since _get_default_replica_context
 # calls _get_default_strategy inside its lock, and them using the same lock
 # can lead to deadlock.
@@ -357,54 +365,60 @@ _default_replica_mode_lock = threading.Lock()
 
 
 def _assert_strategy(strategy):
-  if not has_strategy():
-    raise RuntimeError('Need to be inside "with strategy.scope()" for %s' %
-                       (strategy,))
-  current_strategy = get_strategy()
-  if current_strategy is not strategy:
-    raise RuntimeError(
-        "Mixing different tf.distribute.Strategy objects: %s is not %s" %
-        (current_strategy, strategy))
+    if not has_strategy():
+        raise RuntimeError(
+            'Need to be inside "with strategy.scope()" for %s' % (strategy,)
+        )
+    current_strategy = get_strategy()
+    if current_strategy is not strategy:
+        raise RuntimeError(
+            "Mixing different tf.distribute.Strategy objects: %s is not %s"
+            % (current_strategy, strategy)
+        )
 
 
 def _get_default_strategy():
-  if _defaults["strategy"] is None:
-    # Avoid race condition causing two defaults to be created
-    with _default_strategy_lock:
-      if _defaults["strategy"] is None:
-        # pylint: disable=protected-access
-        # Make sure distribute_lib module is loaded by accessing some member.
-        _ = distribute_lib._creating_default_strategy_singleton
-        distribute_lib._creating_default_strategy_singleton = True
-        if tf2.enabled():
-          _defaults["strategy"] = distribute_lib._DefaultDistributionStrategy()
-        else:
-          _defaults["strategy"] = (
-              distribute_lib._DefaultDistributionStrategyV1())
-        distribute_lib._creating_default_strategy_singleton = False
-        # pylint: enable=protected-access
-  return _defaults["strategy"]
+    if _defaults["strategy"] is None:
+        # Avoid race condition causing two defaults to be created
+        with _default_strategy_lock:
+            if _defaults["strategy"] is None:
+                # pylint: disable=protected-access
+                # Make sure distribute_lib module is loaded by accessing some member.
+                _ = distribute_lib._creating_default_strategy_singleton
+                distribute_lib._creating_default_strategy_singleton = True
+                if tf2.enabled():
+                    _defaults[
+                        "strategy"
+                    ] = distribute_lib._DefaultDistributionStrategy()
+                else:
+                    _defaults[
+                        "strategy"
+                    ] = distribute_lib._DefaultDistributionStrategyV1()
+                distribute_lib._creating_default_strategy_singleton = False
+                # pylint: enable=protected-access
+    return _defaults["strategy"]
 
 
 def _get_default_replica_context():
-  if _defaults["replica_context"] is None:
-    # Avoid race condition causing two defaults to be created
-    with _default_replica_context_lock:
-      if _defaults["replica_context"] is None:
-        # pylint: disable=protected-access
-        _defaults["replica_context"] = distribute_lib._DefaultReplicaContext(
-            _get_default_strategy(), replica_id_in_sync_group=0)
-        # pylint: enable=protected-access
-  return _defaults["replica_context"]
+    if _defaults["replica_context"] is None:
+        # Avoid race condition causing two defaults to be created
+        with _default_replica_context_lock:
+            if _defaults["replica_context"] is None:
+                # pylint: disable=protected-access
+                _defaults["replica_context"] = distribute_lib._DefaultReplicaContext(
+                    _get_default_strategy(), replica_id_in_sync_group=0
+                )
+                # pylint: enable=protected-access
+    return _defaults["replica_context"]
 
 
 def _get_default_replica_mode():
-  if _defaults["replica_mode"] is None:
-    # Avoid race condition causing two defaults to be created
-    with _default_replica_mode_lock:
-      if _defaults["replica_mode"] is None:
-        _defaults["replica_mode"] = _DefaultReplicaThreadMode()
-  return _defaults["replica_mode"]
+    if _defaults["replica_mode"] is None:
+        # Avoid race condition causing two defaults to be created
+        with _default_replica_mode_lock:
+            if _defaults["replica_mode"] is None:
+                _defaults["replica_mode"] = _DefaultReplicaThreadMode()
+    return _defaults["replica_mode"]
 
 
 # Aliases for compatibility with old names.

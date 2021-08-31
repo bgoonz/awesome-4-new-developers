@@ -29,103 +29,94 @@ from tensorflow.python.platform import test
 
 
 class FunctionTransformer(converter_testing.TestCase):
+    def test_basic(self):
+        def f(l):
+            """Docstring."""
+            a = 1
+            l += a
+            return l
 
-  def test_basic(self):
+        tr = self.transform(f, functions)
 
-    def f(l):
-      """Docstring."""
-      a = 1
-      l += a
-      return l
+        result_op = tr(constant_op.constant(1))
+        self.assertIn("f/", result_op.op.name)
+        self.assertEqual("Docstring.", tr.__doc__)
 
-    tr = self.transform(f, functions)
-
-    result_op = tr(constant_op.constant(1))
-    self.assertIn('f/', result_op.op.name)
-    self.assertEqual('Docstring.', tr.__doc__)
-
-  def test_multiline_docstring(self):
-
-    def f():
-      """First sentence.
+    def test_multiline_docstring(self):
+        def f():
+            """First sentence.
 
       Second sentence.
 
       Returns:
         Something.
       """
-      return constant_op.constant(1)
+            return constant_op.constant(1)
 
-    tr = self.transform(f, functions)
+        tr = self.transform(f, functions)
 
-    result_op = tr()
-    self.assertIn('f/', result_op.op.name)
-    self.assertIn('First sentence.', tr.__doc__)
-    self.assertIn('Second sentence.', tr.__doc__)
+        result_op = tr()
+        self.assertIn("f/", result_op.op.name)
+        self.assertIn("First sentence.", tr.__doc__)
+        self.assertIn("Second sentence.", tr.__doc__)
 
-  def test_nested_functions(self):
+    def test_nested_functions(self):
+        def f(l):
+            def inner_fn(i):
+                return i + 1
 
-    def f(l):
+            l += 1
+            return l, inner_fn(l)
 
-      def inner_fn(i):
-        return i + 1
+        tr = self.transform(f, (functions, return_statements))
 
-      l += 1
-      return l, inner_fn(l)
+        first, second = tr(constant_op.constant(1))
+        self.assertIn("f/", first.op.name)
+        self.assertNotIn("inner_fn", first.op.name)
+        self.assertIn("f/inner_fn/", second.op.inputs[0].name)
 
-    tr = self.transform(f, (functions, return_statements))
+    def test_conversion_context_preserves_in_inner_functions(self):
+        def inner_fn_callee():
+            self.assertEqual(ag_ctx.control_status_ctx().status, ag_ctx.Status.DISABLED)
 
-    first, second = tr(constant_op.constant(1))
-    self.assertIn('f/', first.op.name)
-    self.assertNotIn('inner_fn', first.op.name)
-    self.assertIn('f/inner_fn/', second.op.inputs[0].name)
+        def f():
+            def inner_fn():
+                inner_fn_callee()
 
-  def test_conversion_context_preserves_in_inner_functions(self):
+            with ag_ctx.ControlStatusCtx(
+                ag_ctx.Status.DISABLED, converter.ConversionOptions(recursive=True)
+            ):
+                inner_fn()
 
-    def inner_fn_callee():
-      self.assertEqual(
-          ag_ctx.control_status_ctx().status, ag_ctx.Status.DISABLED)
+        tr = self.transform(f, functions)
 
-    def f():
-      def inner_fn():
-        inner_fn_callee()
-      with ag_ctx.ControlStatusCtx(
-          ag_ctx.Status.DISABLED, converter.ConversionOptions(recursive=True)):
-        inner_fn()
+        tr()
 
-    tr = self.transform(f, functions)
+    def test_method(self):
+        class TestClass(object):
+            def f(self, l):
+                def inner_fn(i):
+                    return i + 1
 
-    tr()
+                l += 1
+                return l, inner_fn(l)
 
-  def test_method(self):
+        tr = self.transform(TestClass.f, (functions, return_statements))
 
-    class TestClass(object):
+        first, second = tr(TestClass(), constant_op.constant(1))
+        self.assertIn("f/", first.op.name)
+        self.assertNotIn("inner_fn", first.op.name)
+        self.assertIn("f/inner_fn/", second.op.inputs[0].name)
 
-      def f(self, l):
+    def test_lambda_in_return_value(self):
+        def f():
+            return lambda x: x + 1
 
-        def inner_fn(i):
-          return i + 1
+        tr = self.transform(f, functions)
 
-        l += 1
-        return l, inner_fn(l)
-
-    tr = self.transform(TestClass.f, (functions, return_statements))
-
-    first, second = tr(TestClass(), constant_op.constant(1))
-    self.assertIn('f/', first.op.name)
-    self.assertNotIn('inner_fn', first.op.name)
-    self.assertIn('f/inner_fn/', second.op.inputs[0].name)
-
-  def test_lambda_in_return_value(self):
-
-    def f():
-      return lambda x: x + 1
-
-    tr = self.transform(f, functions)
-
-    result_l = tr()
-    self.assertTrue(api.is_autograph_artifact(result_l))
+        result_l = tr()
+        self.assertTrue(api.is_autograph_artifact(result_l))
 
 
-if __name__ == '__main__':
-  test.main()
+if __name__ == "__main__":
+    test.main()

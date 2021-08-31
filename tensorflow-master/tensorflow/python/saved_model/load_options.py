@@ -23,21 +23,26 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export("saved_model.LoadOptions", v1=[])
 class LoadOptions(object):
-  """Options for loading a SavedModel.
+    """Options for loading a SavedModel.
 
   This function may be used in the `options` argument in functions that
   load a SavedModel (`tf.saved_model.load`, `tf.keras.models.load_model`).
   """
 
-  # Define object attributes in __slots__ for improved memory and performance.
-  __slots__ = ("allow_partial_checkpoint", "experimental_io_device",
-               "experimental_skip_checkpoint")
+    # Define object attributes in __slots__ for improved memory and performance.
+    __slots__ = (
+        "allow_partial_checkpoint",
+        "experimental_io_device",
+        "experimental_skip_checkpoint",
+    )
 
-  def __init__(self,
-               allow_partial_checkpoint=False,
-               experimental_io_device=None,
-               experimental_skip_checkpoint=False):
-    """Creates an object that stores options for SavedModel loading.
+    def __init__(
+        self,
+        allow_partial_checkpoint=False,
+        experimental_io_device=None,
+        experimental_skip_checkpoint=False,
+    ):
+        """Creates an object that stores options for SavedModel loading.
 
     *When to set `allow_partial_checkpoint=True`?*
 
@@ -109,6 +114,6 @@ class LoadOptions(object):
                                                  options=load_options)
 
     """
-    self.experimental_io_device = experimental_io_device
-    self.allow_partial_checkpoint = allow_partial_checkpoint
-    self.experimental_skip_checkpoint = experimental_skip_checkpoint
+        self.experimental_io_device = experimental_io_device
+        self.allow_partial_checkpoint = allow_partial_checkpoint
+        self.experimental_skip_checkpoint = experimental_skip_checkpoint

@@ -31,38 +31,38 @@ from tensorflow.python.training.tracking import util
 
 
 class _ModelWithOptimizerUsingDefun(util.Checkpoint):
+    def __init__(self):
+        self.dense = core.Dense(1)
+        self.optimizer = adam.Adam(0.01)
 
-  def __init__(self):
-    self.dense = core.Dense(1)
-    self.optimizer = adam.Adam(0.01)
-
-  @def_function.function(
-      input_signature=(tensor_spec.TensorSpec([None, 2], dtypes.float32),
-                       tensor_spec.TensorSpec([None], dtypes.float32)),
-  )
-  def call(self, x, y):
-    with backprop.GradientTape() as tape:
-      loss = math_ops.reduce_mean((self.dense(x) - y) ** 2.)
-    trainable_variables = self.dense.trainable_variables
-    gradients = tape.gradient(loss, trainable_variables)
-    self.optimizer.apply_gradients(zip(gradients, trainable_variables))
-    return {"loss": loss}
+    @def_function.function(
+        input_signature=(
+            tensor_spec.TensorSpec([None, 2], dtypes.float32),
+            tensor_spec.TensorSpec([None], dtypes.float32),
+        )
+    )
+    def call(self, x, y):
+        with backprop.GradientTape() as tape:
+            loss = math_ops.reduce_mean((self.dense(x) - y) ** 2.0)
+        trainable_variables = self.dense.trainable_variables
+        gradients = tape.gradient(loss, trainable_variables)
+        self.optimizer.apply_gradients(zip(gradients, trainable_variables))
+        return {"loss": loss}
 
 
 class MemoryTests(test.TestCase):
+    def setUp(self):
+        super(MemoryTests, self).setUp()
+        self._model = _ModelWithOptimizerUsingDefun()
 
-  def setUp(self):
-    super(MemoryTests, self).setUp()
-    self._model = _ModelWithOptimizerUsingDefun()
-
-  @test_util.assert_no_garbage_created
-  def test_no_reference_cycles(self):
-    x = constant_op.constant([[3., 4.]])
-    y = constant_op.constant([2.])
-    self._model.call(x, y)
-    save_dir = os.path.join(self.get_temp_dir(), "saved_model")
-    save.save(self._model, save_dir, self._model.call)
+    @test_util.assert_no_garbage_created
+    def test_no_reference_cycles(self):
+        x = constant_op.constant([[3.0, 4.0]])
+        y = constant_op.constant([2.0])
+        self._model.call(x, y)
+        save_dir = os.path.join(self.get_temp_dir(), "saved_model")
+        save.save(self._model, save_dir, self._model.call)
 
 
 if __name__ == "__main__":
-  test.main()
+    test.main()

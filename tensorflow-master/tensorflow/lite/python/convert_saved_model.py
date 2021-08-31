@@ -31,23 +31,22 @@ from tensorflow.python.saved_model import loader
 
 
 def _log_tensor_details(tensor_info):
-  """Log tensor details: name, shape, and type."""
-  for key in tensor_info:
-    val = tensor_info[key]
-    dtype = types_pb2.DataType.Name(val.dtype)
-    if val.tensor_shape.unknown_rank:
-      shape = "unknown_rank"
-    else:
-      dims = [str(dim.size) for dim in val.tensor_shape.dim]
-      shape = "({})".format(", ".join(dims))
+    """Log tensor details: name, shape, and type."""
+    for key in tensor_info:
+        val = tensor_info[key]
+        dtype = types_pb2.DataType.Name(val.dtype)
+        if val.tensor_shape.unknown_rank:
+            shape = "unknown_rank"
+        else:
+            dims = [str(dim.size) for dim in val.tensor_shape.dim]
+            shape = "({})".format(", ".join(dims))
 
-    logging.info("Tensor's key in saved_model's tensor_map: %s", key)
-    logging.info(" tensor name: %s, shape: %s, type: %s", val.name, shape,
-                 dtype)
+        logging.info("Tensor's key in saved_model's tensor_map: %s", key)
+        logging.info(" tensor name: %s, shape: %s, type: %s", val.name, shape, dtype)
 
 
 def get_meta_graph_def(saved_model_dir, tag_set):
-  """Validate saved_model and extract MetaGraphDef.
+    """Validate saved_model and extract MetaGraphDef.
 
   Args:
     saved_model_dir: saved_model path to convert.
@@ -59,12 +58,12 @@ def get_meta_graph_def(saved_model_dir, tag_set):
   Raises:
     ValueError: No valid MetaGraphDef for given tag_set.
   """
-  with session.Session(graph=ops.Graph()) as sess:
-    return loader.load(sess, tag_set, saved_model_dir)
+    with session.Session(graph=ops.Graph()) as sess:
+        return loader.load(sess, tag_set, saved_model_dir)
 
 
 def get_signature_def(meta_graph, signature_key):
-  """Get the signature def from meta_graph with given signature_key.
+    """Get the signature def from meta_graph with given signature_key.
 
   Args:
     meta_graph: meta_graph_def.
@@ -76,20 +75,23 @@ def get_signature_def(meta_graph, signature_key):
   Raises:
     ValueError: Given signature_key is not valid for this meta_graph.
   """
-  signature_def_map = meta_graph.signature_def
-  signature_def_keys = set(signature_def_map.keys())
-  logging.info(
-      "The given SavedModel MetaGraphDef contains SignatureDefs with the "
-      "following keys: %s", signature_def_keys)
-  if signature_key not in signature_def_keys:
-    raise ValueError("No '{}' in the SavedModel\'s SignatureDefs. Possible "
-                     "values are '{}'.".format(signature_key,
-                                               ",".join(signature_def_keys)))
-  return signature_def_map[signature_key]
+    signature_def_map = meta_graph.signature_def
+    signature_def_keys = set(signature_def_map.keys())
+    logging.info(
+        "The given SavedModel MetaGraphDef contains SignatureDefs with the "
+        "following keys: %s",
+        signature_def_keys,
+    )
+    if signature_key not in signature_def_keys:
+        raise ValueError(
+            "No '{}' in the SavedModel's SignatureDefs. Possible "
+            "values are '{}'.".format(signature_key, ",".join(signature_def_keys))
+        )
+    return signature_def_map[signature_key]
 
 
 def get_inputs_outputs(signature_def):
-  """Get inputs and outputs from SignatureDef.
+    """Get inputs and outputs from SignatureDef.
 
   Args:
     signature_def: SignatureDef in the meta_graph_def for conversion.
@@ -97,24 +99,23 @@ def get_inputs_outputs(signature_def):
   Returns:
     The inputs and outputs in the graph for conversion.
   """
-  inputs_tensor_info = signature_def.inputs
-  outputs_tensor_info = signature_def.outputs
-  logging.info("input tensors info: ")
-  _log_tensor_details(inputs_tensor_info)
-  logging.info("output tensors info: ")
-  _log_tensor_details(outputs_tensor_info)
+    inputs_tensor_info = signature_def.inputs
+    outputs_tensor_info = signature_def.outputs
+    logging.info("input tensors info: ")
+    _log_tensor_details(inputs_tensor_info)
+    logging.info("output tensors info: ")
+    _log_tensor_details(outputs_tensor_info)
 
-  def gather_names(tensor_info):
-    return [tensor_info[key].name for key in tensor_info]
+    def gather_names(tensor_info):
+        return [tensor_info[key].name for key in tensor_info]
 
-  inputs = gather_names(inputs_tensor_info)
-  outputs = gather_names(outputs_tensor_info)
-  return inputs, outputs
+    inputs = gather_names(inputs_tensor_info)
+    outputs = gather_names(outputs_tensor_info)
+    return inputs, outputs
 
 
-def _get_tensors(graph, signature_def_tensor_names=None,
-                 user_tensor_names=None):
-  """Gets the tensors associated with the tensor names.
+def _get_tensors(graph, signature_def_tensor_names=None, user_tensor_names=None):
+    """Gets the tensors associated with the tensor names.
 
   Either signature_def_tensor_names or user_tensor_names should be provided. If
   the user provides tensors, the tensors associated with the user provided
@@ -135,30 +136,32 @@ def _get_tensors(graph, signature_def_tensor_names=None,
       signature_def_tensors and user_tensor_names are undefined or empty.
       user_tensor_names are not valid.
   """
-  tensors = []
-  if user_tensor_names:
-    # Sort the tensor names.
-    user_tensor_names = sorted(user_tensor_names)
+    tensors = []
+    if user_tensor_names:
+        # Sort the tensor names.
+        user_tensor_names = sorted(user_tensor_names)
 
-    tensors = util.get_tensors_from_tensor_names(graph, user_tensor_names)
-  elif signature_def_tensor_names:
-    tensors = [
-        graph.get_tensor_by_name(name)
-        for name in sorted(signature_def_tensor_names)
-    ]
-  else:
-    # Throw ValueError if signature_def_tensors and user_tensor_names are both
-    # either undefined or empty.
-    raise ValueError(
-        "Specify either signature_def_tensor_names or user_tensor_names")
+        tensors = util.get_tensors_from_tensor_names(graph, user_tensor_names)
+    elif signature_def_tensor_names:
+        tensors = [
+            graph.get_tensor_by_name(name)
+            for name in sorted(signature_def_tensor_names)
+        ]
+    else:
+        # Throw ValueError if signature_def_tensors and user_tensor_names are both
+        # either undefined or empty.
+        raise ValueError(
+            "Specify either signature_def_tensor_names or user_tensor_names"
+        )
 
-  return tensors
+    return tensors
 
 
 @convert_phase(Component.PREPARE_TF_MODEL, SubComponent.FREEZE_SAVED_MODEL)
-def freeze_saved_model(saved_model_dir, input_arrays, input_shapes,
-                       output_arrays, tag_set, signature_key):
-  """Converts a SavedModel to a frozen graph.
+def freeze_saved_model(
+    saved_model_dir, input_arrays, input_shapes, output_arrays, tag_set, signature_key
+):
+    """Converts a SavedModel to a frozen graph.
 
   Args:
     saved_model_dir: SavedModel directory to convert.
@@ -187,25 +190,25 @@ def freeze_saved_model(saved_model_dir, input_arrays, input_shapes,
       input_shapes does not match the length of input_arrays.
       input_arrays or output_arrays are not valid.
   """
-  # Read SignatureDef.
-  meta_graph = get_meta_graph_def(saved_model_dir, tag_set)
-  signature_def = get_signature_def(meta_graph, signature_key)
-  inputs, outputs = get_inputs_outputs(signature_def)
+    # Read SignatureDef.
+    meta_graph = get_meta_graph_def(saved_model_dir, tag_set)
+    signature_def = get_signature_def(meta_graph, signature_key)
+    inputs, outputs = get_inputs_outputs(signature_def)
 
-  # Check SavedModel for assets directory.
-  collection_def = meta_graph.collection_def
-  if constants.ASSETS_KEY in collection_def:
-    raise ValueError("SavedModels with assets/ directory are not supported.")
+    # Check SavedModel for assets directory.
+    collection_def = meta_graph.collection_def
+    if constants.ASSETS_KEY in collection_def:
+        raise ValueError("SavedModels with assets/ directory are not supported.")
 
-  graph = ops.Graph()
-  with session.Session(graph=graph) as sess:
-    loader.load(sess, meta_graph.meta_info_def.tags, saved_model_dir)
+    graph = ops.Graph()
+    with session.Session(graph=graph) as sess:
+        loader.load(sess, meta_graph.meta_info_def.tags, saved_model_dir)
 
-    # Gets input and output tensors.
-    # TODO(zhixianyan): Use TFLite supported Op list to filter outputs.
-    in_tensors = _get_tensors(graph, inputs, input_arrays)
-    out_tensors = _get_tensors(graph, outputs, output_arrays)
-    util.set_tensor_shapes(in_tensors, input_shapes)
+        # Gets input and output tensors.
+        # TODO(zhixianyan): Use TFLite supported Op list to filter outputs.
+        in_tensors = _get_tensors(graph, inputs, input_arrays)
+        out_tensors = _get_tensors(graph, outputs, output_arrays)
+        util.set_tensor_shapes(in_tensors, input_shapes)
 
-    frozen_graph_def = util.freeze_graph(sess, in_tensors, out_tensors)
-    return frozen_graph_def, in_tensors, out_tensors, sess.graph
+        frozen_graph_def = util.freeze_graph(sess, in_tensors, out_tensors)
+        return frozen_graph_def, in_tensors, out_tensors, sess.graph

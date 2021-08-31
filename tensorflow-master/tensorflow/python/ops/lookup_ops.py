@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#==============================================================================
+# ==============================================================================
 """Lookup operations."""
 # pylint: disable=g-bad-name
 from __future__ import absolute_import
@@ -36,11 +36,13 @@ from tensorflow.python.ops import control_flow_ops
 from tensorflow.python.ops import gen_lookup_ops
 from tensorflow.python.ops import math_ops
 from tensorflow.python.ops import string_ops
+
 # go/tf-wildcard-import
 # pylint: disable=wildcard-import
 from tensorflow.python.ops.gen_lookup_ops import *
 from tensorflow.python.ops.ragged import ragged_tensor
 from tensorflow.python.training.saver import BaseSaverBuilder
+
 # pylint: enable=wildcard-import
 from tensorflow.python.training.tracking import base as trackable_base
 from tensorflow.python.training.tracking import tracking as trackable
@@ -52,7 +54,7 @@ from tensorflow.python.util.tf_export import tf_export
 @tf_export(v1=["initialize_all_tables"])
 @deprecated(None, "Use `tf.tables_initializer` instead.")
 def initialize_all_tables(name="init_all_tables"):
-  """Returns an Op that initializes all tables of the default graph.
+    """Returns an Op that initializes all tables of the default graph.
 
   Args:
     name: Optional name for the initialization op.
@@ -61,12 +63,12 @@ def initialize_all_tables(name="init_all_tables"):
     An Op that initializes all tables.  Note that if there are
     not tables the returned Op is a NoOp.
   """
-  return tables_initializer(name)
+    return tables_initializer(name)
 
 
 @tf_export(v1=["initializers.tables_initializer", "tables_initializer"])
 def tables_initializer(name="init_all_tables"):
-  """Returns an Op that initializes all tables of the default graph.
+    """Returns an Op that initializes all tables of the default graph.
 
   Args:
     name: Optional name for the initialization op.
@@ -102,14 +104,14 @@ def tables_initializer(name="init_all_tables"):
 
   @end_compatibility
   """
-  initializers = ops.get_collection(ops.GraphKeys.TABLE_INITIALIZERS)
-  if initializers:
-    return control_flow_ops.group(*initializers, name=name)
-  return control_flow_ops.no_op(name=name)
+    initializers = ops.get_collection(ops.GraphKeys.TABLE_INITIALIZERS)
+    if initializers:
+        return control_flow_ops.group(*initializers, name=name)
+    return control_flow_ops.no_op(name=name)
 
 
 def check_table_dtypes(table, key_dtype, value_dtype):
-  """Check that the given key_dtype and value_dtype matches the table dtypes.
+    """Check that the given key_dtype and value_dtype matches the table dtypes.
 
   Args:
     table: The table to check types against to.
@@ -120,67 +122,71 @@ def check_table_dtypes(table, key_dtype, value_dtype):
     TypeError: when 'key_dtype' or 'value_dtype' doesn't match the table data
       types.
   """
-  if key_dtype.base_dtype != table.key_dtype:
-    raise TypeError(f"Invalid key dtype for table, expected {table.key_dtype} "
-                    f"but got {key_dtype}.")
-  if value_dtype.base_dtype != table.value_dtype:
-    raise TypeError("Invalid value dtype for table, expected "
-                    f"{table.value_dtype} but got {value_dtype}.")
+    if key_dtype.base_dtype != table.key_dtype:
+        raise TypeError(
+            f"Invalid key dtype for table, expected {table.key_dtype} "
+            f"but got {key_dtype}."
+        )
+    if value_dtype.base_dtype != table.value_dtype:
+        raise TypeError(
+            "Invalid value dtype for table, expected "
+            f"{table.value_dtype} but got {value_dtype}."
+        )
 
 
 class LookupInterface(trackable.TrackableResource):
-  """Represent a lookup table that persists across different steps."""
+    """Represent a lookup table that persists across different steps."""
 
-  def __init__(self, key_dtype, value_dtype):
-    """Construct a lookup table interface.
+    def __init__(self, key_dtype, value_dtype):
+        """Construct a lookup table interface.
 
     Args:
       key_dtype: The table key type.
       value_dtype: The table value type.
     """
-    self._key_dtype = dtypes.as_dtype(key_dtype)
-    self._value_dtype = dtypes.as_dtype(value_dtype)
-    super(LookupInterface, self).__init__()
+        self._key_dtype = dtypes.as_dtype(key_dtype)
+        self._value_dtype = dtypes.as_dtype(value_dtype)
+        super(LookupInterface, self).__init__()
 
-  def _create_resource(self):
-    raise NotImplementedError
+    def _create_resource(self):
+        raise NotImplementedError
 
-  @property
-  def key_dtype(self):
-    """The table key dtype."""
-    return self._key_dtype
+    @property
+    def key_dtype(self):
+        """The table key dtype."""
+        return self._key_dtype
 
-  @property
-  def value_dtype(self):
-    """The table value dtype."""
-    return self._value_dtype
+    @property
+    def value_dtype(self):
+        """The table value dtype."""
+        return self._value_dtype
 
-  @property
-  def name(self):
-    """The name of the table."""
-    return NotImplementedError
+    @property
+    def name(self):
+        """The name of the table."""
+        return NotImplementedError
 
-  def size(self, name=None):
-    """Compute the number of elements in this table."""
-    raise NotImplementedError
+    def size(self, name=None):
+        """Compute the number of elements in this table."""
+        raise NotImplementedError
 
-  def lookup(self, keys, name=None):
-    """Looks up `keys` in a table, outputs the corresponding values."""
-    raise NotImplementedError
+    def lookup(self, keys, name=None):
+        """Looks up `keys` in a table, outputs the corresponding values."""
+        raise NotImplementedError
 
-  def __getitem__(self, keys):
-    """Looks up `keys` in a table, outputs the corresponding values."""
-    return self.lookup(keys)
+    def __getitem__(self, keys):
+        """Looks up `keys` in a table, outputs the corresponding values."""
+        return self.lookup(keys)
 
 
 class InitializableLookupTableBase(LookupInterface):
-  """Initializable lookup table interface.
+    """Initializable lookup table interface.
 
   An initializable lookup tables persist across different steps.
   """
 
-  def __init__(self, default_value, initializer):
-    """Construct a table object from a table reference.
+    def __init__(self, default_value, initializer):
+        """Construct a table object from a table reference.
 
     If requires a table initializer object (subclass of `TableInitializerBase`).
     It provides the table key and value types, as well as the op to initialize
@@ -190,32 +196,36 @@ class InitializableLookupTableBase(LookupInterface):
       default_value: The value to use if a key is missing in the table.
       initializer: The table initializer to use.
     """
-    super(InitializableLookupTableBase, self).__init__(initializer.key_dtype,
-                                                       initializer.value_dtype)
-    self._default_value = ops.convert_to_tensor(
-        default_value, dtype=self._value_dtype)
-    self._default_value.get_shape().merge_with(tensor_shape.TensorShape([]))
-    if isinstance(initializer, trackable_base.Trackable):
-      self._initializer = self._track_trackable(initializer, "_initializer")
-    with ops.init_scope():
-      self._resource_handle = self._create_resource()
-    if (not context.executing_eagerly() and
-        ops.get_default_graph()._get_control_flow_context() is not None):  # pylint: disable=protected-access
-      with ops.init_scope():
-        self._init_op = self._initialize()
-    else:
-      self._init_op = self._initialize()
+        super(InitializableLookupTableBase, self).__init__(
+            initializer.key_dtype, initializer.value_dtype
+        )
+        self._default_value = ops.convert_to_tensor(
+            default_value, dtype=self._value_dtype
+        )
+        self._default_value.get_shape().merge_with(tensor_shape.TensorShape([]))
+        if isinstance(initializer, trackable_base.Trackable):
+            self._initializer = self._track_trackable(initializer, "_initializer")
+        with ops.init_scope():
+            self._resource_handle = self._create_resource()
+        if (
+            not context.executing_eagerly()
+            and ops.get_default_graph()._get_control_flow_context() is not None
+        ):  # pylint: disable=protected-access
+            with ops.init_scope():
+                self._init_op = self._initialize()
+        else:
+            self._init_op = self._initialize()
 
-  def _initialize(self):
-    return self._initializer.initialize(self)
+    def _initialize(self):
+        return self._initializer.initialize(self)
 
-  @property
-  def default_value(self):
-    """The default value of the table."""
-    return self._default_value
+    @property
+    def default_value(self):
+        """The default value of the table."""
+        return self._default_value
 
-  def size(self, name=None):
-    """Compute the number of elements in this table.
+    def size(self, name=None):
+        """Compute the number of elements in this table.
 
     Args:
       name: A name for the operation (optional).
@@ -223,11 +233,11 @@ class InitializableLookupTableBase(LookupInterface):
     Returns:
       A scalar tensor containing the number of elements in this table.
     """
-    with ops.name_scope(name, "%s_Size" % self.name, [self.resource_handle]):
-      return gen_lookup_ops.lookup_table_size_v2(self.resource_handle)
+        with ops.name_scope(name, "%s_Size" % self.name, [self.resource_handle]):
+            return gen_lookup_ops.lookup_table_size_v2(self.resource_handle)
 
-  def lookup(self, keys, name=None):
-    """Looks up `keys` in a table, outputs the corresponding values.
+    def lookup(self, keys, name=None):
+        """Looks up `keys` in a table, outputs the corresponding values.
 
     The `default_value` is used for keys not present in the table.
 
@@ -243,41 +253,43 @@ class InitializableLookupTableBase(LookupInterface):
       TypeError: when `keys` or `default_value` doesn't match the table data
         types.
     """
-    key_tensor = keys
-    if isinstance(keys,
-                  (sparse_tensor.SparseTensor, ragged_tensor.RaggedTensor)):
-      key_tensor = keys.values
+        key_tensor = keys
+        if isinstance(keys, (sparse_tensor.SparseTensor, ragged_tensor.RaggedTensor)):
+            key_tensor = keys.values
 
-    if keys.dtype.base_dtype != self._key_dtype:
-      raise TypeError(f"Dtype of argument `keys` must be {self._key_dtype}, "
-                      f"received: {keys.dtype}")
+        if keys.dtype.base_dtype != self._key_dtype:
+            raise TypeError(
+                f"Dtype of argument `keys` must be {self._key_dtype}, "
+                f"received: {keys.dtype}"
+            )
 
-    with ops.name_scope(
-        name, "%s_Lookup" % self.name,
-        (self.resource_handle, key_tensor, self._default_value)):
-      values = gen_lookup_ops.lookup_table_find_v2(self.resource_handle,
-                                                   key_tensor,
-                                                   self._default_value)
+        with ops.name_scope(
+            name,
+            "%s_Lookup" % self.name,
+            (self.resource_handle, key_tensor, self._default_value),
+        ):
+            values = gen_lookup_ops.lookup_table_find_v2(
+                self.resource_handle, key_tensor, self._default_value
+            )
 
-    values.set_shape(key_tensor.get_shape())
-    if isinstance(keys, sparse_tensor.SparseTensor):
-      return sparse_tensor.SparseTensor(keys.indices, values, keys.dense_shape)
-    elif isinstance(keys, ragged_tensor.RaggedTensor):
-      return keys.with_values(values)
-    else:
-      return values
+        values.set_shape(key_tensor.get_shape())
+        if isinstance(keys, sparse_tensor.SparseTensor):
+            return sparse_tensor.SparseTensor(keys.indices, values, keys.dense_shape)
+        elif isinstance(keys, ragged_tensor.RaggedTensor):
+            return keys.with_values(values)
+        else:
+            return values
 
 
 class InitializableLookupTableBaseV1(InitializableLookupTableBase):
-
-  @property
-  def initializer(self):
-    return self._init_op
+    @property
+    def initializer(self):
+        return self._init_op
 
 
 @tf_export("lookup.StaticHashTable", v1=[])
 class StaticHashTable(InitializableLookupTableBase):
-  """A generic hash table that is immutable once initialized.
+    """A generic hash table that is immutable once initialized.
 
   Example usage:
 
@@ -305,8 +317,8 @@ class StaticHashTable(InitializableLookupTableBase):
 
   """
 
-  def __init__(self, initializer, default_value, name=None):
-    """Creates a non-initialized `HashTable` object.
+    def __init__(self, initializer, default_value, name=None):
+        """Creates a non-initialized `HashTable` object.
 
     Creates a table, the type of its keys and values are specified by the
     initializer.
@@ -322,38 +334,41 @@ class StaticHashTable(InitializableLookupTableBase):
     Returns:
       A `HashTable` object.
     """
-    self._initializer = initializer
-    self._default_value = default_value
-    self._shared_name = self._initializer._shared_name  # pylint: disable=protected-access
-    if not self._shared_name:
-      # Force using a shared name so that StaticHashTable resources can be
-      # shared across different kernels. If no "shared_name" is set and
-      # "use_node_name_sharing" is False, then each kernel gets its own local
-      # resource.
-      self._shared_name = "hash_table_%s" % (str(uuid.uuid4()),)
-    self._name = name or "hash_table"
-    self._table_name = None
-    super(StaticHashTable, self).__init__(default_value, initializer)
-    self._value_shape = self._default_value.get_shape()
+        self._initializer = initializer
+        self._default_value = default_value
+        self._shared_name = (
+            self._initializer._shared_name
+        )  # pylint: disable=protected-access
+        if not self._shared_name:
+            # Force using a shared name so that StaticHashTable resources can be
+            # shared across different kernels. If no "shared_name" is set and
+            # "use_node_name_sharing" is False, then each kernel gets its own local
+            # resource.
+            self._shared_name = "hash_table_%s" % (str(uuid.uuid4()),)
+        self._name = name or "hash_table"
+        self._table_name = None
+        super(StaticHashTable, self).__init__(default_value, initializer)
+        self._value_shape = self._default_value.get_shape()
 
-  def _create_resource(self):
-    table_ref = gen_lookup_ops.hash_table_v2(
-        shared_name=self._shared_name,
-        key_dtype=self._initializer.key_dtype,
-        value_dtype=self._initializer.value_dtype,
-        name=self._name)
-    if context.executing_eagerly():
-      self._table_name = None
-    else:
-      self._table_name = table_ref.op.name.split("/")[-1]
-    return table_ref
+    def _create_resource(self):
+        table_ref = gen_lookup_ops.hash_table_v2(
+            shared_name=self._shared_name,
+            key_dtype=self._initializer.key_dtype,
+            value_dtype=self._initializer.value_dtype,
+            name=self._name,
+        )
+        if context.executing_eagerly():
+            self._table_name = None
+        else:
+            self._table_name = table_ref.op.name.split("/")[-1]
+        return table_ref
 
-  @property
-  def name(self):
-    return self._table_name
+    @property
+    def name(self):
+        return self._table_name
 
-  def export(self, name=None):
-    """Returns tensors of all keys and values in the table.
+    def export(self, name=None):
+        """Returns tensors of all keys and values in the table.
 
     Args:
       name: A name for the operation (optional).
@@ -362,18 +377,20 @@ class StaticHashTable(InitializableLookupTableBase):
       A pair of tensors with the first tensor containing all keys and the
         second tensors containing all values in the table.
     """
-    with ops.name_scope(name, "%s_Export" % self.name, [self.resource_handle]):
-      exported_keys, exported_values = gen_lookup_ops.lookup_table_export_v2(
-          self.resource_handle, self._key_dtype, self._value_dtype)
+        with ops.name_scope(name, "%s_Export" % self.name, [self.resource_handle]):
+            exported_keys, exported_values = gen_lookup_ops.lookup_table_export_v2(
+                self.resource_handle, self._key_dtype, self._value_dtype
+            )
 
-    exported_values.set_shape(exported_keys.get_shape().concatenate(
-        self._value_shape))
-    return exported_keys, exported_values
+        exported_values.set_shape(
+            exported_keys.get_shape().concatenate(self._value_shape)
+        )
+        return exported_keys, exported_values
 
 
 @tf_export(v1=["lookup.StaticHashTable"])
 class StaticHashTableV1(StaticHashTable):
-  """A generic hash table that is immutable once initialized.
+    """A generic hash table that is immutable once initialized.
 
   When running in graph mode, you must evaluate the tensor returned by
   `tf.tables_initializer()` before evaluating the tensor returned by
@@ -405,61 +422,60 @@ class StaticHashTableV1(StaticHashTable):
   ```
   """
 
-  @property
-  def initializer(self):
-    return self._init_op
+    @property
+    def initializer(self):
+        return self._init_op
 
 
 # For backwards compatibility. This will be removed in TF 2.0.
 class HashTable(StaticHashTableV1):
-
-  @property
-  def init(self):
-    return self.initializer
+    @property
+    def init(self):
+        return self.initializer
 
 
 class TableInitializerBase(trackable_base.Trackable):
-  """Base class for lookup table initializers."""
+    """Base class for lookup table initializers."""
 
-  def __init__(self, key_dtype, value_dtype):
-    """Construct a table initializer object.
+    def __init__(self, key_dtype, value_dtype):
+        """Construct a table initializer object.
 
     Args:
       key_dtype: Type of the table keys.
       value_dtype: Type of the table values.
     """
-    self._key_dtype = dtypes.as_dtype(key_dtype)
-    self._value_dtype = dtypes.as_dtype(value_dtype)
+        self._key_dtype = dtypes.as_dtype(key_dtype)
+        self._value_dtype = dtypes.as_dtype(value_dtype)
 
-  @property
-  def key_dtype(self):
-    """The expected table key dtype."""
-    return self._key_dtype
+    @property
+    def key_dtype(self):
+        """The expected table key dtype."""
+        return self._key_dtype
 
-  @property
-  def value_dtype(self):
-    """The expected table value dtype."""
-    return self._value_dtype
+    @property
+    def value_dtype(self):
+        """The expected table value dtype."""
+        return self._value_dtype
 
-  def initialize(self, table):
-    """Returns the table initialization op."""
-    raise NotImplementedError
+    def initialize(self, table):
+        """Returns the table initialization op."""
+        raise NotImplementedError
 
-  @property
-  def _shared_name(self):
-    """Returns a shared name to be used by the table."""
-    shared_name = ""
-    if context.executing_eagerly():
-      # Ensure a unique name when eager execution is enabled to avoid spurious
-      # sharing issues.
-      # TODO(rohanj): Use context.anonymous_name() instead.
-      shared_name += str(ops.uid())
-    return shared_name
+    @property
+    def _shared_name(self):
+        """Returns a shared name to be used by the table."""
+        shared_name = ""
+        if context.executing_eagerly():
+            # Ensure a unique name when eager execution is enabled to avoid spurious
+            # sharing issues.
+            # TODO(rohanj): Use context.anonymous_name() instead.
+            shared_name += str(ops.uid())
+        return shared_name
 
 
 @tf_export("lookup.KeyValueTensorInitializer")
 class KeyValueTensorInitializer(TableInitializerBase):
-  """Table initializers given `keys` and `values` tensors.
+    """Table initializers given `keys` and `values` tensors.
 
   >>> keys_tensor = tf.constant(['a', 'b', 'c'])
   >>> vals_tensor = tf.constant([7, 8, 9])
@@ -473,8 +489,8 @@ class KeyValueTensorInitializer(TableInitializerBase):
 
   """
 
-  def __init__(self, keys, values, key_dtype=None, value_dtype=None, name=None):
-    """Constructs a table initializer object based on keys and values tensors.
+    def __init__(self, keys, values, key_dtype=None, value_dtype=None, name=None):
+        """Constructs a table initializer object based on keys and values tensors.
 
     Args:
       keys: The tensor for the keys.
@@ -483,28 +499,33 @@ class KeyValueTensorInitializer(TableInitializerBase):
       value_dtype: The `values` data type. Used when `values` is a python array.
       name: A name for the operation (optional).
     """
-    if (not context.executing_eagerly() and
-        ops.get_default_graph()._get_control_flow_context() is not None):  # pylint: disable=protected-access
-      with ops.init_scope():
-        self._keys = ops.convert_to_tensor(keys, dtype=key_dtype, name="keys")
-        self._values = ops.convert_to_tensor(
-            values, dtype=value_dtype, name="values")
-    else:
-      self._keys = ops.convert_to_tensor(keys, dtype=key_dtype, name="keys")
-      self._values = ops.convert_to_tensor(
-          values, dtype=value_dtype, name="values")
-    self._name = name if name is not None else "key_value_init"
-    if context.executing_eagerly():
-      # Ensure a unique name when eager execution is enabled to avoid spurious
-      # sharing issues.
-      # TODO(rohanj): Use context.anonymous_name() instead.
-      self._name += str(ops.uid())
+        if (
+            not context.executing_eagerly()
+            and ops.get_default_graph()._get_control_flow_context() is not None
+        ):  # pylint: disable=protected-access
+            with ops.init_scope():
+                self._keys = ops.convert_to_tensor(keys, dtype=key_dtype, name="keys")
+                self._values = ops.convert_to_tensor(
+                    values, dtype=value_dtype, name="values"
+                )
+        else:
+            self._keys = ops.convert_to_tensor(keys, dtype=key_dtype, name="keys")
+            self._values = ops.convert_to_tensor(
+                values, dtype=value_dtype, name="values"
+            )
+        self._name = name if name is not None else "key_value_init"
+        if context.executing_eagerly():
+            # Ensure a unique name when eager execution is enabled to avoid spurious
+            # sharing issues.
+            # TODO(rohanj): Use context.anonymous_name() instead.
+            self._name += str(ops.uid())
 
-    super(KeyValueTensorInitializer, self).__init__(self._keys.dtype,
-                                                    self._values.dtype)
+        super(KeyValueTensorInitializer, self).__init__(
+            self._keys.dtype, self._values.dtype
+        )
 
-  def initialize(self, table):
-    """Initializes the given `table` with `keys` and `values` tensors.
+    def initialize(self, table):
+        """Initializes the given `table` with `keys` and `values` tensors.
 
     Args:
       table: The table to initialize.
@@ -516,18 +537,20 @@ class KeyValueTensorInitializer(TableInitializerBase):
       TypeError: when the keys and values data types do not match the table
       key and value data types.
     """
-    check_table_dtypes(table, self._keys.dtype, self._values.dtype)
-    with ops.name_scope(
-        self._name, values=(table.resource_handle, self._keys, self._values)):
-      init_op = gen_lookup_ops.lookup_table_import_v2(table.resource_handle,
-                                                      self._keys, self._values)
-    ops.add_to_collection(ops.GraphKeys.TABLE_INITIALIZERS, init_op)
-    return init_op
+        check_table_dtypes(table, self._keys.dtype, self._values.dtype)
+        with ops.name_scope(
+            self._name, values=(table.resource_handle, self._keys, self._values)
+        ):
+            init_op = gen_lookup_ops.lookup_table_import_v2(
+                table.resource_handle, self._keys, self._values
+            )
+        ops.add_to_collection(ops.GraphKeys.TABLE_INITIALIZERS, init_op)
+        return init_op
 
 
 @tf_export("lookup.TextFileIndex")
 class TextFileIndex(object):
-  """The key and value content to get from each line.
+    """The key and value content to get from each line.
 
   This class defines the key and value used for `tf.lookup.TextFileInitializer`.
 
@@ -541,13 +564,14 @@ class TextFileIndex(object):
   A value `>=0` means use the index (starting at zero) of the split line based
       on `delimiter`.
   """
-  WHOLE_LINE = -2
-  LINE_NUMBER = -1
+
+    WHOLE_LINE = -2
+    LINE_NUMBER = -1
 
 
 @tf_export("lookup.TextFileInitializer")
 class TextFileInitializer(TableInitializerBase):
-  r"""Table initializers from a text file.
+    r"""Table initializers from a text file.
 
   This initializer assigns one entry in the table for each line in the file.
 
@@ -602,17 +626,19 @@ class TextFileInitializer(TableInitializerBase):
   2
   """
 
-  def __init__(self,
-               filename,
-               key_dtype,
-               key_index,
-               value_dtype,
-               value_index,
-               vocab_size=None,
-               delimiter="\t",
-               name=None,
-               value_index_offset=0):
-    """Constructs a table initializer object to populate from a text file.
+    def __init__(
+        self,
+        filename,
+        key_dtype,
+        key_index,
+        value_dtype,
+        value_index,
+        vocab_size=None,
+        delimiter="\t",
+        name=None,
+        value_index_offset=0,
+    ):
+        """Constructs a table initializer object to populate from a text file.
 
     It generates one key-value pair per line. The type of table key and
     value are specified by `key_dtype` and `value_dtype`, respectively.
@@ -651,53 +677,67 @@ class TextFileInitializer(TableInitializerBase):
       ValueError: when the filename is empty, or when the table key and value
       data types do not match the expected data types.
     """
-    if not isinstance(filename, ops.Tensor) and not filename:
-      raise ValueError("`filename` argument required for tf.lookup.TextFileInitializer")
+        if not isinstance(filename, ops.Tensor) and not filename:
+            raise ValueError(
+                "`filename` argument required for tf.lookup.TextFileInitializer"
+            )
 
-    self._filename_arg = filename
-    key_dtype = dtypes.as_dtype(key_dtype)
-    value_dtype = dtypes.as_dtype(value_dtype)
+        self._filename_arg = filename
+        key_dtype = dtypes.as_dtype(key_dtype)
+        value_dtype = dtypes.as_dtype(value_dtype)
 
-    if key_index < -2:
-      raise ValueError("`key_index` should be >= -2, received: {key_index}.")
+        if key_index < -2:
+            raise ValueError("`key_index` should be >= -2, received: {key_index}.")
 
-    if key_index == TextFileIndex.LINE_NUMBER and key_dtype != dtypes.int64:
-      raise ValueError("`key_dtype` must be int64 if `key_index` is "
-                       f"{TextFileIndex.LINE_NUMBER}, received: {key_dtype}")
-    if ((key_index == TextFileIndex.WHOLE_LINE) and
-        (not key_dtype.is_integer) and (key_dtype != dtypes.string)):
-      raise ValueError(
-          "`key_dtype` should be either integer or string for `key_index` "
-          f"{TextFileIndex.WHOLE_LINE}, received: {key_dtype}")
-    if value_index < -2:
-      raise ValueError("`value_index` should be >= -2, received: "
-                       f"{value_index}")
+        if key_index == TextFileIndex.LINE_NUMBER and key_dtype != dtypes.int64:
+            raise ValueError(
+                "`key_dtype` must be int64 if `key_index` is "
+                f"{TextFileIndex.LINE_NUMBER}, received: {key_dtype}"
+            )
+        if (
+            (key_index == TextFileIndex.WHOLE_LINE)
+            and (not key_dtype.is_integer)
+            and (key_dtype != dtypes.string)
+        ):
+            raise ValueError(
+                "`key_dtype` should be either integer or string for `key_index` "
+                f"{TextFileIndex.WHOLE_LINE}, received: {key_dtype}"
+            )
+        if value_index < -2:
+            raise ValueError(
+                "`value_index` should be >= -2, received: " f"{value_index}"
+            )
 
-    if value_index == TextFileIndex.LINE_NUMBER and value_dtype != dtypes.int64:
-      raise ValueError("`value_dtype` must be int64 for `value_index` "
-                       f"{TextFileIndex.LINE_NUMBER}, received: {key_dtype}")
-    if ((value_index == TextFileIndex.WHOLE_LINE) and
-        (not value_dtype.is_integer) and (value_dtype != dtypes.string)):
-      raise ValueError(
-          "`value_dtype` should be either integer or string for `value_index` "
-          f"{TextFileIndex.WHOLE_LINE}, received: {value_dtype}")
+        if value_index == TextFileIndex.LINE_NUMBER and value_dtype != dtypes.int64:
+            raise ValueError(
+                "`value_dtype` must be int64 for `value_index` "
+                f"{TextFileIndex.LINE_NUMBER}, received: {key_dtype}"
+            )
+        if (
+            (value_index == TextFileIndex.WHOLE_LINE)
+            and (not value_dtype.is_integer)
+            and (value_dtype != dtypes.string)
+        ):
+            raise ValueError(
+                "`value_dtype` should be either integer or string for `value_index` "
+                f"{TextFileIndex.WHOLE_LINE}, received: {value_dtype}"
+            )
 
-    if (vocab_size is not None) and (vocab_size <= 0):
-      raise ValueError(f"`vocab_size` should be > 0, received: {vocab_size}")
+        if (vocab_size is not None) and (vocab_size <= 0):
+            raise ValueError(f"`vocab_size` should be > 0, received: {vocab_size}")
 
-    self._key_index = key_index
-    self._value_index = value_index
-    self._vocab_size = vocab_size
-    self._delimiter = delimiter
-    self._name = name
-    self._filename = self._track_trackable(
-        trackable.Asset(filename), "_filename")
-    self._offset = value_index_offset
+        self._key_index = key_index
+        self._value_index = value_index
+        self._vocab_size = vocab_size
+        self._delimiter = delimiter
+        self._name = name
+        self._filename = self._track_trackable(trackable.Asset(filename), "_filename")
+        self._offset = value_index_offset
 
-    super(TextFileInitializer, self).__init__(key_dtype, value_dtype)
+        super(TextFileInitializer, self).__init__(key_dtype, value_dtype)
 
-  def initialize(self, table):
-    """Initializes the table from a text file.
+    def initialize(self, table):
+        """Initializes the table from a text file.
 
     Args:
       table: The table to be initialized.
@@ -709,60 +749,81 @@ class TextFileInitializer(TableInitializerBase):
       TypeError: when the keys and values data types do not match the table
       key and value data types.
     """
-    check_table_dtypes(table, self.key_dtype, self.value_dtype)
-    with ops.name_scope(self._name, "text_file_init", (table.resource_handle,)):
-      filename = ops.convert_to_tensor(
-          self._filename, dtypes.string, name="asset_filepath")
-      init_op = gen_lookup_ops.initialize_table_from_text_file_v2(
-          table.resource_handle, filename, self._key_index, self._value_index,
-          -1 if self._vocab_size is None else self._vocab_size, self._delimiter,
-          self._offset)
-    ops.add_to_collection(ops.GraphKeys.TABLE_INITIALIZERS, init_op)
-    # If the filename tensor is anything other than a string constant (e.g.,
-    # if it is a placeholder) then it does not make sense to track it as an
-    # asset.
-    if not context.executing_eagerly() and constant_op.is_constant(filename):
-      ops.add_to_collection(ops.GraphKeys.ASSET_FILEPATHS, filename)
-    return init_op
+        check_table_dtypes(table, self.key_dtype, self.value_dtype)
+        with ops.name_scope(self._name, "text_file_init", (table.resource_handle,)):
+            filename = ops.convert_to_tensor(
+                self._filename, dtypes.string, name="asset_filepath"
+            )
+            init_op = gen_lookup_ops.initialize_table_from_text_file_v2(
+                table.resource_handle,
+                filename,
+                self._key_index,
+                self._value_index,
+                -1 if self._vocab_size is None else self._vocab_size,
+                self._delimiter,
+                self._offset,
+            )
+        ops.add_to_collection(ops.GraphKeys.TABLE_INITIALIZERS, init_op)
+        # If the filename tensor is anything other than a string constant (e.g.,
+        # if it is a placeholder) then it does not make sense to track it as an
+        # asset.
+        if not context.executing_eagerly() and constant_op.is_constant(filename):
+            ops.add_to_collection(ops.GraphKeys.ASSET_FILEPATHS, filename)
+        return init_op
 
-  @property
-  def _shared_name(self):
-    if self._vocab_size:
-      # Keep the shared_name:
-      # <table_type>_<filename>_<vocab_size>_<key_index>_<value_index>_<offset>
-      if self._offset:
-        shared_name = "hash_table_%s_%d_%s_%s_%s" % (
-            self._filename_arg, self._vocab_size, self._key_index,
-            self._value_index, self._offset)
-      else:
-        shared_name = "hash_table_%s_%d_%s_%s" % (
-            self._filename_arg, self._vocab_size, self._key_index,
-            self._value_index)
-    else:
-      # Keep the shared_name
-      # <table_type>_<filename>_<key_index>_<value_index>_<offset>
-      if self._offset:
-        shared_name = "hash_table_%s_%s_%s_%s" % (
-            self._filename_arg, self._key_index, self._value_index,
-            self._offset)
-      else:
-        shared_name = "hash_table_%s_%s_%s" % (
-            self._filename_arg, self._key_index, self._value_index)
+    @property
+    def _shared_name(self):
+        if self._vocab_size:
+            # Keep the shared_name:
+            # <table_type>_<filename>_<vocab_size>_<key_index>_<value_index>_<offset>
+            if self._offset:
+                shared_name = "hash_table_%s_%d_%s_%s_%s" % (
+                    self._filename_arg,
+                    self._vocab_size,
+                    self._key_index,
+                    self._value_index,
+                    self._offset,
+                )
+            else:
+                shared_name = "hash_table_%s_%d_%s_%s" % (
+                    self._filename_arg,
+                    self._vocab_size,
+                    self._key_index,
+                    self._value_index,
+                )
+        else:
+            # Keep the shared_name
+            # <table_type>_<filename>_<key_index>_<value_index>_<offset>
+            if self._offset:
+                shared_name = "hash_table_%s_%s_%s_%s" % (
+                    self._filename_arg,
+                    self._key_index,
+                    self._value_index,
+                    self._offset,
+                )
+            else:
+                shared_name = "hash_table_%s_%s_%s" % (
+                    self._filename_arg,
+                    self._key_index,
+                    self._value_index,
+                )
 
-    return shared_name
+        return shared_name
 
 
 class TextFileStringTableInitializer(TextFileInitializer):
-  """Table initializer for `int64` IDs to string tables from a text file."""
+    """Table initializer for `int64` IDs to string tables from a text file."""
 
-  def __init__(self,
-               filename,
-               key_column_index=TextFileIndex.LINE_NUMBER,
-               value_column_index=TextFileIndex.WHOLE_LINE,
-               vocab_size=None,
-               delimiter="\t",
-               name="text_file_string_table_init"):
-    """Constructs an initializer for an id-to-string table from a text file.
+    def __init__(
+        self,
+        filename,
+        key_column_index=TextFileIndex.LINE_NUMBER,
+        value_column_index=TextFileIndex.WHOLE_LINE,
+        vocab_size=None,
+        delimiter="\t",
+        name="text_file_string_table_init",
+    ):
+        """Constructs an initializer for an id-to-string table from a text file.
 
     It populates a table that its key and value types are int64 and string,
     respectively. It generates one key-value pair per line.
@@ -792,29 +853,32 @@ class TextFileStringTableInitializer(TextFileInitializer):
       TypeError: when the filename is empty, or when the table key and value
       data types do not match the expected data types.
     """
-    super(TextFileStringTableInitializer, self).__init__(
-        filename,
-        dtypes.int64,
-        key_column_index,
-        dtypes.string,
-        value_column_index,
-        vocab_size=vocab_size,
-        delimiter=delimiter,
-        name=name)
+        super(TextFileStringTableInitializer, self).__init__(
+            filename,
+            dtypes.int64,
+            key_column_index,
+            dtypes.string,
+            value_column_index,
+            vocab_size=vocab_size,
+            delimiter=delimiter,
+            name=name,
+        )
 
 
 class TextFileIdTableInitializer(TextFileInitializer):
-  """Table initializer for string to `int64` IDs tables from a text file."""
+    """Table initializer for string to `int64` IDs tables from a text file."""
 
-  def __init__(self,
-               filename,
-               key_column_index=TextFileIndex.WHOLE_LINE,
-               value_column_index=TextFileIndex.LINE_NUMBER,
-               vocab_size=None,
-               delimiter="\t",
-               name="text_file_id_table_init",
-               key_dtype=dtypes.string):
-    """Constructs an initializer for an string-to-id table from a text file.
+    def __init__(
+        self,
+        filename,
+        key_column_index=TextFileIndex.WHOLE_LINE,
+        value_column_index=TextFileIndex.LINE_NUMBER,
+        vocab_size=None,
+        delimiter="\t",
+        name="text_file_id_table_init",
+        key_dtype=dtypes.string,
+    ):
+        """Constructs an initializer for an string-to-id table from a text file.
 
     It populates a table that its key and value types are string and int64,
     respectively. It generates one key-value pair per line.
@@ -845,19 +909,20 @@ class TextFileIdTableInitializer(TextFileInitializer):
       TypeError: when the filename is empty, or when the table key and value
       data types do not match the expected data types.
     """
-    super(TextFileIdTableInitializer, self).__init__(
-        filename,
-        key_dtype,
-        key_column_index,
-        dtypes.int64,
-        value_column_index,
-        vocab_size=vocab_size,
-        delimiter=delimiter,
-        name=name)
+        super(TextFileIdTableInitializer, self).__init__(
+            filename,
+            key_dtype,
+            key_column_index,
+            dtypes.int64,
+            value_column_index,
+            vocab_size=vocab_size,
+            delimiter=delimiter,
+            name=name,
+        )
 
 
 class HasherSpec(collections.namedtuple("HasherSpec", ["hasher", "key"])):
-  """A structure for the spec of the hashing function to use for hash buckets.
+    """A structure for the spec of the hashing function to use for hash buckets.
 
   `hasher` is the name of the hashing function to use (eg. "fasthash",
   "stronghash").
@@ -868,14 +933,15 @@ class HasherSpec(collections.namedtuple("HasherSpec", ["hasher", "key"])):
     hasher: The hasher name to use.
     key: The key to be used by the hashing function, if required.
   """
-  __slots__ = ()
+
+    __slots__ = ()
 
 
 FastHashSpec = HasherSpec("fasthash", None)  # pylint: disable=invalid-name
 
 
 class StrongHashSpec(HasherSpec):
-  """A structure to specify a key of the strong keyed hash spec.
+    """A structure to specify a key of the strong keyed hash spec.
 
   The strong hash requires a `key`, which is a list of 2 unsigned integer
   numbers. These should be non-zero; random numbers generated from random.org
@@ -884,27 +950,29 @@ class StrongHashSpec(HasherSpec):
   Fields:
     key: The key to be used by the keyed hashing function.
   """
-  __slots__ = ()
 
-  def __new__(cls, key):
-    if len(key) != 2:
-      raise ValueError(f"`key` must have size 2, received {len(key)}")
+    __slots__ = ()
 
-    if not isinstance(key[0], compat_util.integral_types) or not isinstance(
-        key[1], compat_util.integral_types):
-      raise TypeError("Invalid key %s. Must be unsigned integer values." % key)
+    def __new__(cls, key):
+        if len(key) != 2:
+            raise ValueError(f"`key` must have size 2, received {len(key)}")
 
-    return super(cls, StrongHashSpec).__new__(cls, "stronghash", key)
+        if not isinstance(key[0], compat_util.integral_types) or not isinstance(
+            key[1], compat_util.integral_types
+        ):
+            raise TypeError("Invalid key %s. Must be unsigned integer values." % key)
+
+        return super(cls, StrongHashSpec).__new__(cls, "stronghash", key)
 
 
 def _as_string(tensor):
-  if dtypes.string == tensor.dtype.base_dtype:
-    return tensor
-  return string_ops.as_string(tensor)
+    if dtypes.string == tensor.dtype.base_dtype:
+        return tensor
+    return string_ops.as_string(tensor)
 
 
 class IdTableWithHashBuckets(LookupInterface):
-  r"""String to Id table wrapper that assigns out-of-vocabulary keys to buckets.
+    r"""String to Id table wrapper that assigns out-of-vocabulary keys to buckets.
 
   For example, if an instance of `IdTableWithHashBuckets` is initialized with a
   string-to-id table that maps:
@@ -952,13 +1020,15 @@ class IdTableWithHashBuckets(LookupInterface):
   by `hasher_spec`.
   """
 
-  def __init__(self,
-               table,
-               num_oov_buckets,
-               hasher_spec=FastHashSpec,
-               name=None,
-               key_dtype=None):
-    """Construct a `IdTableWithHashBuckets` object.
+    def __init__(
+        self,
+        table,
+        num_oov_buckets,
+        hasher_spec=FastHashSpec,
+        name=None,
+        key_dtype=None,
+    ):
+        """Construct a `IdTableWithHashBuckets` object.
 
     Args:
       table: Table that maps `tf.string` or `tf.int64` keys to `tf.int64` ids.
@@ -974,106 +1044,117 @@ class IdTableWithHashBuckets(LookupInterface):
       ValueError: when `table` in None and `num_oov_buckets` is not positive.
       TypeError: when `hasher_spec` is invalid.
     """
-    # If a name ends with a '/' it is a "name scope", remove all trailing '/'
-    # characters to use as table name.
-    if name:
-      name = name.rstrip("/")
-    if table:
-      if key_dtype is None:
-        key_dtype = table.key_dtype
-      supported_table_key_dtypes = (dtypes.int64, dtypes.string)
-      if table.key_dtype not in supported_table_key_dtypes:
-        raise TypeError("Invalid `key_dtype`, expected one of "
-                        f"{supported_table_key_dtypes}, received {key_dtype}.")
-      if table.key_dtype.is_integer != key_dtype.is_integer:
-        raise TypeError("Invalid `key dtype`, expected %s but got %s." %
-                        ("integer" if key_dtype.is_integer else "non-integer",
-                         table.key_dtype))
-      if table.value_dtype != dtypes.int64:
-        raise TypeError("Invalid `value_dtype`: expected int64 but got %s." %
-                        (table.value_dtype))
-      self._table = table
-      name = name or self._table.name
-    else:
-      if num_oov_buckets <= 0:
-        raise ValueError("`oov_buckets` must be > 0 if no `table` is supplied.")
-      key_dtype = dtypes.string if key_dtype is None else key_dtype
-      self._table = None
-      name = name or "hash_bucket"
-    if (not key_dtype.is_integer) and (dtypes.string != key_dtype):
-      raise TypeError("Invalid `key_dtype`, expected integer or string, got "
-                      f"{key_dtype}.")
-    self._num_oov_buckets = num_oov_buckets
+        # If a name ends with a '/' it is a "name scope", remove all trailing '/'
+        # characters to use as table name.
+        if name:
+            name = name.rstrip("/")
+        if table:
+            if key_dtype is None:
+                key_dtype = table.key_dtype
+            supported_table_key_dtypes = (dtypes.int64, dtypes.string)
+            if table.key_dtype not in supported_table_key_dtypes:
+                raise TypeError(
+                    "Invalid `key_dtype`, expected one of "
+                    f"{supported_table_key_dtypes}, received {key_dtype}."
+                )
+            if table.key_dtype.is_integer != key_dtype.is_integer:
+                raise TypeError(
+                    "Invalid `key dtype`, expected %s but got %s."
+                    % (
+                        "integer" if key_dtype.is_integer else "non-integer",
+                        table.key_dtype,
+                    )
+                )
+            if table.value_dtype != dtypes.int64:
+                raise TypeError(
+                    "Invalid `value_dtype`: expected int64 but got %s."
+                    % (table.value_dtype)
+                )
+            self._table = table
+            name = name or self._table.name
+        else:
+            if num_oov_buckets <= 0:
+                raise ValueError("`oov_buckets` must be > 0 if no `table` is supplied.")
+            key_dtype = dtypes.string if key_dtype is None else key_dtype
+            self._table = None
+            name = name or "hash_bucket"
+        if (not key_dtype.is_integer) and (dtypes.string != key_dtype):
+            raise TypeError(
+                "Invalid `key_dtype`, expected integer or string, got " f"{key_dtype}."
+            )
+        self._num_oov_buckets = num_oov_buckets
 
-    if not isinstance(hasher_spec, HasherSpec):
-      raise TypeError("`hasher_spec` must be of type HasherSpec, got "
-                      f"{type(hasher_spec)}.")
-    self._hasher_spec = hasher_spec
-    if name:
-      self._table_name = name.split("/")[-1]
-    else:
-      self._table_name = None
-    super(IdTableWithHashBuckets, self).__init__(key_dtype, dtypes.int64)
+        if not isinstance(hasher_spec, HasherSpec):
+            raise TypeError(
+                "`hasher_spec` must be of type HasherSpec, got " f"{type(hasher_spec)}."
+            )
+        self._hasher_spec = hasher_spec
+        if name:
+            self._table_name = name.split("/")[-1]
+        else:
+            self._table_name = None
+        super(IdTableWithHashBuckets, self).__init__(key_dtype, dtypes.int64)
 
-  def _create_resource(self):
-    if self._table is not None:
-      return self._table._create_resource()  # pylint: disable=protected-access
-    return None
+    def _create_resource(self):
+        if self._table is not None:
+            return self._table._create_resource()  # pylint: disable=protected-access
+        return None
 
-  def _initialize(self):
-    if self._table is not None:
-      return self._table._initialize()  # pylint: disable=protected-access
-    with ops.name_scope(None, "init"):
-      return control_flow_ops.no_op()
+    def _initialize(self):
+        if self._table is not None:
+            return self._table._initialize()  # pylint: disable=protected-access
+        with ops.name_scope(None, "init"):
+            return control_flow_ops.no_op()
 
-  @property
-  def initializer(self):
-    if self._table is not None:
-      return self._table._init_op  # pylint: disable=protected-access
-    with ops.name_scope(None, "init"):
-      return control_flow_ops.no_op()
+    @property
+    def initializer(self):
+        if self._table is not None:
+            return self._table._init_op  # pylint: disable=protected-access
+        with ops.name_scope(None, "init"):
+            return control_flow_ops.no_op()
 
-  @property
-  @deprecated("2018-12-15", "Use `initializer` instead.")
-  def init(self):
-    return self.initializer
+    @property
+    @deprecated("2018-12-15", "Use `initializer` instead.")
+    def init(self):
+        return self.initializer
 
-  @property
-  def resource_handle(self):
-    if self._table is not None:
-      return self._table.resource_handle
-    return None
+    @property
+    def resource_handle(self):
+        if self._table is not None:
+            return self._table.resource_handle
+        return None
 
-  @property
-  def name(self):
-    return self._table_name
+    @property
+    def name(self):
+        return self._table_name
 
-  def size(self, name=None):
-    """Compute the number of elements in this table."""
-    with ops.name_scope(name, "%s_Size" % self.name):
-      if self._table:
-        tsize = self._table.size()
-      else:
-        tsize = ops.convert_to_tensor(0, dtype=dtypes.int64)
-      return tsize + self._num_oov_buckets
+    def size(self, name=None):
+        """Compute the number of elements in this table."""
+        with ops.name_scope(name, "%s_Size" % self.name):
+            if self._table:
+                tsize = self._table.size()
+            else:
+                tsize = ops.convert_to_tensor(0, dtype=dtypes.int64)
+            return tsize + self._num_oov_buckets
 
-  def _get_string_to_hash_bucket_fn(self, hasher_spec):
-    """Returns the string_to_hash_bucket op to use based on `hasher_spec`."""
-    if not isinstance(hasher_spec, HasherSpec):
-      raise TypeError("`hasher_spec` must be of type HasherSpec, got "
-                      f"{type(hasher_spec)}.")
-    if hasher_spec.hasher == "fasthash":
-      return string_ops.string_to_hash_bucket_fast
-    if hasher_spec.hasher == "legacy":
-      return string_ops.string_to_hash_bucket
-    if hasher_spec.hasher == "stronghash":
-      return functools.partial(
-          string_ops.string_to_hash_bucket_strong, key=hasher_spec.key)
-    raise ValueError(
-        f"Found unknown hasher {hasher_spec.hasher} in `hasher_spec`")
+    def _get_string_to_hash_bucket_fn(self, hasher_spec):
+        """Returns the string_to_hash_bucket op to use based on `hasher_spec`."""
+        if not isinstance(hasher_spec, HasherSpec):
+            raise TypeError(
+                "`hasher_spec` must be of type HasherSpec, got " f"{type(hasher_spec)}."
+            )
+        if hasher_spec.hasher == "fasthash":
+            return string_ops.string_to_hash_bucket_fast
+        if hasher_spec.hasher == "legacy":
+            return string_ops.string_to_hash_bucket
+        if hasher_spec.hasher == "stronghash":
+            return functools.partial(
+                string_ops.string_to_hash_bucket_strong, key=hasher_spec.key
+            )
+        raise ValueError(f"Found unknown hasher {hasher_spec.hasher} in `hasher_spec`")
 
-  def lookup(self, keys, name=None):
-    """Looks up `keys` in the table, outputs the corresponding values.
+    def lookup(self, keys, name=None):
+        """Looks up `keys` in the table, outputs the corresponding values.
 
     It assigns out-of-vocabulary keys to buckets based in their hashes.
 
@@ -1088,44 +1169,49 @@ class IdTableWithHashBuckets(LookupInterface):
     Raises:
       TypeError: when `keys` doesn't match the table key data type.
     """
-    if keys.dtype.base_dtype != self._key_dtype:
-      raise TypeError(f"Dtype of argument `keys` must be {self._key_dtype}, "
-                      f"received: {keys.dtype}")
-    values = keys
-    if isinstance(keys,
-                  (sparse_tensor.SparseTensor, ragged_tensor.RaggedTensor)):
-      values = keys.values
-    if self._table and (self._table.key_dtype.base_dtype == dtypes.int64):
-      values = math_ops.cast(values, dtypes.int64)
+        if keys.dtype.base_dtype != self._key_dtype:
+            raise TypeError(
+                f"Dtype of argument `keys` must be {self._key_dtype}, "
+                f"received: {keys.dtype}"
+            )
+        values = keys
+        if isinstance(keys, (sparse_tensor.SparseTensor, ragged_tensor.RaggedTensor)):
+            values = keys.values
+        if self._table and (self._table.key_dtype.base_dtype == dtypes.int64):
+            values = math_ops.cast(values, dtypes.int64)
 
-    if self._num_oov_buckets == 0:
-      ids = self._table.lookup(values, name=name)
-    else:
-      # TODO(yleon): Consider moving this functionality to its own kernel.
-      with ops.name_scope(name, "%s_Lookup" % self.name):
-        str_to_hash_bucket = self._get_string_to_hash_bucket_fn(
-            self._hasher_spec)
-        buckets = str_to_hash_bucket(
-            _as_string(values),
-            num_buckets=self._num_oov_buckets,
-            name="hash_bucket")
-        if self._table:
-          ids = self._table.lookup(values)
-          buckets = math_ops.add(buckets, self._table.size())
-          is_id_non_default = math_ops.not_equal(ids, self._table.default_value)
-          ids = array_ops.where_v2(is_id_non_default, ids, buckets)
+        if self._num_oov_buckets == 0:
+            ids = self._table.lookup(values, name=name)
         else:
-          ids = buckets
-    if isinstance(keys, sparse_tensor.SparseTensor):
-      return sparse_tensor.SparseTensor(keys.indices, ids, keys.dense_shape)
-    elif isinstance(keys, ragged_tensor.RaggedTensor):
-      return keys.with_values(ids)
-    return ids
+            # TODO(yleon): Consider moving this functionality to its own kernel.
+            with ops.name_scope(name, "%s_Lookup" % self.name):
+                str_to_hash_bucket = self._get_string_to_hash_bucket_fn(
+                    self._hasher_spec
+                )
+                buckets = str_to_hash_bucket(
+                    _as_string(values),
+                    num_buckets=self._num_oov_buckets,
+                    name="hash_bucket",
+                )
+                if self._table:
+                    ids = self._table.lookup(values)
+                    buckets = math_ops.add(buckets, self._table.size())
+                    is_id_non_default = math_ops.not_equal(
+                        ids, self._table.default_value
+                    )
+                    ids = array_ops.where_v2(is_id_non_default, ids, buckets)
+                else:
+                    ids = buckets
+        if isinstance(keys, sparse_tensor.SparseTensor):
+            return sparse_tensor.SparseTensor(keys.indices, ids, keys.dense_shape)
+        elif isinstance(keys, ragged_tensor.RaggedTensor):
+            return keys.with_values(ids)
+        return ids
 
 
 @tf_export("lookup.StaticVocabularyTable", v1=[])
 class StaticVocabularyTable(LookupInterface):
-  r"""String to Id table that assigns out-of-vocabulary keys to hash buckets.
+    r"""String to Id table that assigns out-of-vocabulary keys to hash buckets.
 
   For example, if an instance of `StaticVocabularyTable` is initialized with a
   string-to-id initializer that maps:
@@ -1191,12 +1277,8 @@ class StaticVocabularyTable(LookupInterface):
   array([1, 2, 3, 3])
   """
 
-  def __init__(self,
-               initializer,
-               num_oov_buckets,
-               lookup_key_dtype=None,
-               name=None):
-    """Construct a `StaticVocabularyTable` object.
+    def __init__(self, initializer, num_oov_buckets, lookup_key_dtype=None, name=None):
+        """Construct a `StaticVocabularyTable` object.
 
     Args:
       initializer: A `TableInitializerBase` object that contains the data used
@@ -1214,78 +1296,86 @@ class StaticVocabularyTable(LookupInterface):
       TypeError: when lookup_key_dtype or initializer.key_dtype are not
         integer or string. Also when initializer.value_dtype != int64.
     """
-    if num_oov_buckets <= 0:
-      raise ValueError("`num_oov_buckets` must be > 0.")
-    # If a name ends with a '/' it is a "name scope", remove all trailing '/'
-    # characters to use as table name.
-    if name:
-      name = name.rstrip("/")
-    if initializer:
-      if lookup_key_dtype is None:
-        lookup_key_dtype = initializer.key_dtype
-      supported_table_key_dtypes = (dtypes.int64, dtypes.string)
-      if initializer.key_dtype not in supported_table_key_dtypes:
-        raise TypeError("Invalid `key_dtype`, expected one of %s, but got %s." %
-                        (supported_table_key_dtypes, initializer.key_dtype))
-      if initializer.key_dtype.is_integer != lookup_key_dtype.is_integer:
-        raise TypeError(
-            "Invalid `key_dtype`, expected %s but got %s." %
-            ("integer" if lookup_key_dtype.is_integer else "non-integer",
-             initializer.key_dtype))
-      if initializer.value_dtype != dtypes.int64:
-        raise TypeError("Invalid `value_dtype`, expected %s but got %s." %
-                        (dtypes.int64, initializer.value_dtype))
-      if isinstance(initializer, trackable_base.Trackable):
-        self._initializer = self._track_trackable(initializer, "_initializer")
-      self._table = HashTable(initializer, default_value=-1)
-      name = name or self._table.name
-    else:
-      lookup_key_dtype = dtypes.string
-      self._table = None
-      name = name or "hash_bucket"
-    if (not lookup_key_dtype.is_integer) and (dtypes.string !=
-                                              lookup_key_dtype):
-      raise TypeError("Invalid `key_dtype`, expected integer or string, got "
-                      f"{lookup_key_dtype}")
-    self._num_oov_buckets = num_oov_buckets
+        if num_oov_buckets <= 0:
+            raise ValueError("`num_oov_buckets` must be > 0.")
+        # If a name ends with a '/' it is a "name scope", remove all trailing '/'
+        # characters to use as table name.
+        if name:
+            name = name.rstrip("/")
+        if initializer:
+            if lookup_key_dtype is None:
+                lookup_key_dtype = initializer.key_dtype
+            supported_table_key_dtypes = (dtypes.int64, dtypes.string)
+            if initializer.key_dtype not in supported_table_key_dtypes:
+                raise TypeError(
+                    "Invalid `key_dtype`, expected one of %s, but got %s."
+                    % (supported_table_key_dtypes, initializer.key_dtype)
+                )
+            if initializer.key_dtype.is_integer != lookup_key_dtype.is_integer:
+                raise TypeError(
+                    "Invalid `key_dtype`, expected %s but got %s."
+                    % (
+                        "integer" if lookup_key_dtype.is_integer else "non-integer",
+                        initializer.key_dtype,
+                    )
+                )
+            if initializer.value_dtype != dtypes.int64:
+                raise TypeError(
+                    "Invalid `value_dtype`, expected %s but got %s."
+                    % (dtypes.int64, initializer.value_dtype)
+                )
+            if isinstance(initializer, trackable_base.Trackable):
+                self._initializer = self._track_trackable(initializer, "_initializer")
+            self._table = HashTable(initializer, default_value=-1)
+            name = name or self._table.name
+        else:
+            lookup_key_dtype = dtypes.string
+            self._table = None
+            name = name or "hash_bucket"
+        if (not lookup_key_dtype.is_integer) and (dtypes.string != lookup_key_dtype):
+            raise TypeError(
+                "Invalid `key_dtype`, expected integer or string, got "
+                f"{lookup_key_dtype}"
+            )
+        self._num_oov_buckets = num_oov_buckets
 
-    self._table_name = None
-    if name is not None:
-      self._table_name = name.split("/")[-1]
-    super(StaticVocabularyTable, self).__init__(lookup_key_dtype, dtypes.int64)
+        self._table_name = None
+        if name is not None:
+            self._table_name = name.split("/")[-1]
+        super(StaticVocabularyTable, self).__init__(lookup_key_dtype, dtypes.int64)
 
-  def _create_resource(self):
-    if self._table is not None:
-      return self._table._create_resource()  # pylint: disable=protected-access
-    return None
+    def _create_resource(self):
+        if self._table is not None:
+            return self._table._create_resource()  # pylint: disable=protected-access
+        return None
 
-  def _initialize(self):
-    if self._table is not None:
-      return self._table._initialize()  # pylint: disable=protected-access
-    with ops.name_scope(None, "init"):
-      return control_flow_ops.no_op()
+    def _initialize(self):
+        if self._table is not None:
+            return self._table._initialize()  # pylint: disable=protected-access
+        with ops.name_scope(None, "init"):
+            return control_flow_ops.no_op()
 
-  @property
-  def resource_handle(self):
-    if self._table is not None:
-      return self._table.resource_handle
-    return None
+    @property
+    def resource_handle(self):
+        if self._table is not None:
+            return self._table.resource_handle
+        return None
 
-  @property
-  def name(self):
-    return self._table_name
+    @property
+    def name(self):
+        return self._table_name
 
-  def size(self, name=None):
-    """Compute the number of elements in this table."""
-    with ops.name_scope(name, "%s_Size" % self.name):
-      if self._table:
-        tsize = self._table.size()
-      else:
-        tsize = ops.convert_to_tensor(0, dtype=dtypes.int64)
-      return tsize + self._num_oov_buckets
+    def size(self, name=None):
+        """Compute the number of elements in this table."""
+        with ops.name_scope(name, "%s_Size" % self.name):
+            if self._table:
+                tsize = self._table.size()
+            else:
+                tsize = ops.convert_to_tensor(0, dtype=dtypes.int64)
+            return tsize + self._num_oov_buckets
 
-  def lookup(self, keys, name=None):
-    """Looks up `keys` in the table, outputs the corresponding values.
+    def lookup(self, keys, name=None):
+        """Looks up `keys` in the table, outputs the corresponding values.
 
     It assigns out-of-vocabulary keys to buckets based in their hashes.
 
@@ -1300,58 +1390,61 @@ class StaticVocabularyTable(LookupInterface):
     Raises:
       TypeError: when `keys` doesn't match the table key data type.
     """
-    if keys.dtype.base_dtype != self._key_dtype:
-      raise TypeError(f"Dtype of argument `keys` must be {self._key_dtype}, "
-                      f"received: {keys.dtype}")
-    values = keys
-    if isinstance(keys,
-                  (sparse_tensor.SparseTensor, ragged_tensor.RaggedTensor)):
-      values = keys.values
-    if self._table and (self._table.key_dtype.base_dtype == dtypes.int64):
-      values = math_ops.cast(values, dtypes.int64)
+        if keys.dtype.base_dtype != self._key_dtype:
+            raise TypeError(
+                f"Dtype of argument `keys` must be {self._key_dtype}, "
+                f"received: {keys.dtype}"
+            )
+        values = keys
+        if isinstance(keys, (sparse_tensor.SparseTensor, ragged_tensor.RaggedTensor)):
+            values = keys.values
+        if self._table and (self._table.key_dtype.base_dtype == dtypes.int64):
+            values = math_ops.cast(values, dtypes.int64)
 
-    # TODO(yleon): Consider moving this functionality to its own kernel.
-    with ops.name_scope(name, "%s_Lookup" % self.name):
-      buckets = string_ops.string_to_hash_bucket_fast(
-          _as_string(values),
-          num_buckets=self._num_oov_buckets,
-          name="hash_bucket")
-      if self._table:
-        ids = self._table.lookup(values)
-        buckets = math_ops.add(buckets, self._table.size())
-        is_id_non_default = math_ops.not_equal(ids, self._table.default_value)
-        ids = array_ops.where_v2(is_id_non_default, ids, buckets)
-      else:
-        ids = buckets
-    if isinstance(keys, sparse_tensor.SparseTensor):
-      return sparse_tensor.SparseTensor(keys.indices, ids, keys.dense_shape)
-    elif isinstance(keys, ragged_tensor.RaggedTensor):
-      return keys.with_values(ids)
-    return ids
+        # TODO(yleon): Consider moving this functionality to its own kernel.
+        with ops.name_scope(name, "%s_Lookup" % self.name):
+            buckets = string_ops.string_to_hash_bucket_fast(
+                _as_string(values),
+                num_buckets=self._num_oov_buckets,
+                name="hash_bucket",
+            )
+            if self._table:
+                ids = self._table.lookup(values)
+                buckets = math_ops.add(buckets, self._table.size())
+                is_id_non_default = math_ops.not_equal(ids, self._table.default_value)
+                ids = array_ops.where_v2(is_id_non_default, ids, buckets)
+            else:
+                ids = buckets
+        if isinstance(keys, sparse_tensor.SparseTensor):
+            return sparse_tensor.SparseTensor(keys.indices, ids, keys.dense_shape)
+        elif isinstance(keys, ragged_tensor.RaggedTensor):
+            return keys.with_values(ids)
+        return ids
 
 
 @tf_export(v1=["lookup.StaticVocabularyTable"])
 class StaticVocabularyTableV1(StaticVocabularyTable):
+    @property
+    def initializer(self):
+        if self._table is not None:
+            return self._table._init_op  # pylint: disable=protected-access
+        with ops.name_scope(None, "init"):
+            return control_flow_ops.no_op()
 
-  @property
-  def initializer(self):
-    if self._table is not None:
-      return self._table._init_op  # pylint: disable=protected-access
-    with ops.name_scope(None, "init"):
-      return control_flow_ops.no_op()
 
-
-def index_table_from_file(vocabulary_file=None,
-                          num_oov_buckets=0,
-                          vocab_size=None,
-                          default_value=-1,
-                          hasher_spec=FastHashSpec,
-                          key_dtype=dtypes.string,
-                          name=None,
-                          key_column_index=TextFileIndex.WHOLE_LINE,
-                          value_column_index=TextFileIndex.LINE_NUMBER,
-                          delimiter="\t"):
-  """Returns a lookup table that converts a string tensor into int64 IDs.
+def index_table_from_file(
+    vocabulary_file=None,
+    num_oov_buckets=0,
+    vocab_size=None,
+    default_value=-1,
+    hasher_spec=FastHashSpec,
+    key_dtype=dtypes.string,
+    name=None,
+    key_column_index=TextFileIndex.WHOLE_LINE,
+    value_column_index=TextFileIndex.LINE_NUMBER,
+    delimiter="\t",
+):
+    """Returns a lookup table that converts a string tensor into int64 IDs.
 
   This operation constructs a lookup table to convert tensor of strings into
   int64 IDs. The mapping can be initialized from a vocabulary file specified in
@@ -1423,53 +1516,59 @@ def index_table_from_file(vocabulary_file=None,
     ValueError: If `num_oov_buckets` is negative or `vocab_size` is not greater
       than zero.
   """
-  if vocabulary_file is None or (isinstance(vocabulary_file, six.string_types)
-                                 and not vocabulary_file):
-    raise ValueError(
-        "`vocabulary_file` must be specified and must not be empty.")
-  if num_oov_buckets < 0:
-    raise ValueError(
-        "num_oov_buckets must be greater or equal than 0, got %d." %
-        num_oov_buckets)
-  if vocab_size is not None and vocab_size < 1:
-    vocab_file_value = vocabulary_file
-    if isinstance(vocabulary_file, ops.Tensor):
-      vocab_file_value = tensor_util.constant_value(vocabulary_file) or "?"
-    raise ValueError("`vocab_size` must be greater than 0, got %d for "
-                     "vocabulary_file: %s." % (vocab_size, vocab_file_value))
-  if (not key_dtype.is_integer) and (dtypes.string != key_dtype.base_dtype):
-    raise TypeError("Dtype for `keys` should be either integer or string.")
+    if vocabulary_file is None or (
+        isinstance(vocabulary_file, six.string_types) and not vocabulary_file
+    ):
+        raise ValueError("`vocabulary_file` must be specified and must not be empty.")
+    if num_oov_buckets < 0:
+        raise ValueError(
+            "num_oov_buckets must be greater or equal than 0, got %d." % num_oov_buckets
+        )
+    if vocab_size is not None and vocab_size < 1:
+        vocab_file_value = vocabulary_file
+        if isinstance(vocabulary_file, ops.Tensor):
+            vocab_file_value = tensor_util.constant_value(vocabulary_file) or "?"
+        raise ValueError(
+            "`vocab_size` must be greater than 0, got %d for "
+            "vocabulary_file: %s." % (vocab_size, vocab_file_value)
+        )
+    if (not key_dtype.is_integer) and (dtypes.string != key_dtype.base_dtype):
+        raise TypeError("Dtype for `keys` should be either integer or string.")
 
-  with ops.name_scope(name, "string_to_index"):
-    table = None
-    with ops.name_scope(None, "hash_table"):
-      init = TextFileIdTableInitializer(
-          vocabulary_file,
-          vocab_size=vocab_size,
-          key_dtype=dtypes.int64 if key_dtype.is_integer else key_dtype,
-          name="table_init",
-          key_column_index=key_column_index,
-          value_column_index=value_column_index,
-          delimiter=delimiter)
+    with ops.name_scope(name, "string_to_index"):
+        table = None
+        with ops.name_scope(None, "hash_table"):
+            init = TextFileIdTableInitializer(
+                vocabulary_file,
+                vocab_size=vocab_size,
+                key_dtype=dtypes.int64 if key_dtype.is_integer else key_dtype,
+                name="table_init",
+                key_column_index=key_column_index,
+                value_column_index=value_column_index,
+                delimiter=delimiter,
+            )
 
-      table = StaticHashTableV1(init, default_value)
-    if num_oov_buckets:
-      table = IdTableWithHashBuckets(
-          table,
-          num_oov_buckets=num_oov_buckets,
-          hasher_spec=hasher_spec,
-          key_dtype=key_dtype)
+            table = StaticHashTableV1(init, default_value)
+        if num_oov_buckets:
+            table = IdTableWithHashBuckets(
+                table,
+                num_oov_buckets=num_oov_buckets,
+                hasher_spec=hasher_spec,
+                key_dtype=key_dtype,
+            )
 
-    return table
+        return table
 
 
-def index_table_from_tensor(vocabulary_list,
-                            num_oov_buckets=0,
-                            default_value=-1,
-                            hasher_spec=FastHashSpec,
-                            dtype=dtypes.string,
-                            name=None):
-  """Returns a lookup table that converts a string tensor into int64 IDs.
+def index_table_from_tensor(
+    vocabulary_list,
+    num_oov_buckets=0,
+    default_value=-1,
+    hasher_spec=FastHashSpec,
+    dtype=dtypes.string,
+    name=None,
+):
+    """Returns a lookup table that converts a string tensor into int64 IDs.
 
   This operation constructs a lookup table to convert tensor of strings into
   int64 IDs. The mapping can be initialized from a string `vocabulary_list` 1-D
@@ -1521,56 +1620,64 @@ def index_table_from_tensor(vocabulary_list,
     ValueError: If `vocabulary_list` is invalid.
     ValueError: If `num_oov_buckets` is negative.
   """
-  if vocabulary_list is None:
-    raise ValueError("`vocabulary_list` must be specified.")
+    if vocabulary_list is None:
+        raise ValueError("`vocabulary_list` must be specified.")
 
-  if num_oov_buckets < 0:
-    raise ValueError(
-        "`num_oov_buckets` must be greater or equal than 0, got %d." %
-        num_oov_buckets)
+    if num_oov_buckets < 0:
+        raise ValueError(
+            "`num_oov_buckets` must be greater or equal than 0, got %d."
+            % num_oov_buckets
+        )
 
-  if (not dtype.is_integer) and (dtypes.string != dtype.base_dtype):
-    raise TypeError("`dtype` must either be integer or string.")
+    if (not dtype.is_integer) and (dtypes.string != dtype.base_dtype):
+        raise TypeError("`dtype` must either be integer or string.")
 
-  with ops.name_scope(name, "string_to_index"):
-    keys = ops.convert_to_tensor(vocabulary_list)
-    if keys.dtype.is_integer != dtype.is_integer:
-      raise ValueError(
-          "Invalid `dtype`: Expected %s, got %s." %
-          ("integer" if dtype.is_integer else "non-integer", keys.dtype))
-    if (not dtype.is_integer) and (keys.dtype.base_dtype != dtype):
-      raise ValueError("Invalid `dtype`: Expected %s, got %s." %
-                       (dtype, keys.dtype))
-    num_elements = array_ops.size(keys)
-    values = math_ops.cast(math_ops.range(num_elements), dtypes.int64)
+    with ops.name_scope(name, "string_to_index"):
+        keys = ops.convert_to_tensor(vocabulary_list)
+        if keys.dtype.is_integer != dtype.is_integer:
+            raise ValueError(
+                "Invalid `dtype`: Expected %s, got %s."
+                % ("integer" if dtype.is_integer else "non-integer", keys.dtype)
+            )
+        if (not dtype.is_integer) and (keys.dtype.base_dtype != dtype):
+            raise ValueError(
+                "Invalid `dtype`: Expected %s, got %s." % (dtype, keys.dtype)
+            )
+        num_elements = array_ops.size(keys)
+        values = math_ops.cast(math_ops.range(num_elements), dtypes.int64)
 
-    with ops.name_scope(None, "hash_table"):
-      table_keys = math_ops.cast(
-          keys, dtypes.int64) if keys.dtype.is_integer else keys
-      init = KeyValueTensorInitializer(
-          table_keys,
-          values,
-          table_keys.dtype.base_dtype,
-          dtypes.int64,
-          name="table_init")
-      table = StaticHashTableV1(init, default_value)
-    if num_oov_buckets:
-      table = IdTableWithHashBuckets(
-          table,
-          num_oov_buckets=num_oov_buckets,
-          hasher_spec=hasher_spec,
-          key_dtype=dtype)
-    return table
+        with ops.name_scope(None, "hash_table"):
+            table_keys = (
+                math_ops.cast(keys, dtypes.int64) if keys.dtype.is_integer else keys
+            )
+            init = KeyValueTensorInitializer(
+                table_keys,
+                values,
+                table_keys.dtype.base_dtype,
+                dtypes.int64,
+                name="table_init",
+            )
+            table = StaticHashTableV1(init, default_value)
+        if num_oov_buckets:
+            table = IdTableWithHashBuckets(
+                table,
+                num_oov_buckets=num_oov_buckets,
+                hasher_spec=hasher_spec,
+                key_dtype=dtype,
+            )
+        return table
 
 
-def index_to_string_table_from_file(vocabulary_file,
-                                    vocab_size=None,
-                                    default_value="UNK",
-                                    name=None,
-                                    key_column_index=TextFileIndex.LINE_NUMBER,
-                                    value_column_index=TextFileIndex.WHOLE_LINE,
-                                    delimiter="\t"):
-  """Returns a lookup table that maps a `Tensor` of indices into strings.
+def index_to_string_table_from_file(
+    vocabulary_file,
+    vocab_size=None,
+    default_value="UNK",
+    name=None,
+    key_column_index=TextFileIndex.LINE_NUMBER,
+    value_column_index=TextFileIndex.WHOLE_LINE,
+    delimiter="\t",
+):
+    """Returns a lookup table that maps a `Tensor` of indices into strings.
 
   This operation constructs a lookup table to map int64 indices into string
   values. The table is initialized from a vocabulary file specified in
@@ -1634,31 +1741,30 @@ def index_to_string_table_from_file(vocabulary_file,
     ValueError: when `vocabulary_file` is empty.
     ValueError: when `vocab_size` is invalid.
   """
-  if vocabulary_file is None or (isinstance(vocabulary_file, six.string_types)
-                                 and not vocabulary_file):
-    raise ValueError(
-        "`vocabulary_file` must be specified and must not be empty.")
+    if vocabulary_file is None or (
+        isinstance(vocabulary_file, six.string_types) and not vocabulary_file
+    ):
+        raise ValueError("`vocabulary_file` must be specified and must not be empty.")
 
-  if vocab_size is not None and vocab_size < 1:
-    raise ValueError(f"`vocab_size` must be greater than 0, got {vocab_size}.")
+    if vocab_size is not None and vocab_size < 1:
+        raise ValueError(f"`vocab_size` must be greater than 0, got {vocab_size}.")
 
-  with ops.name_scope(name, "index_to_string"):
-    init = TextFileStringTableInitializer(
-        vocabulary_file,
-        vocab_size=vocab_size,
-        name="table_init",
-        key_column_index=key_column_index,
-        value_column_index=value_column_index,
-        delimiter=delimiter)
+    with ops.name_scope(name, "index_to_string"):
+        init = TextFileStringTableInitializer(
+            vocabulary_file,
+            vocab_size=vocab_size,
+            name="table_init",
+            key_column_index=key_column_index,
+            value_column_index=value_column_index,
+            delimiter=delimiter,
+        )
 
-    # TODO(yleon): Use a more efficient structure.
-    return StaticHashTableV1(init, default_value)
+        # TODO(yleon): Use a more efficient structure.
+        return StaticHashTableV1(init, default_value)
 
 
-def index_to_string_table_from_tensor(vocabulary_list,
-                                      default_value="UNK",
-                                      name=None):
-  """Returns a lookup table that maps a `Tensor` of indices into strings.
+def index_to_string_table_from_tensor(vocabulary_list, default_value="UNK", name=None):
+    """Returns a lookup table that maps a `Tensor` of indices into strings.
 
   This operation constructs a lookup table to map int64 indices into string
   values. The mapping is initialized from a string `vocabulary_list` 1-D
@@ -1703,23 +1809,24 @@ def index_to_string_table_from_tensor(vocabulary_list,
     ValueError: when `vocabulary_list` is not set.
   """
 
-  if vocabulary_list is None:
-    raise ValueError("`vocabulary_list` argument must be specified.")
+    if vocabulary_list is None:
+        raise ValueError("`vocabulary_list` argument must be specified.")
 
-  with ops.name_scope(name, "index_to_string"):
-    vocabulary_list = ops.convert_to_tensor(vocabulary_list, dtypes.string)
-    num_elements = array_ops.size(vocabulary_list)
-    keys = math_ops.cast(math_ops.range(num_elements), dtypes.int64)
+    with ops.name_scope(name, "index_to_string"):
+        vocabulary_list = ops.convert_to_tensor(vocabulary_list, dtypes.string)
+        num_elements = array_ops.size(vocabulary_list)
+        keys = math_ops.cast(math_ops.range(num_elements), dtypes.int64)
 
-    init = KeyValueTensorInitializer(
-        keys, vocabulary_list, dtypes.int64, dtypes.string, name="table_init")
-    # TODO(yleon): Use a more efficient structure.
-    return StaticHashTableV1(init, default_value)
+        init = KeyValueTensorInitializer(
+            keys, vocabulary_list, dtypes.int64, dtypes.string, name="table_init"
+        )
+        # TODO(yleon): Use a more efficient structure.
+        return StaticHashTableV1(init, default_value)
 
 
 @tf_export("lookup.experimental.MutableHashTable")
 class MutableHashTable(LookupInterface):
-  """A generic mutable hash table implementation.
+    """A generic mutable hash table implementation.
 
   Data can be inserted by calling the `insert` method and removed by calling the
   `remove` method. It does not support initialization via the init method.
@@ -1747,13 +1854,15 @@ class MutableHashTable(LookupInterface):
   [7, 8]
   """
 
-  def __init__(self,
-               key_dtype,
-               value_dtype,
-               default_value,
-               name="MutableHashTable",
-               checkpoint=True):
-    """Creates an empty `MutableHashTable` object.
+    def __init__(
+        self,
+        key_dtype,
+        value_dtype,
+        default_value,
+        name="MutableHashTable",
+        checkpoint=True,
+    ):
+        """Creates an empty `MutableHashTable` object.
 
     Creates a table, the type of its keys and values are specified by key_dtype
     and value_dtype, respectively.
@@ -1773,63 +1882,64 @@ class MutableHashTable(LookupInterface):
     Raises:
       ValueError: If checkpoint is True and no name was specified.
     """
-    self._default_value = ops.convert_to_tensor(
-        default_value, dtype=value_dtype)
-    self._value_shape = self._default_value.get_shape()
-    self._checkpoint = checkpoint
-    self._key_dtype = key_dtype
-    self._value_dtype = value_dtype
-    self._name = name
+        self._default_value = ops.convert_to_tensor(default_value, dtype=value_dtype)
+        self._value_shape = self._default_value.get_shape()
+        self._checkpoint = checkpoint
+        self._key_dtype = key_dtype
+        self._value_dtype = value_dtype
+        self._name = name
 
-    self._shared_name = None
-    if context.executing_eagerly():
-      # TODO(allenl): This will leak memory due to kernel caching by the
-      # shared_name attribute value (but is better than the alternative of
-      # sharing everything by default when executing eagerly; hopefully creating
-      # tables in a loop is uncommon).
-      # TODO(rohanj): Use context.anonymous_name() instead.
-      self._shared_name = "table_%d" % (ops.uid(),)
-    super(MutableHashTable, self).__init__(key_dtype, value_dtype)
+        self._shared_name = None
+        if context.executing_eagerly():
+            # TODO(allenl): This will leak memory due to kernel caching by the
+            # shared_name attribute value (but is better than the alternative of
+            # sharing everything by default when executing eagerly; hopefully creating
+            # tables in a loop is uncommon).
+            # TODO(rohanj): Use context.anonymous_name() instead.
+            self._shared_name = "table_%d" % (ops.uid(),)
+        super(MutableHashTable, self).__init__(key_dtype, value_dtype)
 
-    self._resource_handle = self._create_resource()
-    if checkpoint:
-      saveable = MutableHashTable._Saveable(self, name)
-      if not context.executing_eagerly():
-        ops.add_to_collection(ops.GraphKeys.SAVEABLE_OBJECTS, saveable)
+        self._resource_handle = self._create_resource()
+        if checkpoint:
+            saveable = MutableHashTable._Saveable(self, name)
+            if not context.executing_eagerly():
+                ops.add_to_collection(ops.GraphKeys.SAVEABLE_OBJECTS, saveable)
 
-  def _create_resource(self):
-    # The table must be shared if checkpointing is requested for multi-worker
-    # training to work correctly. Use the node name if no shared_name has been
-    # explicitly specified.
-    use_node_name_sharing = self._checkpoint and self._shared_name is None
-    if self._default_value.get_shape().ndims == 0:
-      table_ref = gen_lookup_ops.mutable_hash_table_v2(
-          shared_name=self._shared_name,
-          use_node_name_sharing=use_node_name_sharing,
-          key_dtype=self._key_dtype,
-          value_dtype=self._value_dtype,
-          name=self._name)
-    else:
-      table_ref = gen_lookup_ops.mutable_hash_table_of_tensors_v2(
-          shared_name=self._shared_name,
-          use_node_name_sharing=use_node_name_sharing,
-          key_dtype=self._key_dtype,
-          value_dtype=self._value_dtype,
-          value_shape=self._default_value.get_shape(),
-          name=self._name)
+    def _create_resource(self):
+        # The table must be shared if checkpointing is requested for multi-worker
+        # training to work correctly. Use the node name if no shared_name has been
+        # explicitly specified.
+        use_node_name_sharing = self._checkpoint and self._shared_name is None
+        if self._default_value.get_shape().ndims == 0:
+            table_ref = gen_lookup_ops.mutable_hash_table_v2(
+                shared_name=self._shared_name,
+                use_node_name_sharing=use_node_name_sharing,
+                key_dtype=self._key_dtype,
+                value_dtype=self._value_dtype,
+                name=self._name,
+            )
+        else:
+            table_ref = gen_lookup_ops.mutable_hash_table_of_tensors_v2(
+                shared_name=self._shared_name,
+                use_node_name_sharing=use_node_name_sharing,
+                key_dtype=self._key_dtype,
+                value_dtype=self._value_dtype,
+                value_shape=self._default_value.get_shape(),
+                name=self._name,
+            )
 
-    if context.executing_eagerly():
-      self._table_name = None
-    else:
-      self._table_name = table_ref.op.name.split("/")[-1]
-    return table_ref
+        if context.executing_eagerly():
+            self._table_name = None
+        else:
+            self._table_name = table_ref.op.name.split("/")[-1]
+        return table_ref
 
-  @property
-  def name(self):
-    return self._table_name
+    @property
+    def name(self):
+        return self._table_name
 
-  def size(self, name=None):
-    """Compute the number of elements in this table.
+    def size(self, name=None):
+        """Compute the number of elements in this table.
 
     Args:
       name: A name for the operation (optional).
@@ -1837,12 +1947,12 @@ class MutableHashTable(LookupInterface):
     Returns:
       A scalar tensor containing the number of elements in this table.
     """
-    with ops.name_scope(name, "%s_Size" % self.name, [self.resource_handle]):
-      with ops.colocate_with(self.resource_handle):
-        return gen_lookup_ops.lookup_table_size_v2(self.resource_handle)
+        with ops.name_scope(name, "%s_Size" % self.name, [self.resource_handle]):
+            with ops.colocate_with(self.resource_handle):
+                return gen_lookup_ops.lookup_table_size_v2(self.resource_handle)
 
-  def remove(self, keys, name=None):
-    """Removes `keys` and its associated values from the table.
+    def remove(self, keys, name=None):
+        """Removes `keys` and its associated values from the table.
 
     If a key is not present in the table, it is silently ignored.
 
@@ -1857,18 +1967,23 @@ class MutableHashTable(LookupInterface):
     Raises:
       TypeError: when `keys` do not match the table data types.
     """
-    if keys.dtype != self._key_dtype:
-      raise TypeError(f"Dtype of argument `keys` must be {self._key_dtype}, "
-                      f"received: {keys.dtype}")
+        if keys.dtype != self._key_dtype:
+            raise TypeError(
+                f"Dtype of argument `keys` must be {self._key_dtype}, "
+                f"received: {keys.dtype}"
+            )
 
-    with ops.name_scope(name, "%s_lookup_table_remove" % self.name,
-                        (self.resource_handle, keys, self._default_value)):
-      op = gen_lookup_ops.lookup_table_remove_v2(self.resource_handle, keys)
+        with ops.name_scope(
+            name,
+            "%s_lookup_table_remove" % self.name,
+            (self.resource_handle, keys, self._default_value),
+        ):
+            op = gen_lookup_ops.lookup_table_remove_v2(self.resource_handle, keys)
 
-    return op
+        return op
 
-  def lookup(self, keys, dynamic_default_values=None, name=None):
-    """Looks up `keys` in a table, outputs the corresponding values.
+    def lookup(self, keys, dynamic_default_values=None, name=None):
+        """Looks up `keys` in a table, outputs the corresponding values.
 
     The `default_value` is used for keys not present in the table.
 
@@ -1901,17 +2016,24 @@ class MutableHashTable(LookupInterface):
     Raises:
       TypeError: when `keys` do not match the table data types.
     """
-    with ops.name_scope(name, "%s_lookup_table_find" % self.name,
-                        (self.resource_handle, keys, self._default_value)):
-      keys = ops.convert_to_tensor(keys, dtype=self._key_dtype, name="keys")
-      with ops.colocate_with(self.resource_handle):
-        values = gen_lookup_ops.lookup_table_find_v2(
-            self.resource_handle, keys, dynamic_default_values
-            if dynamic_default_values is not None else self._default_value)
-    return values
+        with ops.name_scope(
+            name,
+            "%s_lookup_table_find" % self.name,
+            (self.resource_handle, keys, self._default_value),
+        ):
+            keys = ops.convert_to_tensor(keys, dtype=self._key_dtype, name="keys")
+            with ops.colocate_with(self.resource_handle):
+                values = gen_lookup_ops.lookup_table_find_v2(
+                    self.resource_handle,
+                    keys,
+                    dynamic_default_values
+                    if dynamic_default_values is not None
+                    else self._default_value,
+                )
+        return values
 
-  def insert(self, keys, values, name=None):
-    """Associates `keys` with `values`.
+    def insert(self, keys, values, name=None):
+        """Associates `keys` with `values`.
 
     Args:
       keys: Keys to insert. Can be a tensor of any shape. Must match the table's
@@ -1927,18 +2049,22 @@ class MutableHashTable(LookupInterface):
       TypeError: when `keys` or `values` doesn't match the table data
         types.
     """
-    with ops.name_scope(name, "%s_lookup_table_insert" % self.name,
-                        [self.resource_handle, keys, values]):
-      keys = ops.convert_to_tensor(keys, self._key_dtype, name="keys")
-      values = ops.convert_to_tensor(values, self._value_dtype, name="values")
-      with ops.colocate_with(self.resource_handle):
-        # pylint: disable=protected-access
-        op = gen_lookup_ops.lookup_table_insert_v2(self.resource_handle, keys,
-                                                   values)
-    return op
+        with ops.name_scope(
+            name,
+            "%s_lookup_table_insert" % self.name,
+            [self.resource_handle, keys, values],
+        ):
+            keys = ops.convert_to_tensor(keys, self._key_dtype, name="keys")
+            values = ops.convert_to_tensor(values, self._value_dtype, name="values")
+            with ops.colocate_with(self.resource_handle):
+                # pylint: disable=protected-access
+                op = gen_lookup_ops.lookup_table_insert_v2(
+                    self.resource_handle, keys, values
+                )
+        return op
 
-  def export(self, name=None):
-    """Returns tensors of all keys and values in the table.
+    def export(self, name=None):
+        """Returns tensors of all keys and values in the table.
 
     Args:
       name: A name for the operation (optional).
@@ -1947,48 +2073,54 @@ class MutableHashTable(LookupInterface):
       A pair of tensors with the first tensor containing all keys and the
         second tensors containing all values in the table.
     """
-    with ops.name_scope(name, "%s_lookup_table_export_values" % self.name,
-                        [self.resource_handle]):
-      with ops.colocate_with(self.resource_handle):
-        exported_keys, exported_values = gen_lookup_ops.lookup_table_export_v2(
-            self.resource_handle, self._key_dtype, self._value_dtype)
-    return exported_keys, exported_values
+        with ops.name_scope(
+            name, "%s_lookup_table_export_values" % self.name, [self.resource_handle]
+        ):
+            with ops.colocate_with(self.resource_handle):
+                exported_keys, exported_values = gen_lookup_ops.lookup_table_export_v2(
+                    self.resource_handle, self._key_dtype, self._value_dtype
+                )
+        return exported_keys, exported_values
 
-  def _gather_saveables_for_checkpoint(self):
-    """For object-based checkpointing."""
-    return {
-        "table":
-            functools.partial(
-                MutableHashTable._Saveable, table=self, name=self._name,
-                table_name=self._name)
-    }
+    def _gather_saveables_for_checkpoint(self):
+        """For object-based checkpointing."""
+        return {
+            "table": functools.partial(
+                MutableHashTable._Saveable,
+                table=self,
+                name=self._name,
+                table_name=self._name,
+            )
+        }
 
-  class _Saveable(BaseSaverBuilder.SaveableObject):
-    """SaveableObject implementation for DenseHashTable."""
+    class _Saveable(BaseSaverBuilder.SaveableObject):
+        """SaveableObject implementation for DenseHashTable."""
 
-    def __init__(self, table, name, table_name=None):
-      tensors = table.export()
-      specs = [
-          BaseSaverBuilder.SaveSpec(tensors[0], "", name + "-keys"),
-          BaseSaverBuilder.SaveSpec(tensors[1], "", name + "-values")
-      ]
-      self.table_name = table_name or name
-      # pylint: disable=protected-access
-      super(MutableHashTable._Saveable, self).__init__(table, specs, name)
+        def __init__(self, table, name, table_name=None):
+            tensors = table.export()
+            specs = [
+                BaseSaverBuilder.SaveSpec(tensors[0], "", name + "-keys"),
+                BaseSaverBuilder.SaveSpec(tensors[1], "", name + "-values"),
+            ]
+            self.table_name = table_name or name
+            # pylint: disable=protected-access
+            super(MutableHashTable._Saveable, self).__init__(table, specs, name)
 
-    def restore(self, restored_tensors, restored_shapes):
-      del restored_shapes  # unused
-      # pylint: disable=protected-access
-      with ops.name_scope("%s_table_restore" % self.table_name):
-        with ops.colocate_with(self.op.resource_handle):
-          return gen_lookup_ops.lookup_table_import_v2(self.op.resource_handle,
-                                                       restored_tensors[0],
-                                                       restored_tensors[1])
+        def restore(self, restored_tensors, restored_shapes):
+            del restored_shapes  # unused
+            # pylint: disable=protected-access
+            with ops.name_scope("%s_table_restore" % self.table_name):
+                with ops.colocate_with(self.op.resource_handle):
+                    return gen_lookup_ops.lookup_table_import_v2(
+                        self.op.resource_handle,
+                        restored_tensors[0],
+                        restored_tensors[1],
+                    )
 
 
 @tf_export("lookup.experimental.DenseHashTable")
 class DenseHashTable(LookupInterface):
-  """A mutable hash table with faster lookups and higher memory usage.
+    """A mutable hash table with faster lookups and higher memory usage.
 
   Data can be inserted by calling the `insert` method and removed by calling the
   `remove` method. It does not support initialization via the init method.
@@ -2020,18 +2152,20 @@ class DenseHashTable(LookupInterface):
   array([ 0,  1, -1, -1])
   """
 
-  # TODO(andreasst): consider extracting common code with MutableHashTable into
-  # a common superclass.
-  def __init__(self,
-               key_dtype,
-               value_dtype,
-               default_value,
-               empty_key,
-               deleted_key,
-               initial_num_buckets=None,
-               name="MutableDenseHashTable",
-               checkpoint=True):
-    """Creates an empty `DenseHashTable` object.
+    # TODO(andreasst): consider extracting common code with MutableHashTable into
+    # a common superclass.
+    def __init__(
+        self,
+        key_dtype,
+        value_dtype,
+        default_value,
+        empty_key,
+        deleted_key,
+        initial_num_buckets=None,
+        name="MutableDenseHashTable",
+        checkpoint=True,
+    ):
+        """Creates an empty `DenseHashTable` object.
 
     Creates a table, the type of its keys and values are specified by key_dtype
     and value_dtype, respectively.
@@ -2057,63 +2191,67 @@ class DenseHashTable(LookupInterface):
     Raises:
       ValueError: If checkpoint is True and no name was specified.
     """
-    self._default_value = ops.convert_to_tensor(
-        default_value, dtype=value_dtype, name="default_value")
-    self._key_dtype = key_dtype
-    self._value_dtype = value_dtype
-    self._initial_num_buckets = initial_num_buckets
-    self._value_shape = self._default_value.get_shape()
-    self._checkpoint = checkpoint
-    self._name = name
+        self._default_value = ops.convert_to_tensor(
+            default_value, dtype=value_dtype, name="default_value"
+        )
+        self._key_dtype = key_dtype
+        self._value_dtype = value_dtype
+        self._initial_num_buckets = initial_num_buckets
+        self._value_shape = self._default_value.get_shape()
+        self._checkpoint = checkpoint
+        self._name = name
 
-    self._empty_key = empty_key
-    self._deleted_key = deleted_key
-    self._shared_name = None
-    if context.executing_eagerly():
-      # TODO(allenl): This will leak memory due to kernel caching by the
-      # shared_name attribute value (but is better than the alternative of
-      # sharing everything by default when executing eagerly; hopefully creating
-      # tables in a loop is uncommon).
-      # TODO(rohanj): Use context.anonymous_name() instead.
-      self._shared_name = "table_%d" % (ops.uid(),)
-    super(DenseHashTable, self).__init__(key_dtype, value_dtype)
+        self._empty_key = empty_key
+        self._deleted_key = deleted_key
+        self._shared_name = None
+        if context.executing_eagerly():
+            # TODO(allenl): This will leak memory due to kernel caching by the
+            # shared_name attribute value (but is better than the alternative of
+            # sharing everything by default when executing eagerly; hopefully creating
+            # tables in a loop is uncommon).
+            # TODO(rohanj): Use context.anonymous_name() instead.
+            self._shared_name = "table_%d" % (ops.uid(),)
+        super(DenseHashTable, self).__init__(key_dtype, value_dtype)
 
-    self._resource_handle = self._create_resource()
-    if checkpoint:
-      saveable = DenseHashTable._Saveable(self, name)
-      if not context.executing_eagerly():
-        ops.add_to_collection(ops.GraphKeys.SAVEABLE_OBJECTS, saveable)
+        self._resource_handle = self._create_resource()
+        if checkpoint:
+            saveable = DenseHashTable._Saveable(self, name)
+            if not context.executing_eagerly():
+                ops.add_to_collection(ops.GraphKeys.SAVEABLE_OBJECTS, saveable)
 
-  def _create_resource(self):
-    # The table must be shared if checkpointing is requested for multi-worker
-    # training to work correctly. Use the node name if no shared_name has been
-    # explicitly specified.
-    use_node_name_sharing = self._checkpoint and self._shared_name is None
-    empty_key = ops.convert_to_tensor(
-        self._empty_key, dtype=self._key_dtype, name="empty_key")
-    deleted_key = ops.convert_to_tensor(
-        self._deleted_key, dtype=self._key_dtype, name="deleted_key")
-    table_ref = gen_lookup_ops.mutable_dense_hash_table_v2(
-        empty_key=empty_key,
-        deleted_key=deleted_key,
-        shared_name=self._shared_name,
-        use_node_name_sharing=use_node_name_sharing,
-        value_dtype=self._value_dtype,
-        value_shape=self._value_shape,
-        initial_num_buckets=self._initial_num_buckets,
-        name=self._name)
-    if context.executing_eagerly():
-      self._table_name = None
-    else:
-      self._table_name = table_ref.op.name.split("/")[-1]
-    return table_ref
+    def _create_resource(self):
+        # The table must be shared if checkpointing is requested for multi-worker
+        # training to work correctly. Use the node name if no shared_name has been
+        # explicitly specified.
+        use_node_name_sharing = self._checkpoint and self._shared_name is None
+        empty_key = ops.convert_to_tensor(
+            self._empty_key, dtype=self._key_dtype, name="empty_key"
+        )
+        deleted_key = ops.convert_to_tensor(
+            self._deleted_key, dtype=self._key_dtype, name="deleted_key"
+        )
+        table_ref = gen_lookup_ops.mutable_dense_hash_table_v2(
+            empty_key=empty_key,
+            deleted_key=deleted_key,
+            shared_name=self._shared_name,
+            use_node_name_sharing=use_node_name_sharing,
+            value_dtype=self._value_dtype,
+            value_shape=self._value_shape,
+            initial_num_buckets=self._initial_num_buckets,
+            name=self._name,
+        )
+        if context.executing_eagerly():
+            self._table_name = None
+        else:
+            self._table_name = table_ref.op.name.split("/")[-1]
+        return table_ref
 
-  @property
-  def name(self):
-    return self._table_name
+    @property
+    def name(self):
+        return self._table_name
 
-  def size(self, name=None):
-    """Compute the number of elements in this table.
+    def size(self, name=None):
+        """Compute the number of elements in this table.
 
     Args:
       name: A name for the operation (optional).
@@ -2121,12 +2259,12 @@ class DenseHashTable(LookupInterface):
     Returns:
       A scalar tensor containing the number of elements in this table.
     """
-    with ops.name_scope(name, "%s_Size" % self.name, [self.resource_handle]):
-      with ops.colocate_with(self.resource_handle):
-        return gen_lookup_ops.lookup_table_size_v2(self.resource_handle)
+        with ops.name_scope(name, "%s_Size" % self.name, [self.resource_handle]):
+            with ops.colocate_with(self.resource_handle):
+                return gen_lookup_ops.lookup_table_size_v2(self.resource_handle)
 
-  def lookup(self, keys, name=None):
-    """Looks up `keys` in a table, outputs the corresponding values.
+    def lookup(self, keys, name=None):
+        """Looks up `keys` in a table, outputs the corresponding values.
 
     The `default_value` is used for keys not present in the table.
 
@@ -2142,44 +2280,19 @@ class DenseHashTable(LookupInterface):
     Raises:
       TypeError: when `keys` do not match the table data types.
     """
-    with ops.name_scope(name, "%s_lookup_table_find" % self.name,
-                        [self.resource_handle, keys]):
-      keys = ops.convert_to_tensor(keys, dtype=self._key_dtype, name="keys")
-      with ops.colocate_with(self.resource_handle):
-        values = gen_lookup_ops.lookup_table_find_v2(self.resource_handle, keys,
-                                                     self._default_value)
+        with ops.name_scope(
+            name, "%s_lookup_table_find" % self.name, [self.resource_handle, keys]
+        ):
+            keys = ops.convert_to_tensor(keys, dtype=self._key_dtype, name="keys")
+            with ops.colocate_with(self.resource_handle):
+                values = gen_lookup_ops.lookup_table_find_v2(
+                    self.resource_handle, keys, self._default_value
+                )
 
-    return values
+        return values
 
-  def insert_or_assign(self, keys, values, name=None):
-    """Associates `keys` with `values`.
-
-    Args:
-      keys: Keys to insert. Can be a tensor of any shape. Must match the table's
-        key type.
-      values: Values to be associated with keys. Must be a tensor of the same
-        shape as `keys` and match the table's value type.
-      name: A name for the operation (optional).
-
-    Returns:
-      The created Operation.
-
-    Raises:
-      TypeError: when `keys` or `values` doesn't match the table data
-        types.
-    """
-    with ops.name_scope(name, "%s_lookup_table_insert" % self.name,
-                        [self.resource_handle, keys, values]):
-      keys = ops.convert_to_tensor(keys, dtype=self._key_dtype, name="keys")
-      values = ops.convert_to_tensor(
-          values, dtype=self._value_dtype, name="values")
-      with ops.colocate_with(self.resource_handle):
-        op = gen_lookup_ops.lookup_table_insert_v2(self.resource_handle, keys,
-                                                   values)
-      return op
-
-  def insert(self, keys, values, name=None):
-    """Associates `keys` with `values`.
+    def insert_or_assign(self, keys, values, name=None):
+        """Associates `keys` with `values`.
 
     Args:
       keys: Keys to insert. Can be a tensor of any shape. Must match the table's
@@ -2195,10 +2308,42 @@ class DenseHashTable(LookupInterface):
       TypeError: when `keys` or `values` doesn't match the table data
         types.
     """
-    return self.insert_or_assign(keys, values, name)
+        with ops.name_scope(
+            name,
+            "%s_lookup_table_insert" % self.name,
+            [self.resource_handle, keys, values],
+        ):
+            keys = ops.convert_to_tensor(keys, dtype=self._key_dtype, name="keys")
+            values = ops.convert_to_tensor(
+                values, dtype=self._value_dtype, name="values"
+            )
+            with ops.colocate_with(self.resource_handle):
+                op = gen_lookup_ops.lookup_table_insert_v2(
+                    self.resource_handle, keys, values
+                )
+            return op
 
-  def erase(self, keys, name=None):
-    """Removes `keys` and its associated values from the table.
+    def insert(self, keys, values, name=None):
+        """Associates `keys` with `values`.
+
+    Args:
+      keys: Keys to insert. Can be a tensor of any shape. Must match the table's
+        key type.
+      values: Values to be associated with keys. Must be a tensor of the same
+        shape as `keys` and match the table's value type.
+      name: A name for the operation (optional).
+
+    Returns:
+      The created Operation.
+
+    Raises:
+      TypeError: when `keys` or `values` doesn't match the table data
+        types.
+    """
+        return self.insert_or_assign(keys, values, name)
+
+    def erase(self, keys, name=None):
+        """Removes `keys` and its associated values from the table.
 
     If a key is not present in the table, it is silently ignored.
 
@@ -2213,19 +2358,24 @@ class DenseHashTable(LookupInterface):
     Raises:
       TypeError: when `keys` do not match the table data types.
     """
-    if keys.dtype != self._key_dtype:
-      raise TypeError("Signature mismatch. Keys must be dtype %s, got %s." %
-                      (self._key_dtype, keys.dtype))
+        if keys.dtype != self._key_dtype:
+            raise TypeError(
+                "Signature mismatch. Keys must be dtype %s, got %s."
+                % (self._key_dtype, keys.dtype)
+            )
 
-    with ops.name_scope(name, "%s_lookup_table_remove" % self.name,
-                        (self.resource_handle, keys, self._default_value)):
-      # pylint: disable=protected-access
-      op = gen_lookup_ops.lookup_table_remove_v2(self.resource_handle, keys)
+        with ops.name_scope(
+            name,
+            "%s_lookup_table_remove" % self.name,
+            (self.resource_handle, keys, self._default_value),
+        ):
+            # pylint: disable=protected-access
+            op = gen_lookup_ops.lookup_table_remove_v2(self.resource_handle, keys)
 
-    return op
+        return op
 
-  def remove(self, keys, name=None):
-    """Removes `keys` and its associated values from the table.
+    def remove(self, keys, name=None):
+        """Removes `keys` and its associated values from the table.
 
     If a key is not present in the table, it is silently ignored.
 
@@ -2240,10 +2390,10 @@ class DenseHashTable(LookupInterface):
     Raises:
       TypeError: when `keys` do not match the table data types.
     """
-    return self.erase(keys, name)
+        return self.erase(keys, name)
 
-  def export(self, name=None):
-    """Returns tensors of all keys and values in the table.
+    def export(self, name=None):
+        """Returns tensors of all keys and values in the table.
 
     Args:
       name: A name for the operation (optional).
@@ -2252,44 +2402,50 @@ class DenseHashTable(LookupInterface):
       A pair of tensors with the first tensor containing all keys and the
         second tensors containing all values in the table.
     """
-    with ops.name_scope(name, "%s_lookup_table_export_values" % self.name,
-                        [self.resource_handle]):
-      with ops.colocate_with(self.resource_handle):
-        exported_keys, exported_values = gen_lookup_ops.lookup_table_export_v2(
-            self.resource_handle, self._key_dtype, self._value_dtype)
+        with ops.name_scope(
+            name, "%s_lookup_table_export_values" % self.name, [self.resource_handle]
+        ):
+            with ops.colocate_with(self.resource_handle):
+                exported_keys, exported_values = gen_lookup_ops.lookup_table_export_v2(
+                    self.resource_handle, self._key_dtype, self._value_dtype
+                )
 
-    return exported_keys, exported_values
+        return exported_keys, exported_values
 
-  def _gather_saveables_for_checkpoint(self):
-    """For object-based checkpointing."""
-    return {
-        "table":
-            functools.partial(
-                DenseHashTable._Saveable, table=self, name=self._name,
-                table_name=self._name)
-    }
+    def _gather_saveables_for_checkpoint(self):
+        """For object-based checkpointing."""
+        return {
+            "table": functools.partial(
+                DenseHashTable._Saveable,
+                table=self,
+                name=self._name,
+                table_name=self._name,
+            )
+        }
 
-  class _Saveable(BaseSaverBuilder.SaveableObject):
-    """SaveableObject implementation for DenseHashTable."""
+    class _Saveable(BaseSaverBuilder.SaveableObject):
+        """SaveableObject implementation for DenseHashTable."""
 
-    def __init__(self, table, name, table_name=None):
-      tensors = table.export()
-      specs = [
-          BaseSaverBuilder.SaveSpec(tensors[0], "", name + "-keys"),
-          BaseSaverBuilder.SaveSpec(tensors[1], "", name + "-values")
-      ]
-      self.table_name = table_name or name
-      # pylint: disable=protected-access
-      super(DenseHashTable._Saveable, self).__init__(table, specs, name)
+        def __init__(self, table, name, table_name=None):
+            tensors = table.export()
+            specs = [
+                BaseSaverBuilder.SaveSpec(tensors[0], "", name + "-keys"),
+                BaseSaverBuilder.SaveSpec(tensors[1], "", name + "-values"),
+            ]
+            self.table_name = table_name or name
+            # pylint: disable=protected-access
+            super(DenseHashTable._Saveable, self).__init__(table, specs, name)
 
-    def restore(self, restored_tensors, restored_shapes):
-      del restored_shapes  # unused
-      # pylint: disable=protected-access
-      with ops.name_scope("%s_table_restore" % self.table_name):
-        with ops.colocate_with(self.op.resource_handle):
-          return gen_lookup_ops.lookup_table_import_v2(self.op.resource_handle,
-                                                       restored_tensors[0],
-                                                       restored_tensors[1])
+        def restore(self, restored_tensors, restored_shapes):
+            del restored_shapes  # unused
+            # pylint: disable=protected-access
+            with ops.name_scope("%s_table_restore" % self.table_name):
+                with ops.colocate_with(self.op.resource_handle):
+                    return gen_lookup_ops.lookup_table_import_v2(
+                        self.op.resource_handle,
+                        restored_tensors[0],
+                        restored_tensors[1],
+                    )
 
 
 ops.NotDifferentiable("LookupTableFind")

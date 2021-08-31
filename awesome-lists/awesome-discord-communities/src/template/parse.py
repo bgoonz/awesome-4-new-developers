@@ -8,7 +8,7 @@ class DumpMetadata:
         self.path = Path(path)
 
     def user(self) -> dict:
-        with open(self.path, encoding='utf-8', mode="r") as f:
+        with open(self.path, encoding="utf-8", mode="r") as f:
             u = json.load(f)
         return u
 

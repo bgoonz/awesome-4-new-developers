@@ -241,29 +241,29 @@ _update_replica_id = threading.local()
 
 
 def get_update_replica_id():
-  """Get the current device if in a `tf.distribute.Strategy.update()` call."""
-  try:
-    return _update_replica_id.current
-  except AttributeError:
-    return None
+    """Get the current device if in a `tf.distribute.Strategy.update()` call."""
+    try:
+        return _update_replica_id.current
+    except AttributeError:
+        return None
 
 
 class UpdateContext(object):
-  """Context manager when you are in `update()` or `update_non_slot()`."""
+    """Context manager when you are in `update()` or `update_non_slot()`."""
 
-  __slots__ = ["_replica_id", "_old_replica_id"]
+    __slots__ = ["_replica_id", "_old_replica_id"]
 
-  def __init__(self, replica_id):
-    self._replica_id = replica_id
-    self._old_replica_id = None
+    def __init__(self, replica_id):
+        self._replica_id = replica_id
+        self._old_replica_id = None
 
-  def __enter__(self):
-    self._old_replica_id = get_update_replica_id()
-    _update_replica_id.current = self._replica_id
+    def __enter__(self):
+        self._old_replica_id = get_update_replica_id()
+        _update_replica_id.current = self._replica_id
 
-  def __exit__(self, exception_type, exception_value, traceback):
-    del exception_type, exception_value, traceback
-    _update_replica_id.current = self._old_replica_id
+    def __exit__(self, exception_type, exception_value, traceback):
+        del exception_type, exception_value, traceback
+        _update_replica_id.current = self._old_replica_id
 
 
 # ------------------------------------------------------------------------------
@@ -272,7 +272,7 @@ class UpdateContext(object):
 
 @tf_export(v1=["distribute.get_loss_reduction"])
 def get_loss_reduction():
-  """`tf.distribute.ReduceOp` corresponding to the last loss reduction.
+    """`tf.distribute.ReduceOp` corresponding to the last loss reduction.
 
   This is used to decide whether loss should be scaled in optimizer (used only
   for estimator + v1 optimizer use case).
@@ -281,82 +281,93 @@ def get_loss_reduction():
     `tf.distribute.ReduceOp` corresponding to the last loss reduction for
     estimator and v1 optimizer use case. `tf.distribute.ReduceOp.SUM` otherwise.
   """
-  if not distribution_strategy_context.get_strategy()._scale_loss_for_estimator:  # pylint: disable=protected-access
-    # If we are not in Estimator context then return 'SUM'. We do not need to
-    # scale loss in the optimizer.
-    return reduce_util.ReduceOp.SUM
-  last_reduction = ops.get_default_graph()._last_loss_reduction  # pylint: disable=protected-access
-  if (last_reduction == losses_impl.Reduction.SUM or
-      last_reduction == "sum"):  # Check for tf.keras.losses.Reduction.SUM
-    return reduce_util.ReduceOp.SUM
-  return reduce_util.ReduceOp.MEAN
+    if (
+        not distribution_strategy_context.get_strategy()._scale_loss_for_estimator
+    ):  # pylint: disable=protected-access
+        # If we are not in Estimator context then return 'SUM'. We do not need to
+        # scale loss in the optimizer.
+        return reduce_util.ReduceOp.SUM
+    last_reduction = (
+        ops.get_default_graph()._last_loss_reduction
+    )  # pylint: disable=protected-access
+    if (
+        last_reduction == losses_impl.Reduction.SUM or last_reduction == "sum"
+    ):  # Check for tf.keras.losses.Reduction.SUM
+        return reduce_util.ReduceOp.SUM
+    return reduce_util.ReduceOp.MEAN
 
 
 # ------------------------------------------------------------------------------
 # Internal API for validating the current thread mode
 
 
-def _require_cross_replica_or_default_context_extended(extended,
-                                                       error_message=None):
-  """Verify in cross-replica context."""
-  context = _get_per_thread_mode()
-  cross_replica = context.cross_replica_context
-  if cross_replica is not None and cross_replica.extended is extended:
-    return
-  if context is _get_default_replica_mode():
-    return
-  strategy = extended._container_strategy()  # pylint: disable=protected-access
-  # We have an error to report, figure out the right message.
-  if context.strategy is not strategy:
-    _wrong_strategy_scope(strategy, context)
-  assert cross_replica is None
-  if not error_message:
-    error_message = ("Method requires being in cross-replica context, use "
-                     "get_replica_context().merge_call()")
-  raise RuntimeError(error_message)
+def _require_cross_replica_or_default_context_extended(extended, error_message=None):
+    """Verify in cross-replica context."""
+    context = _get_per_thread_mode()
+    cross_replica = context.cross_replica_context
+    if cross_replica is not None and cross_replica.extended is extended:
+        return
+    if context is _get_default_replica_mode():
+        return
+    strategy = extended._container_strategy()  # pylint: disable=protected-access
+    # We have an error to report, figure out the right message.
+    if context.strategy is not strategy:
+        _wrong_strategy_scope(strategy, context)
+    assert cross_replica is None
+    if not error_message:
+        error_message = (
+            "Method requires being in cross-replica context, use "
+            "get_replica_context().merge_call()"
+        )
+    raise RuntimeError(error_message)
 
 
 def _wrong_strategy_scope(strategy, context):
-  # Figure out the right error message.
-  if not distribution_strategy_context.has_strategy():
-    raise RuntimeError(
-        'Need to be inside "with strategy.scope()" for %s' %
-        (strategy,))
-  else:
-    raise RuntimeError(
-        "Mixing different tf.distribute.Strategy objects: %s is not %s" %
-        (context.strategy, strategy))
+    # Figure out the right error message.
+    if not distribution_strategy_context.has_strategy():
+        raise RuntimeError(
+            'Need to be inside "with strategy.scope()" for %s' % (strategy,)
+        )
+    else:
+        raise RuntimeError(
+            "Mixing different tf.distribute.Strategy objects: %s is not %s"
+            % (context.strategy, strategy)
+        )
 
 
 def require_replica_context(replica_ctx):
-  """Verify in `replica_ctx` replica context."""
-  context = _get_per_thread_mode()
-  if context.replica_context is replica_ctx: return
-  # We have an error to report, figure out the right message.
-  if context.replica_context is None:
-    raise RuntimeError("Need to be inside `call_for_each_replica()`")
-  if context.strategy is replica_ctx.strategy:
-    # Two different ReplicaContexts with the same tf.distribute.Strategy.
-    raise RuntimeError("Mismatching ReplicaContext.")
-  raise RuntimeError(
-      "Mismatching tf.distribute.Strategy objects: %s is not %s." %
-      (context.strategy, replica_ctx.strategy))
+    """Verify in `replica_ctx` replica context."""
+    context = _get_per_thread_mode()
+    if context.replica_context is replica_ctx:
+        return
+    # We have an error to report, figure out the right message.
+    if context.replica_context is None:
+        raise RuntimeError("Need to be inside `call_for_each_replica()`")
+    if context.strategy is replica_ctx.strategy:
+        # Two different ReplicaContexts with the same tf.distribute.Strategy.
+        raise RuntimeError("Mismatching ReplicaContext.")
+    raise RuntimeError(
+        "Mismatching tf.distribute.Strategy objects: %s is not %s."
+        % (context.strategy, replica_ctx.strategy)
+    )
 
 
 def _require_strategy_scope_strategy(strategy):
-  """Verify in a `strategy.scope()` in this thread."""
-  context = _get_per_thread_mode()
-  if context.strategy is strategy: return
-  _wrong_strategy_scope(strategy, context)
+    """Verify in a `strategy.scope()` in this thread."""
+    context = _get_per_thread_mode()
+    if context.strategy is strategy:
+        return
+    _wrong_strategy_scope(strategy, context)
 
 
 def _require_strategy_scope_extended(extended):
-  """Verify in a `distribution_strategy.scope()` in this thread."""
-  context = _get_per_thread_mode()
-  if context.strategy.extended is extended: return
-  # Report error.
-  strategy = extended._container_strategy()  # pylint: disable=protected-access
-  _wrong_strategy_scope(strategy, context)
+    """Verify in a `distribution_strategy.scope()` in this thread."""
+    context = _get_per_thread_mode()
+    if context.strategy.extended is extended:
+        return
+    # Report error.
+    strategy = extended._container_strategy()  # pylint: disable=protected-access
+    _wrong_strategy_scope(strategy, context)
 
 
 # ------------------------------------------------------------------------------
@@ -365,93 +376,111 @@ def _require_strategy_scope_extended(extended):
 
 
 class _CurrentDistributionContext(object):
-  """Context manager setting the current `tf.distribute.Strategy`.
+    """Context manager setting the current `tf.distribute.Strategy`.
 
   Also: overrides the variable creator and optionally the current device.
   """
 
-  def __init__(self,
-               strategy,
-               var_creator_scope,
-               var_scope=None,
-               resource_creator_scope=None,
-               default_device=None):
-    self._context = distribution_strategy_context._CrossReplicaThreadMode(  # pylint: disable=protected-access
-        strategy)
-    self._var_creator_scope = var_creator_scope
-    self._var_scope = var_scope
-    self._resource_creator_scope = resource_creator_scope
-    if default_device:
-      self._device_scope = ops.device(default_device)
-    else:
-      self._device_scope = None
-    self._same_scope_again_count = 0
+    def __init__(
+        self,
+        strategy,
+        var_creator_scope,
+        var_scope=None,
+        resource_creator_scope=None,
+        default_device=None,
+    ):
+        self._context = distribution_strategy_context._CrossReplicaThreadMode(  # pylint: disable=protected-access
+            strategy
+        )
+        self._var_creator_scope = var_creator_scope
+        self._var_scope = var_scope
+        self._resource_creator_scope = resource_creator_scope
+        if default_device:
+            self._device_scope = ops.device(default_device)
+        else:
+            self._device_scope = None
+        self._same_scope_again_count = 0
 
-  def __enter__(self):
-    # Allow this scope to be entered if this strategy is already in scope.
-    if distribution_strategy_context.has_strategy():
-      _require_cross_replica_or_default_context_extended(
-          self._context.strategy.extended)
-      self._same_scope_again_count += 1
-    else:
-      _push_per_thread_mode(self._context)
-      if self._var_scope:
-        self._var_scope.__enter__()
-      self._var_creator_scope.__enter__()
-      if self._resource_creator_scope:
-        nest.map_structure(lambda scope: scope.__enter__(),
-                           self._resource_creator_scope)
-      if self._device_scope:
-        self._device_scope.__enter__()
-    return self._context.strategy
+    def __enter__(self):
+        # Allow this scope to be entered if this strategy is already in scope.
+        if distribution_strategy_context.has_strategy():
+            _require_cross_replica_or_default_context_extended(
+                self._context.strategy.extended
+            )
+            self._same_scope_again_count += 1
+        else:
+            _push_per_thread_mode(self._context)
+            if self._var_scope:
+                self._var_scope.__enter__()
+            self._var_creator_scope.__enter__()
+            if self._resource_creator_scope:
+                nest.map_structure(
+                    lambda scope: scope.__enter__(), self._resource_creator_scope
+                )
+            if self._device_scope:
+                self._device_scope.__enter__()
+        return self._context.strategy
 
-  def __exit__(self, exception_type, exception_value, traceback):
-    if self._same_scope_again_count > 0:
-      self._same_scope_again_count -= 1
-      return
-    if self._device_scope:
-      try:
-        self._device_scope.__exit__(exception_type, exception_value, traceback)
-      except RuntimeError as e:
-        six.raise_from(
-            RuntimeError("Device scope nesting error: move call to "
-                         "tf.distribute.set_strategy() out of `with` scope."),
-            e)
+    def __exit__(self, exception_type, exception_value, traceback):
+        if self._same_scope_again_count > 0:
+            self._same_scope_again_count -= 1
+            return
+        if self._device_scope:
+            try:
+                self._device_scope.__exit__(exception_type, exception_value, traceback)
+            except RuntimeError as e:
+                six.raise_from(
+                    RuntimeError(
+                        "Device scope nesting error: move call to "
+                        "tf.distribute.set_strategy() out of `with` scope."
+                    ),
+                    e,
+                )
 
-    try:
-      self._var_creator_scope.__exit__(
-          exception_type, exception_value, traceback)
-    except RuntimeError as e:
-      six.raise_from(
-          RuntimeError("Variable creator scope nesting error: move call to "
-                       "tf.distribute.set_strategy() out of `with` scope."),
-          e)
+        try:
+            self._var_creator_scope.__exit__(exception_type, exception_value, traceback)
+        except RuntimeError as e:
+            six.raise_from(
+                RuntimeError(
+                    "Variable creator scope nesting error: move call to "
+                    "tf.distribute.set_strategy() out of `with` scope."
+                ),
+                e,
+            )
 
-    if self._resource_creator_scope:
-      try:
-        self._resource_creator_scope.__exit__(exception_type, exception_value,
-                                              traceback)
-      except RuntimeError as e:
-        six.raise_from(
-            RuntimeError("Resource creator scope nesting error: move call "
-                         "to tf.distribute.set_strategy() out of `with` "
-                         "scope."), e)
+        if self._resource_creator_scope:
+            try:
+                self._resource_creator_scope.__exit__(
+                    exception_type, exception_value, traceback
+                )
+            except RuntimeError as e:
+                six.raise_from(
+                    RuntimeError(
+                        "Resource creator scope nesting error: move call "
+                        "to tf.distribute.set_strategy() out of `with` "
+                        "scope."
+                    ),
+                    e,
+                )
 
-    if self._var_scope:
-      try:
-        self._var_scope.__exit__(exception_type, exception_value, traceback)
-      except RuntimeError as e:
-        six.raise_from(
-            RuntimeError("Variable scope nesting error: move call to "
-                         "tf.distribute.set_strategy() out of `with` scope."),
-            e)
-    _pop_per_thread_mode()
+        if self._var_scope:
+            try:
+                self._var_scope.__exit__(exception_type, exception_value, traceback)
+            except RuntimeError as e:
+                six.raise_from(
+                    RuntimeError(
+                        "Variable scope nesting error: move call to "
+                        "tf.distribute.set_strategy() out of `with` scope."
+                    ),
+                    e,
+                )
+        _pop_per_thread_mode()
 
 
 # TODO(yuefengz): add more replication modes.
 @tf_export("distribute.InputReplicationMode")
 class InputReplicationMode(enum.Enum):
-  """Replication mode for input function.
+    """Replication mode for input function.
 
   * `PER_WORKER`: The input function will be called on each worker
     independently, creating as many input pipelines as number of workers.
@@ -462,13 +491,14 @@ class InputReplicationMode(enum.Enum):
     `tf.distribute.Strategy` doesn't manage any state sharing between such
     separate input pipelines.
   """
-  PER_WORKER = "PER_WORKER"
-  PER_REPLICA = "PER_REPLICA"
+
+    PER_WORKER = "PER_WORKER"
+    PER_REPLICA = "PER_REPLICA"
 
 
 @tf_export("distribute.InputContext")
 class InputContext(object):
-  """A class wrapping information needed by an input function.
+    """A class wrapping information needed by an input function.
 
   This is a context class that is passed to the user's input function and
   contains information about the compute replicas and input pipelines. The
@@ -479,15 +509,12 @@ class InputContext(object):
   source etc).
   """
 
-  __slots__ = [
-      "_num_input_pipelines", "_input_pipeline_id", "_num_replicas_in_sync"
-  ]
+    __slots__ = ["_num_input_pipelines", "_input_pipeline_id", "_num_replicas_in_sync"]
 
-  def __init__(self,
-               num_input_pipelines=1,
-               input_pipeline_id=0,
-               num_replicas_in_sync=1):
-    """Initializes an InputContext object.
+    def __init__(
+        self, num_input_pipelines=1, input_pipeline_id=0, num_replicas_in_sync=1
+    ):
+        """Initializes an InputContext object.
 
     Args:
       num_input_pipelines: the number of input pipelines in a cluster.
@@ -495,27 +522,27 @@ class InputContext(object):
         [0,`num_input_pipelines`).
       num_replicas_in_sync: the number of replicas that are in sync.
     """
-    self._num_input_pipelines = num_input_pipelines
-    self._input_pipeline_id = input_pipeline_id
-    self._num_replicas_in_sync = num_replicas_in_sync
+        self._num_input_pipelines = num_input_pipelines
+        self._input_pipeline_id = input_pipeline_id
+        self._num_replicas_in_sync = num_replicas_in_sync
 
-  @property
-  def num_replicas_in_sync(self):
-    """Returns the number of compute replicas in sync."""
-    return self._num_replicas_in_sync
+    @property
+    def num_replicas_in_sync(self):
+        """Returns the number of compute replicas in sync."""
+        return self._num_replicas_in_sync
 
-  @property
-  def input_pipeline_id(self):
-    """Returns the input pipeline ID."""
-    return self._input_pipeline_id
+    @property
+    def input_pipeline_id(self):
+        """Returns the input pipeline ID."""
+        return self._input_pipeline_id
 
-  @property
-  def num_input_pipelines(self):
-    """Returns the number of input pipelines."""
-    return self._num_input_pipelines
+    @property
+    def num_input_pipelines(self):
+        """Returns the number of input pipelines."""
+        return self._num_input_pipelines
 
-  def get_per_replica_batch_size(self, global_batch_size):
-    """Returns the per-replica batch size.
+    def get_per_replica_batch_size(self, global_batch_size):
+        """Returns the per-replica batch size.
 
     Args:
       global_batch_size: the global batch size which should be divisible by
@@ -528,20 +555,23 @@ class InputContext(object):
       ValueError: if `global_batch_size` not divisible by
         `num_replicas_in_sync`.
     """
-    if global_batch_size % self._num_replicas_in_sync != 0:
-      raise ValueError("The `global_batch_size` %r is not divisible by "
-                       "`num_replicas_in_sync` %r " %
-                       (global_batch_size, self._num_replicas_in_sync))
-    return global_batch_size // self._num_replicas_in_sync
+        if global_batch_size % self._num_replicas_in_sync != 0:
+            raise ValueError(
+                "The `global_batch_size` %r is not divisible by "
+                "`num_replicas_in_sync` %r "
+                % (global_batch_size, self._num_replicas_in_sync)
+            )
+        return global_batch_size // self._num_replicas_in_sync
 
-  def __str__(self):
-    return "tf.distribute.InputContext(input pipeline id {}, total: {})".format(
-        self.input_pipeline_id, self.num_input_pipelines)
+    def __str__(self):
+        return "tf.distribute.InputContext(input pipeline id {}, total: {})".format(
+            self.input_pipeline_id, self.num_input_pipelines
+        )
 
 
 @tf_export("distribute.experimental.ValueContext", v1=[])
 class ValueContext(object):
-  """A class wrapping information needed by a distribute function.
+    """A class wrapping information needed by a distribute function.
 
   This is a context class that is passed to the `value_fn` in
   `strategy.experimental_distribute_values_from_function` and contains
@@ -574,45 +604,49 @@ class ValueContext(object):
 
   """
 
-  __slots__ = ["_replica_id_in_sync_group", "_num_replicas_in_sync"]
+    __slots__ = ["_replica_id_in_sync_group", "_num_replicas_in_sync"]
 
-  def __init__(self,
-               replica_id_in_sync_group=0,
-               num_replicas_in_sync=1):
-    """Initializes an ValueContext object.
+    def __init__(self, replica_id_in_sync_group=0, num_replicas_in_sync=1):
+        """Initializes an ValueContext object.
 
     Args:
       replica_id_in_sync_group: the current replica_id, should be an int in
         [0,`num_replicas_in_sync`).
       num_replicas_in_sync: the number of replicas that are in sync.
     """
-    self._replica_id_in_sync_group = replica_id_in_sync_group
-    self._num_replicas_in_sync = num_replicas_in_sync
+        self._replica_id_in_sync_group = replica_id_in_sync_group
+        self._num_replicas_in_sync = num_replicas_in_sync
 
-  @property
-  def num_replicas_in_sync(self):
-    """Returns the number of compute replicas in sync."""
-    return self._num_replicas_in_sync
+    @property
+    def num_replicas_in_sync(self):
+        """Returns the number of compute replicas in sync."""
+        return self._num_replicas_in_sync
 
-  @property
-  def replica_id_in_sync_group(self):
-    """Returns the replica ID."""
-    return self._replica_id_in_sync_group
+    @property
+    def replica_id_in_sync_group(self):
+        """Returns the replica ID."""
+        return self._replica_id_in_sync_group
 
-  def __str__(self):
-    return (("tf.distribute.ValueContext(replica id {}, "
-             " total replicas in sync: ""{})")
-            .format(self.replica_id_in_sync_group, self.num_replicas_in_sync))
+    def __str__(self):
+        return (
+            "tf.distribute.ValueContext(replica id {}, "
+            " total replicas in sync: "
+            "{})"
+        ).format(self.replica_id_in_sync_group, self.num_replicas_in_sync)
 
 
 @tf_export("distribute.RunOptions")
 class RunOptions(
-    collections.namedtuple("RunOptions", [
-        "experimental_enable_dynamic_batch_size",
-        "experimental_bucketizing_dynamic_shape",
-        "experimental_xla_options",
-    ])):
-  """Run options for `strategy.run`.
+    collections.namedtuple(
+        "RunOptions",
+        [
+            "experimental_enable_dynamic_batch_size",
+            "experimental_bucketizing_dynamic_shape",
+            "experimental_xla_options",
+        ],
+    )
+):
+    """Run options for `strategy.run`.
 
   This can be used to hold some strategy specific configs.
 
@@ -630,25 +664,33 @@ class RunOptions(
       TPUStrategy. Controls the XLA compiling options on TPUs. Default to None.
   """
 
-  def __new__(cls,
-              experimental_enable_dynamic_batch_size=True,
-              experimental_bucketizing_dynamic_shape=False,
-              experimental_xla_options=None):
-    return super(RunOptions,
-                 cls).__new__(cls, experimental_enable_dynamic_batch_size,
-                              experimental_bucketizing_dynamic_shape,
-                              experimental_xla_options)
+    def __new__(
+        cls,
+        experimental_enable_dynamic_batch_size=True,
+        experimental_bucketizing_dynamic_shape=False,
+        experimental_xla_options=None,
+    ):
+        return super(RunOptions, cls).__new__(
+            cls,
+            experimental_enable_dynamic_batch_size,
+            experimental_bucketizing_dynamic_shape,
+            experimental_xla_options,
+        )
 
 
 @tf_export("distribute.InputOptions", v1=[])
 class InputOptions(
-    collections.namedtuple("InputOptions", [
-        "experimental_fetch_to_device",
-        "experimental_replication_mode",
-        "experimental_place_dataset_on_device",
-        "experimental_per_replica_buffer_size",
-    ])):
-  """Run options for `experimental_distribute_dataset(s_from_function)`.
+    collections.namedtuple(
+        "InputOptions",
+        [
+            "experimental_fetch_to_device",
+            "experimental_replication_mode",
+            "experimental_place_dataset_on_device",
+            "experimental_per_replica_buffer_size",
+        ],
+    )
+):
+    """Run options for `experimental_distribute_dataset(s_from_function)`.
 
   This can be used to hold some strategy specific configs.
 
@@ -693,19 +735,24 @@ class InputOptions(
       valid with `experimental_fetch_to_device=False`.
   """
 
-  def __new__(cls,
-              experimental_fetch_to_device=None,
-              experimental_replication_mode=InputReplicationMode.PER_WORKER,
-              experimental_place_dataset_on_device=False,
-              experimental_per_replica_buffer_size=1):
-    if experimental_fetch_to_device is None:
-      experimental_fetch_to_device = True
+    def __new__(
+        cls,
+        experimental_fetch_to_device=None,
+        experimental_replication_mode=InputReplicationMode.PER_WORKER,
+        experimental_place_dataset_on_device=False,
+        experimental_per_replica_buffer_size=1,
+    ):
+        if experimental_fetch_to_device is None:
+            experimental_fetch_to_device = True
 
-    return super(InputOptions,
-                 cls).__new__(cls, experimental_fetch_to_device,
-                              experimental_replication_mode,
-                              experimental_place_dataset_on_device,
-                              experimental_per_replica_buffer_size)
+        return super(InputOptions, cls).__new__(
+            cls,
+            experimental_fetch_to_device,
+            experimental_replication_mode,
+            experimental_place_dataset_on_device,
+            experimental_per_replica_buffer_size,
+        )
+
 
 # ------------------------------------------------------------------------------
 # Base classes for all distribution strategies.
@@ -715,7 +762,7 @@ class InputOptions(
 # v1/v2 Strategy, add to implementing classes of StrategyBase.
 # pylint: disable=line-too-long
 class StrategyBase(object):
-  """A state & compute distribution policy on a list of devices.
+    """A state & compute distribution policy on a list of devices.
 
   See [the guide](https://www.tensorflow.org/guide/distributed_training)
   for overview and examples. See `tf.distribute.StrategyExtended` and
@@ -801,63 +848,66 @@ class StrategyBase(object):
   partitioned variables (where a single variable is split across multiple
   devices) at this time.
   """
-  # pylint: enable=line-too-long
 
-  # TODO(josh11b): Partitioned computations, state; sharding
-  # TODO(josh11b): Model parallelism: "replicas" with multiple devices; shuffling
+    # pylint: enable=line-too-long
 
-  def __init__(self, extended):
-    self._extended = extended
+    # TODO(josh11b): Partitioned computations, state; sharding
+    # TODO(josh11b): Model parallelism: "replicas" with multiple devices; shuffling
 
-    # Flag that is used to indicate whether distribution strategy is used with
-    # Estimator. This is required for backward compatibility of loss scaling
-    # when using v1 optimizer with estimator.
-    self._scale_loss_for_estimator = False
+    def __init__(self, extended):
+        self._extended = extended
 
-    if not hasattr(extended, "_retrace_functions_for_each_device"):
-      # pylint: disable=protected-access
-      # `extended._retrace_functions_for_each_device` dictates
-      # whether the same function will be retraced when it is called on
-      # different devices.
-      try:
-        extended._retrace_functions_for_each_device = (
-            len(extended.worker_devices) > 1)
-        distribution_strategy_replica_gauge.get_cell("num_replicas").set(
-            self.num_replicas_in_sync)
-      except:  # pylint: disable=bare-except
-        # Default for the case where extended.worker_devices can't return
-        # a sensible value.
-        extended._retrace_functions_for_each_device = True
+        # Flag that is used to indicate whether distribution strategy is used with
+        # Estimator. This is required for backward compatibility of loss scaling
+        # when using v1 optimizer with estimator.
+        self._scale_loss_for_estimator = False
 
-    # Below are the dicts of axis(int) -> `tf.function`.
-    self._mean_reduce_helper_fns = {}
-    self._reduce_sum_fns = {}
+        if not hasattr(extended, "_retrace_functions_for_each_device"):
+            # pylint: disable=protected-access
+            # `extended._retrace_functions_for_each_device` dictates
+            # whether the same function will be retraced when it is called on
+            # different devices.
+            try:
+                extended._retrace_functions_for_each_device = (
+                    len(extended.worker_devices) > 1
+                )
+                distribution_strategy_replica_gauge.get_cell("num_replicas").set(
+                    self.num_replicas_in_sync
+                )
+            except:  # pylint: disable=bare-except
+                # Default for the case where extended.worker_devices can't return
+                # a sensible value.
+                extended._retrace_functions_for_each_device = True
 
-    # Whether this strategy is designed to work with `ClusterCoordinator`.
-    self._should_use_with_coordinator = False
+        # Below are the dicts of axis(int) -> `tf.function`.
+        self._mean_reduce_helper_fns = {}
+        self._reduce_sum_fns = {}
 
-  @property
-  def extended(self):
-    """`tf.distribute.StrategyExtended` with additional methods."""
-    return self._extended
+        # Whether this strategy is designed to work with `ClusterCoordinator`.
+        self._should_use_with_coordinator = False
 
-  @tf_contextlib.contextmanager
-  def _scale_loss_for_estimator_enabled(self):
-    """Scope which sets a flag used for scaling losses in optimizer.
+    @property
+    def extended(self):
+        """`tf.distribute.StrategyExtended` with additional methods."""
+        return self._extended
+
+    @tf_contextlib.contextmanager
+    def _scale_loss_for_estimator_enabled(self):
+        """Scope which sets a flag used for scaling losses in optimizer.
 
     Yields:
       `_scale_loss_for_estimator_enabled` is a context manager with a
       side effect, but doesn't return a value.
     """
-    self._scale_loss_for_estimator = True
-    try:
-      yield
-    finally:
-      self._scale_loss_for_estimator = False
+        self._scale_loss_for_estimator = True
+        try:
+            yield
+        finally:
+            self._scale_loss_for_estimator = False
 
-  # pylint: disable=line-too-long
-  def scope(self):
-    """Context manager to make the strategy current and distribute variables.
+    # pylint: disable=line-too-long
+    def scope(self):
+        """Context manager to make the strategy current and distribute variables.
 
     This method returns a context manager, and is used as follows:
 
@@ -948,43 +998,48 @@ class StrategyBase(object):
     Returns:
       A context manager.
     """
-    return self._extended._scope(self)  # pylint: disable=protected-access
-  # pylint: enable=line-too-long
+        return self._extended._scope(self)  # pylint: disable=protected-access
 
-  @doc_controls.do_not_doc_inheritable  # DEPRECATED, moving to `extended`
-  @deprecated(None, "use extended.colocate_vars_with() instead.")
-  def colocate_vars_with(self, colocate_with_variable):
-    """DEPRECATED: use extended.colocate_vars_with() instead."""
-    return self._extended.colocate_vars_with(colocate_with_variable)
+    # pylint: enable=line-too-long
 
-  @doc_controls.do_not_generate_docs  # DEPRECATED: TF 1.x only
-  def make_dataset_iterator(self, dataset):
-    """DEPRECATED TF 1.x ONLY."""
-    return self._extended._make_dataset_iterator(dataset)  # pylint: disable=protected-access
+    @doc_controls.do_not_doc_inheritable  # DEPRECATED, moving to `extended`
+    @deprecated(None, "use extended.colocate_vars_with() instead.")
+    def colocate_vars_with(self, colocate_with_variable):
+        """DEPRECATED: use extended.colocate_vars_with() instead."""
+        return self._extended.colocate_vars_with(colocate_with_variable)
 
-  @doc_controls.do_not_generate_docs  # DEPRECATED: TF 1.x only
-  def make_input_fn_iterator(self,
-                             input_fn,
-                             replication_mode=InputReplicationMode.PER_WORKER):
-    """DEPRECATED TF 1.x ONLY."""
-    if replication_mode != InputReplicationMode.PER_WORKER:
-      raise ValueError(
-          "Input replication mode not supported: %r" % replication_mode)
-    with self.scope():
-      return self.extended._make_input_fn_iterator(  # pylint: disable=protected-access
-          input_fn, replication_mode=replication_mode)
+    @doc_controls.do_not_generate_docs  # DEPRECATED: TF 1.x only
+    def make_dataset_iterator(self, dataset):
+        """DEPRECATED TF 1.x ONLY."""
+        return self._extended._make_dataset_iterator(
+            dataset
+        )  # pylint: disable=protected-access
 
-  @doc_controls.do_not_generate_docs  # DEPRECATED: TF 1.x only
-  @deprecated(None, "use run() instead")
-  def experimental_run(self, fn, input_iterator=None):
-    """DEPRECATED TF 1.x ONLY."""
-    with self.scope():
-      args = (input_iterator.get_next(),) if input_iterator is not None else ()
-    return self.run(fn, args=args)
+    @doc_controls.do_not_generate_docs  # DEPRECATED: TF 1.x only
+    def make_input_fn_iterator(
+        self, input_fn, replication_mode=InputReplicationMode.PER_WORKER
+    ):
+        """DEPRECATED TF 1.x ONLY."""
+        if replication_mode != InputReplicationMode.PER_WORKER:
+            raise ValueError(
+                "Input replication mode not supported: %r" % replication_mode
+            )
+        with self.scope():
+            return self.extended._make_input_fn_iterator(  # pylint: disable=protected-access
+                input_fn, replication_mode=replication_mode
+            )
 
-  def experimental_distribute_dataset(self, dataset, options=None):
-    # pylint: disable=line-too-long
-    """Creates `tf.distribute.DistributedDataset` from `tf.data.Dataset`.
+    @doc_controls.do_not_generate_docs  # DEPRECATED: TF 1.x only
+    @deprecated(None, "use run() instead")
+    def experimental_run(self, fn, input_iterator=None):
+        """DEPRECATED TF 1.x ONLY."""
+        with self.scope():
+            args = (input_iterator.get_next(),) if input_iterator is not None else ()
+        return self.run(fn, args=args)
+
+    def experimental_distribute_dataset(self, dataset, options=None):
+        # pylint: disable=line-too-long
+        """Creates `tf.distribute.DistributedDataset` from `tf.data.Dataset`.
 
     The returned `tf.distribute.DistributedDataset` can be iterated over
     similar to regular datasets.
@@ -1098,14 +1153,17 @@ class StrategyBase(object):
     Returns:
       A `tf.distribute.DistributedDataset`.
     """
-    distribution_strategy_input_api_counter.get_cell(
-        self.__class__.__name__, "distribute_dataset").increase_by(1)
-    # pylint: enable=line-too-long
-    return self._extended._experimental_distribute_dataset(dataset, options)  # pylint: disable=protected-access
+        distribution_strategy_input_api_counter.get_cell(
+            self.__class__.__name__, "distribute_dataset"
+        ).increase_by(1)
+        # pylint: enable=line-too-long
+        return self._extended._experimental_distribute_dataset(
+            dataset, options
+        )  # pylint: disable=protected-access
 
-  def distribute_datasets_from_function(self, dataset_fn, options=None):
-    # pylint: disable=line-too-long
-    """Distributes `tf.data.Dataset` instances created by calls to `dataset_fn`.
+    def distribute_datasets_from_function(self, dataset_fn, options=None):
+        # pylint: disable=line-too-long
+        """Distributes `tf.data.Dataset` instances created by calls to `dataset_fn`.
 
     The argument `dataset_fn` that users pass in is an input function that has a
     `tf.distribute.InputContext` argument and returns a `tf.data.Dataset`
@@ -1175,23 +1233,22 @@ class StrategyBase(object):
     Returns:
       A `tf.distribute.DistributedDataset`.
     """
-    distribution_strategy_input_api_counter.get_cell(
-        self.__class__.__name__,
-        "distribute_datasets_from_function").increase_by(1)
-    # pylint: enable=line-too-long
-    return self._extended._distribute_datasets_from_function(  # pylint: disable=protected-access
-        dataset_fn, options)
+        distribution_strategy_input_api_counter.get_cell(
+            self.__class__.__name__, "distribute_datasets_from_function"
+        ).increase_by(1)
+        # pylint: enable=line-too-long
+        return self._extended._distribute_datasets_from_function(  # pylint: disable=protected-access
+            dataset_fn, options
+        )
 
-  # TODO(b/162776748): Remove deprecated symbol.
-  @doc_controls.do_not_doc_inheritable
-  @deprecation.deprecated(None, "rename to distribute_datasets_from_function")
-  def experimental_distribute_datasets_from_function(self,
-                                                     dataset_fn,
-                                                     options=None):
-    return self.distribute_datasets_from_function(dataset_fn, options)
+    # TODO(b/162776748): Remove deprecated symbol.
+    @doc_controls.do_not_doc_inheritable
+    @deprecation.deprecated(None, "rename to distribute_datasets_from_function")
+    def experimental_distribute_datasets_from_function(self, dataset_fn, options=None):
+        return self.distribute_datasets_from_function(dataset_fn, options)
 
-  def run(self, fn, args=(), kwargs=None, options=None):
-    """Invokes `fn` on each replica, with the given arguments.
+    def run(self, fn, args=(), kwargs=None, options=None):
+        """Invokes `fn` on each replica, with the given arguments.
 
     This method is the primary way to distribute your computation with a
     tf.distribute object. It invokes `fn` on each replica. If `args` or `kwargs`
@@ -1294,21 +1351,23 @@ class StrategyBase(object):
       structure can either be `tf.distribute.DistributedValues`, `Tensor`
       objects, or `Tensor`s (for example, if running on a single replica).
     """
-    del options
+        del options
 
-    if not isinstance(args, (list, tuple)):
-      raise ValueError(
-          "positional args must be a list or tuple, got {}".format(type(args)))
+        if not isinstance(args, (list, tuple)):
+            raise ValueError(
+                "positional args must be a list or tuple, got {}".format(type(args))
+            )
 
-    with self.scope():
-      # tf.distribute supports Eager functions, so AutoGraph should not be
-      # applied when the caller is also in Eager mode.
-      fn = autograph.tf_convert(
-          fn, autograph_ctx.control_status_ctx(), convert_by_default=False)
-      return self._extended.call_for_each_replica(fn, args=args, kwargs=kwargs)
+        with self.scope():
+            # tf.distribute supports Eager functions, so AutoGraph should not be
+            # applied when the caller is also in Eager mode.
+            fn = autograph.tf_convert(
+                fn, autograph_ctx.control_status_ctx(), convert_by_default=False
+            )
+            return self._extended.call_for_each_replica(fn, args=args, kwargs=kwargs)
 
-  def reduce(self, reduce_op, value, axis):
-    """Reduce `value` across replicas and return result on current device.
+    def reduce(self, reduce_op, value, axis):
+        """Reduce `value` across replicas and return result on current device.
 
     >>> strategy = tf.distribute.MirroredStrategy(["GPU:0", "GPU:1"])
     >>> def step_fn():
@@ -1412,109 +1471,127 @@ class StrategyBase(object):
     Returns:
       A `Tensor`.
     """
-    # TODO(josh11b): support `value` being a nest.
-    _require_cross_replica_or_default_context_extended(self._extended)
-    if isinstance(reduce_op, six.string_types):
-      reduce_op = reduce_util.ReduceOp(reduce_op.upper())
-    if axis is None:
-      return self._extended._reduce(reduce_op, value)  # pylint: disable=protected-access
-    if reduce_op == reduce_util.ReduceOp.SUM:
+        # TODO(josh11b): support `value` being a nest.
+        _require_cross_replica_or_default_context_extended(self._extended)
+        if isinstance(reduce_op, six.string_types):
+            reduce_op = reduce_util.ReduceOp(reduce_op.upper())
+        if axis is None:
+            return self._extended._reduce(
+                reduce_op, value
+            )  # pylint: disable=protected-access
+        if reduce_op == reduce_util.ReduceOp.SUM:
 
-      def reduce_sum(v):
-        return math_ops.reduce_sum(v, axis=axis)
+            def reduce_sum(v):
+                return math_ops.reduce_sum(v, axis=axis)
 
-      if eager_context.executing_eagerly():
-        # As some strategies (e.g. TPUStrategy) doesn't support pure eager
-        # execution, wrap the `reduce_sum_fn` with a `tf.function` so it can be
-        # run from eager mode. Cache the tf.function by `axis` to avoid the
-        # same function to be traced again.
-        if axis not in self._reduce_sum_fns:
+            if eager_context.executing_eagerly():
+                # As some strategies (e.g. TPUStrategy) doesn't support pure eager
+                # execution, wrap the `reduce_sum_fn` with a `tf.function` so it can be
+                # run from eager mode. Cache the tf.function by `axis` to avoid the
+                # same function to be traced again.
+                if axis not in self._reduce_sum_fns:
 
-          def reduce_sum_fn(v):
-            return self.run(reduce_sum, args=(v,))
+                    def reduce_sum_fn(v):
+                        return self.run(reduce_sum, args=(v,))
 
-          self._reduce_sum_fns[axis] = def_function.function(reduce_sum_fn)
-        value = self._reduce_sum_fns[axis](value)
-      else:
-        value = self.run(reduce_sum, args=(value,))
+                    self._reduce_sum_fns[axis] = def_function.function(reduce_sum_fn)
+                value = self._reduce_sum_fns[axis](value)
+            else:
+                value = self.run(reduce_sum, args=(value,))
 
-      return self._extended._reduce(reduce_op, value)  # pylint: disable=protected-access
-    if reduce_op != reduce_util.ReduceOp.MEAN:
-      raise TypeError("Expected `reduce_op` to be a `tf.distribute.ReduceOp`, "
-                      "not: %r" % reduce_op)
+            return self._extended._reduce(
+                reduce_op, value
+            )  # pylint: disable=protected-access
+        if reduce_op != reduce_util.ReduceOp.MEAN:
+            raise TypeError(
+                "Expected `reduce_op` to be a `tf.distribute.ReduceOp`, "
+                "not: %r" % reduce_op
+            )
 
-    def mean_reduce_helper(v, axes=axis):
-      """Computes the numerator and denominator on each replica."""
-      numer = math_ops.reduce_sum(v, axis=axes)
-      def dimension(axis):
-        if v.shape.rank is not None:
-          # Note(joshl): We support axis < 0 to be consistent with the
-          # tf.math.reduce_* operations.
-          if axis < 0:
-            if axis + v.shape.rank < 0:
-              raise ValueError(
-                  "`axis` = %r out of range for `value` with rank %d" %
-                  (axis, v.shape.rank))
-            axis += v.shape.rank
-          elif axis >= v.shape.rank:
-            raise ValueError(
-                "`axis` = %r out of range for `value` with rank %d" %
-                (axis, v.shape.rank))
-          # TF v2 returns `None` for unknown dimensions and an integer for
-          # known dimension, whereas TF v1 returns tensor_shape.Dimension(None)
-          # or tensor_shape.Dimension(integer). `dimension_value` hides this
-          # difference, always returning `None` or an integer.
-          dim = tensor_shape.dimension_value(v.shape[axis])
-          if dim is not None:
-            # By returning a python value in the static shape case, we can
-            # maybe get a fast path for reducing the denominator.
-            # TODO(b/151871486): Remove array_ops.identity after we fallback to
-            # simple reduction if inputs are all on CPU.
-            return array_ops.identity(
-                constant_op.constant(dim, dtype=dtypes.int64))
-        elif axis < 0:
-          axis = axis + array_ops.rank(v)
-        # TODO(b/151871486): Remove array_ops.identity after we fallback to
-        # simple reduction if inputs are all on CPU.
-        return array_ops.identity(
-            array_ops.shape_v2(v, out_type=dtypes.int64)[axis])
-      if isinstance(axis, six.integer_types):
-        denom = dimension(axis)
-      elif isinstance(axis, (tuple, list)):
-        denom = math_ops.reduce_prod([dimension(a) for a in axes])
-      else:
-        raise TypeError(
-            "Expected `axis` to be an integer, tuple or list not: %r" % axis)
-      # TODO(josh11b): Should we cast denom to v.dtype here instead of after the
-      # reduce is complete?
-      return numer, denom
+        def mean_reduce_helper(v, axes=axis):
+            """Computes the numerator and denominator on each replica."""
+            numer = math_ops.reduce_sum(v, axis=axes)
 
-    if eager_context.executing_eagerly():
-      # As some strategies (e.g. TPUStrategy) doesn't support pure eager
-      # execution, wrap the `mean_reduce_helper` with a `tf.function` so it can
-      # be run from eager mode. Cache the tf.function by `axis` to avoid the
-      # same function to be traced again.
-      if axis not in self._mean_reduce_helper_fns:
+            def dimension(axis):
+                if v.shape.rank is not None:
+                    # Note(joshl): We support axis < 0 to be consistent with the
+                    # tf.math.reduce_* operations.
+                    if axis < 0:
+                        if axis + v.shape.rank < 0:
+                            raise ValueError(
+                                "`axis` = %r out of range for `value` with rank %d"
+                                % (axis, v.shape.rank)
+                            )
+                        axis += v.shape.rank
+                    elif axis >= v.shape.rank:
+                        raise ValueError(
+                            "`axis` = %r out of range for `value` with rank %d"
+                            % (axis, v.shape.rank)
+                        )
+                    # TF v2 returns `None` for unknown dimensions and an integer for
+                    # known dimension, whereas TF v1 returns tensor_shape.Dimension(None)
+                    # or tensor_shape.Dimension(integer). `dimension_value` hides this
+                    # difference, always returning `None` or an integer.
+                    dim = tensor_shape.dimension_value(v.shape[axis])
+                    if dim is not None:
+                        # By returning a python value in the static shape case, we can
+                        # maybe get a fast path for reducing the denominator.
+                        # TODO(b/151871486): Remove array_ops.identity after we fallback to
+                        # simple reduction if inputs are all on CPU.
+                        return array_ops.identity(
+                            constant_op.constant(dim, dtype=dtypes.int64)
+                        )
+                elif axis < 0:
+                    axis = axis + array_ops.rank(v)
+                # TODO(b/151871486): Remove array_ops.identity after we fallback to
+                # simple reduction if inputs are all on CPU.
+                return array_ops.identity(
+                    array_ops.shape_v2(v, out_type=dtypes.int64)[axis]
+                )
 
-        def mean_reduce_fn(v):
-          return self.run(mean_reduce_helper, args=(v,))
+            if isinstance(axis, six.integer_types):
+                denom = dimension(axis)
+            elif isinstance(axis, (tuple, list)):
+                denom = math_ops.reduce_prod([dimension(a) for a in axes])
+            else:
+                raise TypeError(
+                    "Expected `axis` to be an integer, tuple or list not: %r" % axis
+                )
+            # TODO(josh11b): Should we cast denom to v.dtype here instead of after the
+            # reduce is complete?
+            return numer, denom
 
-        self._mean_reduce_helper_fns[axis] = def_function.function(
-            mean_reduce_fn)
-      numer, denom = self._mean_reduce_helper_fns[axis](value)
-    else:
-      numer, denom = self.run(mean_reduce_helper, args=(value,))
+        if eager_context.executing_eagerly():
+            # As some strategies (e.g. TPUStrategy) doesn't support pure eager
+            # execution, wrap the `mean_reduce_helper` with a `tf.function` so it can
+            # be run from eager mode. Cache the tf.function by `axis` to avoid the
+            # same function to be traced again.
+            if axis not in self._mean_reduce_helper_fns:
 
-    # TODO(josh11b): Should batch reduce here instead of doing two.
-    numer = self._extended._reduce(reduce_util.ReduceOp.SUM, numer)  # pylint: disable=protected-access
-    denom = self._extended._reduce(reduce_util.ReduceOp.SUM, denom)  # pylint: disable=protected-access
-    denom = math_ops.cast(denom, numer.dtype)
-    return math_ops.truediv(numer, denom)
+                def mean_reduce_fn(v):
+                    return self.run(mean_reduce_helper, args=(v,))
 
-  @doc_controls.do_not_doc_inheritable  # DEPRECATED
-  @deprecated(None, "use `experimental_local_results` instead.")
-  def unwrap(self, value):
-    """Returns the list of all local per-replica values contained in `value`.
+                self._mean_reduce_helper_fns[axis] = def_function.function(
+                    mean_reduce_fn
+                )
+            numer, denom = self._mean_reduce_helper_fns[axis](value)
+        else:
+            numer, denom = self.run(mean_reduce_helper, args=(value,))
+
+        # TODO(josh11b): Should batch reduce here instead of doing two.
+        numer = self._extended._reduce(
+            reduce_util.ReduceOp.SUM, numer
+        )  # pylint: disable=protected-access
+        denom = self._extended._reduce(
+            reduce_util.ReduceOp.SUM, denom
+        )  # pylint: disable=protected-access
+        denom = math_ops.cast(denom, numer.dtype)
+        return math_ops.truediv(numer, denom)
+
+    @doc_controls.do_not_doc_inheritable  # DEPRECATED
+    @deprecated(None, "use `experimental_local_results` instead.")
+    def unwrap(self, value):
+        """Returns the list of all local per-replica values contained in `value`.
 
     DEPRECATED: Please use `experimental_local_results` instead.
 
@@ -1532,10 +1609,10 @@ class StrategyBase(object):
       A tuple of values contained in `value`. If `value` represents a single
       value, this returns `(value,).`
     """
-    return self._extended._local_results(value)  # pylint: disable=protected-access
+        return self._extended._local_results(value)  # pylint: disable=protected-access
 
-  def experimental_local_results(self, value):
-    """Returns the list of all local per-replica values contained in `value`.
+    def experimental_local_results(self, value):
+        """Returns the list of all local per-replica values contained in `value`.
 
     Note: This only returns values on the worker initiated by this client.
     When using a `tf.distribute.Strategy` like
@@ -1552,27 +1629,25 @@ class StrategyBase(object):
       ith replica. If `value` represents a single value, this returns
       `(value,).`
     """
-    return self._extended._local_results(value)  # pylint: disable=protected-access
+        return self._extended._local_results(value)  # pylint: disable=protected-access
 
-  @doc_controls.do_not_doc_inheritable  # DEPRECATED: TF v1.x only
-  def group(self, value, name=None):
-    """Shortcut for `tf.group(self.experimental_local_results(value))`."""
-    return self._extended._group(value, name)  # pylint: disable=protected-access
+    @doc_controls.do_not_doc_inheritable  # DEPRECATED: TF v1.x only
+    def group(self, value, name=None):
+        """Shortcut for `tf.group(self.experimental_local_results(value))`."""
+        return self._extended._group(value, name)  # pylint: disable=protected-access
 
-  @property
-  def num_replicas_in_sync(self):
-    """Returns number of replicas over which gradients are aggregated."""
-    return self._extended._num_replicas_in_sync  # pylint: disable=protected-access
+    @property
+    def num_replicas_in_sync(self):
+        """Returns number of replicas over which gradients are aggregated."""
+        return self._extended._num_replicas_in_sync  # pylint: disable=protected-access
 
-  @doc_controls.do_not_doc_inheritable  # DEPRECATED: see doc string
-  @deprecated(None, "use `update_config_proto` instead.")
-  def configure(self,
-                session_config=None,
-                cluster_spec=None,
-                task_type=None,
-                task_id=None):
-    # pylint: disable=g-doc-return-or-yield,g-doc-args
-    """DEPRECATED: use `update_config_proto` instead.
+    @doc_controls.do_not_doc_inheritable  # DEPRECATED: see doc string
+    @deprecated(None, "use `update_config_proto` instead.")
+    def configure(
+        self, session_config=None, cluster_spec=None, task_type=None, task_id=None
+    ):
+        # pylint: disable=g-doc-return-or-yield,g-doc-args
+        """DEPRECATED: use `update_config_proto` instead.
 
     Configures the strategy class.
 
@@ -1582,32 +1657,37 @@ class StrategyBase(object):
     `update_config_proto` can be used to update the config_proto based on the
     specific strategy.
     """
-    return self._extended._configure(  # pylint: disable=protected-access
-        session_config, cluster_spec, task_type, task_id)
+        return self._extended._configure(  # pylint: disable=protected-access
+            session_config, cluster_spec, task_type, task_id
+        )
 
-  @doc_controls.do_not_generate_docs  # DEPRECATED
-  def update_config_proto(self, config_proto):
-    """DEPRECATED TF 1.x ONLY."""
-    return self._extended._update_config_proto(config_proto)  # pylint: disable=protected-access
+    @doc_controls.do_not_generate_docs  # DEPRECATED
+    def update_config_proto(self, config_proto):
+        """DEPRECATED TF 1.x ONLY."""
+        return self._extended._update_config_proto(
+            config_proto
+        )  # pylint: disable=protected-access
 
-  def __deepcopy__(self, memo):
-    # First do a regular deepcopy of `self`.
-    cls = self.__class__
-    result = cls.__new__(cls)
-    memo[id(self)] = result
-    for k, v in self.__dict__.items():
-      setattr(result, k, copy.deepcopy(v, memo))
-    # One little fix-up: we want `result._extended` to reference `result`
-    # instead of `self`.
-    result._extended._container_strategy_weakref = weakref.ref(result)  # pylint: disable=protected-access
-    return result
+    def __deepcopy__(self, memo):
+        # First do a regular deepcopy of `self`.
+        cls = self.__class__
+        result = cls.__new__(cls)
+        memo[id(self)] = result
+        for k, v in self.__dict__.items():
+            setattr(result, k, copy.deepcopy(v, memo))
+        # One little fix-up: we want `result._extended` to reference `result`
+        # instead of `self`.
+        result._extended._container_strategy_weakref = weakref.ref(
+            result
+        )  # pylint: disable=protected-access
+        return result
 
-  def __copy__(self):
-    raise RuntimeError("Must only deepcopy DistributionStrategy.")
+    def __copy__(self):
+        raise RuntimeError("Must only deepcopy DistributionStrategy.")
 
-  @property
-  def cluster_resolver(self):
-    """Returns the cluster resolver associated with this strategy.
+    @property
+    def cluster_resolver(self):
+        """Returns the cluster resolver associated with this strategy.
 
     In general, when using a multi-worker `tf.distribute` strategy such as
     `tf.distribute.experimental.MultiWorkerMirroredStrategy` or
@@ -1660,18 +1740,18 @@ class StrategyBase(object):
       The cluster resolver associated with this strategy. Returns `None` if a
       cluster resolver is not applicable or available in this strategy.
     """
-    if hasattr(self.extended, "_cluster_resolver"):
-      return self.extended._cluster_resolver  # pylint: disable=protected-access
-    return None
+        if hasattr(self.extended, "_cluster_resolver"):
+            return self.extended._cluster_resolver  # pylint: disable=protected-access
+        return None
 
 
 @tf_export("distribute.Strategy", v1=[])  # pylint: disable=g-missing-docstring
 class Strategy(StrategyBase):
 
-  __doc__ = StrategyBase.__doc__
+    __doc__ = StrategyBase.__doc__
 
-  def experimental_distribute_values_from_function(self, value_fn):
-    """Generates `tf.distribute.DistributedValues` from `value_fn`.
+    def experimental_distribute_values_from_function(self, value_fn):
+        """Generates `tf.distribute.DistributedValues` from `value_fn`.
 
     This function is to generate `tf.distribute.DistributedValues` to pass
     into `run`, `reduce`, or other methods that take
@@ -1743,12 +1823,13 @@ class Strategy(StrategyBase):
     ```
 
     """
-    return self._extended._experimental_distribute_values_from_function(  # pylint: disable=protected-access
-        value_fn)
+        return self._extended._experimental_distribute_values_from_function(  # pylint: disable=protected-access
+            value_fn
+        )
 
-  def gather(self, value, axis):
-    # pylint: disable=line-too-long, protected-access
-    """Gather `value` across replicas along `axis` to the current device.
+    def gather(self, value, axis):
+        # pylint: disable=line-too-long, protected-access
+        """Gather `value` across replicas along `axis` to the current device.
 
     Given a `tf.distribute.DistributedValues` or `tf.Tensor`-like
     object `value`, this API gathers and concatenates `value` across replicas
@@ -1840,24 +1921,27 @@ class Strategy(StrategyBase):
        A `Tensor` that's the concatenation of `value` across replicas along
        `axis` dimension.
     """
-    # pylint: enable=line-too-long
-    error_message = ("tf.distribute.Strategy.gather method requires "
-                     "cross-replica context, use "
-                     "get_replica_context().all_gather() instead")
-    _require_cross_replica_or_default_context_extended(self._extended,
-                                                       error_message)
-    dst = device_util.current(
-    ) or self._extended._default_device or "/device:CPU:0"
-    if isinstance(value, ops.IndexedSlices):
-      raise NotImplementedError("gather does not support IndexedSlices")
-    return self._extended._local_results(
-        self._extended._gather_to(value, dst, axis))[0]
+        # pylint: enable=line-too-long
+        error_message = (
+            "tf.distribute.Strategy.gather method requires "
+            "cross-replica context, use "
+            "get_replica_context().all_gather() instead"
+        )
+        _require_cross_replica_or_default_context_extended(
+            self._extended, error_message
+        )
+        dst = device_util.current() or self._extended._default_device or "/device:CPU:0"
+        if isinstance(value, ops.IndexedSlices):
+            raise NotImplementedError("gather does not support IndexedSlices")
+        return self._extended._local_results(
+            self._extended._gather_to(value, dst, axis)
+        )[0]
 
 
 # TF v1.x version has additional deprecated APIs
 @tf_export(v1=["distribute.Strategy"])
 class StrategyV1(StrategyBase):
-  """A list of devices with a state & compute distribution policy.
+    """A list of devices with a state & compute distribution policy.
 
   See [the guide](https://www.tensorflow.org/guide/distribute_strategy)
   for overview and examples.
@@ -1867,8 +1951,8 @@ class StrategyV1(StrategyBase):
   multiple devices) at this time.
   """
 
-  def make_dataset_iterator(self, dataset):
-    """Makes an iterator for input provided via `dataset`.
+    def make_dataset_iterator(self, dataset):
+        """Makes an iterator for input provided via `dataset`.
 
     DEPRECATED: This method is not available in TF 2.x.
 
@@ -1891,12 +1975,16 @@ class StrategyV1(StrategyBase):
       An `tf.distribute.InputIterator` which returns inputs for each step of the
       computation.  User should call `initialize` on the returned iterator.
     """
-    return self._extended._make_dataset_iterator(dataset)  # pylint: disable=protected-access
+        return self._extended._make_dataset_iterator(
+            dataset
+        )  # pylint: disable=protected-access
 
-  def make_input_fn_iterator(self,  # pylint: disable=useless-super-delegation
-                             input_fn,
-                             replication_mode=InputReplicationMode.PER_WORKER):
-    """Returns an iterator split across replicas created from an input function.
+    def make_input_fn_iterator(
+        self,  # pylint: disable=useless-super-delegation
+        input_fn,
+        replication_mode=InputReplicationMode.PER_WORKER,
+    ):
+        """Returns an iterator split across replicas created from an input function.
 
     DEPRECATED: This method is not available in TF 2.x.
 
@@ -1932,11 +2020,12 @@ class StrategyV1(StrategyBase):
       `iterator.get_next()` to get the next value to pass to
       `strategy.extended.call_for_each_replica()`.
     """
-    return super(StrategyV1, self).make_input_fn_iterator(
-        input_fn, replication_mode)
+        return super(StrategyV1, self).make_input_fn_iterator(
+            input_fn, replication_mode
+        )
 
-  def experimental_make_numpy_dataset(self, numpy_input, session=None):
-    """Makes a tf.data.Dataset for input provided via a numpy array.
+    def experimental_make_numpy_dataset(self, numpy_input, session=None):
+        """Makes a tf.data.Dataset for input provided via a numpy array.
 
     This avoids adding `numpy_input` as a large constant in the graph,
     and copies the data to the machine or machines that will be processing
@@ -1963,15 +2052,18 @@ class StrategyV1(StrategyBase):
     Returns:
       A `tf.data.Dataset` representing `numpy_input`.
     """
-    return self.extended.experimental_make_numpy_dataset(
-        numpy_input, session=session)
+        return self.extended.experimental_make_numpy_dataset(
+            numpy_input, session=session
+        )
 
-  @deprecated(
-      None,
-      "This method is not available in TF 2.x. Please switch to using `run` instead."
-  )
-  def experimental_run(self, fn, input_iterator=None):  # pylint: disable=useless-super-delegation
-    """Runs ops in `fn` on each replica, with inputs from `input_iterator`.
+    @deprecated(
+        None,
+        "This method is not available in TF 2.x. Please switch to using `run` instead.",
+    )
+    def experimental_run(
+        self, fn, input_iterator=None
+    ):  # pylint: disable=useless-super-delegation
+        """Runs ops in `fn` on each replica, with inputs from `input_iterator`.
 
     DEPRECATED: This method is not available in TF 2.x. Please switch
     to using `run` instead.
@@ -2002,16 +2094,15 @@ class StrategyV1(StrategyBase):
       `Mirrored` (if the values are kept in sync), or `Tensor` (if running on a
       single replica).
     """
-    return super(StrategyV1, self).experimental_run(
-        fn, input_iterator)
+        return super(StrategyV1, self).experimental_run(fn, input_iterator)
 
-  def reduce(self, reduce_op, value, axis=None):
-    return super(StrategyV1, self).reduce(reduce_op, value, axis)
+    def reduce(self, reduce_op, value, axis=None):
+        return super(StrategyV1, self).reduce(reduce_op, value, axis)
 
-  reduce.__doc__ = StrategyBase.reduce.__doc__
+    reduce.__doc__ = StrategyBase.reduce.__doc__
 
-  def update_config_proto(self, config_proto):
-    """Returns a copy of `config_proto` modified for use with this strategy.
+    def update_config_proto(self, config_proto):
+        """Returns a copy of `config_proto` modified for use with this strategy.
 
     DEPRECATED: This method is not available in TF 2.x.
 
@@ -2025,14 +2116,16 @@ class StrategyV1(StrategyBase):
     Returns:
       The updated copy of the `config_proto`.
     """
-    return self._extended._update_config_proto(config_proto)  # pylint: disable=protected-access
+        return self._extended._update_config_proto(
+            config_proto
+        )  # pylint: disable=protected-access
 
 
 # NOTE(josh11b): For any strategy that needs to support tf.compat.v1,
 # instead descend from StrategyExtendedV1.
 @tf_export("distribute.StrategyExtended", v1=[])
 class StrategyExtendedV2(object):
-  """Additional APIs for algorithms that need to be distribution-aware.
+    """Additional APIs for algorithms that need to be distribution-aware.
 
   Note: For most usage of `tf.distribute.Strategy`, there should be no need to
   call these methods, since TensorFlow libraries (such as optimizers) already
@@ -2098,19 +2191,19 @@ class StrategyExtendedV2(object):
 
   """
 
-  def __init__(self, container_strategy):
-    self._container_strategy_weakref = weakref.ref(container_strategy)
-    self._default_device = None
-    # This property is used to determine if we should set drop_remainder=True
-    # when creating Datasets from numpy array inputs.
-    self._require_static_shapes = False
+    def __init__(self, container_strategy):
+        self._container_strategy_weakref = weakref.ref(container_strategy)
+        self._default_device = None
+        # This property is used to determine if we should set drop_remainder=True
+        # when creating Datasets from numpy array inputs.
+        self._require_static_shapes = False
 
-  def _resource_creator_scope(self):
-    """Returns one or more ops.resource_creator_scope for some Strategy."""
-    return None
+    def _resource_creator_scope(self):
+        """Returns one or more ops.resource_creator_scope for some Strategy."""
+        return None
 
-  def _container_strategy(self):
-    """Get the containing `tf.distribute.Strategy`.
+    def _container_strategy(self):
+        """Get the containing `tf.distribute.Strategy`.
 
     This should not generally be needed except when creating a new
     `ReplicaContext` and to validate that the caller is in the correct
@@ -2119,83 +2212,91 @@ class StrategyExtendedV2(object):
     Returns:
       The `tf.distribute.Strategy` such that `strategy.extended` is `self`.
     """
-    container_strategy = self._container_strategy_weakref()
-    assert container_strategy is not None
-    return container_strategy
+        container_strategy = self._container_strategy_weakref()
+        assert container_strategy is not None
+        return container_strategy
 
-  def _scope(self, strategy):
-    """Implementation of tf.distribute.Strategy.scope()."""
+    def _scope(self, strategy):
+        """Implementation of tf.distribute.Strategy.scope()."""
 
-    def creator_with_resource_vars(next_creator, **kwargs):
-      """Variable creator to use in `_CurrentDistributionContext`."""
-      _require_strategy_scope_extended(self)
-      kwargs["use_resource"] = True
-      kwargs["distribute_strategy"] = strategy
+        def creator_with_resource_vars(next_creator, **kwargs):
+            """Variable creator to use in `_CurrentDistributionContext`."""
+            _require_strategy_scope_extended(self)
+            kwargs["use_resource"] = True
+            kwargs["distribute_strategy"] = strategy
 
-      # Unwrap `initial_value` if it is a `CheckpointInitialValue` to avoid
-      # dereferencing a `Tensor` that is without a `name`. We still need to
-      # propagate the metadata it's holding.
-      if isinstance(kwargs["initial_value"], trackable.CheckpointInitialValue):
-        checkpoint_restore_uid = kwargs[
-            "initial_value"].checkpoint_position.restore_uid
-        kwargs["initial_value"] = kwargs["initial_value"].wrapped_value
-      elif isinstance(kwargs["initial_value"],
-                      trackable.CheckpointInitialValueCallable):
-        checkpoint_restore_uid = kwargs[
-            "initial_value"].checkpoint_position.restore_uid
-      elif (isinstance(kwargs["initial_value"], functools.partial) and
-            isinstance(kwargs["initial_value"].func,
-                       trackable.CheckpointInitialValueCallable)):
-        # Some libraries (e.g, Keras) create partial function out of initializer
-        # to bind shape/dtype, for example:
-        #  initial_val = functools.partial(initializer, shape, dtype=dtype)
-        # Therefore to get the restore_uid we need to examine the "func" of
-        # the partial function.
-        checkpoint_restore_uid = kwargs[
-            "initial_value"].func.checkpoint_position.restore_uid
-      else:
-        checkpoint_restore_uid = None
+            # Unwrap `initial_value` if it is a `CheckpointInitialValue` to avoid
+            # dereferencing a `Tensor` that is without a `name`. We still need to
+            # propagate the metadata it's holding.
+            if isinstance(kwargs["initial_value"], trackable.CheckpointInitialValue):
+                checkpoint_restore_uid = kwargs[
+                    "initial_value"
+                ].checkpoint_position.restore_uid
+                kwargs["initial_value"] = kwargs["initial_value"].wrapped_value
+            elif isinstance(
+                kwargs["initial_value"], trackable.CheckpointInitialValueCallable
+            ):
+                checkpoint_restore_uid = kwargs[
+                    "initial_value"
+                ].checkpoint_position.restore_uid
+            elif isinstance(kwargs["initial_value"], functools.partial) and isinstance(
+                kwargs["initial_value"].func, trackable.CheckpointInitialValueCallable
+            ):
+                # Some libraries (e.g, Keras) create partial function out of initializer
+                # to bind shape/dtype, for example:
+                #  initial_val = functools.partial(initializer, shape, dtype=dtype)
+                # Therefore to get the restore_uid we need to examine the "func" of
+                # the partial function.
+                checkpoint_restore_uid = kwargs[
+                    "initial_value"
+                ].func.checkpoint_position.restore_uid
+            else:
+                checkpoint_restore_uid = None
 
-      created = self._create_variable(next_creator, **kwargs)
+            created = self._create_variable(next_creator, **kwargs)
 
-      if checkpoint_restore_uid is not None:
-        # pylint: disable=protected-access
-        # Let the checkpointing infrastructure know that the variable was
-        # already restored so it doesn't waste memory loading the value again.
-        # In this case of CheckpointInitialValueCallable this may already be
-        # done by the final variable creator, but it doesn't hurt to do it
-        # again.
-        created._maybe_initialize_trackable()
-        created._update_uid = checkpoint_restore_uid
-        # pylint: enable=protected-access
-      return created
+            if checkpoint_restore_uid is not None:
+                # pylint: disable=protected-access
+                # Let the checkpointing infrastructure know that the variable was
+                # already restored so it doesn't waste memory loading the value again.
+                # In this case of CheckpointInitialValueCallable this may already be
+                # done by the final variable creator, but it doesn't hurt to do it
+                # again.
+                created._maybe_initialize_trackable()
+                created._update_uid = checkpoint_restore_uid
+                # pylint: enable=protected-access
+            return created
 
-    def distributed_getter(getter, *args, **kwargs):
-      if not self._allow_variable_partition():
-        if kwargs.pop("partitioner", None) is not None:
-          tf_logging.log_first_n(
-              tf_logging.WARN, "Partitioned variables are disabled when using "
-              "current tf.distribute.Strategy.", 1)
-      return getter(*args, **kwargs)
+        def distributed_getter(getter, *args, **kwargs):
+            if not self._allow_variable_partition():
+                if kwargs.pop("partitioner", None) is not None:
+                    tf_logging.log_first_n(
+                        tf_logging.WARN,
+                        "Partitioned variables are disabled when using "
+                        "current tf.distribute.Strategy.",
+                        1,
+                    )
+            return getter(*args, **kwargs)
 
-    return _CurrentDistributionContext(
-        strategy,
-        variable_scope.variable_creator_scope(creator_with_resource_vars),
-        variable_scope.variable_scope(
-            variable_scope.get_variable_scope(),
-            custom_getter=distributed_getter),
-        strategy.extended._resource_creator_scope(),  # pylint: disable=protected-access
-        self._default_device)
+        return _CurrentDistributionContext(
+            strategy,
+            variable_scope.variable_creator_scope(creator_with_resource_vars),
+            variable_scope.variable_scope(
+                variable_scope.get_variable_scope(), custom_getter=distributed_getter
+            ),
+            strategy.extended._resource_creator_scope(),  # pylint: disable=protected-access
+            self._default_device,
+        )
 
-  def _allow_variable_partition(self):
-    return False
+    def _allow_variable_partition(self):
+        return False
 
-  def _create_variable(self, next_creator, **kwargs):
-    # Note: should support "colocate_with" argument.
-    raise NotImplementedError("must be implemented in descendants")
+    def _create_variable(self, next_creator, **kwargs):
+        # Note: should support "colocate_with" argument.
+        raise NotImplementedError("must be implemented in descendants")
 
-  def variable_created_in_scope(self, v):
-    """Tests whether `v` was created while this strategy scope was active.
+    def variable_created_in_scope(self, v):
+        """Tests whether `v` was created while this strategy scope was active.
 
     Variables created inside the strategy scope are "owned" by it:
 
@@ -2218,10 +2319,12 @@ class StrategyExtendedV2(object):
     Returns:
       True if `v` was created inside the scope, False if not.
     """
-    return v._distribute_strategy == self._container_strategy_weakref()  # pylint: disable=protected-access
+        return (
+            v._distribute_strategy == self._container_strategy_weakref()
+        )  # pylint: disable=protected-access
 
-  def colocate_vars_with(self, colocate_with_variable):
-    """Scope that controls which devices variables will be created on.
+    def colocate_vars_with(self, colocate_with_variable):
+        """Scope that controls which devices variables will be created on.
 
     No operations should be added to the graph inside this scope, it
     should only be used when creating variables (some implementations
@@ -2257,42 +2360,42 @@ class StrategyExtendedV2(object):
       A context manager.
     """
 
-    def create_colocated_variable(next_creator, **kwargs):
-      _require_strategy_scope_extended(self)
-      kwargs["use_resource"] = True
-      kwargs["colocate_with"] = colocate_with_variable
-      return next_creator(**kwargs)
+        def create_colocated_variable(next_creator, **kwargs):
+            _require_strategy_scope_extended(self)
+            kwargs["use_resource"] = True
+            kwargs["colocate_with"] = colocate_with_variable
+            return next_creator(**kwargs)
 
-    _require_strategy_scope_extended(self)
-    self._validate_colocate_with_variable(colocate_with_variable)
-    return variable_scope.variable_creator_scope(create_colocated_variable)
+        _require_strategy_scope_extended(self)
+        self._validate_colocate_with_variable(colocate_with_variable)
+        return variable_scope.variable_creator_scope(create_colocated_variable)
 
-  def _validate_colocate_with_variable(self, colocate_with_variable):
-    """Validate `colocate_with_variable` argument to `colocate_vars_with`."""
-    pass
+    def _validate_colocate_with_variable(self, colocate_with_variable):
+        """Validate `colocate_with_variable` argument to `colocate_vars_with`."""
+        pass
 
-  def _make_dataset_iterator(self, dataset):
-    raise NotImplementedError("must be implemented in descendants")
+    def _make_dataset_iterator(self, dataset):
+        raise NotImplementedError("must be implemented in descendants")
 
-  def _make_input_fn_iterator(self, input_fn, replication_mode):
-    raise NotImplementedError("must be implemented in descendants")
+    def _make_input_fn_iterator(self, input_fn, replication_mode):
+        raise NotImplementedError("must be implemented in descendants")
 
-  def _experimental_distribute_dataset(self, dataset, options):
-    raise NotImplementedError("must be implemented in descendants")
+    def _experimental_distribute_dataset(self, dataset, options):
+        raise NotImplementedError("must be implemented in descendants")
 
-  def _distribute_datasets_from_function(self, dataset_fn, options):
-    raise NotImplementedError("must be implemented in descendants")
+    def _distribute_datasets_from_function(self, dataset_fn, options):
+        raise NotImplementedError("must be implemented in descendants")
 
-  def _experimental_distribute_values_from_function(self, value_fn):
-    raise NotImplementedError("must be implemented in descendants")
+    def _experimental_distribute_values_from_function(self, value_fn):
+        raise NotImplementedError("must be implemented in descendants")
 
-  def _reduce(self, reduce_op, value):
-    # Default implementation until we have an implementation for each strategy.
-    dst = device_util.current() or self._default_device or "/device:CPU:0"
-    return self._local_results(self.reduce_to(reduce_op, value, dst))[0]
+    def _reduce(self, reduce_op, value):
+        # Default implementation until we have an implementation for each strategy.
+        dst = device_util.current() or self._default_device or "/device:CPU:0"
+        return self._local_results(self.reduce_to(reduce_op, value, dst))[0]
 
-  def reduce_to(self, reduce_op, value, destinations, options=None):
-    """Combine (via e.g. sum or mean) values across replicas.
+    def reduce_to(self, reduce_op, value, destinations, options=None):
+        """Combine (via e.g. sum or mean) values across replicas.
 
     `reduce_to` aggregates `tf.distribute.DistributedValues` and distributed
     variables. It supports both dense values and `tf.IndexedSlices`.
@@ -2365,22 +2468,24 @@ class StrategyExtendedV2(object):
     Returns:
       A tensor or value reduced to `destinations`.
     """
-    if options is None:
-      options = collective_util.Options()
-    _require_cross_replica_or_default_context_extended(self)
-    assert not isinstance(destinations, (list, tuple))
-    assert not isinstance(reduce_op, variable_scope.VariableAggregation)
-    if isinstance(reduce_op, six.string_types):
-      reduce_op = reduce_util.ReduceOp(reduce_op.upper())
-    assert (reduce_op == reduce_util.ReduceOp.SUM or
-            reduce_op == reduce_util.ReduceOp.MEAN)
-    return self._reduce_to(reduce_op, value, destinations, options)
+        if options is None:
+            options = collective_util.Options()
+        _require_cross_replica_or_default_context_extended(self)
+        assert not isinstance(destinations, (list, tuple))
+        assert not isinstance(reduce_op, variable_scope.VariableAggregation)
+        if isinstance(reduce_op, six.string_types):
+            reduce_op = reduce_util.ReduceOp(reduce_op.upper())
+        assert (
+            reduce_op == reduce_util.ReduceOp.SUM
+            or reduce_op == reduce_util.ReduceOp.MEAN
+        )
+        return self._reduce_to(reduce_op, value, destinations, options)
 
-  def _reduce_to(self, reduce_op, value, destinations, options):
-    raise NotImplementedError("must be implemented in descendants")
+    def _reduce_to(self, reduce_op, value, destinations, options):
+        raise NotImplementedError("must be implemented in descendants")
 
-  def batch_reduce_to(self, reduce_op, value_destination_pairs, options=None):
-    """Combine multiple `reduce_to` calls into one for faster execution.
+    def batch_reduce_to(self, reduce_op, value_destination_pairs, options=None):
+        """Combine multiple `reduce_to` calls into one for faster execution.
 
     Similar to `reduce_to`, but accepts a list of (value, destinations) pairs.
     It's more efficient than reduce each value separately.
@@ -2443,22 +2548,22 @@ class StrategyExtendedV2(object):
     Returns:
       A list of reduced values, one per pair in `value_destination_pairs`.
     """
-    if options is None:
-      options = collective_util.Options()
-    _require_cross_replica_or_default_context_extended(self)
-    assert not isinstance(reduce_op, variable_scope.VariableAggregation)
-    if isinstance(reduce_op, six.string_types):
-      reduce_op = reduce_util.ReduceOp(reduce_op.upper())
-    return self._batch_reduce_to(reduce_op, value_destination_pairs, options)
+        if options is None:
+            options = collective_util.Options()
+        _require_cross_replica_or_default_context_extended(self)
+        assert not isinstance(reduce_op, variable_scope.VariableAggregation)
+        if isinstance(reduce_op, six.string_types):
+            reduce_op = reduce_util.ReduceOp(reduce_op.upper())
+        return self._batch_reduce_to(reduce_op, value_destination_pairs, options)
 
-  def _batch_reduce_to(self, reduce_op, value_destination_pairs, options):
-    return [
-        self.reduce_to(reduce_op, t, destinations=v, options=options)
-        for t, v in value_destination_pairs
-    ]
+    def _batch_reduce_to(self, reduce_op, value_destination_pairs, options):
+        return [
+            self.reduce_to(reduce_op, t, destinations=v, options=options)
+            for t, v in value_destination_pairs
+        ]
 
-  def _replica_ctx_all_reduce(self, reduce_op, value, options=None):
-    """All-reduce `value` across all replicas so that all get the final result.
+    def _replica_ctx_all_reduce(self, reduce_op, value, options=None):
+        """All-reduce `value` across all replicas so that all get the final result.
 
     If `value` is a nested structure of tensors, all-reduces of these tensors
     will be batched when possible. `options` can be set to hint the batching
@@ -2478,36 +2583,40 @@ class StrategyExtendedV2(object):
       A tensor or a nested strucutre of tensors with the reduced values. The
       structure is the same as `value`.
     """
-    if options is None:
-      options = collective_util.Options()
-    replica_context = distribution_strategy_context.get_replica_context()
-    assert replica_context, (
-        "`StrategyExtended._replica_ctx_all_reduce` must be called in"
-        " a replica context")
+        if options is None:
+            options = collective_util.Options()
+        replica_context = distribution_strategy_context.get_replica_context()
+        assert replica_context, (
+            "`StrategyExtended._replica_ctx_all_reduce` must be called in"
+            " a replica context"
+        )
 
-    def merge_fn(_, flat_value):
-      return self.batch_reduce_to(reduce_op, [(v, v) for v in flat_value],
-                                  options)
+        def merge_fn(_, flat_value):
+            return self.batch_reduce_to(
+                reduce_op, [(v, v) for v in flat_value], options
+            )
 
-    reduced = replica_context.merge_call(merge_fn, args=(nest.flatten(value),))
-    return nest.pack_sequence_as(value, reduced)
+        reduced = replica_context.merge_call(merge_fn, args=(nest.flatten(value),))
+        return nest.pack_sequence_as(value, reduced)
 
-  def _replica_ctx_update(self, var, fn, args=(), kwargs=None, group=True):
-    """Run `fn` with `args` and `kwargs` to update `var`."""
-    # This method is called by ReplicaContext.update. Strategies who'd like to
-    # remove merge_call in this path should override this method.
-    replica_context = distribution_strategy_context.get_replica_context()
-    if not replica_context:
-      raise ValueError("`StrategyExtended._replica_ctx_update` must be called "
-                       "in a replica context.")
+    def _replica_ctx_update(self, var, fn, args=(), kwargs=None, group=True):
+        """Run `fn` with `args` and `kwargs` to update `var`."""
+        # This method is called by ReplicaContext.update. Strategies who'd like to
+        # remove merge_call in this path should override this method.
+        replica_context = distribution_strategy_context.get_replica_context()
+        if not replica_context:
+            raise ValueError(
+                "`StrategyExtended._replica_ctx_update` must be called "
+                "in a replica context."
+            )
 
-    def merge_fn(_, *merged_args, **merged_kwargs):
-      return self.update(var, fn, merged_args, merged_kwargs, group=group)
+        def merge_fn(_, *merged_args, **merged_kwargs):
+            return self.update(var, fn, merged_args, merged_kwargs, group=group)
 
-    return replica_context.merge_call(merge_fn, args=args, kwargs=kwargs)
+        return replica_context.merge_call(merge_fn, args=args, kwargs=kwargs)
 
-  def _gather_to(self, value, destinations, axis, options=None):
-    """Gather `value` across replicas along axis-th dimension to `destinations`.
+    def _gather_to(self, value, destinations, axis, options=None):
+        """Gather `value` across replicas along axis-th dimension to `destinations`.
 
     `gather_to` gathers `tf.distribute.DistributedValues` or `tf.Tensor`-like
     object, along `axis`-th dimension. It supports only dense tensors but NOT
@@ -2532,26 +2641,26 @@ class StrategyExtendedV2(object):
     Returns:
       A tensor or value gathered to `destinations`.
     """
-    _require_cross_replica_or_default_context_extended(self)
-    assert not isinstance(destinations, (list, tuple))
-    if options is None:
-      options = collective_util.Options()
-    return self._gather_to_implementation(value, destinations, axis, options)
+        _require_cross_replica_or_default_context_extended(self)
+        assert not isinstance(destinations, (list, tuple))
+        if options is None:
+            options = collective_util.Options()
+        return self._gather_to_implementation(value, destinations, axis, options)
 
-  def _gather_to_implementation(self, value, destinations, axis, options):
-    raise NotImplementedError("_gather_to must be implemented in descendants")
+    def _gather_to_implementation(self, value, destinations, axis, options):
+        raise NotImplementedError("_gather_to must be implemented in descendants")
 
-  def _batch_gather_to(self, value_destination_pairs, axis, options=None):
-    _require_cross_replica_or_default_context_extended(self)
-    if options is None:
-      options = collective_util.Options()
-    return [
-        self._gather_to(t, destinations=v, axis=axis, options=options)
-        for t, v in value_destination_pairs
-    ]
+    def _batch_gather_to(self, value_destination_pairs, axis, options=None):
+        _require_cross_replica_or_default_context_extended(self)
+        if options is None:
+            options = collective_util.Options()
+        return [
+            self._gather_to(t, destinations=v, axis=axis, options=options)
+            for t, v in value_destination_pairs
+        ]
 
-  def update(self, var, fn, args=(), kwargs=None, group=True):
-    """Run `fn` to update `var` using inputs mirrored to the same devices.
+    def update(self, var, fn, args=(), kwargs=None, group=True):
+        """Run `fn` to update `var` using inputs mirrored to the same devices.
 
     `tf.distribute.StrategyExtended.update` takes a distributed variable `var`
     to be updated, an update function `fn`, and `args` and `kwargs` for `fn`. It
@@ -2612,48 +2721,57 @@ class StrategyExtendedV2(object):
       where each list has an element per replica, and the caller is responsible
       for ensuring all elements are executed.
     """
-    # TODO(b/178944108): Update the documentation to relfect the fact that
-    # `update` can be called in a replica context.
-    if kwargs is None:
-      kwargs = {}
-    replica_context = distribution_strategy_context.get_replica_context()
-    # pylint: disable=protected-access
-    if (replica_context is None or replica_context is
-        distribution_strategy_context._get_default_replica_context()):
-      fn = autograph.tf_convert(
-          fn, autograph_ctx.control_status_ctx(), convert_by_default=False)
-      with self._container_strategy().scope():
-        return self._update(var, fn, args, kwargs, group)
-    else:
-      return self._replica_ctx_update(
-          var, fn, args=args, kwargs=kwargs, group=group)
+        # TODO(b/178944108): Update the documentation to relfect the fact that
+        # `update` can be called in a replica context.
+        if kwargs is None:
+            kwargs = {}
+        replica_context = distribution_strategy_context.get_replica_context()
+        # pylint: disable=protected-access
+        if (
+            replica_context is None
+            or replica_context
+            is distribution_strategy_context._get_default_replica_context()
+        ):
+            fn = autograph.tf_convert(
+                fn, autograph_ctx.control_status_ctx(), convert_by_default=False
+            )
+            with self._container_strategy().scope():
+                return self._update(var, fn, args, kwargs, group)
+        else:
+            return self._replica_ctx_update(
+                var, fn, args=args, kwargs=kwargs, group=group
+            )
 
-  def _update(self, var, fn, args, kwargs, group):
-    raise NotImplementedError("must be implemented in descendants")
+    def _update(self, var, fn, args, kwargs, group):
+        raise NotImplementedError("must be implemented in descendants")
 
-  def _local_results(self, val):
-    """Returns local results per replica as a tuple."""
-    if isinstance(val, values.DistributedValues):
-      return val._values  # pylint: disable=protected-access
+    def _local_results(self, val):
+        """Returns local results per replica as a tuple."""
+        if isinstance(val, values.DistributedValues):
+            return val._values  # pylint: disable=protected-access
 
-    if nest.is_nested(val):
-      replica_values = []
+        if nest.is_nested(val):
+            replica_values = []
 
-      def get_values(x, index):
-        if isinstance(x, values.DistributedValues):
-          return x._values[index]  # pylint: disable=protected-access
-        return x
+            def get_values(x, index):
+                if isinstance(x, values.DistributedValues):
+                    return x._values[index]  # pylint: disable=protected-access
+                return x
 
-      for i in range(len(self.worker_devices)):
-        replica_values.append(
-            nest.map_structure(
-                lambda x: get_values(x, i),  # pylint: disable=cell-var-from-loop
-                val))
-      return tuple(replica_values)
-    return (val,)
+            for i in range(len(self.worker_devices)):
+                replica_values.append(
+                    nest.map_structure(
+                        lambda x: get_values(
+                            x, i
+                        ),  # pylint: disable=cell-var-from-loop
+                        val,
+                    )
+                )
+            return tuple(replica_values)
+        return (val,)
 
-  def value_container(self, value):
-    """Returns the container that this per-replica `value` belongs to.
+    def value_container(self, value):
+        """Returns the container that this per-replica `value` belongs to.
 
     Args:
       value: A value returned by `run()` or a variable created in `scope()`.
@@ -2665,56 +2783,54 @@ class StrategyExtendedV2(object):
       `value in experimental_local_results(value_container(value))` will
       always be true.
     """
-    raise NotImplementedError("must be implemented in descendants")
+        raise NotImplementedError("must be implemented in descendants")
 
-  def _group(self, value, name=None):
-    """Implementation of `group`."""
-    value = nest.flatten(self._local_results(value))
+    def _group(self, value, name=None):
+        """Implementation of `group`."""
+        value = nest.flatten(self._local_results(value))
 
-    if len(value) != 1 or name is not None:
-      return control_flow_ops.group(value, name=name)
-    # Special handling for the common case of one op.
-    v, = value
-    if hasattr(v, "op"):
-      v = v.op
-    return v
+        if len(value) != 1 or name is not None:
+            return control_flow_ops.group(value, name=name)
+        # Special handling for the common case of one op.
+        v, = value
+        if hasattr(v, "op"):
+            v = v.op
+        return v
 
-  @property
-  def experimental_require_static_shapes(self):
-    """Returns `True` if static shape is required; `False` otherwise."""
-    return self._require_static_shapes
+    @property
+    def experimental_require_static_shapes(self):
+        """Returns `True` if static shape is required; `False` otherwise."""
+        return self._require_static_shapes
 
-  @property
-  def _num_replicas_in_sync(self):
-    """Returns number of replicas over which gradients are aggregated."""
-    raise NotImplementedError("must be implemented in descendants")
+    @property
+    def _num_replicas_in_sync(self):
+        """Returns number of replicas over which gradients are aggregated."""
+        raise NotImplementedError("must be implemented in descendants")
 
-  @property
-  def worker_devices(self):
-    """Returns the tuple of all devices used to for compute replica execution.
+    @property
+    def worker_devices(self):
+        """Returns the tuple of all devices used to for compute replica execution.
     """
-    # TODO(josh11b): More docstring
-    raise NotImplementedError("must be implemented in descendants")
+        # TODO(josh11b): More docstring
+        raise NotImplementedError("must be implemented in descendants")
 
-  @property
-  def parameter_devices(self):
-    """Returns the tuple of all devices used to place variables."""
-    # TODO(josh11b): More docstring
-    raise NotImplementedError("must be implemented in descendants")
+    @property
+    def parameter_devices(self):
+        """Returns the tuple of all devices used to place variables."""
+        # TODO(josh11b): More docstring
+        raise NotImplementedError("must be implemented in descendants")
 
-  def _configure(self,
-                 session_config=None,
-                 cluster_spec=None,
-                 task_type=None,
-                 task_id=None):
-    """Configures the strategy class."""
-    del session_config, cluster_spec, task_type, task_id
+    def _configure(
+        self, session_config=None, cluster_spec=None, task_type=None, task_id=None
+    ):
+        """Configures the strategy class."""
+        del session_config, cluster_spec, task_type, task_id
 
-  def _update_config_proto(self, config_proto):
-    return copy.deepcopy(config_proto)
+    def _update_config_proto(self, config_proto):
+        return copy.deepcopy(config_proto)
 
-  def _in_multi_worker_mode(self):
-    """Whether this strategy indicates working in multi-worker settings.
+    def _in_multi_worker_mode(self):
+        """Whether this strategy indicates working in multi-worker settings.
 
     Multi-worker training refers to the setup where the training is
     distributed across multiple workers, as opposed to the case where
@@ -2730,16 +2846,16 @@ class StrategyExtendedV2(object):
 
     Experimental. Signature and implementation are subject to change.
     """
-    raise NotImplementedError("must be implemented in descendants")
+        raise NotImplementedError("must be implemented in descendants")
 
 
 @tf_export(v1=["distribute.StrategyExtended"])  # pylint: disable=missing-docstring
 class StrategyExtendedV1(StrategyExtendedV2):
 
-  __doc__ = StrategyExtendedV2.__doc__
+    __doc__ = StrategyExtendedV2.__doc__
 
-  def experimental_make_numpy_dataset(self, numpy_input, session=None):
-    """Makes a dataset for input provided via a numpy array.
+    def experimental_make_numpy_dataset(self, numpy_input, session=None):
+        """Makes a dataset for input provided via a numpy array.
 
     This avoids adding `numpy_input` as a large constant in the graph,
     and copies the data to the machine or machines that will be processing
@@ -2755,14 +2871,14 @@ class StrategyExtendedV1(StrategyExtendedV2):
     Returns:
       A `tf.data.Dataset` representing `numpy_input`.
     """
-    _require_cross_replica_or_default_context_extended(self)
-    return self._experimental_make_numpy_dataset(numpy_input, session=session)
+        _require_cross_replica_or_default_context_extended(self)
+        return self._experimental_make_numpy_dataset(numpy_input, session=session)
 
-  def _experimental_make_numpy_dataset(self, numpy_input, session):
-    raise NotImplementedError("must be implemented in descendants")
+    def _experimental_make_numpy_dataset(self, numpy_input, session):
+        raise NotImplementedError("must be implemented in descendants")
 
-  def broadcast_to(self, tensor, destinations):
-    """Mirror a tensor on one device to all worker devices.
+    def broadcast_to(self, tensor, destinations):
+        """Mirror a tensor on one device to all worker devices.
 
     Args:
       tensor: A Tensor value to broadcast.
@@ -2772,22 +2888,20 @@ class StrategyExtendedV1(StrategyExtendedV2):
     Returns:
       A value mirrored to `destinations` devices.
     """
-    assert destinations is not None  # from old strategy.broadcast()
-    # TODO(josh11b): More docstring
-    _require_cross_replica_or_default_context_extended(self)
-    assert not isinstance(destinations, (list, tuple))
-    return self._broadcast_to(tensor, destinations)
+        assert destinations is not None  # from old strategy.broadcast()
+        # TODO(josh11b): More docstring
+        _require_cross_replica_or_default_context_extended(self)
+        assert not isinstance(destinations, (list, tuple))
+        return self._broadcast_to(tensor, destinations)
 
-  def _broadcast_to(self, tensor, destinations):
-    raise NotImplementedError("must be implemented in descendants")
+    def _broadcast_to(self, tensor, destinations):
+        raise NotImplementedError("must be implemented in descendants")
 
-  @deprecated(None, "please use `run` instead.")
-  def experimental_run_steps_on_iterator(self,
-                                         fn,
-                                         iterator,
-                                         iterations=1,
-                                         initial_loop_values=None):
-    """DEPRECATED: please use `run` instead.
+    @deprecated(None, "please use `run` instead.")
+    def experimental_run_steps_on_iterator(
+        self, fn, iterator, iterations=1, initial_loop_values=None
+    ):
+        """DEPRECATED: please use `run` instead.
 
     Run `fn` with input from `iterator` for `iterations` times.
 
@@ -2824,17 +2938,19 @@ class StrategyExtendedV1(StrategyExtendedV2):
         - non_tensor_outputs: A dictionary containing anything that was set by
           `fn` by calling `context.set_non_tensor_output`.
     """
-    _require_cross_replica_or_default_context_extended(self)
-    with self._container_strategy().scope():
-      return self._experimental_run_steps_on_iterator(fn, iterator, iterations,
-                                                      initial_loop_values)
+        _require_cross_replica_or_default_context_extended(self)
+        with self._container_strategy().scope():
+            return self._experimental_run_steps_on_iterator(
+                fn, iterator, iterations, initial_loop_values
+            )
 
-  def _experimental_run_steps_on_iterator(self, fn, iterator, iterations,
-                                          initial_loop_values):
-    raise NotImplementedError("must be implemented in descendants")
+    def _experimental_run_steps_on_iterator(
+        self, fn, iterator, iterations, initial_loop_values
+    ):
+        raise NotImplementedError("must be implemented in descendants")
 
-  def call_for_each_replica(self, fn, args=(), kwargs=None):
-    """Run `fn` once per replica.
+    def call_for_each_replica(self, fn, args=(), kwargs=None):
+        """Run `fn` once per replica.
 
     `fn` may call `tf.get_replica_context()` to access methods such as
     `replica_id_in_sync_group` and `merge_call()`.
@@ -2877,17 +2993,17 @@ class StrategyExtendedV1(StrategyExtendedV2):
     Returns:
       Merged return value of `fn` across all replicas.
     """
-    _require_cross_replica_or_default_context_extended(self)
-    if kwargs is None:
-      kwargs = {}
-    with self._container_strategy().scope():
-      return self._call_for_each_replica(fn, args, kwargs)
+        _require_cross_replica_or_default_context_extended(self)
+        if kwargs is None:
+            kwargs = {}
+        with self._container_strategy().scope():
+            return self._call_for_each_replica(fn, args, kwargs)
 
-  def _call_for_each_replica(self, fn, args, kwargs):
-    raise NotImplementedError("must be implemented in descendants")
+    def _call_for_each_replica(self, fn, args, kwargs):
+        raise NotImplementedError("must be implemented in descendants")
 
-  def read_var(self, v):
-    """Reads the value of a variable.
+    def read_var(self, v):
+        """Reads the value of a variable.
 
     Returns the aggregate value of a replica-local variable, or the
     (read-only) value of any other variable.
@@ -2899,11 +3015,10 @@ class StrategyExtendedV1(StrategyExtendedV2):
       A tensor representing the value of `v`, aggregated across replicas if
       necessary.
     """
-    raise NotImplementedError("must be implemented in descendants")
+        raise NotImplementedError("must be implemented in descendants")
 
-  def update_non_slot(
-      self, colocate_with, fn, args=(), kwargs=None, group=True):
-    """Runs `fn(*args, **kwargs)` on `colocate_with` devices.
+    def update_non_slot(self, colocate_with, fn, args=(), kwargs=None, group=True):
+        """Runs `fn(*args, **kwargs)` on `colocate_with` devices.
 
     Used to update non-slot variables.
 
@@ -2920,19 +3035,20 @@ class StrategyExtendedV1(StrategyExtendedV2):
     Returns:
       Return value of `fn`, possibly merged across devices.
     """
-    _require_cross_replica_or_default_context_extended(self)
-    if kwargs is None:
-      kwargs = {}
-    fn = autograph.tf_convert(
-        fn, autograph_ctx.control_status_ctx(), convert_by_default=False)
-    with self._container_strategy().scope():
-      return self._update_non_slot(colocate_with, fn, args, kwargs, group)
+        _require_cross_replica_or_default_context_extended(self)
+        if kwargs is None:
+            kwargs = {}
+        fn = autograph.tf_convert(
+            fn, autograph_ctx.control_status_ctx(), convert_by_default=False
+        )
+        with self._container_strategy().scope():
+            return self._update_non_slot(colocate_with, fn, args, kwargs, group)
 
-  def _update_non_slot(self, colocate_with, fn, args, kwargs, group):
-    raise NotImplementedError("must be implemented in descendants")
+    def _update_non_slot(self, colocate_with, fn, args, kwargs, group):
+        raise NotImplementedError("must be implemented in descendants")
 
-  def non_slot_devices(self, var_list):
-    """Device(s) for non-slot variables.
+    def non_slot_devices(self, var_list):
+        """Device(s) for non-slot variables.
 
     DEPRECATED: TF 1.x ONLY.
 
@@ -2950,35 +3066,35 @@ class StrategyExtendedV1(StrategyExtendedV2):
     Returns:
       A sequence of devices for non-slot variables.
     """
-    raise NotImplementedError("must be implemented in descendants")
+        raise NotImplementedError("must be implemented in descendants")
 
-  def _use_merge_call(self):
-    """Whether to use merge-calls inside the distributed strategy."""
-    return True
+    def _use_merge_call(self):
+        """Whether to use merge-calls inside the distributed strategy."""
+        return True
 
-  @property
-  def experimental_between_graph(self):
-    """Whether the strategy uses between-graph replication or not.
+    @property
+    def experimental_between_graph(self):
+        """Whether the strategy uses between-graph replication or not.
 
       This is expected to return a constant value that will not be changed
       throughout its life cycle.
     """
-    raise NotImplementedError("must be implemented in descendants")
+        raise NotImplementedError("must be implemented in descendants")
 
-  @property
-  def experimental_should_init(self):
-    """Whether initialization is needed."""
-    raise NotImplementedError("must be implemented in descendants")
+    @property
+    def experimental_should_init(self):
+        """Whether initialization is needed."""
+        raise NotImplementedError("must be implemented in descendants")
 
-  @property
-  def should_checkpoint(self):
-    """Whether checkpointing is needed."""
-    raise NotImplementedError("must be implemented in descendants")
+    @property
+    def should_checkpoint(self):
+        """Whether checkpointing is needed."""
+        raise NotImplementedError("must be implemented in descendants")
 
-  @property
-  def should_save_summary(self):
-    """Whether saving summaries is needed."""
-    raise NotImplementedError("must be implemented in descendants")
+    @property
+    def should_save_summary(self):
+        """Whether saving summaries is needed."""
+        raise NotImplementedError("must be implemented in descendants")
 
 
 # A note about the difference between the context managers
@@ -3001,7 +3117,7 @@ class StrategyExtendedV1(StrategyExtendedV2):
 #   `get_strategy()` and `has_strategy()`
 #   and switches the thread mode to a "cross-replica context".
 class ReplicaContextBase(object):
-  """A class with a collection of APIs that can be called in a replica context.
+    """A class with a collection of APIs that can be called in a replica context.
 
   You can use `tf.distribute.get_replica_context` to get an instance of
   `ReplicaContext`, which can only be called inside the function passed to
@@ -3018,8 +3134,8 @@ class ReplicaContextBase(object):
   }
   """
 
-  def __init__(self, strategy, replica_id_in_sync_group):
-    """Creates a ReplicaContext.
+    def __init__(self, strategy, replica_id_in_sync_group):
+        """Creates a ReplicaContext.
 
     Args:
       strategy: A `tf.distribute.Strategy`.
@@ -3027,44 +3143,56 @@ class ReplicaContextBase(object):
         integer whenever possible to avoid issues with nested `tf.function`. It
         accepts a `Tensor` only to be compatible with `tpu.replicate`.
     """
-    self._strategy = strategy
-    self._thread_context = distribution_strategy_context._InReplicaThreadMode(  # pylint: disable=protected-access
-        self)
-    if not (replica_id_in_sync_group is None or
-            tensor_util.is_tf_type(replica_id_in_sync_group) or
-            isinstance(replica_id_in_sync_group, int)):
-      raise ValueError(
-          "replica_id_in_sync_group can only be an integer, a Tensor or None.")
-    self._replica_id_in_sync_group = replica_id_in_sync_group
-    # We need this check because TPUContext extends from ReplicaContext and
-    # does not pass a strategy object since it is used by TPUEstimator.
-    if strategy:
-      self._local_replica_id = strategy.extended._get_local_replica_id(
-          replica_id_in_sync_group)
-    self._summary_recording_distribution_strategy = None
+        self._strategy = strategy
+        self._thread_context = distribution_strategy_context._InReplicaThreadMode(  # pylint: disable=protected-access
+            self
+        )
+        if not (
+            replica_id_in_sync_group is None
+            or tensor_util.is_tf_type(replica_id_in_sync_group)
+            or isinstance(replica_id_in_sync_group, int)
+        ):
+            raise ValueError(
+                "replica_id_in_sync_group can only be an integer, a Tensor or None."
+            )
+        self._replica_id_in_sync_group = replica_id_in_sync_group
+        # We need this check because TPUContext extends from ReplicaContext and
+        # does not pass a strategy object since it is used by TPUEstimator.
+        if strategy:
+            self._local_replica_id = strategy.extended._get_local_replica_id(
+                replica_id_in_sync_group
+            )
+        self._summary_recording_distribution_strategy = None
 
-  @doc_controls.do_not_generate_docs
-  def __enter__(self):
-    _push_per_thread_mode(self._thread_context)
+    @doc_controls.do_not_generate_docs
+    def __enter__(self):
+        _push_per_thread_mode(self._thread_context)
 
-    def replica_id_is_zero():
-      return math_ops.equal(self.replica_id_in_sync_group,
-                            constant_op.constant(0))
+        def replica_id_is_zero():
+            return math_ops.equal(
+                self.replica_id_in_sync_group, constant_op.constant(0)
+            )
 
-    summary_state = summary_ops_v2._summary_state  # pylint: disable=protected-access
-    self._summary_recording_distribution_strategy = (
-        summary_state.is_recording_distribution_strategy)
-    summary_state.is_recording_distribution_strategy = replica_id_is_zero
+        summary_state = (
+            summary_ops_v2._summary_state
+        )  # pylint: disable=protected-access
+        self._summary_recording_distribution_strategy = (
+            summary_state.is_recording_distribution_strategy
+        )
+        summary_state.is_recording_distribution_strategy = replica_id_is_zero
 
-  @doc_controls.do_not_generate_docs
-  def __exit__(self, exception_type, exception_value, traceback):
-    summary_state = summary_ops_v2._summary_state  # pylint: disable=protected-access
-    summary_state.is_recording_distribution_strategy = (
-        self._summary_recording_distribution_strategy)
-    _pop_per_thread_mode()
+    @doc_controls.do_not_generate_docs
+    def __exit__(self, exception_type, exception_value, traceback):
+        summary_state = (
+            summary_ops_v2._summary_state
+        )  # pylint: disable=protected-access
+        summary_state.is_recording_distribution_strategy = (
+            self._summary_recording_distribution_strategy
+        )
+        _pop_per_thread_mode()
 
-  def merge_call(self, merge_fn, args=(), kwargs=None):
-    """Merge args across replicas and run `merge_fn` in a cross-replica context.
+    def merge_call(self, merge_fn, args=(), kwargs=None):
+        """Merge args across replicas and run `merge_fn` in a cross-replica context.
 
     This allows communication and coordination when there are multiple calls
     to the step_fn triggered by a call to `strategy.run(step_fn, ...)`.
@@ -3090,31 +3218,33 @@ class ReplicaContextBase(object):
       The return value of `merge_fn`, except for `PerReplica` values which are
       unpacked.
     """
-    require_replica_context(self)
-    if kwargs is None:
-      kwargs = {}
+        require_replica_context(self)
+        if kwargs is None:
+            kwargs = {}
 
-    merge_fn = autograph.tf_convert(
-        merge_fn, autograph_ctx.control_status_ctx(), convert_by_default=False)
-    return self._merge_call(merge_fn, args, kwargs)
+        merge_fn = autograph.tf_convert(
+            merge_fn, autograph_ctx.control_status_ctx(), convert_by_default=False
+        )
+        return self._merge_call(merge_fn, args, kwargs)
 
-  def _merge_call(self, merge_fn, args, kwargs):
-    """Default implementation for single replica."""
-    _push_per_thread_mode(  # thread-local, so not needed with multiple threads
-        distribution_strategy_context._CrossReplicaThreadMode(self._strategy))  # pylint: disable=protected-access
-    try:
-      return merge_fn(self._strategy, *args, **kwargs)
-    finally:
-      _pop_per_thread_mode()
+    def _merge_call(self, merge_fn, args, kwargs):
+        """Default implementation for single replica."""
+        _push_per_thread_mode(  # thread-local, so not needed with multiple threads
+            distribution_strategy_context._CrossReplicaThreadMode(self._strategy)
+        )  # pylint: disable=protected-access
+        try:
+            return merge_fn(self._strategy, *args, **kwargs)
+        finally:
+            _pop_per_thread_mode()
 
-  @property
-  def num_replicas_in_sync(self):
-    """Returns number of replicas that are kept in sync."""
-    return self._strategy.num_replicas_in_sync
+    @property
+    def num_replicas_in_sync(self):
+        """Returns number of replicas that are kept in sync."""
+        return self._strategy.num_replicas_in_sync
 
-  @property
-  def replica_id_in_sync_group(self):
-    """Returns the id of the replica.
+    @property
+    def replica_id_in_sync_group(self):
+        """Returns the id of the replica.
 
     This identifies the replica among all replicas that are kept in sync. The
     value of the replica id can range from 0 to
@@ -3126,46 +3256,47 @@ class ReplicaContextBase(object):
     Returns:
       a `Tensor`.
     """
-    # It's important to prefer making the Tensor at call time whenever possible.
-    # Keeping Tensors in global states doesn't work well with nested
-    # tf.function, since it's possible that the tensor is generated in one func
-    # graph, and gets captured by another, which will result in a subtle "An op
-    # outside of the function building code is being passed a Graph tensor"
-    # error. Making the tensor at call time to ensure it is the same graph where
-    # it's used. However to be compatible with tpu.replicate(),
-    # self._replica_id_in_sync_group can also be a Tensor.
-    if tensor_util.is_tf_type(self._replica_id_in_sync_group):
-      return self._replica_id_in_sync_group
-    return constant_op.constant(
-        self._replica_id_in_sync_group,
-        dtypes.int32,
-        name="replica_id_in_sync_group")
+        # It's important to prefer making the Tensor at call time whenever possible.
+        # Keeping Tensors in global states doesn't work well with nested
+        # tf.function, since it's possible that the tensor is generated in one func
+        # graph, and gets captured by another, which will result in a subtle "An op
+        # outside of the function building code is being passed a Graph tensor"
+        # error. Making the tensor at call time to ensure it is the same graph where
+        # it's used. However to be compatible with tpu.replicate(),
+        # self._replica_id_in_sync_group can also be a Tensor.
+        if tensor_util.is_tf_type(self._replica_id_in_sync_group):
+            return self._replica_id_in_sync_group
+        return constant_op.constant(
+            self._replica_id_in_sync_group,
+            dtypes.int32,
+            name="replica_id_in_sync_group",
+        )
 
-  @property
-  def _replica_id(self):
-    """This is the local replica id in a given sync group."""
-    return self._local_replica_id
+    @property
+    def _replica_id(self):
+        """This is the local replica id in a given sync group."""
+        return self._local_replica_id
 
-  @property
-  def strategy(self):
-    """The current `tf.distribute.Strategy` object."""
-    return self._strategy
+    @property
+    def strategy(self):
+        """The current `tf.distribute.Strategy` object."""
+        return self._strategy
 
-  @property
-  @deprecation.deprecated(None, "Please avoid relying on devices property.")
-  def devices(self):
-    """Returns the devices this replica is to be executed on, as a tuple of strings.
+    @property
+    @deprecation.deprecated(None, "Please avoid relying on devices property.")
+    def devices(self):
+        """Returns the devices this replica is to be executed on, as a tuple of strings.
 
     NOTE: For `tf.distribute.MirroredStrategy` and
     `tf.distribute.experimental.MultiWorkerMirroredStrategy`, this returns a
     nested
     list of device strings, e.g, [["GPU:0"]].
     """
-    require_replica_context(self)
-    return (device_util.current(),)
+        require_replica_context(self)
+        return (device_util.current(),)
 
-  def all_reduce(self, reduce_op, value, options=None):
-    """All-reduces `value` across all replicas.
+    def all_reduce(self, reduce_op, value, options=None):
+        """All-reduces `value` across all replicas.
 
     >>> strategy = tf.distribute.MirroredStrategy(["GPU:0", "GPU:1"])
     >>> def step_fn():
@@ -3227,73 +3358,81 @@ class ReplicaContextBase(object):
        A nested structure of `tf.Tensor` with the reduced values. The structure
        is the same as `value`.
     """
-    flattened_value = nest.flatten(value)
-    has_indexed_slices = False
+        flattened_value = nest.flatten(value)
+        has_indexed_slices = False
 
-    for v in flattened_value:
-      if isinstance(v, ops.IndexedSlices):
-        has_indexed_slices = True
+        for v in flattened_value:
+            if isinstance(v, ops.IndexedSlices):
+                has_indexed_slices = True
 
-    if isinstance(reduce_op, six.string_types):
-      reduce_op = reduce_util.ReduceOp(reduce_op.upper())
-    if options is None:
-      options = collective_util.Options()
+        if isinstance(reduce_op, six.string_types):
+            reduce_op = reduce_util.ReduceOp(reduce_op.upper())
+        if options is None:
+            options = collective_util.Options()
 
-    def batch_all_reduce(strategy, *value_flat):
-      return strategy.extended.batch_reduce_to(
-          reduce_op, [(v, _batch_reduce_destination(v)) for v in value_flat],
-          options)
+        def batch_all_reduce(strategy, *value_flat):
+            return strategy.extended.batch_reduce_to(
+                reduce_op,
+                [(v, _batch_reduce_destination(v)) for v in value_flat],
+                options,
+            )
 
-    # Due to the use of `capture_call_time_value` in collective ops, we have
-    # to maintain two branches: one w/ merge_call and one w/o. Details can be
-    # found in b/184009754.
-    if self._strategy.extended._use_merge_call():  # pylint: disable=protected-access
-      # TODO(cjfj): Work out why `batch_reduce` doesn't return the correct grad.
-      if has_indexed_slices:
-        return nest.pack_sequence_as(
-            value,
-            self.merge_call(batch_all_reduce, args=flattened_value))
+        # Due to the use of `capture_call_time_value` in collective ops, we have
+        # to maintain two branches: one w/ merge_call and one w/o. Details can be
+        # found in b/184009754.
+        if (
+            self._strategy.extended._use_merge_call()
+        ):  # pylint: disable=protected-access
+            # TODO(cjfj): Work out why `batch_reduce` doesn't return the correct grad.
+            if has_indexed_slices:
+                return nest.pack_sequence_as(
+                    value, self.merge_call(batch_all_reduce, args=flattened_value)
+                )
 
-      @custom_gradient.custom_gradient
-      def grad_wrapper(*xs):
-        ys = self.merge_call(batch_all_reduce, args=xs)
-        # The gradient of an all-sum is itself an all-sum (all-mean, likewise).
-        return ys, lambda *dy_s: self.all_reduce(reduce_op, dy_s)
-      return nest.pack_sequence_as(value, grad_wrapper(*flattened_value))
-    else:
-      if has_indexed_slices:
-        return nest.pack_sequence_as(
-            value,
-            self._strategy.extended._replica_ctx_all_reduce(  # pylint: disable=protected-access
-                reduce_op, flattened_value, options))
+            @custom_gradient.custom_gradient
+            def grad_wrapper(*xs):
+                ys = self.merge_call(batch_all_reduce, args=xs)
+                # The gradient of an all-sum is itself an all-sum (all-mean, likewise).
+                return ys, lambda *dy_s: self.all_reduce(reduce_op, dy_s)
 
-      @custom_gradient.custom_gradient
-      def grad_wrapper(*xs):
-        ys = self._strategy.extended._replica_ctx_all_reduce(  # pylint: disable=protected-access
-            reduce_op, xs, options)
-        # The gradient of an all-sum is itself an all-sum (all-mean, likewise).
-        return ys, lambda *dy_s: self.all_reduce(reduce_op, dy_s)
+            return nest.pack_sequence_as(value, grad_wrapper(*flattened_value))
+        else:
+            if has_indexed_slices:
+                return nest.pack_sequence_as(
+                    value,
+                    self._strategy.extended._replica_ctx_all_reduce(  # pylint: disable=protected-access
+                        reduce_op, flattened_value, options
+                    ),
+                )
 
-      return nest.pack_sequence_as(value, grad_wrapper(*flattened_value))
+            @custom_gradient.custom_gradient
+            def grad_wrapper(*xs):
+                ys = self._strategy.extended._replica_ctx_all_reduce(  # pylint: disable=protected-access
+                    reduce_op, xs, options
+                )
+                # The gradient of an all-sum is itself an all-sum (all-mean, likewise).
+                return ys, lambda *dy_s: self.all_reduce(reduce_op, dy_s)
 
-  # TODO(josh11b): Implement `start_all_reduce(method, t)` for efficient
-  # all-reduce. It would return a function returning the result of reducing `t`
-  # across all replicas. The caller would wait to call this function until they
-  # needed the reduce result, allowing an efficient implementation:
-  # * With eager execution, the reduction could be performed asynchronously
-  #   in the background, not blocking until the result was needed.
-  # * When constructing a graph, it could batch up all reduction requests up
-  #   to that point that the first result is needed. Most likely this can be
-  #   implemented in terms of `merge_call()` and `batch_reduce_to()`.
+            return nest.pack_sequence_as(value, grad_wrapper(*flattened_value))
+
+    # TODO(josh11b): Implement `start_all_reduce(method, t)` for efficient
+    # all-reduce. It would return a function returning the result of reducing `t`
+    # across all replicas. The caller would wait to call this function until they
+    # needed the reduce result, allowing an efficient implementation:
+    # * With eager execution, the reduction could be performed asynchronously
+    #   in the background, not blocking until the result was needed.
+    # * When constructing a graph, it could batch up all reduction requests up
+    #   to that point that the first result is needed. Most likely this can be
+    #   implemented in terms of `merge_call()` and `batch_reduce_to()`.
 
 
 @tf_export("distribute.ReplicaContext", v1=[])
 class ReplicaContext(ReplicaContextBase):
 
-  __doc__ = ReplicaContextBase.__doc__
+    __doc__ = ReplicaContextBase.__doc__
 
-  def all_gather(self, value, axis, options=None):
-    """All-gathers `value` across all replicas along `axis`.
+    def all_gather(self, value, axis, options=None):
+        """All-gathers `value` across all replicas along `axis`.
 
     Note: An `all_gather` method can only be called in replica context. For
     a cross-replica context counterpart, see `tf.distribute.Strategy.gather`.
@@ -3414,43 +3553,46 @@ class ReplicaContext(ReplicaContextBase):
        A nested structure of `tf.Tensor` with the gathered values. The structure
        is the same as `value`.
     """
-    for v in nest.flatten(value):
-      if isinstance(v, ops.IndexedSlices):
-        raise NotImplementedError("all_gather does not support IndexedSlices")
+        for v in nest.flatten(value):
+            if isinstance(v, ops.IndexedSlices):
+                raise NotImplementedError("all_gather does not support IndexedSlices")
 
-    if options is None:
-      options = collective_util.Options()
+        if options is None:
+            options = collective_util.Options()
 
-    def batch_all_gather(strategy, *value_flat):
-      return strategy.extended._batch_gather_to(  # pylint: disable=protected-access
-          [(v, _batch_reduce_destination(v)) for v in value_flat], axis,
-          options)
+        def batch_all_gather(strategy, *value_flat):
+            return strategy.extended._batch_gather_to(  # pylint: disable=protected-access
+                [(v, _batch_reduce_destination(v)) for v in value_flat], axis, options
+            )
 
-    @custom_gradient.custom_gradient
-    def grad_wrapper(*xs):
-      ys = self.merge_call(batch_all_gather, args=xs)
+        @custom_gradient.custom_gradient
+        def grad_wrapper(*xs):
+            ys = self.merge_call(batch_all_gather, args=xs)
 
-      def grad(*dy_s):
-        grads = self.all_reduce(reduce_util.ReduceOp.SUM, dy_s)
-        new_grads = []
-        for i, grad in enumerate(grads):
-          input_shape = array_ops.shape(xs[i])
-          axis_dim = array_ops.reshape(input_shape[axis], [1])
-          with ops.control_dependencies([array_ops.identity(grads)]):
-            d = self.all_gather(axis_dim, axis=0)
-            begin_dim = math_ops.reduce_sum(d[:self.replica_id_in_sync_group])
-            end_dim = begin_dim + array_ops.shape(xs[i])[axis]
-            new_grad = array_ops.gather(
-                grad, axis=axis, indices=math_ops.range(begin_dim, end_dim))
-            new_grads.append(new_grad)
-        return new_grads
+            def grad(*dy_s):
+                grads = self.all_reduce(reduce_util.ReduceOp.SUM, dy_s)
+                new_grads = []
+                for i, grad in enumerate(grads):
+                    input_shape = array_ops.shape(xs[i])
+                    axis_dim = array_ops.reshape(input_shape[axis], [1])
+                    with ops.control_dependencies([array_ops.identity(grads)]):
+                        d = self.all_gather(axis_dim, axis=0)
+                        begin_dim = math_ops.reduce_sum(
+                            d[: self.replica_id_in_sync_group]
+                        )
+                        end_dim = begin_dim + array_ops.shape(xs[i])[axis]
+                        new_grad = array_ops.gather(
+                            grad, axis=axis, indices=math_ops.range(begin_dim, end_dim)
+                        )
+                        new_grads.append(new_grad)
+                return new_grads
 
-      return ys, grad
+            return ys, grad
 
-    return nest.pack_sequence_as(value, grad_wrapper(*nest.flatten(value)))
+        return nest.pack_sequence_as(value, grad_wrapper(*nest.flatten(value)))
 
-  def _update(self, var, fn, args=(), kwargs=None, group=True):
-    """Run `fn` to update `var` with `args` and `kwargs` in replica context.
+    def _update(self, var, fn, args=(), kwargs=None, group=True):
+        """Run `fn` to update `var` with `args` and `kwargs` in replica context.
 
     `tf.distribute.ReplicaContext.update` takes a (distributed) variable `var`
     to be updated, an update function `fn`, and `args` and `kwargs` for `fn`.
@@ -3533,23 +3675,25 @@ class ReplicaContext(ReplicaContextBase):
     Returns:
       The return value of `fn` for the local replica.
     """
-    if kwargs is None:
-      kwargs = {}
-    return self._strategy.extended._replica_ctx_update(var, fn, args=args, kwargs=kwargs, group=group)  # pylint: disable=protected-access
+        if kwargs is None:
+            kwargs = {}
+        return self._strategy.extended._replica_ctx_update(
+            var, fn, args=args, kwargs=kwargs, group=group
+        )  # pylint: disable=protected-access
 
 
 @tf_export(v1=["distribute.ReplicaContext"])
 class ReplicaContextV1(ReplicaContextBase):
-  __doc__ = ReplicaContextBase.__doc__
+    __doc__ = ReplicaContextBase.__doc__
 
 
 def _batch_reduce_destination(x):
-  """Returns the destinations for batch all-reduce."""
-  if isinstance(x, ops.Tensor):
-    # If this is a one device strategy.
-    return x.device
-  else:
-    return x
+    """Returns the destinations for batch all-reduce."""
+    if isinstance(x, ops.Tensor):
+        # If this is a one device strategy.
+        return x.device
+    else:
+        return x
 
 
 # ------------------------------------------------------------------------------
@@ -3559,253 +3703,268 @@ _creating_default_strategy_singleton = False
 
 
 class _DefaultDistributionStrategyV1(StrategyV1):
-  """Default `tf.distribute.Strategy` if none is explicitly selected."""
+    """Default `tf.distribute.Strategy` if none is explicitly selected."""
 
-  def __init__(self):
-    if not _creating_default_strategy_singleton:
-      raise RuntimeError("Should only create a single instance of "
-                         "_DefaultDistributionStrategy")
-    super(_DefaultDistributionStrategyV1,
-          self).__init__(_DefaultDistributionExtended(self))
+    def __init__(self):
+        if not _creating_default_strategy_singleton:
+            raise RuntimeError(
+                "Should only create a single instance of "
+                "_DefaultDistributionStrategy"
+            )
+        super(_DefaultDistributionStrategyV1, self).__init__(
+            _DefaultDistributionExtended(self)
+        )
 
-  def __deepcopy__(self, memo):
-    del memo
-    raise RuntimeError("Should only create a single instance of "
-                       "_DefaultDistributionStrategy")
+    def __deepcopy__(self, memo):
+        del memo
+        raise RuntimeError(
+            "Should only create a single instance of " "_DefaultDistributionStrategy"
+        )
 
 
 class _DefaultDistributionStrategy(Strategy):
-  """Default `tf.distribute.Strategy` if none is explicitly selected."""
+    """Default `tf.distribute.Strategy` if none is explicitly selected."""
 
-  def __init__(self):
-    if not _creating_default_strategy_singleton:
-      raise RuntimeError("Should only create a single instance of "
-                         "_DefaultDistributionStrategy")
-    super(_DefaultDistributionStrategy, self).__init__(
-        _DefaultDistributionExtended(self))
+    def __init__(self):
+        if not _creating_default_strategy_singleton:
+            raise RuntimeError(
+                "Should only create a single instance of "
+                "_DefaultDistributionStrategy"
+            )
+        super(_DefaultDistributionStrategy, self).__init__(
+            _DefaultDistributionExtended(self)
+        )
 
-  def __deepcopy__(self, memo):
-    del memo
-    raise RuntimeError("Should only create a single instance of "
-                       "_DefaultDistributionStrategy")
+    def __deepcopy__(self, memo):
+        del memo
+        raise RuntimeError(
+            "Should only create a single instance of " "_DefaultDistributionStrategy"
+        )
 
 
 class _DefaultDistributionContext(object):
-  """Context manager setting the default `tf.distribute.Strategy`."""
+    """Context manager setting the default `tf.distribute.Strategy`."""
 
-  __slots__ = ["_var_creator_scope", "_strategy", "_nested_count"]
+    __slots__ = ["_var_creator_scope", "_strategy", "_nested_count"]
 
-  def __init__(self, strategy):
+    def __init__(self, strategy):
+        def creator(next_creator, **kwargs):
+            _require_strategy_scope_strategy(strategy)
+            return next_creator(**kwargs)
 
-    def creator(next_creator, **kwargs):
-      _require_strategy_scope_strategy(strategy)
-      return next_creator(**kwargs)
+        self._var_creator_scope = variable_scope.variable_creator_scope(creator)
+        self._strategy = strategy
+        self._nested_count = 0
 
-    self._var_creator_scope = variable_scope.variable_creator_scope(creator)
-    self._strategy = strategy
-    self._nested_count = 0
+    def __enter__(self):
+        # Allow this scope to be entered if this strategy is already in scope.
+        if distribution_strategy_context.has_strategy():
+            raise RuntimeError("Must not nest tf.distribute.Strategy scopes.")
+        if self._nested_count == 0:
+            self._var_creator_scope.__enter__()
+        self._nested_count += 1
+        return self._strategy
 
-  def __enter__(self):
-    # Allow this scope to be entered if this strategy is already in scope.
-    if distribution_strategy_context.has_strategy():
-      raise RuntimeError("Must not nest tf.distribute.Strategy scopes.")
-    if self._nested_count == 0:
-      self._var_creator_scope.__enter__()
-    self._nested_count += 1
-    return self._strategy
-
-  def __exit__(self, exception_type, exception_value, traceback):
-    self._nested_count -= 1
-    if self._nested_count == 0:
-      try:
-        self._var_creator_scope.__exit__(
-            exception_type, exception_value, traceback)
-      except RuntimeError as e:
-        six.raise_from(
-            RuntimeError("Variable creator scope nesting error: move call to "
-                         "tf.distribute.set_strategy() out of `with` scope."),
-            e)
+    def __exit__(self, exception_type, exception_value, traceback):
+        self._nested_count -= 1
+        if self._nested_count == 0:
+            try:
+                self._var_creator_scope.__exit__(
+                    exception_type, exception_value, traceback
+                )
+            except RuntimeError as e:
+                six.raise_from(
+                    RuntimeError(
+                        "Variable creator scope nesting error: move call to "
+                        "tf.distribute.set_strategy() out of `with` scope."
+                    ),
+                    e,
+                )
 
 
 class _DefaultDistributionExtended(StrategyExtendedV1):
-  """Implementation of _DefaultDistributionStrategy."""
+    """Implementation of _DefaultDistributionStrategy."""
 
-  def __init__(self, container_strategy):
-    super(_DefaultDistributionExtended, self).__init__(container_strategy)
-    self._retrace_functions_for_each_device = False
+    def __init__(self, container_strategy):
+        super(_DefaultDistributionExtended, self).__init__(container_strategy)
+        self._retrace_functions_for_each_device = False
 
-  def _scope(self, strategy):
-    """Context manager setting a variable creator and `self` as current."""
-    return _DefaultDistributionContext(strategy)
+    def _scope(self, strategy):
+        """Context manager setting a variable creator and `self` as current."""
+        return _DefaultDistributionContext(strategy)
 
-  def colocate_vars_with(self, colocate_with_variable):
-    """Does not require `self.scope`."""
-    _require_strategy_scope_extended(self)
-    return ops.colocate_with(colocate_with_variable)
+    def colocate_vars_with(self, colocate_with_variable):
+        """Does not require `self.scope`."""
+        _require_strategy_scope_extended(self)
+        return ops.colocate_with(colocate_with_variable)
 
-  def variable_created_in_scope(self, v):
-    return v._distribute_strategy is None  # pylint: disable=protected-access
+    def variable_created_in_scope(self, v):
+        return v._distribute_strategy is None  # pylint: disable=protected-access
 
-  def _experimental_distribute_dataset(self, dataset, options):
-    return dataset
+    def _experimental_distribute_dataset(self, dataset, options):
+        return dataset
 
-  def _distribute_datasets_from_function(self, dataset_fn, options):
-    return dataset_fn(InputContext())
+    def _distribute_datasets_from_function(self, dataset_fn, options):
+        return dataset_fn(InputContext())
 
-  def _experimental_distribute_values_from_function(self, value_fn):
-    return value_fn(ValueContext())
+    def _experimental_distribute_values_from_function(self, value_fn):
+        return value_fn(ValueContext())
 
-  def _make_dataset_iterator(self, dataset):
-    return _DefaultDistributionExtended.DefaultInputIterator(dataset)
+    def _make_dataset_iterator(self, dataset):
+        return _DefaultDistributionExtended.DefaultInputIterator(dataset)
 
-  def _make_input_fn_iterator(self,
-                              input_fn,
-                              replication_mode=InputReplicationMode.PER_WORKER):
-    dataset = input_fn(InputContext())
-    return _DefaultDistributionExtended.DefaultInputIterator(dataset)
+    def _make_input_fn_iterator(
+        self, input_fn, replication_mode=InputReplicationMode.PER_WORKER
+    ):
+        dataset = input_fn(InputContext())
+        return _DefaultDistributionExtended.DefaultInputIterator(dataset)
 
-  def _experimental_make_numpy_dataset(self, numpy_input, session):
-    numpy_flat = nest.flatten(numpy_input)
-    vars_flat = tuple(
-        variable_scope.variable(array_ops.zeros(i.shape, i.dtype),
-                                trainable=False, use_resource=True)
-        for i in numpy_flat
-    )
-    for v, i in zip(vars_flat, numpy_flat):
-      numpy_dataset.init_var_from_numpy(v, i, session)
-    vars_nested = nest.pack_sequence_as(numpy_input, vars_flat)
-    return dataset_ops.Dataset.from_tensor_slices(vars_nested)
+    def _experimental_make_numpy_dataset(self, numpy_input, session):
+        numpy_flat = nest.flatten(numpy_input)
+        vars_flat = tuple(
+            variable_scope.variable(
+                array_ops.zeros(i.shape, i.dtype), trainable=False, use_resource=True
+            )
+            for i in numpy_flat
+        )
+        for v, i in zip(vars_flat, numpy_flat):
+            numpy_dataset.init_var_from_numpy(v, i, session)
+        vars_nested = nest.pack_sequence_as(numpy_input, vars_flat)
+        return dataset_ops.Dataset.from_tensor_slices(vars_nested)
 
-  def _broadcast_to(self, tensor, destinations):
-    if destinations is None:
-      return tensor
-    else:
-      raise NotImplementedError("TODO")
+    def _broadcast_to(self, tensor, destinations):
+        if destinations is None:
+            return tensor
+        else:
+            raise NotImplementedError("TODO")
 
-  def _call_for_each_replica(self, fn, args, kwargs):
-    with ReplicaContext(self._container_strategy(), replica_id_in_sync_group=0):
-      return fn(*args, **kwargs)
+    def _call_for_each_replica(self, fn, args, kwargs):
+        with ReplicaContext(self._container_strategy(), replica_id_in_sync_group=0):
+            return fn(*args, **kwargs)
 
-  def _reduce_to(self, reduce_op, value, destinations, options):
-    # TODO(josh11b): Use destinations?
-    del reduce_op, destinations, options
-    return value
+    def _reduce_to(self, reduce_op, value, destinations, options):
+        # TODO(josh11b): Use destinations?
+        del reduce_op, destinations, options
+        return value
 
-  def _gather_to_implementation(self, value, destinations, axis, options):
-    del destinations, axis, options
-    return value
+    def _gather_to_implementation(self, value, destinations, axis, options):
+        del destinations, axis, options
+        return value
 
-  def _update(self, var, fn, args, kwargs, group):
-    # The implementations of _update() and _update_non_slot() are identical
-    # except _update() passes `var` as the first argument to `fn()`.
-    return self._update_non_slot(var, fn, (var,) + tuple(args), kwargs, group)
+    def _update(self, var, fn, args, kwargs, group):
+        # The implementations of _update() and _update_non_slot() are identical
+        # except _update() passes `var` as the first argument to `fn()`.
+        return self._update_non_slot(var, fn, (var,) + tuple(args), kwargs, group)
 
-  def _update_non_slot(self, colocate_with, fn, args, kwargs, should_group):
-    # TODO(josh11b): Figure out what we should be passing to UpdateContext()
-    # once that value is used for something.
-    with UpdateContext(colocate_with):
-      result = fn(*args, **kwargs)
-      if should_group:
-        return result
-      else:
-        return nest.map_structure(self._local_results, result)
+    def _update_non_slot(self, colocate_with, fn, args, kwargs, should_group):
+        # TODO(josh11b): Figure out what we should be passing to UpdateContext()
+        # once that value is used for something.
+        with UpdateContext(colocate_with):
+            result = fn(*args, **kwargs)
+            if should_group:
+                return result
+            else:
+                return nest.map_structure(self._local_results, result)
 
-  def read_var(self, replica_local_var):
-    return array_ops.identity(replica_local_var)
+    def read_var(self, replica_local_var):
+        return array_ops.identity(replica_local_var)
 
-  def _local_results(self, distributed_value):
-    return (distributed_value,)
+    def _local_results(self, distributed_value):
+        return (distributed_value,)
 
-  def value_container(self, value):
-    return value
+    def value_container(self, value):
+        return value
 
-  @property
-  def _num_replicas_in_sync(self):
-    return 1
+    @property
+    def _num_replicas_in_sync(self):
+        return 1
 
-  @property
-  def worker_devices(self):
-    raise RuntimeError("worker_devices() method unsupported by default "
-                       "tf.distribute.Strategy.")
+    @property
+    def worker_devices(self):
+        raise RuntimeError(
+            "worker_devices() method unsupported by default " "tf.distribute.Strategy."
+        )
 
-  @property
-  def parameter_devices(self):
-    raise RuntimeError("parameter_devices() method unsupported by default "
-                       "tf.distribute.Strategy.")
+    @property
+    def parameter_devices(self):
+        raise RuntimeError(
+            "parameter_devices() method unsupported by default "
+            "tf.distribute.Strategy."
+        )
 
-  def non_slot_devices(self, var_list):
-    return min(var_list, key=lambda x: x.name)
+    def non_slot_devices(self, var_list):
+        return min(var_list, key=lambda x: x.name)
 
-  def _in_multi_worker_mode(self):
-    """Whether this strategy indicates working in multi-worker settings."""
-    # Default strategy doesn't indicate multi-worker training.
-    return False
+    def _in_multi_worker_mode(self):
+        """Whether this strategy indicates working in multi-worker settings."""
+        # Default strategy doesn't indicate multi-worker training.
+        return False
 
-  @property
-  def should_checkpoint(self):
-    return True
+    @property
+    def should_checkpoint(self):
+        return True
 
-  @property
-  def should_save_summary(self):
-    return True
+    @property
+    def should_save_summary(self):
+        return True
 
-  def _get_local_replica_id(self, replica_id_in_sync_group):
-    return replica_id_in_sync_group
+    def _get_local_replica_id(self, replica_id_in_sync_group):
+        return replica_id_in_sync_group
 
-  def _get_replica_id_in_sync_group(self, replica_id):
-    return replica_id
+    def _get_replica_id_in_sync_group(self, replica_id):
+        return replica_id
 
-  # TODO(priyag): This should inherit from `InputIterator`, once dependency
-  # issues have been resolved.
-  class DefaultInputIterator(object):
-    """Default implementation of `InputIterator` for default strategy."""
+    # TODO(priyag): This should inherit from `InputIterator`, once dependency
+    # issues have been resolved.
+    class DefaultInputIterator(object):
+        """Default implementation of `InputIterator` for default strategy."""
 
-    def __init__(self, dataset):
-      self._dataset = dataset
-      if eager_context.executing_eagerly():
-        self._iterator = dataset_ops.make_one_shot_iterator(dataset)
-      else:
-        self._iterator = dataset_ops.make_initializable_iterator(dataset)
+        def __init__(self, dataset):
+            self._dataset = dataset
+            if eager_context.executing_eagerly():
+                self._iterator = dataset_ops.make_one_shot_iterator(dataset)
+            else:
+                self._iterator = dataset_ops.make_initializable_iterator(dataset)
 
-    def get_next(self):
-      return self._iterator.get_next()
+        def get_next(self):
+            return self._iterator.get_next()
 
-    def get_next_as_optional(self):
-      return self._iterator.get_next_as_optional()
+        def get_next_as_optional(self):
+            return self._iterator.get_next_as_optional()
 
-    @deprecated(None, "Use the iterator's `initializer` property instead.")
-    def initialize(self):
-      """Initialize underlying iterators.
+        @deprecated(None, "Use the iterator's `initializer` property instead.")
+        def initialize(self):
+            """Initialize underlying iterators.
 
       Returns:
         A list of any initializer ops that should be run.
       """
-      if eager_context.executing_eagerly():
-        self._iterator = self._dataset.make_one_shot_iterator()
-        return []
-      else:
-        return [self._iterator.initializer]
+            if eager_context.executing_eagerly():
+                self._iterator = self._dataset.make_one_shot_iterator()
+                return []
+            else:
+                return [self._iterator.initializer]
 
+        @property
+        def initializer(self):
+            """Returns a list of ops that initialize the iterator."""
+            return self.initialize()
+
+    # TODO(priyag): Delete this once all strategies use global batch size.
     @property
-    def initializer(self):
-      """Returns a list of ops that initialize the iterator."""
-      return self.initialize()
-
-  # TODO(priyag): Delete this once all strategies use global batch size.
-  @property
-  def _global_batch_size(self):
-    """Global and per-replica batching are equivalent for this strategy."""
-    return True
+    def _global_batch_size(self):
+        """Global and per-replica batching are equivalent for this strategy."""
+        return True
 
 
 class _DefaultReplicaContext(ReplicaContext):
-  """ReplicaContext for _DefaultDistributionStrategy."""
+    """ReplicaContext for _DefaultDistributionStrategy."""
 
-  @property
-  def replica_id_in_sync_group(self):
-    # Return 0 instead of a constant tensor to avoid creating a new node for
-    # users who don't use distribution strategy.
-    return 0
+    @property
+    def replica_id_in_sync_group(self):
+        # Return 0 instead of a constant tensor to avoid creating a new node for
+        # users who don't use distribution strategy.
+        return 0
 
 
 # ------------------------------------------------------------------------------
@@ -3817,35 +3976,50 @@ _original_from_proto = resource_variable_ops._from_proto_fn
 
 
 def _from_proto_fn(v, import_scope=None):
-  if distribution_strategy_context.has_strategy():
-    raise NotImplementedError(
-        "Deserialization of variables is not yet supported when using a "
-        "tf.distribute.Strategy.")
-  else:
-    return _original_from_proto(v, import_scope=import_scope)
+    if distribution_strategy_context.has_strategy():
+        raise NotImplementedError(
+            "Deserialization of variables is not yet supported when using a "
+            "tf.distribute.Strategy."
+        )
+    else:
+        return _original_from_proto(v, import_scope=import_scope)
+
 
 resource_variable_ops._from_proto_fn = _from_proto_fn
 # pylint: enable=protected-access
 
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 # Shorthand for some methods from distribution_strategy_context.
-_push_per_thread_mode = distribution_strategy_context._push_per_thread_mode  # pylint: disable=protected-access
-_get_per_thread_mode = distribution_strategy_context._get_per_thread_mode  # pylint: disable=protected-access
-_pop_per_thread_mode = distribution_strategy_context._pop_per_thread_mode  # pylint: disable=protected-access
+_push_per_thread_mode = (
+    distribution_strategy_context._push_per_thread_mode
+)  # pylint: disable=protected-access
+_get_per_thread_mode = (
+    distribution_strategy_context._get_per_thread_mode
+)  # pylint: disable=protected-access
+_pop_per_thread_mode = (
+    distribution_strategy_context._pop_per_thread_mode
+)  # pylint: disable=protected-access
 _get_default_replica_mode = (
-    distribution_strategy_context._get_default_replica_mode)  # pylint: disable=protected-access
+    distribution_strategy_context._get_default_replica_mode
+)  # pylint: disable=protected-access
 
 
 # ------------------------------------------------------------------------------
 # Metrics to track which distribution strategy is being called
 distribution_strategy_gauge = monitoring.StringGauge(
     "/tensorflow/api/distribution_strategy",
-    "Gauge to track the type of distribution strategy used.", "TFVersion")
+    "Gauge to track the type of distribution strategy used.",
+    "TFVersion",
+)
 distribution_strategy_replica_gauge = monitoring.IntGauge(
     "/tensorflow/api/distribution_strategy/replica",
     "Gauge to track the number of replica each distribution strategy used.",
-    "CountType")
+    "CountType",
+)
 distribution_strategy_input_api_counter = monitoring.Counter(
     "/tensorflow/api/distribution_strategy/input_api",
-    "Counter to track the usage of the input APIs", "strategy", "api")
+    "Counter to track the usage of the input APIs",
+    "strategy",
+    "api",
+)

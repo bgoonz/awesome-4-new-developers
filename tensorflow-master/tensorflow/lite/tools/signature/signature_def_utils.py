@@ -19,11 +19,13 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow.core.protobuf import meta_graph_pb2
-from tensorflow.lite.tools.signature import _pywrap_signature_def_util_wrapper as signature_def_util
+from tensorflow.lite.tools.signature import (
+    _pywrap_signature_def_util_wrapper as signature_def_util,
+)
 
 
 def set_signature_defs(tflite_model, signature_def_map):
-  """Sets SignatureDefs to the Metadata of a TfLite flatbuffer buffer.
+    """Sets SignatureDefs to the Metadata of a TfLite flatbuffer buffer.
 
   Args:
     tflite_model: Binary TFLite model (bytes or bytes-like object) to which to
@@ -38,18 +40,20 @@ def set_signature_defs(tflite_model, signature_def_map):
       tflite_model buffer does not contain a valid TFLite model.
       signature_def_map is empty or does not contain a SignatureDef.
   """
-  model = tflite_model
-  if not isinstance(tflite_model, bytearray):
-    model = bytearray(tflite_model)
-  serialized_signature_def_map = {
-      k: v.SerializeToString() for k, v in signature_def_map.items()}
-  model_buffer = signature_def_util.SetSignatureDefMap(
-      model, serialized_signature_def_map)
-  return model_buffer
+    model = tflite_model
+    if not isinstance(tflite_model, bytearray):
+        model = bytearray(tflite_model)
+    serialized_signature_def_map = {
+        k: v.SerializeToString() for k, v in signature_def_map.items()
+    }
+    model_buffer = signature_def_util.SetSignatureDefMap(
+        model, serialized_signature_def_map
+    )
+    return model_buffer
 
 
 def get_signature_defs(tflite_model):
-  """Get SignatureDef dict from the Metadata of a TfLite flatbuffer buffer.
+    """Get SignatureDef dict from the Metadata of a TfLite flatbuffer buffer.
 
   Args:
     tflite_model: TFLite model buffer to get the signature_def.
@@ -64,19 +68,21 @@ def get_signature_defs(tflite_model):
     DecodeError:
       SignatureDef cannot be parsed from TfLite SignatureDef metadata.
   """
-  model = tflite_model
-  if not isinstance(tflite_model, bytearray):
-    model = bytearray(tflite_model)
-  serialized_signature_def_map = signature_def_util.GetSignatureDefMap(model)
-  def _deserialize(serialized):
-    signature_def = meta_graph_pb2.SignatureDef()
-    signature_def.ParseFromString(serialized)
-    return signature_def
-  return {k: _deserialize(v) for k, v in serialized_signature_def_map.items()}
+    model = tflite_model
+    if not isinstance(tflite_model, bytearray):
+        model = bytearray(tflite_model)
+    serialized_signature_def_map = signature_def_util.GetSignatureDefMap(model)
+
+    def _deserialize(serialized):
+        signature_def = meta_graph_pb2.SignatureDef()
+        signature_def.ParseFromString(serialized)
+        return signature_def
+
+    return {k: _deserialize(v) for k, v in serialized_signature_def_map.items()}
 
 
 def clear_signature_defs(tflite_model):
-  """Clears SignatureDefs from the Metadata of a TfLite flatbuffer buffer.
+    """Clears SignatureDefs from the Metadata of a TfLite flatbuffer buffer.
 
   Args:
     tflite_model: TFLite model buffer to remove signature_defs.
@@ -89,7 +95,7 @@ def clear_signature_defs(tflite_model):
     ValueError:
       tflite_model buffer does not contain a valid TFLite model.
   """
-  model = tflite_model
-  if not isinstance(tflite_model, bytearray):
-    model = bytearray(tflite_model)
-  return signature_def_util.ClearSignatureDefs(model)
+    model = tflite_model
+    if not isinstance(tflite_model, bytearray):
+        model = bytearray(tflite_model)
+    return signature_def_util.ClearSignatureDefs(model)

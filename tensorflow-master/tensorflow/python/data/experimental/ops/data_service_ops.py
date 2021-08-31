@@ -48,13 +48,15 @@ _DISTRIBUTED_EPOCH = "distributed_epoch"
 
 # TODO(b/176933539): Use the regular import.
 nested_structure_coder = lazy_loader.LazyLoader(
-    "nested_structure_coder", globals(),
-    "tensorflow.python.saved_model.nested_structure_coder")
+    "nested_structure_coder",
+    globals(),
+    "tensorflow.python.saved_model.nested_structure_coder",
+)
 
 
 @tf_export("data.experimental.service.ShardingPolicy")
 class ShardingPolicy(enum.IntEnum):
-  """Specifies how to shard data among tf.data service workers.
+    """Specifies how to shard data among tf.data service workers.
 
   OFF: No sharding will be performed. Each worker produces the entire dataset
   without any sharding. With this mode, the best practice is to shuffle the
@@ -96,100 +98,107 @@ class ShardingPolicy(enum.IntEnum):
   placeholder to replace with `shard(num_workers, worker_index)`.
   """
 
-  # LINT.IfChange(tf_data_service_sharding_policy)
-  OFF = 0
-  DYNAMIC = 1
-  FILE = 2
-  DATA = 3
-  FILE_OR_DATA = 4
-  HINT = 5
-  # LINT.ThenChange()
+    # LINT.IfChange(tf_data_service_sharding_policy)
+    OFF = 0
+    DYNAMIC = 1
+    FILE = 2
+    DATA = 3
+    FILE_OR_DATA = 4
+    HINT = 5
+    # LINT.ThenChange()
 
-  def _to_proto(self):
-    """Converts the policy to ProcessingModeDef proto enum."""
+    def _to_proto(self):
+        """Converts the policy to ProcessingModeDef proto enum."""
 
-    if self == ShardingPolicy.OFF:
-      return data_service_pb2.ProcessingModeDef.OFF
-    if self == ShardingPolicy.DYNAMIC:
-      return data_service_pb2.ProcessingModeDef.DYNAMIC
-    if self == ShardingPolicy.FILE:
-      return data_service_pb2.ProcessingModeDef.FILE
-    if self == ShardingPolicy.DATA:
-      return data_service_pb2.ProcessingModeDef.DATA
-    if self == ShardingPolicy.FILE_OR_DATA:
-      return data_service_pb2.ProcessingModeDef.FILE_OR_DATA
-    if self == ShardingPolicy.HINT:
-      return data_service_pb2.ProcessingModeDef.HINT
-    raise ValueError(
-        f"Unable to convert sharding policy {self!r} to proto. Please verify "
-        "the policy mapping.")
+        if self == ShardingPolicy.OFF:
+            return data_service_pb2.ProcessingModeDef.OFF
+        if self == ShardingPolicy.DYNAMIC:
+            return data_service_pb2.ProcessingModeDef.DYNAMIC
+        if self == ShardingPolicy.FILE:
+            return data_service_pb2.ProcessingModeDef.FILE
+        if self == ShardingPolicy.DATA:
+            return data_service_pb2.ProcessingModeDef.DATA
+        if self == ShardingPolicy.FILE_OR_DATA:
+            return data_service_pb2.ProcessingModeDef.FILE_OR_DATA
+        if self == ShardingPolicy.HINT:
+            return data_service_pb2.ProcessingModeDef.HINT
+        raise ValueError(
+            f"Unable to convert sharding policy {self!r} to proto. Please verify "
+            "the policy mapping."
+        )
 
 
 def _get_validated_sharding_policy(processing_mode):
-  """Validates `processing_mode` and converts it to ShardingPolicy."""
+    """Validates `processing_mode` and converts it to ShardingPolicy."""
 
-  if isinstance(processing_mode, ShardingPolicy):
-    return processing_mode
-  if compat.forward_compatible(2021, 8, 24):
-    if processing_mode == _PARALLEL_EPOCHS:
-      return ShardingPolicy.OFF
-    if processing_mode == _DISTRIBUTED_EPOCH:
-      return ShardingPolicy.DYNAMIC
-  elif processing_mode in [_PARALLEL_EPOCHS, _DISTRIBUTED_EPOCH]:
-    return processing_mode
+    if isinstance(processing_mode, ShardingPolicy):
+        return processing_mode
+    if compat.forward_compatible(2021, 8, 24):
+        if processing_mode == _PARALLEL_EPOCHS:
+            return ShardingPolicy.OFF
+        if processing_mode == _DISTRIBUTED_EPOCH:
+            return ShardingPolicy.DYNAMIC
+    elif processing_mode in [_PARALLEL_EPOCHS, _DISTRIBUTED_EPOCH]:
+        return processing_mode
 
-  raise ValueError(
-      "tf.data service processing mode should be a ShardingPolicy, "
-      "`\"parallel_epochs\"`, or `\"distributed_epoch\"`. Got "
-      f"{processing_mode!r}.")
+    raise ValueError(
+        "tf.data service processing mode should be a ShardingPolicy, "
+        '`"parallel_epochs"`, or `"distributed_epoch"`. Got '
+        f"{processing_mode!r}."
+    )
 
 
 def _serialize(processing_mode):
-  """Serializes `processing_mode`."""
+    """Serializes `processing_mode`."""
 
-  processing_mode = _get_validated_sharding_policy(processing_mode)
-  if isinstance(processing_mode, ShardingPolicy):
-    # pylint: disable=protected-access
-    processing_mode_def = data_service_pb2.ProcessingModeDef(
-        sharding_policy=_get_validated_sharding_policy(
-            processing_mode)._to_proto())
-    return processing_mode_def.SerializeToString()
-  if processing_mode in [_PARALLEL_EPOCHS, _DISTRIBUTED_EPOCH]:
-    return processing_mode
+    processing_mode = _get_validated_sharding_policy(processing_mode)
+    if isinstance(processing_mode, ShardingPolicy):
+        # pylint: disable=protected-access
+        processing_mode_def = data_service_pb2.ProcessingModeDef(
+            sharding_policy=_get_validated_sharding_policy(processing_mode)._to_proto()
+        )
+        return processing_mode_def.SerializeToString()
+    if processing_mode in [_PARALLEL_EPOCHS, _DISTRIBUTED_EPOCH]:
+        return processing_mode
 
-  raise ValueError(
-      "tf.data service processing mode should be a ShardingPolicy, "
-      "`\"parallel_epochs\"`, or `\"distributed_epoch\"`. Got "
-      f"{processing_mode!r}.")
+    raise ValueError(
+        "tf.data service processing mode should be a ShardingPolicy, "
+        '`"parallel_epochs"`, or `"distributed_epoch"`. Got '
+        f"{processing_mode!r}."
+    )
 
 
 def _validate_job_name(job_name):
-  if job_name is None:
-    return
-  if not isinstance(job_name, six.string_types):
-    raise ValueError("job_name must be a string, but job_name was of type "
-                     "{0}. job_name={1}".format(type(job_name), job_name))
-  if not job_name:
-    raise ValueError("job_name must not be empty")
+    if job_name is None:
+        return
+    if not isinstance(job_name, six.string_types):
+        raise ValueError(
+            "job_name must be a string, but job_name was of type "
+            "{0}. job_name={1}".format(type(job_name), job_name)
+        )
+    if not job_name:
+        raise ValueError("job_name must not be empty")
 
 
 class _DataServiceDatasetV2(dataset_ops.DatasetSource):
-  """A `Dataset` that reads elements from the tf.data service."""
+    """A `Dataset` that reads elements from the tf.data service."""
 
-  def __init__(self,
-               dataset_id,
-               processing_mode,
-               address,
-               element_spec,
-               protocol,
-               data_transfer_protocol,
-               job_name=None,
-               consumer_index=None,
-               num_consumers=None,
-               max_outstanding_requests=None,
-               task_refresh_interval_hint_ms=None,
-               target_workers="AUTO"):
-    """Constructs a _DataServiceDatasetV2.
+    def __init__(
+        self,
+        dataset_id,
+        processing_mode,
+        address,
+        element_spec,
+        protocol,
+        data_transfer_protocol,
+        job_name=None,
+        consumer_index=None,
+        num_consumers=None,
+        max_outstanding_requests=None,
+        task_refresh_interval_hint_ms=None,
+        target_workers="AUTO",
+    ):
+        """Constructs a _DataServiceDatasetV2.
 
     Args:
       dataset_id: The dataset id for the dataset to read from.
@@ -236,108 +245,130 @@ class _DataServiceDatasetV2(dataset_ops.DatasetSource):
         service worker. Consumers of a shared job must use the same
         `target_workers`. Defaults to `"AUTO"`.
     """
-    processing_mode = _serialize(
-        _get_validated_sharding_policy(processing_mode))
-    if consumer_index is None != num_consumers is None:
-      raise ValueError(
-          "Must either set both consumer_index and num_consumers, or neither. ",
-          "consumer_index: ", consumer_index, ", num_consumers: ",
-          num_consumers)
-    if num_consumers is not None and job_name is None:
-      raise ValueError("job_name must be set when setting num_consumers")
+        processing_mode = _serialize(_get_validated_sharding_policy(processing_mode))
+        if consumer_index is None != num_consumers is None:
+            raise ValueError(
+                "Must either set both consumer_index and num_consumers, or neither. ",
+                "consumer_index: ",
+                consumer_index,
+                ", num_consumers: ",
+                num_consumers,
+            )
+        if num_consumers is not None and job_name is None:
+            raise ValueError("job_name must be set when setting num_consumers")
 
-    if job_name is None:
-      job_name = ""
-    if max_outstanding_requests is None:
-      max_outstanding_requests = dataset_ops.AUTOTUNE
-    if task_refresh_interval_hint_ms is None:
-      task_refresh_interval_hint_ms = dataset_ops.AUTOTUNE
+        if job_name is None:
+            job_name = ""
+        if max_outstanding_requests is None:
+            max_outstanding_requests = dataset_ops.AUTOTUNE
+        if task_refresh_interval_hint_ms is None:
+            task_refresh_interval_hint_ms = dataset_ops.AUTOTUNE
 
-    self._dataset_id = ops.convert_to_tensor(
-        dataset_id, dtype=dtypes.int64, name="dataset_id")
-    self._processing_mode = ops.convert_to_tensor(
-        processing_mode, dtype=dtypes.string, name="processing_mode")
-    self._address = ops.convert_to_tensor(
-        address, dtype=dtypes.string, name="address")
-    self._protocol = ops.convert_to_tensor(
-        protocol, dtype=dtypes.string, name="protocol")
-    self._job_name = ops.convert_to_tensor(
-        job_name, dtype=dtypes.string, name="job_name")
-    self._consumer_index = ops.convert_to_tensor(
-        -1 if consumer_index is None else consumer_index,
-        dtype=dtypes.int64,
-        name="consumer_index")
-    self._num_consumers = ops.convert_to_tensor(
-        -1 if num_consumers is None else num_consumers,
-        dtype=dtypes.int64,
-        name="num_consumers")
-    self._max_outstanding_requests = ops.convert_to_tensor(
-        max_outstanding_requests,
-        dtype=dtypes.int64,
-        name="max_outstanding_requests")
-    self._element_spec = element_spec
-    self._target_workers = target_workers
+        self._dataset_id = ops.convert_to_tensor(
+            dataset_id, dtype=dtypes.int64, name="dataset_id"
+        )
+        self._processing_mode = ops.convert_to_tensor(
+            processing_mode, dtype=dtypes.string, name="processing_mode"
+        )
+        self._address = ops.convert_to_tensor(
+            address, dtype=dtypes.string, name="address"
+        )
+        self._protocol = ops.convert_to_tensor(
+            protocol, dtype=dtypes.string, name="protocol"
+        )
+        self._job_name = ops.convert_to_tensor(
+            job_name, dtype=dtypes.string, name="job_name"
+        )
+        self._consumer_index = ops.convert_to_tensor(
+            -1 if consumer_index is None else consumer_index,
+            dtype=dtypes.int64,
+            name="consumer_index",
+        )
+        self._num_consumers = ops.convert_to_tensor(
+            -1 if num_consumers is None else num_consumers,
+            dtype=dtypes.int64,
+            name="num_consumers",
+        )
+        self._max_outstanding_requests = ops.convert_to_tensor(
+            max_outstanding_requests,
+            dtype=dtypes.int64,
+            name="max_outstanding_requests",
+        )
+        self._element_spec = element_spec
+        self._target_workers = target_workers
 
-    compat_kwargs = {}
-    if data_transfer_protocol is not None:
-      compat_kwargs["data_transfer_protocol"] = data_transfer_protocol
-    if compat.forward_compatible(2021, 7, 12) or target_workers != "AUTO":
-      compat_kwargs["target_workers"] = target_workers
+        compat_kwargs = {}
+        if data_transfer_protocol is not None:
+            compat_kwargs["data_transfer_protocol"] = data_transfer_protocol
+        if compat.forward_compatible(2021, 7, 12) or target_workers != "AUTO":
+            compat_kwargs["target_workers"] = target_workers
 
-    variant_tensor = gen_experimental_dataset_ops.data_service_dataset_v2(
-        dataset_id=self._dataset_id,
-        processing_mode=self._processing_mode,
-        address=self._address,
-        protocol=self._protocol,
-        job_name=self._job_name,
-        consumer_index=self._consumer_index,
-        num_consumers=self._num_consumers,
-        max_outstanding_requests=self._max_outstanding_requests,
-        task_refresh_interval_hint_ms=task_refresh_interval_hint_ms,
-        iteration_counter=gen_experimental_dataset_ops.dummy_iteration_counter(
-        ),
-        **compat_kwargs,
-        **self._flat_structure)
-    super(_DataServiceDatasetV2, self).__init__(variant_tensor)
+        variant_tensor = gen_experimental_dataset_ops.data_service_dataset_v2(
+            dataset_id=self._dataset_id,
+            processing_mode=self._processing_mode,
+            address=self._address,
+            protocol=self._protocol,
+            job_name=self._job_name,
+            consumer_index=self._consumer_index,
+            num_consumers=self._num_consumers,
+            max_outstanding_requests=self._max_outstanding_requests,
+            task_refresh_interval_hint_ms=task_refresh_interval_hint_ms,
+            iteration_counter=gen_experimental_dataset_ops.dummy_iteration_counter(),
+            **compat_kwargs,
+            **self._flat_structure,
+        )
+        super(_DataServiceDatasetV2, self).__init__(variant_tensor)
 
-  @property
-  def element_spec(self):
-    return self._element_spec
+    @property
+    def element_spec(self):
+        return self._element_spec
 
 
 class _DataServiceDatasetV1(dataset_ops.DatasetV1Adapter):
-  """A `Dataset` that executes its input through the tf.data service."""
+    """A `Dataset` that executes its input through the tf.data service."""
 
-  @functools.wraps(_DataServiceDatasetV2.__init__)
-  def __init__(self, dataset_id, processing_mode, address, element_spec,
-               protocol, data_transfer_protocol, job_name, consumer_index,
-               num_consumers, max_outstanding_requests,
-               task_refresh_interval_hint_ms, target_workers):
+    @functools.wraps(_DataServiceDatasetV2.__init__)
+    def __init__(
+        self,
+        dataset_id,
+        processing_mode,
+        address,
+        element_spec,
+        protocol,
+        data_transfer_protocol,
+        job_name,
+        consumer_index,
+        num_consumers,
+        max_outstanding_requests,
+        task_refresh_interval_hint_ms,
+        target_workers,
+    ):
 
-    self._wrapped = _DataServiceDatasetV2(
-        dataset_id=dataset_id,
-        processing_mode=processing_mode,
-        address=address,
-        element_spec=element_spec,
-        protocol=protocol,
-        data_transfer_protocol=data_transfer_protocol,
-        job_name=job_name,
-        consumer_index=consumer_index,
-        num_consumers=num_consumers,
-        max_outstanding_requests=max_outstanding_requests,
-        task_refresh_interval_hint_ms=task_refresh_interval_hint_ms,
-        target_workers=target_workers)
-    super(_DataServiceDatasetV1, self).__init__(self._wrapped)
+        self._wrapped = _DataServiceDatasetV2(
+            dataset_id=dataset_id,
+            processing_mode=processing_mode,
+            address=address,
+            element_spec=element_spec,
+            protocol=protocol,
+            data_transfer_protocol=data_transfer_protocol,
+            job_name=job_name,
+            consumer_index=consumer_index,
+            num_consumers=num_consumers,
+            max_outstanding_requests=max_outstanding_requests,
+            task_refresh_interval_hint_ms=task_refresh_interval_hint_ms,
+            target_workers=target_workers,
+        )
+        super(_DataServiceDatasetV1, self).__init__(self._wrapped)
 
 
 if tf2.enabled():
-  _DataServiceDataset = _DataServiceDatasetV2
+    _DataServiceDataset = _DataServiceDatasetV2
 else:
-  _DataServiceDataset = _DataServiceDatasetV1
+    _DataServiceDataset = _DataServiceDatasetV1
 
 
 def _parse_service(service):
-  """Converts a tf.data service string into a (protocol, address) tuple.
+    """Converts a tf.data service string into a (protocol, address) tuple.
 
   Args:
     service: A string in the format "protocol://address" or just "address". If
@@ -346,36 +377,39 @@ def _parse_service(service):
   Returns:
     The (protocol, address) tuple
   """
-  if not isinstance(service, six.string_types):
-    raise ValueError(
-        "service must be a string, but service was of type {0}. service={1}"
-        .format(type(service), service))
-  if not service:
-    raise ValueError("service must not be empty")
-  parts = service.split("://")
-  if len(parts) == 2:
-    protocol, address = parts
-  elif len(parts) == 1:
-    address = parts[0]
-    protocol = _pywrap_utils.TF_DATA_DefaultProtocol()
-  else:
-    raise ValueError("malformed service string has multiple '://': %s" %
-                     service)
-  # TODO(aaudibert): Considering validating reachability of address here.
-  return (protocol, address)
+    if not isinstance(service, six.string_types):
+        raise ValueError(
+            "service must be a string, but service was of type {0}. service={1}".format(
+                type(service), service
+            )
+        )
+    if not service:
+        raise ValueError("service must not be empty")
+    parts = service.split("://")
+    if len(parts) == 2:
+        protocol, address = parts
+    elif len(parts) == 1:
+        address = parts[0]
+        protocol = _pywrap_utils.TF_DATA_DefaultProtocol()
+    else:
+        raise ValueError("malformed service string has multiple '://': %s" % service)
+    # TODO(aaudibert): Considering validating reachability of address here.
+    return (protocol, address)
 
 
-def _distribute(processing_mode,
-                service,
-                job_name=None,
-                consumer_index=None,
-                num_consumers=None,
-                max_outstanding_requests=None,
-                task_refresh_interval_hint_ms=None,
-                data_transfer_protocol=None,
-                compression="AUTO",
-                target_workers="AUTO"):
-  """A transformation that moves dataset processing to the tf.data service.
+def _distribute(
+    processing_mode,
+    service,
+    job_name=None,
+    consumer_index=None,
+    num_consumers=None,
+    max_outstanding_requests=None,
+    task_refresh_interval_hint_ms=None,
+    data_transfer_protocol=None,
+    compression="AUTO",
+    target_workers="AUTO",
+):
+    """A transformation that moves dataset processing to the tf.data service.
 
   This transformation is similar to `distribute`, but supports additional
   parameters which we do not yet want to add to the public Python API.
@@ -430,44 +464,50 @@ def _distribute(processing_mode,
   Returns:
     Dataset: A `Dataset` of the elements produced by the data service.
   """
-  processing_mode = _get_validated_sharding_policy(processing_mode)
-  valid_compressions = [COMPRESSION_AUTO, COMPRESSION_NONE]
-  if compression not in valid_compressions:
-    raise ValueError(
-        "Invalid compression argument: {}. Must be one of {}".format(
-            compression, valid_compressions))
-  if compression == COMPRESSION_AUTO and data_transfer_protocol is not None:
-    compression = COMPRESSION_NONE
-  def _apply_fn(dataset):  # pylint: disable=missing-docstring
-    dataset_id = _register_dataset(service, dataset, compression=compression)
-    return _from_dataset_id(
-        processing_mode,
-        service,
-        dataset_id,
-        dataset.element_spec,
-        job_name=job_name,
-        consumer_index=consumer_index,
-        num_consumers=num_consumers,
-        max_outstanding_requests=max_outstanding_requests,
-        task_refresh_interval_hint_ms=task_refresh_interval_hint_ms,
-        data_transfer_protocol=data_transfer_protocol,
-        compression=compression,
-        target_workers=target_workers)
+    processing_mode = _get_validated_sharding_policy(processing_mode)
+    valid_compressions = [COMPRESSION_AUTO, COMPRESSION_NONE]
+    if compression not in valid_compressions:
+        raise ValueError(
+            "Invalid compression argument: {}. Must be one of {}".format(
+                compression, valid_compressions
+            )
+        )
+    if compression == COMPRESSION_AUTO and data_transfer_protocol is not None:
+        compression = COMPRESSION_NONE
 
-  return _apply_fn
+    def _apply_fn(dataset):  # pylint: disable=missing-docstring
+        dataset_id = _register_dataset(service, dataset, compression=compression)
+        return _from_dataset_id(
+            processing_mode,
+            service,
+            dataset_id,
+            dataset.element_spec,
+            job_name=job_name,
+            consumer_index=consumer_index,
+            num_consumers=num_consumers,
+            max_outstanding_requests=max_outstanding_requests,
+            task_refresh_interval_hint_ms=task_refresh_interval_hint_ms,
+            data_transfer_protocol=data_transfer_protocol,
+            compression=compression,
+            target_workers=target_workers,
+        )
+
+    return _apply_fn
 
 
 @tf_export("data.experimental.service.distribute")
-def distribute(processing_mode,
-               service,
-               job_name=None,
-               consumer_index=None,
-               num_consumers=None,
-               max_outstanding_requests=None,
-               data_transfer_protocol=None,
-               compression="AUTO",
-               target_workers="AUTO"):
-  """A transformation that moves dataset processing to the tf.data service.
+def distribute(
+    processing_mode,
+    service,
+    job_name=None,
+    consumer_index=None,
+    num_consumers=None,
+    max_outstanding_requests=None,
+    data_transfer_protocol=None,
+    compression="AUTO",
+    target_workers="AUTO",
+):
+    """A transformation that moves dataset processing to the tf.data service.
 
   When you iterate over a dataset containing the `distribute` transformation,
   the tf.data service creates a "job" which produces data for the dataset
@@ -687,21 +727,22 @@ def distribute(processing_mode,
   Returns:
     Dataset: A `Dataset` of the elements produced by the data service.
   """
-  _validate_job_name(job_name)
-  return _distribute(
-      processing_mode=processing_mode,
-      service=service,
-      job_name=job_name,
-      consumer_index=consumer_index,
-      num_consumers=num_consumers,
-      max_outstanding_requests=max_outstanding_requests,
-      data_transfer_protocol=data_transfer_protocol,
-      compression=compression,
-      target_workers=target_workers)
+    _validate_job_name(job_name)
+    return _distribute(
+        processing_mode=processing_mode,
+        service=service,
+        job_name=job_name,
+        consumer_index=consumer_index,
+        num_consumers=num_consumers,
+        max_outstanding_requests=max_outstanding_requests,
+        data_transfer_protocol=data_transfer_protocol,
+        compression=compression,
+        target_workers=target_workers,
+    )
 
 
 def _register_dataset(service, dataset, compression):
-  """Registers a dataset with the tf.data service.
+    """Registers a dataset with the tf.data service.
 
   This transformation is similar to `register_dataset`, but supports additional
   parameters which we do not yet want to add to the public Python API.
@@ -720,45 +761,48 @@ def _register_dataset(service, dataset, compression):
   Returns:
     A scalar int64 tensor of the registered dataset's id.
   """
-  valid_compressions = [COMPRESSION_AUTO, COMPRESSION_NONE]
-  if compression not in valid_compressions:
-    raise ValueError(
-        "Invalid compression argument: {}. Must be one of {}".format(
-            compression, valid_compressions))
-  if isinstance(service, tuple):
-    protocol, address = service
-  else:
-    protocol, address = _parse_service(service)
-  external_state_policy = dataset.options().experimental_external_state_policy
-  if external_state_policy is None:
-    external_state_policy = ExternalStatePolicy.WARN
+    valid_compressions = [COMPRESSION_AUTO, COMPRESSION_NONE]
+    if compression not in valid_compressions:
+        raise ValueError(
+            "Invalid compression argument: {}. Must be one of {}".format(
+                compression, valid_compressions
+            )
+        )
+    if isinstance(service, tuple):
+        protocol, address = service
+    else:
+        protocol, address = _parse_service(service)
+    external_state_policy = dataset.options().experimental_external_state_policy
+    if external_state_policy is None:
+        external_state_policy = ExternalStatePolicy.WARN
 
-  encoded_spec = ""
-  if context.executing_eagerly():
-    coder = nested_structure_coder.StructureCoder()
-    encoded_spec = coder.encode_structure(
-        dataset.element_spec).SerializeToString()
+    encoded_spec = ""
+    if context.executing_eagerly():
+        coder = nested_structure_coder.StructureCoder()
+        encoded_spec = coder.encode_structure(dataset.element_spec).SerializeToString()
 
-  if compression == COMPRESSION_AUTO:
-    dataset = dataset.map(
-        lambda *x: compression_ops.compress(x),
-        num_parallel_calls=dataset_ops.AUTOTUNE)
-  dataset = dataset.prefetch(dataset_ops.AUTOTUNE)
-  dataset = dataset._apply_debug_options()  # pylint: disable=protected-access
+    if compression == COMPRESSION_AUTO:
+        dataset = dataset.map(
+            lambda *x: compression_ops.compress(x),
+            num_parallel_calls=dataset_ops.AUTOTUNE,
+        )
+    dataset = dataset.prefetch(dataset_ops.AUTOTUNE)
+    dataset = dataset._apply_debug_options()  # pylint: disable=protected-access
 
-  dataset_id = gen_experimental_dataset_ops.register_dataset(
-      dataset._variant_tensor,  # pylint: disable=protected-access
-      address=address,
-      protocol=protocol,
-      external_state_policy=external_state_policy.value,
-      element_spec=encoded_spec)
+    dataset_id = gen_experimental_dataset_ops.register_dataset(
+        dataset._variant_tensor,  # pylint: disable=protected-access
+        address=address,
+        protocol=protocol,
+        external_state_policy=external_state_policy.value,
+        element_spec=encoded_spec,
+    )
 
-  return dataset_id
+    return dataset_id
 
 
 @tf_export("data.experimental.service.register_dataset")
 def register_dataset(service, dataset):
-  """Registers a dataset with the tf.data service.
+    """Registers a dataset with the tf.data service.
 
   `register_dataset` registers a dataset with the tf.data service so that
   datasets can be created later with
@@ -798,22 +842,24 @@ def register_dataset(service, dataset):
   Returns:
     A scalar int64 tensor of the registered dataset's id.
   """
-  return _register_dataset(service, dataset, compression="AUTO")
+    return _register_dataset(service, dataset, compression="AUTO")
 
 
-def _from_dataset_id(processing_mode,
-                     service,
-                     dataset_id,
-                     element_spec,
-                     job_name=None,
-                     consumer_index=None,
-                     num_consumers=None,
-                     max_outstanding_requests=None,
-                     task_refresh_interval_hint_ms=None,
-                     data_transfer_protocol=None,
-                     compression="AUTO",
-                     target_workers="AUTO"):
-  """Creates a dataset which reads data from the tf.data service.
+def _from_dataset_id(
+    processing_mode,
+    service,
+    dataset_id,
+    element_spec,
+    job_name=None,
+    consumer_index=None,
+    num_consumers=None,
+    max_outstanding_requests=None,
+    task_refresh_interval_hint_ms=None,
+    data_transfer_protocol=None,
+    compression="AUTO",
+    target_workers="AUTO",
+):
+    """Creates a dataset which reads data from the tf.data service.
 
   This transformation is similar to `from_dataset_id`, but supports additional
   parameters which we do not yet want to add to the public Python API.
@@ -874,95 +920,111 @@ def _from_dataset_id(processing_mode,
   Returns:
     A `tf.data.Dataset` which reads from the tf.data service.
   """
-  processing_mode = _get_validated_sharding_policy(processing_mode)
-  valid_compressions = [COMPRESSION_AUTO, COMPRESSION_NONE]
-  if isinstance(service, tuple):
-    protocol, address = service
-  else:
-    protocol, address = _parse_service(service)
+    processing_mode = _get_validated_sharding_policy(processing_mode)
+    valid_compressions = [COMPRESSION_AUTO, COMPRESSION_NONE]
+    if isinstance(service, tuple):
+        protocol, address = service
+    else:
+        protocol, address = _parse_service(service)
 
-  if compression not in valid_compressions:
-    raise ValueError(
-        "Invalid compression argument: {}. Must be one of {}".format(
-            compression, valid_compressions))
-  if job_name is not None:
-    if not isinstance(job_name, six.string_types) and not isinstance(
-        job_name, ops.Tensor):
-      raise ValueError(
-          "job_name must be a string or Tensor, but job_name was of type "
-          "{0}. job_name={1}".format(type(job_name), job_name))
+    if compression not in valid_compressions:
+        raise ValueError(
+            "Invalid compression argument: {}. Must be one of {}".format(
+                compression, valid_compressions
+            )
+        )
+    if job_name is not None:
+        if not isinstance(job_name, six.string_types) and not isinstance(
+            job_name, ops.Tensor
+        ):
+            raise ValueError(
+                "job_name must be a string or Tensor, but job_name was of type "
+                "{0}. job_name={1}".format(type(job_name), job_name)
+            )
 
-  if element_spec is None:
-    if not context.executing_eagerly():
-      raise ValueError("In graph mode element_spec must be provided manually.")
+    if element_spec is None:
+        if not context.executing_eagerly():
+            raise ValueError("In graph mode element_spec must be provided manually.")
 
-    dataset_id_val = tensor_util.constant_value(dataset_id)
-    try:
-      encoded_spec = _pywrap_server_lib.TF_DATA_GetElementSpec(
-          dataset_id_val, address, protocol)
+        dataset_id_val = tensor_util.constant_value(dataset_id)
+        try:
+            encoded_spec = _pywrap_server_lib.TF_DATA_GetElementSpec(
+                dataset_id_val, address, protocol
+            )
 
-    except NotImplementedError as err:
-      raise ValueError("The tf.data service is running an earlier version of "
-                       "TensorFlow that requires specifying `element_spec` as "
-                       "an argument to `from_dataset_id`. Please either supply "
-                       "an element spec or update the tf.data service to the "
-                       "latest version.") from err
+        except NotImplementedError as err:
+            raise ValueError(
+                "The tf.data service is running an earlier version of "
+                "TensorFlow that requires specifying `element_spec` as "
+                "an argument to `from_dataset_id`. Please either supply "
+                "an element spec or update the tf.data service to the "
+                "latest version."
+            ) from err
 
-    except RuntimeError as err:
-      raise ValueError("Failed to fetch element spec for dataset id " +
-                       str(dataset_id_val) + " from tf.data service. If the "
-                       "dataset was registered in graph mode or inside a "
-                       "tf.function, the `element_spec` must be specified as "
-                       "an argument to `from_dataset_id`.") from err
+        except RuntimeError as err:
+            raise ValueError(
+                "Failed to fetch element spec for dataset id "
+                + str(dataset_id_val)
+                + " from tf.data service. If the "
+                "dataset was registered in graph mode or inside a "
+                "tf.function, the `element_spec` must be specified as "
+                "an argument to `from_dataset_id`."
+            ) from err
 
-    struct_pb = nested_structure_coder.struct_pb2.StructuredValue()
-    struct_pb.ParseFromString(encoded_spec)
-    coder = nested_structure_coder.StructureCoder()
-    element_spec = coder.decode_proto(struct_pb)
+        struct_pb = nested_structure_coder.struct_pb2.StructuredValue()
+        struct_pb.ParseFromString(encoded_spec)
+        coder = nested_structure_coder.StructureCoder()
+        element_spec = coder.decode_proto(struct_pb)
 
-  # If we compress, the data service side dataset will produce scalar variants.
-  data_service_element_spec = (
-      tensor_spec.TensorSpec(shape=(), dtype=dtypes.variant)
-      if compression == COMPRESSION_AUTO else element_spec)
+    # If we compress, the data service side dataset will produce scalar variants.
+    data_service_element_spec = (
+        tensor_spec.TensorSpec(shape=(), dtype=dtypes.variant)
+        if compression == COMPRESSION_AUTO
+        else element_spec
+    )
 
-  dataset = _DataServiceDataset(
-      dataset_id=dataset_id,
-      processing_mode=processing_mode,
-      address=address,
-      element_spec=data_service_element_spec,
-      protocol=protocol,
-      data_transfer_protocol=data_transfer_protocol,
-      job_name=job_name,
-      consumer_index=consumer_index,
-      num_consumers=num_consumers,
-      max_outstanding_requests=max_outstanding_requests,
-      task_refresh_interval_hint_ms=task_refresh_interval_hint_ms,
-      target_workers=target_workers)
-  if compression == COMPRESSION_AUTO:
-    dataset = dataset.map(
-        lambda x: compression_ops.uncompress(x, output_spec=element_spec),
-        num_parallel_calls=dataset_ops.AUTOTUNE)
+    dataset = _DataServiceDataset(
+        dataset_id=dataset_id,
+        processing_mode=processing_mode,
+        address=address,
+        element_spec=data_service_element_spec,
+        protocol=protocol,
+        data_transfer_protocol=data_transfer_protocol,
+        job_name=job_name,
+        consumer_index=consumer_index,
+        num_consumers=num_consumers,
+        max_outstanding_requests=max_outstanding_requests,
+        task_refresh_interval_hint_ms=task_refresh_interval_hint_ms,
+        target_workers=target_workers,
+    )
+    if compression == COMPRESSION_AUTO:
+        dataset = dataset.map(
+            lambda x: compression_ops.uncompress(x, output_spec=element_spec),
+            num_parallel_calls=dataset_ops.AUTOTUNE,
+        )
 
-  # Disable autosharding for shared jobs.
-  if job_name is not None:
-    options = options_lib.Options()
-    options.experimental_distribute.auto_shard_policy = AutoShardPolicy.OFF
-    dataset = dataset.with_options(options)
-  return dataset
+    # Disable autosharding for shared jobs.
+    if job_name is not None:
+        options = options_lib.Options()
+        options.experimental_distribute.auto_shard_policy = AutoShardPolicy.OFF
+        dataset = dataset.with_options(options)
+    return dataset
 
 
 @tf_export("data.experimental.service.from_dataset_id")
-def from_dataset_id(processing_mode,
-                    service,
-                    dataset_id,
-                    element_spec=None,
-                    job_name=None,
-                    consumer_index=None,
-                    num_consumers=None,
-                    max_outstanding_requests=None,
-                    data_transfer_protocol=None,
-                    target_workers="AUTO"):
-  """Creates a dataset which reads data from the tf.data service.
+def from_dataset_id(
+    processing_mode,
+    service,
+    dataset_id,
+    element_spec=None,
+    job_name=None,
+    consumer_index=None,
+    num_consumers=None,
+    max_outstanding_requests=None,
+    data_transfer_protocol=None,
+    target_workers="AUTO",
+):
+    """Creates a dataset which reads data from the tf.data service.
 
   This is useful when the dataset is registered by one process, then used in
   another process. When the same process is both registering and reading from
@@ -1054,19 +1116,21 @@ def from_dataset_id(processing_mode,
   Returns:
     A `tf.data.Dataset` which reads from the tf.data service.
   """
-  _validate_job_name(job_name)
-  if job_name is not None:
-    job_name = string_ops.string_join(
-        ["dataset_id=", string_ops.as_string(dataset_id), job_name], "/")
+    _validate_job_name(job_name)
+    if job_name is not None:
+        job_name = string_ops.string_join(
+            ["dataset_id=", string_ops.as_string(dataset_id), job_name], "/"
+        )
 
-  return _from_dataset_id(
-      processing_mode=processing_mode,
-      service=service,
-      dataset_id=dataset_id,
-      element_spec=element_spec,
-      job_name=job_name,
-      consumer_index=consumer_index,
-      num_consumers=num_consumers,
-      max_outstanding_requests=max_outstanding_requests,
-      data_transfer_protocol=data_transfer_protocol,
-      target_workers=target_workers)
+    return _from_dataset_id(
+        processing_mode=processing_mode,
+        service=service,
+        dataset_id=dataset_id,
+        element_spec=element_spec,
+        job_name=job_name,
+        consumer_index=consumer_index,
+        num_consumers=num_consumers,
+        max_outstanding_requests=max_outstanding_requests,
+        data_transfer_protocol=data_transfer_protocol,
+        target_workers=target_workers,
+    )

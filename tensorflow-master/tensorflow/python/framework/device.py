@@ -24,13 +24,13 @@ from tensorflow.python import tf2
 from tensorflow.python.framework import device_spec
 
 if tf2.enabled():
-  DeviceSpec = device_spec.DeviceSpecV2
+    DeviceSpec = device_spec.DeviceSpecV2
 else:
-  DeviceSpec = device_spec.DeviceSpecV1
+    DeviceSpec = device_spec.DeviceSpecV1
 
 
 def check_valid(spec):
-  """Check that a device spec is valid.
+    """Check that a device spec is valid.
 
   Args:
     spec: a string.
@@ -38,24 +38,24 @@ def check_valid(spec):
   Raises:
     An exception if the spec is invalid.
   """
-  # Construct a DeviceSpec.  It will assert a failure if spec is invalid.
-  DeviceSpec.from_string(spec)
+    # Construct a DeviceSpec.  It will assert a failure if spec is invalid.
+    DeviceSpec.from_string(spec)
 
 
 def is_device_spec(obj):
-  """Abstract away the fact that DeviceSpecV2 is the base class."""
-  return isinstance(obj, device_spec.DeviceSpecV2)
+    """Abstract away the fact that DeviceSpecV2 is the base class."""
+    return isinstance(obj, device_spec.DeviceSpecV2)
 
 
 def canonical_name(device):
-  """Returns a canonical name for the given `DeviceSpec` or device name."""
-  if device is None:
-    return ""
-  if is_device_spec(device):
-    return device.to_string()
-  else:
-    device = DeviceSpec.from_string(device)
-    return device.to_string()
+    """Returns a canonical name for the given `DeviceSpec` or device name."""
+    if device is None:
+        return ""
+    if is_device_spec(device):
+        return device.to_string()
+    else:
+        device = DeviceSpec.from_string(device)
+        return device.to_string()
 
 
 # Performance caches
@@ -65,7 +65,7 @@ _string_merge_cache = {}
 
 
 def merge_device(spec):
-  """Returns a device function that merges devices specifications.
+    """Returns a device function that merges devices specifications.
 
   This can be used to merge partial specifications of devices. The
   innermost setting for a device field takes precedence. For example:
@@ -91,49 +91,49 @@ def merge_device(spec):
     ValueError: if the spec was not valid.
   """
 
-  if isinstance(spec, MergeDevice):
-    return spec
+    if isinstance(spec, MergeDevice):
+        return spec
 
-  with _cache_lock:
-    merger = _cached_mergers.get(spec)
-    if merger:
-      return merger
+    with _cache_lock:
+        merger = _cached_mergers.get(spec)
+        if merger:
+            return merger
 
-    merger = MergeDevice(spec)
-    _cached_mergers[spec] = merger
-    return merger
+        merger = MergeDevice(spec)
+        _cached_mergers[spec] = merger
+        return merger
 
 
 class MergeDevice(object):
-  """Wraps a device specification (DeviceSpec or str) with merge functionality.
+    """Wraps a device specification (DeviceSpec or str) with merge functionality.
 
   When called, this class will merge a node_def with its own spec. It also
   exposes a `shortcut_string_merge` method which can significantly improve
   performance of device placement.
   """
 
-  __slots__ = ["_spec"]
+    __slots__ = ["_spec"]
 
-  def __init__(self, spec):
-    if isinstance(spec, device_spec.DeviceSpecV2):
-      self._spec = spec
-    elif isinstance(spec, device_spec.DeviceSpecV1):
-      # Capture a snapshot of spec.
-      self._spec = spec.__class__.from_string(spec.to_string())
-    else:
-      self._spec = DeviceSpec.from_string(spec)
+    def __init__(self, spec):
+        if isinstance(spec, device_spec.DeviceSpecV2):
+            self._spec = spec
+        elif isinstance(spec, device_spec.DeviceSpecV1):
+            # Capture a snapshot of spec.
+            self._spec = spec.__class__.from_string(spec.to_string())
+        else:
+            self._spec = DeviceSpec.from_string(spec)
 
-  def __call__(self, node_def):
-    # In general a user may create a device function which takes into account
-    # arbitrary properties of an op. (For instance dynamically placing ops based
-    # on type.) So even though the standard DeviceSpec route only uses the
-    # device attribute, we take an entire node_def to maintain a consistent
-    # signature with general device functions.
-    current_device = DeviceSpec.from_string(node_def.device or "")
-    return self._spec.make_merged_spec(current_device)
+    def __call__(self, node_def):
+        # In general a user may create a device function which takes into account
+        # arbitrary properties of an op. (For instance dynamically placing ops based
+        # on type.) So even though the standard DeviceSpec route only uses the
+        # device attribute, we take an entire node_def to maintain a consistent
+        # signature with general device functions.
+        current_device = DeviceSpec.from_string(node_def.device or "")
+        return self._spec.make_merged_spec(current_device)
 
-  def shortcut_string_merge(self, node_def):
-    """Merge a node def without materializing a full DeviceSpec object.
+    def shortcut_string_merge(self, node_def):
+        """Merge a node def without materializing a full DeviceSpec object.
 
     Often a device merge is invoked in order to generate a string which can be
     passed into the c api. In such a case, we can cache the
@@ -155,25 +155,26 @@ class MergeDevice(object):
     Returns:
       A string containing the merged device specification.
     """
-    device = node_def.device or ""
+        device = node_def.device or ""
 
-    merge_key = (self._spec, device)
-    result = _string_merge_cache.get(merge_key)
-    if result is None:
-      # This update is not atomic, however because the merge is stateless
-      # we don't need to lock when updating the cache.
-      result = self.__call__(node_def).to_string()
-      _string_merge_cache[merge_key] = result
+        merge_key = (self._spec, device)
+        result = _string_merge_cache.get(merge_key)
+        if result is None:
+            # This update is not atomic, however because the merge is stateless
+            # we don't need to lock when updating the cache.
+            result = self.__call__(node_def).to_string()
+            _string_merge_cache[merge_key] = result
 
-    return result
+        return result
 
-  def __repr__(self):
-    return "{} (spec: {})".format(
-        super(MergeDevice, self).__repr__(), self._spec.to_string())
+    def __repr__(self):
+        return "{} (spec: {})".format(
+            super(MergeDevice, self).__repr__(), self._spec.to_string()
+        )
 
-  @property
-  def is_null_merge(self):
-    """Indicate whether the wrapped spec is empty.
+    @property
+    def is_null_merge(self):
+        """Indicate whether the wrapped spec is empty.
 
     In the degenerate case where self._spec is an empty specification, a caller
     may wish to skip a merge step entirely. (However this class does not have
@@ -182,4 +183,4 @@ class MergeDevice(object):
     Returns:
       A boolean indicating whether a device merge will be trivial.
     """
-    return not bool(self._spec.to_string())
+        return not bool(self._spec.to_string())

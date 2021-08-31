@@ -24,7 +24,7 @@ from tensorflow.python.util.tf_export import tf_export
 @deprecation.deprecated(None, "Use `tf.data.Dataset.unique(...)")
 @tf_export("data.experimental.unique")
 def unique():
-  """Creates a `Dataset` from another `Dataset`, discarding duplicates.
+    """Creates a `Dataset` from another `Dataset`, discarding duplicates.
 
   Use this transformation to produce a dataset that contains one instance of
   each unique element in the input. For example:
@@ -41,7 +41,7 @@ def unique():
     `tf.data.Dataset.apply`.
   """
 
-  def _apply_fn(dataset):
-    return dataset.unique()
+    def _apply_fn(dataset):
+        return dataset.unique()
 
-  return _apply_fn
+    return _apply_fn

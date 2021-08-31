@@ -20,5 +20,5 @@ from __future__ import print_function
 
 
 def enabled():
-  """Returns true if TFRT should be enabled."""
-  return False
+    """Returns true if TFRT should be enabled."""
+    return False

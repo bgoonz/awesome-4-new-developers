@@ -22,17 +22,18 @@ from tensorflow.python.util.tf_export import keras_export
 
 
 # LINT.IfChange
-@keras_export(v1=['keras.estimator.model_to_estimator'])
+@keras_export(v1=["keras.estimator.model_to_estimator"])
 def model_to_estimator(
     keras_model=None,
     keras_model_path=None,
     custom_objects=None,
     model_dir=None,
     config=None,
-    checkpoint_format='saver',
+    checkpoint_format="saver",
     metric_names_map=None,
-    export_outputs=None):
-  """Constructs an `Estimator` instance from given keras model.
+    export_outputs=None,
+):
+    """Constructs an `Estimator` instance from given keras model.
 
   If you use infrastructure or other tooling that relies on Estimators, you can
   still build a Keras model and use model_to_estimator to convert the Keras
@@ -153,34 +154,40 @@ def model_to_estimator(
     ValueError: If an invalid checkpoint_format was given.
   """
 
-  try:
-    from tensorflow_estimator.python.estimator import keras_lib  # pylint: disable=g-import-not-at-top
-  except ImportError:
-    raise NotImplementedError(
-        'tf.keras.estimator.model_to_estimator function not available in your '
-        'installation.')
-  return keras_lib.model_to_estimator(  # pylint:disable=unexpected-keyword-arg
-      keras_model=keras_model,
-      keras_model_path=keras_model_path,
-      custom_objects=custom_objects,
-      model_dir=model_dir,
-      config=config,
-      checkpoint_format=checkpoint_format,
-      use_v2_estimator=False,
-      metric_names_map=metric_names_map,
-      export_outputs=export_outputs)
+    try:
+        from tensorflow_estimator.python.estimator import (
+            keras_lib,
+        )  # pylint: disable=g-import-not-at-top
+    except ImportError:
+        raise NotImplementedError(
+            "tf.keras.estimator.model_to_estimator function not available in your "
+            "installation."
+        )
+    return keras_lib.model_to_estimator(  # pylint:disable=unexpected-keyword-arg
+        keras_model=keras_model,
+        keras_model_path=keras_model_path,
+        custom_objects=custom_objects,
+        model_dir=model_dir,
+        config=config,
+        checkpoint_format=checkpoint_format,
+        use_v2_estimator=False,
+        metric_names_map=metric_names_map,
+        export_outputs=export_outputs,
+    )
 
 
-@keras_export('keras.estimator.model_to_estimator', v1=[])
-def model_to_estimator_v2(keras_model=None,
-                          keras_model_path=None,
-                          custom_objects=None,
-                          model_dir=None,
-                          config=None,
-                          checkpoint_format='checkpoint',
-                          metric_names_map=None,
-                          export_outputs=None):
-  """Constructs an `Estimator` instance from given keras model.
+@keras_export("keras.estimator.model_to_estimator", v1=[])
+def model_to_estimator_v2(
+    keras_model=None,
+    keras_model_path=None,
+    custom_objects=None,
+    model_dir=None,
+    config=None,
+    checkpoint_format="checkpoint",
+    metric_names_map=None,
+    export_outputs=None,
+):
+    """Constructs an `Estimator` instance from given keras model.
 
   If you use infrastructure or other tooling that relies on Estimators, you can
   still build a Keras model and use model_to_estimator to convert the Keras
@@ -340,20 +347,26 @@ def model_to_estimator_v2(keras_model=None,
     ValueError: If an invalid checkpoint_format was given.
   """
 
-  try:
-    from tensorflow_estimator.python.estimator import keras_lib  # pylint: disable=g-import-not-at-top
-  except ImportError:
-    raise NotImplementedError(
-        'tf.keras.estimator.model_to_estimator function not available in your '
-        'installation.')
-  return keras_lib.model_to_estimator(  # pylint:disable=unexpected-keyword-arg
-      keras_model=keras_model,
-      keras_model_path=keras_model_path,
-      custom_objects=custom_objects,
-      model_dir=model_dir,
-      config=config,
-      checkpoint_format=checkpoint_format,
-      use_v2_estimator=True,
-      metric_names_map=metric_names_map,
-      export_outputs=export_outputs)
+    try:
+        from tensorflow_estimator.python.estimator import (
+            keras_lib,
+        )  # pylint: disable=g-import-not-at-top
+    except ImportError:
+        raise NotImplementedError(
+            "tf.keras.estimator.model_to_estimator function not available in your "
+            "installation."
+        )
+    return keras_lib.model_to_estimator(  # pylint:disable=unexpected-keyword-arg
+        keras_model=keras_model,
+        keras_model_path=keras_model_path,
+        custom_objects=custom_objects,
+        model_dir=model_dir,
+        config=config,
+        checkpoint_format=checkpoint_format,
+        use_v2_estimator=True,
+        metric_names_map=metric_names_map,
+        export_outputs=export_outputs,
+    )
+
+
 # LINT.ThenChange(//tensorflow_estimator/python/estimator/keras_lib.py)

@@ -25,26 +25,27 @@ from tensorflow.python.ops import variables
 
 
 def InXlaContext(graph):
-  ctxt = graph._get_control_flow_context()  # pylint: disable=protected-access
-  return GetContainingXLAContext(ctxt) is not None
+    ctxt = graph._get_control_flow_context()  # pylint: disable=protected-access
+    return GetContainingXLAContext(ctxt) is not None
 
 
 def GraphOrParentsInXlaContext(graph):
-  while True:
-    if InXlaContext(graph): return True
-    try:
-      graph = graph.outer_graph
-    except AttributeError:
-      return False
+    while True:
+        if InXlaContext(graph):
+            return True
+        try:
+            graph = graph.outer_graph
+        except AttributeError:
+            return False
 
 
 def IsInWhileLoop(op):
-  ctxt = op._get_control_flow_context()  # pylint: disable=protected-access
-  return GetContainingWhileContext(ctxt) is not None
+    ctxt = op._get_control_flow_context()  # pylint: disable=protected-access
+    return GetContainingWhileContext(ctxt) is not None
 
 
 def GetContainingWhileContext(ctxt, stop_ctxt=None):
-  """Returns the first ancestor WhileContext of `ctxt`.
+    """Returns the first ancestor WhileContext of `ctxt`.
 
   Returns `ctxt` if `ctxt` is a WhileContext, or None if `ctxt` is not in a
   while loop.
@@ -59,14 +60,15 @@ def GetContainingWhileContext(ctxt, stop_ctxt=None):
     `ctxt`, or None if `ctxt` is not in a while loop.  If `stop_ctxt` is not
     `None`, this returns `ctxt` if it matches `stop_ctxt` in its traversal.
   """
-  while ctxt:
-    if ctxt.IsWhileContext() or ctxt == stop_ctxt: return ctxt
-    ctxt = ctxt.outer_context
-  return None
+    while ctxt:
+        if ctxt.IsWhileContext() or ctxt == stop_ctxt:
+            return ctxt
+        ctxt = ctxt.outer_context
+    return None
 
 
 def GetContainingXLAContext(ctxt):
-  """Returns the first ancestor XLAContext of `ctxt`.
+    """Returns the first ancestor XLAContext of `ctxt`.
 
   Returns `ctxt` if `ctxt` is a XLAContext, or None if `ctxt` is not in a
   while loop.
@@ -78,14 +80,17 @@ def GetContainingXLAContext(ctxt):
     `ctxt` if `ctxt` is a XLAContext, the most nested XLAContext containing
     `ctxt`, or None if `ctxt` is not in a while loop.
   """
-  while ctxt:
-    if ctxt.IsXLAContext(): return ctxt
-    ctxt = ctxt.outer_context
-  return None
+    while ctxt:
+        if ctxt.IsXLAContext():
+            return ctxt
+        ctxt = ctxt.outer_context
+    return None
 
 
-def smart_cond(pred, true_fn=None, false_fn=None, name=None):  # pylint: disable=invalid-name
-  """Return either `true_fn()` if predicate `pred` is true else `false_fn()`.
+def smart_cond(
+    pred, true_fn=None, false_fn=None, name=None
+):  # pylint: disable=invalid-name
+    """Return either `true_fn()` if predicate `pred` is true else `false_fn()`.
 
   If `pred` is a bool or has a constant value, we return either `true_fn()`
   or `false_fn()`, otherwise we use `tf.cond` to dynamically route to both.
@@ -103,15 +108,15 @@ def smart_cond(pred, true_fn=None, false_fn=None, name=None):  # pylint: disable
   Raises:
     TypeError: If `true_fn` or `false_fn` is not callable.
   """
-  if isinstance(pred, variables.Variable):
-    return control_flow_ops.cond(
-        pred, true_fn=true_fn, false_fn=false_fn, name=name)
-  return smart_module.smart_cond(
-      pred, true_fn=true_fn, false_fn=false_fn, name=name)
+    if isinstance(pred, variables.Variable):
+        return control_flow_ops.cond(
+            pred, true_fn=true_fn, false_fn=false_fn, name=name
+        )
+    return smart_module.smart_cond(pred, true_fn=true_fn, false_fn=false_fn, name=name)
 
 
 def constant_value(pred):  # pylint: disable=invalid-name
-  """Return the bool value for `pred`, or None if `pred` had a dynamic value.
+    """Return the bool value for `pred`, or None if `pred` had a dynamic value.
 
   Args:
     pred: A scalar, either a Python bool or a TensorFlow boolean variable
@@ -124,13 +129,15 @@ def constant_value(pred):  # pylint: disable=invalid-name
     TypeError: If `pred` is not a Variable, Tensor or bool, or Python
       integer 1 or 0.
   """
-  if isinstance(pred, ops.Tensor):
-    return tensor_util.constant_value(pred)
-  if pred in {0, 1}:  # Accept 1/0 as valid boolean values
-    return bool(pred)
-  if isinstance(pred, bool):
-    return pred
-  if isinstance(pred, variables.Variable):
-    return None
-  raise TypeError("`pred` must be a Tensor, or a Python bool, or 1 or 0. "
-                  "Found instead: %s" % type(pred))
+    if isinstance(pred, ops.Tensor):
+        return tensor_util.constant_value(pred)
+    if pred in {0, 1}:  # Accept 1/0 as valid boolean values
+        return bool(pred)
+    if isinstance(pred, bool):
+        return pred
+    if isinstance(pred, variables.Variable):
+        return None
+    raise TypeError(
+        "`pred` must be a Tensor, or a Python bool, or 1 or 0. "
+        "Found instead: %s" % type(pred)
+    )

@@ -20,9 +20,9 @@ from tensorflow.python.keras.utils.data_utils import get_file
 from tensorflow.python.util.tf_export import keras_export
 
 
-@keras_export('keras.datasets.boston_housing.load_data')
-def load_data(path='boston_housing.npz', test_split=0.2, seed=113):
-  """Loads the Boston Housing dataset.
+@keras_export("keras.datasets.boston_housing.load_data")
+def load_data(path="boston_housing.npz", test_split=0.2, seed=113):
+    """Loads the Boston Housing dataset.
 
   This is a dataset taken from the StatLib library which is maintained at
   Carnegie Mellon University.
@@ -52,25 +52,27 @@ def load_data(path='boston_housing.npz', test_split=0.2, seed=113):
     target scalars. The targets are float scalars typically between 10 and
     50 that represent the home prices in k$.
   """
-  assert 0 <= test_split < 1
-  origin_folder = 'https://storage.googleapis.com/tensorflow/tf-keras-datasets/'
-  path = get_file(
-      path,
-      origin=origin_folder + 'boston_housing.npz',
-      file_hash=
-      'f553886a1f8d56431e820c5b82552d9d95cfcb96d1e678153f8839538947dff5')
-  with np.load(path, allow_pickle=True) as f:  # pylint: disable=unexpected-keyword-arg
-    x = f['x']
-    y = f['y']
+    assert 0 <= test_split < 1
+    origin_folder = "https://storage.googleapis.com/tensorflow/tf-keras-datasets/"
+    path = get_file(
+        path,
+        origin=origin_folder + "boston_housing.npz",
+        file_hash="f553886a1f8d56431e820c5b82552d9d95cfcb96d1e678153f8839538947dff5",
+    )
+    with np.load(
+        path, allow_pickle=True
+    ) as f:  # pylint: disable=unexpected-keyword-arg
+        x = f["x"]
+        y = f["y"]
 
-  rng = np.random.RandomState(seed)
-  indices = np.arange(len(x))
-  rng.shuffle(indices)
-  x = x[indices]
-  y = y[indices]
+    rng = np.random.RandomState(seed)
+    indices = np.arange(len(x))
+    rng.shuffle(indices)
+    x = x[indices]
+    y = y[indices]
 
-  x_train = np.array(x[:int(len(x) * (1 - test_split))])
-  y_train = np.array(y[:int(len(x) * (1 - test_split))])
-  x_test = np.array(x[int(len(x) * (1 - test_split)):])
-  y_test = np.array(y[int(len(x) * (1 - test_split)):])
-  return (x_train, y_train), (x_test, y_test)
+    x_train = np.array(x[: int(len(x) * (1 - test_split))])
+    y_train = np.array(y[: int(len(x) * (1 - test_split))])
+    x_test = np.array(x[int(len(x) * (1 - test_split)) :])
+    y_test = np.array(y[int(len(x) * (1 - test_split)) :])
+    return (x_train, y_train), (x_test, y_test)

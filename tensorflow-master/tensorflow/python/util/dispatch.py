@@ -48,7 +48,7 @@ _GLOBAL_DISPATCHERS = []
 
 @tf_export("__internal__.dispatch.OpDispatcher", v1=[])
 class OpDispatcher(object):
-  """Abstract base class for TensorFlow operator dispatchers.
+    """Abstract base class for TensorFlow operator dispatchers.
 
   Each operation dispatcher acts as an override handler for a single
   TensorFlow operation, and its results are used when the handler indicates
@@ -56,12 +56,12 @@ class OpDispatcher(object):
   than `OpDispatcher.NOT_SUPPORTED`).
   """
 
-  # Sentinel value that can be returned to indicate that an operation
-  # dispatcher does not support a given set of arguments.
-  NOT_SUPPORTED = object()
+    # Sentinel value that can be returned to indicate that an operation
+    # dispatcher does not support a given set of arguments.
+    NOT_SUPPORTED = object()
 
-  def handle(self, args, kwargs):  # pylint: disable=unused-argument
-    """Handle this dispatcher's operation with the specified arguments.
+    def handle(self, args, kwargs):  # pylint: disable=unused-argument
+        """Handle this dispatcher's operation with the specified arguments.
 
     If this operation dispatcher can handle the given arguments, then
     return an appropriate value (or raise an appropriate exception).
@@ -74,10 +74,10 @@ class OpDispatcher(object):
       The result of the operation, or `OpDispatcher.NOT_SUPPORTED` if this
       dispatcher can not handle the given arguments.
     """
-    return self.NOT_SUPPORTED
+        return self.NOT_SUPPORTED
 
-  def register(self, op):
-    """Register this dispatcher as a handler for `op`.
+    def register(self, op):
+        """Register this dispatcher as a handler for `op`.
 
     Args:
       op: Python function: the TensorFlow operation that should be handled. Must
@@ -85,27 +85,27 @@ class OpDispatcher(object):
         and can be added to Python ops using the `add_dispatch_support`
         decorator).
     """
-    if not hasattr(op, DISPATCH_ATTR):
-      raise AssertionError("Dispatching not enabled for %s" % op)
-    getattr(op, DISPATCH_ATTR).append(self)
+        if not hasattr(op, DISPATCH_ATTR):
+            raise AssertionError("Dispatching not enabled for %s" % op)
+        getattr(op, DISPATCH_ATTR).append(self)
 
 
 @tf_export("__internal__.dispatch.GlobalOpDispatcher", v1=[])
 class GlobalOpDispatcher(object):
-  """Abstract base class for TensorFlow global operator dispatchers."""
+    """Abstract base class for TensorFlow global operator dispatchers."""
 
-  NOT_SUPPORTED = OpDispatcher.NOT_SUPPORTED
+    NOT_SUPPORTED = OpDispatcher.NOT_SUPPORTED
 
-  def handle(self, op, args, kwargs):
-    """Handle the specified operation with the specified arguments."""
+    def handle(self, op, args, kwargs):
+        """Handle the specified operation with the specified arguments."""
 
-  def register(self):
-    """Register this dispatcher as a handler for all ops."""
-    _GLOBAL_DISPATCHERS.append(self)
+    def register(self):
+        """Register this dispatcher as a handler for all ops."""
+        _GLOBAL_DISPATCHERS.append(self)
 
 
 def dispatch(op, args, kwargs):
-  """Returns the result from the first successful dispatcher for a given op.
+    """Returns the result from the first successful dispatcher for a given op.
 
   Calls the `handle` method of each `OpDispatcher` that has been registered
   to handle `op`, and returns the value from the first successful handler.
@@ -119,47 +119,48 @@ def dispatch(op, args, kwargs):
     The result of the operation, or `NOT_SUPPORTED` if no registered
     dispatcher can handle the given arguments.
   """
-  for dispatcher in getattr(op, DISPATCH_ATTR):
-    result = dispatcher.handle(args, kwargs)
-    if result is not OpDispatcher.NOT_SUPPORTED:
-      return result
-  for dispatcher in _GLOBAL_DISPATCHERS:
-    result = dispatcher.handle(op, args, kwargs)
-    if result is not OpDispatcher.NOT_SUPPORTED:
-      return result
-  return OpDispatcher.NOT_SUPPORTED
+    for dispatcher in getattr(op, DISPATCH_ATTR):
+        result = dispatcher.handle(args, kwargs)
+        if result is not OpDispatcher.NOT_SUPPORTED:
+            return result
+    for dispatcher in _GLOBAL_DISPATCHERS:
+        result = dispatcher.handle(op, args, kwargs)
+        if result is not OpDispatcher.NOT_SUPPORTED:
+            return result
+    return OpDispatcher.NOT_SUPPORTED
 
 
 class _TypeBasedDispatcher(OpDispatcher):
-  """Dispatcher that handles op if any arguments have a specified type.
+    """Dispatcher that handles op if any arguments have a specified type.
 
   Checks the types of the arguments and keyword arguments (including elements
   of lists or tuples), and if any argument values have the indicated type(s),
   then delegates to an override function.
   """
 
-  def __init__(self, override_func, types):
-    self._types = types
-    self._override_func = override_func
+    def __init__(self, override_func, types):
+        self._types = types
+        self._override_func = override_func
 
-  def _handles(self, args, kwargs):
-    for arg in itertools.chain(args, kwargs.values()):
-      if (isinstance(arg, self._types) or
-          (isinstance(arg, (list, tuple)) and
-           any(isinstance(elt, self._types) for elt in arg))):
-        return True
-    return False
+    def _handles(self, args, kwargs):
+        for arg in itertools.chain(args, kwargs.values()):
+            if isinstance(arg, self._types) or (
+                isinstance(arg, (list, tuple))
+                and any(isinstance(elt, self._types) for elt in arg)
+            ):
+                return True
+        return False
 
-  def handle(self, args, kwargs):
-    if self._handles(args, kwargs):
-      return self._override_func(*args, **kwargs)
-    else:
-      return self.NOT_SUPPORTED
+    def handle(self, args, kwargs):
+        if self._handles(args, kwargs):
+            return self._override_func(*args, **kwargs)
+        else:
+            return self.NOT_SUPPORTED
 
 
 # pylint: disable=g-doc-return-or-yield
 def dispatch_for_types(op, *types):
-  """Decorator to declare that a Python function overrides an op for a type.
+    """Decorator to declare that a Python function overrides an op for a type.
 
   The decorated function is used to override `op` if any of the arguments or
   keyword arguments (including elements of lists or tuples) have one of the
@@ -177,44 +178,46 @@ def dispatch_for_types(op, *types):
     *types: The argument types for which this function should be used.
   """
 
-  def decorator(func):
-    if tf_inspect.getargspec(func) != tf_inspect.getargspec(op):
-      raise AssertionError("The decorated function's signature must exactly "
-                           "match the signature of the overridden op.")
-    _TypeBasedDispatcher(func, types).register(op)
-    return func
+    def decorator(func):
+        if tf_inspect.getargspec(func) != tf_inspect.getargspec(op):
+            raise AssertionError(
+                "The decorated function's signature must exactly "
+                "match the signature of the overridden op."
+            )
+        _TypeBasedDispatcher(func, types).register(op)
+        return func
 
-  return decorator
+    return decorator
 
 
 # pylint: enable=g-doc-return-or-yield
 
 
 def add_dispatch_list(target):
-  """Decorator that adds a dispatch_list attribute to an op."""
-  if hasattr(target, DISPATCH_ATTR):
-    raise AssertionError("%s already has a dispatch list" % target)
-  setattr(target, DISPATCH_ATTR, [])
-  return target
+    """Decorator that adds a dispatch_list attribute to an op."""
+    if hasattr(target, DISPATCH_ATTR):
+        raise AssertionError("%s already has a dispatch list" % target)
+    setattr(target, DISPATCH_ATTR, [])
+    return target
 
 
 @tf_export("__internal__.dispatch.add_dispatch_support", v1=[])
 def add_dispatch_support(target):
-  """Decorator that adds a dispatch handling wrapper to an op."""
+    """Decorator that adds a dispatch handling wrapper to an op."""
 
-  @traceback_utils.filter_traceback
-  def op_dispatch_handler(*args, **kwargs):
-    """Call target, and fall back on dispatchers if there is a TypeError."""
-    try:
-      return target(*args, **kwargs)
-    except (TypeError, ValueError):
-      # Note: convert_to_eager_tensor currently raises a ValueError, not a
-      # TypeError, when given unexpected types.  So we need to catch both.
-      result = dispatch(op_dispatch_handler, args, kwargs)
-      if result is not OpDispatcher.NOT_SUPPORTED:
-        return result
-      else:
-        raise
+    @traceback_utils.filter_traceback
+    def op_dispatch_handler(*args, **kwargs):
+        """Call target, and fall back on dispatchers if there is a TypeError."""
+        try:
+            return target(*args, **kwargs)
+        except (TypeError, ValueError):
+            # Note: convert_to_eager_tensor currently raises a ValueError, not a
+            # TypeError, when given unexpected types.  So we need to catch both.
+            result = dispatch(op_dispatch_handler, args, kwargs)
+            if result is not OpDispatcher.NOT_SUPPORTED:
+                return result
+            else:
+                raise
 
-  add_dispatch_list(op_dispatch_handler)
-  return tf_decorator.make_decorator(target, op_dispatch_handler)
+    add_dispatch_list(op_dispatch_handler)
+    return tf_decorator.make_decorator(target, op_dispatch_handler)

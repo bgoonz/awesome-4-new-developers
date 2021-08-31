@@ -96,10 +96,10 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export(v1=["train.SessionRunHook"])
 class SessionRunHook(object):
-  """Hook to extend calls to MonitoredSession.run()."""
+    """Hook to extend calls to MonitoredSession.run()."""
 
-  def begin(self):
-    """Called once before using the session.
+    def begin(self):
+        """Called once before using the session.
 
     When called, the default graph is the one that will be launched in the
     session.  The hook can modify the graph by adding new operations to it.
@@ -107,10 +107,10 @@ class SessionRunHook(object):
     can not modify the graph anymore. Second call of `begin()` on the same
     graph, should not change the graph.
     """
-    pass
+        pass
 
-  def after_create_session(self, session, coord):  # pylint: disable=unused-argument
-    """Called when new TensorFlow session is created.
+    def after_create_session(self, session, coord):  # pylint: disable=unused-argument
+        """Called when new TensorFlow session is created.
 
     This is called to signal the hooks that a new session has been created. This
     has two essential differences with the situation in which `begin` is called:
@@ -124,10 +124,10 @@ class SessionRunHook(object):
       session: A TensorFlow Session that has been created.
       coord: A Coordinator object which keeps track of all threads.
     """
-    pass
+        pass
 
-  def before_run(self, run_context):  # pylint: disable=unused-argument
-    """Called before each call to run().
+    def before_run(self, run_context):  # pylint: disable=unused-argument
+        """Called before each call to run().
 
     You can return from this call a `SessionRunArgs` object indicating ops or
     tensors to add to the upcoming `run()` call.  These ops/tensors will be run
@@ -147,12 +147,12 @@ class SessionRunHook(object):
     Returns:
       None or a `SessionRunArgs` object.
     """
-    return None
+        return None
 
-  def after_run(self,
-                run_context,  # pylint: disable=unused-argument
-                run_values):  # pylint: disable=unused-argument
-    """Called after each call to run().
+    def after_run(
+        self, run_context, run_values  # pylint: disable=unused-argument
+    ):  # pylint: disable=unused-argument
+        """Called after each call to run().
 
     The `run_values` argument contains results of requested ops/tensors by
     `before_run()`.
@@ -166,10 +166,10 @@ class SessionRunHook(object):
       run_context: A `SessionRunContext` object.
       run_values: A SessionRunValues object.
     """
-    pass
+        pass
 
-  def end(self, session):  # pylint: disable=unused-argument
-    """Called at the end of session.
+    def end(self, session):  # pylint: disable=unused-argument
+        """Called at the end of session.
 
     The `session` argument can be used in case the hook wants to run final ops,
     such as saving a last checkpoint.
@@ -183,14 +183,14 @@ class SessionRunHook(object):
     Args:
       session: A TensorFlow Session that will be soon closed.
     """
-    pass
+        pass
 
 
 @tf_export(v1=["train.SessionRunArgs"])
 class SessionRunArgs(
-    collections.namedtuple("SessionRunArgs",
-                           ["fetches", "feed_dict", "options"])):
-  """Represents arguments to be added to a `Session.run()` call.
+    collections.namedtuple("SessionRunArgs", ["fetches", "feed_dict", "options"])
+):
+    """Represents arguments to be added to a `Session.run()` call.
 
   Args:
     fetches: Exactly like the 'fetches' argument to Session.Run().
@@ -207,13 +207,13 @@ class SessionRunArgs(
       config_pb2.RunOptions proto.
   """
 
-  def __new__(cls, fetches, feed_dict=None, options=None):
-    return super(SessionRunArgs, cls).__new__(cls, fetches, feed_dict, options)
+    def __new__(cls, fetches, feed_dict=None, options=None):
+        return super(SessionRunArgs, cls).__new__(cls, fetches, feed_dict, options)
 
 
 @tf_export(v1=["train.SessionRunContext"])
 class SessionRunContext(object):
-  """Provides information about the `session.run()` call being made.
+    """Provides information about the `session.run()` call being made.
 
   Provides information about original request to `Session.Run()` function.
   SessionRunHook objects can stop the loop by calling `request_stop()` of
@@ -221,15 +221,15 @@ class SessionRunContext(object):
   about run without changing the Hook API.
   """
 
-  def __init__(self, original_args, session):
-    """Initializes SessionRunContext."""
-    self._original_args = original_args
-    self._session = session
-    self._stop_requested = False
+    def __init__(self, original_args, session):
+        """Initializes SessionRunContext."""
+        self._original_args = original_args
+        self._session = session
+        self._stop_requested = False
 
-  @property
-  def original_args(self):
-    """A `SessionRunArgs` object holding the original arguments of `run()`.
+    @property
+    def original_args(self):
+        """A `SessionRunArgs` object holding the original arguments of `run()`.
 
     If user called `MonitoredSession.run(fetches=a, feed_dict=b)`, then this
     field is equal to SessionRunArgs(a, b).
@@ -237,37 +237,37 @@ class SessionRunContext(object):
     Returns:
      A `SessionRunArgs` object
     """
-    return self._original_args
+        return self._original_args
 
-  @property
-  def session(self):
-    """A TensorFlow session object which will execute the `run`."""
-    return self._session
+    @property
+    def session(self):
+        """A TensorFlow session object which will execute the `run`."""
+        return self._session
 
-  @property
-  def stop_requested(self):
-    """Returns whether a stop is requested or not.
+    @property
+    def stop_requested(self):
+        """Returns whether a stop is requested or not.
 
     If true, `MonitoredSession` stops iterations.
     Returns:
       A `bool`
     """
-    return self._stop_requested
+        return self._stop_requested
 
-  def request_stop(self):
-    """Sets stop requested field.
+    def request_stop(self):
+        """Sets stop requested field.
 
     Hooks can use this function to request stop of iterations.
     `MonitoredSession` checks whether this is called or not.
     """
-    self._stop_requested = True
+        self._stop_requested = True
 
 
 @tf_export(v1=["train.SessionRunValues"])
 class SessionRunValues(
-    collections.namedtuple("SessionRunValues",
-                           ["results", "options", "run_metadata"])):
-  """Contains the results of `Session.run()`.
+    collections.namedtuple("SessionRunValues", ["results", "options", "run_metadata"])
+):
+    """Contains the results of `Session.run()`.
 
   In the future we may use this object to add more information about result of
   run without changing the Hook API.

@@ -20,16 +20,19 @@ from absl.testing import parameterized
 import tensorflow as tf
 
 from tensorflow.python.platform import test
-from tensorflow.tools.consistency_integration_test.consistency_test_base import ConsistencyTestBase
+from tensorflow.tools.consistency_integration_test.consistency_test_base import (
+    ConsistencyTestBase,
+)
 
 
 class KerasIntegrationTest(ConsistencyTestBase, parameterized.TestCase):
-  """Test cases for Keras integration with tf.function."""
+    """Test cases for Keras integration with tf.function."""
 
-  @parameterized.named_parameters([('_RunFunctionEagerly', True),
-                                   ('_RunFunctionNonEagerly', False)])
-  def testVariableCreationKerasLayers(self, run_eagerly):
-    """Tests tf.function variable creation in Keras layers.
+    @parameterized.named_parameters(
+        [("_RunFunctionEagerly", True), ("_RunFunctionNonEagerly", False)]
+    )
+    def testVariableCreationKerasLayers(self, run_eagerly):
+        """Tests tf.function variable creation in Keras layers.
 
     Bugs:   b/184210116
     Status: Known issue
@@ -59,29 +62,33 @@ class KerasIntegrationTest(ConsistencyTestBase, parameterized.TestCase):
       run_eagerly: Boolean deciding whether to run tf.function decorated
         functions eagerly or not.
     """
-    self.skipTest('b/184210116')
+        self.skipTest("b/184210116")
 
-    try:
-      original_setting = tf.config.functions_run_eagerly()
-      tf.config.run_functions_eagerly(run_eagerly)
+        try:
+            original_setting = tf.config.functions_run_eagerly()
+            tf.config.run_functions_eagerly(run_eagerly)
 
-      @tf.function
-      def f(x):
-        layer = tf.keras.layers.Dense(2)(x)
-        return layer
+            @tf.function
+            def f(x):
+                layer = tf.keras.layers.Dense(2)(x)
+                return layer
 
-      if run_eagerly:
-        self.assertAllEqual(
-            tf.constant([[0.7891873, -0.5761101], [1.7832438, -1.6489036]],
-                        dtype=tf.float32), f(tf.constant([[1., 2.], [3., 4.]])))
-      else:
-        f(tf.constant([[1., 2.], [3., 4.]]))
+            if run_eagerly:
+                self.assertAllEqual(
+                    tf.constant(
+                        [[0.7891873, -0.5761101], [1.7832438, -1.6489036]],
+                        dtype=tf.float32,
+                    ),
+                    f(tf.constant([[1.0, 2.0], [3.0, 4.0]])),
+                )
+            else:
+                f(tf.constant([[1.0, 2.0], [3.0, 4.0]]))
 
-    finally:
-      tf.config.run_functions_eagerly(original_setting)
+        finally:
+            tf.config.run_functions_eagerly(original_setting)
 
-  def testVariableCreationKerasLayersRecommended(self):
-    """Tests the recommended way of creating Keras layers in tf.function.
+    def testVariableCreationKerasLayersRecommended(self):
+        """Tests the recommended way of creating Keras layers in tf.function.
 
     Bugs:   b/184210116
     Status: Working as intended
@@ -93,23 +100,25 @@ class KerasIntegrationTest(ConsistencyTestBase, parameterized.TestCase):
     * The suggested way of going about the problematic case written in
       `testVariableCreationKerasLayers` test case.
     """
-    layer = None
+        layer = None
 
-    @tf.function
-    def f(x):
-      nonlocal layer
-      if layer is None:
-        layer = tf.keras.layers.Dense(2)
-      return layer(x)
+        @tf.function
+        def f(x):
+            nonlocal layer
+            if layer is None:
+                layer = tf.keras.layers.Dense(2)
+            return layer(x)
 
-    self.assertAllEqual(
-        f(tf.constant([[1., 2.], [3., 4.]])),
-        tf.constant([[0.7891873, -0.5761101], [1.7832438, -1.6489036]]))
+        self.assertAllEqual(
+            f(tf.constant([[1.0, 2.0], [3.0, 4.0]])),
+            tf.constant([[0.7891873, -0.5761101], [1.7832438, -1.6489036]]),
+        )
 
-  @parameterized.named_parameters([('_RunFunctionEagerly', True),
-                                   ('_RunFunctionNonEagerly', False)])
-  def testRetracingKerasOptimAsPythonObj(self, run_eagerly):
-    """Tests tf.function variable creation in Keras optimizers.
+    @parameterized.named_parameters(
+        [("_RunFunctionEagerly", True), ("_RunFunctionNonEagerly", False)]
+    )
+    def testRetracingKerasOptimAsPythonObj(self, run_eagerly):
+        """Tests tf.function variable creation in Keras optimizers.
 
     Bugs:   b/184210116
     Status: Working as intended
@@ -141,46 +150,46 @@ class KerasIntegrationTest(ConsistencyTestBase, parameterized.TestCase):
       run_eagerly: Boolean deciding whether to run tf.function decorated
         functions eagerly or not.
     """
-    self.skipTest('b/184210116')
+        self.skipTest("b/184210116")
 
-    try:
-      original_setting = tf.config.functions_run_eagerly()
-      tf.config.run_functions_eagerly(run_eagerly)
-      trace = []
+        try:
+            original_setting = tf.config.functions_run_eagerly()
+            tf.config.run_functions_eagerly(run_eagerly)
+            trace = []
 
-      @tf.function
-      def train_one_step(a, x, y, optim):
-        nonlocal trace
-        trace.append('#tracing')
-        with tf.GradientTape() as tape:
-          l = tf.reduce_sum(tf.square(a * x - y))
+            @tf.function
+            def train_one_step(a, x, y, optim):
+                nonlocal trace
+                trace.append("#tracing")
+                with tf.GradientTape() as tape:
+                    l = tf.reduce_sum(tf.square(a * x - y))
 
-        w = [a]
-        g = tape.gradient(l, w)
-        optim.apply_gradients(zip(g, w))
-        return a
+                w = [a]
+                g = tape.gradient(l, w)
+                optim.apply_gradients(zip(g, w))
+                return a
 
-      optim0 = tf.keras.optimizers.Adam()
-      optim1 = tf.keras.optimizers.Adam()
-      a = tf.Variable(2.)
-      x = tf.Variable([-1., -1., -1.])
-      y = tf.Variable([2., 2., 2.])
+            optim0 = tf.keras.optimizers.Adam()
+            optim1 = tf.keras.optimizers.Adam()
+            a = tf.Variable(2.0)
+            x = tf.Variable([-1.0, -1.0, -1.0])
+            y = tf.Variable([2.0, 2.0, 2.0])
 
-      tf.config.run_functions_eagerly(run_eagerly)
-      train_one_step(a, x, y, optim0)  # tracing
+            tf.config.run_functions_eagerly(run_eagerly)
+            train_one_step(a, x, y, optim0)  # tracing
 
-      if run_eagerly:
-        train_one_step(a, x, y, optim1)
-      else:
-        self.assertLen(trace, 2)  # traces two times; see "Notes" in the
-                                  # test case docstring for more info.
-        train_one_step(a, x, y, optim1)
+            if run_eagerly:
+                train_one_step(a, x, y, optim1)
+            else:
+                self.assertLen(trace, 2)  # traces two times; see "Notes" in the
+                # test case docstring for more info.
+                train_one_step(a, x, y, optim1)
 
-    finally:
-      tf.config.run_functions_eagerly(original_setting)
+        finally:
+            tf.config.run_functions_eagerly(original_setting)
 
-  def testCachedTensorKerasLayers(self):
-    """Tests tf.function I/O behavior with cached tensors in Keras layers.
+    def testCachedTensorKerasLayers(self):
+        """Tests tf.function I/O behavior with cached tensors in Keras layers.
 
     Bugs:   b/149094965
     Status: Working as intended
@@ -203,41 +212,40 @@ class KerasIntegrationTest(ConsistencyTestBase, parameterized.TestCase):
       `model.fit()` with a different input signature. However, commenting out
       the first step does not have any effect. Why? Left a TODO.
     """
-    self.skipTest('b/149094965')
+        self.skipTest("b/149094965")
 
-    class Context(object):
-      """Context class for demonstrating the issue."""
+        class Context(object):
+            """Context class for demonstrating the issue."""
 
-      def __init__(self):
-        self._cached_value = None
+            def __init__(self):
+                self._cached_value = None
 
-      def f(self, x):
-        result = x + 1
-        if self._cached_value is not None:
-          result += self._cached_value
+            def f(self, x):
+                result = x + 1
+                if self._cached_value is not None:
+                    result += self._cached_value
 
-        self._cached_value = x
-        return result
+                self._cached_value = x
+                return result
 
-    class CustomLayer(tf.keras.layers.Layer):
+        class CustomLayer(tf.keras.layers.Layer):
+            def __init__(self, context, **kwargs):
+                self.context = context
+                super(CustomLayer, self).__init__(**kwargs)
 
-      def __init__(self, context, **kwargs):
-        self.context = context
-        super(CustomLayer, self).__init__(**kwargs)
+            def call(self, x, training=None):
+                return self.context.f(x)
 
-      def call(self, x, training=None):
-        return self.context.f(x)
-
-    ctx = Context()
-    layer = CustomLayer(ctx)
-    # TODO(hyey): Investigate why the line below doesn't have any effect.
-    # Commenting out the line below (tensor caching step) still works. That
-    # probably means that tensors are being cached somewhere else?
-    pred_out = layer(tf.constant(1.0))  # pylint:disable=unused-variable
-    model = tf.keras.models.Sequential([layer])
-    model.compile('sgd', 'mean_squared_error')
-    model.fit(tf.constant([1., 2., 3.]), tf.constant([1., 2., 3.]))
+        ctx = Context()
+        layer = CustomLayer(ctx)
+        # TODO(hyey): Investigate why the line below doesn't have any effect.
+        # Commenting out the line below (tensor caching step) still works. That
+        # probably means that tensors are being cached somewhere else?
+        pred_out = layer(tf.constant(1.0))  # pylint:disable=unused-variable
+        model = tf.keras.models.Sequential([layer])
+        model.compile("sgd", "mean_squared_error")
+        model.fit(tf.constant([1.0, 2.0, 3.0]), tf.constant([1.0, 2.0, 3.0]))
 
 
-if __name__ == '__main__':
-  test.main()
+if __name__ == "__main__":
+    test.main()

@@ -22,4 +22,5 @@ from __future__ import print_function
 # go/tf-wildcard-import
 # pylint: disable=wildcard-import
 from tensorflow.python.lib.io.tf_record import *
+
 # pylint: enable=wildcard-import

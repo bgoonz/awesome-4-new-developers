@@ -27,111 +27,108 @@ from tensorflow.python.training.tracking import base
 
 @registration.register_serializable()
 class RegisteredClass(base.Trackable):
-  pass
+    pass
 
 
 @registration.register_serializable(name="Subclass")
 class RegisteredSubclass(RegisteredClass):
-  pass
+    pass
 
 
 @registration.register_serializable(package="testing")
 class CustomPackage(base.Trackable):
-  pass
+    pass
 
 
 @registration.register_serializable(package="testing", name="name")
 class CustomPackageAndName(base.Trackable):
-  pass
+    pass
 
 
 class SerializableRegistrationTest(test.TestCase, parameterized.TestCase):
+    @parameterized.parameters(
+        [
+            (RegisteredClass, "Custom.RegisteredClass"),
+            (RegisteredSubclass, "Custom.Subclass"),
+            (CustomPackage, "testing.CustomPackage"),
+            (CustomPackageAndName, "testing.name"),
+        ]
+    )
+    def test_registration(self, expected_cls, expected_name):
+        obj = expected_cls()
+        self.assertEqual(registration.get_registered_name(obj), expected_name)
+        self.assertIs(registration.get_registered_class(expected_name), expected_cls)
 
-  @parameterized.parameters([
-      (RegisteredClass, "Custom.RegisteredClass"),
-      (RegisteredSubclass, "Custom.Subclass"),
-      (CustomPackage, "testing.CustomPackage"),
-      (CustomPackageAndName, "testing.name"),
-  ])
-  def test_registration(self, expected_cls, expected_name):
-    obj = expected_cls()
-    self.assertEqual(registration.get_registered_name(obj), expected_name)
-    self.assertIs(
-        registration.get_registered_class(expected_name), expected_cls)
+    def test_get_invalid_name(self):
+        self.assertIsNone(registration.get_registered_class("invalid name"))
 
-  def test_get_invalid_name(self):
-    self.assertIsNone(registration.get_registered_class("invalid name"))
+    def test_get_unregistered_class(self):
+        class NotRegistered(base.Trackable):
+            pass
 
-  def test_get_unregistered_class(self):
+        no_register = NotRegistered
+        self.assertIsNone(registration.get_registered_name(no_register))
 
-    class NotRegistered(base.Trackable):
-      pass
+    def test_duplicate_registration(self):
+        @registration.register_serializable()
+        class Duplicate(base.Trackable):
+            pass
 
-    no_register = NotRegistered
-    self.assertIsNone(registration.get_registered_name(no_register))
+        dup = Duplicate()
+        self.assertEqual(registration.get_registered_name(dup), "Custom.Duplicate")
+        # Registrations with different names are ok.
+        registration.register_serializable(package="duplicate")(Duplicate)
+        # Registrations are checked in reverse order.
+        self.assertEqual(registration.get_registered_name(dup), "duplicate.Duplicate")
+        # Both names should resolve to the same class.
+        self.assertIs(registration.get_registered_class("Custom.Duplicate"), Duplicate)
+        self.assertIs(
+            registration.get_registered_class("duplicate.Duplicate"), Duplicate
+        )
 
-  def test_duplicate_registration(self):
+        # Registrations of the same name fails
+        with self.assertRaisesRegex(ValueError, "already been registered"):
+            registration.register_serializable(package="testing", name="CustomPackage")(
+                Duplicate
+            )
 
-    @registration.register_serializable()
-    class Duplicate(base.Trackable):
-      pass
+    def test_register_non_class_fails(self):
+        obj = RegisteredClass()
+        with self.assertRaisesRegex(ValueError, "must be a class"):
+            registration.register_serializable()(obj)
 
-    dup = Duplicate()
-    self.assertEqual(registration.get_registered_name(dup), "Custom.Duplicate")
-    # Registrations with different names are ok.
-    registration.register_serializable(package="duplicate")(Duplicate)
-    # Registrations are checked in reverse order.
-    self.assertEqual(
-        registration.get_registered_name(dup), "duplicate.Duplicate")
-    # Both names should resolve to the same class.
-    self.assertIs(
-        registration.get_registered_class("Custom.Duplicate"), Duplicate)
-    self.assertIs(
-        registration.get_registered_class("duplicate.Duplicate"), Duplicate)
+    def test_register_bad_predicate_fails(self):
+        with self.assertRaisesRegex(ValueError, "must be callable"):
+            registration.register_serializable(predicate=0)
 
-    # Registrations of the same name fails
-    with self.assertRaisesRegex(ValueError, "already been registered"):
-      registration.register_serializable(
-          package="testing", name="CustomPackage")(
-              Duplicate)
+    def test_predicate(self):
+        class Predicate(base.Trackable):
+            def __init__(self, register_this):
+                self.register_this = register_this
 
-  def test_register_non_class_fails(self):
-    obj = RegisteredClass()
-    with self.assertRaisesRegex(ValueError, "must be a class"):
-      registration.register_serializable()(obj)
+        registration.register_serializable(
+            name="RegisterThisOnlyTrue",
+            predicate=lambda x: isinstance(x, Predicate) and x.register_this,
+        )(Predicate)
 
-  def test_register_bad_predicate_fails(self):
-    with self.assertRaisesRegex(ValueError, "must be callable"):
-      registration.register_serializable(predicate=0)
+        a = Predicate(True)
+        b = Predicate(False)
+        self.assertEqual(
+            registration.get_registered_name(a), "Custom.RegisterThisOnlyTrue"
+        )
+        self.assertIsNone(registration.get_registered_name(b))
 
-  def test_predicate(self):
+        registration.register_serializable(
+            name="RegisterAllPredicate", predicate=lambda x: isinstance(x, Predicate)
+        )(Predicate)
 
-    class Predicate(base.Trackable):
-
-      def __init__(self, register_this):
-        self.register_this = register_this
-
-    registration.register_serializable(
-        name="RegisterThisOnlyTrue",
-        predicate=lambda x: isinstance(x, Predicate) and x.register_this)(
-            Predicate)
-
-    a = Predicate(True)
-    b = Predicate(False)
-    self.assertEqual(
-        registration.get_registered_name(a), "Custom.RegisterThisOnlyTrue")
-    self.assertIsNone(registration.get_registered_name(b))
-
-    registration.register_serializable(
-        name="RegisterAllPredicate",
-        predicate=lambda x: isinstance(x, Predicate))(
-            Predicate)
-
-    self.assertEqual(
-        registration.get_registered_name(a), "Custom.RegisterAllPredicate")
-    self.assertEqual(
-        registration.get_registered_name(b), "Custom.RegisterAllPredicate")
+        self.assertEqual(
+            registration.get_registered_name(a), "Custom.RegisterAllPredicate"
+        )
+        self.assertEqual(
+            registration.get_registered_name(b), "Custom.RegisterAllPredicate"
+        )
 
 
 if __name__ == "__main__":
-  test.main()
+    test.main()

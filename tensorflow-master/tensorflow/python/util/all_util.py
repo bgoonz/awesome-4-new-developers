@@ -24,11 +24,11 @@ import sys as _sys
 from tensorflow.python.util import tf_inspect as _tf_inspect
 
 
-_reference_pattern = _re.compile(r'^@@(\w+)$', flags=_re.MULTILINE)
+_reference_pattern = _re.compile(r"^@@(\w+)$", flags=_re.MULTILINE)
 
 
 def make_all(module_name, doc_string_modules=None):
-  """Generates `__all__` from the docstring of one or more modules.
+    """Generates `__all__` from the docstring of one or more modules.
 
   Usage: `make_all(__name__)` or
   `make_all(__name__, [sys.modules(__name__), other_module])`. The doc string
@@ -44,17 +44,23 @@ def make_all(module_name, doc_string_modules=None):
   Returns:
     A list suitable for use as `__all__`.
   """
-  if doc_string_modules is None:
-    doc_string_modules = [_sys.modules[module_name]]
-  cur_members = set(
-      name for name, _ in _tf_inspect.getmembers(_sys.modules[module_name]))
+    if doc_string_modules is None:
+        doc_string_modules = [_sys.modules[module_name]]
+    cur_members = set(
+        name for name, _ in _tf_inspect.getmembers(_sys.modules[module_name])
+    )
 
-  results = set()
-  for doc_module in doc_string_modules:
-    results.update([m.group(1)
-                    for m in _reference_pattern.finditer(doc_module.__doc__)
-                    if m.group(1) in cur_members])
-  return list(results)
+    results = set()
+    for doc_module in doc_string_modules:
+        results.update(
+            [
+                m.group(1)
+                for m in _reference_pattern.finditer(doc_module.__doc__)
+                if m.group(1) in cur_members
+            ]
+        )
+    return list(results)
+
 
 # Hidden attributes are attributes that have been hidden by
 # `remove_undocumented`. They can be re-instated by `reveal_undocumented`.
@@ -64,7 +70,7 @@ _HIDDEN_ATTRIBUTES = {}
 
 
 def reveal_undocumented(symbol_name, target_module=None):
-  """Reveals a symbol that was previously removed by `remove_undocumented`.
+    """Reveals a symbol that was previously removed by `remove_undocumented`.
 
   This should be used by tensorflow internal tests only. It explicitly
   defeats the encapsulation afforded by `remove_undocumented`.
@@ -75,17 +81,19 @@ def reveal_undocumented(symbol_name, target_module=None):
     symbol_name: a string representing the full absolute path of the symbol.
     target_module: if specified, the module in which to restore the symbol.
   """
-  if symbol_name not in _HIDDEN_ATTRIBUTES:
-    raise LookupError('Symbol %s is not a hidden symbol' % symbol_name)
-  symbol_basename = symbol_name.split('.')[-1]
-  (original_module, attr_value) = _HIDDEN_ATTRIBUTES[symbol_name]
-  if not target_module: target_module = original_module
-  setattr(target_module, symbol_basename, attr_value)
+    if symbol_name not in _HIDDEN_ATTRIBUTES:
+        raise LookupError("Symbol %s is not a hidden symbol" % symbol_name)
+    symbol_basename = symbol_name.split(".")[-1]
+    (original_module, attr_value) = _HIDDEN_ATTRIBUTES[symbol_name]
+    if not target_module:
+        target_module = original_module
+    setattr(target_module, symbol_basename, attr_value)
 
 
-def remove_undocumented(module_name, allowed_exception_list=None,
-                        doc_string_modules=None):
-  """Removes symbols in a module that are not referenced by a docstring.
+def remove_undocumented(
+    module_name, allowed_exception_list=None, doc_string_modules=None
+):
+    """Removes symbols in a module that are not referenced by a docstring.
 
   Args:
     module_name: the name of the module (usually `__name__`).
@@ -99,23 +107,21 @@ def remove_undocumented(module_name, allowed_exception_list=None,
   Returns:
     None
   """
-  current_symbols = set(dir(_sys.modules[module_name]))
-  should_have = make_all(module_name, doc_string_modules)
-  should_have += allowed_exception_list or []
-  extra_symbols = current_symbols - set(should_have)
-  target_module = _sys.modules[module_name]
-  for extra_symbol in extra_symbols:
-    # Skip over __file__, etc. Also preserves internal symbols.
-    if extra_symbol.startswith('_'): continue
-    fully_qualified_name = module_name + '.' + extra_symbol
-    _HIDDEN_ATTRIBUTES[fully_qualified_name] = (target_module,
-                                                getattr(target_module,
-                                                        extra_symbol))
-    delattr(target_module, extra_symbol)
+    current_symbols = set(dir(_sys.modules[module_name]))
+    should_have = make_all(module_name, doc_string_modules)
+    should_have += allowed_exception_list or []
+    extra_symbols = current_symbols - set(should_have)
+    target_module = _sys.modules[module_name]
+    for extra_symbol in extra_symbols:
+        # Skip over __file__, etc. Also preserves internal symbols.
+        if extra_symbol.startswith("_"):
+            continue
+        fully_qualified_name = module_name + "." + extra_symbol
+        _HIDDEN_ATTRIBUTES[fully_qualified_name] = (
+            target_module,
+            getattr(target_module, extra_symbol),
+        )
+        delattr(target_module, extra_symbol)
 
 
-__all__ = [
-    'make_all',
-    'remove_undocumented',
-    'reveal_undocumented',
-]
+__all__ = ["make_all", "remove_undocumented", "reveal_undocumented"]

@@ -30,10 +30,10 @@ from tensorflow.python.util.tf_export import keras_export
 from tensorflow.python.util.tf_export import tf_export
 
 
-@keras_export(v1=['keras.__internal__.legacy.layers.Dense'])
-@tf_export(v1=['layers.Dense'])
+@keras_export(v1=["keras.__internal__.legacy.layers.Dense"])
+@tf_export(v1=["layers.Dense"])
 class Dense(keras_layers.Dense, base.Layer):
-  """Densely-connected layer class.
+    """Densely-connected layer class.
 
   This layer implements the operation:
   `outputs = activation(inputs * kernel + bias)`
@@ -84,38 +84,44 @@ class Dense(keras_layers.Dense, base.Layer):
     bias: Bias vector, if applicable (TensorFlow variable or tensor).
   """
 
-  def __init__(self, units,
-               activation=None,
-               use_bias=True,
-               kernel_initializer=None,
-               bias_initializer=init_ops.zeros_initializer(),
-               kernel_regularizer=None,
-               bias_regularizer=None,
-               activity_regularizer=None,
-               kernel_constraint=None,
-               bias_constraint=None,
-               trainable=True,
-               name=None,
-               **kwargs):
-    super(Dense, self).__init__(units=units,
-                                activation=activation,
-                                use_bias=use_bias,
-                                kernel_initializer=kernel_initializer,
-                                bias_initializer=bias_initializer,
-                                kernel_regularizer=kernel_regularizer,
-                                bias_regularizer=bias_regularizer,
-                                activity_regularizer=activity_regularizer,
-                                kernel_constraint=kernel_constraint,
-                                bias_constraint=bias_constraint,
-                                trainable=trainable,
-                                name=name,
-                                **kwargs)
+    def __init__(
+        self,
+        units,
+        activation=None,
+        use_bias=True,
+        kernel_initializer=None,
+        bias_initializer=init_ops.zeros_initializer(),
+        kernel_regularizer=None,
+        bias_regularizer=None,
+        activity_regularizer=None,
+        kernel_constraint=None,
+        bias_constraint=None,
+        trainable=True,
+        name=None,
+        **kwargs
+    ):
+        super(Dense, self).__init__(
+            units=units,
+            activation=activation,
+            use_bias=use_bias,
+            kernel_initializer=kernel_initializer,
+            bias_initializer=bias_initializer,
+            kernel_regularizer=kernel_regularizer,
+            bias_regularizer=bias_regularizer,
+            activity_regularizer=activity_regularizer,
+            kernel_constraint=kernel_constraint,
+            bias_constraint=bias_constraint,
+            trainable=trainable,
+            name=name,
+            **kwargs
+        )
 
 
-@keras_export(v1=['keras.__internal__.legacy.layers.dense'])
-@tf_export(v1=['layers.dense'])
+@keras_export(v1=["keras.__internal__.legacy.layers.dense"])
+@tf_export(v1=["layers.dense"])
 def dense(
-    inputs, units,
+    inputs,
+    units,
     activation=None,
     use_bias=True,
     kernel_initializer=None,
@@ -127,8 +133,9 @@ def dense(
     bias_constraint=None,
     trainable=True,
     name=None,
-    reuse=None):
-  """Functional interface for the densely-connected layer.
+    reuse=None,
+):
+    """Functional interface for the densely-connected layer.
 
   This layer implements the operation:
   `outputs = activation(inputs * kernel + bias)`
@@ -171,30 +178,34 @@ def dense(
   Raises:
     ValueError: if eager execution is enabled.
   """
-  warnings.warn('`tf.layers.dense` is deprecated and '
-                'will be removed in a future version. '
-                'Please use `tf.keras.layers.Dense` instead.')
-  layer = Dense(units,
-                activation=activation,
-                use_bias=use_bias,
-                kernel_initializer=kernel_initializer,
-                bias_initializer=bias_initializer,
-                kernel_regularizer=kernel_regularizer,
-                bias_regularizer=bias_regularizer,
-                activity_regularizer=activity_regularizer,
-                kernel_constraint=kernel_constraint,
-                bias_constraint=bias_constraint,
-                trainable=trainable,
-                name=name,
-                _scope=name,
-                _reuse=reuse)
-  return layer.apply(inputs)
+    warnings.warn(
+        "`tf.layers.dense` is deprecated and "
+        "will be removed in a future version. "
+        "Please use `tf.keras.layers.Dense` instead."
+    )
+    layer = Dense(
+        units,
+        activation=activation,
+        use_bias=use_bias,
+        kernel_initializer=kernel_initializer,
+        bias_initializer=bias_initializer,
+        kernel_regularizer=kernel_regularizer,
+        bias_regularizer=bias_regularizer,
+        activity_regularizer=activity_regularizer,
+        kernel_constraint=kernel_constraint,
+        bias_constraint=bias_constraint,
+        trainable=trainable,
+        name=name,
+        _scope=name,
+        _reuse=reuse,
+    )
+    return layer.apply(inputs)
 
 
-@keras_export(v1=['keras.__internal__.legacy.layers.Dropout'])
-@tf_export(v1=['layers.Dropout'])
+@keras_export(v1=["keras.__internal__.legacy.layers.Dropout"])
+@tf_export(v1=["layers.Dropout"])
 class Dropout(keras_layers.Dropout, base.Layer):
-  """Applies Dropout to the input.
+    """Applies Dropout to the input.
 
   Dropout consists in randomly setting a fraction `rate` of input units to 0
   at each update during training time, which helps prevent overfitting.
@@ -216,30 +227,19 @@ class Dropout(keras_layers.Dropout, base.Layer):
     name: The name of the layer (string).
   """
 
-  def __init__(self, rate=0.5,
-               noise_shape=None,
-               seed=None,
-               name=None,
-               **kwargs):
-    super(Dropout, self).__init__(rate=rate,
-                                  noise_shape=noise_shape,
-                                  seed=seed,
-                                  name=name,
-                                  **kwargs)
+    def __init__(self, rate=0.5, noise_shape=None, seed=None, name=None, **kwargs):
+        super(Dropout, self).__init__(
+            rate=rate, noise_shape=noise_shape, seed=seed, name=name, **kwargs
+        )
 
-  def call(self, inputs, training=False):
-    return super(Dropout, self).call(inputs, training=training)
+    def call(self, inputs, training=False):
+        return super(Dropout, self).call(inputs, training=training)
 
 
-@keras_export(v1=['keras.__internal__.legacy.layers.dropout'])
-@tf_export(v1=['layers.dropout'])
-def dropout(inputs,
-            rate=0.5,
-            noise_shape=None,
-            seed=None,
-            training=False,
-            name=None):
-  """Applies Dropout to the input.
+@keras_export(v1=["keras.__internal__.legacy.layers.dropout"])
+@tf_export(v1=["layers.dropout"])
+def dropout(inputs, rate=0.5, noise_shape=None, seed=None, training=False, name=None):
+    """Applies Dropout to the input.
 
   Dropout consists in randomly setting a fraction `rate` of input units to 0
   at each update during training time, which helps prevent overfitting.
@@ -270,17 +270,19 @@ def dropout(inputs,
   Raises:
     ValueError: if eager execution is enabled.
   """
-  warnings.warn('`tf.layers.dropout` is deprecated and '
-                'will be removed in a future version. '
-                'Please use `tf.keras.layers.Dropout` instead.')
-  layer = Dropout(rate, noise_shape=noise_shape, seed=seed, name=name)
-  return layer.apply(inputs, training=training)
+    warnings.warn(
+        "`tf.layers.dropout` is deprecated and "
+        "will be removed in a future version. "
+        "Please use `tf.keras.layers.Dropout` instead."
+    )
+    layer = Dropout(rate, noise_shape=noise_shape, seed=seed, name=name)
+    return layer.apply(inputs, training=training)
 
 
-@keras_export(v1=['keras.__internal__.legacy.layers.Flatten'])
-@tf_export(v1=['layers.Flatten'])
+@keras_export(v1=["keras.__internal__.legacy.layers.Flatten"])
+@tf_export(v1=["layers.Flatten"])
 class Flatten(keras_layers.Flatten, base.Layer):
-  """Flattens an input tensor while preserving the batch axis (axis 0).
+    """Flattens an input tensor while preserving the batch axis (axis 0).
 
   Args:
     data_format: A string, one of `channels_last` (default) or `channels_first`.
@@ -301,13 +303,14 @@ class Flatten(keras_layers.Flatten, base.Layer):
     # now `y` has shape `(None, None)`
   ```
   """
-  pass
+
+    pass
 
 
-@keras_export(v1=['keras.__internal__.legacy.layers.flatten'])
-@tf_export(v1=['layers.flatten'])
-def flatten(inputs, name=None, data_format='channels_last'):
-  """Flattens an input tensor while preserving the batch axis (axis 0).
+@keras_export(v1=["keras.__internal__.legacy.layers.flatten"])
+@tf_export(v1=["layers.flatten"])
+def flatten(inputs, name=None, data_format="channels_last"):
+    """Flattens an input tensor while preserving the batch axis (axis 0).
 
   Args:
     inputs: Tensor input.
@@ -333,11 +336,13 @@ def flatten(inputs, name=None, data_format='channels_last'):
     # now `y` has shape `(None, None)`
   ```
   """
-  warnings.warn('`tf.layers.flatten` is deprecated and '
-                'will be removed in a future version. '
-                'Please use `tf.keras.layers.Flatten` instead.')
-  layer = Flatten(name=name, data_format=data_format)
-  return layer.apply(inputs)
+    warnings.warn(
+        "`tf.layers.flatten` is deprecated and "
+        "will be removed in a future version. "
+        "Please use `tf.keras.layers.Flatten` instead."
+    )
+    layer = Flatten(name=name, data_format=data_format)
+    return layer.apply(inputs)
 
 
 # Aliases

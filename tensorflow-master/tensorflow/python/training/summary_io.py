@@ -21,23 +21,24 @@ from __future__ import print_function
 # pylint: disable=unused-import
 from tensorflow.python.summary.summary_iterator import summary_iterator
 from tensorflow.python.summary.writer.writer import FileWriter as _FileWriter
-from tensorflow.python.summary.writer.writer_cache import FileWriterCache as SummaryWriterCache
+from tensorflow.python.summary.writer.writer_cache import (
+    FileWriterCache as SummaryWriterCache,
+)
+
 # pylint: enable=unused-import
 from tensorflow.python.util.deprecation import deprecated
 
 
 class SummaryWriter(_FileWriter):
-
-  @deprecated("2016-11-30",
-              "Please switch to tf.summary.FileWriter. The interface and "
-              "behavior is the same; this is just a rename.")
-  def __init__(self,
-               logdir,
-               graph=None,
-               max_queue=10,
-               flush_secs=120,
-               graph_def=None):
-    """Creates a `SummaryWriter` and an event file.
+    @deprecated(
+        "2016-11-30",
+        "Please switch to tf.summary.FileWriter. The interface and "
+        "behavior is the same; this is just a rename.",
+    )
+    def __init__(
+        self, logdir, graph=None, max_queue=10, flush_secs=120, graph_def=None
+    ):
+        """Creates a `SummaryWriter` and an event file.
 
     This class is deprecated, and should be replaced with tf.summary.FileWriter.
 
@@ -77,5 +78,6 @@ class SummaryWriter(_FileWriter):
         pending events and summaries to disk.
       graph_def: DEPRECATED: Use the `graph` argument instead.
     """
-    super(SummaryWriter, self).__init__(logdir, graph, max_queue, flush_secs,
-                                        graph_def)
+        super(SummaryWriter, self).__init__(
+            logdir, graph, max_queue, flush_secs, graph_def
+        )

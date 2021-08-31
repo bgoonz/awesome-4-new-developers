@@ -23,7 +23,7 @@ from tensorflow.python.ops import gen_experimental_dataset_ops
 
 
 def at(dataset, index):
-  """Returns the element at a specific index in a datasest.
+    """Returns the element at a specific index in a datasest.
 
   Args:
     dataset: A `tf.data.Dataset` to determine whether it supports random access.
@@ -35,11 +35,13 @@ def at(dataset, index):
    Raises:
      UnimplementedError: If random access is not yet supported for a dataset.
   """
-  # pylint: disable=protected-access
-  return structure.from_tensor_list(
-      dataset.element_spec,
-      gen_experimental_dataset_ops.get_element_at_index(
-          dataset._variant_tensor,
-          index,
-          output_types=structure.get_flat_tensor_types(dataset.element_spec),
-          output_shapes=structure.get_flat_tensor_shapes(dataset.element_spec)))
+    # pylint: disable=protected-access
+    return structure.from_tensor_list(
+        dataset.element_spec,
+        gen_experimental_dataset_ops.get_element_at_index(
+            dataset._variant_tensor,
+            index,
+            output_types=structure.get_flat_tensor_types(dataset.element_spec),
+            output_shapes=structure.get_flat_tensor_shapes(dataset.element_spec),
+        ),
+    )

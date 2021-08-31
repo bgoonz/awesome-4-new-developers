@@ -27,10 +27,12 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 # TODO(b/170340570): print deprecation warning for CollectiveCommunication.
-@tf_export("distribute.experimental.CommunicationImplementation",
-           "distribute.experimental.CollectiveCommunication")
+@tf_export(
+    "distribute.experimental.CommunicationImplementation",
+    "distribute.experimental.CollectiveCommunication",
+)
 class CommunicationImplementation(enum.Enum):
-  """Cross device communication implementation.
+    """Cross device communication implementation.
 
   Warning: The alias `tf.distribute.experimental.CollectiveCommunication` is
   deprecated and will be removed in a future version. Use
@@ -42,10 +44,11 @@ class CommunicationImplementation(enum.Enum):
   * `NCCL`: NVIDIA®'s NCCL library. This is now only used for all-reduce on
     GPUs; all-reduce on CPU, all-gather and broadcast fallbacks to RING.
   """
-  AUTO = "AUTO"
-  RING = "RING"
-  NCCL = "NCCL"
-  # TODO(ayushd): add ncclAllGather implementation.
+
+    AUTO = "AUTO"
+    RING = "RING"
+    NCCL = "NCCL"
+    # TODO(ayushd): add ncclAllGather implementation.
 
 
 CollectiveCommunication = CommunicationImplementation
@@ -53,7 +56,7 @@ CollectiveCommunication = CommunicationImplementation
 
 @tf_export("distribute.experimental.CommunicationOptions")
 class _OptionsExported(object):
-  """Options for cross device communications like All-reduce.
+    """Options for cross device communications like All-reduce.
 
   This can be passed to methods like
   `tf.distribute.get_replica_context().all_reduce()` to optimize collective
@@ -80,18 +83,20 @@ class _OptionsExported(object):
 
   """
 
-  def __new__(cls, *args, **kwargs):
-    # We expose a dummy class so that we can separate internal and public APIs.
-    # Note that __init__ won't be called on the returned object if it's a
-    # different class [1].
-    # [1] https://docs.python.org/3/reference/datamodel.html#object.__new__
-    return Options(*args, **kwargs)
+    def __new__(cls, *args, **kwargs):
+        # We expose a dummy class so that we can separate internal and public APIs.
+        # Note that __init__ won't be called on the returned object if it's a
+        # different class [1].
+        # [1] https://docs.python.org/3/reference/datamodel.html#object.__new__
+        return Options(*args, **kwargs)
 
-  def __init__(self,
-               bytes_per_pack=0,
-               timeout_seconds=None,
-               implementation=CommunicationImplementation.AUTO):
-    """Creates a CollectiveHints.
+    def __init__(
+        self,
+        bytes_per_pack=0,
+        timeout_seconds=None,
+        implementation=CommunicationImplementation.AUTO,
+    ):
+        """Creates a CollectiveHints.
 
     Args:
       bytes_per_pack: a non-negative integer. Breaks collective operations into
@@ -115,33 +120,37 @@ class _OptionsExported(object):
     Raises:
       ValueError: When arguments have invalid value.
     """
-    pass
+        pass
 
 
 class Options(object):
-  """Implementation of OptionsInterface."""
+    """Implementation of OptionsInterface."""
 
-  def __init__(self,
-               bytes_per_pack=0,
-               timeout_seconds=None,
-               implementation=CommunicationImplementation.AUTO):
-    if bytes_per_pack < 0:
-      raise ValueError(
-          f"Argument `bytes_per_pack` must be >=0, Received {bytes_per_pack}.")
-    if isinstance(implementation, str):
-      implementation = CommunicationImplementation(implementation.upper())
-    if not isinstance(implementation, CommunicationImplementation):
-      raise ValueError(
-          "Argument `implementation` must be instance of "
-          "`tf.distribute.experimental.CommunicationImplementation`.")
-    self.bytes_per_pack = bytes_per_pack
-    self.timeout_seconds = timeout_seconds
-    self.implementation = implementation
+    def __init__(
+        self,
+        bytes_per_pack=0,
+        timeout_seconds=None,
+        implementation=CommunicationImplementation.AUTO,
+    ):
+        if bytes_per_pack < 0:
+            raise ValueError(
+                f"Argument `bytes_per_pack` must be >=0, Received {bytes_per_pack}."
+            )
+        if isinstance(implementation, str):
+            implementation = CommunicationImplementation(implementation.upper())
+        if not isinstance(implementation, CommunicationImplementation):
+            raise ValueError(
+                "Argument `implementation` must be instance of "
+                "`tf.distribute.experimental.CommunicationImplementation`."
+            )
+        self.bytes_per_pack = bytes_per_pack
+        self.timeout_seconds = timeout_seconds
+        self.implementation = implementation
 
-  __init__.__doc__ = _OptionsExported.__init__.__doc__
+    __init__.__doc__ = _OptionsExported.__init__.__doc__
 
-  def merge(self, options):
-    """Merges with another options and returns a new one.
+    def merge(self, options):
+        """Merges with another options and returns a new one.
 
     Values specified in the `options` takes precedence if they're not the
     default.
@@ -152,21 +161,21 @@ class Options(object):
     Returns:
       A new `tf.distribute.experimental.CollectiveCommunication`.
     """
-    merged = copy.deepcopy(self)
-    if options is None:
-      return merged
-    if options.bytes_per_pack != 0:
-      merged.bytes_per_pack = options.bytes_per_pack
-    if options.timeout_seconds is not None:
-      merged.timeout_seconds = options.timeout_seconds
-    if options.implementation != CommunicationImplementation.AUTO:
-      merged.implementation = options.implementation
-    return merged
+        merged = copy.deepcopy(self)
+        if options is None:
+            return merged
+        if options.bytes_per_pack != 0:
+            merged.bytes_per_pack = options.bytes_per_pack
+        if options.timeout_seconds is not None:
+            merged.timeout_seconds = options.timeout_seconds
+        if options.implementation != CommunicationImplementation.AUTO:
+            merged.implementation = options.implementation
+        return merged
 
 
 @tf_export("distribute.experimental.CollectiveHints")
 class Hints(object):
-  """Hints for collective operations like AllReduce.
+    """Hints for collective operations like AllReduce.
 
   This can be passed to methods like
   `tf.distribute.get_replica_context().all_reduce()` to optimize collective
@@ -204,14 +213,14 @@ class Hints(object):
 
   """
 
-  @deprecation.deprecated(
-      None, "use distribute.experimental.CommunicationOptions instead")
-  def __new__(cls, bytes_per_pack=0, timeout_seconds=None):
-    return Options(
-        bytes_per_pack=bytes_per_pack, timeout_seconds=timeout_seconds)
+    @deprecation.deprecated(
+        None, "use distribute.experimental.CommunicationOptions instead"
+    )
+    def __new__(cls, bytes_per_pack=0, timeout_seconds=None):
+        return Options(bytes_per_pack=bytes_per_pack, timeout_seconds=timeout_seconds)
 
-  def __init__(self, bytes_per_pack=0, timeout_seconds=None):
-    """Creates a CollectiveHints.
+    def __init__(self, bytes_per_pack=0, timeout_seconds=None):
+        """Creates a CollectiveHints.
 
     Args:
       bytes_per_pack: a non-negative integer. Breaks collective operations into
@@ -229,4 +238,4 @@ class Hints(object):
     Raises:
       ValueError: When arguments have invalid value.
     """
-    pass
+        pass

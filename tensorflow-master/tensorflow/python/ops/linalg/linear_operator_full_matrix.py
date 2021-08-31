@@ -32,7 +32,7 @@ __all__ = ["LinearOperatorFullMatrix"]
 @tf_export("linalg.LinearOperatorFullMatrix")
 @linear_operator.make_composite_tensor
 class LinearOperatorFullMatrix(linear_operator.LinearOperator):
-  """`LinearOperator` that wraps a [batch] matrix.
+    """`LinearOperator` that wraps a [batch] matrix.
 
   This operator wraps a [batch] matrix `A` (which is a `Tensor`) with shape
   `[B1,...,Bb, M, N]` for some `b >= 0`.  The first `b` indices index a
@@ -107,14 +107,16 @@ class LinearOperatorFullMatrix(linear_operator.LinearOperator):
     way.
   """
 
-  def __init__(self,
-               matrix,
-               is_non_singular=None,
-               is_self_adjoint=None,
-               is_positive_definite=None,
-               is_square=None,
-               name="LinearOperatorFullMatrix"):
-    r"""Initialize a `LinearOperatorFullMatrix`.
+    def __init__(
+        self,
+        matrix,
+        is_non_singular=None,
+        is_self_adjoint=None,
+        is_positive_definite=None,
+        is_square=None,
+        name="LinearOperatorFullMatrix",
+    ):
+        r"""Initialize a `LinearOperatorFullMatrix`.
 
     Args:
       matrix:  Shape `[B1,...,Bb, M, N]` with `b >= 0`, `M, N >= 0`.
@@ -134,70 +136,74 @@ class LinearOperatorFullMatrix(linear_operator.LinearOperator):
     Raises:
       TypeError:  If `diag.dtype` is not an allowed type.
     """
-    parameters = dict(
-        matrix=matrix,
-        is_non_singular=is_non_singular,
-        is_self_adjoint=is_self_adjoint,
-        is_positive_definite=is_positive_definite,
-        is_square=is_square,
-        name=name
-    )
+        parameters = dict(
+            matrix=matrix,
+            is_non_singular=is_non_singular,
+            is_self_adjoint=is_self_adjoint,
+            is_positive_definite=is_positive_definite,
+            is_square=is_square,
+            name=name,
+        )
 
-    with ops.name_scope(name, values=[matrix]):
-      self._matrix = linear_operator_util.convert_nonref_to_tensor(
-          matrix, name="matrix")
-      self._check_matrix(self._matrix)
+        with ops.name_scope(name, values=[matrix]):
+            self._matrix = linear_operator_util.convert_nonref_to_tensor(
+                matrix, name="matrix"
+            )
+            self._check_matrix(self._matrix)
 
-      super(LinearOperatorFullMatrix, self).__init__(
-          dtype=self._matrix.dtype,
-          is_non_singular=is_non_singular,
-          is_self_adjoint=is_self_adjoint,
-          is_positive_definite=is_positive_definite,
-          is_square=is_square,
-          parameters=parameters,
-          name=name)
-      # TODO(b/143910018) Remove graph_parents in V3.
-      self._set_graph_parents([self._matrix])
+            super(LinearOperatorFullMatrix, self).__init__(
+                dtype=self._matrix.dtype,
+                is_non_singular=is_non_singular,
+                is_self_adjoint=is_self_adjoint,
+                is_positive_definite=is_positive_definite,
+                is_square=is_square,
+                parameters=parameters,
+                name=name,
+            )
+            # TODO(b/143910018) Remove graph_parents in V3.
+            self._set_graph_parents([self._matrix])
 
-  def _check_matrix(self, matrix):
-    """Static check of the `matrix` argument."""
-    allowed_dtypes = [
-        dtypes.float16,
-        dtypes.float32,
-        dtypes.float64,
-        dtypes.complex64,
-        dtypes.complex128,
-    ]
+    def _check_matrix(self, matrix):
+        """Static check of the `matrix` argument."""
+        allowed_dtypes = [
+            dtypes.float16,
+            dtypes.float32,
+            dtypes.float64,
+            dtypes.complex64,
+            dtypes.complex128,
+        ]
 
-    matrix = ops.convert_to_tensor_v2_with_dispatch(matrix, name="matrix")
+        matrix = ops.convert_to_tensor_v2_with_dispatch(matrix, name="matrix")
 
-    dtype = matrix.dtype
-    if dtype not in allowed_dtypes:
-      raise TypeError(
-          "Argument matrix must have dtype in %s.  Found: %s"
-          % (allowed_dtypes, dtype))
+        dtype = matrix.dtype
+        if dtype not in allowed_dtypes:
+            raise TypeError(
+                "Argument matrix must have dtype in %s.  Found: %s"
+                % (allowed_dtypes, dtype)
+            )
 
-    if matrix.shape.ndims is not None and matrix.shape.ndims < 2:
-      raise ValueError(
-          "Argument matrix must have at least 2 dimensions.  Found: %s"
-          % matrix)
+        if matrix.shape.ndims is not None and matrix.shape.ndims < 2:
+            raise ValueError(
+                "Argument matrix must have at least 2 dimensions.  Found: %s" % matrix
+            )
 
-  def _shape(self):
-    return self._matrix.shape
+    def _shape(self):
+        return self._matrix.shape
 
-  def _shape_tensor(self):
-    return array_ops.shape(self._matrix)
+    def _shape_tensor(self):
+        return array_ops.shape(self._matrix)
 
-  def _matmul(self, x, adjoint=False, adjoint_arg=False):
-    return math_ops.matmul(
-        self._matrix, x, adjoint_a=adjoint, adjoint_b=adjoint_arg)
+    def _matmul(self, x, adjoint=False, adjoint_arg=False):
+        return math_ops.matmul(
+            self._matrix, x, adjoint_a=adjoint, adjoint_b=adjoint_arg
+        )
 
-  def _solve(self, rhs, adjoint=False, adjoint_arg=False):
-    return self._dense_solve(rhs, adjoint=adjoint, adjoint_arg=adjoint_arg)
+    def _solve(self, rhs, adjoint=False, adjoint_arg=False):
+        return self._dense_solve(rhs, adjoint=adjoint, adjoint_arg=adjoint_arg)
 
-  def _to_dense(self):
-    return self._matrix
+    def _to_dense(self):
+        return self._matrix
 
-  @property
-  def _composite_tensor_fields(self):
-    return ("matrix",)
+    @property
+    def _composite_tensor_fields(self):
+        return ("matrix",)

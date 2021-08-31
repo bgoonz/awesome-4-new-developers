@@ -20,14 +20,16 @@ import logging as std_logging
 
 import tensorflow as tf
 from tensorflow.python.platform import test
-from tensorflow.tools.consistency_integration_test.consistency_test_base import ConsistencyTestBase
+from tensorflow.tools.consistency_integration_test.consistency_test_base import (
+    ConsistencyTestBase,
+)
 
 
 class TensorArrayConsistencyTests(ConsistencyTestBase):
-  """Test cases for known issues or bugs related to tf.TensorArray."""
+    """Test cases for known issues or bugs related to tf.TensorArray."""
 
-  def testConcat(self):
-    """Tests inconsistent behavior with `.concat()`.
+    def testConcat(self):
+        """Tests inconsistent behavior with `.concat()`.
 
     Bugs:   b/180921284
     Status: Missing error message
@@ -56,32 +58,33 @@ class TensorArrayConsistencyTests(ConsistencyTestBase):
                      # numpy=array([[1, 2, 3], [4, 5, 6]], dtype=int32)>
       ```
     """
-    self.skipTest('b/180921284')
-    try:
-      tf.config.run_functions_eagerly(True)
+        self.skipTest("b/180921284")
+        try:
+            tf.config.run_functions_eagerly(True)
 
-      @tf.function
-      def f(x, y, z):
-        ta = tf.TensorArray(size=3, dtype=tf.int32, element_shape=())
-        ta = ta.write(0, x)
-        ta = ta.write(1, y)
-        ta = ta.write(2, z)
-        return ta.concat()
+            @tf.function
+            def f(x, y, z):
+                ta = tf.TensorArray(size=3, dtype=tf.int32, element_shape=())
+                ta = ta.write(0, x)
+                ta = ta.write(1, y)
+                ta = ta.write(2, z)
+                return ta.concat()
 
-      with self.assertRaisesWithPredicateMatch(
-          BaseException,
-          # TODO(hyey): Below is a placeholder error message of what we
-          # probably want but it needs to be updated to specify what caused
-          # the error and where.
-          'Concatenating scalars in `tf.TensorArray` is unsupported in eager '
-          'mode. Please use `.stack()` instead'):
-        f(1, 2, 3)
+            with self.assertRaisesWithPredicateMatch(
+                BaseException,
+                # TODO(hyey): Below is a placeholder error message of what we
+                # probably want but it needs to be updated to specify what caused
+                # the error and where.
+                "Concatenating scalars in `tf.TensorArray` is unsupported in eager "
+                "mode. Please use `.stack()` instead",
+            ):
+                f(1, 2, 3)
 
-    finally:
-      tf.config.run_functions_eagerly(False)
+        finally:
+            tf.config.run_functions_eagerly(False)
 
-  def testArrayReturnedFromTfFunction(self):
-    """Tests bad handling of tf.TensorArray returned from tf.function.
+    def testArrayReturnedFromTfFunction(self):
+        """Tests bad handling of tf.TensorArray returned from tf.function.
 
     Bugs:   b/147450234
     Status: Broken
@@ -97,28 +100,28 @@ class TensorArrayConsistencyTests(ConsistencyTestBase):
     * Note that XLA fails with a different error that is equally confusing:
       "Support for TensorList crossing the XLA/TF boundary is not implemented."
     """
-    self.skipTest('b/147450234')
-    num_rows = 2
+        self.skipTest("b/147450234")
+        num_rows = 2
 
-    @tf.function
-    def f(x):
-      ta = tf.TensorArray(tf.float32, num_rows)
-      for i in range(num_rows):
-        ta = ta.write(i, x[i])
+        @tf.function
+        def f(x):
+            ta = tf.TensorArray(tf.float32, num_rows)
+            for i in range(num_rows):
+                ta = ta.write(i, x[i])
 
-      return ta
+            return ta
 
-    n = tf.constant([[1., 2.], [3., 4.]])
-    ta0 = f(n)
-    ta1 = tf.TensorArray(tf.float32, num_rows)
-    ta1 = ta1.write(0, n[0])
-    ta1 = ta1.write(1, n[1])
+        n = tf.constant([[1.0, 2.0], [3.0, 4.0]])
+        ta0 = f(n)
+        ta1 = tf.TensorArray(tf.float32, num_rows)
+        ta1 = ta1.write(0, n[0])
+        ta1 = ta1.write(1, n[1])
 
-    # Output of `f(n)` is `tf.Tensor(<unprintable>, shape=(), dtype=variant)`.
-    self.assertAllEqual(ta0.stack(), ta1.stack())
+        # Output of `f(n)` is `tf.Tensor(<unprintable>, shape=(), dtype=variant)`.
+        self.assertAllEqual(ta0.stack(), ta1.stack())
 
-  def testTensorArraySpec(self):
-    """Tests tf.TensorArray behavior with `TensorArraySpec` as input signature.
+    def testTensorArraySpec(self):
+        """Tests tf.TensorArray behavior with `TensorArraySpec` as input signature.
 
     Bugs:   b/162452468, b/187114287
     Status: Broken
@@ -132,25 +135,24 @@ class TensorArrayConsistencyTests(ConsistencyTestBase):
     * Documentation for `tf.TensorArraySpec` appears to be minimal. Need to
       update it.
     """
-    self.skipTest('b/187114287')
-    input_signature = [
-        tf.TensorArraySpec(
-            element_shape=None, dtype=tf.float32, dynamic_size=True)
-    ]
+        self.skipTest("b/187114287")
+        input_signature = [
+            tf.TensorArraySpec(element_shape=None, dtype=tf.float32, dynamic_size=True)
+        ]
 
-    @tf.function(input_signature=input_signature)
-    def f(ta):
-      return ta.stack()
+        @tf.function(input_signature=input_signature)
+        def f(ta):
+            return ta.stack()
 
-    ta = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
-    ta = ta.write(0, tf.constant([1.0, 2.0]))
-    ta = ta.write(1, tf.constant([3.0, 4.0]))
+        ta = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
+        ta = ta.write(0, tf.constant([1.0, 2.0]))
+        ta = ta.write(1, tf.constant([3.0, 4.0]))
 
-    out_t = tf.constant([[1.0, 2.0], [3.0, 4.0]])
-    self.assertAllEqual(f(ta), out_t)
+        out_t = tf.constant([[1.0, 2.0], [3.0, 4.0]])
+        self.assertAllEqual(f(ta), out_t)
 
-  def testTensorArrayConcreteFunction(self):
-    """Tests ConcreteFunction retrieval of a tf.function with a tf.TensorArray.
+    def testTensorArrayConcreteFunction(self):
+        """Tests ConcreteFunction retrieval of a tf.function with a tf.TensorArray.
 
     Bugs:   b/162452468, b/187114664
     Status: Broken
@@ -158,23 +160,23 @@ class TensorArrayConsistencyTests(ConsistencyTestBase):
             fails. More specifically, calling `cf(arr)` should work but doesn't
             and calling `cf()` works rather when it should fail.
     """
-    self.skipTest('b/187114664')
+        self.skipTest("b/187114664")
 
-    @tf.function
-    def fun(x):
-      return x.stack()
+        @tf.function
+        def fun(x):
+            return x.stack()
 
-    ta = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
-    ta = ta.write(0, tf.constant([1.0, 2.0]))
-    ta = ta.write(1, tf.constant([3.0, 4.0]))
+        ta = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
+        ta = ta.write(0, tf.constant([1.0, 2.0]))
+        ta = ta.write(1, tf.constant([3.0, 4.0]))
 
-    cf = fun.get_concrete_function(ta)
-    t0 = cf(ta)
-    t1 = ta.stack()
-    self.assertAllEqual(t0, t1)
+        cf = fun.get_concrete_function(ta)
+        t0 = cf(ta)
+        t1 = ta.stack()
+        self.assertAllEqual(t0, t1)
 
-  def testVariantTensorAsOutput(self):
-    """Tests that tf.variant tensor returns from tf.function for tf.TensorArray.
+    def testVariantTensorAsOutput(self):
+        """Tests that tf.variant tensor returns from tf.function for tf.TensorArray.
 
     Bugs:   b/162452468, b/187115938
     Status: Broken
@@ -187,23 +189,23 @@ class TensorArrayConsistencyTests(ConsistencyTestBase):
     * When tf.function returns a `tf.TensorArray`, output returned should be a
       `tf.TensorArray`.
     """
-    self.skipTest('b/187115938')
+        self.skipTest("b/187115938")
 
-    @tf.function
-    def f():
-      ta = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
-      ta = ta.write(0, tf.constant([1.0, 2.0]))
-      ta = ta.write(1, tf.constant([3.0, 4.0]))
-      return ta
+        @tf.function
+        def f():
+            ta = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
+            ta = ta.write(0, tf.constant([1.0, 2.0]))
+            ta = ta.write(1, tf.constant([3.0, 4.0]))
+            return ta
 
-    rtn_ta = f()
-    # Initialize a `tf.TensorArray` to check against `rtn_ta` that it is a
-    # `tf.TensorArray`.
-    a_ta = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
-    self.assertEqual(rtn_ta.__module__, a_ta.__module__)
+        rtn_ta = f()
+        # Initialize a `tf.TensorArray` to check against `rtn_ta` that it is a
+        # `tf.TensorArray`.
+        a_ta = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
+        self.assertEqual(rtn_ta.__module__, a_ta.__module__)
 
-  def testTensorArrayPassedInAndReturnedFromTfFunction(self):
-    """Tests tf.TensorArray passed in as input and returned as output.
+    def testTensorArrayPassedInAndReturnedFromTfFunction(self):
+        """Tests tf.TensorArray passed in as input and returned as output.
 
     Bugs:   b/162452468, b/187115435, b/147450234
     Status: Broken
@@ -214,25 +216,25 @@ class TensorArrayConsistencyTests(ConsistencyTestBase):
       "Attempting to build a graph-mode TF2-style TensorArray from either an
       eager-mode TensorArray or a TF1-style TensorArray."
     """
-    self.skipTest('b/187115435')
+        self.skipTest("b/187115435")
 
-    @tf.function
-    def f(ta):
-      ta = ta.write(1, tf.constant([3.0, 4.0]))
-      return ta
+        @tf.function
+        def f(ta):
+            ta = ta.write(1, tf.constant([3.0, 4.0]))
+            return ta
 
-    ta0 = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
-    ta0 = ta0.write(0, tf.constant([1.0, 2.0]))
-    ta0 = f(ta0)
+        ta0 = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
+        ta0 = ta0.write(0, tf.constant([1.0, 2.0]))
+        ta0 = f(ta0)
 
-    ta1 = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
-    ta1 = ta1.write(0, tf.constant([1.0, 2.0]))
-    ta1 = ta1.write(1, tf.constant([3.0, 4.0]))
+        ta1 = tf.TensorArray(dtype=tf.float32, dynamic_size=True, size=0)
+        ta1 = ta1.write(0, tf.constant([1.0, 2.0]))
+        ta1 = ta1.write(1, tf.constant([3.0, 4.0]))
 
-    self.assertAllEqual(ta0.stack(), ta1.stack())
+        self.assertAllEqual(ta0.stack(), ta1.stack())
 
-  def testMissingWarning(self):
-    """Tests warnings when the output of tf.TensorArray methods is unused.
+    def testMissingWarning(self):
+        """Tests warnings when the output of tf.TensorArray methods is unused.
 
     Bugs:   b/150784251
     Status: Broken
@@ -270,24 +272,24 @@ class TensorArrayConsistencyTests(ConsistencyTestBase):
         f(tf.constant([1, 2, 3, 4]))
         ```
     """
-    self.skipTest('b/150784251')
+        self.skipTest("b/150784251")
 
-    log = io.StringIO()
-    handler = std_logging.StreamHandler(log)
-    std_logging.root.addHandler(handler)
+        log = io.StringIO()
+        handler = std_logging.StreamHandler(log)
+        std_logging.root.addHandler(handler)
 
-    @tf.function
-    def f(x):
-      ta = tf.TensorArray(x.dtype, tf.shape(x)[0])
-      # A warning should be thrown with the line below. This is the case only
-      # when `f()` is not decorated with tf.function.
-      ta.write(0, x[0])
+        @tf.function
+        def f(x):
+            ta = tf.TensorArray(x.dtype, tf.shape(x)[0])
+            # A warning should be thrown with the line below. This is the case only
+            # when `f()` is not decorated with tf.function.
+            ta.write(0, x[0])
 
-    f(tf.constant([1, 2, 3, 4]))
+        f(tf.constant([1, 2, 3, 4]))
 
-    self.assertIn('Object was never used', log.getvalue())
-    std_logging.root.removeHandler(handler)
+        self.assertIn("Object was never used", log.getvalue())
+        std_logging.root.removeHandler(handler)
 
 
-if __name__ == '__main__':
-  test.main()
+if __name__ == "__main__":
+    test.main()

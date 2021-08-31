@@ -22,7 +22,7 @@ from tensorflow.python.grappler import _pywrap_model_analyzer as tf_wrap
 
 
 def GenerateModelReport(metagraph, assume_valid_feeds=True, debug=False):
-  """Report what's known statically about each node in the provided metagraph.
+    """Report what's known statically about each node in the provided metagraph.
 
   Args:
     metagraph: A TensorFlow MetaGraphDef.
@@ -32,5 +32,6 @@ def GenerateModelReport(metagraph, assume_valid_feeds=True, debug=False):
   Returns:
     A string containing the report.
   """
-  return tf_wrap.GenerateModelReport(
-      metagraph.SerializeToString(), assume_valid_feeds, debug)
+    return tf_wrap.GenerateModelReport(
+        metagraph.SerializeToString(), assume_valid_feeds, debug
+    )

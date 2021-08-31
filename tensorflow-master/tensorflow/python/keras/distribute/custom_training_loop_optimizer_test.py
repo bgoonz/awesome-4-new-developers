@@ -21,105 +21,122 @@ from tensorflow.python.distribute import values
 from tensorflow.python.eager import def_function
 from tensorflow.python.framework import ops
 from tensorflow.python.framework import test_combinations as combinations
-from tensorflow.python.keras.distribute import strategy_combinations as keras_strategy_combinations
+from tensorflow.python.keras.distribute import (
+    strategy_combinations as keras_strategy_combinations,
+)
 from tensorflow.python.keras.optimizer_v2 import gradient_descent
 from tensorflow.python.ops import variables
 from tensorflow.python.platform import test
 
 
 class OptimizerTest(test.TestCase, parameterized.TestCase):
+    @ds_combinations.generate(
+        combinations.times(
+            combinations.combine(
+                distribution=keras_strategy_combinations.multidevice_strategies,
+                mode=["eager"],
+            ),
+            combinations.combine(
+                experimental_aggregate_gradients=True,
+                expected=[[[-0.3, -0.3], [-0.3, -0.3]]],
+            )
+            + combinations.combine(
+                experimental_aggregate_gradients=False,
+                expected=[[[-0.1, -0.1], [-0.2, -0.2]]],
+            ),
+        )
+    )
+    def test_custom_aggregation(
+        self, distribution, experimental_aggregate_gradients, expected
+    ):
 
-  @ds_combinations.generate(
-      combinations.times(
-          combinations.combine(
-              distribution=keras_strategy_combinations.multidevice_strategies,
-              mode=["eager"],
-          ),
-          combinations.combine(
-              experimental_aggregate_gradients=True,
-              expected=[[[-0.3, -0.3], [-0.3, -0.3]]]) +
-          combinations.combine(
-              experimental_aggregate_gradients=False,
-              expected=[[[-0.1, -0.1], [-0.2, -0.2]]])
-      ))
-  def test_custom_aggregation(self, distribution,
-                              experimental_aggregate_gradients, expected):
+        with distribution.scope():
+            v = variables.Variable([0.0, 0.0])
+            optimizer = gradient_descent.SGD(0.1)
 
-    with distribution.scope():
-      v = variables.Variable([0., 0.])
-      optimizer = gradient_descent.SGD(0.1)
+        class PerReplica(values.DistributedValues):
+            """Holds a map from replica to unsynchronized values."""
 
-    class PerReplica(values.DistributedValues):
-      """Holds a map from replica to unsynchronized values."""
+            @property
+            def values(self):
+                """Returns the per replica values."""
+                return self._values
 
-      @property
-      def values(self):
-        """Returns the per replica values."""
-        return self._values
+        @def_function.function
+        def optimize():
+            with ops.device(distribution.extended.worker_devices[0]):
+                v1 = ops.convert_to_tensor_v2_with_dispatch([1.0, 1.0])
+            with ops.device(distribution.extended.worker_devices[1]):
+                v2 = ops.convert_to_tensor_v2_with_dispatch([2.0, 2.0])
+            grads = PerReplica([v1, v2])
 
-    @def_function.function
-    def optimize():
-      with ops.device(distribution.extended.worker_devices[0]):
-        v1 = ops.convert_to_tensor_v2_with_dispatch([1., 1.])
-      with ops.device(distribution.extended.worker_devices[1]):
-        v2 = ops.convert_to_tensor_v2_with_dispatch([2., 2.])
-      grads = PerReplica([v1, v2])
-      def step_fn(grads):
-        optimizer.apply_gradients(
-            [(grads, v)],
-            experimental_aggregate_gradients=experimental_aggregate_gradients)
-        return v.read_value()
+            def step_fn(grads):
+                optimizer.apply_gradients(
+                    [(grads, v)],
+                    experimental_aggregate_gradients=experimental_aggregate_gradients,
+                )
+                return v.read_value()
 
-      return distribution.experimental_local_results(
-          distribution.run(step_fn, args=(grads,)))
+            return distribution.experimental_local_results(
+                distribution.run(step_fn, args=(grads,))
+            )
 
-    self.assertAllClose(optimize(), expected)
+        self.assertAllClose(optimize(), expected)
 
-  @ds_combinations.generate(
-      combinations.combine(
-          distribution=strategy_combinations.one_device_strategy,
-          mode=["eager"],
-          experimental_aggregate_gradients=[True, False]))
-  def test_custom_aggregation_one_device(self, distribution,
-                                         experimental_aggregate_gradients):
+    @ds_combinations.generate(
+        combinations.combine(
+            distribution=strategy_combinations.one_device_strategy,
+            mode=["eager"],
+            experimental_aggregate_gradients=[True, False],
+        )
+    )
+    def test_custom_aggregation_one_device(
+        self, distribution, experimental_aggregate_gradients
+    ):
 
-    with distribution.scope():
-      v = variables.Variable([0., 0.])
-      optimizer = gradient_descent.SGD(0.1)
+        with distribution.scope():
+            v = variables.Variable([0.0, 0.0])
+            optimizer = gradient_descent.SGD(0.1)
 
-    @def_function.function
-    def optimize():
-      grads = ops.convert_to_tensor_v2_with_dispatch([1., 1.])
+        @def_function.function
+        def optimize():
+            grads = ops.convert_to_tensor_v2_with_dispatch([1.0, 1.0])
 
-      def step_fn(grads):
-        optimizer.apply_gradients(
-            [(grads, v)],
-            experimental_aggregate_gradients=experimental_aggregate_gradients)
-        return v.read_value()
+            def step_fn(grads):
+                optimizer.apply_gradients(
+                    [(grads, v)],
+                    experimental_aggregate_gradients=experimental_aggregate_gradients,
+                )
+                return v.read_value()
 
-      return distribution.experimental_local_results(
-          distribution.run(step_fn, args=(grads,)))
+            return distribution.experimental_local_results(
+                distribution.run(step_fn, args=(grads,))
+            )
 
-    self.assertAllClose(optimize(), [[-0.1, -0.1]])
+        self.assertAllClose(optimize(), [[-0.1, -0.1]])
 
-  @ds_combinations.generate(
-      combinations.combine(distribution=[
-          strategy_combinations.central_storage_strategy_with_gpu_and_cpu
-      ]))
-  def test_custom_aggregation_central_storage(self, distribution):
-    with distribution.scope():
-      v = variables.Variable([0., 0.])
-      optimizer = gradient_descent.SGD(0.1)
+    @ds_combinations.generate(
+        combinations.combine(
+            distribution=[
+                strategy_combinations.central_storage_strategy_with_gpu_and_cpu
+            ]
+        )
+    )
+    def test_custom_aggregation_central_storage(self, distribution):
+        with distribution.scope():
+            v = variables.Variable([0.0, 0.0])
+            optimizer = gradient_descent.SGD(0.1)
 
-    grads = ops.convert_to_tensor_v2_with_dispatch([1., 1.])
+        grads = ops.convert_to_tensor_v2_with_dispatch([1.0, 1.0])
 
-    def step_fn(grads):
-      with self.assertRaises(NotImplementedError):
-        optimizer.apply_gradients([(grads, v)],
-                                  experimental_aggregate_gradients=False)
+        def step_fn(grads):
+            with self.assertRaises(NotImplementedError):
+                optimizer.apply_gradients(
+                    [(grads, v)], experimental_aggregate_gradients=False
+                )
 
-    return distribution.run(step_fn, args=(grads,))
+        return distribution.run(step_fn, args=(grads,))
 
 
 if __name__ == "__main__":
-  test.main()
+    test.main()

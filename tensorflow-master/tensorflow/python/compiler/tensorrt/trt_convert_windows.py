@@ -24,14 +24,13 @@ import platform
 from tensorflow.python.util.tf_export import tf_export
 
 if platform.system() != "Windows":
-  raise RuntimeError(
-      "This module is expected to be loaded only on Windows platform.")
+    raise RuntimeError("This module is expected to be loaded only on Windows platform.")
 
 
 class TrtPrecisionMode(object):
-  FP32 = "FP32"
-  FP16 = "FP16"
-  INT8 = "INT8"
+    FP32 = "FP32"
+    FP16 = "FP16"
+    INT8 = "INT8"
 
 
 # Use a large enough number as the default max_workspace_size for TRT engines,
@@ -41,15 +40,19 @@ DEFAULT_TRT_MAX_WORKSPACE_SIZE_BYTES = 1 << 30
 
 @tf_export("experimental.tensorrt.ConversionParams", v1=[])
 class TrtConversionParams(
-    collections.namedtuple("TrtConversionParams", [
-        "rewriter_config_template",
-        "max_workspace_size_bytes",
-        "precision_mode",
-        "minimum_segment_size",
-        "maximum_cached_engines",
-        "use_calibration",
-    ])):
-  """Parameters that are used for TF-TRT conversion.
+    collections.namedtuple(
+        "TrtConversionParams",
+        [
+            "rewriter_config_template",
+            "max_workspace_size_bytes",
+            "precision_mode",
+            "minimum_segment_size",
+            "maximum_cached_engines",
+            "use_calibration",
+        ],
+    )
+):
+    """Parameters that are used for TF-TRT conversion.
 
   Fields:
     rewriter_config_template: a template RewriterConfig proto used to create a
@@ -78,31 +81,34 @@ class TrtConversionParams(
       tensors were trained with fake quantization.
   """
 
-  def __new__(cls,
-              rewriter_config_template=None,
-              max_workspace_size_bytes=DEFAULT_TRT_MAX_WORKSPACE_SIZE_BYTES,
-              precision_mode=TrtPrecisionMode.FP32,
-              minimum_segment_size=3,
-              is_dynamic_op=True,
-              maximum_cached_engines=1,
-              use_calibration=True):
-    raise NotImplementedError(
-        "TensorRT integration is not available on Windows.")
+    def __new__(
+        cls,
+        rewriter_config_template=None,
+        max_workspace_size_bytes=DEFAULT_TRT_MAX_WORKSPACE_SIZE_BYTES,
+        precision_mode=TrtPrecisionMode.FP32,
+        minimum_segment_size=3,
+        is_dynamic_op=True,
+        maximum_cached_engines=1,
+        use_calibration=True,
+    ):
+        raise NotImplementedError("TensorRT integration is not available on Windows.")
 
 
 @tf_export("experimental.tensorrt.Converter", v1=[])
 class TrtConverterWindows(object):
-  """An offline converter for TF-TRT transformation for TF 2.0 SavedModels.
+    """An offline converter for TF-TRT transformation for TF 2.0 SavedModels.
 
   Currently this is not available on Windows platform.
   """
 
-  def __init__(self,
-               input_saved_model_dir=None,
-               input_saved_model_tags=None,
-               input_saved_model_signature_key=None,
-               conversion_params=None):
-    """Initialize the converter.
+    def __init__(
+        self,
+        input_saved_model_dir=None,
+        input_saved_model_tags=None,
+        input_saved_model_signature_key=None,
+        conversion_params=None,
+    ):
+        """Initialize the converter.
 
     Args:
       input_saved_model_dir: the directory to load the SavedModel which contains
@@ -115,5 +121,4 @@ class TrtConverterWindows(object):
     Raises:
       NotImplementedError: TRT is not supported on Windows.
     """
-    raise NotImplementedError(
-        "TensorRT integration is not available on Windows.")
+        raise NotImplementedError("TensorRT integration is not available on Windows.")

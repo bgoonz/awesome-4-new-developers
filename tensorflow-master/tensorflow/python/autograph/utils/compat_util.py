@@ -25,14 +25,14 @@ import six
 
 
 class BasicRef(object):
-  """This shim emulates the nonlocal keyword in Py2-compatible source."""
+    """This shim emulates the nonlocal keyword in Py2-compatible source."""
 
-  def __init__(self, init_value):
-    self.value = init_value
+    def __init__(self, init_value):
+        self.value = init_value
 
 
 def deprecated_py2_support(module_name):
-  """Swaps calling module with a Py2-specific implementation. Noop in Py3."""
-  if six.PY2:
-    legacy_module = importlib.import_module(module_name + '_deprecated_py2')
-    sys.modules[module_name] = legacy_module
+    """Swaps calling module with a Py2-specific implementation. Noop in Py3."""
+    if six.PY2:
+        legacy_module = importlib.import_module(module_name + "_deprecated_py2")
+        sys.modules[module_name] = legacy_module

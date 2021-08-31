@@ -25,18 +25,18 @@ from tensorflow.python.framework import tensor_util
 from tensorflow.python.ops import script_ops
 
 
-class MatchDType(namedtuple('MatchDType', ('arg_number',))):
-  """Allows matching the dtype of an argument.
+class MatchDType(namedtuple("MatchDType", ("arg_number",))):
+    """Allows matching the dtype of an argument.
 
   Used in conjunction with function calls. For example, MatchDType(0) will
   match the DType of the first argument.
   """
 
-  pass
+    pass
 
 
 def wrap_py_func(f, return_dtypes, args, kwargs=None, use_dummy_return=False):
-  """Helper that wraps a callable to py_func.
+    """Helper that wraps a callable to py_func.
 
   The helper passes tensor arguments through the py_func interface. Non-tensor
   arguments are allowed, and will be passed to f directly. Note that non-tensor
@@ -61,72 +61,76 @@ def wrap_py_func(f, return_dtypes, args, kwargs=None, use_dummy_return=False):
     ValueError: if any of the arguments are incorrect.
   """
 
-  if return_dtypes and use_dummy_return:
-    raise ValueError('if use_dummy_return is True, return_dtypes must be empty')
+    if return_dtypes and use_dummy_return:
+        raise ValueError("if use_dummy_return is True, return_dtypes must be empty")
 
-  tensor_args = []
-  tensor_args_idx = {}
+    tensor_args = []
+    tensor_args_idx = {}
 
-  # Of the positional arguments, only grab the tensor ones to be passed through
-  # the py_func.
-  n_args = len(args)
-  arg_is_tensor = tuple(map(tensor_util.is_tf_type, args))
-  for i in range(n_args):
-    if arg_is_tensor[i]:
-      tensor_args_idx[i] = len(tensor_args)
-      tensor_args.append(args[i])
+    # Of the positional arguments, only grab the tensor ones to be passed through
+    # the py_func.
+    n_args = len(args)
+    arg_is_tensor = tuple(map(tensor_util.is_tf_type, args))
+    for i in range(n_args):
+        if arg_is_tensor[i]:
+            tensor_args_idx[i] = len(tensor_args)
+            tensor_args.append(args[i])
 
-  # We essentially take the tensor kwargs, if any, and add them to the list of
-  # positional arguments. The kwargs are then reconstructed inside the py_func.
-  #
-  # For example, if
-  #
-  #     args = [Tensor(1), 'foo']
-  #     kwargs = {'a': Tensor(2), 'b': 'bar'}
-  #
-  # Then
-  #
-  #     tensor_args = (Tensor(1), Tensor(2))
-  #     kwarg_keys = ('a', 'b')
-  if kwargs:
-    kwarg_keys = tuple(kwargs.keys())
-    kwarg_is_tensor = {k: tensor_util.is_tf_type(kwargs[k]) for k in kwarg_keys}
-    for k in kwarg_keys:
-      if kwarg_is_tensor[k]:
-        tensor_args_idx[k] = len(tensor_args)
-        tensor_args.append(kwargs[k])
-  else:
-    kwarg_keys = ()
-
-  # Set up return dtypes.
-  def match_arg_dtype(arg_number):
-    arg = args[arg_number]
-    if not arg_is_tensor[arg_number]:
-      raise ValueError(
-          'argument %d was used with MatchDType and must be a tf.Tensor, but '
-          'was %s instead' % (arg_number, type(arg)))
-    return arg.dtype
-
-  if return_dtypes:
-    if isinstance(return_dtypes, MatchDType):
-      return_dtypes = match_arg_dtype(return_dtypes.arg_number)
-    elif isinstance(return_dtypes, (list, tuple)):
-      return_dtypes = tuple(
-          match_arg_dtype(a.arg_number) if isinstance(a, MatchDType) else a
-          for a in return_dtypes)
+    # We essentially take the tensor kwargs, if any, and add them to the list of
+    # positional arguments. The kwargs are then reconstructed inside the py_func.
+    #
+    # For example, if
+    #
+    #     args = [Tensor(1), 'foo']
+    #     kwargs = {'a': Tensor(2), 'b': 'bar'}
+    #
+    # Then
+    #
+    #     tensor_args = (Tensor(1), Tensor(2))
+    #     kwarg_keys = ('a', 'b')
+    if kwargs:
+        kwarg_keys = tuple(kwargs.keys())
+        kwarg_is_tensor = {k: tensor_util.is_tf_type(kwargs[k]) for k in kwarg_keys}
+        for k in kwarg_keys:
+            if kwarg_is_tensor[k]:
+                tensor_args_idx[k] = len(tensor_args)
+                tensor_args.append(kwargs[k])
     else:
-      assert isinstance(return_dtypes, dtypes.DType)
+        kwarg_keys = ()
 
-  def f_wrapper(*tensor_args):
-    f_args = tuple(tensor_args[tensor_args_idx[i]] if arg_is_tensor[i] else a
-                   for i, a in enumerate(args))
-    f_kwargs = {
-        k: tensor_args[tensor_args_idx[k]] if kwarg_is_tensor[k] else kwargs[k]
-        for i, k in enumerate(kwarg_keys)
-    }
-    retval = f(*f_args, **f_kwargs)
-    return 1 if use_dummy_return else retval
+    # Set up return dtypes.
+    def match_arg_dtype(arg_number):
+        arg = args[arg_number]
+        if not arg_is_tensor[arg_number]:
+            raise ValueError(
+                "argument %d was used with MatchDType and must be a tf.Tensor, but "
+                "was %s instead" % (arg_number, type(arg))
+            )
+        return arg.dtype
 
-  if use_dummy_return:
-    return_dtypes = dtypes.int32
-  return script_ops.eager_py_func(f_wrapper, tensor_args, return_dtypes)
+    if return_dtypes:
+        if isinstance(return_dtypes, MatchDType):
+            return_dtypes = match_arg_dtype(return_dtypes.arg_number)
+        elif isinstance(return_dtypes, (list, tuple)):
+            return_dtypes = tuple(
+                match_arg_dtype(a.arg_number) if isinstance(a, MatchDType) else a
+                for a in return_dtypes
+            )
+        else:
+            assert isinstance(return_dtypes, dtypes.DType)
+
+    def f_wrapper(*tensor_args):
+        f_args = tuple(
+            tensor_args[tensor_args_idx[i]] if arg_is_tensor[i] else a
+            for i, a in enumerate(args)
+        )
+        f_kwargs = {
+            k: tensor_args[tensor_args_idx[k]] if kwarg_is_tensor[k] else kwargs[k]
+            for i, k in enumerate(kwarg_keys)
+        }
+        retval = f(*f_args, **f_kwargs)
+        return 1 if use_dummy_return else retval
+
+    if use_dummy_return:
+        return_dtypes = dtypes.int32
+    return script_ops.eager_py_func(f_wrapper, tensor_args, return_dtypes)

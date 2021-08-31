@@ -33,15 +33,17 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 @tf_export("math.bincount", v1=[])
-def bincount(arr,
-             weights=None,
-             minlength=None,
-             maxlength=None,
-             dtype=dtypes.int32,
-             name=None,
-             axis=None,
-             binary_output=False):
-  """Counts the number of occurrences of each value in an integer array.
+def bincount(
+    arr,
+    weights=None,
+    minlength=None,
+    maxlength=None,
+    dtype=dtypes.int32,
+    name=None,
+    axis=None,
+    binary_output=False,
+):
+    """Counts the number of occurrences of each value in an integer array.
 
   If `minlength` and `maxlength` are not given, returns a vector with length
   `tf.reduce_max(arr) + 1` if `arr` is non-empty, and length 0 otherwise.
@@ -118,114 +120,123 @@ def bincount(arr,
     `InvalidArgumentError` if negative values are provided as an input.
 
   """
-  name = "bincount" if name is None else name
-  with ops.name_scope(name):
-    # Somehow forward compatible needs to be False.
-    if not binary_output and axis is None:
-      arr = ops.convert_to_tensor(arr, name="arr", dtype=dtypes.int32)
-      array_is_nonempty = math_ops.reduce_prod(array_ops.shape(arr)) > 0
-      output_size = math_ops.cast(array_is_nonempty, dtypes.int32) * (
-          math_ops.reduce_max(arr) + 1)
-      if minlength is not None:
-        minlength = ops.convert_to_tensor(
-            minlength, name="minlength", dtype=dtypes.int32)
-        output_size = gen_math_ops.maximum(minlength, output_size)
-      if maxlength is not None:
-        maxlength = ops.convert_to_tensor(
-            maxlength, name="maxlength", dtype=dtypes.int32)
-        output_size = gen_math_ops.minimum(maxlength, output_size)
-      if weights is not None:
-        weights = ops.convert_to_tensor(weights, name="weights")
-        return gen_math_ops.unsorted_segment_sum(weights, arr, output_size)
-      weights = constant_op.constant([], dtype)
-      return gen_math_ops.bincount(arr, output_size, weights)
+    name = "bincount" if name is None else name
+    with ops.name_scope(name):
+        # Somehow forward compatible needs to be False.
+        if not binary_output and axis is None:
+            arr = ops.convert_to_tensor(arr, name="arr", dtype=dtypes.int32)
+            array_is_nonempty = math_ops.reduce_prod(array_ops.shape(arr)) > 0
+            output_size = math_ops.cast(array_is_nonempty, dtypes.int32) * (
+                math_ops.reduce_max(arr) + 1
+            )
+            if minlength is not None:
+                minlength = ops.convert_to_tensor(
+                    minlength, name="minlength", dtype=dtypes.int32
+                )
+                output_size = gen_math_ops.maximum(minlength, output_size)
+            if maxlength is not None:
+                maxlength = ops.convert_to_tensor(
+                    maxlength, name="maxlength", dtype=dtypes.int32
+                )
+                output_size = gen_math_ops.minimum(maxlength, output_size)
+            if weights is not None:
+                weights = ops.convert_to_tensor(weights, name="weights")
+                return gen_math_ops.unsorted_segment_sum(weights, arr, output_size)
+            weights = constant_op.constant([], dtype)
+            return gen_math_ops.bincount(arr, output_size, weights)
 
-    if not isinstance(arr, sparse_tensor.SparseTensor):
-      arr = ragged_tensor.convert_to_tensor_or_ragged_tensor(arr, name="arr")
-    if weights is not None:
-      if not isinstance(weights, sparse_tensor.SparseTensor):
-        weights = ragged_tensor.convert_to_tensor_or_ragged_tensor(
-            weights, name="weights")
-
-    if weights is not None and binary_output:
-      raise ValueError("binary_output and weights are mutually exclusive.")
-
-    if not arr.dtype.is_integer:
-      arr = math_ops.cast(arr, dtypes.int32)
-    if axis is None:
-      axis = 0
-
-    if axis not in [0, -1]:
-      raise ValueError("Unsupported axis value %s. Only 0 and -1 are currently "
-                       "supported." % axis)
-
-    if isinstance(arr, ragged_tensor.RaggedTensor):
-      array_is_nonempty = math_ops.reduce_prod(array_ops.shape(arr.values)) > 0
-    else:
-      array_is_nonempty = math_ops.reduce_prod(array_ops.shape(arr)) > 0
-    if isinstance(arr, sparse_tensor.SparseTensor):
-      output_size = math_ops.cast(array_is_nonempty, arr.dtype) * (
-          math_ops.reduce_max(arr.values) + 1)
-    else:
-      output_size = math_ops.cast(array_is_nonempty, arr.dtype) * (
-          math_ops.reduce_max(arr) + 1)
-    if minlength is not None:
-      minlength = ops.convert_to_tensor(
-          minlength, name="minlength", dtype=arr.dtype)
-      output_size = gen_math_ops.maximum(minlength, output_size)
-    if maxlength is not None:
-      maxlength = ops.convert_to_tensor(
-          maxlength, name="maxlength", dtype=arr.dtype)
-      output_size = gen_math_ops.minimum(maxlength, output_size)
-
-    if axis == 0:
-      if isinstance(arr, sparse_tensor.SparseTensor):
+        if not isinstance(arr, sparse_tensor.SparseTensor):
+            arr = ragged_tensor.convert_to_tensor_or_ragged_tensor(arr, name="arr")
         if weights is not None:
-          weights = validate_sparse_weights(arr, weights, dtype)
-        arr = arr.values
-      elif isinstance(arr, ragged_tensor.RaggedTensor):
-        if weights is not None:
-          weights = validate_ragged_weights(arr, weights, dtype)
-        arr = arr.values
-      else:
-        if weights is not None:
-          weights = array_ops.reshape(weights, [-1])
-        arr = array_ops.reshape(arr, [-1])
+            if not isinstance(weights, sparse_tensor.SparseTensor):
+                weights = ragged_tensor.convert_to_tensor_or_ragged_tensor(
+                    weights, name="weights"
+                )
 
-    if isinstance(arr, sparse_tensor.SparseTensor):
-      weights = validate_sparse_weights(arr, weights, dtype)
-      return gen_math_ops.sparse_bincount(
-          indices=arr.indices,
-          values=arr.values,
-          dense_shape=arr.dense_shape,
-          size=output_size,
-          weights=weights,
-          binary_output=binary_output)
-    elif isinstance(arr, ragged_tensor.RaggedTensor):
-      weights = validate_ragged_weights(arr, weights, dtype)
-      return gen_math_ops.ragged_bincount(
-          splits=arr.row_splits,
-          values=arr.values,
-          size=output_size,
-          weights=weights,
-          binary_output=binary_output)
-    else:
-      weights = validate_dense_weights(arr, weights, dtype)
-      return gen_math_ops.dense_bincount(
-          input=arr,
-          size=output_size,
-          weights=weights,
-          binary_output=binary_output)
+        if weights is not None and binary_output:
+            raise ValueError("binary_output and weights are mutually exclusive.")
+
+        if not arr.dtype.is_integer:
+            arr = math_ops.cast(arr, dtypes.int32)
+        if axis is None:
+            axis = 0
+
+        if axis not in [0, -1]:
+            raise ValueError(
+                "Unsupported axis value %s. Only 0 and -1 are currently "
+                "supported." % axis
+            )
+
+        if isinstance(arr, ragged_tensor.RaggedTensor):
+            array_is_nonempty = math_ops.reduce_prod(array_ops.shape(arr.values)) > 0
+        else:
+            array_is_nonempty = math_ops.reduce_prod(array_ops.shape(arr)) > 0
+        if isinstance(arr, sparse_tensor.SparseTensor):
+            output_size = math_ops.cast(array_is_nonempty, arr.dtype) * (
+                math_ops.reduce_max(arr.values) + 1
+            )
+        else:
+            output_size = math_ops.cast(array_is_nonempty, arr.dtype) * (
+                math_ops.reduce_max(arr) + 1
+            )
+        if minlength is not None:
+            minlength = ops.convert_to_tensor(
+                minlength, name="minlength", dtype=arr.dtype
+            )
+            output_size = gen_math_ops.maximum(minlength, output_size)
+        if maxlength is not None:
+            maxlength = ops.convert_to_tensor(
+                maxlength, name="maxlength", dtype=arr.dtype
+            )
+            output_size = gen_math_ops.minimum(maxlength, output_size)
+
+        if axis == 0:
+            if isinstance(arr, sparse_tensor.SparseTensor):
+                if weights is not None:
+                    weights = validate_sparse_weights(arr, weights, dtype)
+                arr = arr.values
+            elif isinstance(arr, ragged_tensor.RaggedTensor):
+                if weights is not None:
+                    weights = validate_ragged_weights(arr, weights, dtype)
+                arr = arr.values
+            else:
+                if weights is not None:
+                    weights = array_ops.reshape(weights, [-1])
+                arr = array_ops.reshape(arr, [-1])
+
+        if isinstance(arr, sparse_tensor.SparseTensor):
+            weights = validate_sparse_weights(arr, weights, dtype)
+            return gen_math_ops.sparse_bincount(
+                indices=arr.indices,
+                values=arr.values,
+                dense_shape=arr.dense_shape,
+                size=output_size,
+                weights=weights,
+                binary_output=binary_output,
+            )
+        elif isinstance(arr, ragged_tensor.RaggedTensor):
+            weights = validate_ragged_weights(arr, weights, dtype)
+            return gen_math_ops.ragged_bincount(
+                splits=arr.row_splits,
+                values=arr.values,
+                size=output_size,
+                weights=weights,
+                binary_output=binary_output,
+            )
+        else:
+            weights = validate_dense_weights(arr, weights, dtype)
+            return gen_math_ops.dense_bincount(
+                input=arr,
+                size=output_size,
+                weights=weights,
+                binary_output=binary_output,
+            )
 
 
 @tf_export(v1=["math.bincount", "bincount"])
 @deprecation.deprecated_endpoints("bincount")
-def bincount_v1(arr,
-                weights=None,
-                minlength=None,
-                maxlength=None,
-                dtype=dtypes.int32):
-  """Counts the number of occurrences of each value in an integer array.
+def bincount_v1(arr, weights=None, minlength=None, maxlength=None, dtype=dtypes.int32):
+    """Counts the number of occurrences of each value in an integer array.
 
   If `minlength` and `maxlength` are not given, returns a vector with length
   `tf.reduce_max(arr) + 1` if `arr` is non-empty, and length 0 otherwise.
@@ -248,18 +259,20 @@ def bincount_v1(arr,
     A vector with the same dtype as `weights` or the given `dtype`. The bin
     values.
   """
-  return bincount(arr, weights, minlength, maxlength, dtype)
+    return bincount(arr, weights, minlength, maxlength, dtype)
 
 
 @tf_export("sparse.bincount")
-def sparse_bincount(values,
-                    weights=None,
-                    axis=0,
-                    minlength=None,
-                    maxlength=None,
-                    binary_output=False,
-                    name=None):
-  """Count the number of times an integer value appears in a tensor.
+def sparse_bincount(
+    values,
+    weights=None,
+    axis=0,
+    minlength=None,
+    maxlength=None,
+    binary_output=False,
+    name=None,
+):
+    """Count the number of times an integer value appears in a tensor.
 
   This op takes an N-dimensional `Tensor`, `RaggedTensor`, or `SparseTensor`,
   and returns an N-dimensional int64 SparseTensor where element
@@ -384,143 +397,156 @@ def sparse_bincount(values,
    dense_shape=tf.Tensor([    2 10002], shape=(2,), dtype=int64))
 
   """
-  with ops.name_scope(name, "count", [values, weights]):
-    if not isinstance(values, sparse_tensor.SparseTensor):
-      values = ragged_tensor.convert_to_tensor_or_ragged_tensor(
-          values, name="values")
-    if weights is not None:
-      if not isinstance(weights, sparse_tensor.SparseTensor):
-        weights = ragged_tensor.convert_to_tensor_or_ragged_tensor(
-            weights, name="weights")
-
-    if weights is not None and binary_output:
-      raise ValueError("binary_output and weights are mutually exclusive.")
-
-    if axis is None:
-      axis = 0
-
-    if axis not in [0, -1]:
-      raise ValueError("Unsupported axis value %s. Only 0 and -1 are currently "
-                       "supported." % axis)
-
-    minlength_value = minlength if minlength is not None else -1
-    maxlength_value = maxlength if maxlength is not None else -1
-
-    if axis == 0:
-      if isinstance(values, sparse_tensor.SparseTensor):
+    with ops.name_scope(name, "count", [values, weights]):
+        if not isinstance(values, sparse_tensor.SparseTensor):
+            values = ragged_tensor.convert_to_tensor_or_ragged_tensor(
+                values, name="values"
+            )
         if weights is not None:
-          weights = validate_sparse_weights(values, weights)
-        values = values.values
-      elif isinstance(values, ragged_tensor.RaggedTensor):
-        if weights is not None:
-          weights = validate_ragged_weights(values, weights)
-        values = values.values
-      else:
-        if weights is not None:
-          weights = array_ops.reshape(weights, [-1])
-        values = array_ops.reshape(values, [-1])
+            if not isinstance(weights, sparse_tensor.SparseTensor):
+                weights = ragged_tensor.convert_to_tensor_or_ragged_tensor(
+                    weights, name="weights"
+                )
 
-    if isinstance(values, sparse_tensor.SparseTensor):
-      weights = validate_sparse_weights(values, weights)
-      c_ind, c_val, c_shape = gen_count_ops.sparse_count_sparse_output(
-          values.indices,
-          values.values,
-          values.dense_shape,
-          weights,
-          minlength=minlength_value,
-          maxlength=maxlength_value,
-          binary_output=binary_output)
-    elif isinstance(values, ragged_tensor.RaggedTensor):
-      weights = validate_ragged_weights(values, weights)
-      c_ind, c_val, c_shape = gen_count_ops.ragged_count_sparse_output(
-          values.row_splits,
-          values.values,
-          weights,
-          minlength=minlength_value,
-          maxlength=maxlength_value,
-          binary_output=binary_output)
-    else:
-      weights = validate_dense_weights(values, weights)
-      c_ind, c_val, c_shape = gen_count_ops.dense_count_sparse_output(
-          values,
-          weights=weights,
-          minlength=minlength_value,
-          maxlength=maxlength_value,
-          binary_output=binary_output)
+        if weights is not None and binary_output:
+            raise ValueError("binary_output and weights are mutually exclusive.")
 
-    return sparse_tensor.SparseTensor(c_ind, c_val, c_shape)
+        if axis is None:
+            axis = 0
+
+        if axis not in [0, -1]:
+            raise ValueError(
+                "Unsupported axis value %s. Only 0 and -1 are currently "
+                "supported." % axis
+            )
+
+        minlength_value = minlength if minlength is not None else -1
+        maxlength_value = maxlength if maxlength is not None else -1
+
+        if axis == 0:
+            if isinstance(values, sparse_tensor.SparseTensor):
+                if weights is not None:
+                    weights = validate_sparse_weights(values, weights)
+                values = values.values
+            elif isinstance(values, ragged_tensor.RaggedTensor):
+                if weights is not None:
+                    weights = validate_ragged_weights(values, weights)
+                values = values.values
+            else:
+                if weights is not None:
+                    weights = array_ops.reshape(weights, [-1])
+                values = array_ops.reshape(values, [-1])
+
+        if isinstance(values, sparse_tensor.SparseTensor):
+            weights = validate_sparse_weights(values, weights)
+            c_ind, c_val, c_shape = gen_count_ops.sparse_count_sparse_output(
+                values.indices,
+                values.values,
+                values.dense_shape,
+                weights,
+                minlength=minlength_value,
+                maxlength=maxlength_value,
+                binary_output=binary_output,
+            )
+        elif isinstance(values, ragged_tensor.RaggedTensor):
+            weights = validate_ragged_weights(values, weights)
+            c_ind, c_val, c_shape = gen_count_ops.ragged_count_sparse_output(
+                values.row_splits,
+                values.values,
+                weights,
+                minlength=minlength_value,
+                maxlength=maxlength_value,
+                binary_output=binary_output,
+            )
+        else:
+            weights = validate_dense_weights(values, weights)
+            c_ind, c_val, c_shape = gen_count_ops.dense_count_sparse_output(
+                values,
+                weights=weights,
+                minlength=minlength_value,
+                maxlength=maxlength_value,
+                binary_output=binary_output,
+            )
+
+        return sparse_tensor.SparseTensor(c_ind, c_val, c_shape)
 
 
 def validate_dense_weights(values, weights, dtype=None):
-  """Validates the passed weight tensor or creates an empty one."""
-  if weights is None:
-    if dtype:
-      return array_ops.constant([], dtype=dtype)
-    return array_ops.constant([], dtype=values.dtype)
+    """Validates the passed weight tensor or creates an empty one."""
+    if weights is None:
+        if dtype:
+            return array_ops.constant([], dtype=dtype)
+        return array_ops.constant([], dtype=values.dtype)
 
-  if not isinstance(weights, ops.Tensor):
-    raise ValueError(
-        "`weights` must be a tf.Tensor if `values` is a tf.Tensor.")
+    if not isinstance(weights, ops.Tensor):
+        raise ValueError("`weights` must be a tf.Tensor if `values` is a tf.Tensor.")
 
-  return weights
+    return weights
 
 
 def validate_sparse_weights(values, weights, dtype=None):
-  """Validates the passed weight tensor or creates an empty one."""
-  if weights is None:
-    if dtype:
-      return array_ops.constant([], dtype=dtype)
-    return array_ops.constant([], dtype=values.values.dtype)
+    """Validates the passed weight tensor or creates an empty one."""
+    if weights is None:
+        if dtype:
+            return array_ops.constant([], dtype=dtype)
+        return array_ops.constant([], dtype=values.values.dtype)
 
-  if not isinstance(weights, sparse_tensor.SparseTensor):
-    raise ValueError(
-        "`weights` must be a SparseTensor if `values` is a SparseTensor.")
+    if not isinstance(weights, sparse_tensor.SparseTensor):
+        raise ValueError(
+            "`weights` must be a SparseTensor if `values` is a SparseTensor."
+        )
 
-  checks = []
-  if weights.dense_shape is not values.dense_shape:
-    checks.append(
-        check_ops.assert_equal(
-            weights.dense_shape,
-            values.dense_shape,
-            message="'weights' and 'values' must have the same dense shape."))
-  if weights.indices is not values.indices:
-    checks.append(
-        check_ops.assert_equal(
-            weights.indices,
-            values.indices,
-            message="'weights' and 'values' must have the same indices.")
-    )
-  if checks:
-    with ops.control_dependencies(checks):
-      weights = array_ops.identity(weights.values)
-  else:
-    weights = weights.values
+    checks = []
+    if weights.dense_shape is not values.dense_shape:
+        checks.append(
+            check_ops.assert_equal(
+                weights.dense_shape,
+                values.dense_shape,
+                message="'weights' and 'values' must have the same dense shape.",
+            )
+        )
+    if weights.indices is not values.indices:
+        checks.append(
+            check_ops.assert_equal(
+                weights.indices,
+                values.indices,
+                message="'weights' and 'values' must have the same indices.",
+            )
+        )
+    if checks:
+        with ops.control_dependencies(checks):
+            weights = array_ops.identity(weights.values)
+    else:
+        weights = weights.values
 
-  return weights
+    return weights
 
 
 def validate_ragged_weights(values, weights, dtype=None):
-  """Validates the passed weight tensor or creates an empty one."""
-  if weights is None:
-    if dtype:
-      return array_ops.constant([], dtype=dtype)
-    return array_ops.constant([], dtype=values.values.dtype)
+    """Validates the passed weight tensor or creates an empty one."""
+    if weights is None:
+        if dtype:
+            return array_ops.constant([], dtype=dtype)
+        return array_ops.constant([], dtype=values.values.dtype)
 
-  if not isinstance(weights, ragged_tensor.RaggedTensor):
-    raise ValueError(
-        "`weights` must be a RaggedTensor if `values` is a RaggedTensor.")
+    if not isinstance(weights, ragged_tensor.RaggedTensor):
+        raise ValueError(
+            "`weights` must be a RaggedTensor if `values` is a RaggedTensor."
+        )
 
-  checks = []
-  if weights.row_splits is not values.row_splits:
-    checks.append(
-        check_ops.assert_equal(
-            weights.row_splits,
-            values.row_splits,
-            message="'weights' and 'values' must have the same row splits."))
-  if checks:
-    with ops.control_dependencies(checks):
-      weights = array_ops.identity(weights.values)
-  else:
-    weights = weights.values
+    checks = []
+    if weights.row_splits is not values.row_splits:
+        checks.append(
+            check_ops.assert_equal(
+                weights.row_splits,
+                values.row_splits,
+                message="'weights' and 'values' must have the same row splits.",
+            )
+        )
+    if checks:
+        with ops.control_dependencies(checks):
+            weights = array_ops.identity(weights.values)
+    else:
+        weights = weights.values
 
-  return weights
+    return weights

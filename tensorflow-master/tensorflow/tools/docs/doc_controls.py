@@ -27,28 +27,27 @@ _DEPRECATED = "_tf_docs_deprecated"
 
 
 def set_deprecated(obj: T) -> T:
-  """Explicitly tag an object as deprecated for the doc generator."""
-  setattr(obj, _DEPRECATED, None)
-  return obj
+    """Explicitly tag an object as deprecated for the doc generator."""
+    setattr(obj, _DEPRECATED, None)
+    return obj
 
 
 _INHERITABLE_HEADER = "_tf_docs_inheritable_header"
 
 
 def inheritable_header(text):
+    def _wrapped(cls):
+        setattr(cls, _INHERITABLE_HEADER, text)
+        return cls
 
-  def _wrapped(cls):
-    setattr(cls, _INHERITABLE_HEADER, text)
-    return cls
-
-  return _wrapped
+    return _wrapped
 
 
 _DO_NOT_DOC = "_tf_docs_do_not_document"
 
 
 def do_not_generate_docs(obj: T) -> T:
-  """A decorator: Do not generate docs for this object.
+    """A decorator: Do not generate docs for this object.
 
   For example the following classes:
 
@@ -121,15 +120,15 @@ def do_not_generate_docs(obj: T) -> T:
   Returns:
     obj
   """
-  setattr(obj, _DO_NOT_DOC, None)
-  return obj
+    setattr(obj, _DO_NOT_DOC, None)
+    return obj
 
 
 _DO_NOT_DOC_INHERITABLE = "_tf_docs_do_not_doc_inheritable"
 
 
 def do_not_doc_inheritable(obj: T) -> T:
-  """A decorator: Do not generate docs for this method.
+    """A decorator: Do not generate docs for this method.
 
   This version of the decorator is "inherited" by subclasses. No docs will be
   generated for the decorated method in any subclass. Even if the sub-class
@@ -184,15 +183,15 @@ def do_not_doc_inheritable(obj: T) -> T:
   Returns:
     obj
   """
-  setattr(obj, _DO_NOT_DOC_INHERITABLE, None)
-  return obj
+    setattr(obj, _DO_NOT_DOC_INHERITABLE, None)
+    return obj
 
 
 _FOR_SUBCLASS_IMPLEMENTERS = "_tf_docs_tools_for_subclass_implementers"
 
 
 def for_subclass_implementers(obj: T) -> T:
-  """A decorator: Only generate docs for this method in the defining class.
+    """A decorator: Only generate docs for this method in the defining class.
 
   Also group this method's docs with and `@abstractmethod` in the class's docs.
 
@@ -262,8 +261,8 @@ def for_subclass_implementers(obj: T) -> T:
   Returns:
     obj
   """
-  setattr(obj, _FOR_SUBCLASS_IMPLEMENTERS, None)
-  return obj
+    setattr(obj, _FOR_SUBCLASS_IMPLEMENTERS, None)
+    return obj
 
 
 do_not_doc_in_subclasses = for_subclass_implementers
@@ -272,7 +271,7 @@ _DOC_PRIVATE = "_tf_docs_doc_private"
 
 
 def doc_private(obj: T) -> T:
-  """A decorator: Generates docs for private methods/functions.
+    """A decorator: Generates docs for private methods/functions.
 
   For example:
 
@@ -296,15 +295,15 @@ def doc_private(obj: T) -> T:
     obj
   """
 
-  setattr(obj, _DOC_PRIVATE, None)
-  return obj
+    setattr(obj, _DOC_PRIVATE, None)
+    return obj
 
 
 _DOC_IN_CURRENT_AND_SUBCLASSES = "_tf_docs_doc_in_current_and_subclasses"
 
 
 def doc_in_current_and_subclasses(obj: T) -> T:
-  """Overrides `do_not_doc_in_subclasses` decorator.
+    """Overrides `do_not_doc_in_subclasses` decorator.
 
   If this decorator is set on a child class's method whose parent's method
   contains `do_not_doc_in_subclasses`, then that will be overriden and the
@@ -361,5 +360,5 @@ def doc_in_current_and_subclasses(obj: T) -> T:
     obj
   """
 
-  setattr(obj, _DOC_IN_CURRENT_AND_SUBCLASSES, None)
-  return obj
+    setattr(obj, _DOC_IN_CURRENT_AND_SUBCLASSES, None)
+    return obj

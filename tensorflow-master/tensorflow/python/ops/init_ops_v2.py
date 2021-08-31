@@ -37,7 +37,7 @@ _PARTITION_OFFSET = "partition_offset"
 
 
 class Initializer(object):
-  """Initializer base class: all initializers inherit from this class.
+    """Initializer base class: all initializers inherit from this class.
 
   Initializers should implement a `__call__` method with the following
   signature:
@@ -49,8 +49,8 @@ class Initializer(object):
   ```
   """
 
-  def __call__(self, shape, dtype=None, **kwargs):
-    """Returns a tensor object initialized as specified by the initializer.
+    def __call__(self, shape, dtype=None, **kwargs):
+        """Returns a tensor object initialized as specified by the initializer.
 
     Args:
       shape: Shape of the tensor.
@@ -67,19 +67,19 @@ class Initializer(object):
         `partition_shape=(20, 100)` and `partition_offset=(10, 0)`, it should
         return the value for `p1`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def get_config(self):
-    """Returns the configuration of the initializer as a JSON-serializable dict.
+    def get_config(self):
+        """Returns the configuration of the initializer as a JSON-serializable dict.
 
     Returns:
       A JSON-serializable Python dict.
     """
-    return {}
+        return {}
 
-  @classmethod
-  def from_config(cls, config):
-    """Instantiates an initializer from a configuration dictionary.
+    @classmethod
+    def from_config(cls, config):
+        """Instantiates an initializer from a configuration dictionary.
 
     Example:
 
@@ -96,21 +96,23 @@ class Initializer(object):
     Returns:
       An Initializer instance.
     """
-    config.pop("dtype", None)
-    return cls(**config)
+        config.pop("dtype", None)
+        return cls(**config)
 
-  def _validate_kwargs(self, kwargs, support_partition=True):
-    for kwarg in kwargs:
-      if kwarg not in [_PARTITION_SHAPE, _PARTITION_OFFSET]:
-        raise TypeError("Unknown keyword arguments: %s" % kwarg)
-      elif not support_partition:
-        raise ValueError("%s initializer doesn't support partition-related"
-                         " arguments" % self.__class__.__name__)
+    def _validate_kwargs(self, kwargs, support_partition=True):
+        for kwarg in kwargs:
+            if kwarg not in [_PARTITION_SHAPE, _PARTITION_OFFSET]:
+                raise TypeError("Unknown keyword arguments: %s" % kwarg)
+            elif not support_partition:
+                raise ValueError(
+                    "%s initializer doesn't support partition-related"
+                    " arguments" % self.__class__.__name__
+                )
 
 
 @tf_export("zeros_initializer", v1=[])
 class Zeros(Initializer):
-  """Initializer that generates tensors initialized to 0.
+    """Initializer that generates tensors initialized to 0.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -133,8 +135,8 @@ class Zeros(Initializer):
   (<tf.Variable...shape=(4,) dtype=float32...>, <tf.Variable...shape=(4, 4) ...
   """
 
-  def __call__(self, shape, dtype=dtypes.float32, **kwargs):
-    """Returns a tensor object initialized as specified by the initializer.
+    def __call__(self, shape, dtype=dtypes.float32, **kwargs):
+        """Returns a tensor object initialized as specified by the initializer.
 
     Args:
       shape: Shape of the tensor.
@@ -145,18 +147,18 @@ class Zeros(Initializer):
     Raises:
       ValuesError: If the dtype is not numeric or boolean.
     """
-    self._validate_kwargs(kwargs)
-    dtype = dtypes.as_dtype(dtype)
-    if not dtype.is_numpy_compatible or dtype == dtypes.string:
-      raise ValueError("Expected numeric or boolean dtype, got %s." % dtype)
-    if _PARTITION_SHAPE in kwargs:
-      shape = kwargs[_PARTITION_SHAPE]
-    return array_ops.zeros(shape, dtype)
+        self._validate_kwargs(kwargs)
+        dtype = dtypes.as_dtype(dtype)
+        if not dtype.is_numpy_compatible or dtype == dtypes.string:
+            raise ValueError("Expected numeric or boolean dtype, got %s." % dtype)
+        if _PARTITION_SHAPE in kwargs:
+            shape = kwargs[_PARTITION_SHAPE]
+        return array_ops.zeros(shape, dtype)
 
 
 @tf_export("ones_initializer", v1=[])
 class Ones(Initializer):
-  """Initializer that generates tensors initialized to 1.
+    """Initializer that generates tensors initialized to 1.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -179,8 +181,8 @@ class Ones(Initializer):
   (<tf.Variable...shape=(4,) dtype=float32...>, <tf.Variable...shape=(4, 4) ...
   """
 
-  def __call__(self, shape, dtype=dtypes.float32, **kwargs):
-    """Returns a tensor object initialized as specified by the initializer.
+    def __call__(self, shape, dtype=dtypes.float32, **kwargs):
+        """Returns a tensor object initialized as specified by the initializer.
 
     Args:
       shape: Shape of the tensor.
@@ -191,18 +193,18 @@ class Ones(Initializer):
     Raises:
       ValuesError: If the dtype is not numeric or boolean.
     """
-    self._validate_kwargs(kwargs)
-    dtype = dtypes.as_dtype(dtype)
-    if not dtype.is_numpy_compatible or dtype == dtypes.string:
-      raise ValueError("Expected numeric or boolean dtype, got %s." % dtype)
-    if _PARTITION_SHAPE in kwargs:
-      shape = kwargs[_PARTITION_SHAPE]
-    return array_ops.ones(shape, dtype)
+        self._validate_kwargs(kwargs)
+        dtype = dtypes.as_dtype(dtype)
+        if not dtype.is_numpy_compatible or dtype == dtypes.string:
+            raise ValueError("Expected numeric or boolean dtype, got %s." % dtype)
+        if _PARTITION_SHAPE in kwargs:
+            shape = kwargs[_PARTITION_SHAPE]
+        return array_ops.ones(shape, dtype)
 
 
 @tf_export("constant_initializer", v1=[])
 class Constant(Initializer):
-  """Initializer that generates tensors with constant values.
+    """Initializer that generates tensors with constant values.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -264,15 +266,16 @@ class Constant(Initializer):
     TypeError: If the input `value` is not one of the expected types.
   """
 
-  def __init__(self, value=0):
-    if not (np.isscalar(value) or isinstance(value, (list, tuple, np.ndarray))):
-      raise TypeError(
-          "Invalid type for initial value: %s (expected Python scalar, list or "
-          "tuple of values, or numpy.ndarray)." % type(value))
-    self.value = value
+    def __init__(self, value=0):
+        if not (np.isscalar(value) or isinstance(value, (list, tuple, np.ndarray))):
+            raise TypeError(
+                "Invalid type for initial value: %s (expected Python scalar, list or "
+                "tuple of values, or numpy.ndarray)." % type(value)
+            )
+        self.value = value
 
-  def __call__(self, shape, dtype=None, **kwargs):
-    """Returns a tensor object initialized as specified by the initializer.
+    def __call__(self, shape, dtype=None, **kwargs):
+        """Returns a tensor object initialized as specified by the initializer.
 
     Args:
       shape: Shape of the tensor.
@@ -284,18 +287,18 @@ class Constant(Initializer):
       TypeError: If the initializer cannot create a tensor of the requested
        dtype.
     """
-    self._validate_kwargs(kwargs, support_partition=False)
-    if dtype is not None:
-      dtype = dtypes.as_dtype(dtype)
-    return constant_op.constant(self.value, dtype=dtype, shape=shape)
+        self._validate_kwargs(kwargs, support_partition=False)
+        if dtype is not None:
+            dtype = dtypes.as_dtype(dtype)
+        return constant_op.constant(self.value, dtype=dtype, shape=shape)
 
-  def get_config(self):
-    return {"value": self.value}
+    def get_config(self):
+        return {"value": self.value}
 
 
 @tf_export("random_uniform_initializer", v1=[])
 class RandomUniform(Initializer):
-  """Initializer that generates tensors with a uniform distribution.
+    """Initializer that generates tensors with a uniform distribution.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -326,14 +329,14 @@ class RandomUniform(Initializer):
       `tf.random.set_seed` for behavior.
   """
 
-  def __init__(self, minval=-0.05, maxval=0.05, seed=None):
-    self.minval = minval
-    self.maxval = maxval
-    self.seed = seed
-    self._random_generator = _RandomGenerator(seed)
+    def __init__(self, minval=-0.05, maxval=0.05, seed=None):
+        self.minval = minval
+        self.maxval = maxval
+        self.seed = seed
+        self._random_generator = _RandomGenerator(seed)
 
-  def __call__(self, shape, dtype=dtypes.float32, **kwargs):
-    """Returns a tensor object initialized as specified by the initializer.
+    def __call__(self, shape, dtype=dtypes.float32, **kwargs):
+        """Returns a tensor object initialized as specified by the initializer.
 
     Args:
       shape: Shape of the tensor.
@@ -344,26 +347,23 @@ class RandomUniform(Initializer):
     Raises:
       ValueError: If the dtype is not numeric.
     """
-    self._validate_kwargs(kwargs)
-    dtype = dtypes.as_dtype(dtype)
-    if not dtype.is_floating and not dtype.is_integer:
-      raise ValueError("Expected float or integer dtype, got %s." % dtype)
-    if _PARTITION_SHAPE in kwargs:
-      shape = kwargs[_PARTITION_SHAPE]
-    return self._random_generator.random_uniform(shape, self.minval,
-                                                 self.maxval, dtype)
+        self._validate_kwargs(kwargs)
+        dtype = dtypes.as_dtype(dtype)
+        if not dtype.is_floating and not dtype.is_integer:
+            raise ValueError("Expected float or integer dtype, got %s." % dtype)
+        if _PARTITION_SHAPE in kwargs:
+            shape = kwargs[_PARTITION_SHAPE]
+        return self._random_generator.random_uniform(
+            shape, self.minval, self.maxval, dtype
+        )
 
-  def get_config(self):
-    return {
-        "minval": self.minval,
-        "maxval": self.maxval,
-        "seed": self.seed
-    }
+    def get_config(self):
+        return {"minval": self.minval, "maxval": self.maxval, "seed": self.seed}
 
 
 @tf_export("random_normal_initializer", v1=[])
 class RandomNormal(Initializer):
-  """Initializer that generates tensors with a normal distribution.
+    """Initializer that generates tensors with a normal distribution.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -394,14 +394,14 @@ class RandomNormal(Initializer):
 
   """
 
-  def __init__(self, mean=0.0, stddev=0.05, seed=None):
-    self.mean = mean
-    self.stddev = stddev
-    self.seed = seed
-    self._random_generator = _RandomGenerator(seed)
+    def __init__(self, mean=0.0, stddev=0.05, seed=None):
+        self.mean = mean
+        self.stddev = stddev
+        self.seed = seed
+        self._random_generator = _RandomGenerator(seed)
 
-  def __call__(self, shape, dtype=dtypes.float32, **kwargs):
-    """Returns a tensor object initialized as specified by the initializer.
+    def __call__(self, shape, dtype=dtypes.float32, **kwargs):
+        """Returns a tensor object initialized as specified by the initializer.
 
     Args:
       shape: Shape of the tensor.
@@ -412,23 +412,20 @@ class RandomNormal(Initializer):
     Raises:
       ValueError: If the dtype is not floating point
     """
-    self._validate_kwargs(kwargs)
-    dtype = _assert_float_dtype(dtype)
-    if _PARTITION_SHAPE in kwargs:
-      shape = kwargs[_PARTITION_SHAPE]
-    return self._random_generator.random_normal(shape, self.mean, self.stddev,
-                                                dtype)
+        self._validate_kwargs(kwargs)
+        dtype = _assert_float_dtype(dtype)
+        if _PARTITION_SHAPE in kwargs:
+            shape = kwargs[_PARTITION_SHAPE]
+        return self._random_generator.random_normal(
+            shape, self.mean, self.stddev, dtype
+        )
 
-  def get_config(self):
-    return {
-        "mean": self.mean,
-        "stddev": self.stddev,
-        "seed": self.seed
-    }
+    def get_config(self):
+        return {"mean": self.mean, "stddev": self.stddev, "seed": self.seed}
 
 
 class TruncatedNormal(Initializer):
-  """Initializer that generates a truncated normal distribution.
+    """Initializer that generates a truncated normal distribution.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -463,14 +460,14 @@ class TruncatedNormal(Initializer):
       `tf.random.set_seed` for behavior.
   """
 
-  def __init__(self, mean=0.0, stddev=0.05, seed=None):
-    self.mean = mean
-    self.stddev = stddev
-    self.seed = seed
-    self._random_generator = _RandomGenerator(seed)
+    def __init__(self, mean=0.0, stddev=0.05, seed=None):
+        self.mean = mean
+        self.stddev = stddev
+        self.seed = seed
+        self._random_generator = _RandomGenerator(seed)
 
-  def __call__(self, shape, dtype=dtypes.float32, **kwargs):
-    """Returns a tensor object initialized as specified by the initializer.
+    def __call__(self, shape, dtype=dtypes.float32, **kwargs):
+        """Returns a tensor object initialized as specified by the initializer.
 
     Args:
       shape: Shape of the tensor.
@@ -481,23 +478,20 @@ class TruncatedNormal(Initializer):
     Raises:
       ValueError: If the dtype is not floating point
     """
-    self._validate_kwargs(kwargs)
-    dtype = _assert_float_dtype(dtype)
-    if _PARTITION_SHAPE in kwargs:
-      shape = kwargs[_PARTITION_SHAPE]
-    return self._random_generator.truncated_normal(shape, self.mean,
-                                                   self.stddev, dtype)
+        self._validate_kwargs(kwargs)
+        dtype = _assert_float_dtype(dtype)
+        if _PARTITION_SHAPE in kwargs:
+            shape = kwargs[_PARTITION_SHAPE]
+        return self._random_generator.truncated_normal(
+            shape, self.mean, self.stddev, dtype
+        )
 
-  def get_config(self):
-    return {
-        "mean": self.mean,
-        "stddev": self.stddev,
-        "seed": self.seed
-    }
+    def get_config(self):
+        return {"mean": self.mean, "stddev": self.stddev, "seed": self.seed}
 
 
 class VarianceScaling(Initializer):
-  """Initializer capable of adapting its scale to the shape of weights tensors.
+    """Initializer capable of adapting its scale to the shape of weights tensors.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -542,30 +536,27 @@ class VarianceScaling(Initializer):
       "distribution" arguments.
   """
 
-  def __init__(self,
-               scale=1.0,
-               mode="fan_in",
-               distribution="truncated_normal",
-               seed=None):
-    if scale <= 0.:
-      raise ValueError("`scale` must be positive float.")
-    if mode not in {"fan_in", "fan_out", "fan_avg"}:
-      raise ValueError("Invalid `mode` argument:", mode)
-    distribution = distribution.lower()
-    # Compatibility with keras-team/keras.
-    if distribution == "normal":
-      distribution = "truncated_normal"
-    if distribution not in {"uniform", "truncated_normal",
-                            "untruncated_normal"}:
-      raise ValueError("Invalid `distribution` argument:", distribution)
-    self.scale = scale
-    self.mode = mode
-    self.distribution = distribution
-    self.seed = seed
-    self._random_generator = _RandomGenerator(seed)
+    def __init__(
+        self, scale=1.0, mode="fan_in", distribution="truncated_normal", seed=None
+    ):
+        if scale <= 0.0:
+            raise ValueError("`scale` must be positive float.")
+        if mode not in {"fan_in", "fan_out", "fan_avg"}:
+            raise ValueError("Invalid `mode` argument:", mode)
+        distribution = distribution.lower()
+        # Compatibility with keras-team/keras.
+        if distribution == "normal":
+            distribution = "truncated_normal"
+        if distribution not in {"uniform", "truncated_normal", "untruncated_normal"}:
+            raise ValueError("Invalid `distribution` argument:", distribution)
+        self.scale = scale
+        self.mode = mode
+        self.distribution = distribution
+        self.seed = seed
+        self._random_generator = _RandomGenerator(seed)
 
-  def __call__(self, shape, dtype=dtypes.float32, **kwargs):
-    """Returns a tensor object initialized as specified by the initializer.
+    def __call__(self, shape, dtype=dtypes.float32, **kwargs):
+        """Returns a tensor object initialized as specified by the initializer.
 
     Args:
       shape: Shape of the tensor.
@@ -576,40 +567,40 @@ class VarianceScaling(Initializer):
     Raises:
       ValueError: If the dtype is not floating point
     """
-    self._validate_kwargs(kwargs)
-    dtype = _assert_float_dtype(dtype)
-    scale = self.scale
-    fan_in, fan_out = _compute_fans(shape)
-    if _PARTITION_SHAPE in kwargs:
-      shape = kwargs[_PARTITION_SHAPE]
-    if self.mode == "fan_in":
-      scale /= max(1., fan_in)
-    elif self.mode == "fan_out":
-      scale /= max(1., fan_out)
-    else:
-      scale /= max(1., (fan_in + fan_out) / 2.)
-    if self.distribution == "truncated_normal":
-      # constant from scipy.stats.truncnorm.std(a=-2, b=2, loc=0., scale=1.)
-      stddev = math.sqrt(scale) / .87962566103423978
-      return self._random_generator.truncated_normal(shape, 0.0, stddev, dtype)
-    elif self.distribution == "untruncated_normal":
-      stddev = math.sqrt(scale)
-      return self._random_generator.random_normal(shape, 0.0, stddev, dtype)
-    else:
-      limit = math.sqrt(3.0 * scale)
-      return self._random_generator.random_uniform(shape, -limit, limit, dtype)
+        self._validate_kwargs(kwargs)
+        dtype = _assert_float_dtype(dtype)
+        scale = self.scale
+        fan_in, fan_out = _compute_fans(shape)
+        if _PARTITION_SHAPE in kwargs:
+            shape = kwargs[_PARTITION_SHAPE]
+        if self.mode == "fan_in":
+            scale /= max(1.0, fan_in)
+        elif self.mode == "fan_out":
+            scale /= max(1.0, fan_out)
+        else:
+            scale /= max(1.0, (fan_in + fan_out) / 2.0)
+        if self.distribution == "truncated_normal":
+            # constant from scipy.stats.truncnorm.std(a=-2, b=2, loc=0., scale=1.)
+            stddev = math.sqrt(scale) / 0.87962566103423978
+            return self._random_generator.truncated_normal(shape, 0.0, stddev, dtype)
+        elif self.distribution == "untruncated_normal":
+            stddev = math.sqrt(scale)
+            return self._random_generator.random_normal(shape, 0.0, stddev, dtype)
+        else:
+            limit = math.sqrt(3.0 * scale)
+            return self._random_generator.random_uniform(shape, -limit, limit, dtype)
 
-  def get_config(self):
-    return {
-        "scale": self.scale,
-        "mode": self.mode,
-        "distribution": self.distribution,
-        "seed": self.seed
-    }
+    def get_config(self):
+        return {
+            "scale": self.scale,
+            "mode": self.mode,
+            "distribution": self.distribution,
+            "seed": self.seed,
+        }
 
 
 class Orthogonal(Initializer):
-  """Initializer that generates an orthogonal matrix.
+    """Initializer that generates an orthogonal matrix.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -650,13 +641,13 @@ class Orthogonal(Initializer):
       ([pdf](https://arxiv.org/pdf/1312.6120.pdf))
   """
 
-  def __init__(self, gain=1.0, seed=None):
-    self.gain = gain
-    self.seed = seed
-    self._random_generator = _RandomGenerator(seed)
+    def __init__(self, gain=1.0, seed=None):
+        self.gain = gain
+        self.seed = seed
+        self._random_generator = _RandomGenerator(seed)
 
-  def __call__(self, shape, dtype=dtypes.float32, **kwargs):
-    """Returns a tensor object initialized as specified by the initializer.
+    def __call__(self, shape, dtype=dtypes.float32, **kwargs):
+        """Returns a tensor object initialized as specified by the initializer.
 
     Args:
       shape: Shape of the tensor.
@@ -668,37 +659,38 @@ class Orthogonal(Initializer):
       ValueError: If the dtype is not floating point or the input shape is not
        valid.
     """
-    self._validate_kwargs(kwargs, support_partition=False)
-    dtype = _assert_float_dtype(dtype)
-    # Check the shape
-    if len(shape) < 2:
-      raise ValueError("The tensor to initialize must be "
-                       "at least two-dimensional")
-    # Flatten the input shape with the last dimension remaining
-    # its original shape so it works for conv2d
-    num_rows = 1
-    for dim in shape[:-1]:
-      num_rows *= dim
-    num_cols = shape[-1]
-    flat_shape = (max(num_cols, num_rows), min(num_cols, num_rows))
+        self._validate_kwargs(kwargs, support_partition=False)
+        dtype = _assert_float_dtype(dtype)
+        # Check the shape
+        if len(shape) < 2:
+            raise ValueError(
+                "The tensor to initialize must be " "at least two-dimensional"
+            )
+        # Flatten the input shape with the last dimension remaining
+        # its original shape so it works for conv2d
+        num_rows = 1
+        for dim in shape[:-1]:
+            num_rows *= dim
+        num_cols = shape[-1]
+        flat_shape = (max(num_cols, num_rows), min(num_cols, num_rows))
 
-    # Generate a random matrix
-    a = self._random_generator.random_normal(flat_shape, dtype=dtype)
-    # Compute the qr factorization
-    q, r = gen_linalg_ops.qr(a, full_matrices=False)
-    # Make Q uniform
-    d = array_ops.diag_part(r)
-    q *= math_ops.sign(d)
-    if num_rows < num_cols:
-      q = array_ops.matrix_transpose(q)
-    return self.gain * array_ops.reshape(q, shape)
+        # Generate a random matrix
+        a = self._random_generator.random_normal(flat_shape, dtype=dtype)
+        # Compute the qr factorization
+        q, r = gen_linalg_ops.qr(a, full_matrices=False)
+        # Make Q uniform
+        d = array_ops.diag_part(r)
+        q *= math_ops.sign(d)
+        if num_rows < num_cols:
+            q = array_ops.matrix_transpose(q)
+        return self.gain * array_ops.reshape(q, shape)
 
-  def get_config(self):
-    return {"gain": self.gain, "seed": self.seed}
+    def get_config(self):
+        return {"gain": self.gain, "seed": self.seed}
 
 
 class Identity(Initializer):
-  """Initializer that generates the identity matrix.
+    """Initializer that generates the identity matrix.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -724,11 +716,11 @@ class Identity(Initializer):
     gain: Multiplicative factor to apply to the identity matrix.
   """
 
-  def __init__(self, gain=1.0):
-    self.gain = gain
+    def __init__(self, gain=1.0):
+        self.gain = gain
 
-  def __call__(self, shape, dtype=dtypes.float32, **kwargs):
-    """Returns a tensor object initialized as specified by the initializer.
+    def __call__(self, shape, dtype=dtypes.float32, **kwargs):
+        """Returns a tensor object initialized as specified by the initializer.
 
     Args:
       shape: Shape of the tensor.
@@ -740,20 +732,21 @@ class Identity(Initializer):
       ValueError: If the dtype is not floating point
       ValueError: If the requested shape does not have exactly two axes.
     """
-    self._validate_kwargs(kwargs, support_partition=False)
-    dtype = _assert_float_dtype(dtype)
-    if len(shape) != 2:
-      raise ValueError(
-          "Identity matrix initializer can only be used for 2D matrices.")
-    initializer = linalg_ops_impl.eye(*shape, dtype=dtype)
-    return self.gain * initializer
+        self._validate_kwargs(kwargs, support_partition=False)
+        dtype = _assert_float_dtype(dtype)
+        if len(shape) != 2:
+            raise ValueError(
+                "Identity matrix initializer can only be used for 2D matrices."
+            )
+        initializer = linalg_ops_impl.eye(*shape, dtype=dtype)
+        return self.gain * initializer
 
-  def get_config(self):
-    return {"gain": self.gain}
+    def get_config(self):
+        return {"gain": self.gain}
 
 
 class GlorotUniform(VarianceScaling):
-  """The Glorot uniform initializer, also called Xavier uniform initializer.
+    """The Glorot uniform initializer, also called Xavier uniform initializer.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -787,19 +780,17 @@ class GlorotUniform(VarianceScaling):
       ([pdf](http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf))
   """
 
-  def __init__(self, seed=None):
-    super(GlorotUniform, self).__init__(
-        scale=1.0,
-        mode="fan_avg",
-        distribution="uniform",
-        seed=seed)
+    def __init__(self, seed=None):
+        super(GlorotUniform, self).__init__(
+            scale=1.0, mode="fan_avg", distribution="uniform", seed=seed
+        )
 
-  def get_config(self):
-    return {"seed": self.seed}
+    def get_config(self):
+        return {"seed": self.seed}
 
 
 class GlorotNormal(VarianceScaling):
-  """The Glorot normal initializer, also called Xavier normal initializer.
+    """The Glorot normal initializer, also called Xavier normal initializer.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -833,15 +824,13 @@ class GlorotNormal(VarianceScaling):
       ([pdf](http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf))
   """
 
-  def __init__(self, seed=None):
-    super(GlorotNormal, self).__init__(
-        scale=1.0,
-        mode="fan_avg",
-        distribution="truncated_normal",
-        seed=seed)
+    def __init__(self, seed=None):
+        super(GlorotNormal, self).__init__(
+            scale=1.0, mode="fan_avg", distribution="truncated_normal", seed=seed
+        )
 
-  def get_config(self):
-    return {"seed": self.seed}
+    def get_config(self):
+        return {"seed": self.seed}
 
 
 # Aliases.
@@ -862,7 +851,7 @@ identity_initializer = Identity
 
 
 def lecun_normal(seed=None):
-  """LeCun normal initializer.
+    """LeCun normal initializer.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -902,12 +891,13 @@ def lecun_normal(seed=None):
       - Efficient Backprop,
       [Lecun et al., 1998](http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf)
   """
-  return VarianceScaling(
-      scale=1., mode="fan_in", distribution="truncated_normal", seed=seed)
+    return VarianceScaling(
+        scale=1.0, mode="fan_in", distribution="truncated_normal", seed=seed
+    )
 
 
 def lecun_uniform(seed=None):
-  """LeCun uniform initializer.
+    """LeCun uniform initializer.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -945,12 +935,11 @@ def lecun_uniform(seed=None):
       - Efficient Backprop,
       [Lecun et al., 1998](http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf)
   """
-  return VarianceScaling(
-      scale=1., mode="fan_in", distribution="uniform", seed=seed)
+    return VarianceScaling(scale=1.0, mode="fan_in", distribution="uniform", seed=seed)
 
 
 def he_normal(seed=None):
-  """He normal initializer.
+    """He normal initializer.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -985,12 +974,13 @@ def he_normal(seed=None):
       [He et al., 2015](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/He_Delving_Deep_into_ICCV_2015_paper.html) # pylint: disable=line-too-long
       ([pdf](https://www.cv-foundation.org/openaccess/content_iccv_2015/papers/He_Delving_Deep_into_ICCV_2015_paper.pdf))
   """
-  return VarianceScaling(
-      scale=2., mode="fan_in", distribution="truncated_normal", seed=seed)
+    return VarianceScaling(
+        scale=2.0, mode="fan_in", distribution="truncated_normal", seed=seed
+    )
 
 
 def he_uniform(seed=None):
-  """He uniform variance scaling initializer.
+    """He uniform variance scaling initializer.
 
   Initializers allow you to pre-specify an initialization strategy, encoded in
   the Initializer object, without knowing the shape and dtype of the variable
@@ -1025,15 +1015,14 @@ def he_uniform(seed=None):
       [He et al., 2015](https://www.cv-foundation.org/openaccess/content_iccv_2015/html/He_Delving_Deep_into_ICCV_2015_paper.html) # pylint: disable=line-too-long
       ([pdf](https://www.cv-foundation.org/openaccess/content_iccv_2015/papers/He_Delving_Deep_into_ICCV_2015_paper.pdf))
   """
-  return VarianceScaling(
-      scale=2., mode="fan_in", distribution="uniform", seed=seed)
+    return VarianceScaling(scale=2.0, mode="fan_in", distribution="uniform", seed=seed)
 
 
 # Utility functions.
 
 
 def _assert_float_dtype(dtype):
-  """Validate and return floating point type based on `dtype`.
+    """Validate and return floating point type based on `dtype`.
 
   `dtype` must be a floating point type.
 
@@ -1046,49 +1035,49 @@ def _assert_float_dtype(dtype):
   Raises:
     ValueError: if `dtype` is not a floating point type.
   """
-  dtype = dtypes.as_dtype(dtype)
-  if not dtype.is_floating:
-    raise ValueError("Expected floating point type, got %s." % dtype)
-  return dtype
+    dtype = dtypes.as_dtype(dtype)
+    if not dtype.is_floating:
+        raise ValueError("Expected floating point type, got %s." % dtype)
+    return dtype
 
 
 class _RandomGenerator(object):
-  """Random generator that selects appropriate random ops."""
+    """Random generator that selects appropriate random ops."""
 
-  def __init__(self, seed=None):
-    super(_RandomGenerator, self).__init__()
-    if seed is not None:
-      # Stateless random ops requires 2-int seed.
-      self.seed = [seed, 0]
-    else:
-      self.seed = None
+    def __init__(self, seed=None):
+        super(_RandomGenerator, self).__init__()
+        if seed is not None:
+            # Stateless random ops requires 2-int seed.
+            self.seed = [seed, 0]
+        else:
+            self.seed = None
 
-  def random_normal(self, shape, mean=0.0, stddev=1, dtype=dtypes.float32):
-    """A deterministic random normal if seed is passed."""
-    if self.seed:
-      op = stateless_random_ops.stateless_random_normal
-    else:
-      op = random_ops.random_normal
-    return op(
-        shape=shape, mean=mean, stddev=stddev, dtype=dtype, seed=self.seed)
+    def random_normal(self, shape, mean=0.0, stddev=1, dtype=dtypes.float32):
+        """A deterministic random normal if seed is passed."""
+        if self.seed:
+            op = stateless_random_ops.stateless_random_normal
+        else:
+            op = random_ops.random_normal
+        return op(shape=shape, mean=mean, stddev=stddev, dtype=dtype, seed=self.seed)
 
-  def random_uniform(self, shape, minval, maxval, dtype):
-    """A deterministic random uniform if seed is passed."""
-    if self.seed:
-      op = stateless_random_ops.stateless_random_uniform
-    else:
-      op = random_ops.random_uniform
-    return op(
-        shape=shape, minval=minval, maxval=maxval, dtype=dtype, seed=self.seed)
+    def random_uniform(self, shape, minval, maxval, dtype):
+        """A deterministic random uniform if seed is passed."""
+        if self.seed:
+            op = stateless_random_ops.stateless_random_uniform
+        else:
+            op = random_ops.random_uniform
+        return op(
+            shape=shape, minval=minval, maxval=maxval, dtype=dtype, seed=self.seed
+        )
 
-  def truncated_normal(self, shape, mean, stddev, dtype):
-    """A deterministic truncated normal if seed is passed."""
-    if self.seed:
-      op = stateless_random_ops.stateless_truncated_normal
-    else:
-      op = random_ops.truncated_normal
-    return op(
-        shape=shape, mean=mean, stddev=stddev, dtype=dtype, seed=self.seed)
+    def truncated_normal(self, shape, mean, stddev, dtype):
+        """A deterministic truncated normal if seed is passed."""
+        if self.seed:
+            op = stateless_random_ops.stateless_truncated_normal
+        else:
+            op = random_ops.truncated_normal
+        return op(shape=shape, mean=mean, stddev=stddev, dtype=dtype, seed=self.seed)
+
 
 # Compatibility aliases
 

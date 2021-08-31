@@ -32,7 +32,7 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export("train.Coordinator")
 class Coordinator(object):
-  """A coordinator for threads.
+    """A coordinator for threads.
 
   This class implements a simple mechanism to coordinate the termination of a
   set of threads.
@@ -127,8 +127,8 @@ class Coordinator(object):
   ```
   """
 
-  def __init__(self, clean_stop_exception_types=None):
-    """Create a new Coordinator.
+    def __init__(self, clean_stop_exception_types=None):
+        """Create a new Coordinator.
 
     Args:
       clean_stop_exception_types: Optional tuple of Exception types that should
@@ -139,27 +139,27 @@ class Coordinator(object):
         the end of input. When feeding training data from a Python iterator it
         is common to add `StopIteration` to this list.
     """
-    if clean_stop_exception_types is None:
-      clean_stop_exception_types = (errors.OutOfRangeError,)
-    self._clean_stop_exception_types = tuple(clean_stop_exception_types)
-    # Protects all attributes.
-    self._lock = threading.Lock()
-    # Event set when threads must stop.
-    self._stop_event = threading.Event()
-    # Python exc_info to report.
-    # If not None, it should hold the returned value of sys.exc_info(), which is
-    # a tuple containing exception (type, value, traceback).
-    self._exc_info_to_raise = None
-    # True if we have called join() already.
-    self._joined = False
-    # Set of threads registered for joining when join() is called.  These
-    # threads will be joined in addition to the threads passed to the join()
-    # call.  It's ok if threads are both registered and passed to the join()
-    # call.
-    self._registered_threads = set()
+        if clean_stop_exception_types is None:
+            clean_stop_exception_types = (errors.OutOfRangeError,)
+        self._clean_stop_exception_types = tuple(clean_stop_exception_types)
+        # Protects all attributes.
+        self._lock = threading.Lock()
+        # Event set when threads must stop.
+        self._stop_event = threading.Event()
+        # Python exc_info to report.
+        # If not None, it should hold the returned value of sys.exc_info(), which is
+        # a tuple containing exception (type, value, traceback).
+        self._exc_info_to_raise = None
+        # True if we have called join() already.
+        self._joined = False
+        # Set of threads registered for joining when join() is called.  These
+        # threads will be joined in addition to the threads passed to the join()
+        # call.  It's ok if threads are both registered and passed to the join()
+        # call.
+        self._registered_threads = set()
 
-  def _filter_exception(self, ex):
-    """Check if the exception indicated in 'ex' should be ignored.
+    def _filter_exception(self, ex):
+        """Check if the exception indicated in 'ex' should be ignored.
 
     This method examines `ex` to check if it is an exception that should be
     reported to the users.  If yes, it returns `ex` as is, otherwise it returns
@@ -175,17 +175,17 @@ class Coordinator(object):
     Returns:
       ex or None.
     """
-    if isinstance(ex, tuple):
-      ex2 = ex[1]
-    else:
-      ex2 = ex
-    if isinstance(ex2, self._clean_stop_exception_types):
-      # Ignore the exception.
-      ex = None
-    return ex
+        if isinstance(ex, tuple):
+            ex2 = ex[1]
+        else:
+            ex2 = ex
+        if isinstance(ex2, self._clean_stop_exception_types):
+            # Ignore the exception.
+            ex = None
+        return ex
 
-  def request_stop(self, ex=None):
-    """Request that the threads stop.
+    def request_stop(self, ex=None):
+        """Request that the threads stop.
 
     After this is called, calls to `should_stop()` will return `True`.
 
@@ -198,73 +198,79 @@ class Coordinator(object):
         `sys.exc_info()`.  If this is the first call to `request_stop()` the
         corresponding exception is recorded and re-raised from `join()`.
     """
-    with self._lock:
-      ex = self._filter_exception(ex)
-      # If we have already joined the coordinator the exception will not have a
-      # chance to be reported, so just raise it normally.  This can happen if
-      # you continue to use a session have having stopped and joined the
-      # coordinator threads.
-      if self._joined:
-        if isinstance(ex, tuple):
-          six.reraise(*ex)
-        elif ex is not None:
-          # NOTE(touts): This is bogus if request_stop() is not called
-          # from the exception handler that raised ex.
-          six.reraise(*sys.exc_info())
-      if not self._stop_event.is_set():
-        if ex and self._exc_info_to_raise is None:
-          if isinstance(ex, tuple):
-            logging.info("Error reported to Coordinator: %s",
-                         compat.as_str_any(ex[1]),
-                         exc_info=ex)
-            self._exc_info_to_raise = ex
-          else:
-            logging.info("Error reported to Coordinator: %s, %s",
-                         type(ex),
-                         compat.as_str_any(ex))
-            self._exc_info_to_raise = sys.exc_info()
-          # self._exc_info_to_raise should contain a tuple containing exception
-          # (type, value, traceback)
-          if (len(self._exc_info_to_raise) != 3 or
-              not self._exc_info_to_raise[0] or
-              not self._exc_info_to_raise[1]):
-            # Raise, catch and record the exception here so that error happens
-            # where expected.
-            try:
-              raise ValueError(
-                  "ex must be a tuple or sys.exc_info must return the current "
-                  "exception: %s"
-                  % self._exc_info_to_raise)
-            except ValueError:
-              # Record this error so it kills the coordinator properly.
-              # NOTE(touts): As above, this is bogus if request_stop() is not
-              # called from the exception handler that raised ex.
-              self._exc_info_to_raise = sys.exc_info()
+        with self._lock:
+            ex = self._filter_exception(ex)
+            # If we have already joined the coordinator the exception will not have a
+            # chance to be reported, so just raise it normally.  This can happen if
+            # you continue to use a session have having stopped and joined the
+            # coordinator threads.
+            if self._joined:
+                if isinstance(ex, tuple):
+                    six.reraise(*ex)
+                elif ex is not None:
+                    # NOTE(touts): This is bogus if request_stop() is not called
+                    # from the exception handler that raised ex.
+                    six.reraise(*sys.exc_info())
+            if not self._stop_event.is_set():
+                if ex and self._exc_info_to_raise is None:
+                    if isinstance(ex, tuple):
+                        logging.info(
+                            "Error reported to Coordinator: %s",
+                            compat.as_str_any(ex[1]),
+                            exc_info=ex,
+                        )
+                        self._exc_info_to_raise = ex
+                    else:
+                        logging.info(
+                            "Error reported to Coordinator: %s, %s",
+                            type(ex),
+                            compat.as_str_any(ex),
+                        )
+                        self._exc_info_to_raise = sys.exc_info()
+                    # self._exc_info_to_raise should contain a tuple containing exception
+                    # (type, value, traceback)
+                    if (
+                        len(self._exc_info_to_raise) != 3
+                        or not self._exc_info_to_raise[0]
+                        or not self._exc_info_to_raise[1]
+                    ):
+                        # Raise, catch and record the exception here so that error happens
+                        # where expected.
+                        try:
+                            raise ValueError(
+                                "ex must be a tuple or sys.exc_info must return the current "
+                                "exception: %s" % self._exc_info_to_raise
+                            )
+                        except ValueError:
+                            # Record this error so it kills the coordinator properly.
+                            # NOTE(touts): As above, this is bogus if request_stop() is not
+                            # called from the exception handler that raised ex.
+                            self._exc_info_to_raise = sys.exc_info()
 
-        self._stop_event.set()
+                self._stop_event.set()
 
-  def clear_stop(self):
-    """Clears the stop flag.
+    def clear_stop(self):
+        """Clears the stop flag.
 
     After this is called, calls to `should_stop()` will return `False`.
     """
-    with self._lock:
-      self._joined = False
-      self._exc_info_to_raise = None
-      if self._stop_event.is_set():
-        self._stop_event.clear()
+        with self._lock:
+            self._joined = False
+            self._exc_info_to_raise = None
+            if self._stop_event.is_set():
+                self._stop_event.clear()
 
-  def should_stop(self):
-    """Check if stop was requested.
+    def should_stop(self):
+        """Check if stop was requested.
 
     Returns:
       True if a stop was requested.
     """
-    return self._stop_event.is_set()
+        return self._stop_event.is_set()
 
-  @contextlib.contextmanager
-  def stop_on_exception(self):
-    """Context manager to request stop when an Exception is raised.
+    @contextlib.contextmanager
+    def stop_on_exception(self):
+        """Context manager to request stop when an Exception is raised.
 
     Code that uses a coordinator must catch exceptions and pass
     them to the `request_stop()` method to stop the other threads
@@ -293,13 +299,13 @@ class Coordinator(object):
     Yields:
       nothing.
     """
-    try:
-      yield
-    except:  # pylint: disable=bare-except
-      self.request_stop(ex=sys.exc_info())
+        try:
+            yield
+        except:  # pylint: disable=bare-except
+            self.request_stop(ex=sys.exc_info())
 
-  def wait_for_stop(self, timeout=None):
-    """Wait till the Coordinator is told to stop.
+    def wait_for_stop(self, timeout=None):
+        """Wait till the Coordinator is told to stop.
 
     Args:
       timeout: Float.  Sleep for up to that many seconds waiting for
@@ -308,20 +314,19 @@ class Coordinator(object):
     Returns:
       True if the Coordinator is told stop, False if the timeout expired.
     """
-    return self._stop_event.wait(timeout)
+        return self._stop_event.wait(timeout)
 
-  def register_thread(self, thread):
-    """Register a thread to join.
+    def register_thread(self, thread):
+        """Register a thread to join.
 
     Args:
       thread: A Python thread to join.
     """
-    with self._lock:
-      self._registered_threads.add(thread)
+        with self._lock:
+            self._registered_threads.add(thread)
 
-  def join(self, threads=None, stop_grace_period_secs=120,
-           ignore_live_threads=False):
-    """Wait for threads to terminate.
+    def join(self, threads=None, stop_grace_period_secs=120, ignore_live_threads=False):
+        """Wait for threads to terminate.
 
     This call blocks until a set of threads have terminated.  The set of thread
     is the union of the threads passed in the `threads` argument and the list
@@ -349,68 +354,71 @@ class Coordinator(object):
       RuntimeError: If any thread is still alive after `request_stop()`
         is called and the grace period expires.
     """
-    # Threads registered after this call will not be joined.
-    with self._lock:
-      if threads is None:
-        threads = self._registered_threads
-      else:
-        threads = self._registered_threads.union(set(threads))
-      # Copy the set into a list to avoid race conditions where a new thread
-      # is added while we are waiting.
-      threads = list(threads)
+        # Threads registered after this call will not be joined.
+        with self._lock:
+            if threads is None:
+                threads = self._registered_threads
+            else:
+                threads = self._registered_threads.union(set(threads))
+            # Copy the set into a list to avoid race conditions where a new thread
+            # is added while we are waiting.
+            threads = list(threads)
 
-    # Wait for all threads to stop or for request_stop() to be called.
-    while any(t.is_alive() for t in threads) and not self.wait_for_stop(1.0):
-      pass
+        # Wait for all threads to stop or for request_stop() to be called.
+        while any(t.is_alive() for t in threads) and not self.wait_for_stop(1.0):
+            pass
 
-    # If any thread is still alive, wait for the grace period to expire.
-    # By the time this check is executed, threads may still be shutting down,
-    # so we add a sleep of increasing duration to give them a chance to shut
-    # down without losing too many cycles.
-    # The sleep duration is limited to the remaining grace duration.
-    stop_wait_secs = 0.001
-    while any(t.is_alive() for t in threads) and stop_grace_period_secs >= 0.0:
-      time.sleep(stop_wait_secs)
-      stop_grace_period_secs -= stop_wait_secs
-      stop_wait_secs = 2 * stop_wait_secs
-      # Keep the waiting period within sane bounds.
-      # The minimum value is to avoid decreasing stop_wait_secs to a value
-      # that could cause stop_grace_period_secs to remain unchanged.
-      stop_wait_secs = max(min(stop_wait_secs, stop_grace_period_secs), 0.001)
+        # If any thread is still alive, wait for the grace period to expire.
+        # By the time this check is executed, threads may still be shutting down,
+        # so we add a sleep of increasing duration to give them a chance to shut
+        # down without losing too many cycles.
+        # The sleep duration is limited to the remaining grace duration.
+        stop_wait_secs = 0.001
+        while any(t.is_alive() for t in threads) and stop_grace_period_secs >= 0.0:
+            time.sleep(stop_wait_secs)
+            stop_grace_period_secs -= stop_wait_secs
+            stop_wait_secs = 2 * stop_wait_secs
+            # Keep the waiting period within sane bounds.
+            # The minimum value is to avoid decreasing stop_wait_secs to a value
+            # that could cause stop_grace_period_secs to remain unchanged.
+            stop_wait_secs = max(min(stop_wait_secs, stop_grace_period_secs), 0.001)
 
-    # List the threads still alive after the grace period.
-    stragglers = [t.name for t in threads if t.is_alive()]
+        # List the threads still alive after the grace period.
+        stragglers = [t.name for t in threads if t.is_alive()]
 
-    # Terminate with an exception if appropriate.
-    with self._lock:
-      self._joined = True
-      self._registered_threads = set()
-      if self._exc_info_to_raise:
-        six.reraise(*self._exc_info_to_raise)
-      elif stragglers:
-        if ignore_live_threads:
-          logging.info("Coordinator stopped with threads still running: %s",
-                       " ".join(stragglers))
-        else:
-          raise RuntimeError(
-              "Coordinator stopped with threads still running: %s" %
-              " ".join(stragglers))
+        # Terminate with an exception if appropriate.
+        with self._lock:
+            self._joined = True
+            self._registered_threads = set()
+            if self._exc_info_to_raise:
+                six.reraise(*self._exc_info_to_raise)
+            elif stragglers:
+                if ignore_live_threads:
+                    logging.info(
+                        "Coordinator stopped with threads still running: %s",
+                        " ".join(stragglers),
+                    )
+                else:
+                    raise RuntimeError(
+                        "Coordinator stopped with threads still running: %s"
+                        % " ".join(stragglers)
+                    )
 
-  @property
-  def joined(self):
-    return self._joined
+    @property
+    def joined(self):
+        return self._joined
 
-  def raise_requested_exception(self):
-    """If an exception has been passed to `request_stop`, this raises it."""
-    with self._lock:
-      if self._exc_info_to_raise:
-        six.reraise(*self._exc_info_to_raise)
+    def raise_requested_exception(self):
+        """If an exception has been passed to `request_stop`, this raises it."""
+        with self._lock:
+            if self._exc_info_to_raise:
+                six.reraise(*self._exc_info_to_raise)
 
 
 # Threads for the standard services.
 @tf_export(v1=["train.LooperThread"])
 class LooperThread(threading.Thread):
-  """A thread that runs code repeatedly, optionally on a timer.
+    """A thread that runs code repeatedly, optionally on a timer.
 
   This thread class is intended to be used with a `Coordinator`.  It repeatedly
   runs code specified either as `target` and `args` or by the `run_loop()`
@@ -426,9 +434,8 @@ class LooperThread(threading.Thread):
   You typically pass looper threads to the supervisor `Join()` method.
   """
 
-  def __init__(self, coord, timer_interval_secs, target=None, args=None,
-               kwargs=None):
-    """Create a LooperThread.
+    def __init__(self, coord, timer_interval_secs, target=None, args=None, kwargs=None):
+        """Create a LooperThread.
 
     Args:
       coord: A Coordinator.
@@ -441,24 +448,25 @@ class LooperThread(threading.Thread):
     Raises:
       ValueError: If one of the arguments is invalid.
     """
-    if not isinstance(coord, Coordinator):
-      raise ValueError("'coord' argument must be a Coordinator: %s" % coord)
-    super(LooperThread, self).__init__()
-    self.daemon = True
-    self._coord = coord
-    self._timer_interval_secs = timer_interval_secs
-    self._target = target
-    if self._target:
-      self._args = args or ()
-      self._kwargs = kwargs or {}
-    elif args or kwargs:
-      raise ValueError("'args' and 'kwargs' argument require that you also "
-                       "pass 'target'")
-    self._coord.register_thread(self)
+        if not isinstance(coord, Coordinator):
+            raise ValueError("'coord' argument must be a Coordinator: %s" % coord)
+        super(LooperThread, self).__init__()
+        self.daemon = True
+        self._coord = coord
+        self._timer_interval_secs = timer_interval_secs
+        self._target = target
+        if self._target:
+            self._args = args or ()
+            self._kwargs = kwargs or {}
+        elif args or kwargs:
+            raise ValueError(
+                "'args' and 'kwargs' argument require that you also " "pass 'target'"
+            )
+        self._coord.register_thread(self)
 
-  @staticmethod
-  def loop(coord, timer_interval_secs, target, args=None, kwargs=None):
-    """Start a LooperThread that calls a function periodically.
+    @staticmethod
+    def loop(coord, timer_interval_secs, target, args=None, kwargs=None):
+        """Start a LooperThread that calls a function periodically.
 
     If `timer_interval_secs` is None the thread calls `target(args)`
     repeatedly.  Otherwise `target(args)` is called every `timer_interval_secs`
@@ -475,35 +483,36 @@ class LooperThread(threading.Thread):
     Returns:
       The started thread.
     """
-    looper = LooperThread(coord, timer_interval_secs, target=target, args=args,
-                          kwargs=kwargs)
-    looper.start()
-    return looper
+        looper = LooperThread(
+            coord, timer_interval_secs, target=target, args=args, kwargs=kwargs
+        )
+        looper.start()
+        return looper
 
-  def run(self):
-    with self._coord.stop_on_exception():
-      self.start_loop()
-      if self._timer_interval_secs is None:
-        # Call back-to-back.
-        while not self._coord.should_stop():
-          self.run_loop()
-      else:
-        # Next time at which to call run_loop(), starts as 'now'.
-        next_timer_time = time.time()
-        while not self._coord.wait_for_stop(next_timer_time - time.time()):
-          next_timer_time += self._timer_interval_secs
-          self.run_loop()
-      self.stop_loop()
+    def run(self):
+        with self._coord.stop_on_exception():
+            self.start_loop()
+            if self._timer_interval_secs is None:
+                # Call back-to-back.
+                while not self._coord.should_stop():
+                    self.run_loop()
+            else:
+                # Next time at which to call run_loop(), starts as 'now'.
+                next_timer_time = time.time()
+                while not self._coord.wait_for_stop(next_timer_time - time.time()):
+                    next_timer_time += self._timer_interval_secs
+                    self.run_loop()
+            self.stop_loop()
 
-  def start_loop(self):
-    """Called when the thread starts."""
-    pass
+    def start_loop(self):
+        """Called when the thread starts."""
+        pass
 
-  def stop_loop(self):
-    """Called when the thread stops."""
-    pass
+    def stop_loop(self):
+        """Called when the thread stops."""
+        pass
 
-  def run_loop(self):
-    """Called at 'timer_interval_secs' boundaries."""
-    if self._target:
-      self._target(*self._args, **self._kwargs)
+    def run_loop(self):
+        """Called at 'timer_interval_secs' boundaries."""
+        if self._target:
+            self._target(*self._args, **self._kwargs)

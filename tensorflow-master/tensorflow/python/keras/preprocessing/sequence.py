@@ -26,9 +26,9 @@ skipgrams = sequence.skipgrams
 _remove_long_seq = sequence._remove_long_seq  # pylint: disable=protected-access
 
 
-@keras_export('keras.preprocessing.sequence.TimeseriesGenerator')
+@keras_export("keras.preprocessing.sequence.TimeseriesGenerator")
 class TimeseriesGenerator(sequence.TimeseriesGenerator, data_utils.Sequence):
-  """Utility class for generating batches of temporal data.
+    """Utility class for generating batches of temporal data.
 
   This class takes in a sequence of data-points gathered at
   equal intervals, along with time series parameters such as
@@ -82,13 +82,15 @@ class TimeseriesGenerator(sequence.TimeseriesGenerator, data_utils.Sequence):
                         np.array([[10], [11]]))
   ```
   """
-  pass
+
+    pass
 
 
-@keras_export('keras.preprocessing.sequence.pad_sequences')
-def pad_sequences(sequences, maxlen=None, dtype='int32',
-                  padding='pre', truncating='pre', value=0.):
-  """Pads sequences to the same length.
+@keras_export("keras.preprocessing.sequence.pad_sequences")
+def pad_sequences(
+    sequences, maxlen=None, dtype="int32", padding="pre", truncating="pre", value=0.0
+):
+    """Pads sequences to the same length.
 
   This function transforms a list (of length `num_samples`)
   of sequences (lists of integers)
@@ -149,10 +151,15 @@ def pad_sequences(sequences, maxlen=None, dtype='int32',
       ValueError: In case of invalid values for `truncating` or `padding`,
           or in case of invalid shape for a `sequences` entry.
   """
-  return sequence.pad_sequences(
-      sequences, maxlen=maxlen, dtype=dtype,
-      padding=padding, truncating=truncating, value=value)
+    return sequence.pad_sequences(
+        sequences,
+        maxlen=maxlen,
+        dtype=dtype,
+        padding=padding,
+        truncating=truncating,
+        value=value,
+    )
 
-keras_export(
-    'keras.preprocessing.sequence.make_sampling_table')(make_sampling_table)
-keras_export('keras.preprocessing.sequence.skipgrams')(skipgrams)
+
+keras_export("keras.preprocessing.sequence.make_sampling_table")(make_sampling_table)
+keras_export("keras.preprocessing.sequence.skipgrams")(skipgrams)

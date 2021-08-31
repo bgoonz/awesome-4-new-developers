@@ -29,7 +29,7 @@ __all__ = []
 @tf_export("linalg.LinearOperatorInversion")
 @linear_operator.make_composite_tensor
 class LinearOperatorInversion(linear_operator.LinearOperator):
-  """`LinearOperator` representing the inverse of another operator.
+    """`LinearOperator` representing the inverse of another operator.
 
   This operator represents the inverse of another operator.
 
@@ -74,14 +74,16 @@ class LinearOperatorInversion(linear_operator.LinearOperator):
     way.
   """
 
-  def __init__(self,
-               operator,
-               is_non_singular=None,
-               is_self_adjoint=None,
-               is_positive_definite=None,
-               is_square=None,
-               name=None):
-    r"""Initialize a `LinearOperatorInversion`.
+    def __init__(
+        self,
+        operator,
+        is_non_singular=None,
+        is_self_adjoint=None,
+        is_positive_definite=None,
+        is_square=None,
+        name=None,
+    ):
+        r"""Initialize a `LinearOperatorInversion`.
 
     `LinearOperatorInversion` is initialized with an operator `A`.  The `solve`
     and `matmul` methods are effectively swapped.  E.g.
@@ -114,106 +116,122 @@ class LinearOperatorInversion(linear_operator.LinearOperator):
     Raises:
       ValueError:  If `operator.is_non_singular` is False.
     """
-    parameters = dict(
-        operator=operator,
-        is_non_singular=is_non_singular,
-        is_self_adjoint=is_self_adjoint,
-        is_positive_definite=is_positive_definite,
-        is_square=is_square,
-        name=name
-    )
+        parameters = dict(
+            operator=operator,
+            is_non_singular=is_non_singular,
+            is_self_adjoint=is_self_adjoint,
+            is_positive_definite=is_positive_definite,
+            is_square=is_square,
+            name=name,
+        )
 
-    self._operator = operator
+        self._operator = operator
 
-    # Auto-set and check hints.
-    if operator.is_non_singular is False or is_non_singular is False:
-      raise ValueError(
-          "operator and supplied hints must have `is_non_singular` equal to "
-          "`True` or `None`.  Found %s, %s" % (operator.is_non_singular,
-                                               is_non_singular))
-    if operator.is_square is False or is_square is False:
-      raise ValueError(
-          "operator and supplied hints must have `is_square` equal to "
-          "`True` or `None`.  Found %s, %s" % (operator.is_square, is_square))
+        # Auto-set and check hints.
+        if operator.is_non_singular is False or is_non_singular is False:
+            raise ValueError(
+                "operator and supplied hints must have `is_non_singular` equal to "
+                "`True` or `None`.  Found %s, %s"
+                % (operator.is_non_singular, is_non_singular)
+            )
+        if operator.is_square is False or is_square is False:
+            raise ValueError(
+                "operator and supplied hints must have `is_square` equal to "
+                "`True` or `None`.  Found %s, %s" % (operator.is_square, is_square)
+            )
 
-    # The congruency of is_non_singular and is_self_adjoint was checked in the
-    # base operator.  Other hints are, in this special case of inversion, ones
-    # that must be the same for base/derived operator.
-    combine_hint = (
-        linear_operator_util.use_operator_or_provided_hint_unless_contradicting)
+        # The congruency of is_non_singular and is_self_adjoint was checked in the
+        # base operator.  Other hints are, in this special case of inversion, ones
+        # that must be the same for base/derived operator.
+        combine_hint = (
+            linear_operator_util.use_operator_or_provided_hint_unless_contradicting
+        )
 
-    is_square = combine_hint(
-        operator, "is_square", is_square,
-        "An operator is square if and only if its inverse is square.")
+        is_square = combine_hint(
+            operator,
+            "is_square",
+            is_square,
+            "An operator is square if and only if its inverse is square.",
+        )
 
-    is_non_singular = combine_hint(
-        operator, "is_non_singular", is_non_singular,
-        "An operator is non-singular if and only if its inverse is "
-        "non-singular.")
+        is_non_singular = combine_hint(
+            operator,
+            "is_non_singular",
+            is_non_singular,
+            "An operator is non-singular if and only if its inverse is "
+            "non-singular.",
+        )
 
-    is_self_adjoint = combine_hint(
-        operator, "is_self_adjoint", is_self_adjoint,
-        "An operator is self-adjoint if and only if its inverse is "
-        "self-adjoint.")
+        is_self_adjoint = combine_hint(
+            operator,
+            "is_self_adjoint",
+            is_self_adjoint,
+            "An operator is self-adjoint if and only if its inverse is "
+            "self-adjoint.",
+        )
 
-    is_positive_definite = combine_hint(
-        operator, "is_positive_definite", is_positive_definite,
-        "An operator is positive-definite if and only if its inverse is "
-        "positive-definite.")
+        is_positive_definite = combine_hint(
+            operator,
+            "is_positive_definite",
+            is_positive_definite,
+            "An operator is positive-definite if and only if its inverse is "
+            "positive-definite.",
+        )
 
-    # Initialization.
-    if name is None:
-      name = operator.name + "_inv"
-    with ops.name_scope(name, values=operator.graph_parents):
-      super(LinearOperatorInversion, self).__init__(
-          dtype=operator.dtype,
-          is_non_singular=is_non_singular,
-          is_self_adjoint=is_self_adjoint,
-          is_positive_definite=is_positive_definite,
-          is_square=is_square,
-          parameters=parameters,
-          name=name)
-    # TODO(b/143910018) Remove graph_parents in V3.
-    self._set_graph_parents(operator.graph_parents)
+        # Initialization.
+        if name is None:
+            name = operator.name + "_inv"
+        with ops.name_scope(name, values=operator.graph_parents):
+            super(LinearOperatorInversion, self).__init__(
+                dtype=operator.dtype,
+                is_non_singular=is_non_singular,
+                is_self_adjoint=is_self_adjoint,
+                is_positive_definite=is_positive_definite,
+                is_square=is_square,
+                parameters=parameters,
+                name=name,
+            )
+        # TODO(b/143910018) Remove graph_parents in V3.
+        self._set_graph_parents(operator.graph_parents)
 
-  @property
-  def operator(self):
-    """The operator before inversion."""
-    return self._operator
+    @property
+    def operator(self):
+        """The operator before inversion."""
+        return self._operator
 
-  def _assert_non_singular(self):
-    return self.operator.assert_non_singular()
+    def _assert_non_singular(self):
+        return self.operator.assert_non_singular()
 
-  def _assert_positive_definite(self):
-    return self.operator.assert_positive_definite()
+    def _assert_positive_definite(self):
+        return self.operator.assert_positive_definite()
 
-  def _assert_self_adjoint(self):
-    return self.operator.assert_self_adjoint()
+    def _assert_self_adjoint(self):
+        return self.operator.assert_self_adjoint()
 
-  def _shape(self):
-    return self.operator.shape
+    def _shape(self):
+        return self.operator.shape
 
-  def _shape_tensor(self):
-    return self.operator.shape_tensor()
+    def _shape_tensor(self):
+        return self.operator.shape_tensor()
 
-  def _matmul(self, x, adjoint=False, adjoint_arg=False):
-    return self.operator.solve(x, adjoint=adjoint, adjoint_arg=adjoint_arg)
+    def _matmul(self, x, adjoint=False, adjoint_arg=False):
+        return self.operator.solve(x, adjoint=adjoint, adjoint_arg=adjoint_arg)
 
-  def _determinant(self):
-    return 1. / self.operator.determinant()
+    def _determinant(self):
+        return 1.0 / self.operator.determinant()
 
-  def _log_abs_determinant(self):
-    return -1. * self.operator.log_abs_determinant()
+    def _log_abs_determinant(self):
+        return -1.0 * self.operator.log_abs_determinant()
 
-  def _solve(self, rhs, adjoint=False, adjoint_arg=False):
-    return self.operator.matmul(rhs, adjoint=adjoint, adjoint_arg=adjoint_arg)
+    def _solve(self, rhs, adjoint=False, adjoint_arg=False):
+        return self.operator.matmul(rhs, adjoint=adjoint, adjoint_arg=adjoint_arg)
 
-  def _eigvals(self):
-    return 1. / self.operator.eigvals()
+    def _eigvals(self):
+        return 1.0 / self.operator.eigvals()
 
-  def _cond(self):
-    return self.operator.cond()
+    def _cond(self):
+        return self.operator.cond()
 
-  @property
-  def _composite_tensor_fields(self):
-    return ("operator",)
+    @property
+    def _composite_tensor_fields(self):
+        return ("operator",)

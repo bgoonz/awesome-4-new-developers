@@ -27,16 +27,16 @@ from tensorflow.python.platform import test
 
 
 class ShardedVariableTest(test.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.strategy = parameter_server_strategy_v2.ParameterServerStrategyV2(
+            multi_worker_testing_utils.make_parameter_server_cluster(3, 2),
+            variable_partitioner=sharded_variable.FixedShardsPartitioner(2),
+        )
 
-  @classmethod
-  def setUpClass(cls):
-    super().setUpClass()
-    cls.strategy = parameter_server_strategy_v2.ParameterServerStrategyV2(
-        multi_worker_testing_utils.make_parameter_server_cluster(3, 2),
-        variable_partitioner=sharded_variable.FixedShardsPartitioner(2))
-
-  def assert_list_all_equal(self, list1, list2):
-    """Used in lieu of `assertAllEqual`.
+    def assert_list_all_equal(self, list1, list2):
+        """Used in lieu of `assertAllEqual`.
 
     This is used to replace standard `assertAllEqual` for the cases where
     `list1` and `list2` contain `AggregatingVariable`. Lists with
@@ -48,96 +48,93 @@ class ShardedVariableTest(test.TestCase):
       list1: The first list to compare equality.
       list2: The second list to compare equality.
     """
-    for lhs, rhs in zip(list1, list2):
-      self.assertEqual(lhs, rhs)
+        for lhs, rhs in zip(list1, list2):
+            self.assertEqual(lhs, rhs)
 
-  def test_keras_layer_setattr(self):
+    def test_keras_layer_setattr(self):
+        class Layer(base_layer.Layer):
+            def __init__(self):
+                super().__init__()
+                self.w = variables_lib.Variable([0, 1])
+                self.b = variables_lib.Variable([2, 3], trainable=False)
 
-    class Layer(base_layer.Layer):
+        with self.strategy.scope():
+            layer = Layer()
 
-      def __init__(self):
-        super().__init__()
-        self.w = variables_lib.Variable([0, 1])
-        self.b = variables_lib.Variable([2, 3], trainable=False)
+        self.assertLen(layer.trainable_weights, 2)
+        self.assertEqual(layer.trainable_weights[0], [0])
+        self.assertEqual(layer.trainable_weights[1], [1])
+        self.assertLen(layer.non_trainable_weights, 2)
+        self.assertEqual(layer.non_trainable_weights[0], [2])
+        self.assertEqual(layer.non_trainable_weights[1], [3])
+        self.assert_list_all_equal(
+            layer.weights, layer.trainable_weights + layer.non_trainable_weights
+        )
+        self.assert_list_all_equal(layer.trainable_weights, layer.trainable_variables)
+        self.assert_list_all_equal(layer.weights, layer.variables)
 
-    with self.strategy.scope():
-      layer = Layer()
+        checkpoint_deps = set(dep.ref for dep in layer._checkpoint_dependencies)
+        self.assertEqual(checkpoint_deps, set([layer.w, layer.b]))
 
-    self.assertLen(layer.trainable_weights, 2)
-    self.assertEqual(layer.trainable_weights[0], [0])
-    self.assertEqual(layer.trainable_weights[1], [1])
-    self.assertLen(layer.non_trainable_weights, 2)
-    self.assertEqual(layer.non_trainable_weights[0], [2])
-    self.assertEqual(layer.non_trainable_weights[1], [3])
-    self.assert_list_all_equal(
-        layer.weights, layer.trainable_weights + layer.non_trainable_weights)
-    self.assert_list_all_equal(layer.trainable_weights,
-                               layer.trainable_variables)
-    self.assert_list_all_equal(layer.weights, layer.variables)
+    def test_keras_layer_add_weight(self):
+        class Layer(base_layer.Layer):
+            def __init__(self):
+                super().__init__()
+                self.w = self.add_weight(
+                    shape=(2,),
+                    initializer=lambda shape, dtype: constant_op.constant([0.0, 1.0]),
+                    trainable=True,
+                )
+                self.b = self.add_weight(
+                    shape=(2,),
+                    initializer=lambda shape, dtype: constant_op.constant([2.0, 3.0]),
+                    trainable=False,
+                )
 
-    checkpoint_deps = set(dep.ref for dep in layer._checkpoint_dependencies)
-    self.assertEqual(checkpoint_deps, set([layer.w, layer.b]))
+        with self.strategy.scope():
+            layer = Layer()
 
-  def test_keras_layer_add_weight(self):
+        self.assertLen(layer.trainable_weights, 2)
+        self.assertEqual(layer.trainable_weights[0], [0.0])
+        self.assertEqual(layer.trainable_weights[1], [1.0])
+        self.assertLen(layer.non_trainable_weights, 2)
+        self.assertEqual(layer.non_trainable_weights[0], [2.0])
+        self.assertEqual(layer.non_trainable_weights[1], [3.0])
+        self.assert_list_all_equal(
+            layer.weights, layer.trainable_weights + layer.non_trainable_weights
+        )
+        self.assert_list_all_equal(layer.trainable_weights, layer.trainable_variables)
+        self.assert_list_all_equal(layer.weights, layer.variables)
 
-    class Layer(base_layer.Layer):
+        checkpoint_deps = set(dep.ref for dep in layer._checkpoint_dependencies)
+        self.assertEqual(checkpoint_deps, set([layer.w, layer.b]))
 
-      def __init__(self):
-        super().__init__()
-        self.w = self.add_weight(
-            shape=(2,),
-            initializer=lambda shape, dtype: constant_op.constant([0., 1.],),
-            trainable=True)
-        self.b = self.add_weight(
-            shape=(2,),
-            initializer=lambda shape, dtype: constant_op.constant([2., 3.]),
-            trainable=False)
+    def test_saved_model(self):
+        def create_model():
+            inputs = keras.layers.Input(shape=(4,))
+            outputs = keras.layers.Dense(2)(inputs)
+            model = keras.Model(inputs, outputs)
+            model.compile(optimizer="adam", loss="mean_squared_error")
+            return model
 
-    with self.strategy.scope():
-      layer = Layer()
+        with self.strategy.scope():
+            model = create_model()
 
-    self.assertLen(layer.trainable_weights, 2)
-    self.assertEqual(layer.trainable_weights[0], [0.])
-    self.assertEqual(layer.trainable_weights[1], [1.])
-    self.assertLen(layer.non_trainable_weights, 2)
-    self.assertEqual(layer.non_trainable_weights[0], [2.])
-    self.assertEqual(layer.non_trainable_weights[1], [3.])
-    self.assert_list_all_equal(
-        layer.weights, layer.trainable_weights + layer.non_trainable_weights)
-    self.assert_list_all_equal(layer.trainable_weights,
-                               layer.trainable_variables)
-    self.assert_list_all_equal(layer.weights, layer.variables)
+        inputs = random_ops.random_normal(shape=(8, 4))
+        expect = model(inputs)
+        saved_dir = self.get_temp_dir()
+        model.save(saved_dir)
 
-    checkpoint_deps = set(dep.ref for dep in layer._checkpoint_dependencies)
-    self.assertEqual(checkpoint_deps, set([layer.w, layer.b]))
+        loaded_model = keras.models.load_model(saved_dir)
+        got = loaded_model(inputs)
+        self.assertAllClose(got, expect)
+        self.assertGreater(len(model.variables), len(loaded_model.variables))
 
-  def test_saved_model(self):
-
-    def create_model():
-      inputs = keras.layers.Input(shape=(4,))
-      outputs = keras.layers.Dense(2)(inputs)
-      model = keras.Model(inputs, outputs)
-      model.compile(optimizer='adam', loss='mean_squared_error')
-      return model
-
-    with self.strategy.scope():
-      model = create_model()
-
-    inputs = random_ops.random_normal(shape=(8, 4))
-    expect = model(inputs)
-    saved_dir = self.get_temp_dir()
-    model.save(saved_dir)
-
-    loaded_model = keras.models.load_model(saved_dir)
-    got = loaded_model(inputs)
-    self.assertAllClose(got, expect)
-    self.assertGreater(len(model.variables), len(loaded_model.variables))
-
-    with self.assertRaises(ValueError):
-      with self.strategy.scope():
-        keras.models.load_model(saved_dir)
+        with self.assertRaises(ValueError):
+            with self.strategy.scope():
+                keras.models.load_model(saved_dir)
 
 
-if __name__ == '__main__':
-  v2_compat.enable_v2_behavior()
-  test.main()
+if __name__ == "__main__":
+    v2_compat.enable_v2_behavior()
+    test.main()

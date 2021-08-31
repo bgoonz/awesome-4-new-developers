@@ -20,9 +20,11 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow.python.framework import ops
+
 # go/tf-wildcard-import
 # pylint: disable=wildcard-import
 from tensorflow.python.ops.gen_bitwise_ops import *
+
 # pylint: enable=wildcard-import
 
 ops.NotDifferentiable("BitwiseAnd")

@@ -26,4 +26,5 @@ from __future__ import print_function
 # pylint: disable=unused-import
 from tensorflow.python.saved_model.builder_impl import _SavedModelBuilder
 from tensorflow.python.saved_model.builder_impl import SavedModelBuilder
+
 # pylint: enable=unused-import

@@ -30,18 +30,18 @@ from tensorflow.python.ops.linalg import linear_operator
 from tensorflow.python.ops.linalg import linear_operator_util
 from tensorflow.python.util.tf_export import tf_export
 
-__all__ = ['LinearOperatorTridiag',]
+__all__ = ["LinearOperatorTridiag"]
 
-_COMPACT = 'compact'
-_MATRIX = 'matrix'
-_SEQUENCE = 'sequence'
+_COMPACT = "compact"
+_MATRIX = "matrix"
+_SEQUENCE = "sequence"
 _DIAGONAL_FORMATS = frozenset({_COMPACT, _MATRIX, _SEQUENCE})
 
 
-@tf_export('linalg.LinearOperatorTridiag')
+@tf_export("linalg.LinearOperatorTridiag")
 @linear_operator.make_composite_tensor
 class LinearOperatorTridiag(linear_operator.LinearOperator):
-  """`LinearOperator` acting like a [batch] square tridiagonal matrix.
+    """`LinearOperator` acting like a [batch] square tridiagonal matrix.
 
   This operator acts like a [batch] square tridiagonal matrix `A` with shape
   `[B1,...,Bb, N, N]` for some `b >= 0`.  The first `b` indices index a
@@ -126,15 +126,17 @@ class LinearOperatorTridiag(linear_operator.LinearOperator):
     way.
   """
 
-  def __init__(self,
-               diagonals,
-               diagonals_format=_COMPACT,
-               is_non_singular=None,
-               is_self_adjoint=None,
-               is_positive_definite=None,
-               is_square=None,
-               name='LinearOperatorTridiag'):
-    r"""Initialize a `LinearOperatorTridiag`.
+    def __init__(
+        self,
+        diagonals,
+        diagonals_format=_COMPACT,
+        is_non_singular=None,
+        is_self_adjoint=None,
+        is_positive_definite=None,
+        is_square=None,
+        name="LinearOperatorTridiag",
+    ):
+        r"""Initialize a `LinearOperatorTridiag`.
 
     Args:
       diagonals: `Tensor` or list of `Tensor`s depending on `diagonals_format`.
@@ -172,219 +174,249 @@ class LinearOperatorTridiag(linear_operator.LinearOperator):
       TypeError:  If `diag.dtype` is not an allowed type.
       ValueError:  If `diag.dtype` is real, and `is_self_adjoint` is not `True`.
     """
-    parameters = dict(
-        diagonals=diagonals,
-        diagonals_format=diagonals_format,
-        is_non_singular=is_non_singular,
-        is_self_adjoint=is_self_adjoint,
-        is_positive_definite=is_positive_definite,
-        is_square=is_square,
-        name=name
-    )
+        parameters = dict(
+            diagonals=diagonals,
+            diagonals_format=diagonals_format,
+            is_non_singular=is_non_singular,
+            is_self_adjoint=is_self_adjoint,
+            is_positive_definite=is_positive_definite,
+            is_square=is_square,
+            name=name,
+        )
 
-    with ops.name_scope(name, values=[diagonals]):
-      if diagonals_format not in _DIAGONAL_FORMATS:
-        raise ValueError(
-            'Diagonals Format must be one of compact, matrix, sequence'
-            ', got : {}'.format(diagonals_format))
-      if diagonals_format == _SEQUENCE:
-        self._diagonals = [linear_operator_util.convert_nonref_to_tensor(
-            d, name='diag_{}'.format(i)) for i, d in enumerate(diagonals)]
-        dtype = self._diagonals[0].dtype
-      else:
-        self._diagonals = linear_operator_util.convert_nonref_to_tensor(
-            diagonals, name='diagonals')
-        dtype = self._diagonals.dtype
-      self._diagonals_format = diagonals_format
+        with ops.name_scope(name, values=[diagonals]):
+            if diagonals_format not in _DIAGONAL_FORMATS:
+                raise ValueError(
+                    "Diagonals Format must be one of compact, matrix, sequence"
+                    ", got : {}".format(diagonals_format)
+                )
+            if diagonals_format == _SEQUENCE:
+                self._diagonals = [
+                    linear_operator_util.convert_nonref_to_tensor(
+                        d, name="diag_{}".format(i)
+                    )
+                    for i, d in enumerate(diagonals)
+                ]
+                dtype = self._diagonals[0].dtype
+            else:
+                self._diagonals = linear_operator_util.convert_nonref_to_tensor(
+                    diagonals, name="diagonals"
+                )
+                dtype = self._diagonals.dtype
+            self._diagonals_format = diagonals_format
 
-      super(LinearOperatorTridiag, self).__init__(
-          dtype=dtype,
-          is_non_singular=is_non_singular,
-          is_self_adjoint=is_self_adjoint,
-          is_positive_definite=is_positive_definite,
-          is_square=is_square,
-          parameters=parameters,
-          name=name)
+            super(LinearOperatorTridiag, self).__init__(
+                dtype=dtype,
+                is_non_singular=is_non_singular,
+                is_self_adjoint=is_self_adjoint,
+                is_positive_definite=is_positive_definite,
+                is_square=is_square,
+                parameters=parameters,
+                name=name,
+            )
 
-  def _shape(self):
-    if self.diagonals_format == _MATRIX:
-      return self.diagonals.shape
-    if self.diagonals_format == _COMPACT:
-      # Remove the second to last dimension that contains the value 3.
-      d_shape = self.diagonals.shape[:-2].concatenate(
-          self.diagonals.shape[-1])
-    else:
-      broadcast_shape = array_ops.broadcast_static_shape(
-          self.diagonals[0].shape[:-1],
-          self.diagonals[1].shape[:-1])
-      broadcast_shape = array_ops.broadcast_static_shape(
-          broadcast_shape,
-          self.diagonals[2].shape[:-1])
-      d_shape = broadcast_shape.concatenate(self.diagonals[1].shape[-1])
-    return d_shape.concatenate(d_shape[-1])
+    def _shape(self):
+        if self.diagonals_format == _MATRIX:
+            return self.diagonals.shape
+        if self.diagonals_format == _COMPACT:
+            # Remove the second to last dimension that contains the value 3.
+            d_shape = self.diagonals.shape[:-2].concatenate(self.diagonals.shape[-1])
+        else:
+            broadcast_shape = array_ops.broadcast_static_shape(
+                self.diagonals[0].shape[:-1], self.diagonals[1].shape[:-1]
+            )
+            broadcast_shape = array_ops.broadcast_static_shape(
+                broadcast_shape, self.diagonals[2].shape[:-1]
+            )
+            d_shape = broadcast_shape.concatenate(self.diagonals[1].shape[-1])
+        return d_shape.concatenate(d_shape[-1])
 
-  def _shape_tensor(self, diagonals=None):
-    diagonals = diagonals if diagonals is not None else self.diagonals
-    if self.diagonals_format == _MATRIX:
-      return array_ops.shape(diagonals)
-    if self.diagonals_format == _COMPACT:
-      d_shape = array_ops.shape(diagonals[..., 0, :])
-    else:
-      broadcast_shape = array_ops.broadcast_dynamic_shape(
-          array_ops.shape(self.diagonals[0])[:-1],
-          array_ops.shape(self.diagonals[1])[:-1])
-      broadcast_shape = array_ops.broadcast_dynamic_shape(
-          broadcast_shape,
-          array_ops.shape(self.diagonals[2])[:-1])
-      d_shape = array_ops.concat(
-          [broadcast_shape, [array_ops.shape(self.diagonals[1])[-1]]], axis=0)
-    return array_ops.concat([d_shape, [d_shape[-1]]], axis=-1)
+    def _shape_tensor(self, diagonals=None):
+        diagonals = diagonals if diagonals is not None else self.diagonals
+        if self.diagonals_format == _MATRIX:
+            return array_ops.shape(diagonals)
+        if self.diagonals_format == _COMPACT:
+            d_shape = array_ops.shape(diagonals[..., 0, :])
+        else:
+            broadcast_shape = array_ops.broadcast_dynamic_shape(
+                array_ops.shape(self.diagonals[0])[:-1],
+                array_ops.shape(self.diagonals[1])[:-1],
+            )
+            broadcast_shape = array_ops.broadcast_dynamic_shape(
+                broadcast_shape, array_ops.shape(self.diagonals[2])[:-1]
+            )
+            d_shape = array_ops.concat(
+                [broadcast_shape, [array_ops.shape(self.diagonals[1])[-1]]], axis=0
+            )
+        return array_ops.concat([d_shape, [d_shape[-1]]], axis=-1)
 
-  def _assert_self_adjoint(self):
-    # Check the diagonal has non-zero imaginary, and the super and subdiagonals
-    # are conjugate.
+    def _assert_self_adjoint(self):
+        # Check the diagonal has non-zero imaginary, and the super and subdiagonals
+        # are conjugate.
 
-    asserts = []
-    diag_message = (
-        'This tridiagonal operator contained non-zero '
-        'imaginary values on the diagonal.')
-    off_diag_message = (
-        'This tridiagonal operator has non-conjugate '
-        'subdiagonal and superdiagonal.')
+        asserts = []
+        diag_message = (
+            "This tridiagonal operator contained non-zero "
+            "imaginary values on the diagonal."
+        )
+        off_diag_message = (
+            "This tridiagonal operator has non-conjugate "
+            "subdiagonal and superdiagonal."
+        )
 
-    if self.diagonals_format == _MATRIX:
-      asserts += [check_ops.assert_equal(
-          self.diagonals, linalg.adjoint(self.diagonals),
-          message='Matrix was not equal to its adjoint.')]
-    elif self.diagonals_format == _COMPACT:
-      diagonals = ops.convert_to_tensor_v2_with_dispatch(self.diagonals)
-      asserts += [linear_operator_util.assert_zero_imag_part(
-          diagonals[..., 1, :], message=diag_message)]
-      # Roll the subdiagonal so the shifted argument is at the end.
-      subdiag = manip_ops.roll(diagonals[..., 2, :], shift=-1, axis=-1)
-      asserts += [check_ops.assert_equal(
-          math_ops.conj(subdiag[..., :-1]),
-          diagonals[..., 0, :-1],
-          message=off_diag_message)]
-    else:
-      asserts += [linear_operator_util.assert_zero_imag_part(
-          self.diagonals[1], message=diag_message)]
-      subdiag = manip_ops.roll(self.diagonals[2], shift=-1, axis=-1)
-      asserts += [check_ops.assert_equal(
-          math_ops.conj(subdiag[..., :-1]),
-          self.diagonals[0][..., :-1],
-          message=off_diag_message)]
-    return control_flow_ops.group(asserts)
+        if self.diagonals_format == _MATRIX:
+            asserts += [
+                check_ops.assert_equal(
+                    self.diagonals,
+                    linalg.adjoint(self.diagonals),
+                    message="Matrix was not equal to its adjoint.",
+                )
+            ]
+        elif self.diagonals_format == _COMPACT:
+            diagonals = ops.convert_to_tensor_v2_with_dispatch(self.diagonals)
+            asserts += [
+                linear_operator_util.assert_zero_imag_part(
+                    diagonals[..., 1, :], message=diag_message
+                )
+            ]
+            # Roll the subdiagonal so the shifted argument is at the end.
+            subdiag = manip_ops.roll(diagonals[..., 2, :], shift=-1, axis=-1)
+            asserts += [
+                check_ops.assert_equal(
+                    math_ops.conj(subdiag[..., :-1]),
+                    diagonals[..., 0, :-1],
+                    message=off_diag_message,
+                )
+            ]
+        else:
+            asserts += [
+                linear_operator_util.assert_zero_imag_part(
+                    self.diagonals[1], message=diag_message
+                )
+            ]
+            subdiag = manip_ops.roll(self.diagonals[2], shift=-1, axis=-1)
+            asserts += [
+                check_ops.assert_equal(
+                    math_ops.conj(subdiag[..., :-1]),
+                    self.diagonals[0][..., :-1],
+                    message=off_diag_message,
+                )
+            ]
+        return control_flow_ops.group(asserts)
 
-  def _construct_adjoint_diagonals(self, diagonals):
-    # Constructs adjoint tridiagonal matrix from diagonals.
-    if self.diagonals_format == _SEQUENCE:
-      diagonals = [math_ops.conj(d) for d in reversed(diagonals)]
-      # The subdiag and the superdiag swap places, so we need to shift the
-      # padding argument.
-      diagonals[0] = manip_ops.roll(diagonals[0], shift=-1, axis=-1)
-      diagonals[2] = manip_ops.roll(diagonals[2], shift=1, axis=-1)
-      return diagonals
-    elif self.diagonals_format == _MATRIX:
-      return linalg.adjoint(diagonals)
-    else:
-      diagonals = math_ops.conj(diagonals)
-      superdiag, diag, subdiag = array_ops.unstack(
-          diagonals, num=3, axis=-2)
-      # The subdiag and the superdiag swap places, so we need
-      # to shift all arguments.
-      new_superdiag = manip_ops.roll(subdiag, shift=-1, axis=-1)
-      new_subdiag = manip_ops.roll(superdiag, shift=1, axis=-1)
-      return array_ops.stack([new_superdiag, diag, new_subdiag], axis=-2)
+    def _construct_adjoint_diagonals(self, diagonals):
+        # Constructs adjoint tridiagonal matrix from diagonals.
+        if self.diagonals_format == _SEQUENCE:
+            diagonals = [math_ops.conj(d) for d in reversed(diagonals)]
+            # The subdiag and the superdiag swap places, so we need to shift the
+            # padding argument.
+            diagonals[0] = manip_ops.roll(diagonals[0], shift=-1, axis=-1)
+            diagonals[2] = manip_ops.roll(diagonals[2], shift=1, axis=-1)
+            return diagonals
+        elif self.diagonals_format == _MATRIX:
+            return linalg.adjoint(diagonals)
+        else:
+            diagonals = math_ops.conj(diagonals)
+            superdiag, diag, subdiag = array_ops.unstack(diagonals, num=3, axis=-2)
+            # The subdiag and the superdiag swap places, so we need
+            # to shift all arguments.
+            new_superdiag = manip_ops.roll(subdiag, shift=-1, axis=-1)
+            new_subdiag = manip_ops.roll(superdiag, shift=1, axis=-1)
+            return array_ops.stack([new_superdiag, diag, new_subdiag], axis=-2)
 
-  def _matmul(self, x, adjoint=False, adjoint_arg=False):
-    diagonals = self.diagonals
-    if adjoint:
-      diagonals = self._construct_adjoint_diagonals(diagonals)
-    x = linalg.adjoint(x) if adjoint_arg else x
-    return linalg.tridiagonal_matmul(
-        diagonals, x,
-        diagonals_format=self.diagonals_format)
+    def _matmul(self, x, adjoint=False, adjoint_arg=False):
+        diagonals = self.diagonals
+        if adjoint:
+            diagonals = self._construct_adjoint_diagonals(diagonals)
+        x = linalg.adjoint(x) if adjoint_arg else x
+        return linalg.tridiagonal_matmul(
+            diagonals, x, diagonals_format=self.diagonals_format
+        )
 
-  def _solve(self, rhs, adjoint=False, adjoint_arg=False):
-    diagonals = self.diagonals
-    if adjoint:
-      diagonals = self._construct_adjoint_diagonals(diagonals)
+    def _solve(self, rhs, adjoint=False, adjoint_arg=False):
+        diagonals = self.diagonals
+        if adjoint:
+            diagonals = self._construct_adjoint_diagonals(diagonals)
 
-    # TODO(b/144860784): Remove the broadcasting code below once
-    # tridiagonal_solve broadcasts.
+        # TODO(b/144860784): Remove the broadcasting code below once
+        # tridiagonal_solve broadcasts.
 
-    rhs_shape = array_ops.shape(rhs)
-    k = self._shape_tensor(diagonals)[-1]
-    broadcast_shape = array_ops.broadcast_dynamic_shape(
-        self._shape_tensor(diagonals)[:-2], rhs_shape[:-2])
-    rhs = array_ops.broadcast_to(
-        rhs, array_ops.concat(
-            [broadcast_shape, rhs_shape[-2:]], axis=-1))
-    if self.diagonals_format == _MATRIX:
-      diagonals = array_ops.broadcast_to(
-          diagonals, array_ops.concat(
-              [broadcast_shape, [k, k]], axis=-1))
-    elif self.diagonals_format == _COMPACT:
-      diagonals = array_ops.broadcast_to(
-          diagonals, array_ops.concat(
-              [broadcast_shape, [3, k]], axis=-1))
-    else:
-      diagonals = [
-          array_ops.broadcast_to(d, array_ops.concat(
-              [broadcast_shape, [k]], axis=-1)) for d in diagonals]
+        rhs_shape = array_ops.shape(rhs)
+        k = self._shape_tensor(diagonals)[-1]
+        broadcast_shape = array_ops.broadcast_dynamic_shape(
+            self._shape_tensor(diagonals)[:-2], rhs_shape[:-2]
+        )
+        rhs = array_ops.broadcast_to(
+            rhs, array_ops.concat([broadcast_shape, rhs_shape[-2:]], axis=-1)
+        )
+        if self.diagonals_format == _MATRIX:
+            diagonals = array_ops.broadcast_to(
+                diagonals, array_ops.concat([broadcast_shape, [k, k]], axis=-1)
+            )
+        elif self.diagonals_format == _COMPACT:
+            diagonals = array_ops.broadcast_to(
+                diagonals, array_ops.concat([broadcast_shape, [3, k]], axis=-1)
+            )
+        else:
+            diagonals = [
+                array_ops.broadcast_to(
+                    d, array_ops.concat([broadcast_shape, [k]], axis=-1)
+                )
+                for d in diagonals
+            ]
 
-    y = linalg.tridiagonal_solve(
-        diagonals, rhs,
-        diagonals_format=self.diagonals_format,
-        transpose_rhs=adjoint_arg,
-        conjugate_rhs=adjoint_arg)
-    return y
+        y = linalg.tridiagonal_solve(
+            diagonals,
+            rhs,
+            diagonals_format=self.diagonals_format,
+            transpose_rhs=adjoint_arg,
+            conjugate_rhs=adjoint_arg,
+        )
+        return y
 
-  def _diag_part(self):
-    if self.diagonals_format == _MATRIX:
-      return array_ops.matrix_diag_part(self.diagonals)
-    elif self.diagonals_format == _SEQUENCE:
-      diagonal = self.diagonals[1]
-      return array_ops.broadcast_to(
-          diagonal, self.shape_tensor()[:-1])
-    else:
-      return self.diagonals[..., 1, :]
+    def _diag_part(self):
+        if self.diagonals_format == _MATRIX:
+            return array_ops.matrix_diag_part(self.diagonals)
+        elif self.diagonals_format == _SEQUENCE:
+            diagonal = self.diagonals[1]
+            return array_ops.broadcast_to(diagonal, self.shape_tensor()[:-1])
+        else:
+            return self.diagonals[..., 1, :]
 
-  def _to_dense(self):
-    if self.diagonals_format == _MATRIX:
-      return self.diagonals
+    def _to_dense(self):
+        if self.diagonals_format == _MATRIX:
+            return self.diagonals
 
-    if self.diagonals_format == _COMPACT:
-      return gen_array_ops.matrix_diag_v3(
-          self.diagonals,
-          k=(-1, 1),
-          num_rows=-1,
-          num_cols=-1,
-          align='LEFT_RIGHT',
-          padding_value=0.)
+        if self.diagonals_format == _COMPACT:
+            return gen_array_ops.matrix_diag_v3(
+                self.diagonals,
+                k=(-1, 1),
+                num_rows=-1,
+                num_cols=-1,
+                align="LEFT_RIGHT",
+                padding_value=0.0,
+            )
 
-    diagonals = [
-        ops.convert_to_tensor_v2_with_dispatch(d) for d in self.diagonals
-    ]
-    diagonals = array_ops.stack(diagonals, axis=-2)
+        diagonals = [ops.convert_to_tensor_v2_with_dispatch(d) for d in self.diagonals]
+        diagonals = array_ops.stack(diagonals, axis=-2)
 
-    return gen_array_ops.matrix_diag_v3(
-        diagonals,
-        k=(-1, 1),
-        num_rows=-1,
-        num_cols=-1,
-        align='LEFT_RIGHT',
-        padding_value=0.)
+        return gen_array_ops.matrix_diag_v3(
+            diagonals,
+            k=(-1, 1),
+            num_rows=-1,
+            num_cols=-1,
+            align="LEFT_RIGHT",
+            padding_value=0.0,
+        )
 
-  @property
-  def diagonals(self):
-    return self._diagonals
+    @property
+    def diagonals(self):
+        return self._diagonals
 
-  @property
-  def diagonals_format(self):
-    return self._diagonals_format
+    @property
+    def diagonals_format(self):
+        return self._diagonals_format
 
-  @property
-  def _composite_tensor_fields(self):
-    return ('diagonals', 'diagonals_format')
+    @property
+    def _composite_tensor_fields(self):
+        return ("diagonals", "diagonals_format")

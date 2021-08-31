@@ -30,28 +30,28 @@ from tensorflow.python.platform import test
 
 
 @ds_combinations.generate(
-    combinations.combine(
-        distribution=all_strategies,
-        mode=["eager", "graph"]))
-class HashingDistributionTest(keras_parameterized.TestCase,
-                              preprocessing_test_utils.PreprocessingLayerTest):
+    combinations.combine(distribution=all_strategies, mode=["eager", "graph"])
+)
+class HashingDistributionTest(
+    keras_parameterized.TestCase, preprocessing_test_utils.PreprocessingLayerTest
+):
+    def test_distribution(self, distribution):
+        input_data = np.asarray([["omar"], ["stringer"], ["marlo"], ["wire"]])
+        input_dataset = dataset_ops.Dataset.from_tensor_slices(input_data).batch(
+            2, drop_remainder=True
+        )
+        expected_output = [[0], [0], [1], [0]]
 
-  def test_distribution(self, distribution):
-    input_data = np.asarray([["omar"], ["stringer"], ["marlo"], ["wire"]])
-    input_dataset = dataset_ops.Dataset.from_tensor_slices(input_data).batch(
-        2, drop_remainder=True)
-    expected_output = [[0], [0], [1], [0]]
+        config.set_soft_device_placement(True)
 
-    config.set_soft_device_placement(True)
-
-    with distribution.scope():
-      input_data = keras.Input(shape=(None,), dtype=dtypes.string)
-      layer = hashing.Hashing(num_bins=2)
-      int_data = layer(input_data)
-      model = keras.Model(inputs=input_data, outputs=int_data)
-    output_dataset = model.predict(input_dataset)
-    self.assertAllEqual(expected_output, output_dataset)
+        with distribution.scope():
+            input_data = keras.Input(shape=(None,), dtype=dtypes.string)
+            layer = hashing.Hashing(num_bins=2)
+            int_data = layer(input_data)
+            model = keras.Model(inputs=input_data, outputs=int_data)
+        output_dataset = model.predict(input_dataset)
+        self.assertAllEqual(expected_output, output_dataset)
 
 
 if __name__ == "__main__":
-  test.main()
+    test.main()

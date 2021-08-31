@@ -26,10 +26,10 @@ from tensorflow.python.util import dispatch
 from tensorflow.python.util.tf_export import tf_export
 
 
-@tf_export('signal.mfccs_from_log_mel_spectrograms')
+@tf_export("signal.mfccs_from_log_mel_spectrograms")
 @dispatch.add_dispatch_support
 def mfccs_from_log_mel_spectrograms(log_mel_spectrograms, name=None):
-  """Computes [MFCCs][mfcc] of `log_mel_spectrograms`.
+    """Computes [MFCCs][mfcc] of `log_mel_spectrograms`.
 
   Implemented with GPU-compatible ops and supports gradients.
 
@@ -88,24 +88,27 @@ def mfccs_from_log_mel_spectrograms(log_mel_spectrograms, name=None):
   [mfcc]: https://en.wikipedia.org/wiki/Mel-frequency_cepstrum
   [htk]: https://en.wikipedia.org/wiki/HTK_(software)
   """
-  with ops.name_scope(name, 'mfccs_from_log_mel_spectrograms',
-                      [log_mel_spectrograms]):
-    # Compute the DCT-II of the resulting log-magnitude mel-scale spectrogram.
-    # The DCT used in HTK scales every basis vector by sqrt(2/N), which is the
-    # scaling required for an "orthogonal" DCT-II *except* in the 0th bin, where
-    # the true orthogonal DCT (as implemented by scipy) scales by sqrt(1/N). For
-    # this reason, we don't apply orthogonal normalization and scale the DCT by
-    # `0.5 * sqrt(2/N)` manually.
-    log_mel_spectrograms = ops.convert_to_tensor(log_mel_spectrograms)
-    if (log_mel_spectrograms.shape.ndims and
-        log_mel_spectrograms.shape.dims[-1].value is not None):
-      num_mel_bins = log_mel_spectrograms.shape.dims[-1].value
-      if num_mel_bins == 0:
-        raise ValueError('num_mel_bins must be positive. Got: %s' %
-                         log_mel_spectrograms)
-    else:
-      num_mel_bins = array_ops.shape(log_mel_spectrograms)[-1]
+    with ops.name_scope(
+        name, "mfccs_from_log_mel_spectrograms", [log_mel_spectrograms]
+    ):
+        # Compute the DCT-II of the resulting log-magnitude mel-scale spectrogram.
+        # The DCT used in HTK scales every basis vector by sqrt(2/N), which is the
+        # scaling required for an "orthogonal" DCT-II *except* in the 0th bin, where
+        # the true orthogonal DCT (as implemented by scipy) scales by sqrt(1/N). For
+        # this reason, we don't apply orthogonal normalization and scale the DCT by
+        # `0.5 * sqrt(2/N)` manually.
+        log_mel_spectrograms = ops.convert_to_tensor(log_mel_spectrograms)
+        if (
+            log_mel_spectrograms.shape.ndims
+            and log_mel_spectrograms.shape.dims[-1].value is not None
+        ):
+            num_mel_bins = log_mel_spectrograms.shape.dims[-1].value
+            if num_mel_bins == 0:
+                raise ValueError(
+                    "num_mel_bins must be positive. Got: %s" % log_mel_spectrograms
+                )
+        else:
+            num_mel_bins = array_ops.shape(log_mel_spectrograms)[-1]
 
-    dct2 = dct_ops.dct(log_mel_spectrograms, type=2)
-    return dct2 * math_ops.rsqrt(
-        math_ops.cast(num_mel_bins, dct2.dtype) * 2.0)
+        dct2 = dct_ops.dct(log_mel_spectrograms, type=2)
+        return dct2 * math_ops.rsqrt(math_ops.cast(num_mel_bins, dct2.dtype) * 2.0)

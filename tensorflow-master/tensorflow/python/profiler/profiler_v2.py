@@ -46,13 +46,14 @@ _profiler = None
 _profiler_lock = threading.Lock()
 
 
-@tf_export('profiler.experimental.ProfilerOptions', v1=[])
+@tf_export("profiler.experimental.ProfilerOptions", v1=[])
 class ProfilerOptions(
-    collections.namedtuple('ProfilerOptions', [
-        'host_tracer_level', 'python_tracer_level', 'device_tracer_level',
-        'delay_ms'
-    ])):
-  """Options for finer control over the profiler.
+    collections.namedtuple(
+        "ProfilerOptions",
+        ["host_tracer_level", "python_tracer_level", "device_tracer_level", "delay_ms"],
+    )
+):
+    """Options for finer control over the profiler.
 
   Use `tf.profiler.experimental.ProfilerOptions` to control `tf.profiler`
   behavior.
@@ -72,19 +73,21 @@ class ProfilerOptions(
 
   """
 
-  def __new__(cls,
-              host_tracer_level=2,
-              python_tracer_level=0,
-              device_tracer_level=1,
-              delay_ms=None):
-    return super(ProfilerOptions,
-                 cls).__new__(cls, host_tracer_level, python_tracer_level,
-                              device_tracer_level, delay_ms)
+    def __new__(
+        cls,
+        host_tracer_level=2,
+        python_tracer_level=0,
+        device_tracer_level=1,
+        delay_ms=None,
+    ):
+        return super(ProfilerOptions, cls).__new__(
+            cls, host_tracer_level, python_tracer_level, device_tracer_level, delay_ms
+        )
 
 
-@tf_export('profiler.experimental.start', v1=[])
+@tf_export("profiler.experimental.start", v1=[])
 def start(logdir, options=None):
-  """Start profiling TensorFlow performance.
+    """Start profiling TensorFlow performance.
 
   Args:
     logdir: Profiling results log directory.
@@ -109,31 +112,31 @@ def start(logdir, options=None):
   results.
 
   """
-  global _profiler
-  with _profiler_lock:
-    if _profiler is not None:
-      raise errors.AlreadyExistsError(None, None,
-                                      'Another profiler is running.')
-    _profiler = _pywrap_profiler.ProfilerSession()
-    try:
-      # support for namedtuple in pybind11 is missing, we change it to
-      # dict type first.
-      opts = dict(options._asdict()) if options is not None else {}
-      _profiler.start(logdir, opts)
-    except errors.AlreadyExistsError:
-      logging.warning('Another profiler session is running which is probably '
-                      'created by profiler server. Please avoid using profiler '
-                      'server and profiler APIs at the same time.')
-      raise errors.AlreadyExistsError(None, None,
-                                      'Another profiler is running.')
-    except Exception:
-      _profiler = None
-      raise
+    global _profiler
+    with _profiler_lock:
+        if _profiler is not None:
+            raise errors.AlreadyExistsError(None, None, "Another profiler is running.")
+        _profiler = _pywrap_profiler.ProfilerSession()
+        try:
+            # support for namedtuple in pybind11 is missing, we change it to
+            # dict type first.
+            opts = dict(options._asdict()) if options is not None else {}
+            _profiler.start(logdir, opts)
+        except errors.AlreadyExistsError:
+            logging.warning(
+                "Another profiler session is running which is probably "
+                "created by profiler server. Please avoid using profiler "
+                "server and profiler APIs at the same time."
+            )
+            raise errors.AlreadyExistsError(None, None, "Another profiler is running.")
+        except Exception:
+            _profiler = None
+            raise
 
 
-@tf_export('profiler.experimental.stop', v1=[])
+@tf_export("profiler.experimental.stop", v1=[])
 def stop(save=True):
-  """Stops the current profiling session.
+    """Stops the current profiling session.
 
   The profiler session will be stopped and profile results can be saved.
 
@@ -143,36 +146,36 @@ def stop(save=True):
   Raises:
     UnavailableError: If there is no active profiling session.
   """
-  global _profiler
-  with _profiler_lock:
-    if _profiler is None:
-      raise errors.UnavailableError(
-          None, None,
-          'Cannot export profiling results. No profiler is running.')
-    if save:
-      try:
-        _profiler.export_to_tb()
-      except Exception:
+    global _profiler
+    with _profiler_lock:
+        if _profiler is None:
+            raise errors.UnavailableError(
+                None, None, "Cannot export profiling results. No profiler is running."
+            )
+        if save:
+            try:
+                _profiler.export_to_tb()
+            except Exception:
+                _profiler = None
+                raise
         _profiler = None
-        raise
-    _profiler = None
 
 
 def warmup():
-  """Warm-up the profiler session.
+    """Warm-up the profiler session.
 
   The profiler session will set up profiling context, including loading CUPTI
   library for GPU profiling. This is used for improving the accuracy of
   the profiling results.
 
   """
-  start('')
-  stop(save=False)
+    start("")
+    stop(save=False)
 
 
-@tf_export('profiler.experimental.server.start', v1=[])
+@tf_export("profiler.experimental.server.start", v1=[])
 def start_server(port):
-  """Start a profiler grpc server that listens to given port.
+    """Start a profiler grpc server that listens to given port.
 
   The profiler server will exit when the process finishes. The service is
   defined in tensorflow/core/profiler/profiler_service.proto.
@@ -182,12 +185,12 @@ def start_server(port):
   Example usage: ```python tf.profiler.experimental.server.start(6009) # do
     your training here.
   """
-  _pywrap_profiler.start_server(port)
+    _pywrap_profiler.start_server(port)
 
 
-@tf_export('profiler.experimental.Profile', v1=[])
+@tf_export("profiler.experimental.Profile", v1=[])
 class Profile(object):
-  """Context-manager profile API.
+    """Context-manager profile API.
 
   Profiling will start when entering the scope, and stop and save the results to
   the logdir when exits the scope. Open TensorBoard profile tab to view results.
@@ -199,19 +202,19 @@ class Profile(object):
   ```
   """
 
-  def __init__(self, logdir, options=None):
-    """Creates a context manager object for profiler API.
+    def __init__(self, logdir, options=None):
+        """Creates a context manager object for profiler API.
 
     Args:
       logdir: profile data will save to this directory.
       options: An optional `tf.profiler.experimental.ProfilerOptions` can be
         provided to fine tune the profiler's behavior.
     """
-    self._logdir = logdir
-    self._options = options
+        self._logdir = logdir
+        self._options = options
 
-  def __enter__(self):
-    start(self._logdir, self._options)
+    def __enter__(self):
+        start(self._logdir, self._options)
 
-  def __exit__(self, typ, value, tb):
-    stop()
+    def __exit__(self, typ, value, tb):
+        stop()

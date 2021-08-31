@@ -35,7 +35,7 @@ from tensorflow.python.util.tf_export import tf_export
 # could do this from the command line directly.
 @tf_export(v1=["saved_model.signature_def_utils.MethodNameUpdater"])
 class MethodNameUpdater(object):
-  """Updates the method name(s) of the SavedModel stored in the given path.
+    """Updates the method name(s) of the SavedModel stored in the given path.
 
   The `MethodNameUpdater` class provides the functionality to update the method
   name field in the signature_defs of the given SavedModel. For example, it
@@ -59,8 +59,8 @@ class MethodNameUpdater(object):
   library as tf.compat.v1.saved_model.builder.MethodNameUpdater.
   """
 
-  def __init__(self, export_dir):
-    """Creates an MethodNameUpdater object.
+    def __init__(self, export_dir):
+        """Creates an MethodNameUpdater object.
 
     Args:
       export_dir: Directory containing the SavedModel files.
@@ -69,11 +69,11 @@ class MethodNameUpdater(object):
       IOError: If the saved model file does not exist, or cannot be successfully
       parsed.
     """
-    self._export_dir = export_dir
-    self._saved_model = loader.parse_saved_model(export_dir)
+        self._export_dir = export_dir
+        self._saved_model = loader.parse_saved_model(export_dir)
 
-  def replace_method_name(self, signature_key, method_name, tags=None):
-    """Replaces the method_name in the specified signature_def.
+    def replace_method_name(self, signature_key, method_name, tags=None):
+        """Replaces the method_name in the specified signature_def.
 
     This will match and replace multiple sig defs iff tags is None (i.e when
     multiple `MetaGraph`s have a signature_def with the same key).
@@ -90,34 +90,36 @@ class MethodNameUpdater(object):
           if no metagraphs were found with the associated tags or
           if no meta graph has a signature_def that matches signature_key.
     """
-    if not signature_key:
-      raise ValueError("`signature_key` must be defined.")
-    if not method_name:
-      raise ValueError("`method_name` must be defined.")
+        if not signature_key:
+            raise ValueError("`signature_key` must be defined.")
+        if not method_name:
+            raise ValueError("`method_name` must be defined.")
 
-    if (tags is not None and not isinstance(tags, list)):
-      tags = [tags]
-    found_match = False
-    for meta_graph_def in self._saved_model.meta_graphs:
-      if tags is None or set(tags) == set(meta_graph_def.meta_info_def.tags):
-        if signature_key not in meta_graph_def.signature_def:
-          raise ValueError(
-              f"MetaGraphDef associated with tags {tags} "
-              f"does not have a signature_def with key: '{signature_key}'. "
-              "This means either you specified the wrong signature key or "
-              "forgot to put the signature_def with the corresponding key in "
-              "your SavedModel.")
-        meta_graph_def.signature_def[signature_key].method_name = method_name
-        found_match = True
+        if tags is not None and not isinstance(tags, list):
+            tags = [tags]
+        found_match = False
+        for meta_graph_def in self._saved_model.meta_graphs:
+            if tags is None or set(tags) == set(meta_graph_def.meta_info_def.tags):
+                if signature_key not in meta_graph_def.signature_def:
+                    raise ValueError(
+                        f"MetaGraphDef associated with tags {tags} "
+                        f"does not have a signature_def with key: '{signature_key}'. "
+                        "This means either you specified the wrong signature key or "
+                        "forgot to put the signature_def with the corresponding key in "
+                        "your SavedModel."
+                    )
+                meta_graph_def.signature_def[signature_key].method_name = method_name
+                found_match = True
 
-    if not found_match:
-      raise ValueError(
-          f"MetaGraphDef associated with tags {tags} could not be found in "
-          "SavedModel. This means either you specified invalid tags or your "
-          "SavedModel does not have a MetaGraphDef with the specified tags.")
+        if not found_match:
+            raise ValueError(
+                f"MetaGraphDef associated with tags {tags} could not be found in "
+                "SavedModel. This means either you specified invalid tags or your "
+                "SavedModel does not have a MetaGraphDef with the specified tags."
+            )
 
-  def save(self, new_export_dir=None):
-    """Saves the updated `SavedModel`.
+    def save(self, new_export_dir=None):
+        """Saves the updated `SavedModel`.
 
     Args:
       new_export_dir: Path where the updated `SavedModel` will be saved. If
@@ -127,22 +129,28 @@ class MethodNameUpdater(object):
       errors.OpError: If there are errors during the file save operation.
     """
 
-    is_input_text_proto = file_io.file_exists(os.path.join(
-        compat.as_bytes(self._export_dir),
-        compat.as_bytes(constants.SAVED_MODEL_FILENAME_PBTXT)))
-    if not new_export_dir:
-      new_export_dir = self._export_dir
+        is_input_text_proto = file_io.file_exists(
+            os.path.join(
+                compat.as_bytes(self._export_dir),
+                compat.as_bytes(constants.SAVED_MODEL_FILENAME_PBTXT),
+            )
+        )
+        if not new_export_dir:
+            new_export_dir = self._export_dir
 
-    if is_input_text_proto:
-      # TODO(jdchung): Add a util for the path creation below.
-      path = os.path.join(
-          compat.as_bytes(new_export_dir),
-          compat.as_bytes(constants.SAVED_MODEL_FILENAME_PBTXT))
-      file_io.write_string_to_file(path, str(self._saved_model))
-    else:
-      path = os.path.join(
-          compat.as_bytes(new_export_dir),
-          compat.as_bytes(constants.SAVED_MODEL_FILENAME_PB))
-      file_io.write_string_to_file(
-          path, self._saved_model.SerializeToString(deterministic=True))
-    tf_logging.info("SavedModel written to: %s", compat.as_text(path))
+        if is_input_text_proto:
+            # TODO(jdchung): Add a util for the path creation below.
+            path = os.path.join(
+                compat.as_bytes(new_export_dir),
+                compat.as_bytes(constants.SAVED_MODEL_FILENAME_PBTXT),
+            )
+            file_io.write_string_to_file(path, str(self._saved_model))
+        else:
+            path = os.path.join(
+                compat.as_bytes(new_export_dir),
+                compat.as_bytes(constants.SAVED_MODEL_FILENAME_PB),
+            )
+            file_io.write_string_to_file(
+                path, self._saved_model.SerializeToString(deterministic=True)
+            )
+        tf_logging.info("SavedModel written to: %s", compat.as_text(path))

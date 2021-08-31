@@ -1,6 +1,6 @@
 import json
 
-with open('content.json', 'r') as f:
+with open("content.json", "r") as f:
     data = json.load(f)
 
 model_metadata = {}
@@ -10,8 +10,22 @@ for type in data["types"]:
 for model in data["models"]:
     model_metadata[model["type"]].append(model)
 
+
 def render_model_line(model):
-    return "* **" + model["name"] + "** - " + model["description"] + " [Download](" + model["download_link"] + ") | [Demo](" + model["demo_link"] + ") | [Reference](" + model["reference_link"] + ")\n"
+    return (
+        "* **"
+        + model["name"]
+        + "** - "
+        + model["description"]
+        + " [Download]("
+        + model["download_link"]
+        + ") | [Demo]("
+        + model["demo_link"]
+        + ") | [Reference]("
+        + model["reference_link"]
+        + ")\n"
+    )
+
 
 content = """
 
@@ -111,5 +125,5 @@ content += """
 * Distributed under the MIT license. See LICENSE for more information.
 """
 
-with open("README.md", 'w') as out:
-    out.write(content + '\n')
+with open("README.md", "w") as out:
+    out.write(content + "\n")

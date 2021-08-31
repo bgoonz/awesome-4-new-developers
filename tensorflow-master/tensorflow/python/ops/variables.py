@@ -52,27 +52,27 @@ from tensorflow.python.types import core
 
 
 def default_variable_creator(_, **kwds):
-  del kwds
-  raise NotImplementedError("variable_scope needs to be imported")
+    del kwds
+    raise NotImplementedError("variable_scope needs to be imported")
 
 
 def default_variable_creator_v2(_, **kwds):
-  del kwds
-  raise NotImplementedError("variable_scope needs to be imported")
+    del kwds
+    raise NotImplementedError("variable_scope needs to be imported")
 
 
 def _make_getter(captured_getter, captured_previous):
-  """To avoid capturing loop variables."""
+    """To avoid capturing loop variables."""
 
-  def getter(**kwargs):
-    return captured_getter(captured_previous, **kwargs)
+    def getter(**kwargs):
+        return captured_getter(captured_previous, **kwargs)
 
-  return getter
+    return getter
 
 
 @tf_export("VariableSynchronization")
 class VariableSynchronization(enum.Enum):
-  """Indicates when a distributed variable will be synced.
+    """Indicates when a distributed variable will be synced.
 
   * `AUTO`: Indicates that the synchronization will be determined by the current
     `DistributionStrategy` (eg. With `MirroredStrategy` this would be
@@ -91,16 +91,17 @@ class VariableSynchronization(enum.Enum):
   ...                      aggregation=tf.VariableAggregation.MEAN
   ...                      )]
   """
-  AUTO = 0
-  NONE = 1
-  ON_WRITE = 2
-  ON_READ = 3
+
+    AUTO = 0
+    NONE = 1
+    ON_WRITE = 2
+    ON_READ = 3
 
 
 # LINT.IfChange
 @tf_export("VariableAggregation", v1=[])
 class VariableAggregationV2(enum.Enum):
-  """Indicates how a distributed variable will be aggregated.
+    """Indicates how a distributed variable will be aggregated.
 
   `tf.distribute.Strategy` distributes a model by making multiple copies
   (called "replicas") acting data-parallel on different elements of the input
@@ -116,33 +117,34 @@ class VariableAggregationV2(enum.Enum):
     update, but we only want to perform the update once. Used, e.g., for the
     global step counter.
   """
-  NONE = 0
-  SUM = 1
-  MEAN = 2
-  ONLY_FIRST_REPLICA = 3
 
-  def __hash__(self):
-    return hash(self.value)
+    NONE = 0
+    SUM = 1
+    MEAN = 2
+    ONLY_FIRST_REPLICA = 3
 
-  def __eq__(self, other):
-    if self is other:
-      return True
-    elif isinstance(other, VariableAggregation):
-      return int(self.value) == int(other.value)
-    else:
-      return False
+    def __hash__(self):
+        return hash(self.value)
+
+    def __eq__(self, other):
+        if self is other:
+            return True
+        elif isinstance(other, VariableAggregation):
+            return int(self.value) == int(other.value)
+        else:
+            return False
 
 
 @tf_export(v1=["VariableAggregation"])
 class VariableAggregation(enum.Enum):
-  NONE = 0
-  SUM = 1
-  MEAN = 2
-  ONLY_FIRST_REPLICA = 3
-  ONLY_FIRST_TOWER = 3  # DEPRECATED
+    NONE = 0
+    SUM = 1
+    MEAN = 2
+    ONLY_FIRST_REPLICA = 3
+    ONLY_FIRST_TOWER = 3  # DEPRECATED
 
-  def __hash__(self):
-    return hash(self.value)
+    def __hash__(self):
+        return hash(self.value)
 
 
 # LINT.ThenChange(//tensorflow/core/framework/variable.proto)
@@ -151,131 +153,152 @@ class VariableAggregation(enum.Enum):
 # matching the integer values of the proto enums.
 
 VariableAggregation.__doc__ = (
-    VariableAggregationV2.__doc__ +
-    "* `ONLY_FIRST_TOWER`: Deprecated alias for `ONLY_FIRST_REPLICA`.\n  ")
+    VariableAggregationV2.__doc__
+    + "* `ONLY_FIRST_TOWER`: Deprecated alias for `ONLY_FIRST_REPLICA`.\n  "
+)
 
 
-def validate_synchronization_aggregation_trainable(synchronization, aggregation,
-                                                   trainable, name):
-  """Given user-provided variable properties, sets defaults and validates."""
-  if aggregation is None:
-    aggregation = VariableAggregation.NONE
-  else:
-    if not isinstance(aggregation,
-                      (VariableAggregation, VariableAggregationV2)):
-      try:
-        aggregation = VariableAggregationV2(aggregation)
-      except ValueError:
-        raise ValueError(
-            "Invalid variable aggregation mode: {} for variable: {}".format(
-                aggregation, name))
-  if synchronization is None:
-    synchronization = VariableSynchronization.AUTO
-  else:
-    try:
-      synchronization = VariableSynchronization(synchronization)
-    except ValueError:
-      raise ValueError(
-          "Invalid variable synchronization mode: {} for variable: {}".format(
-              synchronization, name))
-  if trainable is None:
-    trainable = synchronization != VariableSynchronization.ON_READ
-  return synchronization, aggregation, trainable
+def validate_synchronization_aggregation_trainable(
+    synchronization, aggregation, trainable, name
+):
+    """Given user-provided variable properties, sets defaults and validates."""
+    if aggregation is None:
+        aggregation = VariableAggregation.NONE
+    else:
+        if not isinstance(aggregation, (VariableAggregation, VariableAggregationV2)):
+            try:
+                aggregation = VariableAggregationV2(aggregation)
+            except ValueError:
+                raise ValueError(
+                    "Invalid variable aggregation mode: {} for variable: {}".format(
+                        aggregation, name
+                    )
+                )
+    if synchronization is None:
+        synchronization = VariableSynchronization.AUTO
+    else:
+        try:
+            synchronization = VariableSynchronization(synchronization)
+        except ValueError:
+            raise ValueError(
+                "Invalid variable synchronization mode: {} for variable: {}".format(
+                    synchronization, name
+                )
+            )
+    if trainable is None:
+        trainable = synchronization != VariableSynchronization.ON_READ
+    return synchronization, aggregation, trainable
 
 
 class VariableMetaclass(type):
-  """Metaclass to allow construction of tf.Variable to be overridden."""
+    """Metaclass to allow construction of tf.Variable to be overridden."""
 
-  def _variable_v1_call(cls,
-                        initial_value=None,
-                        trainable=None,
-                        collections=None,
-                        validate_shape=True,
-                        caching_device=None,
-                        name=None,
-                        variable_def=None,
-                        dtype=None,
-                        expected_shape=None,
-                        import_scope=None,
-                        constraint=None,
-                        use_resource=None,
-                        synchronization=VariableSynchronization.AUTO,
-                        aggregation=VariableAggregation.NONE,
-                        shape=None):
-    """Call on Variable class. Useful to force the signature."""
-    previous_getter = lambda **kwargs: default_variable_creator(None, **kwargs)
-    for _, getter in ops.get_default_graph()._variable_creator_stack:  # pylint: disable=protected-access
-      previous_getter = _make_getter(getter, previous_getter)
+    def _variable_v1_call(
+        cls,
+        initial_value=None,
+        trainable=None,
+        collections=None,
+        validate_shape=True,
+        caching_device=None,
+        name=None,
+        variable_def=None,
+        dtype=None,
+        expected_shape=None,
+        import_scope=None,
+        constraint=None,
+        use_resource=None,
+        synchronization=VariableSynchronization.AUTO,
+        aggregation=VariableAggregation.NONE,
+        shape=None,
+    ):
+        """Call on Variable class. Useful to force the signature."""
+        previous_getter = lambda **kwargs: default_variable_creator(None, **kwargs)
+        for (
+            _,
+            getter,
+        ) in (
+            ops.get_default_graph()._variable_creator_stack
+        ):  # pylint: disable=protected-access
+            previous_getter = _make_getter(getter, previous_getter)
 
-    # Reset `aggregation` that is explicitly set as `None` to the enum NONE.
-    if aggregation is None:
-      aggregation = VariableAggregation.NONE
-    return previous_getter(
-        initial_value=initial_value,
-        trainable=trainable,
-        collections=collections,
-        validate_shape=validate_shape,
-        caching_device=caching_device,
-        name=name,
-        variable_def=variable_def,
-        dtype=dtype,
-        expected_shape=expected_shape,
-        import_scope=import_scope,
-        constraint=constraint,
-        use_resource=use_resource,
-        synchronization=synchronization,
-        aggregation=aggregation,
-        shape=shape)
+        # Reset `aggregation` that is explicitly set as `None` to the enum NONE.
+        if aggregation is None:
+            aggregation = VariableAggregation.NONE
+        return previous_getter(
+            initial_value=initial_value,
+            trainable=trainable,
+            collections=collections,
+            validate_shape=validate_shape,
+            caching_device=caching_device,
+            name=name,
+            variable_def=variable_def,
+            dtype=dtype,
+            expected_shape=expected_shape,
+            import_scope=import_scope,
+            constraint=constraint,
+            use_resource=use_resource,
+            synchronization=synchronization,
+            aggregation=aggregation,
+            shape=shape,
+        )
 
-  def _variable_v2_call(cls,
-                        initial_value=None,
-                        trainable=None,
-                        validate_shape=True,
-                        caching_device=None,
-                        name=None,
-                        variable_def=None,
-                        dtype=None,
-                        import_scope=None,
-                        constraint=None,
-                        synchronization=VariableSynchronization.AUTO,
-                        aggregation=VariableAggregation.NONE,
-                        shape=None):
-    """Call on Variable class. Useful to force the signature."""
-    previous_getter = lambda **kws: default_variable_creator_v2(None, **kws)
-    for _, getter in ops.get_default_graph()._variable_creator_stack:  # pylint: disable=protected-access
-      previous_getter = _make_getter(getter, previous_getter)
+    def _variable_v2_call(
+        cls,
+        initial_value=None,
+        trainable=None,
+        validate_shape=True,
+        caching_device=None,
+        name=None,
+        variable_def=None,
+        dtype=None,
+        import_scope=None,
+        constraint=None,
+        synchronization=VariableSynchronization.AUTO,
+        aggregation=VariableAggregation.NONE,
+        shape=None,
+    ):
+        """Call on Variable class. Useful to force the signature."""
+        previous_getter = lambda **kws: default_variable_creator_v2(None, **kws)
+        for (
+            _,
+            getter,
+        ) in (
+            ops.get_default_graph()._variable_creator_stack
+        ):  # pylint: disable=protected-access
+            previous_getter = _make_getter(getter, previous_getter)
 
-    # Reset `aggregation` that is explicitly set as `None` to the enum NONE.
-    if aggregation is None:
-      aggregation = VariableAggregation.NONE
-    return previous_getter(
-        initial_value=initial_value,
-        trainable=trainable,
-        validate_shape=validate_shape,
-        caching_device=caching_device,
-        name=name,
-        variable_def=variable_def,
-        dtype=dtype,
-        import_scope=import_scope,
-        constraint=constraint,
-        synchronization=synchronization,
-        aggregation=aggregation,
-        shape=shape)
+        # Reset `aggregation` that is explicitly set as `None` to the enum NONE.
+        if aggregation is None:
+            aggregation = VariableAggregation.NONE
+        return previous_getter(
+            initial_value=initial_value,
+            trainable=trainable,
+            validate_shape=validate_shape,
+            caching_device=caching_device,
+            name=name,
+            variable_def=variable_def,
+            dtype=dtype,
+            import_scope=import_scope,
+            constraint=constraint,
+            synchronization=synchronization,
+            aggregation=aggregation,
+            shape=shape,
+        )
 
-  @traceback_utils.filter_traceback
-  def __call__(cls, *args, **kwargs):
-    if cls is VariableV1:
-      return cls._variable_v1_call(*args, **kwargs)
-    elif cls is Variable:
-      return cls._variable_v2_call(*args, **kwargs)
-    else:
-      return super(VariableMetaclass, cls).__call__(*args, **kwargs)
+    @traceback_utils.filter_traceback
+    def __call__(cls, *args, **kwargs):
+        if cls is VariableV1:
+            return cls._variable_v1_call(*args, **kwargs)
+        elif cls is Variable:
+            return cls._variable_v2_call(*args, **kwargs)
+        else:
+            return super(VariableMetaclass, cls).__call__(*args, **kwargs)
 
 
 @tf_export("Variable", v1=[])
 # TODO(mdan): This should subclass core.Tensor, and not all its subclasses?
 class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
-  """See the [variable guide](https://tensorflow.org/guide/variable).
+    """See the [variable guide](https://tensorflow.org/guide/variable).
 
   A variable maintains shared, persistent state manipulated by a program.
 
@@ -368,24 +391,29 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
   See the `tf.function` documentation for details.
   """
 
-  @deprecated_args(
-      None, "A variable's value can be manually cached by calling "
-      "tf.Variable.read_value() under a tf.device scope. The caching_device "
-      "argument does not work properly.", "caching_device")
-  def __init__(self,
-               initial_value=None,
-               trainable=None,
-               validate_shape=True,
-               caching_device=None,
-               name=None,
-               variable_def=None,
-               dtype=None,
-               import_scope=None,
-               constraint=None,
-               synchronization=VariableSynchronization.AUTO,
-               aggregation=VariableAggregation.NONE,
-               shape=None):
-    """Creates a new variable with value `initial_value`.
+    @deprecated_args(
+        None,
+        "A variable's value can be manually cached by calling "
+        "tf.Variable.read_value() under a tf.device scope. The caching_device "
+        "argument does not work properly.",
+        "caching_device",
+    )
+    def __init__(
+        self,
+        initial_value=None,
+        trainable=None,
+        validate_shape=True,
+        caching_device=None,
+        name=None,
+        variable_def=None,
+        dtype=None,
+        import_scope=None,
+        constraint=None,
+        synchronization=VariableSynchronization.AUTO,
+        aggregation=VariableAggregation.NONE,
+        shape=None,
+    ):
+        """Creates a new variable with value `initial_value`.
 
     Args:
       initial_value: A `Tensor`, or Python object convertible to a `Tensor`,
@@ -442,13 +470,13 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
       ValueError: If the initial value is not specified, or does not have a
         shape and `validate_shape` is `True`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def __repr__(self):
-    raise NotImplementedError
+    def __repr__(self):
+        raise NotImplementedError
 
-  def value(self):
-    """Returns the last snapshot of this variable.
+    def value(self):
+        """Returns the last snapshot of this variable.
 
     You usually do not need to call this method as all ops that need the value
     of the variable call it automatically through a `convert_to_tensor()` call.
@@ -464,10 +492,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Returns:
       A `Tensor` containing the value of the variable.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def read_value(self):
-    """Returns the value of this variable, read in the current context.
+    def read_value(self):
+        """Returns the value of this variable, read in the current context.
 
     Can be different from value() if it's on another device, with control
     dependencies, etc.
@@ -475,30 +503,30 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Returns:
       A `Tensor` containing the value of the variable.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def set_shape(self, shape):
-    """Overrides the shape for this variable.
+    def set_shape(self, shape):
+        """Overrides the shape for this variable.
 
     Args:
       shape: the `TensorShape` representing the overridden shape.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  @property
-  def trainable(self):
-    raise NotImplementedError
+    @property
+    def trainable(self):
+        raise NotImplementedError
 
-  @property
-  def synchronization(self):
-    raise NotImplementedError
+    @property
+    def synchronization(self):
+        raise NotImplementedError
 
-  @property
-  def aggregation(self):
-    raise NotImplementedError
+    @property
+    def aggregation(self):
+        raise NotImplementedError
 
-  def eval(self, session=None):
-    """In a session, computes and returns the value of this variable.
+    def eval(self, session=None):
+        """In a session, computes and returns the value of this variable.
 
     This is not a graph construction method, it does not add ops to the graph.
 
@@ -527,13 +555,15 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Returns:
       A numpy `ndarray` with a copy of the value of this variable.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  @deprecated(
-      None, "Use Variable.read_value. Variables in 2.X are initialized "
-      "automatically both in eager and graph (inside tf.defun) contexts.")
-  def initialized_value(self):
-    """Returns the value of the initialized variable.
+    @deprecated(
+        None,
+        "Use Variable.read_value. Variables in 2.X are initialized "
+        "automatically both in eager and graph (inside tf.defun) contexts.",
+    )
+    def initialized_value(self):
+        """Returns the value of the initialized variable.
 
     You should use this instead of the variable itself to initialize another
     variable with a value that depends on the value of this variable.
@@ -551,14 +581,16 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
       A `Tensor` holding the value of this variable after its initializer
       has run.
     """
-    with ops.init_scope():
-      return control_flow_ops.cond(
-          is_variable_initialized(self), self.read_value,
-          lambda: self.initial_value)
+        with ops.init_scope():
+            return control_flow_ops.cond(
+                is_variable_initialized(self),
+                self.read_value,
+                lambda: self.initial_value,
+            )
 
-  @property
-  def initial_value(self):
-    """Returns the Tensor used as the initial value for the variable.
+    @property
+    def initial_value(self):
+        """Returns the Tensor used as the initial value for the variable.
 
     Note that this is different from `initialized_value()` which runs
     the op that initializes the variable before returning its value.
@@ -568,20 +600,20 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Returns:
       A `Tensor`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  @property
-  def constraint(self):
-    """Returns the constraint function associated with this variable.
+    @property
+    def constraint(self):
+        """Returns the constraint function associated with this variable.
 
     Returns:
       The constraint function that was passed to the variable constructor.
       Can be `None` if no constraint was passed.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def assign(self, value, use_locking=False, name=None, read_value=True):
-    """Assigns a new value to the variable.
+    def assign(self, value, use_locking=False, name=None, read_value=True):
+        """Assigns a new value to the variable.
 
     This is essentially a shortcut for `assign(self, value)`.
 
@@ -596,10 +628,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
       The updated variable. If `read_value` is false, instead returns None in
       Eager mode and the assign op in graph mode.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def assign_add(self, delta, use_locking=False, name=None, read_value=True):
-    """Adds a value to this variable.
+    def assign_add(self, delta, use_locking=False, name=None, read_value=True):
+        """Adds a value to this variable.
 
      This is essentially a shortcut for `assign_add(self, delta)`.
 
@@ -614,10 +646,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
       The updated variable. If `read_value` is false, instead returns None in
       Eager mode and the assign op in graph mode.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def assign_sub(self, delta, use_locking=False, name=None, read_value=True):
-    """Subtracts a value from this variable.
+    def assign_sub(self, delta, use_locking=False, name=None, read_value=True):
+        """Subtracts a value from this variable.
 
     This is essentially a shortcut for `assign_sub(self, delta)`.
 
@@ -632,10 +664,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
       The updated variable. If `read_value` is false, instead returns None in
       Eager mode and the assign op in graph mode.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def scatter_sub(self, sparse_delta, use_locking=False, name=None):
-    """Subtracts `tf.IndexedSlices` from this variable.
+    def scatter_sub(self, sparse_delta, use_locking=False, name=None):
+        """Subtracts `tf.IndexedSlices` from this variable.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to be subtracted from this variable.
@@ -648,10 +680,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def scatter_add(self, sparse_delta, use_locking=False, name=None):
-    """Adds `tf.IndexedSlices` to this variable.
+    def scatter_add(self, sparse_delta, use_locking=False, name=None):
+        """Adds `tf.IndexedSlices` to this variable.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to be added to this variable.
@@ -664,10 +696,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def scatter_max(self, sparse_delta, use_locking=False, name=None):
-    """Updates this variable with the max of `tf.IndexedSlices` and itself.
+    def scatter_max(self, sparse_delta, use_locking=False, name=None):
+        """Updates this variable with the max of `tf.IndexedSlices` and itself.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to use as an argument of max with this
@@ -681,10 +713,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def scatter_min(self, sparse_delta, use_locking=False, name=None):
-    """Updates this variable with the min of `tf.IndexedSlices` and itself.
+    def scatter_min(self, sparse_delta, use_locking=False, name=None):
+        """Updates this variable with the min of `tf.IndexedSlices` and itself.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to use as an argument of min with this
@@ -698,10 +730,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def scatter_mul(self, sparse_delta, use_locking=False, name=None):
-    """Multiply this variable by `tf.IndexedSlices`.
+    def scatter_mul(self, sparse_delta, use_locking=False, name=None):
+        """Multiply this variable by `tf.IndexedSlices`.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to multiply this variable by.
@@ -714,10 +746,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def scatter_div(self, sparse_delta, use_locking=False, name=None):
-    """Divide this variable by `tf.IndexedSlices`.
+    def scatter_div(self, sparse_delta, use_locking=False, name=None):
+        """Divide this variable by `tf.IndexedSlices`.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to divide this variable by.
@@ -730,10 +762,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def scatter_update(self, sparse_delta, use_locking=False, name=None):
-    """Assigns `tf.IndexedSlices` to this variable.
+    def scatter_update(self, sparse_delta, use_locking=False, name=None):
+        """Assigns `tf.IndexedSlices` to this variable.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to be assigned to this variable.
@@ -746,10 +778,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def batch_scatter_update(self, sparse_delta, use_locking=False, name=None):
-    """Assigns `tf.IndexedSlices` to this variable batch-wise.
+    def batch_scatter_update(self, sparse_delta, use_locking=False, name=None):
+        """Assigns `tf.IndexedSlices` to this variable batch-wise.
 
     Analogous to `batch_gather`. This assumes that this variable and the
     sparse_delta IndexedSlices have a series of leading dimensions that are the
@@ -792,10 +824,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def scatter_nd_sub(self, indices, updates, name=None):
-    """Applies sparse subtraction to individual values or slices in a Variable.
+    def scatter_nd_sub(self, indices, updates, name=None):
+        """Applies sparse subtraction to individual values or slices in a Variable.
 
     Assuming the variable has rank `P` and `indices` is a `Tensor` of rank `Q`.
 
@@ -838,10 +870,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Returns:
       The updated variable.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def scatter_nd_add(self, indices, updates, name=None):
-    """Applies sparse addition to individual values or slices in a Variable.
+    def scatter_nd_add(self, indices, updates, name=None):
+        """Applies sparse addition to individual values or slices in a Variable.
 
     The Variable has rank `P` and `indices` is a `Tensor` of rank `Q`.
 
@@ -884,10 +916,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Returns:
       The updated variable.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def scatter_nd_update(self, indices, updates, name=None):
-    """Applies sparse assignment to individual values or slices in a Variable.
+    def scatter_nd_update(self, indices, updates, name=None):
+        """Applies sparse assignment to individual values or slices in a Variable.
 
     The Variable has rank `P` and `indices` is a `Tensor` of rank `Q`.
 
@@ -930,10 +962,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Returns:
       The updated variable.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def sparse_read(self, indices, name=None):
-    r"""Gather slices from params axis axis according to indices.
+    def sparse_read(self, indices, name=None):
+        r"""Gather slices from params axis axis according to indices.
 
     This function supports a subset of tf.gather, see tf.gather for details on
     usage.
@@ -946,10 +978,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Returns:
       A `Tensor`. Has the same type as `params`.
     """
-    raise AttributeError
+        raise AttributeError
 
-  def gather_nd(self, indices, name=None):
-    r"""Gather slices from `params` into a Tensor with shape specified by `indices`.
+    def gather_nd(self, indices, name=None):
+        r"""Gather slices from `params` into a Tensor with shape specified by `indices`.
 
     See tf.gather_nd for details.
 
@@ -961,11 +993,11 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Returns:
       A `Tensor`. Has the same type as `params`.
     """
-    raise AttributeError
+        raise AttributeError
 
-  @deprecated(None, "Prefer Dataset.range instead.")
-  def count_up_to(self, limit):
-    """Increments this variable until it reaches `limit`.
+    @deprecated(None, "Prefer Dataset.range instead.")
+    def count_up_to(self, limit):
+        """Increments this variable until it reaches `limit`.
 
     When that Op is run it tries to increment the variable by `1`. If
     incrementing the variable would bring it above `limit` then the Op raises
@@ -984,12 +1016,11 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
       other Op modifies this variable, the values produced will all be
       distinct.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  @deprecated(None,
-              "Prefer Variable.assign which has equivalent behavior in 2.X.")
-  def load(self, value, session=None):
-    """Load new value into this variable.
+    @deprecated(None, "Prefer Variable.assign which has equivalent behavior in 2.X.")
+    def load(self, value, session=None):
+        """Load new value into this variable.
 
     Writes new value to variable's memory. Doesn't add ops to the graph.
 
@@ -1021,92 +1052,103 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Raises:
         ValueError: Session is not passed and no default session
     """
-    if context.executing_eagerly():
-      self.assign(value)
-    else:
-      session = session or ops.get_default_session()
-      if session is None:
-        raise ValueError(
-            "Either session argument should be provided or default session "
-            "should be established")
-      session.run(self.initializer, {self.initializer.inputs[1]: value})
+        if context.executing_eagerly():
+            self.assign(value)
+        else:
+            session = session or ops.get_default_session()
+            if session is None:
+                raise ValueError(
+                    "Either session argument should be provided or default session "
+                    "should be established"
+                )
+            session.run(self.initializer, {self.initializer.inputs[1]: value})
 
-  # Conversion to tensor.
-  @staticmethod
-  def _TensorConversionFunction(v, dtype=None, name=None, as_ref=False):  # pylint: disable=invalid-name
-    """Utility function for converting a Variable to a Tensor."""
-    _ = name
-    if dtype and not dtype.is_compatible_with(v.dtype):
-      raise ValueError(
-          "Incompatible type conversion requested to type '%s' for variable "
-          "of type '%s'" % (dtype.name, v.dtype.name))
-    if as_ref:
-      return v._ref()  # pylint: disable=protected-access
-    else:
-      return v.value()
+    # Conversion to tensor.
+    @staticmethod
+    def _TensorConversionFunction(
+        v, dtype=None, name=None, as_ref=False
+    ):  # pylint: disable=invalid-name
+        """Utility function for converting a Variable to a Tensor."""
+        _ = name
+        if dtype and not dtype.is_compatible_with(v.dtype):
+            raise ValueError(
+                "Incompatible type conversion requested to type '%s' for variable "
+                "of type '%s'" % (dtype.name, v.dtype.name)
+            )
+        if as_ref:
+            return v._ref()  # pylint: disable=protected-access
+        else:
+            return v.value()
 
-  @classmethod
-  def _OverloadAllOperators(cls):  # pylint: disable=invalid-name
-    """Register overloads for all operators."""
-    for operator in ops.Tensor.OVERLOADABLE_OPERATORS:
-      cls._OverloadOperator(operator)
-    # For slicing, bind getitem differently than a tensor (use SliceHelperVar
-    # instead)
-    # pylint: disable=protected-access
-    setattr(cls, "__getitem__", array_ops._SliceHelperVar)
+    @classmethod
+    def _OverloadAllOperators(cls):  # pylint: disable=invalid-name
+        """Register overloads for all operators."""
+        for operator in ops.Tensor.OVERLOADABLE_OPERATORS:
+            cls._OverloadOperator(operator)
+        # For slicing, bind getitem differently than a tensor (use SliceHelperVar
+        # instead)
+        # pylint: disable=protected-access
+        setattr(cls, "__getitem__", array_ops._SliceHelperVar)
 
-  @classmethod
-  def _OverloadOperator(cls, operator):  # pylint: disable=invalid-name
-    """Defer an operator overload to `ops.Tensor`.
+    @classmethod
+    def _OverloadOperator(cls, operator):  # pylint: disable=invalid-name
+        """Defer an operator overload to `ops.Tensor`.
 
     We pull the operator out of ops.Tensor dynamically to avoid ordering issues.
 
     Args:
       operator: string. The operator name.
     """
-    # We can't use the overload mechanism on __eq__ & __ne__ since __eq__ is
-    # called when adding a variable to sets. As a result we call a.value() which
-    # causes infinite recursion when operating within a GradientTape
-    # TODO(gjn): Consider removing this
-    if operator == "__eq__" or operator == "__ne__":
-      return
+        # We can't use the overload mechanism on __eq__ & __ne__ since __eq__ is
+        # called when adding a variable to sets. As a result we call a.value() which
+        # causes infinite recursion when operating within a GradientTape
+        # TODO(gjn): Consider removing this
+        if operator == "__eq__" or operator == "__ne__":
+            return
 
-    tensor_oper = getattr(ops.Tensor, operator)
+        tensor_oper = getattr(ops.Tensor, operator)
 
-    def _run_op(a, *args, **kwargs):
-      # pylint: disable=protected-access
-      return tensor_oper(a.value(), *args, **kwargs)
+        def _run_op(a, *args, **kwargs):
+            # pylint: disable=protected-access
+            return tensor_oper(a.value(), *args, **kwargs)
 
-    functools.update_wrapper(_run_op, tensor_oper)
-    setattr(cls, operator, _run_op)
+        functools.update_wrapper(_run_op, tensor_oper)
+        setattr(cls, operator, _run_op)
 
-  def __hash__(self):
-    if ops.Tensor._USE_EQUALITY and ops.executing_eagerly_outside_functions():  # pylint: disable=protected-access
-      raise TypeError("Variable is unhashable. "
-                      "Instead, use tensor.ref() as the key.")
-    else:
-      return id(self)
+    def __hash__(self):
+        if (
+            ops.Tensor._USE_EQUALITY and ops.executing_eagerly_outside_functions()
+        ):  # pylint: disable=protected-access
+            raise TypeError(
+                "Variable is unhashable. " "Instead, use tensor.ref() as the key."
+            )
+        else:
+            return id(self)
 
-  # TODO(gjn): duplicate of math_ops.tensor_equals, consider removing
-  def __eq__(self, other):
-    """Compares two variables element-wise for equality."""
-    if ops.Tensor._USE_EQUALITY and ops.executing_eagerly_outside_functions():  # pylint: disable=protected-access
-      return gen_math_ops.equal(self, other, incompatible_shape_error=False)
-    else:
-      # In legacy graph mode, tensor equality is object equality
-      return self is other
+    # TODO(gjn): duplicate of math_ops.tensor_equals, consider removing
+    def __eq__(self, other):
+        """Compares two variables element-wise for equality."""
+        if (
+            ops.Tensor._USE_EQUALITY and ops.executing_eagerly_outside_functions()
+        ):  # pylint: disable=protected-access
+            return gen_math_ops.equal(self, other, incompatible_shape_error=False)
+        else:
+            # In legacy graph mode, tensor equality is object equality
+            return self is other
 
-  # TODO(gjn): duplicate of math_ops.tensor_not_equals, consider removing
-  def __ne__(self, other):
-    """Compares two variables element-wise for equality."""
-    if ops.Tensor._USE_EQUALITY and ops.executing_eagerly_outside_functions():  # pylint: disable=protected-access
-      return gen_math_ops.not_equal(self, other, incompatible_shape_error=False)
-    else:
-      # In legacy graph mode, tensor equality is object equality
-      return self is not other
+    # TODO(gjn): duplicate of math_ops.tensor_not_equals, consider removing
+    def __ne__(self, other):
+        """Compares two variables element-wise for equality."""
+        if (
+            ops.Tensor._USE_EQUALITY and ops.executing_eagerly_outside_functions()
+        ):  # pylint: disable=protected-access
+            return gen_math_ops.not_equal(self, other, incompatible_shape_error=False)
+        else:
+            # In legacy graph mode, tensor equality is object equality
+            return self is not other
 
-  def __iter__(self):
-    """Dummy method to prevent iteration.
+    def __iter__(self):
+        """Dummy method to prevent iteration.
 
     Do not call.
 
@@ -1117,25 +1159,25 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Raises:
       TypeError: when invoked.
     """
-    raise TypeError("'Variable' object is not iterable.")
+        raise TypeError("'Variable' object is not iterable.")
 
-  # NOTE(mrry): This enables the Variable's overloaded "right" binary
-  # operators to run when the left operand is an ndarray, because it
-  # accords the Variable class higher priority than an ndarray, or a
-  # numpy matrix.
-  # TODO(mrry): Convert this to using numpy's __numpy_ufunc__
-  # mechanism, which allows more control over how Variables interact
-  # with ndarrays.
-  __array_priority__ = 100
+    # NOTE(mrry): This enables the Variable's overloaded "right" binary
+    # operators to run when the left operand is an ndarray, because it
+    # accords the Variable class higher priority than an ndarray, or a
+    # numpy matrix.
+    # TODO(mrry): Convert this to using numpy's __numpy_ufunc__
+    # mechanism, which allows more control over how Variables interact
+    # with ndarrays.
+    __array_priority__ = 100
 
-  @property
-  def name(self):
-    """The name of this variable."""
-    raise NotImplementedError
+    @property
+    def name(self):
+        """The name of this variable."""
+        raise NotImplementedError
 
-  @property
-  def _shared_name(self):
-    """The shared name of the variable.
+    @property
+    def _shared_name(self):
+        """The shared name of the variable.
 
       Unlike name(), shared_name doesn't have ":0" suffix. It is user-specified
       name with name scope prefix.
@@ -1143,52 +1185,52 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     Returns:
       variable name.
     """
-    return self.name[:self.name.index(":")]
+        return self.name[: self.name.index(":")]
 
-  @property
-  def initializer(self):
-    """The initializer operation for this variable."""
-    raise NotImplementedError
+    @property
+    def initializer(self):
+        """The initializer operation for this variable."""
+        raise NotImplementedError
 
-  @property
-  def device(self):
-    """The device of this variable."""
-    raise NotImplementedError
+    @property
+    def device(self):
+        """The device of this variable."""
+        raise NotImplementedError
 
-  @property
-  def dtype(self):
-    """The `DType` of this variable."""
-    raise NotImplementedError
+    @property
+    def dtype(self):
+        """The `DType` of this variable."""
+        raise NotImplementedError
 
-  @property
-  def op(self):
-    """The `Operation` of this variable."""
-    raise NotImplementedError
+    @property
+    def op(self):
+        """The `Operation` of this variable."""
+        raise NotImplementedError
 
-  @property
-  def graph(self):
-    """The `Graph` of this variable."""
-    raise NotImplementedError
+    @property
+    def graph(self):
+        """The `Graph` of this variable."""
+        raise NotImplementedError
 
-  @property
-  def shape(self):
-    """The `TensorShape` of this variable.
+    @property
+    def shape(self):
+        """The `TensorShape` of this variable.
 
     Returns:
       A `TensorShape`.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  def get_shape(self):
-    """Alias of `Variable.shape`."""
-    return self.shape
+    def get_shape(self):
+        """Alias of `Variable.shape`."""
+        return self.shape
 
-  def _gather_saveables_for_checkpoint(self):
-    """For implementing `Trackable`. This object is saveable on its own."""
-    return {trackable.VARIABLE_VALUE_KEY: self}
+    def _gather_saveables_for_checkpoint(self):
+        """For implementing `Trackable`. This object is saveable on its own."""
+        return {trackable.VARIABLE_VALUE_KEY: self}
 
-  def to_proto(self, export_scope=None):
-    """Converts a `Variable` to a `VariableDef` protocol buffer.
+    def to_proto(self, export_scope=None):
+        """Converts a `Variable` to a `VariableDef` protocol buffer.
 
     Args:
       export_scope: Optional `string`. Name scope to remove.
@@ -1197,32 +1239,32 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
       A `VariableDef` protocol buffer, or `None` if the `Variable` is not
       in the specified name scope.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  @staticmethod
-  def from_proto(variable_def, import_scope=None):
-    """Returns a `Variable` object created from `variable_def`."""
-    return RefVariable(variable_def=variable_def, import_scope=import_scope)
+    @staticmethod
+    def from_proto(variable_def, import_scope=None):
+        """Returns a `Variable` object created from `variable_def`."""
+        return RefVariable(variable_def=variable_def, import_scope=import_scope)
 
-  def _set_save_slice_info(self, save_slice_info):
-    """Sets the slice info for this `Variable`.
+    def _set_save_slice_info(self, save_slice_info):
+        """Sets the slice info for this `Variable`.
 
     Args:
       save_slice_info: A `Variable.SaveSliceInfo` object.
     """
-    self._save_slice_info = save_slice_info
+        self._save_slice_info = save_slice_info
 
-  def _get_save_slice_info(self):
-    return self._save_slice_info
+    def _get_save_slice_info(self):
+        return self._save_slice_info
 
-  @deprecated(None, "Use ref() instead.")
-  def experimental_ref(self):
-    return self.ref()
+    @deprecated(None, "Use ref() instead.")
+    def experimental_ref(self):
+        return self.ref()
 
-  def ref(self):
-    # tf.Tensor also has the same ref() API.  If you update the
-    # documentation here, please update tf.Tensor.ref() as well.
-    """Returns a hashable reference object to this Variable.
+    def ref(self):
+        # tf.Tensor also has the same ref() API.  If you update the
+        # documentation here, please update tf.Tensor.ref() as well.
+        """Returns a hashable reference object to this Variable.
 
     The primary use case for this API is to put variables in a set/dictionary.
     We can't put variables in a set/dictionary as `variable.__hash__()` is no
@@ -1258,10 +1300,10 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     >>> x.ref().deref()
     <tf.Variable 'Variable:0' shape=() dtype=int32, numpy=5>
     """
-    return object_identity.Reference(self)
+        return object_identity.Reference(self)
 
-  class SaveSliceInfo(object):
-    """Information on how to save this Variable as a slice.
+    class SaveSliceInfo(object):
+        """Information on how to save this Variable as a slice.
 
     Provides internal support for saving variables as slices of a larger
     variable.  This API is not public and is subject to change.
@@ -1274,14 +1316,16 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
     * var_shape
     """
 
-    def __init__(self,
-                 full_name=None,
-                 full_shape=None,
-                 var_offset=None,
-                 var_shape=None,
-                 save_slice_info_def=None,
-                 import_scope=None):
-      """Create a `SaveSliceInfo`.
+        def __init__(
+            self,
+            full_name=None,
+            full_shape=None,
+            var_offset=None,
+            var_shape=None,
+            save_slice_info_def=None,
+            import_scope=None,
+        ):
+            """Create a `SaveSliceInfo`.
 
       Args:
         full_name: Name of the full variable of which this `Variable` is a
@@ -1296,29 +1340,31 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
         import_scope: Optional `string`. Name scope to add. Only used when
           initializing from protocol buffer.
       """
-      if save_slice_info_def:
-        assert isinstance(save_slice_info_def, variable_pb2.SaveSliceInfoDef)
-        self.full_name = ops.prepend_name_scope(
-            save_slice_info_def.full_name, import_scope=import_scope)
-        self.full_shape = [i for i in save_slice_info_def.full_shape]
-        self.var_offset = [i for i in save_slice_info_def.var_offset]
-        self.var_shape = [i for i in save_slice_info_def.var_shape]
-      else:
-        self.full_name = full_name
-        self.full_shape = full_shape
-        self.var_offset = var_offset
-        self.var_shape = var_shape
+            if save_slice_info_def:
+                assert isinstance(save_slice_info_def, variable_pb2.SaveSliceInfoDef)
+                self.full_name = ops.prepend_name_scope(
+                    save_slice_info_def.full_name, import_scope=import_scope
+                )
+                self.full_shape = [i for i in save_slice_info_def.full_shape]
+                self.var_offset = [i for i in save_slice_info_def.var_offset]
+                self.var_shape = [i for i in save_slice_info_def.var_shape]
+            else:
+                self.full_name = full_name
+                self.full_shape = full_shape
+                self.var_offset = var_offset
+                self.var_shape = var_shape
 
-    @property
-    def spec(self):
-      """Computes the spec string used for saving."""
-      full_shape_str = " ".join("%d" % d for d in self.full_shape) + " "
-      sl_spec = ":".join(
-          "%d,%d" % (o, s) for o, s in zip(self.var_offset, self.var_shape))
-      return full_shape_str + sl_spec
+        @property
+        def spec(self):
+            """Computes the spec string used for saving."""
+            full_shape_str = " ".join("%d" % d for d in self.full_shape) + " "
+            sl_spec = ":".join(
+                "%d,%d" % (o, s) for o, s in zip(self.var_offset, self.var_shape)
+            )
+            return full_shape_str + sl_spec
 
-    def to_proto(self, export_scope=None):
-      """Returns a SaveSliceInfoDef() proto.
+        def to_proto(self, export_scope=None):
+            """Returns a SaveSliceInfoDef() proto.
 
       Args:
         export_scope: Optional `string`. Name scope to remove.
@@ -1327,19 +1373,20 @@ class Variable(six.with_metaclass(VariableMetaclass, trackable.Trackable)):
         A `SaveSliceInfoDef` protocol buffer, or None if the `Variable` is not
         in the specified name scope.
       """
-      if (export_scope is None or self.full_name.startswith(export_scope)):
-        save_slice_info_def = variable_pb2.SaveSliceInfoDef()
-        save_slice_info_def.full_name = ops.strip_name_scope(
-            self.full_name, export_scope)
-        for i in self.full_shape:
-          save_slice_info_def.full_shape.append(i)
-        for i in self.var_offset:
-          save_slice_info_def.var_offset.append(i)
-        for i in self.var_shape:
-          save_slice_info_def.var_shape.append(i)
-        return save_slice_info_def
-      else:
-        return None
+            if export_scope is None or self.full_name.startswith(export_scope):
+                save_slice_info_def = variable_pb2.SaveSliceInfoDef()
+                save_slice_info_def.full_name = ops.strip_name_scope(
+                    self.full_name, export_scope
+                )
+                for i in self.full_shape:
+                    save_slice_info_def.full_shape.append(i)
+                for i in self.var_offset:
+                    save_slice_info_def.var_offset.append(i)
+                for i in self.var_shape:
+                    save_slice_info_def.var_shape.append(i)
+                return save_slice_info_def
+            else:
+                return None
 
 
 Variable._OverloadAllOperators()  # pylint: disable=protected-access
@@ -1348,7 +1395,7 @@ _pywrap_utils.RegisterType("Variable", Variable)
 
 @tf_export(v1=["Variable"])
 class VariableV1(Variable):
-  """See the [Variables Guide](https://tensorflow.org/guide/variables).
+    """See the [Variables Guide](https://tensorflow.org/guide/variables).
 
   A variable maintains state in the graph across calls to `run()`. You add a
   variable to the graph by constructing an instance of the class `Variable`.
@@ -1462,24 +1509,25 @@ class VariableV1(Variable):
     `tf.compat.v1.variable_scope` before the `tf.compat.v1.get_variable()` call.
   """
 
-  def __init__(
-      self,  # pylint: disable=super-init-not-called
-      initial_value=None,
-      trainable=None,
-      collections=None,
-      validate_shape=True,
-      caching_device=None,
-      name=None,
-      variable_def=None,
-      dtype=None,
-      expected_shape=None,
-      import_scope=None,
-      constraint=None,
-      use_resource=None,
-      synchronization=VariableSynchronization.AUTO,
-      aggregation=VariableAggregation.NONE,
-      shape=None):
-    """Creates a new variable with value `initial_value`.
+    def __init__(
+        self,  # pylint: disable=super-init-not-called
+        initial_value=None,
+        trainable=None,
+        collections=None,
+        validate_shape=True,
+        caching_device=None,
+        name=None,
+        variable_def=None,
+        dtype=None,
+        expected_shape=None,
+        import_scope=None,
+        constraint=None,
+        use_resource=None,
+        synchronization=VariableSynchronization.AUTO,
+        aggregation=VariableAggregation.NONE,
+        shape=None,
+    ):
+        """Creates a new variable with value `initial_value`.
 
     The new variable is added to the graph collections listed in `collections`,
     which defaults to `[GraphKeys.GLOBAL_VARIABLES]`.
@@ -1553,30 +1601,31 @@ class VariableV1(Variable):
       RuntimeError: If eager execution is enabled.
     """
 
-  SaveSliceInfo = Variable.SaveSliceInfo
+    SaveSliceInfo = Variable.SaveSliceInfo
 
 
 # TODO(apassos): do not repeat all comments here
 class RefVariable(VariableV1, core.Tensor):
-  """Ref-based implementation of variables."""
+    """Ref-based implementation of variables."""
 
-  def __init__(
-      self,  # pylint: disable=super-init-not-called
-      initial_value=None,
-      trainable=None,
-      collections=None,
-      validate_shape=True,
-      caching_device=None,
-      name=None,
-      variable_def=None,
-      dtype=None,
-      expected_shape=None,
-      import_scope=None,
-      constraint=None,
-      synchronization=None,
-      aggregation=None,
-      shape=None):
-    """Creates a new variable with value `initial_value`.
+    def __init__(
+        self,  # pylint: disable=super-init-not-called
+        initial_value=None,
+        trainable=None,
+        collections=None,
+        validate_shape=True,
+        caching_device=None,
+        name=None,
+        variable_def=None,
+        dtype=None,
+        expected_shape=None,
+        import_scope=None,
+        constraint=None,
+        synchronization=None,
+        aggregation=None,
+        shape=None,
+    ):
+        """Creates a new variable with value `initial_value`.
 
     The new variable is added to the graph collections listed in `collections`,
     which defaults to `[GraphKeys.GLOBAL_VARIABLES]`.
@@ -1648,52 +1697,62 @@ class RefVariable(VariableV1, core.Tensor):
         shape and `validate_shape` is `True`.
       RuntimeError: If eager execution is enabled.
     """
-    self._in_graph_mode = True
-    if variable_def:
-      # If variable_def is provided, recreates the variable from its fields.
-      if initial_value:
-        raise ValueError("variable_def and initial_value are mutually "
-                         "exclusive.")
-      self._init_from_proto(variable_def, import_scope=import_scope)
-    else:
-      # Create from initial_value.
-      self._init_from_args(
-          initial_value=initial_value,
-          trainable=trainable,
-          collections=collections,
-          validate_shape=validate_shape,
-          caching_device=caching_device,
-          name=name,
-          dtype=dtype,
-          expected_shape=expected_shape,
-          constraint=constraint,
-          synchronization=synchronization,
-          aggregation=aggregation,
-          shape=shape)
+        self._in_graph_mode = True
+        if variable_def:
+            # If variable_def is provided, recreates the variable from its fields.
+            if initial_value:
+                raise ValueError(
+                    "variable_def and initial_value are mutually " "exclusive."
+                )
+            self._init_from_proto(variable_def, import_scope=import_scope)
+        else:
+            # Create from initial_value.
+            self._init_from_args(
+                initial_value=initial_value,
+                trainable=trainable,
+                collections=collections,
+                validate_shape=validate_shape,
+                caching_device=caching_device,
+                name=name,
+                dtype=dtype,
+                expected_shape=expected_shape,
+                constraint=constraint,
+                synchronization=synchronization,
+                aggregation=aggregation,
+                shape=shape,
+            )
 
-  def __repr__(self):
-    if context.executing_eagerly() and not self._in_graph_mode:
-      return "<tf.Variable '%s' shape=%s dtype=%s, numpy=%s>" % (
-          self.name, self.get_shape(), self.dtype.name,
-          ops.numpy_text(self.read_value(), is_repr=True))
-    else:
-      return "<tf.Variable '%s' shape=%s dtype=%s>" % (
-          self.name, self.get_shape(), self.dtype.name)
+    def __repr__(self):
+        if context.executing_eagerly() and not self._in_graph_mode:
+            return "<tf.Variable '%s' shape=%s dtype=%s, numpy=%s>" % (
+                self.name,
+                self.get_shape(),
+                self.dtype.name,
+                ops.numpy_text(self.read_value(), is_repr=True),
+            )
+        else:
+            return "<tf.Variable '%s' shape=%s dtype=%s>" % (
+                self.name,
+                self.get_shape(),
+                self.dtype.name,
+            )
 
-  def _init_from_args(self,
-                      initial_value=None,
-                      trainable=None,
-                      collections=None,
-                      validate_shape=True,
-                      caching_device=None,
-                      name=None,
-                      dtype=None,
-                      expected_shape=None,
-                      constraint=None,
-                      synchronization=None,
-                      aggregation=None,
-                      shape=None):
-    """Creates a new variable from arguments.
+    def _init_from_args(
+        self,
+        initial_value=None,
+        trainable=None,
+        collections=None,
+        validate_shape=True,
+        caching_device=None,
+        name=None,
+        dtype=None,
+        expected_shape=None,
+        constraint=None,
+        synchronization=None,
+        aggregation=None,
+        shape=None,
+    ):
+        """Creates a new variable from arguments.
 
     Args:
       initial_value: A `Tensor`, or Python object convertible to a `Tensor`,
@@ -1748,178 +1807,216 @@ class RefVariable(VariableV1, core.Tensor):
         shape and `validate_shape` is `True`.
       RuntimeError: If lifted into the eager context.
     """
-    _ = expected_shape
-    if initial_value is None:
-      raise ValueError("initial_value must be specified.")
-    init_from_fn = callable(initial_value)
+        _ = expected_shape
+        if initial_value is None:
+            raise ValueError("initial_value must be specified.")
+        init_from_fn = callable(initial_value)
 
-    if collections is None:
-      collections = [ops.GraphKeys.GLOBAL_VARIABLES]
-    if not isinstance(collections, (list, tuple, set)):
-      raise ValueError(
-          "collections argument to Variable constructor must be a list, tuple, "
-          "or set. Got %s of type %s" % (collections, type(collections)))
-    if constraint is not None and not callable(constraint):
-      raise ValueError("The `constraint` argument must be a callable.")
-
-    # Store the graph key so optimizers know how to only retrieve variables from
-    # this graph.
-    self._graph_key = ops.get_default_graph()._graph_key  # pylint: disable=protected-access
-    if isinstance(initial_value, trackable.CheckpointInitialValue):
-      self._maybe_initialize_trackable()
-      self._update_uid = initial_value.checkpoint_position.restore_uid
-      initial_value = initial_value.wrapped_value
-
-    synchronization, aggregation, trainable = (
-        validate_synchronization_aggregation_trainable(synchronization,
-                                                       aggregation, trainable,
-                                                       name))
-    self._synchronization = synchronization
-    self._aggregation = aggregation
-    self._trainable = trainable
-    if trainable and ops.GraphKeys.TRAINABLE_VARIABLES not in collections:
-      collections = list(collections) + [ops.GraphKeys.TRAINABLE_VARIABLES]
-    with ops.init_scope():
-      # Ensure that we weren't lifted into the eager context.
-      if context.executing_eagerly():
-        raise RuntimeError(
-            "RefVariable not supported when eager execution is enabled. ")
-      with ops.name_scope(name, "Variable",
-                          [] if init_from_fn else [initial_value]) as name:
-
-        if init_from_fn:
-          # Use attr_scope and device(None) to simulate the behavior of
-          # colocate_with when the variable we want to colocate with doesn't
-          # yet exist.
-          true_name = ops.name_from_scope_name(name)  # pylint: disable=protected-access
-          attr = attr_value_pb2.AttrValue(
-              list=attr_value_pb2.AttrValue.ListValue(
-                  s=[compat.as_bytes("loc:@%s" % true_name)]))
-          # pylint: disable=protected-access
-          with ops.get_default_graph()._attr_scope({"_class": attr}):
-            with ops.name_scope("Initializer"), ops.device(None):
-              initial_value = initial_value()
-              if isinstance(initial_value, trackable.CheckpointInitialValue):
-                self._maybe_initialize_trackable()
-                self._update_uid = initial_value.checkpoint_position.restore_uid
-                initial_value = initial_value.wrapped_value
-              self._initial_value = ops.convert_to_tensor(
-                  initial_value, name="initial_value", dtype=dtype)
-              if shape is None:
-                shape = (
-                    self._initial_value.get_shape()
-                    if validate_shape else tensor_shape.unknown_shape())
-            self._variable = state_ops.variable_op_v2(
-                shape, self._initial_value.dtype.base_dtype, name=name)
-          # pylint: enable=protected-access
-
-        # Or get the initial value from a Tensor or Python object.
-        else:
-          self._initial_value = ops.convert_to_tensor(
-              initial_value, name="initial_value", dtype=dtype)
-          # pylint: disable=protected-access
-          if self._initial_value.op._get_control_flow_context() is not None:
+        if collections is None:
+            collections = [ops.GraphKeys.GLOBAL_VARIABLES]
+        if not isinstance(collections, (list, tuple, set)):
             raise ValueError(
-                "Initializer for variable %s is from inside a control-flow "
-                "construct, such as a loop or conditional. When creating a "
-                "variable inside a loop or conditional, use a lambda as the "
-                "initializer." % name)
-          if shape is None:
-            # pylint: enable=protected-access
-            shape = (
-                self._initial_value.get_shape()
-                if validate_shape else tensor_shape.unknown_shape())
-          # In this case, the variable op can't be created until after the
-          # initial_value has been converted to a Tensor with a known type.
-          self._variable = state_ops.variable_op_v2(
-              shape, self._initial_value.dtype.base_dtype, name=name)
+                "collections argument to Variable constructor must be a list, tuple, "
+                "or set. Got %s of type %s" % (collections, type(collections))
+            )
+        if constraint is not None and not callable(constraint):
+            raise ValueError("The `constraint` argument must be a callable.")
 
-        # Cache the name in `self`, because some APIs call `Variable.name` in a
-        # tight loop, and this halves the cost.
-        self._name = self._variable.name
+        # Store the graph key so optimizers know how to only retrieve variables from
+        # this graph.
+        self._graph_key = (
+            ops.get_default_graph()._graph_key
+        )  # pylint: disable=protected-access
+        if isinstance(initial_value, trackable.CheckpointInitialValue):
+            self._maybe_initialize_trackable()
+            self._update_uid = initial_value.checkpoint_position.restore_uid
+            initial_value = initial_value.wrapped_value
 
-        # Manually overrides the variable's shape with the initial value's.
-        if validate_shape:
-          initial_value_shape = self._initial_value.get_shape()
-          if not initial_value_shape.is_fully_defined():
-            raise ValueError("initial_value must have a shape specified: %s" %
-                             self._initial_value)
+        synchronization, aggregation, trainable = validate_synchronization_aggregation_trainable(
+            synchronization, aggregation, trainable, name
+        )
+        self._synchronization = synchronization
+        self._aggregation = aggregation
+        self._trainable = trainable
+        if trainable and ops.GraphKeys.TRAINABLE_VARIABLES not in collections:
+            collections = list(collections) + [ops.GraphKeys.TRAINABLE_VARIABLES]
+        with ops.init_scope():
+            # Ensure that we weren't lifted into the eager context.
+            if context.executing_eagerly():
+                raise RuntimeError(
+                    "RefVariable not supported when eager execution is enabled. "
+                )
+            with ops.name_scope(
+                name, "Variable", [] if init_from_fn else [initial_value]
+            ) as name:
 
-        # If 'initial_value' makes use of other variables, make sure we don't
-        # have an issue if these other variables aren't initialized first by
-        # using their initialized_value() method.
-        self._initializer_op = state_ops.assign(
-            self._variable,
-            _try_guard_against_uninitialized_dependencies(
-                name, self._initial_value),
-            validate_shape=validate_shape).op
+                if init_from_fn:
+                    # Use attr_scope and device(None) to simulate the behavior of
+                    # colocate_with when the variable we want to colocate with doesn't
+                    # yet exist.
+                    true_name = ops.name_from_scope_name(
+                        name
+                    )  # pylint: disable=protected-access
+                    attr = attr_value_pb2.AttrValue(
+                        list=attr_value_pb2.AttrValue.ListValue(
+                            s=[compat.as_bytes("loc:@%s" % true_name)]
+                        )
+                    )
+                    # pylint: disable=protected-access
+                    with ops.get_default_graph()._attr_scope({"_class": attr}):
+                        with ops.name_scope("Initializer"), ops.device(None):
+                            initial_value = initial_value()
+                            if isinstance(
+                                initial_value, trackable.CheckpointInitialValue
+                            ):
+                                self._maybe_initialize_trackable()
+                                self._update_uid = (
+                                    initial_value.checkpoint_position.restore_uid
+                                )
+                                initial_value = initial_value.wrapped_value
+                            self._initial_value = ops.convert_to_tensor(
+                                initial_value, name="initial_value", dtype=dtype
+                            )
+                            if shape is None:
+                                shape = (
+                                    self._initial_value.get_shape()
+                                    if validate_shape
+                                    else tensor_shape.unknown_shape()
+                                )
+                        self._variable = state_ops.variable_op_v2(
+                            shape, self._initial_value.dtype.base_dtype, name=name
+                        )
+                    # pylint: enable=protected-access
 
-        # TODO(vrv): Change this class to not take caching_device, but
-        # to take the op to colocate the snapshot with, so we can use
-        # colocation rather than devices.
-        if caching_device is not None:
-          with ops.device(caching_device):
-            self._snapshot = array_ops.identity(self._variable, name="read")
-        else:
-          with ops.colocate_with(self._variable.op):
-            self._snapshot = array_ops.identity(self._variable, name="read")
-      ops.add_to_collections(collections, self)
+                # Or get the initial value from a Tensor or Python object.
+                else:
+                    self._initial_value = ops.convert_to_tensor(
+                        initial_value, name="initial_value", dtype=dtype
+                    )
+                    # pylint: disable=protected-access
+                    if self._initial_value.op._get_control_flow_context() is not None:
+                        raise ValueError(
+                            "Initializer for variable %s is from inside a control-flow "
+                            "construct, such as a loop or conditional. When creating a "
+                            "variable inside a loop or conditional, use a lambda as the "
+                            "initializer." % name
+                        )
+                    if shape is None:
+                        # pylint: enable=protected-access
+                        shape = (
+                            self._initial_value.get_shape()
+                            if validate_shape
+                            else tensor_shape.unknown_shape()
+                        )
+                    # In this case, the variable op can't be created until after the
+                    # initial_value has been converted to a Tensor with a known type.
+                    self._variable = state_ops.variable_op_v2(
+                        shape, self._initial_value.dtype.base_dtype, name=name
+                    )
 
-    self._caching_device = caching_device
-    self._save_slice_info = None
-    self._constraint = constraint
+                # Cache the name in `self`, because some APIs call `Variable.name` in a
+                # tight loop, and this halves the cost.
+                self._name = self._variable.name
 
-  def _init_from_proto(self, variable_def, import_scope=None):
-    """Recreates the Variable object from a `VariableDef` protocol buffer.
+                # Manually overrides the variable's shape with the initial value's.
+                if validate_shape:
+                    initial_value_shape = self._initial_value.get_shape()
+                    if not initial_value_shape.is_fully_defined():
+                        raise ValueError(
+                            "initial_value must have a shape specified: %s"
+                            % self._initial_value
+                        )
+
+                # If 'initial_value' makes use of other variables, make sure we don't
+                # have an issue if these other variables aren't initialized first by
+                # using their initialized_value() method.
+                self._initializer_op = state_ops.assign(
+                    self._variable,
+                    _try_guard_against_uninitialized_dependencies(
+                        name, self._initial_value
+                    ),
+                    validate_shape=validate_shape,
+                ).op
+
+                # TODO(vrv): Change this class to not take caching_device, but
+                # to take the op to colocate the snapshot with, so we can use
+                # colocation rather than devices.
+                if caching_device is not None:
+                    with ops.device(caching_device):
+                        self._snapshot = array_ops.identity(self._variable, name="read")
+                else:
+                    with ops.colocate_with(self._variable.op):
+                        self._snapshot = array_ops.identity(self._variable, name="read")
+            ops.add_to_collections(collections, self)
+
+        self._caching_device = caching_device
+        self._save_slice_info = None
+        self._constraint = constraint
+
+    def _init_from_proto(self, variable_def, import_scope=None):
+        """Recreates the Variable object from a `VariableDef` protocol buffer.
 
     Args:
       variable_def: `VariableDef` protocol buffer, describing a variable whose
         nodes already exists in the graph.
       import_scope: Optional `string`. Name scope to add.
     """
-    assert isinstance(variable_def, variable_pb2.VariableDef)
-    # Create from variable_def.
-    g = ops.get_default_graph()
-    self._variable = g.as_graph_element(
-        ops.prepend_name_scope(
-            variable_def.variable_name, import_scope=import_scope))
-    self._name = self._variable.name
-    self._initializer_op = g.as_graph_element(
-        ops.prepend_name_scope(
-            variable_def.initializer_name, import_scope=import_scope))
-    # Tests whether initial_value_name exists first for backwards compatibility.
-    if (hasattr(variable_def, "initial_value_name") and
-        variable_def.initial_value_name):
-      self._initial_value = g.as_graph_element(
-          ops.prepend_name_scope(
-              variable_def.initial_value_name, import_scope=import_scope))
-    else:
-      self._initial_value = None
-    synchronization, aggregation, trainable = (
-        validate_synchronization_aggregation_trainable(
-            variable_def.synchronization, variable_def.aggregation,
-            variable_def.trainable, variable_def.variable_name))
-    self._synchronization = synchronization
-    self._aggregation = aggregation
-    self._trainable = trainable
-    self._snapshot = g.as_graph_element(
-        ops.prepend_name_scope(
-            variable_def.snapshot_name, import_scope=import_scope))
-    if variable_def.HasField("save_slice_info_def"):
-      self._save_slice_info = Variable.SaveSliceInfo(
-          save_slice_info_def=variable_def.save_slice_info_def,
-          import_scope=import_scope)
-    else:
-      self._save_slice_info = None
-    self._caching_device = None
-    self._constraint = None
+        assert isinstance(variable_def, variable_pb2.VariableDef)
+        # Create from variable_def.
+        g = ops.get_default_graph()
+        self._variable = g.as_graph_element(
+            ops.prepend_name_scope(
+                variable_def.variable_name, import_scope=import_scope
+            )
+        )
+        self._name = self._variable.name
+        self._initializer_op = g.as_graph_element(
+            ops.prepend_name_scope(
+                variable_def.initializer_name, import_scope=import_scope
+            )
+        )
+        # Tests whether initial_value_name exists first for backwards compatibility.
+        if (
+            hasattr(variable_def, "initial_value_name")
+            and variable_def.initial_value_name
+        ):
+            self._initial_value = g.as_graph_element(
+                ops.prepend_name_scope(
+                    variable_def.initial_value_name, import_scope=import_scope
+                )
+            )
+        else:
+            self._initial_value = None
+        synchronization, aggregation, trainable = validate_synchronization_aggregation_trainable(
+            variable_def.synchronization,
+            variable_def.aggregation,
+            variable_def.trainable,
+            variable_def.variable_name,
+        )
+        self._synchronization = synchronization
+        self._aggregation = aggregation
+        self._trainable = trainable
+        self._snapshot = g.as_graph_element(
+            ops.prepend_name_scope(
+                variable_def.snapshot_name, import_scope=import_scope
+            )
+        )
+        if variable_def.HasField("save_slice_info_def"):
+            self._save_slice_info = Variable.SaveSliceInfo(
+                save_slice_info_def=variable_def.save_slice_info_def,
+                import_scope=import_scope,
+            )
+        else:
+            self._save_slice_info = None
+        self._caching_device = None
+        self._constraint = None
 
-  def _as_graph_element(self):
-    """Conversion function for Graph.as_graph_element()."""
-    return self._variable
+    def _as_graph_element(self):
+        """Conversion function for Graph.as_graph_element()."""
+        return self._variable
 
-  def value(self):
-    """Returns the last snapshot of this variable.
+    def value(self):
+        """Returns the last snapshot of this variable.
 
     You usually do not need to call this method as all ops that need the value
     of the variable call it automatically through a `convert_to_tensor()` call.
@@ -1935,10 +2032,10 @@ class RefVariable(VariableV1, core.Tensor):
     Returns:
       A `Tensor` containing the value of the variable.
     """
-    return self._snapshot
+        return self._snapshot
 
-  def read_value(self):
-    """Returns the value of this variable, read in the current context.
+    def read_value(self):
+        """Returns the value of this variable, read in the current context.
 
     Can be different from value() if it's on another device, with control
     dependencies, etc.
@@ -1946,10 +2043,10 @@ class RefVariable(VariableV1, core.Tensor):
     Returns:
       A `Tensor` containing the value of the variable.
     """
-    return array_ops.identity(self._variable, name="read")
+        return array_ops.identity(self._variable, name="read")
 
-  def _ref(self):
-    """Returns a reference to this variable.
+    def _ref(self):
+        """Returns a reference to this variable.
 
     You usually do not need to call this method as all ops that need a reference
     to the variable call it automatically.
@@ -1962,31 +2059,31 @@ class RefVariable(VariableV1, core.Tensor):
     Returns:
       A `Tensor` that is a reference to the variable.
     """
-    return self._variable
+        return self._variable
 
-  def set_shape(self, shape):
-    """Overrides the shape for this variable.
+    def set_shape(self, shape):
+        """Overrides the shape for this variable.
 
     Args:
       shape: the `TensorShape` representing the overridden shape.
     """
-    self._ref().set_shape(shape)
-    self.value().set_shape(shape)
+        self._ref().set_shape(shape)
+        self.value().set_shape(shape)
 
-  @property
-  def trainable(self):
-    return self._trainable
+    @property
+    def trainable(self):
+        return self._trainable
 
-  @property
-  def synchronization(self):
-    return self._synchronization
+    @property
+    def synchronization(self):
+        return self._synchronization
 
-  @property
-  def aggregation(self):
-    return self._aggregation
+    @property
+    def aggregation(self):
+        return self._aggregation
 
-  def eval(self, session=None):
-    """In a session, computes and returns the value of this variable.
+    def eval(self, session=None):
+        """In a session, computes and returns the value of this variable.
 
     This is not a graph construction method, it does not add ops to the graph.
 
@@ -2015,11 +2112,11 @@ class RefVariable(VariableV1, core.Tensor):
     Returns:
       A numpy `ndarray` with a copy of the value of this variable.
     """
-    return self._variable.eval(session=session)
+        return self._variable.eval(session=session)
 
-  @property
-  def initial_value(self):
-    """Returns the Tensor used as the initial value for the variable.
+    @property
+    def initial_value(self):
+        """Returns the Tensor used as the initial value for the variable.
 
     Note that this is different from `initialized_value()` which runs
     the op that initializes the variable before returning its value.
@@ -2029,20 +2126,20 @@ class RefVariable(VariableV1, core.Tensor):
     Returns:
       A `Tensor`.
     """
-    return self._initial_value
+        return self._initial_value
 
-  @property
-  def constraint(self):
-    """Returns the constraint function associated with this variable.
+    @property
+    def constraint(self):
+        """Returns the constraint function associated with this variable.
 
     Returns:
       The constraint function that was passed to the variable constructor.
       Can be `None` if no constraint was passed.
     """
-    return self._constraint
+        return self._constraint
 
-  def assign(self, value, use_locking=False, name=None, read_value=True):
-    """Assigns a new value to the variable.
+    def assign(self, value, use_locking=False, name=None, read_value=True):
+        """Assigns a new value to the variable.
 
     This is essentially a shortcut for `assign(self, value)`.
 
@@ -2057,14 +2154,15 @@ class RefVariable(VariableV1, core.Tensor):
       A `Tensor` that will hold the new value of this variable after
       the assignment has completed.
     """
-    assign = state_ops.assign(
-        self._variable, value, use_locking=use_locking, name=name)
-    if read_value:
-      return assign
-    return assign.op
+        assign = state_ops.assign(
+            self._variable, value, use_locking=use_locking, name=name
+        )
+        if read_value:
+            return assign
+        return assign.op
 
-  def assign_add(self, delta, use_locking=False, name=None, read_value=True):
-    """Adds a value to this variable.
+    def assign_add(self, delta, use_locking=False, name=None, read_value=True):
+        """Adds a value to this variable.
 
      This is essentially a shortcut for `assign_add(self, delta)`.
 
@@ -2079,14 +2177,15 @@ class RefVariable(VariableV1, core.Tensor):
       A `Tensor` that will hold the new value of this variable after
       the addition has completed.
     """
-    assign = state_ops.assign_add(
-        self._variable, delta, use_locking=use_locking, name=name)
-    if read_value:
-      return assign
-    return assign.op
+        assign = state_ops.assign_add(
+            self._variable, delta, use_locking=use_locking, name=name
+        )
+        if read_value:
+            return assign
+        return assign.op
 
-  def assign_sub(self, delta, use_locking=False, name=None, read_value=True):
-    """Subtracts a value from this variable.
+    def assign_sub(self, delta, use_locking=False, name=None, read_value=True):
+        """Subtracts a value from this variable.
 
     This is essentially a shortcut for `assign_sub(self, delta)`.
 
@@ -2101,14 +2200,15 @@ class RefVariable(VariableV1, core.Tensor):
       A `Tensor` that will hold the new value of this variable after
       the subtraction has completed.
     """
-    assign = state_ops.assign_sub(
-        self._variable, delta, use_locking=use_locking, name=name)
-    if read_value:
-      return assign
-    return assign.op
+        assign = state_ops.assign_sub(
+            self._variable, delta, use_locking=use_locking, name=name
+        )
+        if read_value:
+            return assign
+        return assign.op
 
-  def scatter_sub(self, sparse_delta, use_locking=False, name=None):
-    """Subtracts `tf.IndexedSlices` from this variable.
+    def scatter_sub(self, sparse_delta, use_locking=False, name=None):
+        """Subtracts `tf.IndexedSlices` from this variable.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to be subtracted from this variable.
@@ -2122,17 +2222,18 @@ class RefVariable(VariableV1, core.Tensor):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    if not isinstance(sparse_delta, ops.IndexedSlices):
-      raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
-    return gen_state_ops.scatter_sub(
-        self._variable,
-        sparse_delta.indices,
-        sparse_delta.values,
-        use_locking=use_locking,
-        name=name)
+        if not isinstance(sparse_delta, ops.IndexedSlices):
+            raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
+        return gen_state_ops.scatter_sub(
+            self._variable,
+            sparse_delta.indices,
+            sparse_delta.values,
+            use_locking=use_locking,
+            name=name,
+        )
 
-  def scatter_add(self, sparse_delta, use_locking=False, name=None):
-    """Adds `tf.IndexedSlices` to this variable.
+    def scatter_add(self, sparse_delta, use_locking=False, name=None):
+        """Adds `tf.IndexedSlices` to this variable.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to be added to this variable.
@@ -2146,17 +2247,18 @@ class RefVariable(VariableV1, core.Tensor):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    if not isinstance(sparse_delta, ops.IndexedSlices):
-      raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
-    return gen_state_ops.scatter_add(
-        self._variable,
-        sparse_delta.indices,
-        sparse_delta.values,
-        use_locking=use_locking,
-        name=name)
+        if not isinstance(sparse_delta, ops.IndexedSlices):
+            raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
+        return gen_state_ops.scatter_add(
+            self._variable,
+            sparse_delta.indices,
+            sparse_delta.values,
+            use_locking=use_locking,
+            name=name,
+        )
 
-  def scatter_max(self, sparse_delta, use_locking=False, name=None):
-    """Updates this variable with the max of `tf.IndexedSlices` and itself.
+    def scatter_max(self, sparse_delta, use_locking=False, name=None):
+        """Updates this variable with the max of `tf.IndexedSlices` and itself.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to use as an argument of max with this
@@ -2171,17 +2273,18 @@ class RefVariable(VariableV1, core.Tensor):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    if not isinstance(sparse_delta, ops.IndexedSlices):
-      raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
-    return gen_state_ops.scatter_max(
-        self._variable,
-        sparse_delta.indices,
-        sparse_delta.values,
-        use_locking=use_locking,
-        name=name)
+        if not isinstance(sparse_delta, ops.IndexedSlices):
+            raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
+        return gen_state_ops.scatter_max(
+            self._variable,
+            sparse_delta.indices,
+            sparse_delta.values,
+            use_locking=use_locking,
+            name=name,
+        )
 
-  def scatter_min(self, sparse_delta, use_locking=False, name=None):
-    """Updates this variable with the min of `tf.IndexedSlices` and itself.
+    def scatter_min(self, sparse_delta, use_locking=False, name=None):
+        """Updates this variable with the min of `tf.IndexedSlices` and itself.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to use as an argument of min with this
@@ -2196,17 +2299,18 @@ class RefVariable(VariableV1, core.Tensor):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    if not isinstance(sparse_delta, ops.IndexedSlices):
-      raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
-    return gen_state_ops.scatter_min(
-        self._variable,
-        sparse_delta.indices,
-        sparse_delta.values,
-        use_locking=use_locking,
-        name=name)
+        if not isinstance(sparse_delta, ops.IndexedSlices):
+            raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
+        return gen_state_ops.scatter_min(
+            self._variable,
+            sparse_delta.indices,
+            sparse_delta.values,
+            use_locking=use_locking,
+            name=name,
+        )
 
-  def scatter_mul(self, sparse_delta, use_locking=False, name=None):
-    """Multiply this variable by `tf.IndexedSlices`.
+    def scatter_mul(self, sparse_delta, use_locking=False, name=None):
+        """Multiply this variable by `tf.IndexedSlices`.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to multiply this variable by.
@@ -2220,17 +2324,18 @@ class RefVariable(VariableV1, core.Tensor):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    if not isinstance(sparse_delta, ops.IndexedSlices):
-      raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
-    return gen_state_ops.scatter_mul(
-        self._variable,
-        sparse_delta.indices,
-        sparse_delta.values,
-        use_locking=use_locking,
-        name=name)
+        if not isinstance(sparse_delta, ops.IndexedSlices):
+            raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
+        return gen_state_ops.scatter_mul(
+            self._variable,
+            sparse_delta.indices,
+            sparse_delta.values,
+            use_locking=use_locking,
+            name=name,
+        )
 
-  def scatter_div(self, sparse_delta, use_locking=False, name=None):
-    """Divide this variable by `tf.IndexedSlices`.
+    def scatter_div(self, sparse_delta, use_locking=False, name=None):
+        """Divide this variable by `tf.IndexedSlices`.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to divide this variable by.
@@ -2244,17 +2349,18 @@ class RefVariable(VariableV1, core.Tensor):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    if not isinstance(sparse_delta, ops.IndexedSlices):
-      raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
-    return gen_state_ops.scatter_div(
-        self._variable,
-        sparse_delta.indices,
-        sparse_delta.values,
-        use_locking=use_locking,
-        name=name)
+        if not isinstance(sparse_delta, ops.IndexedSlices):
+            raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
+        return gen_state_ops.scatter_div(
+            self._variable,
+            sparse_delta.indices,
+            sparse_delta.values,
+            use_locking=use_locking,
+            name=name,
+        )
 
-  def scatter_update(self, sparse_delta, use_locking=False, name=None):
-    """Assigns `tf.IndexedSlices` to this variable.
+    def scatter_update(self, sparse_delta, use_locking=False, name=None):
+        """Assigns `tf.IndexedSlices` to this variable.
 
     Args:
       sparse_delta: `tf.IndexedSlices` to be assigned to this variable.
@@ -2268,17 +2374,18 @@ class RefVariable(VariableV1, core.Tensor):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    if not isinstance(sparse_delta, ops.IndexedSlices):
-      raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
-    return gen_state_ops.scatter_update(
-        self._variable,
-        sparse_delta.indices,
-        sparse_delta.values,
-        use_locking=use_locking,
-        name=name)
+        if not isinstance(sparse_delta, ops.IndexedSlices):
+            raise TypeError("sparse_delta is not IndexedSlices: %s" % sparse_delta)
+        return gen_state_ops.scatter_update(
+            self._variable,
+            sparse_delta.indices,
+            sparse_delta.values,
+            use_locking=use_locking,
+            name=name,
+        )
 
-  def batch_scatter_update(self, sparse_delta, use_locking=False, name=None):
-    """Assigns `tf.IndexedSlices` to this variable batch-wise.
+    def batch_scatter_update(self, sparse_delta, use_locking=False, name=None):
+        """Assigns `tf.IndexedSlices` to this variable batch-wise.
 
     Analogous to `batch_gather`. This assumes that this variable and the
     sparse_delta IndexedSlices have a series of leading dimensions that are the
@@ -2322,15 +2429,16 @@ class RefVariable(VariableV1, core.Tensor):
     Raises:
       TypeError: if `sparse_delta` is not an `IndexedSlices`.
     """
-    return state_ops.batch_scatter_update(
-        self,
-        sparse_delta.indices,
-        sparse_delta.values,
-        use_locking=use_locking,
-        name=name)
+        return state_ops.batch_scatter_update(
+            self,
+            sparse_delta.indices,
+            sparse_delta.values,
+            use_locking=use_locking,
+            name=name,
+        )
 
-  def scatter_nd_sub(self, indices, updates, name=None):
-    """Applies sparse subtraction to individual values or slices in a Variable.
+    def scatter_nd_sub(self, indices, updates, name=None):
+        """Applies sparse subtraction to individual values or slices in a Variable.
 
     `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
 
@@ -2375,11 +2483,12 @@ class RefVariable(VariableV1, core.Tensor):
       A `Tensor` that will hold the new value of this variable after
       the scattered subtraction has completed.
     """
-    return gen_state_ops.scatter_nd_sub(
-        self._variable, indices, updates, use_locking=True, name=name)
+        return gen_state_ops.scatter_nd_sub(
+            self._variable, indices, updates, use_locking=True, name=name
+        )
 
-  def scatter_nd_add(self, indices, updates, name=None):
-    """Applies sparse addition to individual values or slices in a Variable.
+    def scatter_nd_add(self, indices, updates, name=None):
+        """Applies sparse addition to individual values or slices in a Variable.
 
     `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
 
@@ -2424,11 +2533,12 @@ class RefVariable(VariableV1, core.Tensor):
       A `Tensor` that will hold the new value of this variable after
       the scattered addition has completed.
     """
-    return gen_state_ops.scatter_nd_add(
-        self._variable, indices, updates, use_locking=True, name=name)
+        return gen_state_ops.scatter_nd_add(
+            self._variable, indices, updates, use_locking=True, name=name
+        )
 
-  def scatter_nd_update(self, indices, updates, name=None):
-    """Applies sparse assignment to individual values or slices in a Variable.
+    def scatter_nd_update(self, indices, updates, name=None):
+        """Applies sparse assignment to individual values or slices in a Variable.
 
     `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
 
@@ -2473,44 +2583,12 @@ class RefVariable(VariableV1, core.Tensor):
       A `Tensor` that will hold the new value of this variable after
       the scattered assignment has completed.
     """
-    return gen_state_ops.scatter_nd_update(
-        self._variable, indices, updates, use_locking=True, name=name)
+        return gen_state_ops.scatter_nd_update(
+            self._variable, indices, updates, use_locking=True, name=name
+        )
 
-  def scatter_nd_max(self, indices, updates, name=None):
-    """Updates this variable with the max of `tf.IndexedSlices` and itself.
-
-    `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
-
-    `indices` must be integer tensor, containing indices into `ref`.
-    It must be shape `[d_0, ..., d_{Q-2}, K]` where `0 < K <= P`.
-
-    The innermost dimension of `indices` (with length `K`) corresponds to
-    indices into elements (if `K = P`) or slices (if `K < P`) along the `K`th
-    dimension of `ref`.
-
-    `updates` is `Tensor` of rank `Q-1+P-K` with shape:
-
-    ```
-    [d_0, ..., d_{Q-2}, ref.shape[K], ..., ref.shape[P-1]].
-    ```
-
-    See `tf.scatter_nd` for more details about how to make updates to
-    slices.
-
-    Args:
-      indices: The indices to be used in the operation.
-      updates: The values to be used in the operation.
-      name: the name of the operation.
-
-    Returns:
-      A `Tensor` that will hold the new value of this variable after
-      the scattered addition has completed.
-    """
-    return gen_state_ops.scatter_nd_max(
-        self._variable, indices, updates, use_locking=True, name=name)
-
-  def scatter_nd_min(self, indices, updates, name=None):
-    """Updates this variable with the min of `tf.IndexedSlices` and itself.
+    def scatter_nd_max(self, indices, updates, name=None):
+        """Updates this variable with the max of `tf.IndexedSlices` and itself.
 
     `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
 
@@ -2539,28 +2617,74 @@ class RefVariable(VariableV1, core.Tensor):
       A `Tensor` that will hold the new value of this variable after
       the scattered addition has completed.
     """
-    return gen_state_ops.scatter_nd_min(
-        self._variable, indices, updates, use_locking=True, name=name)
+        return gen_state_ops.scatter_nd_max(
+            self._variable, indices, updates, use_locking=True, name=name
+        )
 
-  def _strided_slice_assign(self, begin, end, strides, value, name, begin_mask,
-                            end_mask, ellipsis_mask, new_axis_mask,
-                            shrink_axis_mask):
-    return gen_array_ops.strided_slice_assign(
-        ref=self._ref(),
-        begin=begin,
-        end=end,
-        strides=strides,
-        value=value,
-        name=name,
-        begin_mask=begin_mask,
-        end_mask=end_mask,
-        ellipsis_mask=ellipsis_mask,
-        new_axis_mask=new_axis_mask,
-        shrink_axis_mask=shrink_axis_mask)
+    def scatter_nd_min(self, indices, updates, name=None):
+        """Updates this variable with the min of `tf.IndexedSlices` and itself.
 
-  @deprecated(None, "Prefer Dataset.range instead.")
-  def count_up_to(self, limit):
-    """Increments this variable until it reaches `limit`.
+    `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
+
+    `indices` must be integer tensor, containing indices into `ref`.
+    It must be shape `[d_0, ..., d_{Q-2}, K]` where `0 < K <= P`.
+
+    The innermost dimension of `indices` (with length `K`) corresponds to
+    indices into elements (if `K = P`) or slices (if `K < P`) along the `K`th
+    dimension of `ref`.
+
+    `updates` is `Tensor` of rank `Q-1+P-K` with shape:
+
+    ```
+    [d_0, ..., d_{Q-2}, ref.shape[K], ..., ref.shape[P-1]].
+    ```
+
+    See `tf.scatter_nd` for more details about how to make updates to
+    slices.
+
+    Args:
+      indices: The indices to be used in the operation.
+      updates: The values to be used in the operation.
+      name: the name of the operation.
+
+    Returns:
+      A `Tensor` that will hold the new value of this variable after
+      the scattered addition has completed.
+    """
+        return gen_state_ops.scatter_nd_min(
+            self._variable, indices, updates, use_locking=True, name=name
+        )
+
+    def _strided_slice_assign(
+        self,
+        begin,
+        end,
+        strides,
+        value,
+        name,
+        begin_mask,
+        end_mask,
+        ellipsis_mask,
+        new_axis_mask,
+        shrink_axis_mask,
+    ):
+        return gen_array_ops.strided_slice_assign(
+            ref=self._ref(),
+            begin=begin,
+            end=end,
+            strides=strides,
+            value=value,
+            name=name,
+            begin_mask=begin_mask,
+            end_mask=end_mask,
+            ellipsis_mask=ellipsis_mask,
+            new_axis_mask=new_axis_mask,
+            shrink_axis_mask=shrink_axis_mask,
+        )
+
+    @deprecated(None, "Prefer Dataset.range instead.")
+    def count_up_to(self, limit):
+        """Increments this variable until it reaches `limit`.
 
     When that Op is run it tries to increment the variable by `1`. If
     incrementing the variable would bring it above `limit` then the Op raises
@@ -2579,77 +2703,80 @@ class RefVariable(VariableV1, core.Tensor):
       other Op modifies this variable, the values produced will all be
       distinct.
     """
-    return state_ops.count_up_to(self._variable, limit=limit)
+        return state_ops.count_up_to(self._variable, limit=limit)
 
-  # Conversion to tensor.
-  @staticmethod
-  def _TensorConversionFunction(v, dtype=None, name=None, as_ref=False):  # pylint: disable=invalid-name
-    """Utility function for converting a Variable to a Tensor."""
-    _ = name
-    if dtype and not dtype.is_compatible_with(v.dtype):
-      raise ValueError(
-          "Incompatible type conversion requested to type '%s' for variable "
-          "of type '%s'" % (dtype.name, v.dtype.name))
-    if as_ref:
-      return v._ref()  # pylint: disable=protected-access
-    else:
-      return v.value()
+    # Conversion to tensor.
+    @staticmethod
+    def _TensorConversionFunction(
+        v, dtype=None, name=None, as_ref=False
+    ):  # pylint: disable=invalid-name
+        """Utility function for converting a Variable to a Tensor."""
+        _ = name
+        if dtype and not dtype.is_compatible_with(v.dtype):
+            raise ValueError(
+                "Incompatible type conversion requested to type '%s' for variable "
+                "of type '%s'" % (dtype.name, v.dtype.name)
+            )
+        if as_ref:
+            return v._ref()  # pylint: disable=protected-access
+        else:
+            return v.value()
 
-  # NOTE(mrry): This enables the Variable's overloaded "right" binary
-  # operators to run when the left operand is an ndarray, because it
-  # accords the Variable class higher priority than an ndarray, or a
-  # numpy matrix.
-  # TODO(mrry): Convert this to using numpy's __numpy_ufunc__
-  # mechanism, which allows more control over how Variables interact
-  # with ndarrays.
-  __array_priority__ = 100
+    # NOTE(mrry): This enables the Variable's overloaded "right" binary
+    # operators to run when the left operand is an ndarray, because it
+    # accords the Variable class higher priority than an ndarray, or a
+    # numpy matrix.
+    # TODO(mrry): Convert this to using numpy's __numpy_ufunc__
+    # mechanism, which allows more control over how Variables interact
+    # with ndarrays.
+    __array_priority__ = 100
 
-  @property
-  def name(self):
-    """The name of this variable."""
-    return self._name
+    @property
+    def name(self):
+        """The name of this variable."""
+        return self._name
 
-  @property
-  def initializer(self):
-    """The initializer operation for this variable."""
-    return self._initializer_op
+    @property
+    def initializer(self):
+        """The initializer operation for this variable."""
+        return self._initializer_op
 
-  @property
-  def device(self):
-    """The device of this variable."""
-    return self._variable.device
+    @property
+    def device(self):
+        """The device of this variable."""
+        return self._variable.device
 
-  @property
-  def dtype(self):
-    """The `DType` of this variable."""
-    return self._variable.dtype
+    @property
+    def dtype(self):
+        """The `DType` of this variable."""
+        return self._variable.dtype
 
-  @property
-  def op(self):
-    """The `Operation` of this variable."""
-    return self._variable.op
+    @property
+    def op(self):
+        """The `Operation` of this variable."""
+        return self._variable.op
 
-  @property
-  def graph(self):
-    """The `Graph` of this variable."""
-    return self._variable.graph
+    @property
+    def graph(self):
+        """The `Graph` of this variable."""
+        return self._variable.graph
 
-  @property
-  def _distribute_strategy(self):
-    """The `tf.distribute.Strategy` that this variable was created under."""
-    return None  # Ref variables are never created inside a strategy.
+    @property
+    def _distribute_strategy(self):
+        """The `tf.distribute.Strategy` that this variable was created under."""
+        return None  # Ref variables are never created inside a strategy.
 
-  @property
-  def shape(self):
-    """The `TensorShape` of this variable.
+    @property
+    def shape(self):
+        """The `TensorShape` of this variable.
 
     Returns:
       A `TensorShape`.
     """
-    return self._variable.get_shape()
+        return self._variable.get_shape()
 
-  def to_proto(self, export_scope=None):
-    """Converts a `Variable` to a `VariableDef` protocol buffer.
+    def to_proto(self, export_scope=None):
+        """Converts a `Variable` to a `VariableDef` protocol buffer.
 
     Args:
       export_scope: Optional `string`. Name scope to remove.
@@ -2658,85 +2785,106 @@ class RefVariable(VariableV1, core.Tensor):
       A `VariableDef` protocol buffer, or `None` if the `Variable` is not
       in the specified name scope.
     """
-    if (export_scope is None or self._variable.name.startswith(export_scope)):
-      var_def = variable_pb2.VariableDef()
-      var_def.variable_name = ops.strip_name_scope(self._variable.name,
-                                                   export_scope)
-      if self._initial_value is not None:
-        # For backwards compatibility.
-        var_def.initial_value_name = ops.strip_name_scope(
-            self._initial_value.name, export_scope)
-      var_def.trainable = self.trainable
-      var_def.synchronization = self.synchronization.value
-      var_def.aggregation = self.aggregation.value
-      var_def.initializer_name = ops.strip_name_scope(self.initializer.name,
-                                                      export_scope)
-      var_def.snapshot_name = ops.strip_name_scope(self._snapshot.name,
-                                                   export_scope)
-      if self._save_slice_info:
-        var_def.save_slice_info_def.MergeFrom(
-            self._save_slice_info.to_proto(export_scope=export_scope))
-      return var_def
-    else:
-      return None
+        if export_scope is None or self._variable.name.startswith(export_scope):
+            var_def = variable_pb2.VariableDef()
+            var_def.variable_name = ops.strip_name_scope(
+                self._variable.name, export_scope
+            )
+            if self._initial_value is not None:
+                # For backwards compatibility.
+                var_def.initial_value_name = ops.strip_name_scope(
+                    self._initial_value.name, export_scope
+                )
+            var_def.trainable = self.trainable
+            var_def.synchronization = self.synchronization.value
+            var_def.aggregation = self.aggregation.value
+            var_def.initializer_name = ops.strip_name_scope(
+                self.initializer.name, export_scope
+            )
+            var_def.snapshot_name = ops.strip_name_scope(
+                self._snapshot.name, export_scope
+            )
+            if self._save_slice_info:
+                var_def.save_slice_info_def.MergeFrom(
+                    self._save_slice_info.to_proto(export_scope=export_scope)
+                )
+            return var_def
+        else:
+            return None
 
-  def __iadd__(self, other):
-    logging.log_first_n(
-        logging.WARN, "Variable += will be deprecated. Use variable.assign_add"
-        " if you want assignment to the variable value or 'x = x + y'"
-        " if you want a new python Tensor object.", 1)
-    return self + other
+    def __iadd__(self, other):
+        logging.log_first_n(
+            logging.WARN,
+            "Variable += will be deprecated. Use variable.assign_add"
+            " if you want assignment to the variable value or 'x = x + y'"
+            " if you want a new python Tensor object.",
+            1,
+        )
+        return self + other
 
-  def __isub__(self, other):
-    logging.log_first_n(
-        logging.WARN, "Variable -= will be deprecated. Use variable.assign_sub"
-        " if you want assignment to the variable value or 'x = x - y'"
-        " if you want a new python Tensor object.", 1)
-    return self - other
+    def __isub__(self, other):
+        logging.log_first_n(
+            logging.WARN,
+            "Variable -= will be deprecated. Use variable.assign_sub"
+            " if you want assignment to the variable value or 'x = x - y'"
+            " if you want a new python Tensor object.",
+            1,
+        )
+        return self - other
 
-  def __imul__(self, other):
-    logging.log_first_n(
-        logging.WARN,
-        "Variable *= will be deprecated. Use `var.assign(var * other)`"
-        " if you want assignment to the variable value or `x = x * y`"
-        " if you want a new python Tensor object.", 1)
-    return self * other
+    def __imul__(self, other):
+        logging.log_first_n(
+            logging.WARN,
+            "Variable *= will be deprecated. Use `var.assign(var * other)`"
+            " if you want assignment to the variable value or `x = x * y`"
+            " if you want a new python Tensor object.",
+            1,
+        )
+        return self * other
 
-  def __idiv__(self, other):
-    logging.log_first_n(
-        logging.WARN,
-        "Variable /= will be deprecated. Use `var.assign(var / other)`"
-        " if you want assignment to the variable value or `x = x / y`"
-        " if you want a new python Tensor object.", 1)
-    return self / other
+    def __idiv__(self, other):
+        logging.log_first_n(
+            logging.WARN,
+            "Variable /= will be deprecated. Use `var.assign(var / other)`"
+            " if you want assignment to the variable value or `x = x / y`"
+            " if you want a new python Tensor object.",
+            1,
+        )
+        return self / other
 
-  def __itruediv__(self, other):
-    logging.log_first_n(
-        logging.WARN,
-        "Variable /= will be deprecated. Use `var.assign(var / other)`"
-        " if you want assignment to the variable value or `x = x / y`"
-        " if you want a new python Tensor object.", 1)
-    return self / other
+    def __itruediv__(self, other):
+        logging.log_first_n(
+            logging.WARN,
+            "Variable /= will be deprecated. Use `var.assign(var / other)`"
+            " if you want assignment to the variable value or `x = x / y`"
+            " if you want a new python Tensor object.",
+            1,
+        )
+        return self / other
 
-  def __irealdiv__(self, other):
-    logging.log_first_n(
-        logging.WARN,
-        "Variable /= will be deprecated. Use `var.assign(var / other)`"
-        " if you want assignment to the variable value or `x = x / y`"
-        " if you want a new python Tensor object.", 1)
-    return self / other
+    def __irealdiv__(self, other):
+        logging.log_first_n(
+            logging.WARN,
+            "Variable /= will be deprecated. Use `var.assign(var / other)`"
+            " if you want assignment to the variable value or `x = x / y`"
+            " if you want a new python Tensor object.",
+            1,
+        )
+        return self / other
 
-  def __ipow__(self, other):
-    logging.log_first_n(
-        logging.WARN,
-        "Variable **= will be deprecated. Use `var.assign(var ** other)`"
-        " if you want assignment to the variable value or `x = x ** y`"
-        " if you want a new python Tensor object.", 1)
-    return self**other
+    def __ipow__(self, other):
+        logging.log_first_n(
+            logging.WARN,
+            "Variable **= will be deprecated. Use `var.assign(var ** other)`"
+            " if you want assignment to the variable value or `x = x ** y`"
+            " if you want a new python Tensor object.",
+            1,
+        )
+        return self ** other
 
 
 def _try_guard_against_uninitialized_dependencies(name, initial_value):
-  """Attempt to guard against dependencies on uninitialized variables.
+    """Attempt to guard against dependencies on uninitialized variables.
 
   Replace references to variables in `initial_value` with references to the
   variable's initialized values. The initialized values are essentially
@@ -2762,36 +2910,36 @@ def _try_guard_against_uninitialized_dependencies(name, initial_value):
   Raises:
     TypeError: If `initial_value` is not a `Tensor`.
   """
-  if not isinstance(initial_value, ops.Tensor):
-    raise TypeError("initial_value needs to be a Tensor: %s" % initial_value)
+    if not isinstance(initial_value, ops.Tensor):
+        raise TypeError("initial_value needs to be a Tensor: %s" % initial_value)
 
-  # Don't modify initial_value if it contains any cyclic dependencies.
-  if _has_cycle(initial_value.op, state={}):
-    return initial_value
-  return _safe_initial_value_from_tensor(name, initial_value, op_cache={})
+    # Don't modify initial_value if it contains any cyclic dependencies.
+    if _has_cycle(initial_value.op, state={}):
+        return initial_value
+    return _safe_initial_value_from_tensor(name, initial_value, op_cache={})
 
 
 _UNKNOWN, _STARTED, _FINISHED = range(3)
 
 
 def _has_cycle(op, state):
-  """Detect cycles in the dependencies of `initial_value`."""
-  op_state = state.get(op.name, _UNKNOWN)
-  if op_state == _STARTED:
-    return True
-  elif op_state == _FINISHED:
-    return False
+    """Detect cycles in the dependencies of `initial_value`."""
+    op_state = state.get(op.name, _UNKNOWN)
+    if op_state == _STARTED:
+        return True
+    elif op_state == _FINISHED:
+        return False
 
-  state[op.name] = _STARTED
-  for i in itertools.chain((i.op for i in op.inputs), op.control_inputs):
-    if _has_cycle(i, state):
-      return True
-  state[op.name] = _FINISHED
-  return False
+    state[op.name] = _STARTED
+    for i in itertools.chain((i.op for i in op.inputs), op.control_inputs):
+        if _has_cycle(i, state):
+            return True
+    state[op.name] = _FINISHED
+    return False
 
 
 def _safe_initial_value_from_tensor(name, tensor, op_cache):
-  """Replace dependencies on variables with their initialized values.
+    """Replace dependencies on variables with their initialized values.
 
   Args:
     name: Variable name.
@@ -2805,16 +2953,16 @@ def _safe_initial_value_from_tensor(name, tensor, op_cache):
     variable's initialized values. This is done on a best-effort basis. If no
     modifications need to be made then `tensor` will be returned unchanged.
   """
-  op = tensor.op
-  new_op = op_cache.get(op.name)
-  if new_op is None:
-    new_op = _safe_initial_value_from_op(name, op, op_cache)
-    op_cache[op.name] = new_op
-  return new_op.outputs[tensor.value_index]
+    op = tensor.op
+    new_op = op_cache.get(op.name)
+    if new_op is None:
+        new_op = _safe_initial_value_from_op(name, op, op_cache)
+        op_cache[op.name] = new_op
+    return new_op.outputs[tensor.value_index]
 
 
 def _safe_initial_value_from_op(name, op, op_cache):
-  """Replace dependencies on variables with their initialized values.
+    """Replace dependencies on variables with their initialized values.
 
   Args:
     name: Variable name.
@@ -2828,44 +2976,49 @@ def _safe_initial_value_from_op(name, op, op_cache):
     variable's initialized values. This is done on a best-effort basis. If no
     modifications need to be made then `op` will be returned unchanged.
   """
-  op_type = op.node_def.op
-  if op_type in ("IsVariableInitialized", "VarIsInitializedOp",
-                 "ReadVariableOp", "If"):
+    op_type = op.node_def.op
+    if op_type in (
+        "IsVariableInitialized",
+        "VarIsInitializedOp",
+        "ReadVariableOp",
+        "If",
+    ):
+        return op
+
+    # Attempt to find the initialized_value of any variable reference / handles.
+    # TODO(b/70206927): Fix handling of ResourceVariables.
+    if op_type in ("Variable", "VariableV2", "VarHandleOp"):
+        initialized_value = _find_initialized_value_for_variable(op)
+        return op if initialized_value is None else initialized_value.op
+
+    # Recursively build initializer expressions for inputs.
+    modified = False
+    new_op_inputs = []
+    for op_input in op.inputs:
+        new_op_input = _safe_initial_value_from_tensor(name, op_input, op_cache)
+        new_op_inputs.append(new_op_input)
+        modified = modified or (new_op_input != op_input)
+
+    # If at least one input was modified, replace the op.
+    if modified:
+        new_op_type = op_type
+        if new_op_type == "RefSwitch":
+            new_op_type = "Switch"
+        new_op_name = op.node_def.name + "_" + name
+        new_op_name = new_op_name.replace(":", "_")
+        return op.graph.create_op(
+            new_op_type,
+            new_op_inputs,
+            op._output_types,  # pylint: disable=protected-access
+            name=new_op_name,
+            attrs=op.node_def.attr,
+        )
+
     return op
-
-  # Attempt to find the initialized_value of any variable reference / handles.
-  # TODO(b/70206927): Fix handling of ResourceVariables.
-  if op_type in ("Variable", "VariableV2", "VarHandleOp"):
-    initialized_value = _find_initialized_value_for_variable(op)
-    return op if initialized_value is None else initialized_value.op
-
-  # Recursively build initializer expressions for inputs.
-  modified = False
-  new_op_inputs = []
-  for op_input in op.inputs:
-    new_op_input = _safe_initial_value_from_tensor(name, op_input, op_cache)
-    new_op_inputs.append(new_op_input)
-    modified = modified or (new_op_input != op_input)
-
-  # If at least one input was modified, replace the op.
-  if modified:
-    new_op_type = op_type
-    if new_op_type == "RefSwitch":
-      new_op_type = "Switch"
-    new_op_name = op.node_def.name + "_" + name
-    new_op_name = new_op_name.replace(":", "_")
-    return op.graph.create_op(
-        new_op_type,
-        new_op_inputs,
-        op._output_types,  # pylint: disable=protected-access
-        name=new_op_name,
-        attrs=op.node_def.attr)
-
-  return op
 
 
 def _find_initialized_value_for_variable(variable_op):
-  """Find the initialized value for a variable op.
+    """Find the initialized value for a variable op.
 
   To do so, lookup the variable op in the variables collection.
 
@@ -2876,22 +3029,24 @@ def _find_initialized_value_for_variable(variable_op):
     A `Tensor` representing the initialized value for the variable or `None`
     if the initialized value could not be found.
   """
-  try:
-    var_names = [variable_op.node_def.name, variable_op.node_def.name + ":0"]
-    for collection_name in (ops.GraphKeys.GLOBAL_VARIABLES,
-                            ops.GraphKeys.LOCAL_VARIABLES):
-      for var in variable_op.graph.get_collection(collection_name):
-        if var.name in var_names:
-          return var.initialized_value()
-  except AttributeError:
-    # Return None when an incomplete user-defined variable type was put in
-    # the collection.
+    try:
+        var_names = [variable_op.node_def.name, variable_op.node_def.name + ":0"]
+        for collection_name in (
+            ops.GraphKeys.GLOBAL_VARIABLES,
+            ops.GraphKeys.LOCAL_VARIABLES,
+        ):
+            for var in variable_op.graph.get_collection(collection_name):
+                if var.name in var_names:
+                    return var.initialized_value()
+    except AttributeError:
+        # Return None when an incomplete user-defined variable type was put in
+        # the collection.
+        return None
     return None
-  return None
 
 
 class PartitionedVariable(object):
-  """A container for partitioned `Variable` objects.
+    """A container for partitioned `Variable` objects.
 
   @compatibility(eager) `tf.PartitionedVariable` is not compatible with
   eager execution.  Use `tf.Variable` instead which is compatible
@@ -2902,8 +3057,8 @@ class PartitionedVariable(object):
   @end_compatibility
   """
 
-  def __init__(self, name, shape, dtype, variable_list, partitions):
-    """Creates a new partitioned variable wrapper.
+    def __init__(self, name, shape, dtype, variable_list, partitions):
+        """Creates a new partitioned variable wrapper.
 
     Variables passed via the variable_list must contain a save_slice_info
     field.  Concatenation and iteration is in lexicographic order according
@@ -2922,58 +3077,63 @@ class PartitionedVariable(object):
       ValueError: If `variable_list` is empty, or the `Variable` shape
         information does not match `shape`, or `partitions` has invalid values.
     """
-    if not isinstance(variable_list, (list, tuple)):
-      raise TypeError("variable_list is not a list or tuple: %s" %
-                      variable_list)
-    if not isinstance(partitions, (list, tuple)):
-      raise TypeError("partitions is not a list or tuple: %s" % partitions)
-    if not all(p >= 1 for p in partitions):
-      raise ValueError("partition values must be positive: %s" % partitions)
-    if not variable_list:
-      raise ValueError("variable_list may not be empty")
-    # pylint: disable=protected-access
-    for v in variable_list:
-      # Sort the variable_list lexicographically according to var offset value.
-      if not all(v._get_save_slice_info() is not None for v in variable_list):
-        raise ValueError(
-            "All variables must have a save_slice_info available: %s" %
-            [v.name for v in variable_list])
-      if len(shape) != len(partitions):
-        raise ValueError("len(shape) != len(partitions): %s vs. %s" %
-                         (shape, partitions))
-      if v._get_save_slice_info().full_shape != shape:
-        raise ValueError("All variables' full shapes must match shape: %s; "
-                         "but full shapes were: %s" %
-                         (shape, str([v._get_save_slice_info().full_shape])))
-    self._variable_list = sorted(
-        variable_list, key=lambda v: v._get_save_slice_info().var_offset)
-    # pylint: enable=protected-access
+        if not isinstance(variable_list, (list, tuple)):
+            raise TypeError("variable_list is not a list or tuple: %s" % variable_list)
+        if not isinstance(partitions, (list, tuple)):
+            raise TypeError("partitions is not a list or tuple: %s" % partitions)
+        if not all(p >= 1 for p in partitions):
+            raise ValueError("partition values must be positive: %s" % partitions)
+        if not variable_list:
+            raise ValueError("variable_list may not be empty")
+        # pylint: disable=protected-access
+        for v in variable_list:
+            # Sort the variable_list lexicographically according to var offset value.
+            if not all(v._get_save_slice_info() is not None for v in variable_list):
+                raise ValueError(
+                    "All variables must have a save_slice_info available: %s"
+                    % [v.name for v in variable_list]
+                )
+            if len(shape) != len(partitions):
+                raise ValueError(
+                    "len(shape) != len(partitions): %s vs. %s" % (shape, partitions)
+                )
+            if v._get_save_slice_info().full_shape != shape:
+                raise ValueError(
+                    "All variables' full shapes must match shape: %s; "
+                    "but full shapes were: %s"
+                    % (shape, str([v._get_save_slice_info().full_shape]))
+                )
+        self._variable_list = sorted(
+            variable_list, key=lambda v: v._get_save_slice_info().var_offset
+        )
+        # pylint: enable=protected-access
 
-    self._name = name
-    self._shape = shape
-    self._dtype = dtype
-    self._partitions = partitions
-    self._as_tensor = None
+        self._name = name
+        self._shape = shape
+        self._dtype = dtype
+        self._partitions = partitions
+        self._as_tensor = None
 
-  def __iter__(self):
-    """Return an iterable for accessing the underlying partition Variables."""
-    return iter(self._variable_list)
+    def __iter__(self):
+        """Return an iterable for accessing the underlying partition Variables."""
+        return iter(self._variable_list)
 
-  def __len__(self):
-    num_partition_axes = len(self._partition_axes())
-    if num_partition_axes > 1:
-      raise ValueError("Cannot get a length for %d > 1 partition axes" %
-                       num_partition_axes)
-    return len(self._variable_list)
+    def __len__(self):
+        num_partition_axes = len(self._partition_axes())
+        if num_partition_axes > 1:
+            raise ValueError(
+                "Cannot get a length for %d > 1 partition axes" % num_partition_axes
+            )
+        return len(self._variable_list)
 
-  def _partition_axes(self):
-    if all(p == 1 for p in self._partitions):
-      return [0]
-    else:
-      return [i for i, p in enumerate(self._partitions) if p > 1]
+    def _partition_axes(self):
+        if all(p == 1 for p in self._partitions):
+            return [0]
+        else:
+            return [i for i, p in enumerate(self._partitions) if p > 1]
 
-  def _concat(self):
-    """Returns the overall concatenated value as a `Tensor`.
+    def _concat(self):
+        """Returns the overall concatenated value as a `Tensor`.
 
     This is different from using the partitioned variable directly as a tensor
     (through tensor conversion and `as_tensor`) in that it creates a new set of
@@ -2982,26 +3142,27 @@ class PartitionedVariable(object):
     Returns:
       `Tensor` containing the concatenated value.
     """
-    if len(self._variable_list) == 1:
-      with ops.name_scope(None):
-        return array_ops.identity(self._variable_list[0], name=self._name)
+        if len(self._variable_list) == 1:
+            with ops.name_scope(None):
+                return array_ops.identity(self._variable_list[0], name=self._name)
 
-    partition_axes = self._partition_axes()
+        partition_axes = self._partition_axes()
 
-    if len(partition_axes) > 1:
-      raise NotImplementedError(
-          "Cannot concatenate along more than one dimension: %s.  "
-          "Multi-axis partition concat is not supported" % str(partition_axes))
-    partition_ix = partition_axes[0]
+        if len(partition_axes) > 1:
+            raise NotImplementedError(
+                "Cannot concatenate along more than one dimension: %s.  "
+                "Multi-axis partition concat is not supported" % str(partition_axes)
+            )
+        partition_ix = partition_axes[0]
 
-    with ops.name_scope(self._name + "/ConcatPartitions/"):
-      concatenated = array_ops.concat(self._variable_list, partition_ix)
+        with ops.name_scope(self._name + "/ConcatPartitions/"):
+            concatenated = array_ops.concat(self._variable_list, partition_ix)
 
-    with ops.name_scope(None):
-      return array_ops.identity(concatenated, name=self._name)
+        with ops.name_scope(None):
+            return array_ops.identity(concatenated, name=self._name)
 
-  def as_tensor(self):
-    """Returns the overall concatenated value as a `Tensor`.
+    def as_tensor(self):
+        """Returns the overall concatenated value as a `Tensor`.
 
     The returned tensor will not inherit the control dependencies from the scope
     where the value is used, which is similar to getting the value of
@@ -3010,110 +3171,117 @@ class PartitionedVariable(object):
     Returns:
       `Tensor` containing the concatenated value.
     """
-    with ops.control_dependencies(None):
-      return self._concat()
+        with ops.control_dependencies(None):
+            return self._concat()
 
-  @staticmethod
-  def _TensorConversionFunction(v, dtype=None, name=None, as_ref=False):
-    # pylint: disable=invalid-name
-    _ = name
-    if dtype is not None and not dtype.is_compatible_with(v.dtype):
-      raise ValueError(
-          "Incompatible type conversion requested to type '%s' for variable "
-          "of type '%s'" % (dtype.name, v.dtype.name))
-    if as_ref:
-      raise NotImplementedError(
-          "PartitionedVariable doesn't support being used as a reference.")
-    else:
-      return v.as_tensor()
+    @staticmethod
+    def _TensorConversionFunction(v, dtype=None, name=None, as_ref=False):
+        # pylint: disable=invalid-name
+        _ = name
+        if dtype is not None and not dtype.is_compatible_with(v.dtype):
+            raise ValueError(
+                "Incompatible type conversion requested to type '%s' for variable "
+                "of type '%s'" % (dtype.name, v.dtype.name)
+            )
+        if as_ref:
+            raise NotImplementedError(
+                "PartitionedVariable doesn't support being used as a reference."
+            )
+        else:
+            return v.as_tensor()
 
-  @property
-  def name(self):
-    return self._name
+    @property
+    def name(self):
+        return self._name
 
-  @property
-  def dtype(self):
-    return self._dtype
+    @property
+    def dtype(self):
+        return self._dtype
 
-  @property
-  def shape(self):
-    return self.get_shape()
+    @property
+    def shape(self):
+        return self.get_shape()
 
-  @property
-  def _distribute_strategy(self):
-    """The `tf.distribute.Strategy` that this variable was created under."""
-    # NOTE(yuefengz): Today, no partitioned variables in a distribute strategy.
-    return None
+    @property
+    def _distribute_strategy(self):
+        """The `tf.distribute.Strategy` that this variable was created under."""
+        # NOTE(yuefengz): Today, no partitioned variables in a distribute strategy.
+        return None
 
-  def get_shape(self):
-    return self._shape
+    def get_shape(self):
+        return self._shape
 
-  def _get_variable_list(self):
-    return self._variable_list
+    def _get_variable_list(self):
+        return self._variable_list
 
-  def _get_partitions(self):
-    return self._partitions
+    def _get_partitions(self):
+        return self._partitions
 
-  def _apply_assign_fn(self, assign_fn, value):
-    partition_axes = self._partition_axes()
-    if len(partition_axes) > 1:
-      raise NotImplementedError(
-          "Cannot do assign action along more than one dimension: %s.  "
-          "Multi-axis partition assign action is not supported " %
-          str(partition_axes))
-    if isinstance(value, list):
-      assert len(value) == len(self._variable_list)
-      value_list = value
-    elif isinstance(value, PartitionedVariable):
-      value_list = [var_part for var_part in value]
-    else:
-      partition_ix = partition_axes[0]
-      size_splits_list = [
-          tensor_shape.dimension_value(var.shape[partition_ix])
-          for var in self._variable_list
-      ]
-      value_list = array_ops.split(value, size_splits_list, axis=partition_ix)
+    def _apply_assign_fn(self, assign_fn, value):
+        partition_axes = self._partition_axes()
+        if len(partition_axes) > 1:
+            raise NotImplementedError(
+                "Cannot do assign action along more than one dimension: %s.  "
+                "Multi-axis partition assign action is not supported "
+                % str(partition_axes)
+            )
+        if isinstance(value, list):
+            assert len(value) == len(self._variable_list)
+            value_list = value
+        elif isinstance(value, PartitionedVariable):
+            value_list = [var_part for var_part in value]
+        else:
+            partition_ix = partition_axes[0]
+            size_splits_list = [
+                tensor_shape.dimension_value(var.shape[partition_ix])
+                for var in self._variable_list
+            ]
+            value_list = array_ops.split(value, size_splits_list, axis=partition_ix)
 
-    op_list = [
-        assign_fn(var, value_list[idx])
-        for idx, var in enumerate(self._variable_list)
-    ]
-    return op_list
+        op_list = [
+            assign_fn(var, value_list[idx])
+            for idx, var in enumerate(self._variable_list)
+        ]
+        return op_list
 
-  def assign(self, value, use_locking=False, name=None, read_value=True):
-    assign_fn = lambda var, r_value: var.assign(
-        r_value, use_locking=use_locking, name=name, read_value=read_value)
-    assign_list = self._apply_assign_fn(assign_fn, value)
-    if read_value:
-      return assign_list
-    return [assign.op for assign in assign_list]
+    def assign(self, value, use_locking=False, name=None, read_value=True):
+        assign_fn = lambda var, r_value: var.assign(
+            r_value, use_locking=use_locking, name=name, read_value=read_value
+        )
+        assign_list = self._apply_assign_fn(assign_fn, value)
+        if read_value:
+            return assign_list
+        return [assign.op for assign in assign_list]
 
-  def assign_add(self, value, use_locking=False, name=None, read_value=True):
-    assign_fn = lambda var, r_value: var.assign_add(
-        r_value, use_locking=use_locking, name=name, read_value=read_value)
-    assign_list = self._apply_assign_fn(assign_fn, value)
-    if read_value:
-      return assign_list
-    return [assign.op for assign in assign_list]
+    def assign_add(self, value, use_locking=False, name=None, read_value=True):
+        assign_fn = lambda var, r_value: var.assign_add(
+            r_value, use_locking=use_locking, name=name, read_value=read_value
+        )
+        assign_list = self._apply_assign_fn(assign_fn, value)
+        if read_value:
+            return assign_list
+        return [assign.op for assign in assign_list]
 
-  def assign_sub(self, value, use_locking=False, name=None, read_value=True):
-    assign_fn = lambda var, r_value: var.assign_sub(
-        r_value, use_locking=use_locking, name=name, read_value=read_value)
-    assign_list = self._apply_assign_fn(assign_fn, value)
-    if read_value:
-      return assign_list
-    return [assign.op for assign in assign_list]
+    def assign_sub(self, value, use_locking=False, name=None, read_value=True):
+        assign_fn = lambda var, r_value: var.assign_sub(
+            r_value, use_locking=use_locking, name=name, read_value=read_value
+        )
+        assign_list = self._apply_assign_fn(assign_fn, value)
+        if read_value:
+            return assign_list
+        return [assign.op for assign in assign_list]
 
 
 # Register a conversion function which reads the value of the variable,
 # allowing instances of the class to be used as tensors.
-ops.register_tensor_conversion_function(RefVariable,
-                                        RefVariable._TensorConversionFunction)  # pylint: disable=protected-access
+ops.register_tensor_conversion_function(
+    RefVariable, RefVariable._TensorConversionFunction
+)  # pylint: disable=protected-access
 
 
 @tf_export(v1=["global_variables"])
 def global_variables(scope=None):
-  """Returns global variables.
+    """Returns global variables.
 
   Global variables are variables that are shared across machines in a
   distributed environment. The `Variable()` constructor or `get_variable()`
@@ -3143,18 +3311,18 @@ def global_variables(scope=None):
   Returns:
     A list of `Variable` objects.
   """
-  return ops.get_collection(ops.GraphKeys.GLOBAL_VARIABLES, scope)
+    return ops.get_collection(ops.GraphKeys.GLOBAL_VARIABLES, scope)
 
 
 @tf_export(v1=["all_variables"])
 @deprecated("2017-03-02", "Please use tf.global_variables instead.")
 def all_variables():
-  """Use `tf.compat.v1.global_variables` instead."""
-  return global_variables()
+    """Use `tf.compat.v1.global_variables` instead."""
+    return global_variables()
 
 
 def _all_saveable_objects(scope=None):
-  """Returns all variables and `SaveableObject`s that must be checkpointed.
+    """Returns all variables and `SaveableObject`s that must be checkpointed.
 
   Args:
     scope: (Optional.) A string. If supplied, the resulting list is filtered to
@@ -3166,14 +3334,15 @@ def _all_saveable_objects(scope=None):
   Returns:
     A list of `Variable` and `SaveableObject` to be checkpointed
   """
-  # TODO(andreasst): make this function public once things are settled.
-  return (ops.get_collection(ops.GraphKeys.GLOBAL_VARIABLES, scope) +
-          ops.get_collection(ops.GraphKeys.SAVEABLE_OBJECTS, scope))
+    # TODO(andreasst): make this function public once things are settled.
+    return ops.get_collection(
+        ops.GraphKeys.GLOBAL_VARIABLES, scope
+    ) + ops.get_collection(ops.GraphKeys.SAVEABLE_OBJECTS, scope)
 
 
 @tf_export(v1=["local_variables"])
 def local_variables(scope=None):
-  """Returns local variables.
+    """Returns local variables.
 
   Local variables - per process variables, usually not saved/restored to
   checkpoint and used for temporary or intermediate values.
@@ -3196,12 +3365,12 @@ def local_variables(scope=None):
   Returns:
     A list of local `Variable` objects.
   """
-  return ops.get_collection(ops.GraphKeys.LOCAL_VARIABLES, scope)
+    return ops.get_collection(ops.GraphKeys.LOCAL_VARIABLES, scope)
 
 
 @tf_export(v1=["model_variables"])
 def model_variables(scope=None):
-  """Returns all variables in the MODEL_VARIABLES collection.
+    """Returns all variables in the MODEL_VARIABLES collection.
 
   Args:
     scope: (Optional.) A string. If supplied, the resulting list is filtered to
@@ -3213,12 +3382,12 @@ def model_variables(scope=None):
   Returns:
     A list of local Variable objects.
   """
-  return ops.get_collection(ops.GraphKeys.MODEL_VARIABLES, scope)
+    return ops.get_collection(ops.GraphKeys.MODEL_VARIABLES, scope)
 
 
 @tf_export(v1=["trainable_variables"])
 def trainable_variables(scope=None):
-  """Returns all variables created with `trainable=True`.
+    """Returns all variables created with `trainable=True`.
 
   When passed `trainable=True`, the `Variable()` constructor automatically
   adds new variables to the graph collection
@@ -3243,12 +3412,12 @@ def trainable_variables(scope=None):
   Returns:
     A list of Variable objects.
   """
-  return ops.get_collection(ops.GraphKeys.TRAINABLE_VARIABLES, scope)
+    return ops.get_collection(ops.GraphKeys.TRAINABLE_VARIABLES, scope)
 
 
 @tf_export(v1=["moving_average_variables"])
 def moving_average_variables(scope=None):
-  """Returns all variables that maintain their moving averages.
+    """Returns all variables that maintain their moving averages.
 
   If an `ExponentialMovingAverage` object is created and the `apply()`
   method is called on a list of variables, these variables will
@@ -3265,12 +3434,12 @@ def moving_average_variables(scope=None):
   Returns:
     A list of Variable objects.
   """
-  return ops.get_collection(ops.GraphKeys.MOVING_AVERAGE_VARIABLES, scope)
+    return ops.get_collection(ops.GraphKeys.MOVING_AVERAGE_VARIABLES, scope)
 
 
 @tf_export(v1=["initializers.variables", "variables_initializer"])
 def variables_initializer(var_list, name="init"):
-  """Returns an Op that initializes a list of variables.
+    """Returns an Op that initializes a list of variables.
 
   After you launch the graph in a session, you can run the returned Op to
   initialize all the variables in `var_list`. This Op runs all the
@@ -3294,22 +3463,22 @@ def variables_initializer(var_list, name="init"):
   Returns:
     An Op that run the initializers of all the specified variables.
   """
-  if var_list and not context.executing_eagerly():
-    return control_flow_ops.group(*[v.initializer for v in var_list], name=name)
-  return control_flow_ops.no_op(name=name)
+    if var_list and not context.executing_eagerly():
+        return control_flow_ops.group(*[v.initializer for v in var_list], name=name)
+    return control_flow_ops.no_op(name=name)
 
 
 @tf_export(v1=["initialize_variables"])
 @tf_should_use.should_use_result
 @deprecated("2017-03-02", "Use `tf.variables_initializer` instead.")
 def initialize_variables(var_list, name="init"):
-  """See `tf.compat.v1.variables_initializer`."""
-  return variables_initializer(var_list, name=name)
+    """See `tf.compat.v1.variables_initializer`."""
+    return variables_initializer(var_list, name=name)
 
 
 @tf_export(v1=["initializers.global_variables", "global_variables_initializer"])
 def global_variables_initializer():
-  """Returns an Op that initializes global variables.
+    """Returns an Op that initializes global variables.
 
   This is just a shortcut for `variables_initializer(global_variables())`
 
@@ -3321,22 +3490,22 @@ def global_variables_initializer():
   Returns:
     An Op that initializes global variables in the graph.
   """
-  if context.executing_eagerly():
-    return control_flow_ops.no_op(name="global_variables_initializer")
-  return variables_initializer(global_variables())
+    if context.executing_eagerly():
+        return control_flow_ops.no_op(name="global_variables_initializer")
+    return variables_initializer(global_variables())
 
 
 @tf_export(v1=["initialize_all_variables"])
 @tf_should_use.should_use_result
 @deprecated("2017-03-02", "Use `tf.global_variables_initializer` instead.")
 def initialize_all_variables():
-  """See `tf.compat.v1.global_variables_initializer`."""
-  return global_variables_initializer()
+    """See `tf.compat.v1.global_variables_initializer`."""
+    return global_variables_initializer()
 
 
 @tf_export(v1=["initializers.local_variables", "local_variables_initializer"])
 def local_variables_initializer():
-  """Returns an Op that initializes all local variables.
+    """Returns an Op that initializes all local variables.
 
   This is just a shortcut for `variables_initializer(local_variables())`
 
@@ -3348,23 +3517,23 @@ def local_variables_initializer():
   Returns:
     An Op that initializes all local variables in the graph.
   """
-  if context.executing_eagerly():
-    return control_flow_ops.no_op(name="local_variables_initializer")
-  return variables_initializer(local_variables())
+    if context.executing_eagerly():
+        return control_flow_ops.no_op(name="local_variables_initializer")
+    return variables_initializer(local_variables())
 
 
 @tf_export(v1=["initialize_local_variables"])
 @tf_should_use.should_use_result
 @deprecated("2017-03-02", "Use `tf.local_variables_initializer` instead.")
 def initialize_local_variables():
-  """See `tf.compat.v1.local_variables_initializer`."""
-  return local_variables_initializer()
+    """See `tf.compat.v1.local_variables_initializer`."""
+    return local_variables_initializer()
 
 
 @tf_export(v1=["is_variable_initialized"])
 @tf_should_use.should_use_result
 def is_variable_initialized(variable):
-  """Tests if a variable has been initialized.
+    """Tests if a variable has been initialized.
 
   Args:
     variable: A `Variable`.
@@ -3373,13 +3542,13 @@ def is_variable_initialized(variable):
     Returns a scalar boolean Tensor, `True` if the variable has been
     initialized, `False` otherwise.
   """
-  return state_ops.is_variable_initialized(variable)
+    return state_ops.is_variable_initialized(variable)
 
 
 @tf_export(v1=["assert_variables_initialized"])
 @tf_should_use.should_use_result
 def assert_variables_initialized(var_list=None):
-  """Returns an Op to check if variables are initialized.
+    """Returns an Op to check if variables are initialized.
 
   NOTE: This function is obsolete and will be removed in 6 months.  Please
   change your implementation to use `report_uninitialized_variables()`.
@@ -3398,32 +3567,33 @@ def assert_variables_initialized(var_list=None):
   Returns:
     An Op, or None if there are no variables.
   """
-  if var_list is None:
-    var_list = global_variables() + local_variables()
-  # Backwards compatibility for old-style variables. TODO(touts): remove.
-  if not var_list:
-    var_list = []
-    for op in ops.get_default_graph().get_operations():
-      if op.type in ["Variable", "VariableV2", "AutoReloadVariable"]:
-        var_list.append(op.outputs[0])
-  if not var_list:
-    return None
-  else:
-    ranks = []
-    for var in var_list:
-      with ops.colocate_with(var.op):
-        ranks.append(array_ops.rank_internal(var, optimize=False))
-    if len(ranks) == 1:
-      return ranks[0]
+    if var_list is None:
+        var_list = global_variables() + local_variables()
+    # Backwards compatibility for old-style variables. TODO(touts): remove.
+    if not var_list:
+        var_list = []
+        for op in ops.get_default_graph().get_operations():
+            if op.type in ["Variable", "VariableV2", "AutoReloadVariable"]:
+                var_list.append(op.outputs[0])
+    if not var_list:
+        return None
     else:
-      return array_ops.stack(ranks)
+        ranks = []
+        for var in var_list:
+            with ops.colocate_with(var.op):
+                ranks.append(array_ops.rank_internal(var, optimize=False))
+        if len(ranks) == 1:
+            return ranks[0]
+        else:
+            return array_ops.stack(ranks)
 
 
 @tf_export(v1=["report_uninitialized_variables"])
 @tf_should_use.should_use_result
-def report_uninitialized_variables(var_list=None,
-                                   name="report_uninitialized_variables"):
-  """Adds ops to list the names of uninitialized variables.
+def report_uninitialized_variables(
+    var_list=None, name="report_uninitialized_variables"
+):
+    """Adds ops to list the names of uninitialized variables.
 
   When run, it returns a 1-D tensor containing the names of uninitialized
   variables if there are any, or an empty array if there are none.
@@ -3437,35 +3607,38 @@ def report_uninitialized_variables(var_list=None,
     A 1-D tensor containing names of the uninitialized variables, or an empty
     1-D tensor if there are no variables or no uninitialized variables.
   """
-  if var_list is None:
-    var_list = global_variables() + local_variables()
-    # Backwards compatibility for old-style variables. TODO(touts): remove.
-    if not var_list:
-      var_list = []
-      for op in ops.get_default_graph().get_operations():
-        if op.type in ["Variable", "VariableV2", "AutoReloadVariable"]:
-          var_list.append(op.outputs[0])
-  with ops.name_scope(name):
-    # Run all operations on CPU
-    if var_list:
-      init_vars = [state_ops.is_variable_initialized(v) for v in var_list]
-    local_device = os.environ.get(
-        "TF_DEVICE_FOR_UNINITIALIZED_VARIABLE_REPORTING", "/cpu:0")
-    with ops.device(local_device):
-      if not var_list:
-        # Return an empty tensor so we only need to check for returned tensor
-        # size being 0 as an indication of model ready.
-        return array_ops.constant([], dtype=dtypes.string)
-      else:
-        # Get a 1-D boolean tensor listing whether each variable is initialized.
-        variables_mask = math_ops.logical_not(array_ops.stack(init_vars))
-        # Get a 1-D string tensor containing all the variable names.
-        variable_names_tensor = array_ops.constant(
-            [s.op.name for s in var_list])
-        # Return a 1-D tensor containing all the names of
-        # uninitialized variables.
-        return array_ops.boolean_mask(variable_names_tensor, variables_mask)
+    if var_list is None:
+        var_list = global_variables() + local_variables()
+        # Backwards compatibility for old-style variables. TODO(touts): remove.
+        if not var_list:
+            var_list = []
+            for op in ops.get_default_graph().get_operations():
+                if op.type in ["Variable", "VariableV2", "AutoReloadVariable"]:
+                    var_list.append(op.outputs[0])
+    with ops.name_scope(name):
+        # Run all operations on CPU
+        if var_list:
+            init_vars = [state_ops.is_variable_initialized(v) for v in var_list]
+        local_device = os.environ.get(
+            "TF_DEVICE_FOR_UNINITIALIZED_VARIABLE_REPORTING", "/cpu:0"
+        )
+        with ops.device(local_device):
+            if not var_list:
+                # Return an empty tensor so we only need to check for returned tensor
+                # size being 0 as an indication of model ready.
+                return array_ops.constant([], dtype=dtypes.string)
+            else:
+                # Get a 1-D boolean tensor listing whether each variable is initialized.
+                variables_mask = math_ops.logical_not(array_ops.stack(init_vars))
+                # Get a 1-D string tensor containing all the variable names.
+                variable_names_tensor = array_ops.constant(
+                    [s.op.name for s in var_list]
+                )
+                # Return a 1-D tensor containing all the names of
+                # uninitialized variables.
+                return array_ops.boolean_mask(variable_names_tensor, variables_mask)
 
 
 ops.register_tensor_conversion_function(
-    PartitionedVariable, PartitionedVariable._TensorConversionFunction)  # pylint: disable=protected-access
+    PartitionedVariable, PartitionedVariable._TensorConversionFunction
+)  # pylint: disable=protected-access

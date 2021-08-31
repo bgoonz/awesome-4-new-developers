@@ -32,9 +32,7 @@ from tensorflow.python.util import deprecation
 from tensorflow.python.util.tf_export import tf_export
 
 
-__all__ = [
-    "DirichletMultinomial",
-]
+__all__ = ["DirichletMultinomial"]
 
 
 _dirichlet_multinomial_sample_note = """For each batch of counts,
@@ -53,7 +51,7 @@ with `self.concentration` and `self.total_count`."""
 
 @tf_export(v1=["distributions.DirichletMultinomial"])
 class DirichletMultinomial(distribution.Distribution):
-  """Dirichlet-Multinomial compound distribution.
+    """Dirichlet-Multinomial compound distribution.
 
   The Dirichlet-Multinomial distribution is parameterized by a (batch of)
   length-`K` `concentration` vectors (`K > 1`) and a `total_count` number of
@@ -162,23 +160,26 @@ class DirichletMultinomial(distribution.Distribution):
 
   """
 
-  # TODO(b/27419586) Change docstring for dtype of concentration once int
-  # allowed.
-  @deprecation.deprecated(
-      "2019-01-01",
-      "The TensorFlow Distributions library has moved to "
-      "TensorFlow Probability "
-      "(https://github.com/tensorflow/probability). You "
-      "should update all references to use `tfp.distributions` "
-      "instead of `tf.distributions`.",
-      warn_once=True)
-  def __init__(self,
-               total_count,
-               concentration,
-               validate_args=False,
-               allow_nan_stats=True,
-               name="DirichletMultinomial"):
-    """Initialize a batch of DirichletMultinomial distributions.
+    # TODO(b/27419586) Change docstring for dtype of concentration once int
+    # allowed.
+    @deprecation.deprecated(
+        "2019-01-01",
+        "The TensorFlow Distributions library has moved to "
+        "TensorFlow Probability "
+        "(https://github.com/tensorflow/probability). You "
+        "should update all references to use `tfp.distributions` "
+        "instead of `tf.distributions`.",
+        warn_once=True,
+    )
+    def __init__(
+        self,
+        total_count,
+        concentration,
+        validate_args=False,
+        allow_nan_stats=True,
+        name="DirichletMultinomial",
+    ):
+        """Initialize a batch of DirichletMultinomial distributions.
 
     Args:
       total_count:  Non-negative floating point tensor, whose dtype is the same
@@ -200,102 +201,106 @@ class DirichletMultinomial(distribution.Distribution):
         more of the statistic's batch members are undefined.
       name: Python `str` name prefixed to Ops created by this class.
     """
-    parameters = dict(locals())
-    with ops.name_scope(name, values=[total_count, concentration]) as name:
-      # Broadcasting works because:
-      # * The broadcasting convention is to prepend dimensions of size [1], and
-      #   we use the last dimension for the distribution, whereas
-      #   the batch dimensions are the leading dimensions, which forces the
-      #   distribution dimension to be defined explicitly (i.e. it cannot be
-      #   created automatically by prepending). This forces enough explicitness.
-      # * All calls involving `counts` eventually require a broadcast between
-      #  `counts` and concentration.
-      self._total_count = ops.convert_to_tensor(total_count, name="total_count")
-      if validate_args:
-        self._total_count = (
-            distribution_util.embed_check_nonnegative_integer_form(
-                self._total_count))
-      self._concentration = self._maybe_assert_valid_concentration(
-          ops.convert_to_tensor(concentration,
-                                name="concentration"),
-          validate_args)
-      self._total_concentration = math_ops.reduce_sum(self._concentration, -1)
-    super(DirichletMultinomial, self).__init__(
-        dtype=self._concentration.dtype,
-        validate_args=validate_args,
-        allow_nan_stats=allow_nan_stats,
-        reparameterization_type=distribution.NOT_REPARAMETERIZED,
-        parameters=parameters,
-        graph_parents=[self._total_count,
-                       self._concentration],
-        name=name)
+        parameters = dict(locals())
+        with ops.name_scope(name, values=[total_count, concentration]) as name:
+            # Broadcasting works because:
+            # * The broadcasting convention is to prepend dimensions of size [1], and
+            #   we use the last dimension for the distribution, whereas
+            #   the batch dimensions are the leading dimensions, which forces the
+            #   distribution dimension to be defined explicitly (i.e. it cannot be
+            #   created automatically by prepending). This forces enough explicitness.
+            # * All calls involving `counts` eventually require a broadcast between
+            #  `counts` and concentration.
+            self._total_count = ops.convert_to_tensor(total_count, name="total_count")
+            if validate_args:
+                self._total_count = distribution_util.embed_check_nonnegative_integer_form(
+                    self._total_count
+                )
+            self._concentration = self._maybe_assert_valid_concentration(
+                ops.convert_to_tensor(concentration, name="concentration"),
+                validate_args,
+            )
+            self._total_concentration = math_ops.reduce_sum(self._concentration, -1)
+        super(DirichletMultinomial, self).__init__(
+            dtype=self._concentration.dtype,
+            validate_args=validate_args,
+            allow_nan_stats=allow_nan_stats,
+            reparameterization_type=distribution.NOT_REPARAMETERIZED,
+            parameters=parameters,
+            graph_parents=[self._total_count, self._concentration],
+            name=name,
+        )
 
-  @property
-  def total_count(self):
-    """Number of trials used to construct a sample."""
-    return self._total_count
+    @property
+    def total_count(self):
+        """Number of trials used to construct a sample."""
+        return self._total_count
 
-  @property
-  def concentration(self):
-    """Concentration parameter; expected prior counts for that coordinate."""
-    return self._concentration
+    @property
+    def concentration(self):
+        """Concentration parameter; expected prior counts for that coordinate."""
+        return self._concentration
 
-  @property
-  def total_concentration(self):
-    """Sum of last dim of concentration parameter."""
-    return self._total_concentration
+    @property
+    def total_concentration(self):
+        """Sum of last dim of concentration parameter."""
+        return self._total_concentration
 
-  def _batch_shape_tensor(self):
-    return array_ops.shape(self.total_concentration)
+    def _batch_shape_tensor(self):
+        return array_ops.shape(self.total_concentration)
 
-  def _batch_shape(self):
-    return self.total_concentration.get_shape()
+    def _batch_shape(self):
+        return self.total_concentration.get_shape()
 
-  def _event_shape_tensor(self):
-    return array_ops.shape(self.concentration)[-1:]
+    def _event_shape_tensor(self):
+        return array_ops.shape(self.concentration)[-1:]
 
-  def _event_shape(self):
-    # Event shape depends only on total_concentration, not "n".
-    return self.concentration.get_shape().with_rank_at_least(1)[-1:]
+    def _event_shape(self):
+        # Event shape depends only on total_concentration, not "n".
+        return self.concentration.get_shape().with_rank_at_least(1)[-1:]
 
-  def _sample_n(self, n, seed=None):
-    n_draws = math_ops.cast(self.total_count, dtype=dtypes.int32)
-    k = self.event_shape_tensor()[0]
-    unnormalized_logits = array_ops.reshape(
-        math_ops.log(random_ops.random_gamma(
-            shape=[n],
-            alpha=self.concentration,
-            dtype=self.dtype,
-            seed=seed)),
-        shape=[-1, k])
-    draws = random_ops.multinomial(
-        logits=unnormalized_logits,
-        num_samples=n_draws,
-        seed=distribution_util.gen_new_seed(seed, salt="dirichlet_multinomial"))
-    x = math_ops.reduce_sum(array_ops.one_hot(draws, depth=k), -2)
-    final_shape = array_ops.concat([[n], self.batch_shape_tensor(), [k]], 0)
-    x = array_ops.reshape(x, final_shape)
-    return math_ops.cast(x, self.dtype)
+    def _sample_n(self, n, seed=None):
+        n_draws = math_ops.cast(self.total_count, dtype=dtypes.int32)
+        k = self.event_shape_tensor()[0]
+        unnormalized_logits = array_ops.reshape(
+            math_ops.log(
+                random_ops.random_gamma(
+                    shape=[n], alpha=self.concentration, dtype=self.dtype, seed=seed
+                )
+            ),
+            shape=[-1, k],
+        )
+        draws = random_ops.multinomial(
+            logits=unnormalized_logits,
+            num_samples=n_draws,
+            seed=distribution_util.gen_new_seed(seed, salt="dirichlet_multinomial"),
+        )
+        x = math_ops.reduce_sum(array_ops.one_hot(draws, depth=k), -2)
+        final_shape = array_ops.concat([[n], self.batch_shape_tensor(), [k]], 0)
+        x = array_ops.reshape(x, final_shape)
+        return math_ops.cast(x, self.dtype)
 
-  @distribution_util.AppendDocstring(_dirichlet_multinomial_sample_note)
-  def _log_prob(self, counts):
-    counts = self._maybe_assert_valid_sample(counts)
-    ordered_prob = (
-        special_math_ops.lbeta(self.concentration + counts)
-        - special_math_ops.lbeta(self.concentration))
-    return ordered_prob + distribution_util.log_combinations(
-        self.total_count, counts)
+    @distribution_util.AppendDocstring(_dirichlet_multinomial_sample_note)
+    def _log_prob(self, counts):
+        counts = self._maybe_assert_valid_sample(counts)
+        ordered_prob = special_math_ops.lbeta(
+            self.concentration + counts
+        ) - special_math_ops.lbeta(self.concentration)
+        return ordered_prob + distribution_util.log_combinations(
+            self.total_count, counts
+        )
 
-  @distribution_util.AppendDocstring(_dirichlet_multinomial_sample_note)
-  def _prob(self, counts):
-    return math_ops.exp(self._log_prob(counts))
+    @distribution_util.AppendDocstring(_dirichlet_multinomial_sample_note)
+    def _prob(self, counts):
+        return math_ops.exp(self._log_prob(counts))
 
-  def _mean(self):
-    return self.total_count * (self.concentration /
-                               self.total_concentration[..., array_ops.newaxis])
+    def _mean(self):
+        return self.total_count * (
+            self.concentration / self.total_concentration[..., array_ops.newaxis]
+        )
 
-  @distribution_util.AppendDocstring(
-      """The covariance for each batch member is defined as the following:
+    @distribution_util.AppendDocstring(
+        """The covariance for each batch member is defined as the following:
 
       ```none
       Var(X_j) = n * alpha_j / alpha_0 * (1 - alpha_j / alpha_0) *
@@ -311,47 +316,58 @@ class DirichletMultinomial(distribution.Distribution):
       Cov(X_i, X_j) = -n * alpha_i * alpha_j / alpha_0 ** 2 *
       (n + alpha_0) / (1 + alpha_0)
       ```
-      """)
-  def _covariance(self):
-    x = self._variance_scale_term() * self._mean()
-    # pylint: disable=invalid-unary-operand-type
-    return array_ops.matrix_set_diag(
-        -math_ops.matmul(
-            x[..., array_ops.newaxis],
-            x[..., array_ops.newaxis, :]),  # outer prod
-        self._variance())
+      """
+    )
+    def _covariance(self):
+        x = self._variance_scale_term() * self._mean()
+        # pylint: disable=invalid-unary-operand-type
+        return array_ops.matrix_set_diag(
+            -math_ops.matmul(
+                x[..., array_ops.newaxis], x[..., array_ops.newaxis, :]
+            ),  # outer prod
+            self._variance(),
+        )
 
-  def _variance(self):
-    scale = self._variance_scale_term()
-    x = scale * self._mean()
-    return x * (self.total_count * scale - x)
+    def _variance(self):
+        scale = self._variance_scale_term()
+        x = scale * self._mean()
+        return x * (self.total_count * scale - x)
 
-  def _variance_scale_term(self):
-    """Helper to `_covariance` and `_variance` which computes a shared scale."""
-    # We must take care to expand back the last dim whenever we use the
-    # total_concentration.
-    c0 = self.total_concentration[..., array_ops.newaxis]
-    return math_ops.sqrt((1. + c0 / self.total_count) / (1. + c0))
+    def _variance_scale_term(self):
+        """Helper to `_covariance` and `_variance` which computes a shared scale."""
+        # We must take care to expand back the last dim whenever we use the
+        # total_concentration.
+        c0 = self.total_concentration[..., array_ops.newaxis]
+        return math_ops.sqrt((1.0 + c0 / self.total_count) / (1.0 + c0))
 
-  def _maybe_assert_valid_concentration(self, concentration, validate_args):
-    """Checks the validity of the concentration parameter."""
-    if not validate_args:
-      return concentration
-    concentration = distribution_util.embed_check_categorical_event_shape(
-        concentration)
-    return control_flow_ops.with_dependencies([
-        check_ops.assert_positive(
+    def _maybe_assert_valid_concentration(self, concentration, validate_args):
+        """Checks the validity of the concentration parameter."""
+        if not validate_args:
+            return concentration
+        concentration = distribution_util.embed_check_categorical_event_shape(
+            concentration
+        )
+        return control_flow_ops.with_dependencies(
+            [
+                check_ops.assert_positive(
+                    concentration, message="Concentration parameter must be positive."
+                )
+            ],
             concentration,
-            message="Concentration parameter must be positive."),
-    ], concentration)
+        )
 
-  def _maybe_assert_valid_sample(self, counts):
-    """Check counts for proper shape, values, then return tensor version."""
-    if not self.validate_args:
-      return counts
-    counts = distribution_util.embed_check_nonnegative_integer_form(counts)
-    return control_flow_ops.with_dependencies([
-        check_ops.assert_equal(
-            self.total_count, math_ops.reduce_sum(counts, -1),
-            message="counts last-dimension must sum to `self.total_count`"),
-    ], counts)
+    def _maybe_assert_valid_sample(self, counts):
+        """Check counts for proper shape, values, then return tensor version."""
+        if not self.validate_args:
+            return counts
+        counts = distribution_util.embed_check_nonnegative_integer_form(counts)
+        return control_flow_ops.with_dependencies(
+            [
+                check_ops.assert_equal(
+                    self.total_count,
+                    math_ops.reduce_sum(counts, -1),
+                    message="counts last-dimension must sum to `self.total_count`",
+                )
+            ],
+            counts,
+        )

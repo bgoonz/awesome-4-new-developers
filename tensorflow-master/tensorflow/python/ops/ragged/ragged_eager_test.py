@@ -26,27 +26,29 @@ from tensorflow.python.ops.ragged import ragged_factory_ops
 from tensorflow.python.platform import googletest
 
 
-class RaggedTensorTest(test_util.TensorFlowTestCase,
-                       parameterized.TestCase):
+class RaggedTensorTest(test_util.TensorFlowTestCase, parameterized.TestCase):
+    @parameterized.parameters(
+        [
+            dict(pylist=[[b"a", b"b"], [b"c"]]),
+            dict(pylist=[[[1, 2], [3]], [[4, 5, 6], [], [7]]]),
+            dict(pylist=[[[1, 2], [3, 4]], [[5, 6], [], [7, 8]]], ragged_rank=1),
+        ]
+    )
+    def testRaggedTensorToList(self, pylist, ragged_rank=None):
+        rt = ragged_factory_ops.constant(pylist, ragged_rank)
+        self.assertAllEqual(rt, pylist)
 
-  @parameterized.parameters([
-      dict(pylist=[[b'a', b'b'], [b'c']]),
-      dict(pylist=[[[1, 2], [3]], [[4, 5, 6], [], [7]]]),
-      dict(pylist=[[[1, 2], [3, 4]], [[5, 6], [], [7, 8]]], ragged_rank=1),
-  ])
-  def testRaggedTensorToList(self, pylist, ragged_rank=None):
-    rt = ragged_factory_ops.constant(pylist, ragged_rank)
-    self.assertAllEqual(rt, pylist)
-
-  @parameterized.parameters([
-      dict(pylist=[[b'a', b'b'], [b'c']]),
-      dict(pylist=[[[1, 2], [3]], [[4, 5, 6], [], [7]]]),
-  ])
-  def testRaggedTensorStr(self, pylist):
-    rt = ragged_factory_ops.constant(pylist)
-    self.assertEqual(str(rt), '<tf.RaggedTensor %s>' % pylist)
+    @parameterized.parameters(
+        [
+            dict(pylist=[[b"a", b"b"], [b"c"]]),
+            dict(pylist=[[[1, 2], [3]], [[4, 5, 6], [], [7]]]),
+        ]
+    )
+    def testRaggedTensorStr(self, pylist):
+        rt = ragged_factory_ops.constant(pylist)
+        self.assertEqual(str(rt), "<tf.RaggedTensor %s>" % pylist)
 
 
-if __name__ == '__main__':
-  ops.enable_eager_execution()
-  googletest.main()
+if __name__ == "__main__":
+    ops.enable_eager_execution()
+    googletest.main()

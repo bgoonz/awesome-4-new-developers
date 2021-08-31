@@ -19,4 +19,4 @@ from __future__ import print_function
 
 
 def enclosing_tpu_context():
-  pass
+    pass

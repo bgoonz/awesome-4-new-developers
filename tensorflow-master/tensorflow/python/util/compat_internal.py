@@ -22,7 +22,7 @@ from tensorflow.python.util.compat import as_str_any
 
 
 def path_to_str(path):
-  """Returns the file system path representation of a `PathLike` object,
+    """Returns the file system path representation of a `PathLike` object,
   else as it is.
 
   Args:
@@ -31,6 +31,6 @@ def path_to_str(path):
   Returns:
     A `str` object.
   """
-  if hasattr(path, "__fspath__"):
-    path = as_str_any(path.__fspath__())
-  return path
+    if hasattr(path, "__fspath__"):
+        path = as_str_any(path.__fspath__())
+    return path

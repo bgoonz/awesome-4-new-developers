@@ -19,6 +19,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+
 os.environ["TF2_BEHAVIOR"] = "1"
 
 from tensorflow.python import tf2  # pylint: disable=g-import-not-at-top
@@ -28,11 +29,10 @@ from tensorflow.python.platform import test
 
 
 class ControlFlowV2EnableTest(test.TestCase):
-
-  def testIsEnabled(self):
-    self.assertTrue(tf2.enabled())
-    self.assertTrue(control_flow_util.ENABLE_CONTROL_FLOW_V2)
+    def testIsEnabled(self):
+        self.assertTrue(tf2.enabled())
+        self.assertTrue(control_flow_util.ENABLE_CONTROL_FLOW_V2)
 
 
 if __name__ == "__main__":
-  googletest.main()
+    googletest.main()

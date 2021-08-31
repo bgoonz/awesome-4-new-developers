@@ -29,4 +29,4 @@ CropAndResizeOpTest = test_base.CropAndResizeOpTestBase
 RGBToHSVOpTest = test_base.RGBToHSVOpTestBase
 
 if __name__ == "__main__":
-  test.main()
+    test.main()

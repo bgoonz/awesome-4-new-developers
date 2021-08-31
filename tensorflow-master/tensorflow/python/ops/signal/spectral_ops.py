@@ -35,12 +35,18 @@ from tensorflow.python.util import dispatch
 from tensorflow.python.util.tf_export import tf_export
 
 
-@tf_export('signal.stft')
+@tf_export("signal.stft")
 @dispatch.add_dispatch_support
-def stft(signals, frame_length, frame_step, fft_length=None,
-         window_fn=window_ops.hann_window,
-         pad_end=False, name=None):
-  """Computes the [Short-time Fourier Transform][stft] of `signals`.
+def stft(
+    signals,
+    frame_length,
+    frame_step,
+    fft_length=None,
+    window_fn=window_ops.hann_window,
+    pad_end=False,
+    name=None,
+):
+    """Computes the [Short-time Fourier Transform][stft] of `signals`.
 
   Implemented with TPU/GPU-compatible ops and supports gradients.
 
@@ -69,39 +75,39 @@ def stft(signals, frame_length, frame_step, fft_length=None,
 
   [stft]: https://en.wikipedia.org/wiki/Short-time_Fourier_transform
   """
-  with ops.name_scope(name, 'stft', [signals, frame_length,
-                                     frame_step]):
-    signals = ops.convert_to_tensor(signals, name='signals')
-    signals.shape.with_rank_at_least(1)
-    frame_length = ops.convert_to_tensor(frame_length, name='frame_length')
-    frame_length.shape.assert_has_rank(0)
-    frame_step = ops.convert_to_tensor(frame_step, name='frame_step')
-    frame_step.shape.assert_has_rank(0)
+    with ops.name_scope(name, "stft", [signals, frame_length, frame_step]):
+        signals = ops.convert_to_tensor(signals, name="signals")
+        signals.shape.with_rank_at_least(1)
+        frame_length = ops.convert_to_tensor(frame_length, name="frame_length")
+        frame_length.shape.assert_has_rank(0)
+        frame_step = ops.convert_to_tensor(frame_step, name="frame_step")
+        frame_step.shape.assert_has_rank(0)
 
-    if fft_length is None:
-      fft_length = _enclosing_power_of_two(frame_length)
-    else:
-      fft_length = ops.convert_to_tensor(fft_length, name='fft_length')
+        if fft_length is None:
+            fft_length = _enclosing_power_of_two(frame_length)
+        else:
+            fft_length = ops.convert_to_tensor(fft_length, name="fft_length")
 
-    framed_signals = shape_ops.frame(
-        signals, frame_length, frame_step, pad_end=pad_end)
+        framed_signals = shape_ops.frame(
+            signals, frame_length, frame_step, pad_end=pad_end
+        )
 
-    # Optionally window the framed signals.
-    if window_fn is not None:
-      window = window_fn(frame_length, dtype=framed_signals.dtype)
-      framed_signals *= window
+        # Optionally window the framed signals.
+        if window_fn is not None:
+            window = window_fn(frame_length, dtype=framed_signals.dtype)
+            framed_signals *= window
 
-    # fft_ops.rfft produces the (fft_length/2 + 1) unique components of the
-    # FFT of the real windowed signals in framed_signals.
-    return fft_ops.rfft(framed_signals, [fft_length])
+        # fft_ops.rfft produces the (fft_length/2 + 1) unique components of the
+        # FFT of the real windowed signals in framed_signals.
+        return fft_ops.rfft(framed_signals, [fft_length])
 
 
-@tf_export('signal.inverse_stft_window_fn')
+@tf_export("signal.inverse_stft_window_fn")
 @dispatch.add_dispatch_support
-def inverse_stft_window_fn(frame_step,
-                           forward_window_fn=window_ops.hann_window,
-                           name=None):
-  """Generates a window function that can be used in `inverse_stft`.
+def inverse_stft_window_fn(
+    frame_step, forward_window_fn=window_ops.hann_window, name=None
+):
+    """Generates a window function that can be used in `inverse_stft`.
 
   Constructs a window that is equal to the forward window with a further
   pointwise amplitude correction.  `inverse_stft_window_fn` is equivalent to
@@ -120,8 +126,9 @@ def inverse_stft_window_fn(frame_step,
       The returned window is suitable for reconstructing original waveform in
       inverse_stft.
   """
-  def inverse_stft_window_fn_inner(frame_length, dtype):
-    """Computes a window that can be used in `inverse_stft`.
+
+    def inverse_stft_window_fn_inner(frame_length, dtype):
+        """Computes a window that can be used in `inverse_stft`.
 
     Args:
       frame_length: An integer scalar `Tensor`. The window length in samples.
@@ -136,35 +143,40 @@ def inverse_stft_window_fn(frame_step,
       returns a `[window_length]` `Tensor` of samples in the provided datatype
       `frame_step` is not scalar, or `frame_step` is not scalar.
     """
-    with ops.name_scope(name, 'inverse_stft_window_fn', [forward_window_fn]):
-      frame_step_ = ops.convert_to_tensor(frame_step, name='frame_step')
-      frame_step_.shape.assert_has_rank(0)
-      frame_length = ops.convert_to_tensor(frame_length, name='frame_length')
-      frame_length.shape.assert_has_rank(0)
+        with ops.name_scope(name, "inverse_stft_window_fn", [forward_window_fn]):
+            frame_step_ = ops.convert_to_tensor(frame_step, name="frame_step")
+            frame_step_.shape.assert_has_rank(0)
+            frame_length = ops.convert_to_tensor(frame_length, name="frame_length")
+            frame_length.shape.assert_has_rank(0)
 
-      # Use equation 7 from Griffin + Lim.
-      forward_window = forward_window_fn(frame_length, dtype=dtype)
-      denom = math_ops.square(forward_window)
-      overlaps = -(-frame_length // frame_step_)  # Ceiling division.  # pylint: disable=invalid-unary-operand-type
-      denom = array_ops.pad(denom, [(0, overlaps * frame_step_ - frame_length)])
-      denom = array_ops.reshape(denom, [overlaps, frame_step_])
-      denom = math_ops.reduce_sum(denom, 0, keepdims=True)
-      denom = array_ops.tile(denom, [overlaps, 1])
-      denom = array_ops.reshape(denom, [overlaps * frame_step_])
+            # Use equation 7 from Griffin + Lim.
+            forward_window = forward_window_fn(frame_length, dtype=dtype)
+            denom = math_ops.square(forward_window)
+            overlaps = -(
+                -frame_length // frame_step_
+            )  # Ceiling division.  # pylint: disable=invalid-unary-operand-type
+            denom = array_ops.pad(denom, [(0, overlaps * frame_step_ - frame_length)])
+            denom = array_ops.reshape(denom, [overlaps, frame_step_])
+            denom = math_ops.reduce_sum(denom, 0, keepdims=True)
+            denom = array_ops.tile(denom, [overlaps, 1])
+            denom = array_ops.reshape(denom, [overlaps * frame_step_])
 
-      return forward_window / denom[:frame_length]
-  return inverse_stft_window_fn_inner
+            return forward_window / denom[:frame_length]
+
+    return inverse_stft_window_fn_inner
 
 
-@tf_export('signal.inverse_stft')
+@tf_export("signal.inverse_stft")
 @dispatch.add_dispatch_support
-def inverse_stft(stfts,
-                 frame_length,
-                 frame_step,
-                 fft_length=None,
-                 window_fn=window_ops.hann_window,
-                 name=None):
-  """Computes the inverse [Short-time Fourier Transform][stft] of `stfts`.
+def inverse_stft(
+    stfts,
+    frame_length,
+    frame_step,
+    fft_length=None,
+    window_fn=window_ops.hann_window,
+    name=None,
+):
+    """Computes the inverse [Short-time Fourier Transform][stft] of `stfts`.
 
   To reconstruct an original waveform, a complementary window function should
   be used with `inverse_stft`. Such a window function can be constructed with
@@ -223,80 +235,100 @@ def inverse_stft(stfts,
 
   [stft]: https://en.wikipedia.org/wiki/Short-time_Fourier_transform
   """
-  with ops.name_scope(name, 'inverse_stft', [stfts]):
-    stfts = ops.convert_to_tensor(stfts, name='stfts')
-    stfts.shape.with_rank_at_least(2)
-    frame_length = ops.convert_to_tensor(frame_length, name='frame_length')
-    frame_length.shape.assert_has_rank(0)
-    frame_step = ops.convert_to_tensor(frame_step, name='frame_step')
-    frame_step.shape.assert_has_rank(0)
-    if fft_length is None:
-      fft_length = _enclosing_power_of_two(frame_length)
-    else:
-      fft_length = ops.convert_to_tensor(fft_length, name='fft_length')
-      fft_length.shape.assert_has_rank(0)
+    with ops.name_scope(name, "inverse_stft", [stfts]):
+        stfts = ops.convert_to_tensor(stfts, name="stfts")
+        stfts.shape.with_rank_at_least(2)
+        frame_length = ops.convert_to_tensor(frame_length, name="frame_length")
+        frame_length.shape.assert_has_rank(0)
+        frame_step = ops.convert_to_tensor(frame_step, name="frame_step")
+        frame_step.shape.assert_has_rank(0)
+        if fft_length is None:
+            fft_length = _enclosing_power_of_two(frame_length)
+        else:
+            fft_length = ops.convert_to_tensor(fft_length, name="fft_length")
+            fft_length.shape.assert_has_rank(0)
 
-    real_frames = fft_ops.irfft(stfts, [fft_length])
+        real_frames = fft_ops.irfft(stfts, [fft_length])
 
-    # frame_length may be larger or smaller than fft_length, so we pad or
-    # truncate real_frames to frame_length.
-    frame_length_static = tensor_util.constant_value(frame_length)
-    # If we don't know the shape of real_frames's inner dimension, pad and
-    # truncate to frame_length.
-    if (frame_length_static is None or real_frames.shape.ndims is None or
-        real_frames.shape.as_list()[-1] is None):
-      real_frames = real_frames[..., :frame_length]
-      real_frames_rank = array_ops.rank(real_frames)
-      real_frames_shape = array_ops.shape(real_frames)
-      paddings = array_ops.concat(
-          [array_ops.zeros([real_frames_rank - 1, 2],
-                           dtype=frame_length.dtype),
-           [[0, math_ops.maximum(0, frame_length - real_frames_shape[-1])]]], 0)
-      real_frames = array_ops.pad(real_frames, paddings)
-    # We know real_frames's last dimension and frame_length statically. If they
-    # are different, then pad or truncate real_frames to frame_length.
-    elif real_frames.shape.as_list()[-1] > frame_length_static:
-      real_frames = real_frames[..., :frame_length_static]
-    elif real_frames.shape.as_list()[-1] < frame_length_static:
-      pad_amount = frame_length_static - real_frames.shape.as_list()[-1]
-      real_frames = array_ops.pad(real_frames,
-                                  [[0, 0]] * (real_frames.shape.ndims - 1) +
-                                  [[0, pad_amount]])
+        # frame_length may be larger or smaller than fft_length, so we pad or
+        # truncate real_frames to frame_length.
+        frame_length_static = tensor_util.constant_value(frame_length)
+        # If we don't know the shape of real_frames's inner dimension, pad and
+        # truncate to frame_length.
+        if (
+            frame_length_static is None
+            or real_frames.shape.ndims is None
+            or real_frames.shape.as_list()[-1] is None
+        ):
+            real_frames = real_frames[..., :frame_length]
+            real_frames_rank = array_ops.rank(real_frames)
+            real_frames_shape = array_ops.shape(real_frames)
+            paddings = array_ops.concat(
+                [
+                    array_ops.zeros(
+                        [real_frames_rank - 1, 2], dtype=frame_length.dtype
+                    ),
+                    [[0, math_ops.maximum(0, frame_length - real_frames_shape[-1])]],
+                ],
+                0,
+            )
+            real_frames = array_ops.pad(real_frames, paddings)
+        # We know real_frames's last dimension and frame_length statically. If they
+        # are different, then pad or truncate real_frames to frame_length.
+        elif real_frames.shape.as_list()[-1] > frame_length_static:
+            real_frames = real_frames[..., :frame_length_static]
+        elif real_frames.shape.as_list()[-1] < frame_length_static:
+            pad_amount = frame_length_static - real_frames.shape.as_list()[-1]
+            real_frames = array_ops.pad(
+                real_frames,
+                [[0, 0]] * (real_frames.shape.ndims - 1) + [[0, pad_amount]],
+            )
 
-    # The above code pads the inner dimension of real_frames to frame_length,
-    # but it does so in a way that may not be shape-inference friendly.
-    # Restore shape information if we are able to.
-    if frame_length_static is not None and real_frames.shape.ndims is not None:
-      real_frames.set_shape([None] * (real_frames.shape.ndims - 1) +
-                            [frame_length_static])
+        # The above code pads the inner dimension of real_frames to frame_length,
+        # but it does so in a way that may not be shape-inference friendly.
+        # Restore shape information if we are able to.
+        if frame_length_static is not None and real_frames.shape.ndims is not None:
+            real_frames.set_shape(
+                [None] * (real_frames.shape.ndims - 1) + [frame_length_static]
+            )
 
-    # Optionally window and overlap-add the inner 2 dimensions of real_frames
-    # into a single [samples] dimension.
-    if window_fn is not None:
-      window = window_fn(frame_length, dtype=stfts.dtype.real_dtype)
-      real_frames *= window
-    return reconstruction_ops.overlap_and_add(real_frames, frame_step)
+        # Optionally window and overlap-add the inner 2 dimensions of real_frames
+        # into a single [samples] dimension.
+        if window_fn is not None:
+            window = window_fn(frame_length, dtype=stfts.dtype.real_dtype)
+            real_frames *= window
+        return reconstruction_ops.overlap_and_add(real_frames, frame_step)
 
 
 def _enclosing_power_of_two(value):
-  """Return 2**N for integer N such that 2**N >= value."""
-  value_static = tensor_util.constant_value(value)
-  if value_static is not None:
-    return constant_op.constant(
-        int(2**np.ceil(np.log(value_static) / np.log(2.0))), value.dtype)
-  return math_ops.cast(
-      math_ops.pow(
-          2.0,
-          math_ops.ceil(
-              math_ops.log(math_ops.cast(value, dtypes.float32)) /
-              math_ops.log(2.0))), value.dtype)
+    """Return 2**N for integer N such that 2**N >= value."""
+    value_static = tensor_util.constant_value(value)
+    if value_static is not None:
+        return constant_op.constant(
+            int(2 ** np.ceil(np.log(value_static) / np.log(2.0))), value.dtype
+        )
+    return math_ops.cast(
+        math_ops.pow(
+            2.0,
+            math_ops.ceil(
+                math_ops.log(math_ops.cast(value, dtypes.float32)) / math_ops.log(2.0)
+            ),
+        ),
+        value.dtype,
+    )
 
 
-@tf_export('signal.mdct')
+@tf_export("signal.mdct")
 @dispatch.add_dispatch_support
-def mdct(signals, frame_length, window_fn=window_ops.vorbis_window,
-         pad_end=False, norm=None, name=None):
-  """Computes the [Modified Discrete Cosine Transform][mdct] of `signals`.
+def mdct(
+    signals,
+    frame_length,
+    window_fn=window_ops.vorbis_window,
+    pad_end=False,
+    norm=None,
+    name=None,
+):
+    """Computes the [Modified Discrete Cosine Transform][mdct] of `signals`.
 
   Implemented with TPU/GPU-compatible ops and supports gradients.
 
@@ -331,50 +363,48 @@ def mdct(signals, frame_length, window_fn=window_ops.vorbis_window,
 
   [mdct]: https://en.wikipedia.org/wiki/Modified_discrete_cosine_transform
   """
-  with ops.name_scope(name, 'mdct', [signals, frame_length]):
-    signals = ops.convert_to_tensor(signals, name='signals')
-    signals.shape.with_rank_at_least(1)
-    frame_length = ops.convert_to_tensor(frame_length, name='frame_length')
-    frame_length.shape.assert_has_rank(0)
-    # Assert that frame_length is divisible by 4.
-    frame_length_static = tensor_util.constant_value(frame_length)
-    if frame_length_static is not None:
-      if frame_length_static % 4 != 0:
-        raise ValueError('The frame length must be a multiple of 4.')
-      frame_step = ops.convert_to_tensor(frame_length_static // 2,
-                                         dtype=frame_length.dtype)
-    else:
-      frame_step = frame_length // 2
+    with ops.name_scope(name, "mdct", [signals, frame_length]):
+        signals = ops.convert_to_tensor(signals, name="signals")
+        signals.shape.with_rank_at_least(1)
+        frame_length = ops.convert_to_tensor(frame_length, name="frame_length")
+        frame_length.shape.assert_has_rank(0)
+        # Assert that frame_length is divisible by 4.
+        frame_length_static = tensor_util.constant_value(frame_length)
+        if frame_length_static is not None:
+            if frame_length_static % 4 != 0:
+                raise ValueError("The frame length must be a multiple of 4.")
+            frame_step = ops.convert_to_tensor(
+                frame_length_static // 2, dtype=frame_length.dtype
+            )
+        else:
+            frame_step = frame_length // 2
 
-    framed_signals = shape_ops.frame(
-        signals, frame_length, frame_step, pad_end=pad_end)
+        framed_signals = shape_ops.frame(
+            signals, frame_length, frame_step, pad_end=pad_end
+        )
 
-    # Optionally window the framed signals.
-    if window_fn is not None:
-      window = window_fn(frame_length, dtype=framed_signals.dtype)
-      framed_signals *= window
-    else:
-      framed_signals *= 1.0 / np.sqrt(2)
+        # Optionally window the framed signals.
+        if window_fn is not None:
+            window = window_fn(frame_length, dtype=framed_signals.dtype)
+            framed_signals *= window
+        else:
+            framed_signals *= 1.0 / np.sqrt(2)
 
-    split_frames = array_ops.split(framed_signals, 4, axis=-1)
-    frame_firsthalf = -array_ops.reverse(split_frames[2],
-                                         [-1]) - split_frames[3]
-    frame_secondhalf = split_frames[0] - array_ops.reverse(split_frames[1],
-                                                           [-1])
-    frames_rearranged = array_ops.concat((frame_firsthalf, frame_secondhalf),
-                                         axis=-1)
-    # Below call produces the (frame_length // 2) unique components of the
-    # type 4 orthonormal DCT of the real windowed signals in frames_rearranged.
-    return dct_ops.dct(frames_rearranged, type=4, norm=norm)
+        split_frames = array_ops.split(framed_signals, 4, axis=-1)
+        frame_firsthalf = -array_ops.reverse(split_frames[2], [-1]) - split_frames[3]
+        frame_secondhalf = split_frames[0] - array_ops.reverse(split_frames[1], [-1])
+        frames_rearranged = array_ops.concat(
+            (frame_firsthalf, frame_secondhalf), axis=-1
+        )
+        # Below call produces the (frame_length // 2) unique components of the
+        # type 4 orthonormal DCT of the real windowed signals in frames_rearranged.
+        return dct_ops.dct(frames_rearranged, type=4, norm=norm)
 
 
-@tf_export('signal.inverse_mdct')
+@tf_export("signal.inverse_mdct")
 @dispatch.add_dispatch_support
-def inverse_mdct(mdcts,
-                 window_fn=window_ops.vorbis_window,
-                 norm=None,
-                 name=None):
-  """Computes the inverse modified DCT of `mdcts`.
+def inverse_mdct(mdcts, window_fn=window_ops.vorbis_window, norm=None, name=None):
+    """Computes the inverse modified DCT of `mdcts`.
 
   To reconstruct an original waveform, the same window function should
   be used with `mdct` and `inverse_mdct`.
@@ -427,27 +457,32 @@ def inverse_mdct(mdcts,
 
   [mdct]: https://en.wikipedia.org/wiki/Modified_discrete_cosine_transform
   """
-  with ops.name_scope(name, 'inverse_mdct', [mdcts]):
-    mdcts = ops.convert_to_tensor(mdcts, name='mdcts')
-    mdcts.shape.with_rank_at_least(2)
-    half_len = math_ops.cast(mdcts.shape[-1], dtype=dtypes.int32)
+    with ops.name_scope(name, "inverse_mdct", [mdcts]):
+        mdcts = ops.convert_to_tensor(mdcts, name="mdcts")
+        mdcts.shape.with_rank_at_least(2)
+        half_len = math_ops.cast(mdcts.shape[-1], dtype=dtypes.int32)
 
-    if norm is None:
-      half_len_float = math_ops.cast(half_len, dtype=mdcts.dtype)
-      result_idct4 = (0.5 / half_len_float) * dct_ops.dct(mdcts, type=4)
-    elif norm == 'ortho':
-      result_idct4 = dct_ops.dct(mdcts, type=4, norm='ortho')
-    split_result = array_ops.split(result_idct4, 2, axis=-1)
-    real_frames = array_ops.concat((split_result[1],
-                                    -array_ops.reverse(split_result[1], [-1]),
-                                    -array_ops.reverse(split_result[0], [-1]),
-                                    -split_result[0]), axis=-1)
+        if norm is None:
+            half_len_float = math_ops.cast(half_len, dtype=mdcts.dtype)
+            result_idct4 = (0.5 / half_len_float) * dct_ops.dct(mdcts, type=4)
+        elif norm == "ortho":
+            result_idct4 = dct_ops.dct(mdcts, type=4, norm="ortho")
+        split_result = array_ops.split(result_idct4, 2, axis=-1)
+        real_frames = array_ops.concat(
+            (
+                split_result[1],
+                -array_ops.reverse(split_result[1], [-1]),
+                -array_ops.reverse(split_result[0], [-1]),
+                -split_result[0],
+            ),
+            axis=-1,
+        )
 
-    # Optionally window and overlap-add the inner 2 dimensions of real_frames
-    # into a single [samples] dimension.
-    if window_fn is not None:
-      window = window_fn(2 * half_len, dtype=mdcts.dtype)
-      real_frames *= window
-    else:
-      real_frames *= 1.0 / np.sqrt(2)
-    return reconstruction_ops.overlap_and_add(real_frames, half_len)
+        # Optionally window and overlap-add the inner 2 dimensions of real_frames
+        # into a single [samples] dimension.
+        if window_fn is not None:
+            window = window_fn(2 * half_len, dtype=mdcts.dtype)
+            real_frames *= window
+        else:
+            real_frames *= 1.0 / np.sqrt(2)
+        return reconstruction_ops.overlap_and_add(real_frames, half_len)

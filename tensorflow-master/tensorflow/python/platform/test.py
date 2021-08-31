@@ -33,18 +33,20 @@ from tensorflow.python.framework.test_util import is_gpu_available
 
 from tensorflow.python.ops.gradient_checker import compute_gradient_error
 from tensorflow.python.ops.gradient_checker import compute_gradient
+
 # pylint: enable=unused-import,g-bad-import-order
 
 import functools
 
 import sys
 from tensorflow.python.util.tf_export import tf_export
-if sys.version_info.major == 2:
-  import mock                # pylint: disable=g-import-not-at-top,unused-import
-else:
-  from unittest import mock  # pylint: disable=g-import-not-at-top,g-importing-member
 
-tf_export(v1=['test.mock'])(mock)
+if sys.version_info.major == 2:
+    import mock  # pylint: disable=g-import-not-at-top,unused-import
+else:
+    from unittest import mock  # pylint: disable=g-import-not-at-top,g-importing-member
+
+tf_export(v1=["test.mock"])(mock)
 
 # Import Benchmark class
 Benchmark = _googletest.Benchmark  # pylint: disable=invalid-name
@@ -53,16 +55,16 @@ Benchmark = _googletest.Benchmark  # pylint: disable=invalid-name
 StubOutForTesting = _googletest.StubOutForTesting  # pylint: disable=invalid-name
 
 
-@tf_export('test.main')
+@tf_export("test.main")
 def main(argv=None):
-  """Runs all unit tests."""
-  _test_util.InstallStackTraceHandler()
-  return _googletest.main(argv)
+    """Runs all unit tests."""
+    _test_util.InstallStackTraceHandler()
+    return _googletest.main(argv)
 
 
-@tf_export(v1=['test.get_temp_dir'])
+@tf_export(v1=["test.get_temp_dir"])
 def get_temp_dir():
-  """Returns a temporary directory for use during tests.
+    """Returns a temporary directory for use during tests.
 
   There is no need to delete the directory after the test.
 
@@ -76,12 +78,12 @@ def get_temp_dir():
   Returns:
     The temporary directory.
   """
-  return _googletest.GetTempDir()
+    return _googletest.GetTempDir()
 
 
-@tf_export(v1=['test.test_src_dir_path'])
+@tf_export(v1=["test.test_src_dir_path"])
 def test_src_dir_path(relative_path):
-  """Creates an absolute test srcdir path given a relative path.
+    """Creates an absolute test srcdir path given a relative path.
 
   Args:
     relative_path: a path relative to tensorflow root.
@@ -90,12 +92,12 @@ def test_src_dir_path(relative_path):
   Returns:
     An absolute path to the linked in runfiles.
   """
-  return _googletest.test_src_dir_path(relative_path)
+    return _googletest.test_src_dir_path(relative_path)
 
 
-@tf_export('test.is_built_with_cuda')
+@tf_export("test.is_built_with_cuda")
 def is_built_with_cuda():
-  """Returns whether TensorFlow was built with CUDA (GPU) support.
+    """Returns whether TensorFlow was built with CUDA (GPU) support.
 
   This method should only be used in tests written with `tf.test.TestCase`. A
   typical usage is to skip tests that should only run with CUDA (GPU).
@@ -111,12 +113,12 @@ def is_built_with_cuda():
 
   TensorFlow official binary is built with CUDA.
   """
-  return _test_util.IsGoogleCudaEnabled()
+    return _test_util.IsGoogleCudaEnabled()
 
 
-@tf_export('test.is_built_with_rocm')
+@tf_export("test.is_built_with_rocm")
 def is_built_with_rocm():
-  """Returns whether TensorFlow was built with ROCm (GPU) support.
+    """Returns whether TensorFlow was built with ROCm (GPU) support.
 
   This method should only be used in tests written with `tf.test.TestCase`. A
   typical usage is to skip tests that should only run with ROCm (GPU).
@@ -132,30 +134,29 @@ def is_built_with_rocm():
 
   TensorFlow official binary is NOT built with ROCm.
   """
-  return _test_util.IsBuiltWithROCm()
+    return _test_util.IsBuiltWithROCm()
 
 
-@tf_export('test.disable_with_predicate')
+@tf_export("test.disable_with_predicate")
 def disable_with_predicate(pred, skip_message):
-  """Disables the test if pred is true."""
+    """Disables the test if pred is true."""
 
-  def decorator_disable_with_predicate(func):
+    def decorator_disable_with_predicate(func):
+        @functools.wraps(func)
+        def wrapper_disable_with_predicate(self, *args, **kwargs):
+            if pred():
+                self.skipTest(skip_message)
+            else:
+                return func(self, *args, **kwargs)
 
-    @functools.wraps(func)
-    def wrapper_disable_with_predicate(self, *args, **kwargs):
-      if pred():
-        self.skipTest(skip_message)
-      else:
-        return func(self, *args, **kwargs)
+        return wrapper_disable_with_predicate
 
-    return wrapper_disable_with_predicate
-
-  return decorator_disable_with_predicate
+    return decorator_disable_with_predicate
 
 
-@tf_export('test.is_built_with_gpu_support')
+@tf_export("test.is_built_with_gpu_support")
 def is_built_with_gpu_support():
-  """Returns whether TensorFlow was built with GPU (CUDA or ROCm) support.
+    """Returns whether TensorFlow was built with GPU (CUDA or ROCm) support.
 
   This method should only be used in tests written with `tf.test.TestCase`. A
   typical usage is to skip tests that should only run with GPU.
@@ -171,12 +172,12 @@ def is_built_with_gpu_support():
 
   TensorFlow official binary is built with CUDA GPU support.
   """
-  return is_built_with_cuda() or is_built_with_rocm()
+    return is_built_with_cuda() or is_built_with_rocm()
 
 
-@tf_export('test.is_built_with_xla')
+@tf_export("test.is_built_with_xla")
 def is_built_with_xla():
-  """Returns whether TensorFlow was built with XLA support.
+    """Returns whether TensorFlow was built with XLA support.
 
   This method should only be used in tests written with `tf.test.TestCase`. A
   typical usage is to skip tests that should only run with XLA.
@@ -195,4 +196,4 @@ def is_built_with_xla():
 
   TensorFlow official binary is built with XLA.
   """
-  return _test_util.IsBuiltWithXLA()
+    return _test_util.IsBuiltWithXLA()

@@ -29,9 +29,9 @@ from tensorflow.python.types import doc_typealias
 from tensorflow.python.util.tf_export import tf_export
 
 if sys.version_info >= (3, 8):
-  from typing import Protocol  # pylint:disable=g-import-not-at-top
+    from typing import Protocol  # pylint:disable=g-import-not-at-top
 else:
-  from typing_extensions import Protocol  # pylint:disable=g-import-not-at-top
+    from typing_extensions import Protocol  # pylint:disable=g-import-not-at-top
 
 # TODO(mdan): Consider adding ABC once the dependence on isinstance is reduced.
 # TODO(mdan): Add type annotations.
@@ -40,52 +40,53 @@ else:
 # TODO(b/178822082): Revisit this API when tf.types gets more resource.
 @tf_export("__internal__.types.Tensor", v1=[])
 class Tensor(object):
-  """The base class of all dense Tensor objects.
+    """The base class of all dense Tensor objects.
 
   A dense tensor has a static data type (dtype), and may have a static rank and
   shape. Tensor objects are immutable. Mutable objects may be backed by a Tensor
   which holds the unique handle that identifies the mutable object.
   """
 
-  @property
-  def dtype(self):
-    pass
+    @property
+    def dtype(self):
+        pass
 
-  @property
-  def shape(self):
-    pass
+    @property
+    def shape(self):
+        pass
 
 
 class Symbol(Tensor):
-  """Symbolic "graph" Tensor.
+    """Symbolic "graph" Tensor.
 
   These objects represent the output of an op definition and do not carry a
   value.
   """
-  pass
+
+    pass
 
 
 class Value(Tensor):
-  """Tensor that can be associated with a value (aka "eager tensor").
+    """Tensor that can be associated with a value (aka "eager tensor").
 
   These objects represent the (usually future) output of executing an op
   immediately.
   """
 
-  def numpy(self):
-    pass
+    def numpy(self):
+        pass
 
 
 @tf_export("types.experimental.Callable", v1=[])
 class Callable:
-  """Base class for TF callables like those created by tf.function.
+    """Base class for TF callables like those created by tf.function.
 
   Note: Callables are conceptually very similar to `tf.Operation`: a
   `tf.Operation` is a kind of callable.
   """
 
-  def __call__(self, *args, **kwargs):
-    """Executes this callable.
+    def __call__(self, *args, **kwargs):
+        """Executes this callable.
 
     This behaves like a regular op - in eager mode, it immediately starts
     execution, returning results. In graph mode, it creates ops which return
@@ -104,7 +105,7 @@ class Callable:
 
 @tf_export("types.experimental.ConcreteFunction", v1=[])
 class ConcreteFunction(Callable):
-  """Base class for graph functions.
+    """Base class for graph functions.
 
   A `ConcreteFunction` encapsulates a single graph function definition and
   is differentiable under `tf.GradientTape` contexts.
@@ -114,7 +115,7 @@ class ConcreteFunction(Callable):
 # TODO(mdan): Name just `types.Function`, for historic continuity?
 @tf_export("types.experimental.GenericFunction", v1=[])
 class GenericFunction(Callable):
-  """Base class for polymorphic graph functions.
+    """Base class for polymorphic graph functions.
 
   Graph functions are Python callable objects that dispatch calls to a
   TensorFlow graph. Polymorphic graph functions can be backed by multiple TF
@@ -125,8 +126,8 @@ class GenericFunction(Callable):
   Also see `tf.function`.
   """
 
-  def get_concrete_function(self, *args, **kwargs) -> ConcreteFunction:
-    """Returns a `ConcreteFunction` specialized to input types.
+    def get_concrete_function(self, *args, **kwargs) -> ConcreteFunction:
+        """Returns a `ConcreteFunction` specialized to input types.
 
     The arguments specified by `args` and `kwargs` follow normal function call
     rules. The returned `ConcreteFunction` has the same set of positional and
@@ -170,10 +171,10 @@ class GenericFunction(Callable):
     Returns:
       A `ConcreteFunction`.
     """
-    pass
+        pass
 
-  def experimental_get_compiler_ir(self, *args, **kwargs):
-    """Returns compiler IR for the compiled function.
+    def experimental_get_compiler_ir(self, *args, **kwargs):
+        """Returns compiler IR for the compiled function.
 
     This API is intended *only* for debugging as there are no guarantees on
     backwards compatibility of returned IR or the allowed values of `stage`.
@@ -234,14 +235,14 @@ class GenericFunction(Callable):
         which is not compiled (`jit_compile=True` is not set).
       TypeError: When called with input in graph mode.
     """
-    pass
+        pass
 
 
 class TensorProtocol(Protocol):
-  """Protocol type for objects that can be converted to Tensor."""
+    """Protocol type for objects that can be converted to Tensor."""
 
-  def __tf_tensor__(self, dtype=None, name=None):
-    """Converts this object to a Tensor.
+    def __tf_tensor__(self, dtype=None, name=None):
+        """Converts this object to a Tensor.
 
     Args:
       dtype: data type for the returned Tensor
@@ -249,15 +250,27 @@ class TensorProtocol(Protocol):
     Returns:
       A Tensor.
     """
-    pass
+        pass
 
 
 # TODO(rahulkamat): Add missing types that are convertible to Tensor.
-TensorLike = Union[Tensor, TensorProtocol, int, float, bool, str, complex,
-                   tuple, list, np.ndarray, np.generic]
+TensorLike = Union[
+    Tensor,
+    TensorProtocol,
+    int,
+    float,
+    bool,
+    str,
+    complex,
+    tuple,
+    list,
+    np.ndarray,
+    np.generic,
+]
 doc_typealias.document(
     obj=TensorLike,
-    doc=textwrap.dedent("""\
+    doc=textwrap.dedent(
+        """\
       Union of all types that can be converted to a `tf.Tensor` by `tf.convert_to_tensor`.
 
       This definition may be used in user code. Additional types may be added
@@ -277,7 +290,7 @@ doc_typealias.document(
       foo([1, 2, 3])
       foo(np.array([1, 2, 3]))
       ```
-      """),
+      """
+    ),
 )
-tf_export("types.experimental.TensorLike").export_constant(
-    __name__, "TensorLike")
+tf_export("types.experimental.TensorLike").export_constant(__name__, "TensorLike")

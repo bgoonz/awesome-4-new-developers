@@ -28,7 +28,7 @@ from tensorflow.python.util.tf_export import keras_export
 
 
 class Pooling1D(Layer):
-  """Pooling layer for arbitrary pooling functions, for 1D inputs.
+    """Pooling layer for arbitrary pooling functions, for 1D inputs.
 
   This class only exists for code reuse. It will never be an exposed API.
 
@@ -50,63 +50,70 @@ class Pooling1D(Layer):
     name: A string, the name of the layer.
   """
 
-  def __init__(self, pool_function, pool_size, strides,
-               padding='valid', data_format='channels_last',
-               name=None, **kwargs):
-    super(Pooling1D, self).__init__(name=name, **kwargs)
-    if data_format is None:
-      data_format = backend.image_data_format()
-    if strides is None:
-      strides = pool_size
-    self.pool_function = pool_function
-    self.pool_size = conv_utils.normalize_tuple(pool_size, 1, 'pool_size')
-    self.strides = conv_utils.normalize_tuple(strides, 1, 'strides')
-    self.padding = conv_utils.normalize_padding(padding)
-    self.data_format = conv_utils.normalize_data_format(data_format)
-    self.input_spec = InputSpec(ndim=3)
+    def __init__(
+        self,
+        pool_function,
+        pool_size,
+        strides,
+        padding="valid",
+        data_format="channels_last",
+        name=None,
+        **kwargs
+    ):
+        super(Pooling1D, self).__init__(name=name, **kwargs)
+        if data_format is None:
+            data_format = backend.image_data_format()
+        if strides is None:
+            strides = pool_size
+        self.pool_function = pool_function
+        self.pool_size = conv_utils.normalize_tuple(pool_size, 1, "pool_size")
+        self.strides = conv_utils.normalize_tuple(strides, 1, "strides")
+        self.padding = conv_utils.normalize_padding(padding)
+        self.data_format = conv_utils.normalize_data_format(data_format)
+        self.input_spec = InputSpec(ndim=3)
 
-  def call(self, inputs):
-    pad_axis = 2 if self.data_format == 'channels_last' else 3
-    inputs = array_ops.expand_dims(inputs, pad_axis)
-    outputs = self.pool_function(
-        inputs,
-        self.pool_size + (1,),
-        strides=self.strides + (1,),
-        padding=self.padding,
-        data_format=self.data_format)
-    return array_ops.squeeze(outputs, pad_axis)
+    def call(self, inputs):
+        pad_axis = 2 if self.data_format == "channels_last" else 3
+        inputs = array_ops.expand_dims(inputs, pad_axis)
+        outputs = self.pool_function(
+            inputs,
+            self.pool_size + (1,),
+            strides=self.strides + (1,),
+            padding=self.padding,
+            data_format=self.data_format,
+        )
+        return array_ops.squeeze(outputs, pad_axis)
 
-  def compute_output_shape(self, input_shape):
-    input_shape = tensor_shape.TensorShape(input_shape).as_list()
-    if self.data_format == 'channels_first':
-      steps = input_shape[2]
-      features = input_shape[1]
-    else:
-      steps = input_shape[1]
-      features = input_shape[2]
-    length = conv_utils.conv_output_length(steps,
-                                           self.pool_size[0],
-                                           self.padding,
-                                           self.strides[0])
-    if self.data_format == 'channels_first':
-      return tensor_shape.TensorShape([input_shape[0], features, length])
-    else:
-      return tensor_shape.TensorShape([input_shape[0], length, features])
+    def compute_output_shape(self, input_shape):
+        input_shape = tensor_shape.TensorShape(input_shape).as_list()
+        if self.data_format == "channels_first":
+            steps = input_shape[2]
+            features = input_shape[1]
+        else:
+            steps = input_shape[1]
+            features = input_shape[2]
+        length = conv_utils.conv_output_length(
+            steps, self.pool_size[0], self.padding, self.strides[0]
+        )
+        if self.data_format == "channels_first":
+            return tensor_shape.TensorShape([input_shape[0], features, length])
+        else:
+            return tensor_shape.TensorShape([input_shape[0], length, features])
 
-  def get_config(self):
-    config = {
-        'strides': self.strides,
-        'pool_size': self.pool_size,
-        'padding': self.padding,
-        'data_format': self.data_format,
-    }
-    base_config = super(Pooling1D, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {
+            "strides": self.strides,
+            "pool_size": self.pool_size,
+            "padding": self.padding,
+            "data_format": self.data_format,
+        }
+        base_config = super(Pooling1D, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
 
-@keras_export('keras.layers.MaxPool1D', 'keras.layers.MaxPooling1D')
+@keras_export("keras.layers.MaxPool1D", "keras.layers.MaxPooling1D")
 class MaxPooling1D(Pooling1D):
-  """Max pooling operation for 1D temporal data.
+    """Max pooling operation for 1D temporal data.
 
   Downsamples the input representation by taking the maximum value over a
   spatial window of size `pool_size`. The window is shifted by `strides`.  The
@@ -184,21 +191,28 @@ class MaxPooling1D(Pooling1D):
       3D tensor with shape `(batch_size, features, downsampled_steps)`.
   """
 
-  def __init__(self, pool_size=2, strides=None,
-               padding='valid', data_format='channels_last', **kwargs):
+    def __init__(
+        self,
+        pool_size=2,
+        strides=None,
+        padding="valid",
+        data_format="channels_last",
+        **kwargs
+    ):
 
-    super(MaxPooling1D, self).__init__(
-        functools.partial(backend.pool2d, pool_mode='max'),
-        pool_size=pool_size,
-        strides=strides,
-        padding=padding,
-        data_format=data_format,
-        **kwargs)
+        super(MaxPooling1D, self).__init__(
+            functools.partial(backend.pool2d, pool_mode="max"),
+            pool_size=pool_size,
+            strides=strides,
+            padding=padding,
+            data_format=data_format,
+            **kwargs
+        )
 
 
-@keras_export('keras.layers.AveragePooling1D', 'keras.layers.AvgPool1D')
+@keras_export("keras.layers.AveragePooling1D", "keras.layers.AvgPool1D")
 class AveragePooling1D(Pooling1D):
-  """Average pooling for temporal data.
+    """Average pooling for temporal data.
 
   Downsamples the input representation by taking the average value over the
   window defined by `pool_size`. The window is shifted by `strides`.  The
@@ -297,19 +311,26 @@ class AveragePooling1D(Pooling1D):
       3D tensor with shape `(batch_size, features, downsampled_steps)`.
   """
 
-  def __init__(self, pool_size=2, strides=None,
-               padding='valid', data_format='channels_last', **kwargs):
-    super(AveragePooling1D, self).__init__(
-        functools.partial(backend.pool2d, pool_mode='avg'),
-        pool_size=pool_size,
-        strides=strides,
-        padding=padding,
-        data_format=data_format,
-        **kwargs)
+    def __init__(
+        self,
+        pool_size=2,
+        strides=None,
+        padding="valid",
+        data_format="channels_last",
+        **kwargs
+    ):
+        super(AveragePooling1D, self).__init__(
+            functools.partial(backend.pool2d, pool_mode="avg"),
+            pool_size=pool_size,
+            strides=strides,
+            padding=padding,
+            data_format=data_format,
+            **kwargs
+        )
 
 
 class Pooling2D(Layer):
-  """Pooling layer for arbitrary pooling functions, for 2D inputs (e.g. images).
+    """Pooling layer for arbitrary pooling functions, for 2D inputs (e.g. images).
 
   This class only exists for code reuse. It will never be an exposed API.
 
@@ -333,69 +354,81 @@ class Pooling2D(Layer):
     name: A string, the name of the layer.
   """
 
-  def __init__(self, pool_function, pool_size, strides,
-               padding='valid', data_format=None,
-               name=None, **kwargs):
-    super(Pooling2D, self).__init__(name=name, **kwargs)
-    if data_format is None:
-      data_format = backend.image_data_format()
-    if strides is None:
-      strides = pool_size
-    self.pool_function = pool_function
-    self.pool_size = conv_utils.normalize_tuple(pool_size, 2, 'pool_size')
-    self.strides = conv_utils.normalize_tuple(strides, 2, 'strides')
-    self.padding = conv_utils.normalize_padding(padding)
-    self.data_format = conv_utils.normalize_data_format(data_format)
-    self.input_spec = InputSpec(ndim=4)
+    def __init__(
+        self,
+        pool_function,
+        pool_size,
+        strides,
+        padding="valid",
+        data_format=None,
+        name=None,
+        **kwargs
+    ):
+        super(Pooling2D, self).__init__(name=name, **kwargs)
+        if data_format is None:
+            data_format = backend.image_data_format()
+        if strides is None:
+            strides = pool_size
+        self.pool_function = pool_function
+        self.pool_size = conv_utils.normalize_tuple(pool_size, 2, "pool_size")
+        self.strides = conv_utils.normalize_tuple(strides, 2, "strides")
+        self.padding = conv_utils.normalize_padding(padding)
+        self.data_format = conv_utils.normalize_data_format(data_format)
+        self.input_spec = InputSpec(ndim=4)
 
-  def call(self, inputs):
-    if self.data_format == 'channels_last':
-      pool_shape = (1,) + self.pool_size + (1,)
-      strides = (1,) + self.strides + (1,)
-    else:
-      pool_shape = (1, 1) + self.pool_size
-      strides = (1, 1) + self.strides
-    outputs = self.pool_function(
-        inputs,
-        ksize=pool_shape,
-        strides=strides,
-        padding=self.padding.upper(),
-        data_format=conv_utils.convert_data_format(self.data_format, 4))
-    return outputs
+    def call(self, inputs):
+        if self.data_format == "channels_last":
+            pool_shape = (1,) + self.pool_size + (1,)
+            strides = (1,) + self.strides + (1,)
+        else:
+            pool_shape = (1, 1) + self.pool_size
+            strides = (1, 1) + self.strides
+        outputs = self.pool_function(
+            inputs,
+            ksize=pool_shape,
+            strides=strides,
+            padding=self.padding.upper(),
+            data_format=conv_utils.convert_data_format(self.data_format, 4),
+        )
+        return outputs
 
-  def compute_output_shape(self, input_shape):
-    input_shape = tensor_shape.TensorShape(input_shape).as_list()
-    if self.data_format == 'channels_first':
-      rows = input_shape[2]
-      cols = input_shape[3]
-    else:
-      rows = input_shape[1]
-      cols = input_shape[2]
-    rows = conv_utils.conv_output_length(rows, self.pool_size[0], self.padding,
-                                         self.strides[0])
-    cols = conv_utils.conv_output_length(cols, self.pool_size[1], self.padding,
-                                         self.strides[1])
-    if self.data_format == 'channels_first':
-      return tensor_shape.TensorShape(
-          [input_shape[0], input_shape[1], rows, cols])
-    else:
-      return tensor_shape.TensorShape(
-          [input_shape[0], rows, cols, input_shape[3]])
+    def compute_output_shape(self, input_shape):
+        input_shape = tensor_shape.TensorShape(input_shape).as_list()
+        if self.data_format == "channels_first":
+            rows = input_shape[2]
+            cols = input_shape[3]
+        else:
+            rows = input_shape[1]
+            cols = input_shape[2]
+        rows = conv_utils.conv_output_length(
+            rows, self.pool_size[0], self.padding, self.strides[0]
+        )
+        cols = conv_utils.conv_output_length(
+            cols, self.pool_size[1], self.padding, self.strides[1]
+        )
+        if self.data_format == "channels_first":
+            return tensor_shape.TensorShape(
+                [input_shape[0], input_shape[1], rows, cols]
+            )
+        else:
+            return tensor_shape.TensorShape(
+                [input_shape[0], rows, cols, input_shape[3]]
+            )
 
-  def get_config(self):
-    config = {
-        'pool_size': self.pool_size,
-        'padding': self.padding,
-        'strides': self.strides,
-        'data_format': self.data_format
-    }
-    base_config = super(Pooling2D, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {
+            "pool_size": self.pool_size,
+            "padding": self.padding,
+            "strides": self.strides,
+            "data_format": self.data_format,
+        }
+        base_config = super(Pooling2D, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
 
-@keras_export('keras.layers.MaxPool2D', 'keras.layers.MaxPooling2D')
+@keras_export("keras.layers.MaxPool2D", "keras.layers.MaxPooling2D")
 class MaxPooling2D(Pooling2D):
-  """Max pooling operation for 2D spatial data.
+    """Max pooling operation for 2D spatial data.
 
   Downsamples the input along its spatial dimensions (height and width)
   by taking the maximum value over an input window
@@ -518,21 +551,27 @@ class MaxPooling2D(Pooling2D):
     output shape.
   """
 
-  def __init__(self,
-               pool_size=(2, 2),
-               strides=None,
-               padding='valid',
-               data_format=None,
-               **kwargs):
-    super(MaxPooling2D, self).__init__(
-        nn.max_pool,
-        pool_size=pool_size, strides=strides,
-        padding=padding, data_format=data_format, **kwargs)
+    def __init__(
+        self,
+        pool_size=(2, 2),
+        strides=None,
+        padding="valid",
+        data_format=None,
+        **kwargs
+    ):
+        super(MaxPooling2D, self).__init__(
+            nn.max_pool,
+            pool_size=pool_size,
+            strides=strides,
+            padding=padding,
+            data_format=data_format,
+            **kwargs
+        )
 
 
-@keras_export('keras.layers.AveragePooling2D', 'keras.layers.AvgPool2D')
+@keras_export("keras.layers.AveragePooling2D", "keras.layers.AvgPool2D")
 class AveragePooling2D(Pooling2D):
-  """Average pooling operation for spatial data.
+    """Average pooling operation for spatial data.
 
   Downsamples the input along its spatial dimensions (height and width)
   by taking the average value over an input window
@@ -632,20 +671,26 @@ class AveragePooling2D(Pooling2D):
       4D tensor with shape `(batch_size, channels, pooled_rows, pooled_cols)`.
   """
 
-  def __init__(self,
-               pool_size=(2, 2),
-               strides=None,
-               padding='valid',
-               data_format=None,
-               **kwargs):
-    super(AveragePooling2D, self).__init__(
-        nn.avg_pool,
-        pool_size=pool_size, strides=strides,
-        padding=padding, data_format=data_format, **kwargs)
+    def __init__(
+        self,
+        pool_size=(2, 2),
+        strides=None,
+        padding="valid",
+        data_format=None,
+        **kwargs
+    ):
+        super(AveragePooling2D, self).__init__(
+            nn.avg_pool,
+            pool_size=pool_size,
+            strides=strides,
+            padding=padding,
+            data_format=data_format,
+            **kwargs
+        )
 
 
 class Pooling3D(Layer):
-  """Pooling layer for arbitrary pooling functions, for 3D inputs.
+    """Pooling layer for arbitrary pooling functions, for 3D inputs.
 
   This class only exists for code reuse. It will never be an exposed API.
 
@@ -671,78 +716,88 @@ class Pooling3D(Layer):
     name: A string, the name of the layer.
   """
 
-  def __init__(self, pool_function, pool_size, strides,
-               padding='valid', data_format='channels_last',
-               name=None, **kwargs):
-    super(Pooling3D, self).__init__(name=name, **kwargs)
-    if data_format is None:
-      data_format = backend.image_data_format()
-    if strides is None:
-      strides = pool_size
-    self.pool_function = pool_function
-    self.pool_size = conv_utils.normalize_tuple(pool_size, 3, 'pool_size')
-    self.strides = conv_utils.normalize_tuple(strides, 3, 'strides')
-    self.padding = conv_utils.normalize_padding(padding)
-    self.data_format = conv_utils.normalize_data_format(data_format)
-    self.input_spec = InputSpec(ndim=5)
+    def __init__(
+        self,
+        pool_function,
+        pool_size,
+        strides,
+        padding="valid",
+        data_format="channels_last",
+        name=None,
+        **kwargs
+    ):
+        super(Pooling3D, self).__init__(name=name, **kwargs)
+        if data_format is None:
+            data_format = backend.image_data_format()
+        if strides is None:
+            strides = pool_size
+        self.pool_function = pool_function
+        self.pool_size = conv_utils.normalize_tuple(pool_size, 3, "pool_size")
+        self.strides = conv_utils.normalize_tuple(strides, 3, "strides")
+        self.padding = conv_utils.normalize_padding(padding)
+        self.data_format = conv_utils.normalize_data_format(data_format)
+        self.input_spec = InputSpec(ndim=5)
 
-  def call(self, inputs):
-    pool_shape = (1,) + self.pool_size + (1,)
-    strides = (1,) + self.strides + (1,)
+    def call(self, inputs):
+        pool_shape = (1,) + self.pool_size + (1,)
+        strides = (1,) + self.strides + (1,)
 
-    if self.data_format == 'channels_first':
-      # TF does not support `channels_first` with 3D pooling operations,
-      # so we must handle this case manually.
-      # TODO(fchollet): remove this when TF pooling is feature-complete.
-      inputs = array_ops.transpose(inputs, (0, 2, 3, 4, 1))
+        if self.data_format == "channels_first":
+            # TF does not support `channels_first` with 3D pooling operations,
+            # so we must handle this case manually.
+            # TODO(fchollet): remove this when TF pooling is feature-complete.
+            inputs = array_ops.transpose(inputs, (0, 2, 3, 4, 1))
 
-    outputs = self.pool_function(
-        inputs,
-        ksize=pool_shape,
-        strides=strides,
-        padding=self.padding.upper())
+        outputs = self.pool_function(
+            inputs, ksize=pool_shape, strides=strides, padding=self.padding.upper()
+        )
 
-    if self.data_format == 'channels_first':
-      outputs = array_ops.transpose(outputs, (0, 4, 1, 2, 3))
-    return outputs
+        if self.data_format == "channels_first":
+            outputs = array_ops.transpose(outputs, (0, 4, 1, 2, 3))
+        return outputs
 
-  def compute_output_shape(self, input_shape):
-    input_shape = tensor_shape.TensorShape(input_shape).as_list()
-    if self.data_format == 'channels_first':
-      len_dim1 = input_shape[2]
-      len_dim2 = input_shape[3]
-      len_dim3 = input_shape[4]
-    else:
-      len_dim1 = input_shape[1]
-      len_dim2 = input_shape[2]
-      len_dim3 = input_shape[3]
-    len_dim1 = conv_utils.conv_output_length(len_dim1, self.pool_size[0],
-                                             self.padding, self.strides[0])
-    len_dim2 = conv_utils.conv_output_length(len_dim2, self.pool_size[1],
-                                             self.padding, self.strides[1])
-    len_dim3 = conv_utils.conv_output_length(len_dim3, self.pool_size[2],
-                                             self.padding, self.strides[2])
-    if self.data_format == 'channels_first':
-      return tensor_shape.TensorShape(
-          [input_shape[0], input_shape[1], len_dim1, len_dim2, len_dim3])
-    else:
-      return tensor_shape.TensorShape(
-          [input_shape[0], len_dim1, len_dim2, len_dim3, input_shape[4]])
+    def compute_output_shape(self, input_shape):
+        input_shape = tensor_shape.TensorShape(input_shape).as_list()
+        if self.data_format == "channels_first":
+            len_dim1 = input_shape[2]
+            len_dim2 = input_shape[3]
+            len_dim3 = input_shape[4]
+        else:
+            len_dim1 = input_shape[1]
+            len_dim2 = input_shape[2]
+            len_dim3 = input_shape[3]
+        len_dim1 = conv_utils.conv_output_length(
+            len_dim1, self.pool_size[0], self.padding, self.strides[0]
+        )
+        len_dim2 = conv_utils.conv_output_length(
+            len_dim2, self.pool_size[1], self.padding, self.strides[1]
+        )
+        len_dim3 = conv_utils.conv_output_length(
+            len_dim3, self.pool_size[2], self.padding, self.strides[2]
+        )
+        if self.data_format == "channels_first":
+            return tensor_shape.TensorShape(
+                [input_shape[0], input_shape[1], len_dim1, len_dim2, len_dim3]
+            )
+        else:
+            return tensor_shape.TensorShape(
+                [input_shape[0], len_dim1, len_dim2, len_dim3, input_shape[4]]
+            )
 
-  def get_config(self):
-    config = {
-        'pool_size': self.pool_size,
-        'padding': self.padding,
-        'strides': self.strides,
-        'data_format': self.data_format
-    }
-    base_config = super(Pooling3D, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {
+            "pool_size": self.pool_size,
+            "padding": self.padding,
+            "strides": self.strides,
+            "data_format": self.data_format,
+        }
+        base_config = super(Pooling3D, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
 
-@keras_export('keras.layers.MaxPool3D', 'keras.layers.MaxPooling3D')
+@keras_export("keras.layers.MaxPool3D", "keras.layers.MaxPooling3D")
 class MaxPooling3D(Pooling3D):
-  """Max pooling operation for 3D data (spatial or spatio-temporal).
+    """Max pooling operation for 3D data (spatial or spatio-temporal).
 
   Downsamples the input along its spatial dimensions (depth, height, and width)
   by taking the maximum value over an input window
@@ -799,21 +854,27 @@ class MaxPooling3D(Pooling3D):
   ```
   """
 
-  def __init__(self,
-               pool_size=(2, 2, 2),
-               strides=None,
-               padding='valid',
-               data_format=None,
-               **kwargs):
-    super(MaxPooling3D, self).__init__(
-        nn.max_pool3d,
-        pool_size=pool_size, strides=strides,
-        padding=padding, data_format=data_format, **kwargs)
+    def __init__(
+        self,
+        pool_size=(2, 2, 2),
+        strides=None,
+        padding="valid",
+        data_format=None,
+        **kwargs
+    ):
+        super(MaxPooling3D, self).__init__(
+            nn.max_pool3d,
+            pool_size=pool_size,
+            strides=strides,
+            padding=padding,
+            data_format=data_format,
+            **kwargs
+        )
 
 
-@keras_export('keras.layers.AveragePooling3D', 'keras.layers.AvgPool3D')
+@keras_export("keras.layers.AveragePooling3D", "keras.layers.AvgPool3D")
 class AveragePooling3D(Pooling3D):
-  """Average pooling operation for 3D data (spatial or spatio-temporal).
+    """Average pooling operation for 3D data (spatial or spatio-temporal).
 
   Downsamples the input along its spatial dimensions (depth, height, and width)
   by taking the average value over an input window
@@ -870,53 +931,58 @@ class AveragePooling3D(Pooling3D):
   ```
   """
 
-  def __init__(self,
-               pool_size=(2, 2, 2),
-               strides=None,
-               padding='valid',
-               data_format=None,
-               **kwargs):
-    super(AveragePooling3D, self).__init__(
-        nn.avg_pool3d,
-        pool_size=pool_size, strides=strides,
-        padding=padding, data_format=data_format, **kwargs)
+    def __init__(
+        self,
+        pool_size=(2, 2, 2),
+        strides=None,
+        padding="valid",
+        data_format=None,
+        **kwargs
+    ):
+        super(AveragePooling3D, self).__init__(
+            nn.avg_pool3d,
+            pool_size=pool_size,
+            strides=strides,
+            padding=padding,
+            data_format=data_format,
+            **kwargs
+        )
 
 
 class GlobalPooling1D(Layer):
-  """Abstract class for different global pooling 1D layers."""
+    """Abstract class for different global pooling 1D layers."""
 
-  def __init__(self, data_format='channels_last', keepdims=False, **kwargs):
-    super(GlobalPooling1D, self).__init__(**kwargs)
-    self.input_spec = InputSpec(ndim=3)
-    self.data_format = conv_utils.normalize_data_format(data_format)
-    self.keepdims = keepdims
+    def __init__(self, data_format="channels_last", keepdims=False, **kwargs):
+        super(GlobalPooling1D, self).__init__(**kwargs)
+        self.input_spec = InputSpec(ndim=3)
+        self.data_format = conv_utils.normalize_data_format(data_format)
+        self.keepdims = keepdims
 
-  def compute_output_shape(self, input_shape):
-    input_shape = tensor_shape.TensorShape(input_shape).as_list()
-    if self.data_format == 'channels_first':
-      if self.keepdims:
-        return tensor_shape.TensorShape([input_shape[0], input_shape[1], 1])
-      else:
-        return tensor_shape.TensorShape([input_shape[0], input_shape[1]])
-    else:
-      if self.keepdims:
-        return tensor_shape.TensorShape([input_shape[0], 1, input_shape[2]])
-      else:
-        return tensor_shape.TensorShape([input_shape[0], input_shape[2]])
+    def compute_output_shape(self, input_shape):
+        input_shape = tensor_shape.TensorShape(input_shape).as_list()
+        if self.data_format == "channels_first":
+            if self.keepdims:
+                return tensor_shape.TensorShape([input_shape[0], input_shape[1], 1])
+            else:
+                return tensor_shape.TensorShape([input_shape[0], input_shape[1]])
+        else:
+            if self.keepdims:
+                return tensor_shape.TensorShape([input_shape[0], 1, input_shape[2]])
+            else:
+                return tensor_shape.TensorShape([input_shape[0], input_shape[2]])
 
-  def call(self, inputs):
-    raise NotImplementedError
+    def call(self, inputs):
+        raise NotImplementedError
 
-  def get_config(self):
-    config = {'data_format': self.data_format, 'keepdims': self.keepdims}
-    base_config = super(GlobalPooling1D, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {"data_format": self.data_format, "keepdims": self.keepdims}
+        base_config = super(GlobalPooling1D, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
 
-@keras_export('keras.layers.GlobalAveragePooling1D',
-              'keras.layers.GlobalAvgPool1D')
+@keras_export("keras.layers.GlobalAveragePooling1D", "keras.layers.GlobalAvgPool1D")
 class GlobalAveragePooling1D(GlobalPooling1D):
-  """Global average pooling operation for temporal data.
+    """Global average pooling operation for temporal data.
 
   Examples:
 
@@ -964,32 +1030,31 @@ class GlobalAveragePooling1D(GlobalPooling1D):
         3D tensor with shape `(batch_size, features, 1)`
   """
 
-  def __init__(self, data_format='channels_last', **kwargs):
-    super(GlobalAveragePooling1D, self).__init__(data_format=data_format,
-                                                 **kwargs)
-    self.supports_masking = True
+    def __init__(self, data_format="channels_last", **kwargs):
+        super(GlobalAveragePooling1D, self).__init__(data_format=data_format, **kwargs)
+        self.supports_masking = True
 
-  def call(self, inputs, mask=None):
-    steps_axis = 1 if self.data_format == 'channels_last' else 2
-    if mask is not None:
-      mask = math_ops.cast(mask, inputs[0].dtype)
-      mask = array_ops.expand_dims(
-          mask, 2 if self.data_format == 'channels_last' else 1)
-      inputs *= mask
-      return backend.sum(
-          inputs, axis=steps_axis,
-          keepdims=self.keepdims) / math_ops.reduce_sum(
-              mask, axis=steps_axis, keepdims=self.keepdims)
-    else:
-      return backend.mean(inputs, axis=steps_axis, keepdims=self.keepdims)
+    def call(self, inputs, mask=None):
+        steps_axis = 1 if self.data_format == "channels_last" else 2
+        if mask is not None:
+            mask = math_ops.cast(mask, inputs[0].dtype)
+            mask = array_ops.expand_dims(
+                mask, 2 if self.data_format == "channels_last" else 1
+            )
+            inputs *= mask
+            return backend.sum(
+                inputs, axis=steps_axis, keepdims=self.keepdims
+            ) / math_ops.reduce_sum(mask, axis=steps_axis, keepdims=self.keepdims)
+        else:
+            return backend.mean(inputs, axis=steps_axis, keepdims=self.keepdims)
 
-  def compute_mask(self, inputs, mask=None):
-    return None
+    def compute_mask(self, inputs, mask=None):
+        return None
 
 
-@keras_export('keras.layers.GlobalMaxPool1D', 'keras.layers.GlobalMaxPooling1D')
+@keras_export("keras.layers.GlobalMaxPool1D", "keras.layers.GlobalMaxPooling1D")
 class GlobalMaxPooling1D(GlobalPooling1D):
-  """Global max pooling operation for 1D temporal data.
+    """Global max pooling operation for 1D temporal data.
 
   Downsamples the input representation by taking the maximum value over
   the time dimension.
@@ -1043,47 +1108,46 @@ class GlobalMaxPooling1D(GlobalPooling1D):
         3D tensor with shape `(batch_size, features, 1)`
   """
 
-  def call(self, inputs):
-    steps_axis = 1 if self.data_format == 'channels_last' else 2
-    return backend.max(inputs, axis=steps_axis, keepdims=self.keepdims)
+    def call(self, inputs):
+        steps_axis = 1 if self.data_format == "channels_last" else 2
+        return backend.max(inputs, axis=steps_axis, keepdims=self.keepdims)
 
 
 class GlobalPooling2D(Layer):
-  """Abstract class for different global pooling 2D layers.
+    """Abstract class for different global pooling 2D layers.
   """
 
-  def __init__(self, data_format=None, keepdims=False, **kwargs):
-    super(GlobalPooling2D, self).__init__(**kwargs)
-    self.data_format = conv_utils.normalize_data_format(data_format)
-    self.input_spec = InputSpec(ndim=4)
-    self.keepdims = keepdims
+    def __init__(self, data_format=None, keepdims=False, **kwargs):
+        super(GlobalPooling2D, self).__init__(**kwargs)
+        self.data_format = conv_utils.normalize_data_format(data_format)
+        self.input_spec = InputSpec(ndim=4)
+        self.keepdims = keepdims
 
-  def compute_output_shape(self, input_shape):
-    input_shape = tensor_shape.TensorShape(input_shape).as_list()
-    if self.data_format == 'channels_last':
-      if self.keepdims:
-        return tensor_shape.TensorShape([input_shape[0], 1, 1, input_shape[3]])
-      else:
-        return tensor_shape.TensorShape([input_shape[0], input_shape[3]])
-    else:
-      if self.keepdims:
-        return tensor_shape.TensorShape([input_shape[0], input_shape[1], 1, 1])
-      else:
-        return tensor_shape.TensorShape([input_shape[0], input_shape[1]])
+    def compute_output_shape(self, input_shape):
+        input_shape = tensor_shape.TensorShape(input_shape).as_list()
+        if self.data_format == "channels_last":
+            if self.keepdims:
+                return tensor_shape.TensorShape([input_shape[0], 1, 1, input_shape[3]])
+            else:
+                return tensor_shape.TensorShape([input_shape[0], input_shape[3]])
+        else:
+            if self.keepdims:
+                return tensor_shape.TensorShape([input_shape[0], input_shape[1], 1, 1])
+            else:
+                return tensor_shape.TensorShape([input_shape[0], input_shape[1]])
 
-  def call(self, inputs):
-    raise NotImplementedError
+    def call(self, inputs):
+        raise NotImplementedError
 
-  def get_config(self):
-    config = {'data_format': self.data_format, 'keepdims': self.keepdims}
-    base_config = super(GlobalPooling2D, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {"data_format": self.data_format, "keepdims": self.keepdims}
+        base_config = super(GlobalPooling2D, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
 
-@keras_export('keras.layers.GlobalAveragePooling2D',
-              'keras.layers.GlobalAvgPool2D')
+@keras_export("keras.layers.GlobalAveragePooling2D", "keras.layers.GlobalAvgPool2D")
 class GlobalAveragePooling2D(GlobalPooling2D):
-  """Global average pooling operation for spatial data.
+    """Global average pooling operation for spatial data.
 
   Examples:
 
@@ -1127,16 +1191,16 @@ class GlobalAveragePooling2D(GlobalPooling2D):
         4D tensor with shape `(batch_size, channels, 1, 1)`
   """
 
-  def call(self, inputs):
-    if self.data_format == 'channels_last':
-      return backend.mean(inputs, axis=[1, 2], keepdims=self.keepdims)
-    else:
-      return backend.mean(inputs, axis=[2, 3], keepdims=self.keepdims)
+    def call(self, inputs):
+        if self.data_format == "channels_last":
+            return backend.mean(inputs, axis=[1, 2], keepdims=self.keepdims)
+        else:
+            return backend.mean(inputs, axis=[2, 3], keepdims=self.keepdims)
 
 
-@keras_export('keras.layers.GlobalMaxPool2D', 'keras.layers.GlobalMaxPooling2D')
+@keras_export("keras.layers.GlobalMaxPool2D", "keras.layers.GlobalMaxPooling2D")
 class GlobalMaxPooling2D(GlobalPooling2D):
-  """Global max pooling operation for spatial data.
+    """Global max pooling operation for spatial data.
 
   Examples:
 
@@ -1180,50 +1244,51 @@ class GlobalMaxPooling2D(GlobalPooling2D):
         4D tensor with shape `(batch_size, channels, 1, 1)`
   """
 
-  def call(self, inputs):
-    if self.data_format == 'channels_last':
-      return backend.max(inputs, axis=[1, 2], keepdims=self.keepdims)
-    else:
-      return backend.max(inputs, axis=[2, 3], keepdims=self.keepdims)
+    def call(self, inputs):
+        if self.data_format == "channels_last":
+            return backend.max(inputs, axis=[1, 2], keepdims=self.keepdims)
+        else:
+            return backend.max(inputs, axis=[2, 3], keepdims=self.keepdims)
 
 
 class GlobalPooling3D(Layer):
-  """Abstract class for different global pooling 3D layers."""
+    """Abstract class for different global pooling 3D layers."""
 
-  def __init__(self, data_format=None, keepdims=False, **kwargs):
-    super(GlobalPooling3D, self).__init__(**kwargs)
-    self.data_format = conv_utils.normalize_data_format(data_format)
-    self.input_spec = InputSpec(ndim=5)
-    self.keepdims = keepdims
+    def __init__(self, data_format=None, keepdims=False, **kwargs):
+        super(GlobalPooling3D, self).__init__(**kwargs)
+        self.data_format = conv_utils.normalize_data_format(data_format)
+        self.input_spec = InputSpec(ndim=5)
+        self.keepdims = keepdims
 
-  def compute_output_shape(self, input_shape):
-    input_shape = tensor_shape.TensorShape(input_shape).as_list()
-    if self.data_format == 'channels_last':
-      if self.keepdims:
-        return tensor_shape.TensorShape(
-            [input_shape[0], 1, 1, 1, input_shape[4]])
-      else:
-        return tensor_shape.TensorShape([input_shape[0], input_shape[4]])
-    else:
-      if self.keepdims:
-        return tensor_shape.TensorShape(
-            [input_shape[0], input_shape[1], 1, 1, 1])
-      else:
-        return tensor_shape.TensorShape([input_shape[0], input_shape[1]])
+    def compute_output_shape(self, input_shape):
+        input_shape = tensor_shape.TensorShape(input_shape).as_list()
+        if self.data_format == "channels_last":
+            if self.keepdims:
+                return tensor_shape.TensorShape(
+                    [input_shape[0], 1, 1, 1, input_shape[4]]
+                )
+            else:
+                return tensor_shape.TensorShape([input_shape[0], input_shape[4]])
+        else:
+            if self.keepdims:
+                return tensor_shape.TensorShape(
+                    [input_shape[0], input_shape[1], 1, 1, 1]
+                )
+            else:
+                return tensor_shape.TensorShape([input_shape[0], input_shape[1]])
 
-  def call(self, inputs):
-    raise NotImplementedError
+    def call(self, inputs):
+        raise NotImplementedError
 
-  def get_config(self):
-    config = {'data_format': self.data_format, 'keepdims': self.keepdims}
-    base_config = super(GlobalPooling3D, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {"data_format": self.data_format, "keepdims": self.keepdims}
+        base_config = super(GlobalPooling3D, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
 
-@keras_export('keras.layers.GlobalAveragePooling3D',
-              'keras.layers.GlobalAvgPool3D')
+@keras_export("keras.layers.GlobalAveragePooling3D", "keras.layers.GlobalAvgPool3D")
 class GlobalAveragePooling3D(GlobalPooling3D):
-  """Global Average pooling operation for 3D data.
+    """Global Average pooling operation for 3D data.
 
   Args:
     data_format: A string,
@@ -1261,16 +1326,16 @@ class GlobalAveragePooling3D(GlobalPooling3D):
         5D tensor with shape `(batch_size, channels, 1, 1, 1)`
   """
 
-  def call(self, inputs):
-    if self.data_format == 'channels_last':
-      return backend.mean(inputs, axis=[1, 2, 3], keepdims=self.keepdims)
-    else:
-      return backend.mean(inputs, axis=[2, 3, 4], keepdims=self.keepdims)
+    def call(self, inputs):
+        if self.data_format == "channels_last":
+            return backend.mean(inputs, axis=[1, 2, 3], keepdims=self.keepdims)
+        else:
+            return backend.mean(inputs, axis=[2, 3, 4], keepdims=self.keepdims)
 
 
-@keras_export('keras.layers.GlobalMaxPool3D', 'keras.layers.GlobalMaxPooling3D')
+@keras_export("keras.layers.GlobalMaxPool3D", "keras.layers.GlobalMaxPooling3D")
 class GlobalMaxPooling3D(GlobalPooling3D):
-  """Global Max pooling operation for 3D data.
+    """Global Max pooling operation for 3D data.
 
   Args:
     data_format: A string,
@@ -1308,11 +1373,11 @@ class GlobalMaxPooling3D(GlobalPooling3D):
         5D tensor with shape `(batch_size, channels, 1, 1, 1)`
   """
 
-  def call(self, inputs):
-    if self.data_format == 'channels_last':
-      return backend.max(inputs, axis=[1, 2, 3], keepdims=self.keepdims)
-    else:
-      return backend.max(inputs, axis=[2, 3, 4], keepdims=self.keepdims)
+    def call(self, inputs):
+        if self.data_format == "channels_last":
+            return backend.max(inputs, axis=[1, 2, 3], keepdims=self.keepdims)
+        else:
+            return backend.max(inputs, axis=[2, 3, 4], keepdims=self.keepdims)
 
 
 # Aliases

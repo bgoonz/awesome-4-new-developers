@@ -26,56 +26,54 @@ import six
 
 from tensorflow.python.util import tf_inspect
 
-__all__ = ['traverse']
+__all__ = ["traverse"]
 
 
 def _traverse_internal(root, visit, stack, path):
-  """Internal helper for traverse."""
+    """Internal helper for traverse."""
 
-  # Only traverse modules and classes
-  if not tf_inspect.isclass(root) and not tf_inspect.ismodule(root):
-    return
+    # Only traverse modules and classes
+    if not tf_inspect.isclass(root) and not tf_inspect.ismodule(root):
+        return
 
-  try:
-    children = tf_inspect.getmembers(root)
-
-    # Add labels for duplicate values in Enum.
-    if tf_inspect.isclass(root) and issubclass(root, enum.Enum):
-      for enum_member in root.__members__.items():
-        if enum_member not in children:
-          children.append(enum_member)
-      children = sorted(children)
-  except ImportError:
-    # Children could be missing for one of two reasons:
-    # 1. On some Python installations, some modules do not support enumerating
-    #    members (six in particular), leading to import errors.
-    # 2. Children are lazy-loaded.
     try:
-      children = []
-      for child_name in root.__all__:
-        children.append((child_name, getattr(root, child_name)))
-    except AttributeError:
-      children = []
+        children = tf_inspect.getmembers(root)
 
-  new_stack = stack + [root]
-  visit(path, root, children)
-  for name, child in children:
-    # Do not descend into built-in modules
-    if tf_inspect.ismodule(
-        child) and child.__name__ in sys.builtin_module_names:
-      continue
+        # Add labels for duplicate values in Enum.
+        if tf_inspect.isclass(root) and issubclass(root, enum.Enum):
+            for enum_member in root.__members__.items():
+                if enum_member not in children:
+                    children.append(enum_member)
+            children = sorted(children)
+    except ImportError:
+        # Children could be missing for one of two reasons:
+        # 1. On some Python installations, some modules do not support enumerating
+        #    members (six in particular), leading to import errors.
+        # 2. Children are lazy-loaded.
+        try:
+            children = []
+            for child_name in root.__all__:
+                children.append((child_name, getattr(root, child_name)))
+        except AttributeError:
+            children = []
 
-    # Break cycles
-    if any(child is item for item in new_stack):  # `in`, but using `is`
-      continue
+    new_stack = stack + [root]
+    visit(path, root, children)
+    for name, child in children:
+        # Do not descend into built-in modules
+        if tf_inspect.ismodule(child) and child.__name__ in sys.builtin_module_names:
+            continue
 
-    child_path = six.ensure_str(path) + '.' + six.ensure_str(
-        name) if path else name
-    _traverse_internal(child, visit, new_stack, child_path)
+        # Break cycles
+        if any(child is item for item in new_stack):  # `in`, but using `is`
+            continue
+
+        child_path = six.ensure_str(path) + "." + six.ensure_str(name) if path else name
+        _traverse_internal(child, visit, new_stack, child_path)
 
 
 def traverse(root, visit):
-  """Recursively enumerate all members of `root`.
+    """Recursively enumerate all members of `root`.
 
   Similar to the Python library function `os.path.walk`.
 
@@ -108,4 +106,4 @@ def traverse(root, visit):
     visit: A function taking arguments `(path, parent, children)`. Will be
       called for each object found in the traversal.
   """
-  _traverse_internal(root, visit, [], '')
+    _traverse_internal(root, visit, [], "")

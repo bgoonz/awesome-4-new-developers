@@ -43,7 +43,7 @@ from tensorflow.python.util.tf_export import tf_export
 # bits, all of which will be sent to the C++ code. The actual C++
 # implementation of some algorithms may only use a lower part of the bits.
 
-UINT64_HALF_SPAN = 2**63
+UINT64_HALF_SPAN = 2 ** 63
 MAX_INT64 = UINT64_HALF_SPAN - 1
 MIN_INT64 = -UINT64_HALF_SPAN
 UINT64_SPAN = UINT64_HALF_SPAN * 2
@@ -71,7 +71,7 @@ DEFAULT_ALGORITHM = RNG_ALG_PHILOX
 
 
 def non_deterministic_ints(shape, dtype=dtypes.int64):
-  """Non-deterministically generates some integers.
+    """Non-deterministically generates some integers.
 
   This op may use some OS-provided source of non-determinism (e.g. an RNG), so
   each execution will give different results.
@@ -83,18 +83,17 @@ def non_deterministic_ints(shape, dtype=dtypes.int64):
   Returns:
     a tensor whose element values are non-deterministically chosen.
   """
-  return gen_stateful_random_ops.non_deterministic_ints(
-      shape=shape, dtype=dtype)
+    return gen_stateful_random_ops.non_deterministic_ints(shape=shape, dtype=dtype)
 
 
 def _uint_to_int(n):
-  if isinstance(n, int) and n > SEED_MAX:
-    n = n - SEED_UINT_SPAN
-  return n
+    if isinstance(n, int) and n > SEED_MAX:
+        n = n - SEED_UINT_SPAN
+    return n
 
 
 def _make_1d_state(state_size, seed):
-  """Makes a 1-D RNG state.
+    """Makes a 1-D RNG state.
 
   Args:
     state_size: an integer.
@@ -103,71 +102,73 @@ def _make_1d_state(state_size, seed):
   Returns:
     a 1-D tensor of shape [state_size] and dtype STATE_TYPE.
   """
-  if isinstance(seed, six.integer_types):
-    # chop the Python integer (infinite precision) into chunks of SEED_TYPE
-    ls = []
-    for _ in range(state_size):
-      ls.append(seed & SEED_BIT_MASK)
-      seed >>= SEED_TYPE_BITS
-    seed = ls
-  # to avoid overflow error from ops.convert_to_tensor
-  seed = nest.map_structure(_uint_to_int, seed)
-  seed = math_ops.cast(seed, STATE_TYPE)
-  seed = array_ops.reshape(seed, [-1])
-  seed = seed[0:state_size]
-  # Padding with zeros on the *left* if too short. Padding on the right would
-  # cause a small seed to be used as the "counter" while the "key" is always
-  # zero (for counter-based RNG algorithms), because in the current memory
-  # layout counter is stored before key. In such a situation two RNGs with
-  # two different small seeds may generate overlapping outputs.
-  seed_size = seed.shape[0]
-  if seed_size is None:
-    seed_size = array_ops.shape(seed)[0]
-  padding_size = math_ops.maximum(state_size - seed_size, 0)
-  padding = array_ops.zeros([padding_size], seed.dtype)
-  # can't use `pad` because it doesn't support integer dtypes on GPU
-  seed = array_ops.concat([padding, seed], axis=0)
-  seed.set_shape([state_size])
-  return seed
+    if isinstance(seed, six.integer_types):
+        # chop the Python integer (infinite precision) into chunks of SEED_TYPE
+        ls = []
+        for _ in range(state_size):
+            ls.append(seed & SEED_BIT_MASK)
+            seed >>= SEED_TYPE_BITS
+        seed = ls
+    # to avoid overflow error from ops.convert_to_tensor
+    seed = nest.map_structure(_uint_to_int, seed)
+    seed = math_ops.cast(seed, STATE_TYPE)
+    seed = array_ops.reshape(seed, [-1])
+    seed = seed[0:state_size]
+    # Padding with zeros on the *left* if too short. Padding on the right would
+    # cause a small seed to be used as the "counter" while the "key" is always
+    # zero (for counter-based RNG algorithms), because in the current memory
+    # layout counter is stored before key. In such a situation two RNGs with
+    # two different small seeds may generate overlapping outputs.
+    seed_size = seed.shape[0]
+    if seed_size is None:
+        seed_size = array_ops.shape(seed)[0]
+    padding_size = math_ops.maximum(state_size - seed_size, 0)
+    padding = array_ops.zeros([padding_size], seed.dtype)
+    # can't use `pad` because it doesn't support integer dtypes on GPU
+    seed = array_ops.concat([padding, seed], axis=0)
+    seed.set_shape([state_size])
+    return seed
 
 
 def _get_counter_size(alg):
-  if alg == RNG_ALG_PHILOX:
-    return 2
-  elif alg == RNG_ALG_THREEFRY:
-    return 1
-  else:
-    raise ValueError(
-        f"Argument `alg` got unsupported value {alg}. Supported values are "
-        f"{RNG_ALG_PHILOX} for the Philox algorithm and {RNG_ALG_THREEFRY} for "
-        f"the ThreeFry algorithm.")
+    if alg == RNG_ALG_PHILOX:
+        return 2
+    elif alg == RNG_ALG_THREEFRY:
+        return 1
+    else:
+        raise ValueError(
+            f"Argument `alg` got unsupported value {alg}. Supported values are "
+            f"{RNG_ALG_PHILOX} for the Philox algorithm and {RNG_ALG_THREEFRY} for "
+            f"the ThreeFry algorithm."
+        )
 
 
 def _get_state_size(alg):
-  if alg == RNG_ALG_PHILOX:
-    return PHILOX_STATE_SIZE
-  elif alg == RNG_ALG_THREEFRY:
-    return THREEFRY_STATE_SIZE
-  else:
-    raise ValueError(
-        f"Argument `alg` got unsupported value {alg}. Supported values are "
-        f"{RNG_ALG_PHILOX} for the Philox algorithm and {RNG_ALG_THREEFRY} for "
-        f"the ThreeFry algorithm.")
+    if alg == RNG_ALG_PHILOX:
+        return PHILOX_STATE_SIZE
+    elif alg == RNG_ALG_THREEFRY:
+        return THREEFRY_STATE_SIZE
+    else:
+        raise ValueError(
+            f"Argument `alg` got unsupported value {alg}. Supported values are "
+            f"{RNG_ALG_PHILOX} for the Philox algorithm and {RNG_ALG_THREEFRY} for "
+            f"the ThreeFry algorithm."
+        )
 
 
 def _check_state_shape(shape, alg):
-  if isinstance(alg, ops.Tensor) and not context.executing_eagerly():
-    return
-  shape.assert_is_compatible_with([_get_state_size(int(alg))])
+    if isinstance(alg, ops.Tensor) and not context.executing_eagerly():
+        return
+    shape.assert_is_compatible_with([_get_state_size(int(alg))])
 
 
 def _make_state_from_seed(seed, alg):
-  return _make_1d_state(_get_state_size(alg), seed)
+    return _make_1d_state(_get_state_size(alg), seed)
 
 
 @tf_export("random.create_rng_state", "random.experimental.create_rng_state")
 def create_rng_state(seed, alg):
-  """Creates a RNG state from an integer or a vector.
+    """Creates a RNG state from an integer or a vector.
 
   Example:
 
@@ -185,35 +186,35 @@ def create_rng_state(seed, alg):
   Returns:
     a 1-D numpy array whose size depends on the algorithm.
   """
-  alg = stateless_random_ops.convert_alg_to_int(alg)
-  return _make_state_from_seed(seed, alg)
+    alg = stateless_random_ops.convert_alg_to_int(alg)
+    return _make_state_from_seed(seed, alg)
 
 
 def _shape_tensor(shape):
-  """Convert to an int32 or int64 tensor, defaulting to int64 if empty."""
-  if isinstance(shape, (tuple, list)) and not shape:
-    dtype = dtypes.int64
-  else:
-    dtype = None
-  return ops.convert_to_tensor(shape, dtype=dtype, name="shape")
+    """Convert to an int32 or int64 tensor, defaulting to int64 if empty."""
+    if isinstance(shape, (tuple, list)) and not shape:
+        dtype = dtypes.int64
+    else:
+        dtype = None
+    return ops.convert_to_tensor(shape, dtype=dtype, name="shape")
 
 
 def _convert_to_state_tensor(t):
-  # to avoid out-of-range error from ops.convert_to_tensor
-  t = nest.map_structure(_uint_to_int, t)
-  return math_ops.cast(t, STATE_TYPE)
+    # to avoid out-of-range error from ops.convert_to_tensor
+    t = nest.map_structure(_uint_to_int, t)
+    return math_ops.cast(t, STATE_TYPE)
 
 
 def get_replica_id():
-  rctx = ds_context.get_replica_context()
-  if rctx is None:
-    return None
-  return rctx.replica_id_in_sync_group
+    rctx = ds_context.get_replica_context()
+    if rctx is None:
+        return None
+    return rctx.replica_id_in_sync_group
 
 
 @tf_export("random.Generator", "random.experimental.Generator")
 class Generator(tracking.AutoTrackable):
-  """Random-number generator.
+    """Random-number generator.
 
   Example:
 
@@ -323,9 +324,9 @@ class Generator(tracking.AutoTrackable):
   for more details).
   """
 
-  @classmethod
-  def from_state(cls, state, alg):
-    """Creates a generator from a state.
+    @classmethod
+    def from_state(cls, state, alg):
+        """Creates a generator from a state.
 
     See `__init__` for description of `state` and `alg`.
 
@@ -336,11 +337,11 @@ class Generator(tracking.AutoTrackable):
     Returns:
       The new generator.
     """
-    return cls(alg=alg, state=state)
+        return cls(alg=alg, state=state)
 
-  @classmethod
-  def from_seed(cls, seed, alg=None):
-    """Creates a generator from a seed.
+    @classmethod
+    def from_seed(cls, seed, alg=None):
+        """Creates a generator from a seed.
 
     A seed is a 1024-bit unsigned integer represented either as a Python
     integer or a vector of integers. Seeds shorter than 1024-bit will be
@@ -357,16 +358,16 @@ class Generator(tracking.AutoTrackable):
     Returns:
       The new generator.
     """
-    if alg is None:
-      # TODO(b/170668986): more sophisticated algorithm selection
-      alg = DEFAULT_ALGORITHM
-    alg = stateless_random_ops.convert_alg_to_int(alg)
-    state = create_rng_state(seed, alg)
-    return cls(state=state, alg=alg)
+        if alg is None:
+            # TODO(b/170668986): more sophisticated algorithm selection
+            alg = DEFAULT_ALGORITHM
+        alg = stateless_random_ops.convert_alg_to_int(alg)
+        state = create_rng_state(seed, alg)
+        return cls(state=state, alg=alg)
 
-  @classmethod
-  def from_non_deterministic_state(cls, alg=None):
-    """Creates a generator by non-deterministically initializing its state.
+    @classmethod
+    def from_non_deterministic_state(cls, alg=None):
+        """Creates a generator by non-deterministically initializing its state.
 
     The source of the non-determinism will be platform- and time-dependent.
 
@@ -377,20 +378,21 @@ class Generator(tracking.AutoTrackable):
     Returns:
       The new generator.
     """
-    if config.deterministic_ops_enabled():
-      raise RuntimeError('"from_non_deterministic_state" cannot be called when '  # pylint: disable=g-doc-exception
-                         "determinism is enabled.")
-    if alg is None:
-      # TODO(b/170668986): more sophisticated algorithm selection
-      alg = DEFAULT_ALGORITHM
-    alg = stateless_random_ops.convert_alg_to_int(alg)
-    state = non_deterministic_ints(shape=[_get_state_size(alg)],
-                                   dtype=SEED_TYPE)
-    return cls(state=state, alg=alg)
+        if config.deterministic_ops_enabled():
+            raise RuntimeError(
+                '"from_non_deterministic_state" cannot be called when '  # pylint: disable=g-doc-exception
+                "determinism is enabled."
+            )
+        if alg is None:
+            # TODO(b/170668986): more sophisticated algorithm selection
+            alg = DEFAULT_ALGORITHM
+        alg = stateless_random_ops.convert_alg_to_int(alg)
+        state = non_deterministic_ints(shape=[_get_state_size(alg)], dtype=SEED_TYPE)
+        return cls(state=state, alg=alg)
 
-  @classmethod
-  def from_key_counter(cls, key, counter, alg):
-    """Creates a generator from a key and a counter.
+    @classmethod
+    def from_key_counter(cls, key, counter, alg):
+        """Creates a generator from a key and a counter.
 
     This constructor only applies if the algorithm is a counter-based algorithm.
     See method `key` for the meaning of "key" and "counter".
@@ -405,17 +407,17 @@ class Generator(tracking.AutoTrackable):
     Returns:
       The new generator.
     """
-    counter = _convert_to_state_tensor(counter)
-    key = _convert_to_state_tensor(key)
-    alg = stateless_random_ops.convert_alg_to_int(alg)
-    counter.shape.assert_is_compatible_with([_get_state_size(alg) - 1])
-    key.shape.assert_is_compatible_with([])
-    key = array_ops.reshape(key, [1])
-    state = array_ops.concat([counter, key], 0)
-    return cls(state=state, alg=alg)
+        counter = _convert_to_state_tensor(counter)
+        key = _convert_to_state_tensor(key)
+        alg = stateless_random_ops.convert_alg_to_int(alg)
+        counter.shape.assert_is_compatible_with([_get_state_size(alg) - 1])
+        key.shape.assert_is_compatible_with([])
+        key = array_ops.reshape(key, [1])
+        state = array_ops.concat([counter, key], 0)
+        return cls(state=state, alg=alg)
 
-  def __init__(self, copy_from=None, state=None, alg=None):
-    """Creates a generator.
+    def __init__(self, copy_from=None, state=None, alg=None):
+        """Creates a generator.
 
     The new generator will be initialized by one of the following ways, with
     decreasing precedence:
@@ -439,32 +441,34 @@ class Generator(tracking.AutoTrackable):
         Note `PHILOX` guarantees the same numbers are produced (given
         the same random state) across all architectures (CPU, GPU, XLA etc).
     """
-    # TODO(b/175072242): Remove distribution-strategy dependencies in this file.
-    if ds_context.has_strategy():
-      self._distribution_strategy = ds_context.get_strategy()
-    else:
-      self._distribution_strategy = None
-    if copy_from is not None:
-      # All other arguments should be None
-      assert (alg or state) is None
-      self._state_var = self._create_variable(copy_from.state, dtype=STATE_TYPE,
-                                              trainable=False)
-      self._alg = copy_from.algorithm
-    else:
-      assert alg is not None and state is not None
-      alg = stateless_random_ops.convert_alg_to_int(alg)
-      if isinstance(state, variables.Variable):
-        _check_state_shape(state.shape, alg)
-        self._state_var = state
-      else:
-        state = _convert_to_state_tensor(state)
-        _check_state_shape(state.shape, alg)
-        self._state_var = self._create_variable(state, dtype=STATE_TYPE,
-                                                trainable=False)
-      self._alg = alg
+        # TODO(b/175072242): Remove distribution-strategy dependencies in this file.
+        if ds_context.has_strategy():
+            self._distribution_strategy = ds_context.get_strategy()
+        else:
+            self._distribution_strategy = None
+        if copy_from is not None:
+            # All other arguments should be None
+            assert (alg or state) is None
+            self._state_var = self._create_variable(
+                copy_from.state, dtype=STATE_TYPE, trainable=False
+            )
+            self._alg = copy_from.algorithm
+        else:
+            assert alg is not None and state is not None
+            alg = stateless_random_ops.convert_alg_to_int(alg)
+            if isinstance(state, variables.Variable):
+                _check_state_shape(state.shape, alg)
+                self._state_var = state
+            else:
+                state = _convert_to_state_tensor(state)
+                _check_state_shape(state.shape, alg)
+                self._state_var = self._create_variable(
+                    state, dtype=STATE_TYPE, trainable=False
+                )
+            self._alg = alg
 
-  def _create_variable(self, *args, **kwargs):
-    """Creates a variable.
+    def _create_variable(self, *args, **kwargs):
+        """Creates a variable.
 
     Args:
       *args: positional arguments passed along to `variables.Variable.
@@ -473,46 +477,47 @@ class Generator(tracking.AutoTrackable):
     Returns:
       The created variable.
     """
-    v = variables.Variable(*args, **kwargs)
-    if isinstance(v, sharded_variable.ShardedVariable):
-      # RNG state is an atomic entity representing a 128-bit or
-      # 192-bit value, so it mustn't be sharded.
-      raise ValueError(
-          "tf.random.Generator state is sharded, which is not allowed. When "
-          "creating a tf.distribute.experimental.ParameterServerStrategy, "
-          "please make sure that the `variable_partitioner` "
-          "argument won't shard a "
-          "small variable of shape [2] or [3]. Ways to avoid sharding small "
-          "variables include setting `variable_partitioner` to None or to "
-          "tf.distribute.experimental.partitioners.MinSizePartitioner with a "
-          "large enough `min_shard_bytes`.")
-    return v
+        v = variables.Variable(*args, **kwargs)
+        if isinstance(v, sharded_variable.ShardedVariable):
+            # RNG state is an atomic entity representing a 128-bit or
+            # 192-bit value, so it mustn't be sharded.
+            raise ValueError(
+                "tf.random.Generator state is sharded, which is not allowed. When "
+                "creating a tf.distribute.experimental.ParameterServerStrategy, "
+                "please make sure that the `variable_partitioner` "
+                "argument won't shard a "
+                "small variable of shape [2] or [3]. Ways to avoid sharding small "
+                "variables include setting `variable_partitioner` to None or to "
+                "tf.distribute.experimental.partitioners.MinSizePartitioner with a "
+                "large enough `min_shard_bytes`."
+            )
+        return v
 
-  def reset(self, state):
-    """Resets the generator by a new state.
+    def reset(self, state):
+        """Resets the generator by a new state.
 
     See `__init__` for the meaning of "state".
 
     Args:
       state: the new state.
     """
-    state = _convert_to_state_tensor(state)
-    state.shape.assert_is_compatible_with([_get_state_size(self.algorithm)])
-    self._state_var.assign(state)
+        state = _convert_to_state_tensor(state)
+        state.shape.assert_is_compatible_with([_get_state_size(self.algorithm)])
+        self._state_var.assign(state)
 
-  def reset_from_seed(self, seed):
-    """Resets the generator by a new seed.
+    def reset_from_seed(self, seed):
+        """Resets the generator by a new seed.
 
     See `from_seed` for the meaning of "seed".
 
     Args:
       seed: the new seed.
     """
-    state = create_rng_state(seed, self.algorithm)
-    self._state_var.assign(state)
+        state = create_rng_state(seed, self.algorithm)
+        self._state_var.assign(state)
 
-  def reset_from_key_counter(self, key, counter):
-    """Resets the generator by a new key-counter pair.
+    def reset_from_key_counter(self, key, counter):
+        """Resets the generator by a new key-counter pair.
 
     See `from_key_counter` for the meaning of "key" and "counter".
 
@@ -520,33 +525,33 @@ class Generator(tracking.AutoTrackable):
       key: the new key.
       counter: the new counter.
     """
-    counter = _convert_to_state_tensor(counter)
-    key = _convert_to_state_tensor(key)
-    counter.shape.assert_is_compatible_with(
-        [_get_state_size(self.algorithm) - 1])
-    key.shape.assert_is_compatible_with([])
-    key = array_ops.reshape(key, [1])
-    state = array_ops.concat([counter, key], 0)
-    self._state_var.assign(state)
+        counter = _convert_to_state_tensor(counter)
+        key = _convert_to_state_tensor(key)
+        counter.shape.assert_is_compatible_with([_get_state_size(self.algorithm) - 1])
+        key.shape.assert_is_compatible_with([])
+        key = array_ops.reshape(key, [1])
+        state = array_ops.concat([counter, key], 0)
+        self._state_var.assign(state)
 
-  @property
-  def state(self):
-    """The internal state of the RNG."""
-    return self._state_var
+    @property
+    def state(self):
+        """The internal state of the RNG."""
+        return self._state_var
 
-  @property
-  def algorithm(self):
-    """The RNG algorithm id (a Python integer or scalar integer Tensor)."""
-    return self._alg
+    @property
+    def algorithm(self):
+        """The RNG algorithm id (a Python integer or scalar integer Tensor)."""
+        return self._alg
 
-  def _standard_normal(self, shape, dtype):
-    key, counter = self._prepare_key_counter(shape)
-    return gen_stateless_random_ops_v2.stateless_random_normal_v2(
-        shape, key=key, counter=counter, dtype=dtype, alg=self.algorithm)
+    def _standard_normal(self, shape, dtype):
+        key, counter = self._prepare_key_counter(shape)
+        return gen_stateless_random_ops_v2.stateless_random_normal_v2(
+            shape, key=key, counter=counter, dtype=dtype, alg=self.algorithm
+        )
 
-  @property
-  def key(self):
-    """The 'key' part of the state of a counter-based RNG.
+    @property
+    def key(self):
+        """The 'key' part of the state of a counter-based RNG.
 
     For a counter-base RNG algorithm such as Philox and ThreeFry (as
     described in paper 'Parallel Random Numbers: As Easy as 1, 2, 3'
@@ -561,24 +566,26 @@ class Generator(tracking.AutoTrackable):
       A scalar which is the 'key' part of the state, if the RNG algorithm is
         counter-based; otherwise it raises a ValueError.
     """
-    alg = self.algorithm
-    if alg == RNG_ALG_PHILOX or alg == RNG_ALG_THREEFRY:
-      return self._state_var[-1]
-    else:
-      raise ValueError(
-          f"This generator uses an unsupported algorithm {alg}. Supported "
-          f"values are {RNG_ALG_PHILOX} for the Philox algorithm and "
-          f"{RNG_ALG_THREEFRY} for the ThreeFry algorithm.")
+        alg = self.algorithm
+        if alg == RNG_ALG_PHILOX or alg == RNG_ALG_THREEFRY:
+            return self._state_var[-1]
+        else:
+            raise ValueError(
+                f"This generator uses an unsupported algorithm {alg}. Supported "
+                f"values are {RNG_ALG_PHILOX} for the Philox algorithm and "
+                f"{RNG_ALG_THREEFRY} for the ThreeFry algorithm."
+            )
 
-  def _skip_single_var(self, var, delta):
-    # TODO(wangpeng): Cache the cast algorithm instead of casting everytime.
-    return gen_stateful_random_ops.rng_read_and_skip(
-        var.handle,
-        alg=math_ops.cast(self.algorithm, dtypes.int32),
-        delta=math_ops.cast(delta, dtypes.uint64))
+    def _skip_single_var(self, var, delta):
+        # TODO(wangpeng): Cache the cast algorithm instead of casting everytime.
+        return gen_stateful_random_ops.rng_read_and_skip(
+            var.handle,
+            alg=math_ops.cast(self.algorithm, dtypes.int32),
+            delta=math_ops.cast(delta, dtypes.uint64),
+        )
 
-  def skip(self, delta):
-    """Advance the counter of a counter-based RNG.
+    def skip(self, delta):
+        """Advance the counter of a counter-based RNG.
 
     Args:
       delta: the amount of advancement. The state of the RNG after
@@ -590,59 +597,67 @@ class Generator(tracking.AutoTrackable):
       A `Tensor` of type `int64`.
     """
 
-    def update_fn(v):
-      return self._skip_single_var(v, delta)
-    # TODO(b/170515001): Always call strategy.extended.update after calling it
-    #   from both replica context and cross-replica context is supported.
-    if values_util.is_saving_non_distributed():
-      # Assumes replica context with replica_id=0, since we only save the first
-      # replica.
-      return update_fn(self.state)
-    if self._distribution_strategy is not None:
-      with ds_context.enter_or_assert_strategy(self._distribution_strategy):
-        if ds_context.in_cross_replica_context():
-          # Code that operates on all replicas of a variable cannot be saved
-          # without retracing.
-          values_util.mark_as_unsaveable()
-        if (ds_context.in_cross_replica_context() or
-            "CentralStorage" in type(self._distribution_strategy).__name__):
-          # In cross-replica context we need to use strategy.extended.update.
-          # In CentralStorageStrategy we also need to use
-          # strategy.extended.update (even for replica context),
-          # because variable updates here must be within merge_call.
-          return ds_context.get_strategy().extended.update(
-              self.state, update_fn)
-    return update_fn(self.state)
+        def update_fn(v):
+            return self._skip_single_var(v, delta)
 
-  def _preprocess_key(self, key):
-    if self._distribution_strategy is None:
-      return key
-    with ds_context.enter_or_assert_strategy(self._distribution_strategy):
-      replica_id = get_replica_id()
-      if replica_id is not None:
-        replica_id = array_ops.stack([replica_id, 0], axis=0)
-        replica_id = math_ops.cast(replica_id, dtypes.uint64)
-        # Conceptually: key = hash(key, replica_id)
-        key = gen_stateless_random_ops_v2.stateless_random_uniform_full_int_v2(
-            shape=[1], key=key, counter=replica_id, dtype=dtypes.uint64,
-            alg=self.algorithm)
-      return key
+        # TODO(b/170515001): Always call strategy.extended.update after calling it
+        #   from both replica context and cross-replica context is supported.
+        if values_util.is_saving_non_distributed():
+            # Assumes replica context with replica_id=0, since we only save the first
+            # replica.
+            return update_fn(self.state)
+        if self._distribution_strategy is not None:
+            with ds_context.enter_or_assert_strategy(self._distribution_strategy):
+                if ds_context.in_cross_replica_context():
+                    # Code that operates on all replicas of a variable cannot be saved
+                    # without retracing.
+                    values_util.mark_as_unsaveable()
+                if (
+                    ds_context.in_cross_replica_context()
+                    or "CentralStorage" in type(self._distribution_strategy).__name__
+                ):
+                    # In cross-replica context we need to use strategy.extended.update.
+                    # In CentralStorageStrategy we also need to use
+                    # strategy.extended.update (even for replica context),
+                    # because variable updates here must be within merge_call.
+                    return ds_context.get_strategy().extended.update(
+                        self.state, update_fn
+                    )
+        return update_fn(self.state)
 
-  def _prepare_key_counter(self, shape):
-    delta = math_ops.reduce_prod(shape)
-    counter_key = self.skip(delta)
-    counter_size = _get_counter_size(self.algorithm)
-    counter = array_ops.bitcast(counter_key[:counter_size], dtypes.uint64)
-    key = array_ops.bitcast(counter_key[counter_size:counter_size + 1],
-                            dtypes.uint64)
-    key = self._preprocess_key(key)
-    return key, counter
+    def _preprocess_key(self, key):
+        if self._distribution_strategy is None:
+            return key
+        with ds_context.enter_or_assert_strategy(self._distribution_strategy):
+            replica_id = get_replica_id()
+            if replica_id is not None:
+                replica_id = array_ops.stack([replica_id, 0], axis=0)
+                replica_id = math_ops.cast(replica_id, dtypes.uint64)
+                # Conceptually: key = hash(key, replica_id)
+                key = gen_stateless_random_ops_v2.stateless_random_uniform_full_int_v2(
+                    shape=[1],
+                    key=key,
+                    counter=replica_id,
+                    dtype=dtypes.uint64,
+                    alg=self.algorithm,
+                )
+            return key
 
-  # The following functions return a tensor and as a side effect update
-  # self._state_var.
-  def normal(self, shape, mean=0.0, stddev=1.0, dtype=dtypes.float32,
-             name=None):
-    """Outputs random values from a normal distribution.
+    def _prepare_key_counter(self, shape):
+        delta = math_ops.reduce_prod(shape)
+        counter_key = self.skip(delta)
+        counter_size = _get_counter_size(self.algorithm)
+        counter = array_ops.bitcast(counter_key[:counter_size], dtypes.uint64)
+        key = array_ops.bitcast(
+            counter_key[counter_size : counter_size + 1], dtypes.uint64
+        )
+        key = self._preprocess_key(key)
+        return key, counter
+
+    # The following functions return a tensor and as a side effect update
+    # self._state_var.
+    def normal(self, shape, mean=0.0, stddev=1.0, dtype=dtypes.float32, name=None):
+        """Outputs random values from a normal distribution.
 
     Args:
       shape: A 1-D integer Tensor or Python array. The shape of the output
@@ -657,24 +672,23 @@ class Generator(tracking.AutoTrackable):
     Returns:
       A tensor of the specified shape filled with random normal values.
     """
-    with ops.name_scope(name, "stateful_normal", [shape, mean, stddev]) as name:
-      shape = _shape_tensor(shape)
-      mean = ops.convert_to_tensor(mean, dtype=dtype, name="mean")
-      stddev = ops.convert_to_tensor(stddev, dtype=dtype, name="stddev")
-      rnd = self._standard_normal(shape, dtype=dtype)
-      return math_ops.add(rnd * stddev, mean, name=name)
+        with ops.name_scope(name, "stateful_normal", [shape, mean, stddev]) as name:
+            shape = _shape_tensor(shape)
+            mean = ops.convert_to_tensor(mean, dtype=dtype, name="mean")
+            stddev = ops.convert_to_tensor(stddev, dtype=dtype, name="stddev")
+            rnd = self._standard_normal(shape, dtype=dtype)
+            return math_ops.add(rnd * stddev, mean, name=name)
 
-  def _truncated_normal(self, shape, dtype):
-    key, counter = self._prepare_key_counter(shape)
-    return gen_stateless_random_ops_v2.stateless_truncated_normal_v2(
-        shape=shape, key=key, counter=counter, dtype=dtype, alg=self.algorithm)
+    def _truncated_normal(self, shape, dtype):
+        key, counter = self._prepare_key_counter(shape)
+        return gen_stateless_random_ops_v2.stateless_truncated_normal_v2(
+            shape=shape, key=key, counter=counter, dtype=dtype, alg=self.algorithm
+        )
 
-  def truncated_normal(self, shape,
-                       mean=0.0,
-                       stddev=1.0,
-                       dtype=dtypes.float32,
-                       name=None):
-    """Outputs random values from a truncated normal distribution.
+    def truncated_normal(
+        self, shape, mean=0.0, stddev=1.0, dtype=dtypes.float32, name=None
+    ):
+        """Outputs random values from a truncated normal distribution.
 
     The generated values follow a normal distribution with specified mean and
     standard deviation, except that values whose magnitude is more than
@@ -694,33 +708,33 @@ class Generator(tracking.AutoTrackable):
       A tensor of the specified shape filled with random truncated normal
         values.
     """
-    with ops.name_scope(
-        name, "truncated_normal", [shape, mean, stddev]) as name:
-      shape_tensor = _shape_tensor(shape)
-      mean_tensor = ops.convert_to_tensor(mean, dtype=dtype, name="mean")
-      stddev_tensor = ops.convert_to_tensor(stddev, dtype=dtype, name="stddev")
-      rnd = self._truncated_normal(shape_tensor, dtype=dtype)
-      mul = rnd * stddev_tensor
-      return math_ops.add(mul, mean_tensor, name=name)
+        with ops.name_scope(name, "truncated_normal", [shape, mean, stddev]) as name:
+            shape_tensor = _shape_tensor(shape)
+            mean_tensor = ops.convert_to_tensor(mean, dtype=dtype, name="mean")
+            stddev_tensor = ops.convert_to_tensor(stddev, dtype=dtype, name="stddev")
+            rnd = self._truncated_normal(shape_tensor, dtype=dtype)
+            mul = rnd * stddev_tensor
+            return math_ops.add(mul, mean_tensor, name=name)
 
-  def _uniform(self, shape, dtype):
-    key, counter = self._prepare_key_counter(shape)
-    return gen_stateless_random_ops_v2.stateless_random_uniform_v2(
-        shape=shape, key=key, counter=counter, dtype=dtype, alg=self.algorithm)
+    def _uniform(self, shape, dtype):
+        key, counter = self._prepare_key_counter(shape)
+        return gen_stateless_random_ops_v2.stateless_random_uniform_v2(
+            shape=shape, key=key, counter=counter, dtype=dtype, alg=self.algorithm
+        )
 
-  def _uniform_full_int(self, shape, dtype, name=None):
-    key, counter = self._prepare_key_counter(shape)
-    return gen_stateless_random_ops_v2.stateless_random_uniform_full_int_v2(
-        shape=shape,
-        key=key,
-        counter=counter,
-        dtype=dtype,
-        alg=self.algorithm,
-        name=name)
+    def _uniform_full_int(self, shape, dtype, name=None):
+        key, counter = self._prepare_key_counter(shape)
+        return gen_stateless_random_ops_v2.stateless_random_uniform_full_int_v2(
+            shape=shape,
+            key=key,
+            counter=counter,
+            dtype=dtype,
+            alg=self.algorithm,
+            name=name,
+        )
 
-  def uniform(self, shape, minval=0, maxval=None,
-              dtype=dtypes.float32, name=None):
-    """Outputs random values from a uniform distribution.
+    def uniform(self, shape, minval=0, maxval=None, dtype=dtypes.float32, name=None):
+        """Outputs random values from a uniform distribution.
 
     The generated values follow a uniform distribution in the range
     `[minval, maxval)`. The lower bound `minval` is included in the range, while
@@ -761,37 +775,39 @@ class Generator(tracking.AutoTrackable):
     Raises:
       ValueError: If `dtype` is integral and `maxval` is not specified.
     """
-    dtype = dtypes.as_dtype(dtype)
-    if dtype.is_integer:
-      if (minval is None) != (maxval is None):
-        raise ValueError("For integer dtype {}, minval and maxval must be both "
-                         "`None` or both non-`None`; got minval={} and "
-                         "maxval={}".format(dtype, minval, maxval))
-    elif maxval is None:
-      maxval = 1
-    with ops.name_scope(name, "stateful_uniform",
-                        [shape, minval, maxval]) as name:
-      shape = _shape_tensor(shape)
-      if dtype.is_integer and minval is None:
-        return self._uniform_full_int(shape=shape, dtype=dtype, name=name)
-      minval = ops.convert_to_tensor(minval, dtype=dtype, name="min")
-      maxval = ops.convert_to_tensor(maxval, dtype=dtype, name="max")
-      if dtype.is_integer:
-        key, counter = self._prepare_key_counter(shape)
-        return gen_stateless_random_ops_v2.stateless_random_uniform_int_v2(
-            shape=shape,
-            key=key,
-            counter=counter,
-            minval=minval,
-            maxval=maxval,
-            alg=self.algorithm,
-            name=name)
-      else:
-        rnd = self._uniform(shape=shape, dtype=dtype)
-        return math_ops.add(rnd * (maxval - minval), minval, name=name)
+        dtype = dtypes.as_dtype(dtype)
+        if dtype.is_integer:
+            if (minval is None) != (maxval is None):
+                raise ValueError(
+                    "For integer dtype {}, minval and maxval must be both "
+                    "`None` or both non-`None`; got minval={} and "
+                    "maxval={}".format(dtype, minval, maxval)
+                )
+        elif maxval is None:
+            maxval = 1
+        with ops.name_scope(name, "stateful_uniform", [shape, minval, maxval]) as name:
+            shape = _shape_tensor(shape)
+            if dtype.is_integer and minval is None:
+                return self._uniform_full_int(shape=shape, dtype=dtype, name=name)
+            minval = ops.convert_to_tensor(minval, dtype=dtype, name="min")
+            maxval = ops.convert_to_tensor(maxval, dtype=dtype, name="max")
+            if dtype.is_integer:
+                key, counter = self._prepare_key_counter(shape)
+                return gen_stateless_random_ops_v2.stateless_random_uniform_int_v2(
+                    shape=shape,
+                    key=key,
+                    counter=counter,
+                    minval=minval,
+                    maxval=maxval,
+                    alg=self.algorithm,
+                    name=name,
+                )
+            else:
+                rnd = self._uniform(shape=shape, dtype=dtype)
+                return math_ops.add(rnd * (maxval - minval), minval, name=name)
 
-  def uniform_full_int(self, shape, dtype=dtypes.uint64, name=None):
-    """Uniform distribution on an integer type's entire range.
+    def uniform_full_int(self, shape, dtype=dtypes.uint64, name=None):
+        """Uniform distribution on an integer type's entire range.
 
     This method is the same as setting `minval` and `maxval` to `None` in the
     `uniform` method.
@@ -804,14 +820,13 @@ class Generator(tracking.AutoTrackable):
     Returns:
       A tensor of random numbers of the required shape.
     """
-    dtype = dtypes.as_dtype(dtype)
-    with ops.name_scope(name, "stateful_uniform_full_int",
-                        [shape]) as name:
-      shape = _shape_tensor(shape)
-      return self._uniform_full_int(shape=shape, dtype=dtype, name=name)
+        dtype = dtypes.as_dtype(dtype)
+        with ops.name_scope(name, "stateful_uniform_full_int", [shape]) as name:
+            shape = _shape_tensor(shape)
+            return self._uniform_full_int(shape=shape, dtype=dtype, name=name)
 
-  def binomial(self, shape, counts, probs, dtype=dtypes.int32, name=None):
-    """Outputs random values from a binomial distribution.
+    def binomial(self, shape, counts, probs, dtype=dtypes.int32, name=None):
+        """Outputs random values from a binomial distribution.
 
     The generated values follow a binomial distribution with specified count and
     probability of success parameters.
@@ -854,31 +869,32 @@ class Generator(tracking.AutoTrackable):
         the binomial distribution on counts[i] trials with probability of
         success probs[i].
     """
-    dtype = dtypes.as_dtype(dtype)
-    with ops.name_scope(name, "binomial", [shape, counts, probs]) as name:
-      counts = ops.convert_to_tensor(counts, name="counts")
-      probs = ops.convert_to_tensor(probs, name="probs")
-      shape_tensor = _shape_tensor(shape)
-      return gen_stateful_random_ops.stateful_random_binomial(
-          self.state.handle,
-          self.algorithm,
-          shape=shape_tensor,
-          counts=counts,
-          probs=probs,
-          dtype=dtype,
-          name=name)
+        dtype = dtypes.as_dtype(dtype)
+        with ops.name_scope(name, "binomial", [shape, counts, probs]) as name:
+            counts = ops.convert_to_tensor(counts, name="counts")
+            probs = ops.convert_to_tensor(probs, name="probs")
+            shape_tensor = _shape_tensor(shape)
+            return gen_stateful_random_ops.stateful_random_binomial(
+                self.state.handle,
+                self.algorithm,
+                shape=shape_tensor,
+                counts=counts,
+                probs=probs,
+                dtype=dtype,
+                name=name,
+            )
 
-  # TODO(wangpeng): implement other distributions
+    # TODO(wangpeng): implement other distributions
 
-  def _make_int64_keys(self, shape=()):
-    # New independent keys are generated via
-    # `new_key[i] = hash(old_key, counter+i)`, which is exactly what
-    # `uniform_full_int(dtype=int64)` does for PhiloxRandom_64_128_128 and
-    # ThreeFry_64_64_64.
-    return self.uniform_full_int(shape=shape, dtype=dtypes.int64)
+    def _make_int64_keys(self, shape=()):
+        # New independent keys are generated via
+        # `new_key[i] = hash(old_key, counter+i)`, which is exactly what
+        # `uniform_full_int(dtype=int64)` does for PhiloxRandom_64_128_128 and
+        # ThreeFry_64_64_64.
+        return self.uniform_full_int(shape=shape, dtype=dtypes.int64)
 
-  def make_seeds(self, count=1):
-    """Generates seeds for stateless random ops.
+    def make_seeds(self, count=1):
+        """Generates seeds for stateless random ops.
 
     For example:
 
@@ -897,21 +913,22 @@ class Generator(tracking.AutoTrackable):
     Returns:
       A tensor of shape [2, count] and dtype int64.
     """
-    alg = self.algorithm
-    if alg == RNG_ALG_PHILOX or alg == RNG_ALG_THREEFRY:
-      keys = self._make_int64_keys(shape=[count])
-      # The two seeds for stateless random ops don't have individual semantics
-      # and are scrambled together, so setting one to zero is fine.
-      zeros = array_ops.zeros_like(keys)
-      return array_ops.stack([keys, zeros])
-    else:
-      raise ValueError(
-          f"This generator uses an unsupported algorithm {alg}. Supported "
-          f"values are {RNG_ALG_PHILOX} for the Philox algorithm and "
-          f"{RNG_ALG_THREEFRY} for the ThreeFry algorithm.")
+        alg = self.algorithm
+        if alg == RNG_ALG_PHILOX or alg == RNG_ALG_THREEFRY:
+            keys = self._make_int64_keys(shape=[count])
+            # The two seeds for stateless random ops don't have individual semantics
+            # and are scrambled together, so setting one to zero is fine.
+            zeros = array_ops.zeros_like(keys)
+            return array_ops.stack([keys, zeros])
+        else:
+            raise ValueError(
+                f"This generator uses an unsupported algorithm {alg}. Supported "
+                f"values are {RNG_ALG_PHILOX} for the Philox algorithm and "
+                f"{RNG_ALG_THREEFRY} for the ThreeFry algorithm."
+            )
 
-  def split(self, count=1):
-    """Returns a list of independent `Generator` objects.
+    def split(self, count=1):
+        """Returns a list of independent `Generator` objects.
 
     Two generators are independent of each other in the sense that the
     random-number streams they generate don't have statistically detectable
@@ -948,20 +965,24 @@ class Generator(tracking.AutoTrackable):
       A list (length `count`) of `Generator` objects independent of each other.
       The new generators have the same RNG algorithm as the old one.
     """
-    def _key_to_state(alg, key):
-      # Padding with zeros on the left. The zeros will be the counter.
-      return [0] * (_get_state_size(alg) - 1) + [key]
 
-    alg = self.algorithm
-    if alg == RNG_ALG_PHILOX or alg == RNG_ALG_THREEFRY:
-      keys = self._make_int64_keys(shape=[count])
-      return [Generator(state=_key_to_state(alg, key), alg=alg)
-              for key in array_ops.unstack(keys, num=count)]
-    else:
-      raise ValueError(
-          f"This generator uses an unsupported algorithm {alg}. Supported "
-          f"values are {RNG_ALG_PHILOX} for the Philox algorithm and "
-          f"{RNG_ALG_THREEFRY} for the ThreeFry algorithm.")
+        def _key_to_state(alg, key):
+            # Padding with zeros on the left. The zeros will be the counter.
+            return [0] * (_get_state_size(alg) - 1) + [key]
+
+        alg = self.algorithm
+        if alg == RNG_ALG_PHILOX or alg == RNG_ALG_THREEFRY:
+            keys = self._make_int64_keys(shape=[count])
+            return [
+                Generator(state=_key_to_state(alg, key), alg=alg)
+                for key in array_ops.unstack(keys, num=count)
+            ]
+        else:
+            raise ValueError(
+                f"This generator uses an unsupported algorithm {alg}. Supported "
+                f"values are {RNG_ALG_PHILOX} for the Philox algorithm and "
+                f"{RNG_ALG_THREEFRY} for the ThreeFry algorithm."
+            )
 
 
 # It's not safe to create TF ops before `init_google` is called, so this is
@@ -970,10 +991,9 @@ class Generator(tracking.AutoTrackable):
 global_generator = None
 
 
-@tf_export("random.get_global_generator",
-           "random.experimental.get_global_generator")
+@tf_export("random.get_global_generator", "random.experimental.get_global_generator")
 def get_global_generator():
-  """Retrieves the global generator.
+    """Retrieves the global generator.
 
   This function will create the global generator the first time it is called,
   and the generator will be placed at the default device at that time, so one
@@ -983,22 +1003,23 @@ def get_global_generator():
   Returns:
     The global `tf.random.Generator` object.
   """
-  global global_generator
-  if global_generator is None:
-    if config.deterministic_ops_enabled():
-      raise RuntimeError('"get_global_generator" cannot be called if '  # pylint: disable=g-doc-exception
-                         "determinism is enabled, unless "
-                         '"set_global_generator" has already been called. '
-                         'Please call "set_global_generator" first.')
-    with ops.init_scope():
-      global_generator = Generator.from_non_deterministic_state()
-  return global_generator
+    global global_generator
+    if global_generator is None:
+        if config.deterministic_ops_enabled():
+            raise RuntimeError(
+                '"get_global_generator" cannot be called if '  # pylint: disable=g-doc-exception
+                "determinism is enabled, unless "
+                '"set_global_generator" has already been called. '
+                'Please call "set_global_generator" first.'
+            )
+        with ops.init_scope():
+            global_generator = Generator.from_non_deterministic_state()
+    return global_generator
 
 
-@tf_export("random.set_global_generator",
-           "random.experimental.set_global_generator")
+@tf_export("random.set_global_generator", "random.experimental.set_global_generator")
 def set_global_generator(generator):
-  """Replaces the global generator with another `Generator` object.
+    """Replaces the global generator with another `Generator` object.
 
   This function creates a new Generator object (and the Variable object within),
   which does not work well with tf.function because (1) tf.function puts
@@ -1014,5 +1035,5 @@ def set_global_generator(generator):
   Args:
     generator: the new `Generator` object.
   """
-  global global_generator
-  global_generator = generator
+    global global_generator
+    global_generator = generator

@@ -19,16 +19,16 @@ from __future__ import print_function
 
 
 def get_default_communication_protocol():
-  return 'grpc'
+    return "grpc"
 
 
 def is_remote_path(_):
-  return False
+    return False
 
 
 def get_appendable_file_encoding():
-  return ''
+    return ""
 
 
 def coordination_service_type(_):
-  return None
+    return None

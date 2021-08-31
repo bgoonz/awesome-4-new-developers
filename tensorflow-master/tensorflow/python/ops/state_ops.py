@@ -28,9 +28,11 @@ from tensorflow.python.ops import array_ops
 from tensorflow.python.ops import gen_math_ops
 from tensorflow.python.ops import gen_resource_variable_ops
 from tensorflow.python.ops import gen_state_ops
+
 # go/tf-wildcard-import
 # pylint: disable=wildcard-import
 from tensorflow.python.ops.gen_state_ops import *
+
 # pylint: enable=wildcard-import
 from tensorflow.python.util import deprecation
 from tensorflow.python.util.deprecation import deprecated
@@ -38,22 +40,28 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 # pylint: disable=protected-access,g-doc-return-or-yield,g-doc-args
-def variable_op(shape, dtype, name="Variable", set_shape=True, container="",
-                shared_name=""):
-  """Deprecated. Used variable_op_v2 instead."""
-  if not set_shape:
-    shape = tensor_shape.unknown_shape()
-  ret = gen_state_ops.variable(shape=shape, dtype=dtype, name=name,
-                               container=container, shared_name=shared_name)
-  # TODO(mrry): Move this to where it is used, so we can get rid of this op
-  #   wrapper?
-  if set_shape:
-    ret.set_shape(shape)
-  return ret
+def variable_op(
+    shape, dtype, name="Variable", set_shape=True, container="", shared_name=""
+):
+    """Deprecated. Used variable_op_v2 instead."""
+    if not set_shape:
+        shape = tensor_shape.unknown_shape()
+    ret = gen_state_ops.variable(
+        shape=shape,
+        dtype=dtype,
+        name=name,
+        container=container,
+        shared_name=shared_name,
+    )
+    # TODO(mrry): Move this to where it is used, so we can get rid of this op
+    #   wrapper?
+    if set_shape:
+        ret.set_shape(shape)
+    return ret
 
 
 def variable_op_v2(shape, dtype, name="Variable", container="", shared_name=""):
-  """Create a variable Operation.
+    """Create a variable Operation.
 
   See also variables.Variable.
 
@@ -71,16 +79,17 @@ def variable_op_v2(shape, dtype, name="Variable", container="", shared_name=""):
   Returns:
     A variable tensor.
   """
-  return gen_state_ops.variable_v2(
-      shape=shape,
-      dtype=dtype,
-      name=name,
-      container=container,
-      shared_name=shared_name)
+    return gen_state_ops.variable_v2(
+        shape=shape,
+        dtype=dtype,
+        name=name,
+        container=container,
+        shared_name=shared_name,
+    )
 
 
 def init_variable(v, init, name="init"):
-  """Initializes variable with "init".
+    """Initializes variable with "init".
 
   This op does the following:
   if init is a Tensor, v = init
@@ -98,24 +107,24 @@ def init_variable(v, init, name="init"):
   Returns:
     The operation that initializes v.
   """
-  with ops.name_scope(None, v.op.name + "/", [v, init]):
-    with ops.name_scope(name) as scope:
-      with ops.colocate_with(v):
-        if callable(init):
-          assert v.get_shape().is_fully_defined(), "Variable shape unknown."
-          # TODO(mrry): Convert to v.shape when the property and
-          # accessor are reconciled (and all initializers support
-          # tf.TensorShape objects).
-          value = init(v.get_shape().as_list(), v.dtype.base_dtype)
-          value = ops.convert_to_tensor(value, name="value")
-          return gen_state_ops.assign(v, value, name=scope)
-        else:
-          init = ops.convert_to_tensor(init, name="init")
-          return gen_state_ops.assign(v, init, name=scope)
+    with ops.name_scope(None, v.op.name + "/", [v, init]):
+        with ops.name_scope(name) as scope:
+            with ops.colocate_with(v):
+                if callable(init):
+                    assert v.get_shape().is_fully_defined(), "Variable shape unknown."
+                    # TODO(mrry): Convert to v.shape when the property and
+                    # accessor are reconciled (and all initializers support
+                    # tf.TensorShape objects).
+                    value = init(v.get_shape().as_list(), v.dtype.base_dtype)
+                    value = ops.convert_to_tensor(value, name="value")
+                    return gen_state_ops.assign(v, value, name=scope)
+                else:
+                    init = ops.convert_to_tensor(init, name="init")
+                    return gen_state_ops.assign(v, init, name=scope)
 
 
 def is_variable_initialized(ref, name=None):
-  """Checks whether a tensor has been initialized.
+    """Checks whether a tensor has been initialized.
 
   Outputs boolean scalar indicating whether the tensor has been initialized.
 
@@ -127,15 +136,15 @@ def is_variable_initialized(ref, name=None):
   Returns:
     A `Tensor` of type `bool`.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.is_variable_initialized(ref=ref, name=name)
-  # Handle resource variables.
-  return ref.is_initialized(name=name)
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.is_variable_initialized(ref=ref, name=name)
+    # Handle resource variables.
+    return ref.is_initialized(name=name)
 
 
 @tf_export(v1=["assign_sub"])
 def assign_sub(ref, value, use_locking=None, name=None):
-  """Update `ref` by subtracting `value` from it.
+    """Update `ref` by subtracting `value` from it.
 
   This operation outputs `ref` after the update is done.
   This makes it easier to chain operations that need to use the reset value.
@@ -199,15 +208,14 @@ def assign_sub(ref, value, use_locking=None, name=None):
 
   @end_compatibility
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.assign_sub(
-        ref, value, use_locking=use_locking, name=name)
-  return ref.assign_sub(value)
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.assign_sub(ref, value, use_locking=use_locking, name=name)
+    return ref.assign_sub(value)
 
 
 @tf_export(v1=["assign_add"])
 def assign_add(ref, value, use_locking=None, name=None):
-  """Update `ref` by adding `value` to it.
+    """Update `ref` by adding `value` to it.
 
   This operation outputs `ref` after the update is done.
   This makes it easier to chain operations that need to use the reset value.
@@ -271,15 +279,14 @@ def assign_add(ref, value, use_locking=None, name=None):
 
   @end_compatibility
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.assign_add(
-        ref, value, use_locking=use_locking, name=name)
-  return ref.assign_add(value)
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.assign_add(ref, value, use_locking=use_locking, name=name)
+    return ref.assign_add(value)
 
 
 @tf_export(v1=["assign"])
 def assign(ref, value, validate_shape=None, use_locking=None, name=None):
-  """Update `ref` by assigning `value` to it.
+    """Update `ref` by assigning `value` to it.
 
   This operation outputs a Tensor that holds the new value of `ref` after
   the value has been assigned. This makes it easier to chain operations that
@@ -352,17 +359,21 @@ def assign(ref, value, validate_shape=None, use_locking=None, name=None):
   >>> res_b.numpy()
   2
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.assign(
-        ref, value, use_locking=use_locking, name=name,
-        validate_shape=validate_shape)
-  return ref.assign(value, name=name)
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.assign(
+            ref,
+            value,
+            use_locking=use_locking,
+            name=name,
+            validate_shape=validate_shape,
+        )
+    return ref.assign(value, name=name)
 
 
 @tf_export(v1=["count_up_to"])
 @deprecated(None, "Prefer Dataset.range instead.")
 def count_up_to(ref, limit, name=None):
-  r"""Increments 'ref' until it reaches 'limit'.
+    r"""Increments 'ref' until it reaches 'limit'.
 
   Args:
     ref: A Variable. Must be one of the following types: `int32`, `int64`.
@@ -377,16 +388,15 @@ def count_up_to(ref, limit, name=None):
     A copy of the input before increment. If nothing else modifies the
     input, the values produced will all be distinct.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.count_up_to(ref, limit=limit, name=name)
-  return gen_state_ops.resource_count_up_to(
-      ref.handle, limit, T=ref.dtype, name=name)
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.count_up_to(ref, limit=limit, name=name)
+    return gen_state_ops.resource_count_up_to(ref.handle, limit, T=ref.dtype, name=name)
 
 
 @tf_export(v1=["scatter_update"])
 def scatter_update(ref, indices, updates, use_locking=True, name=None):
-  # pylint: disable=line-too-long
-  r"""Applies sparse updates to a variable reference.
+    # pylint: disable=line-too-long
+    r"""Applies sparse updates to a variable reference.
 
   This operation computes
 
@@ -429,17 +439,20 @@ def scatter_update(ref, indices, updates, use_locking=True, name=None):
     Same as `ref`.  Returned as a convenience for operations that want
     to use the updated values after the update is done.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.scatter_update(ref, indices, updates,
-                                        use_locking=use_locking, name=name)
-  return ref._lazy_read(gen_resource_variable_ops.resource_scatter_update(  # pylint: disable=protected-access
-      ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype),
-      name=name))
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.scatter_update(
+            ref, indices, updates, use_locking=use_locking, name=name
+        )
+    return ref._lazy_read(
+        gen_resource_variable_ops.resource_scatter_update(  # pylint: disable=protected-access
+            ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype), name=name
+        )
+    )
 
 
 @tf_export(v1=["scatter_nd_update"])
 def scatter_nd_update(ref, indices, updates, use_locking=True, name=None):
-  r"""Applies sparse `updates` to individual values or slices in a Variable.
+    r"""Applies sparse `updates` to individual values or slices in a Variable.
 
   `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
 
@@ -491,18 +504,19 @@ def scatter_nd_update(ref, indices, updates, use_locking=True, name=None):
   Returns:
     The value of the variable after the update.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.scatter_nd_update(
-        ref, indices, updates, use_locking, name)
-  return ref._lazy_read(gen_state_ops.resource_scatter_nd_update(  # pylint: disable=protected-access
-      ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype),
-      name=name))
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.scatter_nd_update(ref, indices, updates, use_locking, name)
+    return ref._lazy_read(
+        gen_state_ops.resource_scatter_nd_update(  # pylint: disable=protected-access
+            ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype), name=name
+        )
+    )
 
 
 @tf_export(v1=["scatter_add"])
 def scatter_add(ref, indices, updates, use_locking=False, name=None):
-  # pylint: disable=line-too-long
-  r"""Adds sparse updates to the variable referenced by `resource`.
+    # pylint: disable=line-too-long
+    r"""Adds sparse updates to the variable referenced by `resource`.
 
   This operation computes
 
@@ -543,17 +557,20 @@ def scatter_add(ref, indices, updates, use_locking=False, name=None):
     Same as `ref`.  Returned as a convenience for operations that want
     to use the updated values after the update is done.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.scatter_add(ref, indices, updates,
-                                     use_locking=use_locking, name=name)
-  return ref._lazy_read(gen_resource_variable_ops.resource_scatter_add(  # pylint: disable=protected-access
-      ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype),
-      name=name))
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.scatter_add(
+            ref, indices, updates, use_locking=use_locking, name=name
+        )
+    return ref._lazy_read(
+        gen_resource_variable_ops.resource_scatter_add(  # pylint: disable=protected-access
+            ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype), name=name
+        )
+    )
 
 
 @tf_export(v1=["scatter_nd_add"])
 def scatter_nd_add(ref, indices, updates, use_locking=False, name=None):
-  r"""Applies sparse addition to individual values or slices in a Variable.
+    r"""Applies sparse addition to individual values or slices in a Variable.
 
   `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
 
@@ -606,17 +623,18 @@ def scatter_nd_add(ref, indices, updates, use_locking=False, name=None):
   Returns:
     A mutable `Tensor`. Has the same type as `ref`.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.scatter_nd_add(
-        ref, indices, updates, use_locking, name)
-  return ref._lazy_read(gen_state_ops.resource_scatter_nd_add(  # pylint: disable=protected-access
-      ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype),
-      name=name))
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.scatter_nd_add(ref, indices, updates, use_locking, name)
+    return ref._lazy_read(
+        gen_state_ops.resource_scatter_nd_add(  # pylint: disable=protected-access
+            ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype), name=name
+        )
+    )
 
 
 @tf_export(v1=["scatter_sub"])
 def scatter_sub(ref, indices, updates, use_locking=False, name=None):
-  r"""Subtracts sparse updates to a variable reference.
+    r"""Subtracts sparse updates to a variable reference.
 
   ```python
       # Scalar indices
@@ -660,17 +678,20 @@ def scatter_sub(ref, indices, updates, use_locking=False, name=None):
   Returns:
     A mutable `Tensor`. Has the same type as `ref`.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.scatter_sub(ref, indices, updates,
-                                     use_locking=use_locking, name=name)
-  return ref._lazy_read(gen_resource_variable_ops.resource_scatter_sub(  # pylint: disable=protected-access
-      ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype),
-      name=name))
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.scatter_sub(
+            ref, indices, updates, use_locking=use_locking, name=name
+        )
+    return ref._lazy_read(
+        gen_resource_variable_ops.resource_scatter_sub(  # pylint: disable=protected-access
+            ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype), name=name
+        )
+    )
 
 
 @tf_export(v1=["scatter_nd_sub"])
 def scatter_nd_sub(ref, indices, updates, use_locking=False, name=None):
-  r"""Applies sparse subtraction to individual values or slices in a Variable.
+    r"""Applies sparse subtraction to individual values or slices in a Variable.
 
   `ref` is a `Tensor` with rank `P` and `indices` is a `Tensor` of rank `Q`.
 
@@ -724,18 +745,19 @@ def scatter_nd_sub(ref, indices, updates, use_locking=False, name=None):
   Returns:
     A mutable `Tensor`. Has the same type as `ref`.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.scatter_nd_sub(
-        ref, indices, updates, use_locking, name)
-  return ref._lazy_read(gen_state_ops.resource_scatter_nd_sub(  # pylint: disable=protected-access
-      ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype),
-      name=name))
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.scatter_nd_sub(ref, indices, updates, use_locking, name)
+    return ref._lazy_read(
+        gen_state_ops.resource_scatter_nd_sub(  # pylint: disable=protected-access
+            ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype), name=name
+        )
+    )
 
 
 @tf_export(v1=["scatter_mul"])
 def scatter_mul(ref, indices, updates, use_locking=False, name=None):
-  # pylint: disable=line-too-long
-  r"""Multiplies sparse updates into a variable reference.
+    # pylint: disable=line-too-long
+    r"""Multiplies sparse updates into a variable reference.
 
   This operation computes
 
@@ -776,18 +798,21 @@ def scatter_mul(ref, indices, updates, use_locking=False, name=None):
   Returns:
     A mutable `Tensor`. Has the same type as `ref`.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.scatter_mul(ref, indices, updates,
-                                     use_locking=use_locking, name=name)
-  return ref._lazy_read(gen_resource_variable_ops.resource_scatter_mul(  # pylint: disable=protected-access
-      ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype),
-      name=name))
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.scatter_mul(
+            ref, indices, updates, use_locking=use_locking, name=name
+        )
+    return ref._lazy_read(
+        gen_resource_variable_ops.resource_scatter_mul(  # pylint: disable=protected-access
+            ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype), name=name
+        )
+    )
 
 
 @tf_export(v1=["scatter_div"])
 def scatter_div(ref, indices, updates, use_locking=False, name=None):
-  # pylint: disable=line-too-long
-  r"""Divides a variable reference by sparse updates.
+    # pylint: disable=line-too-long
+    r"""Divides a variable reference by sparse updates.
 
   This operation computes
 
@@ -828,18 +853,21 @@ def scatter_div(ref, indices, updates, use_locking=False, name=None):
   Returns:
     A mutable `Tensor`. Has the same type as `ref`.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.scatter_div(ref, indices, updates,
-                                     use_locking=use_locking, name=name)
-  return ref._lazy_read(gen_resource_variable_ops.resource_scatter_div(  # pylint: disable=protected-access
-      ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype),
-      name=name))
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.scatter_div(
+            ref, indices, updates, use_locking=use_locking, name=name
+        )
+    return ref._lazy_read(
+        gen_resource_variable_ops.resource_scatter_div(  # pylint: disable=protected-access
+            ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype), name=name
+        )
+    )
 
 
 @tf_export(v1=["scatter_max"])
 def scatter_max(ref, indices, updates, use_locking=False, name=None):
-  # pylint: disable=line-too-long
-  r"""Reduces sparse updates into a variable reference using the `max` operation.
+    # pylint: disable=line-too-long
+    r"""Reduces sparse updates into a variable reference using the `max` operation.
 
   This operation computes
 
@@ -883,18 +911,21 @@ def scatter_max(ref, indices, updates, use_locking=False, name=None):
   Returns:
     A mutable `Tensor`. Has the same type as `ref`.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.scatter_max(ref, indices, updates,
-                                     use_locking=use_locking, name=name)
-  return ref._lazy_read(gen_resource_variable_ops.resource_scatter_max(  # pylint: disable=protected-access
-      ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype),
-      name=name))
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.scatter_max(
+            ref, indices, updates, use_locking=use_locking, name=name
+        )
+    return ref._lazy_read(
+        gen_resource_variable_ops.resource_scatter_max(  # pylint: disable=protected-access
+            ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype), name=name
+        )
+    )
 
 
 @tf_export(v1=["scatter_min"])
 def scatter_min(ref, indices, updates, use_locking=False, name=None):
-  # pylint: disable=line-too-long
-  r"""Reduces sparse updates into a variable reference using the `min` operation.
+    # pylint: disable=line-too-long
+    r"""Reduces sparse updates into a variable reference using the `min` operation.
 
   This operation computes
 
@@ -938,19 +969,23 @@ def scatter_min(ref, indices, updates, use_locking=False, name=None):
   Returns:
     A mutable `Tensor`. Has the same type as `ref`.
   """
-  if ref.dtype._is_ref_dtype:
-    return gen_state_ops.scatter_min(ref, indices, updates,
-                                     use_locking=use_locking, name=name)
-  return ref._lazy_read(gen_resource_variable_ops.resource_scatter_min(  # pylint: disable=protected-access
-      ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype),
-      name=name))
+    if ref.dtype._is_ref_dtype:
+        return gen_state_ops.scatter_min(
+            ref, indices, updates, use_locking=use_locking, name=name
+        )
+    return ref._lazy_read(
+        gen_resource_variable_ops.resource_scatter_min(  # pylint: disable=protected-access
+            ref.handle, indices, ops.convert_to_tensor(updates, ref.dtype), name=name
+        )
+    )
 
 
 @tf_export(v1=["batch_scatter_update"])
 @deprecation.deprecated(
-    "2018-11-29", "Use the batch_scatter_update method of Variable instead.")
+    "2018-11-29", "Use the batch_scatter_update method of Variable instead."
+)
 def batch_scatter_update(ref, indices, updates, use_locking=True, name=None):
-  """Generalization of `tf.compat.v1.scatter_update` to axis different than 0.
+    """Generalization of `tf.compat.v1.scatter_update` to axis different than 0.
 
   Analogous to `batch_gather`. This assumes that `ref`, `indices` and `updates`
   have a series of leading dimensions that are the same for all of them, and the
@@ -1000,47 +1035,47 @@ def batch_scatter_update(ref, indices, updates, use_locking=True, name=None):
     ValueError: If the initial `ndims` of `ref`, `indices`, and `updates` are
         not the same.
   """
-  with ops.name_scope(name):
-    indices = ops.convert_to_tensor(indices, name="indices")
-    indices_shape = array_ops.shape(indices)
-    indices_dimensions = indices.get_shape().ndims
+    with ops.name_scope(name):
+        indices = ops.convert_to_tensor(indices, name="indices")
+        indices_shape = array_ops.shape(indices)
+        indices_dimensions = indices.get_shape().ndims
 
-    if indices_dimensions is None:
-      raise ValueError("batch_gather does not allow indices with unknown "
-                       "shape.")
+        if indices_dimensions is None:
+            raise ValueError(
+                "batch_gather does not allow indices with unknown " "shape."
+            )
 
-    nd_indices = array_ops.expand_dims(indices, axis=-1)
-    nd_indices_list = []
+        nd_indices = array_ops.expand_dims(indices, axis=-1)
+        nd_indices_list = []
 
-    # Scatter ND requires indices to have an additional dimension, in which the
-    # coordinates of the updated things are specified. For this to be adapted to
-    # the scatter_update with several leading dimensions, we simply make use of
-    # a tf.range for all the leading dimensions followed by concat of all the
-    # coordinates we created with the original indices.
+        # Scatter ND requires indices to have an additional dimension, in which the
+        # coordinates of the updated things are specified. For this to be adapted to
+        # the scatter_update with several leading dimensions, we simply make use of
+        # a tf.range for all the leading dimensions followed by concat of all the
+        # coordinates we created with the original indices.
 
-    # For example if indices.shape = [2, 3, 4], we should generate the following
-    # indices for tf.compat.v1.scatter_nd_update:
-    # nd_indices[:, :, 0] = [[0, 0, 0], [1, 1, 1]]
-    # nd_indices[:, :, 1] = [[0, 1, 2], [0, 1, 2]]
-    # nd_indices[:, :, 2] = indices
-    for dimension in range(indices_dimensions - 1):
-      # In this loop we generate the following for the example (one for each
-      # iteration).
-      # nd_indices[:, :, 0] = [[0, 0, 0], [1, 1, 1]]
-      # nd_indices[:, :, 1] = [[0, 1, 2], [0, 1, 2]]
-      # This is done at every iteration with a tf.range over the size of the
-      # i-th dimension and using broadcasting over the desired shape.
-      dimension_size = indices_shape[dimension]
-      shape_to_broadcast = [1] * (indices_dimensions + 1)
-      shape_to_broadcast[dimension] = dimension_size
-      dimension_range = array_ops.reshape(
-          gen_math_ops._range(0, dimension_size, 1), shape_to_broadcast)
-      if dimension_range.dtype.base_dtype != nd_indices.dtype:
-        dimension_range = gen_math_ops.cast(dimension_range, nd_indices.dtype)
-      nd_indices_list.append(
-          dimension_range * array_ops.ones_like(nd_indices))
-    # Add the original indices at the end, as described above, and concat.
-    nd_indices_list.append(nd_indices)
-    final_indices = array_ops.concat(nd_indices_list, axis=-1)
-    return scatter_nd_update(
-        ref, final_indices, updates, use_locking=use_locking)
+        # For example if indices.shape = [2, 3, 4], we should generate the following
+        # indices for tf.compat.v1.scatter_nd_update:
+        # nd_indices[:, :, 0] = [[0, 0, 0], [1, 1, 1]]
+        # nd_indices[:, :, 1] = [[0, 1, 2], [0, 1, 2]]
+        # nd_indices[:, :, 2] = indices
+        for dimension in range(indices_dimensions - 1):
+            # In this loop we generate the following for the example (one for each
+            # iteration).
+            # nd_indices[:, :, 0] = [[0, 0, 0], [1, 1, 1]]
+            # nd_indices[:, :, 1] = [[0, 1, 2], [0, 1, 2]]
+            # This is done at every iteration with a tf.range over the size of the
+            # i-th dimension and using broadcasting over the desired shape.
+            dimension_size = indices_shape[dimension]
+            shape_to_broadcast = [1] * (indices_dimensions + 1)
+            shape_to_broadcast[dimension] = dimension_size
+            dimension_range = array_ops.reshape(
+                gen_math_ops._range(0, dimension_size, 1), shape_to_broadcast
+            )
+            if dimension_range.dtype.base_dtype != nd_indices.dtype:
+                dimension_range = gen_math_ops.cast(dimension_range, nd_indices.dtype)
+            nd_indices_list.append(dimension_range * array_ops.ones_like(nd_indices))
+        # Add the original indices at the end, as described above, and concat.
+        nd_indices_list.append(nd_indices)
+        final_indices = array_ops.concat(nd_indices_list, axis=-1)
+        return scatter_nd_update(ref, final_indices, updates, use_locking=use_locking)

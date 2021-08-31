@@ -25,15 +25,24 @@ from tensorflow.python.util import traceback_utils
 
 
 class FrameInfo(
-    collections.namedtuple('FrameInfo',
-                           ('filename', 'lineno', 'function_name', 'code',
-                            'is_converted', 'is_allowlisted'))):
+    collections.namedtuple(
+        "FrameInfo",
+        (
+            "filename",
+            "lineno",
+            "function_name",
+            "code",
+            "is_converted",
+            "is_allowlisted",
+        ),
+    )
+):
 
-  __slots__ = ()
+    __slots__ = ()
 
 
 def _stack_trace_inside_mapped_code(tb, source_map, converter_filename):
-  """Summarizes inner traceback frames up to the call to a given function.
+    """Summarizes inner traceback frames up to the call to a given function.
 
   This functions locates the innermost (i.e. most recent) frame that corresponds
   to code that can be mapped by source_map originated from, and returns a
@@ -81,46 +90,49 @@ def _stack_trace_inside_mapped_code(tb, source_map, converter_filename):
   Returns:
     List[FrameInfo]
   """
-  result_frames = []
-  for filename, line_number, function_name, text in reversed(tb):
+    result_frames = []
+    for filename, line_number, function_name, text in reversed(tb):
 
-    loc = origin_info.LineLocation(filename=filename, lineno=line_number)
-    if loc in source_map:
-      origin = source_map[loc]
-      fi = FrameInfo(
-          filename=origin.loc.filename,
-          lineno=origin.loc.lineno,
-          function_name=origin.function_name,
-          code=origin.source_code_line,
-          is_converted=True,
-          is_allowlisted=False)
-      result_frames.append(fi)
-      break
+        loc = origin_info.LineLocation(filename=filename, lineno=line_number)
+        if loc in source_map:
+            origin = source_map[loc]
+            fi = FrameInfo(
+                filename=origin.loc.filename,
+                lineno=origin.loc.lineno,
+                function_name=origin.function_name,
+                code=origin.source_code_line,
+                is_converted=True,
+                is_allowlisted=False,
+            )
+            result_frames.append(fi)
+            break
 
-    if filename == converter_filename:
-      if result_frames:
-        prev = result_frames[-1]
-        assert not prev.is_converted  # See the if above.
+        if filename == converter_filename:
+            if result_frames:
+                prev = result_frames[-1]
+                assert not prev.is_converted  # See the if above.
+                fi = FrameInfo(
+                    filename=prev.filename,
+                    lineno=prev.lineno,
+                    function_name=prev.function_name,
+                    code=prev.code,
+                    is_converted=False,
+                    is_allowlisted=True,
+                )
+                result_frames[-1] = fi
+            continue
+
         fi = FrameInfo(
-            filename=prev.filename,
-            lineno=prev.lineno,
-            function_name=prev.function_name,
-            code=prev.code,
+            filename=filename,
+            lineno=line_number,
+            function_name=function_name,
+            code=text,
             is_converted=False,
-            is_allowlisted=True)
-        result_frames[-1] = fi
-      continue
+            is_allowlisted=False,
+        )
+        result_frames.append(fi)
 
-    fi = FrameInfo(
-        filename=filename,
-        lineno=line_number,
-        function_name=function_name,
-        code=text,
-        is_converted=False,
-        is_allowlisted=False)
-    result_frames.append(fi)
-
-  return tuple(result_frames)
+    return tuple(result_frames)
 
 
 KNOWN_STRING_CONSTRUCTOR_ERRORS = (
@@ -140,91 +152,95 @@ KNOWN_STRING_CONSTRUCTOR_ERRORS = (
 # that doesn't do that. Overriding the name for display purposes; hopefully
 # that won't create too many surprises.
 class MultilineMessageKeyError(KeyError):
+    def __init__(self, message, original_key):
+        super(MultilineMessageKeyError, self).__init__(original_key)
+        self.__message = message
 
-  def __init__(self, message, original_key):
-    super(MultilineMessageKeyError, self).__init__(original_key)
-    self.__message = message
+    def __str__(self):
+        return self.__message
 
-  def __str__(self):
-    return self.__message
 
 MultilineMessageKeyError.__name__ = KeyError.__name__
 
 
 class ErrorMetadataBase(object):
-  """Container objects attached to exceptions raised in user code.
+    """Container objects attached to exceptions raised in user code.
 
   This metadata allows re-raising exceptions that occur in generated code, with
   a custom error message that includes a stack trace relative to user-readable
   code from which the generated code originated.
   """
 
-  __slots__ = ('translated_stack', 'cause_message')
+    __slots__ = ("translated_stack", "cause_message")
 
-  def __init__(self, callsite_tb, cause_metadata, cause_message, source_map,
-               converter_filename):
-    translated_stack = _stack_trace_inside_mapped_code(
-        callsite_tb, source_map, converter_filename)
+    def __init__(
+        self, callsite_tb, cause_metadata, cause_message, source_map, converter_filename
+    ):
+        translated_stack = _stack_trace_inside_mapped_code(
+            callsite_tb, source_map, converter_filename
+        )
 
-    if cause_metadata is None:
-      self.translated_stack = translated_stack
-      self.cause_message = cause_message
-    else:
-      # Daisy chain the translated stacks.
-      self.translated_stack = (
-          cause_metadata.translated_stack + (translated_stack[-1],))
-      self.cause_message = cause_metadata.cause_message
+        if cause_metadata is None:
+            self.translated_stack = translated_stack
+            self.cause_message = cause_message
+        else:
+            # Daisy chain the translated stacks.
+            self.translated_stack = cause_metadata.translated_stack + (
+                translated_stack[-1],
+            )
+            self.cause_message = cause_metadata.cause_message
 
-  def get_message(self):
-    """Returns the message for the underlying exception."""
-    lines = []
+    def get_message(self):
+        """Returns the message for the underlying exception."""
+        lines = []
 
-    lines.append('in user code:')
-    lines.append('')
+        lines.append("in user code:")
+        lines.append("")
 
-    for frame_info in reversed(self.translated_stack):
-      if (traceback_utils.is_traceback_filtering_enabled() and
-          not traceback_utils.include_frame(frame_info.filename)):
-        continue
+        for frame_info in reversed(self.translated_stack):
+            if traceback_utils.is_traceback_filtering_enabled() and not traceback_utils.include_frame(
+                frame_info.filename
+            ):
+                continue
 
-      formatted_line = '    {}:{} {}'.format(frame_info.filename,
-                                             frame_info.lineno,
-                                             frame_info.function_name)
-      if frame_info.is_converted:
-        formatted_line += '  *'
-      elif frame_info.is_allowlisted:
-        formatted_line += '  **'
-      lines.append(formatted_line)
+            formatted_line = "    {}:{} {}".format(
+                frame_info.filename, frame_info.lineno, frame_info.function_name
+            )
+            if frame_info.is_converted:
+                formatted_line += "  *"
+            elif frame_info.is_allowlisted:
+                formatted_line += "  **"
+            lines.append(formatted_line)
 
-      if frame_info.code is None:
-        code_snippet = '<source unavailable>'
-      else:
-        code_snippet = frame_info.code.strip()
-      lines.append('        {}'.format(code_snippet))
+            if frame_info.code is None:
+                code_snippet = "<source unavailable>"
+            else:
+                code_snippet = frame_info.code.strip()
+            lines.append("        {}".format(code_snippet))
 
-    lines.append('')
+        lines.append("")
 
-    message_lines = self.cause_message.split('\n')
-    for i in range(len(message_lines)):
-      message_lines[i] = '    ' + message_lines[i]
-    lines.extend(message_lines)
+        message_lines = self.cause_message.split("\n")
+        for i in range(len(message_lines)):
+            message_lines[i] = "    " + message_lines[i]
+        lines.extend(message_lines)
 
-    lines.append('')
+        lines.append("")
 
-    return '\n'.join(lines)
+        return "\n".join(lines)
 
-  def create_exception(self, source_error):
-    preferred_type = type(source_error)
-    if preferred_type.__init__ is Exception.__init__:
-      return preferred_type(self.get_message())
-    if preferred_type in KNOWN_STRING_CONSTRUCTOR_ERRORS:
-      return preferred_type(self.get_message())
-    elif preferred_type is KeyError:
-      return MultilineMessageKeyError(self.get_message(), self.cause_message)
-    return None
+    def create_exception(self, source_error):
+        preferred_type = type(source_error)
+        if preferred_type.__init__ is Exception.__init__:
+            return preferred_type(self.get_message())
+        if preferred_type in KNOWN_STRING_CONSTRUCTOR_ERRORS:
+            return preferred_type(self.get_message())
+        elif preferred_type is KeyError:
+            return MultilineMessageKeyError(self.get_message(), self.cause_message)
+        return None
 
-  def to_exception(self, source_error):
-    exc = self.create_exception(source_error)
-    exc.__suppress_context__ = True
-    exc.ag_error_metadata = self
-    return exc
+    def to_exception(self, source_error):
+        exc = self.create_exception(source_error)
+        exc.__suppress_context__ = True
+        exc.ag_error_metadata = self
+        return exc

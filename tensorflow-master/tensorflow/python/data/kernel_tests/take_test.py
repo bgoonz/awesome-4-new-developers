@@ -28,38 +28,44 @@ from tensorflow.python.platform import test
 
 
 class TakeTest(test_base.DatasetTestBase, parameterized.TestCase):
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(count=[-1, 0, 4, 10, 25]),
+        )
+    )
+    def testBasic(self, count):
+        components = (np.arange(10),)
+        dataset = dataset_ops.Dataset.from_tensor_slices(components).take(count)
+        self.assertEqual(
+            [c.shape[1:] for c in components],
+            [shape for shape in dataset_ops.get_legacy_output_shapes(dataset)],
+        )
+        num_output = min(count, 10) if count != -1 else 10
+        self.assertDatasetProduces(
+            dataset, [tuple(components[0][i : i + 1]) for i in range(num_output)]
+        )
 
-  @combinations.generate(
-      combinations.times(test_base.default_test_combinations(),
-                         combinations.combine(count=[-1, 0, 4, 10, 25])))
-  def testBasic(self, count):
-    components = (np.arange(10),)
-    dataset = dataset_ops.Dataset.from_tensor_slices(components).take(count)
-    self.assertEqual(
-        [c.shape[1:] for c in components],
-        [shape for shape in dataset_ops.get_legacy_output_shapes(dataset)])
-    num_output = min(count, 10) if count != -1 else 10
-    self.assertDatasetProduces(
-        dataset, [tuple(components[0][i:i + 1]) for i in range(num_output)])
 
+class TakeDatasetCheckpointTest(
+    checkpoint_test_base.CheckpointTestBase, parameterized.TestCase
+):
+    def _build_take_dataset(self, count):
+        components = (np.arange(10),)
+        return dataset_ops.Dataset.from_tensor_slices(components).take(count)
 
-class TakeDatasetCheckpointTest(checkpoint_test_base.CheckpointTestBase,
-                                parameterized.TestCase):
-
-  def _build_take_dataset(self, count):
-    components = (np.arange(10),)
-    return dataset_ops.Dataset.from_tensor_slices(components).take(count)
-
-  @combinations.generate(
-      combinations.times(
-          test_base.default_test_combinations(),
-          checkpoint_test_base.default_test_combinations(),
-          combinations.combine(count=[5], num_outputs=[5]) +
-          combinations.combine(count=[20, 10, -1], num_outputs=[10]) +
-          combinations.combine(count=[0], num_outputs=[0])))
-  def test(self, verify_fn, count, num_outputs):
-    verify_fn(self, lambda: self._build_take_dataset(count), num_outputs)
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            checkpoint_test_base.default_test_combinations(),
+            combinations.combine(count=[5], num_outputs=[5])
+            + combinations.combine(count=[20, 10, -1], num_outputs=[10])
+            + combinations.combine(count=[0], num_outputs=[0]),
+        )
+    )
+    def test(self, verify_fn, count, num_outputs):
+        verify_fn(self, lambda: self._build_take_dataset(count), num_outputs)
 
 
 if __name__ == "__main__":
-  test.main()
+    test.main()
