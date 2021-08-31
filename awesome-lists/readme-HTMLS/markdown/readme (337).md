@@ -109,15 +109,11 @@ This list contains the most useful tools and data for creating web animations. \
 
 <img src="data/covers/92ZiDgAAQBAJ.jpg" width="200" />
 
-
-
 SVG is extremely powerful, with its reduced HTTP requests and crispness on any display. It becomes increasingly more interesting as you explore its capabilities for responsive animation and performance boons. When you animate SVG, you must be aware of normal image traits like composition, color, implementation, and optimization. But when you animate, it increases the complexity of each of these factors exponentially.
 
 ### [Creating Web Animations: Bringing Your UIs to Life](https://www.amazon.com/Creating-Web-Animations-Bringing-Your/dp/1491957514/)
 
 <img src="data/covers/NK9rDgAAQBAJ.jpg" width="200" />
-
-
 
 Thanks to faster browsers, better web standards support, and more powerful devices, the web now defines the next generation of user interfaces that are fun, practical, fluid, and memorable. The key? Animation. But learning how to create animations is hard, and existing learning material doesnt explain the context of the UI problem that animations are trying to solve. Thats where this book comes in.
 
