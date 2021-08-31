@@ -29,24 +29,38 @@ from tensorflow.python.keras.engine.base_preprocessing_layer import Preprocessin
 from tensorflow.python.keras.layers.preprocessing.image_preprocessing import CenterCrop
 from tensorflow.python.keras.layers.preprocessing.image_preprocessing import RandomCrop
 from tensorflow.python.keras.layers.preprocessing.image_preprocessing import RandomFlip
-from tensorflow.python.keras.layers.preprocessing.image_preprocessing import RandomContrast
-from tensorflow.python.keras.layers.preprocessing.image_preprocessing import RandomHeight
-from tensorflow.python.keras.layers.preprocessing.image_preprocessing import RandomRotation
-from tensorflow.python.keras.layers.preprocessing.image_preprocessing import RandomTranslation
+from tensorflow.python.keras.layers.preprocessing.image_preprocessing import (
+    RandomContrast,
+)
+from tensorflow.python.keras.layers.preprocessing.image_preprocessing import (
+    RandomHeight,
+)
+from tensorflow.python.keras.layers.preprocessing.image_preprocessing import (
+    RandomRotation,
+)
+from tensorflow.python.keras.layers.preprocessing.image_preprocessing import (
+    RandomTranslation,
+)
 from tensorflow.python.keras.layers.preprocessing.image_preprocessing import RandomWidth
 from tensorflow.python.keras.layers.preprocessing.image_preprocessing import RandomZoom
 from tensorflow.python.keras.layers.preprocessing.image_preprocessing import Resizing
 from tensorflow.python.keras.layers.preprocessing.image_preprocessing import Rescaling
 
 # Preprocessing layers.
-from tensorflow.python.keras.layers.preprocessing.category_crossing import CategoryCrossing
-from tensorflow.python.keras.layers.preprocessing.category_encoding import CategoryEncoding
+from tensorflow.python.keras.layers.preprocessing.category_crossing import (
+    CategoryCrossing,
+)
+from tensorflow.python.keras.layers.preprocessing.category_encoding import (
+    CategoryEncoding,
+)
 from tensorflow.python.keras.layers.preprocessing.discretization import Discretization
 from tensorflow.python.keras.layers.preprocessing.hashing import Hashing
 from tensorflow.python.keras.layers.preprocessing.integer_lookup import IntegerLookup
 from tensorflow.python.keras.layers.preprocessing.normalization import Normalization
 from tensorflow.python.keras.layers.preprocessing.string_lookup import StringLookup
-from tensorflow.python.keras.layers.preprocessing.text_vectorization import TextVectorization
+from tensorflow.python.keras.layers.preprocessing.text_vectorization import (
+    TextVectorization,
+)
 
 # Advanced activations.
 from tensorflow.python.keras.layers.advanced_activations import LeakyReLU
@@ -143,17 +157,31 @@ from tensorflow.python.keras.layers.noise import GaussianNoise
 from tensorflow.python.keras.layers.noise import GaussianDropout
 
 # Normalization layers.
-from tensorflow.python.keras.layers.normalization.layer_normalization import LayerNormalization
-from tensorflow.python.keras.layers.normalization.batch_normalization import SyncBatchNormalization
+from tensorflow.python.keras.layers.normalization.layer_normalization import (
+    LayerNormalization,
+)
+from tensorflow.python.keras.layers.normalization.batch_normalization import (
+    SyncBatchNormalization,
+)
 
 if tf2.enabled():
-  from tensorflow.python.keras.layers.normalization.batch_normalization import BatchNormalization
-  from tensorflow.python.keras.layers.normalization.batch_normalization_v1 import BatchNormalization as BatchNormalizationV1
-  BatchNormalizationV2 = BatchNormalization
+    from tensorflow.python.keras.layers.normalization.batch_normalization import (
+        BatchNormalization,
+    )
+    from tensorflow.python.keras.layers.normalization.batch_normalization_v1 import (
+        BatchNormalization as BatchNormalizationV1,
+    )
+
+    BatchNormalizationV2 = BatchNormalization
 else:
-  from tensorflow.python.keras.layers.normalization.batch_normalization_v1 import BatchNormalization
-  from tensorflow.python.keras.layers.normalization.batch_normalization import BatchNormalization as BatchNormalizationV2
-  BatchNormalizationV1 = BatchNormalization
+    from tensorflow.python.keras.layers.normalization.batch_normalization_v1 import (
+        BatchNormalization,
+    )
+    from tensorflow.python.keras.layers.normalization.batch_normalization import (
+        BatchNormalization as BatchNormalizationV2,
+    )
+
+    BatchNormalizationV1 = BatchNormalization
 
 # Kernelized layers.
 from tensorflow.python.keras.layers.kernelized import RandomFourierFeatures
@@ -195,31 +223,33 @@ from tensorflow.python.keras.layers.recurrent import PeepholeLSTMCell
 from tensorflow.python.keras.layers.recurrent import SimpleRNN
 
 if tf2.enabled():
-  from tensorflow.python.keras.layers.recurrent_v2 import GRU
-  from tensorflow.python.keras.layers.recurrent_v2 import GRUCell
-  from tensorflow.python.keras.layers.recurrent_v2 import LSTM
-  from tensorflow.python.keras.layers.recurrent_v2 import LSTMCell
-  from tensorflow.python.keras.layers.recurrent import GRU as GRUV1
-  from tensorflow.python.keras.layers.recurrent import GRUCell as GRUCellV1
-  from tensorflow.python.keras.layers.recurrent import LSTM as LSTMV1
-  from tensorflow.python.keras.layers.recurrent import LSTMCell as LSTMCellV1
-  GRUV2 = GRU
-  GRUCellV2 = GRUCell
-  LSTMV2 = LSTM
-  LSTMCellV2 = LSTMCell
+    from tensorflow.python.keras.layers.recurrent_v2 import GRU
+    from tensorflow.python.keras.layers.recurrent_v2 import GRUCell
+    from tensorflow.python.keras.layers.recurrent_v2 import LSTM
+    from tensorflow.python.keras.layers.recurrent_v2 import LSTMCell
+    from tensorflow.python.keras.layers.recurrent import GRU as GRUV1
+    from tensorflow.python.keras.layers.recurrent import GRUCell as GRUCellV1
+    from tensorflow.python.keras.layers.recurrent import LSTM as LSTMV1
+    from tensorflow.python.keras.layers.recurrent import LSTMCell as LSTMCellV1
+
+    GRUV2 = GRU
+    GRUCellV2 = GRUCell
+    LSTMV2 = LSTM
+    LSTMCellV2 = LSTMCell
 else:
-  from tensorflow.python.keras.layers.recurrent import GRU
-  from tensorflow.python.keras.layers.recurrent import GRUCell
-  from tensorflow.python.keras.layers.recurrent import LSTM
-  from tensorflow.python.keras.layers.recurrent import LSTMCell
-  from tensorflow.python.keras.layers.recurrent_v2 import GRU as GRUV2
-  from tensorflow.python.keras.layers.recurrent_v2 import GRUCell as GRUCellV2
-  from tensorflow.python.keras.layers.recurrent_v2 import LSTM as LSTMV2
-  from tensorflow.python.keras.layers.recurrent_v2 import LSTMCell as LSTMCellV2
-  GRUV1 = GRU
-  GRUCellV1 = GRUCell
-  LSTMV1 = LSTM
-  LSTMCellV1 = LSTMCell
+    from tensorflow.python.keras.layers.recurrent import GRU
+    from tensorflow.python.keras.layers.recurrent import GRUCell
+    from tensorflow.python.keras.layers.recurrent import LSTM
+    from tensorflow.python.keras.layers.recurrent import LSTMCell
+    from tensorflow.python.keras.layers.recurrent_v2 import GRU as GRUV2
+    from tensorflow.python.keras.layers.recurrent_v2 import GRUCell as GRUCellV2
+    from tensorflow.python.keras.layers.recurrent_v2 import LSTM as LSTMV2
+    from tensorflow.python.keras.layers.recurrent_v2 import LSTMCell as LSTMCellV2
+
+    GRUV1 = GRU
+    GRUCellV1 = GRUCell
+    LSTMV1 = LSTM
+    LSTMCellV1 = LSTMCell
 
 # Convolutional-recurrent layers.
 from tensorflow.python.keras.layers.convolutional_recurrent import ConvLSTM2D
@@ -245,7 +275,7 @@ from tensorflow.python.keras.layers.serialization import serialize
 
 
 class VersionAwareLayers(object):
-  """Utility to be used internally to access layers in a V1/V2-aware fashion.
+    """Utility to be used internally to access layers in a V1/V2-aware fashion.
 
   When using layers within the Keras codebase, under the constraint that
   e.g. `layers.BatchNormalization` should be the `BatchNormalization` version
@@ -255,8 +285,8 @@ class VersionAwareLayers(object):
   of `VersionAwareLayers` (which you can use just like the `layers` module).
   """
 
-  def __getattr__(self, name):
-    serialization.populate_deserializable_objects()
-    if name in serialization.LOCAL.ALL_OBJECTS:
-      return serialization.LOCAL.ALL_OBJECTS[name]
-    return super(VersionAwareLayers, self).__getattr__(name)
+    def __getattr__(self, name):
+        serialization.populate_deserializable_objects()
+        if name in serialization.LOCAL.ALL_OBJECTS:
+            return serialization.LOCAL.ALL_OBJECTS[name]
+        return super(VersionAwareLayers, self).__getattr__(name)

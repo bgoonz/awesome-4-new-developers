@@ -29,13 +29,15 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 @tf_export(
-    'random.uniform_candidate_sampler',
-    v1=['random.uniform_candidate_sampler', 'nn.uniform_candidate_sampler'])
+    "random.uniform_candidate_sampler",
+    v1=["random.uniform_candidate_sampler", "nn.uniform_candidate_sampler"],
+)
 @dispatch.add_dispatch_support
-@deprecation.deprecated_endpoints('nn.uniform_candidate_sampler')
-def uniform_candidate_sampler(true_classes, num_true, num_sampled, unique,
-                              range_max, seed=None, name=None):
-  """Samples a set of classes using a uniform base distribution.
+@deprecation.deprecated_endpoints("nn.uniform_candidate_sampler")
+def uniform_candidate_sampler(
+    true_classes, num_true, num_sampled, unique, range_max, seed=None, name=None
+):
+    """Samples a set of classes using a uniform base distribution.
 
   This operation randomly samples a tensor of sampled classes
   (`sampled_candidates`) from the range of integers `[0, range_max)`.
@@ -82,23 +84,29 @@ def uniform_candidate_sampler(true_classes, num_true, num_sampled, unique,
       `sampled_candidates`. The expected counts under the sampling distribution
       of each of `sampled_candidates`.
   """
-  seed1, seed2 = random_seed.get_seed(seed)
-  return gen_candidate_sampling_ops.uniform_candidate_sampler(
-      true_classes, num_true, num_sampled, unique, range_max, seed=seed1,
-      seed2=seed2, name=name)
+    seed1, seed2 = random_seed.get_seed(seed)
+    return gen_candidate_sampling_ops.uniform_candidate_sampler(
+        true_classes,
+        num_true,
+        num_sampled,
+        unique,
+        range_max,
+        seed=seed1,
+        seed2=seed2,
+        name=name,
+    )
 
 
 @tf_export(
-    'random.log_uniform_candidate_sampler',
-    v1=[
-        'random.log_uniform_candidate_sampler',
-        'nn.log_uniform_candidate_sampler'
-    ])
+    "random.log_uniform_candidate_sampler",
+    v1=["random.log_uniform_candidate_sampler", "nn.log_uniform_candidate_sampler"],
+)
 @dispatch.add_dispatch_support
-@deprecation.deprecated_endpoints('nn.log_uniform_candidate_sampler')
-def log_uniform_candidate_sampler(true_classes, num_true, num_sampled, unique,
-                                  range_max, seed=None, name=None):
-  """Samples a set of classes using a log-uniform (Zipfian) base distribution.
+@deprecation.deprecated_endpoints("nn.log_uniform_candidate_sampler")
+def log_uniform_candidate_sampler(
+    true_classes, num_true, num_sampled, unique, range_max, seed=None, name=None
+):
+    """Samples a set of classes using a log-uniform (Zipfian) base distribution.
 
   This operation randomly samples a tensor of sampled classes
   (`sampled_candidates`) from the range of integers `[0, range_max)`.
@@ -148,20 +156,28 @@ def log_uniform_candidate_sampler(true_classes, num_true, num_sampled, unique,
       `sampled_candidates`. The expected counts under the sampling distribution
       of each of `sampled_candidates`.
   """
-  seed1, seed2 = random_seed.get_seed(seed)
-  return gen_candidate_sampling_ops.log_uniform_candidate_sampler(
-      true_classes, num_true, num_sampled, unique, range_max, seed=seed1,
-      seed2=seed2, name=name)
+    seed1, seed2 = random_seed.get_seed(seed)
+    return gen_candidate_sampling_ops.log_uniform_candidate_sampler(
+        true_classes,
+        num_true,
+        num_sampled,
+        unique,
+        range_max,
+        seed=seed1,
+        seed2=seed2,
+        name=name,
+    )
 
 
 @tf_export(
-    'random.learned_unigram_candidate_sampler',
-    'nn.learned_unigram_candidate_sampler')
+    "random.learned_unigram_candidate_sampler", "nn.learned_unigram_candidate_sampler"
+)
 @dispatch.add_dispatch_support
-@deprecation.deprecated_endpoints(['nn.learned_unigram_candidate_sampler'])
-def learned_unigram_candidate_sampler(true_classes, num_true, num_sampled,
-                                      unique, range_max, seed=None, name=None):
-  """Samples a set of classes from a distribution learned during training.
+@deprecation.deprecated_endpoints(["nn.learned_unigram_candidate_sampler"])
+def learned_unigram_candidate_sampler(
+    true_classes, num_true, num_sampled, unique, range_max, seed=None, name=None
+):
+    """Samples a set of classes from a distribution learned during training.
 
   This operation randomly samples a tensor of sampled classes
   (`sampled_candidates`) from the range of integers `[0, range_max)`.
@@ -209,29 +225,39 @@ def learned_unigram_candidate_sampler(true_classes, num_true, num_sampled,
       of each of `sampled_candidates`.
 
   """
-  seed1, seed2 = random_seed.get_seed(seed)
-  return gen_candidate_sampling_ops.learned_unigram_candidate_sampler(
-      true_classes, num_true, num_sampled, unique, range_max, seed=seed1,
-      seed2=seed2, name=name)
+    seed1, seed2 = random_seed.get_seed(seed)
+    return gen_candidate_sampling_ops.learned_unigram_candidate_sampler(
+        true_classes,
+        num_true,
+        num_sampled,
+        unique,
+        range_max,
+        seed=seed1,
+        seed2=seed2,
+        name=name,
+    )
 
 
-@tf_export('random.fixed_unigram_candidate_sampler',
-           'nn.fixed_unigram_candidate_sampler')
+@tf_export(
+    "random.fixed_unigram_candidate_sampler", "nn.fixed_unigram_candidate_sampler"
+)
 @dispatch.add_dispatch_support
-def fixed_unigram_candidate_sampler(true_classes,
-                                    num_true,
-                                    num_sampled,
-                                    unique,
-                                    range_max,
-                                    vocab_file='',
-                                    distortion=1.0,
-                                    num_reserved_ids=0,
-                                    num_shards=1,
-                                    shard=0,
-                                    unigrams=(),
-                                    seed=None,
-                                    name=None):
-  """Samples a set of classes using the provided (fixed) base distribution.
+def fixed_unigram_candidate_sampler(
+    true_classes,
+    num_true,
+    num_sampled,
+    unique,
+    range_max,
+    vocab_file="",
+    distortion=1.0,
+    num_reserved_ids=0,
+    num_shards=1,
+    shard=0,
+    unigrams=(),
+    seed=None,
+    name=None,
+):
+    """Samples a set of classes using the provided (fixed) base distribution.
 
   This operation randomly samples a tensor of sampled classes
   (`sampled_candidates`) from the range of integers `[0, range_max)`.
@@ -301,18 +327,30 @@ def fixed_unigram_candidate_sampler(true_classes,
       of each of `sampled_candidates`.
 
   """
-  seed1, seed2 = random_seed.get_seed(seed)
-  return gen_candidate_sampling_ops.fixed_unigram_candidate_sampler(
-      true_classes, num_true, num_sampled, unique, range_max,
-      vocab_file=vocab_file, distortion=distortion,
-      num_reserved_ids=num_reserved_ids, num_shards=num_shards, shard=shard,
-      unigrams=unigrams, seed=seed1, seed2=seed2, name=name)
+    seed1, seed2 = random_seed.get_seed(seed)
+    return gen_candidate_sampling_ops.fixed_unigram_candidate_sampler(
+        true_classes,
+        num_true,
+        num_sampled,
+        unique,
+        range_max,
+        vocab_file=vocab_file,
+        distortion=distortion,
+        num_reserved_ids=num_reserved_ids,
+        num_shards=num_shards,
+        shard=shard,
+        unigrams=unigrams,
+        seed=seed1,
+        seed2=seed2,
+        name=name,
+    )
 
 
-@tf_export('random.all_candidate_sampler', 'nn.all_candidate_sampler')
-def all_candidate_sampler(true_classes, num_true, num_sampled, unique,
-                          seed=None, name=None):
-  """Generate the set of all classes.
+@tf_export("random.all_candidate_sampler", "nn.all_candidate_sampler")
+def all_candidate_sampler(
+    true_classes, num_true, num_sampled, unique, seed=None, name=None
+):
+    """Generate the set of all classes.
 
   Deterministically generates and returns the set of all possible classes.
   For testing purposes.  There is no need to use this, since you might as
@@ -339,17 +377,18 @@ def all_candidate_sampler(true_classes, num_true, num_sampled, unique,
       `sampled_candidates`. The expected counts under the sampling distribution
       of each of `sampled_candidates`. All returned values are 1.0.
   """
-  seed1, seed2 = random_seed.get_seed(seed)
-  return gen_candidate_sampling_ops.all_candidate_sampler(
-      true_classes, num_true, num_sampled, unique, seed=seed1, seed2=seed2,
-      name=name)
+    seed1, seed2 = random_seed.get_seed(seed)
+    return gen_candidate_sampling_ops.all_candidate_sampler(
+        true_classes, num_true, num_sampled, unique, seed=seed1, seed2=seed2, name=name
+    )
 
 
-@tf_export('nn.compute_accidental_hits')
+@tf_export("nn.compute_accidental_hits")
 @dispatch.add_dispatch_support
-def compute_accidental_hits(true_classes, sampled_candidates, num_true,
-                            seed=None, name=None):
-  """Compute the position ids in `sampled_candidates` matching `true_classes`.
+def compute_accidental_hits(
+    true_classes, sampled_candidates, num_true, seed=None, name=None
+):
+    """Compute the position ids in `sampled_candidates` matching `true_classes`.
 
   In Candidate Sampling, this operation facilitates virtually removing
   sampled classes which happen to match target classes.  This is done
@@ -389,7 +428,7 @@ def compute_accidental_hits(true_classes, sampled_candidates, num_true,
       Each value is `-FLOAT_MAX`.
 
   """
-  seed1, seed2 = random_seed.get_seed(seed)
-  return gen_candidate_sampling_ops.compute_accidental_hits(
-      true_classes, sampled_candidates, num_true, seed=seed1, seed2=seed2,
-      name=name)
+    seed1, seed2 = random_seed.get_seed(seed)
+    return gen_candidate_sampling_ops.compute_accidental_hits(
+        true_classes, sampled_candidates, num_true, seed=seed1, seed2=seed2, name=name
+    )

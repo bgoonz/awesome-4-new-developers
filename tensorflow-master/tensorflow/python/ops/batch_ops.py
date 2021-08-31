@@ -22,22 +22,26 @@ from tensorflow.python.eager import function
 from tensorflow.python.framework import ops
 from tensorflow.python.framework import tensor_spec
 from tensorflow.python.ops import gen_batch_ops
+
 # pylint: disable=wildcard-import
 from tensorflow.python.ops.gen_batch_ops import *
+
 # pylint: enable=wildcard-import
 from tensorflow.python.util import nest
 from tensorflow.python.util.tf_export import tf_export
 
 
 @tf_export("nondifferentiable_batch_function")
-def batch_function(num_batch_threads,
-                   max_batch_size,
-                   batch_timeout_micros,
-                   allowed_batch_sizes=None,
-                   max_enqueued_batches=10,
-                   autograph=True,
-                   enable_large_batch_splitting=True):
-  """Batches the computation done by the decorated function.
+def batch_function(
+    num_batch_threads,
+    max_batch_size,
+    batch_timeout_micros,
+    allowed_batch_sizes=None,
+    max_enqueued_batches=10,
+    autograph=True,
+    enable_large_batch_splitting=True,
+):
+    """Batches the computation done by the decorated function.
 
   So, for example, in the following code
 
@@ -87,39 +91,44 @@ def batch_function(num_batch_threads,
     The decorated function will return the unbatched computation output Tensors.
   """
 
-  def decorator(fn):  # pylint: disable=missing-docstring
+    def decorator(fn):  # pylint: disable=missing-docstring
+        def decorated(*args):  # pylint: disable=missing-docstring
+            @function.defun(autograph=autograph)
+            def computation(*computation_args):
+                return fn(*computation_args)
 
-    def decorated(*args):  # pylint: disable=missing-docstring
+            computation = computation.get_concrete_function(
+                *[
+                    tensor_spec.TensorSpec(dtype=x.dtype, shape=x.shape, name=str(i))
+                    for i, x in enumerate(args)
+                ]
+            )
 
-      @function.defun(autograph=autograph)
-      def computation(*computation_args):
-        return fn(*computation_args)
+            with ops.name_scope("batch") as name:
+                for a in args:
+                    if not isinstance(a, ops.Tensor):
+                        raise ValueError(
+                            "All arguments to functions decorated with "
+                            "`batch_function`  are supposed to be Tensors; "
+                            "found %s" % repr(a)
+                        )
+                outputs = gen_batch_ops.batch_function(
+                    num_batch_threads=num_batch_threads,
+                    max_batch_size=max_batch_size,
+                    batch_timeout_micros=batch_timeout_micros,
+                    allowed_batch_sizes=allowed_batch_sizes,
+                    max_enqueued_batches=max_enqueued_batches,
+                    shared_name=name,
+                    enable_large_batch_splitting=enable_large_batch_splitting,
+                    f=computation,
+                    in_tensors=list(args),
+                    captured_tensors=computation.captured_inputs,
+                    Tout=[o.dtype for o in computation.outputs],
+                )
+                return nest.pack_sequence_as(
+                    computation.structured_outputs, outputs, expand_composites=True
+                )
 
-      computation = computation.get_concrete_function(
-          *[tensor_spec.TensorSpec(dtype=x.dtype, shape=x.shape, name=str(i))
-            for i, x in enumerate(args)])
+        return decorated
 
-      with ops.name_scope("batch") as name:
-        for a in args:
-          if not isinstance(a, ops.Tensor):
-            raise ValueError("All arguments to functions decorated with "
-                             "`batch_function`  are supposed to be Tensors; "
-                             "found %s" % repr(a))
-        outputs = gen_batch_ops.batch_function(
-            num_batch_threads=num_batch_threads,
-            max_batch_size=max_batch_size,
-            batch_timeout_micros=batch_timeout_micros,
-            allowed_batch_sizes=allowed_batch_sizes,
-            max_enqueued_batches=max_enqueued_batches,
-            shared_name=name,
-            enable_large_batch_splitting=enable_large_batch_splitting,
-            f=computation,
-            in_tensors=list(args),
-            captured_tensors=computation.captured_inputs,
-            Tout=[o.dtype for o in computation.outputs])
-        return nest.pack_sequence_as(
-            computation.structured_outputs, outputs, expand_composites=True)
-
-    return decorated
-
-  return decorator
+    return decorator

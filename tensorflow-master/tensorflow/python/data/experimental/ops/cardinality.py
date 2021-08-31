@@ -28,15 +28,15 @@ from tensorflow.python.util.tf_export import tf_export
 INFINITE = -1
 UNKNOWN = -2
 tf_export("data.experimental.INFINITE_CARDINALITY").export_constant(
-    __name__, "INFINITE")
-tf_export("data.experimental.UNKNOWN_CARDINALITY").export_constant(
-    __name__, "UNKNOWN")
+    __name__, "INFINITE"
+)
+tf_export("data.experimental.UNKNOWN_CARDINALITY").export_constant(__name__, "UNKNOWN")
 
 
 # TODO(b/157691652): Deprecate this method after migrating users to the new API.
 @tf_export("data.experimental.cardinality")
 def cardinality(dataset):
-  """Returns the cardinality of `dataset`, if known.
+    """Returns the cardinality of `dataset`, if known.
 
   The operation returns the cardinality of `dataset`. The operation may return
   `tf.data.experimental.INFINITE_CARDINALITY` if `dataset` contains an infinite
@@ -65,12 +65,14 @@ def cardinality(dataset):
     constant `INFINITE_CARDINALITY` and `UNKNOWN_CARDINALITY` respectively.
   """
 
-  return gen_dataset_ops.dataset_cardinality(dataset._variant_tensor)  # pylint: disable=protected-access
+    return gen_dataset_ops.dataset_cardinality(
+        dataset._variant_tensor
+    )  # pylint: disable=protected-access
 
 
 @tf_export("data.experimental.assert_cardinality")
 def assert_cardinality(expected_cardinality):
-  """Asserts the cardinality of the input dataset.
+    """Asserts the cardinality of the input dataset.
 
   NOTE: The following assumes that "examples.tfrecord" contains 42 records.
 
@@ -94,24 +96,26 @@ def assert_cardinality(expected_cardinality):
       the dataset) and an error is raised if the actual and expected cardinality
       differ.
   """
-  def _apply_fn(dataset):
-    return _AssertCardinalityDataset(dataset, expected_cardinality)
 
-  return _apply_fn
+    def _apply_fn(dataset):
+        return _AssertCardinalityDataset(dataset, expected_cardinality)
+
+    return _apply_fn
 
 
 class _AssertCardinalityDataset(dataset_ops.UnaryUnchangedStructureDataset):
-  """A `Dataset` that assert the cardinality of its input."""
+    """A `Dataset` that assert the cardinality of its input."""
 
-  def __init__(self, input_dataset, expected_cardinality):
-    self._input_dataset = input_dataset
-    self._expected_cardinality = ops.convert_to_tensor(
-        expected_cardinality, dtype=dtypes.int64, name="expected_cardinality")
+    def __init__(self, input_dataset, expected_cardinality):
+        self._input_dataset = input_dataset
+        self._expected_cardinality = ops.convert_to_tensor(
+            expected_cardinality, dtype=dtypes.int64, name="expected_cardinality"
+        )
 
-    # pylint: enable=protected-access
-    variant_tensor = ged_ops.assert_cardinality_dataset(
-        self._input_dataset._variant_tensor,  # pylint: disable=protected-access
-        self._expected_cardinality,
-        **self._flat_structure)
-    super(_AssertCardinalityDataset, self).__init__(input_dataset,
-                                                    variant_tensor)
+        # pylint: enable=protected-access
+        variant_tensor = ged_ops.assert_cardinality_dataset(
+            self._input_dataset._variant_tensor,  # pylint: disable=protected-access
+            self._expected_cardinality,
+            **self._flat_structure
+        )
+        super(_AssertCardinalityDataset, self).__init__(input_dataset, variant_tensor)

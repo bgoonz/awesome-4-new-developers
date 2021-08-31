@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ page.title }} - Rails Girls</title>
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/js/prefixfree.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" integrity="sha384-SDFvKZaD/OapoAVqhWJM8vThqq+NQWczamziIoxiMYVNrVeUUrf2zhbsFvuHOrAh" crossorigin="anonymous" type="text/javascript"></script>
+    <script src="/js/js_cookie.js"></script>
+    <script src="/js/guides.js"></script>
+    <script src="/js/mobile-menu.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" integrity="sha384-j4yX2PowqrVy4Ogwr6u4kWzszBjcwPSvEjXy5oAODYFpI/KZCiVl8hRTGAJULguo" crossorigin="anonymous" rel="stylesheet">
+    <link href="/css/code.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/favicon.png" rel="shortcut icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    {% include header.html %}
+    <article class="container">
+      <div class="span10">
+        {{ content }}
+      </div>
+    </article>
+    {% include footer.html %}
+    {% include analytics.html %}
+  </body>
+</html>

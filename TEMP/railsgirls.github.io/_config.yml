@@ -1,0 +1,15 @@
+permalink: pretty
+markdown: kramdown
+exclude:
+  - ".rvmrc"
+  - ".rbenv-version"
+  - ".ruby-version"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "README.md"
+  - "node_modules/"
+  - "vendor/bundle/"
+  - "vendor/cache/"
+  - "vendor/gems/"
+  - "vendor/ruby/"
+source_url: https://github.com/railsgirls/railsgirls.github.io/blob/master/

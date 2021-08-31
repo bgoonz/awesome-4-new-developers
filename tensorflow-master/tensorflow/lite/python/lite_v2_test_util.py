@@ -35,10 +35,10 @@ from tensorflow.python.training.tracking import tracking
 
 
 class ModelTest(test_util.TensorFlowTestCase, parameterized.TestCase):
-  """Base test class for TensorFlow Lite 2.x model tests."""
+    """Base test class for TensorFlow Lite 2.x model tests."""
 
-  def _evaluateTFLiteModel(self, tflite_model, input_data, input_shapes=None):
-    """Evaluates the model on the `input_data`.
+    def _evaluateTFLiteModel(self, tflite_model, input_data, input_shapes=None):
+        """Evaluates the model on the `input_data`.
 
     Args:
       tflite_model: TensorFlow Lite model.
@@ -50,29 +50,29 @@ class ModelTest(test_util.TensorFlowTestCase, parameterized.TestCase):
     Returns:
       [np.ndarray]
     """
-    interpreter = Interpreter(model_content=tflite_model)
-    input_details = interpreter.get_input_details()
-    if input_shapes:
-      for idx, (shape_signature, final_shape) in enumerate(input_shapes):
-        self.assertTrue(
-            (input_details[idx]['shape_signature'] == shape_signature).all())
-        index = input_details[idx]['index']
-        interpreter.resize_tensor_input(index, final_shape, strict=True)
-    interpreter.allocate_tensors()
+        interpreter = Interpreter(model_content=tflite_model)
+        input_details = interpreter.get_input_details()
+        if input_shapes:
+            for idx, (shape_signature, final_shape) in enumerate(input_shapes):
+                self.assertTrue(
+                    (input_details[idx]["shape_signature"] == shape_signature).all()
+                )
+                index = input_details[idx]["index"]
+                interpreter.resize_tensor_input(index, final_shape, strict=True)
+        interpreter.allocate_tensors()
 
-    output_details = interpreter.get_output_details()
-    input_details = interpreter.get_input_details()
+        output_details = interpreter.get_output_details()
+        input_details = interpreter.get_input_details()
 
-    for input_tensor, tensor_data in zip(input_details, input_data):
-      interpreter.set_tensor(input_tensor['index'], tensor_data.numpy())
-    interpreter.invoke()
-    return [
-        interpreter.get_tensor(details['index']) for details in output_details
-    ]
+        for input_tensor, tensor_data in zip(input_details, input_data):
+            interpreter.set_tensor(input_tensor["index"], tensor_data.numpy())
+        interpreter.invoke()
+        return [interpreter.get_tensor(details["index"]) for details in output_details]
 
-  def _evaluateTFLiteModelUsingSignatureDef(self, tflite_model, signature_key,
-                                            inputs):
-    """Evaluates the model on the `inputs`.
+    def _evaluateTFLiteModelUsingSignatureDef(
+        self, tflite_model, signature_key, inputs
+    ):
+        """Evaluates the model on the `inputs`.
 
     Args:
       tflite_model: TensorFlow Lite model.
@@ -84,92 +84,89 @@ class ModelTest(test_util.TensorFlowTestCase, parameterized.TestCase):
       Key is the output name in the SignatureDef 'signature_key'
       Value is the output value
     """
-    interpreter = Interpreter(model_content=tflite_model)
-    signature_runner = interpreter.get_signature_runner(signature_key)
-    return signature_runner(**inputs)
+        interpreter = Interpreter(model_content=tflite_model)
+        signature_runner = interpreter.get_signature_runner(signature_key)
+        return signature_runner(**inputs)
 
-  def _getSimpleVariableModel(self):
-    root = tracking.AutoTrackable()
-    root.v1 = variables.Variable(3.)
-    root.v2 = variables.Variable(2.)
-    root.f = def_function.function(lambda x: root.v1 * root.v2 * x)
-    return root
+    def _getSimpleVariableModel(self):
+        root = tracking.AutoTrackable()
+        root.v1 = variables.Variable(3.0)
+        root.v2 = variables.Variable(2.0)
+        root.f = def_function.function(lambda x: root.v1 * root.v2 * x)
+        return root
 
-  def _getSimpleModelWithVariables(self):
+    def _getSimpleModelWithVariables(self):
+        class SimpleModelWithOneVariable(tracking.AutoTrackable):
+            """Basic model with 1 variable."""
 
-    class SimpleModelWithOneVariable(tracking.AutoTrackable):
-      """Basic model with 1 variable."""
+            def __init__(self):
+                super(SimpleModelWithOneVariable, self).__init__()
+                self.var = variables.Variable(array_ops.zeros((1, 10), name="var"))
 
-      def __init__(self):
-        super(SimpleModelWithOneVariable, self).__init__()
-        self.var = variables.Variable(array_ops.zeros((1, 10), name='var'))
+            @def_function.function
+            def assign_add(self, x):
+                self.var.assign_add(x)
+                return self.var
 
-      @def_function.function
-      def assign_add(self, x):
-        self.var.assign_add(x)
-        return self.var
+        return SimpleModelWithOneVariable()
 
-    return SimpleModelWithOneVariable()
+    def _getMultiFunctionModel(self):
+        class BasicModel(tracking.AutoTrackable):
+            """Basic model with multiple functions."""
 
-  def _getMultiFunctionModel(self):
+            def __init__(self):
+                self.y = None
+                self.z = None
 
-    class BasicModel(tracking.AutoTrackable):
-      """Basic model with multiple functions."""
+            @def_function.function
+            def add(self, x):
+                if self.y is None:
+                    self.y = variables.Variable(2.0)
+                return x + self.y
 
-      def __init__(self):
-        self.y = None
-        self.z = None
+            @def_function.function
+            def sub(self, x):
+                if self.z is None:
+                    self.z = variables.Variable(3.0)
+                return x - self.z
 
-      @def_function.function
-      def add(self, x):
-        if self.y is None:
-          self.y = variables.Variable(2.)
-        return x + self.y
+            @def_function.function
+            def mul_add(self, x, y):
+                if self.z is None:
+                    self.z = variables.Variable(3.0)
+                return x * self.z + y
 
-      @def_function.function
-      def sub(self, x):
-        if self.z is None:
-          self.z = variables.Variable(3.)
-        return x - self.z
+        return BasicModel()
 
-      @def_function.function
-      def mul_add(self, x, y):
-        if self.z is None:
-          self.z = variables.Variable(3.)
-        return x * self.z + y
+    def _getMultiFunctionModelWithSharedWeight(self):
+        class BasicModelWithSharedWeight(tracking.AutoTrackable):
+            """Model with multiple functions and a shared weight."""
 
-    return BasicModel()
+            def __init__(self):
+                self.weight = constant_op.constant(
+                    [1.0], shape=(1, 512, 512, 1), dtype=dtypes.float32
+                )
 
-  def _getMultiFunctionModelWithSharedWeight(self):
+            @def_function.function
+            def add(self, x):
+                return x + self.weight
 
-    class BasicModelWithSharedWeight(tracking.AutoTrackable):
-      """Model with multiple functions and a shared weight."""
+            @def_function.function
+            def sub(self, x):
+                return x - self.weight
 
-      def __init__(self):
-        self.weight = constant_op.constant([1.0],
-                                           shape=(1, 512, 512, 1),
-                                           dtype=dtypes.float32)
+            @def_function.function
+            def mul(self, x):
+                return x * self.weight
 
-      @def_function.function
-      def add(self, x):
-        return x + self.weight
+        return BasicModelWithSharedWeight()
 
-      @def_function.function
-      def sub(self, x):
-        return x - self.weight
-
-      @def_function.function
-      def mul(self, x):
-        return x * self.weight
-
-    return BasicModelWithSharedWeight()
-
-  def _assertValidDebugInfo(self, debug_info):
-    """Verify the DebugInfo is valid."""
-    file_names = set()
-    for file_path in debug_info.files:
-      file_names.add(os.path.basename(file_path))
-    # To make the test independent on how the nodes are created, we only assert
-    # the name of this test file.
-    self.assertIn('lite_v2_test.py', file_names)
-    self.assertNotIn('lite_test.py', file_names)
+    def _assertValidDebugInfo(self, debug_info):
+        """Verify the DebugInfo is valid."""
+        file_names = set()
+        for file_path in debug_info.files:
+            file_names.add(os.path.basename(file_path))
+        # To make the test independent on how the nodes are created, we only assert
+        # the name of this test file.
+        self.assertIn("lite_v2_test.py", file_names)
+        self.assertNotIn("lite_test.py", file_names)

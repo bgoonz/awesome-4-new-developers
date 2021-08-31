@@ -1,0 +1,221 @@
+<h2 id="clone-an-object">Clone an object</h2>
+pre data-role="codeBlock" data-info="js" class="language-javascript"><code>  clone(x)</code></pre>
+<p>Can clone any primitive type, array, and object. If x has a function clone, this function will be invoked to clone the object. &gt;param {} x &gt;return {} clone</p>
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a   title="1"></a>
+<a  id=-2" title="2"></a>
+<a  id=-3" title="3"><span >export</span> <span >function</span> <span >clone</span>(x) <span >{</span></a>
+<a  id=-4" title="4">  <span >const</span> type <span >=</span> <span >typeof</span> x<span >;</span></a>
+<a  id=-5" title="5">  <span >// immutable primitive types</span></a>
+<a  id=-6" title="6">  <span >if</span> (</a>
+<a  id=-7" title="7">    type <span >===</span> <span >&quot;number&quot;</span> <span >||</span></a>
+<a  id=-8" title="8">    type <span >===</span> <span >&quot;string&quot;</span> <span >||</span></a>
+<a  id=-9" title="9">    type <span >===</span> <span >&quot;boolean&quot;</span> <span >||</span></a>
+<a  id=-10" title="10">    x <span >===</span> <span >null</span> <span >||</span></a>
+<a  id=-11" title="11">    x <span >===</span> <span >undefined</span></a>
+<a  id=-12" title="12">  ) <span >{</span></a>
+<a  id=-13" title="13">    <span >return</span> x<span >;</span></a>
+<a  id=-14" title="14">  <span >}</span></a>
+<a  id=-15" title="15">  <span >// use clone function of the object when available</span></a>
+<a  id=-16" title="16">  <span >if</span> (<span >typeof</span> <span >x</span>.<span >clone</span> <span >===</span> <span >&quot;function&quot;</span>) <span >{</span></a>
+<a  id=-17" title="17">    <span >return</span> <span >x</span>.<span >clone</span>()<span >;</span></a>
+<a  id=-18" title="18">  <span >}</span></a>
+<a  id=-19" title="19">  <span >// array</span></a>
+<a  id=-20" title="20">  <span >if</span> (<span >Array</span>.<span >isArray</span>(x)) <span >{</span></a>
+<a  id=-21" title="21">    <span >return</span> <span >x</span>.<span >map</span>(<span >function</span> (value) <span >{</span></a>
+<a  id=-22" title="22">      <span >return</span> <span >clone</span>(value)<span >;</span></a>
+<a  id=-23" title="23">    <span >}</span>)<span >;</span></a>
+<a  id=-24" title="24">  <span >}</span></a>
+<a  id=-25" title="25">  <span >if</span> (x <span >instanceof</span> Date) <span >return</span> <span >new</span> <span >Date</span>(<span >x</span>.<span >valueOf</span>())<span >;</span></a>
+<a  id=-26" title="26"></a>
+<a  id=-27" title="27">  <span >// object</span></a>
+<a  id=-28" title="28">  <span >return</span> <span >mapObject</span>(x<span >,</span> clone)<span >;</span></a>
+<a  id=-29" title="29"><span >}</span></a></code></pre></div>
+<h2 id="apply-map-to-all-properties-of-an-object">Apply map to all properties of an object</h2>
+<blockquote>
+<p>param {Object} object param {function} callback return {Object} Returns a copy of the object with mapped properties</p>
+</blockquote>
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a   title="1"></a>
+<a   title="2"></a>
+<a   title="3"><span >export</span> <span >function</span> <span >mapObject</span>(object<span >,</span> callback) <span >{</span></a>
+<a  id=-4" title="4">  <span >const</span> clone <span >=</span> <span >{};</span></a>
+<a  id=-5" title="5">  <span >for</span> (<span >const</span> key <span >in</span> object) <span >{</span></a>
+<a  id=-6" title="6">    <span >if</span> (<span >hasOwnProperty</span>(object<span >,</span> key)) <span >{</span></a>
+<a  id=-7" title="7">      clone[key] <span >=</span> <span >callback</span>(object[key])<span >;</span></a>
+<a  id=-8" title="8">    <span >}</span></a>
+<a  id=-9" title="9">  <span >}</span></a>
+<a  id=-10" title="10">  <span >return</span> clone<span >;</span></a>
+<a  id=-11" title="11"><span >}</span></a></code></pre></div>
+<h2 id="extend-object-a-with-the-properties-of-object-b">Extend object a with the properties of object b</h2>
+<blockquote>
+<p>param {Object} a param {Object} b return {Object} a</p>
+</blockquote>
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a   title="1"></a>
+<a  id=-2" title="2"></a>
+<a  id=-3" title="3"><span >export</span> <span >function</span> <span >extend</span>(a<span >,</span> b) <span >{</span></a>
+<a  id=-4" title="4">  <span >for</span> (<span >const</span> prop <span >in</span> b) <span >{</span></a>
+<a  id=-5" title="5">    <span >if</span> (<span >hasOwnProperty</span>(b<span >,</span> prop)) <span >{</span></a>
+<a  id=-6" title="6">      a[prop] <span >=</span> b[prop]<span >;</span></a>
+<a  id=-7" title="7">    <span >}</span></a>
+<a  id=-8" title="8">  <span >}</span></a>
+<a  id=-9" title="9">  <span >return</span> a<span >;</span></a>
+<a  id=-10" title="10"><span >}</span></a></code></pre></div>
+<h2 id="deep-test-equality-of-all-fields-in-two-pairs-of-arrays-or-objects.">Deep test equality of all fields in two pairs of arrays or objects.</h2>
+<p>Compares values and functions strictly (ie. 2 is not the same as ‘2'). &gt;param {Array | Object} a &gt;param {Array
+  | Object} b &gt;returns {boolean}</p>
+<div>
+  <pre data-role="codeBlock" data-info="js" class="language-javascript"> ><code><a   title="1"></a>
+<a  id=-2" title="2"></a>
+<a  id=-3" title="3"><span >export</span> <span >function</span> <span >deepStrictEqual</span>(a<span >,</span> b) <span >{</span></a>
+<a  id=-4" title="4">  <span >let</span> prop<span >,</span> i<span >,</span> len<span >;</span></a>
+<a  id=-5" title="5">  <span >if</span> (<span >Array</span>.<span >isArray</span>(a)) <span >{</span></a>
+<a  id=-6" title="6">    <span >if</span> (<span >!Array</span>.<span >isArray</span>(b)) <span >{</span></a>
+<a  id=-7" title="7">      <span >return</span> <span >false;</span></a>
+<a  id=-8" title="8">    <span >}</span></a>
+<a  id=-9" title="9">    <span >if</span> (<span >a</span>.<span >length</span> <span >!==</span> <span >b</span>.<span >length</span>) <span >{</span></a>
+<a  id=-10" title="10">      <span >return</span> <span >false;</span></a>
+<a  id=-11" title="11">    <span >}</span></a>
+<a  id=-12" title="12">    <span >for</span> (i <span >=</span> <span >0,</span> len <span >=</span> <span >a</span>.<span >length;</span> i <span >&lt;</span> len<span >;</span> i<span >++</span>) <span >{</span></a>
+<a  id=-13" title="13">      <span >if</span> (<span >!</span><span >deepStrictEqual</span>(a[i]<span >,</span> b[i])) <span >{</span></a>
+<a  id=-14" title="14">        <span >return</span> <span >false;</span></a>
+<a  id=-15" title="15">      <span >}</span></a>
+<a  id=-16" title="16">    <span >}</span></a>
+<a  id=-17" title="17">    <span >return</span> <span >true;</span></a>
+<a  id=-18" title="18">  <span >}</span> <span >else</span> <span >if</span> (<span >typeof</span> a <span >===</span> <span >&quot;function&quot;</span>) <span >{</span></a>
+<a  id=-19" title="19">    <span >return</span> a <span >===</span> b<span >;</span></a>
+<a  id=-20" title="20">  <span >}</span> <span >else</span> <span >if</span> (a <span >instanceof</span> Object) <span >{</span></a>
+<a  id=-21" title="21">    <span >if</span> (<span >Array</span>.<span >isArray</span>(b) <span >||</span> <span >!</span>(b <span >instanceof</span> Object)) <span >{</span></a>
+<a  id=-22" title="22">      <span >return</span> <span >false;</span></a>
+<a  id=-23" title="23">    <span >}</span></a>
+<a  id=-24" title="24">    <span >for</span> (prop <span >in</span> a) <span >{</span></a>
+<a  id=-25" title="25">      <span >// noinspection JSUnfilteredForInLoop</span></a>
+<a  id=-26" title="26">      <span >if</span> (<span >!</span>(prop <span >in</span> b) <span >||</span> <span >!</span><span >deepStrictEqual</span>(a[prop]<span >,</span> b[prop])) <span >{</span></a>
+<a  id=-27" title="27">        <span >return</span> <span >false;</span></a>
+<a  id=-28" title="28">      <span >}</span></a>
+<a  id=-29" title="29">    <span >}</span></a>
+<a  id=-30" title="30">    <span >for</span> (prop <span >in</span> b) <span >{</span></a>
+<a  id=-31" title="31">      <span >// noinspection JSUnfilteredForInLoop</span></a>
+<a  id=-32" title="32">      <span >if</span> (<span >!</span>(prop <span >in</span> a) <span >||</span> <span >!</span><span >deepStrictEqual</span>(a[prop]<span >,</span> b[prop])) <span >{</span></a>
+<a  id=-33" title="33">        <span >return</span> <span >false;</span></a>
+<a  id=-34" title="34">      <span >}</span></a>
+<a  id=-35" title="35">    <span >}</span></a>
+<a  id=-36" title="36">    <span >return</span> <span >true;</span></a>
+<a  id=-37" title="37">  <span >}</span> <span >else</span> <span >{</span></a>
+<a  id=-38" title="38">    <span >return</span> a <span >===</span> b<span >;</span></a>
+<a  id=-39" title="39">  <span >}</span></a>
+<a  id=-40" title="40"><span >}</span></a></code></pre></div>
+<h2 id="recursively-flatten-a-nested-object.">Recursively flatten a nested object.</h2>
+<blockquote>
+<p>param {Object} nestedObject return {Object} Returns the flattened object</p>
+</blockquote>
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a   title="1"></a>
+<a  id=-2" title="2"></a>
+<a  id=-3" title="3"><span >export</span> <span >function</span> <span >deepFlatten</span>(nestedObject) <span >{</span></a>
+<a  id=-4" title="4">  <span >const</span> flattenedObject <span >=</span> <span >{};</span></a>
+<a  id=-5" title="5">  <span >_deepFlatten</span>(nestedObject<span >,</span> flattenedObject)<span >;</span></a>
+<a  id=-6" title="6">  <span >return</span> flattenedObject<span >;</span></a>
+<a  id=-7" title="7"><span >}</span></a>
+<a  id=-8" title="8"><span >// helper function used by deepFlatten</span></a>
+<a  id=-9" title="9"><span >function</span> <span >_deepFlatten</span>(nestedObject<span >,</span> flattenedObject) <span >{</span></a>
+<a  id=-10" title="10">  <span >for</span> (<span >const</span> prop <span >in</span> nestedObject) <span >{</span></a>
+<a  id=-11" title="11">    <span >if</span> (<span >hasOwnProperty</span>(nestedObject<span >,</span> prop)) <span >{</span></a>
+<a  id=-12" title="12">      <span >const</span> value <span >=</span> nestedObject[prop]<span >;</span></a>
+<a  id=-13" title="13">      <span >if</span> (<span >typeof</span> value <span >===</span> <span >&quot;object&quot;</span> <span >&amp;&amp;</span> value <span >!==</span> <span >null</span>) <span >{</span></a>
+<a  id=-14" title="14">        <span >_deepFlatten</span>(value<span >,</span> flattenedObject)<span >;</span></a>
+<a  id=-15" title="15">      <span >}</span> <span >else</span> <span >{</span></a>
+<a  id=-16" title="16">        flattenedObject[prop] <span >=</span> value<span >;</span></a>
+<a  id=-17" title="17">      <span >}</span></a>
+<a  id=-18" title="18">    <span >}</span></a>
+<a  id=-19" title="19">  <span >}</span></a>
+<a  id=-20" title="20"><span >}</span></a></code></pre></div>
+<h2 id="test-whether-the-current-javascript-engine-supports-object.defineproperty">Test whether the current JavaScript engine supports Object.defineProperty</h2>
+<blockquote>
+<p>returns {boolean} returns true if supported</p>
+</blockquote>
+<div id="cb7">
+  <pre data-role="codeBlock" data-info="js" class="language-javascript"> ><code><a   title="1"></a>
+<a  id="cb7-2" title="2"></a>
+<a  id="cb7-3" title="3"><span >export</span> <span >function</span> <span >canDefineProperty</span>() <span >{</span></a>
+<a  id="cb7-4" title="4">  <span >// test needed for broken IE8 implementation</span></a>
+<a  id="cb7-5" title="5">  <span >try</span> <span >{</span></a>
+<a  id="cb7-6" title="6">    <span >if</span> (<span >Object</span>.<span >defineProperty</span>) <span >{</span></a>
+<a  id="cb7-7" title="7">      <span >Object</span>.<span >defineProperty</span>(<span >{},</span> <span >&quot;x&quot;,</span> <span >{</span> <span >get:</span> <span >function</span> () <span >{}</span> <span >}</span>)<span >;</span></a>
+<a  id="cb7-8" title="8">      <span >return</span> <span >true;</span></a>
+<a  id="cb7-9" title="9">    <span >}</span></a>
+<a  id="cb7-10" title="10">  <span >}</span> <span >catch</span> (e) <span >{}</span></a>
+<a  id="cb7-11" title="11">  <span >return</span> <span >false;</span></a>
+<a  id="cb7-12" title="12"><span >}</span></a></code></pre></div>
+<h2 id="attach-a-lazy-loading-property-to-a-constant.">Attach a lazy loading property to a constant.</h2>
+<p>The given function <code>fn</code> is called once when the property is first requested. &gt;param {Object} object Object where to add the property &gt;param {string} prop Property name &gt;param {Function} valueResolver Function returning the property value. Called without arguments.</p>
+<div id="cb8">
+  <pre data-role="codeBlock" data-info="js" class="language-javascript"> ><code><a   title="1"></a>
+<a  id="cb8-2" title="2"></a>
+<a  id="cb8-3" title="3"><span >export</span> <span >function</span> <span >lazy</span>(object<span >,</span> prop<span >,</span> valueResolver) <span >{</span></a>
+<a  id="cb8-4" title="4">  <span >let</span> _uninitialized <span >=</span> <span >true;</span></a>
+<a  id="cb8-5" title="5">  <span >let</span> _value<span >;</span></a>
+<a  id="cb8-6" title="6">  <span >Object</span>.<span >defineProperty</span>(object<span >,</span> prop<span >,</span> <span >{</span></a>
+<a  id="cb8-7" title="7">    <span >get:</span> <span >function</span> () <span >{</span></a>
+<a  id="cb8-8" title="8">      <span >if</span> (_uninitialized) <span >{</span></a>
+<a  id="cb8-9" title="9">        _value <span >=</span> <span >valueResolver</span>()<span >;</span></a>
+<a  id="cb8-10" title="10">        _uninitialized <span >=</span> <span >false;</span></a>
+<a  id="cb8-11" title="11">      <span >}</span></a>
+<a  id="cb8-12" title="12">      <span >return</span> _value<span >;</span></a>
+<a  id="cb8-13" title="13">    <span >},</span></a>
+<a  id="cb8-14" title="14">    <span >set:</span> <span >function</span> (value) <span >{</span></a>
+<a  id="cb8-15" title="15">      _value <span >=</span> value<span >;</span></a>
+<a  id="cb8-16" title="16">      _uninitialized <span >=</span> <span >false;</span></a>
+<a  id="cb8-17" title="17">    <span >},</span></a>
+<a  id="cb8-18" title="18">    <span >configurable:</span> <span >true,</span></a>
+<a  id="cb8-19" title="19">    <span >enumerable:</span> <span >true,</span></a>
+<a  id="cb8-20" title="20">  <span >}</span>)<span >;</span></a>
+<a  id="cb8-21" title="21"><span >}</span></a></code></pre></div>
+<h2 id="get-a-nested-property-from-an-object">Get a nested property from an object</h2>
+<blockquote>
+<p>param {Object} object param {string | string[]} path returns {Object}</p>
+</blockquote>
+<div id="cb9">
+  <pre data-role="codeBlock" data-info="js" class="language-javascript"> ><code><a   title="1"></a>
+<a  id="cb9-2" title="2"></a>
+<a  id="cb9-3" title="3"><span >export</span> <span >function</span> <span >get</span>(object<span >,</span> path) <span >{</span></a>
+<a  id="cb9-4" title="4">  <span >if</span> (<span >typeof</span> path <span >===</span> <span >&quot;string&quot;</span>) <span >{</span></a>
+<a  id="cb9-5" title="5">    <span >if</span> (<span >isPath</span>(path)) <span >{</span></a>
+<a  id="cb9-6" title="6">      <span >return</span> <span >get</span>(object<span >,</span> <span >path</span>.<span >split</span>(<span >&quot;.&quot;</span>))<span >;</span></a>
+<a  id="cb9-7" title="7">    <span >}</span> <span >else</span> <span >{</span></a>
+<a  id="cb9-8" title="8">      <span >return</span> object[path]<span >;</span></a>
+<a  id="cb9-9" title="9">    <span >}</span></a>
+<a  id="cb9-10" title="10">  <span >}</span></a>
+<a  id="cb9-11" title="11">  <span >let</span> child <span >=</span> object<span >;</span></a>
+<a  id="cb9-12" title="12">  <span >for</span> (<span >let</span> i <span >=</span> <span >0;</span> i <span >&lt;</span> <span >path</span>.<span >length;</span> i<span >++</span>) <span >{</span></a>
+<a  id="cb9-13" title="13">    <span >const</span> key <span >=</span> path[i]<span >;</span></a>
+<a  id="cb9-14" title="14">    child <span >=</span> child <span >?</span> child[key] : <span >undefined;</span></a>
+<a  id="cb9-15" title="15">  <span >}</span></a>
+<a  id="cb9-16" title="16">  <span >return</span> child<span >;</span></a>
+<a  id="cb9-17" title="17"><span >}</span></a></code></pre></div>
+<h2 id="set-a-nested-property-in-an-object">Set a nested property in an object</h2>
+<p>Mutates the object itself If the path doesn't exist, it will be created &gt;param {Object} object &gt;param {string |
+  string[]} path &gt;param {} value &gt;returns {Object}</p>
+<div id=0">
+  <pre data-role="codeBlock" data-info="js" class="language-javascript"> ><code><a  id=0-1" title="1"></a>
+<a  id=0-2" title="2"></a>
+<a  id=0-3" title="3"><span >export</span> <span >function</span> <span >set</span>(object<span >,</span> path<span >,</span> value) <span >{</span></a>
+<a  id=0-4" title="4">  <span >if</span> (<span >typeof</span> path <span >===</span> <span >&quot;string&quot;</span>) <span >{</span></a>
+<a  id=0-5" title="5">    <span >if</span> (<span >isPath</span>(path)) <span >{</span></a>
+<a  id=0-6" title="6">      <span >return</span> <span >set</span>(object<span >,</span> <span >path</span>.<span >split</span>(<span >&quot;.&quot;</span>)<span >,</span> value)<span >;</span></a>
+<a  id=0-7" title="7">    <span >}</span> <span >else</span> <span >{</span></a>
+<a  id=0-8" title="8">      object[path] <span >=</span> value<span >;</span></a>
+<a  id=0-9" title="9">      <span >return</span> object<span >;</span></a>
+<a  id=0-10" title="10">    <span >}</span></a>
+<a  id=0-11" title="11">  <span >}</span></a>
+<a  id=0-12" title="12">  <span >let</span> child <span >=</span> object<span >;</span></a>
+<a  id=0-13" title="13">  <span >for</span> (<span >let</span> i <span >=</span> <span >0;</span> i <span >&lt;</span> <span >path</span>.<span >length</span> <span >-</span> <span >1;</span> i<span >++</span>) <span >{</span></a>
+<a  id=0-14" title="14">    <span >const</span> key <span >=</span> path[i]<span >;</span></a>
+<a  id=0-15" title="15">    <span >if</span> (child[key] <span >===</span> <span >undefined</span>) <span >{</span></a>
+<a  id=0-16" title="16">      child[key] <span >=</span> <span >{};</span></a>
+<a  id=0-17" title="17">    <span >}</span></a>
+<a  id=0-18" title="18">    child <span >=</span> child[key]<span >;</span></a>
+<a  id=0-19" title="19">  <span >}</span></a>
+<a  id=0-20" title="20">  <span >if</span> (<span >path</span>.<span >length</span> <span >&gt;</span> <span >0</span>) <span >{</span></a>
+<a  id=0-21" title="21">    <span >const</span> lastKey <span >=</span> path[<span >path</span>.<span >length</span> <span >-</span> <span >1</span>]<span >;</span></a>
+<a  id=0-22" title="22">    child[lastKey] <span >=</span> value<span >;</span></a>
+<a  id=0-23" title="23">  <span >}</span></a>
+<a  id=0-24" title="24">  <span >return</span> object<span >;</span></a>
+<a  id=0-25" title="25"><span >}</span></a></code></pre></div>

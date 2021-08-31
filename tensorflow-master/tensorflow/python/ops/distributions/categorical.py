@@ -34,34 +34,36 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 def _broadcast_cat_event_and_params(event, params, base_dtype):
-  """Broadcasts the event or distribution parameters."""
-  if event.dtype.is_integer:
-    pass
-  elif event.dtype.is_floating:
-    # When `validate_args=True` we've already ensured int/float casting
-    # is closed.
-    event = math_ops.cast(event, dtype=dtypes.int32)
-  else:
-    raise TypeError("`value` should have integer `dtype` or "
-                    "`self.dtype` ({})".format(base_dtype))
-  shape_known_statically = (
-      params.shape.ndims is not None and
-      params.shape[:-1].is_fully_defined() and
-      event.shape.is_fully_defined())
-  if not shape_known_statically or params.shape[:-1] != event.shape:
-    params *= array_ops.ones_like(event[..., array_ops.newaxis],
-                                  dtype=params.dtype)
-    params_shape = array_ops.shape(params)[:-1]
-    event *= array_ops.ones(params_shape, dtype=event.dtype)
-    if params.shape.ndims is not None:
-      event.set_shape(tensor_shape.TensorShape(params.shape[:-1]))
+    """Broadcasts the event or distribution parameters."""
+    if event.dtype.is_integer:
+        pass
+    elif event.dtype.is_floating:
+        # When `validate_args=True` we've already ensured int/float casting
+        # is closed.
+        event = math_ops.cast(event, dtype=dtypes.int32)
+    else:
+        raise TypeError(
+            "`value` should have integer `dtype` or "
+            "`self.dtype` ({})".format(base_dtype)
+        )
+    shape_known_statically = (
+        params.shape.ndims is not None
+        and params.shape[:-1].is_fully_defined()
+        and event.shape.is_fully_defined()
+    )
+    if not shape_known_statically or params.shape[:-1] != event.shape:
+        params *= array_ops.ones_like(event[..., array_ops.newaxis], dtype=params.dtype)
+        params_shape = array_ops.shape(params)[:-1]
+        event *= array_ops.ones(params_shape, dtype=event.dtype)
+        if params.shape.ndims is not None:
+            event.set_shape(tensor_shape.TensorShape(params.shape[:-1]))
 
-  return event, params
+    return event, params
 
 
 @tf_export(v1=["distributions.Categorical"])
 class Categorical(distribution.Distribution):
-  """Categorical distribution.
+    """Categorical distribution.
 
   The Categorical distribution is parameterized by either probabilities or
   log-probabilities of a set of `K` classes. It is defined over the integers
@@ -150,23 +152,25 @@ class Categorical(distribution.Distribution):
 
   """
 
-  @deprecation.deprecated(
-      "2019-01-01",
-      "The TensorFlow Distributions library has moved to "
-      "TensorFlow Probability "
-      "(https://github.com/tensorflow/probability). You "
-      "should update all references to use `tfp.distributions` "
-      "instead of `tf.distributions`.",
-      warn_once=True)
-  def __init__(
-      self,
-      logits=None,
-      probs=None,
-      dtype=dtypes.int32,
-      validate_args=False,
-      allow_nan_stats=True,
-      name="Categorical"):
-    """Initialize Categorical distributions using class log-probabilities.
+    @deprecation.deprecated(
+        "2019-01-01",
+        "The TensorFlow Distributions library has moved to "
+        "TensorFlow Probability "
+        "(https://github.com/tensorflow/probability). You "
+        "should update all references to use `tfp.distributions` "
+        "instead of `tf.distributions`.",
+        warn_once=True,
+    )
+    def __init__(
+        self,
+        logits=None,
+        probs=None,
+        dtype=dtypes.int32,
+        validate_args=False,
+        allow_nan_stats=True,
+        name="Categorical",
+    ):
+        """Initialize Categorical distributions using class log-probabilities.
 
     Args:
       logits: An N-D `Tensor`, `N >= 1`, representing the log probabilities
@@ -190,146 +194,154 @@ class Categorical(distribution.Distribution):
         more of the statistic's batch members are undefined.
       name: Python `str` name prefixed to Ops created by this class.
     """
-    parameters = dict(locals())
-    with ops.name_scope(name, values=[logits, probs]) as name:
-      self._logits, self._probs = distribution_util.get_logits_and_probs(
-          logits=logits,
-          probs=probs,
-          validate_args=validate_args,
-          multidimensional=True,
-          name=name)
+        parameters = dict(locals())
+        with ops.name_scope(name, values=[logits, probs]) as name:
+            self._logits, self._probs = distribution_util.get_logits_and_probs(
+                logits=logits,
+                probs=probs,
+                validate_args=validate_args,
+                multidimensional=True,
+                name=name,
+            )
 
-      if validate_args:
-        self._logits = distribution_util.embed_check_categorical_event_shape(
-            self._logits)
+            if validate_args:
+                self._logits = distribution_util.embed_check_categorical_event_shape(
+                    self._logits
+                )
 
-      logits_shape_static = self._logits.get_shape().with_rank_at_least(1)
-      if logits_shape_static.ndims is not None:
-        self._batch_rank = ops.convert_to_tensor(
-            logits_shape_static.ndims - 1,
-            dtype=dtypes.int32,
-            name="batch_rank")
-      else:
-        with ops.name_scope(name="batch_rank"):
-          self._batch_rank = array_ops.rank(self._logits) - 1
+            logits_shape_static = self._logits.get_shape().with_rank_at_least(1)
+            if logits_shape_static.ndims is not None:
+                self._batch_rank = ops.convert_to_tensor(
+                    logits_shape_static.ndims - 1, dtype=dtypes.int32, name="batch_rank"
+                )
+            else:
+                with ops.name_scope(name="batch_rank"):
+                    self._batch_rank = array_ops.rank(self._logits) - 1
 
-      logits_shape = array_ops.shape(self._logits, name="logits_shape")
-      if tensor_shape.dimension_value(logits_shape_static[-1]) is not None:
-        self._event_size = ops.convert_to_tensor(
-            logits_shape_static.dims[-1].value,
-            dtype=dtypes.int32,
-            name="event_size")
-      else:
-        with ops.name_scope(name="event_size"):
-          self._event_size = logits_shape[self._batch_rank]
+            logits_shape = array_ops.shape(self._logits, name="logits_shape")
+            if tensor_shape.dimension_value(logits_shape_static[-1]) is not None:
+                self._event_size = ops.convert_to_tensor(
+                    logits_shape_static.dims[-1].value,
+                    dtype=dtypes.int32,
+                    name="event_size",
+                )
+            else:
+                with ops.name_scope(name="event_size"):
+                    self._event_size = logits_shape[self._batch_rank]
 
-      if logits_shape_static[:-1].is_fully_defined():
-        self._batch_shape_val = constant_op.constant(
-            logits_shape_static[:-1].as_list(),
-            dtype=dtypes.int32,
-            name="batch_shape")
-      else:
-        with ops.name_scope(name="batch_shape"):
-          self._batch_shape_val = logits_shape[:-1]
-    super(Categorical, self).__init__(
-        dtype=dtype,
-        reparameterization_type=distribution.NOT_REPARAMETERIZED,
-        validate_args=validate_args,
-        allow_nan_stats=allow_nan_stats,
-        parameters=parameters,
-        graph_parents=[self._logits,
-                       self._probs],
-        name=name)
+            if logits_shape_static[:-1].is_fully_defined():
+                self._batch_shape_val = constant_op.constant(
+                    logits_shape_static[:-1].as_list(),
+                    dtype=dtypes.int32,
+                    name="batch_shape",
+                )
+            else:
+                with ops.name_scope(name="batch_shape"):
+                    self._batch_shape_val = logits_shape[:-1]
+        super(Categorical, self).__init__(
+            dtype=dtype,
+            reparameterization_type=distribution.NOT_REPARAMETERIZED,
+            validate_args=validate_args,
+            allow_nan_stats=allow_nan_stats,
+            parameters=parameters,
+            graph_parents=[self._logits, self._probs],
+            name=name,
+        )
 
-  @property
-  def event_size(self):
-    """Scalar `int32` tensor: the number of classes."""
-    return self._event_size
+    @property
+    def event_size(self):
+        """Scalar `int32` tensor: the number of classes."""
+        return self._event_size
 
-  @property
-  def logits(self):
-    """Vector of coordinatewise logits."""
-    return self._logits
+    @property
+    def logits(self):
+        """Vector of coordinatewise logits."""
+        return self._logits
 
-  @property
-  def probs(self):
-    """Vector of coordinatewise probabilities."""
-    return self._probs
+    @property
+    def probs(self):
+        """Vector of coordinatewise probabilities."""
+        return self._probs
 
-  def _batch_shape_tensor(self):
-    return array_ops.identity(self._batch_shape_val)
+    def _batch_shape_tensor(self):
+        return array_ops.identity(self._batch_shape_val)
 
-  def _batch_shape(self):
-    return self.logits.get_shape()[:-1]
+    def _batch_shape(self):
+        return self.logits.get_shape()[:-1]
 
-  def _event_shape_tensor(self):
-    return constant_op.constant([], dtype=dtypes.int32)
+    def _event_shape_tensor(self):
+        return constant_op.constant([], dtype=dtypes.int32)
 
-  def _event_shape(self):
-    return tensor_shape.TensorShape([])
+    def _event_shape(self):
+        return tensor_shape.TensorShape([])
 
-  def _sample_n(self, n, seed=None):
-    if self.logits.get_shape().ndims == 2:
-      logits_2d = self.logits
-    else:
-      logits_2d = array_ops.reshape(self.logits, [-1, self.event_size])
-    sample_dtype = dtypes.int64 if self.dtype.size > 4 else dtypes.int32
-    draws = random_ops.multinomial(
-        logits_2d, n, seed=seed, output_dtype=sample_dtype)
-    draws = array_ops.reshape(
-        array_ops.transpose(draws),
-        array_ops.concat([[n], self.batch_shape_tensor()], 0))
-    return math_ops.cast(draws, self.dtype)
+    def _sample_n(self, n, seed=None):
+        if self.logits.get_shape().ndims == 2:
+            logits_2d = self.logits
+        else:
+            logits_2d = array_ops.reshape(self.logits, [-1, self.event_size])
+        sample_dtype = dtypes.int64 if self.dtype.size > 4 else dtypes.int32
+        draws = random_ops.multinomial(
+            logits_2d, n, seed=seed, output_dtype=sample_dtype
+        )
+        draws = array_ops.reshape(
+            array_ops.transpose(draws),
+            array_ops.concat([[n], self.batch_shape_tensor()], 0),
+        )
+        return math_ops.cast(draws, self.dtype)
 
-  def _cdf(self, k):
-    k = ops.convert_to_tensor(k, name="k")
-    if self.validate_args:
-      k = distribution_util.embed_check_integer_casting_closed(
-          k, target_dtype=dtypes.int32)
+    def _cdf(self, k):
+        k = ops.convert_to_tensor(k, name="k")
+        if self.validate_args:
+            k = distribution_util.embed_check_integer_casting_closed(
+                k, target_dtype=dtypes.int32
+            )
 
-    k, probs = _broadcast_cat_event_and_params(
-        k, self.probs, base_dtype=self.dtype.base_dtype)
+        k, probs = _broadcast_cat_event_and_params(
+            k, self.probs, base_dtype=self.dtype.base_dtype
+        )
 
-    # batch-flatten everything in order to use `sequence_mask()`.
-    batch_flattened_probs = array_ops.reshape(probs,
-                                              (-1, self._event_size))
-    batch_flattened_k = array_ops.reshape(k, [-1])
+        # batch-flatten everything in order to use `sequence_mask()`.
+        batch_flattened_probs = array_ops.reshape(probs, (-1, self._event_size))
+        batch_flattened_k = array_ops.reshape(k, [-1])
 
-    to_sum_over = array_ops.where(
-        array_ops.sequence_mask(batch_flattened_k, self._event_size),
-        batch_flattened_probs,
-        array_ops.zeros_like(batch_flattened_probs))
-    batch_flattened_cdf = math_ops.reduce_sum(to_sum_over, axis=-1)
-    # Reshape back to the shape of the argument.
-    return array_ops.reshape(batch_flattened_cdf, array_ops.shape(k))
+        to_sum_over = array_ops.where(
+            array_ops.sequence_mask(batch_flattened_k, self._event_size),
+            batch_flattened_probs,
+            array_ops.zeros_like(batch_flattened_probs),
+        )
+        batch_flattened_cdf = math_ops.reduce_sum(to_sum_over, axis=-1)
+        # Reshape back to the shape of the argument.
+        return array_ops.reshape(batch_flattened_cdf, array_ops.shape(k))
 
-  def _log_prob(self, k):
-    k = ops.convert_to_tensor(k, name="k")
-    if self.validate_args:
-      k = distribution_util.embed_check_integer_casting_closed(
-          k, target_dtype=dtypes.int32)
-    k, logits = _broadcast_cat_event_and_params(
-        k, self.logits, base_dtype=self.dtype.base_dtype)
+    def _log_prob(self, k):
+        k = ops.convert_to_tensor(k, name="k")
+        if self.validate_args:
+            k = distribution_util.embed_check_integer_casting_closed(
+                k, target_dtype=dtypes.int32
+            )
+        k, logits = _broadcast_cat_event_and_params(
+            k, self.logits, base_dtype=self.dtype.base_dtype
+        )
 
-    # pylint: disable=invalid-unary-operand-type
-    return -nn_ops.sparse_softmax_cross_entropy_with_logits(
-        labels=k,
-        logits=logits)
+        # pylint: disable=invalid-unary-operand-type
+        return -nn_ops.sparse_softmax_cross_entropy_with_logits(labels=k, logits=logits)
 
-  def _entropy(self):
-    return -math_ops.reduce_sum(
-        nn_ops.log_softmax(self.logits) * self.probs, axis=-1)
+    def _entropy(self):
+        return -math_ops.reduce_sum(
+            nn_ops.log_softmax(self.logits) * self.probs, axis=-1
+        )
 
-  def _mode(self):
-    ret = math_ops.argmax(self.logits, axis=self._batch_rank)
-    ret = math_ops.cast(ret, self.dtype)
-    ret.set_shape(self.batch_shape)
-    return ret
+    def _mode(self):
+        ret = math_ops.argmax(self.logits, axis=self._batch_rank)
+        ret = math_ops.cast(ret, self.dtype)
+        ret.set_shape(self.batch_shape)
+        return ret
 
 
 @kullback_leibler.RegisterKL(Categorical, Categorical)
 def _kl_categorical_categorical(a, b, name=None):
-  """Calculate the batched KL divergence KL(a || b) with a and b Categorical.
+    """Calculate the batched KL divergence KL(a || b) with a and b Categorical.
 
   Args:
     a: instance of a Categorical distribution object.
@@ -340,10 +352,9 @@ def _kl_categorical_categorical(a, b, name=None):
   Returns:
     Batchwise KL(a || b)
   """
-  with ops.name_scope(name, "kl_categorical_categorical",
-                      values=[a.logits, b.logits]):
-    # sum(probs log(probs / (1 - probs)))
-    delta_log_probs1 = (nn_ops.log_softmax(a.logits) -
-                        nn_ops.log_softmax(b.logits))
-    return math_ops.reduce_sum(nn_ops.softmax(a.logits) * delta_log_probs1,
-                               axis=-1)
+    with ops.name_scope(
+        name, "kl_categorical_categorical", values=[a.logits, b.logits]
+    ):
+        # sum(probs log(probs / (1 - probs)))
+        delta_log_probs1 = nn_ops.log_softmax(a.logits) - nn_ops.log_softmax(b.logits)
+        return math_ops.reduce_sum(nn_ops.softmax(a.logits) * delta_log_probs1, axis=-1)

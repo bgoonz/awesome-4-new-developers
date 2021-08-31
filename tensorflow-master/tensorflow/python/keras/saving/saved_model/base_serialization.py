@@ -26,34 +26,34 @@ from tensorflow.python.training.tracking import tracking
 
 
 class SavedModelSaver(object, metaclass=abc.ABCMeta):
-  """Saver defining the methods and properties used to serialize Keras objects.
+    """Saver defining the methods and properties used to serialize Keras objects.
   """
 
-  def __init__(self, obj):
-    self.obj = obj
+    def __init__(self, obj):
+        self.obj = obj
 
-  @abc.abstractproperty
-  def object_identifier(self):
-    """String stored in object identifier field in the SavedModel proto.
+    @abc.abstractproperty
+    def object_identifier(self):
+        """String stored in object identifier field in the SavedModel proto.
 
     Returns:
       A string with the object identifier, which is used at load time.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  @property
-  def tracking_metadata(self):
-    """String stored in metadata field in the SavedModel proto.
+    @property
+    def tracking_metadata(self):
+        """String stored in metadata field in the SavedModel proto.
 
     Returns:
       A serialized JSON storing information necessary for recreating this layer.
     """
-    # TODO(kathywu): check that serialized JSON can be loaded (e.g., if an
-    # object is in the python property)
-    return json_utils.Encoder().encode(self.python_properties)
+        # TODO(kathywu): check that serialized JSON can be loaded (e.g., if an
+        # object is in the python property)
+        return json_utils.Encoder().encode(self.python_properties)
 
-  def list_extra_dependencies_for_serialization(self, serialization_cache):
-    """Lists extra dependencies to serialize to SavedModel.
+    def list_extra_dependencies_for_serialization(self, serialization_cache):
+        """Lists extra dependencies to serialize to SavedModel.
 
     By overriding this method, extra dependencies can be attached to the
     serialized Layer. For example, this is used to save the list of `variables`
@@ -70,13 +70,13 @@ class SavedModelSaver(object, metaclass=abc.ABCMeta):
       A dictionary mapping attribute names to trackable objects. The entire list
       of attributes are listed in the `saved_model._LayerAttributes` class.
     """
-    if not utils.should_save_traces():
-      return {}
+        if not utils.should_save_traces():
+            return {}
 
-    return self.objects_to_serialize(serialization_cache)
+        return self.objects_to_serialize(serialization_cache)
 
-  def list_functions_for_serialization(self, serialization_cache):
-    """Lists extra functions to serialize to the SavedModel.
+    def list_functions_for_serialization(self, serialization_cache):
+        """Lists extra functions to serialize to the SavedModel.
 
     Args:
       serialization_cache: Dictionary passed to all objects in the same object
@@ -86,33 +86,35 @@ class SavedModelSaver(object, metaclass=abc.ABCMeta):
         A dictionary mapping attribute names to `Function` or
         `ConcreteFunction`.
     """
-    if not utils.should_save_traces():
-      return {}
+        if not utils.should_save_traces():
+            return {}
 
-    fns = self.functions_to_serialize(serialization_cache)
+        fns = self.functions_to_serialize(serialization_cache)
 
-    # The parent AutoTrackable class saves all user-defined tf.functions, and
-    # returns them in _list_functions_for_serialization(). Add these functions
-    # to the dict.
-    fns.update(
-        tracking.AutoTrackable._list_functions_for_serialization(  # pylint:disable=protected-access
-            self.obj, serialization_cache))
-    return fns
+        # The parent AutoTrackable class saves all user-defined tf.functions, and
+        # returns them in _list_functions_for_serialization(). Add these functions
+        # to the dict.
+        fns.update(
+            tracking.AutoTrackable._list_functions_for_serialization(  # pylint:disable=protected-access
+                self.obj, serialization_cache
+            )
+        )
+        return fns
 
-  @abc.abstractproperty
-  def python_properties(self):
-    """Returns dictionary of python properties to save in the metadata.
+    @abc.abstractproperty
+    def python_properties(self):
+        """Returns dictionary of python properties to save in the metadata.
 
     This dictionary must be serializable and deserializable to/from JSON.
 
     When loading, the items in this dict are used to initialize the object and
     define attributes in the revived object.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  @abc.abstractmethod
-  def objects_to_serialize(self, serialization_cache):
-    """Returns dictionary of extra checkpointable objects to serialize.
+    @abc.abstractmethod
+    def objects_to_serialize(self, serialization_cache):
+        """Returns dictionary of extra checkpointable objects to serialize.
 
     See `functions_to_serialize` for an explanation of this function's
     effects.
@@ -124,11 +126,11 @@ class SavedModelSaver(object, metaclass=abc.ABCMeta):
     Returns:
         A dictionary mapping attribute names to checkpointable objects.
     """
-    raise NotImplementedError
+        raise NotImplementedError
 
-  @abc.abstractmethod
-  def functions_to_serialize(self, serialization_cache):
-    """Returns extra functions to include when serializing a Keras object.
+    @abc.abstractmethod
+    def functions_to_serialize(self, serialization_cache):
+        """Returns extra functions to include when serializing a Keras object.
 
     Normally, when calling exporting an object to SavedModel, only the
     functions and objects defined by the user are saved. For example:
@@ -174,4 +176,4 @@ class SavedModelSaver(object, metaclass=abc.ABCMeta):
         A dictionary mapping attribute names to `Function` or
         `ConcreteFunction`.
     """
-    raise NotImplementedError
+        raise NotImplementedError

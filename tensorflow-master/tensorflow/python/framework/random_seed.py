@@ -30,19 +30,19 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 DEFAULT_GRAPH_SEED = 87654321
-_MAXINT32 = 2**31 - 1
+_MAXINT32 = 2 ** 31 - 1
 
 _graph_to_seed_dict = weakref.WeakKeyDictionary()
 
 
 def _truncate_seed(seed):
-  return seed % _MAXINT32  # Truncate to fit into 32-bit integer
+    return seed % _MAXINT32  # Truncate to fit into 32-bit integer
 
 
-@tf_export(v1=['random.get_seed', 'get_seed'])
-@deprecation.deprecated_endpoints('get_seed')
+@tf_export(v1=["random.get_seed", "get_seed"])
+@deprecation.deprecated_endpoints("get_seed")
 def get_seed(op_seed):
-  """Returns the local seeds an operation should use given an op-specific seed.
+    """Returns the local seeds an operation should use given an op-specific seed.
 
   Given operation-specific seed, `op_seed`, this helper function returns two
   seeds derived from graph-level and op-level seeds. Many random operations
@@ -59,47 +59,48 @@ def get_seed(op_seed):
     A tuple of two integers that should be used for the local seed of this
     operation.
   """
-  eager = context.executing_eagerly()
+    eager = context.executing_eagerly()
 
-  if eager:
-    global_seed = context.global_seed()
-  else:
-    global_seed = ops.get_default_graph().seed
-
-  if global_seed is not None:
-    if op_seed is None:
-      # pylint: disable=protected-access
-      if hasattr(ops.get_default_graph(), '_seed_used'):
-        ops.get_default_graph()._seed_used = True
-      if eager:
-        op_seed = context.internal_operation_seed()
-      else:
-        op_seed = _graph_to_seed_dict.setdefault(ops.get_default_graph(), 0)
-        _graph_to_seed_dict[ops.get_default_graph()] += 1
-
-    seeds = _truncate_seed(global_seed), _truncate_seed(op_seed)
-  else:
-    if op_seed is not None:
-      seeds = DEFAULT_GRAPH_SEED, _truncate_seed(op_seed)
+    if eager:
+        global_seed = context.global_seed()
     else:
-      seeds = None, None
+        global_seed = ops.get_default_graph().seed
 
-  if seeds == (None, None) and config.deterministic_ops_enabled():
-    raise RuntimeError(  # pylint: disable=g-doc-exception
-        'Random ops require a seed to be set when determinism is enabled. '
-        'Please set a seed before running the op, e.g. by calling '
-        'tf.random.set_seed(1).')
+    if global_seed is not None:
+        if op_seed is None:
+            # pylint: disable=protected-access
+            if hasattr(ops.get_default_graph(), "_seed_used"):
+                ops.get_default_graph()._seed_used = True
+            if eager:
+                op_seed = context.internal_operation_seed()
+            else:
+                op_seed = _graph_to_seed_dict.setdefault(ops.get_default_graph(), 0)
+                _graph_to_seed_dict[ops.get_default_graph()] += 1
 
-  # Avoid (0, 0) as the C++ ops interpret it as nondeterminism, which would
-  # be unexpected since Python docs say nondeterminism is (None, None).
-  if seeds == (0, 0):
-    return (0, _MAXINT32)
-  return seeds
+        seeds = _truncate_seed(global_seed), _truncate_seed(op_seed)
+    else:
+        if op_seed is not None:
+            seeds = DEFAULT_GRAPH_SEED, _truncate_seed(op_seed)
+        else:
+            seeds = None, None
+
+    if seeds == (None, None) and config.deterministic_ops_enabled():
+        raise RuntimeError(  # pylint: disable=g-doc-exception
+            "Random ops require a seed to be set when determinism is enabled. "
+            "Please set a seed before running the op, e.g. by calling "
+            "tf.random.set_seed(1)."
+        )
+
+    # Avoid (0, 0) as the C++ ops interpret it as nondeterminism, which would
+    # be unexpected since Python docs say nondeterminism is (None, None).
+    if seeds == (0, 0):
+        return (0, _MAXINT32)
+    return seeds
 
 
-@tf_export(v1=['random.set_random_seed', 'set_random_seed'])
+@tf_export(v1=["random.set_random_seed", "set_random_seed"])
 def set_random_seed(seed):
-  """Sets the graph-level random seed for the default graph.
+    """Sets the graph-level random seed for the default graph.
 
   Operations that rely on a random seed actually derive it from two seeds:
   the graph-level and operation-level seeds. This sets the graph-level seed.
@@ -205,15 +206,15 @@ def set_random_seed(seed):
   Args:
     seed: integer.
   """
-  if context.executing_eagerly():
-    context.set_global_seed(seed)
-  else:
-    ops.get_default_graph().seed = seed
+    if context.executing_eagerly():
+        context.set_global_seed(seed)
+    else:
+        ops.get_default_graph().seed = seed
 
 
-@tf_export('random.set_seed', v1=[])
+@tf_export("random.set_seed", v1=[])
 def set_seed(seed):
-  """Sets the global random seed.
+    """Sets the global random seed.
 
   Operations that rely on a random seed actually derive it from two seeds:
   the global and operation-level seeds. This sets the global seed.
@@ -359,4 +360,4 @@ def set_seed(seed):
   Args:
     seed: integer.
   """
-  set_random_seed(seed)
+    set_random_seed(seed)

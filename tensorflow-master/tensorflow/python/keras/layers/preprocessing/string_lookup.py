@@ -26,7 +26,7 @@ from tensorflow.python.util.tf_export import keras_export
 
 @keras_export("keras.layers.experimental.preprocessing.StringLookup", v1=[])
 class StringLookup(index_lookup.IndexLookup):
-  """Maps strings from a vocabulary to integer indices.
+    """Maps strings from a vocabulary to integer indices.
 
   This layer translates a set of arbitrary strings into an integer output via a
   table-based vocabulary lookup.
@@ -278,64 +278,70 @@ class StringLookup(index_lookup.IndexLookup):
   either directly or via adapt() before calling get_vocabulary().
   """
 
-  def __init__(self,
-               max_tokens=None,
-               num_oov_indices=1,
-               mask_token=None,
-               oov_token="[UNK]",
-               vocabulary=None,
-               encoding=None,
-               invert=False,
-               output_mode=index_lookup.INT,
-               sparse=False,
-               pad_to_max_tokens=False,
-               **kwargs):
-    allowed_dtypes = [dtypes.string]
+    def __init__(
+        self,
+        max_tokens=None,
+        num_oov_indices=1,
+        mask_token=None,
+        oov_token="[UNK]",
+        vocabulary=None,
+        encoding=None,
+        invert=False,
+        output_mode=index_lookup.INT,
+        sparse=False,
+        pad_to_max_tokens=False,
+        **kwargs
+    ):
+        allowed_dtypes = [dtypes.string]
 
-    if "dtype" in kwargs and kwargs["dtype"] not in allowed_dtypes:
-      raise ValueError("The value of the dtype argument for StringLookup may "
-                       "only be one of %s." % (allowed_dtypes,))
+        if "dtype" in kwargs and kwargs["dtype"] not in allowed_dtypes:
+            raise ValueError(
+                "The value of the dtype argument for StringLookup may "
+                "only be one of %s." % (allowed_dtypes,)
+            )
 
-    if "dtype" not in kwargs:
-      kwargs["dtype"] = dtypes.string
+        if "dtype" not in kwargs:
+            kwargs["dtype"] = dtypes.string
 
-    if encoding is None:
-      encoding = "utf-8"
+        if encoding is None:
+            encoding = "utf-8"
 
-    self.encoding = encoding
+        self.encoding = encoding
 
-    super(StringLookup, self).__init__(
-        max_tokens=max_tokens,
-        num_oov_indices=num_oov_indices,
-        mask_token=mask_token,
-        oov_token=oov_token,
-        vocabulary=vocabulary,
-        invert=invert,
-        output_mode=output_mode,
-        sparse=sparse,
-        pad_to_max_tokens=pad_to_max_tokens,
-        **kwargs)
+        super(StringLookup, self).__init__(
+            max_tokens=max_tokens,
+            num_oov_indices=num_oov_indices,
+            mask_token=mask_token,
+            oov_token=oov_token,
+            vocabulary=vocabulary,
+            invert=invert,
+            output_mode=output_mode,
+            sparse=sparse,
+            pad_to_max_tokens=pad_to_max_tokens,
+            **kwargs
+        )
 
-  def get_config(self):
-    config = {"encoding": self.encoding}
-    base_config = super(StringLookup, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {"encoding": self.encoding}
+        base_config = super(StringLookup, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
-  def set_vocabulary(self, vocabulary, idf_weights=None):
-    if isinstance(vocabulary, str):
-      if self.output_mode == index_lookup.TF_IDF:
-        raise RuntimeError("Setting vocabulary directly from a file is not "
-                           "supported in TF-IDF mode, since this layer cannot "
-                           "read files containing TF-IDF weight data. Please "
-                           "read the file using Python and set the vocabulary "
-                           "and weights by passing lists or arrays to the "
-                           "set_vocabulary function's `vocabulary` and "
-                           "`idf_weights` args.")
-      vocabulary = table_utils.get_vocabulary_from_file(vocabulary,
-                                                        self.encoding)
-    super().set_vocabulary(vocabulary, idf_weights=idf_weights)
+    def set_vocabulary(self, vocabulary, idf_weights=None):
+        if isinstance(vocabulary, str):
+            if self.output_mode == index_lookup.TF_IDF:
+                raise RuntimeError(
+                    "Setting vocabulary directly from a file is not "
+                    "supported in TF-IDF mode, since this layer cannot "
+                    "read files containing TF-IDF weight data. Please "
+                    "read the file using Python and set the vocabulary "
+                    "and weights by passing lists or arrays to the "
+                    "set_vocabulary function's `vocabulary` and "
+                    "`idf_weights` args."
+                )
+            vocabulary = table_utils.get_vocabulary_from_file(vocabulary, self.encoding)
+        super().set_vocabulary(vocabulary, idf_weights=idf_weights)
 
-  # Overriden methods from IndexLookup.
-  def _tensor_vocab_to_numpy(self, vocabulary):
-    vocabulary = vocabulary.numpy()
-    return np.array([compat.as_text(x, self.encoding) for x in vocabulary])
+    # Overriden methods from IndexLookup.
+    def _tensor_vocab_to_numpy(self, vocabulary):
+        vocabulary = vocabulary.numpy()
+        return np.array([compat.as_text(x, self.encoding) for x in vocabulary])

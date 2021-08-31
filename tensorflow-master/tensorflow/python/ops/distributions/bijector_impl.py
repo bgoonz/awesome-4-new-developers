@@ -37,17 +37,14 @@ from tensorflow.python.ops.distributions import util as distribution_util
 from tensorflow.python.util import object_identity
 
 
-__all__ = [
-    "Bijector",
-]
+__all__ = ["Bijector"]
 
 
-class _Mapping(collections.namedtuple(
-    "_Mapping", ["x", "y", "ildj_map", "kwargs"])):
-  """Helper class to make it easier to manage caching in `Bijector`."""
+class _Mapping(collections.namedtuple("_Mapping", ["x", "y", "ildj_map", "kwargs"])):
+    """Helper class to make it easier to manage caching in `Bijector`."""
 
-  def __new__(cls, x=None, y=None, ildj_map=None, kwargs=None):
-    """Custom __new__ so namedtuple items have defaults.
+    def __new__(cls, x=None, y=None, ildj_map=None, kwargs=None):
+        """Custom __new__ so namedtuple items have defaults.
 
     Args:
       x: `Tensor`. Forward.
@@ -60,22 +57,24 @@ class _Mapping(collections.namedtuple(
     Returns:
       mapping: New instance of _Mapping.
     """
-    return super(_Mapping, cls).__new__(cls, x, y, ildj_map, kwargs)
+        return super(_Mapping, cls).__new__(cls, x, y, ildj_map, kwargs)
 
-  @property
-  def x_key(self):
-    """Returns key used for caching Y=g(X)."""
-    return ((object_identity.Reference(self.x),) +
-            self._deep_tuple(tuple(sorted(self.kwargs.items()))))
+    @property
+    def x_key(self):
+        """Returns key used for caching Y=g(X)."""
+        return (object_identity.Reference(self.x),) + self._deep_tuple(
+            tuple(sorted(self.kwargs.items()))
+        )
 
-  @property
-  def y_key(self):
-    """Returns key used for caching X=g^{-1}(Y)."""
-    return ((object_identity.Reference(self.y),) +
-            self._deep_tuple(tuple(sorted(self.kwargs.items()))))
+    @property
+    def y_key(self):
+        """Returns key used for caching X=g^{-1}(Y)."""
+        return (object_identity.Reference(self.y),) + self._deep_tuple(
+            tuple(sorted(self.kwargs.items()))
+        )
 
-  def merge(self, x=None, y=None, ildj_map=None, kwargs=None, mapping=None):
-    """Returns new _Mapping with args merged with self.
+    def merge(self, x=None, y=None, ildj_map=None, kwargs=None, mapping=None):
+        """Returns new _Mapping with args merged with self.
 
     Args:
       x: `Tensor`. Forward.
@@ -93,48 +92,50 @@ class _Mapping(collections.namedtuple(
     Raises:
       ValueError: if mapping and any other arg is not `None`.
     """
-    if mapping is None:
-      mapping = _Mapping(x=x, y=y, ildj_map=ildj_map, kwargs=kwargs)
-    elif any(arg is not None for arg in [x, y, ildj_map, kwargs]):
-      raise ValueError("Cannot simultaneously specify mapping and individual "
-                       "arguments.")
+        if mapping is None:
+            mapping = _Mapping(x=x, y=y, ildj_map=ildj_map, kwargs=kwargs)
+        elif any(arg is not None for arg in [x, y, ildj_map, kwargs]):
+            raise ValueError(
+                "Cannot simultaneously specify mapping and individual " "arguments."
+            )
 
-    return _Mapping(
-        x=self._merge(self.x, mapping.x),
-        y=self._merge(self.y, mapping.y),
-        ildj_map=self._merge_dicts(self.ildj_map, mapping.ildj_map),
-        kwargs=self._merge(self.kwargs, mapping.kwargs))
+        return _Mapping(
+            x=self._merge(self.x, mapping.x),
+            y=self._merge(self.y, mapping.y),
+            ildj_map=self._merge_dicts(self.ildj_map, mapping.ildj_map),
+            kwargs=self._merge(self.kwargs, mapping.kwargs),
+        )
 
-  def _merge_dicts(self, old=None, new=None):
-    """Helper to merge two dictionaries."""
-    old = {} if old is None else old
-    new = {} if new is None else new
-    for k, v in six.iteritems(new):
-      val = old.get(k, None)
-      if val is not None and val is not v:
-        raise ValueError("Found different value for existing key "
-                         "(key:{} old_value:{} new_value:{}".format(
-                             k, old[k], v))
-      old[k] = v
-    return old
+    def _merge_dicts(self, old=None, new=None):
+        """Helper to merge two dictionaries."""
+        old = {} if old is None else old
+        new = {} if new is None else new
+        for k, v in six.iteritems(new):
+            val = old.get(k, None)
+            if val is not None and val is not v:
+                raise ValueError(
+                    "Found different value for existing key "
+                    "(key:{} old_value:{} new_value:{}".format(k, old[k], v)
+                )
+            old[k] = v
+        return old
 
-  def _merge(self, old, new):
-    """Helper to merge which handles merging one value."""
-    if old is None:
-      return new
-    elif new is not None and old is not new:
-      raise ValueError("Incompatible values: %s != %s" % (old, new))
-    return old
+    def _merge(self, old, new):
+        """Helper to merge which handles merging one value."""
+        if old is None:
+            return new
+        elif new is not None and old is not new:
+            raise ValueError("Incompatible values: %s != %s" % (old, new))
+        return old
 
-  def _deep_tuple(self, x):
-    """Converts lists of lists to tuples of tuples."""
-    return (tuple(map(self._deep_tuple, x))
-            if isinstance(x, (list, tuple)) else x)
+    def _deep_tuple(self, x):
+        """Converts lists of lists to tuples of tuples."""
+        return tuple(map(self._deep_tuple, x)) if isinstance(x, (list, tuple)) else x
 
 
 @six.add_metaclass(abc.ABCMeta)
 class Bijector(object):
-  r"""Interface for transformations of a `Distribution` sample.
+    r"""Interface for transformations of a `Distribution` sample.
 
   Bijectors can be used to represent any differentiable and injective
   (one to one) function defined on an open subset of `R^n`.  Some non-injective
@@ -490,16 +491,18 @@ class Bijector(object):
 
   """
 
-  @abc.abstractmethod
-  def __init__(self,
-               graph_parents=None,
-               is_constant_jacobian=False,
-               validate_args=False,
-               dtype=None,
-               forward_min_event_ndims=None,
-               inverse_min_event_ndims=None,
-               name=None):
-    """Constructs Bijector.
+    @abc.abstractmethod
+    def __init__(
+        self,
+        graph_parents=None,
+        is_constant_jacobian=False,
+        validate_args=False,
+        dtype=None,
+        forward_min_event_ndims=None,
+        inverse_min_event_ndims=None,
+        name=None,
+    ):
+        """Constructs Bijector.
 
     A `Bijector` transforms random variables into new random variables.
 
@@ -537,74 +540,81 @@ class Bijector(object):
         negative.
       ValueError:  If a member of `graph_parents` is not a `Tensor`.
     """
-    self._graph_parents = graph_parents or []
+        self._graph_parents = graph_parents or []
 
-    if forward_min_event_ndims is None and inverse_min_event_ndims is None:
-      raise ValueError("Must specify at least one of `forward_min_event_ndims` "
-                       "and `inverse_min_event_ndims`.")
-    elif inverse_min_event_ndims is None:
-      inverse_min_event_ndims = forward_min_event_ndims
-    elif forward_min_event_ndims is None:
-      forward_min_event_ndims = inverse_min_event_ndims
+        if forward_min_event_ndims is None and inverse_min_event_ndims is None:
+            raise ValueError(
+                "Must specify at least one of `forward_min_event_ndims` "
+                "and `inverse_min_event_ndims`."
+            )
+        elif inverse_min_event_ndims is None:
+            inverse_min_event_ndims = forward_min_event_ndims
+        elif forward_min_event_ndims is None:
+            forward_min_event_ndims = inverse_min_event_ndims
 
-    if not isinstance(forward_min_event_ndims, int):
-      raise TypeError("Expected forward_min_event_ndims to be of "
-                      "type int, got {}".format(
-                          type(forward_min_event_ndims).__name__))
+        if not isinstance(forward_min_event_ndims, int):
+            raise TypeError(
+                "Expected forward_min_event_ndims to be of "
+                "type int, got {}".format(type(forward_min_event_ndims).__name__)
+            )
 
-    if not isinstance(inverse_min_event_ndims, int):
-      raise TypeError("Expected inverse_min_event_ndims to be of "
-                      "type int, got {}".format(
-                          type(inverse_min_event_ndims).__name__))
+        if not isinstance(inverse_min_event_ndims, int):
+            raise TypeError(
+                "Expected inverse_min_event_ndims to be of "
+                "type int, got {}".format(type(inverse_min_event_ndims).__name__)
+            )
 
-    if forward_min_event_ndims < 0:
-      raise ValueError("forward_min_event_ndims must be a non-negative "
-                       "integer.")
-    if inverse_min_event_ndims < 0:
-      raise ValueError("inverse_min_event_ndims must be a non-negative "
-                       "integer.")
+        if forward_min_event_ndims < 0:
+            raise ValueError(
+                "forward_min_event_ndims must be a non-negative " "integer."
+            )
+        if inverse_min_event_ndims < 0:
+            raise ValueError(
+                "inverse_min_event_ndims must be a non-negative " "integer."
+            )
 
-    self._forward_min_event_ndims = forward_min_event_ndims
-    self._inverse_min_event_ndims = inverse_min_event_ndims
-    self._is_constant_jacobian = is_constant_jacobian
-    self._constant_ildj_map = {}
-    self._validate_args = validate_args
-    self._dtype = dtype
-    # These dicts can only be accessed using _Mapping.x_key or _Mapping.y_key
-    self._from_y = {}
-    self._from_x = {}
-    if name:
-      self._name = name
-    else:
-      # We want the default convention to be snake_case rather than CamelCase
-      # since `Chain` uses bijector.name as the kwargs dictionary key.
-      def camel_to_snake(name):
-        s1 = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)
-        return re.sub("([a-z0-9])([A-Z])", r"\1_\2", s1).lower()
-      self._name = camel_to_snake(type(self).__name__.lstrip("_"))
+        self._forward_min_event_ndims = forward_min_event_ndims
+        self._inverse_min_event_ndims = inverse_min_event_ndims
+        self._is_constant_jacobian = is_constant_jacobian
+        self._constant_ildj_map = {}
+        self._validate_args = validate_args
+        self._dtype = dtype
+        # These dicts can only be accessed using _Mapping.x_key or _Mapping.y_key
+        self._from_y = {}
+        self._from_x = {}
+        if name:
+            self._name = name
+        else:
+            # We want the default convention to be snake_case rather than CamelCase
+            # since `Chain` uses bijector.name as the kwargs dictionary key.
+            def camel_to_snake(name):
+                s1 = re.sub("(.)([A-Z][a-z]+)", r"\1_\2", name)
+                return re.sub("([a-z0-9])([A-Z])", r"\1_\2", s1).lower()
 
-    for i, t in enumerate(self._graph_parents):
-      if t is None or not tensor_util.is_tf_type(t):
-        raise ValueError("Graph parent item %d is not a Tensor; %s." % (i, t))
+            self._name = camel_to_snake(type(self).__name__.lstrip("_"))
 
-  @property
-  def graph_parents(self):
-    """Returns this `Bijector`'s graph_parents as a Python list."""
-    return self._graph_parents
+        for i, t in enumerate(self._graph_parents):
+            if t is None or not tensor_util.is_tf_type(t):
+                raise ValueError("Graph parent item %d is not a Tensor; %s." % (i, t))
 
-  @property
-  def forward_min_event_ndims(self):
-    """Returns the minimal number of dimensions bijector.forward operates on."""
-    return self._forward_min_event_ndims
+    @property
+    def graph_parents(self):
+        """Returns this `Bijector`'s graph_parents as a Python list."""
+        return self._graph_parents
 
-  @property
-  def inverse_min_event_ndims(self):
-    """Returns the minimal number of dimensions bijector.inverse operates on."""
-    return self._inverse_min_event_ndims
+    @property
+    def forward_min_event_ndims(self):
+        """Returns the minimal number of dimensions bijector.forward operates on."""
+        return self._forward_min_event_ndims
 
-  @property
-  def is_constant_jacobian(self):
-    """Returns true iff the Jacobian matrix is not a function of x.
+    @property
+    def inverse_min_event_ndims(self):
+        """Returns the minimal number of dimensions bijector.inverse operates on."""
+        return self._inverse_min_event_ndims
+
+    @property
+    def is_constant_jacobian(self):
+        """Returns true iff the Jacobian matrix is not a function of x.
 
     Note: Jacobian matrix is either constant for both forward and inverse or
     neither.
@@ -612,11 +622,11 @@ class Bijector(object):
     Returns:
       is_constant_jacobian: Python `bool`.
     """
-    return self._is_constant_jacobian
+        return self._is_constant_jacobian
 
-  @property
-  def _is_injective(self):
-    """Returns true iff the forward map `g` is injective (one-to-one function).
+    @property
+    def _is_injective(self):
+        """Returns true iff the forward map `g` is injective (one-to-one function).
 
     **WARNING** This hidden property and its behavior are subject to change.
 
@@ -628,32 +638,32 @@ class Bijector(object):
     Returns:
       is_injective: Python `bool`.
     """
-    return True
+        return True
 
-  @property
-  def validate_args(self):
-    """Returns True if Tensor arguments will be validated."""
-    return self._validate_args
+    @property
+    def validate_args(self):
+        """Returns True if Tensor arguments will be validated."""
+        return self._validate_args
 
-  @property
-  def dtype(self):
-    """dtype of `Tensor`s transformable by this distribution."""
-    return self._dtype
+    @property
+    def dtype(self):
+        """dtype of `Tensor`s transformable by this distribution."""
+        return self._dtype
 
-  @property
-  def name(self):
-    """Returns the string name of this `Bijector`."""
-    return self._name
+    @property
+    def name(self):
+        """Returns the string name of this `Bijector`."""
+        return self._name
 
-  def _forward_event_shape_tensor(self, input_shape):
-    """Subclass implementation for `forward_event_shape_tensor` function."""
-    # By default, we assume event_shape is unchanged.
-    return input_shape
+    def _forward_event_shape_tensor(self, input_shape):
+        """Subclass implementation for `forward_event_shape_tensor` function."""
+        # By default, we assume event_shape is unchanged.
+        return input_shape
 
-  def forward_event_shape_tensor(self,
-                                 input_shape,
-                                 name="forward_event_shape_tensor"):
-    """Shape of a single sample from a single batch as an `int32` 1D `Tensor`.
+    def forward_event_shape_tensor(
+        self, input_shape, name="forward_event_shape_tensor"
+    ):
+        """Shape of a single sample from a single batch as an `int32` 1D `Tensor`.
 
     Args:
       input_shape: `Tensor`, `int32` vector indicating event-portion shape
@@ -664,18 +674,19 @@ class Bijector(object):
       forward_event_shape_tensor: `Tensor`, `int32` vector indicating
         event-portion shape after applying `forward`.
     """
-    with self._name_scope(name, [input_shape]):
-      input_shape = ops.convert_to_tensor(input_shape, dtype=dtypes.int32,
-                                          name="input_shape")
-      return self._forward_event_shape_tensor(input_shape)
+        with self._name_scope(name, [input_shape]):
+            input_shape = ops.convert_to_tensor(
+                input_shape, dtype=dtypes.int32, name="input_shape"
+            )
+            return self._forward_event_shape_tensor(input_shape)
 
-  def _forward_event_shape(self, input_shape):
-    """Subclass implementation for `forward_event_shape` public function."""
-    # By default, we assume event_shape is unchanged.
-    return input_shape
+    def _forward_event_shape(self, input_shape):
+        """Subclass implementation for `forward_event_shape` public function."""
+        # By default, we assume event_shape is unchanged.
+        return input_shape
 
-  def forward_event_shape(self, input_shape):
-    """Shape of a single sample from a single batch as a `TensorShape`.
+    def forward_event_shape(self, input_shape):
+        """Shape of a single sample from a single batch as a `TensorShape`.
 
     Same meaning as `forward_event_shape_tensor`. May be only partially defined.
 
@@ -687,17 +698,17 @@ class Bijector(object):
       forward_event_shape_tensor: `TensorShape` indicating event-portion shape
         after applying `forward`. Possibly unknown.
     """
-    return self._forward_event_shape(tensor_shape.TensorShape(input_shape))
+        return self._forward_event_shape(tensor_shape.TensorShape(input_shape))
 
-  def _inverse_event_shape_tensor(self, output_shape):
-    """Subclass implementation for `inverse_event_shape_tensor` function."""
-    # By default, we assume event_shape is unchanged.
-    return output_shape
+    def _inverse_event_shape_tensor(self, output_shape):
+        """Subclass implementation for `inverse_event_shape_tensor` function."""
+        # By default, we assume event_shape is unchanged.
+        return output_shape
 
-  def inverse_event_shape_tensor(self,
-                                 output_shape,
-                                 name="inverse_event_shape_tensor"):
-    """Shape of a single sample from a single batch as an `int32` 1D `Tensor`.
+    def inverse_event_shape_tensor(
+        self, output_shape, name="inverse_event_shape_tensor"
+    ):
+        """Shape of a single sample from a single batch as an `int32` 1D `Tensor`.
 
     Args:
       output_shape: `Tensor`, `int32` vector indicating event-portion shape
@@ -708,18 +719,19 @@ class Bijector(object):
       inverse_event_shape_tensor: `Tensor`, `int32` vector indicating
         event-portion shape after applying `inverse`.
     """
-    with self._name_scope(name, [output_shape]):
-      output_shape = ops.convert_to_tensor(output_shape, dtype=dtypes.int32,
-                                           name="output_shape")
-      return self._inverse_event_shape_tensor(output_shape)
+        with self._name_scope(name, [output_shape]):
+            output_shape = ops.convert_to_tensor(
+                output_shape, dtype=dtypes.int32, name="output_shape"
+            )
+            return self._inverse_event_shape_tensor(output_shape)
 
-  def _inverse_event_shape(self, output_shape):
-    """Subclass implementation for `inverse_event_shape` public function."""
-    # By default, we assume event_shape is unchanged.
-    return tensor_shape.TensorShape(output_shape)
+    def _inverse_event_shape(self, output_shape):
+        """Subclass implementation for `inverse_event_shape` public function."""
+        # By default, we assume event_shape is unchanged.
+        return tensor_shape.TensorShape(output_shape)
 
-  def inverse_event_shape(self, output_shape):
-    """Shape of a single sample from a single batch as a `TensorShape`.
+    def inverse_event_shape(self, output_shape):
+        """Shape of a single sample from a single batch as a `TensorShape`.
 
     Same meaning as `inverse_event_shape_tensor`. May be only partially defined.
 
@@ -731,27 +743,27 @@ class Bijector(object):
       inverse_event_shape_tensor: `TensorShape` indicating event-portion shape
         after applying `inverse`. Possibly unknown.
     """
-    return self._inverse_event_shape(output_shape)
+        return self._inverse_event_shape(output_shape)
 
-  def _forward(self, x):
-    """Subclass implementation for `forward` public function."""
-    raise NotImplementedError("forward not implemented.")
+    def _forward(self, x):
+        """Subclass implementation for `forward` public function."""
+        raise NotImplementedError("forward not implemented.")
 
-  def _call_forward(self, x, name, **kwargs):
-    with self._name_scope(name, [x]):
-      x = ops.convert_to_tensor(x, name="x")
-      self._maybe_assert_dtype(x)
-      if not self._is_injective:  # No caching for non-injective
-        return self._forward(x, **kwargs)
-      mapping = self._lookup(x=x, kwargs=kwargs)
-      if mapping.y is not None:
-        return mapping.y
-      mapping = mapping.merge(y=self._forward(x, **kwargs))
-      self._cache(mapping)
-      return mapping.y
+    def _call_forward(self, x, name, **kwargs):
+        with self._name_scope(name, [x]):
+            x = ops.convert_to_tensor(x, name="x")
+            self._maybe_assert_dtype(x)
+            if not self._is_injective:  # No caching for non-injective
+                return self._forward(x, **kwargs)
+            mapping = self._lookup(x=x, kwargs=kwargs)
+            if mapping.y is not None:
+                return mapping.y
+            mapping = mapping.merge(y=self._forward(x, **kwargs))
+            self._cache(mapping)
+            return mapping.y
 
-  def forward(self, x, name="forward"):
-    """Returns the forward `Bijector` evaluation, i.e., X = g(Y).
+    def forward(self, x, name="forward"):
+        """Returns the forward `Bijector` evaluation, i.e., X = g(Y).
 
     Args:
       x: `Tensor`. The input to the "forward" evaluation.
@@ -765,27 +777,27 @@ class Bijector(object):
         `self.dtype`.
       NotImplementedError: if `_forward` is not implemented.
     """
-    return self._call_forward(x, name)
+        return self._call_forward(x, name)
 
-  def _inverse(self, y):
-    """Subclass implementation for `inverse` public function."""
-    raise NotImplementedError("inverse not implemented")
+    def _inverse(self, y):
+        """Subclass implementation for `inverse` public function."""
+        raise NotImplementedError("inverse not implemented")
 
-  def _call_inverse(self, y, name, **kwargs):
-    with self._name_scope(name, [y]):
-      y = ops.convert_to_tensor(y, name="y")
-      self._maybe_assert_dtype(y)
-      if not self._is_injective:  # No caching for non-injective
-        return self._inverse(y, **kwargs)
-      mapping = self._lookup(y=y, kwargs=kwargs)
-      if mapping.x is not None:
-        return mapping.x
-      mapping = mapping.merge(x=self._inverse(y, **kwargs))
-      self._cache(mapping)
-      return mapping.x
+    def _call_inverse(self, y, name, **kwargs):
+        with self._name_scope(name, [y]):
+            y = ops.convert_to_tensor(y, name="y")
+            self._maybe_assert_dtype(y)
+            if not self._is_injective:  # No caching for non-injective
+                return self._inverse(y, **kwargs)
+            mapping = self._lookup(y=y, kwargs=kwargs)
+            if mapping.x is not None:
+                return mapping.x
+            mapping = mapping.merge(x=self._inverse(y, **kwargs))
+            self._cache(mapping)
+            return mapping.x
 
-  def inverse(self, y, name="inverse"):
-    """Returns the inverse `Bijector` evaluation, i.e., X = g^{-1}(Y).
+    def inverse(self, y, name="inverse"):
+        """Returns the inverse `Bijector` evaluation, i.e., X = g^{-1}(Y).
 
     Args:
       y: `Tensor`. The input to the "inverse" evaluation.
@@ -801,10 +813,10 @@ class Bijector(object):
         `self.dtype`.
       NotImplementedError: if `_inverse` is not implemented.
     """
-    return self._call_inverse(y, name)
+        return self._call_inverse(y, name)
 
-  def _inverse_log_det_jacobian(self, y):
-    """Subclass implementation of `inverse_log_det_jacobian` public function.
+    def _inverse_log_det_jacobian(self, y):
+        """Subclass implementation of `inverse_log_det_jacobian` public function.
 
     In particular, this method differs from the public function, in that it
     does not take `event_ndims`. Thus, this implements the minimal Jacobian
@@ -817,60 +829,73 @@ class Bijector(object):
         If not injective, returns the k-tuple containing jacobians for the
         unique `k` points `(x1, ..., xk)` such that `g(xi) = y`.
     """
-    raise NotImplementedError("inverse_log_det_jacobian not implemented.")
+        raise NotImplementedError("inverse_log_det_jacobian not implemented.")
 
-  def _call_inverse_log_det_jacobian(self, y, event_ndims, name, **kwargs):
-    with self._name_scope(name, [y]):
-      if event_ndims in self._constant_ildj_map:
-        return self._constant_ildj_map[event_ndims]
-      y = ops.convert_to_tensor(y, name="y")
-      self._maybe_assert_dtype(y)
-      with ops.control_dependencies(self._check_valid_event_ndims(
-          min_event_ndims=self.inverse_min_event_ndims,
-          event_ndims=event_ndims)):
-        if not self._is_injective:  # No caching for non-injective
-          try:
-            ildjs = self._inverse_log_det_jacobian(y, **kwargs)
-            return tuple(self._reduce_jacobian_det_over_event(
-                y, ildj, self.inverse_min_event_ndims, event_ndims)
-                         for ildj in ildjs)
-          except NotImplementedError as original_exception:
-            try:
-              x = self._inverse(y, **kwargs)
-              fldjs = self._forward_log_det_jacobian(x, **kwargs)
-              return tuple(self._reduce_jacobian_det_over_event(
-                  x, -fldj, self.forward_min_event_ndims, event_ndims)
-                           for fldj in fldjs)
-            except NotImplementedError:
-              raise original_exception
+    def _call_inverse_log_det_jacobian(self, y, event_ndims, name, **kwargs):
+        with self._name_scope(name, [y]):
+            if event_ndims in self._constant_ildj_map:
+                return self._constant_ildj_map[event_ndims]
+            y = ops.convert_to_tensor(y, name="y")
+            self._maybe_assert_dtype(y)
+            with ops.control_dependencies(
+                self._check_valid_event_ndims(
+                    min_event_ndims=self.inverse_min_event_ndims,
+                    event_ndims=event_ndims,
+                )
+            ):
+                if not self._is_injective:  # No caching for non-injective
+                    try:
+                        ildjs = self._inverse_log_det_jacobian(y, **kwargs)
+                        return tuple(
+                            self._reduce_jacobian_det_over_event(
+                                y, ildj, self.inverse_min_event_ndims, event_ndims
+                            )
+                            for ildj in ildjs
+                        )
+                    except NotImplementedError as original_exception:
+                        try:
+                            x = self._inverse(y, **kwargs)
+                            fldjs = self._forward_log_det_jacobian(x, **kwargs)
+                            return tuple(
+                                self._reduce_jacobian_det_over_event(
+                                    x, -fldj, self.forward_min_event_ndims, event_ndims
+                                )
+                                for fldj in fldjs
+                            )
+                        except NotImplementedError:
+                            raise original_exception
 
-        mapping = self._lookup(y=y, kwargs=kwargs)
-        if mapping.ildj_map is not None and event_ndims in mapping.ildj_map:
-          return mapping.ildj_map[event_ndims]
-        try:
-          x = None  # Not needed; leave cache as is.
-          ildj = self._inverse_log_det_jacobian(y, **kwargs)
-          ildj = self._reduce_jacobian_det_over_event(
-              y, ildj, self.inverse_min_event_ndims, event_ndims)
-        except NotImplementedError as original_exception:
-          try:
-            x = (mapping.x if mapping.x is not None
-                 else self._inverse(y, **kwargs))
-            ildj = -self._forward_log_det_jacobian(x, **kwargs)
-            ildj = self._reduce_jacobian_det_over_event(
-                x, ildj, self.forward_min_event_ndims, event_ndims)
-          except NotImplementedError:
-            raise original_exception
+                mapping = self._lookup(y=y, kwargs=kwargs)
+                if mapping.ildj_map is not None and event_ndims in mapping.ildj_map:
+                    return mapping.ildj_map[event_ndims]
+                try:
+                    x = None  # Not needed; leave cache as is.
+                    ildj = self._inverse_log_det_jacobian(y, **kwargs)
+                    ildj = self._reduce_jacobian_det_over_event(
+                        y, ildj, self.inverse_min_event_ndims, event_ndims
+                    )
+                except NotImplementedError as original_exception:
+                    try:
+                        x = (
+                            mapping.x
+                            if mapping.x is not None
+                            else self._inverse(y, **kwargs)
+                        )
+                        ildj = -self._forward_log_det_jacobian(x, **kwargs)
+                        ildj = self._reduce_jacobian_det_over_event(
+                            x, ildj, self.forward_min_event_ndims, event_ndims
+                        )
+                    except NotImplementedError:
+                        raise original_exception
 
-        mapping = mapping.merge(x=x, ildj_map={event_ndims: ildj})
-        self._cache(mapping)
-        if self.is_constant_jacobian:
-          self._constant_ildj_map[event_ndims] = ildj
-        return ildj
+                mapping = mapping.merge(x=x, ildj_map={event_ndims: ildj})
+                self._cache(mapping)
+                if self.is_constant_jacobian:
+                    self._constant_ildj_map[event_ndims] = ildj
+                return ildj
 
-  def inverse_log_det_jacobian(
-      self, y, event_ndims, name="inverse_log_det_jacobian"):
-    """Returns the (log o det o Jacobian o inverse)(y).
+    def inverse_log_det_jacobian(self, y, event_ndims, name="inverse_log_det_jacobian"):
+        """Returns the (log o det o Jacobian o inverse)(y).
 
     Mathematically, returns: `log(det(dX/dY))(Y)`. (Recall that: `X=g^{-1}(Y)`.)
 
@@ -897,10 +922,10 @@ class Bijector(object):
         `self.dtype`.
       NotImplementedError: if `_inverse_log_det_jacobian` is not implemented.
     """
-    return self._call_inverse_log_det_jacobian(y, event_ndims, name)
+        return self._call_inverse_log_det_jacobian(y, event_ndims, name)
 
-  def _forward_log_det_jacobian(self, x):
-    """Subclass implementation of `forward_log_det_jacobian` public function.
+    def _forward_log_det_jacobian(self, x):
+        """Subclass implementation of `forward_log_det_jacobian` public function.
 
     In particular, this method differs from the public function, in that it
     does not take `event_ndims`. Thus, this implements the minimal Jacobian
@@ -915,64 +940,79 @@ class Bijector(object):
         unique `k` points `(x1, ..., xk)` such that `g(xi) = y`.
     """
 
-    raise NotImplementedError(
-        "forward_log_det_jacobian not implemented.")
+        raise NotImplementedError("forward_log_det_jacobian not implemented.")
 
-  def _call_forward_log_det_jacobian(self, x, event_ndims, name, **kwargs):
-    if not self._is_injective:
-      raise NotImplementedError(
-          "forward_log_det_jacobian cannot be implemented for non-injective "
-          "transforms.")
-    with self._name_scope(name, [x]):
-      with ops.control_dependencies(self._check_valid_event_ndims(
-          min_event_ndims=self.forward_min_event_ndims,
-          event_ndims=event_ndims)):
-        if event_ndims in self._constant_ildj_map:
-          # Need "-1. *" to avoid invalid-unary-operand-type linter warning.
-          return -1. * self._constant_ildj_map[event_ndims]
-        x = ops.convert_to_tensor(x, name="x")
-        self._maybe_assert_dtype(x)
-        if not self._is_injective:  # No caching for non-injective
-          try:
-            fldjs = self._forward_log_det_jacobian(x, **kwargs)  # No caching.
-            return tuple(self._reduce_jacobian_det_over_event(
-                x, fldj, self.forward_min_event_ndims, event_ndims)
-                         for fldj in fldjs)
-          except NotImplementedError as original_exception:
-            try:
-              y = self._forward(x, **kwargs)
-              ildjs = self._inverse_log_det_jacobian(y, **kwargs)
-              return tuple(self._reduce_jacobian_det_over_event(
-                  y, -ildj, self.inverse_min_event_ndims, event_ndims)
-                           for ildj in ildjs)
-            except NotImplementedError:
-              raise original_exception
-        mapping = self._lookup(x=x, kwargs=kwargs)
-        if mapping.ildj_map is not None and event_ndims in mapping.ildj_map:
-          return -mapping.ildj_map[event_ndims]
-        try:
-          y = None  # Not needed; leave cache as is.
-          ildj = -self._forward_log_det_jacobian(x, **kwargs)
-          ildj = self._reduce_jacobian_det_over_event(
-              x, ildj, self.forward_min_event_ndims, event_ndims)
-        except NotImplementedError as original_exception:
-          try:
-            y = (mapping.y if mapping.y is not None
-                 else self._forward(x, **kwargs))
-            ildj = self._inverse_log_det_jacobian(y, **kwargs)
-            ildj = self._reduce_jacobian_det_over_event(
-                y, ildj, self.inverse_min_event_ndims, event_ndims)
-          except NotImplementedError:
-            raise original_exception
-        mapping = mapping.merge(y=y, ildj_map={event_ndims: ildj})
-        self._cache(mapping)
-        if self.is_constant_jacobian:
-          self._constant_ildj_map[event_ndims] = ildj
-        return -ildj
+    def _call_forward_log_det_jacobian(self, x, event_ndims, name, **kwargs):
+        if not self._is_injective:
+            raise NotImplementedError(
+                "forward_log_det_jacobian cannot be implemented for non-injective "
+                "transforms."
+            )
+        with self._name_scope(name, [x]):
+            with ops.control_dependencies(
+                self._check_valid_event_ndims(
+                    min_event_ndims=self.forward_min_event_ndims,
+                    event_ndims=event_ndims,
+                )
+            ):
+                if event_ndims in self._constant_ildj_map:
+                    # Need "-1. *" to avoid invalid-unary-operand-type linter warning.
+                    return -1.0 * self._constant_ildj_map[event_ndims]
+                x = ops.convert_to_tensor(x, name="x")
+                self._maybe_assert_dtype(x)
+                if not self._is_injective:  # No caching for non-injective
+                    try:
+                        fldjs = self._forward_log_det_jacobian(
+                            x, **kwargs
+                        )  # No caching.
+                        return tuple(
+                            self._reduce_jacobian_det_over_event(
+                                x, fldj, self.forward_min_event_ndims, event_ndims
+                            )
+                            for fldj in fldjs
+                        )
+                    except NotImplementedError as original_exception:
+                        try:
+                            y = self._forward(x, **kwargs)
+                            ildjs = self._inverse_log_det_jacobian(y, **kwargs)
+                            return tuple(
+                                self._reduce_jacobian_det_over_event(
+                                    y, -ildj, self.inverse_min_event_ndims, event_ndims
+                                )
+                                for ildj in ildjs
+                            )
+                        except NotImplementedError:
+                            raise original_exception
+                mapping = self._lookup(x=x, kwargs=kwargs)
+                if mapping.ildj_map is not None and event_ndims in mapping.ildj_map:
+                    return -mapping.ildj_map[event_ndims]
+                try:
+                    y = None  # Not needed; leave cache as is.
+                    ildj = -self._forward_log_det_jacobian(x, **kwargs)
+                    ildj = self._reduce_jacobian_det_over_event(
+                        x, ildj, self.forward_min_event_ndims, event_ndims
+                    )
+                except NotImplementedError as original_exception:
+                    try:
+                        y = (
+                            mapping.y
+                            if mapping.y is not None
+                            else self._forward(x, **kwargs)
+                        )
+                        ildj = self._inverse_log_det_jacobian(y, **kwargs)
+                        ildj = self._reduce_jacobian_det_over_event(
+                            y, ildj, self.inverse_min_event_ndims, event_ndims
+                        )
+                    except NotImplementedError:
+                        raise original_exception
+                mapping = mapping.merge(y=y, ildj_map={event_ndims: ildj})
+                self._cache(mapping)
+                if self.is_constant_jacobian:
+                    self._constant_ildj_map[event_ndims] = ildj
+                return -ildj
 
-  def forward_log_det_jacobian(
-      self, x, event_ndims, name="forward_log_det_jacobian"):
-    """Returns both the forward_log_det_jacobian.
+    def forward_log_det_jacobian(self, x, event_ndims, name="forward_log_det_jacobian"):
+        """Returns both the forward_log_det_jacobian.
 
     Args:
       x: `Tensor`. The input to the "forward" Jacobian determinant evaluation.
@@ -994,126 +1034,143 @@ class Bijector(object):
         nor {`_inverse`, `_inverse_log_det_jacobian`} are implemented, or
         this is a non-injective bijector.
     """
-    return self._call_forward_log_det_jacobian(x, event_ndims, name)
+        return self._call_forward_log_det_jacobian(x, event_ndims, name)
 
-  @contextlib.contextmanager
-  def _name_scope(self, name=None, values=None):
-    """Helper function to standardize op scope."""
-    with ops.name_scope(self.name):
-      with ops.name_scope(
-          name, values=(values or []) + self.graph_parents) as scope:
-        yield scope
+    @contextlib.contextmanager
+    def _name_scope(self, name=None, values=None):
+        """Helper function to standardize op scope."""
+        with ops.name_scope(self.name):
+            with ops.name_scope(
+                name, values=(values or []) + self.graph_parents
+            ) as scope:
+                yield scope
 
-  def _maybe_assert_dtype(self, x):
-    """Helper to check dtype when self.dtype is known."""
-    if self.dtype is not None and self.dtype.base_dtype != x.dtype.base_dtype:
-      raise TypeError("Input had dtype %s but expected %s." %
-                      (self.dtype, x.dtype))
+    def _maybe_assert_dtype(self, x):
+        """Helper to check dtype when self.dtype is known."""
+        if self.dtype is not None and self.dtype.base_dtype != x.dtype.base_dtype:
+            raise TypeError(
+                "Input had dtype %s but expected %s." % (self.dtype, x.dtype)
+            )
 
-  def _cache(self, mapping):
-    """Helper which stores mapping info in forward/inverse dicts."""
-    # Merging from lookup is an added check that we're not overwriting anything
-    # which is not None.
-    mapping = mapping.merge(mapping=self._lookup(
-        mapping.x, mapping.y, mapping.kwargs))
-    if mapping.x is None and mapping.y is None:
-      raise ValueError("Caching expects at least one of (x,y) to be known, "
-                       "i.e., not None.")
-    self._from_x[mapping.x_key] = mapping
-    self._from_y[mapping.y_key] = mapping
+    def _cache(self, mapping):
+        """Helper which stores mapping info in forward/inverse dicts."""
+        # Merging from lookup is an added check that we're not overwriting anything
+        # which is not None.
+        mapping = mapping.merge(
+            mapping=self._lookup(mapping.x, mapping.y, mapping.kwargs)
+        )
+        if mapping.x is None and mapping.y is None:
+            raise ValueError(
+                "Caching expects at least one of (x,y) to be known, " "i.e., not None."
+            )
+        self._from_x[mapping.x_key] = mapping
+        self._from_y[mapping.y_key] = mapping
 
-  def _lookup(self, x=None, y=None, kwargs=None):
-    """Helper which retrieves mapping info from forward/inverse dicts."""
-    mapping = _Mapping(x=x, y=y, kwargs=kwargs)
-    # Since _cache requires both x,y to be set, we only need to do one cache
-    # lookup since the mapping is always in both or neither.
-    if mapping.x is not None:
-      return self._from_x.get(mapping.x_key, mapping)
-    if mapping.y is not None:
-      return self._from_y.get(mapping.y_key, mapping)
-    return mapping
+    def _lookup(self, x=None, y=None, kwargs=None):
+        """Helper which retrieves mapping info from forward/inverse dicts."""
+        mapping = _Mapping(x=x, y=y, kwargs=kwargs)
+        # Since _cache requires both x,y to be set, we only need to do one cache
+        # lookup since the mapping is always in both or neither.
+        if mapping.x is not None:
+            return self._from_x.get(mapping.x_key, mapping)
+        if mapping.y is not None:
+            return self._from_y.get(mapping.y_key, mapping)
+        return mapping
 
-  def _reduce_jacobian_det_over_event(
-      self, y, ildj, min_event_ndims, event_ndims):
-    """Reduce jacobian over event_ndims - min_event_ndims."""
-    # In this case, we need to tile the Jacobian over the event and reduce.
-    y_rank = array_ops.rank(y)
-    y_shape = array_ops.shape(y)[
-        y_rank - event_ndims : y_rank - min_event_ndims]
+    def _reduce_jacobian_det_over_event(self, y, ildj, min_event_ndims, event_ndims):
+        """Reduce jacobian over event_ndims - min_event_ndims."""
+        # In this case, we need to tile the Jacobian over the event and reduce.
+        y_rank = array_ops.rank(y)
+        y_shape = array_ops.shape(y)[y_rank - event_ndims : y_rank - min_event_ndims]
 
-    ones = array_ops.ones(y_shape, ildj.dtype)
-    reduced_ildj = math_ops.reduce_sum(
-        ones * ildj,
-        axis=self._get_event_reduce_dims(min_event_ndims, event_ndims))
-    # The multiplication by ones can change the inferred static shape so we try
-    # to recover as much as possible.
-    event_ndims_ = self._maybe_get_static_event_ndims(event_ndims)
-    if (event_ndims_ is not None and
-        y.shape.ndims is not None and
-        ildj.shape.ndims is not None):
-      y_shape = y.shape[y.shape.ndims - event_ndims_ :
-                        y.shape.ndims - min_event_ndims]
-      broadcast_shape = array_ops.broadcast_static_shape(ildj.shape, y_shape)
-      reduced_ildj.set_shape(
-          broadcast_shape[: broadcast_shape.ndims - (
-              event_ndims_ - min_event_ndims)])
+        ones = array_ops.ones(y_shape, ildj.dtype)
+        reduced_ildj = math_ops.reduce_sum(
+            ones * ildj, axis=self._get_event_reduce_dims(min_event_ndims, event_ndims)
+        )
+        # The multiplication by ones can change the inferred static shape so we try
+        # to recover as much as possible.
+        event_ndims_ = self._maybe_get_static_event_ndims(event_ndims)
+        if (
+            event_ndims_ is not None
+            and y.shape.ndims is not None
+            and ildj.shape.ndims is not None
+        ):
+            y_shape = y.shape[
+                y.shape.ndims - event_ndims_ : y.shape.ndims - min_event_ndims
+            ]
+            broadcast_shape = array_ops.broadcast_static_shape(ildj.shape, y_shape)
+            reduced_ildj.set_shape(
+                broadcast_shape[
+                    : broadcast_shape.ndims - (event_ndims_ - min_event_ndims)
+                ]
+            )
 
-    return reduced_ildj
+        return reduced_ildj
 
-  def _get_event_reduce_dims(self, min_event_ndims, event_ndims):
-    """Compute the reduction dimensions given event_ndims."""
-    event_ndims_ = self._maybe_get_static_event_ndims(event_ndims)
+    def _get_event_reduce_dims(self, min_event_ndims, event_ndims):
+        """Compute the reduction dimensions given event_ndims."""
+        event_ndims_ = self._maybe_get_static_event_ndims(event_ndims)
 
-    if event_ndims_ is not None:
-      return [-index for index in range(1, event_ndims_ - min_event_ndims + 1)]
-    else:
-      reduce_ndims = event_ndims - min_event_ndims
-      return math_ops.range(-reduce_ndims, 0)
+        if event_ndims_ is not None:
+            return [-index for index in range(1, event_ndims_ - min_event_ndims + 1)]
+        else:
+            reduce_ndims = event_ndims - min_event_ndims
+            return math_ops.range(-reduce_ndims, 0)
 
-  def _check_valid_event_ndims(self, min_event_ndims, event_ndims):
-    """Check whether event_ndims is at least min_event_ndims."""
-    event_ndims = ops.convert_to_tensor(event_ndims, name="event_ndims")
-    event_ndims_ = tensor_util.constant_value(event_ndims)
-    assertions = []
+    def _check_valid_event_ndims(self, min_event_ndims, event_ndims):
+        """Check whether event_ndims is at least min_event_ndims."""
+        event_ndims = ops.convert_to_tensor(event_ndims, name="event_ndims")
+        event_ndims_ = tensor_util.constant_value(event_ndims)
+        assertions = []
 
-    if not event_ndims.dtype.is_integer:
-      raise ValueError("Expected integer dtype, got dtype {}".format(
-          event_ndims.dtype))
+        if not event_ndims.dtype.is_integer:
+            raise ValueError(
+                "Expected integer dtype, got dtype {}".format(event_ndims.dtype)
+            )
 
-    if event_ndims_ is not None:
-      if event_ndims.shape.ndims != 0:
-        raise ValueError("Expected scalar event_ndims, got shape {}".format(
-            event_ndims.shape))
-      if min_event_ndims > event_ndims_:
-        raise ValueError("event_ndims ({}) must be larger than "
-                         "min_event_ndims ({})".format(
-                             event_ndims_, min_event_ndims))
-    elif self.validate_args:
-      assertions += [
-          check_ops.assert_greater_equal(event_ndims, min_event_ndims)]
+        if event_ndims_ is not None:
+            if event_ndims.shape.ndims != 0:
+                raise ValueError(
+                    "Expected scalar event_ndims, got shape {}".format(
+                        event_ndims.shape
+                    )
+                )
+            if min_event_ndims > event_ndims_:
+                raise ValueError(
+                    "event_ndims ({}) must be larger than "
+                    "min_event_ndims ({})".format(event_ndims_, min_event_ndims)
+                )
+        elif self.validate_args:
+            assertions += [check_ops.assert_greater_equal(event_ndims, min_event_ndims)]
 
-    if event_ndims.shape.is_fully_defined():
-      if event_ndims.shape.ndims != 0:
-        raise ValueError("Expected scalar shape, got ndims {}".format(
-            event_ndims.shape.ndims))
+        if event_ndims.shape.is_fully_defined():
+            if event_ndims.shape.ndims != 0:
+                raise ValueError(
+                    "Expected scalar shape, got ndims {}".format(
+                        event_ndims.shape.ndims
+                    )
+                )
 
-    elif self.validate_args:
-      assertions += [
-          check_ops.assert_rank(event_ndims, 0, message="Expected scalar.")]
-    return assertions
+        elif self.validate_args:
+            assertions += [
+                check_ops.assert_rank(event_ndims, 0, message="Expected scalar.")
+            ]
+        return assertions
 
-  def _maybe_get_static_event_ndims(self, event_ndims):
-    """Helper which returns tries to return an integer static value."""
-    event_ndims_ = distribution_util.maybe_get_static_value(event_ndims)
+    def _maybe_get_static_event_ndims(self, event_ndims):
+        """Helper which returns tries to return an integer static value."""
+        event_ndims_ = distribution_util.maybe_get_static_value(event_ndims)
 
-    if isinstance(event_ndims_, (np.generic, np.ndarray)):
-      if event_ndims_.dtype not in (np.int32, np.int64):
-        raise ValueError("Expected integer dtype, got dtype {}".format(
-            event_ndims_.dtype))
+        if isinstance(event_ndims_, (np.generic, np.ndarray)):
+            if event_ndims_.dtype not in (np.int32, np.int64):
+                raise ValueError(
+                    "Expected integer dtype, got dtype {}".format(event_ndims_.dtype)
+                )
 
-      if isinstance(event_ndims_, np.ndarray) and len(event_ndims_.shape):
-        raise ValueError("Expected a scalar integer, got {}".format(
-            event_ndims_))
-      event_ndims_ = int(event_ndims_)
+            if isinstance(event_ndims_, np.ndarray) and len(event_ndims_.shape):
+                raise ValueError(
+                    "Expected a scalar integer, got {}".format(event_ndims_)
+                )
+            event_ndims_ = int(event_ndims_)
 
-    return event_ndims_
+        return event_ndims_

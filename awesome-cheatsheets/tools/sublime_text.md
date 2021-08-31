@@ -4,7 +4,6 @@
 
 - `shift + cmd + P `: Command palette
 
-
 ## Goto anything
 
 - `cmd + P `: Goto file
@@ -14,7 +13,6 @@
 - `cmd + P `: Fuzzy search
 
 - `cmd + R `: Goto symbol
-
 
 ## Quick selections
 
@@ -31,7 +29,6 @@
 - `shift + cmd + space `: Expand selection to scope
 
 - `shift + cmd + L `: Split into lines
-
 
 ## Edit code
 
@@ -61,7 +58,6 @@
 
 - `ctrl + k, ctrl + u ` : To Uppercase
 
-
 ## Searching
 
 - `cmd + F `: Search in file
@@ -69,7 +65,6 @@
 - `shift + cmd + F `: Search in all files
 
 - `<open files> `: where filter
-
 
 ## Miscelaneous
 
@@ -85,11 +80,9 @@
 
 - `ctrl + b `: Build and execute file
 
-
 ## Must have packages
 
 `A file icon, BracketHighlighter, Color Highlighter, Comment-Snippets, DevDocs, EditorConfig, Emmet, File Rename, Git, Git blame, GitGutter, HTML-CSS-JS Prettify, JavaScript Completions, JavaScript Patterns, JavaScript Snippets, LESS, Nodejs, Package Control, Pretty JSON, SideBarEnhancements, SublimeLinter, SublimeLinter-contrib-eslint, Terminal, Termius, auto save`
-
 
 ## Preferences
 
@@ -117,12 +110,11 @@
 
 ```javascript
 [
-{ "keys": ["super+v"], "command": "paste_and_indent" },
-{ "keys": ["super+shift+v"], "command": "paste" },
-{ "keys": ["super+shift+r"], "command": "reindent" },
-{ "keys": ["super+h"], "command": "dev_docs_search_selection" }
-]
-
+  { keys: ["super+v"], command: "paste_and_indent" },
+  { keys: ["super+shift+v"], command: "paste" },
+  { keys: ["super+shift+r"], command: "reindent" },
+  { keys: ["super+h"], command: "dev_docs_search_selection" },
+];
 ```
 
 ## Syncing settings with iCloud
@@ -134,7 +126,6 @@
 - `mv User ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/WebDev/ST3/Plugins`
 
 - `ln -s ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/WebDev/ST3/Plugins/User`
-
 
 ## Restore settings from iCloud
 

@@ -26,21 +26,20 @@ from tensorflow.python.training.tracking.tracking import AutoTrackable
 # once the issue with copybara is fixed.
 # pylint:disable=g-inconsistent-quotes
 base_layer = LazyLoader(
-    "base_layer", globals(),
-    "tensorflow.python.keras.engine.base_layer")
+    "base_layer", globals(), "tensorflow.python.keras.engine.base_layer"
+)
 training_lib = LazyLoader(
-    "training_lib", globals(),
-    "tensorflow.python.keras.engine.training")
-metrics = LazyLoader("metrics", globals(),
-                     "tensorflow.python.keras.metrics")
+    "training_lib", globals(), "tensorflow.python.keras.engine.training"
+)
+metrics = LazyLoader("metrics", globals(), "tensorflow.python.keras.metrics")
 recurrent = LazyLoader(
-    "recurrent", globals(),
-    "tensorflow.python.keras.layers.recurrent")
+    "recurrent", globals(), "tensorflow.python.keras.layers.recurrent"
+)
 # pylint:enable=g-inconsistent-quotes
 
 
 class SerializedAttributes(object):
-  """Class that tracks and validates all serialization attributes.
+    """Class that tracks and validates all serialization attributes.
 
   Keras models contain many Python-defined components. For example, the
   trainable_variable property lists the model's trainable variables by
@@ -106,10 +105,11 @@ class SerializedAttributes(object):
   attributes should not be removed or modified without sufficient justification.
   """
 
-  @staticmethod
-  def with_attributes(
-      name, checkpointable_objects=None, functions=None, copy_from=None):
-    """Creates a subclass with all attributes as specified in the arguments.
+    @staticmethod
+    def with_attributes(
+        name, checkpointable_objects=None, functions=None, copy_from=None
+    ):
+        """Creates a subclass with all attributes as specified in the arguments.
 
     Args:
       name: Name of subclass
@@ -123,113 +123,139 @@ class SerializedAttributes(object):
       Child class with attributes as defined in the `checkpointable_objects`
       and `functions` lists.
     """
-    checkpointable_objects = checkpointable_objects or []
-    functions = functions or []
+        checkpointable_objects = checkpointable_objects or []
+        functions = functions or []
 
-    if copy_from is not None:
-      for cls in copy_from:
-        checkpointable_objects.extend(cls.all_checkpointable_objects)
-        functions.extend(cls.all_functions)
+        if copy_from is not None:
+            for cls in copy_from:
+                checkpointable_objects.extend(cls.all_checkpointable_objects)
+                functions.extend(cls.all_functions)
 
-    classdict = {
-        'all_checkpointable_objects': set(checkpointable_objects),
-        'all_functions': set(functions)}
-    return type(name, (SerializedAttributes,), classdict)
+        classdict = {
+            "all_checkpointable_objects": set(checkpointable_objects),
+            "all_functions": set(functions),
+        }
+        return type(name, (SerializedAttributes,), classdict)
 
-  @staticmethod
-  def new(obj):
-    """Returns a new SerializedAttribute object."""
-    if isinstance(obj, training_lib.Model):
-      return ModelAttributes()
-    elif isinstance(obj, metrics.Metric):
-      return MetricAttributes()
-    elif isinstance(obj, recurrent.RNN):
-      return RNNAttributes()
-    elif isinstance(obj, base_layer.Layer):
-      return LayerAttributes()
-    else:
-      raise TypeError('Internal error during serialization: Expected Keras '
-                      'Layer object, got {} of type {}'.format(obj, type(obj)))
+    @staticmethod
+    def new(obj):
+        """Returns a new SerializedAttribute object."""
+        if isinstance(obj, training_lib.Model):
+            return ModelAttributes()
+        elif isinstance(obj, metrics.Metric):
+            return MetricAttributes()
+        elif isinstance(obj, recurrent.RNN):
+            return RNNAttributes()
+        elif isinstance(obj, base_layer.Layer):
+            return LayerAttributes()
+        else:
+            raise TypeError(
+                "Internal error during serialization: Expected Keras "
+                "Layer object, got {} of type {}".format(obj, type(obj))
+            )
 
-  def __init__(self):
-    self._object_dict = {}
-    self._function_dict = {}
-    self._keras_trackable = AutoTrackable()
+    def __init__(self):
+        self._object_dict = {}
+        self._function_dict = {}
+        self._keras_trackable = AutoTrackable()
 
-  @property
-  def functions(self):
-    """Returns dictionary of all functions."""
-    return {key: value for key, value in self._function_dict.items()
-            if value is not None}
+    @property
+    def functions(self):
+        """Returns dictionary of all functions."""
+        return {
+            key: value
+            for key, value in self._function_dict.items()
+            if value is not None
+        }
 
-  @property
-  def checkpointable_objects(self):
-    """Returns dictionary of all checkpointable objects."""
-    return {key: value for key, value in self._object_dict.items()
-            if value is not None}
+    @property
+    def checkpointable_objects(self):
+        """Returns dictionary of all checkpointable objects."""
+        return {
+            key: value for key, value in self._object_dict.items() if value is not None
+        }
 
-  @property
-  def functions_to_serialize(self):
-    """Returns functions to attach to the root object during serialization."""
-    functions = {}
-    for key, v in self.functions.items():
-      if key in CommonEndpoints.all_functions:
-        functions[key] = (v.wrapped_call if isinstance(v, save_impl.LayerCall)
-                          else v)
-    return functions
+    @property
+    def functions_to_serialize(self):
+        """Returns functions to attach to the root object during serialization."""
+        functions = {}
+        for key, v in self.functions.items():
+            if key in CommonEndpoints.all_functions:
+                functions[key] = (
+                    v.wrapped_call if isinstance(v, save_impl.LayerCall) else v
+                )
+        return functions
 
-  @property
-  def objects_to_serialize(self):
-    """Returns objects to attach to the root object during serialization."""
-    objects = {key: value for key, value in self.checkpointable_objects.items()
-               if key in CommonEndpoints.all_checkpointable_objects}
-    objects[constants.KERAS_ATTR] = self._keras_trackable
-    return objects
+    @property
+    def objects_to_serialize(self):
+        """Returns objects to attach to the root object during serialization."""
+        objects = {
+            key: value
+            for key, value in self.checkpointable_objects.items()
+            if key in CommonEndpoints.all_checkpointable_objects
+        }
+        objects[constants.KERAS_ATTR] = self._keras_trackable
+        return objects
 
-  def set_and_validate_functions(self, function_dict):
-    """Saves function dictionary, and validates dictionary values."""
-    for key in self.all_functions:
-      if key in function_dict:
-        if (function_dict[key] is not None and  # Not all functions are required
-            not isinstance(function_dict[key],
-                           (def_function.Function, save_impl.LayerCall))):
-          raise ValueError(
-              'Function dictionary contained a non-function object: {} (for key'
-              ' {})'.format(function_dict[key], key))
-        fn = function_dict[key]
-        self._function_dict[key] = fn
+    def set_and_validate_functions(self, function_dict):
+        """Saves function dictionary, and validates dictionary values."""
+        for key in self.all_functions:
+            if key in function_dict:
+                if function_dict[
+                    key
+                ] is not None and not isinstance(  # Not all functions are required
+                    function_dict[key], (def_function.Function, save_impl.LayerCall)
+                ):
+                    raise ValueError(
+                        "Function dictionary contained a non-function object: {} (for key"
+                        " {})".format(function_dict[key], key)
+                    )
+                fn = function_dict[key]
+                self._function_dict[key] = fn
 
-        # Extract TensorFlow `Function` from LayerCall.
-        tf_fn = fn.wrapped_call if isinstance(fn, save_impl.LayerCall) else fn
-        setattr(self._keras_trackable, key, tf_fn)
-      else:
-        raise ValueError('Function {} missing from serialized function dict.'
-                         .format(key))
-    return self.functions
+                # Extract TensorFlow `Function` from LayerCall.
+                tf_fn = fn.wrapped_call if isinstance(fn, save_impl.LayerCall) else fn
+                setattr(self._keras_trackable, key, tf_fn)
+            else:
+                raise ValueError(
+                    "Function {} missing from serialized function dict.".format(key)
+                )
+        return self.functions
 
-  def set_and_validate_objects(self, object_dict):
-    """Saves objects to a dictionary, and validates the values."""
-    for key in self.all_checkpointable_objects:
-      if key in object_dict:
-        if not isinstance(object_dict[key], trackable.Trackable):
-          raise ValueError(
-              'Object dictionary contained a non-trackable object: {} (for key'
-              ' {})'.format(object_dict[key], key))
-        self._object_dict[key] = object_dict[key]
-        setattr(self._keras_trackable, key, object_dict[key])
-      else:
-        raise ValueError(
-            'Object {} missing from serialized object dict.'.format(key))
-    return self.checkpointable_objects
+    def set_and_validate_objects(self, object_dict):
+        """Saves objects to a dictionary, and validates the values."""
+        for key in self.all_checkpointable_objects:
+            if key in object_dict:
+                if not isinstance(object_dict[key], trackable.Trackable):
+                    raise ValueError(
+                        "Object dictionary contained a non-trackable object: {} (for key"
+                        " {})".format(object_dict[key], key)
+                    )
+                self._object_dict[key] = object_dict[key]
+                setattr(self._keras_trackable, key, object_dict[key])
+            else:
+                raise ValueError(
+                    "Object {} missing from serialized object dict.".format(key)
+                )
+        return self.checkpointable_objects
 
 
-class CommonEndpoints(SerializedAttributes.with_attributes(
-    'CommonEndpoints',
-    checkpointable_objects=['variables', 'trainable_variables',
-                            'regularization_losses'],
-    functions=['__call__', 'call_and_return_all_conditional_losses',
-               '_default_save_signature'])):
-  """Common endpoints shared by all models loadable by Keras.
+class CommonEndpoints(
+    SerializedAttributes.with_attributes(
+        "CommonEndpoints",
+        checkpointable_objects=[
+            "variables",
+            "trainable_variables",
+            "regularization_losses",
+        ],
+        functions=[
+            "__call__",
+            "call_and_return_all_conditional_losses",
+            "_default_save_signature",
+        ],
+    )
+):
+    """Common endpoints shared by all models loadable by Keras.
 
   List of all attributes:
     variables: List of all variables in the model and its sublayers.
@@ -246,14 +272,21 @@ class CommonEndpoints(SerializedAttributes.with_attributes(
   """
 
 
-class LayerAttributes(SerializedAttributes.with_attributes(
-    'LayerAttributes',
-    checkpointable_objects=['non_trainable_variables', 'layers', 'metrics',
-                            'layer_regularization_losses', 'layer_metrics'],
-    functions=['call_and_return_conditional_losses', 'activity_regularizer_fn'],
-    copy_from=[CommonEndpoints]
-    )):
-  """Layer checkpointable objects + functions that are saved to the SavedModel.
+class LayerAttributes(
+    SerializedAttributes.with_attributes(
+        "LayerAttributes",
+        checkpointable_objects=[
+            "non_trainable_variables",
+            "layers",
+            "metrics",
+            "layer_regularization_losses",
+            "layer_metrics",
+        ],
+        functions=["call_and_return_conditional_losses", "activity_regularizer_fn"],
+        copy_from=[CommonEndpoints],
+    )
+):
+    """Layer checkpointable objects + functions that are saved to the SavedModel.
 
   List of all attributes:
     All attributes from CommonEndpoints
@@ -272,40 +305,41 @@ class LayerAttributes(SerializedAttributes.with_attributes(
   """
 
 
-class ModelAttributes(SerializedAttributes.with_attributes(
-    'ModelAttributes',
-    copy_from=[LayerAttributes])):
-  """Model checkpointable objects + functions that are saved to the SavedModel.
+class ModelAttributes(
+    SerializedAttributes.with_attributes("ModelAttributes", copy_from=[LayerAttributes])
+):
+    """Model checkpointable objects + functions that are saved to the SavedModel.
 
   List of all attributes:
     All attributes from LayerAttributes (including CommonEndpoints)
   """
-  # TODO(kathywu): Add attributes `compile_losses` and `compile_metrics`, which
-  #  list all losses and metrics defined by `model.compile`.
+
+    # TODO(kathywu): Add attributes `compile_losses` and `compile_metrics`, which
+    #  list all losses and metrics defined by `model.compile`.
 
 
 class MetricAttributes(
     SerializedAttributes.with_attributes(
-        'MetricAttributes',
-        checkpointable_objects=['variables'],
-        functions=[],
-    )):
-  """Attributes that are added to Metric objects when saved to SavedModel.
+        "MetricAttributes", checkpointable_objects=["variables"], functions=[]
+    )
+):
+    """Attributes that are added to Metric objects when saved to SavedModel.
 
   List of all attributes:
     variables: list of all variables
   """
-  pass
+
+    pass
 
 
-class RNNAttributes(SerializedAttributes.with_attributes(
-    'RNNAttributes',
-    checkpointable_objects=['states'],
-    copy_from=[LayerAttributes])):
-  """RNN checkpointable objects + functions that are saved to the SavedModel.
+class RNNAttributes(
+    SerializedAttributes.with_attributes(
+        "RNNAttributes", checkpointable_objects=["states"], copy_from=[LayerAttributes]
+    )
+):
+    """RNN checkpointable objects + functions that are saved to the SavedModel.
 
   List of all attributes:
     All attributes from LayerAttributes (including CommonEndpoints)
     states: List of state variables
   """
-

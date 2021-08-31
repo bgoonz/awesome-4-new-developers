@@ -30,26 +30,23 @@ from tensorflow.python.util.tf_export import tf_export
 _DIVERGENCES = {}
 
 
-__all__ = [
-    "RegisterKL",
-    "kl_divergence",
-]
+__all__ = ["RegisterKL", "kl_divergence"]
 
 
 def _registered_kl(type_a, type_b):
-  """Get the KL function registered for classes a and b."""
-  hierarchy_a = tf_inspect.getmro(type_a)
-  hierarchy_b = tf_inspect.getmro(type_b)
-  dist_to_children = None
-  kl_fn = None
-  for mro_to_a, parent_a in enumerate(hierarchy_a):
-    for mro_to_b, parent_b in enumerate(hierarchy_b):
-      candidate_dist = mro_to_a + mro_to_b
-      candidate_kl_fn = _DIVERGENCES.get((parent_a, parent_b), None)
-      if not kl_fn or (candidate_kl_fn and candidate_dist < dist_to_children):
-        dist_to_children = candidate_dist
-        kl_fn = candidate_kl_fn
-  return kl_fn
+    """Get the KL function registered for classes a and b."""
+    hierarchy_a = tf_inspect.getmro(type_a)
+    hierarchy_b = tf_inspect.getmro(type_b)
+    dist_to_children = None
+    kl_fn = None
+    for mro_to_a, parent_a in enumerate(hierarchy_a):
+        for mro_to_b, parent_b in enumerate(hierarchy_b):
+            candidate_dist = mro_to_a + mro_to_b
+            candidate_kl_fn = _DIVERGENCES.get((parent_a, parent_b), None)
+            if not kl_fn or (candidate_kl_fn and candidate_dist < dist_to_children):
+                dist_to_children = candidate_dist
+                kl_fn = candidate_kl_fn
+    return kl_fn
 
 
 @deprecation.deprecated(
@@ -59,11 +56,11 @@ def _registered_kl(type_a, type_b):
     "(https://github.com/tensorflow/probability). You "
     "should update all references to use `tfp.distributions` "
     "instead of `tf.distributions`.",
-    warn_once=True)
+    warn_once=True,
+)
 @tf_export(v1=["distributions.kl_divergence"])
-def kl_divergence(distribution_a, distribution_b,
-                  allow_nan_stats=True, name=None):
-  """Get the KL-divergence KL(distribution_a || distribution_b).
+def kl_divergence(distribution_a, distribution_b, allow_nan_stats=True, name=None):
+    """Get the KL-divergence KL(distribution_a || distribution_b).
 
   If there is no KL method registered specifically for `type(distribution_a)`
   and `type(distribution_b)`, then the class hierarchies of these types are
@@ -96,29 +93,36 @@ def kl_divergence(distribution_a, distribution_b,
     NotImplementedError: If no KL method is defined for distribution types
       of `distribution_a` and `distribution_b`.
   """
-  kl_fn = _registered_kl(type(distribution_a), type(distribution_b))
-  if kl_fn is None:
-    raise NotImplementedError(
-        "No KL(distribution_a || distribution_b) registered for distribution_a "
-        "type %s and distribution_b type %s"
-        % (type(distribution_a).__name__, type(distribution_b).__name__))
+    kl_fn = _registered_kl(type(distribution_a), type(distribution_b))
+    if kl_fn is None:
+        raise NotImplementedError(
+            "No KL(distribution_a || distribution_b) registered for distribution_a "
+            "type %s and distribution_b type %s"
+            % (type(distribution_a).__name__, type(distribution_b).__name__)
+        )
 
-  with ops.name_scope("KullbackLeibler"):
-    kl_t = kl_fn(distribution_a, distribution_b, name=name)
-    if allow_nan_stats:
-      return kl_t
+    with ops.name_scope("KullbackLeibler"):
+        kl_t = kl_fn(distribution_a, distribution_b, name=name)
+        if allow_nan_stats:
+            return kl_t
 
-    # Check KL for NaNs
-    kl_t = array_ops.identity(kl_t, name="kl")
+        # Check KL for NaNs
+        kl_t = array_ops.identity(kl_t, name="kl")
 
-    with ops.control_dependencies([
-        control_flow_ops.Assert(
-            math_ops.logical_not(
-                math_ops.reduce_any(math_ops.is_nan(kl_t))),
-            ["KL calculation between %s and %s returned NaN values "
-             "(and was called with allow_nan_stats=False). Values:"
-             % (distribution_a.name, distribution_b.name), kl_t])]):
-      return array_ops.identity(kl_t, name="checked_kl")
+        with ops.control_dependencies(
+            [
+                control_flow_ops.Assert(
+                    math_ops.logical_not(math_ops.reduce_any(math_ops.is_nan(kl_t))),
+                    [
+                        "KL calculation between %s and %s returned NaN values "
+                        "(and was called with allow_nan_stats=False). Values:"
+                        % (distribution_a.name, distribution_b.name),
+                        kl_t,
+                    ],
+                )
+            ]
+        ):
+            return array_ops.identity(kl_t, name="checked_kl")
 
 
 @deprecation.deprecated(
@@ -128,10 +132,10 @@ def kl_divergence(distribution_a, distribution_b,
     "(https://github.com/tensorflow/probability). You "
     "should update all references to use `tfp.distributions` "
     "instead of `tf.distributions`.",
-    warn_once=True)
-def cross_entropy(ref, other,
-                  allow_nan_stats=True, name=None):
-  """Computes the (Shannon) cross entropy.
+    warn_once=True,
+)
+def cross_entropy(ref, other, allow_nan_stats=True, name=None):
+    """Computes the (Shannon) cross entropy.
 
   Denote two distributions by `P` (`ref`) and `Q` (`other`). Assuming `P, Q`
   are absolutely continuous with respect to one another and permit densities
@@ -156,14 +160,15 @@ def cross_entropy(ref, other,
     cross_entropy: `ref.dtype` `Tensor` with shape `[B1, ..., Bn]`
       representing `n` different calculations of (Shanon) cross entropy.
   """
-  with ops.name_scope(name, "cross_entropy"):
-    return ref.entropy() + kl_divergence(
-        ref, other, allow_nan_stats=allow_nan_stats)
+    with ops.name_scope(name, "cross_entropy"):
+        return ref.entropy() + kl_divergence(
+            ref, other, allow_nan_stats=allow_nan_stats
+        )
 
 
 @tf_export(v1=["distributions.RegisterKL"])
 class RegisterKL(object):
-  """Decorator to register a KL divergence implementation function.
+    """Decorator to register a KL divergence implementation function.
 
   Usage:
 
@@ -172,25 +177,26 @@ class RegisterKL(object):
     # Return KL(norm_a || norm_b)
   """
 
-  @deprecation.deprecated(
-      "2019-01-01",
-      "The TensorFlow Distributions library has moved to "
-      "TensorFlow Probability "
-      "(https://github.com/tensorflow/probability). You "
-      "should update all references to use `tfp.distributions` "
-      "instead of `tf.distributions`.",
-      warn_once=True)
-  def __init__(self, dist_cls_a, dist_cls_b):
-    """Initialize the KL registrar.
+    @deprecation.deprecated(
+        "2019-01-01",
+        "The TensorFlow Distributions library has moved to "
+        "TensorFlow Probability "
+        "(https://github.com/tensorflow/probability). You "
+        "should update all references to use `tfp.distributions` "
+        "instead of `tf.distributions`.",
+        warn_once=True,
+    )
+    def __init__(self, dist_cls_a, dist_cls_b):
+        """Initialize the KL registrar.
 
     Args:
       dist_cls_a: the class of the first argument of the KL divergence.
       dist_cls_b: the class of the second argument of the KL divergence.
     """
-    self._key = (dist_cls_a, dist_cls_b)
+        self._key = (dist_cls_a, dist_cls_b)
 
-  def __call__(self, kl_fn):
-    """Perform the KL registration.
+    def __call__(self, kl_fn):
+        """Perform the KL registration.
 
     Args:
       kl_fn: The function to use for the KL divergence.
@@ -203,11 +209,16 @@ class RegisterKL(object):
       ValueError: if a KL divergence function has already been registered for
         the given argument classes.
     """
-    if not callable(kl_fn):
-      raise TypeError("kl_fn must be callable, received: %s" % kl_fn)
-    if self._key in _DIVERGENCES:
-      raise ValueError("KL(%s || %s) has already been registered to: %s"
-                       % (self._key[0].__name__, self._key[1].__name__,
-                          _DIVERGENCES[self._key]))
-    _DIVERGENCES[self._key] = kl_fn
-    return kl_fn
+        if not callable(kl_fn):
+            raise TypeError("kl_fn must be callable, received: %s" % kl_fn)
+        if self._key in _DIVERGENCES:
+            raise ValueError(
+                "KL(%s || %s) has already been registered to: %s"
+                % (
+                    self._key[0].__name__,
+                    self._key[1].__name__,
+                    _DIVERGENCES[self._key],
+                )
+            )
+        _DIVERGENCES[self._key] = kl_fn
+        return kl_fn

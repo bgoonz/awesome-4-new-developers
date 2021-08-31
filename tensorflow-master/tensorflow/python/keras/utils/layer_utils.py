@@ -24,9 +24,9 @@ from tensorflow.python.util import nest
 from tensorflow.python.util.tf_export import keras_export
 
 
-@keras_export('keras.utils.get_source_inputs')
+@keras_export("keras.utils.get_source_inputs")
 def get_source_inputs(tensor, layer=None, node_index=None):
-  """Returns the list of input tensors necessary to compute `tensor`.
+    """Returns the list of input tensors necessary to compute `tensor`.
 
   Output will always be a list of tensors
   (potentially with 1 element).
@@ -40,53 +40,59 @@ def get_source_inputs(tensor, layer=None, node_index=None):
   Returns:
       List of input tensors.
   """
-  if not hasattr(tensor, '_keras_history'):
-    return tensor
+    if not hasattr(tensor, "_keras_history"):
+        return tensor
 
-  if layer is None or node_index:
-    layer, node_index, _ = tensor._keras_history
-  if not layer._inbound_nodes:
-    return [tensor]
-  else:
-    node = layer._inbound_nodes[node_index]
-    if node.is_input:
-      # Reached an Input layer, stop recursion.
-      return nest.flatten(node.input_tensors)
+    if layer is None or node_index:
+        layer, node_index, _ = tensor._keras_history
+    if not layer._inbound_nodes:
+        return [tensor]
     else:
-      source_tensors = []
-      for layer, node_index, _, tensor in node.iterate_inbound():
-        previous_sources = get_source_inputs(tensor, layer, node_index)
-        # Avoid input redundancy.
-        for x in previous_sources:
-          if all(x is not t for t in source_tensors):
-            source_tensors.append(x)
-      return source_tensors
+        node = layer._inbound_nodes[node_index]
+        if node.is_input:
+            # Reached an Input layer, stop recursion.
+            return nest.flatten(node.input_tensors)
+        else:
+            source_tensors = []
+            for layer, node_index, _, tensor in node.iterate_inbound():
+                previous_sources = get_source_inputs(tensor, layer, node_index)
+                # Avoid input redundancy.
+                for x in previous_sources:
+                    if all(x is not t for t in source_tensors):
+                        source_tensors.append(x)
+            return source_tensors
 
 
-def validate_string_arg(input_data,
-                        allowable_strings,
-                        layer_name,
-                        arg_name,
-                        allow_none=False,
-                        allow_callables=False):
-  """Validates the correctness of a string-based arg."""
-  if allow_none and input_data is None:
-    return
-  elif allow_callables and callable(input_data):
-    return
-  elif isinstance(input_data, str) and input_data in allowable_strings:
-    return
-  else:
-    allowed_args = '`None`, ' if allow_none else ''
-    allowed_args += 'a `Callable`, ' if allow_callables else ''
-    allowed_args += 'or one of the following values: %s' % (allowable_strings,)
-    raise ValueError(('The %s argument of layer %s received an invalid '
-                      'value %s. Allowed values are: %s.') %
-                     (arg_name, layer_name, input_data, allowed_args))
+def validate_string_arg(
+    input_data,
+    allowable_strings,
+    layer_name,
+    arg_name,
+    allow_none=False,
+    allow_callables=False,
+):
+    """Validates the correctness of a string-based arg."""
+    if allow_none and input_data is None:
+        return
+    elif allow_callables and callable(input_data):
+        return
+    elif isinstance(input_data, str) and input_data in allowable_strings:
+        return
+    else:
+        allowed_args = "`None`, " if allow_none else ""
+        allowed_args += "a `Callable`, " if allow_callables else ""
+        allowed_args += "or one of the following values: %s" % (allowable_strings,)
+        raise ValueError(
+            (
+                "The %s argument of layer %s received an invalid "
+                "value %s. Allowed values are: %s."
+            )
+            % (arg_name, layer_name, input_data, allowed_args)
+        )
 
 
 def count_params(weights):
-  """Count the total number of scalars composing the weights.
+    """Count the total number of scalars composing the weights.
 
   Args:
       weights: An iterable containing the weights on which to compute params
@@ -94,16 +100,16 @@ def count_params(weights):
   Returns:
       The total number of scalars composing the weights
   """
-  unique_weights = {id(w): w for w in weights}.values()
-  weight_shapes = [w.shape.as_list() for w in unique_weights]
-  standardized_weight_shapes = [
-      [0 if w_i is None else w_i for w_i in w] for w in weight_shapes
-  ]
-  return int(sum(np.prod(p) for p in standardized_weight_shapes))
+    unique_weights = {id(w): w for w in weights}.values()
+    weight_shapes = [w.shape.as_list() for w in unique_weights]
+    standardized_weight_shapes = [
+        [0 if w_i is None else w_i for w_i in w] for w in weight_shapes
+    ]
+    return int(sum(np.prod(p) for p in standardized_weight_shapes))
 
 
 def print_summary(model, line_length=None, positions=None, print_fn=None):
-  """Prints a summary of a model.
+    """Prints a summary of a model.
 
   Args:
       model: Keras model instance.
@@ -118,162 +124,166 @@ def print_summary(model, line_length=None, positions=None, print_fn=None):
           in order to capture the string summary.
           It defaults to `print` (prints to stdout).
   """
-  if print_fn is None:
-    print_fn = print
+    if print_fn is None:
+        print_fn = print
 
-  if model.__class__.__name__ == 'Sequential':
-    sequential_like = True
-  elif not model._is_graph_network:
-    # We treat subclassed models as a simple sequence of layers, for logging
-    # purposes.
-    sequential_like = True
-  else:
-    sequential_like = True
-    nodes_by_depth = model._nodes_by_depth.values()
-    nodes = []
-    for v in nodes_by_depth:
-      if (len(v) > 1) or (len(v) == 1 and
-                          len(nest.flatten(v[0].keras_inputs)) > 1):
-        # if the model has multiple nodes
-        # or if the nodes have multiple inbound_layers
-        # the model is no longer sequential
-        sequential_like = False
-        break
-      nodes += v
+    if model.__class__.__name__ == "Sequential":
+        sequential_like = True
+    elif not model._is_graph_network:
+        # We treat subclassed models as a simple sequence of layers, for logging
+        # purposes.
+        sequential_like = True
+    else:
+        sequential_like = True
+        nodes_by_depth = model._nodes_by_depth.values()
+        nodes = []
+        for v in nodes_by_depth:
+            if (len(v) > 1) or (
+                len(v) == 1 and len(nest.flatten(v[0].keras_inputs)) > 1
+            ):
+                # if the model has multiple nodes
+                # or if the nodes have multiple inbound_layers
+                # the model is no longer sequential
+                sequential_like = False
+                break
+            nodes += v
+        if sequential_like:
+            # search for shared layers
+            for layer in model.layers:
+                flag = False
+                for node in layer._inbound_nodes:
+                    if node in nodes:
+                        if flag:
+                            sequential_like = False
+                            break
+                        else:
+                            flag = True
+                if not sequential_like:
+                    break
+
     if sequential_like:
-      # search for shared layers
-      for layer in model.layers:
-        flag = False
-        for node in layer._inbound_nodes:
-          if node in nodes:
-            if flag:
-              sequential_like = False
-              break
-            else:
-              flag = True
-        if not sequential_like:
-          break
+        line_length = line_length or 65
+        positions = positions or [0.45, 0.85, 1.0]
+        if positions[-1] <= 1:
+            positions = [int(line_length * p) for p in positions]
+        # header names for the different log elements
+        to_display = ["Layer (type)", "Output Shape", "Param #"]
+    else:
+        line_length = line_length or 98
+        positions = positions or [0.33, 0.55, 0.67, 1.0]
+        if positions[-1] <= 1:
+            positions = [int(line_length * p) for p in positions]
+        # header names for the different log elements
+        to_display = ["Layer (type)", "Output Shape", "Param #", "Connected to"]
+        relevant_nodes = []
+        for v in model._nodes_by_depth.values():
+            relevant_nodes += v
 
-  if sequential_like:
-    line_length = line_length or 65
-    positions = positions or [.45, .85, 1.]
-    if positions[-1] <= 1:
-      positions = [int(line_length * p) for p in positions]
-    # header names for the different log elements
-    to_display = ['Layer (type)', 'Output Shape', 'Param #']
-  else:
-    line_length = line_length or 98
-    positions = positions or [.33, .55, .67, 1.]
-    if positions[-1] <= 1:
-      positions = [int(line_length * p) for p in positions]
-    # header names for the different log elements
-    to_display = ['Layer (type)', 'Output Shape', 'Param #', 'Connected to']
-    relevant_nodes = []
-    for v in model._nodes_by_depth.values():
-      relevant_nodes += v
+    def print_row(fields, positions):
+        line = ""
+        for i in range(len(fields)):
+            if i > 0:
+                line = line[:-1] + " "
+            line += str(fields[i])
+            line = line[: positions[i]]
+            line += " " * (positions[i] - len(line))
+        print_fn(line)
 
-  def print_row(fields, positions):
-    line = ''
-    for i in range(len(fields)):
-      if i > 0:
-        line = line[:-1] + ' '
-      line += str(fields[i])
-      line = line[:positions[i]]
-      line += ' ' * (positions[i] - len(line))
-    print_fn(line)
+    print_fn('Model: "{}"'.format(model.name))
+    print_fn("_" * line_length)
+    print_row(to_display, positions)
+    print_fn("=" * line_length)
 
-  print_fn('Model: "{}"'.format(model.name))
-  print_fn('_' * line_length)
-  print_row(to_display, positions)
-  print_fn('=' * line_length)
-
-  def print_layer_summary(layer):
-    """Prints a summary for a single layer.
+    def print_layer_summary(layer):
+        """Prints a summary for a single layer.
 
     Args:
         layer: target layer.
     """
-    try:
-      output_shape = layer.output_shape
-    except AttributeError:
-      output_shape = 'multiple'
-    except RuntimeError:  # output_shape unknown in Eager mode.
-      output_shape = '?'
-    name = layer.name
-    cls_name = layer.__class__.__name__
-    if not layer.built and not getattr(layer, '_is_graph_network', False):
-      # If a subclassed model has a layer that is not called in Model.call, the
-      # layer will not be built and we cannot call layer.count_params().
-      params = '0 (unused)'
-    else:
-      params = layer.count_params()
-    fields = [name + ' (' + cls_name + ')', output_shape, params]
-    print_row(fields, positions)
-
-  def print_layer_summary_with_connections(layer):
-    """Prints a summary for a single layer (including topological connections).
-
-    Args:
-        layer: target layer.
-    """
-    try:
-      output_shape = layer.output_shape
-    except AttributeError:
-      output_shape = 'multiple'
-    connections = []
-    for node in layer._inbound_nodes:
-      if relevant_nodes and node not in relevant_nodes:
-        # node is not part of the current network
-        continue
-
-      for inbound_layer, node_index, tensor_index, _ in node.iterate_inbound():
-        connections.append('{}[{}][{}]'.format(inbound_layer.name, node_index,
-                                               tensor_index))
-
-    name = layer.name
-    cls_name = layer.__class__.__name__
-    if not connections:
-      first_connection = ''
-    else:
-      first_connection = connections[0]
-    fields = [
-        name + ' (' + cls_name + ')', output_shape,
-        layer.count_params(), first_connection
-    ]
-    print_row(fields, positions)
-    if len(connections) > 1:
-      for i in range(1, len(connections)):
-        fields = ['', '', '', connections[i]]
+        try:
+            output_shape = layer.output_shape
+        except AttributeError:
+            output_shape = "multiple"
+        except RuntimeError:  # output_shape unknown in Eager mode.
+            output_shape = "?"
+        name = layer.name
+        cls_name = layer.__class__.__name__
+        if not layer.built and not getattr(layer, "_is_graph_network", False):
+            # If a subclassed model has a layer that is not called in Model.call, the
+            # layer will not be built and we cannot call layer.count_params().
+            params = "0 (unused)"
+        else:
+            params = layer.count_params()
+        fields = [name + " (" + cls_name + ")", output_shape, params]
         print_row(fields, positions)
 
-  layers = model.layers
-  for i in range(len(layers)):
-    if sequential_like:
-      print_layer_summary(layers[i])
+    def print_layer_summary_with_connections(layer):
+        """Prints a summary for a single layer (including topological connections).
+
+    Args:
+        layer: target layer.
+    """
+        try:
+            output_shape = layer.output_shape
+        except AttributeError:
+            output_shape = "multiple"
+        connections = []
+        for node in layer._inbound_nodes:
+            if relevant_nodes and node not in relevant_nodes:
+                # node is not part of the current network
+                continue
+
+            for inbound_layer, node_index, tensor_index, _ in node.iterate_inbound():
+                connections.append(
+                    "{}[{}][{}]".format(inbound_layer.name, node_index, tensor_index)
+                )
+
+        name = layer.name
+        cls_name = layer.__class__.__name__
+        if not connections:
+            first_connection = ""
+        else:
+            first_connection = connections[0]
+        fields = [
+            name + " (" + cls_name + ")",
+            output_shape,
+            layer.count_params(),
+            first_connection,
+        ]
+        print_row(fields, positions)
+        if len(connections) > 1:
+            for i in range(1, len(connections)):
+                fields = ["", "", "", connections[i]]
+                print_row(fields, positions)
+
+    layers = model.layers
+    for i in range(len(layers)):
+        if sequential_like:
+            print_layer_summary(layers[i])
+        else:
+            print_layer_summary_with_connections(layers[i])
+        if i == len(layers) - 1:
+            print_fn("=" * line_length)
+        else:
+            print_fn("_" * line_length)
+
+    if hasattr(model, "_collected_trainable_weights"):
+        trainable_count = count_params(model._collected_trainable_weights)
     else:
-      print_layer_summary_with_connections(layers[i])
-    if i == len(layers) - 1:
-      print_fn('=' * line_length)
-    else:
-      print_fn('_' * line_length)
+        trainable_count = count_params(model.trainable_weights)
 
-  if hasattr(model, '_collected_trainable_weights'):
-    trainable_count = count_params(model._collected_trainable_weights)
-  else:
-    trainable_count = count_params(model.trainable_weights)
+    non_trainable_count = count_params(model.non_trainable_weights)
 
-  non_trainable_count = count_params(model.non_trainable_weights)
-
-  print_fn('Total params: {:,}'.format(trainable_count + non_trainable_count))
-  print_fn('Trainable params: {:,}'.format(trainable_count))
-  print_fn('Non-trainable params: {:,}'.format(non_trainable_count))
-  print_fn('_' * line_length)
+    print_fn("Total params: {:,}".format(trainable_count + non_trainable_count))
+    print_fn("Trainable params: {:,}".format(trainable_count))
+    print_fn("Non-trainable params: {:,}".format(non_trainable_count))
+    print_fn("_" * line_length)
 
 
-def convert_dense_weights_data_format(dense,
-                                      previous_feature_map_shape,
-                                      target_data_format='channels_first'):
-  """Utility useful when changing a convnet's `data_format`.
+def convert_dense_weights_data_format(
+    dense, previous_feature_map_shape, target_data_format="channels_first"
+):
+    """Utility useful when changing a convnet's `data_format`.
 
   When porting the weights of a convnet from one data format to the other,
   if the convnet includes a `Flatten` layer
@@ -292,35 +302,36 @@ def convert_dense_weights_data_format(dense,
           if converting a "channels_first" model to "channels_last",
           or reciprocally.
   """
-  assert target_data_format in {'channels_last', 'channels_first'}
-  kernel, bias = dense.get_weights()
-  for i in range(kernel.shape[1]):
-    if target_data_format == 'channels_first':
-      c, h, w = previous_feature_map_shape
-      original_fm_shape = (h, w, c)
-      ki = kernel[:, i].reshape(original_fm_shape)
-      ki = np.transpose(ki, (2, 0, 1))  # last -> first
-    else:
-      h, w, c = previous_feature_map_shape
-      original_fm_shape = (c, h, w)
-      ki = kernel[:, i].reshape(original_fm_shape)
-      ki = np.transpose(ki, (1, 2, 0))  # first -> last
-    kernel[:, i] = np.reshape(ki, (np.prod(previous_feature_map_shape),))
-  dense.set_weights([kernel, bias])
+    assert target_data_format in {"channels_last", "channels_first"}
+    kernel, bias = dense.get_weights()
+    for i in range(kernel.shape[1]):
+        if target_data_format == "channels_first":
+            c, h, w = previous_feature_map_shape
+            original_fm_shape = (h, w, c)
+            ki = kernel[:, i].reshape(original_fm_shape)
+            ki = np.transpose(ki, (2, 0, 1))  # last -> first
+        else:
+            h, w, c = previous_feature_map_shape
+            original_fm_shape = (c, h, w)
+            ki = kernel[:, i].reshape(original_fm_shape)
+            ki = np.transpose(ki, (1, 2, 0))  # first -> last
+        kernel[:, i] = np.reshape(ki, (np.prod(previous_feature_map_shape),))
+    dense.set_weights([kernel, bias])
 
 
 def is_builtin_layer(layer):
-  if not getattr(layer, '_keras_api_names', None):
-    return False
+    if not getattr(layer, "_keras_api_names", None):
+        return False
 
-  # Subclasses of `Layer` that are not exported inherit the export name
-  # of the base layer class.
-  return (layer._keras_api_names != ('keras.layers.Layer',) and
-          layer._keras_api_names_v1 != ('keras.layers.Layer',))
+    # Subclasses of `Layer` that are not exported inherit the export name
+    # of the base layer class.
+    return layer._keras_api_names != (
+        "keras.layers.Layer",
+    ) and layer._keras_api_names_v1 != ("keras.layers.Layer",)
 
 
 def cached_per_instance(f):
-  """Lightweight decorator for caching lazily constructed properties.
+    """Lightweight decorator for caching lazily constructed properties.
 
   When to use:
   This decorator provides simple caching with minimal overhead. It is designed
@@ -401,34 +412,34 @@ def cached_per_instance(f):
     f decorated with simple caching behavior.
   """
 
-  cache = weakref.WeakKeyDictionary()
+    cache = weakref.WeakKeyDictionary()
 
-  @functools.wraps(f)
-  def wrapped(item):
-    output = cache.get(item)
-    if output is None:
-      cache[item] = output = f(item)
-    return output
+    @functools.wraps(f)
+    def wrapped(item):
+        output = cache.get(item)
+        if output is None:
+            cache[item] = output = f(item)
+        return output
 
-  wrapped.cache = cache
-  return wrapped
+    wrapped.cache = cache
+    return wrapped
 
 
 def filter_empty_layer_containers(layer_list):
-  """Filter out empty Layer-like containers and uniquify."""
-  # TODO(b/130381733): Make this an attribute in base_layer.Layer.
-  existing = set()
-  to_visit = layer_list[::-1]
-  while to_visit:
-    obj = to_visit.pop()
-    if id(obj) in existing:
-      continue
-    existing.add(id(obj))
-    if hasattr(obj, '_is_layer') and not isinstance(obj, type):
-      yield obj
-    else:
-      sub_layers = getattr(obj, 'layers', None) or []
+    """Filter out empty Layer-like containers and uniquify."""
+    # TODO(b/130381733): Make this an attribute in base_layer.Layer.
+    existing = set()
+    to_visit = layer_list[::-1]
+    while to_visit:
+        obj = to_visit.pop()
+        if id(obj) in existing:
+            continue
+        existing.add(id(obj))
+        if hasattr(obj, "_is_layer") and not isinstance(obj, type):
+            yield obj
+        else:
+            sub_layers = getattr(obj, "layers", None) or []
 
-      # Trackable data structures will not show up in ".layers" lists, but
-      # the layers they contain will.
-      to_visit.extend(sub_layers[::-1])
+            # Trackable data structures will not show up in ".layers" lists, but
+            # the layers they contain will.
+            to_visit.extend(sub_layers[::-1])

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Getting-Your-Vagrant-Environment-Up-and-Running</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="what-is-vagrant">What is Vagrant?</h1>
+<p>In a nutshell, Vagrant is an isolated environment that runs locally on your machine. When you set up Vagrant and start it up in a directory that contains a Vagrantfile, your Vagrant environment gets shared access to everything in that directory.</p>
+<p>The biggest win from using Vagrant though is the fact that it standardizes everyone’s environment to be the same thing, regardless of whether you’re on a Mac, a Windows, or another Linux distro. This ensures that everyone is working in the same environment, meaning there’s essentially no chance that you’ll see an error that is unique to you because it was caused by some environment issue. If you encounter an issue, <em>everyone</em> else using the same virtual environment should be able to replicate that issue.</p>
+<p>The other important thing that Vagrant provides is seamless synchronization of directories. At the root level directory where you place your <code>Vagrantfile</code>, any files and subdirectories will be mirrored between both your local machine and the virtual environment. This is great because it means that most of your workflow doesn’t need to change. Continue using whatever text editor you’ve been using up to this point to make changes to files. The only thing that does change is that you’ll need to test your changes within the virtual environment (seeing if your code compiles, running tests, etc.).</p>
+<p>And that’s about it! It might like seem like much right now, but trust me when I say that having everyone work in the same environment is a huge boon to both you as a student as well as to the instructors (no more having to figure out if some issue is being caused by some obscure environmental factor). It’s also nice that you’re getting some experience with virtual environment now, because they are a tool used in the software development workflows of many companies!</p>
+<h1 id="getting-vagrant-up-and-running">Getting Vagrant Up and Running</h1>
+<ol type="1">
+<li><p>Head to <a href="https://www.vagrantup.com/downloads.html">https://www.vagrantup.com/downloads.html</a> and grab the installer for your particular operating system.</p></li>
+<li><p>VirtualBox is a dependency that Vagrant relies on, so we’ll need to install that as well. Head to <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a> and grab the installer for your particular operating system.</p></li>
+</ol>
+<blockquote>
+<p>NOTE: If you’re on a recent version of OSX such as High Sierra or Mojave and the VirtualBox installation failed, you may need to explicitly allow the installation in your security preferences. <a href="https://matthewpalmer.net/blog/2017/12/10/install-virtualbox-mac-high-sierra/index.html">This</a> walks through what you’ll need to do.</p>
+</blockquote>
+<ol start="3" type="1">
+<li><p>Open up a terminal window and create a new directory that will be the root-level directory for all of your CS curriculum material (<code>lamdbda-cs</code> for example). If you already have some of the CS repositories forked/cloned locally, you’ll want to move all of them into one directory. Your repositories from other tracks don’t need to be included; just CS repos will suffice.</p></li>
+<li><p>In the root-level directory, make a file called <code>Vagrantfile</code> (yes, no extension) and copy the contents of <a href="https://gist.github.com/seanchen1991/ac80020058439c0fc88159cddd42a324">this gist</a> into the <code>Vagrantfile</code>. This is the configuration file for our virtual environment.</p></li>
+<li><p>In your terminal at the root-level directory where the <code>Vagrantfile</code> is located, run <code>vagrant up</code> to initialize the vagrant environment. This could take ~10 minutes to complete.</p></li>
+<li><p>Now that the Vagrant environment has been initialized, we need to SSH into it. If you’re on OSX or Linux, you can do this with the <code>vagrant ssh</code> command. If you’re on a Windows machine, you’ll need to SSH using your favorite SSH client (such as <a href="https://www.putty.org/">PUTTY</a>).</p></li>
+</ol>
+<pre><code>protocol: SSH
+Hostname: 127.0.0.1
+Port 2222</code></pre>
+<ol start="7" type="1">
+<li>That’s it! You should now have successfully booted up and entered the Vagrant virtual environment. You might see a message saying</li>
+</ol>
+<pre><code>New release &#39;18.04.2 LTS&#39; available.
+Run &#39;do-release-upgrade&#39; to upgrade to it.</code></pre>
+<p><em>DON’T</em> run this command. We want everyone to be on the same Ubuntu version, so we’ll all be sticking with version 16.04.</p>
+<p>From here, execute <code>cd /vagrant</code> to <code>cd</code> into the mirror of the root-level directory that will contain all of your local CS repositories. Any changes to files/directories you make in the virtual environment will be mirrored in your local environment and vice versa.</p>
+<p>In order to exit out of the virtual environment, simply type <code>exit</code> at the prompt.</p>
+<h1 id="whats-in-the-box">What’s In the Box?</h1>
+<p>Here’s what’s included in the box when you first boot up your shiny new virtual environment:</p>
+<ul>
+<li>Ubuntu 16.04.6 LTS</li>
+<li>Python 2.7.12 (old version of Python that’s still used quite a lot)</li>
+<li>Python 3.5.2 (newer version of Python, but not new enough for our purposes)</li>
+<li>Pip 8.1.1 (Python package manager)</li>
+<li>GDB 7.11.1 (a C debugger)</li>
+<li>GCC 5.4.0 (a C compiler)</li>
+</ul>
+<h1 id="installing-some-additional-tools">Installing Some Additional Tools</h1>
+<p>We’ll need to install some additional tools in preparation for the CS curriculum.</p>
+<h3 id="installing-python-3.7">Installing Python 3.7</h3>
+<p>Run the following commands in your Vagrant virtual environment to install Python 3.7:</p>
+<ol type="1">
+<li><code>sudo apt update</code></li>
+<li><code>sudo apt install software-properties-common</code></li>
+<li><code>sudo add-apt-repository ppa:deadsnakes/ppa</code></li>
+<li><code>sudo apt update</code></li>
+<li><code>sudo apt install python3.7</code></li>
+</ol>
+<p>At this point, we have three versions of Python installed in our virtual env: Python 2.7 (which can be accessed with the command <code>python</code>), Python 3.5 (which can be accessed with the command <code>python3</code>), and Python 3.7 (which can be accessed with the command <code>python3.7</code>).</p>
+<p>Let’s map Python 3.7 to the <code>python3</code> command (we’re going to leave Python 2 mapped to the <code>python</code> command). We won’t be using Python 3.5.</p>
+<p>In order to do this, run the following:</p>
+<ol type="1">
+<li><code>sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.5 1</code></li>
+<li><code>sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2</code></li>
+<li><code>sudo update-alternatives --config python3</code></li>
+</ol>
+<p>A little menu will be brought up and you can just hit ENTER/RETURN at the prompt. At this point, Python 3.7 should be mapped to the <code>python3</code> command. Test it out with <code>python3 -V</code> to confirm if it worked.</p>
+</body>
+</html>

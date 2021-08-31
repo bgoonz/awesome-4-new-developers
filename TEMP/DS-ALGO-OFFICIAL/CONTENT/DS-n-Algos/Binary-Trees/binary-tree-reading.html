@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A description of the page and its contents" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Page Title</title>
+    <link rel="stylesheet" href="./../../assets/style.css" />
+    <link rel="stylesheet" href="./../../assets/prism.css" />
+    <script async src="./../../assets/prism.js"></script>
+  </head>
+
+  <body>
+
+
+    <a href="https://github.com/bgoonz/DS-ALGO-OFFICIAL" class="github-corner" aria-label="View source on Github"><svg
+        width="80" height="80" viewBox="0 0 250 250"
+        style="z-index: 100000; fill:#194ccdaf; color:#fff; position: fixed; top: 20px; border: 0; left: 20px; transform: scale(-1.5, 1.5);"
+        aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+          fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+        </path>
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+          fill="currentColor" class="octo-body"></path>
+      </svg></a>
+
+
+
+
+    <h1 id="example-binary-tree">Example Binary Tree</h1>
+    <h3 id="visual-aid">Visual Aid</h3>
+    <hr />
+    <h2 id="picture-alt"><img src="https://assets.aaonline.io/data_structures_algorithms/trees/images/graph_a.png"
+        alt="picture alt" /></h2>
+    <hr />
+    <h3 id="example-code">Example Code</h3>
+    <hr />
+    <div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a
+          title="1"><span>class</span>
+          TreeNode <span>{</span></a>
+        <a title="2"> <span>constructor</span>(val) <span>{</span></a>
+        <a title="3"> <span>this</span>.<span>val</span> <span>=</span> val<span>;</span></a>
+        <a title="4"> <span>this</span>.<span>left</span> <span>=</span> <span>null;</span></a>
+        <a title="5"> <span>this</span>.<span>right</span> <span>=</span> <span>null;</span></a>
+        <a id=-6" title="6"> <span>}</span></a>
+        <a title="7"><span>}</span></a>
+        <a title="8"></a>
+        <a title="9"><span>let</span> a <span>=</span> <span>new</span>
+          <span>TreeNode</span>(<span>&quot;a&quot;</span>)<span>;</span></a>
+        <a id=-10" title="10"><span>let</span> b <span>=</span> <span>new</span>
+          <span>TreeNode</span>(<span>&quot;b&quot;</span>)<span>;</span></a>
+        <a title="11"><span>let</span> c <span>=</span> <span>new</span>
+          <span>TreeNode</span>(<span>&quot;c&quot;</span>)<span>;</span></a>
+        <a id=-12" title="12"><span>let</span> d <span>=</span> <span>new</span>
+          <span>TreeNode</span>(<span>&quot;d&quot;</span>)<span>;</span></a>
+        <a id=-13" title="13"><span>let</span> e <span>=</span> <span>new</span>
+          <span>TreeNode</span>(<span>&quot;e&quot;</span>)<span>;</span></a>
+        <a id=-14" title="14"><span>let</span> f <span>=</span> <span>new</span>
+          <span>TreeNode</span>(<span>&quot;f&quot;</span>)<span>;</span></a>
+        <a id=-15" title="15"></a>
+        <a id=-16" title="16"><span>a</span>.<span>left</span> <span>=</span> b<span>;</span></a>
+        <a id=-17" title="17"><span>a</span>.<span>right</span> <span>=</span> c<span>;</span></a>
+        <a id=-18" title="18"><span>b</span>.<span>left</span> <span>=</span> d<span>;</span></a>
+        <a id=-19" title="19"><span>b</span>.<span>right</span> <span>=</span> e<span>;</span></a>
+        <a id=-20" title="20"><span>c</span>.<span>right</span> <span>=</span> f<span>;</span></a></code></pre>
+    </div>
+    <hr />
+    <hr />
+    <h1 id="terms">Terms</h1>
+    <ul>
+      <li>tree - graph with no cycles</li>
+      <li>binary tree - tree where nodes have at most 2 nodes</li>
+      <li>root - the ultimate parent, the single node of a tree that can access every other node through edges; by
+        definition the root will not have a parent</li>
+      <li>internal node - a node that has children</li>
+      <li>leaf - a node that does not have any children</li>
+      <li>path - a series of nodes that can be traveled through edges - for example A, B, E is a path through the above
+        tree</li>
+    </ul>
+    <hr />
+    <h1 id="search-patterns">Search Patterns</h1>
+    <ul>
+      <li>Breadth First Search - Check all nodes at a level before moving down a level
+        <ul>
+          <li>Think of this of searching horizontally in rows</li>
+        </ul>
+      </li>
+      <li>Depth First Search - Check the depth as far as it goes for one child, before moving on to the next child.
+        <ul>
+          <li>Think of this as searching vertically in diagonals</li>
+          <li>Pre-Order Traversal - Access the data of the current node, recursively visit the left sub tree,
+            recursively
+            visit the right sub tree
+            <ul>
+              <li>All the way to the left, top down, going right after other options have already been logged.</li>
+            </ul>
+          </li>
+          <li>In-Order Traversal - Recursively visit the left sub tree, access the data of the current node, recursively
+            visit the right sub tree
+            <ul>
+              <li>In the order they were the "current root", the actual return order of the recursive calls.</li>
+            </ul>
+          </li>
+          <li>Post-Order Traversal - Recursively visit the left sub tree, recursively visit the right sub tree, access
+            the
+            data of the current node.
+            <ul>
+              <li>Starting with the bottom most nodes working up through the tree</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <hr />
+    <h1 id="constraints">Constraints</h1>
+    <ul>
+      <li>Binary trees have at most two children per node</li>
+      <li>Given any node of the tree, the values on the left must be strictly less than that node</li>
+      <li>Given any node of the tree, the values on the right must be strictly greater than or equal to that node</li>
+      <li>Given these constraints a binary tree is necessarily a sorted data structure</li>
+      <li>The worst binary trees devolve into a linked list, the best are height balanced (think branching).</li>
+    </ul>
+    <hr />
+    <h1 id="pseudocode-for-insertion">PseudoCode For Insertion</h1>
+    <ul>
+      <li>Create a new node</li>
+      <li>Start at the root
+        <ul>
+          <li>Check if there is a root
+            <ul>
+              <li>If not the root becomes the new node</li>
+            </ul>
+          </li>
+          <li>If there is a root check if the value of the new node is equal to, greater then, or less then the value of
+            the root
+            <ul>
+              <li>If it is greater or equal to
+                <ul>
+                  <li>Check to see if there is a node to the right
+                    <ul>
+                      <li>If there is, move to the new node and continue with the node to the right as the subtree root
+                      </li>
+                      <li>If there is not, add the new node as the right property of the current node</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>If it is smaller
+                <ul>
+                  <li>Check to see if there is a node to the left
+                    <ul>
+                      <li>If there is, move to the new node and continue with the node to the left as the subtree root
+                      </li>
+                      <li>If there is not, add the new node as the left property of the current node</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <hr />
+    <h1 id="pseudocode-for-search-of-a-single-item">PseudoCode For Search Of A single Item</h1>
+    <ul>
+      <li>Start at the root
+        <ul>
+          <li>Check if there is a root
+            <ul>
+              <li>If not, there is nothing in the tree, so the search is over</li>
+            </ul>
+          </li>
+          <li>If there is a root, check if the value of the root is equal to, greater then, or less then the value were
+            looking for;
+            <ul>
+              <li>If it is equal to the value
+                <ul>
+                  <li>We found what we are searching for</li>
+                </ul>
+              </li>
+              <li>If it is less than the value
+                <ul>
+                  <li>Check to see if there is a node to the left
+                    <ul>
+                      <li>If there isn't
+                        <ul>
+                          <li>the value isn't in our tree</li>
+                        </ul>
+                      </li>
+                      <li>If there is
+                        <ul>
+                          <li>repeat these steps with the node to the left as the new subtree root</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>If it is greater than the value
+                <ul>
+                  <li>Check to see if there is a node to the right
+                    <ul>
+                      <li>If there isn't
+                        <ul>
+                          <li>the value isn't in our tree</li>
+                        </ul>
+                      </li>
+                      <li>If there is
+                        <ul>
+                          <li>repeat these steps with the node to the right as the new subtree root</li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <hr />
+    <h1 id="pseudocode-for-breadth-first-search-traversal">PseudoCode For Breadth First Search Traversal</h1>
+    <ul>
+      <li>Create a queue class or use an array</li>
+      <li>Create a variable to store the values of the nodes visited</li>
+      <li>Place the root in the queue</li>
+      <li>Loop as many times as there are items in the queue
+        <ul>
+          <li>Dequeue a node</li>
+          <li>If there is a left value to the node dequeued, add it to the queue</li>
+          <li>If there is a right value to the node dequeued, add it to the queue</li>
+          <li>Push the nodes value into the variable that stores nodes visited</li>
+        </ul>
+      </li>
+    </ul>
+    <hr />
+    <h1 id="pseudocode-for-depth-first-search-traversal">PseudoCode For Depth First Search Traversal</h1>
+    <h2 id="pre-order">Pre-Order</h2>
+    <h4 id="iterative">Iterative</h4>
+    <ul>
+      <li>Create a stack class or use an array</li>
+      <li>Push the root into the stack</li>
+      <li>Create a variable to store the values of the nodes visited</li>
+      <li>Do this as long as there is something on the stack
+        <ul>
+          <li>Pop a node from the stack</li>
+          <li>Push that nodes value into the variable that stores nodes visited.</li>
+          <li>If there is a node to the right push it into the stack</li>
+          <li>If there is a node to the left push it into the stack</li>
+        </ul>
+      </li>
+      <li>Return the variable storing the values</li>
+    </ul>
+    <h4 id="recursive">Recursive</h4>
+    <ul>
+      <li>Create a variable to store the current root</li>
+      <li>Push the value of current root to the variable storing the values</li>
+      <li>If the current root has a left propety call the function on that the left property</li>
+      <li>If the current root has a right propety call the function on that the right property</li>
+      <li>Spread the current root, the left values, and the right values</li>
+    </ul>
+    <h2 id="in-order">In-Order</h2>
+    <h4 id="iterative-1">Iterative</h4>
+    <ul>
+      <li>Create a stack class or use an array</li>
+      <li>Create a variable to store the current root</li>
+      <li>Create a variable to store the values of the nodes visited</li>
+      <li>Create a loop
+        <ul>
+          <li>While the current root exists
+            <ul>
+              <li>push the current root to the call stack</li>
+              <li>current root is equal to the left of current root</li>
+            </ul>
+          </li>
+          <li>if the stack is empty break out of the loop</li>
+          <li>set a variable to equal the popped value of the stack</li>
+          <li>push that variable into the variable that stores values</li>
+          <li>set the current root to the right of the current loop</li>
+        </ul>
+      </li>
+      <li>Return the variable storing the values</li>
+    </ul>
+    <h4 id="recursive-1">Recursive</h4>
+    <ul>
+      <li>Create a variable to store the current root</li>
+      <li>Push the value of current root to the variable storing the values</li>
+      <li>If the current root has a left propety call the function on that the left property</li>
+      <li>If the current root has a right propety call the function on that the right property</li>
+      <li>Spread the the left values, current root ,and the right values</li>
+    </ul>
+    <h2 id="post-order">Post-Order</h2>
+    <h4 id="iterative-2">Iterative</h4>
+    <ul>
+      <li>Haven't figured this one out yet.</li>
+    </ul>
+    <h4 id="recursive-2">Recursive</h4>
+    <ul>
+      <li>Create a variable to store the current root</li>
+      <li>Push the value of current root to the variable storing the values</li>
+      <li>If the current root has a left propety call the function on that the left property</li>
+      <li>If the current root has a right propety call the function on that the right property</li>
+      <li>Spread the the left values, the right values, and current root</li>
+    </ul>
+    <hr />
+    <h1 id="example-binary-search-tree">Example Binary Search Tree</h1>
+    <div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a
+          title="1"><span>class</span>
+          TreeNode <span>{</span></a>
+        <a id=-2" title="2"> <span>constructor</span>(val) <span>{</span></a>
+        <a id=-3" title="3"> <span>this</span>.<span>val</span> <span>=</span> val<span>;</span></a>
+        <a id=-4" title="4"> <span>this</span>.<span>left</span> <span>=</span> <span>null;</span></a>
+        <a id=-5" title="5"> <span>this</span>.<span>right</span> <span>=</span> <span>null;</span></a>
+        <a id=-6" title="6"> <span>}</span></a>
+        <a id=-7" title="7"><span>}</span></a>
+        <a id=-8" title="8"></a>
+        <a id=-9" title="9"><span>class</span> BST <span>{</span></a>
+        <a id=-10" title="10"> <span>constructor</span>() <span>{</span></a>
+        <a id=-11" title="11"> <span>this</span>.<span>root</span> <span>=</span> <span>null;</span></a>
+        <a id=-12" title="12"> <span>}</span></a>
+        <a id=-13" title="13"></a>
+        <a id=-14" title="14"> <span>//Insert a new node</span></a>
+        <a id=-15" title="15"></a>
+        <a id=-16" title="16"> <span>recursiveInsert</span>(val<span>,</span> currentNode <span>=</span>
+          <span>this</span>.<span>root</span>) <span>{</span></a>
+        <a id=-17" title="17"> <span>if</span> (<span>!this</span>.<span>root</span>) <span>{</span></a>
+        <a id=-18" title="18"> <span>this</span>.<span>root</span> <span>=</span> <span>new</span>
+          <span>TreeNode</span>(val)<span>;</span></a>
+        <a id=-19" title="19"> <span>return</span> <span>this;</span></a>
+        <a id=-20" title="20"> <span>}</span></a>
+        <a id=-21" title="21"> <span>if</span> (val <span>&lt;</span> <span>currentNode</span>.<span>val</span>)
+          <span>{</span></a>
+        <a id=-22" title="22"> <span>if</span> (<span>!currentNode</span>.<span>left</span>) <span>{</span></a>
+        <a id=-23" title="23"> <span>currentNode</span>.<span>left</span> <span>=</span> <span>new</span>
+          <span>TreeNode</span>(val)<span>;</span></a>
+        <a id=-24" title="24"> <span>}</span> <span>else</span> <span>{</span></a>
+        <a id=-25" title="25"> <span>this</span>.<span>insert</span>(val<span>,</span>
+          <span>currentNode</span>.<span>left</span>)<span>;</span></a>
+        <a id=-26" title="26"> <span>}</span></a>
+        <a id=-27" title="27"> <span>}</span> <span>else</span> <span>{</span></a>
+        <a id=-28" title="28"> <span>if</span> (<span>!currentNode</span>.<span>right</span>) <span>{</span></a>
+        <a id=-29" title="29"> <span>currentNode</span>.<span>right</span> <span>=</span> <span>new</span>
+          <span>TreeNode</span>(val)<span>;</span></a>
+        <a id=-30" title="30"> <span>}</span> <span>else</span> <span>{</span></a>
+        <a id=-31" title="31"> <span>this</span>.<span>insert</span>(val<span>,</span>
+          <span>currentNode</span>.<span>right</span>)<span>;</span></a>
+        <a id=-32" title="32"> <span>}</span></a>
+        <a id=-33" title="33"> <span>}</span></a>
+        <a id=-34" title="34"> <span>}</span></a>
+        <a id=-35" title="35"></a>
+        <a id=-36" title="36"> <span>iterativeInsert</span>(val<span>,</span> currentNode <span>=</span>
+          <span>this</span>.<span>root</span>) <span>{</span></a>
+        <a id=-37" title="37"> <span>if</span> (<span>!this</span>.<span>root</span>) <span>{</span></a>
+        <a id=-38" title="38"> <span>this</span>.<span>root</span> <span>=</span> <span>new</span>
+          <span>TreeNode</span>(val)<span>;</span></a>
+        <a id=-39" title="39"> <span>return</span> <span>this;</span></a>
+        <a id=-40" title="40"> <span>}</span></a>
+        <a id=-41" title="41"> <span>if</span> (val <span>&lt;</span> <span>currentNode</span>.<span>val</span>)
+          <span>{</span></a>
+        <a id=-42" title="42"> <span>if</span> (<span>!currentNode</span>.<span>left</span>) <span>{</span></a>
+        <a id=-43" title="43"> <span>currentNode</span>.<span>left</span> <span>=</span> <span>new</span>
+          <span>TreeNode</span>()<span>;</span></a>
+        <a id=-44" title="44"> <span>}</span> <span>else</span> <span>{</span></a>
+        <a id=-45" title="45"> <span>while</span> (<span>true</span>) <span>{</span></a>
+        <a id=-46" title="46"> <span>if</span> (val <span>&lt;</span> <span>currentNode</span>.<span>val</span>)
+          <span>{</span></a>
+        <a id=-47" title="47"> <span>if</span> (<span>!currenNodet</span>.<span>left</span>) <span>{</span></a>
+        <a id=-48" title="48"> <span>currentNode</span>.<span>left</span> <span>=</span> <span>new</span>
+          <span>TreeNode</span>()<span>;</span></a>
+        <a id=-49" title="49"> <span>return</span> <span>this;</span></a>
+        <a id=-50" title="50"> <span>}</span> <span>else</span> <span>{</span></a>
+        <a id=-51" title="51"> currentNode <span>=</span> <span>currentNode</span>.<span>left;</span></a>
+        <a id=-52" title="52"> <span>}</span></a>
+        <a id=-53" title="53"> <span>}</span> <span>else</span> <span>{</span></a>
+        <a id=-54" title="54"> <span>if</span> (<span>!currentNode</span>.<span>right</span>) <span>{</span></a>
+        <a id=-55" title="55"> <span>currentNode</span>.<span>right</span> <span>=</span> <span>new</span>
+          <span>TreeNode</span>()<span>;</span></a>
+        <a id=-56" title="56"> <span>return</span> <span>this;</span></a>
+        <a id=-57" title="57"> <span>}</span> <span>else</span> <span>{</span></a>
+        <a id=-58" title="58"> currentNode <span>=</span> <span>currentNode</span>.<span>right;</span></a>
+        <a id=-59" title="59"> <span>}</span></a>
+        <a id=-60" title="60"> <span>}</span></a>
+        <a id=-61" title="61"> <span>}</span></a>
+        <a id=-62" title="62"> <span>}</span></a>
+        <a id=-63" title="63"> <span>}</span></a>
+        <a id=-64" title="64"> <span>}</span></a>
+        <a id=-65" title="65"></a>
+        <a id=-66" title="66"> <span>//Search the tree</span></a>
+        <a id=-67" title="67"></a>
+        <a id=-68" title="68"> <span>searchRecur</span>(val<span>,</span> currentNode <span>=</span>
+          <span>this</span>.<span>root</span>) <span>{</span></a>
+        <a id=-69" title="69"> <span>if</span> (<span>!</span>currentNode) <span>return</span> <span>false;</span></a>
+        <a id=-70" title="70"> <span>if</span> (val <span>&lt;</span> <span>currentNode</span>.<span>val</span>)
+          <span>{</span></a>
+        <a id=-71" title="71"> <span>return</span> <span>this</span>.<span>searchRecur</span>(val<span>,</span>
+          <span>currentNode</span>.<span>left</span>)<span>;</span></a>
+        <a id=-72" title="72"> <span>}</span> <span>else</span> <span>if</span> (val <span>&gt;</span>
+          <span>currentNode</span>.<span>val</span>) <span>{</span></a>
+        <a id=-73" title="73"> <span>return</span> <span>this</span>.<span>searchRecur</span>(val<span>,</span>
+          <span>currentNode</span>.<span>right</span>)<span>;</span></a>
+        <a id=-74" title="74"> <span>}</span> <span>else</span> <span>{</span></a>
+        <a id=-75" title="75"> <span>return</span> <span>true;</span></a>
+        <a id=-76" title="76"> <span>}</span></a>
+        <a id=-77" title="77"> <span>}</span></a>
+        <a id=-78" title="78"></a>
+        <a id=-79" title="79"> <span>searchIter</span>(val) <span>{</span></a>
+        <a id=-80" title="80"> <span>let</span> currentNode <span>=</span> <span>this</span>.<span>root;</span></a>
+        <a id=-81" title="81"> <span>while</span> (currentNode) <span>{</span></a>
+        <a id=-82" title="82"> <span>if</span> (val <span>&lt;</span> <span>currentNode</span>.<span>val</span>)
+          <span>{</span></a>
+        <a id=-83" title="83"> currentNode <span>=</span> <span>currentNode</span>.<span>left;</span></a>
+        <a id=-84" title="84"> <span>}</span> <span>else</span> <span>if</span> (val <span>&gt;</span>
+          <span>currentNode</span>.<span>val</span>) <span>{</span></a>
+        <a id=-85" title="85"> currentNode <span>=</span> <span>currentNode</span>.<span>right;</span></a>
+        <a id=-86" title="86"> <span>}</span> <span>else</span> <span>{</span></a>
+        <a id=-87" title="87"> <span>return</span> <span>true;</span></a>
+        <a id=-88" title="88"> <span>}</span></a>
+        <a id=-89" title="89"> <span>}</span></a>
+        <a id=-90" title="90"> <span>return</span> <span>false;</span></a>
+        <a id=-91" title="91"> <span>}</span></a>
+        <a id=-92" title="92"></a>
+        <a id=-93" title="93"> <span>// Maybe works, who knows, pulled it off the internet....</span></a>
+        <a id=-94" title="94"></a>
+        <a id=-95" title="95"> <span>deleteNodeHelper</span>(root<span>,</span> key) <span>{</span></a>
+        <a id=-96" title="96"> <span>if</span> (root <span>===</span> <span>null</span>) <span>{</span></a>
+        <a id=-97" title="97"> <span>return</span> <span>false;</span></a>
+        <a id=-98" title="98"> <span>}</span></a>
+        <a id=-99" title="99"> <span>if</span> (key <span>&lt;</span> <span>root</span>.<span>val</span>)
+          <span>{</span></a>
+        <a id=-100" title="100"> <span>root</span>.<span>left</span> <span>=</span>
+          <span>deleteNodeHelper</span>(<span>root</span>.<span>left,</span> key)<span>;</span></a>
+        <a id=-101" title="101"> <span>return</span> root<span>;</span></a>
+        <a id=-102" title="102"> <span>}</span> <span>else</span> <span>if</span> (key <span>&gt;</span>
+          <span>root</span>.<span>val</span>) <span>{</span></a>
+        <a id=-103" title="103"> <span>root</span>.<span>right</span> <span>=</span>
+          <span>deleteNodeHelper</span>(<span>root</span>.<span>right,</span> key)<span>;</span></a>
+        <a id=-104" title="104"> <span>return</span> root<span>;</span></a>
+        <a id=-105" title="105"> <span>}</span> <span>else</span> <span>{</span></a>
+        <a id=-106" title="106"> <span>if</span> (<span>root</span>.<span>left</span> <span>===</span> <span>null</span>
+          <span>&amp;&amp;</span> <span>root</span>.<span>right</span> <span>===</span> <span>null</span>)
+          <span>{</span></a>
+        <a id=-107" title="107"> root <span>=</span> <span>null;</span></a>
+        <a id=-108" title="108"> <span>return</span> root<span>;</span></a>
+        <a id=-109" title="109"> <span>}</span></a>
+        <a id=-110" title="110"> <span>if</span> (<span>root</span>.<span>left</span> <span>===</span>
+          <span>null</span>)
+          <span>return</span> <span>root</span>.<span>right;</span></a>
+        <a id=-111" title="111"> <span>if</span> (<span>root</span>.<span>right</span> <span>===</span>
+          <span>null</span>)
+          <span>return</span> <span>root</span>.<span>left;</span></a>
+        <a id=-112" title="112"></a>
+        <a id=-113" title="113"> <span>let</span> currNode <span>=</span> <span>root</span>.<span>right;</span></a>
+        <a id=-114" title="114"> <span>while</span> (<span>currNode</span>.<span>left</span> <span>!==</span>
+          <span>null</span>) <span>{</span></a>
+        <a id=-115" title="115"> currNode <span>=</span> <span>currNode</span>.<span>left;</span></a>
+        <a id=-116" title="116"> <span>}</span></a>
+        <a id=-117" title="117"> <span>root</span>.<span>val</span> <span>=</span>
+          <span>currNode</span>.<span>val;</span></a>
+        <a id=-118" title="118"> <span>root</span>.<span>right</span> <span>=</span>
+          <span>deleteNodeHelper</span>(<span>root</span>.<span>right,</span>
+          <span>currNode</span>.<span>val</span>)<span>;</span></a>
+        <a id=-119" title="119"> <span>return</span> root<span>;</span></a>
+        <a id=-120" title="120"> <span>}</span></a>
+        <a id=-121" title="121"> <span>}</span></a>
+        <a id=-122" title="122"></a>
+        <a id=-123" title="123"> <span>//Recursive Depth First Search</span></a>
+        <a id=-124" title="124"></a>
+        <a id=-125" title="125"> <span>preOrderTraversal</span>(root) <span>{</span></a>
+        <a id=-126" title="126"> <span>if</span> (<span>!</span>root) <span>return</span> []<span>;</span></a>
+        <a id=-127" title="127"> <span>let</span> left <span>=</span>
+          <span>this</span>.<span>preOrderTraversal</span>(<span>root</span>.<span>left</span>)<span>;</span></a>
+        <a id=-128" title="128"> <span>let</span> right <span>=</span>
+          <span>this</span>.<span>preOrderTraversal</span>(<span>root</span>.<span>right</span>)<span>;</span></a>
+        <a id=-129" title="129"> <span>return</span> [<span>root</span>.<span>val,</span> ...<span>left,</span>
+          ...<span>right</span>]<span>;</span></a>
+        <a id=-130" title="130"> <span>}</span></a>
+        <a id=-131" title="131"></a>
+        <a id=-132" title="132"> <span>preOrderTraversalV2</span>(root) <span>{</span></a>
+        <a id=-133" title="133"> <span>if</span> (<span>!</span>root) <span>return</span> []<span>;</span></a>
+        <a id=-134" title="134"> <span>let</span> newArray <span>=</span> <span>new</span>
+          <span>Array</span>()<span>;</span></a>
+        <a id=-135" title="135">
+          <span>newArray</span>.<span>push</span>(<span>root</span>.<span>val</span>)<span>;</span></a>
+        <a id=-136" title="136">
+          <span>newArray</span>.<span>push</span>(...<span>this</span>.<span>preOrderTraversalV2</span>(<span>root</span>.<span>left</span>))<span>;</span></a>
+        <a id=-137" title="137">
+          <span>newArray</span>.<span>push</span>(...<span>this</span>.<span>preOrderTraversalV2</span>(<span>root</span>.<span>right</span>))<span>;</span></a>
+        <a id=-138" title="138"> <span>return</span> newArray<span>;</span></a>
+        <a id=-139" title="139"> <span>}</span></a>
+        <a id=-140" title="140"></a>
+        <a id=-141" title="141"> <span>inOrderTraversal</span>(root) <span>{</span></a>
+        <a id=-142" title="142"> <span>if</span> (<span>!</span>root) <span>return</span> []<span>;</span></a>
+        <a id=-143" title="143"> <span>let</span> left <span>=</span>
+          <span>this</span>.<span>inOrderTraversal</span>(<span>root</span>.<span>left</span>)<span>;</span></a>
+        <a id=-144" title="144"> <span>let</span> right <span>=</span>
+          <span>this</span>.<span>inOrderTraversal</span>(<span>root</span>.<span>right</span>)<span>;</span></a>
+        <a id=-145" title="145"> <span>return</span> [...<span>left,</span> <span>root</span>.<span>val,</span>
+          ...<span>right</span>]<span>;</span></a>
+        <a id=-146" title="146"> <span>}</span></a>
+        <a id=-147" title="147"></a>
+        <a id=-148" title="148"> <span>inOrderTraversalV2</span>(root) <span>{</span></a>
+        <a id=-149" title="149"> <span>if</span> (<span>!</span>root) <span>return</span> []<span>;</span></a>
+        <a id=-150" title="150"> <span>let</span> newArray <span>=</span> <span>new</span>
+          <span>Array</span>()<span>;</span></a>
+        <a id=-151" title="151">
+          <span>newArray</span>.<span>push</span>(...<span>this</span>.<span>inOrderTraversalV2</span>(<span>root</span>.<span>left</span>))<span>;</span></a>
+        <a id=-152" title="152">
+          <span>newArray</span>.<span>push</span>(<span>root</span>.<span>val</span>)<span>;</span></a>
+        <a id=-153" title="153">
+          <span>newArray</span>.<span>push</span>(...<span>this</span>.<span>inOrderTraversalV2</span>(<span>root</span>.<span>right</span>))<span>;</span></a>
+        <a id=-154" title="154"> <span>return</span> newArray<span>;</span></a>
+        <a id=-155" title="155"> <span>}</span></a>
+        <a id=-156" title="156"></a>
+        <a id=-157" title="157"> <span>postOrderTraversal</span>(root) <span>{</span></a>
+        <a id=-158" title="158"> <span>if</span> (<span>!</span>root) <span>return</span> []<span>;</span></a>
+        <a id=-159" title="159"> <span>let</span> left <span>=</span>
+          <span>this</span>.<span>postOrderTraversal</span>(<span>root</span>.<span>left</span>)<span>;</span></a>
+        <a id=-160" title="160"> <span>let</span> right <span>=</span>
+          <span>this</span>.<span>postOrderTraversal</span>(<span>root</span>.<span>right</span>)<span>;</span></a>
+        <a id=-161" title="161"> <span>return</span> [...<span>left,</span> ...<span>right,</span>
+          <span>root</span>.<span>val</span>]<span>;</span></a>
+        <a id=-162" title="162"> <span>}</span></a>
+        <a id=-163" title="163"></a>
+        <a id=-164" title="164"> <span>postOrderTraversalV2</span>(root) <span>{</span></a>
+        <a id=-165" title="165"> <span>if</span> (<span>!</span>root) <span>return</span> []<span>;</span></a>
+        <a id=-166" title="166"> <span>let</span> newArray <span>=</span> <span>new</span>
+          <span>Array</span>()<span>;</span></a>
+        <a id=-167" title="167">
+          <span>newArray</span>.<span>push</span>(...<span>this</span>.<span>postOrderTraversalV2</span>(<span>root</span>.<span>left</span>))<span>;</span></a>
+        <a id=-168" title="168">
+          <span>newArray</span>.<span>push</span>(...<span>this</span>.<span>postOrderTraversalV2</span>(<span>root</span>.<span>right</span>))<span>;</span></a>
+        <a id=-169" title="169">
+          <span>newArray</span>.<span>push</span>(<span>root</span>.<span>val</span>)<span>;</span></a>
+        <a id=-170" title="170"> <span>return</span> newArray<span>;</span></a>
+        <a id=-171" title="171"> <span>}</span></a>
+        <a id=-172" title="172"></a>
+        <a id=-173" title="173"> <span>// Iterative Depth First Search</span></a>
+        <a id=-174" title="174"></a>
+        <a id=-175" title="175"> <span>iterativePreOrder</span>(root) <span>{</span></a>
+        <a id=-176" title="176"> <span>let</span> stack <span>=</span> [root]<span>;</span></a>
+        <a id=-177" title="177"> <span>let</span> results <span>=</span> []<span>;</span></a>
+        <a id=-178" title="178"> <span>while</span> (<span>stack</span>.<span>length</span>) <span>{</span></a>
+        <a id=-179" title="179"> <span>let</span> current <span>=</span>
+          <span>stack</span>.<span>pop</span>()<span>;</span></a>
+        <a id=-180" title="180"> <span>results</span>.<span>push</span>(current)<span>;</span></a>
+        <a id=-181" title="181"> <span>if</span> (<span>current</span>.<span>left</span>)
+          <span>stack</span>.<span>push</span>(<span>current</span>.<span>left</span>)<span>;</span></a>
+        <a id=-182" title="182"> <span>if</span> (<span>current</span>.<span>right</span>)
+          <span>stack</span>.<span>push</span>(<span>current</span>.<span>right</span>)<span>;</span></a>
+        <a id=-183" title="183"> <span>}</span></a>
+        <a id=-184" title="184"> <span>return</span> results<span>;</span></a>
+        <a id=-185" title="185"> <span>}</span></a>
+        <a id=-186" title="186"></a>
+        <a id=-187" title="187"> <span>iterativeInOrder</span>(root) <span>{</span></a>
+        <a id=-188" title="188"> <span>let</span> stack <span>=</span> []<span>;</span></a>
+        <a id=-189" title="189"> <span>let</span> current <span>=</span> root<span>;</span></a>
+        <a id=-190" title="190"> <span>let</span> results <span>=</span> []<span>;</span></a>
+        <a id=-191" title="191"> <span>while</span> (<span>true</span>) <span>{</span></a>
+        <a id=-192" title="192"> <span>while</span> (current) <span>{</span></a>
+        <a id=-193" title="193"> <span>stack</span>.<span>push</span>(current)<span>;</span></a>
+        <a id=-194" title="194"> current <span>=</span> <span>current</span>.<span>left;</span></a>
+        <a id=-195" title="195"> <span>}</span></a>
+        <a id=-196" title="196"></a>
+        <a id=-197" title="197"> <span>if</span> (<span>!stack</span>.<span>length</span>) <span>break;</span></a>
+        <a id=-198" title="198"> <span>let</span> removed <span>=</span>
+          <span>stack</span>.<span>pop</span>()<span>;</span></a>
+        <a id=-199" title="199"> <span>results</span>.<span>push</span>(removed)<span>;</span></a>
+        <a id=-200" title="200"> current <span>=</span> <span>current</span>.<span>right;</span></a>
+        <a id=-201" title="201"> <span>}</span></a>
+        <a id=-202" title="202"> <span>return</span> results<span>;</span></a>
+        <a id=-203" title="203"> <span>}</span></a>
+        <a id=-204" title="204"></a>
+        <a id=-205" title="205"> <span>//To-Do iterativePostOrder</span></a>
+        <a id=-206" title="206"></a>
+        <a id=-207" title="207"> <span>//Breadth First Search</span></a>
+        <a id=-208" title="208"></a>
+        <a id=-209" title="209"> <span>breadthFirstSearch</span>(root) <span>{</span></a>
+        <a id=-210" title="210"> <span>let</span> queue <span>=</span> [root]<span>;</span></a>
+        <a id=-211" title="211"> <span>let</span> result <span>=</span> []<span>;</span></a>
+        <a id=-212" title="212"> <span>while</span> (<span>queue</span>.<span>length</span>) <span>{</span></a>
+        <a id=-213" title="213"> <span>let</span> current <span>=</span>
+          <span>queue</span>.<span>shift</span>()<span>;</span></a>
+        <a id=-214" title="214"> <span>if</span> (<span>current</span>.<span>left</span>)
+          <span>queue</span>.<span>push</span>(<span>current</span>.<span>left</span>)<span>;</span></a>
+        <a id=-215" title="215"> <span>if</span> (<span>current</span>.<span>right</span>)
+          <span>queue</span>.<span>push</span>(<span>current</span>.<span>left</span>)<span>;</span></a>
+        <a id=-216" title="216"> <span>current</span>.<span>push</span>(result)<span>;</span></a>
+        <a id=-217" title="217"> <span>}</span></a>
+        <a id=-218" title="218"> <span>return</span> result<span>;</span></a>
+        <a id=-219" title="219"> <span>}</span></a>
+        <a id=-220" title="220"></a>
+        <a id=-221" title="221"> <span>// Converting a Sorted Array to a Binary Search Tree</span></a>
+        <a id=-222" title="222"></a>
+        <a id=-223" title="223"> <span>sortedArrayToBST</span>(nums) <span>{</span></a>
+        <a id=-224" title="224"> <span>if</span> (<span>nums</span>.<span>length</span> <span>===</span> <span>0</span>)
+          <span>return</span> <span>null;</span></a>
+        <a id=-225" title="225"></a>
+        <a id=-226" title="226"> <span>let</span> mid <span>=</span>
+          <span>Math</span>.<span>floor</span>(<span>nums</span>.<span>length</span> / <span>2</span>)<span>;</span></a>
+        <a id=-227" title="227"> <span>let</span> root <span>=</span> <span>new</span>
+          <span>TreeNode</span>(nums[mid])<span>;</span></a>
+        <a id=-228" title="228"></a>
+        <a id=-229" title="229"> <span>let</span> left <span>=</span>
+          <span>nums</span>.<span>slice</span>(<span>0,</span>
+          mid)<span>;</span></a>
+        <a id=-230" title="230"> <span>root</span>.<span>left</span> <span>=</span>
+          <span>sortedArrayToBST</span>(left)<span>;</span></a>
+        <a id=-231" title="231"></a>
+        <a id=-232" title="232"> <span>let</span> right <span>=</span> <span>nums</span>.<span>slice</span>(mid
+          <span>+</span> <span>1</span>)<span>;</span></a>
+        <a id=-233" title="233"> <span>root</span>.<span>right</span> <span>=</span>
+          <span>sortedArrayToBST</span>(right)<span>;</span></a>
+        <a id=-234" title="234"></a>
+        <a id=-235" title="235"> <span>return</span> root<span>;</span></a>
+        <a id=-236" title="236"> <span>}</span></a>
+        <a id=-237" title="237"><span>}</span></a></code></pre>
+    </div>

@@ -29,7 +29,7 @@ from tensorflow.python.ops.ragged import ragged_tensor_shape
 
 
 def where_v2(condition, x=None, y=None, name=None):
-  """Return the elements where `condition` is `True`.
+    """Return the elements where `condition` is `True`.
 
   : If both `x` and `y` are None: Retrieve indices of true elements.
 
@@ -74,23 +74,24 @@ def where_v2(condition, x=None, y=None, name=None):
     ValueError: When exactly one of `x` or `y` is non-`None`; or when
       `condition`, `x`, and `y` have incompatible shapes.
   """
-  if (x is None) != (y is None):
-    raise ValueError('x and y must be either both None or both non-None')
+    if (x is None) != (y is None):
+        raise ValueError("x and y must be either both None or both non-None")
 
-  with ops.name_scope('RaggedWhere', name, [condition, x, y]):
-    condition = ragged_tensor.convert_to_tensor_or_ragged_tensor(
-        condition, name='condition')
-    if x is None:
-      return _coordinate_where(condition)
-    else:
-      x = ragged_tensor.convert_to_tensor_or_ragged_tensor(x, name='x')
-      y = ragged_tensor.convert_to_tensor_or_ragged_tensor(y, name='y')
-      condition, x, y = ragged_tensor.match_row_splits_dtypes(condition, x, y)
-      return _elementwise_where_v2(condition, x, y)
+    with ops.name_scope("RaggedWhere", name, [condition, x, y]):
+        condition = ragged_tensor.convert_to_tensor_or_ragged_tensor(
+            condition, name="condition"
+        )
+        if x is None:
+            return _coordinate_where(condition)
+        else:
+            x = ragged_tensor.convert_to_tensor_or_ragged_tensor(x, name="x")
+            y = ragged_tensor.convert_to_tensor_or_ragged_tensor(y, name="y")
+            condition, x, y = ragged_tensor.match_row_splits_dtypes(condition, x, y)
+            return _elementwise_where_v2(condition, x, y)
 
 
 def where(condition, x=None, y=None, name=None):
-  """Return the elements, either from `x` or `y`, depending on the `condition`.
+    """Return the elements, either from `x` or `y`, depending on the `condition`.
 
   : If both `x` and `y` are `None`:
     Returns the coordinates of true elements of `condition`. The coordinates
@@ -156,97 +157,104 @@ def where(condition, x=None, y=None, name=None):
   >>> print(where(condition, x, y))
   <tf.RaggedTensor [[b'A', b'B', b'C'], [b'd', b'e']]>
   """
-  if (x is None) != (y is None):
-    raise ValueError('x and y must be either both None or both non-None')
-  with ops.name_scope('RaggedWhere', name, [condition, x, y]):
-    condition = ragged_tensor.convert_to_tensor_or_ragged_tensor(
-        condition, name='condition')
-    if x is None:
-      return _coordinate_where(condition)
-    else:
-      x = ragged_tensor.convert_to_tensor_or_ragged_tensor(x, name='x')
-      y = ragged_tensor.convert_to_tensor_or_ragged_tensor(y, name='y')
-      condition, x, y = ragged_tensor.match_row_splits_dtypes(condition, x, y)
-      return _elementwise_where(condition, x, y)
+    if (x is None) != (y is None):
+        raise ValueError("x and y must be either both None or both non-None")
+    with ops.name_scope("RaggedWhere", name, [condition, x, y]):
+        condition = ragged_tensor.convert_to_tensor_or_ragged_tensor(
+            condition, name="condition"
+        )
+        if x is None:
+            return _coordinate_where(condition)
+        else:
+            x = ragged_tensor.convert_to_tensor_or_ragged_tensor(x, name="x")
+            y = ragged_tensor.convert_to_tensor_or_ragged_tensor(y, name="y")
+            condition, x, y = ragged_tensor.match_row_splits_dtypes(condition, x, y)
+            return _elementwise_where(condition, x, y)
 
 
 def _elementwise_where(condition, x, y):
-  """Ragged version of tf.where(condition, x, y)."""
-  condition_is_ragged = isinstance(condition, ragged_tensor.RaggedTensor)
-  x_is_ragged = isinstance(x, ragged_tensor.RaggedTensor)
-  y_is_ragged = isinstance(y, ragged_tensor.RaggedTensor)
+    """Ragged version of tf.where(condition, x, y)."""
+    condition_is_ragged = isinstance(condition, ragged_tensor.RaggedTensor)
+    x_is_ragged = isinstance(x, ragged_tensor.RaggedTensor)
+    y_is_ragged = isinstance(y, ragged_tensor.RaggedTensor)
 
-  if not (condition_is_ragged or x_is_ragged or y_is_ragged):
-    return array_ops.where(condition, x, y)
+    if not (condition_is_ragged or x_is_ragged or y_is_ragged):
+        return array_ops.where(condition, x, y)
 
-  elif condition_is_ragged and x_is_ragged and y_is_ragged:
-    return ragged_functional_ops.map_flat_values(array_ops.where, condition, x,
-                                                 y)
-  elif not condition_is_ragged:
-    # Concatenate x and y, and then use `gather` to assemble the selected rows.
-    condition.shape.assert_has_rank(1)
-    x_and_y = ragged_concat_ops.concat([x, y], axis=0)
-    x_nrows = _nrows(x, out_type=x_and_y.row_splits.dtype)
-    y_nrows = _nrows(y, out_type=x_and_y.row_splits.dtype)
-    indices = array_ops.where(condition, math_ops.range(x_nrows),
-                              x_nrows + math_ops.range(y_nrows))
-    return ragged_gather_ops.gather(x_and_y, indices)
+    elif condition_is_ragged and x_is_ragged and y_is_ragged:
+        return ragged_functional_ops.map_flat_values(array_ops.where, condition, x, y)
+    elif not condition_is_ragged:
+        # Concatenate x and y, and then use `gather` to assemble the selected rows.
+        condition.shape.assert_has_rank(1)
+        x_and_y = ragged_concat_ops.concat([x, y], axis=0)
+        x_nrows = _nrows(x, out_type=x_and_y.row_splits.dtype)
+        y_nrows = _nrows(y, out_type=x_and_y.row_splits.dtype)
+        indices = array_ops.where(
+            condition, math_ops.range(x_nrows), x_nrows + math_ops.range(y_nrows)
+        )
+        return ragged_gather_ops.gather(x_and_y, indices)
 
-  else:
-    raise ValueError('Input shapes do not match.')
+    else:
+        raise ValueError("Input shapes do not match.")
 
 
 def _elementwise_where_v2(condition, x, y):
-  """Ragged version of tf.where_v2(condition, x, y)."""
-  # Broadcast x, y, and condition to have the same shape.
-  if not (condition.shape.is_fully_defined() and x.shape.is_fully_defined() and
-          y.shape.is_fully_defined() and x.shape == y.shape and
-          condition.shape == x.shape):
-    shape_c = ragged_tensor_shape.RaggedTensorDynamicShape.from_tensor(
-        condition)
-    shape_x = ragged_tensor_shape.RaggedTensorDynamicShape.from_tensor(x)
-    shape_y = ragged_tensor_shape.RaggedTensorDynamicShape.from_tensor(y)
-    shape = ragged_tensor_shape.broadcast_dynamic_shape(
-        shape_c, ragged_tensor_shape.broadcast_dynamic_shape(shape_x, shape_y))
-    condition = ragged_tensor_shape.broadcast_to(condition, shape)
-    x = ragged_tensor_shape.broadcast_to(x, shape)
-    y = ragged_tensor_shape.broadcast_to(y, shape)
+    """Ragged version of tf.where_v2(condition, x, y)."""
+    # Broadcast x, y, and condition to have the same shape.
+    if not (
+        condition.shape.is_fully_defined()
+        and x.shape.is_fully_defined()
+        and y.shape.is_fully_defined()
+        and x.shape == y.shape
+        and condition.shape == x.shape
+    ):
+        shape_c = ragged_tensor_shape.RaggedTensorDynamicShape.from_tensor(condition)
+        shape_x = ragged_tensor_shape.RaggedTensorDynamicShape.from_tensor(x)
+        shape_y = ragged_tensor_shape.RaggedTensorDynamicShape.from_tensor(y)
+        shape = ragged_tensor_shape.broadcast_dynamic_shape(
+            shape_c, ragged_tensor_shape.broadcast_dynamic_shape(shape_x, shape_y)
+        )
+        condition = ragged_tensor_shape.broadcast_to(condition, shape)
+        x = ragged_tensor_shape.broadcast_to(x, shape)
+        y = ragged_tensor_shape.broadcast_to(y, shape)
 
-  condition_is_ragged = isinstance(condition, ragged_tensor.RaggedTensor)
-  x_is_ragged = isinstance(x, ragged_tensor.RaggedTensor)
-  y_is_ragged = isinstance(y, ragged_tensor.RaggedTensor)
-  if not (condition_is_ragged or x_is_ragged or y_is_ragged):
-    return array_ops.where_v2(condition, x, y)
+    condition_is_ragged = isinstance(condition, ragged_tensor.RaggedTensor)
+    x_is_ragged = isinstance(x, ragged_tensor.RaggedTensor)
+    y_is_ragged = isinstance(y, ragged_tensor.RaggedTensor)
+    if not (condition_is_ragged or x_is_ragged or y_is_ragged):
+        return array_ops.where_v2(condition, x, y)
 
-  return ragged_functional_ops.map_flat_values(array_ops.where_v2, condition, x,
-                                               y)
+    return ragged_functional_ops.map_flat_values(array_ops.where_v2, condition, x, y)
 
 
 def _coordinate_where(condition):
-  """Ragged version of tf.where(condition)."""
-  if not isinstance(condition, ragged_tensor.RaggedTensor):
-    return array_ops.where(condition)
+    """Ragged version of tf.where(condition)."""
+    if not isinstance(condition, ragged_tensor.RaggedTensor):
+        return array_ops.where(condition)
 
-  # The coordinate for each `true` value in condition.values.
-  selected_coords = _coordinate_where(condition.values)
+    # The coordinate for each `true` value in condition.values.
+    selected_coords = _coordinate_where(condition.values)
 
-  # Convert the first index in each coordinate to a row index and column index.
-  condition = condition.with_row_splits_dtype(selected_coords.dtype)
-  first_index = selected_coords[:, 0]
-  selected_rows = array_ops.gather(condition.value_rowids(), first_index)
-  selected_row_starts = array_ops.gather(condition.row_splits, selected_rows)
-  selected_cols = first_index - selected_row_starts
+    # Convert the first index in each coordinate to a row index and column index.
+    condition = condition.with_row_splits_dtype(selected_coords.dtype)
+    first_index = selected_coords[:, 0]
+    selected_rows = array_ops.gather(condition.value_rowids(), first_index)
+    selected_row_starts = array_ops.gather(condition.row_splits, selected_rows)
+    selected_cols = first_index - selected_row_starts
 
-  # Assemble the row & column index with the indices for inner dimensions.
-  return array_ops.concat([
-      array_ops.expand_dims(selected_rows, 1),
-      array_ops.expand_dims(selected_cols, 1), selected_coords[:, 1:]
-  ],
-                          axis=1)
+    # Assemble the row & column index with the indices for inner dimensions.
+    return array_ops.concat(
+        [
+            array_ops.expand_dims(selected_rows, 1),
+            array_ops.expand_dims(selected_cols, 1),
+            selected_coords[:, 1:],
+        ],
+        axis=1,
+    )
 
 
 def _nrows(rt_input, out_type):
-  if isinstance(rt_input, ragged_tensor.RaggedTensor):
-    return rt_input.nrows(out_type=out_type)
-  else:
-    return array_ops.shape(rt_input, out_type=out_type)[0]
+    if isinstance(rt_input, ragged_tensor.RaggedTensor):
+        return rt_input.nrows(out_type=out_type)
+    else:
+        return array_ops.shape(rt_input, out_type=out_type)[0]

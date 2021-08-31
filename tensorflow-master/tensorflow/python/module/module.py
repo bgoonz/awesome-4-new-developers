@@ -33,7 +33,7 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export("Module")
 class Module(tracking.AutoTrackable):
-  """Base neural network module class.
+    """Base neural network module class.
 
   A module is a named container for `tf.Variable`s, other `tf.Module`s and
   functions which apply to user input. For example a dense layer in a neural
@@ -101,67 +101,55 @@ class Module(tracking.AutoTrackable):
      dtype=float32)>)
   """
 
-  # AutoTrackable adds object attributes that users will not expect us to
-  # include when flattening (these reference dependencies reachable via other
-  # object attributes).
-  _TF_MODULE_IGNORED_PROPERTIES = frozenset((
-      "_self_unconditional_checkpoint_dependencies",
-      "_self_unconditional_dependency_names"
-  ))
+    # AutoTrackable adds object attributes that users will not expect us to
+    # include when flattening (these reference dependencies reachable via other
+    # object attributes).
+    _TF_MODULE_IGNORED_PROPERTIES = frozenset(
+        (
+            "_self_unconditional_checkpoint_dependencies",
+            "_self_unconditional_dependency_names",
+        )
+    )
 
-  def __init__(self, name=None):
-    if name is None:
-      name = camel_to_snake(type(self).__name__)
-    else:
-      if not valid_identifier(name):
-        raise ValueError(
-            "%r is not a valid module name. Module names must be valid Python "
-            "identifiers (e.g. a valid class name)." % name)
+    def __init__(self, name=None):
+        if name is None:
+            name = camel_to_snake(type(self).__name__)
+        else:
+            if not valid_identifier(name):
+                raise ValueError(
+                    "%r is not a valid module name. Module names must be valid Python "
+                    "identifiers (e.g. a valid class name)." % name
+                )
 
-    self._name = name
-    if tf2.enabled():
-      with ops.name_scope_v2(name) as scope_name:
-        self._name_scope = ops.name_scope_v2(scope_name)
-    else:
-      with ops.name_scope(name, skip_on_eager=False) as scope_name:
-        self._scope_name = scope_name
+        self._name = name
+        if tf2.enabled():
+            with ops.name_scope_v2(name) as scope_name:
+                self._name_scope = ops.name_scope_v2(scope_name)
+        else:
+            with ops.name_scope(name, skip_on_eager=False) as scope_name:
+                self._scope_name = scope_name
 
-  @property
-  def name(self):
-    """Returns the name of this module as passed or determined in the ctor.
+    @property
+    def name(self):
+        """Returns the name of this module as passed or determined in the ctor.
 
     NOTE: This is not the same as the `self.name_scope.name` which includes
     parent module names.
     """
-    return self._name
+        return self._name
 
-  @property
-  def name_scope(self):
-    """Returns a `tf.name_scope` instance for this class."""
-    if tf2.enabled():
-      return self._name_scope
-    else:
-      # In TF1 name_scope is not re-entrant in eager so we cannot memoize it.
-      return ops.name_scope(self._scope_name, skip_on_eager=False)
+    @property
+    def name_scope(self):
+        """Returns a `tf.name_scope` instance for this class."""
+        if tf2.enabled():
+            return self._name_scope
+        else:
+            # In TF1 name_scope is not re-entrant in eager so we cannot memoize it.
+            return ops.name_scope(self._scope_name, skip_on_eager=False)
 
-  @property
-  def variables(self):
-    """Sequence of variables owned by this module and its submodules.
-
-    Note: this method uses reflection to find variables on the current instance
-    and submodules. For performance reasons you may wish to cache the result
-    of calling this method if you don't expect the return value to change.
-
-    Returns:
-      A sequence of variables for the current module (sorted by attribute
-      name) followed by variables from all submodules recursively (breadth
-      first).
-    """
-    return tuple(self._flatten(predicate=_is_variable, expand_composites=True))
-
-  @property
-  def trainable_variables(self):
-    """Sequence of trainable variables owned by this module and its submodules.
+    @property
+    def variables(self):
+        """Sequence of variables owned by this module and its submodules.
 
     Note: this method uses reflection to find variables on the current instance
     and submodules. For performance reasons you may wish to cache the result
@@ -172,12 +160,11 @@ class Module(tracking.AutoTrackable):
       name) followed by variables from all submodules recursively (breadth
       first).
     """
-    return tuple(
-        self._flatten(predicate=_is_trainable_variable, expand_composites=True))
+        return tuple(self._flatten(predicate=_is_variable, expand_composites=True))
 
-  @property
-  def non_trainable_variables(self):
-    """Sequence of non-trainable variables owned by this module and its submodules.
+    @property
+    def trainable_variables(self):
+        """Sequence of trainable variables owned by this module and its submodules.
 
     Note: this method uses reflection to find variables on the current instance
     and submodules. For performance reasons you may wish to cache the result
@@ -188,11 +175,28 @@ class Module(tracking.AutoTrackable):
       name) followed by variables from all submodules recursively (breadth
       first).
     """
-    return tuple(self._flatten(predicate=_is_non_trainable_variable))
+        return tuple(
+            self._flatten(predicate=_is_trainable_variable, expand_composites=True)
+        )
 
-  @property
-  def submodules(self):
-    """Sequence of all sub-modules.
+    @property
+    def non_trainable_variables(self):
+        """Sequence of non-trainable variables owned by this module and its submodules.
+
+    Note: this method uses reflection to find variables on the current instance
+    and submodules. For performance reasons you may wish to cache the result
+    of calling this method if you don't expect the return value to change.
+
+    Returns:
+      A sequence of variables for the current module (sorted by attribute
+      name) followed by variables from all submodules recursively (breadth
+      first).
+    """
+        return tuple(self._flatten(predicate=_is_non_trainable_variable))
+
+    @property
+    def submodules(self):
+        """Sequence of all sub-modules.
 
     Submodules are modules which are properties of this module, or found as
     properties of modules which are properties of this module (and so on).
@@ -212,15 +216,17 @@ class Module(tracking.AutoTrackable):
     Returns:
       A sequence of all submodules.
     """
-    return tuple(self._flatten(predicate=_is_module))
+        return tuple(self._flatten(predicate=_is_module))
 
-  def _flatten(self,
-               recursive=True,
-               predicate=None,
-               attribute_traversal_key=None,
-               with_path=False,
-               expand_composites=False):
-    """Flattened attribute values in sorted order by attribute name.
+    def _flatten(
+        self,
+        recursive=True,
+        predicate=None,
+        attribute_traversal_key=None,
+        with_path=False,
+        expand_composites=False,
+    ):
+        """Flattened attribute values in sorted order by attribute name.
 
     Modules are flattened by first walking their attributes in name order.
     Each attribute value is then flattened to find leaf values. If flatten is
@@ -271,21 +277,22 @@ class Module(tracking.AutoTrackable):
       Flat generator for leaves of the current module and optionally all
       submodules.
     """
-    if predicate is None:
-      predicate = lambda _: True
+        if predicate is None:
+            predicate = lambda _: True
 
-    return _flatten_module(
-        self,
-        recursive=recursive,
-        predicate=predicate,
-        attributes_to_ignore=self._TF_MODULE_IGNORED_PROPERTIES,
-        attribute_traversal_key=attribute_traversal_key,
-        with_path=with_path,
-        expand_composites=expand_composites)
+        return _flatten_module(
+            self,
+            recursive=recursive,
+            predicate=predicate,
+            attributes_to_ignore=self._TF_MODULE_IGNORED_PROPERTIES,
+            attribute_traversal_key=attribute_traversal_key,
+            with_path=with_path,
+            expand_composites=expand_composites,
+        )
 
-  @classmethod
-  def with_name_scope(cls, method):
-    """Decorator to automatically enter the module name scope.
+    @classmethod
+    def with_name_scope(cls, method):
+        """Decorator to automatically enter the module name scope.
 
     >>> class MyModule(tf.Module):
     ...   @tf.Module.with_name_scope
@@ -310,51 +317,55 @@ class Module(tracking.AutoTrackable):
     Returns:
       The original method wrapped such that it enters the module's name scope.
     """
-    def method_with_name_scope(self, *args, **kwargs):
-      with self.name_scope:
-        return method(self, *args, **kwargs)
 
-    return tf_decorator.make_decorator(method, method_with_name_scope)
+        def method_with_name_scope(self, *args, **kwargs):
+            with self.name_scope:
+                return method(self, *args, **kwargs)
+
+        return tf_decorator.make_decorator(method, method_with_name_scope)
 
 
 def _is_variable(obj):
-  return isinstance(obj, variables.Variable)
+    return isinstance(obj, variables.Variable)
 
 
 def _is_trainable_variable(obj):
-  return _is_variable(obj) and getattr(obj, "trainable", False)
+    return _is_variable(obj) and getattr(obj, "trainable", False)
 
 
 def _is_non_trainable_variable(obj):
-  return _is_variable(obj) and not getattr(obj, "trainable", False)
+    return _is_variable(obj) and not getattr(obj, "trainable", False)
 
 
 def _is_module(obj):
-  return isinstance(obj, Module)
+    return isinstance(obj, Module)
+
 
 _CAMEL_TO_SNAKE_R = re.compile(r"((?<=[a-z0-9])[A-Z]|(?!^)[A-Z](?=[a-z]))")
 _VALID_IDENTIFIER = re.compile(r"^[a-zA-Z_]([a-zA-Z0-9_])*$")
 
 
 def valid_identifier(name):
-  return bool(_VALID_IDENTIFIER.match(name))
+    return bool(_VALID_IDENTIFIER.match(name))
 
 
 def camel_to_snake(value):
-  return _CAMEL_TO_SNAKE_R.sub(r"_\1", value).lower()
+    return _CAMEL_TO_SNAKE_R.sub(r"_\1", value).lower()
 
 
-def _flatten_module(module,
-                    recursive,
-                    predicate,
-                    attribute_traversal_key,
-                    attributes_to_ignore,
-                    with_path,
-                    expand_composites,
-                    module_path=(),
-                    seen=None,
-                    recursion_stack=None):
-  """Implementation of `flatten`.
+def _flatten_module(
+    module,
+    recursive,
+    predicate,
+    attribute_traversal_key,
+    attributes_to_ignore,
+    with_path,
+    expand_composites,
+    module_path=(),
+    seen=None,
+    recursion_stack=None,
+):
+    """Implementation of `flatten`.
 
   Args:
     module: Current module to process.
@@ -381,76 +392,78 @@ def _flatten_module(module,
     Matched leaves with the optional corresponding paths of the current module
     and optionally all its submodules.
   """
-  module_id = id(module)
-  if seen is None:
-    seen = set([module_id])
+    module_id = id(module)
+    if seen is None:
+        seen = set([module_id])
 
-  module_dict = vars(module)
-  submodules = []
+    module_dict = vars(module)
+    submodules = []
 
-  if recursion_stack is None:
-    recursion_stack = []
+    if recursion_stack is None:
+        recursion_stack = []
 
-  # When calling `_flatten_module` with `with_path=False`, the global lookup
-  # table `seen` guarantees the uniqueness of the matched objects.
-  # In the case of `with_path=True`, there might be multiple paths associated
-  # with the same predicate, so we don't stop traversing according to `seen`
-  # to make sure all these paths are returned.
-  # When there are cycles connecting submodules, we break cycles by avoiding
-  # following back edges (links pointing to a node in `recursion_stack`).
-  if module_id in recursion_stack:
-    recursive = False
+    # When calling `_flatten_module` with `with_path=False`, the global lookup
+    # table `seen` guarantees the uniqueness of the matched objects.
+    # In the case of `with_path=True`, there might be multiple paths associated
+    # with the same predicate, so we don't stop traversing according to `seen`
+    # to make sure all these paths are returned.
+    # When there are cycles connecting submodules, we break cycles by avoiding
+    # following back edges (links pointing to a node in `recursion_stack`).
+    if module_id in recursion_stack:
+        recursive = False
 
-  for key in sorted(module_dict, key=attribute_traversal_key):
-    if key in attributes_to_ignore:
-      continue
+    for key in sorted(module_dict, key=attribute_traversal_key):
+        if key in attributes_to_ignore:
+            continue
 
-    prop = module_dict[key]
-    try:
-      leaves = nest.flatten_with_tuple_paths(
-          prop, expand_composites=expand_composites)
-    except Exception as cause:  # pylint: disable=broad-except
-      six.raise_from(
-          ValueError(
-              "Error processing property {!r} of {!r}".format(key, prop)),
-          cause)
+        prop = module_dict[key]
+        try:
+            leaves = nest.flatten_with_tuple_paths(
+                prop, expand_composites=expand_composites
+            )
+        except Exception as cause:  # pylint: disable=broad-except
+            six.raise_from(
+                ValueError("Error processing property {!r} of {!r}".format(key, prop)),
+                cause,
+            )
 
-    for leaf_path, leaf in leaves:
-      leaf_path = (key,) + leaf_path
+        for leaf_path, leaf in leaves:
+            leaf_path = (key,) + leaf_path
 
-      if not with_path:
-        leaf_id = id(leaf)
-        if leaf_id in seen:
-          continue
-        seen.add(leaf_id)
+            if not with_path:
+                leaf_id = id(leaf)
+                if leaf_id in seen:
+                    continue
+                seen.add(leaf_id)
 
-      if predicate(leaf):
-        if with_path:
-          yield module_path + leaf_path, leaf
-        else:
-          yield leaf
+            if predicate(leaf):
+                if with_path:
+                    yield module_path + leaf_path, leaf
+                else:
+                    yield leaf
 
-      if recursive and _is_module(leaf):
-        # Walk direct properties first then recurse.
-        submodules.append((module_path + leaf_path, leaf))
+            if recursive and _is_module(leaf):
+                # Walk direct properties first then recurse.
+                submodules.append((module_path + leaf_path, leaf))
 
-  recursion_stack.append(module_id)
+    recursion_stack.append(module_id)
 
-  for submodule_path, submodule in submodules:
-    subvalues = _flatten_module(
-        submodule,
-        recursive=recursive,
-        predicate=predicate,
-        attribute_traversal_key=attribute_traversal_key,
-        attributes_to_ignore=submodule._TF_MODULE_IGNORED_PROPERTIES,  # pylint: disable=protected-access
-        with_path=with_path,
-        expand_composites=expand_composites,
-        module_path=submodule_path,
-        seen=seen,
-        recursion_stack=recursion_stack)
+    for submodule_path, submodule in submodules:
+        subvalues = _flatten_module(
+            submodule,
+            recursive=recursive,
+            predicate=predicate,
+            attribute_traversal_key=attribute_traversal_key,
+            attributes_to_ignore=submodule._TF_MODULE_IGNORED_PROPERTIES,  # pylint: disable=protected-access
+            with_path=with_path,
+            expand_composites=expand_composites,
+            module_path=submodule_path,
+            seen=seen,
+            recursion_stack=recursion_stack,
+        )
 
-    for subvalue in subvalues:
-      # Predicate is already tested for these values.
-      yield subvalue
+        for subvalue in subvalues:
+            # Predicate is already tested for these values.
+            yield subvalue
 
-  recursion_stack.pop()
+    recursion_stack.pop()

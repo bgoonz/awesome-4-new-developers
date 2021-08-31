@@ -39,28 +39,31 @@ _FORWARD_COMPATIBILITY_DATE_NUMBER = None
 
 
 def _date_to_date_number(year, month, day):
-  return (year << 9) | (month << 5) | day
+    return (year << 9) | (month << 5) | day
 
 
 def _update_forward_compatibility_date_number(date_to_override=None):
-  """Update the base date to compare in forward_compatible function."""
+    """Update the base date to compare in forward_compatible function."""
 
-  global _FORWARD_COMPATIBILITY_DATE_NUMBER
+    global _FORWARD_COMPATIBILITY_DATE_NUMBER
 
-  if date_to_override:
-    date = date_to_override
-  else:
-    date = _FORWARD_COMPATIBILITY_HORIZON
-    delta_days = os.getenv(_FORWARD_COMPATIBILITY_DELTA_DAYS_VAR_NAME)
-    if delta_days:
-      date += datetime.timedelta(days=int(delta_days))
+    if date_to_override:
+        date = date_to_override
+    else:
+        date = _FORWARD_COMPATIBILITY_HORIZON
+        delta_days = os.getenv(_FORWARD_COMPATIBILITY_DELTA_DAYS_VAR_NAME)
+        if delta_days:
+            date += datetime.timedelta(days=int(delta_days))
 
-  if date < _FORWARD_COMPATIBILITY_HORIZON:
-    logging.warning("Trying to set the forward compatibility date to the past"
-                    " date %s. This will be ignored by TensorFlow." % (date))
-    return
-  _FORWARD_COMPATIBILITY_DATE_NUMBER = _date_to_date_number(
-      date.year, date.month, date.day)
+    if date < _FORWARD_COMPATIBILITY_HORIZON:
+        logging.warning(
+            "Trying to set the forward compatibility date to the past"
+            " date %s. This will be ignored by TensorFlow." % (date)
+        )
+        return
+    _FORWARD_COMPATIBILITY_DATE_NUMBER = _date_to_date_number(
+        date.year, date.month, date.day
+    )
 
 
 _update_forward_compatibility_date_number()
@@ -68,7 +71,7 @@ _update_forward_compatibility_date_number()
 
 @tf_export("compat.forward_compatible")
 def forward_compatible(year, month, day):
-  """Return true if the forward compatibility window has expired.
+    """Return true if the forward compatibility window has expired.
 
   See [Version
   compatibility](https://tensorflow.org/guide/version_compat#backward_forward).
@@ -122,14 +125,13 @@ def forward_compatible(year, month, day):
     can be consumed by programs that are compiled with the TensorFlow library
     source code after (year, month, day).
   """
-  return _FORWARD_COMPATIBILITY_DATE_NUMBER > _date_to_date_number(
-      year, month, day)
+    return _FORWARD_COMPATIBILITY_DATE_NUMBER > _date_to_date_number(year, month, day)
 
 
 @tf_export("compat.forward_compatibility_horizon")
 @tf_contextlib.contextmanager
 def forward_compatibility_horizon(year, month, day):
-  """Context manager for testing forward compatibility of generated graphs.
+    """Context manager for testing forward compatibility of generated graphs.
 
   See [Version
   compatibility](https://tensorflow.org/guide/version_compat#backward_forward).
@@ -165,8 +167,8 @@ def forward_compatibility_horizon(year, month, day):
   Yields:
     Nothing.
   """
-  try:
-    _update_forward_compatibility_date_number(datetime.date(year, month, day))
-    yield
-  finally:
-    _update_forward_compatibility_date_number()
+    try:
+        _update_forward_compatibility_date_number(datetime.date(year, month, day))
+        yield
+    finally:
+        _update_forward_compatibility_date_number()

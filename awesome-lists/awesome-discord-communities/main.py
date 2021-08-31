@@ -16,18 +16,20 @@ Usage:
 
 from src.template import generator, parse, icon
 
-'''Parse given community metadata'''
-parsed = parse.Content(path='./data/community.json')
+"""Parse given community metadata"""
+parsed = parse.Content(path="./data/community.json")
 
-'''Download and save the community icon to icon_path'''
-i = icon.GetIcon(icon_path='./images/server_icons', **parsed.icon())
+"""Download and save the community icon to icon_path"""
+i = icon.GetIcon(icon_path="./images/server_icons", **parsed.icon())
 # Uncomment i.save() to save the community icon
 # i.save()
 
-'''Generate template'''
+"""Generate template"""
 t = generator.GenerateTemplate(**parsed.community())
-print(f'''{t.format_icon()}
+print(
+    f"""{t.format_icon()}
 
 [__{t.format_name()}__]({t.format_invite()}){t.format_official()}{t.format_reddit()}{t.format_homepage()}{t.format_git()} \\
 Notable Channels: {t.format_channels()} \\
-Language: {t.format_language()}{t.padding()}''')
+Language: {t.format_language()}{t.padding()}"""
+)

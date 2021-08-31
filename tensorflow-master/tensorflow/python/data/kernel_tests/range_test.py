@@ -30,135 +30,145 @@ from tensorflow.python.platform import test
 
 
 class RangeTest(test_base.DatasetTestBase, parameterized.TestCase):
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(
+                output_type=[dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64]
+            ),
+        )
+    )
+    def testStop(self, output_type):
+        stop = 5
+        dataset = dataset_ops.Dataset.range(stop, output_type=output_type)
+        expected_output = np.arange(stop, dtype=output_type.as_numpy_dtype)
+        self.assertDatasetProduces(dataset, expected_output=expected_output)
+        self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
 
-  @combinations.generate(
-      combinations.times(
-          test_base.default_test_combinations(),
-          combinations.combine(output_type=[
-              dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64
-          ])))
-  def testStop(self, output_type):
-    stop = 5
-    dataset = dataset_ops.Dataset.range(stop, output_type=output_type)
-    expected_output = np.arange(stop, dtype=output_type.as_numpy_dtype)
-    self.assertDatasetProduces(dataset, expected_output=expected_output)
-    self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(
+                output_type=[dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64]
+            ),
+        )
+    )
+    def testStartStop(self, output_type):
+        start, stop = 2, 5
+        dataset = dataset_ops.Dataset.range(start, stop, output_type=output_type)
+        expected_output = np.arange(start, stop, dtype=output_type.as_numpy_dtype)
+        self.assertDatasetProduces(dataset, expected_output=expected_output)
+        self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
 
-  @combinations.generate(
-      combinations.times(
-          test_base.default_test_combinations(),
-          combinations.combine(output_type=[
-              dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64
-          ])))
-  def testStartStop(self, output_type):
-    start, stop = 2, 5
-    dataset = dataset_ops.Dataset.range(start, stop, output_type=output_type)
-    expected_output = np.arange(start, stop, dtype=output_type.as_numpy_dtype)
-    self.assertDatasetProduces(dataset, expected_output=expected_output)
-    self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(
+                output_type=[dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64]
+            ),
+        )
+    )
+    def testStartStopStep(self, output_type):
+        start, stop, step = 2, 10, 2
+        dataset = dataset_ops.Dataset.range(start, stop, step, output_type=output_type)
+        expected_output = np.arange(start, stop, step, dtype=output_type.as_numpy_dtype)
+        self.assertDatasetProduces(dataset, expected_output=expected_output)
+        self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
 
-  @combinations.generate(
-      combinations.times(
-          test_base.default_test_combinations(),
-          combinations.combine(output_type=[
-              dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64
-          ])))
-  def testStartStopStep(self, output_type):
-    start, stop, step = 2, 10, 2
-    dataset = dataset_ops.Dataset.range(
-        start, stop, step, output_type=output_type)
-    expected_output = np.arange(
-        start, stop, step, dtype=output_type.as_numpy_dtype)
-    self.assertDatasetProduces(dataset, expected_output=expected_output)
-    self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(
+                output_type=[dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64]
+            ),
+        )
+    )
+    def testZeroStep(self, output_type):
+        start, stop, step = 2, 10, 0
+        with self.assertRaises(errors.InvalidArgumentError):
+            dataset = dataset_ops.Dataset.range(
+                start, stop, step, output_type=output_type
+            )
+            self.evaluate(dataset._variant_tensor)
 
-  @combinations.generate(
-      combinations.times(
-          test_base.default_test_combinations(),
-          combinations.combine(output_type=[
-              dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64
-          ])))
-  def testZeroStep(self, output_type):
-    start, stop, step = 2, 10, 0
-    with self.assertRaises(errors.InvalidArgumentError):
-      dataset = dataset_ops.Dataset.range(
-          start, stop, step, output_type=output_type)
-      self.evaluate(dataset._variant_tensor)
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(
+                output_type=[dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64]
+            ),
+        )
+    )
+    def testNegativeStep(self, output_type):
+        start, stop, step = 2, 10, -1
+        dataset = dataset_ops.Dataset.range(start, stop, step, output_type=output_type)
+        expected_output = np.arange(start, stop, step, dtype=output_type.as_numpy_dtype)
+        self.assertDatasetProduces(dataset, expected_output=expected_output)
+        self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
 
-  @combinations.generate(
-      combinations.times(
-          test_base.default_test_combinations(),
-          combinations.combine(output_type=[
-              dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64
-          ])))
-  def testNegativeStep(self, output_type):
-    start, stop, step = 2, 10, -1
-    dataset = dataset_ops.Dataset.range(
-        start, stop, step, output_type=output_type)
-    expected_output = np.arange(
-        start, stop, step, dtype=output_type.as_numpy_dtype)
-    self.assertDatasetProduces(dataset, expected_output=expected_output)
-    self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(
+                output_type=[dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64]
+            ),
+        )
+    )
+    def testStopLessThanStart(self, output_type):
+        start, stop = 10, 2
+        dataset = dataset_ops.Dataset.range(start, stop, output_type=output_type)
+        expected_output = np.arange(start, stop, dtype=output_type.as_numpy_dtype)
+        self.assertDatasetProduces(dataset, expected_output=expected_output)
+        self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
 
-  @combinations.generate(
-      combinations.times(
-          test_base.default_test_combinations(),
-          combinations.combine(output_type=[
-              dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64
-          ])))
-  def testStopLessThanStart(self, output_type):
-    start, stop = 10, 2
-    dataset = dataset_ops.Dataset.range(start, stop, output_type=output_type)
-    expected_output = np.arange(start, stop, dtype=output_type.as_numpy_dtype)
-    self.assertDatasetProduces(dataset, expected_output=expected_output)
-    self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(
+                output_type=[dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64]
+            ),
+        )
+    )
+    def testStopLessThanStartWithPositiveStep(self, output_type):
+        start, stop, step = 10, 2, 2
+        dataset = dataset_ops.Dataset.range(start, stop, step, output_type=output_type)
+        expected_output = np.arange(start, stop, step, dtype=output_type.as_numpy_dtype)
+        self.assertDatasetProduces(dataset, expected_output=expected_output)
+        self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
 
-  @combinations.generate(
-      combinations.times(
-          test_base.default_test_combinations(),
-          combinations.combine(output_type=[
-              dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64
-          ])))
-  def testStopLessThanStartWithPositiveStep(self, output_type):
-    start, stop, step = 10, 2, 2
-    dataset = dataset_ops.Dataset.range(
-        start, stop, step, output_type=output_type)
-    expected_output = np.arange(
-        start, stop, step, dtype=output_type.as_numpy_dtype)
-    self.assertDatasetProduces(dataset, expected_output=expected_output)
-    self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
-
-  @combinations.generate(
-      combinations.times(
-          test_base.default_test_combinations(),
-          combinations.combine(output_type=[
-              dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64
-          ])))
-  def testStopLessThanStartWithNegativeStep(self, output_type):
-    start, stop, step = 10, 2, -1
-    dataset = dataset_ops.Dataset.range(
-        start, stop, step, output_type=output_type)
-    expected_output = np.arange(
-        start, stop, step, dtype=output_type.as_numpy_dtype)
-    self.assertDatasetProduces(dataset, expected_output=expected_output)
-    self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(
+                output_type=[dtypes.int32, dtypes.int64, dtypes.float32, dtypes.float64]
+            ),
+        )
+    )
+    def testStopLessThanStartWithNegativeStep(self, output_type):
+        start, stop, step = 10, 2, -1
+        dataset = dataset_ops.Dataset.range(start, stop, step, output_type=output_type)
+        expected_output = np.arange(start, stop, step, dtype=output_type.as_numpy_dtype)
+        self.assertDatasetProduces(dataset, expected_output=expected_output)
+        self.assertEqual(output_type, dataset_ops.get_legacy_output_types(dataset))
 
 
-class RangeCheckpointTest(checkpoint_test_base.CheckpointTestBase,
-                          parameterized.TestCase):
+class RangeCheckpointTest(
+    checkpoint_test_base.CheckpointTestBase, parameterized.TestCase
+):
+    def _build_range_dataset(self, start, stop):
+        return dataset_ops.Dataset.range(start, stop)
 
-  def _build_range_dataset(self, start, stop):
-    return dataset_ops.Dataset.range(start, stop)
-
-  @combinations.generate(
-      combinations.times(test_base.default_test_combinations(),
-                         checkpoint_test_base.default_test_combinations()))
-  def test(self, verify_fn):
-    start = 2
-    stop = 10
-    verify_fn(self, lambda: self._build_range_dataset(start, stop),
-              stop - start)
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            checkpoint_test_base.default_test_combinations(),
+        )
+    )
+    def test(self, verify_fn):
+        start = 2
+        stop = 10
+        verify_fn(self, lambda: self._build_range_dataset(start, stop), stop - start)
 
 
 if __name__ == "__main__":
-  test.main()
+    test.main()

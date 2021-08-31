@@ -26,49 +26,51 @@ _active_trace = None
 
 
 def _status_to_exception(code, message):
-  try:
-    error_class = errors.exception_type_from_error_code(code)
-    return error_class(None, None, message)
-  except KeyError:
-    return errors.UnknownError(None, None, message, code)
+    try:
+        error_class = errors.exception_type_from_error_code(code)
+        return error_class(None, None, message)
+    except KeyError:
+        return errors.UnknownError(None, None, message, code)
 
 
 class _NotOkStatusException(Exception):
-  """Exception class to handle not ok Status."""
+    """Exception class to handle not ok Status."""
 
-  def __init__(self, message, code):
-    super(_NotOkStatusException, self).__init__()
-    self.message = message
-    self.code = code
+    def __init__(self, message, code):
+        super(_NotOkStatusException, self).__init__()
+        self.message = message
+        self.code = code
 
-  def __str__(self):
-    e = _status_to_exception(self.code, self.message)
-    return "%s: %s" % (e.__class__.__name__, e)
+    def __str__(self):
+        e = _status_to_exception(self.code, self.message)
+        return "%s: %s" % (e.__class__.__name__, e)
 
 
 pywrap_tfe.TFE_Py_RegisterExceptionClass(_NotOkStatusException)
 
 
 class _FallbackException(Exception):
-  """Exception class to handle fallback from the fastpath.
+    """Exception class to handle fallback from the fastpath.
 
   The fastpath that we refer to here is the one implemented to reduce per-op
   overheads (TFE_Py_FastPathExecute_C). If the conditions for executing the op
   on the fastpath are not met, we fallback to a safer (and more complete)
   slowpath, and this Exception is raised to signal that transition.
   """
-  pass
+
+    pass
 
 
 class _SymbolicException(Exception):
-  """Exception class to handle use of symbolic tensors when executing eagerly.
+    """Exception class to handle use of symbolic tensors when executing eagerly.
 
   `keras.Input()` creates symbolic tensors (in a FuncGraph managed by the
   Keras backend) while in eager execution. This exception is used to
   identify this case (raised in `convert_to_tensor` cause generated functions
   for ops to construct graphs instead of executing the kernel).
   """
-  pass
+
+    pass
 
 
 pywrap_tfe.TFE_Py_RegisterFallbackExceptionClass(_FallbackException)

@@ -1,0 +1,7 @@
+body {
+  margin: 25px;
+}
+#input {
+  height: 150px;
+  font-family: "Courier New", Courier, monospace;
+}

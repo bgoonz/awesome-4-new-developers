@@ -34,9 +34,11 @@ from tensorflow.python.framework import sparse_tensor
 from tensorflow.python.framework import tensor_util
 from tensorflow.python.ops import gen_logging_ops
 from tensorflow.python.ops import string_ops
+
 # go/tf-wildcard-import
 # pylint: disable=wildcard-import
 from tensorflow.python.ops.gen_logging_ops import *
+
 # pylint: enable=wildcard-import
 from tensorflow.python.platform import tf_logging
 from tensorflow.python.util import dispatch
@@ -46,10 +48,10 @@ from tensorflow.python.util.tf_export import tf_export
 
 # Register printing to the cell output if we are in a Colab or Jupyter Notebook.
 try:
-  get_ipython()  # Exists in an ipython env like Jupyter or Colab
-  pywrap_tfe.TFE_Py_EnableInteractivePythonLogging()
+    get_ipython()  # Exists in an ipython env like Jupyter or Colab
+    pywrap_tfe.TFE_Py_EnableInteractivePythonLogging()
 except NameError:
-  pass
+    pass
 
 # The python wrapper for Assert is in control_flow_ops, as the Assert
 # call relies on certain conditionals for its dependencies.  Use
@@ -62,18 +64,21 @@ except NameError:
 
 
 # pylint: disable=invalid-name
-@deprecated("2018-08-20", "Use tf.print instead of tf.Print. Note that "
-            "tf.print returns a no-output operator that directly "
-            "prints the output. Outside of defuns or eager mode, "
-            "this operator will not be executed unless it is "
-            "directly specified in session.run or used as a "
-            "control dependency for other operators. This is "
-            "only a concern in graph mode. Below is an example "
-            "of how to ensure tf.print executes in graph mode:\n")
+@deprecated(
+    "2018-08-20",
+    "Use tf.print instead of tf.Print. Note that "
+    "tf.print returns a no-output operator that directly "
+    "prints the output. Outside of defuns or eager mode, "
+    "this operator will not be executed unless it is "
+    "directly specified in session.run or used as a "
+    "control dependency for other operators. This is "
+    "only a concern in graph mode. Below is an example "
+    "of how to ensure tf.print executes in graph mode:\n",
+)
 @tf_export(v1=["Print"])
 @dispatch.add_dispatch_support
 def Print(input_, data, message=None, first_n=None, summarize=None, name=None):
-  """Prints a list of tensors.
+    """Prints a list of tensors.
 
   This is an identity op (behaves like `tf.identity`) with the side effect
   of printing `data` when evaluating.
@@ -116,24 +121,24 @@ def Print(input_, data, message=None, first_n=None, summarize=None, name=None):
         sess.run(out)
     ```
   """
-  return gen_logging_ops._print(input_, data, message, first_n, summarize, name)
+    return gen_logging_ops._print(input_, data, message, first_n, summarize, name)
 
 
 # pylint: enable=invalid-name
 
 
 def _generate_placeholder_string(x, default_placeholder="{}"):
-  """Generate and return a string that does not appear in `x`."""
-  placeholder = default_placeholder
-  rng = random.Random(5)
-  while placeholder in x:
-    placeholder = placeholder + str(rng.randint(0, 9))
-  return placeholder
+    """Generate and return a string that does not appear in `x`."""
+    placeholder = default_placeholder
+    rng = random.Random(5)
+    while placeholder in x:
+        placeholder = placeholder + str(rng.randint(0, 9))
+    return placeholder
 
 
 def _is_filepath(output_stream):
-  """Returns True if output_stream is a file path."""
-  return isinstance(output_stream, str) and output_stream.startswith("file://")
+    """Returns True if output_stream is a file path."""
+    return isinstance(output_stream, str) and output_stream.startswith("file://")
 
 
 # Temporarily disable pylint g-doc-args error to allow giving more context
@@ -145,7 +150,7 @@ def _is_filepath(output_stream):
 @tf_export("print")
 @dispatch.add_dispatch_support
 def print_v2(*inputs, **kwargs):
-  """Print the specified inputs.
+    """Print the specified inputs.
 
   A TensorFlow operator that prints the specified inputs to a desired
   output stream or logging level. The inputs may be dense or sparse Tensors,
@@ -255,142 +260,156 @@ def print_v2(*inputs, **kwargs):
   Raises:
     ValueError: If an unsupported output stream is specified.
   """
-  # Because we are using arbitrary-length positional arguments, python 2
-  # does not support explicitly specifying the keyword arguments in the
-  # function definition. So, we manually get the keyword arguments w/ default
-  # values here.
-  output_stream = kwargs.pop("output_stream", sys.stderr)
-  name = kwargs.pop("name", None)
-  summarize = kwargs.pop("summarize", 3)
-  sep = kwargs.pop("sep", " ")
-  end = kwargs.pop("end", os.linesep)
-  if kwargs:
-    raise ValueError("Unrecognized keyword arguments for tf.print: %s" % kwargs)
-  format_name = None
-  if name:
-    format_name = name + "_format"
+    # Because we are using arbitrary-length positional arguments, python 2
+    # does not support explicitly specifying the keyword arguments in the
+    # function definition. So, we manually get the keyword arguments w/ default
+    # values here.
+    output_stream = kwargs.pop("output_stream", sys.stderr)
+    name = kwargs.pop("name", None)
+    summarize = kwargs.pop("summarize", 3)
+    sep = kwargs.pop("sep", " ")
+    end = kwargs.pop("end", os.linesep)
+    if kwargs:
+        raise ValueError("Unrecognized keyword arguments for tf.print: %s" % kwargs)
+    format_name = None
+    if name:
+        format_name = name + "_format"
 
-  # Match the C++ string constants representing the different output streams.
-  # Keep this updated!
-  output_stream_to_constant = {
-      sys.stdout: "stdout",
-      sys.stderr: "stderr",
-      tf_logging.INFO: "log(info)",
-      tf_logging.info: "log(info)",
-      tf_logging.WARN: "log(warning)",
-      tf_logging.warning: "log(warning)",
-      tf_logging.warn: "log(warning)",
-      tf_logging.ERROR: "log(error)",
-      tf_logging.error: "log(error)",
-      logging.INFO: "log(info)",
-      logging.info: "log(info)",
-      logging.INFO: "log(info)",
-      logging.WARNING: "log(warning)",
-      logging.WARN: "log(warning)",
-      logging.warning: "log(warning)",
-      logging.warn: "log(warning)",
-      logging.ERROR: "log(error)",
-      logging.error: "log(error)",
-  }
+    # Match the C++ string constants representing the different output streams.
+    # Keep this updated!
+    output_stream_to_constant = {
+        sys.stdout: "stdout",
+        sys.stderr: "stderr",
+        tf_logging.INFO: "log(info)",
+        tf_logging.info: "log(info)",
+        tf_logging.WARN: "log(warning)",
+        tf_logging.warning: "log(warning)",
+        tf_logging.warn: "log(warning)",
+        tf_logging.ERROR: "log(error)",
+        tf_logging.error: "log(error)",
+        logging.INFO: "log(info)",
+        logging.info: "log(info)",
+        logging.INFO: "log(info)",
+        logging.WARNING: "log(warning)",
+        logging.WARN: "log(warning)",
+        logging.warning: "log(warning)",
+        logging.warn: "log(warning)",
+        logging.ERROR: "log(error)",
+        logging.error: "log(error)",
+    }
 
-  if _is_filepath(output_stream):
-    output_stream_string = output_stream
-  else:
-    output_stream_string = output_stream_to_constant.get(output_stream)
-    if not output_stream_string:
-      raise ValueError("Unsupported output stream, logging level, or file." +
-                       str(output_stream) +
-                       ". Supported streams are sys.stdout, "
-                       "sys.stderr, tf.logging.info, "
-                       "tf.logging.warning, tf.logging.error. " +
-                       "File needs to be in the form of 'file://<filepath>'.")
+    if _is_filepath(output_stream):
+        output_stream_string = output_stream
+    else:
+        output_stream_string = output_stream_to_constant.get(output_stream)
+        if not output_stream_string:
+            raise ValueError(
+                "Unsupported output stream, logging level, or file."
+                + str(output_stream)
+                + ". Supported streams are sys.stdout, "
+                "sys.stderr, tf.logging.info, "
+                "tf.logging.warning, tf.logging.error. "
+                + "File needs to be in the form of 'file://<filepath>'."
+            )
 
-  # If we are only printing a single string scalar, there is no need to format
-  if (len(inputs) == 1 and tensor_util.is_tf_type(inputs[0]) and
-      (not isinstance(inputs[0], sparse_tensor.SparseTensor)) and
-      (inputs[0].shape.ndims == 0) and (inputs[0].dtype == dtypes.string)):
-    formatted_string = inputs[0]
-  # Otherwise, we construct an appropriate template for the tensors we are
-  # printing, and format the template using those tensors.
-  else:
-    # For each input to this print function, we extract any nested tensors,
-    # and construct an appropriate template to format representing the
-    # printed input.
-    templates = []
-    tensors = []
-    # If an input to the print function is of type `OrderedDict`, sort its
-    # elements by the keys for consistency with the ordering of `nest.flatten`.
-    # This is not needed for `dict` types because `pprint.pformat()` takes care
-    # of printing the template in a sorted fashion.
-    inputs_ordered_dicts_sorted = []
-    for input_ in inputs:
-      if isinstance(input_, py_collections.OrderedDict):
-        inputs_ordered_dicts_sorted.append(
-            py_collections.OrderedDict(sorted(input_.items())))
-      else:
-        inputs_ordered_dicts_sorted.append(input_)
-    tensor_free_structure = nest.map_structure(
-        lambda x: "" if tensor_util.is_tf_type(x) else x,
-        inputs_ordered_dicts_sorted)
+    # If we are only printing a single string scalar, there is no need to format
+    if (
+        len(inputs) == 1
+        and tensor_util.is_tf_type(inputs[0])
+        and (not isinstance(inputs[0], sparse_tensor.SparseTensor))
+        and (inputs[0].shape.ndims == 0)
+        and (inputs[0].dtype == dtypes.string)
+    ):
+        formatted_string = inputs[0]
+    # Otherwise, we construct an appropriate template for the tensors we are
+    # printing, and format the template using those tensors.
+    else:
+        # For each input to this print function, we extract any nested tensors,
+        # and construct an appropriate template to format representing the
+        # printed input.
+        templates = []
+        tensors = []
+        # If an input to the print function is of type `OrderedDict`, sort its
+        # elements by the keys for consistency with the ordering of `nest.flatten`.
+        # This is not needed for `dict` types because `pprint.pformat()` takes care
+        # of printing the template in a sorted fashion.
+        inputs_ordered_dicts_sorted = []
+        for input_ in inputs:
+            if isinstance(input_, py_collections.OrderedDict):
+                inputs_ordered_dicts_sorted.append(
+                    py_collections.OrderedDict(sorted(input_.items()))
+                )
+            else:
+                inputs_ordered_dicts_sorted.append(input_)
+        tensor_free_structure = nest.map_structure(
+            lambda x: "" if tensor_util.is_tf_type(x) else x,
+            inputs_ordered_dicts_sorted,
+        )
 
-    tensor_free_template = " ".join(
-        pprint.pformat(x) for x in tensor_free_structure)
-    placeholder = _generate_placeholder_string(tensor_free_template)
+        tensor_free_template = " ".join(
+            pprint.pformat(x) for x in tensor_free_structure
+        )
+        placeholder = _generate_placeholder_string(tensor_free_template)
 
-    for input_ in inputs:
-      placeholders = []
-      # Use the nest utilities to flatten & process any nested elements in this
-      # input. The placeholder for a tensor in the template should be the
-      # placeholder string, and the placeholder for a non-tensor can just be
-      # the printed value of the non-tensor itself.
-      for x in nest.flatten(input_):
-        # support sparse tensors
-        if isinstance(x, sparse_tensor.SparseTensor):
-          tensors.extend([x.indices, x.values, x.dense_shape])
-          placeholders.append(
-              "SparseTensor(indices={}, values={}, shape={})".format(
-                  placeholder, placeholder, placeholder))
-        elif tensor_util.is_tf_type(x):
-          tensors.append(x)
-          placeholders.append(placeholder)
-        else:
-          placeholders.append(x)
+        for input_ in inputs:
+            placeholders = []
+            # Use the nest utilities to flatten & process any nested elements in this
+            # input. The placeholder for a tensor in the template should be the
+            # placeholder string, and the placeholder for a non-tensor can just be
+            # the printed value of the non-tensor itself.
+            for x in nest.flatten(input_):
+                # support sparse tensors
+                if isinstance(x, sparse_tensor.SparseTensor):
+                    tensors.extend([x.indices, x.values, x.dense_shape])
+                    placeholders.append(
+                        "SparseTensor(indices={}, values={}, shape={})".format(
+                            placeholder, placeholder, placeholder
+                        )
+                    )
+                elif tensor_util.is_tf_type(x):
+                    tensors.append(x)
+                    placeholders.append(placeholder)
+                else:
+                    placeholders.append(x)
 
-      if isinstance(input_, six.string_types):
-        # If the current input to format/print is a normal string, that string
-        # can act as the template.
-        cur_template = input_
-      else:
-        # We pack the placeholders into a data structure that matches the
-        # input data structure format, then format that data structure
-        # into a string template.
-        #
-        # NOTE: We must use pprint.pformat here for building the template for
-        # unordered data structures such as `dict`, because `str` doesn't
-        # guarantee orderings, while pprint prints in sorted order. pprint
-        # will match the ordering of `nest.flatten`.
-        # This even works when nest.flatten reorders OrderedDicts, because
-        # pprint is printing *after* the OrderedDicts have been reordered.
-        cur_template = pprint.pformat(
-            nest.pack_sequence_as(input_, placeholders))
-      templates.append(cur_template)
+            if isinstance(input_, six.string_types):
+                # If the current input to format/print is a normal string, that string
+                # can act as the template.
+                cur_template = input_
+            else:
+                # We pack the placeholders into a data structure that matches the
+                # input data structure format, then format that data structure
+                # into a string template.
+                #
+                # NOTE: We must use pprint.pformat here for building the template for
+                # unordered data structures such as `dict`, because `str` doesn't
+                # guarantee orderings, while pprint prints in sorted order. pprint
+                # will match the ordering of `nest.flatten`.
+                # This even works when nest.flatten reorders OrderedDicts, because
+                # pprint is printing *after* the OrderedDicts have been reordered.
+                cur_template = pprint.pformat(
+                    nest.pack_sequence_as(input_, placeholders)
+                )
+            templates.append(cur_template)
 
-    # We join the templates for the various inputs into a single larger
-    # template. We also remove all quotes surrounding the placeholders, so that
-    # the formatted/printed output will not contain quotes around tensors.
-    # (example of where these quotes might appear: if we have added a
-    # placeholder string into a list, then pretty-formatted that list)
-    template = sep.join(templates)
-    template = template.replace("'" + placeholder + "'", placeholder)
-    formatted_string = string_ops.string_format(
-        inputs=tensors,
-        template=template,
-        placeholder=placeholder,
-        summarize=summarize,
-        name=format_name)
+        # We join the templates for the various inputs into a single larger
+        # template. We also remove all quotes surrounding the placeholders, so that
+        # the formatted/printed output will not contain quotes around tensors.
+        # (example of where these quotes might appear: if we have added a
+        # placeholder string into a list, then pretty-formatted that list)
+        template = sep.join(templates)
+        template = template.replace("'" + placeholder + "'", placeholder)
+        formatted_string = string_ops.string_format(
+            inputs=tensors,
+            template=template,
+            placeholder=placeholder,
+            summarize=summarize,
+            name=format_name,
+        )
 
-  return gen_logging_ops.print_v2(
-      formatted_string, output_stream=output_stream_string, name=name, end=end)
+    return gen_logging_ops.print_v2(
+        formatted_string, output_stream=output_stream_string, name=name, end=end
+    )
 
 
 # pylint: enable=g-doc-args
@@ -398,24 +417,26 @@ def print_v2(*inputs, **kwargs):
 
 @ops.RegisterGradient("Print")
 def _PrintGrad(op, *grad):
-  return list(grad) + [None] * (len(op.inputs) - 1)
+    return list(grad) + [None] * (len(op.inputs) - 1)
 
 
 def _Collect(val, collections, default_collections):
-  if collections is None:
-    collections = default_collections
-  for key in collections:
-    ops.add_to_collection(key, val)
+    if collections is None:
+        collections = default_collections
+    for key in collections:
+        ops.add_to_collection(key, val)
 
 
 @deprecated(
-    "2016-11-30", "Please switch to tf.summary.histogram. Note that "
+    "2016-11-30",
+    "Please switch to tf.summary.histogram. Note that "
     "tf.summary.histogram uses the node name instead of the tag. "
     "This means that TensorFlow will automatically de-duplicate summary "
-    "names based on the scope they are created in.")
+    "names based on the scope they are created in.",
+)
 def histogram_summary(tag, values, collections=None, name=None):
-  # pylint: disable=line-too-long
-  """Outputs a `Summary` protocol buffer with a histogram.
+    # pylint: disable=line-too-long
+    """Outputs a `Summary` protocol buffer with a histogram.
 
   This ops is deprecated. Please switch to tf.summary.histogram.
 
@@ -441,21 +462,23 @@ def histogram_summary(tag, values, collections=None, name=None):
     A scalar `Tensor` of type `string`. The serialized `Summary` protocol
     buffer.
   """
-  with ops.name_scope(name, "HistogramSummary", [tag, values]) as scope:
-    val = gen_logging_ops.histogram_summary(tag=tag, values=values, name=scope)
-    _Collect(val, collections, [ops.GraphKeys.SUMMARIES])
-  return val
+    with ops.name_scope(name, "HistogramSummary", [tag, values]) as scope:
+        val = gen_logging_ops.histogram_summary(tag=tag, values=values, name=scope)
+        _Collect(val, collections, [ops.GraphKeys.SUMMARIES])
+    return val
 
 
 @deprecated(
-    "2016-11-30", "Please switch to tf.summary.image. Note that "
+    "2016-11-30",
+    "Please switch to tf.summary.image. Note that "
     "tf.summary.image uses the node name instead of the tag. "
     "This means that TensorFlow will automatically de-duplicate summary "
     "names based on the scope they are created in. Also, the max_images "
-    "argument was renamed to max_outputs.")
+    "argument was renamed to max_outputs.",
+)
 def image_summary(tag, tensor, max_images=3, collections=None, name=None):
-  # pylint: disable=line-too-long
-  """Outputs a `Summary` protocol buffer with images.
+    # pylint: disable=line-too-long
+    """Outputs a `Summary` protocol buffer with images.
 
   For an explanation of why this op was deprecated, and information on how to
   migrate, look
@@ -502,26 +525,24 @@ def image_summary(tag, tensor, max_images=3, collections=None, name=None):
     A scalar `Tensor` of type `string`. The serialized `Summary` protocol
     buffer.
   """
-  with ops.name_scope(name, "ImageSummary", [tag, tensor]) as scope:
-    val = gen_logging_ops.image_summary(
-        tag=tag, tensor=tensor, max_images=max_images, name=scope)
-    _Collect(val, collections, [ops.GraphKeys.SUMMARIES])
-  return val
+    with ops.name_scope(name, "ImageSummary", [tag, tensor]) as scope:
+        val = gen_logging_ops.image_summary(
+            tag=tag, tensor=tensor, max_images=max_images, name=scope
+        )
+        _Collect(val, collections, [ops.GraphKeys.SUMMARIES])
+    return val
 
 
 @deprecated(
-    "2016-11-30", "Please switch to tf.summary.audio. Note that "
+    "2016-11-30",
+    "Please switch to tf.summary.audio. Note that "
     "tf.summary.audio uses the node name instead of the tag. "
     "This means that TensorFlow will automatically de-duplicate summary "
-    "names based on the scope they are created in.")
-def audio_summary(tag,
-                  tensor,
-                  sample_rate,
-                  max_outputs=3,
-                  collections=None,
-                  name=None):
-  # pylint: disable=line-too-long
-  """Outputs a `Summary` protocol buffer with audio.
+    "names based on the scope they are created in.",
+)
+def audio_summary(tag, tensor, sample_rate, max_outputs=3, collections=None, name=None):
+    # pylint: disable=line-too-long
+    """Outputs a `Summary` protocol buffer with audio.
 
   This op is deprecated. Please switch to tf.summary.audio.
   For an explanation of why this op was deprecated, and information on how to
@@ -557,23 +578,25 @@ def audio_summary(tag,
     A scalar `Tensor` of type `string`. The serialized `Summary` protocol
     buffer.
   """
-  with ops.name_scope(name, "AudioSummary", [tag, tensor]) as scope:
-    sample_rate = ops.convert_to_tensor(
-        sample_rate, dtype=dtypes.float32, name="sample_rate")
-    val = gen_logging_ops.audio_summary_v2(
-        tag=tag,
-        tensor=tensor,
-        max_outputs=max_outputs,
-        sample_rate=sample_rate,
-        name=scope)
-    _Collect(val, collections, [ops.GraphKeys.SUMMARIES])
-  return val
+    with ops.name_scope(name, "AudioSummary", [tag, tensor]) as scope:
+        sample_rate = ops.convert_to_tensor(
+            sample_rate, dtype=dtypes.float32, name="sample_rate"
+        )
+        val = gen_logging_ops.audio_summary_v2(
+            tag=tag,
+            tensor=tensor,
+            max_outputs=max_outputs,
+            sample_rate=sample_rate,
+            name=scope,
+        )
+        _Collect(val, collections, [ops.GraphKeys.SUMMARIES])
+    return val
 
 
 @deprecated("2016-11-30", "Please switch to tf.summary.merge.")
 def merge_summary(inputs, collections=None, name=None):
-  # pylint: disable=line-too-long
-  """Merges summaries.
+    # pylint: disable=line-too-long
+    """Merges summaries.
 
   This op is deprecated. Please switch to tf.compat.v1.summary.merge, which has
   identical
@@ -598,15 +621,15 @@ def merge_summary(inputs, collections=None, name=None):
     A scalar `Tensor` of type `string`. The serialized `Summary` protocol
     buffer resulting from the merging.
   """
-  with ops.name_scope(name, "MergeSummary", inputs):
-    val = gen_logging_ops.merge_summary(inputs=inputs, name=name)
-    _Collect(val, collections, [])
-  return val
+    with ops.name_scope(name, "MergeSummary", inputs):
+        val = gen_logging_ops.merge_summary(inputs=inputs, name=name)
+        _Collect(val, collections, [])
+    return val
 
 
 @deprecated("2016-11-30", "Please switch to tf.summary.merge_all.")
 def merge_all_summaries(key=ops.GraphKeys.SUMMARIES):
-  """Merges all summaries collected in the default graph.
+    """Merges all summaries collected in the default graph.
 
   This op is deprecated. Please switch to tf.compat.v1.summary.merge_all, which
   has
@@ -621,15 +644,15 @@ def merge_all_summaries(key=ops.GraphKeys.SUMMARIES):
     `Tensor` of type `string` containing the serialized `Summary` protocol
     buffer resulting from the merging.
   """
-  summary_ops = ops.get_collection(key)
-  if not summary_ops:
-    return None
-  else:
-    return merge_summary(summary_ops)
+    summary_ops = ops.get_collection(key)
+    if not summary_ops:
+        return None
+    else:
+        return merge_summary(summary_ops)
 
 
 def get_summary_op():
-  """Returns a single Summary op that would run all summaries.
+    """Returns a single Summary op that would run all summaries.
 
   Either existing one from `SUMMARY_OP` collection or merges all existing
   summaries.
@@ -639,29 +662,31 @@ def get_summary_op():
     `Tensor` of type `string` containing the serialized `Summary` protocol
     buffer resulting from the merging.
   """
-  summary_op = ops.get_collection(ops.GraphKeys.SUMMARY_OP)
-  if summary_op is not None:
-    if summary_op:
-      summary_op = summary_op[0]
-    else:
-      summary_op = None
-  if summary_op is None:
-    summary_op = merge_all_summaries()
+    summary_op = ops.get_collection(ops.GraphKeys.SUMMARY_OP)
     if summary_op is not None:
-      ops.add_to_collection(ops.GraphKeys.SUMMARY_OP, summary_op)
-  return summary_op
+        if summary_op:
+            summary_op = summary_op[0]
+        else:
+            summary_op = None
+    if summary_op is None:
+        summary_op = merge_all_summaries()
+        if summary_op is not None:
+            ops.add_to_collection(ops.GraphKeys.SUMMARY_OP, summary_op)
+    return summary_op
 
 
 @deprecated(
-    "2016-11-30", "Please switch to tf.summary.scalar. Note that "
+    "2016-11-30",
+    "Please switch to tf.summary.scalar. Note that "
     "tf.summary.scalar uses the node name instead of the tag. "
     "This means that TensorFlow will automatically de-duplicate summary "
     "names based on the scope they are created in. Also, passing a "
     "tensor or list of tags to a scalar summary op is no longer "
-    "supported.")
+    "supported.",
+)
 def scalar_summary(tags, values, collections=None, name=None):
-  # pylint: disable=line-too-long
-  """Outputs a `Summary` protocol buffer with scalar values.
+    # pylint: disable=line-too-long
+    """Outputs a `Summary` protocol buffer with scalar values.
 
   This ops is deprecated. Please switch to tf.summary.scalar.
   For an explanation of why this op was deprecated, and information on how to
@@ -682,10 +707,10 @@ def scalar_summary(tags, values, collections=None, name=None):
     A scalar `Tensor` of type `string`. The serialized `Summary` protocol
     buffer.
   """
-  with ops.name_scope(name, "ScalarSummary", [tags, values]) as scope:
-    val = gen_logging_ops.scalar_summary(tags=tags, values=values, name=scope)
-    _Collect(val, collections, [ops.GraphKeys.SUMMARIES])
-  return val
+    with ops.name_scope(name, "ScalarSummary", [tags, values]) as scope:
+        val = gen_logging_ops.scalar_summary(tags=tags, values=values, name=scope)
+        _Collect(val, collections, [ops.GraphKeys.SUMMARIES])
+    return val
 
 
 ops.NotDifferentiable("HistogramSummary")

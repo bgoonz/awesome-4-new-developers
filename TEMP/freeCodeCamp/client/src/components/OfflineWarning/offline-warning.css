@@ -1,0 +1,6 @@
+.offline-warning {
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

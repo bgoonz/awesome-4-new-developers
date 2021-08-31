@@ -21,11 +21,11 @@ from __future__ import print_function
 from tensorflow.python.ops.ragged import ragged_gather_ops
 
 
-#===============================================================================
+# ===============================================================================
 # ragged.batch_gather
-#===============================================================================
+# ===============================================================================
 def batch_gather(params, indices, name=None):
-  """Gathers slices from `params` according to `indices` with batch dims.
+    """Gathers slices from `params` according to `indices` with batch dims.
 
   This operation is similar to `gather`, but it assumes that the leading `N`
   dimensions of `indices` and `params` are batch dimensions, and performs a
@@ -55,4 +55,4 @@ def batch_gather(params, indices, name=None):
   >>> tf.compat.v1.batch_gather(params, indices)
   <tf.RaggedTensor [[b'b', b'c', b'a'], [], [], [b'e', b'e']]>
   """
-  return ragged_gather_ops.gather(params, indices, batch_dims=-1, name=name)
+    return ragged_gather_ops.gather(params, indices, batch_dims=-1, name=name)

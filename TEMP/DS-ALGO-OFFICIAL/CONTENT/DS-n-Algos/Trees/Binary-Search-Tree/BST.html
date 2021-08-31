@@ -1,0 +1,165 @@
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a   title="1"></a>
+<a   title="2"></a>
+<a   title="3"><span >class</span> TreeNode <span >{</span></a>
+<a   title="4">  <span >constructor</span>(val) <span >{</span></a>
+<a   title="5">    <span >this</span>.<span >val</span> <span >=</span> val<span >;</span></a>
+<a  id=-6" title="6">    <span >this</span>.<span >left</span> <span >=</span> <span >null;</span></a>
+<a   title="7">    <span >this</span>.<span >right</span> <span >=</span> <span >null;</span></a>
+<a   title="8">  <span >}</span></a>
+<a   title="9"><span >}</span></a>
+<a  id=-10" title="10"></a>
+<a   title="11"><span >class</span> BST <span >{</span></a>
+<a  id=-12" title="12">  <span >constructor</span>() <span >{</span></a>
+<a  id=-13" title="13">    <span >this</span>.<span >root</span> <span >=</span> <span >null;</span></a>
+<a  id=-14" title="14">  <span >}</span></a>
+<a  id=-15" title="15"></a>
+<a  id=-16" title="16">  <span >insert</span>(val<span >,</span> root <span >=</span> <span >this</span>.<span >root</span>) <span >{</span></a>
+<a  id=-17" title="17">    <span >let</span> newNode <span >=</span> <span >new</span> <span >TreeNode</span>(val)<span >;</span></a>
+<a  id=-18" title="18"></a>
+<a  id=-19" title="19">    <span >if</span> (<span >!this</span>.<span >root</span>) <span >{</span></a>
+<a  id=-20" title="20">      <span >this</span>.<span >root</span> <span >=</span> newNode<span >;</span></a>
+<a  id=-21" title="21">      <span >return;</span></a>
+<a  id=-22" title="22">    <span >}</span></a>
+<a  id=-23" title="23"></a>
+<a  id=-24" title="24">    <span >if</span> (<span >newNode</span>.<span >val</span> <span >&lt;</span> <span >root</span>.<span >val</span>) <span >{</span></a>
+<a  id=-25" title="25">      <span >if</span> (<span >root</span>.<span >left</span> <span >===</span> <span >null</span>) <span >{</span></a>
+<a  id=-26" title="26">        <span >root</span>.<span >left</span> <span >=</span> newNode<span >;</span></a>
+<a  id=-27" title="27">      <span >}</span> <span >else</span> <span >{</span></a>
+<a  id=-28" title="28">        <span >this</span>.<span >insert</span>(val<span >,</span> <span >root</span>.<span >left</span>)<span >;</span></a>
+<a  id=-29" title="29">      <span >}</span></a>
+<a  id=-30" title="30">    <span >}</span></a>
+<a  id=-31" title="31"></a>
+<a  id=-32" title="32">    <span >if</span> (<span >newNode</span>.<span >val</span> <span >&gt;=</span> <span >root</span>.<span >val</span>) <span >{</span></a>
+<a  id=-33" title="33">      <span >if</span> (<span >root</span>.<span >right</span> <span >===</span> <span >null</span>) <span >{</span></a>
+<a  id=-34" title="34">        <span >root</span>.<span >right</span> <span >=</span> newNode<span >;</span></a>
+<a  id=-35" title="35">      <span >}</span> <span >else</span> <span >{</span></a>
+<a  id=-36" title="36">        <span >this</span>.<span >insert</span>(val<span >,</span> <span >root</span>.<span >right</span>)<span >;</span></a>
+<a  id=-37" title="37">      <span >}</span></a>
+<a  id=-38" title="38">    <span >}</span></a>
+<a  id=-39" title="39">  <span >}</span></a>
+<a  id=-40" title="40"></a>
+<a  id=-41" title="41">  <span >searchRecur</span>(val<span >,</span> root <span >=</span> <span >this</span>.<span >root</span>) <span >{</span></a>
+<a  id=-42" title="42">    <span >if</span> (<span >!</span>root) <span >{</span></a>
+<a  id=-43" title="43">      <span >return</span> <span >false;</span></a>
+<a  id=-44" title="44">    <span >}</span></a>
+<a  id=-45" title="45">    <span >if</span> (<span >root</span>.<span >val</span> <span >===</span> val) <span >{</span></a>
+<a  id=-46" title="46">      <span >return</span> <span >true;</span></a>
+<a  id=-47" title="47">    <span >}</span></a>
+<a  id=-48" title="48"></a>
+<a  id=-49" title="49">    <span >// console.log(&quot;VAL::::::&quot; ,val)</span></a>
+<a  id=-50" title="50">    <span >// console.log(&quot;ROOT VAL:::::&quot;, root.val)</span></a>
+<a  id=-51" title="51">    <span >let</span> found <span >=</span> <span >false;</span></a>
+<a  id=-52" title="52">    <span >if</span> (val <span >&lt;</span> <span >root</span>.<span >val</span>) <span >{</span></a>
+<a  id=-53" title="53">      found <span >=</span> <span >this</span>.<span >searchRecur</span>(val<span >,</span> <span >root</span>.<span >left</span>)<span >;</span></a>
+<a  id=-54" title="54">    <span >}</span> <span >else</span> <span >{</span></a>
+<a  id=-55" title="55">      found <span >=</span> <span >this</span>.<span >searchRecur</span>(val<span >,</span> <span >root</span>.<span >right</span>)<span >;</span></a>
+<a  id=-56" title="56">    <span >}</span></a>
+<a  id=-57" title="57"></a>
+<a  id=-58" title="58">    <span >return</span> found<span >;</span></a>
+<a  id=-59" title="59"></a>
+<a  id=-60" title="60">    <span >//     value :7</span></a>
+<a  id=-61" title="61"></a>
+<a  id=-62" title="62">    <span >//     searchRecur (7, 5)</span></a>
+<a  id=-63" title="63">    <span >//           10</span></a>
+<a  id=-64" title="64">    <span >//       5       16</span></a>
+<a  id=-65" title="65">    <span >//    1    7         16</span></a>
+<a  id=-66" title="66">    <span >// postOrder.push(...postOrderArray(roo.left));</span></a>
+<a  id=-67" title="67">    <span >// postOrder.push(...postOrderArray(roo.right));</span></a>
+<a  id=-68" title="68">    <span >// postOrder.push(roo.val);</span></a>
+<a  id=-69" title="69"></a>
+<a  id=-70" title="70">    <span >// if (val &lt; root.val) {</span></a>
+<a  id=-71" title="71">    <span >//    // console.log(&quot;ROOOT LEFT:::&quot;, root.left)</span></a>
+<a  id=-72" title="72">    <span >//    // console.log(&quot;VALUE:::&quot;, val)</span></a>
+<a  id=-73" title="73">    <span >//     if (root.left=== val) {</span></a>
+<a  id=-74" title="74"></a>
+<a  id=-75" title="75">    <span >//         return true;</span></a>
+<a  id=-76" title="76">    <span >//     } else {</span></a>
+<a  id=-77" title="77">    <span >//         return this.searchRecur(val, root.left);</span></a>
+<a  id=-78" title="78">    <span >//     }</span></a>
+<a  id=-79" title="79">    <span >// }else {</span></a>
+<a  id=-80" title="80">    <span >//     if (root.right === val) {</span></a>
+<a  id=-81" title="81">    <span >//         return true;</span></a>
+<a  id=-82" title="82">    <span >//     } else {</span></a>
+<a  id=-83" title="83">    <span >//         return this.searchRecur(val, root.right);</span></a>
+<a  id=-84" title="84">    <span >//     }</span></a>
+<a  id=-85" title="85">    <span >// }</span></a>
+<a  id=-86" title="86"></a>
+<a  id=-87" title="87">    <span >// return false;</span></a>
+<a  id=-88" title="88">  <span >}</span></a>
+<a  id=-89" title="89"></a>
+<a  id=-90" title="90">  <span >searchIter</span>(val) <span >{</span></a>
+<a  id=-91" title="91">    <span >if</span> (<span >!this</span>.<span >root</span>) <span >{</span></a>
+<a  id=-92" title="92">      <span >return</span> <span >false;</span></a>
+<a  id=-93" title="93">    <span >}</span></a>
+<a  id=-94" title="94"></a>
+<a  id=-95" title="95">    <span >let</span> found <span >=</span> <span >false;</span></a>
+<a  id=-96" title="96">    <span >let</span> curr <span >=</span> <span >this</span>.<span >root;</span></a>
+<a  id=-97" title="97"></a>
+<a  id=-98" title="98">    <span >while</span> (<span >!</span>found) <span >{</span></a>
+<a  id=-99" title="99">      <span >if</span> (<span >!</span>curr) <span >{</span></a>
+<a  id=-100" title="100">        <span >return</span> <span >false;</span></a>
+<a  id=-101" title="101">      <span >}</span></a>
+<a  id=-102" title="102">      <span >if</span> (val <span >===</span> <span >curr</span>.<span >val</span>) <span >{</span></a>
+<a  id=-103" title="103">        found <span >=</span> <span >true;</span></a>
+<a  id=-104" title="104">        <span >return</span> <span >true;</span></a>
+<a  id=-105" title="105">      <span >}</span></a>
+<a  id=-106" title="106">      <span >if</span> (val <span >&lt;</span> <span >curr</span>.<span >val</span>) <span >{</span></a>
+<a  id=-107" title="107">        curr <span >=</span> <span >curr</span>.<span >left;</span></a>
+<a  id=-108" title="108">      <span >}</span> <span >else</span> <span >{</span></a>
+<a  id=-109" title="109">        curr <span >=</span> <span >curr</span>.<span >right;</span></a>
+<a  id=-110" title="110">      <span >}</span></a>
+<a  id=-111" title="111">    <span >}</span></a>
+<a  id=-112" title="112"></a>
+<a  id=-113" title="113">    <span >return</span> <span >false;</span></a>
+<a  id=-114" title="114">  <span >}</span></a>
+<a  id=-115" title="115"><span >}</span></a>
+<a  id=-116" title="116"></a>
+<a  id=-117" title="117"><span >/*</span></a>
+<a  id=-118" title="118"><span >    BST</span></a>
+<a  id=-119" title="119"><span >    #constructor()</span></a>
+<a  id=-120" title="120"><span >      ✓ should initialize the `root` property to null</span></a>
+<a  id=-121" title="121"><span >    #insert(val)</span></a>
+<a  id=-122" title="122"><span >      ✓ should insert a TreeNode with the given value into the BST</span></a>
+<a  id=-123" title="123"><span >      when the BST is empty</span></a>
+<a  id=-124" title="124"><span >        ✓ should correctly insert a TreeNode with the given val as the root</span></a>
+<a  id=-125" title="125"><span >    #searchRecur(val)</span></a>
+<a  id=-126" title="126"><span >      ✓ should return false if the BST is empty</span></a>
+<a  id=-127" title="127"><span >      ✓ should be recursive</span></a>
+<a  id=-128" title="128"><span >      when the val is contained in the BST</span></a>
+<a  id=-129" title="129"><span >        ✓ should return true</span></a>
+<a  id=-130" title="130"><span >      when the val is not contained in the BST</span></a>
+<a  id=-131" title="131"><span >        ✓ should return false</span></a>
+<a  id=-132" title="132"><span >    #searchIter(val)</span></a>
+<a  id=-133" title="133"><span >      ✓ should return false if the BST is empty</span></a>
+<a  id=-134" title="134"><span >      ✓ should be iterative, not recursive</span></a>
+<a  id=-135" title="135"><span >      when the val is contained in the BST</span></a>
+<a  id=-136" title="136"><span >        ✓ should return true</span></a>
+<a  id=-137" title="137"><span >      when the val is not contained in the BST</span></a>
+<a  id=-138" title="138"><span >        ✓ should return false</span></a>
+<a  id=-139" title="139"></a>
+<a  id=-140" title="140"><span >  findMin()</span></a>
+<a  id=-141" title="141"><span >    when the tree is empty</span></a>
+<a  id=-142" title="142"><span >      ✓ should return null</span></a>
+<a  id=-143" title="143"><span >    when the root has no children</span></a>
+<a  id=-144" title="144"><span >      ✓ should return the root</span></a>
+<a  id=-145" title="145"><span >    when the root only has right children</span></a>
+<a  id=-146" title="146"><span >      ✓ should return the root</span></a>
+<a  id=-147" title="147"><span >    when the root has left children</span></a>
+<a  id=-148" title="148"><span >      ✓ should return the leftmost child of the root</span></a>
+<a  id=-149" title="149"></a>
+<a  id=-150" title="150"><span >  getHeight()</span></a>
+<a  id=-151" title="151"><span >    ✓ should return -1 for an empty root</span></a>
+<a  id=-152" title="152"><span >    ✓ should correctly return the height of a balanced tree</span></a>
+<a  id=-153" title="153"><span >    ✓ should correctly return the height of an unbalanced tree</span></a>
+<a  id=-154" title="154"><span >*/</span></a>
+<a  id=-155" title="155"></a>
+<a  id=-156" title="156"><span >module</span>.<span >exports</span> <span >=</span> <span >{</span></a>
+<a  id=-157" title="157">  TreeNode<span >,</span></a>
+<a  id=-158" title="158">  BST<span >,</span></a>
+<a  id=-159" title="159"><span >};</span></a></code></pre></div>
+<hr />
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a   title="1"></a></code></pre>
+</div>
+<hr />
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a   title="1"></a></code></pre>
+</div>

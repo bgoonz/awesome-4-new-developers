@@ -32,12 +32,12 @@ func @dynamicBroadcast(%arg0: tensor<?xf32>, %arg1: tensor<?x?xf32>) -> tensor<?
 """
 
 with Context() as context:
-  register_chlo_dialect(context)
-  register_mhlo_dialect(context)
+    register_chlo_dialect(context)
+    register_mhlo_dialect(context)
 
-  m = Module.parse(ASM)
-  print(m)
-  add_op = m.body.operations[0].regions[0].blocks[0].operations[0]
-  print(repr(add_op))
-  print(add_op)
-  print("Everything works")
+    m = Module.parse(ASM)
+    print(m)
+    add_op = m.body.operations[0].regions[0].blocks[0].operations[0]
+    print(repr(add_op))
+    print(add_op)
+    print("Everything works")

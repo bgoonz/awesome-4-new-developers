@@ -10,7 +10,6 @@
 
 - `Upgrade local SDK`: gcloud components update, gcloud components update --version 219.0.1
 
-
 ## BUCKET BASICS
 
 - `List all buckets and files`: gsutil ls, gsutil ls -lh gs://<bucket-name>
@@ -28,13 +27,12 @@
 - `Copy folder`: gsutil cp -r ./conf gs://<bucket-name>/
 
 - `Show disk usage`: gsutil du -h gs://<bucket-name>/<directory>/
- 
+
 - `Create bucket`: gsutil mb gs://<bucket-name>
 
 - `Caculate file sha1sum`: gsha1sum syslog-migration-10.0.2.tgz, shasum syslog-migration-10.0.2.tgz
 
 - `Gsutil help`: gsutil help, gsutil help cp, gsutil help options
-
 
 ## GCP PROJECT
 
@@ -43,7 +41,6 @@
 - `Show project info `: gcloud compute project-info describe
 
 - `Switch project `: gcloud config set project <project-id>
-
 
 ## GKE
 
@@ -59,7 +56,6 @@
 
 - `List all container clusters `: gcloud container clusters list
 
-
 ## IAM
 
 - `Authenticate client `: gcloud auth activate-service-account --key-file <key-file>
@@ -74,7 +70,6 @@
 
 - `Revoke previous generated credential `: gcloud auth <application-default> revoke
 
-
 ## BUCKET SECURITY
 
 - `Make all files readable `: gsutil -m acl set -R -a public-read gs://<bucket-name>/
@@ -84,7 +79,6 @@
 - `Grant bucket access `: gsutil iam ch user:denny@gmail.com:objectCreator,objectViewer gs://<bucket-name>
 
 - `Remove bucket access `: gsutil iam ch -d user:denny@gmail.com:objectCreator,objectViewer gs://<bucket-name>
-
 
 ## VM
 
@@ -104,7 +98,6 @@
 
 - `Upload files `: gcloud compute copy-files ~/LOCAL-FILE-1 example-instance:~/REMOTE-DIR --zone us-central1-a
 
-
 ## DISKS & VOLUMES
 
 - `List all disks `: gcloud compute disks list
@@ -114,7 +107,6 @@
 - `List all snapshots `: gcloud compute snapshots list
 
 - `Create snapshot `: gcloud compute disks snapshot <diskname> --snapshotname <name1> --zone $zone
-
 
 ## NETWORK
 
@@ -126,7 +118,7 @@
 
 - `Create subnet `: gcloud compute networks subnets create subnet1 --network net1 --range 10.5.4.0/24
 
-- `Get a static ip `: gcloud compute addresses create --region us-west2-a vpn-1-static-ip 
+- `Get a static ip `: gcloud compute addresses create --region us-west2-a vpn-1-static-ip
 
 - `List all ip addresses `: gcloud compute addresses list
 
@@ -134,13 +126,11 @@
 
 - `List all routes `: gcloud compute routes list
 
-
 ## DNS
 
 - `List of all record-sets in my zone `: gcloud dns record-sets list --zone my_zone
 
 - `List first 10 DNS records `: gcloud dns record-sets list --zone my_zone --limit=10
-
 
 ## FIREWALL
 
@@ -154,7 +144,6 @@
 
 - `Update one firewall rule `: gcloud compute firewall-rules update default --network default --allow tcp:9200 tcp:9300
 
-
 ## IMAGES & CONTAINERS
 
 - `List all images `: gcloud compute images list
@@ -163,11 +152,9 @@
 
 - `Set kubectl context `: gcloud container clusters get-credentials <cluster-name>
 
-
 ## RDS
 
 - `List all sql instances `: gcloud sql instances list
-
 
 ## SERVICES
 

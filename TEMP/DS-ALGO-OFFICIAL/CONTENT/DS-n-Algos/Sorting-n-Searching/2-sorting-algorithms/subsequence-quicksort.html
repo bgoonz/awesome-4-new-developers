@@ -1,0 +1,76 @@
+<h3 id="the-steps">The steps</h3>
+<hr />
+<ul>
+<li><h2 id="call-quick-sort-passing-the-array-and-left-pointer-and-right-pointer-to-the-quicksort-function.-for-the-first-call-left-pointer-would-be-the-index-of-the-first-element-which-is-0-and-right-pointer-would-be-the-index-of-the-last-element-which-would-be-length--1.">Call Quick sort, passing the array and left-pointer and right-pointer to the quickSort function. For the first call, left-pointer would be the index of the first element which is 0 and right-pointer would be the index of the last element which would be (length -1).</h2></li>
+<li><h2 id="select-pivot-as-the-last-index-of-the-array.-the-key-process-in-quicksort-is-partition.-target-of-partitions-is-given-an-array-and-an-element-x-of-array-as-pivot-put-x-at-its-correct-position-in-sorted-array-and-put-all-smaller-elements-smaller-than-x-before-x-and-put-all-greater-elements-greater-than-x-after-x.-all-this-should-be-done-in-linear-time.">Select Pivot, as the last index of the array. The key process in quickSort is partition(). Target of partitions is, given an array and an element x of array as pivot, put x at its correct position in sorted array and put all smaller elements (smaller than x) before x, and put all greater elements (greater than x) after x. All this should be done in linear time.</h2></li>
+<li><h2 id="swap-function-a-helper-function-to-swap-values-of-the-array.">Swap function: A helper function to swap values of the array.</h2></li>
+<li><h2 id="call-partition-function-after-calculating-the-pivot-we-send-the-pivot-to-the-partition-function.-this-function-moves-all-the-items-smaller-than-the-pivot-value-to-the-left-and-larger-than-pivot-value-to-the-right-with-the-swap-function.-then-the-function-updates-and-returns-the-value-of-the-left-pointer-which-is-indeed-used-as-the-partitionindex.">Call Partition function: After calculating the pivot, we send the pivot to the partition() function. This function moves all the items smaller than the pivot value to the left and larger than pivot value to the right with the swap function. Then the function updates and returns the value of the left-pointer, which is indeed used as the partitionIndex.</h2></li>
+<li><p>partitionIndex: In the partition() function, we keep moving all the items smaller than the pivot value to the left and larger than pivot value to the right. We have to keep track of the position of the partition. so that we can split the array into two parts in the next step. This tracking of the index where we partition the array is done by using partitionIndex variable. the initial value is left-pointer. And this initial value gets updated by the partition() function Inside the partition() function, we swap values for misplaced elements. That is, if an element is larger than the pivot position element, but is placed on the left side of the pivot, we swap it. —</p></li>
+<li>Repeat the process: Now come back to quickSort function. when I get the updated partitionIndex, apply quickSort for the left side of the array and right side of the array. keep doing it until left is smaller than right. So, after the first 2 segments (segmented by pivot) are scanned with the partition() function, the next two segments that the main algorithm recurs on are [left…pivot - 1] and [pivot…right]</li>
+</ul>
+<div id=">pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a   title="1"><span >//I hate using var but in this case the fact that it is function scope is rather advantageous.... substituting in let for var does not accurately sort the array in this case ... a exclusivley let declared implementation can be found in the 05-quicksort.js file above.</span></a>
+<a   title="2"><span >//1.) swap helper func</span></a>
+<a   title="3"><span >function</span> <span >swap</span>( array<span >,</span> i<span >,</span> j ) <span >{</span></a>
+<a   title="4">  <span >var</span> temp <span >=</span> array[ i ]<span >;</span></a>
+<a   title="5">  array[ i ] <span >=</span> array[ j ]<span >;</span></a>
+<a  id=-6" title="6">  array[ j ] <span >=</span> temp<span >;</span></a>
+<a   title="7"><span >}</span></a>
+<a   title="8"><span >function</span> <span >flexiSort</span>( array<span >,</span> left<span >,</span> right ) <span >{</span></a>
+<a   title="9">  <span >// left-pointer would be the index of the first element ...</span></a>
+<a  id=-10" title="10">  <span >//---&gt; 0 </span></a>
+<a   title="11">  <span >//right-pointer would be the index of the last element </span></a>
+<a  id=-12" title="12">  <span >//---&gt; (length -1).</span></a>
+<a  id=-13" title="13">  left <span >=</span> left <span >||</span> <span >0;</span></a>
+<a  id=-14" title="14">  right <span >=</span> right <span >||</span> <span >array</span>.<span >length</span> <span >-</span> <span >1;</span></a>
+<a  id=-15" title="15">  <span >var</span> pivot <span >=</span> <span >partition</span>( array<span >,</span> left<span >,</span> right )<span >;</span></a>
+<a  id=-16" title="16">  <span >if</span> ( left <span >&lt;</span> pivot <span >-</span> <span >1</span> ) <span >{</span></a>
+<a  id=-17" title="17">    <span >flexiSort</span>( array<span >,</span> left<span >,</span> pivot <span >-</span> <span >1</span> )<span >;</span></a>
+<a  id=-18" title="18">  <span >}</span></a>
+<a  id=-19" title="19">  <span >if</span> ( right <span >&gt;</span> pivot ) <span >{</span></a>
+<a  id=-20" title="20">    <span >flexiSort</span>( array<span >,</span> pivot<span >,</span> right )</a>
+<a  id=-21" title="21">  <span >}</span></a>
+<a  id=-22" title="22">  <span >return</span> array<span >;</span></a>
+<a  id=-23" title="23"><span >}</span></a>
+<a  id=-24" title="24"><span >/* Two indices that start at the ends of the array being partitioned, then move toward each other, until they detect an inversion: a pair of elements, one greater than the pivot, one smaller, that are in the wrong order relative to each other. The inverted elements are then swapped. </span></a>
+<a  id=-25" title="25"><span >Here the numerical values of left and right is continually getting updated with each inner while loop. But only if the while loop condition gets satisfied. That is, when the while loop condition is unsatisfied, e.g. for the first inner while loop, when array[left] &gt; array[pivot] which means we have found a misplaced pair. </span></a>
+<a  id=-26" title="26"><span >That is, although the left &lt;= right (which is being made sure by the outer while loop) the actual elements are not sorted. Meaning a left side element is larger in value than the right side element. So, the code execution then jumps out of the inner while loop and goes right in to execute the swap function.</span></a>
+<a  id=-27" title="27"><span >*/</span></a>
+<a  id=-28" title="28"><span >function</span> <span >partition</span>( array<span >,</span> left<span >,</span> right ) <span >{</span></a>
+<a  id=-29" title="29">  <span >var</span> pivot <span >=</span> <span >Math</span>.<span >floor</span>( ( left <span >+</span> right ) / <span >2</span> )<span >;</span></a>
+<a  id=-30" title="30">  <span >while</span> ( left <span >&lt;</span> right ) <span >{</span></a>
+<a  id=-31" title="31">    <span >while</span> ( array[ left ] <span >&lt;</span> array[ pivot ] ) <span >{</span></a>
+<a  id=-32" title="32">      left<span >++</span></a>
+<a  id=-33" title="33">    <span >}</span></a>
+<a  id=-34" title="34">    <span >while</span> ( array[ right ] <span >&gt;</span> array[ pivot ] ) <span >{</span></a>
+<a  id=-35" title="35">      right<span >--</span></a>
+<a  id=-36" title="36">    <span >}</span></a>
+<a  id=-37" title="37">    <span >if</span> ( left <span >&lt;=</span> right ) <span >{</span></a>
+<a  id=-38" title="38">      <span >swap</span>( array<span >,</span> left<span >,</span> right )<span >;</span></a>
+<a  id=-39" title="39">      left<span >++</span></a>
+<a  id=-40" title="40">      right<span >--</span></a>
+<a  id=-41" title="41">    <span >}</span></a>
+<a  id=-42" title="42">  <span >}</span></a>
+<a  id=-43" title="43">  <span >return</span> left<span >;</span></a>
+<a  id=-44" title="44"><span >}</span></a>
+<a  id=-45" title="45"><span >//--------------------------------(Testing)--------------------------------</span></a>
+<a  id=-46" title="46"><span >function</span> <span >getRandomInt</span>( min<span >,</span> max ) <span >{</span></a>
+<a  id=-47" title="47">  <span >return</span> <span >Math</span>.<span >floor</span>( <span >Math</span>.<span >random</span>() <span >*</span> ( max <span >-</span> min <span >+</span> <span >1</span> ) ) <span >+</span> min<span >;</span></a>
+<a  id=-48" title="48">  <span >// By adding 1, I am making the maximum inclusive</span></a>
+<a  id=-49" title="49">  <span >//Fun Fact:----&gt;( the minimum is inclusive anyway).</span></a>
+<a  id=-50" title="50">  <span >//Math.random() function returns a pseudo - random number in the range from 0 inclusive --&gt; 1 exclusive</span></a>
+<a  id=-51" title="51">  <span >//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random</span></a>
+<a  id=-52" title="52"><span >}</span></a>
+<a  id=-53" title="53"><span >//--------------------------------------------------------------------------</span></a>
+<a  id=-54" title="54"><span >var</span> arr <span >=</span> []<span >;</span></a>
+<a  id=-55" title="55"><span >// random unsorted array of integers</span></a>
+<a  id=-56" title="56"><span >for</span> ( <span >var</span> i <span >=</span> <span >0;</span> i <span >&lt;</span> <span >10;</span> i<span >++</span> ) <span >{</span></a>
+<a  id=-57" title="57">  <span >arr</span>.<span >push</span>( <span >getRandomInt</span>( <span >1,</span> <span >100</span> ) )<span >;</span></a>
+<a  id=-58" title="58"><span >}</span></a>
+<a  id=-59" title="59"><span >console</span>.<span >log</span>( <span >&quot;-----------------------------------------------------------------&quot;</span> )<span >;</span></a>
+<a  id=-60" title="60"><span >console</span>.<span >log</span>( <span >&quot;Unsorted array: &quot;</span> )<span >;</span></a>
+<a  id=-61" title="61"><span >// unsorted array</span></a>
+<a  id=-62" title="62"><span >console</span>.<span >log</span>( arr )<span >;</span></a>
+<a  id=-63" title="63"><span >console</span>.<span >log</span>( <span >&quot;-----------------------------------------------------------------&quot;</span> )</a>
+<a  id=-64" title="64">arr <span >=</span> <span >flexiSort</span>( arr<span >,</span> <span >0,</span> <span >arr</span>.<span >length</span> <span >-</span> <span >1</span> )<span >;</span></a>
+<a  id=-65" title="65"><span >console</span>.<span >log</span>( <span >&quot;↧↧↧↧↧  Sorted array: ↧↧↧↧↧↧ &quot;</span> )<span >;</span></a>
+<a  id=-66" title="66"><span >console</span>.<span >log</span>( arr )<span >;</span></a></code></pre></div>

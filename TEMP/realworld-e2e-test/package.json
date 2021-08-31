@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "start": "cd packages && npm install && npm run start",
+    "stop": "cd packages && npm run stop",
+    "pretest": "mkdir -p .screenshots/",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "casual": "^1.5.17",
+    "chai": "^4.1.2",
+    "mocha": "^5.0.0",
+    "puppeteer": "^1.6.1"
+  },
+  "license": "MIT"
+}

@@ -30,65 +30,77 @@ from tensorflow.python.platform import test
 
 
 class PrefetchTest(test_base.DatasetTestBase, parameterized.TestCase):
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(buffer_size=[-1, None, 0, 42]),
+        )
+    )
+    def testBufferSize(self, buffer_size):
+        dataset = dataset_ops.Dataset.range(10).prefetch(buffer_size=buffer_size)
+        self.assertDatasetProduces(dataset, expected_output=range(10))
 
-  @combinations.generate(
-      combinations.times(test_base.default_test_combinations(),
-                         combinations.combine(buffer_size=[-1, None, 0, 42])))
-  def testBufferSize(self, buffer_size):
-    dataset = dataset_ops.Dataset.range(10).prefetch(buffer_size=buffer_size)
-    self.assertDatasetProduces(dataset, expected_output=range(10))
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(buffer_size=[-2, -42]),
+        )
+    )
+    def testInvalidBufferSize(self, buffer_size):
+        with self.assertRaises(errors.InvalidArgumentError):
+            dataset = dataset_ops.Dataset.range(10).prefetch(buffer_size=buffer_size)
+            self.evaluate(dataset._variant_tensor)
 
-  @combinations.generate(
-      combinations.times(test_base.default_test_combinations(),
-                         combinations.combine(buffer_size=[-2, -42])))
-  def testInvalidBufferSize(self, buffer_size):
-    with self.assertRaises(errors.InvalidArgumentError):
-      dataset = dataset_ops.Dataset.range(10).prefetch(buffer_size=buffer_size)
-      self.evaluate(dataset._variant_tensor)
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            combinations.combine(buffer_size=[-1, None, 0, 42], slack_period=[1, 8]),
+        )
+    )
+    def testPrefetchWithSlack(self, buffer_size, slack_period):
+        dataset = dataset_ops.Dataset.range(100)
+        dataset = dataset_ops.PrefetchDataset(
+            dataset, buffer_size, slack_period=slack_period
+        )
+        self.assertDatasetProduces(dataset, expected_output=range(100))
 
-  @combinations.generate(
-      combinations.times(
-          test_base.default_test_combinations(),
-          combinations.combine(
-              buffer_size=[-1, None, 0, 42], slack_period=[1, 8])))
-  def testPrefetchWithSlack(self, buffer_size, slack_period):
-    dataset = dataset_ops.Dataset.range(100)
-    dataset = dataset_ops.PrefetchDataset(
-        dataset, buffer_size, slack_period=slack_period)
-    self.assertDatasetProduces(dataset, expected_output=range(100))
+    @combinations.generate(combinations.combine(tf_api_version=1, mode="graph"))
+    def testPrefetchCancellation(self):
+        def map_py_fn(x):
+            while x > -1:
+                x = x * 1
+            return x
 
-  @combinations.generate(combinations.combine(tf_api_version=1, mode="graph"))
-  def testPrefetchCancellation(self):
+        dataset = dataset_ops.Dataset.range(10).map(map_py_fn).prefetch(3)
+        get_next = self.getNext(dataset)
 
-    def map_py_fn(x):
-      while x > -1:
-        x = x * 1
-      return x
-
-    dataset = dataset_ops.Dataset.range(10).map(map_py_fn).prefetch(3)
-    get_next = self.getNext(dataset)
-
-    with self.cached_session() as sess:
-      thread = self.checkedThread(self.assert_op_cancelled, args=(get_next(),))
-      thread.start()
-      time.sleep(0.5)
-      sess.close()
-      thread.join()
+        with self.cached_session() as sess:
+            thread = self.checkedThread(self.assert_op_cancelled, args=(get_next(),))
+            thread.start()
+            time.sleep(0.5)
+            sess.close()
+            thread.join()
 
 
-class PrefetchCheckpointTest(checkpoint_test_base.CheckpointTestBase,
-                             parameterized.TestCase):
+class PrefetchCheckpointTest(
+    checkpoint_test_base.CheckpointTestBase, parameterized.TestCase
+):
+    def build_dataset(self, seed=10):
+        return (
+            dataset_ops.Dataset.range(100)
+            .prefetch(10)
+            .shuffle(buffer_size=10, seed=seed, reshuffle_each_iteration=False)
+        )
 
-  def build_dataset(self, seed=10):
-    return dataset_ops.Dataset.range(100).prefetch(10).shuffle(
-        buffer_size=10, seed=seed, reshuffle_each_iteration=False)
-
-  @combinations.generate(
-      combinations.times(test_base.default_test_combinations(),
-                         checkpoint_test_base.default_test_combinations()))
-  def test(self, verify_fn):
-    verify_fn(self, self.build_dataset, num_outputs=100)
+    @combinations.generate(
+        combinations.times(
+            test_base.default_test_combinations(),
+            checkpoint_test_base.default_test_combinations(),
+        )
+    )
+    def test(self, verify_fn):
+        verify_fn(self, self.build_dataset, num_outputs=100)
 
 
 if __name__ == "__main__":
-  test.main()
+    test.main()

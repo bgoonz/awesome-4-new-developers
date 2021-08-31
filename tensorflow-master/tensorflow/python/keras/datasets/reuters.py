@@ -24,18 +24,20 @@ from tensorflow.python.platform import tf_logging as logging
 from tensorflow.python.util.tf_export import keras_export
 
 
-@keras_export('keras.datasets.reuters.load_data')
-def load_data(path='reuters.npz',
-              num_words=None,
-              skip_top=0,
-              maxlen=None,
-              test_split=0.2,
-              seed=113,
-              start_char=1,
-              oov_char=2,
-              index_from=3,
-              **kwargs):
-  """Loads the Reuters newswire classification dataset.
+@keras_export("keras.datasets.reuters.load_data")
+def load_data(
+    path="reuters.npz",
+    num_words=None,
+    skip_top=0,
+    maxlen=None,
+    test_split=0.2,
+    seed=113,
+    start_char=1,
+    oov_char=2,
+    index_from=3,
+    **kwargs
+):
+    """Loads the Reuters newswire classification dataset.
 
   This is a dataset of 11,228 newswires from Reuters, labeled over 46 topics.
 
@@ -97,58 +99,61 @@ def load_data(path='reuters.npz',
   Words that were not seen in the training set but are in the test set
   have simply been skipped.
   """
-  # Legacy support
-  if 'nb_words' in kwargs:
-    logging.warning('The `nb_words` argument in `load_data` '
-                    'has been renamed `num_words`.')
-    num_words = kwargs.pop('nb_words')
-  if kwargs:
-    raise TypeError('Unrecognized keyword arguments: ' + str(kwargs))
+    # Legacy support
+    if "nb_words" in kwargs:
+        logging.warning(
+            "The `nb_words` argument in `load_data` " "has been renamed `num_words`."
+        )
+        num_words = kwargs.pop("nb_words")
+    if kwargs:
+        raise TypeError("Unrecognized keyword arguments: " + str(kwargs))
 
-  origin_folder = 'https://storage.googleapis.com/tensorflow/tf-keras-datasets/'
-  path = get_file(
-      path,
-      origin=origin_folder + 'reuters.npz',
-      file_hash=
-      'd6586e694ee56d7a4e65172e12b3e987c03096cb01eab99753921ef915959916')
-  with np.load(path, allow_pickle=True) as f:  # pylint: disable=unexpected-keyword-arg
-    xs, labels = f['x'], f['y']
+    origin_folder = "https://storage.googleapis.com/tensorflow/tf-keras-datasets/"
+    path = get_file(
+        path,
+        origin=origin_folder + "reuters.npz",
+        file_hash="d6586e694ee56d7a4e65172e12b3e987c03096cb01eab99753921ef915959916",
+    )
+    with np.load(
+        path, allow_pickle=True
+    ) as f:  # pylint: disable=unexpected-keyword-arg
+        xs, labels = f["x"], f["y"]
 
-  rng = np.random.RandomState(seed)
-  indices = np.arange(len(xs))
-  rng.shuffle(indices)
-  xs = xs[indices]
-  labels = labels[indices]
+    rng = np.random.RandomState(seed)
+    indices = np.arange(len(xs))
+    rng.shuffle(indices)
+    xs = xs[indices]
+    labels = labels[indices]
 
-  if start_char is not None:
-    xs = [[start_char] + [w + index_from for w in x] for x in xs]
-  elif index_from:
-    xs = [[w + index_from for w in x] for x in xs]
+    if start_char is not None:
+        xs = [[start_char] + [w + index_from for w in x] for x in xs]
+    elif index_from:
+        xs = [[w + index_from for w in x] for x in xs]
 
-  if maxlen:
-    xs, labels = _remove_long_seq(maxlen, xs, labels)
+    if maxlen:
+        xs, labels = _remove_long_seq(maxlen, xs, labels)
 
-  if not num_words:
-    num_words = max(max(x) for x in xs)
+    if not num_words:
+        num_words = max(max(x) for x in xs)
 
-  # by convention, use 2 as OOV word
-  # reserve 'index_from' (=3 by default) characters:
-  # 0 (padding), 1 (start), 2 (OOV)
-  if oov_char is not None:
-    xs = [[w if skip_top <= w < num_words else oov_char for w in x] for x in xs]
-  else:
-    xs = [[w for w in x if skip_top <= w < num_words] for x in xs]
+    # by convention, use 2 as OOV word
+    # reserve 'index_from' (=3 by default) characters:
+    # 0 (padding), 1 (start), 2 (OOV)
+    if oov_char is not None:
+        xs = [[w if skip_top <= w < num_words else oov_char for w in x] for x in xs]
+    else:
+        xs = [[w for w in x if skip_top <= w < num_words] for x in xs]
 
-  idx = int(len(xs) * (1 - test_split))
-  x_train, y_train = np.array(xs[:idx], dtype='object'), np.array(labels[:idx])
-  x_test, y_test = np.array(xs[idx:], dtype='object'), np.array(labels[idx:])
+    idx = int(len(xs) * (1 - test_split))
+    x_train, y_train = np.array(xs[:idx], dtype="object"), np.array(labels[:idx])
+    x_test, y_test = np.array(xs[idx:], dtype="object"), np.array(labels[idx:])
 
-  return (x_train, y_train), (x_test, y_test)
+    return (x_train, y_train), (x_test, y_test)
 
 
-@keras_export('keras.datasets.reuters.get_word_index')
-def get_word_index(path='reuters_word_index.json'):
-  """Retrieves a dict mapping words to their index in the Reuters dataset.
+@keras_export("keras.datasets.reuters.get_word_index")
+def get_word_index(path="reuters_word_index.json"):
+    """Retrieves a dict mapping words to their index in the Reuters dataset.
 
   Args:
       path: where to cache the data (relative to `~/.keras/dataset`).
@@ -156,10 +161,11 @@ def get_word_index(path='reuters_word_index.json'):
   Returns:
       The word index dictionary. Keys are word strings, values are their index.
   """
-  origin_folder = 'https://storage.googleapis.com/tensorflow/tf-keras-datasets/'
-  path = get_file(
-      path,
-      origin=origin_folder + 'reuters_word_index.json',
-      file_hash='4d44cc38712099c9e383dc6e5f11a921')
-  with open(path) as f:
-    return json.load(f)
+    origin_folder = "https://storage.googleapis.com/tensorflow/tf-keras-datasets/"
+    path = get_file(
+        path,
+        origin=origin_folder + "reuters_word_index.json",
+        file_hash="4d44cc38712099c9e383dc6e5f11a921",
+    )
+    with open(path) as f:
+        return json.load(f)

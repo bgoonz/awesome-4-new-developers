@@ -1,0 +1,6 @@
+client/.cache/**
+client/static/**
+client/public/**
+api-server/src/public/**
+api-server/lib/**
+tools/contributor/**

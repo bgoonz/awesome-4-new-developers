@@ -24,7 +24,7 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export("data.experimental.ignore_errors")
 def ignore_errors(log_warning=False):
-  """Creates a `Dataset` from another `Dataset` and silently ignores any errors.
+    """Creates a `Dataset` from another `Dataset` and silently ignores any errors.
 
   Use this transformation to produce a dataset that contains the same elements
   as the input, but silently drops any elements that caused an error. For
@@ -50,21 +50,21 @@ def ignore_errors(log_warning=False):
     `tf.data.Dataset.apply`.
   """
 
-  def _apply_fn(dataset):
-    return _IgnoreErrorsDataset(dataset, log_warning)
+    def _apply_fn(dataset):
+        return _IgnoreErrorsDataset(dataset, log_warning)
 
-  return _apply_fn
+    return _apply_fn
 
 
 class _IgnoreErrorsDataset(dataset_ops.UnaryUnchangedStructureDataset):
-  """A `Dataset` that silently ignores errors when computing its input."""
+    """A `Dataset` that silently ignores errors when computing its input."""
 
-  def __init__(self, input_dataset, log_warning):
-    """See `Dataset.ignore_errors()` for details."""
-    self._input_dataset = input_dataset
-    variant_tensor = (
-        gen_experimental_dataset_ops.ignore_errors_dataset(
+    def __init__(self, input_dataset, log_warning):
+        """See `Dataset.ignore_errors()` for details."""
+        self._input_dataset = input_dataset
+        variant_tensor = gen_experimental_dataset_ops.ignore_errors_dataset(
             self._input_dataset._variant_tensor,  # pylint: disable=protected-access
             log_warning=log_warning,
-            **self._flat_structure))
-    super(_IgnoreErrorsDataset, self).__init__(input_dataset, variant_tensor)
+            **self._flat_structure
+        )
+        super(_IgnoreErrorsDataset, self).__init__(input_dataset, variant_tensor)

@@ -27,23 +27,25 @@ from tensorflow.python.util.tf_export import keras_export
 
 # pylint: disable=g-import-not-at-top
 try:
-  import h5py
+    import h5py
 except ImportError:
-  h5py = None
+    h5py = None
 # pylint: enable=g-import-not-at-top
 
 
-@keras_export('keras.models.save_model')
-def save_model(model,
-               filepath,
-               overwrite=True,
-               include_optimizer=True,
-               save_format=None,
-               signatures=None,
-               options=None,
-               save_traces=True):
-  # pylint: disable=line-too-long
-  """Saves a model as a TensorFlow SavedModel or HDF5 file.
+@keras_export("keras.models.save_model")
+def save_model(
+    model,
+    filepath,
+    overwrite=True,
+    include_optimizer=True,
+    save_format=None,
+    signatures=None,
+    options=None,
+    save_traces=True,
+):
+    # pylint: disable=line-too-long
+    """Saves a model as a TensorFlow SavedModel or HDF5 file.
 
   See the [Serialization and Saving guide](https://keras.io/guides/serialization_and_saving/)
   for details.
@@ -117,43 +119,60 @@ def save_model(model,
   Raises:
       ImportError: If save format is hdf5, and h5py is not available.
   """
-  # pylint: enable=line-too-long
-  from tensorflow.python.keras.engine import sequential  # pylint: disable=g-import-not-at-top
+    # pylint: enable=line-too-long
+    from tensorflow.python.keras.engine import (
+        sequential,
+    )  # pylint: disable=g-import-not-at-top
 
-  default_format = 'tf' if tf2.enabled() else 'h5'
-  save_format = save_format or default_format
+    default_format = "tf" if tf2.enabled() else "h5"
+    save_format = save_format or default_format
 
-  filepath = path_to_string(filepath)
+    filepath = path_to_string(filepath)
 
-  # If the user has not already called fit or built the underlying metrics, we
-  # should do that before saving to ensure the metric names have all
-  # appropriate name transformations applied.
-  saving_utils.try_build_compiled_arguments(model)
+    # If the user has not already called fit or built the underlying metrics, we
+    # should do that before saving to ensure the metric names have all
+    # appropriate name transformations applied.
+    saving_utils.try_build_compiled_arguments(model)
 
-  if (save_format == 'h5' or
-      (h5py is not None and isinstance(filepath, h5py.File)) or
-      saving_utils.is_hdf5_filepath(filepath)):
-    # TODO(b/130258301): add utility method for detecting model type.
-    if (not model._is_graph_network and  # pylint:disable=protected-access
-        not isinstance(model, sequential.Sequential)):
-      raise NotImplementedError(
-          'Saving the model to HDF5 format requires the model to be a '
-          'Functional model or a Sequential model. It does not work for '
-          'subclassed models, because such models are defined via the body of '
-          'a Python method, which isn\'t safely serializable. Consider saving '
-          'to the Tensorflow SavedModel format (by setting save_format="tf") '
-          'or using `save_weights`.')
-    hdf5_format.save_model_to_hdf5(
-        model, filepath, overwrite, include_optimizer)
-  else:
-    with generic_utils.SharedObjectSavingScope():
-      saved_model_save.save(model, filepath, overwrite, include_optimizer,
-                            signatures, options, save_traces)
+    if (
+        save_format == "h5"
+        or (h5py is not None and isinstance(filepath, h5py.File))
+        or saving_utils.is_hdf5_filepath(filepath)
+    ):
+        # TODO(b/130258301): add utility method for detecting model type.
+        if (
+            not model._is_graph_network
+            and not isinstance(  # pylint:disable=protected-access
+                model, sequential.Sequential
+            )
+        ):
+            raise NotImplementedError(
+                "Saving the model to HDF5 format requires the model to be a "
+                "Functional model or a Sequential model. It does not work for "
+                "subclassed models, because such models are defined via the body of "
+                "a Python method, which isn't safely serializable. Consider saving "
+                'to the Tensorflow SavedModel format (by setting save_format="tf") '
+                "or using `save_weights`."
+            )
+        hdf5_format.save_model_to_hdf5(model, filepath, overwrite, include_optimizer)
+    else:
+        with generic_utils.SharedObjectSavingScope():
+            saved_model_save.save(
+                model,
+                filepath,
+                overwrite,
+                include_optimizer,
+                signatures,
+                options,
+                save_traces,
+            )
 
 
-@keras_export('keras.models.load_model')
-def load_model(filepath, custom_objects=None, compile=True, options=None):  # pylint: disable=redefined-builtin
-  """Loads a model saved via `model.save()`.
+@keras_export("keras.models.load_model")
+def load_model(
+    filepath, custom_objects=None, compile=True, options=None
+):  # pylint: disable=redefined-builtin
+    """Loads a model saved via `model.save()`.
 
   Usage:
 
@@ -193,21 +212,25 @@ def load_model(filepath, custom_objects=None, compile=True, options=None):  # py
       ImportError: if loading from an hdf5 file and h5py is not available.
       IOError: In case of an invalid savefile.
   """
-  with generic_utils.SharedObjectLoadingScope():
-    with generic_utils.CustomObjectScope(custom_objects or {}):
-      with load_context.load_context(options):
-        if (h5py is not None and
-            (isinstance(filepath, h5py.File) or h5py.is_hdf5(filepath))):
-          return hdf5_format.load_model_from_hdf5(filepath, custom_objects,
-                                                  compile)
+    with generic_utils.SharedObjectLoadingScope():
+        with generic_utils.CustomObjectScope(custom_objects or {}):
+            with load_context.load_context(options):
+                if h5py is not None and (
+                    isinstance(filepath, h5py.File) or h5py.is_hdf5(filepath)
+                ):
+                    return hdf5_format.load_model_from_hdf5(
+                        filepath, custom_objects, compile
+                    )
 
-        filepath = path_to_string(filepath)
-        if isinstance(filepath, str):
-          return saved_model_load.load(filepath, compile, options)
+                filepath = path_to_string(filepath)
+                if isinstance(filepath, str):
+                    return saved_model_load.load(filepath, compile, options)
 
-  raise IOError(
-      'Unable to load model. Filepath is not an hdf5 file (or h5py is not '
-      'available) or SavedModel.')
+    raise IOError(
+        "Unable to load model. Filepath is not an hdf5 file (or h5py is not "
+        "available) or SavedModel."
+    )
+
 
 # Inject the load_model function to keras_deps to remove the dependency
 # from TFLite to Keras.

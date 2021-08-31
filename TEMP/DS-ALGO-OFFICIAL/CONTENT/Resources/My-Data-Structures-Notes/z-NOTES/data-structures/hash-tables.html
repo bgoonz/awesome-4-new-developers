@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./prism.css" />
+    <script async defer src="./prism.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body>
+    <a
+      href="https://github.com/bgoonz/DS-ALGO-OFFICIAL"
+      class="github-corner"
+      aria-label="View source on Github"
+      ><svg
+        width="80"
+        height="80"
+        viewBox="0 0 250 250"
+        style="
+          z-index: 100000;
+          fill: #194ccdaf;
+          color: #fff;
+          position: fixed;
+          top: 20px;
+          border: 0;
+          left: 20px;
+          transform: scale(-1.5, 1.5);
+        "
+        aria-hidden="true"
+      >
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+          fill="currentColor"
+          style="transform-origin: 130px 106px"
+          class="octo-arm"
+        ></path>
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+          fill="currentColor"
+          class="octo-body"
+        ></path></svg
+    ></a>
+
+    ;
+    <h1 id="hash-tables">Hash Tables</h1>
+    <h3 id="projected-time">Projected Time</h3>
+    <p>About 2 hours and 30 minutes</p>
+    <ul>
+      <li>60 mins Lesson</li>
+      <li>30 mins Independent Practice</li>
+      <li>30 mins Check for Understanding</li>
+    </ul>
+    <h3 id="prerequisites">Prerequisites</h3>
+    <ul>
+      <li>
+        <a href="../javascript/javascript-7-oop.md"
+          >JavaScript prototypal inheritance</a
+        >
+      </li>
+      <li>
+        <a href="../runtime-complexity/runtime-complexity.md"
+          >Runtime complexity</a
+        >
+      </li>
+    </ul>
+    <h3 id="motivation">Motivation</h3>
+    <p>
+      Hash tables are one of the most frequently used data structures. You’ll
+      use them in your code a lot, so knowing how and when to use hash tables is
+      important.
+    </p>
+    <p>
+      Knowing how hash tables work will give you a deeper understanding of why
+      hash tables are used and what they’re good for. Hash tables are also often
+      used in the solution to interview questions.
+    </p>
+    <p>Uses of Hashing:</p>
+    <ul>
+      <li>
+        Authentication - Cryptographic hash functions let you log in to a system
+        without storing your password anywhere vulnerable.
+      </li>
+      <li>
+        Search - Hashing is useful for indexing large storage spaces, so that
+        you can look things up in them without reading their entire contents
+        every time. Developers usually do the indexing of big data sets to
+        reduce the time of processing operations over them.
+      </li>
+      <li>
+        Programming languages - Hash tables are a convenient way to implement
+        the mechanism that connects a variable’s name to its memory location.
+        <a
+          href="https://www.quora.com/What-are-the-real-world-examples-for-hashing"
+          >(quora.com)</a
+        >
+      </li>
+    </ul>
+    <h3 id="objectives">Objectives</h3>
+    <ul>
+      <li>Understand basic hashing algorithms</li>
+      <li>Know the runtime of hash table operations</li>
+      <li>Be able to identify problems where hash tables could be used</li>
+      <li>Be able to write code that uses hash tables to solve problems</li>
+      <li>
+        Understand how hash tables are implemented and how this implementation
+        leads to the runtime properties
+      </li>
+    </ul>
+    <h3 id="specific-things-to-learn">Specific Things to Learn</h3>
+    <ul>
+      <li>A hash table is used to store key-value pairs or tuples.</li>
+      <li>
+        Why is this called a hash table? The hash of the key determines where
+        the value is stored.
+      </li>
+      <li>All objects in JavaScript are hash tables.</li>
+      <li>
+        Look-up in a hash table is on average O(1). Worst case look-up is O(n).
+      </li>
+      <li>
+        Using different hashing algorithms on the keys will affect the hash
+        table’s performance.
+      </li>
+    </ul>
+    <h3 id="materials">Materials</h3>
+    <ul>
+      <li>
+        <a
+          href="https://docs.google.com/presentation/d/1V9liCnncXJDXZ0CK_MbXfFrWz6cwGucTYdIkHdkJ9_8/edit#slide=id.p"
+          >Understanding and Using Hash Tables Slides</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://docs.google.com/presentation/d/1-zCx1fc5cUP6rklL-CrYzmO8ibcXztsOZxJUv3Fpd-s/edit#slide=id.g2f6e14aaa5_0_0"
+          >Implementing Hash Tables Slides</a
+        >
+      </li>
+    </ul>
+    <h3 id="lesson">Lesson</h3>
+    <ul>
+      <li>
+        Read through lesson slides
+        <a
+          href="https://docs.google.com/presentation/d/1V9liCnncXJDXZ0CK_MbXfFrWz6cwGucTYdIkHdkJ9_8/edit#slide=id.p"
+          >Understanding and Using Hash Tables</a
+        >
+      </li>
+      <li>
+        Read through lesson slides
+        <a
+          href="https://docs.google.com/presentation/d/1-zCx1fc5cUP6rklL-CrYzmO8ibcXztsOZxJUv3Fpd-s/edit#slide=id.g2f6e14aaa5_0_0"
+          >Implementing Hash Tables</a
+        >
+      </li>
+    </ul>
+    <h3 id="common-mistakes-misconceptions">
+      Common Mistakes / Misconceptions
+    </h3>
+    <ul>
+      <li>
+        When should I use an array instead of a hash table? If your keys are
+        sequential integers.
+      </li>
+    </ul>
+    <h3 id="preamble">Preamble</h3>
+    <p>Languages call this type of data structure by many names:</p>
+    <ul>
+      <li>
+        ES2015 JS calls it a
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"
+          >Map</a
+        >
+        but historically, since all Objects allow lookup by property name, folks
+        just used plain <code>Object</code>
+      </li>
+      <li>
+        Python calls it a
+        <a href="https://realpython.com/python-dicts/"><code>Dict</code></a> for
+        Dictionary since you look it up by a key, just like a dictionary’s have
+        an index for each letter
+      </li>
+      <li>
+        Java calls is a
+        <a
+          href="https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"
+          ><code>HashMap</code></a
+        >
+        or <code>Hashtable</code>
+      </li>
+      <li>
+        Ruby calls it a
+        <a href="https://ruby-doc.org/core-2.7.0/Hash.html"
+          ><code>Hash</code></a
+        >
+      </li>
+    </ul>
+    <h3 id="guided-practice">Guided Practice</h3>
+    <p>Let’s understand how to make hash maps using JavaScript.</p>
+    <ul>
+      <li>
+        <a href="https://reactgo.com/hashtable-javascript/"
+          >How to implement hash table in javascript</a
+        >
+      </li>
+      <li>
+        Here is the link for the video on
+        <a href="https://www.youtube.com/watch?v=VundFD_ccgE"
+          >how to make hash tables using JavaScripts</a
+        >.
+      </li>
+      <li>
+        The another link for what hash tables are and how to implement them is
+        <a
+          href="https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-tables/tutorial/"
+          >Basics of Hash Tables</a
+        >. It contains the code for how <em>different types of hashing</em> can
+        be done by <em>coding</em> in JS. The apprentices should be able to code
+        different type of hashtables like linear probing, quadratic probing etc.
+        They can start tutorial where coding begins provided that they know the
+        basics of hashing.
+      </li>
+    </ul>
+    <h3 id="independent-practice">Independent Practice</h3>
+    <h4 id="coding-questions-that-use-hash-tables">
+      Coding questions that use hash tables
+    </h4>
+    <ul>
+      <li>
+        A person is represented in a JSON string, and the person’s
+        <code>name</code> is specified. Say hello to this person.
+      </li>
+    </ul>
+    <h4 id="implement-a-hash-table">Implement a hash table</h4>
+    <p>
+      Basics: set(), get(), print() Challenge 1: Handle collisions with chaining
+      Challenge 2: Make the table larger when enough items are added to the
+      table
+    </p>
+    <h3 id="challenge">Challenge</h3>
+    <p>
+      Compare implementations of bucket collisions with a peer. Brainstorm
+      different data structures one can use for implementing buckets. Code
+      review others’ hash table implementations: Are clear parameter and method
+      names used? Is the code DRY? Compare hashing algorithm choices with a
+      peer.
+    </p>
+    <h3 id="check-for-understanding">Check for Understanding</h3>
+    <ul>
+      <li>Explain how a hash table uses hashing.</li>
+      <li>
+        What is a real-world use case for a hash table? What are the advantages?
+      </li>
+    </ul>
+    <h3 id="supplemental-materials">Supplemental Materials</h3>
+    <ul>
+      <li>
+        <a
+          href="https://medium.freecodecamp.org/how-to-implement-a-simple-hash-table-in-javascript-cb3b9c1f2997"
+          >How to implement simple hash table?</a
+        >
+      </li>
+      <li>
+        <a href="http://www.mojavelinux.com/articles/javascript_hashes.html"
+          >Hash Tables in JavaScript</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://codeburst.io/objects-and-hash-tables-in-javascript-a472ad1940d9"
+          >Objects and Hash Tables in JavaScript</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://medium.com/javascript-in-plain-english/algorithm-in-javascript-hash-table-7b0464d2b81b"
+          >Algorithms in JavaScript: Hash Tables</a
+        >
+      </li>
+    </ul>
+  </body>
+</html>

@@ -32,12 +32,11 @@ from tensorflow.python.ops import gen_experimental_dataset_ops as ged_ops
 from tensorflow.python.util.tf_export import tf_export
 
 SHARD_HINT = -1
-tf_export("data.experimental.SHARD_HINT").export_constant(
-    __name__, "SHARD_HINT")
+tf_export("data.experimental.SHARD_HINT").export_constant(__name__, "SHARD_HINT")
 
 
 class _AutoShardDataset(dataset_ops.UnaryDataset):
-  """A `Dataset` that shards the `Dataset` automatically.
+    """A `Dataset` that shards the `Dataset` automatically.
 
   This dataset takes in an existing dataset and tries to automatically figure
   out how to shard the dataset in a multi-worker scenario using graph rewrites.
@@ -71,32 +70,37 @@ class _AutoShardDataset(dataset_ops.UnaryDataset):
       automatically sharding the dataset.
   """
 
-  def __init__(self, input_dataset, num_workers, index, num_replicas=None):
-    self._input_dataset = input_dataset
+    def __init__(self, input_dataset, num_workers, index, num_replicas=None):
+        self._input_dataset = input_dataset
 
-    self._element_spec = input_dataset.element_spec
-    variant_tensor = ged_ops.auto_shard_dataset(
-        self._input_dataset._variant_tensor,  # pylint: disable=protected-access
-        num_workers=num_workers,
-        index=index,
-        auto_shard_policy=int(
-            input_dataset.options().experimental_distribute.auto_shard_policy),
-        num_replicas=num_replicas,
-        **self._flat_structure)
-    super(_AutoShardDataset, self).__init__(input_dataset, variant_tensor)
+        self._element_spec = input_dataset.element_spec
+        variant_tensor = ged_ops.auto_shard_dataset(
+            self._input_dataset._variant_tensor,  # pylint: disable=protected-access
+            num_workers=num_workers,
+            index=index,
+            auto_shard_policy=int(
+                input_dataset.options().experimental_distribute.auto_shard_policy
+            ),
+            num_replicas=num_replicas,
+            **self._flat_structure
+        )
+        super(_AutoShardDataset, self).__init__(input_dataset, variant_tensor)
 
-  @property
-  def element_spec(self):
-    return self._element_spec
+    @property
+    def element_spec(self):
+        return self._element_spec
 
 
-def _AutoShardDatasetV1(input_dataset, num_workers, index, num_replicas=None):  # pylint: disable=invalid-name
-  return dataset_ops.DatasetV1Adapter(
-      _AutoShardDataset(input_dataset, num_workers, index, num_replicas))
+def _AutoShardDatasetV1(
+    input_dataset, num_workers, index, num_replicas=None
+):  # pylint: disable=invalid-name
+    return dataset_ops.DatasetV1Adapter(
+        _AutoShardDataset(input_dataset, num_workers, index, num_replicas)
+    )
 
 
 class _RebatchDataset(dataset_ops.UnaryDataset):
-  """A `Dataset` that rebatches elements from its input into new batch sizes.
+    """A `Dataset` that rebatches elements from its input into new batch sizes.
 
   `_RebatchDataset(input_dataset, batch_sizes)` is functionally equivalent to
   `input_dataset.unbatch().batch(N)`, where the value of N cycles through the
@@ -122,8 +126,8 @@ class _RebatchDataset(dataset_ops.UnaryDataset):
   ```
   """
 
-  def __init__(self, input_dataset, batch_sizes, drop_remainder=False):
-    """Creates a _RebatchDataset.
+    def __init__(self, input_dataset, batch_sizes, drop_remainder=False):
+        """Creates a _RebatchDataset.
 
     Args:
       input_dataset: `Dataset` to rebatch.
@@ -135,29 +139,33 @@ class _RebatchDataset(dataset_ops.UnaryDataset):
         `batch_sizes[cycle_index] elements; the default behavior is not to drop
         the smaller batch.
     """
-    self._input_dataset = input_dataset
-    self._batch_sizes = ops.convert_to_tensor(
-        batch_sizes, dtype=dtypes.int64, name="batch_sizes")
-    self._drop_remainder = ops.convert_to_tensor(
-        drop_remainder, dtype=dtypes.bool, name="drop_remainder")
-    new_batch_dim = self._compute_static_batch_dim()
+        self._input_dataset = input_dataset
+        self._batch_sizes = ops.convert_to_tensor(
+            batch_sizes, dtype=dtypes.int64, name="batch_sizes"
+        )
+        self._drop_remainder = ops.convert_to_tensor(
+            drop_remainder, dtype=dtypes.bool, name="drop_remainder"
+        )
+        new_batch_dim = self._compute_static_batch_dim()
 
-    # pylint: disable=protected-access
-    self._element_spec = nest.map_structure(
-        lambda ts: ts._unbatch()._batch(new_batch_dim),
-        dataset_ops.get_structure(input_dataset))
-    # pylint: enable=protected-access
+        # pylint: disable=protected-access
+        self._element_spec = nest.map_structure(
+            lambda ts: ts._unbatch()._batch(new_batch_dim),
+            dataset_ops.get_structure(input_dataset),
+        )
+        # pylint: enable=protected-access
 
-    input_dataset = dataset_ops.normalize_to_dense(input_dataset)
-    variant_tensor = ged_ops.rebatch_dataset_v2(
-        input_dataset._variant_tensor,  # pylint: disable=protected-access
-        batch_sizes=batch_sizes,
-        drop_remainder=drop_remainder,
-        **self._flat_structure)
-    super(_RebatchDataset, self).__init__(input_dataset, variant_tensor)
+        input_dataset = dataset_ops.normalize_to_dense(input_dataset)
+        variant_tensor = ged_ops.rebatch_dataset_v2(
+            input_dataset._variant_tensor,  # pylint: disable=protected-access
+            batch_sizes=batch_sizes,
+            drop_remainder=drop_remainder,
+            **self._flat_structure
+        )
+        super(_RebatchDataset, self).__init__(input_dataset, variant_tensor)
 
-  def _compute_static_batch_dim(self):
-    """Computes the static batch dimension of a dataset if it can be determined.
+    def _compute_static_batch_dim(self):
+        """Computes the static batch dimension of a dataset if it can be determined.
 
     Given the _RebatchDataset parameters, determines the batch dimension of this
     dataset statically. Returns None if this cannot be determined or is
@@ -172,64 +180,68 @@ class _RebatchDataset(dataset_ops.UnaryDataset):
       not batched, or input_dataset batch sizes are incompatible with each
       other.
     """
-    new_batch_dim = tensor_util.constant_value(self._batch_sizes)
-    if new_batch_dim is None:
-      return None
+        new_batch_dim = tensor_util.constant_value(self._batch_sizes)
+        if new_batch_dim is None:
+            return None
 
-    if isinstance(new_batch_dim, np.ndarray):
-      if len(new_batch_dim.shape) == 1:
-        if np.all(new_batch_dim == new_batch_dim[0]):
-          new_batch_dim = new_batch_dim[0]
-        else:
-          return None
-      elif len(new_batch_dim.shape) > 1:
-        raise ValueError("Expected batch_sizes to be a scalar or vector.")
+        if isinstance(new_batch_dim, np.ndarray):
+            if len(new_batch_dim.shape) == 1:
+                if np.all(new_batch_dim == new_batch_dim[0]):
+                    new_batch_dim = new_batch_dim[0]
+                else:
+                    return None
+            elif len(new_batch_dim.shape) > 1:
+                raise ValueError("Expected batch_sizes to be a scalar or vector.")
 
-    if self._may_form_partial_batches(new_batch_dim):
-      return None
+        if self._may_form_partial_batches(new_batch_dim):
+            return None
 
-    return new_batch_dim
+        return new_batch_dim
 
-  def _may_form_partial_batches(self, desired_batch_size):
-    """Returns whether this dataset may form partial batches."""
-    if tensor_util.constant_value(self._drop_remainder):
-      return False
+    def _may_form_partial_batches(self, desired_batch_size):
+        """Returns whether this dataset may form partial batches."""
+        if tensor_util.constant_value(self._drop_remainder):
+            return False
 
-    def get_batch_dim(type_spec):
-      shape = type_spec._to_legacy_output_shapes()  # pylint: disable=protected-access
-      if not isinstance(shape, tensor_shape.TensorShape):
-        return None
-      if shape.rank is None:
-        return None
-      if len(shape) < 1:
-        raise ValueError("Expected a dataset whose elements have rank >= 1 "
-                         "but found a dataset whose elements are scalars. "
-                         "You can fix the issue by adding the `batch` "
-                         "transformation to the dataset.")
-      return shape.dims[0].value
+        def get_batch_dim(type_spec):
+            shape = (
+                type_spec._to_legacy_output_shapes()
+            )  # pylint: disable=protected-access
+            if not isinstance(shape, tensor_shape.TensorShape):
+                return None
+            if shape.rank is None:
+                return None
+            if len(shape) < 1:
+                raise ValueError(
+                    "Expected a dataset whose elements have rank >= 1 "
+                    "but found a dataset whose elements are scalars. "
+                    "You can fix the issue by adding the `batch` "
+                    "transformation to the dataset."
+                )
+            return shape.dims[0].value
 
-    input_batch_dims = [
-        get_batch_dim(ts)
-        for ts in nest.flatten(dataset_ops.get_structure(self._input_dataset))
-    ]
-    known_input_batch_dims = [d for d in input_batch_dims if d is not None]
+        input_batch_dims = [
+            get_batch_dim(ts)
+            for ts in nest.flatten(dataset_ops.get_structure(self._input_dataset))
+        ]
+        known_input_batch_dims = [d for d in input_batch_dims if d is not None]
 
-    if not known_input_batch_dims:
-      return True
+        if not known_input_batch_dims:
+            return True
 
-    known_input_batch_dims = np.asarray(known_input_batch_dims)
-    if not np.all(known_input_batch_dims == known_input_batch_dims[0]):
-      raise ValueError("Batch dimensions of input dataset are not compatible.")
+        known_input_batch_dims = np.asarray(known_input_batch_dims)
+        if not np.all(known_input_batch_dims == known_input_batch_dims[0]):
+            raise ValueError("Batch dimensions of input dataset are not compatible.")
 
-    return known_input_batch_dims[0] % desired_batch_size != 0
+        return known_input_batch_dims[0] % desired_batch_size != 0
 
-  @property
-  def element_spec(self):
-    return self._element_spec
+    @property
+    def element_spec(self):
+        return self._element_spec
 
 
 class _LegacyRebatchDataset(dataset_ops.UnaryDataset):
-  """A `Dataset` that divides its input batches into `num_replicas` sub-batches.
+    """A `Dataset` that divides its input batches into `num_replicas` sub-batches.
 
   For each batch in the input dataset, _LegacyRebatchDataset will produce
   `num_replicas` smaller batches whose sizes add up to the original batch size.
@@ -246,8 +258,8 @@ class _LegacyRebatchDataset(dataset_ops.UnaryDataset):
   ```
   """
 
-  def __init__(self, input_dataset, num_replicas):
-    """Creates a _LegacyRebatchDataset.
+    def __init__(self, input_dataset, num_replicas):
+        """Creates a _LegacyRebatchDataset.
 
     Args:
       input_dataset: `Dataset` to rebatch.
@@ -255,66 +267,72 @@ class _LegacyRebatchDataset(dataset_ops.UnaryDataset):
         to split each batch from `input_dataset` into.
     """
 
-    def recalculate_batch_size(type_spec):
-      """Recalculates the output_shape after dividing it by num_replicas."""
-      output_shape = type_spec._to_legacy_output_shapes()  # pylint: disable=protected-access
-      if not isinstance(output_shape, tensor_shape.TensorShape):
-        return None
+        def recalculate_batch_size(type_spec):
+            """Recalculates the output_shape after dividing it by num_replicas."""
+            output_shape = (
+                type_spec._to_legacy_output_shapes()
+            )  # pylint: disable=protected-access
+            if not isinstance(output_shape, tensor_shape.TensorShape):
+                return None
 
-      # If the output shape is unknown, we set the batch dimension to unknown.
-      if output_shape.rank is None:
-        return None
+            # If the output shape is unknown, we set the batch dimension to unknown.
+            if output_shape.rank is None:
+                return None
 
-      if len(output_shape) < 1:
-        raise ValueError("Expected a dataset whose elements have rank >= 1 "
-                         "but found a dataset whose elements are scalars. "
-                         "You can fix the issue by adding the `batch` "
-                         "transformation to the dataset.")
-      output_dims = [d.value for d in output_shape.dims]
+            if len(output_shape) < 1:
+                raise ValueError(
+                    "Expected a dataset whose elements have rank >= 1 "
+                    "but found a dataset whose elements are scalars. "
+                    "You can fix the issue by adding the `batch` "
+                    "transformation to the dataset."
+                )
+            output_dims = [d.value for d in output_shape.dims]
 
-      if output_dims[0] is not None and output_dims[0] % num_replicas == 0:
-        return output_dims[0] // num_replicas
+            if output_dims[0] is not None and output_dims[0] % num_replicas == 0:
+                return output_dims[0] // num_replicas
 
-      # Set the batch dimension to unknown. If the global batch size does not
-      # divide num_replicas evenly, the minibatches may have different sizes.
-      return None
+            # Set the batch dimension to unknown. If the global batch size does not
+            # divide num_replicas evenly, the minibatches may have different sizes.
+            return None
 
-    def rebatch(type_spec):
-      # pylint: disable=protected-access
-      batch_size = recalculate_batch_size(type_spec)
-      return type_spec._unbatch()._batch(batch_size)
-      # pylint: enable=protected-access
+        def rebatch(type_spec):
+            # pylint: disable=protected-access
+            batch_size = recalculate_batch_size(type_spec)
+            return type_spec._unbatch()._batch(batch_size)
+            # pylint: enable=protected-access
 
-    self._element_spec = nest.map_structure(
-        rebatch, dataset_ops.get_structure(input_dataset))
-    input_dataset = dataset_ops.normalize_to_dense(input_dataset)
-    variant_tensor = ged_ops.rebatch_dataset(
-        input_dataset._variant_tensor,  # pylint: disable=protected-access
-        num_replicas=num_replicas,
-        **self._flat_structure)
-    super(_LegacyRebatchDataset, self).__init__(input_dataset, variant_tensor)
+        self._element_spec = nest.map_structure(
+            rebatch, dataset_ops.get_structure(input_dataset)
+        )
+        input_dataset = dataset_ops.normalize_to_dense(input_dataset)
+        variant_tensor = ged_ops.rebatch_dataset(
+            input_dataset._variant_tensor,  # pylint: disable=protected-access
+            num_replicas=num_replicas,
+            **self._flat_structure
+        )
+        super(_LegacyRebatchDataset, self).__init__(input_dataset, variant_tensor)
 
-  @property
-  def element_spec(self):
-    return self._element_spec
+    @property
+    def element_spec(self):
+        return self._element_spec
 
 
 class _RemoteDataset(dataset_ops.DatasetSource):
-  """Creates a dataset on a given `device` given a graph def."""
+    """Creates a dataset on a given `device` given a graph def."""
 
-  def __init__(self, graph_def, device, element_spec):
-    self._elem_spec = element_spec
-    with ops.device(device):
-      variant_tensor = ged_ops.dataset_from_graph(graph_def)
-    super(_RemoteDataset, self).__init__(variant_tensor)
+    def __init__(self, graph_def, device, element_spec):
+        self._elem_spec = element_spec
+        with ops.device(device):
+            variant_tensor = ged_ops.dataset_from_graph(graph_def)
+        super(_RemoteDataset, self).__init__(variant_tensor)
 
-  @property
-  def element_spec(self):
-    return self._elem_spec
+    @property
+    def element_spec(self):
+        return self._elem_spec
 
 
 def replicate(dataset, devices):
-  """A transformation that replicates `dataset` onto a list of devices.
+    """A transformation that replicates `dataset` onto a list of devices.
 
   Args:
     dataset: A `tf.data.Dataset` object.
@@ -323,31 +341,32 @@ def replicate(dataset, devices):
   Returns:
     A dictionary mapping device name to a dataset on that device.
   """
-  if not isinstance(dataset, dataset_ops.DatasetV2):
-    raise TypeError("`dataset` must be a `tf.data.Dataset` object.")
+    if not isinstance(dataset, dataset_ops.DatasetV2):
+        raise TypeError("`dataset` must be a `tf.data.Dataset` object.")
 
-  # pylint: disable=protected-access
-  dataset_device = dataset._variant_tensor.device
+    # pylint: disable=protected-access
+    dataset_device = dataset._variant_tensor.device
 
-  datasets = {}
-  if len(devices) == 1 and devices[0] == dataset_device:
-    datasets[devices[0]] = dataset
+    datasets = {}
+    if len(devices) == 1 and devices[0] == dataset_device:
+        datasets[devices[0]] = dataset
+        return datasets
+
+    with ops.colocate_with(dataset._variant_tensor):
+        dataset = dataset._apply_debug_options()
+        graph_def = dataset._as_serialized_graph(
+            strip_device_assignment=True, external_state_policy=ExternalStatePolicy.WARN
+        )
+    for device in devices:
+        ds = _RemoteDataset(graph_def, device, dataset.element_spec)
+        datasets[device] = ds
     return datasets
 
-  with ops.colocate_with(dataset._variant_tensor):
-    dataset = dataset._apply_debug_options()
-    graph_def = dataset._as_serialized_graph(
-        strip_device_assignment=True,
-        external_state_policy=ExternalStatePolicy.WARN)
-  for device in devices:
-    ds = _RemoteDataset(graph_def, device, dataset.element_spec)
-    datasets[device] = ds
-  return datasets
 
-
-def batch_sizes_for_worker(global_batch_size, num_workers,
-                           num_replicas_per_worker, worker_index):
-  """Determines how to rebatch a dataset for the given worker.
+def batch_sizes_for_worker(
+    global_batch_size, num_workers, num_replicas_per_worker, worker_index
+):
+    """Determines how to rebatch a dataset for the given worker.
 
   Given the global batch size, number of workers, number of replicas per worker,
   and worker index, returns the correct batch sizes for rebatching a dataset
@@ -429,48 +448,51 @@ def batch_sizes_for_worker(global_batch_size, num_workers,
     A `tf.int64` vector, representing the batch sizes to rebatch the dataset
     into.
   """
-  # Constraint (A)
-  num_subbatches = num_workers * num_replicas_per_worker
+    # Constraint (A)
+    num_subbatches = num_workers * num_replicas_per_worker
 
-  offset = worker_index * num_replicas_per_worker
+    offset = worker_index * num_replicas_per_worker
 
-  const_value = tensor_util.constant_value(global_batch_size)
-  if const_value is not None:
-    # Use the constant global batch size for further calculations
-    global_batch_size = const_value
+    const_value = tensor_util.constant_value(global_batch_size)
+    if const_value is not None:
+        # Use the constant global batch size for further calculations
+        global_batch_size = const_value
 
-  # Let N = W * R. Constraint (B) and (D) jointly mean that the iterations
-  # should have batch size either floor(B/N) or ceil(B/N). Namely, of the N
-  # subbatches a batch is split into, B - N * floor(B/N) of them will have size
-  # ceil(B/N), and the rest will have size floor(B/N).
-  floor = global_batch_size // num_subbatches
-  num_ceil = global_batch_size - (num_subbatches * floor)
+    # Let N = W * R. Constraint (B) and (D) jointly mean that the iterations
+    # should have batch size either floor(B/N) or ceil(B/N). Namely, of the N
+    # subbatches a batch is split into, B - N * floor(B/N) of them will have size
+    # ceil(B/N), and the rest will have size floor(B/N).
+    floor = global_batch_size // num_subbatches
+    num_ceil = global_batch_size - (num_subbatches * floor)
 
-  # For worker 0, we assign the first num_ceil subbatches to have size
-  # ceil(B/N), and the remainder to have size floor(B/N). The other workers will
-  # each be offset by R * worker_index in order to meet constraint (C).
-  if const_value is not None:
-    # If the global batch size is a known constant value, we return a constant
-    # tensor directly instead of manipulating it with TF ops. This allows for
-    # better downstream shape inference.
-    worker_0 = [floor + 1] * num_ceil + [floor] * (num_subbatches - num_ceil)
-    return ops.convert_to_tensor(
-        worker_0[offset:] + worker_0[:offset],
-        dtype=dtypes.int64,
-        name="batch_sizes")
+    # For worker 0, we assign the first num_ceil subbatches to have size
+    # ceil(B/N), and the remainder to have size floor(B/N). The other workers will
+    # each be offset by R * worker_index in order to meet constraint (C).
+    if const_value is not None:
+        # If the global batch size is a known constant value, we return a constant
+        # tensor directly instead of manipulating it with TF ops. This allows for
+        # better downstream shape inference.
+        worker_0 = [floor + 1] * num_ceil + [floor] * (num_subbatches - num_ceil)
+        return ops.convert_to_tensor(
+            worker_0[offset:] + worker_0[:offset],
+            dtype=dtypes.int64,
+            name="batch_sizes",
+        )
 
-  worker_0 = array_ops.ones(num_subbatches, dtype=dtypes.int64)
-  worker_0 = floor * worker_0 + array_ops.concat([
-      array_ops.ones(num_ceil, dtype=dtypes.int64),
-      array_ops.zeros(num_subbatches - num_ceil, dtype=dtypes.int64)
-  ],
-                                                 axis=0)
+    worker_0 = array_ops.ones(num_subbatches, dtype=dtypes.int64)
+    worker_0 = floor * worker_0 + array_ops.concat(
+        [
+            array_ops.ones(num_ceil, dtype=dtypes.int64),
+            array_ops.zeros(num_subbatches - num_ceil, dtype=dtypes.int64),
+        ],
+        axis=0,
+    )
 
-  return array_ops.concat([worker_0[offset:], worker_0[:offset]], axis=0)
+    return array_ops.concat([worker_0[offset:], worker_0[:offset]], axis=0)
 
 
 def compute_batch_size(dataset):
-  """An operation that returns the batch size of the dataset.
+    """An operation that returns the batch size of the dataset.
 
   This op tries to infer the batch size statically by walking up the dataset
   tree from the final dataset node and returning the batch size of the first
@@ -493,30 +515,35 @@ def compute_batch_size(dataset):
     will be -1.
   """
 
-  def get_static_batch_dim(output_shape):
-    if output_shape.rank is None:
-      return None
-    return output_shape.dims[0].value
+    def get_static_batch_dim(output_shape):
+        if output_shape.rank is None:
+            return None
+        return output_shape.dims[0].value
 
-  batch_dims = [
-      get_static_batch_dim(ts._to_legacy_output_shapes())  # pylint: disable=protected-access
-      for ts in nest.flatten(dataset_ops.get_structure(dataset))
-  ]
+    batch_dims = [
+        get_static_batch_dim(
+            ts._to_legacy_output_shapes()
+        )  # pylint: disable=protected-access
+        for ts in nest.flatten(dataset_ops.get_structure(dataset))
+    ]
 
-  if all(d is not None for d in batch_dims):
+    if all(d is not None for d in batch_dims):
 
-    if all(d == batch_dims[0] for d in batch_dims):
-      # If all batch dimensions are known and equal, return that directly.
-      batch_dim = batch_dims[0]
-    else:
-      # If all batch dimensions are known but not all equal, return -1.
-      batch_dim = -1
+        if all(d == batch_dims[0] for d in batch_dims):
+            # If all batch dimensions are known and equal, return that directly.
+            batch_dim = batch_dims[0]
+        else:
+            # If all batch dimensions are known but not all equal, return -1.
+            batch_dim = -1
 
-    return constant_op.constant(
-        batch_dim, dtype=dtypes.int64, name="static_batch_size")
+        return constant_op.constant(
+            batch_dim, dtype=dtypes.int64, name="static_batch_size"
+        )
 
-  # If any batch dimensions are unknown, use compute_batch_size op.
-  return ged_ops.compute_batch_size(dataset._variant_tensor)  # pylint: disable=protected-access
+    # If any batch dimensions are unknown, use compute_batch_size op.
+    return ged_ops.compute_batch_size(
+        dataset._variant_tensor
+    )  # pylint: disable=protected-access
 
 
 _AutoShardDatasetV1.__doc__ = _AutoShardDataset.__doc__

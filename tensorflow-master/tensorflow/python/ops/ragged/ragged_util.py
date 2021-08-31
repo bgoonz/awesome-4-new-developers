@@ -27,9 +27,8 @@ from tensorflow.python.ops import gen_ragged_math_ops
 from tensorflow.python.ops import math_ops
 
 
-
 def assert_splits_match(nested_splits_lists):
-  """Checks that the given splits lists are identical.
+    """Checks that the given splits lists are identical.
 
   Performs static tests to ensure that the given splits lists are identical,
   and returns a list of control dependency op tensors that check that they are
@@ -45,15 +44,15 @@ def assert_splits_match(nested_splits_lists):
   Raises:
     ValueError: If the splits are not identical.
   """
-  error_msg = "Inputs must have identical ragged splits"
-  for splits_list in nested_splits_lists:
-    if len(splits_list) != len(nested_splits_lists[0]):
-      raise ValueError(error_msg)
-  return [
-      check_ops.assert_equal(s1, s2, message=error_msg)
-      for splits_list in nested_splits_lists[1:]
-      for (s1, s2) in zip(nested_splits_lists[0], splits_list)
-  ]
+    error_msg = "Inputs must have identical ragged splits"
+    for splits_list in nested_splits_lists:
+        if len(splits_list) != len(nested_splits_lists[0]):
+            raise ValueError(error_msg)
+    return [
+        check_ops.assert_equal(s1, s2, message=error_msg)
+        for splits_list in nested_splits_lists[1:]
+        for (s1, s2) in zip(nested_splits_lists[0], splits_list)
+    ]
 
 
 # Note: imported here to avoid circular dependency of array_ops.
@@ -63,12 +62,12 @@ repeat = array_ops.repeat_with_axis
 
 
 def lengths_to_splits(lengths):
-  """Returns splits corresponding to the given lengths."""
-  return array_ops.concat([[0], math_ops.cumsum(lengths)], axis=-1)
+    """Returns splits corresponding to the given lengths."""
+    return array_ops.concat([[0], math_ops.cumsum(lengths)], axis=-1)
 
 
 def repeat_ranges(params, splits, repeats):
-  """Repeats each range of `params` (as specified by `splits`) `repeats` times.
+    """Repeats each range of `params` (as specified by `splits`) `repeats` times.
 
   Let the `i`th range of `params` be defined as
   `params[splits[i]:splits[i + 1]]`.  Then this function returns a tensor
@@ -94,20 +93,19 @@ def repeat_ranges(params, splits, repeats):
   tf.Tensor([b'a' b'b' b'a' b'b' b'a' b'b' b'c' b'c' b'c'],
       shape=(9,), dtype=string)
   """
-  # Divide `splits` into starts and limits, and repeat them `repeats` times.
-  if repeats.shape.ndims != 0:
-    repeated_starts = repeat(splits[:-1], repeats, axis=0)
-    repeated_limits = repeat(splits[1:], repeats, axis=0)
-  else:
-    # Optimization: we can just call repeat once, and then slice the result.
-    repeated_splits = repeat(splits, repeats, axis=0)
-    n_splits = array_ops.shape(repeated_splits, out_type=repeats.dtype)[0]
-    repeated_starts = repeated_splits[:n_splits - repeats]
-    repeated_limits = repeated_splits[repeats:]
+    # Divide `splits` into starts and limits, and repeat them `repeats` times.
+    if repeats.shape.ndims != 0:
+        repeated_starts = repeat(splits[:-1], repeats, axis=0)
+        repeated_limits = repeat(splits[1:], repeats, axis=0)
+    else:
+        # Optimization: we can just call repeat once, and then slice the result.
+        repeated_splits = repeat(splits, repeats, axis=0)
+        n_splits = array_ops.shape(repeated_splits, out_type=repeats.dtype)[0]
+        repeated_starts = repeated_splits[: n_splits - repeats]
+        repeated_limits = repeated_splits[repeats:]
 
-  # Get indices for each range from starts to limits, and use those to gather
-  # the values in the desired repetition pattern.
-  one = array_ops.ones((), repeated_starts.dtype)
-  offsets = gen_ragged_math_ops.ragged_range(
-      repeated_starts, repeated_limits, one)
-  return array_ops.gather(params, offsets.rt_dense_values)
+    # Get indices for each range from starts to limits, and use those to gather
+    # the values in the desired repetition pattern.
+    one = array_ops.ones((), repeated_starts.dtype)
+    offsets = gen_ragged_math_ops.ragged_range(repeated_starts, repeated_limits, one)
+    return array_ops.gather(params, offsets.rt_dense_values)

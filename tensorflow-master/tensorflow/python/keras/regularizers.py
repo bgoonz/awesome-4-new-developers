@@ -25,25 +25,31 @@ from tensorflow.python.util.tf_export import keras_export
 
 
 def _check_penalty_number(x):
-  """check penalty number availability, raise ValueError if failed."""
-  if not isinstance(x, (float, int)):
-    raise ValueError(('Value: {} is not a valid regularization penalty number, '
-                      'expected an int or float value').format(x))
+    """check penalty number availability, raise ValueError if failed."""
+    if not isinstance(x, (float, int)):
+        raise ValueError(
+            (
+                "Value: {} is not a valid regularization penalty number, "
+                "expected an int or float value"
+            ).format(x)
+        )
 
-  if math.isinf(x) or math.isnan(x):
-    raise ValueError(
-        ('Value: {} is not a valid regularization penalty number, '
-         'a positive/negative infinity or NaN is not a property value'
-        ).format(x))
+    if math.isinf(x) or math.isnan(x):
+        raise ValueError(
+            (
+                "Value: {} is not a valid regularization penalty number, "
+                "a positive/negative infinity or NaN is not a property value"
+            ).format(x)
+        )
 
 
 def _none_to_default(inputs, default):
-  return default if inputs is None else default
+    return default if inputs is None else default
 
 
-@keras_export('keras.regularizers.Regularizer')
+@keras_export("keras.regularizers.Regularizer")
 class Regularizer(object):
-  """Regularizer base class.
+    """Regularizer base class.
 
   Regularizers allow you to apply penalties on layer parameters or layer
   activity during optimization. These penalties are summed into the loss
@@ -161,13 +167,13 @@ class Regularizer(object):
   regularizers to be registered as serializable.
   """
 
-  def __call__(self, x):
-    """Compute a regularization penalty from an input tensor."""
-    return 0.
+    def __call__(self, x):
+        """Compute a regularization penalty from an input tensor."""
+        return 0.0
 
-  @classmethod
-  def from_config(cls, config):
-    """Creates a regularizer from its config.
+    @classmethod
+    def from_config(cls, config):
+        """Creates a regularizer from its config.
 
     This method is the reverse of `get_config`,
     capable of instantiating the same regularizer from the config
@@ -183,10 +189,10 @@ class Regularizer(object):
     Returns:
         A regularizer instance.
     """
-    return cls(**config)
+        return cls(**config)
 
-  def get_config(self):
-    """Returns the config of the regularizer.
+    def get_config(self):
+        """Returns the config of the regularizer.
 
     An regularizer config is a Python dictionary (serializable)
     containing all configuration parameters of the regularizer.
@@ -203,12 +209,12 @@ class Regularizer(object):
     Returns:
         Python dictionary.
     """
-    raise NotImplementedError(str(self) + ' does not implement get_config()')
+        raise NotImplementedError(str(self) + " does not implement get_config()")
 
 
-@keras_export('keras.regularizers.L1L2')
+@keras_export("keras.regularizers.L1L2")
 class L1L2(Regularizer):
-  """A regularizer that applies both L1 and L2 regularization penalties.
+    """A regularizer that applies both L1 and L2 regularization penalties.
 
   The L1 regularization penalty is computed as:
   `loss = l1 * reduce_sum(abs(x))`
@@ -227,33 +233,33 @@ class L1L2(Regularizer):
       l2: Float; L2 regularization factor.
   """
 
-  def __init__(self, l1=0., l2=0.):  # pylint: disable=redefined-outer-name
-    # The default value for l1 and l2 are different from the value in l1_l2
-    # for backward compatibility reason. Eg, L1L2(l2=0.1) will only have l2
-    # and no l1 penalty.
-    l1 = 0. if l1 is None else l1
-    l2 = 0. if l2 is None else l2
-    _check_penalty_number(l1)
-    _check_penalty_number(l2)
+    def __init__(self, l1=0.0, l2=0.0):  # pylint: disable=redefined-outer-name
+        # The default value for l1 and l2 are different from the value in l1_l2
+        # for backward compatibility reason. Eg, L1L2(l2=0.1) will only have l2
+        # and no l1 penalty.
+        l1 = 0.0 if l1 is None else l1
+        l2 = 0.0 if l2 is None else l2
+        _check_penalty_number(l1)
+        _check_penalty_number(l2)
 
-    self.l1 = backend.cast_to_floatx(l1)
-    self.l2 = backend.cast_to_floatx(l2)
+        self.l1 = backend.cast_to_floatx(l1)
+        self.l2 = backend.cast_to_floatx(l2)
 
-  def __call__(self, x):
-    regularization = backend.constant(0., dtype=x.dtype)
-    if self.l1:
-      regularization += self.l1 * math_ops.reduce_sum(math_ops.abs(x))
-    if self.l2:
-      regularization += self.l2 * math_ops.reduce_sum(math_ops.square(x))
-    return regularization
+    def __call__(self, x):
+        regularization = backend.constant(0.0, dtype=x.dtype)
+        if self.l1:
+            regularization += self.l1 * math_ops.reduce_sum(math_ops.abs(x))
+        if self.l2:
+            regularization += self.l2 * math_ops.reduce_sum(math_ops.square(x))
+        return regularization
 
-  def get_config(self):
-    return {'l1': float(self.l1), 'l2': float(self.l2)}
+    def get_config(self):
+        return {"l1": float(self.l1), "l2": float(self.l2)}
 
 
-@keras_export('keras.regularizers.L1', 'keras.regularizers.l1')
+@keras_export("keras.regularizers.L1", "keras.regularizers.l1")
 class L1(Regularizer):
-  """A regularizer that applies a L1 regularization penalty.
+    """A regularizer that applies a L1 regularization penalty.
 
   The L1 regularization penalty is computed as:
   `loss = l1 * reduce_sum(abs(x))`
@@ -268,26 +274,26 @@ class L1(Regularizer):
       l1: Float; L1 regularization factor.
   """
 
-  def __init__(self, l1=0.01, **kwargs):  # pylint: disable=redefined-outer-name
-    l1 = kwargs.pop('l', l1)  # Backwards compatibility
-    if kwargs:
-      raise TypeError('Argument(s) not recognized: %s' % (kwargs,))
+    def __init__(self, l1=0.01, **kwargs):  # pylint: disable=redefined-outer-name
+        l1 = kwargs.pop("l", l1)  # Backwards compatibility
+        if kwargs:
+            raise TypeError("Argument(s) not recognized: %s" % (kwargs,))
 
-    l1 = 0.01 if l1 is None else l1
-    _check_penalty_number(l1)
+        l1 = 0.01 if l1 is None else l1
+        _check_penalty_number(l1)
 
-    self.l1 = backend.cast_to_floatx(l1)
+        self.l1 = backend.cast_to_floatx(l1)
 
-  def __call__(self, x):
-    return self.l1 * math_ops.reduce_sum(math_ops.abs(x))
+    def __call__(self, x):
+        return self.l1 * math_ops.reduce_sum(math_ops.abs(x))
 
-  def get_config(self):
-    return {'l1': float(self.l1)}
+    def get_config(self):
+        return {"l1": float(self.l1)}
 
 
-@keras_export('keras.regularizers.L2', 'keras.regularizers.l2')
+@keras_export("keras.regularizers.L2", "keras.regularizers.l2")
 class L2(Regularizer):
-  """A regularizer that applies a L2 regularization penalty.
+    """A regularizer that applies a L2 regularization penalty.
 
   The L2 regularization penalty is computed as:
   `loss = l2 * reduce_sum(square(x))`
@@ -302,26 +308,26 @@ class L2(Regularizer):
       l2: Float; L2 regularization factor.
   """
 
-  def __init__(self, l2=0.01, **kwargs):  # pylint: disable=redefined-outer-name
-    l2 = kwargs.pop('l', l2)  # Backwards compatibility
-    if kwargs:
-      raise TypeError('Argument(s) not recognized: %s' % (kwargs,))
+    def __init__(self, l2=0.01, **kwargs):  # pylint: disable=redefined-outer-name
+        l2 = kwargs.pop("l", l2)  # Backwards compatibility
+        if kwargs:
+            raise TypeError("Argument(s) not recognized: %s" % (kwargs,))
 
-    l2 = 0.01 if l2 is None else l2
-    _check_penalty_number(l2)
+        l2 = 0.01 if l2 is None else l2
+        _check_penalty_number(l2)
 
-    self.l2 = backend.cast_to_floatx(l2)
+        self.l2 = backend.cast_to_floatx(l2)
 
-  def __call__(self, x):
-    return self.l2 * math_ops.reduce_sum(math_ops.square(x))
+    def __call__(self, x):
+        return self.l2 * math_ops.reduce_sum(math_ops.square(x))
 
-  def get_config(self):
-    return {'l2': float(self.l2)}
+    def get_config(self):
+        return {"l2": float(self.l2)}
 
 
-@keras_export('keras.regularizers.l1_l2')
+@keras_export("keras.regularizers.l1_l2")
 def l1_l2(l1=0.01, l2=0.01):  # pylint: disable=redefined-outer-name
-  r"""Create a regularizer that applies both L1 and L2 penalties.
+    r"""Create a regularizer that applies both L1 and L2 penalties.
 
   The L1 regularization penalty is computed as:
   `loss = l1 * reduce_sum(abs(x))`
@@ -336,7 +342,7 @@ def l1_l2(l1=0.01, l2=0.01):  # pylint: disable=redefined-outer-name
   Returns:
     An L1L2 Regularizer with the given regularization factors.
   """
-  return L1L2(l1=l1, l2=l2)
+    return L1L2(l1=l1, l2=l2)
 
 
 # Deserialization aliases.
@@ -344,35 +350,37 @@ l1 = L1
 l2 = L2
 
 
-@keras_export('keras.regularizers.serialize')
+@keras_export("keras.regularizers.serialize")
 def serialize(regularizer):
-  return serialize_keras_object(regularizer)
+    return serialize_keras_object(regularizer)
 
 
-@keras_export('keras.regularizers.deserialize')
+@keras_export("keras.regularizers.deserialize")
 def deserialize(config, custom_objects=None):
-  if config == 'l1_l2':
-    # Special case necessary since the defaults used for "l1_l2" (string)
-    # differ from those of the L1L2 class.
-    return L1L2(l1=0.01, l2=0.01)
-  return deserialize_keras_object(
-      config,
-      module_objects=globals(),
-      custom_objects=custom_objects,
-      printable_module_name='regularizer')
+    if config == "l1_l2":
+        # Special case necessary since the defaults used for "l1_l2" (string)
+        # differ from those of the L1L2 class.
+        return L1L2(l1=0.01, l2=0.01)
+    return deserialize_keras_object(
+        config,
+        module_objects=globals(),
+        custom_objects=custom_objects,
+        printable_module_name="regularizer",
+    )
 
 
-@keras_export('keras.regularizers.get')
+@keras_export("keras.regularizers.get")
 def get(identifier):
-  """Retrieve a regularizer instance from a config or identifier."""
-  if identifier is None:
-    return None
-  if isinstance(identifier, dict):
-    return deserialize(identifier)
-  elif isinstance(identifier, str):
-    return deserialize(str(identifier))
-  elif callable(identifier):
-    return identifier
-  else:
-    raise ValueError(
-        'Could not interpret regularizer identifier: {}'.format(identifier))
+    """Retrieve a regularizer instance from a config or identifier."""
+    if identifier is None:
+        return None
+    if isinstance(identifier, dict):
+        return deserialize(identifier)
+    elif isinstance(identifier, str):
+        return deserialize(str(identifier))
+    elif callable(identifier):
+        return identifier
+    else:
+        raise ValueError(
+            "Could not interpret regularizer identifier: {}".format(identifier)
+        )

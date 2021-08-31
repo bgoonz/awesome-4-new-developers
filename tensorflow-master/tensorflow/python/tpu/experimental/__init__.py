@@ -20,4 +20,5 @@ from __future__ import print_function
 
 # pylint: disable=unused-import
 from tensorflow.python.tpu import tpu_strategy_util
+
 # pylint: enable=unused-import

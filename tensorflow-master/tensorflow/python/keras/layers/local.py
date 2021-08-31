@@ -32,9 +32,9 @@ from tensorflow.python.ops import math_ops
 from tensorflow.python.util.tf_export import keras_export
 
 
-@keras_export('keras.layers.LocallyConnected1D')
+@keras_export("keras.layers.LocallyConnected1D")
 class LocallyConnected1D(Layer):
-  """Locally-connected layer for 1D inputs.
+    """Locally-connected layer for 1D inputs.
 
   The `LocallyConnected1D` layer works similarly to
   the `Conv1D` layer, except that weights are unshared,
@@ -114,220 +114,242 @@ class LocallyConnected1D(Layer):
         might have changed due to padding or strides.
   """
 
-  def __init__(self,
-               filters,
-               kernel_size,
-               strides=1,
-               padding='valid',
-               data_format=None,
-               activation=None,
-               use_bias=True,
-               kernel_initializer='glorot_uniform',
-               bias_initializer='zeros',
-               kernel_regularizer=None,
-               bias_regularizer=None,
-               activity_regularizer=None,
-               kernel_constraint=None,
-               bias_constraint=None,
-               implementation=1,
-               **kwargs):
-    super(LocallyConnected1D, self).__init__(**kwargs)
-    self.filters = filters
-    self.kernel_size = conv_utils.normalize_tuple(kernel_size, 1, 'kernel_size')
-    self.strides = conv_utils.normalize_tuple(strides, 1, 'strides')
-    self.padding = conv_utils.normalize_padding(padding)
-    if self.padding != 'valid' and implementation == 1:
-      raise ValueError('Invalid border mode for LocallyConnected1D '
-                       '(only "valid" is supported if implementation is 1): ' +
-                       padding)
-    self.data_format = conv_utils.normalize_data_format(data_format)
-    self.activation = activations.get(activation)
-    self.use_bias = use_bias
-    self.kernel_initializer = initializers.get(kernel_initializer)
-    self.bias_initializer = initializers.get(bias_initializer)
-    self.kernel_regularizer = regularizers.get(kernel_regularizer)
-    self.bias_regularizer = regularizers.get(bias_regularizer)
-    self.activity_regularizer = regularizers.get(activity_regularizer)
-    self.kernel_constraint = constraints.get(kernel_constraint)
-    self.bias_constraint = constraints.get(bias_constraint)
-    self.implementation = implementation
-    self.input_spec = InputSpec(ndim=3)
+    def __init__(
+        self,
+        filters,
+        kernel_size,
+        strides=1,
+        padding="valid",
+        data_format=None,
+        activation=None,
+        use_bias=True,
+        kernel_initializer="glorot_uniform",
+        bias_initializer="zeros",
+        kernel_regularizer=None,
+        bias_regularizer=None,
+        activity_regularizer=None,
+        kernel_constraint=None,
+        bias_constraint=None,
+        implementation=1,
+        **kwargs
+    ):
+        super(LocallyConnected1D, self).__init__(**kwargs)
+        self.filters = filters
+        self.kernel_size = conv_utils.normalize_tuple(kernel_size, 1, "kernel_size")
+        self.strides = conv_utils.normalize_tuple(strides, 1, "strides")
+        self.padding = conv_utils.normalize_padding(padding)
+        if self.padding != "valid" and implementation == 1:
+            raise ValueError(
+                "Invalid border mode for LocallyConnected1D "
+                '(only "valid" is supported if implementation is 1): ' + padding
+            )
+        self.data_format = conv_utils.normalize_data_format(data_format)
+        self.activation = activations.get(activation)
+        self.use_bias = use_bias
+        self.kernel_initializer = initializers.get(kernel_initializer)
+        self.bias_initializer = initializers.get(bias_initializer)
+        self.kernel_regularizer = regularizers.get(kernel_regularizer)
+        self.bias_regularizer = regularizers.get(bias_regularizer)
+        self.activity_regularizer = regularizers.get(activity_regularizer)
+        self.kernel_constraint = constraints.get(kernel_constraint)
+        self.bias_constraint = constraints.get(bias_constraint)
+        self.implementation = implementation
+        self.input_spec = InputSpec(ndim=3)
 
-  @property
-  def _use_input_spec_as_call_signature(self):
-    return False
+    @property
+    def _use_input_spec_as_call_signature(self):
+        return False
 
-  @tf_utils.shape_type_conversion
-  def build(self, input_shape):
-    if self.data_format == 'channels_first':
-      input_dim, input_length = input_shape[1], input_shape[2]
-    else:
-      input_dim, input_length = input_shape[2], input_shape[1]
+    @tf_utils.shape_type_conversion
+    def build(self, input_shape):
+        if self.data_format == "channels_first":
+            input_dim, input_length = input_shape[1], input_shape[2]
+        else:
+            input_dim, input_length = input_shape[2], input_shape[1]
 
-    if input_dim is None:
-      raise ValueError(
-          'Axis 2 of input should be fully-defined. '
-          'Found shape:', input_shape)
-    self.output_length = conv_utils.conv_output_length(input_length,
-                                                       self.kernel_size[0],
-                                                       self.padding,
-                                                       self.strides[0])
+        if input_dim is None:
+            raise ValueError(
+                "Axis 2 of input should be fully-defined. " "Found shape:", input_shape
+            )
+        self.output_length = conv_utils.conv_output_length(
+            input_length, self.kernel_size[0], self.padding, self.strides[0]
+        )
 
-    if self.implementation == 1:
-      self.kernel_shape = (self.output_length, self.kernel_size[0] * input_dim,
-                           self.filters)
+        if self.implementation == 1:
+            self.kernel_shape = (
+                self.output_length,
+                self.kernel_size[0] * input_dim,
+                self.filters,
+            )
 
-      self.kernel = self.add_weight(
-          shape=self.kernel_shape,
-          initializer=self.kernel_initializer,
-          name='kernel',
-          regularizer=self.kernel_regularizer,
-          constraint=self.kernel_constraint)
+            self.kernel = self.add_weight(
+                shape=self.kernel_shape,
+                initializer=self.kernel_initializer,
+                name="kernel",
+                regularizer=self.kernel_regularizer,
+                constraint=self.kernel_constraint,
+            )
 
-    elif self.implementation == 2:
-      if self.data_format == 'channels_first':
-        self.kernel_shape = (input_dim, input_length, self.filters,
-                             self.output_length)
-      else:
-        self.kernel_shape = (input_length, input_dim, self.output_length,
-                             self.filters)
+        elif self.implementation == 2:
+            if self.data_format == "channels_first":
+                self.kernel_shape = (
+                    input_dim,
+                    input_length,
+                    self.filters,
+                    self.output_length,
+                )
+            else:
+                self.kernel_shape = (
+                    input_length,
+                    input_dim,
+                    self.output_length,
+                    self.filters,
+                )
 
-      self.kernel = self.add_weight(
-          shape=self.kernel_shape,
-          initializer=self.kernel_initializer,
-          name='kernel',
-          regularizer=self.kernel_regularizer,
-          constraint=self.kernel_constraint)
+            self.kernel = self.add_weight(
+                shape=self.kernel_shape,
+                initializer=self.kernel_initializer,
+                name="kernel",
+                regularizer=self.kernel_regularizer,
+                constraint=self.kernel_constraint,
+            )
 
-      self.kernel_mask = get_locallyconnected_mask(
-          input_shape=(input_length,),
-          kernel_shape=self.kernel_size,
-          strides=self.strides,
-          padding=self.padding,
-          data_format=self.data_format,
-      )
+            self.kernel_mask = get_locallyconnected_mask(
+                input_shape=(input_length,),
+                kernel_shape=self.kernel_size,
+                strides=self.strides,
+                padding=self.padding,
+                data_format=self.data_format,
+            )
 
-    elif self.implementation == 3:
-      self.kernel_shape = (self.output_length * self.filters,
-                           input_length * input_dim)
+        elif self.implementation == 3:
+            self.kernel_shape = (
+                self.output_length * self.filters,
+                input_length * input_dim,
+            )
 
-      self.kernel_idxs = sorted(
-          conv_utils.conv_kernel_idxs(
-              input_shape=(input_length,),
-              kernel_shape=self.kernel_size,
-              strides=self.strides,
-              padding=self.padding,
-              filters_in=input_dim,
-              filters_out=self.filters,
-              data_format=self.data_format))
+            self.kernel_idxs = sorted(
+                conv_utils.conv_kernel_idxs(
+                    input_shape=(input_length,),
+                    kernel_shape=self.kernel_size,
+                    strides=self.strides,
+                    padding=self.padding,
+                    filters_in=input_dim,
+                    filters_out=self.filters,
+                    data_format=self.data_format,
+                )
+            )
 
-      self.kernel = self.add_weight(
-          shape=(len(self.kernel_idxs),),
-          initializer=self.kernel_initializer,
-          name='kernel',
-          regularizer=self.kernel_regularizer,
-          constraint=self.kernel_constraint)
+            self.kernel = self.add_weight(
+                shape=(len(self.kernel_idxs),),
+                initializer=self.kernel_initializer,
+                name="kernel",
+                regularizer=self.kernel_regularizer,
+                constraint=self.kernel_constraint,
+            )
 
-    else:
-      raise ValueError('Unrecognized implementation mode: %d.' %
-                       self.implementation)
+        else:
+            raise ValueError(
+                "Unrecognized implementation mode: %d." % self.implementation
+            )
 
-    if self.use_bias:
-      self.bias = self.add_weight(
-          shape=(self.output_length, self.filters),
-          initializer=self.bias_initializer,
-          name='bias',
-          regularizer=self.bias_regularizer,
-          constraint=self.bias_constraint)
-    else:
-      self.bias = None
+        if self.use_bias:
+            self.bias = self.add_weight(
+                shape=(self.output_length, self.filters),
+                initializer=self.bias_initializer,
+                name="bias",
+                regularizer=self.bias_regularizer,
+                constraint=self.bias_constraint,
+            )
+        else:
+            self.bias = None
 
-    if self.data_format == 'channels_first':
-      self.input_spec = InputSpec(ndim=3, axes={1: input_dim})
-    else:
-      self.input_spec = InputSpec(ndim=3, axes={-1: input_dim})
-    self.built = True
+        if self.data_format == "channels_first":
+            self.input_spec = InputSpec(ndim=3, axes={1: input_dim})
+        else:
+            self.input_spec = InputSpec(ndim=3, axes={-1: input_dim})
+        self.built = True
 
-  @tf_utils.shape_type_conversion
-  def compute_output_shape(self, input_shape):
-    if self.data_format == 'channels_first':
-      input_length = input_shape[2]
-    else:
-      input_length = input_shape[1]
+    @tf_utils.shape_type_conversion
+    def compute_output_shape(self, input_shape):
+        if self.data_format == "channels_first":
+            input_length = input_shape[2]
+        else:
+            input_length = input_shape[1]
 
-    length = conv_utils.conv_output_length(input_length, self.kernel_size[0],
-                                           self.padding, self.strides[0])
+        length = conv_utils.conv_output_length(
+            input_length, self.kernel_size[0], self.padding, self.strides[0]
+        )
 
-    if self.data_format == 'channels_first':
-      return (input_shape[0], self.filters, length)
-    elif self.data_format == 'channels_last':
-      return (input_shape[0], length, self.filters)
+        if self.data_format == "channels_first":
+            return (input_shape[0], self.filters, length)
+        elif self.data_format == "channels_last":
+            return (input_shape[0], length, self.filters)
 
-  def call(self, inputs):
-    if self.implementation == 1:
-      output = backend.local_conv(
-          inputs, self.kernel, self.kernel_size, self.strides,
-          (self.output_length,), self.data_format)
+    def call(self, inputs):
+        if self.implementation == 1:
+            output = backend.local_conv(
+                inputs,
+                self.kernel,
+                self.kernel_size,
+                self.strides,
+                (self.output_length,),
+                self.data_format,
+            )
 
-    elif self.implementation == 2:
-      output = local_conv_matmul(inputs, self.kernel, self.kernel_mask,
-                                 self.compute_output_shape(inputs.shape))
+        elif self.implementation == 2:
+            output = local_conv_matmul(
+                inputs,
+                self.kernel,
+                self.kernel_mask,
+                self.compute_output_shape(inputs.shape),
+            )
 
-    elif self.implementation == 3:
-      output = local_conv_sparse_matmul(inputs, self.kernel, self.kernel_idxs,
-                                        self.kernel_shape,
-                                        self.compute_output_shape(inputs.shape))
+        elif self.implementation == 3:
+            output = local_conv_sparse_matmul(
+                inputs,
+                self.kernel,
+                self.kernel_idxs,
+                self.kernel_shape,
+                self.compute_output_shape(inputs.shape),
+            )
 
-    else:
-      raise ValueError('Unrecognized implementation mode: %d.' %
-                       self.implementation)
+        else:
+            raise ValueError(
+                "Unrecognized implementation mode: %d." % self.implementation
+            )
 
-    if self.use_bias:
-      output = backend.bias_add(output, self.bias, data_format=self.data_format)
+        if self.use_bias:
+            output = backend.bias_add(output, self.bias, data_format=self.data_format)
 
-    output = self.activation(output)
-    return output
+        output = self.activation(output)
+        return output
 
-  def get_config(self):
-    config = {
-        'filters':
-            self.filters,
-        'kernel_size':
-            self.kernel_size,
-        'strides':
-            self.strides,
-        'padding':
-            self.padding,
-        'data_format':
-            self.data_format,
-        'activation':
-            activations.serialize(self.activation),
-        'use_bias':
-            self.use_bias,
-        'kernel_initializer':
-            initializers.serialize(self.kernel_initializer),
-        'bias_initializer':
-            initializers.serialize(self.bias_initializer),
-        'kernel_regularizer':
-            regularizers.serialize(self.kernel_regularizer),
-        'bias_regularizer':
-            regularizers.serialize(self.bias_regularizer),
-        'activity_regularizer':
-            regularizers.serialize(self.activity_regularizer),
-        'kernel_constraint':
-            constraints.serialize(self.kernel_constraint),
-        'bias_constraint':
-            constraints.serialize(self.bias_constraint),
-        'implementation':
-            self.implementation
-    }
-    base_config = super(LocallyConnected1D, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {
+            "filters": self.filters,
+            "kernel_size": self.kernel_size,
+            "strides": self.strides,
+            "padding": self.padding,
+            "data_format": self.data_format,
+            "activation": activations.serialize(self.activation),
+            "use_bias": self.use_bias,
+            "kernel_initializer": initializers.serialize(self.kernel_initializer),
+            "bias_initializer": initializers.serialize(self.bias_initializer),
+            "kernel_regularizer": regularizers.serialize(self.kernel_regularizer),
+            "bias_regularizer": regularizers.serialize(self.bias_regularizer),
+            "activity_regularizer": regularizers.serialize(self.activity_regularizer),
+            "kernel_constraint": constraints.serialize(self.kernel_constraint),
+            "bias_constraint": constraints.serialize(self.bias_constraint),
+            "implementation": self.implementation,
+        }
+        base_config = super(LocallyConnected1D, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
 
-@keras_export('keras.layers.LocallyConnected2D')
+@keras_export("keras.layers.LocallyConnected2D")
 class LocallyConnected2D(Layer):
-  """Locally-connected layer for 2D inputs.
+    """Locally-connected layer for 2D inputs.
 
   The `LocallyConnected2D` layer works similarly
   to the `Conv2D` layer, except that weights are unshared,
@@ -421,228 +443,258 @@ class LocallyConnected2D(Layer):
         due to padding.
   """
 
-  def __init__(self,
-               filters,
-               kernel_size,
-               strides=(1, 1),
-               padding='valid',
-               data_format=None,
-               activation=None,
-               use_bias=True,
-               kernel_initializer='glorot_uniform',
-               bias_initializer='zeros',
-               kernel_regularizer=None,
-               bias_regularizer=None,
-               activity_regularizer=None,
-               kernel_constraint=None,
-               bias_constraint=None,
-               implementation=1,
-               **kwargs):
-    super(LocallyConnected2D, self).__init__(**kwargs)
-    self.filters = filters
-    self.kernel_size = conv_utils.normalize_tuple(kernel_size, 2, 'kernel_size')
-    self.strides = conv_utils.normalize_tuple(strides, 2, 'strides')
-    self.padding = conv_utils.normalize_padding(padding)
-    if self.padding != 'valid' and implementation == 1:
-      raise ValueError('Invalid border mode for LocallyConnected2D '
-                       '(only "valid" is supported if implementation is 1): ' +
-                       padding)
-    self.data_format = conv_utils.normalize_data_format(data_format)
-    self.activation = activations.get(activation)
-    self.use_bias = use_bias
-    self.kernel_initializer = initializers.get(kernel_initializer)
-    self.bias_initializer = initializers.get(bias_initializer)
-    self.kernel_regularizer = regularizers.get(kernel_regularizer)
-    self.bias_regularizer = regularizers.get(bias_regularizer)
-    self.activity_regularizer = regularizers.get(activity_regularizer)
-    self.kernel_constraint = constraints.get(kernel_constraint)
-    self.bias_constraint = constraints.get(bias_constraint)
-    self.implementation = implementation
-    self.input_spec = InputSpec(ndim=4)
+    def __init__(
+        self,
+        filters,
+        kernel_size,
+        strides=(1, 1),
+        padding="valid",
+        data_format=None,
+        activation=None,
+        use_bias=True,
+        kernel_initializer="glorot_uniform",
+        bias_initializer="zeros",
+        kernel_regularizer=None,
+        bias_regularizer=None,
+        activity_regularizer=None,
+        kernel_constraint=None,
+        bias_constraint=None,
+        implementation=1,
+        **kwargs
+    ):
+        super(LocallyConnected2D, self).__init__(**kwargs)
+        self.filters = filters
+        self.kernel_size = conv_utils.normalize_tuple(kernel_size, 2, "kernel_size")
+        self.strides = conv_utils.normalize_tuple(strides, 2, "strides")
+        self.padding = conv_utils.normalize_padding(padding)
+        if self.padding != "valid" and implementation == 1:
+            raise ValueError(
+                "Invalid border mode for LocallyConnected2D "
+                '(only "valid" is supported if implementation is 1): ' + padding
+            )
+        self.data_format = conv_utils.normalize_data_format(data_format)
+        self.activation = activations.get(activation)
+        self.use_bias = use_bias
+        self.kernel_initializer = initializers.get(kernel_initializer)
+        self.bias_initializer = initializers.get(bias_initializer)
+        self.kernel_regularizer = regularizers.get(kernel_regularizer)
+        self.bias_regularizer = regularizers.get(bias_regularizer)
+        self.activity_regularizer = regularizers.get(activity_regularizer)
+        self.kernel_constraint = constraints.get(kernel_constraint)
+        self.bias_constraint = constraints.get(bias_constraint)
+        self.implementation = implementation
+        self.input_spec = InputSpec(ndim=4)
 
-  @property
-  def _use_input_spec_as_call_signature(self):
-    return False
+    @property
+    def _use_input_spec_as_call_signature(self):
+        return False
 
-  @tf_utils.shape_type_conversion
-  def build(self, input_shape):
-    if self.data_format == 'channels_last':
-      input_row, input_col = input_shape[1:-1]
-      input_filter = input_shape[3]
-    else:
-      input_row, input_col = input_shape[2:]
-      input_filter = input_shape[1]
-    if input_row is None or input_col is None:
-      raise ValueError('The spatial dimensions of the inputs to '
-                       ' a LocallyConnected2D layer '
-                       'should be fully-defined, but layer received '
-                       'the inputs shape ' + str(input_shape))
-    output_row = conv_utils.conv_output_length(input_row, self.kernel_size[0],
-                                               self.padding, self.strides[0])
-    output_col = conv_utils.conv_output_length(input_col, self.kernel_size[1],
-                                               self.padding, self.strides[1])
-    self.output_row = output_row
-    self.output_col = output_col
+    @tf_utils.shape_type_conversion
+    def build(self, input_shape):
+        if self.data_format == "channels_last":
+            input_row, input_col = input_shape[1:-1]
+            input_filter = input_shape[3]
+        else:
+            input_row, input_col = input_shape[2:]
+            input_filter = input_shape[1]
+        if input_row is None or input_col is None:
+            raise ValueError(
+                "The spatial dimensions of the inputs to "
+                " a LocallyConnected2D layer "
+                "should be fully-defined, but layer received "
+                "the inputs shape " + str(input_shape)
+            )
+        output_row = conv_utils.conv_output_length(
+            input_row, self.kernel_size[0], self.padding, self.strides[0]
+        )
+        output_col = conv_utils.conv_output_length(
+            input_col, self.kernel_size[1], self.padding, self.strides[1]
+        )
+        self.output_row = output_row
+        self.output_col = output_col
 
-    if self.implementation == 1:
-      self.kernel_shape = (output_row * output_col, self.kernel_size[0] *
-                           self.kernel_size[1] * input_filter, self.filters)
+        if self.implementation == 1:
+            self.kernel_shape = (
+                output_row * output_col,
+                self.kernel_size[0] * self.kernel_size[1] * input_filter,
+                self.filters,
+            )
 
-      self.kernel = self.add_weight(
-          shape=self.kernel_shape,
-          initializer=self.kernel_initializer,
-          name='kernel',
-          regularizer=self.kernel_regularizer,
-          constraint=self.kernel_constraint)
+            self.kernel = self.add_weight(
+                shape=self.kernel_shape,
+                initializer=self.kernel_initializer,
+                name="kernel",
+                regularizer=self.kernel_regularizer,
+                constraint=self.kernel_constraint,
+            )
 
-    elif self.implementation == 2:
-      if self.data_format == 'channels_first':
-        self.kernel_shape = (input_filter, input_row, input_col, self.filters,
-                             self.output_row, self.output_col)
-      else:
-        self.kernel_shape = (input_row, input_col, input_filter,
-                             self.output_row, self.output_col, self.filters)
+        elif self.implementation == 2:
+            if self.data_format == "channels_first":
+                self.kernel_shape = (
+                    input_filter,
+                    input_row,
+                    input_col,
+                    self.filters,
+                    self.output_row,
+                    self.output_col,
+                )
+            else:
+                self.kernel_shape = (
+                    input_row,
+                    input_col,
+                    input_filter,
+                    self.output_row,
+                    self.output_col,
+                    self.filters,
+                )
 
-      self.kernel = self.add_weight(
-          shape=self.kernel_shape,
-          initializer=self.kernel_initializer,
-          name='kernel',
-          regularizer=self.kernel_regularizer,
-          constraint=self.kernel_constraint)
+            self.kernel = self.add_weight(
+                shape=self.kernel_shape,
+                initializer=self.kernel_initializer,
+                name="kernel",
+                regularizer=self.kernel_regularizer,
+                constraint=self.kernel_constraint,
+            )
 
-      self.kernel_mask = get_locallyconnected_mask(
-          input_shape=(input_row, input_col),
-          kernel_shape=self.kernel_size,
-          strides=self.strides,
-          padding=self.padding,
-          data_format=self.data_format,
-      )
+            self.kernel_mask = get_locallyconnected_mask(
+                input_shape=(input_row, input_col),
+                kernel_shape=self.kernel_size,
+                strides=self.strides,
+                padding=self.padding,
+                data_format=self.data_format,
+            )
 
-    elif self.implementation == 3:
-      self.kernel_shape = (self.output_row * self.output_col * self.filters,
-                           input_row * input_col * input_filter)
+        elif self.implementation == 3:
+            self.kernel_shape = (
+                self.output_row * self.output_col * self.filters,
+                input_row * input_col * input_filter,
+            )
 
-      self.kernel_idxs = sorted(
-          conv_utils.conv_kernel_idxs(
-              input_shape=(input_row, input_col),
-              kernel_shape=self.kernel_size,
-              strides=self.strides,
-              padding=self.padding,
-              filters_in=input_filter,
-              filters_out=self.filters,
-              data_format=self.data_format))
+            self.kernel_idxs = sorted(
+                conv_utils.conv_kernel_idxs(
+                    input_shape=(input_row, input_col),
+                    kernel_shape=self.kernel_size,
+                    strides=self.strides,
+                    padding=self.padding,
+                    filters_in=input_filter,
+                    filters_out=self.filters,
+                    data_format=self.data_format,
+                )
+            )
 
-      self.kernel = self.add_weight(
-          shape=(len(self.kernel_idxs),),
-          initializer=self.kernel_initializer,
-          name='kernel',
-          regularizer=self.kernel_regularizer,
-          constraint=self.kernel_constraint)
+            self.kernel = self.add_weight(
+                shape=(len(self.kernel_idxs),),
+                initializer=self.kernel_initializer,
+                name="kernel",
+                regularizer=self.kernel_regularizer,
+                constraint=self.kernel_constraint,
+            )
 
-    else:
-      raise ValueError('Unrecognized implementation mode: %d.' %
-                       self.implementation)
+        else:
+            raise ValueError(
+                "Unrecognized implementation mode: %d." % self.implementation
+            )
 
-    if self.use_bias:
-      self.bias = self.add_weight(
-          shape=(output_row, output_col, self.filters),
-          initializer=self.bias_initializer,
-          name='bias',
-          regularizer=self.bias_regularizer,
-          constraint=self.bias_constraint)
-    else:
-      self.bias = None
-    if self.data_format == 'channels_first':
-      self.input_spec = InputSpec(ndim=4, axes={1: input_filter})
-    else:
-      self.input_spec = InputSpec(ndim=4, axes={-1: input_filter})
-    self.built = True
+        if self.use_bias:
+            self.bias = self.add_weight(
+                shape=(output_row, output_col, self.filters),
+                initializer=self.bias_initializer,
+                name="bias",
+                regularizer=self.bias_regularizer,
+                constraint=self.bias_constraint,
+            )
+        else:
+            self.bias = None
+        if self.data_format == "channels_first":
+            self.input_spec = InputSpec(ndim=4, axes={1: input_filter})
+        else:
+            self.input_spec = InputSpec(ndim=4, axes={-1: input_filter})
+        self.built = True
 
-  @tf_utils.shape_type_conversion
-  def compute_output_shape(self, input_shape):
-    if self.data_format == 'channels_first':
-      rows = input_shape[2]
-      cols = input_shape[3]
-    elif self.data_format == 'channels_last':
-      rows = input_shape[1]
-      cols = input_shape[2]
+    @tf_utils.shape_type_conversion
+    def compute_output_shape(self, input_shape):
+        if self.data_format == "channels_first":
+            rows = input_shape[2]
+            cols = input_shape[3]
+        elif self.data_format == "channels_last":
+            rows = input_shape[1]
+            cols = input_shape[2]
 
-    rows = conv_utils.conv_output_length(rows, self.kernel_size[0],
-                                         self.padding, self.strides[0])
-    cols = conv_utils.conv_output_length(cols, self.kernel_size[1],
-                                         self.padding, self.strides[1])
+        rows = conv_utils.conv_output_length(
+            rows, self.kernel_size[0], self.padding, self.strides[0]
+        )
+        cols = conv_utils.conv_output_length(
+            cols, self.kernel_size[1], self.padding, self.strides[1]
+        )
 
-    if self.data_format == 'channels_first':
-      return (input_shape[0], self.filters, rows, cols)
-    elif self.data_format == 'channels_last':
-      return (input_shape[0], rows, cols, self.filters)
+        if self.data_format == "channels_first":
+            return (input_shape[0], self.filters, rows, cols)
+        elif self.data_format == "channels_last":
+            return (input_shape[0], rows, cols, self.filters)
 
-  def call(self, inputs):
-    if self.implementation == 1:
-      output = backend.local_conv(
-          inputs, self.kernel, self.kernel_size, self.strides,
-          (self.output_row, self.output_col),
-          self.data_format)
+    def call(self, inputs):
+        if self.implementation == 1:
+            output = backend.local_conv(
+                inputs,
+                self.kernel,
+                self.kernel_size,
+                self.strides,
+                (self.output_row, self.output_col),
+                self.data_format,
+            )
 
-    elif self.implementation == 2:
-      output = local_conv_matmul(inputs, self.kernel, self.kernel_mask,
-                                 self.compute_output_shape(inputs.shape))
+        elif self.implementation == 2:
+            output = local_conv_matmul(
+                inputs,
+                self.kernel,
+                self.kernel_mask,
+                self.compute_output_shape(inputs.shape),
+            )
 
-    elif self.implementation == 3:
-      output = local_conv_sparse_matmul(inputs, self.kernel, self.kernel_idxs,
-                                        self.kernel_shape,
-                                        self.compute_output_shape(inputs.shape))
+        elif self.implementation == 3:
+            output = local_conv_sparse_matmul(
+                inputs,
+                self.kernel,
+                self.kernel_idxs,
+                self.kernel_shape,
+                self.compute_output_shape(inputs.shape),
+            )
 
-    else:
-      raise ValueError('Unrecognized implementation mode: %d.' %
-                       self.implementation)
+        else:
+            raise ValueError(
+                "Unrecognized implementation mode: %d." % self.implementation
+            )
 
-    if self.use_bias:
-      output = backend.bias_add(output, self.bias, data_format=self.data_format)
+        if self.use_bias:
+            output = backend.bias_add(output, self.bias, data_format=self.data_format)
 
-    output = self.activation(output)
-    return output
+        output = self.activation(output)
+        return output
 
-  def get_config(self):
-    config = {
-        'filters':
-            self.filters,
-        'kernel_size':
-            self.kernel_size,
-        'strides':
-            self.strides,
-        'padding':
-            self.padding,
-        'data_format':
-            self.data_format,
-        'activation':
-            activations.serialize(self.activation),
-        'use_bias':
-            self.use_bias,
-        'kernel_initializer':
-            initializers.serialize(self.kernel_initializer),
-        'bias_initializer':
-            initializers.serialize(self.bias_initializer),
-        'kernel_regularizer':
-            regularizers.serialize(self.kernel_regularizer),
-        'bias_regularizer':
-            regularizers.serialize(self.bias_regularizer),
-        'activity_regularizer':
-            regularizers.serialize(self.activity_regularizer),
-        'kernel_constraint':
-            constraints.serialize(self.kernel_constraint),
-        'bias_constraint':
-            constraints.serialize(self.bias_constraint),
-        'implementation':
-            self.implementation
-    }
-    base_config = super(LocallyConnected2D, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {
+            "filters": self.filters,
+            "kernel_size": self.kernel_size,
+            "strides": self.strides,
+            "padding": self.padding,
+            "data_format": self.data_format,
+            "activation": activations.serialize(self.activation),
+            "use_bias": self.use_bias,
+            "kernel_initializer": initializers.serialize(self.kernel_initializer),
+            "bias_initializer": initializers.serialize(self.bias_initializer),
+            "kernel_regularizer": regularizers.serialize(self.kernel_regularizer),
+            "bias_regularizer": regularizers.serialize(self.bias_regularizer),
+            "activity_regularizer": regularizers.serialize(self.activity_regularizer),
+            "kernel_constraint": constraints.serialize(self.kernel_constraint),
+            "bias_constraint": constraints.serialize(self.bias_constraint),
+            "implementation": self.implementation,
+        }
+        base_config = super(LocallyConnected2D, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
 
-def get_locallyconnected_mask(input_shape, kernel_shape, strides, padding,
-                              data_format):
-  """Return a mask representing connectivity of a locally-connected operation.
+def get_locallyconnected_mask(input_shape, kernel_shape, strides, padding, data_format):
+    """Return a mask representing connectivity of a locally-connected operation.
 
   This method returns a masking numpy array of 0s and 1s (of type `np.float32`)
   that, when element-wise multiplied with a fully-connected weight tensor, masks
@@ -680,30 +732,31 @@ def get_locallyconnected_mask(input_shape, kernel_shape, strides, padding,
     ValueError: if `data_format` is neither `"channels_first"` nor
                 `"channels_last"`.
   """
-  mask = conv_utils.conv_kernel_mask(
-      input_shape=input_shape,
-      kernel_shape=kernel_shape,
-      strides=strides,
-      padding=padding)
+    mask = conv_utils.conv_kernel_mask(
+        input_shape=input_shape,
+        kernel_shape=kernel_shape,
+        strides=strides,
+        padding=padding,
+    )
 
-  ndims = int(mask.ndim / 2)
+    ndims = int(mask.ndim / 2)
 
-  if data_format == 'channels_first':
-    mask = np.expand_dims(mask, 0)
-    mask = np.expand_dims(mask, -ndims - 1)
+    if data_format == "channels_first":
+        mask = np.expand_dims(mask, 0)
+        mask = np.expand_dims(mask, -ndims - 1)
 
-  elif data_format == 'channels_last':
-    mask = np.expand_dims(mask, ndims)
-    mask = np.expand_dims(mask, -1)
+    elif data_format == "channels_last":
+        mask = np.expand_dims(mask, ndims)
+        mask = np.expand_dims(mask, -1)
 
-  else:
-    raise ValueError('Unrecognized data_format: ' + str(data_format))
+    else:
+        raise ValueError("Unrecognized data_format: " + str(data_format))
 
-  return mask
+    return mask
 
 
 def local_conv_matmul(inputs, kernel, kernel_mask, output_shape):
-  """Apply N-D convolution with un-shared weights using a single matmul call.
+    """Apply N-D convolution with un-shared weights using a single matmul call.
 
   This method outputs `inputs . (kernel * kernel_mask)`
   (with `.` standing for matrix-multiply and `*` for element-wise multiply)
@@ -737,21 +790,20 @@ def local_conv_matmul(inputs, kernel, kernel_mask, output_shape):
   Returns:
       Output (N+2)-D tensor with shape `output_shape`.
   """
-  inputs_flat = backend.reshape(inputs, (backend.shape(inputs)[0], -1))
+    inputs_flat = backend.reshape(inputs, (backend.shape(inputs)[0], -1))
 
-  kernel = kernel_mask * kernel
-  kernel = make_2d(kernel, split_dim=backend.ndim(kernel) // 2)
+    kernel = kernel_mask * kernel
+    kernel = make_2d(kernel, split_dim=backend.ndim(kernel) // 2)
 
-  output_flat = math_ops.matmul(inputs_flat, kernel, b_is_sparse=True)
-  output = backend.reshape(output_flat, [
-      backend.shape(output_flat)[0],
-  ] + output_shape.as_list()[1:])
-  return output
+    output_flat = math_ops.matmul(inputs_flat, kernel, b_is_sparse=True)
+    output = backend.reshape(
+        output_flat, [backend.shape(output_flat)[0]] + output_shape.as_list()[1:]
+    )
+    return output
 
 
-def local_conv_sparse_matmul(inputs, kernel, kernel_idxs, kernel_shape,
-                             output_shape):
-  """Apply N-D convolution with un-shared weights using a single sparse matmul.
+def local_conv_sparse_matmul(inputs, kernel, kernel_idxs, kernel_shape, output_shape):
+    """Apply N-D convolution with un-shared weights using a single sparse matmul.
 
   This method outputs `inputs . tf.sparse.SparseTensor(indices=kernel_idxs,
   values=kernel, dense_shape=kernel_shape)`, with `.` standing for
@@ -775,23 +827,25 @@ def local_conv_sparse_matmul(inputs, kernel, kernel_idxs, kernel_shape,
   Returns:
       Output (N+2)-D dense tensor with shape `output_shape`.
   """
-  inputs_flat = backend.reshape(inputs, (backend.shape(inputs)[0], -1))
-  output_flat = gen_sparse_ops.SparseTensorDenseMatMul(
-      a_indices=kernel_idxs,
-      a_values=kernel,
-      a_shape=kernel_shape,
-      b=inputs_flat,
-      adjoint_b=True)
-  output_flat_transpose = backend.transpose(output_flat)
+    inputs_flat = backend.reshape(inputs, (backend.shape(inputs)[0], -1))
+    output_flat = gen_sparse_ops.SparseTensorDenseMatMul(
+        a_indices=kernel_idxs,
+        a_values=kernel,
+        a_shape=kernel_shape,
+        b=inputs_flat,
+        adjoint_b=True,
+    )
+    output_flat_transpose = backend.transpose(output_flat)
 
-  output_reshaped = backend.reshape(output_flat_transpose, [
-      backend.shape(output_flat_transpose)[0],
-  ] + output_shape.as_list()[1:])
-  return output_reshaped
+    output_reshaped = backend.reshape(
+        output_flat_transpose,
+        [backend.shape(output_flat_transpose)[0]] + output_shape.as_list()[1:],
+    )
+    return output_reshaped
 
 
 def make_2d(tensor, split_dim):
-  """Reshapes an N-dimensional tensor into a 2D tensor.
+    """Reshapes an N-dimensional tensor into a 2D tensor.
 
   Dimensions before (excluding) and after (including) `split_dim` are grouped
   together.
@@ -805,11 +859,11 @@ def make_2d(tensor, split_dim):
     Tensor of shape
     `(d0 * ... * d(split_dim-1), d(split_dim) * ... * d(N-1))`.
   """
-  shape = array_ops.shape(tensor)
-  in_dims = shape[:split_dim]
-  out_dims = shape[split_dim:]
+    shape = array_ops.shape(tensor)
+    in_dims = shape[:split_dim]
+    out_dims = shape[split_dim:]
 
-  in_size = math_ops.reduce_prod(in_dims)
-  out_size = math_ops.reduce_prod(out_dims)
+    in_size = math_ops.reduce_prod(in_dims)
+    out_size = math_ops.reduce_prod(out_dims)
 
-  return array_ops.reshape(tensor, (in_size, out_size))
+    return array_ops.reshape(tensor, (in_size, out_size))

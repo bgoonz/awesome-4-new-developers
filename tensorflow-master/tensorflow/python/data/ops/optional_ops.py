@@ -36,7 +36,7 @@ from tensorflow.python.util.tf_export import tf_export
 @deprecation.deprecated_endpoints("data.experimental.Optional")
 @six.add_metaclass(abc.ABCMeta)
 class Optional(composite_tensor.CompositeTensor):
-  """Represents a value that may or may not be present.
+    """Represents a value that may or may not be present.
 
   A `tf.experimental.Optional` can represent the result of an operation that may
   fail as a value, rather than raising an exception and halting execution. For
@@ -65,9 +65,9 @@ class Optional(composite_tensor.CompositeTensor):
   tf.Tensor(False, shape=(), dtype=bool)
   """
 
-  @abc.abstractmethod
-  def has_value(self, name=None):
-    """Returns a tensor that evaluates to `True` if this optional has a value.
+    @abc.abstractmethod
+    def has_value(self, name=None):
+        """Returns a tensor that evaluates to `True` if this optional has a value.
 
     >>> optional = tf.experimental.Optional.from_value(42)
     >>> print(optional.has_value())
@@ -79,11 +79,11 @@ class Optional(composite_tensor.CompositeTensor):
     Returns:
       A scalar `tf.Tensor` of type `tf.bool`.
     """
-    raise NotImplementedError("Optional.has_value()")
+        raise NotImplementedError("Optional.has_value()")
 
-  @abc.abstractmethod
-  def get_value(self, name=None):
-    """Returns the value wrapped by this optional.
+    @abc.abstractmethod
+    def get_value(self, name=None):
+        """Returns the value wrapped by this optional.
 
     If this optional does not have a value (i.e. `self.has_value()` evaluates to
     `False`), this operation will raise `tf.errors.InvalidArgumentError` at
@@ -99,11 +99,11 @@ class Optional(composite_tensor.CompositeTensor):
     Returns:
       The wrapped value.
     """
-    raise NotImplementedError("Optional.get_value()")
+        raise NotImplementedError("Optional.get_value()")
 
-  @abc.abstractproperty
-  def element_spec(self):
-    """The type specification of an element of this optional.
+    @abc.abstractproperty
+    def element_spec(self):
+        """The type specification of an element of this optional.
 
     >>> optional = tf.experimental.Optional.from_value(42)
     >>> print(optional.element_spec)
@@ -113,11 +113,11 @@ class Optional(composite_tensor.CompositeTensor):
       A (nested) structure of `tf.TypeSpec` objects matching the structure of an
       element of this optional, specifying the type of individual components.
     """
-    raise NotImplementedError("Optional.element_spec")
+        raise NotImplementedError("Optional.element_spec")
 
-  @staticmethod
-  def empty(element_spec):
-    """Returns an `Optional` that has no value.
+    @staticmethod
+    def empty(element_spec):
+        """Returns an `Optional` that has no value.
 
     NOTE: This method takes an argument that defines the structure of the value
     that would be contained in the returned `Optional` if it had a value.
@@ -134,11 +134,11 @@ class Optional(composite_tensor.CompositeTensor):
     Returns:
       A `tf.experimental.Optional` with no value.
     """
-    return _OptionalImpl(gen_dataset_ops.optional_none(), element_spec)
+        return _OptionalImpl(gen_dataset_ops.optional_none(), element_spec)
 
-  @staticmethod
-  def from_value(value):
-    """Returns a `tf.experimental.Optional` that wraps the given value.
+    @staticmethod
+    def from_value(value):
+        """Returns a `tf.experimental.Optional` that wraps the given value.
 
     >>> optional = tf.experimental.Optional.from_value(42)
     >>> print(optional.has_value())
@@ -153,59 +153,58 @@ class Optional(composite_tensor.CompositeTensor):
     Returns:
       A `tf.experimental.Optional` that wraps `value`.
     """
-    with ops.name_scope("optional") as scope:
-      with ops.name_scope("value"):
-        element_spec = structure.type_spec_from_value(value)
-        encoded_value = structure.to_tensor_list(element_spec, value)
+        with ops.name_scope("optional") as scope:
+            with ops.name_scope("value"):
+                element_spec = structure.type_spec_from_value(value)
+                encoded_value = structure.to_tensor_list(element_spec, value)
 
-    return _OptionalImpl(
-        gen_dataset_ops.optional_from_value(encoded_value, name=scope),
-        element_spec)
+        return _OptionalImpl(
+            gen_dataset_ops.optional_from_value(encoded_value, name=scope), element_spec
+        )
 
 
 class _OptionalImpl(Optional):
-  """Concrete implementation of `tf.experimental.Optional`.
+    """Concrete implementation of `tf.experimental.Optional`.
 
   NOTE(mrry): This implementation is kept private, to avoid defining
   `Optional.__init__()` in the public API.
   """
 
-  def __init__(self, variant_tensor, element_spec):
-    self._variant_tensor = variant_tensor
-    self._element_spec = element_spec
+    def __init__(self, variant_tensor, element_spec):
+        self._variant_tensor = variant_tensor
+        self._element_spec = element_spec
 
-  def has_value(self, name=None):
-    with ops.colocate_with(self._variant_tensor):
-      return gen_dataset_ops.optional_has_value(self._variant_tensor, name=name)
+    def has_value(self, name=None):
+        with ops.colocate_with(self._variant_tensor):
+            return gen_dataset_ops.optional_has_value(self._variant_tensor, name=name)
 
-  def get_value(self, name=None):
-    # TODO(b/110122868): Consolidate the restructuring logic with similar logic
-    # in `Iterator.get_next()` and `StructuredFunctionWrapper`.
-    with ops.name_scope(name, "OptionalGetValue",
-                        [self._variant_tensor]) as scope:
-      with ops.colocate_with(self._variant_tensor):
-        result = gen_dataset_ops.optional_get_value(
-            self._variant_tensor,
-            name=scope,
-            output_types=structure.get_flat_tensor_types(self._element_spec),
-            output_shapes=structure.get_flat_tensor_shapes(self._element_spec))
-      # NOTE: We do not colocate the deserialization of composite tensors
-      # because not all ops are guaranteed to have non-GPU kernels.
-      return structure.from_tensor_list(self._element_spec, result)
+    def get_value(self, name=None):
+        # TODO(b/110122868): Consolidate the restructuring logic with similar logic
+        # in `Iterator.get_next()` and `StructuredFunctionWrapper`.
+        with ops.name_scope(name, "OptionalGetValue", [self._variant_tensor]) as scope:
+            with ops.colocate_with(self._variant_tensor):
+                result = gen_dataset_ops.optional_get_value(
+                    self._variant_tensor,
+                    name=scope,
+                    output_types=structure.get_flat_tensor_types(self._element_spec),
+                    output_shapes=structure.get_flat_tensor_shapes(self._element_spec),
+                )
+            # NOTE: We do not colocate the deserialization of composite tensors
+            # because not all ops are guaranteed to have non-GPU kernels.
+            return structure.from_tensor_list(self._element_spec, result)
 
-  @property
-  def element_spec(self):
-    return self._element_spec
+    @property
+    def element_spec(self):
+        return self._element_spec
 
-  @property
-  def _type_spec(self):
-    return OptionalSpec.from_value(self)
+    @property
+    def _type_spec(self):
+        return OptionalSpec.from_value(self)
 
 
-@tf_export(
-    "OptionalSpec", v1=["OptionalSpec", "data.experimental.OptionalStructure"])
+@tf_export("OptionalSpec", v1=["OptionalSpec", "data.experimental.OptionalStructure"])
 class OptionalSpec(type_spec.TypeSpec):
-  """Type specification for `tf.experimental.Optional`.
+    """Type specification for `tf.experimental.Optional`.
 
   For instance, `tf.OptionalSpec` can be used to define a tf.function that takes
   `tf.experimental.Optional` as an input argument:
@@ -226,38 +225,38 @@ class OptionalSpec(type_spec.TypeSpec):
       type specification of the optional element.
   """
 
-  __slots__ = ["_element_spec"]
+    __slots__ = ["_element_spec"]
 
-  def __init__(self, element_spec):
-    self._element_spec = element_spec
+    def __init__(self, element_spec):
+        self._element_spec = element_spec
 
-  @property
-  def value_type(self):
-    return _OptionalImpl
+    @property
+    def value_type(self):
+        return _OptionalImpl
 
-  def _serialize(self):
-    return (self._element_spec,)
+    def _serialize(self):
+        return (self._element_spec,)
 
-  @property
-  def _component_specs(self):
-    return [tensor_spec.TensorSpec((), dtypes.variant)]
+    @property
+    def _component_specs(self):
+        return [tensor_spec.TensorSpec((), dtypes.variant)]
 
-  def _to_components(self, value):
-    return [value._variant_tensor]  # pylint: disable=protected-access
+    def _to_components(self, value):
+        return [value._variant_tensor]  # pylint: disable=protected-access
 
-  def _from_components(self, flat_value):
-    # pylint: disable=protected-access
-    return _OptionalImpl(flat_value[0], self._element_spec)
+    def _from_components(self, flat_value):
+        # pylint: disable=protected-access
+        return _OptionalImpl(flat_value[0], self._element_spec)
 
-  @staticmethod
-  def from_value(value):
-    return OptionalSpec(value.element_spec)
+    @staticmethod
+    def from_value(value):
+        return OptionalSpec(value.element_spec)
 
-  def _to_legacy_output_types(self):
-    return self
+    def _to_legacy_output_types(self):
+        return self
 
-  def _to_legacy_output_shapes(self):
-    return self
+    def _to_legacy_output_shapes(self):
+        return self
 
-  def _to_legacy_output_classes(self):
-    return self
+    def _to_legacy_output_classes(self):
+        return self

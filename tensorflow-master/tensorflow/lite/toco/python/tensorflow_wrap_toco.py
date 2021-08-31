@@ -21,4 +21,5 @@ from __future__ import print_function
 
 # pylint: disable=unused-import
 from tensorflow.python._pywrap_toco_api import TocoConvert
+
 # pylint: enable=unused-import

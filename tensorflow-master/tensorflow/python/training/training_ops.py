@@ -20,7 +20,9 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow.python.ops import gen_training_ops  # pylint: disable=unused-import
+
 # go/tf-wildcard-import
 # pylint: disable=wildcard-import
 from tensorflow.python.ops.gen_training_ops import *
+
 # pylint: enable=wildcard-import

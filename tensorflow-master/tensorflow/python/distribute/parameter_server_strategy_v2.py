@@ -52,7 +52,7 @@ ALLOWED_TASK_TYPES = ("chief", "worker", "ps")
 
 @tf_export("distribute.experimental.ParameterServerStrategy", v1=[])
 class ParameterServerStrategyV2(distribute_lib.Strategy):
-  """An multi-worker tf.distribute strategy with parameter servers.
+    """An multi-worker tf.distribute strategy with parameter servers.
 
   Parameter server training is a common data-parallel method to scale up a
   machine learning model on multiple machines. A parameter server training
@@ -411,9 +411,9 @@ class ParameterServerStrategyV2(distribute_lib.Strategy):
   `steps_per_epoch` must be specified.
   """
 
-  # pyformat: disable
-  def __init__(self, cluster_resolver, variable_partitioner=None):
-    """Initializes the TF2 parameter server strategy.
+    # pyformat: disable
+    def __init__(self, cluster_resolver, variable_partitioner=None):
+        """Initializes the TF2 parameter server strategy.
 
     This initializes the `tf.distribute.experimental.ParameterServerStrategy`
     object to be ready for use with
@@ -452,167 +452,192 @@ class ParameterServerStrategyV2(distribute_lib.Strategy):
         * Variables created under `strategy.extended.colocate_vars_with` will
         not be partitioned.
     """
-    # pyformat: enable
-    self._cluster_resolver = cluster_resolver
+        # pyformat: enable
+        self._cluster_resolver = cluster_resolver
 
-    self._verify_args_and_config(cluster_resolver)
-    self._cluster_coordinator = None
-    logging.info(
-        "`tf.distribute.experimental.ParameterServerStrategy` is initialized "
-        "with cluster_spec: %s", cluster_resolver.cluster_spec())
+        self._verify_args_and_config(cluster_resolver)
+        self._cluster_coordinator = None
+        logging.info(
+            "`tf.distribute.experimental.ParameterServerStrategy` is initialized "
+            "with cluster_spec: %s",
+            cluster_resolver.cluster_spec(),
+        )
 
-    # TODO(b/167894802): Make coordinator, worker, and ps names customizable.
-    self._connect_to_cluster(coordinator_name="chief")
-    self._extended = ParameterServerStrategyV2Extended(self, cluster_resolver,
-                                                       variable_partitioner)
-    super(ParameterServerStrategyV2, self).__init__(self._extended)
-    distribute_lib.distribution_strategy_gauge.get_cell("V2").set(
-        "ParameterServerStrategy")
-    self._should_use_with_coordinator = True
-    # Used while constructing distributed iterators.
-    self._canonicalize_devices = False
+        # TODO(b/167894802): Make coordinator, worker, and ps names customizable.
+        self._connect_to_cluster(coordinator_name="chief")
+        self._extended = ParameterServerStrategyV2Extended(
+            self, cluster_resolver, variable_partitioner
+        )
+        super(ParameterServerStrategyV2, self).__init__(self._extended)
+        distribute_lib.distribution_strategy_gauge.get_cell("V2").set(
+            "ParameterServerStrategy"
+        )
+        self._should_use_with_coordinator = True
+        # Used while constructing distributed iterators.
+        self._canonicalize_devices = False
 
-  def _connect_to_cluster(self, coordinator_name):
-    if coordinator_name in ["worker", "ps"]:
-      raise ValueError("coordinator name should not be 'worker' or 'ps'.")
-    cluster_spec = self._cluster_resolver.cluster_spec()
-    self._num_workers = len(cluster_spec.as_dict().get("worker", ()))
-    self._num_ps = len(cluster_spec.as_dict().get("ps", ()))
+    def _connect_to_cluster(self, coordinator_name):
+        if coordinator_name in ["worker", "ps"]:
+            raise ValueError("coordinator name should not be 'worker' or 'ps'.")
+        cluster_spec = self._cluster_resolver.cluster_spec()
+        self._num_workers = len(cluster_spec.as_dict().get("worker", ()))
+        self._num_ps = len(cluster_spec.as_dict().get("ps", ()))
 
-    device_filters = server_lib.ClusterDeviceFilters()
-    # For any worker, only the devices on ps and coordinator nodes are visible
-    for i in range(self._num_workers):
-      device_filters.set_device_filters(
-          "worker", i, ["/job:ps", "/job:%s" % coordinator_name])
-    # Similarly for any ps, only the devices on workers and coordinator are
-    # visible
-    for i in range(self._num_ps):
-      device_filters.set_device_filters(
-          "ps", i, ["/job:worker", "/job:%s" % coordinator_name])
+        device_filters = server_lib.ClusterDeviceFilters()
+        # For any worker, only the devices on ps and coordinator nodes are visible
+        for i in range(self._num_workers):
+            device_filters.set_device_filters(
+                "worker", i, ["/job:ps", "/job:%s" % coordinator_name]
+            )
+        # Similarly for any ps, only the devices on workers and coordinator are
+        # visible
+        for i in range(self._num_ps):
+            device_filters.set_device_filters(
+                "ps", i, ["/job:worker", "/job:%s" % coordinator_name]
+            )
 
-    # Allow at most one outstanding RPC for each worker at a certain time. This
-    # is to simplify worker failure handling in the runtime
-    os.environ["TF_ENABLE_EAGER_CLIENT_STREAMING_ENQUEUE"] = "False"
+        # Allow at most one outstanding RPC for each worker at a certain time. This
+        # is to simplify worker failure handling in the runtime
+        os.environ["TF_ENABLE_EAGER_CLIENT_STREAMING_ENQUEUE"] = "False"
 
-    logging.info("%s is now connecting to cluster with cluster_spec: %r",
-                 self.__class__.__name__, cluster_spec)
-    remote.connect_to_cluster(
-        cluster_spec,
-        job_name=coordinator_name,
-        protocol=self._cluster_resolver.rpc_layer,
-        cluster_device_filters=device_filters)
+        logging.info(
+            "%s is now connecting to cluster with cluster_spec: %r",
+            self.__class__.__name__,
+            cluster_spec,
+        )
+        remote.connect_to_cluster(
+            cluster_spec,
+            job_name=coordinator_name,
+            protocol=self._cluster_resolver.rpc_layer,
+            cluster_device_filters=device_filters,
+        )
 
-    distribute_lib.distribution_strategy_replica_gauge.get_cell(
-        "ps_strategy_num_workers").set(self._num_workers)
-    distribute_lib.distribution_strategy_replica_gauge.get_cell(
-        "ps_strategy_num_ps").set(self._num_ps)
+        distribute_lib.distribution_strategy_replica_gauge.get_cell(
+            "ps_strategy_num_workers"
+        ).set(self._num_workers)
+        distribute_lib.distribution_strategy_replica_gauge.get_cell(
+            "ps_strategy_num_ps"
+        ).set(self._num_ps)
 
-  def _verify_args_and_config(self, cluster_resolver):
-    if not cluster_resolver.cluster_spec():
-      raise ValueError("Cluster spec must be non-empty in "
-                       "`tf.distribute.cluster_resolver.ClusterResolver`.")
-    cluster_spec = cluster_resolver.cluster_spec()
+    def _verify_args_and_config(self, cluster_resolver):
+        if not cluster_resolver.cluster_spec():
+            raise ValueError(
+                "Cluster spec must be non-empty in "
+                "`tf.distribute.cluster_resolver.ClusterResolver`."
+            )
+        cluster_spec = cluster_resolver.cluster_spec()
 
-    # The following checks if the task types are allowed (chief, ps, worker).
-    multi_worker_util._validate_cluster_spec(  # pylint: disable=protected-access
-        cluster_spec,
-        cluster_resolver.task_type,
-        cluster_resolver.task_id)
+        # The following checks if the task types are allowed (chief, ps, worker).
+        multi_worker_util._validate_cluster_spec(  # pylint: disable=protected-access
+            cluster_spec, cluster_resolver.task_type, cluster_resolver.task_id
+        )
 
-    if multi_worker_util.task_count(cluster_spec, "ps") < 1:
-      raise ValueError("There must be at least one ps.")
+        if multi_worker_util.task_count(cluster_spec, "ps") < 1:
+            raise ValueError("There must be at least one ps.")
 
-    if multi_worker_util.task_count(cluster_spec, "worker") < 1:
-      raise ValueError("There must be at least one worker.")
+        if multi_worker_util.task_count(cluster_spec, "worker") < 1:
+            raise ValueError("There must be at least one worker.")
 
 
 class ParameterServerStrategyV2Extended(
-    parameter_server_strategy.ParameterServerStrategyExtended):
-  """Extended class for ParameterServerStrategyV2.
+    parameter_server_strategy.ParameterServerStrategyExtended
+):
+    """Extended class for ParameterServerStrategyV2.
 
   Please see `tf.distribute.StrategyExtended` doc for more information.
   """
 
-  def __init__(self, container_strategy, cluster_resolver,
-               variable_partitioner):
-    """Initialization of ParameterServerStrategyV2Extended."""
-    super(ParameterServerStrategyV2Extended, self).__init__(container_strategy)
-    self._num_ps = len(cluster_resolver.cluster_spec().as_dict().get("ps", []))
-    self._num_workers = len(cluster_resolver.cluster_spec().as_dict().get(
-        "worker", []))
-    self._variable_count = 0
+    def __init__(self, container_strategy, cluster_resolver, variable_partitioner):
+        """Initialization of ParameterServerStrategyV2Extended."""
+        super(ParameterServerStrategyV2Extended, self).__init__(container_strategy)
+        self._num_ps = len(cluster_resolver.cluster_spec().as_dict().get("ps", []))
+        self._num_workers = len(
+            cluster_resolver.cluster_spec().as_dict().get("worker", [])
+        )
+        self._variable_count = 0
 
-    self._variable_partitioner = variable_partitioner
-    # The following two attrs are to verify that `ParameterServerStrategy`
-    # methods are properly used with a `ClusterCoordinator`.
-    self._used_with_coordinator = False
-    self._being_scheduled = False
-    self._set_num_gpus()
-    distribute_lib.distribution_strategy_replica_gauge.get_cell(
-        "num_gpus_per_worker").set(self._num_gpus_per_worker)
+        self._variable_partitioner = variable_partitioner
+        # The following two attrs are to verify that `ParameterServerStrategy`
+        # methods are properly used with a `ClusterCoordinator`.
+        self._used_with_coordinator = False
+        self._being_scheduled = False
+        self._set_num_gpus()
+        distribute_lib.distribution_strategy_replica_gauge.get_cell(
+            "num_gpus_per_worker"
+        ).set(self._num_gpus_per_worker)
 
-    # Don't canonicalize the devices here since this code is executed on Chief,
-    # but we want the reduce evaluation to be done on each worker. Placer will
-    # automatically choose the right device based on current context.
-    # TODO(ishark): Use select_cross_device_ops instead.
-    self._cross_device_ops = cross_device_ops_lib.ReductionToOneDevice(
-        reduce_to_device="/device:CPU:0")
-    self._cross_device_ops._canonicalize_devices = False  # pylint: disable=protected-access
-    self._allow_run_without_coordinator = False
+        # Don't canonicalize the devices here since this code is executed on Chief,
+        # but we want the reduce evaluation to be done on each worker. Placer will
+        # automatically choose the right device based on current context.
+        # TODO(ishark): Use select_cross_device_ops instead.
+        self._cross_device_ops = cross_device_ops_lib.ReductionToOneDevice(
+            reduce_to_device="/device:CPU:0"
+        )
+        self._cross_device_ops._canonicalize_devices = (
+            False
+        )  # pylint: disable=protected-access
+        self._allow_run_without_coordinator = False
 
-  def _set_num_gpus(self):
-    devices = config.list_logical_devices("GPU")
-    per_worker_gpus = {}
-    for d in devices:
-      d_spec = tf_device.DeviceSpec.from_string(d.name)
-      if d_spec.device_type == "GPU" and d_spec.job == "worker":
-        # TODO(b/167894802): update if worker name is customizable
-        job_spec = d_spec.replace(device_type=None, device_index=None)
-        per_worker_gpus[job_spec] = per_worker_gpus.get(job_spec, 0) + 1
+    def _set_num_gpus(self):
+        devices = config.list_logical_devices("GPU")
+        per_worker_gpus = {}
+        for d in devices:
+            d_spec = tf_device.DeviceSpec.from_string(d.name)
+            if d_spec.device_type == "GPU" and d_spec.job == "worker":
+                # TODO(b/167894802): update if worker name is customizable
+                job_spec = d_spec.replace(device_type=None, device_index=None)
+                per_worker_gpus[job_spec] = per_worker_gpus.get(job_spec, 0) + 1
 
-    num_gpus = 0
-    for _, count in per_worker_gpus.items():
-      if num_gpus > 0 and count != num_gpus:
-        raise ValueError("Mismatched number of GPUs per worker")
-      num_gpus = count
+        num_gpus = 0
+        for _, count in per_worker_gpus.items():
+            if num_gpus > 0 and count != num_gpus:
+                raise ValueError("Mismatched number of GPUs per worker")
+            num_gpus = count
 
-    self._num_gpus_per_worker = num_gpus
-    logging.info(f"Number of GPUs on workers: {self._num_gpus_per_worker}")
+        self._num_gpus_per_worker = num_gpus
+        logging.info(f"Number of GPUs on workers: {self._num_gpus_per_worker}")
 
-  @property
-  def _num_replicas_in_sync(self):
-    return self._num_gpus_per_worker or 1
+    @property
+    def _num_replicas_in_sync(self):
+        return self._num_gpus_per_worker or 1
 
-  def _create_var_creator(self, next_creator, **kwargs):
-    aggregation = kwargs.pop("aggregation", vs.VariableAggregation.NONE)
+    def _create_var_creator(self, next_creator, **kwargs):
+        aggregation = kwargs.pop("aggregation", vs.VariableAggregation.NONE)
 
-    def var_creator(**kwargs):
-      """Create an AggregatingVariable."""
-      # Create and wrap the variable.
-      v = next_creator(**kwargs)
-      wrapped_v = ps_values.CachingVariable(v)
-      wrapped = ps_values.AggregatingVariable(self._container_strategy(),
-                                              wrapped_v, aggregation)
-      return wrapped
+        def var_creator(**kwargs):
+            """Create an AggregatingVariable."""
+            # Create and wrap the variable.
+            v = next_creator(**kwargs)
+            wrapped_v = ps_values.CachingVariable(v)
+            wrapped = ps_values.AggregatingVariable(
+                self._container_strategy(), wrapped_v, aggregation
+            )
+            return wrapped
 
-    if self._num_replicas_in_sync > 1:
-      if aggregation not in (
-          vs.VariableAggregation.NONE,
-          vs.VariableAggregation.SUM,
-          vs.VariableAggregation.MEAN,
-          vs.VariableAggregation.ONLY_FIRST_REPLICA
-      ):
-        raise ValueError("Invalid variable aggregation mode: " + aggregation +
-                         " for variable: " + kwargs["name"])
-      return var_creator
-    else:
-      def variable_creator_single_replica(**kwargs):
-        v = next_creator(**kwargs)
-        return ps_values.CachingVariable(v)
-      return variable_creator_single_replica
+        if self._num_replicas_in_sync > 1:
+            if aggregation not in (
+                vs.VariableAggregation.NONE,
+                vs.VariableAggregation.SUM,
+                vs.VariableAggregation.MEAN,
+                vs.VariableAggregation.ONLY_FIRST_REPLICA,
+            ):
+                raise ValueError(
+                    "Invalid variable aggregation mode: "
+                    + aggregation
+                    + " for variable: "
+                    + kwargs["name"]
+                )
+            return var_creator
+        else:
 
-  def _create_variable(self, next_creator, **kwargs):
-    """Implements StrategyExtendedV2._create_variable.
+            def variable_creator_single_replica(**kwargs):
+                v = next_creator(**kwargs)
+                return ps_values.CachingVariable(v)
+
+            return variable_creator_single_replica
+
+    def _create_variable(self, next_creator, **kwargs):
+        """Implements StrategyExtendedV2._create_variable.
 
     Creates a `Variable` or a `ShardedVariable`. A `ShardedVariable` will be
     created if satisfying all the following criteria:
@@ -631,249 +656,274 @@ class ParameterServerStrategyV2Extended(
       A `Variable` or `ShardedVariable`.
     """
 
-    var_creator = self._create_var_creator(next_creator, **kwargs)
-    if "colocate_with" in kwargs:  # Never partition colocated_with variables.
-      colocate_with = kwargs["colocate_with"]
-      # Clear the variable scope to avoid possible conflicts between device
-      # scope and colocation scope.
-      with ops.device(None):
-        with ops.colocate_with(colocate_with):
-          var = var_creator(**kwargs)
-          logging.debug(
-              "Creating variable (name:%s, shape:%r) that colocates with %s",
-              var.name, var.shape, kwargs["colocate_with"].name)
-          return var
+        var_creator = self._create_var_creator(next_creator, **kwargs)
+        if "colocate_with" in kwargs:  # Never partition colocated_with variables.
+            colocate_with = kwargs["colocate_with"]
+            # Clear the variable scope to avoid possible conflicts between device
+            # scope and colocation scope.
+            with ops.device(None):
+                with ops.colocate_with(colocate_with):
+                    var = var_creator(**kwargs)
+                    logging.debug(
+                        "Creating variable (name:%s, shape:%r) that colocates with %s",
+                        var.name,
+                        var.shape,
+                        kwargs["colocate_with"].name,
+                    )
+                    return var
 
-    if self._variable_partitioner is None:
-      return self._create_variable_round_robin(var_creator, **kwargs)
+        if self._variable_partitioner is None:
+            return self._create_variable_round_robin(var_creator, **kwargs)
 
-    name = kwargs.get("name", None)
-    initial_value = kwargs.get("initial_value", None)
-    if initial_value is None:
-      raise ValueError(
-          "It looks like you are using `ParameterServerStrategy` with a "
-          "`variable_partitioner`, and trying to create a variable without "
-          "specifying `initial_value`. This is not allowed. Please specify the "
-          "`initial_value`. This can also happen if you are trying to load a "
-          "saved_model within a `ParameterServerStrategy` scope. Loading a "
-          "saved_model with `variable_partitioner` is not supported.")
+        name = kwargs.get("name", None)
+        initial_value = kwargs.get("initial_value", None)
+        if initial_value is None:
+            raise ValueError(
+                "It looks like you are using `ParameterServerStrategy` with a "
+                "`variable_partitioner`, and trying to create a variable without "
+                "specifying `initial_value`. This is not allowed. Please specify the "
+                "`initial_value`. This can also happen if you are trying to load a "
+                "saved_model within a `ParameterServerStrategy` scope. Loading a "
+                "saved_model with `variable_partitioner` is not supported."
+            )
 
-    # Two cases where initial_value can be a callable:
-    #   1. initial_value is passed as a callable, e.g, an `initializer` class.
-    #   2. restoring from checkpoint, initial_value is a
-    #     "CheckpointInitialValueCallable".
-    init_from_fn = callable(initial_value)
+        # Two cases where initial_value can be a callable:
+        #   1. initial_value is passed as a callable, e.g, an `initializer` class.
+        #   2. restoring from checkpoint, initial_value is a
+        #     "CheckpointInitialValueCallable".
+        init_from_fn = callable(initial_value)
 
-    dtype = kwargs.get("dtype", None)
-    shape = kwargs.get("shape", None)
-    if init_from_fn and (shape is None or dtype is None):
-      init_from_fn = False
-      initial_value = initial_value()
-    if not init_from_fn:
-      # The initial_value is created on coordinator, it will need to be sent to
-      # ps for variable initialization, which can be inefficient and can
-      # potentially hit the 2GB limit on protobuf serialization.
-      initial_value = ops.convert_to_tensor(initial_value, dtype=dtype)
-      dtype = initial_value.dtype
-      shape = initial_value.shape
-    else:
-      shape = tensor_shape.as_shape(shape)
-
-    if shape.rank == 0:  # Skip partitioning rank-0 variable.
-      return self._create_variable_round_robin(var_creator, **kwargs)
-
-    num_partitions = self._variable_partitioner(shape=shape, dtype=dtype)
-    if not num_partitions or num_partitions[0] == 0 or any(
-        v != 1 for v in num_partitions[1:]):
-      raise ValueError(
-          "variable_partitioner must return a list/tuple whose elements are 1"
-          " besides the first element (non-zero), got: %r" % num_partitions)
-
-    if num_partitions[0] == 1:  # no partition
-      return self._create_variable_round_robin(var_creator, **kwargs)
-
-    # Use "div" partition strategy to partition the variable.
-    num_partitions = min(num_partitions[0], shape[0])
-    base = shape[0] // num_partitions
-    extra = shape[0] % num_partitions
-    # An example: num_partitions=4, shape[0]=10, partitions: [3, 3, 2, 2]
-    # offsets: [0, 3, 6, 8, 10]
-    offsets = []
-    for i in range(num_partitions):
-      if i == 0:
-        offsets.append(0)
-      else:
-        prev_shard_size = base + (1 if i - 1 < extra else 0)
-        offsets.append(offsets[i - 1] + prev_shard_size)
-    offsets.append(shape[0])
-
-    def init_shard_fn(shard_index):
-      if not init_from_fn:
-        logging.log_if(
-            logging.WARN, _INEFFICIENT_INIT_WARNING % name, shard_index == 0 and
-            shape.num_elements() > _LARGE_VARIABLE_NUM_ELEMENTS)
-        return initial_value[offsets[shard_index]:offsets[shard_index + 1]]
-      partition_shape = (offsets[shard_index + 1] -
-                         offsets[shard_index],) + shape[1:]
-      partition_offset = (offsets[shard_index],) + (0,) * len(shape[1:])
-      arg_spec = tf_inspect.getfullargspec(initial_value)
-      if ("shard_info" not in arg_spec.args and
-          "shard_info" not in arg_spec.kwonlyargs):
-        try:
-          value = initial_value(
-              partition_shape=partition_shape,
-              partition_offset=partition_offset)
-        except (TypeError, ValueError):
-          # TypeError: Initializer doesn't accept kwargs
-          # ValueError: Initializer doesn't accept partition kwargs
-          # In both cases we go ahead creating the full value and then slice.
-          value = initial_value()
-
-        if value.shape == partition_shape:
-          # Initializer supports partition: value is the partition value.
-          return value
+        dtype = kwargs.get("dtype", None)
+        shape = kwargs.get("shape", None)
+        if init_from_fn and (shape is None or dtype is None):
+            init_from_fn = False
+            initial_value = initial_value()
+        if not init_from_fn:
+            # The initial_value is created on coordinator, it will need to be sent to
+            # ps for variable initialization, which can be inefficient and can
+            # potentially hit the 2GB limit on protobuf serialization.
+            initial_value = ops.convert_to_tensor(initial_value, dtype=dtype)
+            dtype = initial_value.dtype
+            shape = initial_value.shape
         else:
-          # Initializer doesn't support partition: value is the full value
-          # and needs to be sliced to get the partition value.
-          logging.log_if(
-              logging.WARN, _INEFFICIENT_INIT_WARNING % name,
-              shard_index == 0 and
-              shape.num_elements() > _LARGE_VARIABLE_NUM_ELEMENTS)
-          return value[offsets[shard_index]:offsets[shard_index + 1]]
-      else:
-        # For compatibility with `CheckpointInitialValueCallable`.
-        return initial_value(
-            shard_info=trackable.ShardInfo(
-                shape=tensor_shape.as_shape(partition_shape),
-                offset=partition_offset))
+            shape = tensor_shape.as_shape(shape)
 
-    var_list = []
-    for i in range(num_partitions):
-      kwargs["shape"] = (offsets[i + 1] - offsets[i],) + shape[1:]
-      kwargs["initial_value"] = lambda: init_shard_fn(i)
-      if name is not None:
-        kwargs["name"] = "{}/part_{}".format(name, i)
-      var_list.append(self._create_variable_round_robin(var_creator, **kwargs))
+        if shape.rank == 0:  # Skip partitioning rank-0 variable.
+            return self._create_variable_round_robin(var_creator, **kwargs)
 
-    result = sharded_variable.ShardedVariable(var_list)
-    return result
+        num_partitions = self._variable_partitioner(shape=shape, dtype=dtype)
+        if (
+            not num_partitions
+            or num_partitions[0] == 0
+            or any(v != 1 for v in num_partitions[1:])
+        ):
+            raise ValueError(
+                "variable_partitioner must return a list/tuple whose elements are 1"
+                " besides the first element (non-zero), got: %r" % num_partitions
+            )
 
-  def _create_variable_round_robin(self, next_creator, **kwargs):
-    # Clear the colocation scope to avoid possible conflicts between device
-    # scope and colocation scope.
-    with ops.colocate_with(None, ignore_existing=True):
-      # Explicitly set CPU:0 device for PS in case create variable is called
-      # inside replica_fn and worker has with GPU:0 scope.
-      with ops.device("/job:ps/task:%d/device:CPU:0" %
-                      (self._variable_count % self._num_ps)):
-        var = next_creator(**kwargs)
-        logging.debug(
-            "Creating variable (name:%s, shape:%r) on "
-            "/job:ps/task:%d/device:CPU:0",
-            var.name, var.shape, (self._variable_count % self._num_ps))
-        self._variable_count += 1
-        return var
+        if num_partitions[0] == 1:  # no partition
+            return self._create_variable_round_robin(var_creator, **kwargs)
 
-  def _assert_used_with_cluster_coordinator(self):
-    if (not self._used_with_coordinator and
-        not self._allow_run_without_coordinator):
-      raise NotImplementedError(
-          "`tf.distribute.experimental.ParameterServerStrategy` must be used "
-          "with `tf.distribute.experimental.coordinator.ClusterCoordinator` in "
-          "a custom training loop. If you are using `Model.fit`, please supply "
-          "a dataset function directly to a "
-          "`tf.keras.utils.experimental.DatasetCreator` instead.")
+        # Use "div" partition strategy to partition the variable.
+        num_partitions = min(num_partitions[0], shape[0])
+        base = shape[0] // num_partitions
+        extra = shape[0] % num_partitions
+        # An example: num_partitions=4, shape[0]=10, partitions: [3, 3, 2, 2]
+        # offsets: [0, 3, 6, 8, 10]
+        offsets = []
+        for i in range(num_partitions):
+            if i == 0:
+                offsets.append(0)
+            else:
+                prev_shard_size = base + (1 if i - 1 < extra else 0)
+                offsets.append(offsets[i - 1] + prev_shard_size)
+        offsets.append(shape[0])
 
-  def _assert_being_scheduled_by_cluster_coordinator(self):
-    if not self._being_scheduled and not self._allow_run_without_coordinator:
-      logging.warning(
-          "It is detected that a function used with "
-          "`tf.distribute.experimental.ParameterServerStrategy` "
-          "is executed locally on the coordinator. This is inefficient but may "
-          "be valid for one-off tasks such as inferring output signature. "
-          "To properly distribute functions to run on workers, `run` or "
-          "`reduce` should be used within a function passed to `"
-          "tf.distribute.experimental.coordinator.ClusterCoordinator.schedule`."
-      )
+        def init_shard_fn(shard_index):
+            if not init_from_fn:
+                logging.log_if(
+                    logging.WARN,
+                    _INEFFICIENT_INIT_WARNING % name,
+                    shard_index == 0
+                    and shape.num_elements() > _LARGE_VARIABLE_NUM_ELEMENTS,
+                )
+                return initial_value[offsets[shard_index] : offsets[shard_index + 1]]
+            partition_shape = (
+                offsets[shard_index + 1] - offsets[shard_index],
+            ) + shape[1:]
+            partition_offset = (offsets[shard_index],) + (0,) * len(shape[1:])
+            arg_spec = tf_inspect.getfullargspec(initial_value)
+            if (
+                "shard_info" not in arg_spec.args
+                and "shard_info" not in arg_spec.kwonlyargs
+            ):
+                try:
+                    value = initial_value(
+                        partition_shape=partition_shape,
+                        partition_offset=partition_offset,
+                    )
+                except (TypeError, ValueError):
+                    # TypeError: Initializer doesn't accept kwargs
+                    # ValueError: Initializer doesn't accept partition kwargs
+                    # In both cases we go ahead creating the full value and then slice.
+                    value = initial_value()
 
-  # options is not used right now. But we may want to support options while
-  # creating InputWorkers in future, similar to MirroredStrategy.
-  def _input_workers_with_options(self, options=None):
-    input_workers_devices = (
-        ("/device:CPU:0", self.worker_devices),)
-    return input_lib.InputWorkers(
-        input_workers_devices, canonicalize_devices=False)
+                if value.shape == partition_shape:
+                    # Initializer supports partition: value is the partition value.
+                    return value
+                else:
+                    # Initializer doesn't support partition: value is the full value
+                    # and needs to be sliced to get the partition value.
+                    logging.log_if(
+                        logging.WARN,
+                        _INEFFICIENT_INIT_WARNING % name,
+                        shard_index == 0
+                        and shape.num_elements() > _LARGE_VARIABLE_NUM_ELEMENTS,
+                    )
+                    return value[offsets[shard_index] : offsets[shard_index + 1]]
+            else:
+                # For compatibility with `CheckpointInitialValueCallable`.
+                return initial_value(
+                    shard_info=trackable.ShardInfo(
+                        shape=tensor_shape.as_shape(partition_shape),
+                        offset=partition_offset,
+                    )
+                )
 
-  def _experimental_distribute_dataset(self, dataset, options):
-    input_workers_devices = self._input_workers_with_options()
+        var_list = []
+        for i in range(num_partitions):
+            kwargs["shape"] = (offsets[i + 1] - offsets[i],) + shape[1:]
+            kwargs["initial_value"] = lambda: init_shard_fn(i)
+            if name is not None:
+                kwargs["name"] = "{}/part_{}".format(name, i)
+            var_list.append(self._create_variable_round_robin(var_creator, **kwargs))
 
-    # If this DistributedDataset is created outside ClusterCoordinator, i,e,
-    # outside a tf.function, we don't build its underlying datasets immediately
-    # until it is passed to ClusterCoordinator.create_per_worker_dataset.
-    return input_lib.get_distributed_dataset(
-        dataset,
-        input_workers_devices,
-        self._container_strategy(),
-        num_replicas_in_sync=self._num_replicas_in_sync,
-        options=options,
-        build=ops.inside_function())  # will be built by ClusterCoordinator
+        result = sharded_variable.ShardedVariable(var_list)
+        return result
 
-  def _distribute_datasets_from_function(self, dataset_fn, options):
-    # There is no synchronization beyond a worker and thus, the number of
-    # input pipelines in sync is only 1 per worker.
-    input_pipeline_id_in_sync = 0
-    num_input_pipelines_in_sync = 1
+    def _create_variable_round_robin(self, next_creator, **kwargs):
+        # Clear the colocation scope to avoid possible conflicts between device
+        # scope and colocation scope.
+        with ops.colocate_with(None, ignore_existing=True):
+            # Explicitly set CPU:0 device for PS in case create variable is called
+            # inside replica_fn and worker has with GPU:0 scope.
+            with ops.device(
+                "/job:ps/task:%d/device:CPU:0" % (self._variable_count % self._num_ps)
+            ):
+                var = next_creator(**kwargs)
+                logging.debug(
+                    "Creating variable (name:%s, shape:%r) on "
+                    "/job:ps/task:%d/device:CPU:0",
+                    var.name,
+                    var.shape,
+                    (self._variable_count % self._num_ps),
+                )
+                self._variable_count += 1
+                return var
 
-    input_context = distribute_lib.InputContext(
-        num_input_pipelines=num_input_pipelines_in_sync,
-        input_pipeline_id=input_pipeline_id_in_sync,
-        num_replicas_in_sync=self._num_replicas_in_sync)
+    def _assert_used_with_cluster_coordinator(self):
+        if not self._used_with_coordinator and not self._allow_run_without_coordinator:
+            raise NotImplementedError(
+                "`tf.distribute.experimental.ParameterServerStrategy` must be used "
+                "with `tf.distribute.experimental.coordinator.ClusterCoordinator` in "
+                "a custom training loop. If you are using `Model.fit`, please supply "
+                "a dataset function directly to a "
+                "`tf.keras.utils.experimental.DatasetCreator` instead."
+            )
 
-    # If this DistributedDatasetFromFunction is created outside
-    # ClusterCoordinator, i,e, outside a tf.function, we don't build its
-    # underlying datasets immediately until it is passed to
-    # ClusterCoordinator.create_per_worker_dataset.
-    return input_lib.get_distributed_datasets_from_function(
-        dataset_fn,
-        self._input_workers_with_options(options),
-        [input_context],
-        self._container_strategy(),
-        options=options,
-        build=ops.inside_function())  # will be built by ClusterCoordinator
+    def _assert_being_scheduled_by_cluster_coordinator(self):
+        if not self._being_scheduled and not self._allow_run_without_coordinator:
+            logging.warning(
+                "It is detected that a function used with "
+                "`tf.distribute.experimental.ParameterServerStrategy` "
+                "is executed locally on the coordinator. This is inefficient but may "
+                "be valid for one-off tasks such as inferring output signature. "
+                "To properly distribute functions to run on workers, `run` or "
+                "`reduce` should be used within a function passed to `"
+                "tf.distribute.experimental.coordinator.ClusterCoordinator.schedule`."
+            )
 
-  @property
-  def worker_devices(self):
-    num_gpus = self._num_gpus_per_worker
-    if num_gpus > 0:
-      compute_devices = tuple("/device:GPU:%d" % (i,) for i in range(num_gpus))
-    else:
-      compute_devices = ("/device:CPU:0",)
-    return compute_devices
+    # options is not used right now. But we may want to support options while
+    # creating InputWorkers in future, similar to MirroredStrategy.
+    def _input_workers_with_options(self, options=None):
+        input_workers_devices = (("/device:CPU:0", self.worker_devices),)
+        return input_lib.InputWorkers(input_workers_devices, canonicalize_devices=False)
 
-  def _call_for_each_replica(self, fn, args, kwargs):
-    self._assert_being_scheduled_by_cluster_coordinator()
+    def _experimental_distribute_dataset(self, dataset, options):
+        input_workers_devices = self._input_workers_with_options()
 
-    return mirrored_run.call_for_each_replica(self._container_strategy(), fn,
-                                              args, kwargs)
+        # If this DistributedDataset is created outside ClusterCoordinator, i,e,
+        # outside a tf.function, we don't build its underlying datasets immediately
+        # until it is passed to ClusterCoordinator.create_per_worker_dataset.
+        return input_lib.get_distributed_dataset(
+            dataset,
+            input_workers_devices,
+            self._container_strategy(),
+            num_replicas_in_sync=self._num_replicas_in_sync,
+            options=options,
+            build=ops.inside_function(),
+        )  # will be built by ClusterCoordinator
 
-  def _reduce(self, reduce_op, value):
-    self._assert_being_scheduled_by_cluster_coordinator()
-    dst = device_util.current() or self._default_device or "/device:CPU:0"
-    destinations = device_util.canonicalize_without_job_and_task(dst)
-    result = self._local_results(
-        self.reduce_to(reduce_op, value, destinations))[0]
-    return result
+    def _distribute_datasets_from_function(self, dataset_fn, options):
+        # There is no synchronization beyond a worker and thus, the number of
+        # input pipelines in sync is only 1 per worker.
+        input_pipeline_id_in_sync = 0
+        num_input_pipelines_in_sync = 1
 
-  def _reduce_to(self, reduce_op, value, destinations, options):
-    self._assert_being_scheduled_by_cluster_coordinator()
+        input_context = distribute_lib.InputContext(
+            num_input_pipelines=num_input_pipelines_in_sync,
+            input_pipeline_id=input_pipeline_id_in_sync,
+            num_replicas_in_sync=self._num_replicas_in_sync,
+        )
 
-    def get_values(x):
-      if isinstance(x, values.DistributedValues):
-        return self._cross_device_ops.reduce(
-            reduce_op, x, destinations=destinations)  # pylint: disable=protected-access
-      return x
+        # If this DistributedDatasetFromFunction is created outside
+        # ClusterCoordinator, i,e, outside a tf.function, we don't build its
+        # underlying datasets immediately until it is passed to
+        # ClusterCoordinator.create_per_worker_dataset.
+        return input_lib.get_distributed_datasets_from_function(
+            dataset_fn,
+            self._input_workers_with_options(options),
+            [input_context],
+            self._container_strategy(),
+            options=options,
+            build=ops.inside_function(),
+        )  # will be built by ClusterCoordinator
 
-    return nest.map_structure(get_values, value)
+    @property
+    def worker_devices(self):
+        num_gpus = self._num_gpus_per_worker
+        if num_gpus > 0:
+            compute_devices = tuple("/device:GPU:%d" % (i,) for i in range(num_gpus))
+        else:
+            compute_devices = ("/device:CPU:0",)
+        return compute_devices
+
+    def _call_for_each_replica(self, fn, args, kwargs):
+        self._assert_being_scheduled_by_cluster_coordinator()
+
+        return mirrored_run.call_for_each_replica(
+            self._container_strategy(), fn, args, kwargs
+        )
+
+    def _reduce(self, reduce_op, value):
+        self._assert_being_scheduled_by_cluster_coordinator()
+        dst = device_util.current() or self._default_device or "/device:CPU:0"
+        destinations = device_util.canonicalize_without_job_and_task(dst)
+        result = self._local_results(self.reduce_to(reduce_op, value, destinations))[0]
+        return result
+
+    def _reduce_to(self, reduce_op, value, destinations, options):
+        self._assert_being_scheduled_by_cluster_coordinator()
+
+        def get_values(x):
+            if isinstance(x, values.DistributedValues):
+                return self._cross_device_ops.reduce(
+                    reduce_op, x, destinations=destinations
+                )  # pylint: disable=protected-access
+            return x
+
+        return nest.map_structure(get_values, value)
 
 
 # The warning that will be logged if the way we initialize sharded variables
@@ -885,6 +935,7 @@ _INEFFICIENT_INIT_WARNING = (
     "footprint, explicitly specify `dtype` and `shape` when creating "
     "variables, and use `tf.initializers` to initialize the variable. "
     "Note that some initializers (e.g., orthogonal) don't support "
-    "memory-efficient initialization and there is not much you can do here.")
+    "memory-efficient initialization and there is not much you can do here."
+)
 
 _LARGE_VARIABLE_NUM_ELEMENTS = 1e9

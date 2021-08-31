@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./../../../assets/style.css" />
+  <link rel="stylesheet" href="./../../../assets/prism.css" />
+  <script async src="./../../../assets/prism.js"></script>
+</head>
+
+<body>
+
+
+  <a href="https://github.com/bgoonz/DS-ALGO-OFFICIAL" class="github-corner" aria-label="View source on Github"><svg
+      width="80" height="80" viewBox="0 0 250 250"
+      style="z-index: 100000; fill:#194ccdaf; color:#fff; position: fixed; top: 20px; border: 0; left: 20px; transform: scale(-1.5, 1.5);"
+      aria-hidden="true">
+      <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+      <path
+        d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+        fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+      </path>
+      <path
+        d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+        fill="currentColor" class="octo-body"></path>
+    </svg></a>
+
+
+
+
+
+
+
+  <p>// Recursive Boolean</p>
+  <div id=">
+  pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a title="1"><span>function</span>
+        <span>recurBSearch</span>(array<span>,</span> target) <span>{</span></a>
+      <a title="2"> <span>// Our base case:</span></a>
+      <a title="3"> <span>// If our array is empty, we do not have the target</span></a>
+      <a title="4"> <span>if</span> (<span>array</span>.<span>length</span> <span>===</span> <span>0</span>)
+        <span>{</span></a>
+      <a title="5"> <span>return</span> <span>false;</span></a>
+      <a id=-6" title="6"> <span>}</span></a>
+      <a title="7"></a>
+      <a title="8"> <span>// Get a reference to the middle index, and middle element</span></a>
+      <a title="9"> <span>const</span> midIdx <span>=</span>
+        <span>Math</span>.<span>floor</span>(<span>array</span>.<span>length</span> / <span>2</span>)<span>;</span></a>
+      <a id=-10" title="10"> <span>const</span> midEl <span>=</span> array[midIdx]</a>
+      <a title="11"> <span>// We get a subarray that represents our left half by slicing up to but not</span></a>
+      <a id=-12" title="12"> <span>// including our midIdx.</span></a>
+      <a id=-13" title="13"> <span>const</span> leftHalf <span>=</span>
+        <span>array</span>.<span>slice</span>(<span>0,</span> midIdx)<span>;</span></a>
+      <a id=-14" title="14"> <span>// We get a subarray that represents our right half by slicing from the</span></a>
+      <a id=-15" title="15"> <span>// midIdx + 1 all the way to the end of our array (no second argument
+          needed).</span></a>
+      <a id=-16" title="16"> <span>const</span> rightHalf <span>=</span> <span>array</span>.<span>slice</span>(midIdx
+        <span>+</span> <span>1</span>)<span>;</span></a>
+      <a id=-17" title="17"> <span>// If our target is smaller than the middle element, repeat this process
+          with</span></a>
+      <a id=-18" title="18"> <span>// the left half of our array.</span></a>
+      <a id=-19" title="19"> <span>if</span> (target <span>&lt;</span> midEl) <span>{</span></a>
+      <a id=-20" title="20"> <span>return</span> <span>recurBSearch</span>(leftHalf<span>,</span>
+        target)<span>;</span></a>
+      <a id=-21" title="21"> <span>}</span></a>
+      <a id=-22" title="22"> <span>// If our target is larger than the middle element, repeat this process
+          with</span></a>
+      <a id=-23" title="23"> <span>// the right half of our array.</span></a>
+      <a id=-24" title="24"> <span>else</span> <span>if</span> (target <span>&gt;</span> midEl) <span>{</span></a>
+      <a id=-25" title="25"> <span>return</span> <span>recurBSearch</span>(rightHalf<span>,</span>
+        target)<span>;</span></a>
+      <a id=-26" title="26"> <span>}</span></a>
+      <a id=-27" title="27"> <span>// If neither of these occurred, we found our element and return true.</span></a>
+      <a id=-28" title="28"> <span>else</span> <span>{</span></a>
+      <a id=-29" title="29"> <span>return</span> <span>true;</span></a>
+      <a id=-30" title="30"> <span>}</span></a>
+      <a id=-31" title="31"><span>}</span></a></code></pre>
+  </div>
+  <p>// Iterative Boolean</p>
+  <div id=">
+  pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a title="1"><span>function</span>
+        <span>iterBSearch</span>(array<span>,</span> target) <span>{</span></a>
+      <a id=-2" title="2"> <span>// Get a reference to our lower and upper bounds that we would like to
+          search</span></a>
+      <a id=-3" title="3"> <span>// within our array. At the start, this is the entire array, so the indices
+          are</span></a>
+      <a id=-4" title="4"> <span>// 0 and our length - 1.</span></a>
+      <a id=-5" title="5"> <span>let</span> lowerIdx <span>=</span> <span>0;</span></a>
+      <a id=-6" title="6"> <span>let</span> upperIdx <span>=</span> <span>array</span>.<span>length</span>
+        <span>-</span> <span>1;</span></a>
+      <a id=-7" title="7"> <span>// We also create a midIdx variable because we will reassign it at each
+          iteration</span></a>
+      <a id=-8" title="8"> <span>let</span> midIdx<span>;</span></a>
+      <a id=-9" title="9"></a>
+      <a id=-10" title="10"> <span>// While our lowerIdx &lt;= upperIdx, we still have elements that we haven&#39;t
+          ruled</span></a>
+      <a id=-11" title="11"> <span>// out as being our target, so we want our iteration to continue.</span></a>
+      <a id=-12" title="12"> <span>while</span> (lowerIdx <span>&lt;=</span> upperIdx) <span>{</span></a>
+      <a id=-13" title="13"> <span>// Get a reference to the middle element within our current bounds.</span></a>
+      <a id=-14" title="14"> <span>// We are using Math.floor in order to get an integer/valid index.</span></a>
+      <a id=-15" title="15"> <span>// (If we used ceiling, we would have to do some subtraction in order to
+          get</span></a>
+      <a id=-16" title="16"> <span>// our first element. For example, [14] has a length 1, so</span></a>
+      <a id=-17" title="17"> <span>// Math.ceil((0 + 1)/2)) = 1, which is outside our bounds.</span></a>
+      <a id=-18" title="18"> midIdx <span>=</span> <span>Math</span>.<span>floor</span>((lowerIdx <span>+</span>
+        upperIdx) / <span>2</span>)<span>;</span></a>
+      <a id=-19" title="19"> <span>// If our target is larger than our current middle element, our lower
+          bound</span></a>
+      <a id=-20" title="20"> <span>// needs to be moved up past our midIdx so that we look at the right half.</span></a>
+      <a id=-21" title="21"> <span>if</span> (array[midIdx] <span>&lt;</span> target) <span>{</span></a>
+      <a id=-22" title="22"> lowerIdx <span>=</span> midIdx <span>+</span> <span>1;</span></a>
+      <a id=-23" title="23"> <span>// If our target is smaller than our current middle element, our upper
+          bound</span></a>
+      <a id=-24" title="24"> <span>// needs to be moved down past our midIdx so that we look at the left
+          half.</span></a>
+      <a id=-25" title="25"> <span>}</span> <span>else</span> <span>if</span> (array[midIdx] <span>&gt;</span> target)
+        <span>{</span></a>
+      <a id=-26" title="26"> upperIdx <span>=</span> midIdx <span>-</span> <span>1;</span></a>
+      <a id=-27" title="27"> <span>// Otherwise, we have found our target at the midIdx and can return true.</span></a>
+      <a id=-28" title="28"> <span>}</span> <span>else</span> <span>{</span></a>
+      <a id=-29" title="29"> <span>return</span> <span>true;</span></a>
+      <a id=-30" title="30"> <span>}</span></a>
+      <a id=-31" title="31"> <span>}</span></a>
+      <a id=-32" title="32"></a>
+      <a id=-33" title="33"> <span>// If we made it outside of our loop without returning, our target is not
+          in</span></a>
+      <a id=-34" title="34"> <span>// the array, so we can return false.</span></a>
+      <a id=-35" title="35"> <span>return</span> <span>false;</span></a>
+      <a id=-36" title="36"><span>}</span></a></code></pre>
+  </div>
+  <p>// Recursive Index</p>
+  <div id=">
+  pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a title="1"><span>function</span>
+        <span>recurBSearchIdx</span>(array<span>,</span> target) <span>{</span></a>
+      <a title="2"> <span>// Our base case</span></a>
+      <a title="3"> <span>// This is another way of checking if the length is 0</span></a>
+      <a id=-4" title="4"> <span>// Since 0 is a falsey value, !0 would be truthy, meaning our array is empty</span></a>
+      <a id=-5" title="5"> <span>// -1 here indicates that the value is not found (very common for -1 to be
+          used</span></a>
+      <a id=-6" title="6"> <span>// in these situations so that all return values are numbers)</span></a>
+      <a id=-7" title="7"> <span>if</span> (<span>!array</span>.<span>length</span>) <span>return</span>
+        <span>-1;</span></a>
+      <a id=-8" title="8"></a>
+      <a id=-9" title="9"> <span>// Getting a reference to our middle element for our comparisons</span></a>
+      <a id=-10" title="10"> <span>const</span> midIdx <span>=</span>
+        <span>Math</span>.<span>floor</span>(<span>array</span>.<span>length</span> / <span>2</span>)<span>;</span></a>
+      <a id=-11" title="11"> <span>const</span> midEl <span>=</span> array[midIdx]<span>;</span></a>
+      <a id=-12" title="12"></a>
+      <a id=-13" title="13"> <span>// We get a subarray that represents our left half by slicing up to but
+          not</span></a>
+      <a id=-14" title="14"> <span>// including our midIdx.</span></a>
+      <a id=-15" title="15"> <span>const</span> leftHalf <span>=</span>
+        <span>array</span>.<span>slice</span>(<span>0,</span> midIdx)<span>;</span></a>
+      <a id=-16" title="16"> <span>// We get a subarray that represents our right half by slicing from the</span></a>
+      <a id=-17" title="17"> <span>// midIdx + 1 all the way to the end of our array (no second argument
+          needed).</span></a>
+      <a id=-18" title="18"> <span>const</span> rightHalf <span>=</span> <span>array</span>.<span>slice</span>(midIdx
+        <span>+</span> <span>1</span>)<span>;</span></a>
+      <a id=-19" title="19"></a>
+      <a id=-20" title="20"> <span>// If our target is less than our current middle element, we can
+          recursively</span></a>
+      <a id=-21" title="21"> <span>// call our function with the left half of the array and return that
+          value.</span></a>
+      <a id=-22" title="22"> <span>if</span> (target <span>&lt;</span> midEl) <span>{</span></a>
+      <a id=-23" title="23"> <span>return</span> <span>recurBSearchIdx</span>(leftHalf<span>,</span>
+        target)<span>;</span></a>
+      <a id=-24" title="24"> <span>// If our target is greater than our current middle element we have two
+          scenarios</span></a>
+      <a id=-25" title="25"> <span>// The first scenario, we did not find our target in the subarray (right
+          side).</span></a>
+      <a id=-26" title="26"> <span>// In this case, we also want to return -1 to indicate that the value
+          isn&#39;t</span></a>
+      <a id=-27" title="27"> <span>// in our array.</span></a>
+      <a id=-28" title="28"> <span>// The second scenario is that we find our element in the subarray.</span></a>
+      <a id=-29" title="29"> <span>// In this case, the return value is going to be the index IN THE
+          SUBARRAY.</span></a>
+      <a id=-30" title="30"> <span>// In order for us to be able to return what index that corresponds to in</span></a>
+      <a id=-31" title="31"> <span>// our larger original array, we need to shift this value by where this</span></a>
+      <a id=-32" title="32"> <span>// subarray starts in our larger array.</span></a>
+      <a id=-33" title="33"> <span>// Ultimately this means taking our return value and adding on our midIdx +
+          1</span></a>
+      <a id=-34" title="34"> <span>// Take a look at the comments below this function for an example</span></a>
+      <a id=-35" title="35"> <span>}</span> <span>else</span> <span>if</span> (target <span>&gt;</span> midEl)
+        <span>{</span></a>
+      <a id=-36" title="36"> <span>const</span> idxShift <span>=</span>
+        <span>recurBSearchIdx</span>(rightHalf<span>,</span> target)</a>
+      <a id=-37" title="37"> <span>if</span> (idxShift <span>===</span> <span>-1</span>) <span>{</span></a>
+      <a id=-38" title="38"> <span>return</span> <span>-1</span></a>
+      <a id=-39" title="39"> <span>}</span></a>
+      <a id=-40" title="40"> <span>else</span> <span>{</span></a>
+      <a id=-41" title="41"> <span>return</span> idxShift <span>+</span> midIdx <span>+</span> <span>1</span></a>
+      <a id=-42" title="42"> <span>}</span></a>
+      <a id=-43" title="43"> <span>// If neither of the above cases are true, we found our element and return
+          that</span></a>
+      <a id=-44" title="44"> <span>// index (the midIdx that we compared)</span></a>
+      <a id=-45" title="45"> <span>}</span> <span>else</span> <span>{</span></a>
+      <a id=-46" title="46"> <span>return</span> midIdx<span>;</span></a>
+      <a id=-47" title="47"> <span>}</span></a>
+      <a id=-48" title="48"><span>}</span></a></code></pre>
+  </div>
+  <p>// Using the right-side shift example: // Array: [1, 2, 3, 4, 5], Target: 5 // The first index that we are going to
+    compare is Math.floor(array.length/2) = 2, // which is our element 3. // Our target is greater than this value, so
+    we
+    need to check the right subarray. // The new array is [4, 5] with the same target of 5. // In this recursive call,
+    the
+    index that we are checking is Math.floor(array.length/2) = 1, // which is our element 5. // Since we found our
+    element, we are hitting our last case of the conditional, // return our index of 1 to where our recursive function
+    was
+    called. // This value of 1 does not line up with the index of our original array, though, // it was the index of our
+    subarray. // In order to convert this into an index that aligns with our current, larger // array, we need to add on
+    the amount that the indices were shifted. Our slicing // of the subarray was acheived by taking the first three
+    elements off. We know // this intuitively, but it can be calculated by adding on our midIdx + 1 that // we
+    originally
+    passed to our slice method. // We end up getting our returned index from the recursion (1) added on to our // midIdx
+    +
+    1 (2 + 1), getting a final index of 4, which corresponds to where // our element is in the larger array. // This
+    shifting didn't have to take place on the left side because the indices // of the subarrays are the same as the
+    indices of our larger array (index 1 of // the left subarray is the same element as index 1 of the larger original).
+  </p>
+  <p>// Recursive Index v2</p>
+  <div id=">
+  pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a title="1"><span>function</span>
+        <span>recurBSearchIdxV2</span>(array<span>,</span> target<span>,</span> lo <span>=</span> <span>0,</span> hi
+        <span>=</span> <span>array</span>.<span>length</span> <span>-</span> <span>1</span>) <span>{</span></a>
+      <a id=-2" title="2"> <span>// I&#39;m adding a second condition to this base case that Alvin doesn&#39;t do.
+          It&#39;s</span></a>
+      <a id=-3" title="3"> <span>// possible that our last element of the array is the target, which would
+          mean</span></a>
+      <a id=-4" title="4"> <span>// that lo === hi, but we haven&#39;t checked that element yet.</span></a>
+      <a id=-5" title="5"> <span>// This second part of the condition will only ever be evaluated when the
+          first</span></a>
+      <a id=-6" title="6"> <span>// is true, making that final check.</span></a>
+      <a id=-7" title="7"> <span>// (This is an edge case that I don&#39;t think Alvin accounts for)</span></a>
+      <a id=-8" title="8"> <span>if</span> (lo <span>===</span> hi <span>&amp;&amp;</span> array[lo] <span>!==</span>
+        target) <span>{</span></a>
+      <a id=-9" title="9"> <span>return</span> <span>-1;</span></a>
+      <a id=-10" title="10"> <span>}</span></a>
+      <a id=-11" title="11"></a>
+      <a id=-12" title="12"> <span>let</span> midIdx <span>=</span> <span>Math</span>.<span>floor</span>((lo
+        <span>+</span> hi) / <span>2</span>)<span>;</span></a>
+      <a id=-13" title="13"></a>
+      <a id=-14" title="14"> <span>if</span> (target <span>&lt;</span> array[midIdx]) <span>{</span></a>
+      <a id=-15" title="15"> <span>return</span> <span>recurBSearchIdxV2</span>(array<span>,</span> target<span>,</span>
+        lo<span>,</span> midIdx)<span>;</span></a>
+      <a id=-16" title="16"> <span>}</span> <span>else</span> <span>if</span> (target <span>&gt;</span> array[midIdx])
+        <span>{</span></a>
+      <a id=-17" title="17"> <span>return</span> <span>recurBSearchIdxV2</span>(array<span>,</span> target<span>,</span>
+        midIdx <span>+</span> <span>1,</span> hi)<span>;</span></a>
+      <a id=-18" title="18"> <span>}</span> <span>else</span> <span>{</span></a>
+      <a id=-19" title="19"> <span>return</span> midIdx<span>;</span></a>
+      <a id=-20" title="20"> <span>}</span></a>
+      <a id=-21" title="21"><span>}</span></a></code></pre>
+  </div>
+  <p>// Iterative Index</p>
+  <div>
+    pre data-role="codeBlock" data-info="js" class="language-javascript" ><code><a title="1"><span>function</span>
+        <span>iterBSearchIdx</span>(array<span>,</span> target) <span>{</span></a>
+      <a id=-2" title="2"> <span>// The implementation of this function is exactly the same as returning a
+          boolean</span></a>
+      <a id=-3" title="3"> <span>// Instead of returning true/false, we return the midIdx.</span></a>
+      <a id=-4" title="4"> <span>// No index shifting needs to take place like in the right-side scenario
+          above</span></a>
+      <a id=-5" title="5"> <span>// because we are never making subarrays; we are only dealing with the
+          indices</span></a>
+      <a id=-6" title="6"> <span>// as they relate to the original array.</span></a>
+      <a id=-7" title="7"> <span>let</span> lowerIdx <span>=</span> <span>0;</span></a>
+      <a id=-8" title="8"> <span>let</span> upperIdx <span>=</span> <span>array</span>.<span>length</span>
+        <span>-</span> <span>1;</span></a>
+      <a id=-9" title="9"> <span>let</span> midIdx<span>;</span></a>
+      <a id=-10" title="10"></a>
+      <a id=-11" title="11"> <span>while</span> (lowerIdx <span>&lt;=</span> upperIdx) <span>{</span></a>
+      <a id=-12" title="12"> midIdx <span>=</span> <span>Math</span>.<span>floor</span>((lowerIdx <span>+</span>
+        upperIdx) / <span>2</span>)<span>;</span></a>
+      <a id=-13" title="13"> <span>if</span> (array[midIdx] <span>&lt;</span> target) <span>{</span></a>
+      <a id=-14" title="14"> lowerIdx <span>=</span> midIdx <span>+</span> <span>1;</span></a>
+      <a id=-15" title="15"> <span>}</span> <span>else</span> <span>if</span> (array[midIdx] <span>&gt;</span> target)
+        <span>{</span></a>
+      <a id=-16" title="16"> upperIdx <span>=</span> midIdx <span>-</span> <span>1;</span></a>
+      <a id=-17" title="17"> <span>}</span> <span>else</span> <span>{</span></a>
+      <a id=-18" title="18"> <span>return</span> midIdx<span>;</span></a>
+      <a id=-19" title="19"> <span>}</span></a>
+      <a id=-20" title="20"> <span>}</span></a>
+      <a id=-21" title="21"></a>
+      <a id=-22" title="22"> <span>return</span> <span>-1;</span></a>
+      <a id=-23" title="23"><span>}</span></a></code></pre>
+  </div>
+  <div id=">
+  pre data-role=" codeBlock" data-info="js" class="language-javascript"><code><a
+        title="1"><span>module</span>.<span>exports</span> <span>=</span> <span>{</span></a>
+      <a id=-2" title="2"> recurBSearch<span>,</span></a>
+      <a id=-3" title="3"> iterBSearch<span>,</span></a>
+      <a id=-4" title="4"> recurBSearchIdx<span>,</span></a>
+      <a id=-5" title="5"> recurBSearchIdxV2<span>,</span></a>
+      <a id=-6" title="6"> iterBSearchIdx</a>
+      <a id=-7" title="7"><span>}</span></a></code></pre>
+  </div>
+</body>
+
+</html>

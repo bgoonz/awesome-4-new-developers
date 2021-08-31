@@ -18,10 +18,14 @@ from tensorflow.python.compat import v2_compat
 from tensorflow.python.data.ops import dataset_ops
 from tensorflow.python.distribute import combinations as ds_combinations
 from tensorflow.python.distribute import multi_process_runner
-from tensorflow.python.distribute.coordinator import cluster_coordinator as coordinator_lib
+from tensorflow.python.distribute.coordinator import (
+    cluster_coordinator as coordinator_lib,
+)
 from tensorflow.python.framework import test_combinations as combinations
 from tensorflow.python.keras import callbacks as callbacks_lib
-from tensorflow.python.keras.distribute import dataset_creator_model_fit_test_base as test_base
+from tensorflow.python.keras.distribute import (
+    dataset_creator_model_fit_test_base as test_base,
+)
 from tensorflow.python.keras.distribute import strategy_combinations
 from tensorflow.python.platform import gfile
 
@@ -29,106 +33,113 @@ from tensorflow.python.platform import gfile
 @ds_combinations.generate(
     combinations.combine(
         strategy=strategy_combinations.parameter_server_strategies_multi_worker,
-        mode="eager"))
+        mode="eager",
+    )
+)
 class DatasetCreatorModelFitParameterServerStrategyOnlyTest(
-    test_base.DatasetCreatorModelFitTestBase):
+    test_base.DatasetCreatorModelFitTestBase
+):
+    def testModelFitWithRunEagerly(self, strategy):
+        with self.assertRaisesRegex(
+            ValueError,
+            "When using `Model` with `ParameterServerStrategy`, "
+            "`run_eagerly` is not supported.",
+        ):
+            self._model_fit(strategy, run_eagerly=True)
 
-  def testModelFitWithRunEagerly(self, strategy):
-    with self.assertRaisesRegex(
-        ValueError, "When using `Model` with `ParameterServerStrategy`, "
-        "`run_eagerly` is not supported."):
-      self._model_fit(strategy, run_eagerly=True)
+    def testModelFitWithDatasetInstance(self, strategy):
+        with self.assertRaisesRegex(
+            NotImplementedError,
+            "Only `tf.keras.utils.experimental.DatasetCreator`, `tf.Tensor`, "
+            "numpy arrays and pandas dataframes are supported types at this "
+            "time.",
+        ):
+            self._model_fit(
+                strategy, x=dataset_ops.DatasetV2.from_tensor_slices([1, 1])
+            )
 
-  def testModelFitWithDatasetInstance(self, strategy):
-    with self.assertRaisesRegex(
-        NotImplementedError,
-        "Only `tf.keras.utils.experimental.DatasetCreator`, `tf.Tensor`, "
-        "numpy arrays and pandas dataframes are supported types at this "
-        "time."):
-      self._model_fit(
-          strategy, x=dataset_ops.DatasetV2.from_tensor_slices([1, 1]))
+    def testModelPredict(self, strategy):
+        model, _ = self._model_compile(strategy)
+        test_data = (
+            dataset_ops.DatasetV2.from_tensor_slices([1.0, 2.0, 3.0, 1.0, 5.0, 1.0])
+            .repeat()
+            .batch(2)
+        )
+        model.predict(x=test_data, steps=3)
 
-  def testModelPredict(self, strategy):
-    model, _ = self._model_compile(strategy)
-    test_data = dataset_ops.DatasetV2.from_tensor_slices(
-        [1., 2., 3., 1., 5., 1.]).repeat().batch(2)
-    model.predict(x=test_data, steps=3)
+    def testClusterCoordinatorSingleInstance(self, strategy):
+        model = self._model_fit(strategy)
+        strategy = model.distribute_strategy
+        self.assertIs(
+            strategy._cluster_coordinator, coordinator_lib.ClusterCoordinator(strategy)
+        )
 
-  def testClusterCoordinatorSingleInstance(self, strategy):
-    model = self._model_fit(strategy)
-    strategy = model.distribute_strategy
-    self.assertIs(strategy._cluster_coordinator,
-                  coordinator_lib.ClusterCoordinator(strategy))
+    def testModelFitErrorOnBatchLevelCallbacks(self, strategy):
+        class BatchLevelCallback(callbacks_lib.Callback):
+            def on_train_batch_end(self, batch, logs=None):
+                pass
 
-  def testModelFitErrorOnBatchLevelCallbacks(self, strategy):
+        with self.assertRaisesRegex(
+            ValueError, "Batch-level `Callback`s are not supported"
+        ):
+            callbacks = [BatchLevelCallback()]
+            self._model_fit(strategy, callbacks=callbacks)
 
-    class BatchLevelCallback(callbacks_lib.Callback):
+    def testModelFitCallbackSupportsTFLogs(self, strategy):
+        class MyCallback(callbacks_lib.Callback):
+            def __init__(self):
+                super(MyCallback, self).__init__()
+                # Fetches the RemoteValues if necessary.
+                self._supports_tf_logs = True
 
-      def on_train_batch_end(self, batch, logs=None):
-        pass
+            def on_train_batch_end(self, batch, logs=None):
+                assert isinstance(logs, coordinator_lib.RemoteValue)
 
-    with self.assertRaisesRegex(ValueError,
-                                "Batch-level `Callback`s are not supported"):
-      callbacks = [BatchLevelCallback()]
-      self._model_fit(strategy, callbacks=callbacks)
+        my_callback = MyCallback()
+        callbacks = [my_callback]
+        self._model_fit(strategy, callbacks=callbacks)
 
-  def testModelFitCallbackSupportsTFLogs(self, strategy):
+    def testModelFitVerbosity(self, strategy):
+        class MyCallback(callbacks_lib.Callback):
+            pass
 
-    class MyCallback(callbacks_lib.Callback):
+        my_callback = MyCallback()
+        callbacks = [my_callback]
+        self._model_fit(strategy, callbacks=callbacks)
+        # PSStrategy should default to epoch-level logging.
+        self.assertEqual(my_callback.params["verbose"], 2)
 
-      def __init__(self):
-        super(MyCallback, self).__init__()
-        # Fetches the RemoteValues if necessary.
-        self._supports_tf_logs = True
+    def testModelFitTensorBoardEpochLevel(self, strategy):
+        log_dir = self.get_temp_dir()
+        callbacks = [callbacks_lib.TensorBoard(log_dir)]
+        self._model_fit(strategy, callbacks=callbacks)
+        self.assertTrue(gfile.Exists(log_dir))
+        files = gfile.ListDirectory(log_dir)
+        self.assertGreaterEqual(len(files), 1)
 
-      def on_train_batch_end(self, batch, logs=None):
-        assert isinstance(logs, coordinator_lib.RemoteValue)
+    def testModelEvaluateWithDatasetInstance(self, strategy):
+        with self.assertRaisesRegex(
+            NotImplementedError,
+            "Only `tf.keras.utils.experimental.DatasetCreator`, `tf.Tensor`, "
+            "numpy arrays and pandas dataframes are supported types at this "
+            "time.",
+        ):
+            self._model_evaluate(
+                strategy, x=dataset_ops.DatasetV2.from_tensor_slices([1, 1])
+            )
 
-    my_callback = MyCallback()
-    callbacks = [my_callback]
-    self._model_fit(strategy, callbacks=callbacks)
+    def testModelEvaluateErrorOnBatchLevelCallbacks(self, strategy):
+        class BatchLevelCallback(callbacks_lib.Callback):
+            def on_train_batch_end(self, batch, logs=None):
+                pass
 
-  def testModelFitVerbosity(self, strategy):
-
-    class MyCallback(callbacks_lib.Callback):
-      pass
-
-    my_callback = MyCallback()
-    callbacks = [my_callback]
-    self._model_fit(strategy, callbacks=callbacks)
-    # PSStrategy should default to epoch-level logging.
-    self.assertEqual(my_callback.params["verbose"], 2)
-
-  def testModelFitTensorBoardEpochLevel(self, strategy):
-    log_dir = self.get_temp_dir()
-    callbacks = [callbacks_lib.TensorBoard(log_dir)]
-    self._model_fit(strategy, callbacks=callbacks)
-    self.assertTrue(gfile.Exists(log_dir))
-    files = gfile.ListDirectory(log_dir)
-    self.assertGreaterEqual(len(files), 1)
-
-  def testModelEvaluateWithDatasetInstance(self, strategy):
-    with self.assertRaisesRegex(
-        NotImplementedError,
-        "Only `tf.keras.utils.experimental.DatasetCreator`, `tf.Tensor`, "
-        "numpy arrays and pandas dataframes are supported types at this "
-        "time."):
-      self._model_evaluate(
-          strategy, x=dataset_ops.DatasetV2.from_tensor_slices([1, 1]))
-
-  def testModelEvaluateErrorOnBatchLevelCallbacks(self, strategy):
-
-    class BatchLevelCallback(callbacks_lib.Callback):
-
-      def on_train_batch_end(self, batch, logs=None):
-        pass
-
-    with self.assertRaisesRegex(ValueError,
-                                "Batch-level `Callback`s are not supported"):
-      callbacks = [BatchLevelCallback()]
-      self._model_evaluate(strategy, callbacks=callbacks)
+        with self.assertRaisesRegex(
+            ValueError, "Batch-level `Callback`s are not supported"
+        ):
+            callbacks = [BatchLevelCallback()]
+            self._model_evaluate(strategy, callbacks=callbacks)
 
 
 if __name__ == "__main__":
-  v2_compat.enable_v2_behavior()
-  multi_process_runner.test_main()
+    v2_compat.enable_v2_behavior()
+    multi_process_runner.test_main()

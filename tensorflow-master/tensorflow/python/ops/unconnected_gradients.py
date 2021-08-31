@@ -25,7 +25,7 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export("UnconnectedGradients")
 class UnconnectedGradients(enum.Enum):
-  """Controls how gradient computation behaves when y does not depend on x.
+    """Controls how gradient computation behaves when y does not depend on x.
 
   The gradient of y with respect to x can be zero in two different ways: there
   could be no differentiable path in the graph connecting x to y (and so we can
@@ -39,5 +39,6 @@ class UnconnectedGradients(enum.Enum):
     to y
   * `ZERO`: Indicates that a zero tensor will be returned in the shape of x.
   """
-  NONE = "none"
-  ZERO = "zero"
+
+    NONE = "none"
+    ZERO = "zero"

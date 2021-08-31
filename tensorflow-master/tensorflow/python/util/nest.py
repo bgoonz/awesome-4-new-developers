@@ -56,11 +56,13 @@ from tensorflow.python.util.tf_export import tf_export
 
 _SHALLOW_TREE_HAS_INVALID_KEYS = (
     "The shallow_tree's keys are not a subset of the input_tree's keys. The "
-    "shallow_tree has the following keys that are not in the input_tree: {}.")
+    "shallow_tree has the following keys that are not in the input_tree: {}."
+)
 
 _STRUCTURES_HAVE_MISMATCHING_TYPES = (
     "The two structures don't have the same sequence type. Input structure has "
-    "type {input_type}, while shallow structure has type {shallow_type}.")
+    "type {input_type}, while shallow structure has type {shallow_type}."
+)
 
 _STRUCTURES_HAVE_MISMATCHING_LENGTHS = (
     "The two structures don't have the same sequence length. Input "
@@ -71,15 +73,17 @@ _STRUCTURES_HAVE_MISMATCHING_LENGTHS = (
 _INPUT_TREE_SMALLER_THAN_SHALLOW_TREE = (
     "The input_tree has fewer elements than the shallow_tree. Input structure "
     "has length {input_size}, while shallow structure has length "
-    "{shallow_size}.")
+    "{shallow_size}."
+)
 
 _IF_SHALLOW_IS_SEQ_INPUT_MUST_BE_SEQ = (
     "If shallow structure is a sequence, input must also be a sequence. "
-    "Input has type: {}.")
+    "Input has type: {}."
+)
 
 
 def _get_attrs_items(obj):
-  """Returns a list of (name, value) pairs from an attrs instance.
+    """Returns a list of (name, value) pairs from an attrs instance.
 
   The list will be sorted by name.
 
@@ -89,21 +93,21 @@ def _get_attrs_items(obj):
   Returns:
     A list of (attr_name, attr_value) pairs, sorted by attr_name.
   """
-  attrs = getattr(obj.__class__, "__attrs_attrs__")
-  attr_names = (a.name for a in attrs)
-  return [(attr_name, getattr(obj, attr_name)) for attr_name in attr_names]
+    attrs = getattr(obj.__class__, "__attrs_attrs__")
+    attr_names = (a.name for a in attrs)
+    return [(attr_name, getattr(obj, attr_name)) for attr_name in attr_names]
 
 
 def _sorted(dict_):
-  """Returns a sorted list of the dict keys, with error if keys not sortable."""
-  try:
-    return sorted(dict_.keys())
-  except TypeError:
-    raise TypeError("nest only supports dicts with sortable keys.")
+    """Returns a sorted list of the dict keys, with error if keys not sortable."""
+    try:
+        return sorted(dict_.keys())
+    except TypeError:
+        raise TypeError("nest only supports dicts with sortable keys.")
 
 
 def is_namedtuple(instance, strict=False):
-  """Returns True iff `instance` is a `namedtuple`.
+    """Returns True iff `instance` is a `namedtuple`.
 
   Args:
     instance: An instance of a Python object.
@@ -115,7 +119,8 @@ def is_namedtuple(instance, strict=False):
   Returns:
     True if `instance` is a `namedtuple`.
   """
-  return _pywrap_utils.IsNamedtuple(instance, strict)
+    return _pywrap_utils.IsNamedtuple(instance, strict)
+
 
 _is_namedtuple = is_namedtuple  # This function was private up to TF2.5.
 
@@ -130,19 +135,19 @@ _is_mapping = _pywrap_utils.IsMapping
 
 @tf_export("__internal__.nest.is_attrs", v1=[])
 def is_attrs(obj):
-  """Returns a true if its input is an instance of an attr.s decorated class."""
-  return _is_attrs(obj)
+    """Returns a true if its input is an instance of an attr.s decorated class."""
+    return _is_attrs(obj)
 
 
 @tf_export("__internal__.nest.is_mapping", v1=[])
 def is_mapping(obj):
-  """Returns a true if its input is a collections.Mapping."""
-  return _is_mapping(obj)
+    """Returns a true if its input is a collections.Mapping."""
+    return _is_mapping(obj)
 
 
 @tf_export("__internal__.nest.sequence_like", v1=[])
 def _sequence_like(instance, args):
-  """Converts the sequence `args` to the same type as `instance`.
+    """Converts the sequence `args` to the same type as `instance`.
 
   Args:
     instance: an instance of `tuple`, `list`, `namedtuple`, `dict`,
@@ -153,70 +158,74 @@ def _sequence_like(instance, args):
   Returns:
     `args` with the type of `instance`.
   """
-  if _is_mutable_mapping(instance):
-    # Pack dictionaries in a deterministic order by sorting the keys.
-    # Notice this means that we ignore the original order of `OrderedDict`
-    # instances. This is intentional, to avoid potential bugs caused by mixing
-    # ordered and plain dicts (e.g., flattening a dict but using a
-    # corresponding `OrderedDict` to pack it back).
-    result = dict(zip(_sorted(instance), args))
-    instance_type = type(instance)
-    if instance_type == _collections.defaultdict:
-      d = _collections.defaultdict(instance.default_factory)
+    if _is_mutable_mapping(instance):
+        # Pack dictionaries in a deterministic order by sorting the keys.
+        # Notice this means that we ignore the original order of `OrderedDict`
+        # instances. This is intentional, to avoid potential bugs caused by mixing
+        # ordered and plain dicts (e.g., flattening a dict but using a
+        # corresponding `OrderedDict` to pack it back).
+        result = dict(zip(_sorted(instance), args))
+        instance_type = type(instance)
+        if instance_type == _collections.defaultdict:
+            d = _collections.defaultdict(instance.default_factory)
+        else:
+            d = instance_type()
+        for key in instance:
+            d[key] = result[key]
+        return d
+    elif _is_mapping(instance):
+        result = dict(zip(_sorted(instance), args))
+        instance_type = type(instance)
+        tf_logging.log_first_n(
+            tf_logging.WARN,
+            "Mapping types may not work well with tf.nest. Prefer"
+            " using MutableMapping for {}".format(instance_type),
+            1,
+        )
+        try:
+            return instance_type((key, result[key]) for key in instance)
+        except TypeError as err:
+            raise TypeError(
+                "Error creating an object of type {} like {}. Note that "
+                "it must accept a single positional argument "
+                "representing an iterable of key-value pairs, in "
+                "addition to self. Cause: {}".format(type(instance), instance, err)
+            )
+    elif _is_mapping_view(instance):
+        # We can't directly construct mapping views, so we create a list instead
+        return list(args)
+    elif is_namedtuple(instance) or _is_attrs(instance):
+        if isinstance(instance, _wrapt.ObjectProxy):
+            instance_type = type(instance.__wrapped__)
+        else:
+            instance_type = type(instance)
+        return instance_type(*args)
+    elif _is_composite_tensor(instance):
+        assert len(args) == 1
+        spec = instance._type_spec  # pylint: disable=protected-access
+        return spec._from_components(args[0])  # pylint: disable=protected-access
+    elif _is_type_spec(instance):
+        # Pack a CompositeTensor's components according to a TypeSpec.
+        assert len(args) == 1
+        return instance._from_components(args[0])  # pylint: disable=protected-access
+    elif isinstance(instance, _six.moves.range):
+        return _sequence_like(list(instance), args)
+    elif isinstance(instance, _wrapt.ObjectProxy):
+        # For object proxies, first create the underlying type and then re-wrap it
+        # in the proxy type.
+        return type(instance)(_sequence_like(instance.__wrapped__, args))
     else:
-      d = instance_type()
-    for key in instance:
-      d[key] = result[key]
-    return d
-  elif _is_mapping(instance):
-    result = dict(zip(_sorted(instance), args))
-    instance_type = type(instance)
-    tf_logging.log_first_n(
-        tf_logging.WARN, "Mapping types may not work well with tf.nest. Prefer"
-        " using MutableMapping for {}".format(instance_type), 1)
-    try:
-      return instance_type((key, result[key]) for key in instance)
-    except TypeError as err:
-      raise TypeError("Error creating an object of type {} like {}. Note that "
-                      "it must accept a single positional argument "
-                      "representing an iterable of key-value pairs, in "
-                      "addition to self. Cause: {}".format(
-                          type(instance), instance, err))
-  elif _is_mapping_view(instance):
-    # We can't directly construct mapping views, so we create a list instead
-    return list(args)
-  elif is_namedtuple(instance) or _is_attrs(instance):
-    if isinstance(instance, _wrapt.ObjectProxy):
-      instance_type = type(instance.__wrapped__)
-    else:
-      instance_type = type(instance)
-    return instance_type(*args)
-  elif _is_composite_tensor(instance):
-    assert len(args) == 1
-    spec = instance._type_spec  # pylint: disable=protected-access
-    return spec._from_components(args[0])  # pylint: disable=protected-access
-  elif _is_type_spec(instance):
-    # Pack a CompositeTensor's components according to a TypeSpec.
-    assert len(args) == 1
-    return instance._from_components(args[0])  # pylint: disable=protected-access
-  elif isinstance(instance, _six.moves.range):
-    return _sequence_like(list(instance), args)
-  elif isinstance(instance, _wrapt.ObjectProxy):
-    # For object proxies, first create the underlying type and then re-wrap it
-    # in the proxy type.
-    return type(instance)(_sequence_like(instance.__wrapped__, args))
-  else:
-    # Not a namedtuple
-    return type(instance)(args)
+        # Not a namedtuple
+        return type(instance)(args)
 
 
 def _yield_value(iterable):
-  for _, v in _yield_sorted_items(iterable):
-    yield v
+    for _, v in _yield_sorted_items(iterable):
+        yield v
 
 
 def _yield_sorted_items(iterable):
-  """Yield (key, value) pairs for `iterable` in a deterministic order.
+    """Yield (key, value) pairs for `iterable` in a deterministic order.
 
   For Sequences, the key will be an int, the array index of a value.
   For Mappings, the key will be the dictionary key.
@@ -230,38 +239,40 @@ def _yield_sorted_items(iterable):
   Yields:
     The iterable's (key, value) pairs, in order of sorted keys.
   """
-  # Ordered to check common structure types (list, tuple, dict) first.
-  if isinstance(iterable, list):
-    for item in enumerate(iterable):
-      yield item
-  # namedtuples handled separately to avoid expensive namedtuple check.
-  elif type(iterable) == tuple:  # pylint: disable=unidiomatic-typecheck
-    for item in enumerate(iterable):
-      yield item
-  elif isinstance(iterable, (dict, _collections_abc.Mapping)):
-    # Iterate through dictionaries in a deterministic order by sorting the
-    # keys. Notice this means that we ignore the original order of `OrderedDict`
-    # instances. This is intentional, to avoid potential bugs caused by mixing
-    # ordered and plain dicts (e.g., flattening a dict but using a
-    # corresponding `OrderedDict` to pack it back).
-    for key in _sorted(iterable):
-      yield key, iterable[key]
-  elif _is_attrs(iterable):
-    for item in _get_attrs_items(iterable):
-      yield item
-  elif is_namedtuple(iterable):
-    for field in iterable._fields:
-      yield field, getattr(iterable, field)
-  elif _is_composite_tensor(iterable):
-    type_spec = iterable._type_spec  # pylint: disable=protected-access
-    yield type_spec.value_type.__name__, type_spec._to_components(iterable)  # pylint: disable=protected-access
-  elif _is_type_spec(iterable):
-    # Note: to allow CompositeTensors and their TypeSpecs to have matching
-    # structures, we need to use the same key string here.
-    yield iterable.value_type.__name__, iterable._component_specs  # pylint: disable=protected-access
-  else:
-    for item in enumerate(iterable):
-      yield item
+    # Ordered to check common structure types (list, tuple, dict) first.
+    if isinstance(iterable, list):
+        for item in enumerate(iterable):
+            yield item
+    # namedtuples handled separately to avoid expensive namedtuple check.
+    elif type(iterable) == tuple:  # pylint: disable=unidiomatic-typecheck
+        for item in enumerate(iterable):
+            yield item
+    elif isinstance(iterable, (dict, _collections_abc.Mapping)):
+        # Iterate through dictionaries in a deterministic order by sorting the
+        # keys. Notice this means that we ignore the original order of `OrderedDict`
+        # instances. This is intentional, to avoid potential bugs caused by mixing
+        # ordered and plain dicts (e.g., flattening a dict but using a
+        # corresponding `OrderedDict` to pack it back).
+        for key in _sorted(iterable):
+            yield key, iterable[key]
+    elif _is_attrs(iterable):
+        for item in _get_attrs_items(iterable):
+            yield item
+    elif is_namedtuple(iterable):
+        for field in iterable._fields:
+            yield field, getattr(iterable, field)
+    elif _is_composite_tensor(iterable):
+        type_spec = iterable._type_spec  # pylint: disable=protected-access
+        yield type_spec.value_type.__name__, type_spec._to_components(
+            iterable
+        )  # pylint: disable=protected-access
+    elif _is_type_spec(iterable):
+        # Note: to allow CompositeTensors and their TypeSpecs to have matching
+        # structures, we need to use the same key string here.
+        yield iterable.value_type.__name__, iterable._component_specs  # pylint: disable=protected-access
+    else:
+        for item in enumerate(iterable):
+            yield item
 
 
 # See the swig file (util.i) for documentation.
@@ -274,7 +285,7 @@ is_sequence_or_composite = _pywrap_utils.IsSequenceOrComposite
 
 @tf_export("nest.is_nested")
 def is_nested(seq):
-  """Returns true if its input is a collections.abc.Sequence (except strings).
+    """Returns true if its input is a collections.abc.Sequence (except strings).
 
     >>> tf.nest.is_nested("1234")
     False
@@ -314,12 +325,12 @@ def is_nested(seq):
     True if the sequence is a not a string and is a collections.abc.Sequence
     or a dict.
   """
-  return is_sequence(seq)
+    return is_sequence(seq)
 
 
 @tf_export("nest.flatten")
 def flatten(structure, expand_composites=False):
-  """Returns a flat list from a given nested structure.
+    """Returns a flat list from a given nested structure.
 
   If nest is not a structure , tuple (or a namedtuple), dict, or an attrs class,
   then returns a single-element list:
@@ -411,10 +422,10 @@ def flatten(structure, expand_composites=False):
   Raises:
     TypeError: The nest is or contains a dict with non-sortable keys.
   """
-  if structure is None:
-    return [None]
-  expand_composites = bool(expand_composites)
-  return _pywrap_utils.Flatten(structure, expand_composites)
+    if structure is None:
+        return [None]
+    expand_composites = bool(expand_composites)
+    return _pywrap_utils.Flatten(structure, expand_composites)
 
 
 # See the swig file (util.i) for documentation.
@@ -424,22 +435,21 @@ _same_namedtuples = same_namedtuples  # This function was private up to TF2.5.
 
 class _DotString(object):
 
-  __slots__ = []
+    __slots__ = []
 
-  def __str__(self):
-    return "."
+    def __str__(self):
+        return "."
 
-  def __repr__(self):
-    return "."
+    def __repr__(self):
+        return "."
 
 
 _DOT = _DotString()
 
 
 @tf_export("nest.assert_same_structure")
-def assert_same_structure(nest1, nest2, check_types=True,
-                          expand_composites=False):
-  """Asserts that two structures are nested in the same way.
+def assert_same_structure(nest1, nest2, check_types=True, expand_composites=False):
+    """Asserts that two structures are nested in the same way.
 
   Note the method does not check the types of data inside the structures.
 
@@ -519,24 +529,24 @@ def assert_same_structure(nest1, nest2, check_types=True,
     TypeError: If the two structures differ in the type of sequence in any of
       their substructures. Only possible if `check_types` is `True`.
   """
-  # Convert to bool explicitly as otherwise pybind will not be able# to handle
-  # type mismatch message correctly. See GitHub issue 42329 for details.
-  check_types = bool(check_types)
-  expand_composites = bool(expand_composites)
-  try:
-    _pywrap_utils.AssertSameStructure(nest1, nest2, check_types,
-                                      expand_composites)
-  except (ValueError, TypeError) as e:
-    str1 = str(map_structure(lambda _: _DOT, nest1))
-    str2 = str(map_structure(lambda _: _DOT, nest2))
-    raise type(e)("%s\n"
-                  "Entire first structure:\n%s\n"
-                  "Entire second structure:\n%s"
-                  % (str(e), str1, str2))
+    # Convert to bool explicitly as otherwise pybind will not be able# to handle
+    # type mismatch message correctly. See GitHub issue 42329 for details.
+    check_types = bool(check_types)
+    expand_composites = bool(expand_composites)
+    try:
+        _pywrap_utils.AssertSameStructure(nest1, nest2, check_types, expand_composites)
+    except (ValueError, TypeError) as e:
+        str1 = str(map_structure(lambda _: _DOT, nest1))
+        str2 = str(map_structure(lambda _: _DOT, nest2))
+        raise type(e)(
+            "%s\n"
+            "Entire first structure:\n%s\n"
+            "Entire second structure:\n%s" % (str(e), str1, str2)
+        )
 
 
 def flatten_dict_items(dictionary):
-  """Returns a dictionary with flattened keys and values.
+    """Returns a dictionary with flattened keys and values.
 
   This function flattens the keys and values of a dictionary, which can be
   arbitrarily nested structures, and returns the flattened version of such
@@ -565,11 +575,11 @@ def flatten_dict_items(dictionary):
     ValueError: If any key and value do not have the same structure layout, or
     if keys are not unique.
   """
-  return _pywrap_nest.FlattenDictItems(dictionary)
+    return _pywrap_nest.FlattenDictItems(dictionary)
 
 
 def _packed_nest_with_indices(structure, flat, index, is_seq, sequence_fn=None):
-  """Helper function for pack_sequence_as.
+    """Helper function for pack_sequence_as.
 
   Args:
     structure: Substructure (list / tuple / dict) to mimic.
@@ -589,63 +599,73 @@ def _packed_nest_with_indices(structure, flat, index, is_seq, sequence_fn=None):
     ValueError: if `structure` contains more elements than `flat`
       (assuming indexing starts from `index`).
   """
-  packed = []
-  sequence_fn = sequence_fn or _sequence_like
-  for s in _yield_value(structure):
-    if is_seq(s):
-      new_index, child = _packed_nest_with_indices(s, flat, index, is_seq,
-                                                   sequence_fn)
-      packed.append(sequence_fn(s, child))
-      index = new_index
-    else:
-      packed.append(flat[index])
-      index += 1
-  return index, packed
+    packed = []
+    sequence_fn = sequence_fn or _sequence_like
+    for s in _yield_value(structure):
+        if is_seq(s):
+            new_index, child = _packed_nest_with_indices(
+                s, flat, index, is_seq, sequence_fn
+            )
+            packed.append(sequence_fn(s, child))
+            index = new_index
+        else:
+            packed.append(flat[index])
+            index += 1
+    return index, packed
 
 
-def _pack_sequence_as(structure, flat_sequence, expand_composites,
-                      sequence_fn=None):
-  """Implements sequence packing, with the option to alter the structure."""
-  is_seq = is_sequence_or_composite if expand_composites else is_sequence
-  sequence_fn = sequence_fn or _sequence_like
-  def truncate(value, length):
-    value_str = str(value)
-    return value_str[:length] + (value_str[length:] and "...")
+def _pack_sequence_as(structure, flat_sequence, expand_composites, sequence_fn=None):
+    """Implements sequence packing, with the option to alter the structure."""
+    is_seq = is_sequence_or_composite if expand_composites else is_sequence
+    sequence_fn = sequence_fn or _sequence_like
 
-  if not is_seq(flat_sequence):
-    raise TypeError(
-        "Attempted to pack value:\n  {}\ninto a sequence, but found "
-        "incompatible type `{}` instead."
-        .format(truncate(flat_sequence, 100), type(flat_sequence)))
+    def truncate(value, length):
+        value_str = str(value)
+        return value_str[:length] + (value_str[length:] and "...")
 
-  if not is_seq(structure):
-    if len(flat_sequence) != 1:
-      raise ValueError(
-          "The target structure is of type `{}`\n  {}\nHowever the input "
-          "structure is a sequence ({}) of length {}.\n  {}\nnest cannot "
-          "guarantee that it is safe to map one to the other.".format(
-              type(structure), truncate(structure, 100), type(flat_sequence),
-              len(flat_sequence), truncate(flat_sequence, 100)))
-    return flat_sequence[0]
+    if not is_seq(flat_sequence):
+        raise TypeError(
+            "Attempted to pack value:\n  {}\ninto a sequence, but found "
+            "incompatible type `{}` instead.".format(
+                truncate(flat_sequence, 100), type(flat_sequence)
+            )
+        )
 
-  try:
-    final_index, packed = _packed_nest_with_indices(structure, flat_sequence,
-                                                    0, is_seq, sequence_fn)
-    if final_index < len(flat_sequence):
-      raise IndexError
-  except IndexError:
-    flat_structure = flatten(structure, expand_composites=expand_composites)
-    if len(flat_structure) != len(flat_sequence):
-      raise ValueError(
-          "Could not pack sequence. Structure had %d elements, but "
-          "flat_sequence had %d elements.  Structure: %s, flat_sequence: %s." %
-          (len(flat_structure), len(flat_sequence), structure, flat_sequence))
-  return sequence_fn(structure, packed)
+    if not is_seq(structure):
+        if len(flat_sequence) != 1:
+            raise ValueError(
+                "The target structure is of type `{}`\n  {}\nHowever the input "
+                "structure is a sequence ({}) of length {}.\n  {}\nnest cannot "
+                "guarantee that it is safe to map one to the other.".format(
+                    type(structure),
+                    truncate(structure, 100),
+                    type(flat_sequence),
+                    len(flat_sequence),
+                    truncate(flat_sequence, 100),
+                )
+            )
+        return flat_sequence[0]
+
+    try:
+        final_index, packed = _packed_nest_with_indices(
+            structure, flat_sequence, 0, is_seq, sequence_fn
+        )
+        if final_index < len(flat_sequence):
+            raise IndexError
+    except IndexError:
+        flat_structure = flatten(structure, expand_composites=expand_composites)
+        if len(flat_structure) != len(flat_sequence):
+            raise ValueError(
+                "Could not pack sequence. Structure had %d elements, but "
+                "flat_sequence had %d elements.  Structure: %s, flat_sequence: %s."
+                % (len(flat_structure), len(flat_sequence), structure, flat_sequence)
+            )
+    return sequence_fn(structure, packed)
 
 
 @tf_export("nest.pack_sequence_as")
 def pack_sequence_as(structure, flat_sequence, expand_composites=False):
-  """Returns a given flattened sequence packed into a given structure.
+    """Returns a given flattened sequence packed into a given structure.
 
   If `structure` is a scalar, `flat_sequence` must be a single-element list;
   in this case the return value is `flat_sequence[0]`.
@@ -754,12 +774,12 @@ def pack_sequence_as(structure, flat_sequence, expand_composites=False):
       element counts.
     TypeError: `structure` is or contains a dict with non-sortable keys.
   """
-  return _pack_sequence_as(structure, flat_sequence, expand_composites)
+    return _pack_sequence_as(structure, flat_sequence, expand_composites)
 
 
 @tf_export("nest.map_structure")
 def map_structure(func, *structure, **kwargs):
-  """Applies `func` to each entry in `structure` and returns a new structure.
+    """Applies `func` to each entry in `structure` and returns a new structure.
 
   Applies `func(x[0], x[1], ...)` where x[i] is an entry in
   `structure[i]`.  All structures in `structure` must have the same arity,
@@ -844,34 +864,39 @@ def map_structure(func, *structure, **kwargs):
       each other by type.
     ValueError: If wrong keyword arguments are provided.
   """
-  if not callable(func):
-    raise TypeError("func must be callable, got: %s" % func)
+    if not callable(func):
+        raise TypeError("func must be callable, got: %s" % func)
 
-  if not structure:
-    raise ValueError("Must provide at least one structure")
+    if not structure:
+        raise ValueError("Must provide at least one structure")
 
-  check_types = kwargs.pop("check_types", True)
-  expand_composites = kwargs.pop("expand_composites", False)
+    check_types = kwargs.pop("check_types", True)
+    expand_composites = kwargs.pop("expand_composites", False)
 
-  if kwargs:
-    raise ValueError(
-        "Only valid keyword arguments are `check_types` and "
-        "`expand_composites`, not: `%s`" % ("`, `".join(kwargs.keys())))
+    if kwargs:
+        raise ValueError(
+            "Only valid keyword arguments are `check_types` and "
+            "`expand_composites`, not: `%s`" % ("`, `".join(kwargs.keys()))
+        )
 
-  for other in structure[1:]:
-    assert_same_structure(structure[0], other, check_types=check_types,
-                          expand_composites=expand_composites)
+    for other in structure[1:]:
+        assert_same_structure(
+            structure[0],
+            other,
+            check_types=check_types,
+            expand_composites=expand_composites,
+        )
 
-  flat_structure = (flatten(s, expand_composites) for s in structure)
-  entries = zip(*flat_structure)
+    flat_structure = (flatten(s, expand_composites) for s in structure)
+    entries = zip(*flat_structure)
 
-  return pack_sequence_as(
-      structure[0], [func(*x) for x in entries],
-      expand_composites=expand_composites)
+    return pack_sequence_as(
+        structure[0], [func(*x) for x in entries], expand_composites=expand_composites
+    )
 
 
 def map_structure_with_paths(func, *structure, **kwargs):
-  """Applies `func` to each entry in `structure` and returns a new structure.
+    """Applies `func` to each entry in `structure` and returns a new structure.
 
   Applies `func(path, x[0], x[1], ..., **kwargs)` where x[i] is an entry in
   `structure[i]` and `path` is the common path to x[i] in the structures.  All
@@ -902,18 +927,18 @@ def map_structure_with_paths(func, *structure, **kwargs):
       the type of sequence in any of their substructures.
     ValueError: If no structures are provided.
   """
-  def wrapper_func(tuple_path, *inputs, **kwargs):
-    string_path = "/".join(str(s) for s in tuple_path)
-    return func(string_path, *inputs, **kwargs)
 
-  return map_structure_with_tuple_paths_up_to(structure[0],
-                                              wrapper_func,
-                                              *structure,
-                                              **kwargs)
+    def wrapper_func(tuple_path, *inputs, **kwargs):
+        string_path = "/".join(str(s) for s in tuple_path)
+        return func(string_path, *inputs, **kwargs)
+
+    return map_structure_with_tuple_paths_up_to(
+        structure[0], wrapper_func, *structure, **kwargs
+    )
 
 
 def map_structure_with_tuple_paths(func, *structure, **kwargs):
-  """Applies `func` to each entry in `structure` and returns a new structure.
+    """Applies `func` to each entry in `structure` and returns a new structure.
 
   Applies `func(tuple_path, x[0], x[1], ..., **kwargs)` where `x[i]` is an entry
   in `structure[i]` and `tuple_path` is a tuple of indices and/or dictionary
@@ -945,14 +970,13 @@ def map_structure_with_tuple_paths(func, *structure, **kwargs):
       the type of sequence in any of their substructures.
     ValueError: If no structures are provided.
   """
-  return map_structure_with_tuple_paths_up_to(structure[0],
-                                              func,
-                                              *structure,
-                                              **kwargs)
+    return map_structure_with_tuple_paths_up_to(
+        structure[0], func, *structure, **kwargs
+    )
 
 
 def _yield_flat_up_to(shallow_tree, input_tree, is_seq, path=()):
-  """Yields (path, value) pairs of input_tree flattened up to shallow_tree.
+    """Yields (path, value) pairs of input_tree flattened up to shallow_tree.
 
   Args:
     shallow_tree: Nested structure. Traverse no further than its leaf nodes.
@@ -968,24 +992,23 @@ def _yield_flat_up_to(shallow_tree, input_tree, is_seq, path=()):
     shallow_tree, and value is the value of the corresponding node in
     input_tree.
   """
-  if not is_seq(shallow_tree):
-    yield (path, input_tree)
-  else:
-    input_tree = dict(_yield_sorted_items(input_tree))
-    for shallow_key, shallow_subtree in _yield_sorted_items(shallow_tree):
-      subpath = path + (shallow_key,)
-      input_subtree = input_tree[shallow_key]
-      for leaf_path, leaf_value in _yield_flat_up_to(shallow_subtree,
-                                                     input_subtree, is_seq,
-                                                     path=subpath):
-        yield (leaf_path, leaf_value)
+    if not is_seq(shallow_tree):
+        yield (path, input_tree)
+    else:
+        input_tree = dict(_yield_sorted_items(input_tree))
+        for shallow_key, shallow_subtree in _yield_sorted_items(shallow_tree):
+            subpath = path + (shallow_key,)
+            input_subtree = input_tree[shallow_key]
+            for leaf_path, leaf_value in _yield_flat_up_to(
+                shallow_subtree, input_subtree, is_seq, path=subpath
+            ):
+                yield (leaf_path, leaf_value)
 
 
-def assert_shallow_structure(shallow_tree,
-                             input_tree,
-                             check_types=True,
-                             expand_composites=False):
-  """Asserts that `shallow_tree` is a shallow structure of `input_tree`.
+def assert_shallow_structure(
+    shallow_tree, input_tree, check_types=True, expand_composites=False
+):
+    """Asserts that `shallow_tree` is a shallow structure of `input_tree`.
 
   That is, this function tests if the `input_tree` structure can be created from
   the `shallow_tree` structure by replacing its leaf nodes with deeper
@@ -1024,95 +1047,117 @@ def assert_shallow_structure(shallow_tree,
     ValueError: If the sequence lengths of `shallow_tree` are different from
       `input_tree`.
   """
-  is_seq = is_sequence_or_composite if expand_composites else is_sequence
-  if is_seq(shallow_tree):
-    if not is_seq(input_tree):
-      raise TypeError(
-          "If shallow structure is a sequence, input must also be a sequence. "
-          "Input has type: %s." % type(input_tree))
+    is_seq = is_sequence_or_composite if expand_composites else is_sequence
+    if is_seq(shallow_tree):
+        if not is_seq(input_tree):
+            raise TypeError(
+                "If shallow structure is a sequence, input must also be a sequence. "
+                "Input has type: %s." % type(input_tree)
+            )
 
-    if isinstance(shallow_tree, _wrapt.ObjectProxy):
-      shallow_type = type(shallow_tree.__wrapped__)
-    else:
-      shallow_type = type(shallow_tree)
+        if isinstance(shallow_tree, _wrapt.ObjectProxy):
+            shallow_type = type(shallow_tree.__wrapped__)
+        else:
+            shallow_type = type(shallow_tree)
 
-    if check_types and not isinstance(input_tree, shallow_type):
-      # Duck-typing means that nest should be fine with two different
-      # namedtuples with identical name and fields.
-      shallow_is_namedtuple = is_namedtuple(shallow_tree, False)
-      input_is_namedtuple = is_namedtuple(input_tree, False)
-      if shallow_is_namedtuple and input_is_namedtuple:
-        if not same_namedtuples(shallow_tree, input_tree):
-          raise TypeError(_STRUCTURES_HAVE_MISMATCHING_TYPES.format(
-              input_type=type(input_tree),
-              shallow_type=type(shallow_tree)))
+        if check_types and not isinstance(input_tree, shallow_type):
+            # Duck-typing means that nest should be fine with two different
+            # namedtuples with identical name and fields.
+            shallow_is_namedtuple = is_namedtuple(shallow_tree, False)
+            input_is_namedtuple = is_namedtuple(input_tree, False)
+            if shallow_is_namedtuple and input_is_namedtuple:
+                if not same_namedtuples(shallow_tree, input_tree):
+                    raise TypeError(
+                        _STRUCTURES_HAVE_MISMATCHING_TYPES.format(
+                            input_type=type(input_tree), shallow_type=type(shallow_tree)
+                        )
+                    )
 
-      elif isinstance(shallow_tree, list) and isinstance(input_tree, list):
-        # List subclasses are considered the same,
-        # e.g. python list vs. _ListWrapper.
-        pass
+            elif isinstance(shallow_tree, list) and isinstance(input_tree, list):
+                # List subclasses are considered the same,
+                # e.g. python list vs. _ListWrapper.
+                pass
 
-      elif ((_is_composite_tensor(shallow_tree) or
-             _is_composite_tensor(input_tree)) and
-            (_is_type_spec(shallow_tree) or _is_type_spec(input_tree))):
-        pass  # Compatibility will be checked below.
+            elif (
+                _is_composite_tensor(shallow_tree) or _is_composite_tensor(input_tree)
+            ) and (_is_type_spec(shallow_tree) or _is_type_spec(input_tree)):
+                pass  # Compatibility will be checked below.
 
-      elif not (isinstance(shallow_tree, _collections_abc.Mapping) and
-                isinstance(input_tree, _collections_abc.Mapping)):
-        raise TypeError(_STRUCTURES_HAVE_MISMATCHING_TYPES.format(
-            input_type=type(input_tree),
-            shallow_type=type(shallow_tree)))
+            elif not (
+                isinstance(shallow_tree, _collections_abc.Mapping)
+                and isinstance(input_tree, _collections_abc.Mapping)
+            ):
+                raise TypeError(
+                    _STRUCTURES_HAVE_MISMATCHING_TYPES.format(
+                        input_type=type(input_tree), shallow_type=type(shallow_tree)
+                    )
+                )
 
-    if _is_composite_tensor(shallow_tree) or _is_composite_tensor(input_tree):
-      if not (
-          (_is_composite_tensor(input_tree) or _is_type_spec(input_tree)) and
-          (_is_composite_tensor(shallow_tree) or _is_type_spec(shallow_tree))):
-        raise TypeError(_STRUCTURES_HAVE_MISMATCHING_TYPES.format(
-            input_type=type(input_tree),
-            shallow_type=type(shallow_tree)))
-      type_spec_1 = (shallow_tree if _is_type_spec(shallow_tree) else
-                     shallow_tree._type_spec)  # pylint: disable=protected-access
-      type_spec_2 = (input_tree if _is_type_spec(input_tree) else
-                     input_tree._type_spec)  # pylint: disable=protected-access
-      try:
-        _ = type_spec_1.most_specific_compatible_type(type_spec_2)
-      except (TypeError, ValueError) as e:
-        raise ValueError(
-            "Incompatible CompositeTensor TypeSpecs: %s vs. %s -- %s" %
-            (type_spec_1, type_spec_2, e))
+        if _is_composite_tensor(shallow_tree) or _is_composite_tensor(input_tree):
+            if not (
+                (_is_composite_tensor(input_tree) or _is_type_spec(input_tree))
+                and (_is_composite_tensor(shallow_tree) or _is_type_spec(shallow_tree))
+            ):
+                raise TypeError(
+                    _STRUCTURES_HAVE_MISMATCHING_TYPES.format(
+                        input_type=type(input_tree), shallow_type=type(shallow_tree)
+                    )
+                )
+            type_spec_1 = (
+                shallow_tree if _is_type_spec(shallow_tree) else shallow_tree._type_spec
+            )  # pylint: disable=protected-access
+            type_spec_2 = (
+                input_tree if _is_type_spec(input_tree) else input_tree._type_spec
+            )  # pylint: disable=protected-access
+            try:
+                _ = type_spec_1.most_specific_compatible_type(type_spec_2)
+            except (TypeError, ValueError) as e:
+                raise ValueError(
+                    "Incompatible CompositeTensor TypeSpecs: %s vs. %s -- %s"
+                    % (type_spec_1, type_spec_2, e)
+                )
 
-    elif _is_type_spec(shallow_tree):
-      if not _is_type_spec(input_tree):
-        raise TypeError("If shallow structure is a TypeSpec, input must also "
-                        "be a TypeSpec.  Input has type: %s."
-                        % type(input_tree))
-    else:
-      if len(input_tree) != len(shallow_tree):
-        raise ValueError(
-            _STRUCTURES_HAVE_MISMATCHING_LENGTHS.format(
-                input_length=len(input_tree), shallow_length=len(shallow_tree)))
-      elif len(input_tree) < len(shallow_tree):
-        raise ValueError(
-            _INPUT_TREE_SMALLER_THAN_SHALLOW_TREE.format(
-                input_size=len(input_tree), shallow_size=len(shallow_tree)))
+        elif _is_type_spec(shallow_tree):
+            if not _is_type_spec(input_tree):
+                raise TypeError(
+                    "If shallow structure is a TypeSpec, input must also "
+                    "be a TypeSpec.  Input has type: %s." % type(input_tree)
+                )
+        else:
+            if len(input_tree) != len(shallow_tree):
+                raise ValueError(
+                    _STRUCTURES_HAVE_MISMATCHING_LENGTHS.format(
+                        input_length=len(input_tree), shallow_length=len(shallow_tree)
+                    )
+                )
+            elif len(input_tree) < len(shallow_tree):
+                raise ValueError(
+                    _INPUT_TREE_SMALLER_THAN_SHALLOW_TREE.format(
+                        input_size=len(input_tree), shallow_size=len(shallow_tree)
+                    )
+                )
 
-    if isinstance(shallow_tree, _collections_abc.Mapping):
-      absent_keys = set(shallow_tree) - set(input_tree)
-      if absent_keys:
-        raise ValueError(_SHALLOW_TREE_HAS_INVALID_KEYS
-                         .format(sorted(absent_keys)))
+        if isinstance(shallow_tree, _collections_abc.Mapping):
+            absent_keys = set(shallow_tree) - set(input_tree)
+            if absent_keys:
+                raise ValueError(
+                    _SHALLOW_TREE_HAS_INVALID_KEYS.format(sorted(absent_keys))
+                )
 
-    for shallow_branch, input_branch in zip(_yield_value(shallow_tree),
-                                            _yield_value(input_tree)):
-      assert_shallow_structure(shallow_branch, input_branch,
-                               check_types=check_types,
-                               expand_composites=expand_composites)
+        for shallow_branch, input_branch in zip(
+            _yield_value(shallow_tree), _yield_value(input_tree)
+        ):
+            assert_shallow_structure(
+                shallow_branch,
+                input_branch,
+                check_types=check_types,
+                expand_composites=expand_composites,
+            )
 
 
 @tf_export("__internal__.nest.flatten_up_to", v1=[])
-def flatten_up_to(shallow_tree, input_tree, check_types=True,
-                  expand_composites=False):
-  """Flattens `input_tree` up to `shallow_tree`.
+def flatten_up_to(shallow_tree, input_tree, check_types=True, expand_composites=False):
+    """Flattens `input_tree` up to `shallow_tree`.
 
   Any further depth in structure in `input_tree` is retained as elements in the
   partially flatten output.
@@ -1185,20 +1230,21 @@ def flatten_up_to(shallow_tree, input_tree, check_types=True,
     ValueError: If the sequence lengths of `shallow_tree` are different from
       `input_tree`.
   """
-  is_seq = is_sequence_or_composite if expand_composites else is_sequence
-  assert_shallow_structure(shallow_tree,
-                           input_tree,
-                           check_types=check_types,
-                           expand_composites=expand_composites)
-  # Discard paths returned by _yield_flat_up_to.
-  return [v for _, v in _yield_flat_up_to(shallow_tree, input_tree, is_seq)]
+    is_seq = is_sequence_or_composite if expand_composites else is_sequence
+    assert_shallow_structure(
+        shallow_tree,
+        input_tree,
+        check_types=check_types,
+        expand_composites=expand_composites,
+    )
+    # Discard paths returned by _yield_flat_up_to.
+    return [v for _, v in _yield_flat_up_to(shallow_tree, input_tree, is_seq)]
 
 
-def flatten_with_tuple_paths_up_to(shallow_tree,
-                                   input_tree,
-                                   check_types=True,
-                                   expand_composites=False):
-  """Flattens `input_tree` up to `shallow_tree`.
+def flatten_with_tuple_paths_up_to(
+    shallow_tree, input_tree, check_types=True, expand_composites=False
+):
+    """Flattens `input_tree` up to `shallow_tree`.
 
   Any further depth in structure in `input_tree` is retained as elements in the
   partially flattened output.
@@ -1290,17 +1336,19 @@ def flatten_with_tuple_paths_up_to(shallow_tree,
     ValueError: If the sequence lengths of `shallow_tree` are different from
       `input_tree`.
   """
-  is_seq = is_sequence_or_composite if expand_composites else is_sequence
-  assert_shallow_structure(shallow_tree,
-                           input_tree,
-                           check_types=check_types,
-                           expand_composites=expand_composites)
-  return list(_yield_flat_up_to(shallow_tree, input_tree, is_seq))
+    is_seq = is_sequence_or_composite if expand_composites else is_sequence
+    assert_shallow_structure(
+        shallow_tree,
+        input_tree,
+        check_types=check_types,
+        expand_composites=expand_composites,
+    )
+    return list(_yield_flat_up_to(shallow_tree, input_tree, is_seq))
 
 
 @tf_export("__internal__.nest.map_structure_up_to", v1=[])
 def map_structure_up_to(shallow_tree, func, *inputs, **kwargs):
-  """Applies a function or op to a number of partially flattened inputs.
+    """Applies a function or op to a number of partially flattened inputs.
 
   The `inputs` are flattened up to `shallow_tree` before being mapped.
 
@@ -1373,15 +1421,16 @@ def map_structure_up_to(shallow_tree, func, *inputs, **kwargs):
     result of repeatedly applying `func`, with the same structure layout as
     `shallow_tree`.
   """
-  return map_structure_with_tuple_paths_up_to(
-      shallow_tree,
-      lambda _, *values: func(*values),  # Discards the path arg.
-      *inputs,
-      **kwargs)
+    return map_structure_with_tuple_paths_up_to(
+        shallow_tree,
+        lambda _, *values: func(*values),  # Discards the path arg.
+        *inputs,
+        **kwargs
+    )
 
 
 def map_structure_with_tuple_paths_up_to(shallow_tree, func, *inputs, **kwargs):
-  """Applies a function or op to a number of partially flattened inputs.
+    """Applies a function or op to a number of partially flattened inputs.
 
   Like map_structure_up_to(), except that the 'func' argument takes a path
   tuple as its first argument, followed by the corresponding values from
@@ -1447,41 +1496,43 @@ def map_structure_with_tuple_paths_up_to(shallow_tree, func, *inputs, **kwargs):
     Result of repeatedly applying `func`. Has the same structure layout as
     `shallow_tree`.
   """
-  if not inputs:
-    raise ValueError("Cannot map over no sequences")
+    if not inputs:
+        raise ValueError("Cannot map over no sequences")
 
-  check_types = kwargs.pop("check_types", True)
-  expand_composites = kwargs.pop("expand_composites", False)
-  is_seq = is_sequence_or_composite if expand_composites else is_sequence
+    check_types = kwargs.pop("check_types", True)
+    expand_composites = kwargs.pop("expand_composites", False)
+    is_seq = is_sequence_or_composite if expand_composites else is_sequence
 
-  for input_tree in inputs:
-    assert_shallow_structure(
-        shallow_tree,
-        input_tree,
-        check_types=check_types,
-        expand_composites=expand_composites)
+    for input_tree in inputs:
+        assert_shallow_structure(
+            shallow_tree,
+            input_tree,
+            check_types=check_types,
+            expand_composites=expand_composites,
+        )
 
-  # Flatten each input separately, apply the function to corresponding elements,
-  # then repack based on the structure of the first input.
-  flat_value_gen = (
-      flatten_up_to(  # pylint: disable=g-complex-comprehension
-          shallow_tree,
-          input_tree,
-          check_types,
-          expand_composites=expand_composites) for input_tree in inputs)
-  flat_path_gen = (
-      path for path, _ in _yield_flat_up_to(shallow_tree, inputs[0], is_seq))
-  results = [
-      func(*args, **kwargs) for args in zip(flat_path_gen, *flat_value_gen)
-  ]
-  return pack_sequence_as(structure=shallow_tree, flat_sequence=results,
-                          expand_composites=expand_composites)
+    # Flatten each input separately, apply the function to corresponding elements,
+    # then repack based on the structure of the first input.
+    flat_value_gen = (
+        flatten_up_to(  # pylint: disable=g-complex-comprehension
+            shallow_tree, input_tree, check_types, expand_composites=expand_composites
+        )
+        for input_tree in inputs
+    )
+    flat_path_gen = (
+        path for path, _ in _yield_flat_up_to(shallow_tree, inputs[0], is_seq)
+    )
+    results = [func(*args, **kwargs) for args in zip(flat_path_gen, *flat_value_gen)]
+    return pack_sequence_as(
+        structure=shallow_tree,
+        flat_sequence=results,
+        expand_composites=expand_composites,
+    )
 
 
 @tf_export("__internal__.nest.get_traverse_shallow_structure", v1=[])
-def get_traverse_shallow_structure(traverse_fn, structure,
-                                   expand_composites=False):
-  """Generates a shallow structure from a `traverse_fn` and `structure`.
+def get_traverse_shallow_structure(traverse_fn, structure, expand_composites=False):
+    """Generates a shallow structure from a `traverse_fn` and `structure`.
 
   `traverse_fn` must accept any possible subtree of `structure` and return
   a depth=1 structure containing `True` or `False` values, describing which
@@ -1510,48 +1561,56 @@ def get_traverse_shallow_structure(traverse_fn, structure,
       or if any leaf values in the returned structure or scalar are not type
       `bool`.
   """
-  is_seq = is_sequence_or_composite if expand_composites else is_sequence
-  to_traverse = traverse_fn(structure)
-  if not is_seq(structure):
-    if not isinstance(to_traverse, bool):
-      raise TypeError("traverse_fn returned structure: %s for non-structure: %s"
-                      % (to_traverse, structure))
-    return to_traverse
-  level_traverse = []
-  if isinstance(to_traverse, bool):
-    if not to_traverse:
-      # Do not traverse this substructure at all.  Exit early.
-      return False
-    else:
-      # Traverse the entire substructure.
-      for branch in _yield_value(structure):
-        level_traverse.append(
-            get_traverse_shallow_structure(traverse_fn, branch,
-                                           expand_composites=expand_composites))
-  elif not is_seq(to_traverse):
-    raise TypeError("traverse_fn returned a non-bool scalar: %s for input: %s"
-                    % (to_traverse, structure))
-  else:
-    # Traverse some subset of this substructure.
-    assert_shallow_structure(to_traverse, structure,
-                             expand_composites=expand_composites)
-    for t, branch in zip(_yield_value(to_traverse),
-                         _yield_value(structure)):
-      if not isinstance(t, bool):
+    is_seq = is_sequence_or_composite if expand_composites else is_sequence
+    to_traverse = traverse_fn(structure)
+    if not is_seq(structure):
+        if not isinstance(to_traverse, bool):
+            raise TypeError(
+                "traverse_fn returned structure: %s for non-structure: %s"
+                % (to_traverse, structure)
+            )
+        return to_traverse
+    level_traverse = []
+    if isinstance(to_traverse, bool):
+        if not to_traverse:
+            # Do not traverse this substructure at all.  Exit early.
+            return False
+        else:
+            # Traverse the entire substructure.
+            for branch in _yield_value(structure):
+                level_traverse.append(
+                    get_traverse_shallow_structure(
+                        traverse_fn, branch, expand_composites=expand_composites
+                    )
+                )
+    elif not is_seq(to_traverse):
         raise TypeError(
-            "traverse_fn didn't return a depth=1 structure of bools.  saw: %s "
-            " for structure: %s" % (to_traverse, structure))
-      if t:
-        level_traverse.append(
-            get_traverse_shallow_structure(traverse_fn, branch))
-      else:
-        level_traverse.append(False)
-  return _sequence_like(structure, level_traverse)
+            "traverse_fn returned a non-bool scalar: %s for input: %s"
+            % (to_traverse, structure)
+        )
+    else:
+        # Traverse some subset of this substructure.
+        assert_shallow_structure(
+            to_traverse, structure, expand_composites=expand_composites
+        )
+        for t, branch in zip(_yield_value(to_traverse), _yield_value(structure)):
+            if not isinstance(t, bool):
+                raise TypeError(
+                    "traverse_fn didn't return a depth=1 structure of bools.  saw: %s "
+                    " for structure: %s" % (to_traverse, structure)
+                )
+            if t:
+                level_traverse.append(
+                    get_traverse_shallow_structure(traverse_fn, branch)
+                )
+            else:
+                level_traverse.append(False)
+    return _sequence_like(structure, level_traverse)
 
 
 @tf_export("__internal__.nest.yield_flat_paths", v1=[])
 def yield_flat_paths(nest, expand_composites=False):
-  """Yields paths for some nested structure.
+    """Yields paths for some nested structure.
 
   Paths are lists of objects which can be str-converted, which may include
   integers or other types which are used as indices in a dict.
@@ -1586,14 +1645,13 @@ def yield_flat_paths(nest, expand_composites=False):
     Tuples containing index or key values which form the path to a specific
     leaf value in the nested structure.
   """
-  is_seq = is_sequence_or_composite if expand_composites else is_sequence
-  for k, _ in _yield_flat_up_to(nest, nest, is_seq):
-    yield k
+    is_seq = is_sequence_or_composite if expand_composites else is_sequence
+    for k, _ in _yield_flat_up_to(nest, nest, is_seq):
+        yield k
 
 
-def flatten_with_joined_string_paths(structure, separator="/",
-                                     expand_composites=False):
-  """Returns a list of (string path, data element) tuples.
+def flatten_with_joined_string_paths(structure, separator="/", expand_composites=False):
+    """Returns a list of (string path, data element) tuples.
 
   The order of tuples produced matches that of `nest.flatten`. This allows you
   to flatten a nested structure while keeping information about where in the
@@ -1611,17 +1669,19 @@ def flatten_with_joined_string_paths(structure, separator="/",
   Returns:
     A list of (string, data element) tuples.
   """
-  flat_paths = yield_flat_paths(structure, expand_composites=expand_composites)
-  def stringify_and_join(path_elements):
-    return separator.join(str(path_element) for path_element in path_elements)
+    flat_paths = yield_flat_paths(structure, expand_composites=expand_composites)
 
-  flat_string_paths = (stringify_and_join(path) for path in flat_paths)
-  return list(zip(flat_string_paths,
-                  flatten(structure, expand_composites=expand_composites)))
+    def stringify_and_join(path_elements):
+        return separator.join(str(path_element) for path_element in path_elements)
+
+    flat_string_paths = (stringify_and_join(path) for path in flat_paths)
+    return list(
+        zip(flat_string_paths, flatten(structure, expand_composites=expand_composites))
+    )
 
 
 def flatten_with_tuple_paths(structure, expand_composites=False):
-  """Returns a list of `(tuple_path, leaf_element)` tuples.
+    """Returns a list of `(tuple_path, leaf_element)` tuples.
 
   The order of pairs produced matches that of `nest.flatten`. This allows you
   to flatten a nested structure while keeping information about where in the
@@ -1639,14 +1699,17 @@ def flatten_with_tuple_paths(structure, expand_composites=False):
     of indices and/or dictionary keys that uniquely specify the path to
     `leaf_element` within `structure`.
   """
-  return list(zip(yield_flat_paths(structure,
-                                   expand_composites=expand_composites),
-                  flatten(structure, expand_composites=expand_composites)))
+    return list(
+        zip(
+            yield_flat_paths(structure, expand_composites=expand_composites),
+            flatten(structure, expand_composites=expand_composites),
+        )
+    )
 
 
 @tf_export("__internal__.nest.list_to_tuple", v1=[])
 def list_to_tuple(structure):
-  """Replace all lists with tuples.
+    """Replace all lists with tuples.
 
   The fork of nest that tf.data uses treats lists as single elements, while
   tf.nest treats them as structures to recurse into. Keras has chosen to adopt
@@ -1659,13 +1722,15 @@ def list_to_tuple(structure):
   Returns:
     structure mapped to replace all lists with tuples.
   """
-  def sequence_fn(instance, args):
-    if isinstance(instance, list):
-      return tuple(args)
-    return _sequence_like(instance, args)
 
-  return _pack_sequence_as(structure, flatten(structure), False,
-                           sequence_fn=sequence_fn)
+    def sequence_fn(instance, args):
+        if isinstance(instance, list):
+            return tuple(args)
+        return _sequence_like(instance, args)
+
+    return _pack_sequence_as(
+        structure, flatten(structure), False, sequence_fn=sequence_fn
+    )
 
 
 _pywrap_utils.RegisterType("Mapping", _collections_abc.Mapping)

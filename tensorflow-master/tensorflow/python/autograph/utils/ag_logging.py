@@ -26,20 +26,20 @@ import traceback
 from tensorflow.python.platform import tf_logging as logging
 from tensorflow.python.util.tf_export import tf_export
 
-VERBOSITY_VAR_NAME = 'AUTOGRAPH_VERBOSITY'
+VERBOSITY_VAR_NAME = "AUTOGRAPH_VERBOSITY"
 DEFAULT_VERBOSITY = 0
 
 verbosity_level = None  # vlog-like. Takes precedence over the env variable.
 echo_log_to_stdout = False
 
 # In interactive Python, logging echo is enabled by default.
-if hasattr(sys, 'ps1') or hasattr(sys, 'ps2'):
-  echo_log_to_stdout = True
+if hasattr(sys, "ps1") or hasattr(sys, "ps2"):
+    echo_log_to_stdout = True
 
 
-@tf_export('autograph.set_verbosity')
+@tf_export("autograph.set_verbosity")
 def set_verbosity(level, alsologtostdout=False):
-  """Sets the AutoGraph verbosity level.
+    """Sets the AutoGraph verbosity level.
 
   _Debug logging in AutoGraph_
 
@@ -82,15 +82,15 @@ def set_verbosity(level, alsologtostdout=False):
       value to a larger number, like 10.
     alsologtostdout: bool, whether to also output log messages to `sys.stdout`.
   """
-  global verbosity_level
-  global echo_log_to_stdout
-  verbosity_level = level
-  echo_log_to_stdout = alsologtostdout
+    global verbosity_level
+    global echo_log_to_stdout
+    verbosity_level = level
+    echo_log_to_stdout = alsologtostdout
 
 
-@tf_export('autograph.trace')
+@tf_export("autograph.trace")
 def trace(*args):
-  """Traces argument information at compilation time.
+    """Traces argument information at compilation time.
 
   `trace` is useful when debugging, and it always executes during the tracing
   phase, that is, when the TF graph is constructed.
@@ -108,42 +108,42 @@ def trace(*args):
   Args:
     *args: Arguments to print to `sys.stdout`.
   """
-  print(*args)
+    print(*args)
 
 
 def get_verbosity():
-  global verbosity_level
-  if verbosity_level is not None:
-    return verbosity_level
-  return int(os.getenv(VERBOSITY_VAR_NAME, DEFAULT_VERBOSITY))
+    global verbosity_level
+    if verbosity_level is not None:
+        return verbosity_level
+    return int(os.getenv(VERBOSITY_VAR_NAME, DEFAULT_VERBOSITY))
 
 
 def has_verbosity(level):
-  return get_verbosity() >= level
+    return get_verbosity() >= level
 
 
 def _output_to_stdout(msg, *args, **kwargs):
-  print(msg % args)
-  if kwargs.get('exc_info', False):
-    traceback.print_exc()
+    print(msg % args)
+    if kwargs.get("exc_info", False):
+        traceback.print_exc()
 
 
 def error(level, msg, *args, **kwargs):
-  if has_verbosity(level):
-    logging.error(msg, *args, **kwargs)
-    if echo_log_to_stdout:
-      _output_to_stdout('ERROR: ' + msg, *args, **kwargs)
+    if has_verbosity(level):
+        logging.error(msg, *args, **kwargs)
+        if echo_log_to_stdout:
+            _output_to_stdout("ERROR: " + msg, *args, **kwargs)
 
 
 def log(level, msg, *args, **kwargs):
-  if has_verbosity(level):
-    logging.info(msg, *args, **kwargs)
-    if echo_log_to_stdout:
-      _output_to_stdout(msg, *args, **kwargs)
+    if has_verbosity(level):
+        logging.info(msg, *args, **kwargs)
+        if echo_log_to_stdout:
+            _output_to_stdout(msg, *args, **kwargs)
 
 
 def warn(msg, *args, **kwargs):
-  logging.warning(msg, *args, **kwargs)
-  if echo_log_to_stdout:
-    _output_to_stdout('WARNING: ' + msg, *args, **kwargs)
-  sys.stdout.flush()
+    logging.warning(msg, *args, **kwargs)
+    if echo_log_to_stdout:
+        _output_to_stdout("WARNING: " + msg, *args, **kwargs)
+    sys.stdout.flush()

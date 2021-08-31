@@ -21,7 +21,9 @@ from tensorflow.python.feature_column import feature_column_v2 as fcv2
 from tensorflow.python.framework import dtypes as dt
 from tensorflow.python.keras.layers.preprocessing import category_crossing
 from tensorflow.python.keras.layers.preprocessing import hashing
-from tensorflow.python.keras.layers.preprocessing.benchmarks import feature_column_benchmark as fc_bm
+from tensorflow.python.keras.layers.preprocessing.benchmarks import (
+    feature_column_benchmark as fc_bm,
+)
 from tensorflow.python.platform import test as tf_test
 
 # This is required as of 3/2021 because otherwise we drop into graph mode.
@@ -32,60 +34,58 @@ BATCH_SIZES = [32, 256]
 
 
 def embedding_varlen(batch_size, max_length):
-  """Benchmark a variable-length embedding."""
-  # Data and constants.
+    """Benchmark a variable-length embedding."""
+    # Data and constants.
 
-  num_buckets = 10000
-  vocab = fc_bm.create_vocabulary(32768)
-  data_a = fc_bm.create_string_data(
-      max_length, batch_size * NUM_REPEATS, vocab, pct_oov=0.0)
-  data_b = fc_bm.create_string_data(
-      max_length, batch_size * NUM_REPEATS, vocab, pct_oov=0.0)
+    num_buckets = 10000
+    vocab = fc_bm.create_vocabulary(32768)
+    data_a = fc_bm.create_string_data(
+        max_length, batch_size * NUM_REPEATS, vocab, pct_oov=0.0
+    )
+    data_b = fc_bm.create_string_data(
+        max_length, batch_size * NUM_REPEATS, vocab, pct_oov=0.0
+    )
 
-  # Keras implementation
-  input_1 = keras.Input(shape=(None,), name="data_a", dtype=dt.string)
-  input_2 = keras.Input(shape=(None,), name="data_b", dtype=dt.string)
-  crossed_data = category_crossing.CategoryCrossing()([input_1, input_2])
-  hashed_data = hashing.Hashing(num_buckets)(crossed_data)
-  model = keras.Model([input_1, input_2], hashed_data)
+    # Keras implementation
+    input_1 = keras.Input(shape=(None,), name="data_a", dtype=dt.string)
+    input_2 = keras.Input(shape=(None,), name="data_b", dtype=dt.string)
+    crossed_data = category_crossing.CategoryCrossing()([input_1, input_2])
+    hashed_data = hashing.Hashing(num_buckets)(crossed_data)
+    model = keras.Model([input_1, input_2], hashed_data)
 
-  # FC implementation
-  fc = fcv2.crossed_column(["data_a", "data_b"], num_buckets)
+    # FC implementation
+    fc = fcv2.crossed_column(["data_a", "data_b"], num_buckets)
 
-  # Wrap the FC implementation in a tf.function for a fair comparison
-  @tf_function()
-  def fc_fn(tensors):
-    fc.transform_feature(fcv2.FeatureTransformationCache(tensors), None)
+    # Wrap the FC implementation in a tf.function for a fair comparison
+    @tf_function()
+    def fc_fn(tensors):
+        fc.transform_feature(fcv2.FeatureTransformationCache(tensors), None)
 
-  # Benchmark runs
-  keras_data = {
-      "data_a":
-          data_a.to_tensor(default_value="", shape=(batch_size, max_length)),
-      "data_b":
-          data_b.to_tensor(default_value="", shape=(batch_size, max_length)),
-  }
-  k_avg_time = fc_bm.run_keras(keras_data, model, batch_size, NUM_REPEATS)
+    # Benchmark runs
+    keras_data = {
+        "data_a": data_a.to_tensor(default_value="", shape=(batch_size, max_length)),
+        "data_b": data_b.to_tensor(default_value="", shape=(batch_size, max_length)),
+    }
+    k_avg_time = fc_bm.run_keras(keras_data, model, batch_size, NUM_REPEATS)
 
-  fc_data = {
-      "data_a":
-          data_a.to_tensor(default_value="", shape=(batch_size, max_length)),
-      "data_b":
-          data_b.to_tensor(default_value="", shape=(batch_size, max_length)),
-  }
-  fc_avg_time = fc_bm.run_fc(fc_data, fc_fn, batch_size, NUM_REPEATS)
+    fc_data = {
+        "data_a": data_a.to_tensor(default_value="", shape=(batch_size, max_length)),
+        "data_b": data_b.to_tensor(default_value="", shape=(batch_size, max_length)),
+    }
+    fc_avg_time = fc_bm.run_fc(fc_data, fc_fn, batch_size, NUM_REPEATS)
 
-  return k_avg_time, fc_avg_time
+    return k_avg_time, fc_avg_time
 
 
 class BenchmarkLayer(fc_bm.LayerBenchmark):
-  """Benchmark the layer forward pass."""
+    """Benchmark the layer forward pass."""
 
-  def benchmark_layer(self):
-    for batch in BATCH_SIZES:
-      name = "cross_hash|dense|batch_%s" % batch
-      k_time, f_time = embedding_varlen(batch_size=batch, max_length=256)
-      self.report(name, k_time, f_time, NUM_REPEATS)
+    def benchmark_layer(self):
+        for batch in BATCH_SIZES:
+            name = "cross_hash|dense|batch_%s" % batch
+            k_time, f_time = embedding_varlen(batch_size=batch, max_length=256)
+            self.report(name, k_time, f_time, NUM_REPEATS)
 
 
 if __name__ == "__main__":
-  tf_test.main()
+    tf_test.main()

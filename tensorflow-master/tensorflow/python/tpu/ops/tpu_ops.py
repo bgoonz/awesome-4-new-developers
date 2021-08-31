@@ -21,9 +21,11 @@ from __future__ import print_function
 from tensorflow.python.framework import dtypes
 from tensorflow.python.framework import ops
 from tensorflow.python.ops import array_ops
+
 # pylint: disable=wildcard-import,unused-import
 from tensorflow.python.ops import gen_tpu_ops
 from tensorflow.python.ops.gen_tpu_ops import *
+
 # pylint: enable=wildcard-import,unused-import
 from tensorflow.python.platform import tf_logging as logging
 from tensorflow.python.tpu import tpu_function
@@ -31,23 +33,21 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 def _create_default_group_assignment():
-  num_shards = tpu_function.get_tpu_context().number_of_shards
-  if num_shards is None:
-    logging.warning(
-        "cross_replica_sum should be used within a tpu_shard_context, but "
-        "got unset number_of_shards. Assuming 1.")
-    num_shards = 1
-  group_assignment = [list(range(num_shards))]
-  return group_assignment
+    num_shards = tpu_function.get_tpu_context().number_of_shards
+    if num_shards is None:
+        logging.warning(
+            "cross_replica_sum should be used within a tpu_shard_context, but "
+            "got unset number_of_shards. Assuming 1."
+        )
+        num_shards = 1
+    group_assignment = [list(range(num_shards))]
+    return group_assignment
 
 
-def all_to_all(x,
-               concat_dimension,
-               split_dimension,
-               split_count,
-               group_assignment=None,
-               name=None):
-  """Exchange data across TPU replicas.
+def all_to_all(
+    x, concat_dimension, split_dimension, split_count, group_assignment=None, name=None
+):
+    """Exchange data across TPU replicas.
 
   Args:
     x: The local tensor.
@@ -63,35 +63,38 @@ def all_to_all(x,
   Returns:
     A `Tensor` which is concatenated by data from different replicas.
   """
-  if group_assignment is None:
-    group_assignment = _create_default_group_assignment()
-  return gen_tpu_ops.all_to_all(
-      x,
-      group_assignment,
-      concat_dimension=concat_dimension,
-      split_dimension=split_dimension,
-      split_count=split_count,
-      name=name)
+    if group_assignment is None:
+        group_assignment = _create_default_group_assignment()
+    return gen_tpu_ops.all_to_all(
+        x,
+        group_assignment,
+        concat_dimension=concat_dimension,
+        split_dimension=split_dimension,
+        split_count=split_count,
+        name=name,
+    )
 
 
 @ops.RegisterGradient("AllToAll")
 def _all_to_all_grad(op, grad):
-  # The gradient of a all-to-all is also a all-to-all but the
-  # split_dimension and concat_dimension is swapped.
-  # The gradient with respect to group_assignment is None.
-  return [
-      gen_tpu_ops.all_to_all(
-          grad,
-          op.inputs[1],
-          concat_dimension=op.get_attr("split_dimension"),
-          split_dimension=op.get_attr("concat_dimension"),
-          split_count=op.get_attr("split_count")), None
-  ]
+    # The gradient of a all-to-all is also a all-to-all but the
+    # split_dimension and concat_dimension is swapped.
+    # The gradient with respect to group_assignment is None.
+    return [
+        gen_tpu_ops.all_to_all(
+            grad,
+            op.inputs[1],
+            concat_dimension=op.get_attr("split_dimension"),
+            split_dimension=op.get_attr("concat_dimension"),
+            split_count=op.get_attr("split_count"),
+        ),
+        None,
+    ]
 
 
 @tf_export(v1=["tpu.cross_replica_sum"])
 def cross_replica_sum(x, group_assignment=None, name=None):
-  """Sum the input tensor across replicas according to group_assignment.
+    """Sum the input tensor across replicas according to group_assignment.
 
   Args:
     x: The local tensor to the sum.
@@ -103,14 +106,14 @@ def cross_replica_sum(x, group_assignment=None, name=None):
   Returns:
     A `Tensor` which is summed across replicas.
   """
-  if group_assignment is None:
-    group_assignment = _create_default_group_assignment()
+    if group_assignment is None:
+        group_assignment = _create_default_group_assignment()
 
-  return gen_tpu_ops.cross_replica_sum(x, group_assignment, name=name)
+    return gen_tpu_ops.cross_replica_sum(x, group_assignment, name=name)
 
 
 def collective_permute(x, source_target_pairs, name=None):
-  """Permute the input tensor across replicas given source_target_pairs.
+    """Permute the input tensor across replicas given source_target_pairs.
 
   For each source_target_pair <a, b>, we send replica a's input to replica b.
   Each replica id must only appear once in the source column. Also it must
@@ -132,85 +135,97 @@ def collective_permute(x, source_target_pairs, name=None):
   Returns:
     A `Tensor` which is permuted.
   """
-  return gen_tpu_ops.collective_permute(x, source_target_pairs, name=name)
+    return gen_tpu_ops.collective_permute(x, source_target_pairs, name=name)
 
 
 @ops.RegisterGradient("CollectivePermute")
 def _collective_permute_grad(op, grad):
-  # The gradient of a collective permute operation is also a collective
-  # permute, but with source/target pairs reversed. The gradient with respect
-  # to input argument `source_target_pairs` is `None`.
-  source_target_pairs = op.inputs[1][:, ::-1]
-  return [gen_tpu_ops.collective_permute(grad, source_target_pairs), None]
+    # The gradient of a collective permute operation is also a collective
+    # permute, but with source/target pairs reversed. The gradient with respect
+    # to input argument `source_target_pairs` is `None`.
+    source_target_pairs = op.inputs[1][:, ::-1]
+    return [gen_tpu_ops.collective_permute(grad, source_target_pairs), None]
 
 
 @ops.RegisterGradient("CrossReplicaSum")
 def _cross_replica_sum_grad(op, grad):
-  # The gradient of a cross replica sum is also a cross-replica sum.
-  # The gradient with respect to group_assignment is None.
-  return [gen_tpu_ops.cross_replica_sum(grad, op.inputs[1]), None]
+    # The gradient of a cross replica sum is also a cross-replica sum.
+    # The gradient with respect to group_assignment is None.
+    return [gen_tpu_ops.cross_replica_sum(grad, op.inputs[1]), None]
 
 
 # This extra type checking exists to give a more helpful error message in
 # the common case that uint8 and int64 values are infed. Remove when both
 # types are supported.
 
-_SUPPORTED_INFEED_DTYPES = set([
-    dtypes.bool, dtypes.int32, dtypes.int64, dtypes.bfloat16, dtypes.float32,
-    dtypes.complex64, dtypes.uint32
-])
+_SUPPORTED_INFEED_DTYPES = set(
+    [
+        dtypes.bool,
+        dtypes.int32,
+        dtypes.int64,
+        dtypes.bfloat16,
+        dtypes.float32,
+        dtypes.complex64,
+        dtypes.uint32,
+    ]
+)
 
 
 @ops.RegisterGradient("TPUEmbeddingActivations")
 def _embedding_activations_grad(activations_op, grad_wrt_activations):
-  """Saves the gradient of embedding activations ops in a graph collection."""
-  g = ops.get_default_graph()
-  table_id = activations_op.get_attr("table_id")
-  lookup_id = activations_op.get_attr("lookup_id")
-  table_gradients = g.get_collection_ref("tpu_embedding_gradients_table_%d" %
-                                         table_id)
+    """Saves the gradient of embedding activations ops in a graph collection."""
+    g = ops.get_default_graph()
+    table_id = activations_op.get_attr("table_id")
+    lookup_id = activations_op.get_attr("lookup_id")
+    table_gradients = g.get_collection_ref(
+        "tpu_embedding_gradients_table_%d" % table_id
+    )
 
-  if not table_gradients:
-    raise RuntimeError(
-        "Gradients for TPUEmbedding have been generated in non-training mode."
-        "This is not expected. Consider putting your Optimizer.minimize code "
-        "behind the training mode condition check. For Estimator, you can "
-        "do \n\n"
-        "    if mode == tf.estimator.ModeKeys.TRAIN:\n"
-        "        train_op = opt.minimize(loss)\n"
-        "\n")
+    if not table_gradients:
+        raise RuntimeError(
+            "Gradients for TPUEmbedding have been generated in non-training mode."
+            "This is not expected. Consider putting your Optimizer.minimize code "
+            "behind the training mode condition check. For Estimator, you can "
+            "do \n\n"
+            "    if mode == tf.estimator.ModeKeys.TRAIN:\n"
+            "        train_op = opt.minimize(loss)\n"
+            "\n"
+        )
 
-  if lookup_id < 0 or lookup_id >= len(table_gradients):
-    raise RuntimeError(
-        "Gradients (w.r.t. TPUEmbedding activations) generated for table_id {} "
-        "and lookup_id {}. The lookup_id attribute is outside the expected "
-        "range [0, {}).".format(table_id, lookup_id, len(table_gradients)))
+    if lookup_id < 0 or lookup_id >= len(table_gradients):
+        raise RuntimeError(
+            "Gradients (w.r.t. TPUEmbedding activations) generated for table_id {} "
+            "and lookup_id {}. The lookup_id attribute is outside the expected "
+            "range [0, {}).".format(table_id, lookup_id, len(table_gradients))
+        )
 
-  if table_gradients[lookup_id] is not None:
-    raise RuntimeError(
-        "Duplicate gradients (w.r.t. TPUEmbedding activations) generated for "
-        "table_id {} and lookup_id {}. This happens when there are multiple "
-        "calls to tf.gradients in a graph containing TPU embeddings. "
-        "TF cannot identify which gradient to use for updating the embedding "
-        "variables. Consider placing tf.StopGradient around tensors where "
-        "variable update is not required. Previous gradients were generated by "
-        "the following callstack: {}.".format(
-            table_id, lookup_id, table_gradients[lookup_id].op.traceback))
+    if table_gradients[lookup_id] is not None:
+        raise RuntimeError(
+            "Duplicate gradients (w.r.t. TPUEmbedding activations) generated for "
+            "table_id {} and lookup_id {}. This happens when there are multiple "
+            "calls to tf.gradients in a graph containing TPU embeddings. "
+            "TF cannot identify which gradient to use for updating the embedding "
+            "variables. Consider placing tf.StopGradient around tensors where "
+            "variable update is not required. Previous gradients were generated by "
+            "the following callstack: {}.".format(
+                table_id, lookup_id, table_gradients[lookup_id].op.traceback
+            )
+        )
 
-  table_gradients[lookup_id] = array_ops.identity(grad_wrt_activations)
-  return [
-      # RegisterGradient requires that value be returned for all inputs. Since
-      # the first argument (tpu_gradient_variable_{table_name}) has shape [1],
-      # we will return zeros(shape=[1]). The actual gradient w.r.t. the
-      # embedding activations (grad_wrt_activations) has the same shape as the
-      # activations returned by  embedding_activations.
-      array_ops.zeros(arg.shape, dtype=dtypes.float32)
-      for arg in activations_op.inputs
-  ]
+    table_gradients[lookup_id] = array_ops.identity(grad_wrt_activations)
+    return [
+        # RegisterGradient requires that value be returned for all inputs. Since
+        # the first argument (tpu_gradient_variable_{table_name}) has shape [1],
+        # we will return zeros(shape=[1]). The actual gradient w.r.t. the
+        # embedding activations (grad_wrt_activations) has the same shape as the
+        # activations returned by  embedding_activations.
+        array_ops.zeros(arg.shape, dtype=dtypes.float32)
+        for arg in activations_op.inputs
+    ]
 
 
 def infeed_dequeue(dtype, shape, name=None):
-  """A placeholder op for a value that will be fed into the computation.
+    """A placeholder op for a value that will be fed into the computation.
 
   Args:
     dtype: A `tf.DType`. The type of elements in the tensor.
@@ -224,18 +239,20 @@ def infeed_dequeue(dtype, shape, name=None):
   Raises:
     TypeError: If 'dtype` is not a supported infeed type.
   """
-  if dtype not in _SUPPORTED_INFEED_DTYPES:
-    raise TypeError(
-        "Operation '{}' has type {} which is not a supported TPU infeed type. "
-        "Supported types are: {}".format(name, dtype,
-                                         list(_SUPPORTED_INFEED_DTYPES)))
+    if dtype not in _SUPPORTED_INFEED_DTYPES:
+        raise TypeError(
+            "Operation '{}' has type {} which is not a supported TPU infeed type. "
+            "Supported types are: {}".format(
+                name, dtype, list(_SUPPORTED_INFEED_DTYPES)
+            )
+        )
 
-  return gen_tpu_ops.infeed_dequeue(dtype, shape, name=name)
+    return gen_tpu_ops.infeed_dequeue(dtype, shape, name=name)
 
 
 # pylint: disable=redefined-outer-name
 def infeed_dequeue_tuple(dtypes, shapes, name=None):
-  """A placeholder op for values fed into the TPU simultaneously as a tuple.
+    """A placeholder op for values fed into the TPU simultaneously as a tuple.
 
   Args:
     dtypes: A list of `tf.DType`s that has length `>= 1`. The element types of
@@ -251,23 +268,21 @@ def infeed_dequeue_tuple(dtypes, shapes, name=None):
   Raises:
     TypeError: If a type in 'dtypes` is not a supported infeed type.
   """
-  for dtype in dtypes:
-    if dtype not in _SUPPORTED_INFEED_DTYPES:
-      raise TypeError(
-          "{} is not a supported TPU infeed type. Supported types are: "
-          "{}".format(dtype, list(_SUPPORTED_INFEED_DTYPES)))
-  return gen_tpu_ops.infeed_dequeue_tuple(dtypes, shapes, name=name)
+    for dtype in dtypes:
+        if dtype not in _SUPPORTED_INFEED_DTYPES:
+            raise TypeError(
+                "{} is not a supported TPU infeed type. Supported types are: "
+                "{}".format(dtype, list(_SUPPORTED_INFEED_DTYPES))
+            )
+    return gen_tpu_ops.infeed_dequeue_tuple(dtypes, shapes, name=name)
 
 
 # pylint: enable=redefined-outer-name
 
 
 # pylint: disable=protected-access
-def send_tpu_embedding_gradients(inputs,
-                                 config,
-                                 learning_rates=None,
-                                 name=None):
-  """A placeholder op for feeding per-sample gradients to the embedding layer.
+def send_tpu_embedding_gradients(inputs, config, learning_rates=None, name=None):
+    """A placeholder op for feeding per-sample gradients to the embedding layer.
 
   Args:
     inputs: A TensorList of gradients with which to update embedding tables.
@@ -288,22 +303,21 @@ def send_tpu_embedding_gradients(inputs,
   Returns:
     A SendTPUEmbeddingGradients operation.
   """
-  if learning_rates is None:
-    learning_rates = []
-  return gen_tpu_ops.send_tpu_embedding_gradients(
-      inputs=inputs, learning_rates=learning_rates, config=config, name=name)
+    if learning_rates is None:
+        learning_rates = []
+    return gen_tpu_ops.send_tpu_embedding_gradients(
+        inputs=inputs, learning_rates=learning_rates, config=config, name=name
+    )
 
 
-send_tpu_embedding_gradients.__doc__ = (
-    gen_tpu_ops.send_tpu_embedding_gradients.__doc__)
+send_tpu_embedding_gradients.__doc__ = gen_tpu_ops.send_tpu_embedding_gradients.__doc__
 
 
 # pylint: disable=protected-access
-def enqueue_tpu_embedding_integer_batch(batch,
-                                        device_ordinal,
-                                        mode_override=None,
-                                        name=None):
-  """A placeholder op for enqueueing embedding IDs to the TPU.
+def enqueue_tpu_embedding_integer_batch(
+    batch, device_ordinal, mode_override=None, name=None
+):
+    """A placeholder op for enqueueing embedding IDs to the TPU.
 
   Args:
     batch: A list of 1D tensors, one for each embedding table, containing the
@@ -320,28 +334,32 @@ def enqueue_tpu_embedding_integer_batch(batch,
   Returns:
     An EnqueueTPUEmbeddingIntegerBatch operation.
   """
-  if mode_override is None:
-    mode_override = "unspecified"
-  return gen_tpu_ops.enqueue_tpu_embedding_integer_batch(
-      batch=batch,
-      device_ordinal=device_ordinal,
-      mode_override=mode_override,
-      name=name)
+    if mode_override is None:
+        mode_override = "unspecified"
+    return gen_tpu_ops.enqueue_tpu_embedding_integer_batch(
+        batch=batch,
+        device_ordinal=device_ordinal,
+        mode_override=mode_override,
+        name=name,
+    )
 
 
 enqueue_tpu_embedding_integer_batch.__doc__ = (
-    gen_tpu_ops.enqueue_tpu_embedding_integer_batch.__doc__)
+    gen_tpu_ops.enqueue_tpu_embedding_integer_batch.__doc__
+)
 
 
 # pylint: disable=protected-access
-def enqueue_tpu_embedding_sparse_batch(sample_indices,
-                                       embedding_indices,
-                                       aggregation_weights,
-                                       device_ordinal,
-                                       combiners=None,
-                                       mode_override=None,
-                                       name=None):
-  """A placeholder op for enqueueing embedding IDs to the TPU.
+def enqueue_tpu_embedding_sparse_batch(
+    sample_indices,
+    embedding_indices,
+    aggregation_weights,
+    device_ordinal,
+    combiners=None,
+    mode_override=None,
+    name=None,
+):
+    """A placeholder op for enqueueing embedding IDs to the TPU.
 
   Args:
     sample_indices: A list of rank 1 Tensors specifying the training example and
@@ -374,34 +392,38 @@ def enqueue_tpu_embedding_sparse_batch(sample_indices,
   Returns:
     An EnqueueTPUEmbeddingSparseBatch operation.
   """
-  if mode_override is None:
-    mode_override = "unspecified"
-  return gen_tpu_ops.enqueue_tpu_embedding_sparse_batch(
-      sample_indices=sample_indices,
-      embedding_indices=embedding_indices,
-      aggregation_weights=aggregation_weights,
-      device_ordinal=device_ordinal,
-      combiners=combiners,
-      mode_override=mode_override,
-      name=name)
+    if mode_override is None:
+        mode_override = "unspecified"
+    return gen_tpu_ops.enqueue_tpu_embedding_sparse_batch(
+        sample_indices=sample_indices,
+        embedding_indices=embedding_indices,
+        aggregation_weights=aggregation_weights,
+        device_ordinal=device_ordinal,
+        combiners=combiners,
+        mode_override=mode_override,
+        name=name,
+    )
 
 
 enqueue_tpu_embedding_sparse_batch.__doc__ = (
-    gen_tpu_ops.enqueue_tpu_embedding_sparse_batch.__doc__)
+    gen_tpu_ops.enqueue_tpu_embedding_sparse_batch.__doc__
+)
 
 
 # pylint: disable=protected-access
-def enqueue_tpu_embedding_sparse_tensor_batch(sample_indices,
-                                              embedding_indices,
-                                              aggregation_weights,
-                                              table_ids,
-                                              device_ordinal,
-                                              max_sequence_lengths=None,
-                                              num_features=None,
-                                              combiners=None,
-                                              mode_override=None,
-                                              name=None):
-  """A placeholder op for enqueueing embedding IDs to the TPU.
+def enqueue_tpu_embedding_sparse_tensor_batch(
+    sample_indices,
+    embedding_indices,
+    aggregation_weights,
+    table_ids,
+    device_ordinal,
+    max_sequence_lengths=None,
+    num_features=None,
+    combiners=None,
+    mode_override=None,
+    name=None,
+):
+    """A placeholder op for enqueueing embedding IDs to the TPU.
 
   Args:
     sample_indices: A list of rank 2 Tensors specifying the training example to
@@ -451,37 +473,41 @@ def enqueue_tpu_embedding_sparse_tensor_batch(sample_indices,
   Returns:
     An EnqueueTPUEmbeddingSparseTensorBatch operation.
   """
-  if mode_override is None:
-    mode_override = "unspecified"
-  return gen_tpu_ops.enqueue_tpu_embedding_sparse_tensor_batch(
-      sample_indices=sample_indices,
-      embedding_indices=embedding_indices,
-      aggregation_weights=aggregation_weights,
-      table_ids=table_ids,
-      device_ordinal=device_ordinal,
-      max_sequence_lengths=max_sequence_lengths,
-      combiners=combiners,
-      mode_override=mode_override,
-      num_features=num_features,
-      name=name)
+    if mode_override is None:
+        mode_override = "unspecified"
+    return gen_tpu_ops.enqueue_tpu_embedding_sparse_tensor_batch(
+        sample_indices=sample_indices,
+        embedding_indices=embedding_indices,
+        aggregation_weights=aggregation_weights,
+        table_ids=table_ids,
+        device_ordinal=device_ordinal,
+        max_sequence_lengths=max_sequence_lengths,
+        combiners=combiners,
+        mode_override=mode_override,
+        num_features=num_features,
+        name=name,
+    )
 
 
 enqueue_tpu_embedding_sparse_tensor_batch.__doc__ = (
-    gen_tpu_ops.enqueue_tpu_embedding_sparse_tensor_batch.__doc__)
+    gen_tpu_ops.enqueue_tpu_embedding_sparse_tensor_batch.__doc__
+)
 
 
 # pylint: disable=protected-access
-def enqueue_tpu_embedding_ragged_tensor_batch(sample_splits,
-                                              embedding_indices,
-                                              aggregation_weights,
-                                              table_ids,
-                                              device_ordinal,
-                                              max_sequence_lengths=None,
-                                              num_features=None,
-                                              combiners=None,
-                                              mode_override=None,
-                                              name=None):
-  """A placeholder op for enqueueing embedding IDs to the TPU.
+def enqueue_tpu_embedding_ragged_tensor_batch(
+    sample_splits,
+    embedding_indices,
+    aggregation_weights,
+    table_ids,
+    device_ordinal,
+    max_sequence_lengths=None,
+    num_features=None,
+    combiners=None,
+    mode_override=None,
+    name=None,
+):
+    """A placeholder op for enqueueing embedding IDs to the TPU.
 
   Args:
     sample_splits: A list of rank 1 Tensors specifying the break points for
@@ -531,20 +557,22 @@ def enqueue_tpu_embedding_ragged_tensor_batch(sample_splits,
   Returns:
     An EnqueueTPUEmbeddingRaggedTensorBatch operation.
   """
-  if mode_override is None:
-    mode_override = "unspecified"
-  return gen_tpu_ops.enqueue_tpu_embedding_ragged_tensor_batch(
-      sample_splits=sample_splits,
-      embedding_indices=embedding_indices,
-      aggregation_weights=aggregation_weights,
-      table_ids=table_ids,
-      device_ordinal=device_ordinal,
-      max_sequence_lengths=max_sequence_lengths,
-      combiners=combiners,
-      mode_override=mode_override,
-      num_features=num_features,
-      name=name)
+    if mode_override is None:
+        mode_override = "unspecified"
+    return gen_tpu_ops.enqueue_tpu_embedding_ragged_tensor_batch(
+        sample_splits=sample_splits,
+        embedding_indices=embedding_indices,
+        aggregation_weights=aggregation_weights,
+        table_ids=table_ids,
+        device_ordinal=device_ordinal,
+        max_sequence_lengths=max_sequence_lengths,
+        combiners=combiners,
+        mode_override=mode_override,
+        num_features=num_features,
+        name=name,
+    )
 
 
 enqueue_tpu_embedding_ragged_tensor_batch.__doc__ = (
-    gen_tpu_ops.enqueue_tpu_embedding_ragged_tensor_batch.__doc__)
+    gen_tpu_ops.enqueue_tpu_embedding_ragged_tensor_batch.__doc__
+)

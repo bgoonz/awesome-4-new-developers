@@ -25,16 +25,23 @@ from tensorflow.python.ops import gen_set_ops
 from tensorflow.python.util import dispatch
 from tensorflow.python.util.tf_export import tf_export
 
-_VALID_DTYPES = frozenset([
-    dtypes.int8, dtypes.int16, dtypes.int32, dtypes.int64, dtypes.uint8,
-    dtypes.uint16, dtypes.string
-])
+_VALID_DTYPES = frozenset(
+    [
+        dtypes.int8,
+        dtypes.int16,
+        dtypes.int32,
+        dtypes.int64,
+        dtypes.uint8,
+        dtypes.uint16,
+        dtypes.string,
+    ]
+)
 
 
 @tf_export("sets.size", v1=["sets.size", "sets.set_size"])
 @dispatch.add_dispatch_support
 def set_size(a, validate_indices=True):
-  """Compute number of unique elements along last dimension of `a`.
+    """Compute number of unique elements along last dimension of `a`.
 
   Args:
     a: `SparseTensor`, with indices sorted in row-major order.
@@ -49,16 +56,16 @@ def set_size(a, validate_indices=True):
   Raises:
     TypeError: If `a` is an invalid types.
   """
-  a = sparse_tensor.convert_to_tensor_or_sparse_tensor(a, name="a")
-  if not isinstance(a, sparse_tensor.SparseTensor):
-    raise TypeError("Expected `SparseTensor`, got %s." % a)
-  if a.values.dtype.base_dtype not in _VALID_DTYPES:
-    raise TypeError(
-        f"Invalid dtype `{a.values.dtype}` not in supported dtypes: "
-        f"`{_VALID_DTYPES}`.")
-  # pylint: disable=protected-access
-  return gen_set_ops.set_size(a.indices, a.values, a.dense_shape,
-                              validate_indices)
+    a = sparse_tensor.convert_to_tensor_or_sparse_tensor(a, name="a")
+    if not isinstance(a, sparse_tensor.SparseTensor):
+        raise TypeError("Expected `SparseTensor`, got %s." % a)
+    if a.values.dtype.base_dtype not in _VALID_DTYPES:
+        raise TypeError(
+            f"Invalid dtype `{a.values.dtype}` not in supported dtypes: "
+            f"`{_VALID_DTYPES}`."
+        )
+    # pylint: disable=protected-access
+    return gen_set_ops.set_size(a.indices, a.values, a.dense_shape, validate_indices)
 
 
 ops.NotDifferentiable("SetSize")
@@ -69,7 +76,7 @@ ops.NotDifferentiable("SparseToSparseSetOperation")
 
 
 def _convert_to_tensors_or_sparse_tensors(a, b):
-  """Convert to tensor types, and flip order if necessary.
+    """Convert to tensor types, and flip order if necessary.
 
   Args:
     a: `Tensor` or `SparseTensor` of the same type as `b`.
@@ -81,22 +88,24 @@ def _convert_to_tensors_or_sparse_tensors(a, b):
     been flipped to make it dense,sparse instead of sparse,dense (since the set
     ops do not support the latter).
   """
-  a = sparse_tensor.convert_to_tensor_or_sparse_tensor(a, name="a")
-  if a.dtype.base_dtype not in _VALID_DTYPES:
-    raise TypeError(
-        f"'a' has invalid dtype `{a.dtype}` not in supported dtypes: "
-        f"`{_VALID_DTYPES}`.")
-  b = sparse_tensor.convert_to_tensor_or_sparse_tensor(b, name="b")
-  if b.dtype.base_dtype != a.dtype.base_dtype:
-    raise TypeError("Types don't match, %s vs %s." % (a.dtype, b.dtype))
-  if (isinstance(a, sparse_tensor.SparseTensor) and
-      not isinstance(b, sparse_tensor.SparseTensor)):
-    return b, a, True
-  return a, b, False
+    a = sparse_tensor.convert_to_tensor_or_sparse_tensor(a, name="a")
+    if a.dtype.base_dtype not in _VALID_DTYPES:
+        raise TypeError(
+            f"'a' has invalid dtype `{a.dtype}` not in supported dtypes: "
+            f"`{_VALID_DTYPES}`."
+        )
+    b = sparse_tensor.convert_to_tensor_or_sparse_tensor(b, name="b")
+    if b.dtype.base_dtype != a.dtype.base_dtype:
+        raise TypeError("Types don't match, %s vs %s." % (a.dtype, b.dtype))
+    if isinstance(a, sparse_tensor.SparseTensor) and not isinstance(
+        b, sparse_tensor.SparseTensor
+    ):
+        return b, a, True
+    return a, b, False
 
 
 def _set_operation(a, b, set_operation, validate_indices=True):
-  """Compute set operation of elements in last dimension of `a` and `b`.
+    """Compute set operation of elements in last dimension of `a` and `b`.
 
   All but the last dimension of `a` and `b` must match.
 
@@ -120,28 +129,38 @@ def _set_operation(a, b, set_operation, validate_indices=True):
     TypeError: If inputs are invalid types.
     ValueError: If `a` is sparse and `b` is dense.
   """
-  if isinstance(a, sparse_tensor.SparseTensor):
-    if isinstance(b, sparse_tensor.SparseTensor):
-      indices, values, shape = gen_set_ops.sparse_to_sparse_set_operation(
-          a.indices, a.values, a.dense_shape, b.indices, b.values,
-          b.dense_shape, set_operation, validate_indices)
+    if isinstance(a, sparse_tensor.SparseTensor):
+        if isinstance(b, sparse_tensor.SparseTensor):
+            indices, values, shape = gen_set_ops.sparse_to_sparse_set_operation(
+                a.indices,
+                a.values,
+                a.dense_shape,
+                b.indices,
+                b.values,
+                b.dense_shape,
+                set_operation,
+                validate_indices,
+            )
+        else:
+            raise ValueError(
+                "Sparse,Dense is not supported, but Dense,Sparse is. "
+                "Please flip the order of your inputs."
+            )
+    elif isinstance(b, sparse_tensor.SparseTensor):
+        indices, values, shape = gen_set_ops.dense_to_sparse_set_operation(
+            a, b.indices, b.values, b.dense_shape, set_operation, validate_indices
+        )
     else:
-      raise ValueError("Sparse,Dense is not supported, but Dense,Sparse is. "
-                       "Please flip the order of your inputs.")
-  elif isinstance(b, sparse_tensor.SparseTensor):
-    indices, values, shape = gen_set_ops.dense_to_sparse_set_operation(
-        a, b.indices, b.values, b.dense_shape, set_operation, validate_indices)
-  else:
-    indices, values, shape = gen_set_ops.dense_to_dense_set_operation(
-        a, b, set_operation, validate_indices)
-  return sparse_tensor.SparseTensor(indices, values, shape)
+        indices, values, shape = gen_set_ops.dense_to_dense_set_operation(
+            a, b, set_operation, validate_indices
+        )
+    return sparse_tensor.SparseTensor(indices, values, shape)
 
 
-@tf_export(
-    "sets.intersection", v1=["sets.intersection", "sets.set_intersection"])
+@tf_export("sets.intersection", v1=["sets.intersection", "sets.set_intersection"])
 @dispatch.add_dispatch_support
 def set_intersection(a, b, validate_indices=True):
-  """Compute set intersection of elements in last dimension of `a` and `b`.
+    """Compute set intersection of elements in last dimension of `a` and `b`.
 
   All but the last dimension of `a` and `b` must match.
 
@@ -204,14 +223,14 @@ def set_intersection(a, b, validate_indices=True):
     the last dimension the same. Elements along the last dimension contain the
     intersections.
   """
-  a, b, _ = _convert_to_tensors_or_sparse_tensors(a, b)
-  return _set_operation(a, b, "intersection", validate_indices)
+    a, b, _ = _convert_to_tensors_or_sparse_tensors(a, b)
+    return _set_operation(a, b, "intersection", validate_indices)
 
 
 @tf_export("sets.difference", v1=["sets.difference", "sets.set_difference"])
 @dispatch.add_dispatch_support
 def set_difference(a, b, aminusb=True, validate_indices=True):
-  """Compute set difference of elements in last dimension of `a` and `b`.
+    """Compute set difference of elements in last dimension of `a` and `b`.
 
   All but the last dimension of `a` and `b` must match.
 
@@ -283,16 +302,16 @@ def set_difference(a, b, aminusb=True, validate_indices=True):
     errors_impl.InvalidArgumentError: If the shapes of `a` and `b` do not
         match in any dimension other than the last dimension.
   """
-  a, b, flipped = _convert_to_tensors_or_sparse_tensors(a, b)
-  if flipped:
-    aminusb = not aminusb
-  return _set_operation(a, b, "a-b" if aminusb else "b-a", validate_indices)
+    a, b, flipped = _convert_to_tensors_or_sparse_tensors(a, b)
+    if flipped:
+        aminusb = not aminusb
+    return _set_operation(a, b, "a-b" if aminusb else "b-a", validate_indices)
 
 
 @tf_export("sets.union", v1=["sets.union", "sets.set_union"])
 @dispatch.add_dispatch_support
 def set_union(a, b, validate_indices=True):
-  """Compute set union of elements in last dimension of `a` and `b`.
+    """Compute set union of elements in last dimension of `a` and `b`.
 
   All but the last dimension of `a` and `b` must match.
 
@@ -364,5 +383,5 @@ def set_union(a, b, validate_indices=True):
     the last dimension the same. Elements along the last dimension contain the
     unions.
   """
-  a, b, _ = _convert_to_tensors_or_sparse_tensors(a, b)
-  return _set_operation(a, b, "union", validate_indices)
+    a, b, _ = _convert_to_tensors_or_sparse_tensors(a, b)
+    return _set_operation(a, b, "union", validate_indices)

@@ -27,7 +27,7 @@ RunKey = collections.namedtuple("RunKey", ["feed_names", "fetch_names"])
 
 
 def get_graph_element_name(elem):
-  """Obtain the name or string representation of a graph element.
+    """Obtain the name or string representation of a graph element.
 
   If the graph element has the attribute "name", return name. Otherwise, return
   a __str__ representation of the graph element. Certain graph elements, such as
@@ -41,11 +41,11 @@ def get_graph_element_name(elem):
     str(fetch).
   """
 
-  return elem.name if hasattr(elem, "name") else str(elem)
+    return elem.name if hasattr(elem, "name") else str(elem)
 
 
 def get_flattened_names(feeds_or_fetches):
-  """Get a flattened list of the names in run() call feeds or fetches.
+    """Get a flattened list of the names in run() call feeds or fetches.
 
   Args:
     feeds_or_fetches: Feeds or fetches of the `Session.run()` call. It maybe
@@ -56,23 +56,23 @@ def get_flattened_names(feeds_or_fetches):
     (list of str) A flattened list of fetch names from `feeds_or_fetches`.
   """
 
-  lines = []
-  if isinstance(feeds_or_fetches, (list, tuple)):
-    for item in feeds_or_fetches:
-      lines.extend(get_flattened_names(item))
-  elif isinstance(feeds_or_fetches, dict):
-    for key in feeds_or_fetches:
-      lines.extend(get_flattened_names(feeds_or_fetches[key]))
-  else:
-    # This ought to be a Tensor, an Operation or a Variable, for which the name
-    # attribute should be available. (Bottom-out condition of the recursion.)
-    lines.append(get_graph_element_name(feeds_or_fetches))
+    lines = []
+    if isinstance(feeds_or_fetches, (list, tuple)):
+        for item in feeds_or_fetches:
+            lines.extend(get_flattened_names(item))
+    elif isinstance(feeds_or_fetches, dict):
+        for key in feeds_or_fetches:
+            lines.extend(get_flattened_names(feeds_or_fetches[key]))
+    else:
+        # This ought to be a Tensor, an Operation or a Variable, for which the name
+        # attribute should be available. (Bottom-out condition of the recursion.)
+        lines.append(get_graph_element_name(feeds_or_fetches))
 
-  return lines
+    return lines
 
 
 def get_run_key(feed_dict, fetches):
-  """Summarize the names of feeds and fetches as a RunKey JSON string.
+    """Summarize the names of feeds and fetches as a RunKey JSON string.
 
   Args:
     feed_dict: The feed_dict given to the `Session.run()` call.
@@ -83,5 +83,6 @@ def get_run_key(feed_dict, fetches):
     Array of the names of the feeds. The second item is a flattened Array of
     the names of the fetches.
   """
-  return json.dumps(RunKey(get_flattened_names(feed_dict),
-                           get_flattened_names(fetches)))
+    return json.dumps(
+        RunKey(get_flattened_names(feed_dict), get_flattened_names(fetches))
+    )

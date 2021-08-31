@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Javascript-Python-cheatsheet</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#versions">Versions</a></li>
+<li><a href="#development-environments">Development Environments</a></li>
+<li><a href="#running-programs">Running Programs</a></li>
+<li><a href="#comments">Comments</a></li>
+<li><a href="#semicolons">Semicolons</a></li>
+<li><a href="#whitespace-blocks">Whitespace, Blocks</a></li>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#arithmetic-operators">Arithmetic Operators</a></li>
+<li><a href="#variables">Variables</a></li>
+<li><a href="#data-types">Data Types</a></li>
+<li><a href="#arrayslists">Arrays/Lists</a></li>
+<li><a href="#slices">Slices</a></li>
+<li><a href="#objectsdicts">Objects/Dicts</a></li>
+<li><a href="#string-formatting">String Formatting</a></li>
+<li><a href="#booleans-and-conditionals">Booleans and Conditionals</a></li>
+<li><a href="#for-loops"><code>for</code> Loops</a></li>
+<li><a href="#while-loops"><code>while</code> Loops</a></li>
+<li><a href="#switch-statement"><code>switch</code> Statement</a></li>
+<li><a href="#if-conditionals"><code>if</code> Conditionals</a></li>
+<li><a href="#classes">Classes</a></li>
+</ul>
+<h2 id="versions">Versions</h2>
+<h3 id="javascript">JavaScript</h3>
+<p>The standard defining JavaScript (JS) is <em>ECMAScript</em> (ES). Modern browsers and NodeJS support ES6, which has a rich feature set. Older browsers might not support all ES6 features.</p>
+<p>The website <a href="https://caniuse.com/">caniuse.com</a> will show which browsers support specific JS features.</p>
+<h3 id="python">Python</h3>
+<p>Python 3.x is the current version, but there are a number of packages and sites running legacy Python 2.</p>
+<p>On some systems, you might have to be explicit when you invoke Python about which version you want by running <code>python2</code> or <code>python3</code>. The <code>--version</code> command line switch will tell you which version is running. Example:</p>
+<pre><code>$ python --version
+Python 2.7.10
+$ python2 --version
+-bash: python2: command not found
+$ python3 --version
+Python 3.6.5</code></pre>
+<p>Using <code>virtualenv</code> or <code>pipenv</code> can really ease development painpoints surrounding the version. See <a href="#development-environments">Development Environments</a>, below.</p>
+<h2 id="development-environments">Development Environments</h2>
+<h3 id="javascript-1">JavaScript</h3>
+<p>For managing project packages, the classic tool is <code>npm</code>. This is slowly being superseded by the newer <code>yarn</code> tool. Choose one for a project, and don’t mix and match.</p>
+<h3 id="python-1">Python</h3>
+<p>For managing project packages and Python versions, the classic tool is <code>virtualenv</code>. This is slowly being superseded by the newer <code>pipenv</code> tool.</p>
+<h2 id="running-programs">Running Programs</h2>
+<h3 id="javascript-2">JavaScript</h3>
+<p>Running from the command line with NodeJS:</p>
+<pre><code>node program.js arg1 arg2 etc</code></pre>
+<p>In a web page, a script is referenced with a <code>&lt;script&gt;</code> HTML tag:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;program.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<h3 id="python-2">Python</h3>
+<p>Running from the command line:</p>
+<pre><code>python program.py arg1 arg2 etc</code></pre>
+<h2 id="comments">Comments</h2>
+<h3 id="javascript-3">JavaScript</h3>
+<p>Single line:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="co">// Anything after two forward slashes is a comment</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="at">print</span>(<span class="dv">2</span>)<span class="op">;</span>  <span class="co">// prints 2</span></a></code></pre></div>
+<p>Multi-line comments:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">/* Anything between slash-star and</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">star-slash is a comment */</span></a></code></pre></div>
+<p>You may not nest multi-line comments.</p>
+<h3 id="python-3">Python</h3>
+<p>Single line:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Anything after a # is a comment</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="bu">print</span>(<span class="dv">2</span>)  <span class="co"># prints 2</span></a></code></pre></div>
+<p>Python doesn’t directly support multi-line comments, but you can effectively do them by using multi-line strings <code>"""</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" title="1"><span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">At this point we wish</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co">to print out some numbers</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">and see where that gets us</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="bu">print</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="bu">print</span>(<span class="dv">2</span>)</a></code></pre></div>
+<h2 id="semicolons">Semicolons</h2>
+<h3 id="javascript-4">JavaScript</h3>
+<p>Javascript ends statements with semicolons, usually at the end of the line. I can also be effectively used to put multiple statements on the same line, but this is rare.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Hello, world!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="kw">let</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> <span class="va">console</span>.<span class="at">log</span>(x)<span class="op">;</span></a></code></pre></div>
+<p>Javascript interpreters will let you get away without using semicolons at ends of lines, but you should use them.</p>
+<h3 id="python-4">Python</h3>
+<p>Python can separate statements by semicolons, though this is rare in practice.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" title="1"><span class="bu">print</span>(<span class="dv">1</span>)<span class="op">;</span> <span class="bu">print</span>(<span class="dv">2</span>)   <span class="co"># prints 1, then 2</span></a></code></pre></div>
+<h2 id="whitespace-blocks">Whitespace, blocks</h2>
+<h3 id="javascript-5">JavaScript</h3>
+<p>Whitespace has no special meaning. Blocks are declared with squirrely braces <code>{</code> and <code>}</code>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="cf">if</span> (x <span class="op">==</span> <span class="dv">2</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;x must be 2&quot;</span>)</a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="cf">if</span> (x <span class="op">==</span> <span class="dv">3</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-5" title="5">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;x must be 3&quot;</span>)</a>
+<a class="sourceLine" id="cb11-6" title="6">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-7" title="7">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;x must be something else&quot;</span>)</a>
+<a class="sourceLine" id="cb11-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="op">}</span></a></code></pre></div>
+<h3 id="python-5">Python</h3>
+<p>Indentation level is how blocks are declared. The preferred method is to use spaces, but tabs can also be used.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" title="1"><span class="cf">if</span> x <span class="op">==</span> <span class="dv">2</span>:</a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="bu">print</span>(<span class="st">&quot;x must be 2&quot;</span>)</a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="cf">if</span> x <span class="op">==</span> <span class="dv">3</span>:</a>
+<a class="sourceLine" id="cb12-5" title="5">    <span class="bu">print</span>(<span class="st">&quot;x must be 3&quot;</span>)</a>
+<a class="sourceLine" id="cb12-6" title="6">  <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb12-7" title="7">    <span class="bu">print</span>(<span class="st">&quot;x must be something else&quot;</span>)</a></code></pre></div>
+<h2 id="functions">Functions</h2>
+<h3 id="javascript-6">JavaScript</h3>
+<p>Define functions as follows:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">function</span> <span class="at">foobar</span>(x<span class="op">,</span> y<span class="op">,</span> z) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(x<span class="op">,</span> y<span class="op">,</span> z)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="cf">return</span> <span class="dv">12</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>An alternate syntax for functions is growing increasingly common, called <em>arrow functions</em>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">let</span> hello <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;hello&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;world&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb14-5" title="5"></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="at">hello</span>()<span class="op">;</span> <span class="co">// prints hello, then world</span></a>
+<a class="sourceLine" id="cb14-7" title="7"></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="co">// Arrow functions with single parameters don&#39;t</span></a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="co">// need parens around the parameter:</span></a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="kw">let</span> printNum <span class="op">=</span> x <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-11" title="11">  <span class="va">console</span>.<span class="at">log</span>(x)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="op">}</span></a>
+<a class="sourceLine" id="cb14-13" title="13"></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="co">// If you don&#39;t explicitly return a value, the value</span></a>
+<a class="sourceLine" id="cb14-15" title="15"><span class="co">// of the last expression in the function is used.</span></a>
+<a class="sourceLine" id="cb14-16" title="16"><span class="co">// Also, single-expression functions don&#39;t need</span></a>
+<a class="sourceLine" id="cb14-17" title="17"><span class="co">// braces around them.</span></a>
+<a class="sourceLine" id="cb14-18" title="18"><span class="kw">let</span> add <span class="op">=</span> (x<span class="op">,</span> y) <span class="kw">=&gt;</span> x <span class="op">+</span> y<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-19" title="19"></a>
+<a class="sourceLine" id="cb14-20" title="20"><span class="va">console</span>.<span class="at">log</span>(<span class="at">add</span>(<span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>))<span class="op">;</span> <span class="co">// prints 9</span></a></code></pre></div>
+<h3 id="python-6">Python</h3>
+<p>Define functions as follows:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">def</span> foobar(x, y, z):</a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="bu">print</span>(x, y, z)</a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="cf">return</span> <span class="dv">12</span></a></code></pre></div>
+<p>Python also supports the concept of <em>lambda functions</em>, which are simple functions that can do basic operations.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb16-1" title="1">add <span class="op">=</span> <span class="kw">lambda</span> x, y: x <span class="op">+</span> y</a>
+<a class="sourceLine" id="cb16-2" title="2"></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="bu">print</span>(add(<span class="dv">4</span>, <span class="dv">5</span>)) <span class="co"># prints 9</span></a></code></pre></div>
+<h2 id="arithmetic-operators">Arithmetic Operators</h2>
+<h3 id="javascript-7">JavaScript</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td>Addition</td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td>Subtraction</td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td>Multiplication</td>
+</tr>
+<tr class="even">
+<td><code>/</code></td>
+<td>Division</td>
+</tr>
+<tr class="odd">
+<td><code>%</code></td>
+<td>Modulo (remainder)</td>
+</tr>
+<tr class="even">
+<td><code>--</code></td>
+<td>Pre-decrement, post-decrement</td>
+</tr>
+<tr class="odd">
+<td><code>++</code></td>
+<td>Pre-increment, post-increment</td>
+</tr>
+<tr class="even">
+<td><code>**</code></td>
+<td>Exponentiation (power)</td>
+</tr>
+<tr class="odd">
+<td><code>=</code></td>
+<td>Assignment</td>
+</tr>
+<tr class="even">
+<td><code>+=</code></td>
+<td>Addition assignment</td>
+</tr>
+<tr class="odd">
+<td><code>-=</code></td>
+<td>Subtraction assignment</td>
+</tr>
+<tr class="even">
+<td><code>*=</code></td>
+<td>Multiplication assignment</td>
+</tr>
+<tr class="odd">
+<td><code>/=</code></td>
+<td>Division assignment</td>
+</tr>
+<tr class="even">
+<td><code>%=</code></td>
+<td>Modulo assignment</td>
+</tr>
+</tbody>
+</table>
+<h3 id="python-7">Python</h3>
+<p>The pre- and post-increment and decrement are notably absent.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td>Addition</td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td>Subtraction</td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td>Multiplication</td>
+</tr>
+<tr class="even">
+<td><code>/</code></td>
+<td>Division</td>
+</tr>
+<tr class="odd">
+<td><code>%</code></td>
+<td>Modulo (remainder)</td>
+</tr>
+<tr class="even">
+<td><code>**</code></td>
+<td>Exponentiation (power)</td>
+</tr>
+<tr class="odd">
+<td><code>=</code></td>
+<td>Assignment</td>
+</tr>
+<tr class="even">
+<td><code>+=</code></td>
+<td>Addition assignment</td>
+</tr>
+<tr class="odd">
+<td><code>-=</code></td>
+<td>Subtraction assignment</td>
+</tr>
+<tr class="even">
+<td><code>*=</code></td>
+<td>Multiplication assignment</td>
+</tr>
+<tr class="odd">
+<td><code>/=</code></td>
+<td>Division assignment</td>
+</tr>
+<tr class="even">
+<td><code>%=</code></td>
+<td>Modulo assignment</td>
+</tr>
+</tbody>
+</table>
+<h2 id="variables">Variables</h2>
+<h3 id="javascript-8">Javascript</h3>
+<p>Variables are created upon use, but should be created with the <code>let</code> or <code>const</code> keywords.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">let</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="kw">const</span> y <span class="op">=</span> <span class="dv">30</span><span class="op">;</span></a></code></pre></div>
+<p><code>var</code> is an outdated way of declaring variables in Javascript.</p>
+<h3 id="python-8">Python</h3>
+<p>Variables are created upon use.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb18-1" title="1">x <span class="op">=</span> <span class="dv">10</span></a></code></pre></div>
+<h2 id="data-types">Data Types</h2>
+<h3 id="javascript-9">JavaScript</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">let</span> a <span class="op">=</span> <span class="dv">12</span><span class="op">;</span>        <span class="co">// number</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw">let</span> b <span class="op">=</span> <span class="fl">1.2</span><span class="op">;</span>       <span class="co">// number</span></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="kw">let</span> c <span class="op">=</span> <span class="st">&#39;hello&#39;</span><span class="op">;</span>   <span class="co">// string</span></a>
+<a class="sourceLine" id="cb19-4" title="4"><span class="kw">let</span> d <span class="op">=</span> <span class="st">&quot;world&quot;</span><span class="op">;</span>   <span class="co">// string </span></a>
+<a class="sourceLine" id="cb19-5" title="5"><span class="kw">let</span> e <span class="op">=</span> <span class="kw">true</span><span class="op">;</span>      <span class="co">// boolean</span></a>
+<a class="sourceLine" id="cb19-6" title="6"><span class="kw">let</span> f <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>      <span class="co">// null value</span></a>
+<a class="sourceLine" id="cb19-7" title="7"><span class="kw">let</span> g <span class="op">=</span> <span class="kw">undefined</span><span class="op">;</span> <span class="co">// undefined value</span></a></code></pre></div>
+<p>Multi-line strings:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">let</span> s <span class="op">=</span> <span class="vs">`this is a</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="vs">multi-line string`</span><span class="op">;</span></a></code></pre></div>
+<p>Parameterized strings:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">let</span> x <span class="op">=</span> <span class="dv">12</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="va">console</span>.<span class="at">log</span>(<span class="vs">`x is </span><span class="sc">${</span>x<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span> <span class="co">// prints &quot;x is 12&quot;</span></a></code></pre></div>
+<p>JS is <em>weakly typed</em> so it supports operations on multiple types of data at once.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1"><span class="st">&quot;2&quot;</span> <span class="op">+</span> <span class="dv">4</span><span class="op">;</span>           <span class="co">// string &quot;24&quot;</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="at">parseInt</span>(<span class="st">&quot;2&quot;</span>) <span class="op">+</span> <span class="dv">4</span><span class="op">;</span> <span class="co">// number 6</span></a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="at">Number</span>(<span class="st">&quot;2&quot;</span>) <span class="op">+</span> <span class="dv">4</span><span class="op">;</span>   <span class="co">// number 6</span></a></code></pre></div>
+<h3 id="python-9">Python</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" title="1">a <span class="op">=</span> <span class="dv">12</span>       <span class="co"># int (integer)</span></a>
+<a class="sourceLine" id="cb23-2" title="2">b <span class="op">=</span> <span class="fl">1.2</span>      <span class="co"># float (floating point)</span></a>
+<a class="sourceLine" id="cb23-3" title="3">c <span class="op">=</span> <span class="st">&#39;hello&#39;</span>  <span class="co"># str (string)</span></a>
+<a class="sourceLine" id="cb23-4" title="4">d <span class="op">=</span> <span class="st">&quot;world&quot;</span>  <span class="co"># str</span></a>
+<a class="sourceLine" id="cb23-5" title="5">e <span class="op">=</span> <span class="va">False</span>    <span class="co"># bool (boolean)</span></a>
+<a class="sourceLine" id="cb23-6" title="6">f <span class="op">=</span> <span class="va">None</span>     <span class="co"># null value</span></a></code></pre></div>
+<p>Multi-line strings:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" title="1">s <span class="op">=</span> <span class="st">&quot;&quot;&quot;this is a</span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="st">multi-line string&quot;&quot;&quot;</span></a></code></pre></div>
+<p>Parameterized strings:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb25-1" title="1">x <span class="op">=</span> <span class="dv">12</span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="bu">print</span>(<span class="ss">f&#39;x is </span><span class="sc">{x}</span><span class="ss">&#39;</span>)   <span class="co"># prints &quot;x is 12&quot;</span></a></code></pre></div>
+<p>Python is generally <em>strongly typed</em> so it it will often complain if you try to mix and match types. You can coerce a type with the <code>int()</code>, <code>float()</code>, <code>str()</code>, and <code>bool()</code> functions.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" title="1"><span class="co">&quot;2&quot;</span> <span class="op">+</span> <span class="dv">4</span>        <span class="co"># ERROR: can&#39;t mix types</span></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="bu">int</span>(<span class="st">&quot;2&quot;</span>) <span class="op">+</span> <span class="dv">4</span>   <span class="co"># integer 6</span></a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="co">&quot;2&quot;</span> <span class="op">+</span> <span class="bu">str</span>(<span class="dv">4</span>)   <span class="co"># string 24</span></a></code></pre></div>
+<h2 id="arrayslists">Arrays/Lists</h2>
+<h3 id="javascript-10">JavaScript</h3>
+<p>In JS, lists are called <em>arrays</em>.</p>
+<p>Arrays are zero-based.</p>
+<p>Creating lists:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">let</span> a1 <span class="op">=</span> <span class="kw">new</span> <span class="at">Array</span>()<span class="op">;</span>   <span class="co">// Empty array</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="kw">let</span> a2 <span class="op">=</span> <span class="kw">new</span> <span class="at">Array</span>(<span class="dv">10</span>)<span class="op">;</span> <span class="co">// Array of 10 elements</span></a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="kw">let</span> a3 <span class="op">=</span> []<span class="op">;</span>            <span class="co">// Empty array</span></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="kw">let</span> a4 <span class="op">=</span> [<span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span>]<span class="op">;</span>  <span class="co">// Array of 3 elements</span></a>
+<a class="sourceLine" id="cb27-5" title="5"><span class="kw">let</span> a5 <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="st">&quot;b&quot;</span>]<span class="op">;</span>   <span class="co">// No problem</span></a></code></pre></div>
+<p>Accessing:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb28-1" title="1"><span class="va">console</span>.<span class="at">log</span>(a4[<span class="dv">1</span>])<span class="op">;</span>  <span class="co">// prints 20</span></a>
+<a class="sourceLine" id="cb28-2" title="2"></a>
+<a class="sourceLine" id="cb28-3" title="3">a4[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>   <span class="co">// change from 10 to 5</span></a>
+<a class="sourceLine" id="cb28-4" title="4">a4[<span class="dv">20</span>] <span class="op">=</span> <span class="dv">99</span><span class="op">;</span> <span class="co">// OK, makes a new element at index 20</span></a></code></pre></div>
+<p>Length/number of elements:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb29-1" title="1"><span class="va">a4</span>.<span class="at">length</span><span class="op">;</span> <span class="co">// 3</span></a></code></pre></div>
+<h3 id="python-10">Python</h3>
+<p>In Python, arrays are called <em>lists</em>.</p>
+<p>Lists are zero-based.</p>
+<p>Creating lists:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb30-1" title="1">a1 <span class="op">=</span> <span class="bu">list</span>()          <span class="co"># Empty list</span></a>
+<a class="sourceLine" id="cb30-2" title="2">a2 <span class="op">=</span> <span class="bu">list</span>((<span class="dv">88</span>, <span class="dv">99</span>))  <span class="co"># List of two elements</span></a>
+<a class="sourceLine" id="cb30-3" title="3">a3 <span class="op">=</span> []              <span class="co"># Empty list</span></a>
+<a class="sourceLine" id="cb30-4" title="4">a4 <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>]    <span class="co"># List of 3 elements</span></a>
+<a class="sourceLine" id="cb30-5" title="5">a5 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">&quot;b&quot;</span>]     <span class="co"># No problem</span></a></code></pre></div>
+<p>Accessing:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb31-1" title="1"><span class="bu">print</span>(a4[<span class="dv">1</span>])  <span class="co"># prints 20</span></a>
+<a class="sourceLine" id="cb31-2" title="2"></a>
+<a class="sourceLine" id="cb31-3" title="3">a4[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>    <span class="co"># change from 10 to 5</span></a>
+<a class="sourceLine" id="cb31-4" title="4">a4[<span class="dv">20</span>] <span class="op">=</span> <span class="dv">99</span><span class="op">;</span>  <span class="co"># ERROR: assignment out of range</span></a></code></pre></div>
+<p>Length/Number of elements:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb32-1" title="1"><span class="bu">len</span>(a4)   <span class="co"># 3</span></a></code></pre></div>
+<h4 id="slices">Slices</h4>
+<p>In Python, we can access parts of lists or strings using slices.</p>
+<p>Creating slices:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb33-1" title="1">a[start:end] <span class="co"># items start through end-1</span></a>
+<a class="sourceLine" id="cb33-2" title="2">a[start:]    <span class="co"># items start through the rest of the array</span></a>
+<a class="sourceLine" id="cb33-3" title="3">a[:end]      <span class="co"># items from the beginning through end-1</span></a>
+<a class="sourceLine" id="cb33-4" title="4">a[:]         <span class="co"># a copy of the whole array</span></a></code></pre></div>
+<p>Starting from the end: We can also use negative numbers when creating slices, which just means we start with the index at the end of the array, rather than the index at the beginning of the array.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb34-1" title="1">a[<span class="op">-</span><span class="dv">1</span>]    <span class="co"># last item in the array</span></a>
+<a class="sourceLine" id="cb34-2" title="2">a[<span class="op">-</span><span class="dv">2</span>:]   <span class="co"># last two items in the array</span></a>
+<a class="sourceLine" id="cb34-3" title="3">a[:<span class="op">-</span><span class="dv">2</span>]   <span class="co"># everything except the last two items</span></a></code></pre></div>
+<h4 id="tuples">Tuples</h4>
+<p>Python supports a read-only type of list called a <em>tuple</em>.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb35-1" title="1">x <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="bu">print</span>(x[<span class="dv">1</span>])  <span class="co"># prints 2</span></a>
+<a class="sourceLine" id="cb35-3" title="3"></a>
+<a class="sourceLine" id="cb35-4" title="4">y <span class="op">=</span> (<span class="dv">10</span>,)    <span class="co"># A tuple of one element, comma required</span></a></code></pre></div>
+<h4 id="list-comprehensions">List Comprehensions</h4>
+<p>Python supports building lists with <em>list comprehensions</em>. This is often useful for filtering lists.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb36-1" title="1">a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb36-2" title="2"></a>
+<a class="sourceLine" id="cb36-3" title="3"><span class="co"># Make a list b that is the same as list a:</span></a>
+<a class="sourceLine" id="cb36-4" title="4">b <span class="op">=</span> [i <span class="cf">for</span> i <span class="kw">in</span> a]  <span class="co"># Pretty boring</span></a>
+<a class="sourceLine" id="cb36-5" title="5"></a>
+<a class="sourceLine" id="cb36-6" title="6"><span class="co"># Make a list c that contains only the</span></a>
+<a class="sourceLine" id="cb36-7" title="7"><span class="co"># even elements of a:</span></a>
+<a class="sourceLine" id="cb36-8" title="8">c <span class="op">=</span> [i <span class="cf">for</span> i <span class="kw">in</span> a <span class="cf">if</span> i <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>]</a></code></pre></div>
+<h2 id="objectsdicts">Objects/Dicts</h2>
+<h3 id="javascript-11">JavaScript</h3>
+<p><em>Objects</em> hold data which can be found by a specific key called a <em>property</em>.</p>
+<p>Creation:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">let</span> o1 <span class="op">=</span> <span class="op">{};</span>           <span class="co">// empty object</span></a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="kw">let</span> o2 <span class="op">=</span> <span class="op">{</span><span class="st">&quot;x&quot;</span><span class="op">:</span> <span class="dv">12</span><span class="op">};</span>    <span class="co">// one property</span></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="kw">let</span> o3 <span class="op">=</span> <span class="op">{</span><span class="dt">y</span><span class="op">:</span> <span class="st">&quot;hello&quot;</span><span class="op">};</span> <span class="co">// property quotes optional</span></a>
+<a class="sourceLine" id="cb37-4" title="4"></a>
+<a class="sourceLine" id="cb37-5" title="5"><span class="kw">let</span> o4 <span class="op">=</span> <span class="op">{</span>  <span class="co">// common multiline format</span></a>
+<a class="sourceLine" id="cb37-6" title="6">  <span class="st">&quot;a&quot;</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb37-7" title="7">  <span class="st">&quot;b&quot;</span><span class="op">:</span> <span class="fl">1.2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb37-8" title="8">  <span class="st">&quot;foo&quot;</span><span class="op">:</span> <span class="st">&quot;hello&quot;</span></a>
+<a class="sourceLine" id="cb37-9" title="9"><span class="op">};</span></a></code></pre></div>
+<p>Access:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb38-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="va">o2</span>.<span class="at">x</span>)<span class="op">;</span>      <span class="co">// prints 12</span></a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="va">console</span>.<span class="at">log</span>(o4[<span class="st">&quot;foo&quot;</span>])<span class="op">;</span> <span class="co">// prints hello</span></a></code></pre></div>
+<h3 id="python-11">Python</h3>
+<p><em>Dicts</em> hold information that can be accessed by a <em>key</em>.</p>
+<p>Unlike objects in JS, a <code>dict</code> is its own beast, and is not the same as an object obtained by instantiating a Python class.</p>
+<p>Creation:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb39-1" title="1">o1 <span class="op">=</span> {}           <span class="co"># empty dict</span></a>
+<a class="sourceLine" id="cb39-2" title="2">o2 <span class="op">=</span> {<span class="st">&quot;x&quot;</span>: <span class="dv">12</span>}    <span class="co"># one key</span></a>
+<a class="sourceLine" id="cb39-3" title="3">o3 <span class="op">=</span> {y: <span class="st">&quot;hello&quot;</span>} <span class="co"># ERROR: key quotes required,</span></a>
+<a class="sourceLine" id="cb39-4" title="4">                  <span class="co"># unless y is a variable</span></a>
+<a class="sourceLine" id="cb39-5" title="5">                  <span class="co"># that holds a value you wish</span></a>
+<a class="sourceLine" id="cb39-6" title="6">                  <span class="co"># to use as a key</span></a>
+<a class="sourceLine" id="cb39-7" title="7"></a>
+<a class="sourceLine" id="cb39-8" title="8">o4 <span class="op">=</span> {  <span class="co"># multiline format</span></a>
+<a class="sourceLine" id="cb39-9" title="9">  <span class="st">&quot;a&quot;</span>: <span class="dv">20</span>,</a>
+<a class="sourceLine" id="cb39-10" title="10">  <span class="st">&quot;b&quot;</span>: <span class="fl">1.2</span>,</a>
+<a class="sourceLine" id="cb39-11" title="11">  <span class="st">&quot;foo&quot;</span>: <span class="st">&quot;hello&quot;</span></a>
+<a class="sourceLine" id="cb39-12" title="12">}</a></code></pre></div>
+<p>Access:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb40-1" title="1"><span class="bu">print</span>(o4[<span class="st">&quot;a&quot;</span>])  <span class="co"># Prints 20</span></a></code></pre></div>
+<p>Dot notation does not work with Python dicts.</p>
+<h2 id="string-formatting">String Formatting</h2>
+<h3 id="javascript-12">JavaScript</h3>
+<p>Converting to different number bases:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">let</span> x <span class="op">=</span> <span class="dv">237</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="kw">let</span> x_binary <span class="op">=</span> <span class="va">x</span>.<span class="at">toString</span>(<span class="dv">2</span>)<span class="op">;</span> <span class="co">// string &#39;11101101&#39;</span></a>
+<a class="sourceLine" id="cb41-3" title="3"><span class="kw">let</span> x_hex <span class="op">=</span> <span class="va">x</span>.<span class="at">toString</span>(<span class="dv">16</span>)<span class="op">;</span>   <span class="co">// string &#39;ed&#39;</span></a></code></pre></div>
+<p>Controlling floating point precision:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">let</span> x <span class="op">=</span> <span class="fl">3.1415926535</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb42-2" title="2"><span class="kw">let</span> y <span class="op">=</span> <span class="va">x</span>.<span class="at">toFixed</span>(<span class="dv">2</span>)<span class="op">;</span>  <span class="co">// string &#39;3.14&#39;</span></a></code></pre></div>
+<p>Padding and justification:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">let</span> s <span class="op">=</span> <span class="st">&quot;Hello!&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="kw">let</span> t <span class="op">=</span> <span class="va">s</span>.<span class="at">padStart</span>(<span class="dv">10</span><span class="op">,</span> <span class="st">&#39; &#39;</span>)<span class="op">;</span> <span class="co">// string &#39;    Hello!&#39; </span></a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="kw">let</span> u <span class="op">=</span> <span class="va">s</span>.<span class="at">padEnd</span>(<span class="dv">10</span><span class="op">,</span> <span class="st">&#39; &#39;</span>)<span class="op">;</span>   <span class="co">// string &#39;Hello!    &#39;</span></a>
+<a class="sourceLine" id="cb43-4" title="4"></a>
+<a class="sourceLine" id="cb43-5" title="5"><span class="kw">let</span> v <span class="op">=</span> <span class="va">s</span>.<span class="at">padStart</span>(<span class="dv">10</span><span class="op">,</span> <span class="st">&#39;*&#39;</span>)<span class="op">;</span> <span class="co">// string &#39;****Hello!&#39; </span></a>
+<a class="sourceLine" id="cb43-6" title="6"></a>
+<a class="sourceLine" id="cb43-7" title="7"><span class="co">// Pad with leading zeroes</span></a>
+<a class="sourceLine" id="cb43-8" title="8">(<span class="dv">12</span>).<span class="at">toString</span>(<span class="dv">2</span>).<span class="at">padStart</span>(<span class="dv">8</span><span class="op">,</span> <span class="st">&#39;0&#39;</span>)<span class="op">;</span> <span class="co">// string &#39;00001100&#39;</span></a></code></pre></div>
+<p>Parameterized strings:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">let</span> x <span class="op">=</span> <span class="fl">3.1415926</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="kw">let</span> y <span class="op">=</span> <span class="st">&quot;Hello&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb44-3" title="3"><span class="kw">let</span> z <span class="op">=</span> <span class="dv">67</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb44-4" title="4"></a>
+<a class="sourceLine" id="cb44-5" title="5"><span class="co">// &#39;x is 3.14, y is &quot;Hello&quot;, z is 01000011&#39;</span></a>
+<a class="sourceLine" id="cb44-6" title="6"><span class="kw">let</span> s <span class="op">=</span> <span class="vs">`x is </span><span class="sc">${</span><span class="va">x</span>.<span class="at">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs">, y is &quot;</span><span class="sc">${</span>y<span class="sc">}</span><span class="vs">&quot;, z is </span><span class="sc">${</span><span class="va">z</span>.<span class="at">toString</span>(<span class="dv">2</span>).<span class="at">padStart</span>(<span class="dv">8</span><span class="op">,</span> <span class="st">&#39;0&#39;</span>)<span class="sc">}</span><span class="vs">`</span></a></code></pre></div>
+<h3 id="python-12">Python</h3>
+<p>Python has the printf operator <code>%</code> which is tremendously powerful. (If the operands to <code>%</code> are numbers, modulo is performed. If the left operand is a string, printf is performed.)</p>
+<p>But even <code>%</code> is being superseded by the <code>format</code> function.</p>
+<p><a href="https://pyformat.info/">Tons of details at pyformat.info</a>.</p>
+<p>Also see <a href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting">printf-style String Formatting</a> for a reference.</p>
+<h2 id="booleans-and-conditionals">Booleans and Conditionals</h2>
+<h3 id="javascript-13">JavaScript</h3>
+<p>Literal boolean values:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb45-1" title="1">x <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-2" title="2">y <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></a></code></pre></div>
+<p>Boolean operators:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>==</code></td>
+<td>Equality</td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>Inequality</td>
+</tr>
+<tr class="odd">
+<td><code>===</code></td>
+<td>Strict equality</td>
+</tr>
+<tr class="even">
+<td><code>!==</code></td>
+<td>Strict inequality</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td>Less than</td>
+</tr>
+<tr class="even">
+<td><code>&gt;</code></td>
+<td>Greater than</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;=</code></td>
+<td>Less than or equal</td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td>Greater than or equal</td>
+</tr>
+</tbody>
+</table>
+<p>The concept of strict equality/inequality applies to items that might normally be converted into a compatible type. The strict tests will consider if the types themselves are the same.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb46-1" title="1"><span class="dv">0</span> <span class="op">==</span> <span class="st">&quot;0&quot;</span><span class="op">;</span>  <span class="co">// true</span></a>
+<a class="sourceLine" id="cb46-2" title="2"><span class="dv">0</span> <span class="op">===</span> <span class="st">&quot;0&quot;</span><span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb46-3" title="3"></a>
+<a class="sourceLine" id="cb46-4" title="4"><span class="dv">0</span> <span class="op">==</span> []<span class="op">;</span>   <span class="co">// true</span></a>
+<a class="sourceLine" id="cb46-5" title="5"><span class="dv">0</span> <span class="op">===</span> []<span class="op">;</span>  <span class="co">// false</span></a>
+<a class="sourceLine" id="cb46-6" title="6"></a>
+<a class="sourceLine" id="cb46-7" title="7"><span class="dv">0</span> <span class="op">==</span> <span class="dv">0</span><span class="op">;</span>    <span class="co">// true</span></a>
+<a class="sourceLine" id="cb46-8" title="8"><span class="dv">0</span> <span class="op">===</span> <span class="dv">0</span><span class="op">;</span>   <span class="co">// true</span></a></code></pre></div>
+<p>Logical operators: |Operator|Description| |–|–| |<code>!</code>|Logical inverse, not| |<code>&amp;&amp;</code>|Logical AND| |<code>||</code>|Logical OR|</p>
+<p>The not operator <code>!</code> can be used to test whether or not a value is “truthy”.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb47-1" title="1"><span class="op">!</span><span class="dv">0</span><span class="op">;</span>    <span class="co">// true</span></a>
+<a class="sourceLine" id="cb47-2" title="2"><span class="op">!!</span><span class="dv">0</span><span class="op">;</span>   <span class="co">// false</span></a>
+<a class="sourceLine" id="cb47-3" title="3"><span class="op">!</span><span class="dv">1</span><span class="op">;</span>    <span class="co">// false</span></a>
+<a class="sourceLine" id="cb47-4" title="4"><span class="op">!</span><span class="kw">null</span><span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb47-5" title="5"><span class="op">!</span><span class="st">&quot;0&quot;</span><span class="op">;</span>  <span class="co">// false, perhaps unexpectedly</span></a>
+<a class="sourceLine" id="cb47-6" title="6"><span class="op">!</span><span class="st">&quot;x&quot;</span><span class="op">;</span>  <span class="co">// false</span></a></code></pre></div>
+<p>Example:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb48-1" title="1"><span class="cf">if</span> (a <span class="op">==</span> <span class="dv">2</span> <span class="op">&amp;&amp;</span> b <span class="op">!==</span> <span class="st">&quot;&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb48-2" title="2">  <span class="co">// Something complicated</span></a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="op">}</span></a></code></pre></div>
+<h3 id="python-13">Python</h3>
+<p>Literal boolean values:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb49-1" title="1">x <span class="op">=</span> <span class="va">True</span></a>
+<a class="sourceLine" id="cb49-2" title="2">y <span class="op">=</span> <span class="va">False</span></a></code></pre></div>
+<p>Boolean operators:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>==</code></td>
+<td>Equality</td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>Inequality</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td>Less than</td>
+</tr>
+<tr class="even">
+<td><code>&gt;</code></td>
+<td>Greater than</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;=</code></td>
+<td>Less than or equal</td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td>Greater than or equal</td>
+</tr>
+</tbody>
+</table>
+<p>Logical operators:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>not</code></td>
+<td>Logical inverse, not</td>
+</tr>
+<tr class="even">
+<td><code>and</code></td>
+<td>Logical AND</td>
+</tr>
+<tr class="odd">
+<td><code>or</code></td>
+<td>Logical OR</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>not</code> operator can be used to test whether or not a value is “truthy”.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">not</span> <span class="dv">0</span>      <span class="co"># true</span></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="kw">not</span> <span class="kw">not</span> <span class="dv">0</span>  <span class="co"># false</span></a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="kw">not</span> <span class="dv">1</span>      <span class="co"># false</span></a>
+<a class="sourceLine" id="cb50-4" title="4"><span class="kw">not</span> <span class="va">None</span><span class="op">;</span>  <span class="co"># true</span></a>
+<a class="sourceLine" id="cb50-5" title="5"><span class="kw">not</span> <span class="st">&quot;0&quot;</span>    <span class="co"># false, perhaps unexpectedly</span></a>
+<a class="sourceLine" id="cb50-6" title="6"><span class="kw">not</span> <span class="st">&quot;x&quot;</span>    <span class="co"># false</span></a></code></pre></div>
+<p>Example:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb51-1" title="1"><span class="cf">if</span> a <span class="op">==</span> <span class="dv">2</span> <span class="kw">and</span> b <span class="op">!=</span> <span class="st">&quot;&quot;</span>:</a>
+<a class="sourceLine" id="cb51-2" title="2">  <span class="co"># Something complicated</span></a></code></pre></div>
+<h2 id="for-loops"><code>for</code> Loops</h2>
+<h3 id="javascript-14">JavaScript</h3>
+<p>C-style <code>for</code> loops:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb52-1" title="1"><span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb52-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(i)<span class="op">;</span></a>
+<a class="sourceLine" id="cb52-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p><code>for</code>-<code>in</code> loops iterate over the properties of an object or indexes of an array:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb53-1" title="1">a <span class="op">=</span> [<span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb53-2" title="2"></a>
+<a class="sourceLine" id="cb53-3" title="3"><span class="cf">for</span> (<span class="kw">let</span> i <span class="kw">in</span> a) <span class="op">{</span></a>
+<a class="sourceLine" id="cb53-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(i)<span class="op">;</span>    # <span class="dv">0</span>  <span class="dv">1</span>  <span class="dv">2</span></a>
+<a class="sourceLine" id="cb53-5" title="5">  <span class="va">console</span>.<span class="at">log</span>(a[i])<span class="op">;</span> # <span class="dv">10</span> <span class="dv">20</span> <span class="dv">30</span></a>
+<a class="sourceLine" id="cb53-6" title="6"><span class="op">}</span></a>
+<a class="sourceLine" id="cb53-7" title="7"></a>
+<a class="sourceLine" id="cb53-8" title="8">b <span class="op">=</span> <span class="op">{</span><span class="st">&#39;x&#39;</span><span class="op">:</span> <span class="dv">77</span><span class="op">,</span> <span class="st">&#39;y&#39;</span><span class="op">:</span> <span class="dv">88</span><span class="op">,</span> <span class="st">&#39;z&#39;</span><span class="op">:</span> <span class="dv">99</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb53-9" title="9"></a>
+<a class="sourceLine" id="cb53-10" title="10"><span class="cf">for</span> (<span class="kw">let</span> i <span class="kw">in</span> b) <span class="op">{</span></a>
+<a class="sourceLine" id="cb53-11" title="11">  <span class="va">console</span>.<span class="at">log</span>(i)<span class="op">;</span>    # x  y  z</a>
+<a class="sourceLine" id="cb53-12" title="12">  <span class="va">console</span>.<span class="at">log</span>(b[i])<span class="op">;</span> # <span class="dv">77</span> <span class="dv">88</span> <span class="dv">99</span></a>
+<a class="sourceLine" id="cb53-13" title="13"><span class="op">}</span></a></code></pre></div>
+<p><code>for</code>-<code>of</code> loops access the values within the array (as opposed to the indexes of the array):</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb54-1" title="1">a <span class="op">=</span> [<span class="dv">10</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">30</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb54-2" title="2"></a>
+<a class="sourceLine" id="cb54-3" title="3"><span class="cf">for</span> (<span class="kw">let</span> i <span class="kw">of</span> a) <span class="op">{</span></a>
+<a class="sourceLine" id="cb54-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(i)<span class="op">;</span>  # <span class="dv">10</span> <span class="dv">20</span> <span class="dv">30</span></a>
+<a class="sourceLine" id="cb54-5" title="5"><span class="op">}</span></a></code></pre></div>
+<h3 id="python-14">Python</h3>
+<p><code>for</code>-<code>in</code> loops over an <em>iteratable</em>. This can be a list, object, or other type of iterable item.</p>
+<p>Counting loops:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb55-1" title="1"><span class="co"># Use the range() function to count:</span></a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</a>
+<a class="sourceLine" id="cb55-3" title="3">  <span class="bu">print</span>(i)   <span class="co"># Prints 0-9</span></a>
+<a class="sourceLine" id="cb55-4" title="4"></a>
+<a class="sourceLine" id="cb55-5" title="5"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>, <span class="dv">30</span>):</a>
+<a class="sourceLine" id="cb55-6" title="6">  <span class="bu">print</span>(i)   <span class="co"># Prints 20-29</span></a>
+<a class="sourceLine" id="cb55-7" title="7"></a>
+<a class="sourceLine" id="cb55-8" title="8"><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">3</span>):</a>
+<a class="sourceLine" id="cb55-9" title="9">  <span class="bu">print</span>(i)   <span class="co"># Print every 3rd number from -10 to 19</span></a></code></pre></div>
+<p>Iterating over other types:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb56-1" title="1"><span class="co"># A list</span></a>
+<a class="sourceLine" id="cb56-2" title="2">a <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>]</a>
+<a class="sourceLine" id="cb56-3" title="3"></a>
+<a class="sourceLine" id="cb56-4" title="4"><span class="co"># Print 10 20 30</span></a>
+<a class="sourceLine" id="cb56-5" title="5"><span class="cf">for</span> i <span class="kw">in</span> a:</a>
+<a class="sourceLine" id="cb56-6" title="6">  <span class="bu">print</span>(i)</a>
+<a class="sourceLine" id="cb56-7" title="7"></a>
+<a class="sourceLine" id="cb56-8" title="8"><span class="co"># A dict</span></a>
+<a class="sourceLine" id="cb56-9" title="9">b <span class="op">=</span> {<span class="st">&#39;x&#39;</span>:<span class="dv">5</span>, <span class="st">&#39;y&#39;</span>:<span class="dv">15</span>, <span class="st">&#39;z&#39;</span>:<span class="dv">0</span>}</a>
+<a class="sourceLine" id="cb56-10" title="10"></a>
+<a class="sourceLine" id="cb56-11" title="11"><span class="co"># Print x y z (the keys of the dict)</span></a>
+<a class="sourceLine" id="cb56-12" title="12"><span class="cf">for</span> i <span class="kw">in</span> b:</a>
+<a class="sourceLine" id="cb56-13" title="13">  <span class="bu">print</span>(i)</a></code></pre></div>
+<h2 id="while-loops"><code>while</code> Loops</h2>
+<h3 id="javascript-15">JavaScript</h3>
+<p>C-style <code>while</code> and <code>do</code>-<code>while</code>:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb57-1" title="1"><span class="co">// Print 10 down to 0:</span></a>
+<a class="sourceLine" id="cb57-2" title="2"></a>
+<a class="sourceLine" id="cb57-3" title="3"><span class="kw">let</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb57-4" title="4"><span class="cf">while</span> (x <span class="op">&gt;=</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb57-5" title="5">  <span class="va">console</span>.<span class="at">log</span>(x)<span class="op">;</span></a>
+<a class="sourceLine" id="cb57-6" title="6">  x<span class="op">--;</span></a>
+<a class="sourceLine" id="cb57-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb57-8" title="8"></a>
+<a class="sourceLine" id="cb57-9" title="9"><span class="co">// Print 0 up to 9:</span></a>
+<a class="sourceLine" id="cb57-10" title="10"><span class="kw">let</span> x <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb57-11" title="11"><span class="cf">do</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb57-12" title="12">  <span class="va">console</span>.<span class="at">log</span>(x)<span class="op">;</span></a>
+<a class="sourceLine" id="cb57-13" title="13">  x<span class="op">++;</span></a>
+<a class="sourceLine" id="cb57-14" title="14"><span class="cf">while</span> (x <span class="op">&lt;</span> <span class="dv">10</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="python-15">Python</h3>
+<p>Python has a <code>while</code> loop:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb58-1" title="1"><span class="co"># Print from 10 down through 0</span></a>
+<a class="sourceLine" id="cb58-2" title="2">x <span class="op">=</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb58-3" title="3"><span class="cf">while</span> x <span class="op">&gt;=</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb58-4" title="4">  <span class="bu">print</span>(x)</a>
+<a class="sourceLine" id="cb58-5" title="5">  x <span class="op">-=</span> <span class="dv">1</span></a></code></pre></div>
+<h2 id="switch-statement"><code>switch</code> Statement</h2>
+<h3 id="javascript-16">JavaScript</h3>
+<p>JS can switch on various data types:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb59-1" title="1"><span class="cf">switch</span>(x) <span class="op">{</span></a>
+<a class="sourceLine" id="cb59-2" title="2">  <span class="cf">case</span> <span class="st">&quot;foo&quot;</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb59-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;x is foo, all right&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb59-4" title="4">    <span class="cf">break</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb59-5" title="5">  <span class="cf">case</span> <span class="dv">23</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb59-6" title="6">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;but here x is 23&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb59-7" title="7">    <span class="cf">break</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb59-8" title="8">  <span class="cf">default</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb59-9" title="9">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;x is something else entirely&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb59-10" title="10"><span class="op">}</span></a></code></pre></div>
+<h3 id="python-16">Python</h3>
+<p>Python doesn’t have a <code>switch</code> statement. You can use <code>if</code>-<code>elif</code>-<code>else</code> blocks.</p>
+<p>A somewhat clumsy approximation of a <code>switch</code> can be constructed with a <code>dict</code> of functions.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">def</span> func1():</a>
+<a class="sourceLine" id="cb60-2" title="2">  <span class="bu">print</span>(<span class="st">&quot;case 1 is hit&quot;</span>)</a>
+<a class="sourceLine" id="cb60-3" title="3"></a>
+<a class="sourceLine" id="cb60-4" title="4"><span class="kw">def</span> func2():</a>
+<a class="sourceLine" id="cb60-5" title="5">  <span class="bu">print</span>(<span class="st">&quot;case 2 is hit&quot;</span>)</a>
+<a class="sourceLine" id="cb60-6" title="6"></a>
+<a class="sourceLine" id="cb60-7" title="7"><span class="kw">def</span> func3():</a>
+<a class="sourceLine" id="cb60-8" title="8">  <span class="bu">print</span>(<span class="st">&quot;case 3 is hit&quot;</span>)</a>
+<a class="sourceLine" id="cb60-9" title="9"></a>
+<a class="sourceLine" id="cb60-10" title="10">funcs <span class="op">=</span> {</a>
+<a class="sourceLine" id="cb60-11" title="11">  <span class="st">&quot;alpha&quot;</span>: func1,</a>
+<a class="sourceLine" id="cb60-12" title="12">  <span class="st">&quot;bravo&quot;</span>: func2,</a>
+<a class="sourceLine" id="cb60-13" title="13">  <span class="st">&quot;charlie&quot;</span>: func3</a>
+<a class="sourceLine" id="cb60-14" title="14">}<span class="op">;</span></a>
+<a class="sourceLine" id="cb60-15" title="15"></a>
+<a class="sourceLine" id="cb60-16" title="16">x <span class="op">=</span> <span class="st">&quot;bravo&quot;</span></a>
+<a class="sourceLine" id="cb60-17" title="17">funcs[x]()  <span class="co"># calls func2</span></a></code></pre></div>
+<h2 id="if-conditionals"><code>if</code> Conditionals</h2>
+<h3 id="javascript-17">JavaScript</h3>
+<p>JS uses C-style <code>if</code> statements:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb61-1" title="1"><span class="cf">if</span> (x <span class="op">==</span> <span class="dv">10</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb61-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;x is 10&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb61-3" title="3"><span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (x <span class="op">==</span> <span class="dv">20</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb61-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;x is 20&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb61-5" title="5"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb61-6" title="6">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;x is something else&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb61-7" title="7"><span class="op">}</span></a></code></pre></div>
+<h3 id="python-17">Python</h3>
+<p>Python notably uses <code>elif</code> instead of <code>else if</code>.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb62-1" title="1"><span class="cf">if</span> x <span class="op">==</span> <span class="dv">10</span>:</a>
+<a class="sourceLine" id="cb62-2" title="2">  <span class="bu">print</span>(<span class="st">&quot;x is 10&quot;</span>)</a>
+<a class="sourceLine" id="cb62-3" title="3"><span class="cf">elif</span> x <span class="op">==</span> <span class="dv">20</span>:</a>
+<a class="sourceLine" id="cb62-4" title="4">  <span class="bu">print</span>(<span class="st">&quot;x is 20&quot;</span>)</a>
+<a class="sourceLine" id="cb62-5" title="5"><span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb62-6" title="6">  <span class="bu">print</span>(<span class="st">&quot;x is something else&quot;</span>)</a></code></pre></div>
+<h2 id="classes">Classes</h2>
+<h3 id="javascript-18">JavaScript</h3>
+<p>The current object is referred to by <code>this</code>.</p>
+<p>Pre ES-2015, classes were created using functions. This is now outdated.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb63-1" title="1"><span class="kw">function</span> <span class="at">Goat</span>(color) <span class="op">{</span></a>
+<a class="sourceLine" id="cb63-2" title="2">  <span class="kw">this</span>.<span class="at">legs</span> <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb63-3" title="3">  <span class="kw">this</span>.<span class="at">color</span> <span class="op">=</span> color<span class="op">;</span></a>
+<a class="sourceLine" id="cb63-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb63-5" title="5"></a>
+<a class="sourceLine" id="cb63-6" title="6">g <span class="op">=</span> <span class="kw">new</span> <span class="at">Goat</span>(<span class="st">&quot;brown&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<p>JS uses prototypal inheritance. Pre ES-2015, this was explicit, and is also outdated:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">function</span> <span class="at">Creature</span>(type) <span class="op">{</span></a>
+<a class="sourceLine" id="cb64-2" title="2">  <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> type<span class="op">;</span></a>
+<a class="sourceLine" id="cb64-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb64-4" title="4"></a>
+<a class="sourceLine" id="cb64-5" title="5"><span class="co">// Make Goats inherit from Creature:</span></a>
+<a class="sourceLine" id="cb64-6" title="6"><span class="va">Goat</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="kw">new</span> <span class="at">Creature</span>(<span class="st">&quot;mammal&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb64-7" title="7"></a>
+<a class="sourceLine" id="cb64-8" title="8"><span class="co">// Add a method:</span></a>
+<a class="sourceLine" id="cb64-9" title="9"><span class="va">Goat</span>.<span class="va">prototype</span>.<span class="at">jump</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb64-10" title="10">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;I&#39;m jumping! Yay!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb64-11" title="11"><span class="op">};</span></a>
+<a class="sourceLine" id="cb64-12" title="12"></a>
+<a class="sourceLine" id="cb64-13" title="13">g <span class="op">=</span> <span class="kw">new</span> <span class="at">Goat</span>(<span class="st">&quot;red&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb64-14" title="14"><span class="va">g</span>.<span class="at">type</span><span class="op">;</span>   <span class="co">// &quot;mammal&quot;, since Goat inherits from Creature</span></a>
+<a class="sourceLine" id="cb64-15" title="15"><span class="va">g</span>.<span class="at">jump</span>()<span class="op">;</span> <span class="co">// &quot;I&#39;m jumping! Yay!&quot;</span></a></code></pre></div>
+<p>Modern JS introduced the <code>class</code> keyword and a syntax more familiar to most other OOP languages. Note that the inheritance model is still prototypal inheritance; it’s just that the details are hidden from the developer.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb65-1" title="1"><span class="kw">class</span> Creature <span class="op">{</span></a>
+<a class="sourceLine" id="cb65-2" title="2">  <span class="at">constructor</span>(type) <span class="op">{</span></a>
+<a class="sourceLine" id="cb65-3" title="3">    <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> type<span class="op">;</span></a>
+<a class="sourceLine" id="cb65-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb65-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb65-6" title="6"></a>
+<a class="sourceLine" id="cb65-7" title="7"><span class="kw">class</span> Goat <span class="kw">extends</span> Creature <span class="op">{</span></a>
+<a class="sourceLine" id="cb65-8" title="8">  <span class="at">constructor</span>(color) <span class="op">{</span></a>
+<a class="sourceLine" id="cb65-9" title="9">    <span class="kw">super</span>(<span class="st">&quot;mammal&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb65-10" title="10">    <span class="kw">this</span>.<span class="at">legs</span> <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb65-11" title="11">    <span class="kw">this</span>.<span class="at">color</span> <span class="op">=</span> color<span class="op">;</span></a>
+<a class="sourceLine" id="cb65-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb65-13" title="13"></a>
+<a class="sourceLine" id="cb65-14" title="14">  <span class="at">jump</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb65-15" title="15">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;I&#39;m jumping! Yay!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb65-16" title="16">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb65-17" title="17"><span class="op">}</span></a>
+<a class="sourceLine" id="cb65-18" title="18"></a>
+<a class="sourceLine" id="cb65-19" title="19">g <span class="op">=</span> <span class="kw">new</span> <span class="at">Goat</span>(<span class="st">&quot;orange&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb65-20" title="20"><span class="va">g</span>.<span class="at">type</span><span class="op">;</span>   <span class="co">// &quot;mammal&quot;</span></a>
+<a class="sourceLine" id="cb65-21" title="21"><span class="va">g</span>.<span class="at">jump</span>()<span class="op">;</span> <span class="co">// &quot;I&#39;m jumping! Yay!&quot;</span></a></code></pre></div>
+<p>JS does not support multiple inheritance since each object can only have one prototype object. You have to use a <em>mix-in</em> if you want to achieve similar functionality.</p>
+<h3 id="python-18">Python</h3>
+<p>The current object is referred to by <code>self</code>. Note that <code>self</code> is explicitly present as the first parameter in object methods.</p>
+<p>Python 2 syntax:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">class</span> Creature:</a>
+<a class="sourceLine" id="cb66-2" title="2">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="bu">type</span>): <span class="co"># constructor</span></a>
+<a class="sourceLine" id="cb66-3" title="3">    <span class="va">self</span>.<span class="bu">type</span> <span class="op">=</span> <span class="bu">type</span></a>
+<a class="sourceLine" id="cb66-4" title="4"></a>
+<a class="sourceLine" id="cb66-5" title="5"><span class="kw">class</span> Goat(Creature):</a>
+<a class="sourceLine" id="cb66-6" title="6">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, color):</a>
+<a class="sourceLine" id="cb66-7" title="7">    <span class="co"># call super constructor</span></a>
+<a class="sourceLine" id="cb66-8" title="8">    Creature.<span class="fu">__init__</span>(<span class="va">self</span>, <span class="st">&quot;mammal&quot;</span>)</a>
+<a class="sourceLine" id="cb66-9" title="9">    <span class="va">self</span>.color <span class="op">=</span> color</a>
+<a class="sourceLine" id="cb66-10" title="10">  </a>
+<a class="sourceLine" id="cb66-11" title="11">  <span class="kw">def</span> jump(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb66-12" title="12">    <span class="bu">print</span>(<span class="st">&quot;I&#39;m jumping! Yay!&quot;</span>)</a>
+<a class="sourceLine" id="cb66-13" title="13"></a>
+<a class="sourceLine" id="cb66-14" title="14">g <span class="op">=</span> Goat(<span class="st">&quot;green&quot;</span>)</a>
+<a class="sourceLine" id="cb66-15" title="15">g.<span class="bu">type</span>    <span class="co"># mammal</span></a>
+<a class="sourceLine" id="cb66-16" title="16">g.jump()  <span class="co"># I&#39;m jumping! Yay!</span></a></code></pre></div>
+<p>Python 3 syntax includes the new <code>super()</code> keyword to make life easier.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb67-1" title="1"><span class="kw">class</span> Creature:</a>
+<a class="sourceLine" id="cb67-2" title="2">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, <span class="bu">type</span>): <span class="co"># constructor</span></a>
+<a class="sourceLine" id="cb67-3" title="3">    <span class="va">self</span>.<span class="bu">type</span> <span class="op">=</span> <span class="bu">type</span></a>
+<a class="sourceLine" id="cb67-4" title="4"></a>
+<a class="sourceLine" id="cb67-5" title="5"><span class="kw">class</span> Goat(Creature):</a>
+<a class="sourceLine" id="cb67-6" title="6">  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, color):</a>
+<a class="sourceLine" id="cb67-7" title="7">    <span class="co"># call super constructor</span></a>
+<a class="sourceLine" id="cb67-8" title="8">    <span class="bu">super</span>().<span class="fu">__init__</span>(<span class="st">&quot;mammal&quot;</span>)  <span class="co"># &lt;-- Nicer!</span></a>
+<a class="sourceLine" id="cb67-9" title="9">    <span class="va">self</span>.color <span class="op">=</span> color</a>
+<a class="sourceLine" id="cb67-10" title="10">  </a>
+<a class="sourceLine" id="cb67-11" title="11">  <span class="kw">def</span> jump(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb67-12" title="12">    <span class="bu">print</span>(<span class="st">&quot;I&#39;m jumping! Yay!&quot;</span>)</a>
+<a class="sourceLine" id="cb67-13" title="13"></a>
+<a class="sourceLine" id="cb67-14" title="14">g <span class="op">=</span> Goat(<span class="st">&quot;green&quot;</span>)</a>
+<a class="sourceLine" id="cb67-15" title="15">g.<span class="bu">type</span>    <span class="co"># mammal</span></a>
+<a class="sourceLine" id="cb67-16" title="16">g.jump()  <span class="co"># I&#39;m jumping! Yay!</span></a></code></pre></div>
+<p>Python supports multiple inheritance.</p>
+</body>
+</html>

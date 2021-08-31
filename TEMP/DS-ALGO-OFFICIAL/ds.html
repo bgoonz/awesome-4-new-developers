@@ -1,0 +1,2969 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ds</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="file:///c:\Users\bryan\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.5.16\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css"
+    />
+
+    <style>
+
+      code[class*="language-"],
+      pre[class*="language-"] {
+        color: #333;
+        background: none;
+        font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        text-align: left;
+        white-space: pre;
+        word-spacing: normal;
+        word-break: normal;
+        word-wrap: normal;
+        line-height: 1.4;
+
+        -moz-tab-size: 8;
+        -o-tab-size: 8;
+        tab-size: 8;
+
+        -webkit-hyphens: none;
+        -moz-hyphens: none;
+        -ms-hyphens: none;
+        hyphens: none;
+      }
+
+      /* Code blocks */
+      pre[class*="language-"] {
+        padding: 0.8em;
+        overflow: auto;
+        /* border: 1px solid #ddd; */
+        border-radius: 3px;
+        /* background: #fff; */
+        background: #f5f5f5;
+      }
+
+      /* Inline code */
+      :not(pre) > code[class*="language-"] {
+        padding: 0.1em;
+        border-radius: 0.3em;
+        white-space: normal;
+        background: #f5f5f5;
+      }
+
+      .token.comment,
+      .token.blockquote {
+        color: #969896;
+      }
+
+      .token.cdata {
+        color: #183691;
+      }
+
+      .token.doctype,
+      .token.punctuation,
+      .token.variable,
+      .token.macro.property {
+        color: #333;
+      }
+
+      .token.operator,
+      .token.important,
+      .token.keyword,
+      .token.rule,
+      .token.builtin {
+        color: #a71d5d;
+      }
+
+      .token.string,
+      .token.url,
+      .token.regex,
+      .token.attr-value {
+        color: #183691;
+      }
+
+      .token.property,
+      .token.number,
+      .token.boolean,
+      .token.entity,
+      .token.atrule,
+      .token.constant,
+      .token.symbol,
+      .token.command,
+      .token.code {
+        color: #0086b3;
+      }
+
+      .token.tag,
+      .token.selector,
+      .token.prolog {
+        color: #63a35c;
+      }
+
+      .token.function,
+      .token.namespace,
+      .token.pseudo-element,
+      .token.class,
+      .token.class-name,
+      .token.pseudo-class,
+      .token.id,
+      .token.url-reference .token.variable,
+      .token.attr-name {
+        color: #795da3;
+      }
+
+      .token.entity {
+        cursor: help;
+      }
+
+      .token.title,
+      .token.title .token.punctuation {
+        font-weight: bold;
+        color: #1d3e81;
+      }
+
+      .token.list {
+        color: #ed6a43;
+      }
+
+      .token.inserted {
+        background-color: #eaffea;
+        color: #55a532;
+      }
+
+      .token.deleted {
+        background-color: #ffecec;
+        color: #bd2c00;
+      }
+
+      .token.bold {
+        font-weight: bold;
+      }
+
+      .token.italic {
+        font-style: italic;
+      }
+
+      /* JSON */
+      .language-json .token.property {
+        color: #183691;
+      }
+
+      .language-markup .token.tag .token.punctuation {
+        color: #333;
+      }
+
+      /* CSS */
+      code.language-css,
+      .language-css .token.function {
+        color: #0086b3;
+      }
+
+      /* YAML */
+      .language-yaml .token.atrule {
+        color: #63a35c;
+      }
+
+      code.language-yaml {
+        color: #183691;
+      }
+
+      /* Ruby */
+      .language-ruby .token.function {
+        color: #333;
+      }
+
+      /* Markdown */
+      .language-markdown .token.url {
+        color: #795da3;
+      }
+
+      /* Makefile */
+      .language-makefile .token.symbol {
+        color: #795da3;
+      }
+
+      .language-makefile .token.variable {
+        color: #183691;
+      }
+
+      .language-makefile .token.builtin {
+        color: #0086b3;
+      }
+
+      /* Bash */
+      .language-bash .token.keyword {
+        color: #0086b3;
+      }
+
+      /* highlight */
+      pre[data-line] {
+        position: relative;
+        padding: 1em 0 1em 3em;
+      }
+
+      pre[data-line] .line-highlight-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: transparent;
+        display: block;
+        width: 100%;
+      }
+
+      pre[data-line] .line-highlight {
+        position: absolute;
+        left: 0;
+        right: 0;
+        padding: inherit 0;
+        margin-top: 1em;
+        background: hsla(24, 20%, 50%, 0.08);
+        background: linear-gradient(
+          to right,
+          hsla(24, 20%, 50%, 0.1) 70%,
+          hsla(24, 20%, 50%, 0)
+        );
+        pointer-events: none;
+        line-height: inherit;
+        white-space: pre;
+      }
+
+      pre[data-line] .line-highlight:before,
+      pre[data-line] .line-highlight[data-end]:after {
+        content: attr(data-start);
+        position: absolute;
+        top: 0.4em;
+        left: 0.6em;
+        min-width: 1em;
+        padding: 0 0.5em;
+        background-color: hsla(24, 20%, 50%, 0.4);
+        color: hsl(24, 20%, 95%);
+        font: bold 65%/1.5 sans-serif;
+        text-align: center;
+        vertical-align: 0.3em;
+        border-radius: 999px;
+        text-shadow: none;
+        box-shadow: 0 1px white;
+      }
+
+      pre[data-line] .line-highlight[data-end]:after {
+        content: attr(data-end);
+        top: auto;
+        bottom: 0.4em;
+      }
+
+      html body {
+        font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+        background-color: #fff;
+        overflow: initial;
+        box-sizing: border-box;
+        word-wrap: break-word;
+      }
+
+      html body > :first-child {
+        margin-top: 0;
+      }
+
+      html body h1,
+      html body h2,
+      html body h3,
+      html body h4,
+      html body h5,
+      html body h6 {
+        line-height: 1.2;
+        margin-top: 1em;
+        margin-bottom: 16px;
+        color: #000;
+      }
+
+      html body h1 {
+        font-size: 2.25em;
+        font-weight: 300;
+        padding-bottom: 0.3em;
+      }
+
+      html body h2 {
+        font-size: 1.75em;
+        font-weight: 400;
+        padding-bottom: 0.3em;
+      }
+
+      html body h3 {
+        font-size: 1.5em;
+        font-weight: 500;
+      }
+
+      html body h4 {
+        font-size: 1.25em;
+        font-weight: 600;
+      }
+
+      html body h5 {
+        font-size: 1.1em;
+        font-weight: 600;
+      }
+
+      html body h6 {
+        font-size: 1em;
+        font-weight: 600;
+      }
+
+      html body h1,
+      html body h2,
+      html body h3,
+      html body h4,
+      html body h5 {
+        font-weight: 600;
+      }
+
+      html body h5 {
+        font-size: 1em;
+      }
+
+      html body h6 {
+        color: #5c5c5c;
+      }
+
+      html body strong {
+        color: #000;
+      }
+
+      html body del {
+        color: #5c5c5c;
+      }
+
+      html body a:not([href]) {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      html body a {
+        color: #08c;
+        text-decoration: none;
+      }
+
+      html body a:hover {
+        color: #00a3f5;
+        text-decoration: none;
+      }
+
+      html body img {
+        max-width: 100%;
+      }
+
+      html body > p {
+        margin-top: 0;
+        margin-bottom: 16px;
+        word-wrap: break-word;
+      }
+
+      html body > ul,
+      html body > ol {
+        margin-bottom: 16px;
+      }
+
+      html body ul,
+      html body ol {
+        padding-left: 2em;
+      }
+
+      html body ul.no-list,
+      html body ol.no-list {
+        padding: 0;
+        list-style-type: none;
+      }
+
+      html body ul ul,
+      html body ul ol,
+      html body ol ol,
+      html body ol ul {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      html body li {
+        margin-bottom: 0;
+      }
+
+      html body li.task-list-item {
+        list-style: none;
+      }
+
+      html body li > p {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      html body .task-list-item-checkbox {
+        margin: 0 0.2em 0.25em -1.8em;
+        vertical-align: middle;
+      }
+
+      html body .task-list-item-checkbox:hover {
+        cursor: pointer;
+      }
+
+      html body blockquote {
+        margin: 16px 0;
+        font-size: inherit;
+        padding: 0 15px;
+        color: #5c5c5c;
+        background-color: #f0f0f0;
+        border-left: 4px solid #d6d6d6;
+      }
+
+      html body blockquote > :first-child {
+        margin-top: 0;
+      }
+
+      html body blockquote > :last-child {
+        margin-bottom: 0;
+      }
+
+      html body hr {
+        height: 4px;
+        margin: 32px 0;
+        background-color: #d6d6d6;
+        border: 0 none;
+      }
+
+      html body table {
+        margin: 10px 0 15px 0;
+        border-collapse: collapse;
+        border-spacing: 0;
+        display: block;
+        width: 100%;
+        overflow: auto;
+        word-break: normal;
+        word-break: keep-all;
+      }
+
+      html body table th {
+        font-weight: bold;
+        color: #000;
+      }
+
+      html body table td,
+      html body table th {
+        border: 1px solid #d6d6d6;
+        padding: 6px 13px;
+      }
+
+      html body dl {
+        padding: 0;
+      }
+
+      html body dl dt {
+        padding: 0;
+        margin-top: 16px;
+        font-size: 1em;
+        font-style: italic;
+        font-weight: bold;
+      }
+
+      html body dl dd {
+        padding: 0 16px;
+        margin-bottom: 16px;
+      }
+
+      html body code {
+        font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+        font-size: 0.85em !important;
+        color: #000;
+        background-color: #f0f0f0;
+        border-radius: 3px;
+        padding: 0.2em 0;
+      }
+
+      html body code::before,
+      html body code::after {
+        letter-spacing: -0.2em;
+        content: "\00a0";
+      }
+
+      html body pre > code {
+        padding: 0;
+        margin: 0;
+        font-size: 0.85em !important;
+        word-break: normal;
+        white-space: pre;
+        background: transparent;
+        border: 0;
+      }
+
+      html body .highlight {
+        margin-bottom: 16px;
+      }
+
+      html body .highlight pre,
+      html body pre {
+        padding: 1em;
+        overflow: auto;
+        font-size: 0.85em !important;
+        line-height: 1.45;
+        border: #d6d6d6;
+        border-radius: 3px;
+      }
+
+      html body .highlight pre {
+        margin-bottom: 0;
+        word-break: normal;
+      }
+
+      html body pre code,
+      html body pre tt {
+        display: inline;
+        max-width: initial;
+        padding: 0;
+        margin: 0;
+        overflow: initial;
+        line-height: inherit;
+        word-wrap: normal;
+        background-color: transparent;
+        border: 0;
+      }
+
+      html body pre code:before,
+      html body pre tt:before,
+      html body pre code:after,
+      html body pre tt:after {
+        content: normal;
+      }
+
+      html body p,
+      html body blockquote,
+      html body ul,
+      html body ol,
+      html body dl,
+      html body pre {
+        margin-top: 0;
+        margin-bottom: 16px;
+      }
+
+      html body kbd {
+        color: #000;
+        border: 1px solid #d6d6d6;
+        border-bottom: 2px solid #c7c7c7;
+        padding: 2px 4px;
+        background-color: #f0f0f0;
+        border-radius: 3px;
+      }
+
+      @media print {
+        html body {
+          background-color: #fff;
+        }
+
+        html body h1,
+        html body h2,
+        html body h3,
+        html body h4,
+        html body h5,
+        html body h6 {
+          color: #000;
+          page-break-after: avoid;
+        }
+
+        html body blockquote {
+          color: #5c5c5c;
+        }
+
+        html body pre {
+          page-break-inside: avoid;
+        }
+
+        html body table {
+          display: table;
+        }
+
+        html body img {
+          display: block;
+          max-width: 100%;
+          max-height: 100%;
+        }
+
+        html body pre,
+        html body code {
+          word-wrap: break-word;
+          white-space: pre;
+        }
+      }
+
+      .markdown-preview {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      .markdown-preview .pagebreak,
+      .markdown-preview .newpage {
+        page-break-before: always;
+      }
+
+      .markdown-preview pre.line-numbers {
+        position: relative;
+        padding-left: 3.8em;
+        counter-reset: linenumber;
+      }
+
+      .markdown-preview pre.line-numbers > code {
+        position: relative;
+      }
+
+      .markdown-preview pre.line-numbers .line-numbers-rows {
+        position: absolute;
+        pointer-events: none;
+        top: 1em;
+        font-size: 100%;
+        left: 0;
+        width: 3em;
+        letter-spacing: -1px;
+        border-right: 1px solid #999;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      .markdown-preview pre.line-numbers .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+      }
+
+      .markdown-preview pre.line-numbers .line-numbers-rows > span:before {
+        content: counter(linenumber);
+        color: #999;
+        display: block;
+        padding-right: 0.8em;
+        text-align: right;
+      }
+
+      .markdown-preview .mathjax-exps .MathJax_Display {
+        text-align: center !important;
+      }
+
+      .markdown-preview:not([for="preview"]) .code-chunk .btn-group {
+        display: none;
+      }
+
+      .markdown-preview:not([for="preview"]) .code-chunk .status {
+        display: none;
+      }
+
+      .markdown-preview:not([for="preview"]) .code-chunk .output-div {
+        margin-bottom: 16px;
+      }
+
+      .scrollbar-style::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .scrollbar-style::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: transparent;
+      }
+
+      .scrollbar-style::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: rgba(150, 150, 150, 0.66);
+        border: 4px solid rgba(150, 150, 150, 0.66);
+        background-clip: content-box;
+      }
+
+      html body[for="html-export"]:not([data-presentation-mode]) {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        overflow: auto;
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])
+        .markdown-preview {
+        position: relative;
+        top: 0;
+      }
+
+      @media screen and (min-width: 914px) {
+        html
+          body[for="html-export"]:not([data-presentation-mode])
+          .markdown-preview {
+          padding: 2em calc(50% - 457px + 2em);
+        }
+      }
+
+      @media screen and (max-width: 914px) {
+        html
+          body[for="html-export"]:not([data-presentation-mode])
+          .markdown-preview {
+          padding: 2em;
+        }
+      }
+
+      @media screen and (max-width: 450px) {
+        html
+          body[for="html-export"]:not([data-presentation-mode])
+          .markdown-preview {
+          font-size: 14px !important;
+          padding: 1em;
+        }
+      }
+
+      @media print {
+        html
+          body[for="html-export"]:not([data-presentation-mode])
+          #sidebar-toc-btn {
+          display: none;
+        }
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])
+        #sidebar-toc-btn {
+        position: fixed;
+        bottom: 8px;
+        left: 8px;
+        font-size: 28px;
+        cursor: pointer;
+        color: inherit;
+        z-index: 99;
+        width: 32px;
+        text-align: center;
+        opacity: 0.4;
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+        #sidebar-toc-btn {
+        opacity: 1;
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+        .md-sidebar-toc {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 300px;
+        height: 100%;
+        padding: 32px 0 48px 0;
+        font-size: 14px;
+        box-shadow: 0 0 4px rgba(150, 150, 150, 0.33);
+        box-sizing: border-box;
+        overflow: auto;
+        background-color: inherit;
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+        .md-sidebar-toc::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+        .md-sidebar-toc::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background-color: transparent;
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+        .md-sidebar-toc::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: rgba(150, 150, 150, 0.66);
+        border: 4px solid rgba(150, 150, 150, 0.66);
+        background-clip: content-box;
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+        .md-sidebar-toc
+        a {
+        text-decoration: none;
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+        .md-sidebar-toc
+        ul {
+        padding: 0 1.6em;
+        margin-top: 0.8em;
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+        .md-sidebar-toc
+        li {
+        margin-bottom: 0.8em;
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+        .md-sidebar-toc
+        ul {
+        list-style-type: none;
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+        .markdown-preview {
+        left: 300px;
+        width: calc(100% - 300px);
+        padding: 2em calc(50% - 457px - 150px);
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      @media screen and (max-width: 1274px) {
+        html
+          body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+          .markdown-preview {
+          padding: 2em;
+        }
+      }
+
+      @media screen and (max-width: 450px) {
+        html
+          body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc]
+          .markdown-preview {
+          width: 100%;
+        }
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc])
+        .markdown-preview {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      html
+        body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc])
+        .md-sidebar-toc {
+        display: none;
+      }
+
+      /* Please visit the URL below for more information: */
+      /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+    </style>
+  </head>
+
+  <body for="html-export">
+    <div class="mume markdown-preview">
+      <h1 class="mume-header" id="fundamental-data-structures-in-javascript">
+        Fundamental Data Structures In JavaScript
+      </h1>
+
+      <p>Fundamental Data Structures In JavaScript</p>
+      <h2 class="mume-header" id="data-structures-in-javascript">
+        Data structures in JavaScript
+      </h2>
+
+      <p>
+        Here&apos;s a website I created to practice data structures!<br />
+        <a href="https://ds-algo-official-c3dw6uapg-bgoonz.vercel.app/"
+          ><strong>directory</strong><br />
+          <em>Edit description</em
+          >ds-algo-official-c3dw6uapg-bgoonz.vercel.app</a
+        >
+      </p>
+      <p>
+        Here&apos;s the repo that the website is built on:<br />
+        <a href="https://github.com/bgoonz/DS-ALGO-OFFICIAL"
+          ><strong>bgoonz/DS-ALGO-OFFICIAL</strong><br />
+          *Navigation ####Author:Bryan Guner Big O notation is the language we
+          use for talking about how long an algorithm
+          takes&#x2026;*github.com</a
+        >
+      </p>
+      <h2 class="mume-header" id="resources-article-content-below">
+        Resources (article content below):
+      </h2>
+
+      <h3 class="mume-header" id="videos">Videos</h3>
+
+      <ul>
+        <li>
+          <p>
+            <a
+              href="https://www.youtube.com/watch?v=0IAPZzGSbME&amp;list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O&amp;index=2&amp;t=0s"
+              >Abdul Bari: YouTubeChannel for Algorithms</a
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            <a
+              href="https://www.youtube.com/watch?v=lxja8wBwN0k&amp;list=PLKKfKV1b9e8ps6dD3QA5KFfHdiWj9cB1s"
+              >Data Structures and algorithms</a
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            <a
+              href="https://www.youtube.com/playlist?list=PLmGElG-9wxc9Us6IK6Qy-KHlG_F3IS6Q9"
+              >Data Structures and algorithms Course</a
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            <a
+              href="https://www.khanacademy.org/computing/computer-science/algorithms"
+              >Khan Academy</a
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            <a
+              href="https://www.youtube.com/playlist?list=PL2_aWCzGMAwI3W_JlcBbtYTwiQSsOTa6P"
+              >Data structures by mycodeschool</a
+            >Pre-requisite for this lesson is good understanding of pointers in
+            C.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a
+              href="https://www.youtube.com/watch?v=HtSuA80QTyo&amp;list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb"
+              >MIT 6.006: Intro to Algorithms(2011)</a
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            <a
+              href="https://www.youtube.com/watch?v=5_5oE5lgrhw&amp;list=PLu0W_9lII9ahIappRPN0MCAgtOu3lQjQi"
+              >Data Structures and Algorithms by Codewithharry</a
+            >
+          </p>
+        </li>
+      </ul>
+      <h3 class="mume-header" id="books">Books</h3>
+
+      <ul>
+        <li>
+          <p>
+            <a
+              href="https://edutechlearners.com/download/Introduction_to_algorithms-3rd%20Edition.pdf"
+              >Introduction to Algorithms</a
+            >
+            by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and
+            Clifford Stein
+          </p>
+        </li>
+        <li>
+          <p>
+            <a
+              href="http://www.sso.sy/sites/default/files/competitive%20programming%203_1.pdf"
+              >Competitive Programming 3</a
+            >
+            by Steven Halim and Felix Halim
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="https://cses.fi/book/book.pdf"
+              >Competitive Programmers Hand Book</a
+            >
+            Beginner friendly hand book for competitive programmers.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a
+              href="https://github.com/Amchuz/My-Data-Structures-and-Algorithms-Resources/raw/master/Books/Data%20Structures%20and%20Algorithms%20-%20Narasimha%20Karumanchi.pdf"
+              >Data Structures and Algorithms Made Easy</a
+            >
+            by Narasimha Karumanchi
+          </p>
+        </li>
+        <li>
+          <p>
+            <a
+              href="https://github.com/Amchuz/My-Data-Structures-and-Algorithms-Resources/raw/master/Books/Learning%20Algorithms%20Through%20Programming%20and%20Puzzle%20Solving.pdf"
+              >Learning Algorithms Through Programming and Puzzle Solving</a
+            >
+            by Alexander Kulikov and Pavel Pevzner
+          </p>
+        </li>
+      </ul>
+      <h3 class="mume-header" id="coding-practice">Coding practice</h3>
+
+      <ul>
+        <li>
+          <p><a href="https://leetcode.com/">LeetCode</a></p>
+        </li>
+        <li>
+          <p><a href="https://www.interviewbit.com/">InterviewBit</a></p>
+        </li>
+        <li>
+          <p><a href="https://codility.com/">Codility</a></p>
+        </li>
+        <li>
+          <p><a href="https://www.hackerrank.com/">HackerRank</a></p>
+        </li>
+        <li>
+          <p><a href="https://projecteuler.net/">Project Euler</a></p>
+        </li>
+        <li>
+          <p><a href="https://spoj.com/">Spoj</a></p>
+        </li>
+        <li>
+          <p>
+            <a href="https://code.google.com/codejam/contests.html"
+              >Google Code Jam practice problems</a
+            >
+          </p>
+        </li>
+        <li>
+          <p><a href="https://www.hackerearth.com/">HackerEarth</a></p>
+        </li>
+        <li>
+          <p><a href="https://www.topcoder.com/">Top Coder</a></p>
+        </li>
+        <li>
+          <p><a href="https://www.codechef.com/">CodeChef</a></p>
+        </li>
+        <li>
+          <p><a href="https://www.codewars.com/">Codewars</a></p>
+        </li>
+        <li>
+          <p><a href="https://codesignal.com/">CodeSignal</a></p>
+        </li>
+        <li>
+          <p><a href="http://codekata.com/">CodeKata</a></p>
+        </li>
+        <li>
+          <p><a href="https://www.firecode.io/">Firecode</a></p>
+        </li>
+      </ul>
+      <h3 class="mume-header" id="courses">Courses</h3>
+
+      <ul>
+        <li>
+          <p>
+            <a
+              href="https://academy.zerotomastery.io/p/master-the-coding-interview-faang-interview-prep"
+              >Master the Coding Interview: Big Tech (FAANG) Interviews</a
+            >
+            Course by Andrei and his team.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="https://realpython.com/python-data-structures"
+              >Common Python Data Structures</a
+            >
+            Data structures are the fundamental constructs around which you
+            build your programs. Each data structure provides a particular way
+            of organizing data so it can be accessed efficiently, depending on
+            your use case. Python ships with an extensive set of data structures
+            in its standard library.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="https://www.geeksforgeeks.org/fork-cpp-course-structure"
+              >Fork CPP</a
+            >
+            A good course for beginners.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="https://codeforces.com/edu/course/2">EDU</a> Advanced
+            course.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="https://www.udacity.com/course/c-for-programmers--ud210"
+              >C++ For Programmers</a
+            >
+            Learn features and constructs for C++.
+          </p>
+        </li>
+      </ul>
+      <h3 class="mume-header" id="guides">Guides</h3>
+
+      <ul>
+        <li>
+          <p>
+            <a href="http://www.geeksforgeeks.org/"
+              >GeeksForGeeks &#x2014; A CS portal for geeks</a
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="https://www.learneroo.com/subjects/8"
+              >Learneroo &#x2014; Algorithms</a
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            <a
+              href="http://www.topcoder.com/tc?d1=tutorials&amp;d2=alg_index&amp;module=Static"
+              >Top Coder tutorials</a
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="http://www.infoarena.ro/training-path"
+              >Infoarena training path</a
+            >
+            (RO)
+          </p>
+        </li>
+        <li>
+          <p>
+            Steven &amp; Felix Halim &#x2014;
+            <a
+              href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;category=118"
+              >Increasing the Lower Bound of Programming Contests</a
+            >
+            (UVA Online Judge)
+          </p>
+        </li>
+      </ul>
+      <h2 class="mume-header" id="space">
+        <em><strong>space</strong></em>
+      </h2>
+
+      <blockquote>
+        <p>
+          <em
+            >The space complexity represents the memory consumption of a data
+            structure. As for most of the things in life, you can&apos;t have it
+            all, so it is with the data structures. You will generally need to
+            trade some time for space or the other way around.</em
+          >
+        </p>
+      </blockquote>
+      <h2 class="mume-header" id="time"><em>time</em></h2>
+
+      <blockquote>
+        <p>
+          <em
+            >The time complexity for a data structure is in general more diverse
+            than its space complexity.</em
+          >
+        </p>
+      </blockquote>
+      <h2 class="mume-header" id="several-operations">
+        <em>Several operations</em>
+      </h2>
+
+      <blockquote>
+        <p>
+          <em
+            >In contrary to algorithms, when you look at the time complexity for
+            data structures you need to express it for several operations that
+            you can do with data structures. It can be adding elements, deleting
+            elements, accessing an element or even searching for an element.</em
+          >
+        </p>
+      </blockquote>
+      <h2 class="mume-header" id="dependent-on-data">
+        <em>Dependent on data</em>
+      </h2>
+
+      <blockquote>
+        <p>
+          <em
+            >Something that data structure and algorithms have in common when
+            talking about time complexity is that they are both dealing with
+            data. When you deal with data you become dependent on them and as a
+            result the time complexity is also dependent of the data that you
+            received. To solve this problem we talk about 3 different time
+            complexity.</em
+          >
+        </p>
+      </blockquote>
+      <ul>
+        <li>
+          <p>
+            <strong
+              >The best-case complexity: when the data looks the best</strong
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong
+              >The worst-case complexity: when the data looks the worst</strong
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong
+              >The average-case complexity: when the data looks average</strong
+            >
+          </p>
+        </li>
+      </ul>
+      <h2 class="mume-header" id="big-o-notation">Big O notation</h2>
+
+      <p>
+        The complexity is usually expressed with the Big O notation. The
+        wikipedia page about this subject is pretty complex but you can find
+        here a good summary of the different complexity for the most famous data
+        structures and sorting algorithms.
+      </p>
+      <h2 class="mume-header" id="the-array-data-structure">
+        The Array data structure
+      </h2>
+
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/2000/0*Qk3UYgeqXamRrFLR.gif"
+          alt
+        />
+      </p>
+      <h2 class="mume-header" id="definition">Definition</h2>
+
+      <p>
+        An Array data structure, or simply an Array, is a data structure
+        consisting of a collection of elements (values or variables), each
+        identified by at least one array index or key. The simplest type of data
+        structure is a linear array, also called one-dimensional array. From
+        Wikipedia
+      </p>
+      <p>
+        Arrays are among the oldest and most important data structures and are
+        used by every program. They are also used to implement many other data
+        structures.
+      </p>
+      <p>
+        <em>Complexity</em><br />
+        <em>Average</em><br />
+        <em>Access Search Insertion Deletion</em>
+      </p>
+      <p>O(1) O(n) O(1) O(n)</p>
+      <pre class="language-text">
+class ArrayADT {
+    constructor() {
+        this.array = [];
+    }
+
+    add(data) {
+        this.array.push(data);
+    }
+
+    remove(data) {
+        this.array = this.array.filter((current) =&gt; current !== data);
+    }
+
+    search(data) {
+        const foundIndex = this.array.indexOf(data);
+        if (foundIndex === -1) {
+            return foundIndex;
+        }
+
+        return null;
+    }
+
+    getAtIndex(index) {
+        return this.array[index];
+    }
+
+    length() {
+        return this.array.length;
+    }
+
+    print() {
+        console.log(this.array.join(&quot; &quot;));
+    }
+}
+
+const array = new ArrayADT();
+console.log(&quot;const array = new ArrayADT();: &quot;, array);
+console.log(&quot;-------------------------------&quot;);
+
+console.log(&quot;array.add(1): &quot;, array.add(1));
+array.add(3);
+array.add(4);
+console.log(
+    &quot;array.add(2);: &quot;,
+    array.add(2),
+    &quot;array.add(3);&quot;,
+    array.add(3),
+    &quot;array.add(4); &quot;,
+    array.add(4)
+);
+
+console.log(&quot;-------------------------------&quot;);
+array.print();
+console.log(&quot;-------------------------------&quot;);
+
+console.log(&quot;search 3 gives index 2:&quot;, array.search(3));
+console.log(&quot;-------------------------------&quot;);
+
+console.log(&quot;getAtIndex 2 gives 3:&quot;, array.getAtIndex(2)); 
+console.log(&quot;-------------------------------&quot;);
+
+console.log(&quot;length is 4:&quot;, array.length());
+console.log(&quot;-------------------------------&quot;);
+
+array.remove(3);
+array.print();
+console.log(&quot;-------------------------------&quot;);
+
+array.add(5);
+array.add(5);
+array.print(); 
+console.log(&quot;-------------------------------&quot;);
+
+
+array.remove(5);
+array.print(); 
+console.log( 
+  &quot;-------------------------------&quot; );
+/*
+ ~ final : (master) node 01-array.js 
+const array = new ArrayADT();:  ArrayADT { array: [] }
+-------------------------------
+array.add(1):  undefined
+array.add(2);:  undefined array.add(3); undefined array.add(4);  undefined
+-------------------------------
+1 3 4 2 3 4
+-------------------------------
+search 3 gives index 2: null
+-------------------------------
+getAtIndex 2 gives 3: 4
+-------------------------------
+length is 4: 6
+-------------------------------
+1 4 2 4
+-------------------------------
+1 4 2 4 5 5
+-------------------------------
+1 4 2 4
+-------------------------------
+ ~ final : (master) 
+ */
+</pre
+      >
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/2000/1*-BJ2hU-CZO2kuzu4x5a53g.png"
+          alt
+        />
+      </p>
+      <p>
+        indexvalue0 &#x2026; this is the first value, stored at zero position
+      </p>
+      <ol>
+        <li>
+          <p>The index of an array <strong>runs in sequence</strong></p>
+        </li>
+        <li>
+          <p>
+            This could be useful for storing data that are required to be
+            ordered, such as rankings or queues
+          </p>
+        </li>
+        <li>
+          <p>
+            In JavaScript, array&apos;s value could be mixed; meaning value of
+            each index could be of different data, be it String, Number or even
+            Objects
+          </p>
+          <p>
+            // 1. Creating Arrays<br />
+            let firstArray = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;];<br />
+            let secondArray = [&quot;d&quot;,&quot;e&quot;,&quot;f&quot;];
+          </p>
+          <p>
+            // 2. Access an Array Item<br />
+            console.log(firstArray[0]); // Results: &quot;a&quot;
+          </p>
+          <p>
+            // 3. Loop over an Array<br />
+            firstArray.forEach(function(item, index, array){<br />
+            console.log(item, index);<br />
+            });<br />
+            // Results:<br />
+            // a 0<br />
+            // b 1<br />
+            // c 2
+          </p>
+          <p>
+            // 4. Add new item to END of array<br />
+            secondArray.push(&apos;g&apos;);<br />
+            console.log(secondArray);<br />
+            // Results: [&quot;d&quot;,&quot;e&quot;,&quot;f&quot;,
+            &quot;g&quot;]
+          </p>
+          <p>
+            // 5. Remove item from END of array<br />
+            secondArray.pop();<br />
+            console.log(secondArray);<br />
+            // Results: [&quot;d&quot;,&quot;e&quot;,&quot;f&quot;]
+          </p>
+          <p>
+            // 6. Remove item from FRONT of array<br />
+            secondArray.shift();<br />
+            console.log(secondArray);<br />
+            // Results: [&quot;e&quot;,&quot;f&quot;]
+          </p>
+          <p>
+            // 7. Add item to FRONT of array<br />
+            secondArray.unshift(&quot;d&quot;);<br />
+            console.log(secondArray);<br />
+            // Results: [&quot;d&quot;,&quot;e&quot;,&quot;f&quot;]
+          </p>
+          <p>
+            // 8. Find INDEX of an item in array<br />
+            let position = secondArray.indexOf(&apos;f&apos;);<br />
+            // Results: 2
+          </p>
+          <p>
+            // 9. Remove Item by Index Position<br />
+            secondArray.splice(position, 1);<br />
+            console.log(secondArray);<br />
+            // Note, the second argument, in this case &quot;1&quot;,<br />
+            // represent the number of array elements to be removed<br />
+            // Results: [&quot;d&quot;,&quot;e&quot;]
+          </p>
+          <p>
+            // 10. Copy an Array<br />
+            let shallowCopy = secondArray.slice();<br />
+            console.log(secondArray);<br />
+            console.log(shallowCopy);<br />
+            // Results: ShallowCopy === [&quot;d&quot;,&quot;e&quot;]
+          </p>
+          <p>
+            // 11. JavaScript properties that BEGIN with a digit MUST be
+            accessed using bracket notation<br />
+            renderer.3d.setTexture(model, &apos;character.png&apos;); // a
+            syntax error<br />
+            renderer[&apos;3d&apos;].setTexture(model,
+            &apos;character.png&apos;); // works properly
+          </p>
+          <p>
+            // 12. Combine two Arrays<br />
+            let thirdArray = firstArray.concat(secondArray);<br />
+            console.log(thirdArray);<br />
+            // [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;, &quot;d&quot;,
+            &quot;e&quot;];
+          </p>
+          <p>
+            // 13. Combine all Array elements into a string<br />
+            console.log(thirdArray.join()); // Results: a,b,c,d,e<br />
+            console.log(thirdArray.join(&apos;&apos;)); // Results: abcde<br />
+            console.log(thirdArray.join(&apos;-&apos;)); // Results: a-b-c-d-e
+          </p>
+          <p>
+            // 14. Reversing an Array (in place, i.e. destructive)<br />
+            console.log(thirdArray.reverse()); // [&quot;e&quot;, &quot;d&quot;,
+            &quot;c&quot;, &quot;b&quot;, &quot;a&quot;]
+          </p>
+          <p>
+            // 15. sort<br />
+            let unsortedArray = [&quot;Alphabet&quot;, &quot;Zoo&quot;,
+            &quot;Products&quot;, &quot;Computer Science&quot;,
+            &quot;Computer&quot;];<br />
+            console.log(unsortedArray.sort());<br />
+            // Results: [&quot;Alphabet&quot;, &quot;Computer&quot;,
+            &quot;Computer Science&quot;, &quot;Products&quot;, &quot;Zoo&quot;
+            ]
+          </p>
+        </li>
+      </ol>
+      <h2 class="mume-header" id="2-objects">2. Objects</h2>
+
+      <p>Think of objects as a logical grouping of a bunch of properties.</p>
+      <p>
+        Properties could be some variable that it&apos;s storing or some methods
+        that it&apos;s using.
+      </p>
+      <p>I also visualize an object as a table.</p>
+      <p>
+        The main difference is that object&apos;s &quot;index&quot; need not be
+        numbers and is not necessarily sequenced.
+      </p>
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/2572/1*KVZkD2zrgEa_47igW8Hq8g.png"
+          alt
+        />
+      </p>
+      <pre class="language-text">
+// 16. Creating an Object
+
+let newObj = {
+    name: &quot;I&apos;m an object&quot;,
+    values: [1,10,11,20],
+    others: &apos;&apos;,
+    &quot;1property&quot;: &apos;example of property name starting with digit&apos;
+
+};
+
+// 17. Figure out what keys/properties are in an object
+console.log(Object.keys(newObj));
+// Results: [ &apos;name&apos;, &apos;values&apos;, &apos;others&apos;, &apos;1property&apos; ]
+
+// 18. Show all values stored in the object
+console.log(Object.values(newObj));
+
+// Results:
+// [ &apos;I\&apos;m an object&apos;,
+//   [ 1, 10, 11, 20 ],
+//   &apos;&apos;,
+//   &apos;example of property name starting with digit&apos; ]
+
+// 19. Show all key and values of the object
+for (let [key, value] of Object.entries(newObj)) {
+    console.log(`${key}: ${value}`);
+}
+// Results:
+// name: I&apos;m an object
+// values: 1,10,11,20
+// others:
+// 1property: example of property name starting with digit
+
+// 20. Accessing Object&apos;s Properties
+// Two different ways to access properties, both produce same results
+console.log(newObj.name);
+console.log(newObj[&quot;name&quot;]);
+
+// But if the property name starts with a digit,
+// we CANNOT use dot notation
+console.log(newObj[&quot;1property&quot;]);
+
+// 21. Adding a Method to an Object
+newObj.helloWorld = function(){
+    console.log(&quot;Hello World from inside an object!&quot;);
+}
+
+// 22. Invoking an Object&apos;s Method
+newObj.helloWorld();
+</pre
+      >
+      <h2 class="mume-header" id="the-hash-table">The Hash Table</h2>
+
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/2000/0*avbxLAFocSV6vsl5.gif"
+          alt
+        />
+      </p>
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/2048/0*3GJiRoLyEoZ_aIlO"
+          alt
+        />
+      </p>
+      <h2 class="mume-header" id="definition-1"><em>Definition</em></h2>
+
+      <blockquote>
+        <p>
+          <em
+            >A Hash Table (Hash Map) is a data structure used to implement an
+            associative array, a structure that can map keys to values. A Hash
+            Table uses a hash function to compute an index into an array of
+            buckets or slots, from which the desired value can be found. From
+            Wikipedia</em
+          >
+        </p>
+      </blockquote>
+      <p>
+        Hash Tables are considered the more efficient data structure for lookup
+        and for this reason, they are widely used.
+      </p>
+      <p>
+        Complexity<br />
+        Average<br />
+        Access Search Insertion Deletion
+      </p>
+      <ul>
+        <li>O(1) O(1) O(1)</li>
+      </ul>
+      <blockquote>
+        <p><em>The code</em></p>
+      </blockquote>
+      <p>
+        Note, here I am storing another object for every hash in my Hash Table.
+      </p>
+      <pre class="language-text">
+class HashTable {
+    constructor( size ) {
+        this.values = {};
+        this.numberOfValues = 0;
+        this.size = size;
+    }
+    add( key, value ) {
+        let hash = this.calculateHash( key );
+        if ( !this.values.hasOwnProperty( hash ) ) {
+            this.values[ hash ] = {};
+        }
+        if ( !this.values[ hash ].hasOwnProperty( key ) ) {
+            this.numberOfValues++;
+        }
+        this.values[ hash ][ key ] = value;
+    }
+    remove( key ) {
+        let hash = this.calculateHash( key );
+        if (
+            this.values.hasOwnProperty( hash ) &amp;&amp;
+            this.values[ hash ].hasOwnProperty( key )
+        ) {
+            delete this.values[ hash ][ key ];
+            this.numberOfValues--;
+        }
+    }
+    calculateHash( key ) {
+        return key.toString().length % this.size;
+    }
+    search( key ) {
+        let hash = this.calculateHash( key );
+        if (
+            this.values.hasOwnProperty( hash ) &amp;&amp;
+            this.values[ hash ].hasOwnProperty( key )
+        ) {
+            return this.values[ hash ][ key ];
+        } else {
+            return null;
+        }
+    }
+    length() {
+        return this.numberOfValues;
+    }
+    print() {
+        let string = &quot;&quot;;
+        for ( let value in this.values ) {
+            for ( let key in this.values[ value ] ) {
+                string += this.values[ value ][ key ] + &quot; &quot;;
+            }
+        }
+        console.log( string.trim() );
+    }
+}
+let hashTable = new HashTable( 3 );
+hashTable.add( &quot;first&quot;, 1 );
+hashTable.add( &quot;second&quot;, 2 );
+hashTable.add( &quot;third&quot;, 3 );
+hashTable.add( &quot;fourth&quot;, 4 );
+hashTable.add( &quot;fifth&quot;, 5 );
+hashTable.print(); // =&gt; 2 4 1 3 5
+console.log( &quot;length gives 5:&quot;, hashTable.length() ); // =&gt; 5
+console.log( &quot;search second gives 2:&quot;, hashTable.search( &quot;second&quot; ) ); // =&gt; 2
+hashTable.remove( &quot;fourth&quot; );
+hashTable.remove( &quot;first&quot; );
+hashTable.print(); // =&gt; 2 3 5
+console.log( &quot;length gives 3:&quot;, hashTable.length() ); // =&gt; 3
+/*
+   ~ js-files : (master) node hash.js 
+2 4 1 3 5
+length gives 5: 5
+search second gives 2: 2
+2 3 5
+length gives 3: 3
+*/
+</pre
+      >
+      <h2 class="mume-header" id="the-set">The Set</h2>
+
+      <h2 class="mume-header" id="sets">Sets</h2>
+
+      <p>
+        Sets are pretty much what it sounds like. It&apos;s the same intuition
+        as Set in Mathematics. I visualize Sets as Venn Diagrams.
+      </p>
+      <pre class="language-text">
+// 23. Creating a new Set
+let newSet = new Set();
+
+// 24. Adding new elements to a set
+newSet.add(1); // Set[1]
+newSet.add(&quot;text&quot;) // Set[1, &quot;text&quot;]
+
+// 25. Check if element is in set
+newSet.has(1); // true
+
+// 24. Check size of set
+console.log(newSet.size) // Results: 2
+
+// 26. Delete element from set
+newSet.delete(1) // Set[&quot;text&quot;]
+
+// 27. Set Operations: isSuperSet
+function isSuperset(set, subset) {
+    for (let elem of subset) {
+        if (!set.has(elem)) {
+            return false;
+        }
+    }
+    return true;
+}
+// 28. Set Operations: union
+function union(setA, setB) {
+    let _union = new Set(setA);
+    for (let elem of setB) {
+        _union.add(elem);
+    }
+    return _union;
+}
+
+// 29. Set Operations: intersection
+function intersection(setA, setB) {
+    let _intersection = new Set();
+    for (let elem of setB) {
+        if (setA.has(elem)) {
+            _intersection.add(elem);
+        }
+    }
+    return _intersection;
+}
+// 30. Set Operations: symmetricDifference
+function symmetricDifference(setA, setB) {
+    let _difference = new Set(setA);
+    for (let elem of setB) {
+        if (_difference.has(elem)) {
+            _difference.delete(elem);
+        } else {
+            _difference.add(elem);
+        }
+    }
+    return _difference;
+}
+// 31. Set Operations: difference
+function difference(setA, setB) {
+    let _difference = new Set(setA);
+    for (let elem of setB) {
+        _difference.delete(elem);
+    }
+    return _difference;
+}
+
+// Examples
+let setA = new Set([1, 2, 3, 4]);
+let setB = new Set([2, 3]);
+let setC = new Set([3, 4, 5, 6]);
+
+console.log(isSuperset(setA, setB));            // =&gt; true
+console.log(union(setA, setC));                 // =&gt; Set [1, 2, 3, 4, 5, 6]
+console.log(intersection(setA, setC));          // =&gt; Set [3, 4]
+console.log(symmetricDifference(setA, setC));   // =&gt; Set [1, 2, 5, 6]
+console.log(difference(setA, setC));            // =&gt; Set [1, 2]
+</pre
+      >
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/2000/0*gOE33ANZP2ujbjIG"
+          alt
+        />
+      </p>
+      <h2 class="mume-header" id="definition-2"><em>Definition</em></h2>
+
+      <blockquote>
+        <p>
+          <em
+            >A Set is an abstract data type that can store certain values,
+            without any particular order, and no repeated values. It is a
+            computer implementation of the mathematical concept of a finite Set.
+            From Wikipedia</em
+          >
+        </p>
+      </blockquote>
+      <p>
+        The Set data structure is usually used to test whether elements belong
+        to set of values. Rather then only containing elements, Sets are more
+        used to perform operations on multiple values at once with methods such
+        as union, intersect, etc&#x2026;
+      </p>
+      <p>
+        Complexity<br />
+        Average<br />
+        Access Search Insertion Deletion
+      </p>
+      <ul>
+        <li>O(n) O(n) O(n)</li>
+      </ul>
+      <blockquote>
+        <p><em>The code</em></p>
+      </blockquote>
+      <pre class="language-text">
+function Set() {
+      this.values = [];
+      this.numberOfValues = 0;
+    }
+    
+    Set.prototype.add = function(value) {
+      if(!~this.values.indexOf(value)) {
+        this.values.push(value);
+        this.numberOfValues++;
+      }
+    };
+    Set.prototype.remove = function(value) {
+      let index = this.values.indexOf(value);
+      if(~index) {
+        this.values.splice(index, 1);
+        this.numberOfValues--;
+      }
+    };
+    Set.prototype.contains = function(value) {
+      return this.values.indexOf(value) !== -1;
+    };
+    Set.prototype.union = function(set) {
+      let newSet = new Set();
+      set.values.forEach(function(value) {
+        newSet.add(value);
+      });
+      this.values.forEach(function(value) {
+        newSet.add(value);
+      });
+      return newSet;
+    };
+    Set.prototype.intersect = function(set) {
+      let newSet = new Set();
+      this.values.forEach(function(value) {
+        if(set.contains(value)) {
+          newSet.add(value);
+        }
+      });
+      return newSet;
+    };
+    Set.prototype.difference = function(set) {
+      let newSet = new Set();
+      this.values.forEach(function(value) {
+        if(!set.contains(value)) {
+          newSet.add(value);
+        }
+      });
+      return newSet;
+    };
+    Set.prototype.isSubset = function(set) {
+      return set.values.every(function(value) {
+        return this.contains(value);
+      }, this);
+    };
+    Set.prototype.length = function() {
+      return this.numberOfValues;
+    };
+    Set.prototype.print = function() {
+      console.log(this.values.join(&apos; &apos;));
+    };
+    
+    let set = new Set();
+    set.add(1);
+    set.add(2);
+    set.add(3);
+    set.add(4);
+    set.print(); // =&gt; 1 2 3 4
+    set.remove(3);
+    set.print(); // =&gt; 1 2 4
+    console.log(&apos;contains 4 is true:&apos;, set.contains(4)); // =&gt; true
+    console.log(&apos;contains 3 is false:&apos;, set.contains(3)); // =&gt; false
+    console.log(&apos;---&apos;);
+    let set1 = new Set();
+    set1.add(1);
+    set1.add(2);
+    let set2 = new Set();
+    set2.add(2);
+    set2.add(3);
+    let set3 = set2.union(set1);
+    set3.print(); // =&gt; 1 2 3
+    let set4 = set2.intersect(set1);
+    set4.print(); // =&gt; 2
+    let set5 = set.difference(set3); // 1 2 4 diff 1 2 3
+    set5.print(); // =&gt; 4
+    let set6 = set3.difference(set); // 1 2 3 diff 1 2 4
+    set6.print(); // =&gt; 3
+    console.log(&apos;set1 subset of set is true:&apos;, set.isSubset(set1)); // =&gt; true
+    console.log(&apos;set2 subset of set is false:&apos;, set.isSubset(set2)); // =&gt; false
+    console.log(&apos;set1 length gives 2:&apos;, set1.length()); // =&gt; 2
+    console.log(&apos;set3 length gives 3:&apos;, set3.length()); // =&gt; 3
+</pre
+      >
+      <h2 class="mume-header" id="the-singly-linked-list">
+        The Singly Linked List
+      </h2>
+
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/2048/0*fLs64rV-Xq19aVCA.gif"
+          alt
+        />
+      </p>
+      <h2 class="mume-header" id="definition-3"><em>Definition</em></h2>
+
+      <blockquote>
+        <p>
+          <em
+            >A Singly Linked List is a linear collection of data elements,
+            called nodes pointing to the next node by means of pointer. It is a
+            data structure consisting of a group of nodes which together
+            represent a sequence. Under the simplest form, each node is composed
+            of data and a reference (in other words, a link) to the next node in
+            the sequence.</em
+          >
+        </p>
+      </blockquote>
+      <p>
+        Linked Lists are among the simplest and most common data structures
+        because it allows for efficient insertion or removal of elements from
+        any position in the sequence.
+      </p>
+      <p>
+        Complexity<br />
+        Average<br />
+        Access Search Insertion Deletion<br />
+        O(n) O(n) O(1) O(1)
+      </p>
+      <blockquote>
+        <p><em>The code</em></p>
+      </blockquote>
+      <pre class="language-text">
+function Node(data) {
+  this.data = data;
+  this.next = null;
+}
+
+function SinglyLinkedList() {
+  this.head = null;
+  this.tail = null;
+  this.numberOfValues = 0;
+}
+
+SinglyLinkedList.prototype.add = function(data) {
+  let node = new Node(data);
+  if(!this.head) {
+    this.head = node;
+    this.tail = node;
+  } else {
+    this.tail.next = node;
+    this.tail = node;
+  }
+  this.numberOfValues++;
+};
+SinglyLinkedList.prototype.remove = function(data) {
+  let previous = this.head;
+  let current = this.head;
+  while(current) {
+    if(current.data === data) {
+      if(current === this.head) {
+        this.head = this.head.next;
+      }
+      if(current === this.tail) {
+        this.tail = previous;
+      }
+      previous.next = current.next;
+      this.numberOfValues--;
+    } else {
+      previous = current;
+    }
+    current = current.next;
+  }
+};
+SinglyLinkedList.prototype.insertAfter = function(data, toNodeData) {
+  let current = this.head;
+  while(current) {
+    if(current.data === toNodeData) {
+      let node = new Node(data);
+      if(current === this.tail) {
+        this.tail.next = node;
+        this.tail = node;
+      } else {
+        node.next = current.next;
+        current.next = node;
+      }
+      this.numberOfValues++;
+    }
+    current = current.next;
+  }
+};
+SinglyLinkedList.prototype.traverse = function(fn) {
+  let current = this.head;
+  while(current) {
+    if(fn) {
+      fn(current);
+    }
+    current = current.next;
+  }
+};
+SinglyLinkedList.prototype.length = function() {
+  return this.numberOfValues;
+};
+SinglyLinkedList.prototype.print = function() {
+  let string = &apos;&apos;;
+  let current = this.head;
+  while(current) {
+    string += current.data + &apos; &apos;;
+    current = current.next;
+  }
+  console.log(string.trim());
+};
+
+let singlyLinkedList = new SinglyLinkedList();
+singlyLinkedList.print(); // =&gt; &apos;&apos;
+singlyLinkedList.add(1);
+singlyLinkedList.add(2);
+singlyLinkedList.add(3);
+singlyLinkedList.add(4);
+singlyLinkedList.print(); // =&gt; 1 2 3 4
+console.log(&apos;length is 4:&apos;, singlyLinkedList.length()); // =&gt; 4
+singlyLinkedList.remove(3); // remove value
+singlyLinkedList.print(); // =&gt; 1 2 4
+singlyLinkedList.remove(9); // remove non existing value
+singlyLinkedList.print(); // =&gt; 1 2 4
+singlyLinkedList.remove(1); // remove head
+singlyLinkedList.print(); // =&gt; 2 4
+singlyLinkedList.remove(4); // remove tail
+singlyLinkedList.print(); // =&gt; 2
+console.log(&apos;length is 1:&apos;, singlyLinkedList.length()); // =&gt; 1
+singlyLinkedList.add(6);
+singlyLinkedList.print(); // =&gt; 2 6
+singlyLinkedList.insertAfter(3, 2);
+singlyLinkedList.print(); // =&gt; 2 3 6
+singlyLinkedList.insertAfter(4, 3);
+singlyLinkedList.print(); // =&gt; 2 3 4 6
+singlyLinkedList.insertAfter(5, 9); // insertAfter a non existing node
+singlyLinkedList.print(); // =&gt; 2 3 4 6
+singlyLinkedList.insertAfter(5, 4);
+singlyLinkedList.insertAfter(7, 6); // insertAfter the tail
+singlyLinkedList.print(); // =&gt; 2 3 4 5 6 7
+singlyLinkedList.add(8); // add node with normal method
+singlyLinkedList.print(); // =&gt; 2 3 4 5 6 7 8
+console.log(&apos;length is 7:&apos;, singlyLinkedList.length()); // =&gt; 7
+singlyLinkedList.traverse(function(node) { node.data = node.data + 10; });
+singlyLinkedList.print(); // =&gt; 12 13 14 15 16 17 18
+singlyLinkedList.traverse(function(node) { console.log(node.data); }); // =&gt; 12 13 14 15 16 17 18
+console.log(&apos;length is 7:&apos;, singlyLinkedList.length()); // =&gt; 7
+</pre
+      >
+      <h2 class="mume-header" id="the-doubly-linked-list">
+        The Doubly Linked List
+      </h2>
+
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/2000/0*TQXiR-L_itiG3WP-.gif"
+          alt
+        />
+      </p>
+      <h2 class="mume-header" id="definition-4"><em>Definition</em></h2>
+
+      <blockquote>
+        <p>
+          <em
+            >A Doubly Linked List is a linked data structure that consists of a
+            set of sequentially linked records called nodes. Each node contains
+            two fields, called links, that are references to the previous and to
+            the next node in the sequence of nodes. From Wikipedia</em
+          >
+        </p>
+      </blockquote>
+      <p>
+        Having two node links allow traversal in either direction but adding or
+        removing a node in a doubly linked list requires changing more links
+        than the same operations on a Singly Linked List.
+      </p>
+      <p>
+        Complexity<br />
+        Average<br />
+        Access Search Insertion Deletion<br />
+        O(n) O(n) O(1) O(1)
+      </p>
+      <blockquote>
+        <p><em>The code</em></p>
+      </blockquote>
+      <pre class="language-text">
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.previous = null;
+        this.next = null;
+    }
+}
+class DoublyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+        this.numberOfValues = 0;
+    }
+
+    add(data) {
+        let node = new Node(data);
+        if (!this.head) {
+            this.head = node;
+            this.tail = node;
+        } else {
+            node.previous = this.tail;
+            this.tail.next = node;
+            this.tail = node;
+        }
+        this.numberOfValues++;
+    }
+    remove(data) {
+        let current = this.head;
+        while (current) {
+            if (current.data === data) {
+                if (current === this.head &amp;&amp; current === this.tail) {
+                    this.head = null;
+                    this.tail = null;
+                } else if (current === this.head) {
+                    this.head = this.head.next;
+                    this.head.previous = null;
+                } else if (current === this.tail) {
+                    this.tail = this.tail.previous;
+                    this.tail.next = null;
+                } else {
+                    current.previous.next = current.next;
+                    current.next.previous = current.previous;
+                }
+                this.numberOfValues--;
+            }
+            current = current.next;
+        }
+    }
+    insertAfter(data, toNodeData) {
+        let current = this.head;
+        while (current) {
+            if (current.data === toNodeData) {
+                let node = new Node(data);
+                if (current === this.tail) {
+                    this.add(data);
+                } else {
+                    current.next.previous = node;
+                    node.previous = current;
+                    node.next = current.next;
+                    current.next = node;
+                    this.numberOfValues++;
+                }
+            }
+            current = current.next;
+        }
+    }
+    traverse(fn) {
+        let current = this.head;
+        while (current) {
+            if (fn) {
+                fn(current);
+            }
+            current = current.next;
+        }
+    }
+    traverseReverse(fn) {
+        let current = this.tail;
+        while (current) {
+            if (fn) {
+                fn(current);
+            }
+            current = current.previous;
+        }
+    }
+    length() {
+        return this.numberOfValues;
+    }
+    print() {
+        let string = &quot;&quot;;
+        let current = this.head;
+        while (current) {
+            string += current.data + &quot; &quot;;
+            current = current.next;
+        }
+        console.log(string.trim());
+    }
+}
+
+let doublyLinkedList = new DoublyLinkedList();
+doublyLinkedList.print(); // =&gt; &apos;&apos;
+doublyLinkedList.add(1);
+doublyLinkedList.add(2);
+doublyLinkedList.add(3);
+doublyLinkedList.add(4);
+doublyLinkedList.print(); // =&gt; 1 2 3 4
+console.log(&quot;length is 4:&quot;, doublyLinkedList.length()); // =&gt; 4
+doublyLinkedList.remove(3); // remove value
+doublyLinkedList.print(); // =&gt; 1 2 4
+doublyLinkedList.remove(9); // remove non existing value
+doublyLinkedList.print(); // =&gt; 1 2 4
+doublyLinkedList.remove(1); // remove head
+doublyLinkedList.print(); // =&gt; 2 4
+doublyLinkedList.remove(4); // remove tail
+doublyLinkedList.print(); // =&gt; 2
+console.log(&quot;length is 1:&quot;, doublyLinkedList.length()); // =&gt; 1
+doublyLinkedList.remove(2); // remove tail, the list should be empty
+doublyLinkedList.print(); // =&gt; &apos;&apos;
+console.log(&quot;length is 0:&quot;, doublyLinkedList.length()); // =&gt; 0
+doublyLinkedList.add(2);
+doublyLinkedList.add(6);
+doublyLinkedList.print(); // =&gt; 2 6
+doublyLinkedList.insertAfter(3, 2);
+doublyLinkedList.print(); // =&gt; 2 3 6
+doublyLinkedList.traverseReverse(function (node) {
+    console.log(node.data);
+});
+doublyLinkedList.insertAfter(4, 3);
+doublyLinkedList.print(); // =&gt; 2 3 4 6
+doublyLinkedList.insertAfter(5, 9); // insertAfter a non existing node
+doublyLinkedList.print(); // =&gt; 2 3 4 6
+doublyLinkedList.insertAfter(5, 4);
+doublyLinkedList.insertAfter(7, 6); // insertAfter the tail
+doublyLinkedList.print(); // =&gt; 2 3 4 5 6 7
+doublyLinkedList.add(8); // add node with normal method
+doublyLinkedList.print(); // =&gt; 2 3 4 5 6 7 8
+console.log(&quot;length is 7:&quot;, doublyLinkedList.length()); // =&gt; 7
+doublyLinkedList.traverse(function (node) {
+    node.data = node.data + 10;
+});
+doublyLinkedList.print(); // =&gt; 12 13 14 15 16 17 18
+doublyLinkedList.traverse(function (node) {
+    console.log(node.data);
+}); // =&gt; 12 13 14 15 16 17 18
+console.log(&quot;length is 7:&quot;, doublyLinkedList.length()); // =&gt; 7
+doublyLinkedList.traverseReverse(function (node) {
+    console.log(node.data);
+}); // =&gt; 18 17 16 15 14 13 12
+doublyLinkedList.print(); // =&gt; 12 13 14 15 16 17 18
+console.log(&quot;length is 7:&quot;, doublyLinkedList.length()); // =&gt; 7
+/*
+   ~ js-files : (master) node double-linked-list.js 
+
+1 2 3 4
+length is 4: 4
+1 2 4
+1 2 4
+2 4
+2
+length is 1: 1
+
+length is 0: 0
+2 6
+2 3 6
+6
+3
+2
+2 3 4 6
+2 3 4 6
+2 3 4 5 6 7
+2 3 4 5 6 7 8
+length is 7: 7
+12 13 14 15 16 17 18
+12
+13
+14
+15
+16
+17
+18
+length is 7: 7
+18
+17
+16
+15
+14
+13
+12
+12 13 14 15 16 17 18
+length is 7: 7
+ ~ js-files : (master) 
+*/
+</pre
+      >
+      <h2 class="mume-header" id="the-stack">The Stack</h2>
+
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/4050/0*qsjYW-Lvfo22ecLE.gif"
+          alt
+        />
+      </p>
+      <h2 class="mume-header" id="definition-5"><em>Definition</em></h2>
+
+      <blockquote>
+        <p>
+          <em
+            >A Stack is an abstract data type that serves as a collection of
+            elements, with two principal operations: push, which adds an element
+            to the collection, and pop, which removes the most recently added
+            element that was not yet removed. The order in which elements come
+            off a Stack gives rise to its alternative name, LIFO (for last in,
+            first out). From Wikipedia</em
+          >
+        </p>
+      </blockquote>
+      <p>
+        A Stack often has a third method peek which allows to check the last
+        pushed element without popping it.
+      </p>
+      <p>
+        Complexity<br />
+        Average<br />
+        Access Search Insertion Deletion<br />
+        O(n) O(n) O(1) O(1)
+      </p>
+      <blockquote>
+        <p><em>The code</em></p>
+      </blockquote>
+      <pre class="language-text">
+function Stack() {
+  this.stack = [];
+}
+
+Stack.prototype.push = function(value) {
+  this.stack.push(value);
+};
+Stack.prototype.pop = function() {
+  return this.stack.pop();
+};
+Stack.prototype.peek = function() {
+  return this.stack[this.stack.length - 1];
+};
+Stack.prototype.length = function() {
+  return this.stack.length;
+};
+Stack.prototype.print = function() {
+  console.log(this.stack.join(&apos; &apos;));
+};
+
+let stack = new Stack();
+stack.push(1);
+stack.push(2);
+stack.push(3);
+stack.print(); // =&gt; 1 2 3
+console.log(&apos;length is 3:&apos;, stack.length()); // =&gt; 3
+console.log(&apos;peek is 3:&apos;, stack.peek()); // =&gt; 3
+console.log(&apos;pop is 3:&apos;, stack.pop()); // =&gt; 3
+stack.print(); // =&gt; 1 2
+console.log(&apos;pop is 2:&apos;, stack.pop());  // =&gt; 2
+console.log(&apos;length is 1:&apos;, stack.length()); // =&gt; 1
+console.log(&apos;pop is 1:&apos;, stack.pop()); // =&gt; 1
+stack.print(); // =&gt; &apos;&apos;
+console.log(&apos;peek is undefined:&apos;, stack.peek()); // =&gt; undefined
+console.log(&apos;pop is undefined:&apos;, stack.pop()); // =&gt; undefined
+</pre
+      >
+      <h2 class="mume-header" id="the-queue">The Queue</h2>
+
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/4050/0*YvfuX5tKP7-V0p7v.gif"
+          alt
+        />
+      </p>
+      <h2 class="mume-header" id="definition-6"><em>Definition</em></h2>
+
+      <blockquote>
+        <p>
+          <em
+            >A Queue is a particular kind of abstract data type or collection in
+            which the entities in the collection are kept in order and the
+            principal operations are the addition of entities to the rear
+            terminal position, known as enqueue, and removal of entities from
+            the front terminal position, known as dequeue. This makes the Queue
+            a First-In-First-Out (FIFO) data structure. In a FIFO data
+            structure, the first element added to the Queue will be the first
+            one to be removed.</em
+          >
+        </p>
+      </blockquote>
+      <p>
+        As for the Stack data structure, a peek operation is often added to the
+        Queue data structure. It returns the value of the front element without
+        dequeuing it.
+      </p>
+      <p>
+        Complexity<br />
+        Average<br />
+        Access Search Insertion Deletion<br />
+        O(n) O(n) O(1) O(n)
+      </p>
+      <blockquote>
+        <p><em>The code</em></p>
+      </blockquote>
+      <pre class="language-text">
+function Queue() {
+  this.queue = [];
+}
+
+Queue.prototype.enqueue = function(value) {
+  this.queue.push(value);
+};
+Queue.prototype.dequeue = function() {
+  return this.queue.shift();
+};
+Queue.prototype.peek = function() {
+  return this.queue[0];
+};
+Queue.prototype.length = function() {
+  return this.queue.length;
+};
+Queue.prototype.print = function() {
+  console.log(this.queue.join(&apos; &apos;));
+};
+
+let queue = new Queue();
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+queue.print(); // =&gt; 1 2 3
+console.log(&apos;length is 3:&apos;, queue.length()); // =&gt; 3
+console.log(&apos;peek is 1:&apos;, queue.peek()); // =&gt; 3
+console.log(&apos;dequeue is 1:&apos;, queue.dequeue()); // =&gt; 1
+queue.print(); // =&gt; 2 3
+console.log(&apos;dequeue is 2:&apos;, queue.dequeue());  // =&gt; 2
+console.log(&apos;length is 1:&apos;, queue.length()); // =&gt; 1
+console.log(&apos;dequeue is 3:&apos;, queue.dequeue()); // =&gt; 3
+queue.print(); // =&gt; &apos;&apos;
+console.log(&apos;peek is undefined:&apos;, queue.peek()); // =&gt; undefined
+console.log(&apos;dequeue is undefined:&apos;, queue.dequeue()); // =&gt; undefined
+</pre
+      >
+      <h2 class="mume-header" id="the-tree">The Tree</h2>
+
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/2000/0*yUiQ-NaPKeLQnN7n"
+          alt
+        />
+      </p>
+      <h2 class="mume-header" id="definition-7"><em>Definition</em></h2>
+
+      <blockquote>
+        <p>
+          <em
+            >A Tree is a widely used data structure that simulates a
+            hierarchical tree structure, with a root value and subtrees of
+            children with a parent node. A tree data structure can be defined
+            recursively as a collection of nodes (starting at a root node),
+            where each node is a data structure consisting of a value, together
+            with a list of references to nodes (the &quot;children&quot;), with
+            the constraints that no reference is duplicated, and none points to
+            the root node. From Wikipedia</em
+          >
+        </p>
+      </blockquote>
+      <p>
+        Complexity<br />
+        Average<br />
+        Access Search Insertion Deletion<br />
+        O(n) O(n) O(n) O(n)<br />
+        To get a full overview of the time and space complexity of the Tree data
+        structure, have a look to this excellent Big O cheat sheet.
+      </p>
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/2000/1*DCdQiB6XqBJCrFRz12BwqA.png"
+          alt
+        />
+      </p>
+      <blockquote>
+        <p><em>The code</em></p>
+      </blockquote>
+      <pre class="language-text">
+function Node(data) {
+  this.data = data;
+  this.children = [];
+}
+
+function Tree() {
+  this.root = null;
+}
+
+Tree.prototype.add = function(data, toNodeData) {
+  let node = new Node(data);
+  let parent = toNodeData ? this.findBFS(toNodeData) : null;
+  if(parent) {
+    parent.children.push(node);
+  } else {
+    if(!this.root) {
+      this.root = node;
+    } else {
+      return &apos;Root node is already assigned&apos;;
+    }
+  }
+};
+Tree.prototype.remove = function(data) {
+  if(this.root.data === data) {
+    this.root = null;
+  }
+
+  let queue = [this.root];
+  while(queue.length) {
+    let node = queue.shift();
+    for(let i = 0; i &lt; node.children.length; i++) {
+      if(node.children[i].data === data) {
+        node.children.splice(i, 1);
+      } else {
+        queue.push(node.children[i]);
+      }
+    }
+  }
+};
+Tree.prototype.contains = function(data) {
+  return this.findBFS(data) ? true : false;
+};
+Tree.prototype.findBFS = function(data) {
+  let queue = [this.root];
+  while(queue.length) {
+    let node = queue.shift();
+    if(node.data === data) {
+      return node;
+    }
+    for(let i = 0; i &lt; node.children.length; i++) {
+      queue.push(node.children[i]);
+    }
+  }
+  return null;
+};
+Tree.prototype._preOrder = function(node, fn) {
+  if(node) {
+    if(fn) {
+      fn(node);
+    }
+    for(let i = 0; i &lt; node.children.length; i++) {
+      this._preOrder(node.children[i], fn);
+    }
+  }
+};
+Tree.prototype._postOrder = function(node, fn) {
+  if(node) {
+    for(let i = 0; i &lt; node.children.length; i++) {
+      this._postOrder(node.children[i], fn);
+    }
+    if(fn) {
+      fn(node);
+    }
+  }
+};
+Tree.prototype.traverseDFS = function(fn, method) {
+  let current = this.root;
+  if(method) {
+    this[&apos;_&apos; + method](current, fn);
+  } else {
+    this._preOrder(current, fn);
+  }
+};
+Tree.prototype.traverseBFS = function(fn) {
+  let queue = [this.root];
+  while(queue.length) {
+    let node = queue.shift();
+    if(fn) {
+      fn(node);
+    }
+    for(let i = 0; i &lt; node.children.length; i++) {
+      queue.push(node.children[i]);
+    }
+  }
+};
+Tree.prototype.print = function() {
+  if(!this.root) {
+    return console.log(&apos;No root node found&apos;);
+  }
+  let newline = new Node(&apos;|&apos;);
+  let queue = [this.root, newline];
+  let string = &apos;&apos;;
+  while(queue.length) {
+    let node = queue.shift();
+    string += node.data.toString() + &apos; &apos;;
+    if(node === newline &amp;&amp; queue.length) {
+      queue.push(newline);
+    }
+    for(let i = 0; i &lt; node.children.length; i++) {
+      queue.push(node.children[i]);
+    }
+  }
+  console.log(string.slice(0, -2).trim());
+};
+Tree.prototype.printByLevel = function() {
+  if(!this.root) {
+    return console.log(&apos;No root node found&apos;);
+  }
+  let newline = new Node(&apos;\n&apos;);
+  let queue = [this.root, newline];
+  let string = &apos;&apos;;
+  while(queue.length) {
+    let node = queue.shift();
+    string += node.data.toString() + (node.data !== &apos;\n&apos; ? &apos; &apos; : &apos;&apos;);
+    if(node === newline &amp;&amp; queue.length) {
+      queue.push(newline);
+    }
+    for(let i = 0; i &lt; node.children.length; i++) {
+      queue.push(node.children[i]);
+    }
+  }
+  console.log(string.trim());
+};
+
+let tree = new Tree();
+tree.add(&apos;ceo&apos;);
+tree.add(&apos;cto&apos;, &apos;ceo&apos;);
+tree.add(&apos;dev1&apos;, &apos;cto&apos;);
+tree.add(&apos;dev2&apos;, &apos;cto&apos;);
+tree.add(&apos;dev3&apos;, &apos;cto&apos;);
+tree.add(&apos;cfo&apos;, &apos;ceo&apos;);
+tree.add(&apos;accountant&apos;, &apos;cfo&apos;);
+tree.add(&apos;cmo&apos;, &apos;ceo&apos;);
+tree.print(); // =&gt; ceo | cto cfo cmo | dev1 dev2 dev3 accountant
+tree.printByLevel();  // =&gt; ceo \n cto cfo cmo \n dev1 dev2 dev3 accountant
+console.log(&apos;tree contains dev1 is true:&apos;, tree.contains(&apos;dev1&apos;)); // =&gt; true
+console.log(&apos;tree contains dev4 is false:&apos;, tree.contains(&apos;dev4&apos;)); // =&gt; false
+console.log(&apos;--- BFS&apos;);
+tree.traverseBFS(function(node) { console.log(node.data); }); // =&gt; ceo cto cfo cmo dev1 dev2 dev3 accountant
+console.log(&apos;--- DFS preOrder&apos;);
+tree.traverseDFS(function(node) { console.log(node.data); }, &apos;preOrder&apos;); // =&gt; ceo cto dev1 dev2 dev3 cfo accountant cmo
+console.log(&apos;--- DFS postOrder&apos;);
+tree.traverseDFS(function(node) { console.log(node.data); }, &apos;postOrder&apos;); // =&gt; dev1 dev2 dev3 cto accountant cfo cmo ceo
+tree.remove(&apos;cmo&apos;);
+tree.print(); // =&gt; ceo | cto cfo | dev1 dev2 dev3 accountant
+tree.remove(&apos;cfo&apos;);
+tree.print(); // =&gt; ceo | cto | dev1 dev2 dev3
+</pre
+      >
+      <h2 class="mume-header" id="the-graph">The Graph</h2>
+
+      <p>
+        <img
+          src="https://cdn-images-1.medium.com/max/2000/0*q31mL1kjFWlIzw3l.gif"
+          alt
+        />
+      </p>
+      <h2 class="mume-header" id="definition-8"><em>Definition</em></h2>
+
+      <blockquote>
+        <p>
+          <em
+            >A Graph data structure consists of a finite (and possibly mutable)
+            set of vertices or nodes or points, together with a set of unordered
+            pairs of these vertices for an undirected Graph or a set of ordered
+            pairs for a directed Graph. These pairs are known as edges, arcs, or
+            lines for an undirected Graph and as arrows, directed edges,
+            directed arcs, or directed lines for a directed Graph. The vertices
+            may be part of the Graph structure, or may be external entities
+            represented by integer indices or references. From Wikipedia</em
+          >
+        </p>
+      </blockquote>
+      <p>
+        A Graph data structure may also associate to each edge some edge value,
+        such as a symbolic label or a numeric attribute (cost, capacity, length,
+        etc.).
+      </p>
+      <p>
+        Representation<br />
+        There are different ways of representing a graph, each of them with its
+        own advantages and disadvantages. Here are the main 2:
+      </p>
+      <p>
+        Adjacency list: For every vertex a list of adjacent vertices is stored.
+        This can be viewed as storing the list of edges. This data structure
+        allows the storage of additional data on the vertices and edges.<br />
+        Adjacency matrix: Data are stored in a two-dimensional matrix, in which
+        the rows represent source vertices and columns represent destination
+        vertices. The data on the edges and vertices must be stored
+        externally.<br />
+        Complexity<br />
+        Adjacency list<br />
+        Storage Add Vertex Add Edge Query<br />
+        O( V + E<br />
+        Adjacency matrix<br />
+        Storage Add Vertex Add Edge Query<br />
+        O( V ^2) O(
+      </p>
+      <p>Graph</p>
+      <blockquote>
+        <p><em>The code</em></p>
+      </blockquote>
+      <pre class="language-text">
+//below uses the adjacency list representation.
+
+    function Graph() {
+      this.vertices = [];
+      this.edges = [];
+      this.numberOfEdges = 0;
+    }
+    
+    Graph.prototype.addVertex = function(vertex) {
+      this.vertices.push(vertex);
+      this.edges[vertex] = [];
+    };
+    Graph.prototype.removeVertex = function(vertex) {
+      let index = this.vertices.indexOf(vertex);
+      if(~index) {
+        this.vertices.splice(index, 1);
+      }
+      while(this.edges[vertex].length) {
+        let adjacentVertex = this.edges[vertex].pop();
+        this.removeEdge(adjacentVertex, vertex);
+      }
+    };
+    Graph.prototype.addEdge = function(vertex1, vertex2) {
+      this.edges[vertex1].push(vertex2);
+      this.edges[vertex2].push(vertex1);
+      this.numberOfEdges++;
+    };
+    Graph.prototype.removeEdge = function(vertex1, vertex2) {
+      let index1 = this.edges[vertex1] ? this.edges[vertex1].indexOf(vertex2) : -1;
+      let index2 = this.edges[vertex2] ? this.edges[vertex2].indexOf(vertex1) : -1;
+      if(~index1) {
+        this.edges[vertex1].splice(index1, 1);
+        this.numberOfEdges--;
+      }
+      if(~index2) {
+        this.edges[vertex2].splice(index2, 1);
+      }
+    };
+    Graph.prototype.size = function() {
+      return this.vertices.length;
+    };
+    Graph.prototype.relations = function() {
+      return this.numberOfEdges;
+    };
+    Graph.prototype.traverseDFS = function(vertex, fn) {
+      if(!~this.vertices.indexOf(vertex)) {
+        return console.log(&apos;Vertex not found&apos;);
+      }
+      let visited = [];
+      this._traverseDFS(vertex, visited, fn);
+    };
+    Graph.prototype._traverseDFS = function(vertex, visited, fn) {
+      visited[vertex] = true;
+      if(this.edges[vertex] !== undefined) {
+        fn(vertex);
+      }
+      for(let i = 0; i &lt; this.edges[vertex].length; i++) {
+        if(!visited[this.edges[vertex][i]]) {
+          this._traverseDFS(this.edges[vertex][i], visited, fn);
+        }
+      }
+    };
+    Graph.prototype.traverseBFS = function(vertex, fn) {
+      if(!~this.vertices.indexOf(vertex)) {
+        return console.log(&apos;Vertex not found&apos;);
+      }
+      let queue = [];
+      queue.push(vertex);
+      let visited = [];
+      visited[vertex] = true;
+    
+      while(queue.length) {
+        vertex = queue.shift();
+        fn(vertex);
+        for(let i = 0; i &lt; this.edges[vertex].length; i++) {
+          if(!visited[this.edges[vertex][i]]) {
+            visited[this.edges[vertex][i]] = true;
+            queue.push(this.edges[vertex][i]);
+          }
+        }
+      }
+    };
+    Graph.prototype.pathFromTo = function(vertexSource, vertexDestination) {
+      if(!~this.vertices.indexOf(vertexSource)) {
+        return console.log(&apos;Vertex not found&apos;);
+      }
+      let queue = [];
+      queue.push(vertexSource);
+      let visited = [];
+      visited[vertexSource] = true;
+      let paths = [];
+    
+      while(queue.length) {
+        let vertex = queue.shift();
+        for(let i = 0; i &lt; this.edges[vertex].length; i++) {
+          if(!visited[this.edges[vertex][i]]) {
+            visited[this.edges[vertex][i]] = true;
+            queue.push(this.edges[vertex][i]);
+            // save paths between vertices
+            paths[this.edges[vertex][i]] = vertex;
+          }
+        }
+      }
+      if(!visited[vertexDestination]) {
+        return undefined;
+      }
+    
+      let path = [];
+      for(let j = vertexDestination; j != vertexSource; j = paths[j]) {
+        path.push(j);
+      }
+      path.push(j);
+      return path.reverse().join(&apos;-&apos;);
+    };
+    Graph.prototype.print = function() {
+      console.log(this.vertices.map(function(vertex) {
+        return (vertex + &apos; -&gt; &apos; + this.edges[vertex].join(&apos;, &apos;)).trim();
+      }, this).join(&apos; | &apos;));
+    };
+    ```
+    let graph = new Graph();
+    graph.addVertex(1);
+    graph.addVertex(2);
+    graph.addVertex(3);
+    graph.addVertex(4);
+    graph.addVertex(5);
+    graph.addVertex(6);
+    graph.print(); // 1 -&gt; | 2 -&gt; | 3 -&gt; | 4 -&gt; | 5 -&gt; | 6 -&gt;
+    graph.addEdge(1, 2);
+    graph.addEdge(1, 5);
+    graph.addEdge(2, 3);
+    graph.addEdge(2, 5);
+    graph.addEdge(3, 4);
+    graph.addEdge(4, 5);
+    graph.addEdge(4, 6);
+    graph.print(); // 1 -&gt; 2, 5 | 2 -&gt; 1, 3, 5 | 3 -&gt; 2, 4 | 4 -&gt; 3, 5, 6 | 5 -&gt; 1, 2, 4 | 6 -&gt; 4
+    console.log(&apos;graph size (number of vertices):&apos;, graph.size()); // =&gt; 6
+    console.log(&apos;graph relations (number of edges):&apos;, graph.relations()); // =&gt; 7
+    graph.traverseDFS(1, function(vertex) { console.log(vertex); }); // =&gt; 1 2 3 4 5 6
+    console.log(&apos;---&apos;);
+    graph.traverseBFS(1, function(vertex) { console.log(vertex); }); // =&gt; 1 2 5 3 4 6
+    graph.traverseDFS(0, function(vertex) { console.log(vertex); }); // =&gt; &apos;Vertex not found&apos;
+    graph.traverseBFS(0, function(vertex) { console.log(vertex); }); // =&gt; &apos;Vertex not found&apos;
+    console.log(&apos;path from 6 to 1:&apos;, graph.pathFromTo(6, 1)); // =&gt; 6-4-5-1
+    console.log(&apos;path from 3 to 5:&apos;, graph.pathFromTo(3, 5)); // =&gt; 3-2-5
+    graph.removeEdge(1, 2);
+    graph.removeEdge(4, 5);
+    graph.removeEdge(10, 11);
+    console.log(&apos;graph relations (number of edges):&apos;, graph.relations()); // =&gt; 5
+    console.log(&apos;path from 6 to 1:&apos;, graph.pathFromTo(6, 1)); // =&gt; 6-4-3-2-5-1
+    graph.addEdge(1, 2);
+    graph.addEdge(4, 5);
+    console.log(&apos;graph relations (number of edges):&apos;, graph.relations()); // =&gt; 7
+    console.log(&apos;path from 6 to 1:&apos;, graph.pathFromTo(6, 1)); // =&gt; 6-4-5-1
+    graph.removeVertex(5);
+    console.log(&apos;graph size (number of vertices):&apos;, graph.size()); // =&gt; 5
+    console.log(&apos;graph relations (number of edges):&apos;, graph.relations()); // =&gt; 4
+    console.log(&apos;path from 6 to 1:&apos;, graph.pathFromTo(6, 1)); // =&gt; 6-4-3-2-1
+</pre
+      >
+      <p>
+        &#x2261;If you found this guide helpful feel free to checkout my
+        github/gists where I host similar content:
+      </p>
+      <p>
+        <a href="https://gist.github.com/bgoonz"
+          >bgoonz&apos;s gists &#xB7; GitHub</a
+        ><br />
+        <a href="https://github.com/bgoonz"
+          ><strong>bgoonz &#x2014; Overview</strong><br />
+          *Web Developer, Electrical Engineer JavaScript | CSS | Bootstrap |
+          Python | React | Node.js | Express | Sequelize&#x2026;*github.com</a
+        >
+      </p>
+      <p>
+        Or Checkout my personal Resource Site:<br />
+        <a href="https://goofy-euclid-1cd736.netlify.app/"
+          ><strong>a/A-Student-Resources</strong><br />
+          <em>Edit description</em>goofy-euclid-1cd736.netlify.app</a
+        >
+      </p>
+    </div>
+    <div class="md-sidebar-toc">
+      <ul>
+        <li>
+          <a href="#fundamental-data-structures-in-javascript"
+            >Fundamental Data Structures In JavaScript</a
+          >
+          <ul>
+            <li>
+              <a href="#data-structures-in-javascript"
+                >Data structures in JavaScript</a
+              >
+            </li>
+            <li>
+              <a href="#resources-article-content-below"
+                >Resources (article content below):</a
+              >
+              <ul>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#books">Books</a></li>
+                <li><a href="#coding-practice">Coding practice</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#guides">Guides</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#space"
+                ><em><strong>space</strong></em></a
+              >
+            </li>
+            <li>
+              <a href="#time"><em>time</em></a>
+            </li>
+            <li>
+              <a href="#several-operations"><em>Several operations</em></a>
+            </li>
+            <li>
+              <a href="#dependent-on-data"><em>Dependent on data</em></a>
+            </li>
+            <li><a href="#big-o-notation">Big O notation</a></li>
+            <li>
+              <a href="#the-array-data-structure">The Array data structure</a>
+            </li>
+            <li><a href="#definition">Definition</a></li>
+            <li><a href="#2-objects">2. Objects</a></li>
+            <li><a href="#the-hash-table">The Hash Table</a></li>
+            <li>
+              <a href="#definition-1"><em>Definition</em></a>
+            </li>
+            <li><a href="#the-set">The Set</a></li>
+            <li><a href="#sets">Sets</a></li>
+            <li>
+              <a href="#definition-2"><em>Definition</em></a>
+            </li>
+            <li>
+              <a href="#the-singly-linked-list">The Singly Linked List</a>
+            </li>
+            <li>
+              <a href="#definition-3"><em>Definition</em></a>
+            </li>
+            <li>
+              <a href="#the-doubly-linked-list">The Doubly Linked List</a>
+            </li>
+            <li>
+              <a href="#definition-4"><em>Definition</em></a>
+            </li>
+            <li><a href="#the-stack">The Stack</a></li>
+            <li>
+              <a href="#definition-5"><em>Definition</em></a>
+            </li>
+            <li><a href="#the-queue">The Queue</a></li>
+            <li>
+              <a href="#definition-6"><em>Definition</em></a>
+            </li>
+            <li><a href="#the-tree">The Tree</a></li>
+            <li>
+              <a href="#definition-7"><em>Definition</em></a>
+            </li>
+            <li><a href="#the-graph">The Graph</a></li>
+            <li>
+              <a href="#definition-8"><em>Definition</em></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <a id="sidebar-toc-btn">&#x2261;</a>
+
+    <script>
+      var sidebarTOCBtn = document.getElementById("sidebar-toc-btn");
+      sidebarTOCBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
+        if (document.body.hasAttribute("html-show-sidebar-toc")) {
+          document.body.removeAttribute("html-show-sidebar-toc");
+        } else {
+          document.body.setAttribute("html-show-sidebar-toc", true);
+        }
+      });
+    </script>
+  </body>
+</html>

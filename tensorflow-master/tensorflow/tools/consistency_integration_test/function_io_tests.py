@@ -20,14 +20,16 @@ from absl.testing import parameterized
 import tensorflow as tf
 
 from tensorflow.python.platform import test
-from tensorflow.tools.consistency_integration_test.consistency_test_base import ConsistencyTestBase
+from tensorflow.tools.consistency_integration_test.consistency_test_base import (
+    ConsistencyTestBase,
+)
 
 
 class TfFunctionIOConsistencyTests(ConsistencyTestBase, parameterized.TestCase):
-  """Test cases for known issues or bugs related to tf.function I/O."""
+    """Test cases for known issues or bugs related to tf.function I/O."""
 
-  def testDynamicIndirectVariableCreation(self):
-    """Tests tf.function that tries to re-create `tf.Variable`s.
+    def testDynamicIndirectVariableCreation(self):
+        """Tests tf.function that tries to re-create `tf.Variable`s.
 
     Bugs:   b/147231209
     Status: Known issue
@@ -121,32 +123,33 @@ class TfFunctionIOConsistencyTests(ConsistencyTestBase, parameterized.TestCase):
     * go/tf-mutable-refs is a work-in-progress, longer term project designed to
       address this issue.
     """
-    self.skipTest('b/147231209')
+        self.skipTest("b/147231209")
 
-    class Foo:
-      """Foo class for demonstrating the issue."""
+        class Foo:
+            """Foo class for demonstrating the issue."""
 
-      def __init__(self):
-        self._flag_keyed_vars = {}
+            def __init__(self):
+                self._flag_keyed_vars = {}
 
-      def __call__(self, var_creation_flag):
-        self.compute(var_creation_flag)
+            def __call__(self, var_creation_flag):
+                self.compute(var_creation_flag)
 
-      @tf.function
-      def compute(self, var_creation_flag):
-        if var_creation_flag not in self._flag_keyed_vars:
-          self._flag_keyed_vars[var_creation_flag] = tf.Variable(1.0)
+            @tf.function
+            def compute(self, var_creation_flag):
+                if var_creation_flag not in self._flag_keyed_vars:
+                    self._flag_keyed_vars[var_creation_flag] = tf.Variable(1.0)
 
-    foo = Foo()
-    foo(True)  # traced twice, with variable lifting
-    foo(True)  # not traced, reuses variables from first trace
-    foo(False)  # re-traced twice, variable lifting raises error; but we don't
-                # need to raise, we can just lift like in the first trace.
+        foo = Foo()
+        foo(True)  # traced twice, with variable lifting
+        foo(True)  # not traced, reuses variables from first trace
+        foo(False)  # re-traced twice, variable lifting raises error; but we don't
+        # need to raise, we can just lift like in the first trace.
 
-  @parameterized.named_parameters([('_RunFunctionEagerly', True),
-                                   ('_RunFunctionNonEagerly', False)])
-  def testVariableCreationCustomModule(self, run_eagerly):
-    """Tests tf.function variable creation with custom objects (`tf.Module`).
+    @parameterized.named_parameters(
+        [("_RunFunctionEagerly", True), ("_RunFunctionNonEagerly", False)]
+    )
+    def testVariableCreationCustomModule(self, run_eagerly):
+        """Tests tf.function variable creation with custom objects (`tf.Module`).
 
     Bugs:   b/184210116
     Status: Working as intended
@@ -176,42 +179,43 @@ class TfFunctionIOConsistencyTests(ConsistencyTestBase, parameterized.TestCase):
       run_eagerly: Boolean deciding whether to run tf.function decorated
         functions eagerly or not.
     """
-    self.skipTest('b/184210116')
+        self.skipTest("b/184210116")
 
-    try:
-      original_setting = tf.config.functions_run_eagerly()
-      tf.config.run_functions_eagerly(run_eagerly)
+        try:
+            original_setting = tf.config.functions_run_eagerly()
+            tf.config.run_functions_eagerly(run_eagerly)
 
-      class Dense(tf.Module):
-        """Custom Dense class for demonstration."""
+            class Dense(tf.Module):
+                """Custom Dense class for demonstration."""
 
-        def __init__(self, in_features, out_features):
-          super().__init__()
-          self.w = tf.Variable(tf.random.normal([in_features, out_features]))
-          self.b = tf.Variable(tf.zeros([out_features]))
+                def __init__(self, in_features, out_features):
+                    super().__init__()
+                    self.w = tf.Variable(tf.random.normal([in_features, out_features]))
+                    self.b = tf.Variable(tf.zeros([out_features]))
 
-        def __call__(self, x):
-          y = tf.matmul(x, self.w) + self.b
-          return tf.nn.relu(y)
+                def __call__(self, x):
+                    y = tf.matmul(x, self.w) + self.b
+                    return tf.nn.relu(y)
 
-      @tf.function
-      def f(x):
-        layer = Dense(3, 3)(x)
-        return layer
+            @tf.function
+            def f(x):
+                layer = Dense(3, 3)(x)
+                return layer
 
-      in_val = tf.constant([[1., 2., 3]])
+            in_val = tf.constant([[1.0, 2.0, 3]])
 
-      if run_eagerly:
-        self.assertAllEqual(
-            tf.constant([[0., 2.037801, 0.]], dtype=tf.float32), f(in_val))
-      else:
-        f(in_val)
+            if run_eagerly:
+                self.assertAllEqual(
+                    tf.constant([[0.0, 2.037801, 0.0]], dtype=tf.float32), f(in_val)
+                )
+            else:
+                f(in_val)
 
-    finally:
-      tf.config.run_functions_eagerly(original_setting)
+        finally:
+            tf.config.run_functions_eagerly(original_setting)
 
-  def testRetraceOnObjectPropertyChange(self):
-    """Tests retracing behavior of tf.function when object property has changed.
+    def testRetraceOnObjectPropertyChange(self):
+        """Tests retracing behavior of tf.function when object property has changed.
 
     Bugs:   b/162221622
     Status: Broken
@@ -225,46 +229,46 @@ class TfFunctionIOConsistencyTests(ConsistencyTestBase, parameterized.TestCase):
       the correct conditional branch didn't get traced initially and because
       retracing doesn't take place.
     """
-    self.skipTest('b/162221622')
-    trace = []
+        self.skipTest("b/162221622")
+        trace = []
 
-    class Foo:
-      """Foo class for demonstration."""
+        class Foo:
+            """Foo class for demonstration."""
 
-      def __init__(self):
-        self.condition = True
-        self.n = 1.0
+            def __init__(self):
+                self.condition = True
+                self.n = 1.0
 
-      @tf.function
-      def f(self, x):
-        """Function `f` for demonstration."""
-        nonlocal trace
-        trace.append('#tracing')
+            @tf.function
+            def f(self, x):
+                """Function `f` for demonstration."""
+                nonlocal trace
+                trace.append("#tracing")
 
-        if not self.condition:
-          trace.append('#retracing')
-          self.n = x
+                if not self.condition:
+                    trace.append("#retracing")
+                    self.n = x
 
-        return self.n
+                return self.n
 
-    foo = Foo()
-    a = 2.0
+        foo = Foo()
+        a = 2.0
 
-    out0 = foo.f(a)
-    self.assertEqual(out0, tf.constant(1.))
-    self.assertEqual(trace, ['#tracing'])
+        out0 = foo.f(a)
+        self.assertEqual(out0, tf.constant(1.0))
+        self.assertEqual(trace, ["#tracing"])
 
-    trace = []
-    foo.condition = False
+        trace = []
+        foo.condition = False
 
-    out1 = foo.f(a)
-    # `out1` is 1.0 and `trace` is `[]` because tf.function did not retrace
-    # despite that `foo`'s property has changed.
-    self.assertEqual(out1, tf.constant(2.))
-    self.assertEqual(trace, ['#tracing', '#retracing'])
+        out1 = foo.f(a)
+        # `out1` is 1.0 and `trace` is `[]` because tf.function did not retrace
+        # despite that `foo`'s property has changed.
+        self.assertEqual(out1, tf.constant(2.0))
+        self.assertEqual(trace, ["#tracing", "#retracing"])
 
-  def testRetraceOnObjectPropertyChangeOneWorkaround(self):
-    """Tests a possible workaround for handling changes in object property.
+    def testRetraceOnObjectPropertyChangeOneWorkaround(self):
+        """Tests a possible workaround for handling changes in object property.
 
     Bugs:   b/162221622
     Status: Broken
@@ -280,48 +284,48 @@ class TfFunctionIOConsistencyTests(ConsistencyTestBase, parameterized.TestCase):
       `testRetraceOnObjectPropertyChange` test case. We are explicitly
       passing in the conditional variable in order to trigger retracing.
     """
-    trace = []
+        trace = []
 
-    class Foo:
-      """Foo class for demonstration."""
+        class Foo:
+            """Foo class for demonstration."""
 
-      def __init__(self):
-        self.condition = True
-        self.n = 1.0
-        self.var = None
+            def __init__(self):
+                self.condition = True
+                self.n = 1.0
+                self.var = None
 
-      @tf.function
-      def f(self, x, condition):
-        """Function `f` for demonstration."""
-        nonlocal trace
-        trace.append('#tracing')
+            @tf.function
+            def f(self, x, condition):
+                """Function `f` for demonstration."""
+                nonlocal trace
+                trace.append("#tracing")
 
-        self.condition = condition
+                self.condition = condition
 
-        if self.var is None:
-          self.var = tf.Variable(x)
+                if self.var is None:
+                    self.var = tf.Variable(x)
 
-        if not self.condition:
-          trace.append('#retracing')
-          self.n = 5.0
+                if not self.condition:
+                    trace.append("#retracing")
+                    self.n = 5.0
 
-        return self.var.assign_add(self.n)
+                return self.var.assign_add(self.n)
 
-    foo = Foo()
-    a = 2.0
+        foo = Foo()
+        a = 2.0
 
-    out0 = foo.f(a, True)
-    self.assertEqual(out0, tf.constant(3.))
-    self.assertEqual(trace, ['#tracing', '#tracing'])
+        out0 = foo.f(a, True)
+        self.assertEqual(out0, tf.constant(3.0))
+        self.assertEqual(trace, ["#tracing", "#tracing"])
 
-    trace = []
+        trace = []
 
-    out1 = foo.f(a, False)
-    self.assertEqual(out1, tf.constant(8.))
-    self.assertEqual(trace, ['#tracing', '#retracing'])
+        out1 = foo.f(a, False)
+        self.assertEqual(out1, tf.constant(8.0))
+        self.assertEqual(trace, ["#tracing", "#retracing"])
 
-  def testDataResourcesIO(self):
-    """Tests returning iterators from tf.function.
+    def testDataResourcesIO(self):
+        """Tests returning iterators from tf.function.
 
     Bugs:   b/170436338, b/170497789 (feature request)
     Status: Broken
@@ -374,24 +378,24 @@ class TfFunctionIOConsistencyTests(ConsistencyTestBase, parameterized.TestCase):
         model.train()
         ```
     """
-    self.skipTest('b/170436338')
+        self.skipTest("b/170436338")
 
-    class Model(tf.Module):
-      """Model class for demonstrating the issue."""
+        class Model(tf.Module):
+            """Model class for demonstrating the issue."""
 
-      @tf.function
-      def f(self):
-        dataset = iter(tf.data.Dataset.from_tensors([0.0]).repeat())
-        iterator = iter(dataset)
-        return iterator
+            @tf.function
+            def f(self):
+                dataset = iter(tf.data.Dataset.from_tensors([0.0]).repeat())
+                iterator = iter(dataset)
+                return iterator
 
-    m = Model()
-    it0 = m.f()
-    it1 = iter(tf.data.Dataset.from_tensors([0.0]).repeat())
-    self.assertEqual(type(it0), type(it1))
+        m = Model()
+        it0 = m.f()
+        it1 = iter(tf.data.Dataset.from_tensors([0.0]).repeat())
+        self.assertEqual(type(it0), type(it1))
 
-  def testCachedTensor(self):
-    """Tests tf.function behavior with cached tensors (side I/O).
+    def testCachedTensor(self):
+        """Tests tf.function behavior with cached tensors (side I/O).
 
     Bugs:   b/149094965
     Status: Working as intended
@@ -411,32 +415,31 @@ class TfFunctionIOConsistencyTests(ConsistencyTestBase, parameterized.TestCase):
     * Error message mentions about "Graph" tensor being passed in. Is this the
       most informative message? Left a TODO.
     """
-    self.skipTest('b/149094965')
+        self.skipTest("b/149094965")
 
-    class Context(object):
-      """Context class for demonstrating the issue."""
+        class Context(object):
+            """Context class for demonstrating the issue."""
 
-      def __init__(self):
-        self._cached_value = None
+            def __init__(self):
+                self._cached_value = None
 
-      def f(self, x):
-        result = x + 1
-        if self._cached_value is not None:
-          result += self._cached_value
+            def f(self, x):
+                result = x + 1
+                if self._cached_value is not None:
+                    result += self._cached_value
 
-        self._cached_value = x
-        return result
+                self._cached_value = x
+                return result
 
-    @tf.function
-    def some_func(ctx, x):
-      return ctx.f(x + 1)
+        @tf.function
+        def some_func(ctx, x):
+            return ctx.f(x + 1)
 
-    ctx = Context()
-    some_func(ctx, tf.constant(1))
-    some_func(ctx, tf.constant(2))
-    self.assertAllEqual(
-        some_func(ctx, tf.constant([1, 2])), tf.constant([6, 7]))
+        ctx = Context()
+        some_func(ctx, tf.constant(1))
+        some_func(ctx, tf.constant(2))
+        self.assertAllEqual(some_func(ctx, tf.constant([1, 2])), tf.constant([6, 7]))
 
 
-if __name__ == '__main__':
-  test.main()
+if __name__ == "__main__":
+    test.main()

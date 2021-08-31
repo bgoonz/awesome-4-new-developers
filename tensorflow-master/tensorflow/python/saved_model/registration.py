@@ -24,24 +24,24 @@ _REGISTERED_NAMES = []
 
 
 def get_registered_name(obj):
-  for name in reversed(_REGISTERED_NAMES):
-    predicate, cls = _CLASS_REGISTRY[name]
-    if not predicate and type(obj) == cls:  # pylint: disable=unidiomatic-typecheck
-      return name
-    if predicate and predicate(obj):
-      return name
-  return None
-
-
-def get_registered_class(registered_name):
-  try:
-    return _CLASS_REGISTRY[registered_name][1]
-  except KeyError:
+    for name in reversed(_REGISTERED_NAMES):
+        predicate, cls = _CLASS_REGISTRY[name]
+        if not predicate and type(obj) == cls:  # pylint: disable=unidiomatic-typecheck
+            return name
+        if predicate and predicate(obj):
+            return name
     return None
 
 
+def get_registered_class(registered_name):
+    try:
+        return _CLASS_REGISTRY[registered_name][1]
+    except KeyError:
+        return None
+
+
 def register_serializable(package="Custom", name=None, predicate=None):
-  """Decorator for registering a serializable class.
+    """Decorator for registering a serializable class.
 
   THIS METHOD IS STILL EXPERIMENTAL AND MAY CHANGE AT ANY TIME.
 
@@ -79,26 +79,29 @@ def register_serializable(package="Custom", name=None, predicate=None):
   Raises:
     ValueError if predicate is not callable.
   """
-  if predicate is not None and not callable(predicate):
-    raise ValueError("The `predicate` passed to registered_serializable "
-                     "must be callable.")
+    if predicate is not None and not callable(predicate):
+        raise ValueError(
+            "The `predicate` passed to registered_serializable " "must be callable."
+        )
 
-  def decorator(arg):
-    """Registers a class with the serialization framework."""
-    if not tf_inspect.isclass(arg):
-      raise ValueError(
-          "Registered serializable must be a class: {}".format(arg))
+    def decorator(arg):
+        """Registers a class with the serialization framework."""
+        if not tf_inspect.isclass(arg):
+            raise ValueError("Registered serializable must be a class: {}".format(arg))
 
-    class_name = name if name is not None else arg.__name__
-    registered_name = package + "." + class_name
+        class_name = name if name is not None else arg.__name__
+        registered_name = package + "." + class_name
 
-    if registered_name in _CLASS_REGISTRY:
-      raise ValueError("{} has already been registered to {}".format(
-          registered_name, _CLASS_REGISTRY[registered_name]))
+        if registered_name in _CLASS_REGISTRY:
+            raise ValueError(
+                "{} has already been registered to {}".format(
+                    registered_name, _CLASS_REGISTRY[registered_name]
+                )
+            )
 
-    _CLASS_REGISTRY[registered_name] = (predicate, arg)
-    _REGISTERED_NAMES.append(registered_name)
+        _CLASS_REGISTRY[registered_name] = (predicate, arg)
+        _REGISTERED_NAMES.append(registered_name)
 
-    return arg
+        return arg
 
-  return decorator
+    return decorator

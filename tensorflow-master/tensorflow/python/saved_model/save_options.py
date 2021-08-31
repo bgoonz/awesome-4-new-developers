@@ -27,7 +27,7 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export("saved_model.experimental.VariablePolicy")
 class VariablePolicy(enum.Enum):
-  """Enum defining options for variable handling when saving.
+    """Enum defining options for variable handling when saving.
 
   NONE
     No policy applied: Distributed variables are saved as one variable, with no
@@ -63,55 +63,62 @@ class VariablePolicy(enum.Enum):
     is not available.
   """
 
-  NONE = None
+    NONE = None
 
-  SAVE_VARIABLE_DEVICES = "save_variable_devices"
+    SAVE_VARIABLE_DEVICES = "save_variable_devices"
 
-  EXPAND_DISTRIBUTED_VARIABLES = "expand_distributed_variables"
+    EXPAND_DISTRIBUTED_VARIABLES = "expand_distributed_variables"
 
-  def _save_variable_devices(self):
-    """Checks whether variable devices should be saved."""
-    return self != VariablePolicy.NONE
+    def _save_variable_devices(self):
+        """Checks whether variable devices should be saved."""
+        return self != VariablePolicy.NONE
 
-  def _expand_distributed_variables(self):
-    """Checks whether distributed variables should be expanded."""
-    return self == VariablePolicy.EXPAND_DISTRIBUTED_VARIABLES
+    def _expand_distributed_variables(self):
+        """Checks whether distributed variables should be expanded."""
+        return self == VariablePolicy.EXPAND_DISTRIBUTED_VARIABLES
 
-  @staticmethod
-  def from_obj(obj):
-    """Tries to convert `obj` to a VariablePolicy instance."""
-    if obj is None:
-      return VariablePolicy.NONE
-    if isinstance(obj, VariablePolicy):
-      return obj
-    key = str(obj).lower()
-    for policy in VariablePolicy:
-      if key == policy.value:
-        return policy
-    raise ValueError(f"Received invalid VariablePolicy value: {obj}.")
+    @staticmethod
+    def from_obj(obj):
+        """Tries to convert `obj` to a VariablePolicy instance."""
+        if obj is None:
+            return VariablePolicy.NONE
+        if isinstance(obj, VariablePolicy):
+            return obj
+        key = str(obj).lower()
+        for policy in VariablePolicy:
+            if key == policy.value:
+                return policy
+        raise ValueError(f"Received invalid VariablePolicy value: {obj}.")
 
 
 @tf_export("saved_model.SaveOptions")
 class SaveOptions(object):
-  """Options for saving to SavedModel.
+    """Options for saving to SavedModel.
 
   This function may be used in the `options` argument in functions that
   save a SavedModel (`tf.saved_model.save`, `tf.keras.models.save_model`).
   """
 
-  # Define object attributes in __slots__ for improved memory and performance.
-  __slots__ = ("namespace_whitelist", "save_debug_info", "function_aliases",
-               "experimental_io_device", "experimental_variable_policy",
-               "experimental_custom_gradients")
+    # Define object attributes in __slots__ for improved memory and performance.
+    __slots__ = (
+        "namespace_whitelist",
+        "save_debug_info",
+        "function_aliases",
+        "experimental_io_device",
+        "experimental_variable_policy",
+        "experimental_custom_gradients",
+    )
 
-  def __init__(self,
-               namespace_whitelist=None,
-               save_debug_info=False,
-               function_aliases=None,
-               experimental_io_device=None,
-               experimental_variable_policy=None,
-               experimental_custom_gradients=True):
-    """Creates an object that stores options for SavedModel saving.
+    def __init__(
+        self,
+        namespace_whitelist=None,
+        save_debug_info=False,
+        function_aliases=None,
+        experimental_io_device=None,
+        experimental_variable_policy=None,
+        experimental_custom_gradients=True,
+    ):
+        """Creates an object that stores options for SavedModel saving.
 
     Args:
       namespace_whitelist: List of strings containing op namespaces to whitelist
@@ -163,29 +170,33 @@ class SaveOptions(object):
         gradient functions for the functions decorated by `tf.custom_gradient`.
         Defaults to `True`.
     """
-    self.namespace_whitelist = _validate_namespace_whitelist(
-        namespace_whitelist)
-    self.save_debug_info = save_debug_info
-    self.function_aliases = function_aliases if function_aliases else dict()
-    self.experimental_custom_gradients = experimental_custom_gradients
-    self.experimental_io_device = experimental_io_device
-    self.experimental_variable_policy = (
-        VariablePolicy.from_obj(experimental_variable_policy))
+        self.namespace_whitelist = _validate_namespace_whitelist(namespace_whitelist)
+        self.save_debug_info = save_debug_info
+        self.function_aliases = function_aliases if function_aliases else dict()
+        self.experimental_custom_gradients = experimental_custom_gradients
+        self.experimental_io_device = experimental_io_device
+        self.experimental_variable_policy = VariablePolicy.from_obj(
+            experimental_variable_policy
+        )
 
 
 def _validate_namespace_whitelist(namespace_whitelist):
-  """Validates namespace whitelist argument."""
-  if namespace_whitelist is None:
-    return None
-  if not isinstance(namespace_whitelist, list):
-    raise TypeError("`namespace_whitelist` must be a list of strings. Got: "
-                    f"{namespace_whitelist} with type "
-                    f"{type(namespace_whitelist)}.")
+    """Validates namespace whitelist argument."""
+    if namespace_whitelist is None:
+        return None
+    if not isinstance(namespace_whitelist, list):
+        raise TypeError(
+            "`namespace_whitelist` must be a list of strings. Got: "
+            f"{namespace_whitelist} with type "
+            f"{type(namespace_whitelist)}."
+        )
 
-  processed = []
-  for namespace in namespace_whitelist:
-    if not isinstance(namespace, six.string_types):
-      raise ValueError("Whitelisted namespace must be a string. Got: "
-                       f"{namespace} of type {type(namespace)}.")
-    processed.append(compat.as_str(namespace))
-  return processed
+    processed = []
+    for namespace in namespace_whitelist:
+        if not isinstance(namespace, six.string_types):
+            raise ValueError(
+                "Whitelisted namespace must be a string. Got: "
+                f"{namespace} of type {type(namespace)}."
+            )
+        processed.append(compat.as_str(namespace))
+    return processed

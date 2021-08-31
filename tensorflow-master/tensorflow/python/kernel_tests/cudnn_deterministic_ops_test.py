@@ -24,7 +24,7 @@ from tensorflow.python.platform import test
 
 ConvolutionTest = cudnn_deterministic_base.ConvolutionTest
 
-if __name__ == '__main__':
-  # TODO(reedwm): Merge this file with cudnn_deterministic_base.py.
-  config.enable_deterministic_ops(True)
-  test.main()
+if __name__ == "__main__":
+    # TODO(reedwm): Merge this file with cudnn_deterministic_base.py.
+    config.enable_deterministic_ops(True)
+    test.main()

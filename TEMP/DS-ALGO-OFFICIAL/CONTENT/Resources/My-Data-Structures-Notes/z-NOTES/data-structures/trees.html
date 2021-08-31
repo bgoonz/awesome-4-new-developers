@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./prism.css" />
+    <script async defer src="./prism.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body>
+    <a
+      href="https://github.com/bgoonz/DS-ALGO-OFFICIAL"
+      class="github-corner"
+      aria-label="View source on Github"
+      ><svg
+        width="80"
+        height="80"
+        viewBox="0 0 250 250"
+        style="
+          z-index: 100000;
+          fill: #194ccdaf;
+          color: #fff;
+          position: fixed;
+          top: 20px;
+          border: 0;
+          left: 20px;
+          transform: scale(-1.5, 1.5);
+        "
+        aria-hidden="true"
+      >
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+          fill="currentColor"
+          style="transform-origin: 130px 106px"
+          class="octo-arm"
+        ></path>
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+          fill="currentColor"
+          class="octo-body"
+        ></path></svg
+    ></a>
+
+    ;
+    <h1 id="trees">Trees</h1>
+    <h3 id="projected-time">Projected Time</h3>
+    <p>about 2 hours</p>
+    <ul>
+      <li>Lesson Materials - 30-50 minutes</li>
+      <li>Independent Practice - 60-90 minutes</li>
+    </ul>
+    <h3 id="prerequisites">Prerequisites</h3>
+    <ul>
+      <li>
+        <a href="/data-structures/intro-to-data-structures.md"
+          >Intro to Data Structures</a
+        >
+      </li>
+      <li>
+        <a href="/javascript/javascript-1-variables.md"
+          >JavaScript 1 - Variables, Strings, Numbers</a
+        >
+      </li>
+      <li>
+        <a href="/javascript/javascript-2-arrays-functions.md"
+          >JavaScript 2 - Arrays, Functions</a
+        >
+      </li>
+      <li>
+        <a href="/javascript/javascript-3-conditionals.md"
+          >JavaScript 3 - Conditionals, Comparisons, Booleans</a
+        >
+      </li>
+      <li>
+        <a href="/javascript/javascript-4-loops.md">JavaScript 4 - Loops</a>
+      </li>
+      <li>
+        <a href="/javascript/javascript-5-switch.md"
+          >JavaScript 5 - Switch Statements</a
+        >
+      </li>
+      <li>
+        <a href="/javascript/javascript-6-object-literals.md"
+          >JavaScript 6 - Object Literals</a
+        >
+      </li>
+      <li>
+        <a href="/javascript/javascript-7-oop.md"
+          >JavaScript 7 - Object-Oriented Programming</a
+        >
+      </li>
+      <li>
+        <a href="/runtime-complexity/runtime-complexity.md"
+          >Runtime Complexity</a
+        >
+      </li>
+    </ul>
+    <h3 id="motivation">Motivation</h3>
+    <ul>
+      <li>
+        <p>
+          Trees are the type of data structure that will allow you to store and
+          process objects and tasks dealing with numbers, strings and everything
+          in between. The motivation here is to understand that a tree is a type
+          of data structure that represents data in a top down arrangement,
+          similar to a hierarchy.
+        </p>
+      </li>
+      <li>
+        <p>
+          https://google.com uses a type of tree called a ‘trie’ to
+          auto-complete what you are typing into the search bar. By seeing the
+          first few letters you’ve typed, it can check it’s record tree of
+          possible letters that can come after. So if you type “how do I”, their
+          record tree for “how do I” has child nodes each contain a possible
+          following set of characters, like “learn to draw” or “tie a tie” or
+          “build a shelf”. The same can be said for auto-complete in many
+          texting apps.
+        </p>
+      </li>
+      <li>
+        <p>
+          When records are kept in order in a binary search tree (or BST),
+          everything on one side of any branch is a lower value, and everything
+          on the other side is a higher value, so finding something again is
+          extremely efficient.
+        </p>
+      </li>
+      <li>
+        <p>
+          Companies that care about spacial positioning are likely to use
+          something called quadtrees or octrees which are the 2d &amp; 3d
+          parallels of a BST (so you may see this used for optimizing physics
+          simulations e.g. in game engines like
+          <a href="https://unity3d.com/">Unity</a> and
+          <a href="https://www.unrealengine.com/en-US/what-is-unreal-engine-4"
+            >Unreal</a
+          >.)
+        </p>
+      </li>
+      <li>
+        <p>
+          <a href="https://www.agari.com/">Agari</a> used
+          <a href="https://en.wikipedia.org/wiki/Radix_tree">Radix tries</a> to
+          optimize their IP address search engine - their efficiency went from
+          0(n) (searching an array) to O(log n).
+        </p>
+      </li>
+    </ul>
+    <h3 id="objectives">Objectives</h3>
+    <p>
+      <strong>Participants will be able to:</strong> identify, implement and
+      differentiate: trees, binary tree traversal, binary heaps, &amp; tries.
+    </p>
+    <h3 id="specific-things-to-learn">Specific Things to Learn</h3>
+    <ul>
+      <li>Trees</li>
+      <li>Binary Search Trees</li>
+      <li>B Trees</li>
+      <li>Tries</li>
+      <li>Heaps</li>
+    </ul>
+    <h3 id="materials">Materials</h3>
+    <ul>
+      <li>
+        <a
+          href="https://docs.google.com/presentation/d/1O_mK6z7q69RLvqVFmoqfmEr4XKFSYVibgf-E08hxApw/edit?usp=sharing"
+          >Techtonica: Trees Slides</a
+        >
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=7vw2iIdqHlM"
+          >binary search trees (video)</a
+        >
+        - 7 minutes
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/b-tree-set-1-introduction-2/"
+          >B trees</a
+        >
+        -5 min read
+      </li>
+      <li>
+        <a href="https://youtu.be/zIjfhVPRZCg">tries (video)</a>- 5 minutes
+      </li>
+      <li>
+        <a href="https://youtu.be/-urNrIAQnNo">tries explained (video)</a> - 9
+        minutes
+      </li>
+      <li>
+        <a href="https://youtu.be/t0Cq6tVNRBA">heaps (video)</a> - 10 minutes
+      </li>
+      <li>
+        <a href="https://youtu.be/DuDz6B4cqVc"
+          >Data Structures: Crash Course Computer Science #14 (video)</a
+        >
+        (Trees are explained 8 minutes into the video - 1 min total)
+      </li>
+      <li>
+        <a href="https://webdocs.cs.ualberta.ca/~holte/T26/tree-as-array.html"
+          >Tree Implementation in an Array</a
+        >(5 min read)
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=oSWTXtMglKE"
+          >Data Structures: Trees (video)</a
+        >(10 min video)
+      </li>
+    </ul>
+    <h3 id="lesson">Lesson</h3>
+    <p>
+      Work through the materials provided in ‘materials’. This should take 30-50
+      minutes.
+    </p>
+    <h4 id="notes">Notes:</h4>
+    <ul>
+      <li>
+        <p>
+          <strong>Trees</strong> associate every object to a node in a tree, and
+          the number of children stemming from that node are referred to as its
+          degree. There are several types of trees, including Binary Search
+          Trees (BST) and with Binary Search Trees you can perform insertions,
+          deletions, and retrievals.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Trees are a common interview question</strong>. They can be
+          used when you want to store data that takes the shape of a hierarchy.
+          Unlike arrays, and linked lists, trees are a non-linear data
+          structure. Organizing keys in the form of a tree allows us to search
+          for a given key quicker than a linked list, but slower than searching
+          through an array.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Self-balancing search trees</strong> and
+          <strong>Red-Black trees</strong> produce an upper bound of O(Log n)for
+          search. Trees also provide a faster key insertion and deletion time
+          than arrays, but slightly slower than unordered linked lists.
+        </p>
+      </li>
+      <li>
+        <p>
+          The common uses of trees include manipulating hierarchical data,
+          making information easy to search (tree traversal), manipulating
+          sorted lists of data, compositing digital images for visual effects,
+          and router algorithms.
+        </p>
+      </li>
+    </ul>
+    <h3 id="independent-practice">Independent Practice</h3>
+    <p>
+      <a
+        href="https://www.pdfdrive.com/cracking-the-coding-interview-e52072841.html"
+        >Cracking the Coding Interview 6th Ed.</a
+      >, Ch.4 | Trees &amp; Graphs pages 100 - 107
+    </p>
+    <ul>
+      <li>Read pages 100 - 107</li>
+      <li>Implement 3 of the Interview Challenges found on pages 109 - 111</li>
+    </ul>
+    <h3 id="challenge">Challenge</h3>
+    <p>
+      Ask a mentor, volunteer, or apprentice for a code review of your Tree
+      implementation.
+    </p>
+    <h3 id="check-for-understanding">Check for Understanding</h3>
+    <p>
+      Create a cheat sheet about the types of trees, binary tree traversal,
+      binary heaps, tries, graphs, and graph search.
+    </p>
+  </body>
+</html>

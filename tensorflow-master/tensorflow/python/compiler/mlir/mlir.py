@@ -22,11 +22,11 @@ from tensorflow.python import pywrap_mlir
 from tensorflow.python.util.tf_export import tf_export
 
 
-@tf_export('mlir.experimental.convert_graph_def')
-def convert_graph_def(graph_def,
-                      pass_pipeline='tf-standard-pipeline',
-                      show_debug_info=False):
-  """Import a GraphDef and convert it to a textual MLIR module.
+@tf_export("mlir.experimental.convert_graph_def")
+def convert_graph_def(
+    graph_def, pass_pipeline="tf-standard-pipeline", show_debug_info=False
+):
+    """Import a GraphDef and convert it to a textual MLIR module.
 
   This API is only intended for inspecting the internals of TensorFlow and the
   string returned is at the moment intended for debugging purposes.
@@ -47,14 +47,14 @@ def convert_graph_def(graph_def,
       MLIR.
 
   """
-  return pywrap_mlir.import_graphdef(graph_def, pass_pipeline, show_debug_info)
+    return pywrap_mlir.import_graphdef(graph_def, pass_pipeline, show_debug_info)
 
 
-@tf_export('mlir.experimental.convert_function')
-def convert_function(concrete_function,
-                     pass_pipeline='tf-standard-pipeline',
-                     show_debug_info=False):
-  """Import a ConcreteFunction and convert it to a textual MLIR module.
+@tf_export("mlir.experimental.convert_function")
+def convert_function(
+    concrete_function, pass_pipeline="tf-standard-pipeline", show_debug_info=False
+):
+    """Import a ConcreteFunction and convert it to a textual MLIR module.
 
   This API is only intended for inspecting the internals of TensorFlow and the
   string returned is at the moment intended for debugging purposes.
@@ -91,5 +91,6 @@ def convert_function(concrete_function,
       to MLIR.
 
   """
-  return pywrap_mlir.import_function(concrete_function, pass_pipeline,
-                                     show_debug_info)
+    return pywrap_mlir.import_function(
+        concrete_function, pass_pipeline, show_debug_info
+    )

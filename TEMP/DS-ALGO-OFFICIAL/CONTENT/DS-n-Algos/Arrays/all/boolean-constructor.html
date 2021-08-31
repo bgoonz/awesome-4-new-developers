@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A description of the page and its contents" />
+    <link rel="stylesheet" href="./../../assets/styles.css" />
+    <title>Page Title</title>
+    <link rel="stylesheet" href="./../../../assets/style.css" />
+    <link rel="stylesheet" href="./../../../assets/prism.css" />
+    <script async src="./../../../assets/prism.js"></script>
+  </head>
+
+  <body>
+
+
+    <a href="https://github.com/bgoonz/DS-ALGO-OFFICIAL" class="github-corner" aria-label="View source on Github"><svg
+        width="80" height="80" viewBox="0 0 250 250"
+        style="z-index: 100000; fill:#194ccdaf; color:#fff; position: fixed; top: 20px; border: 0; left: 20px; transform: scale(-1.5, 1.5);"
+        aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+          fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+        </path>
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+          fill="currentColor" class="octo-body"></path>
+      </svg></a>
+
+
+
+
+    <h1 id="boolean-constructor">Boolean() constructor</h1>
+    <blockquote>
+      <p>The Boolean() constructor is used to create Boolean objects.</p>
+    </blockquote>
+    <p>The <strong><code>Boolean()</code></strong> constructor is used to create <a class="btn"
+        href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"><code>Boolean</code></a>
+      objects.</p>
+    <p>The source for this interactive example is stored in a GitHub repository. If you'd like to contribute to the
+      interactive examples project, please clone <a class="btn"
+        href="https://github.com/mdn/interactive-examples">https://github.com/mdn/interactive-examples</a> and send us a
+      pull request.</p>
+    <h2 id="syntax">Syntax</h2>
+    <p>new Boolean([value])</p>
+    <h3 id="parameters">Parameters</h3>
+    <p><code>value</code> Optional</p>
+    <p>The initial value of the <code>Boolean</code> object.</p>
+    <h2 id="examples">Examples</h2>
+    <h3 id="creating-boolean-objects-with-an-initial-value-of-false">Creating <code>Boolean</code> objects with an
+      initial
+      value of <code>false</code></h3>
+    pre data-role="codeBlock" data-info="js" class="language-javascript"><code>var bNoParam = new Boolean();
+      var bZero = new Boolean(0);
+      var bNull = new Boolean(null);
+      var bEmptyString = new Boolean(&#39;&#39;);
+      var bfalse = new Boolean(false);</code></pre>
+    <h3 id="creating-boolean-objects-with-an-initial-value-of-true">Creating <code>Boolean</code> objects with an
+      initial
+      value of <code>true</code></h3>
+    pre data-role="codeBlock" data-info="js" class="language-javascript"><code>var btrue = new Boolean(true);
+      var btrueString = new Boolean(&#39;true&#39;);
+      var bfalseString = new Boolean(&#39;false&#39;);
+      var bSuLin = new Boolean(&#39;Su Lin&#39;);
+      var bArrayProto = new Boolean([]);
+      var bObjProto = new Boolean({});</code></pre>
+    <h2 id="specifications">Specifications</h2>
+    <table>
+      <colgroup>
+        <col style="width: 100%" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Specification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>[ECMAScript (ECMA-262)</td>
+        </tr>
+        <tr>
+          <td>The definition of ‘Boolean constructor' in that
+            specification.](https://tc39.es/ecma262/#sec-boolean-constructor)
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h2 id="browser-compatibility">Browser compatibility</h2>
+    <p>The compatibility table on this page is generated from structured data. If you'd like to contribute to the data,
+      please check out <a class="btn"
+        href="https://github.com/mdn/browser-compat-data">https://github.com/mdn/browser-compat-data</a> and send us a
+      pull
+      request.</p>
+    <p><a class="btn" href="https://github.com/mdn/browser-compat-data">Update compatibility data on GitHub</a></p>
+    <table>
+      <colgroup>
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Desktop</th>
+          <th>Mobile</th>
+          <th>Server</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td>Chrome</td>
+          <td>Edge</td>
+          <td>Firefox</td>
+        </tr>
+        <tr>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><code>Boolean()</code> constructor</td>
+          <td>Chrome Full support 1</td>
+          <td>Edge Full support 12</td>
+          <td>Firefox Full support 1</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4 id="what-happens-next">What happens next?</h4>
+    <p>Our team will review your report. Once we verify the information you have supplied we will update this browser
+      compatability table accordingly.</p>
+    <h4 id="can-i-keep-track-of-my-report">Can I keep track of my report?</h4>
+    <p>You can join the GitHub repository to see updates and commits for this table data:</p>
+    <p><a class="btn" href="https://github.com/mdn/browser-compat-data">https://github.com/mdn/browser-compat-data</a>
+    </p>
+    <p>Our goal is to provide accurate, real values for all our compatibility data tables. Notifying MDN of inaccurate
+      data or supplying new data pushes us further towards our goal of providing 100% real values to the developer
+      community.<br />
+      Thank you for helping.</p>
+    <p>Please select the browser or browsers which are affected.</p>
+    <p>Briefly outline the issue you are highlighting. Minimum 10 and maximum 1,000 characters.</p>
+    <p>Browser documentation and release notes are good supporting items to accompany your message. A demo hosted on
+      services like Codepen or JSBin are perfect for providing real examples of your findings.</p>
+    <p>Connection error:Sorry, we can't seem to reach the server. We are working to fix the problem. Please try again
+      later.
+    </p>
+    <h3 id="legend">Legend</h3>
+    <p>Full support</p>
+    <p>Full support</p>
+    <h2 id="see-also">See also</h2>
+    <ul>
+      <li><a class="btn"
+          href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/en-US/docs/Glossary/Boolean">Boolean</a>
+      </li>
+    </ul>
+    <p><a class="btn"
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean/Boolean">Source</a>
+    </p>
+
+  </body>
+
+</html>

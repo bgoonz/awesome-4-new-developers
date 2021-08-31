@@ -30,14 +30,12 @@ from tensorflow.python.util import dispatch
 from tensorflow.python.util.tf_export import tf_export
 
 
-@tf_export('histogram_fixed_width_bins')
+@tf_export("histogram_fixed_width_bins")
 @dispatch.add_dispatch_support
-def histogram_fixed_width_bins(values,
-                               value_range,
-                               nbins=100,
-                               dtype=dtypes.int32,
-                               name=None):
-  """Bins the given values for use in a histogram.
+def histogram_fixed_width_bins(
+    values, value_range, nbins=100, dtype=dtypes.int32, name=None
+):
+    """Bins the given values for use in a histogram.
 
   Given the tensor `values`, this operation returns a rank 1 `Tensor`
   representing the indices of a histogram into which each element
@@ -73,40 +71,41 @@ def histogram_fixed_width_bins(values,
   >>> indices.numpy()
   array([0, 0, 1, 2, 4, 4], dtype=int32)
   """
-  with ops.name_scope(name, 'histogram_fixed_width_bins',
-                      [values, value_range, nbins]):
-    values = ops.convert_to_tensor(values, name='values')
-    shape = array_ops.shape(values)
+    with ops.name_scope(
+        name, "histogram_fixed_width_bins", [values, value_range, nbins]
+    ):
+        values = ops.convert_to_tensor(values, name="values")
+        shape = array_ops.shape(values)
 
-    values = array_ops.reshape(values, [-1])
-    value_range = ops.convert_to_tensor(value_range, name='value_range')
-    nbins = ops.convert_to_tensor(nbins, dtype=dtypes.int32, name='nbins')
-    nbins_float = math_ops.cast(nbins, values.dtype)
+        values = array_ops.reshape(values, [-1])
+        value_range = ops.convert_to_tensor(value_range, name="value_range")
+        nbins = ops.convert_to_tensor(nbins, dtype=dtypes.int32, name="nbins")
+        nbins_float = math_ops.cast(nbins, values.dtype)
 
-    # Map tensor values that fall within value_range to [0, 1].
-    scaled_values = math_ops.truediv(
-        values - value_range[0],
-        value_range[1] - value_range[0],
-        name='scaled_values')
+        # Map tensor values that fall within value_range to [0, 1].
+        scaled_values = math_ops.truediv(
+            values - value_range[0],
+            value_range[1] - value_range[0],
+            name="scaled_values",
+        )
 
-    # map tensor values within the open interval value_range to {0,.., nbins-1},
-    # values outside the open interval will be zero or less, or nbins or more.
-    indices = math_ops.floor(nbins_float * scaled_values, name='indices')
+        # map tensor values within the open interval value_range to {0,.., nbins-1},
+        # values outside the open interval will be zero or less, or nbins or more.
+        indices = math_ops.floor(nbins_float * scaled_values, name="indices")
 
-    # Clip edge cases (e.g. value = value_range[1]) or "outliers."
-    indices = math_ops.cast(
-        clip_ops.clip_by_value(indices, 0, nbins_float - 1), dtypes.int32)
-    return array_ops.reshape(indices, shape)
+        # Clip edge cases (e.g. value = value_range[1]) or "outliers."
+        indices = math_ops.cast(
+            clip_ops.clip_by_value(indices, 0, nbins_float - 1), dtypes.int32
+        )
+        return array_ops.reshape(indices, shape)
 
 
-@tf_export('histogram_fixed_width')
+@tf_export("histogram_fixed_width")
 @dispatch.add_dispatch_support
-def histogram_fixed_width(values,
-                          value_range,
-                          nbins=100,
-                          dtype=dtypes.int32,
-                          name=None):
-  """Return histogram of values.
+def histogram_fixed_width(
+    values, value_range, nbins=100, dtype=dtypes.int32, name=None
+):
+    """Return histogram of values.
 
   Given the tensor `values`, this operation returns a rank 1 histogram counting
   the number of entries in `values` that fell into every bin.  The bins are
@@ -140,9 +139,11 @@ def histogram_fixed_width(values,
   >>> hist.numpy()
   array([2, 1, 1, 0, 2], dtype=int32)
   """
-  with ops.name_scope(name, 'histogram_fixed_width',
-                      [values, value_range, nbins]) as name:
-    # pylint: disable=protected-access
-    return gen_math_ops._histogram_fixed_width(
-        values, value_range, nbins, dtype=dtype, name=name)
-    # pylint: enable=protected-access
+    with ops.name_scope(
+        name, "histogram_fixed_width", [values, value_range, nbins]
+    ) as name:
+        # pylint: disable=protected-access
+        return gen_math_ops._histogram_fixed_width(
+            values, value_range, nbins, dtype=dtype, name=name
+        )
+        # pylint: enable=protected-access

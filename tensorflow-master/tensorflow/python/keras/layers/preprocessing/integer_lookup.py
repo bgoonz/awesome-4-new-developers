@@ -24,7 +24,7 @@ from tensorflow.python.util.tf_export import keras_export
 
 @keras_export("keras.layers.experimental.preprocessing.IntegerLookup", v1=[])
 class IntegerLookup(index_lookup.IndexLookup):
-  """Reindex integer inputs to be in a contiguous range, via a dict lookup.
+    """Reindex integer inputs to be in a contiguous range, via a dict lookup.
 
   This layer maps a set of arbitrary integer input tokens into indexed
   integer output via a table-based vocabulary lookup. The layer's output indices
@@ -280,79 +280,89 @@ class IntegerLookup(index_lookup.IndexLookup):
   either directly or via `adapt()` before calling `get_vocabulary()`.
   """
 
-  def __init__(self,
-               max_tokens=None,
-               num_oov_indices=1,
-               mask_token=None,
-               oov_token=-1,
-               vocabulary=None,
-               invert=False,
-               output_mode=index_lookup.INT,
-               sparse=False,
-               pad_to_max_tokens=False,
-               **kwargs):
-    allowed_dtypes = [dtypes.int64]
+    def __init__(
+        self,
+        max_tokens=None,
+        num_oov_indices=1,
+        mask_token=None,
+        oov_token=-1,
+        vocabulary=None,
+        invert=False,
+        output_mode=index_lookup.INT,
+        sparse=False,
+        pad_to_max_tokens=False,
+        **kwargs
+    ):
+        allowed_dtypes = [dtypes.int64]
 
-    # Support deprecated args for this layer.
-    if "max_values" in kwargs:
-      logging.log_first_n(logging.WARN,
-                          "max_values is deprecated, use max_tokens instead.",
-                          1)
-      max_tokens = kwargs["max_values"]
-      del kwargs["max_values"]
-    if "mask_value" in kwargs:
-      logging.log_first_n(logging.WARN,
-                          "mask_value is deprecated, use mask_token instead.",
-                          1)
-      mask_token = kwargs["mask_value"]
-      del kwargs["mask_value"]
-    if "oov_value" in kwargs:
-      logging.log_first_n(logging.WARN,
-                          "oov_value is deprecated, use oov_token instead.", 1)
-      oov_token = kwargs["oov_value"]
-      del kwargs["oov_value"]
+        # Support deprecated args for this layer.
+        if "max_values" in kwargs:
+            logging.log_first_n(
+                logging.WARN, "max_values is deprecated, use max_tokens instead.", 1
+            )
+            max_tokens = kwargs["max_values"]
+            del kwargs["max_values"]
+        if "mask_value" in kwargs:
+            logging.log_first_n(
+                logging.WARN, "mask_value is deprecated, use mask_token instead.", 1
+            )
+            mask_token = kwargs["mask_value"]
+            del kwargs["mask_value"]
+        if "oov_value" in kwargs:
+            logging.log_first_n(
+                logging.WARN, "oov_value is deprecated, use oov_token instead.", 1
+            )
+            oov_token = kwargs["oov_value"]
+            del kwargs["oov_value"]
 
-    if "dtype" in kwargs and kwargs["dtype"] not in allowed_dtypes:
-      raise ValueError("The value of the dtype argument for IntegerLookup may "
-                       "only be one of %s." % (allowed_dtypes,))
+        if "dtype" in kwargs and kwargs["dtype"] not in allowed_dtypes:
+            raise ValueError(
+                "The value of the dtype argument for IntegerLookup may "
+                "only be one of %s." % (allowed_dtypes,)
+            )
 
-    if "dtype" not in kwargs:
-      kwargs["dtype"] = dtypes.int64
+        if "dtype" not in kwargs:
+            kwargs["dtype"] = dtypes.int64
 
-    # If max_tokens is set, the token must be greater than 1 - otherwise we
-    # are creating a 0-element vocab, which doesn't make sense.
-    if max_tokens is not None and max_tokens <= 1:
-      raise ValueError("If set, max_tokens must be greater than 1. "
-                       "You passed %s" % (max_tokens,))
+        # If max_tokens is set, the token must be greater than 1 - otherwise we
+        # are creating a 0-element vocab, which doesn't make sense.
+        if max_tokens is not None and max_tokens <= 1:
+            raise ValueError(
+                "If set, max_tokens must be greater than 1. "
+                "You passed %s" % (max_tokens,)
+            )
 
-    if num_oov_indices < 0:
-      raise ValueError(
-          "num_oov_indices must be greater than or equal to 0. You passed %s" %
-          (num_oov_indices,))
+        if num_oov_indices < 0:
+            raise ValueError(
+                "num_oov_indices must be greater than or equal to 0. You passed %s"
+                % (num_oov_indices,)
+            )
 
-    super(IntegerLookup, self).__init__(
-        max_tokens=max_tokens,
-        num_oov_indices=num_oov_indices,
-        mask_token=mask_token,
-        oov_token=oov_token,
-        vocabulary=vocabulary,
-        invert=invert,
-        output_mode=output_mode,
-        sparse=sparse,
-        pad_to_max_tokens=pad_to_max_tokens,
-        **kwargs)
+        super(IntegerLookup, self).__init__(
+            max_tokens=max_tokens,
+            num_oov_indices=num_oov_indices,
+            mask_token=mask_token,
+            oov_token=oov_token,
+            vocabulary=vocabulary,
+            invert=invert,
+            output_mode=output_mode,
+            sparse=sparse,
+            pad_to_max_tokens=pad_to_max_tokens,
+            **kwargs
+        )
 
-  def set_vocabulary(self, vocabulary, idf_weights=None):
-    if isinstance(vocabulary, str):
-      if self.output_mode == index_lookup.TF_IDF:
-        raise RuntimeError(
-            "Setting vocabulary directly from a file is not "
-            "supported in TF-IDF mode, since this layer cannot "
-            "read files containing TF-IDF weight data. Please "
-            "read the file using Python and set the vocabulary "
-            "and weights by passing lists or arrays to the "
-            "set_vocabulary function's `vocabulary` and `idf_weights` "
-            "args.")
-      vocabulary = table_utils.get_vocabulary_from_file(vocabulary)
-      vocabulary = [int(v) for v in vocabulary]
-    super().set_vocabulary(vocabulary, idf_weights=idf_weights)
+    def set_vocabulary(self, vocabulary, idf_weights=None):
+        if isinstance(vocabulary, str):
+            if self.output_mode == index_lookup.TF_IDF:
+                raise RuntimeError(
+                    "Setting vocabulary directly from a file is not "
+                    "supported in TF-IDF mode, since this layer cannot "
+                    "read files containing TF-IDF weight data. Please "
+                    "read the file using Python and set the vocabulary "
+                    "and weights by passing lists or arrays to the "
+                    "set_vocabulary function's `vocabulary` and `idf_weights` "
+                    "args."
+                )
+            vocabulary = table_utils.get_vocabulary_from_file(vocabulary)
+            vocabulary = [int(v) for v in vocabulary]
+        super().set_vocabulary(vocabulary, idf_weights=idf_weights)

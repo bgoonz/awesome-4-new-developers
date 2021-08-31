@@ -35,7 +35,7 @@ from tensorflow.tools.docs import doc_controls
 
 @tf_export("__internal__.train.assign_moving_average", v1=[])
 def assign_moving_average(variable, value, decay, zero_debias=True, name=None):
-  """Compute the moving average of a variable.
+    """Compute the moving average of a variable.
 
   The moving average of 'variable' updated with 'value' is:
     variable * decay + value * (1 - decay)
@@ -85,43 +85,40 @@ def assign_moving_average(variable, value, decay, zero_debias=True, name=None):
       [Kingma et al., 2015](https://arxiv.org/abs/1412.6980)
       ([pdf](https://arxiv.org/pdf/1412.6980.pdf))
   """
-  with ops.name_scope(name, "AssignMovingAvg",
-                      [variable, value, decay]) as scope:
-    decay = ops.convert_to_tensor(1.0 - decay, name="decay")
-    if decay.dtype != variable.dtype.base_dtype:
-      decay = math_ops.cast(decay, variable.dtype.base_dtype)
+    with ops.name_scope(name, "AssignMovingAvg", [variable, value, decay]) as scope:
+        decay = ops.convert_to_tensor(1.0 - decay, name="decay")
+        if decay.dtype != variable.dtype.base_dtype:
+            decay = math_ops.cast(decay, variable.dtype.base_dtype)
 
-    def update_fn(v, value):
-      return state_ops.assign_sub(v, (v - value) * decay, name=scope)
+        def update_fn(v, value):
+            return state_ops.assign_sub(v, (v - value) * decay, name=scope)
 
-    def update(strategy, v, value):
-      if zero_debias:
-        return _zero_debias(strategy, v, value, decay)
-      else:
-        return _update(strategy, v, update_fn, args=(value,))
+        def update(strategy, v, value):
+            if zero_debias:
+                return _zero_debias(strategy, v, value, decay)
+            else:
+                return _update(strategy, v, update_fn, args=(value,))
 
-    replica_context = distribution_strategy_context.get_replica_context()
-    if replica_context:
-      # In a replica context, we update variable using the mean of value across
-      # replicas.
-      def merge_fn(strategy, v, value):
-        value = strategy.extended.reduce_to(ds_reduce_util.ReduceOp.MEAN, value,
-                                            v)
-        return update(strategy, v, value)
+        replica_context = distribution_strategy_context.get_replica_context()
+        if replica_context:
+            # In a replica context, we update variable using the mean of value across
+            # replicas.
+            def merge_fn(strategy, v, value):
+                value = strategy.extended.reduce_to(
+                    ds_reduce_util.ReduceOp.MEAN, value, v
+                )
+                return update(strategy, v, value)
 
-      return replica_context.merge_call(merge_fn, args=(variable, value))
-    else:
-      strategy = distribution_strategy_context.get_cross_replica_context()
-      return update(strategy, variable, value)
+            return replica_context.merge_call(merge_fn, args=(variable, value))
+        else:
+            strategy = distribution_strategy_context.get_cross_replica_context()
+            return update(strategy, variable, value)
 
 
-def weighted_moving_average(value,
-                            decay,
-                            weight,
-                            truediv=True,
-                            collections=None,
-                            name=None):
-  """Compute the weighted moving average of `value`.
+def weighted_moving_average(
+    value, decay, weight, truediv=True, collections=None, name=None
+):
+    """Compute the weighted moving average of `value`.
 
   Conceptually, the weighted moving average is:
     `moving_average(value * weight) / moving_average(weight)`,
@@ -146,55 +143,61 @@ def weighted_moving_average(value,
   Returns:
     An Operation that updates and returns the weighted moving average.
   """
-  # Unlike assign_moving_average, the weighted moving average doesn't modify
-  # user-visible variables. It is the ratio of two internal variables, which are
-  # moving averages of the updates.  Thus, the signature of this function is
-  # quite different than assign_moving_average.
-  if collections is None:
-    collections = [ops.GraphKeys.GLOBAL_VARIABLES]
-  with variable_scope.variable_scope(name, "WeightedMovingAvg",
-                                     [value, weight, decay]) as scope:
-    value_x_weight_var = variable_scope.get_variable(
-        "value_x_weight",
-        shape=value.get_shape(),
-        dtype=value.dtype,
-        initializer=init_ops.zeros_initializer(),
-        trainable=False,
-        collections=collections)
-    weight_var = variable_scope.get_variable(
-        "weight",
-        shape=weight.get_shape(),
-        dtype=weight.dtype,
-        initializer=init_ops.zeros_initializer(),
-        trainable=False,
-        collections=collections)
-    numerator = assign_moving_average(
-        value_x_weight_var, value * weight, decay, zero_debias=False)
-    denominator = assign_moving_average(
-        weight_var, weight, decay, zero_debias=False)
+    # Unlike assign_moving_average, the weighted moving average doesn't modify
+    # user-visible variables. It is the ratio of two internal variables, which are
+    # moving averages of the updates.  Thus, the signature of this function is
+    # quite different than assign_moving_average.
+    if collections is None:
+        collections = [ops.GraphKeys.GLOBAL_VARIABLES]
+    with variable_scope.variable_scope(
+        name, "WeightedMovingAvg", [value, weight, decay]
+    ) as scope:
+        value_x_weight_var = variable_scope.get_variable(
+            "value_x_weight",
+            shape=value.get_shape(),
+            dtype=value.dtype,
+            initializer=init_ops.zeros_initializer(),
+            trainable=False,
+            collections=collections,
+        )
+        weight_var = variable_scope.get_variable(
+            "weight",
+            shape=weight.get_shape(),
+            dtype=weight.dtype,
+            initializer=init_ops.zeros_initializer(),
+            trainable=False,
+            collections=collections,
+        )
+        numerator = assign_moving_average(
+            value_x_weight_var, value * weight, decay, zero_debias=False
+        )
+        denominator = assign_moving_average(
+            weight_var, weight, decay, zero_debias=False
+        )
 
-    if truediv:
-      return math_ops.truediv(numerator, denominator, name=scope.name)
-    else:
-      return math_ops.divide(numerator, denominator, name=scope.name)
+        if truediv:
+            return math_ops.truediv(numerator, denominator, name=scope.name)
+        else:
+            return math_ops.divide(numerator, denominator, name=scope.name)
 
 
 def _update(strategy, var, update_fn, args):
-  """Applies updates depending on the context."""
-  assert distribution_strategy_context.in_cross_replica_context(), (
-      "_update can only be called in cross-replica context")
-  if distribute_lib.get_update_replica_id() is not None:
-    # Call update_fn on var to delegate the implementation. We expect `var` will
-    # do the right thing in update context, e.g, if `var` is a MirroredVariable,
-    # it should pick its component variable based on `update_replica_id` and
-    # only update that.
-    return update_fn(var, *args)
-  else:
-    return strategy.extended.update(var, update_fn, args)
+    """Applies updates depending on the context."""
+    assert (
+        distribution_strategy_context.in_cross_replica_context()
+    ), "_update can only be called in cross-replica context"
+    if distribute_lib.get_update_replica_id() is not None:
+        # Call update_fn on var to delegate the implementation. We expect `var` will
+        # do the right thing in update context, e.g, if `var` is a MirroredVariable,
+        # it should pick its component variable based on `update_replica_id` and
+        # only update that.
+        return update_fn(var, *args)
+    else:
+        return strategy.extended.update(var, update_fn, args)
 
 
 def _zero_debias(strategy, unbiased_var, value, decay):
-  """Compute the delta required for a debiased Variable.
+    """Compute the delta required for a debiased Variable.
 
   All exponential moving averages initialized with Tensors are initialized to 0,
   and therefore are biased to 0. Variables initialized to 0 and used as EMAs are
@@ -232,59 +235,63 @@ def _zero_debias(strategy, unbiased_var, value, decay):
       ([pdf](https://arxiv.org/pdf/1412.6980.pdf))
 
   """
-  with variable_scope.variable_scope(
-      unbiased_var.name[:-len(":0")], values=[unbiased_var, value, decay]):
-    with ops.init_scope():
-      biased_initializer = init_ops.zeros_initializer()
-      local_step_initializer = init_ops.zeros_initializer()
+    with variable_scope.variable_scope(
+        unbiased_var.name[: -len(":0")], values=[unbiased_var, value, decay]
+    ):
+        with ops.init_scope():
+            biased_initializer = init_ops.zeros_initializer()
+            local_step_initializer = init_ops.zeros_initializer()
 
-    def _maybe_get_unique(name):
-      """Get name for a unique variable, if not `reuse=True`."""
-      if variable_scope.get_variable_scope().reuse:
-        return name
-      vs_vars = [
-          x.op.name
-          for x in variable_scope.get_variable_scope().global_variables()
-      ]
-      full_name = variable_scope.get_variable_scope().name + "/" + name
-      if full_name not in vs_vars:
-        return name
-      idx = 1
-      while full_name + ("_%d" % idx) in vs_vars:
-        idx += 1
-      return name + ("_%d" % idx)
+        def _maybe_get_unique(name):
+            """Get name for a unique variable, if not `reuse=True`."""
+            if variable_scope.get_variable_scope().reuse:
+                return name
+            vs_vars = [
+                x.op.name
+                for x in variable_scope.get_variable_scope().global_variables()
+            ]
+            full_name = variable_scope.get_variable_scope().name + "/" + name
+            if full_name not in vs_vars:
+                return name
+            idx = 1
+            while full_name + ("_%d" % idx) in vs_vars:
+                idx += 1
+            return name + ("_%d" % idx)
 
-    with strategy.extended.colocate_vars_with(unbiased_var):
-      biased_var = variable_scope.get_variable(
-          _maybe_get_unique("biased"),
-          initializer=biased_initializer,
-          shape=unbiased_var.get_shape(),
-          dtype=unbiased_var.dtype,
-          trainable=False)
-      local_step = variable_scope.get_variable(
-          _maybe_get_unique("local_step"),
-          shape=[],
-          dtype=unbiased_var.dtype,
-          initializer=local_step_initializer,
-          trainable=False)
+        with strategy.extended.colocate_vars_with(unbiased_var):
+            biased_var = variable_scope.get_variable(
+                _maybe_get_unique("biased"),
+                initializer=biased_initializer,
+                shape=unbiased_var.get_shape(),
+                dtype=unbiased_var.dtype,
+                trainable=False,
+            )
+            local_step = variable_scope.get_variable(
+                _maybe_get_unique("local_step"),
+                shape=[],
+                dtype=unbiased_var.dtype,
+                initializer=local_step_initializer,
+                trainable=False,
+            )
 
-  def update_fn(v, value, biased_var, local_step):
-    update_biased = state_ops.assign_sub(biased_var,
-                                         (biased_var - value) * decay)
-    update_local_step = local_step.assign_add(1)
+    def update_fn(v, value, biased_var, local_step):
+        update_biased = state_ops.assign_sub(biased_var, (biased_var - value) * decay)
+        update_local_step = local_step.assign_add(1)
 
-    # This function gets `1 - decay`, so use `1.0 - decay` in the exponent.
-    bias_factor = 1 - math_ops.pow(1.0 - decay, update_local_step)
-    return state_ops.assign(
-        v, update_biased / bias_factor, name=ops.get_name_scope() + "/")
+        # This function gets `1 - decay`, so use `1.0 - decay` in the exponent.
+        bias_factor = 1 - math_ops.pow(1.0 - decay, update_local_step)
+        return state_ops.assign(
+            v, update_biased / bias_factor, name=ops.get_name_scope() + "/"
+        )
 
-  return _update(
-      strategy, unbiased_var, update_fn, args=(value, biased_var, local_step))
+    return _update(
+        strategy, unbiased_var, update_fn, args=(value, biased_var, local_step)
+    )
 
 
 @tf_export("train.ExponentialMovingAverage")
 class ExponentialMovingAverage(object):
-  """Maintains moving averages of variables by employing an exponential decay.
+    """Maintains moving averages of variables by employing an exponential decay.
 
   When training a model, it is often beneficial to maintain moving averages of
   the trained parameters.  Evaluations that use averaged parameters sometimes
@@ -446,12 +453,14 @@ class ExponentialMovingAverage(object):
   ```
   """
 
-  def __init__(self,
-               decay,
-               num_updates=None,
-               zero_debias=False,
-               name="ExponentialMovingAverage"):
-    """Creates a new ExponentialMovingAverage object.
+    def __init__(
+        self,
+        decay,
+        num_updates=None,
+        zero_debias=False,
+        name="ExponentialMovingAverage",
+    ):
+        """Creates a new ExponentialMovingAverage object.
 
     The `apply()` method has to be called to create shadow variables.
     Follow-on calls to the `apply()` method will update the moving averages
@@ -476,19 +485,19 @@ class ExponentialMovingAverage(object):
       name: String. Optional prefix name to use for the name of ops added in
         `apply()`.
     """
-    self._decay = decay
-    self._num_updates = num_updates
-    self._zero_debias = zero_debias
-    self._name = name
-    self._averages = {}
+        self._decay = decay
+        self._num_updates = num_updates
+        self._zero_debias = zero_debias
+        self._name = name
+        self._averages = {}
 
-  @property
-  def name(self):
-    """The name of this ExponentialMovingAverage object."""
-    return self._name
+    @property
+    def name(self):
+        """The name of this ExponentialMovingAverage object."""
+        return self._name
 
-  def apply(self, var_list=None):
-    """Maintains moving averages of variables.
+    def apply(self, var_list=None):
+        """Maintains moving averages of variables.
 
     `var_list` must be a list of `Variable` objects.  This method
     creates shadow variables (holding the moving averages)
@@ -525,69 +534,80 @@ class ExponentialMovingAverage(object):
     Raises:
       TypeError: If the arguments are not an allowed type.
     """
-    # TODO(touts): op_scope
-    if var_list is None:
-      var_list = variables.trainable_variables()
-    for v in var_list:
-      if (isinstance(v, ops.Tensor)
-          and ops.executing_eagerly_outside_functions()):
-        raise TypeError(
-            "tf.train.ExponentialMovingAverage does not support non-Variable"
-            " tensors when eager execution is enabled.")
-    zero_debias_true = set()  # set of vars to set `zero_debias=True`
-    for var in var_list:
-      if var.dtype.base_dtype not in [
-          dtypes.bfloat16, dtypes.float16, dtypes.float32, dtypes.float64
-      ]:
-        raise TypeError("The variables must be half, float, or double: %s" %
-                        var.name)
+        # TODO(touts): op_scope
+        if var_list is None:
+            var_list = variables.trainable_variables()
+        for v in var_list:
+            if isinstance(v, ops.Tensor) and ops.executing_eagerly_outside_functions():
+                raise TypeError(
+                    "tf.train.ExponentialMovingAverage does not support non-Variable"
+                    " tensors when eager execution is enabled."
+                )
+        zero_debias_true = set()  # set of vars to set `zero_debias=True`
+        for var in var_list:
+            if var.dtype.base_dtype not in [
+                dtypes.bfloat16,
+                dtypes.float16,
+                dtypes.float32,
+                dtypes.float64,
+            ]:
+                raise TypeError(
+                    "The variables must be half, float, or double: %s" % var.name
+                )
 
-      if var.ref() not in self._averages:
-        # For variables: to lower communication bandwidth across devices we keep
-        # the moving averages on the same device as the variables. For other
-        # tensors, we rely on the existing device allocation mechanism.
-        with ops.init_scope():
-          if isinstance(var, variables.Variable):
-            with ops.device(var.device):
-              initialized_value = var.initialized_value()
-            avg = slot_creator.create_slot(
-                var,
-                initialized_value,
-                self.name,
-                colocate_with_primary=True,
-                copy_xla_sharding=True)
-            # NOTE(mrry): We only add `tf.Variable` objects to the
-            # `MOVING_AVERAGE_VARIABLES` collection.
-            ops.add_to_collection(ops.GraphKeys.MOVING_AVERAGE_VARIABLES, var)
-          else:
-            avg = slot_creator.create_zeros_slot(
-                var,
-                self.name,
-                colocate_with_primary=(var.op.type in [
-                    "Variable", "VariableV2", "VarHandleOp"
-                ]),
-                copy_xla_sharding=True)
-            if self._zero_debias:
-              zero_debias_true.add(avg.ref())
-        self._averages[var.ref()] = avg
+            if var.ref() not in self._averages:
+                # For variables: to lower communication bandwidth across devices we keep
+                # the moving averages on the same device as the variables. For other
+                # tensors, we rely on the existing device allocation mechanism.
+                with ops.init_scope():
+                    if isinstance(var, variables.Variable):
+                        with ops.device(var.device):
+                            initialized_value = var.initialized_value()
+                        avg = slot_creator.create_slot(
+                            var,
+                            initialized_value,
+                            self.name,
+                            colocate_with_primary=True,
+                            copy_xla_sharding=True,
+                        )
+                        # NOTE(mrry): We only add `tf.Variable` objects to the
+                        # `MOVING_AVERAGE_VARIABLES` collection.
+                        ops.add_to_collection(
+                            ops.GraphKeys.MOVING_AVERAGE_VARIABLES, var
+                        )
+                    else:
+                        avg = slot_creator.create_zeros_slot(
+                            var,
+                            self.name,
+                            colocate_with_primary=(
+                                var.op.type in ["Variable", "VariableV2", "VarHandleOp"]
+                            ),
+                            copy_xla_sharding=True,
+                        )
+                        if self._zero_debias:
+                            zero_debias_true.add(avg.ref())
+                self._averages[var.ref()] = avg
 
-    with ops.name_scope(self.name) as scope:
-      decay = ops.convert_to_tensor(
-          self._decay, dtype=dtypes.float32, name="decay")
-      if self._num_updates is not None:
-        num_updates = math_ops.cast(
-            self._num_updates, dtypes.float32, name="num_updates")
-        decay = math_ops.minimum(decay,
-                                 (1.0 + num_updates) / (10.0 + num_updates))
-      updates = []
-      for var in var_list:
-        avg = self._averages[var.ref()]
-        zero_debias = avg.ref() in zero_debias_true
-        updates.append(assign_moving_average(avg, var, decay, zero_debias))
-      return control_flow_ops.group(*updates, name=scope)
+        with ops.name_scope(self.name) as scope:
+            decay = ops.convert_to_tensor(
+                self._decay, dtype=dtypes.float32, name="decay"
+            )
+            if self._num_updates is not None:
+                num_updates = math_ops.cast(
+                    self._num_updates, dtypes.float32, name="num_updates"
+                )
+                decay = math_ops.minimum(
+                    decay, (1.0 + num_updates) / (10.0 + num_updates)
+                )
+            updates = []
+            for var in var_list:
+                avg = self._averages[var.ref()]
+                zero_debias = avg.ref() in zero_debias_true
+                updates.append(assign_moving_average(avg, var, decay, zero_debias))
+            return control_flow_ops.group(*updates, name=scope)
 
-  def average(self, var):
-    """Returns the `Variable` holding the average of `var`.
+    def average(self, var):
+        """Returns the `Variable` holding the average of `var`.
 
     Args:
       var: A `Variable` object.
@@ -596,11 +616,11 @@ class ExponentialMovingAverage(object):
       A `Variable` object or `None` if the moving average of `var`
       is not maintained.
     """
-    return self._averages.get(var.ref(), None)
+        return self._averages.get(var.ref(), None)
 
-  @doc_controls.do_not_generate_docs
-  def average_name(self, var):
-    """[Meant for TF1] Returns name of `Variable` holding the average for `var`.
+    @doc_controls.do_not_generate_docs
+    def average_name(self, var):
+        """[Meant for TF1] Returns name of `Variable` holding the average for `var`.
 
     (Designed to work with legacy `tf.compat.v1.train.Saver`, it is sensitive to
     specific variable names and not recommended for TF2)
@@ -624,14 +644,15 @@ class ExponentialMovingAverage(object):
       by the `ExponentialMovingAverage class` to hold the moving average of
       `var`.
     """
-    if var.ref() in self._averages:
-      return self._averages[var.ref()].name[:-len(":0")]
-    return ops.get_default_graph().unique_name(
-        var.name[:-len(":0")] + "/" + self.name, mark_as_used=False)
+        if var.ref() in self._averages:
+            return self._averages[var.ref()].name[: -len(":0")]
+        return ops.get_default_graph().unique_name(
+            var.name[: -len(":0")] + "/" + self.name, mark_as_used=False
+        )
 
-  @doc_controls.do_not_generate_docs
-  def variables_to_restore(self, moving_avg_variables=None):
-    """[Designed for TF 1.x] Returns a map of names to `Variables` to restore.
+    @doc_controls.do_not_generate_docs
+    def variables_to_restore(self, moving_avg_variables=None):
+        """[Designed for TF 1.x] Returns a map of names to `Variables` to restore.
 
     (Designed to work with legacy `tf.compat.v1.train.Saver`, sensitive to
     specific variable names and not recommended for TF2)
@@ -664,21 +685,20 @@ class ExponentialMovingAverage(object):
       original or the moving average version of the variable name, depending
       on whether the variable name is in the `moving_avg_variables`.
     """
-    name_map = {}
-    if moving_avg_variables is None:
-      # Include trainable variables and variables which have been explicitly
-      # added to the moving_average_variables collection.
-      moving_avg_variables = variables.trainable_variables()
-      moving_avg_variables += variables.moving_average_variables()
-    # Remove duplicates
-    moving_avg_variables = set(v.ref() for v in moving_avg_variables)
-    # Collect all the variables with moving average,
-    for v in moving_avg_variables:
-      name_map[self.average_name(v.deref())] = v.deref()
-    # Make sure we restore variables without moving averages as well.
-    moving_avg_variable_names = set(
-        v.deref().name for v in moving_avg_variables)
-    for v in list(set(variables.global_variables())):
-      if v.name not in moving_avg_variable_names and v.op.name not in name_map:
-        name_map[v.op.name] = v
-    return name_map
+        name_map = {}
+        if moving_avg_variables is None:
+            # Include trainable variables and variables which have been explicitly
+            # added to the moving_average_variables collection.
+            moving_avg_variables = variables.trainable_variables()
+            moving_avg_variables += variables.moving_average_variables()
+        # Remove duplicates
+        moving_avg_variables = set(v.ref() for v in moving_avg_variables)
+        # Collect all the variables with moving average,
+        for v in moving_avg_variables:
+            name_map[self.average_name(v.deref())] = v.deref()
+        # Make sure we restore variables without moving averages as well.
+        moving_avg_variable_names = set(v.deref().name for v in moving_avg_variables)
+        for v in list(set(variables.global_variables())):
+            if v.name not in moving_avg_variable_names and v.op.name not in name_map:
+                name_map[v.op.name] = v
+        return name_map

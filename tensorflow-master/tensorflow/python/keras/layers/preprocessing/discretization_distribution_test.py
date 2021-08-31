@@ -30,32 +30,33 @@ from tensorflow.python.keras.layers.preprocessing import preprocessing_test_util
 
 @ds_combinations.generate(
     combinations.combine(
-        strategy=strategy_combinations.all_strategies +
-        strategy_combinations.multi_worker_mirrored_strategies,
-        mode=["eager", "graph"]))
+        strategy=strategy_combinations.all_strategies
+        + strategy_combinations.multi_worker_mirrored_strategies,
+        mode=["eager", "graph"],
+    )
+)
 class DiscretizationDistributionTest(
-    keras_parameterized.TestCase,
-    preprocessing_test_utils.PreprocessingLayerTest):
+    keras_parameterized.TestCase, preprocessing_test_utils.PreprocessingLayerTest
+):
+    def test_distribution(self, strategy):
+        input_array = np.array([[-1.5, 1.0, 3.4, 0.5], [0.0, 3.0, 1.3, 0.0]])
 
-  def test_distribution(self, strategy):
-    input_array = np.array([[-1.5, 1.0, 3.4, .5], [0.0, 3.0, 1.3, 0.0]])
+        expected_output = [[0, 2, 3, 1], [1, 3, 2, 1]]
+        expected_output_shape = [None, 4]
 
-    expected_output = [[0, 2, 3, 1], [1, 3, 2, 1]]
-    expected_output_shape = [None, 4]
+        config.set_soft_device_placement(True)
 
-    config.set_soft_device_placement(True)
+        with strategy.scope():
+            input_data = keras.Input(shape=(4,))
+            layer = discretization.Discretization(bin_boundaries=[0.0, 1.0, 2.0])
+            bucket_data = layer(input_data)
+            self.assertAllEqual(expected_output_shape, bucket_data.shape.as_list())
 
-    with strategy.scope():
-      input_data = keras.Input(shape=(4,))
-      layer = discretization.Discretization(bin_boundaries=[0., 1., 2.])
-      bucket_data = layer(input_data)
-      self.assertAllEqual(expected_output_shape, bucket_data.shape.as_list())
-
-      model = keras.Model(inputs=input_data, outputs=bucket_data)
-    output_dataset = model.predict(input_array)
-    self.assertAllEqual(expected_output, output_dataset)
+            model = keras.Model(inputs=input_data, outputs=bucket_data)
+        output_dataset = model.predict(input_array)
+        self.assertAllEqual(expected_output, output_dataset)
 
 
 if __name__ == "__main__":
-  v2_compat.enable_v2_behavior()
-  multi_process_runner.test_main()
+    v2_compat.enable_v2_behavior()
+    multi_process_runner.test_main()

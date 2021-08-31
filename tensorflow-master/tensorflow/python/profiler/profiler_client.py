@@ -23,17 +23,19 @@ from tensorflow.python.profiler.internal import _pywrap_profiler
 
 from tensorflow.python.util.tf_export import tf_export
 
-_GRPC_PREFIX = 'grpc://'
+_GRPC_PREFIX = "grpc://"
 
 
-@tf_export('profiler.experimental.client.trace', v1=[])
-def trace(service_addr,
-          logdir,
-          duration_ms,
-          worker_list='',
-          num_tracing_attempts=3,
-          options=None):
-  """Sends gRPC requests to one or more profiler servers to perform on-demand profiling.
+@tf_export("profiler.experimental.client.trace", v1=[])
+def trace(
+    service_addr,
+    logdir,
+    duration_ms,
+    worker_list="",
+    num_tracing_attempts=3,
+    options=None,
+):
+    """Sends gRPC requests to one or more profiler servers to perform on-demand profiling.
 
   This method will block the calling thread until it receives responses from all
   servers or until deadline expiration. Both single host and multiple host
@@ -125,19 +127,26 @@ def trace(service_addr,
   Open your browser and go to localhost:6006/#profile to view profiling results.
 
   """
-  if duration_ms <= 0:
-    raise errors.InvalidArgumentError(None, None,
-                                      'duration_ms must be greater than zero.')
+    if duration_ms <= 0:
+        raise errors.InvalidArgumentError(
+            None, None, "duration_ms must be greater than zero."
+        )
 
-  opts = dict(options._asdict()) if options is not None else {}
-  _pywrap_profiler.trace(
-      _strip_addresses(service_addr, _GRPC_PREFIX), logdir, worker_list, True,
-      duration_ms, num_tracing_attempts, opts)
+    opts = dict(options._asdict()) if options is not None else {}
+    _pywrap_profiler.trace(
+        _strip_addresses(service_addr, _GRPC_PREFIX),
+        logdir,
+        worker_list,
+        True,
+        duration_ms,
+        num_tracing_attempts,
+        opts,
+    )
 
 
-@tf_export('profiler.experimental.client.monitor', v1=[])
+@tf_export("profiler.experimental.client.monitor", v1=[])
 def monitor(service_addr, duration_ms, level=1):
-  """Sends grpc requests to profiler server to perform on-demand monitoring.
+    """Sends grpc requests to profiler server to perform on-demand monitoring.
 
   The monitoring result is a light weight performance summary of your model
   execution. This method will block the caller thread until it receives the
@@ -164,13 +173,14 @@ def monitor(service_addr, duration_ms, level=1):
   ```
 
   """
-  return _pywrap_profiler.monitor(
-      _strip_prefix(service_addr, _GRPC_PREFIX), duration_ms, level, True)
+    return _pywrap_profiler.monitor(
+        _strip_prefix(service_addr, _GRPC_PREFIX), duration_ms, level, True
+    )
 
 
 def _strip_prefix(s, prefix):
-  return s[len(prefix):] if s.startswith(prefix) else s
+    return s[len(prefix) :] if s.startswith(prefix) else s
 
 
 def _strip_addresses(addresses, prefix):
-  return ','.join([_strip_prefix(s, prefix) for s in addresses.split(',')])
+    return ",".join([_strip_prefix(s, prefix) for s in addresses.split(",")])

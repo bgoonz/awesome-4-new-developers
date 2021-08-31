@@ -25,41 +25,43 @@ from tensorflow.python.util import deprecation
 from tensorflow.python.util.tf_export import tf_export
 
 
-@tf_export(
-    v1=["io.TFRecordCompressionType", "python_io.TFRecordCompressionType"])
-@deprecation.deprecated_endpoints("io.TFRecordCompressionType",
-                                  "python_io.TFRecordCompressionType")
+@tf_export(v1=["io.TFRecordCompressionType", "python_io.TFRecordCompressionType"])
+@deprecation.deprecated_endpoints(
+    "io.TFRecordCompressionType", "python_io.TFRecordCompressionType"
+)
 class TFRecordCompressionType(object):
-  """The type of compression for the record."""
-  NONE = 0
-  ZLIB = 1
-  GZIP = 2
+    """The type of compression for the record."""
+
+    NONE = 0
+    ZLIB = 1
+    GZIP = 2
 
 
-@tf_export(
-    "io.TFRecordOptions",
-    v1=["io.TFRecordOptions", "python_io.TFRecordOptions"])
+@tf_export("io.TFRecordOptions", v1=["io.TFRecordOptions", "python_io.TFRecordOptions"])
 @deprecation.deprecated_endpoints("python_io.TFRecordOptions")
 class TFRecordOptions(object):
-  """Options used for manipulating TFRecord files."""
-  compression_type_map = {
-      TFRecordCompressionType.ZLIB: "ZLIB",
-      TFRecordCompressionType.GZIP: "GZIP",
-      TFRecordCompressionType.NONE: ""
-  }
+    """Options used for manipulating TFRecord files."""
 
-  def __init__(self,
-               compression_type=None,
-               flush_mode=None,
-               input_buffer_size=None,
-               output_buffer_size=None,
-               window_bits=None,
-               compression_level=None,
-               compression_method=None,
-               mem_level=None,
-               compression_strategy=None):
-    # pylint: disable=line-too-long
-    """Creates a `TFRecordOptions` instance.
+    compression_type_map = {
+        TFRecordCompressionType.ZLIB: "ZLIB",
+        TFRecordCompressionType.GZIP: "GZIP",
+        TFRecordCompressionType.NONE: "",
+    }
+
+    def __init__(
+        self,
+        compression_type=None,
+        flush_mode=None,
+        input_buffer_size=None,
+        output_buffer_size=None,
+        window_bits=None,
+        compression_level=None,
+        compression_method=None,
+        mem_level=None,
+        compression_strategy=None,
+    ):
+        # pylint: disable=line-too-long
+        """Creates a `TFRecordOptions` instance.
 
     Options only effect TFRecordWriter when compression_type is not `None`.
     Documentation, details, and defaults can be found in
@@ -84,23 +86,23 @@ class TFRecordOptions(object):
     Raises:
       ValueError: If compression_type is invalid.
     """
-    # pylint: enable=line-too-long
-    # Check compression_type is valid, but for backwards compatibility don't
-    # immediately convert to a string.
-    self.get_compression_type_string(compression_type)
-    self.compression_type = compression_type
-    self.flush_mode = flush_mode
-    self.input_buffer_size = input_buffer_size
-    self.output_buffer_size = output_buffer_size
-    self.window_bits = window_bits
-    self.compression_level = compression_level
-    self.compression_method = compression_method
-    self.mem_level = mem_level
-    self.compression_strategy = compression_strategy
+        # pylint: enable=line-too-long
+        # Check compression_type is valid, but for backwards compatibility don't
+        # immediately convert to a string.
+        self.get_compression_type_string(compression_type)
+        self.compression_type = compression_type
+        self.flush_mode = flush_mode
+        self.input_buffer_size = input_buffer_size
+        self.output_buffer_size = output_buffer_size
+        self.window_bits = window_bits
+        self.compression_level = compression_level
+        self.compression_method = compression_method
+        self.mem_level = mem_level
+        self.compression_strategy = compression_strategy
 
-  @classmethod
-  def get_compression_type_string(cls, options):
-    """Convert various option types to a unified string.
+    @classmethod
+    def get_compression_type_string(cls, options):
+        """Convert various option types to a unified string.
 
     Args:
       options: `TFRecordOption`, `TFRecordCompressionType`, or string.
@@ -111,51 +113,51 @@ class TFRecordOptions(object):
     Raises:
       ValueError: If compression_type is invalid.
     """
-    if not options:
-      return ""
-    elif isinstance(options, TFRecordOptions):
-      return cls.get_compression_type_string(options.compression_type)
-    elif isinstance(options, TFRecordCompressionType):
-      return cls.compression_type_map[options]
-    elif options in TFRecordOptions.compression_type_map:
-      return cls.compression_type_map[options]
-    elif options in TFRecordOptions.compression_type_map.values():
-      return options
-    else:
-      raise ValueError('Not a valid compression_type: "{}"'.format(options))
+        if not options:
+            return ""
+        elif isinstance(options, TFRecordOptions):
+            return cls.get_compression_type_string(options.compression_type)
+        elif isinstance(options, TFRecordCompressionType):
+            return cls.compression_type_map[options]
+        elif options in TFRecordOptions.compression_type_map:
+            return cls.compression_type_map[options]
+        elif options in TFRecordOptions.compression_type_map.values():
+            return options
+        else:
+            raise ValueError('Not a valid compression_type: "{}"'.format(options))
 
-  def _as_record_writer_options(self):
-    """Convert to RecordWriterOptions for use with PyRecordWriter."""
-    options = _pywrap_record_io.RecordWriterOptions(
-        compat.as_bytes(
-            self.get_compression_type_string(self.compression_type)))
+    def _as_record_writer_options(self):
+        """Convert to RecordWriterOptions for use with PyRecordWriter."""
+        options = _pywrap_record_io.RecordWriterOptions(
+            compat.as_bytes(self.get_compression_type_string(self.compression_type))
+        )
 
-    if self.flush_mode is not None:
-      options.zlib_options.flush_mode = self.flush_mode
-    if self.input_buffer_size is not None:
-      options.zlib_options.input_buffer_size = self.input_buffer_size
-    if self.output_buffer_size is not None:
-      options.zlib_options.output_buffer_size = self.output_buffer_size
-    if self.window_bits is not None:
-      options.zlib_options.window_bits = self.window_bits
-    if self.compression_level is not None:
-      options.zlib_options.compression_level = self.compression_level
-    if self.compression_method is not None:
-      options.zlib_options.compression_method = self.compression_method
-    if self.mem_level is not None:
-      options.zlib_options.mem_level = self.mem_level
-    if self.compression_strategy is not None:
-      options.zlib_options.compression_strategy = self.compression_strategy
-    return options
+        if self.flush_mode is not None:
+            options.zlib_options.flush_mode = self.flush_mode
+        if self.input_buffer_size is not None:
+            options.zlib_options.input_buffer_size = self.input_buffer_size
+        if self.output_buffer_size is not None:
+            options.zlib_options.output_buffer_size = self.output_buffer_size
+        if self.window_bits is not None:
+            options.zlib_options.window_bits = self.window_bits
+        if self.compression_level is not None:
+            options.zlib_options.compression_level = self.compression_level
+        if self.compression_method is not None:
+            options.zlib_options.compression_method = self.compression_method
+        if self.mem_level is not None:
+            options.zlib_options.mem_level = self.mem_level
+        if self.compression_strategy is not None:
+            options.zlib_options.compression_strategy = self.compression_strategy
+        return options
 
 
 @tf_export(v1=["io.tf_record_iterator", "python_io.tf_record_iterator"])
 @deprecation.deprecated(
     date=None,
-    instructions=("Use eager execution and: \n"
-                  "`tf.data.TFRecordDataset(path)`"))
+    instructions=("Use eager execution and: \n" "`tf.data.TFRecordDataset(path)`"),
+)
 def tf_record_iterator(path, options=None):
-  """An iterator that read the records from a TFRecords file.
+    """An iterator that read the records from a TFRecords file.
 
   Args:
     path: The path to the TFRecords file.
@@ -167,12 +169,12 @@ def tf_record_iterator(path, options=None):
   Raises:
     IOError: If `path` cannot be opened for reading.
   """
-  compression_type = TFRecordOptions.get_compression_type_string(options)
-  return _pywrap_record_io.RecordIterator(path, compression_type)
+    compression_type = TFRecordOptions.get_compression_type_string(options)
+    return _pywrap_record_io.RecordIterator(path, compression_type)
 
 
 def tf_record_random_reader(path):
-  """Creates a reader that allows random-access reads from a TFRecords file.
+    """Creates a reader that allows random-access reads from a TFRecords file.
 
   The created reader object has the following method:
 
@@ -209,14 +211,13 @@ def tf_record_random_reader(path):
   Raises:
     IOError: If `path` cannot be opened for reading.
   """
-  return _pywrap_record_io.RandomRecordReader(path)
+    return _pywrap_record_io.RandomRecordReader(path)
 
 
-@tf_export(
-    "io.TFRecordWriter", v1=["io.TFRecordWriter", "python_io.TFRecordWriter"])
+@tf_export("io.TFRecordWriter", v1=["io.TFRecordWriter", "python_io.TFRecordWriter"])
 @deprecation.deprecated_endpoints("python_io.TFRecordWriter")
 class TFRecordWriter(_pywrap_record_io.RecordWriter):
-  """A class to write records to a TFRecords file.
+    """A class to write records to a TFRecords file.
 
   [TFRecords tutorial](https://www.tensorflow.org/tutorials/load_data/tfrecord)
 
@@ -278,9 +279,9 @@ class TFRecordWriter(_pywrap_record_io.RecordWriter):
   in `with` blocks like a normal file. (See the usage example above.)
   """
 
-  # TODO(josh11b): Support appending?
-  def __init__(self, path, options=None):
-    """Opens file `path` and creates a `TFRecordWriter` writing to it.
+    # TODO(josh11b): Support appending?
+    def __init__(self, path, options=None):
+        """Opens file `path` and creates a `TFRecordWriter` writing to it.
 
     Args:
       path: The path to the TFRecords file.
@@ -291,32 +292,34 @@ class TFRecordWriter(_pywrap_record_io.RecordWriter):
       IOError: If `path` cannot be opened for writing.
       ValueError: If valid compression_type can't be determined from `options`.
     """
-    if not isinstance(options, TFRecordOptions):
-      options = TFRecordOptions(compression_type=options)
+        if not isinstance(options, TFRecordOptions):
+            options = TFRecordOptions(compression_type=options)
 
-    # pylint: disable=protected-access
-    super(TFRecordWriter, self).__init__(
-        compat.as_bytes(path), options._as_record_writer_options())
-    # pylint: enable=protected-access
+        # pylint: disable=protected-access
+        super(TFRecordWriter, self).__init__(
+            compat.as_bytes(path), options._as_record_writer_options()
+        )
+        # pylint: enable=protected-access
 
-  # TODO(slebedev): The following wrapper methods are there to compensate
-  # for lack of signatures in pybind11-generated classes. Switch to
-  # __text_signature__ when TensorFlow drops Python 2.X support.
-  # See https://github.com/pybind/pybind11/issues/945
-  # pylint: disable=useless-super-delegation
-  def write(self, record):
-    """Write a string record to the file.
+    # TODO(slebedev): The following wrapper methods are there to compensate
+    # for lack of signatures in pybind11-generated classes. Switch to
+    # __text_signature__ when TensorFlow drops Python 2.X support.
+    # See https://github.com/pybind/pybind11/issues/945
+    # pylint: disable=useless-super-delegation
+    def write(self, record):
+        """Write a string record to the file.
 
     Args:
       record: str
     """
-    super(TFRecordWriter, self).write(record)
+        super(TFRecordWriter, self).write(record)
 
-  def flush(self):
-    """Flush the file."""
-    super(TFRecordWriter, self).flush()
+    def flush(self):
+        """Flush the file."""
+        super(TFRecordWriter, self).flush()
 
-  def close(self):
-    """Close the file."""
-    super(TFRecordWriter, self).close()
-  # pylint: enable=useless-super-delegation
+    def close(self):
+        """Close the file."""
+        super(TFRecordWriter, self).close()
+
+    # pylint: enable=useless-super-delegation

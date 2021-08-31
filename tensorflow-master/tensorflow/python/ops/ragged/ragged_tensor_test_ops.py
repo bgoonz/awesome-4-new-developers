@@ -83,9 +83,7 @@ UNARY_FLOAT_OPS = [
     special_math_ops.bessel_i1,
     special_math_ops.bessel_i1e,
 ]
-UNARY_BOOL_OPS = [
-    math_ops.logical_not,
-]
+UNARY_BOOL_OPS = [math_ops.logical_not]
 UNARY_STRING_OPS = [
     string_ops.decode_base64,
     string_ops.encode_base64,
@@ -115,15 +113,8 @@ BINARY_FLOAT_OPS = [
     math_ops.subtract,
     math_ops.truediv,
 ]
-BINARY_BOOL_OPS = [
-    math_ops.logical_and,
-    math_ops.logical_or,
-    math_ops.logical_xor,
-]
-UNARY_INT_OPS = [
-    gen_bitwise_ops.invert,
-    string_ops.unicode_script,
-]
+BINARY_BOOL_OPS = [math_ops.logical_and, math_ops.logical_or, math_ops.logical_xor]
+UNARY_INT_OPS = [gen_bitwise_ops.invert, string_ops.unicode_script]
 BINARY_INT_OPS = [
     gen_bitwise_ops.bitwise_and,
     gen_bitwise_ops.bitwise_or,

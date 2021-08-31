@@ -26,13 +26,10 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 @tf_export(v1=["train.exponential_decay"])
-def exponential_decay(learning_rate,
-                      global_step,
-                      decay_steps,
-                      decay_rate,
-                      staircase=False,
-                      name=None):
-  """Applies exponential decay to the learning rate.
+def exponential_decay(
+    learning_rate, global_step, decay_steps, decay_rate, staircase=False, name=None
+):
+    """Applies exponential decay to the learning rate.
 
   When training a model, it is often recommended to lower the learning rate as
   the training progresses.  This function applies an exponential decay function
@@ -92,18 +89,19 @@ def exponential_decay(learning_rate,
   the learning rate value across different invocations of optimizer functions.
   @end_compatibility
   """
-  decayed_lr = learning_rate_schedule.ExponentialDecay(
-      learning_rate, decay_steps, decay_rate, staircase=staircase, name=name)
-  if not context.executing_eagerly():
-    decayed_lr = decayed_lr(global_step)
-  else:
-    decayed_lr = functools.partial(decayed_lr, global_step)
-  return decayed_lr
+    decayed_lr = learning_rate_schedule.ExponentialDecay(
+        learning_rate, decay_steps, decay_rate, staircase=staircase, name=name
+    )
+    if not context.executing_eagerly():
+        decayed_lr = decayed_lr(global_step)
+    else:
+        decayed_lr = functools.partial(decayed_lr, global_step)
+    return decayed_lr
 
 
 @tf_export(v1=["train.piecewise_constant_decay", "train.piecewise_constant"])
 def piecewise_constant(x, boundaries, values, name=None):
-  """Piecewise constant from boundaries and interval values.
+    """Piecewise constant from boundaries and interval values.
 
   Example: use a learning rate that's 1.0 for the first 100001 steps, 0.5
     for the next 10000 steps, and 0.1 for any additional steps.
@@ -145,49 +143,58 @@ def piecewise_constant(x, boundaries, values, name=None):
   the learning rate value across different invocations of optimizer functions.
   @end_compatibility
   """
-  boundaries = nest.map_structure(ops.convert_to_tensor_v2_with_dispatch,
-                                  nest.flatten(boundaries))
-  values = nest.map_structure(ops.convert_to_tensor_v2_with_dispatch,
-                              nest.flatten(values))
-  x_recomp = ops.convert_to_tensor_v2_with_dispatch(x)
-  # Avoid explicit conversion to x's dtype. This could result in faulty
-  # comparisons, for example if floats are converted to integers.
-  for i, b in enumerate(boundaries):
-    if b.dtype.base_dtype != x_recomp.dtype.base_dtype:
-      # We can promote int32 boundaries to int64 without loss of precision.
-      # This covers the most common case where the user passes in boundaries
-      # as an array of Python integers.
-      if (b.dtype.base_dtype == dtypes.int32 and
-          x_recomp.dtype.base_dtype == dtypes.int64):
-        b = math_ops.cast(b, x_recomp.dtype.base_dtype)
-        boundaries[i] = b
-      else:
-        raise ValueError(
-            "Boundaries (%s) must have the same dtype as x (%s)." %
-            (b.dtype.base_dtype, x_recomp.dtype.base_dtype))
-  for v in values[1:]:
-    if v.dtype.base_dtype != values[0].dtype.base_dtype:
-      raise ValueError(
-          "Values must have elements all with the same dtype (%s vs %s)." %
-          (values[0].dtype.base_dtype, v.dtype.base_dtype))
-  decayed_lr = learning_rate_schedule.PiecewiseConstantDecay(
-      boundaries, values, name=name)
-  if not context.executing_eagerly():
-    decayed_lr = decayed_lr(x)
-  else:
-    decayed_lr = functools.partial(decayed_lr, x)
-  return decayed_lr
+    boundaries = nest.map_structure(
+        ops.convert_to_tensor_v2_with_dispatch, nest.flatten(boundaries)
+    )
+    values = nest.map_structure(
+        ops.convert_to_tensor_v2_with_dispatch, nest.flatten(values)
+    )
+    x_recomp = ops.convert_to_tensor_v2_with_dispatch(x)
+    # Avoid explicit conversion to x's dtype. This could result in faulty
+    # comparisons, for example if floats are converted to integers.
+    for i, b in enumerate(boundaries):
+        if b.dtype.base_dtype != x_recomp.dtype.base_dtype:
+            # We can promote int32 boundaries to int64 without loss of precision.
+            # This covers the most common case where the user passes in boundaries
+            # as an array of Python integers.
+            if (
+                b.dtype.base_dtype == dtypes.int32
+                and x_recomp.dtype.base_dtype == dtypes.int64
+            ):
+                b = math_ops.cast(b, x_recomp.dtype.base_dtype)
+                boundaries[i] = b
+            else:
+                raise ValueError(
+                    "Boundaries (%s) must have the same dtype as x (%s)."
+                    % (b.dtype.base_dtype, x_recomp.dtype.base_dtype)
+                )
+    for v in values[1:]:
+        if v.dtype.base_dtype != values[0].dtype.base_dtype:
+            raise ValueError(
+                "Values must have elements all with the same dtype (%s vs %s)."
+                % (values[0].dtype.base_dtype, v.dtype.base_dtype)
+            )
+    decayed_lr = learning_rate_schedule.PiecewiseConstantDecay(
+        boundaries, values, name=name
+    )
+    if not context.executing_eagerly():
+        decayed_lr = decayed_lr(x)
+    else:
+        decayed_lr = functools.partial(decayed_lr, x)
+    return decayed_lr
 
 
 @tf_export(v1=["train.polynomial_decay"])
-def polynomial_decay(learning_rate,
-                     global_step,
-                     decay_steps,
-                     end_learning_rate=0.0001,
-                     power=1.0,
-                     cycle=False,
-                     name=None):
-  """Applies a polynomial decay to the learning rate.
+def polynomial_decay(
+    learning_rate,
+    global_step,
+    decay_steps,
+    end_learning_rate=0.0001,
+    power=1.0,
+    cycle=False,
+    name=None,
+):
+    """Applies a polynomial decay to the learning rate.
 
   It is commonly observed that a monotonically decreasing learning rate, whose
   degree of change is carefully chosen, results in a better performing model.
@@ -265,29 +272,27 @@ def polynomial_decay(learning_rate,
   the learning rate value across different invocations of optimizer functions.
   @end_compatibility
   """
-  decayed_lr = learning_rate_schedule.PolynomialDecay(
-      learning_rate,
-      decay_steps,
-      end_learning_rate=end_learning_rate,
-      power=power,
-      cycle=cycle,
-      name=name)
+    decayed_lr = learning_rate_schedule.PolynomialDecay(
+        learning_rate,
+        decay_steps,
+        end_learning_rate=end_learning_rate,
+        power=power,
+        cycle=cycle,
+        name=name,
+    )
 
-  if not context.executing_eagerly():
-    decayed_lr = decayed_lr(global_step)
-  else:
-    decayed_lr = functools.partial(decayed_lr, global_step)
-  return decayed_lr
+    if not context.executing_eagerly():
+        decayed_lr = decayed_lr(global_step)
+    else:
+        decayed_lr = functools.partial(decayed_lr, global_step)
+    return decayed_lr
 
 
 @tf_export(v1=["train.natural_exp_decay"])
-def natural_exp_decay(learning_rate,
-                      global_step,
-                      decay_steps,
-                      decay_rate,
-                      staircase=False,
-                      name=None):
-  """Applies natural exponential decay to the initial learning rate.
+def natural_exp_decay(
+    learning_rate, global_step, decay_steps, decay_rate, staircase=False, name=None
+):
+    """Applies natural exponential decay to the initial learning rate.
 
   When training a model, it is often recommended to lower the learning rate as
   the training progresses.  This function applies an exponential decay function
@@ -353,29 +358,23 @@ def natural_exp_decay(learning_rate,
   the learning rate value across different invocations of optimizer functions.
   @end_compatibility
   """
-  natural_exp_rate = math_ops.exp(math_ops.negative(decay_rate))
-  decayed_lr = learning_rate_schedule.ExponentialDecay(
-      learning_rate,
-      decay_steps,
-      natural_exp_rate,
-      staircase=staircase,
-      name=name)
+    natural_exp_rate = math_ops.exp(math_ops.negative(decay_rate))
+    decayed_lr = learning_rate_schedule.ExponentialDecay(
+        learning_rate, decay_steps, natural_exp_rate, staircase=staircase, name=name
+    )
 
-  if not context.executing_eagerly():
-    decayed_lr = decayed_lr(global_step)
-  else:
-    decayed_lr = functools.partial(decayed_lr, global_step)
-  return decayed_lr
+    if not context.executing_eagerly():
+        decayed_lr = decayed_lr(global_step)
+    else:
+        decayed_lr = functools.partial(decayed_lr, global_step)
+    return decayed_lr
 
 
 @tf_export(v1=["train.inverse_time_decay"])
-def inverse_time_decay(learning_rate,
-                       global_step,
-                       decay_steps,
-                       decay_rate,
-                       staircase=False,
-                       name=None):
-  """Applies inverse time decay to the initial learning rate.
+def inverse_time_decay(
+    learning_rate, global_step, decay_steps, decay_rate, staircase=False, name=None
+):
+    """Applies inverse time decay to the initial learning rate.
 
   When training a model, it is often recommended to lower the learning rate as
   the training progresses.  This function applies an inverse decay function
@@ -441,19 +440,20 @@ def inverse_time_decay(learning_rate,
   the learning rate value across different invocations of optimizer functions.
   @end_compatibility
   """
-  decayed_lr = learning_rate_schedule.InverseTimeDecay(
-      learning_rate, decay_steps, decay_rate, staircase=staircase, name=name)
+    decayed_lr = learning_rate_schedule.InverseTimeDecay(
+        learning_rate, decay_steps, decay_rate, staircase=staircase, name=name
+    )
 
-  if not context.executing_eagerly():
-    decayed_lr = decayed_lr(global_step)
-  else:
-    decayed_lr = functools.partial(decayed_lr, global_step)
-  return decayed_lr
+    if not context.executing_eagerly():
+        decayed_lr = decayed_lr(global_step)
+    else:
+        decayed_lr = functools.partial(decayed_lr, global_step)
+    return decayed_lr
 
 
 @tf_export(v1=["train.cosine_decay"])
 def cosine_decay(learning_rate, global_step, decay_steps, alpha=0.0, name=None):
-  """Applies cosine decay to the learning rate.
+    """Applies cosine decay to the learning rate.
 
   When training a model, it is often recommended to lower the learning rate as
   the training progresses.  This function applies a cosine decay function
@@ -504,25 +504,28 @@ def cosine_decay(learning_rate, global_step, decay_steps, alpha=0.0, name=None):
   the learning rate value across different invocations of optimizer functions.
   @end_compatibility
   """
-  decayed_lr = learning_rate_schedule.CosineDecay(
-      learning_rate, decay_steps, alpha=alpha, name=name)
+    decayed_lr = learning_rate_schedule.CosineDecay(
+        learning_rate, decay_steps, alpha=alpha, name=name
+    )
 
-  if not context.executing_eagerly():
-    decayed_lr = decayed_lr(global_step)
-  else:
-    decayed_lr = functools.partial(decayed_lr, global_step)
-  return decayed_lr
+    if not context.executing_eagerly():
+        decayed_lr = decayed_lr(global_step)
+    else:
+        decayed_lr = functools.partial(decayed_lr, global_step)
+    return decayed_lr
 
 
 @tf_export(v1=["train.cosine_decay_restarts"])
-def cosine_decay_restarts(learning_rate,
-                          global_step,
-                          first_decay_steps,
-                          t_mul=2.0,
-                          m_mul=1.0,
-                          alpha=0.0,
-                          name=None):
-  """Applies cosine decay with restarts to the learning rate.
+def cosine_decay_restarts(
+    learning_rate,
+    global_step,
+    first_decay_steps,
+    t_mul=2.0,
+    m_mul=1.0,
+    alpha=0.0,
+    name=None,
+):
+    """Applies cosine decay with restarts to the learning rate.
 
   When training a model, it is often recommended to lower the learning rate as
   the training progresses.  This function applies a cosine decay function with
@@ -576,30 +579,33 @@ def cosine_decay_restarts(learning_rate,
   the learning rate value across different invocations of optimizer functions.
   @end_compatibility
   """
-  decayed_lr = learning_rate_schedule.CosineDecayRestarts(
-      learning_rate,
-      first_decay_steps,
-      t_mul=t_mul,
-      m_mul=m_mul,
-      alpha=alpha,
-      name=name)
+    decayed_lr = learning_rate_schedule.CosineDecayRestarts(
+        learning_rate,
+        first_decay_steps,
+        t_mul=t_mul,
+        m_mul=m_mul,
+        alpha=alpha,
+        name=name,
+    )
 
-  if not context.executing_eagerly():
-    decayed_lr = decayed_lr(global_step)
-  else:
-    decayed_lr = functools.partial(decayed_lr, global_step)
-  return decayed_lr
+    if not context.executing_eagerly():
+        decayed_lr = decayed_lr(global_step)
+    else:
+        decayed_lr = functools.partial(decayed_lr, global_step)
+    return decayed_lr
 
 
 @tf_export(v1=["train.linear_cosine_decay"])
-def linear_cosine_decay(learning_rate,
-                        global_step,
-                        decay_steps,
-                        num_periods=0.5,
-                        alpha=0.0,
-                        beta=0.001,
-                        name=None):
-  """Applies linear cosine decay to the learning rate.
+def linear_cosine_decay(
+    learning_rate,
+    global_step,
+    decay_steps,
+    num_periods=0.5,
+    alpha=0.0,
+    beta=0.001,
+    name=None,
+):
+    """Applies linear cosine decay to the learning rate.
 
   Note that linear cosine decay is more aggressive than cosine decay and
   larger initial learning rates can typically be used.
@@ -661,32 +667,35 @@ def linear_cosine_decay(learning_rate,
   the learning rate value across different invocations of optimizer functions.
   @end_compatibility
   """
-  decayed_lr = learning_rate_schedule.LinearCosineDecay(
-      learning_rate,
-      decay_steps,
-      num_periods=num_periods,
-      alpha=alpha,
-      beta=beta,
-      name=name)
+    decayed_lr = learning_rate_schedule.LinearCosineDecay(
+        learning_rate,
+        decay_steps,
+        num_periods=num_periods,
+        alpha=alpha,
+        beta=beta,
+        name=name,
+    )
 
-  if not context.executing_eagerly():
-    decayed_lr = decayed_lr(global_step)
-  else:
-    decayed_lr = functools.partial(decayed_lr, global_step)
-  return decayed_lr
+    if not context.executing_eagerly():
+        decayed_lr = decayed_lr(global_step)
+    else:
+        decayed_lr = functools.partial(decayed_lr, global_step)
+    return decayed_lr
 
 
 @tf_export(v1=["train.noisy_linear_cosine_decay"])
-def noisy_linear_cosine_decay(learning_rate,
-                              global_step,
-                              decay_steps,
-                              initial_variance=1.0,
-                              variance_decay=0.55,
-                              num_periods=0.5,
-                              alpha=0.0,
-                              beta=0.001,
-                              name=None):
-  """Applies noisy linear cosine decay to the learning rate.
+def noisy_linear_cosine_decay(
+    learning_rate,
+    global_step,
+    decay_steps,
+    initial_variance=1.0,
+    variance_decay=0.55,
+    num_periods=0.5,
+    alpha=0.0,
+    beta=0.001,
+    name=None,
+):
+    """Applies noisy linear cosine decay to the learning rate.
 
   Note that linear cosine decay is more aggressive than cosine decay and
   larger initial learning rates can typically be used.
@@ -754,18 +763,19 @@ def noisy_linear_cosine_decay(learning_rate,
   the learning rate value across different invocations of optimizer functions.
   @end_compatibility
   """
-  decayed_lr = learning_rate_schedule.NoisyLinearCosineDecay(
-      learning_rate,
-      decay_steps,
-      initial_variance=initial_variance,
-      variance_decay=variance_decay,
-      num_periods=num_periods,
-      alpha=alpha,
-      beta=beta,
-      name=name)
+    decayed_lr = learning_rate_schedule.NoisyLinearCosineDecay(
+        learning_rate,
+        decay_steps,
+        initial_variance=initial_variance,
+        variance_decay=variance_decay,
+        num_periods=num_periods,
+        alpha=alpha,
+        beta=beta,
+        name=name,
+    )
 
-  if not context.executing_eagerly():
-    decayed_lr = decayed_lr(global_step)
-  else:
-    decayed_lr = functools.partial(decayed_lr, global_step)
-  return decayed_lr
+    if not context.executing_eagerly():
+        decayed_lr = decayed_lr(global_step)
+    else:
+        decayed_lr = functools.partial(decayed_lr, global_step)
+    return decayed_lr

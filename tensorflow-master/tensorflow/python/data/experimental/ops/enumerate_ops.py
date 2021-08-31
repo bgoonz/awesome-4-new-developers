@@ -24,7 +24,7 @@ from tensorflow.python.util.tf_export import tf_export
 @deprecation.deprecated(None, "Use `tf.data.Dataset.enumerate()`.")
 @tf_export("data.experimental.enumerate_dataset")
 def enumerate_dataset(start=0):
-  """A transformation that enumerates the elements of a dataset.
+    """A transformation that enumerates the elements of a dataset.
 
   It is similar to python's `enumerate`.
   For example:
@@ -52,7 +52,7 @@ def enumerate_dataset(start=0):
     `tf.data.Dataset.apply`.
   """
 
-  def _apply_fn(dataset):
-    return dataset.enumerate(start)
+    def _apply_fn(dataset):
+        return dataset.enumerate(start)
 
-  return _apply_fn
+    return _apply_fn

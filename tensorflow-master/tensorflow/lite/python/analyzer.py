@@ -18,17 +18,20 @@ import os
 
 # pylint: disable=g-import-not-at-top
 if not os.path.splitext(__file__)[0].endswith(
-    os.path.join("tflite_runtime", "analyzer")):
-  # This file is part of tensorflow package.
-  from tensorflow.lite.python import wrap_toco
-  from tensorflow.lite.python.analyzer_wrapper import _pywrap_analyzer_wrapper as _analyzer_wrapper
+    os.path.join("tflite_runtime", "analyzer")
+):
+    # This file is part of tensorflow package.
+    from tensorflow.lite.python import wrap_toco
+    from tensorflow.lite.python.analyzer_wrapper import (
+        _pywrap_analyzer_wrapper as _analyzer_wrapper,
+    )
 else:
-  # This file is part of tflite_runtime package.
-  from tflite_runtime import _pywrap_analyzer_wrapper as _analyzer_wrapper
+    # This file is part of tflite_runtime package.
+    from tflite_runtime import _pywrap_analyzer_wrapper as _analyzer_wrapper
 
 
-class ModelAnalyzer():
-  """Provides a collection of TFLite model analyzer tools.
+class ModelAnalyzer:
+    """Provides a collection of TFLite model analyzer tools.
 
   Example:
 
@@ -54,12 +57,9 @@ class ModelAnalyzer():
   WARNING: Experimental interface, subject to change.
   """
 
-  @staticmethod
-  def analyze(model_path=None,
-              model_content=None,
-              gpu_compatibility=False,
-              **kwargs):
-    """Analyzes the given tflite_model with dumping model structure.
+    @staticmethod
+    def analyze(model_path=None, model_content=None, gpu_compatibility=False, **kwargs):
+        """Analyzes the given tflite_model with dumping model structure.
 
     This tool provides a way to understand users' TFLite flatbuffer model by
     dumping internal graph structure. It also provides additional features
@@ -77,22 +77,26 @@ class ModelAnalyzer():
     Returns:
       Print analyzed report via console output.
     """
-    if not model_path and not model_content:
-      raise ValueError("neither `model_path` nor `model_content` is provided")
-    if model_path:
-      print(f"=== {model_path} ===\n")
-      tflite_model = model_path
-      input_is_filepath = True
-    else:
-      print("=== TFLite ModelAnalyzer ===\n")
-      tflite_model = model_content
-      input_is_filepath = False
+        if not model_path and not model_content:
+            raise ValueError("neither `model_path` nor `model_content` is provided")
+        if model_path:
+            print(f"=== {model_path} ===\n")
+            tflite_model = model_path
+            input_is_filepath = True
+        else:
+            print("=== TFLite ModelAnalyzer ===\n")
+            tflite_model = model_content
+            input_is_filepath = False
 
-    if kwargs.get("experimental_use_mlir", False):
-      print(
-          wrap_toco.wrapped_flat_buffer_file_to_mlir(tflite_model,
-                                                     input_is_filepath))
-    else:
-      print(
-          _analyzer_wrapper.ModelAnalyzer(tflite_model, input_is_filepath,
-                                          gpu_compatibility))
+        if kwargs.get("experimental_use_mlir", False):
+            print(
+                wrap_toco.wrapped_flat_buffer_file_to_mlir(
+                    tflite_model, input_is_filepath
+                )
+            )
+        else:
+            print(
+                _analyzer_wrapper.ModelAnalyzer(
+                    tflite_model, input_is_filepath, gpu_compatibility
+                )
+            )

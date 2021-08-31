@@ -31,50 +31,51 @@ from tensorflow.python.platform import test
 
 
 def batch_wrapper(dataset, batch_size, distribution, repeat=None):
-  if repeat:
-    dataset = dataset.repeat(repeat)
-  # TPUs currently require fully defined input shapes, drop_remainder ensures
-  # the input will have fully defined shapes.
-  if isinstance(distribution,
-                (tpu_strategy.TPUStrategy, tpu_strategy.TPUStrategyV1)):
-    return dataset.batch(batch_size, drop_remainder=True)
-  else:
-    return dataset.batch(batch_size)
+    if repeat:
+        dataset = dataset.repeat(repeat)
+    # TPUs currently require fully defined input shapes, drop_remainder ensures
+    # the input will have fully defined shapes.
+    if isinstance(distribution, (tpu_strategy.TPUStrategy, tpu_strategy.TPUStrategyV1)):
+        return dataset.batch(batch_size, drop_remainder=True)
+    else:
+        return dataset.batch(batch_size)
 
 
 @ds_combinations.generate(
     combinations.combine(
         # Investigate why crossing is not supported with TPU.
         distribution=all_strategies,
-        mode=['eager', 'graph']))
+        mode=["eager", "graph"],
+    )
+)
 class CategoryCrossingDistributionTest(
-    keras_parameterized.TestCase,
-    preprocessing_test_utils.PreprocessingLayerTest):
+    keras_parameterized.TestCase, preprocessing_test_utils.PreprocessingLayerTest
+):
+    def test_distribution(self, distribution):
+        input_array_1 = np.array([["a", "b"], ["c", "d"]])
+        input_array_2 = np.array([["e", "f"], ["g", "h"]])
+        inp_dataset = dataset_ops.DatasetV2.from_tensor_slices(
+            {"input_1": input_array_1, "input_2": input_array_2}
+        )
+        inp_dataset = batch_wrapper(inp_dataset, 2, distribution)
 
-  def test_distribution(self, distribution):
-    input_array_1 = np.array([['a', 'b'], ['c', 'd']])
-    input_array_2 = np.array([['e', 'f'], ['g', 'h']])
-    inp_dataset = dataset_ops.DatasetV2.from_tensor_slices(
-        {'input_1': input_array_1, 'input_2': input_array_2})
-    inp_dataset = batch_wrapper(inp_dataset, 2, distribution)
+        # pyformat: disable
+        expected_output = [
+            [b"a_X_e", b"a_X_f", b"b_X_e", b"b_X_f"],
+            [b"c_X_g", b"c_X_h", b"d_X_g", b"d_X_h"],
+        ]
+        config.set_soft_device_placement(True)
 
-    # pyformat: disable
-    expected_output = [[b'a_X_e', b'a_X_f', b'b_X_e', b'b_X_f'],
-                       [b'c_X_g', b'c_X_h', b'd_X_g', b'd_X_h']]
-    config.set_soft_device_placement(True)
-
-    with distribution.scope():
-      input_data_1 = keras.Input(shape=(2,), dtype=dtypes.string,
-                                 name='input_1')
-      input_data_2 = keras.Input(shape=(2,), dtype=dtypes.string,
-                                 name='input_2')
-      input_data = [input_data_1, input_data_2]
-      layer = category_crossing.CategoryCrossing()
-      int_data = layer(input_data)
-      model = keras.Model(inputs=input_data, outputs=int_data)
-    output_dataset = model.predict(inp_dataset)
-    self.assertAllEqual(expected_output, output_dataset)
+        with distribution.scope():
+            input_data_1 = keras.Input(shape=(2,), dtype=dtypes.string, name="input_1")
+            input_data_2 = keras.Input(shape=(2,), dtype=dtypes.string, name="input_2")
+            input_data = [input_data_1, input_data_2]
+            layer = category_crossing.CategoryCrossing()
+            int_data = layer(input_data)
+            model = keras.Model(inputs=input_data, outputs=int_data)
+        output_dataset = model.predict(inp_dataset)
+        self.assertAllEqual(expected_output, output_dataset)
 
 
-if __name__ == '__main__':
-  test.main()
+if __name__ == "__main__":
+    test.main()

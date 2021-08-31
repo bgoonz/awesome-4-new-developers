@@ -23,16 +23,16 @@ from tensorflow.python.ops import array_ops
 
 
 def _get_available_devices():
-  return [x.name for x in backend.get_session().list_devices()]
+    return [x.name for x in backend.get_session().list_devices()]
 
 
 def _normalize_device_name(name):
-  name = '/' + name.lower().split('device:')[1]
-  return name
+    name = "/" + name.lower().split("device:")[1]
+    return name
 
 
 def multi_gpu_model(model, gpus, cpu_merge=True, cpu_relocation=False):
-  """Replicates a model on different GPUs.
+    """Replicates a model on different GPUs.
 
   Specifically, this function implements single-machine
   multi-GPU data parallelism. It works in the following way:
@@ -146,36 +146,39 @@ def multi_gpu_model(model, gpus, cpu_merge=True, cpu_relocation=False):
   Raises:
     ValueError: if the `gpus` argument does not match available devices.
   """
-  if isinstance(gpus, (list, tuple)):
-    if len(gpus) <= 1:
-      raise ValueError('For multi-gpu usage to be effective, '
-                       'call `multi_gpu_model` with `len(gpus) >= 2`. '
-                       'Received: `gpus=%s`' % gpus)
-    num_gpus = len(gpus)
-    target_gpu_ids = gpus
-  else:
-    if gpus <= 1:
-      raise ValueError('For multi-gpu usage to be effective, '
-                       'call `multi_gpu_model` with `gpus >= 2`. '
-                       'Received: `gpus=%s`' % gpus)
-    num_gpus = gpus
-    target_gpu_ids = range(num_gpus)
+    if isinstance(gpus, (list, tuple)):
+        if len(gpus) <= 1:
+            raise ValueError(
+                "For multi-gpu usage to be effective, "
+                "call `multi_gpu_model` with `len(gpus) >= 2`. "
+                "Received: `gpus=%s`" % gpus
+            )
+        num_gpus = len(gpus)
+        target_gpu_ids = gpus
+    else:
+        if gpus <= 1:
+            raise ValueError(
+                "For multi-gpu usage to be effective, "
+                "call `multi_gpu_model` with `gpus >= 2`. "
+                "Received: `gpus=%s`" % gpus
+            )
+        num_gpus = gpus
+        target_gpu_ids = range(num_gpus)
 
-  target_devices = ['/cpu:0'] + ['/gpu:%d' % i for i in target_gpu_ids]
-  available_devices = _get_available_devices()
-  available_devices = [
-      _normalize_device_name(name) for name in available_devices
-  ]
-  for device in target_devices:
-    if device not in available_devices:
-      raise ValueError('To call `multi_gpu_model` with `gpus=%s`, '
-                       'we expect the following devices to be available: %s. '
-                       'However this machine only has: %s. '
-                       'Try reducing `gpus`.' % (gpus, target_devices,
-                                                 available_devices))
+    target_devices = ["/cpu:0"] + ["/gpu:%d" % i for i in target_gpu_ids]
+    available_devices = _get_available_devices()
+    available_devices = [_normalize_device_name(name) for name in available_devices]
+    for device in target_devices:
+        if device not in available_devices:
+            raise ValueError(
+                "To call `multi_gpu_model` with `gpus=%s`, "
+                "we expect the following devices to be available: %s. "
+                "However this machine only has: %s. "
+                "Try reducing `gpus`." % (gpus, target_devices, available_devices)
+            )
 
-  def get_slice(data, i, parts):
-    """Slice an array into `parts` slices and return slice `i`.
+    def get_slice(data, i, parts):
+        """Slice an array into `parts` slices and return slice `i`.
 
     Args:
       data: array to slice.
@@ -185,74 +188,74 @@ def multi_gpu_model(model, gpus, cpu_merge=True, cpu_relocation=False):
     Returns:
       Slice `i` of `data`.
     """
-    shape = array_ops.shape(data)
-    batch_size = shape[:1]
-    input_shape = shape[1:]
-    step = batch_size // parts
-    if i == parts - 1:
-      size = batch_size - step * i
-    else:
-      size = step
-    size = array_ops.concat([size, input_shape], axis=0)
-    stride = array_ops.concat([step, input_shape * 0], axis=0)
-    start = stride * i
-    return array_ops.slice(data, start, size)
+        shape = array_ops.shape(data)
+        batch_size = shape[:1]
+        input_shape = shape[1:]
+        step = batch_size // parts
+        if i == parts - 1:
+            size = batch_size - step * i
+        else:
+            size = step
+        size = array_ops.concat([size, input_shape], axis=0)
+        stride = array_ops.concat([step, input_shape * 0], axis=0)
+        start = stride * i
+        return array_ops.slice(data, start, size)
 
-  # Relocate the model definition under CPU device scope if needed
-  if cpu_relocation:
-    from tensorflow.python.keras.models import clone_model  # pylint: disable=g-import-not-at-top
-    with ops.device('/cpu:0'):
-      model = clone_model(model)
+    # Relocate the model definition under CPU device scope if needed
+    if cpu_relocation:
+        from tensorflow.python.keras.models import (
+            clone_model,
+        )  # pylint: disable=g-import-not-at-top
 
-  all_outputs = [[] for _ in range(len(model.outputs))]
+        with ops.device("/cpu:0"):
+            model = clone_model(model)
 
-  # Place a copy of the model on each GPU,
-  # each getting a slice of the inputs.
-  for i, gpu_id in enumerate(target_gpu_ids):
-    with ops.device('/gpu:%d' % gpu_id):
-      with backend.name_scope('replica_%d' % gpu_id):
-        inputs = []
-        # Retrieve a slice of the input.
-        for x in model.inputs:
-          input_shape = tuple(x.shape.as_list())[1:]
-          slice_i = Lambda(
-              get_slice,
-              output_shape=input_shape,
-              arguments={
-                  'i': i,
-                  'parts': num_gpus
-              })(
-                  x)
-          inputs.append(slice_i)
+    all_outputs = [[] for _ in range(len(model.outputs))]
 
-        # Apply model on slice
-        # (creating a model replica on the target device).
-        outputs = model(inputs)
-        if not isinstance(outputs, list):
-          outputs = [outputs]
+    # Place a copy of the model on each GPU,
+    # each getting a slice of the inputs.
+    for i, gpu_id in enumerate(target_gpu_ids):
+        with ops.device("/gpu:%d" % gpu_id):
+            with backend.name_scope("replica_%d" % gpu_id):
+                inputs = []
+                # Retrieve a slice of the input.
+                for x in model.inputs:
+                    input_shape = tuple(x.shape.as_list())[1:]
+                    slice_i = Lambda(
+                        get_slice,
+                        output_shape=input_shape,
+                        arguments={"i": i, "parts": num_gpus},
+                    )(x)
+                    inputs.append(slice_i)
 
-        # Save the outputs for merging back together later.
-        for o, output in enumerate(outputs):
-          all_outputs[o].append(output)
+                # Apply model on slice
+                # (creating a model replica on the target device).
+                outputs = model(inputs)
+                if not isinstance(outputs, list):
+                    outputs = [outputs]
 
-  # Deduplicate output names to handle Siamese networks.
-  occurrences = {}
-  for n in model.output_names:
-    if n not in occurrences:
-      occurrences[n] = 1
-    else:
-      occurrences[n] += 1
-  conflict_counter = {n: 0 for n, count in occurrences.items() if count > 1}
-  output_names = []
-  for n in model.output_names:
-    if n in conflict_counter:
-      conflict_counter[n] += 1
-      n += '_%d' % conflict_counter[n]
-    output_names.append(n)
+                # Save the outputs for merging back together later.
+                for o, output in enumerate(outputs):
+                    all_outputs[o].append(output)
 
-  # Merge outputs under expected scope.
-  with ops.device('/cpu:0' if cpu_merge else '/gpu:%d' % target_gpu_ids[0]):
-    merged = []
-    for name, outputs in zip(output_names, all_outputs):
-      merged.append(concatenate(outputs, axis=0, name=name))
-    return Model(model.inputs, merged)
+    # Deduplicate output names to handle Siamese networks.
+    occurrences = {}
+    for n in model.output_names:
+        if n not in occurrences:
+            occurrences[n] = 1
+        else:
+            occurrences[n] += 1
+    conflict_counter = {n: 0 for n, count in occurrences.items() if count > 1}
+    output_names = []
+    for n in model.output_names:
+        if n in conflict_counter:
+            conflict_counter[n] += 1
+            n += "_%d" % conflict_counter[n]
+        output_names.append(n)
+
+    # Merge outputs under expected scope.
+    with ops.device("/cpu:0" if cpu_merge else "/gpu:%d" % target_gpu_ids[0]):
+        merged = []
+        for name, outputs in zip(output_names, all_outputs):
+            merged.append(concatenate(outputs, axis=0, name=name))
+        return Model(model.inputs, merged)

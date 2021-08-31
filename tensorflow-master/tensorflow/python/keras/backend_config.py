@@ -18,19 +18,19 @@ from tensorflow.python.util import dispatch
 from tensorflow.python.util.tf_export import keras_export
 
 # The type of float to use throughout a session.
-_FLOATX = 'float32'
+_FLOATX = "float32"
 
 # Epsilon fuzz factor used throughout the codebase.
 _EPSILON = 1e-7
 
 # Default image data format, one of "channels_last", "channels_first".
-_IMAGE_DATA_FORMAT = 'channels_last'
+_IMAGE_DATA_FORMAT = "channels_last"
 
 
-@keras_export('keras.backend.epsilon')
+@keras_export("keras.backend.epsilon")
 @dispatch.add_dispatch_support
 def epsilon():
-  """Returns the value of the fuzz factor used in numeric expressions.
+    """Returns the value of the fuzz factor used in numeric expressions.
 
   Returns:
       A float.
@@ -39,12 +39,12 @@ def epsilon():
   >>> tf.keras.backend.epsilon()
   1e-07
   """
-  return _EPSILON
+    return _EPSILON
 
 
-@keras_export('keras.backend.set_epsilon')
+@keras_export("keras.backend.set_epsilon")
 def set_epsilon(value):
-  """Sets the value of the fuzz factor used in numeric expressions.
+    """Sets the value of the fuzz factor used in numeric expressions.
 
   Args:
       value: float. New value of epsilon.
@@ -57,13 +57,13 @@ def set_epsilon(value):
   1e-05
    >>> tf.keras.backend.set_epsilon(1e-7)
   """
-  global _EPSILON
-  _EPSILON = value
+    global _EPSILON
+    _EPSILON = value
 
 
-@keras_export('keras.backend.floatx')
+@keras_export("keras.backend.floatx")
 def floatx():
-  """Returns the default float type, as a string.
+    """Returns the default float type, as a string.
 
   E.g. `'float16'`, `'float32'`, `'float64'`.
 
@@ -74,12 +74,12 @@ def floatx():
   >>> tf.keras.backend.floatx()
   'float32'
   """
-  return _FLOATX
+    return _FLOATX
 
 
-@keras_export('keras.backend.set_floatx')
+@keras_export("keras.backend.set_floatx")
 def set_floatx(value):
-  """Sets the default float type.
+    """Sets the default float type.
 
   Note: It is not recommended to set this to float16 for training, as this will
   likely cause numeric stability issues. Instead, mixed precision, which is
@@ -102,16 +102,16 @@ def set_floatx(value):
   Raises:
       ValueError: In case of invalid value.
   """
-  global _FLOATX
-  if value not in {'float16', 'float32', 'float64'}:
-    raise ValueError('Unknown floatx type: ' + str(value))
-  _FLOATX = str(value)
+    global _FLOATX
+    if value not in {"float16", "float32", "float64"}:
+        raise ValueError("Unknown floatx type: " + str(value))
+    _FLOATX = str(value)
 
 
-@keras_export('keras.backend.image_data_format')
+@keras_export("keras.backend.image_data_format")
 @dispatch.add_dispatch_support
 def image_data_format():
-  """Returns the default image data format convention.
+    """Returns the default image data format convention.
 
   Returns:
       A string, either `'channels_first'` or `'channels_last'`
@@ -120,12 +120,12 @@ def image_data_format():
   >>> tf.keras.backend.image_data_format()
   'channels_last'
   """
-  return _IMAGE_DATA_FORMAT
+    return _IMAGE_DATA_FORMAT
 
 
-@keras_export('keras.backend.set_image_data_format')
+@keras_export("keras.backend.set_image_data_format")
 def set_image_data_format(data_format):
-  """Sets the value of the image data format convention.
+    """Sets the value of the image data format convention.
 
   Args:
       data_format: string. `'channels_first'` or `'channels_last'`.
@@ -141,7 +141,7 @@ def set_image_data_format(data_format):
   Raises:
       ValueError: In case of invalid `data_format` value.
   """
-  global _IMAGE_DATA_FORMAT
-  if data_format not in {'channels_last', 'channels_first'}:
-    raise ValueError('Unknown data_format: ' + str(data_format))
-  _IMAGE_DATA_FORMAT = str(data_format)
+    global _IMAGE_DATA_FORMAT
+    if data_format not in {"channels_last", "channels_first"}:
+        raise ValueError("Unknown data_format: " + str(data_format))
+    _IMAGE_DATA_FORMAT = str(data_format)

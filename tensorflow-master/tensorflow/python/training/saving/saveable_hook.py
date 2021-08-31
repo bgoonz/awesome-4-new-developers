@@ -22,7 +22,7 @@ from tensorflow.python.training.tracking import base
 
 
 class SaveableHook(base.NoRestoreSaveable):
-  """Base class for running callbacks at Save/Restore time.
+    """Base class for running callbacks at Save/Restore time.
 
   Subclasses should override one or both methods to modify or read variables
   during the saving process. No guarantees are made regarding the precedence
@@ -35,25 +35,22 @@ class SaveableHook(base.NoRestoreSaveable):
   Saves a single constant in order to be compliant with the SaveableObject API.
   """
 
-  def __init__(self, name):
-    """Creates a `SaveableHook` object.
+    def __init__(self, name):
+        """Creates a `SaveableHook` object.
 
     Args:
       name: the name to save the object under.
     """
-    super(SaveableHook, self).__init__(
-        tensor=constant_op.constant(0),
-        name=name,
-    )
+        super(SaveableHook, self).__init__(tensor=constant_op.constant(0), name=name)
 
-  @property
-  def device(self):
-    return self.op.device
+    @property
+    def device(self):
+        return self.op.device
 
-  def before_save(self):
-    """This method will be called before iterating devices for saving."""
-    pass
+    def before_save(self):
+        """This method will be called before iterating devices for saving."""
+        pass
 
-  def after_restore(self):
-    """This method will be called after each device is restored."""
-    pass
+    def after_restore(self):
+        """This method will be called after each device is restored."""
+        pass

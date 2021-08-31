@@ -22,12 +22,8 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 @tf_export(v1=["train.basic_train_loop"])
-def basic_train_loop(supervisor,
-                     train_step_fn,
-                     args=None,
-                     kwargs=None,
-                     master=""):
-  """Basic loop to train a model.
+def basic_train_loop(supervisor, train_step_fn, args=None, kwargs=None, master=""):
+    """Basic loop to train a model.
 
   Calls `train_step_fn` in a loop to train a model.  The function is called as:
 
@@ -48,18 +44,18 @@ def basic_train_loop(supervisor,
     master: Master to use to create the training session.  Defaults to `""`
       which causes the session to be created in the local process.
   """
-  if args is None:
-    args = []
-  if kwargs is None:
-    kwargs = {}
-  should_retry = True
-  while should_retry:
-    try:
-      should_retry = False
-      with supervisor.managed_session(master) as sess:
-        while not supervisor.should_stop():
-          train_step_fn(sess, *args, **kwargs)
-    except errors.AbortedError:
-      # Always re-run on AbortedError as it indicates a restart of one of the
-      # distributed tensorflow servers.
-      should_retry = True
+    if args is None:
+        args = []
+    if kwargs is None:
+        kwargs = {}
+    should_retry = True
+    while should_retry:
+        try:
+            should_retry = False
+            with supervisor.managed_session(master) as sess:
+                while not supervisor.should_stop():
+                    train_step_fn(sess, *args, **kwargs)
+        except errors.AbortedError:
+            # Always re-run on AbortedError as it indicates a restart of one of the
+            # distributed tensorflow servers.
+            should_retry = True

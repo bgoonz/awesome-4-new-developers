@@ -37,13 +37,15 @@ __all__ = ["make_template"]
 
 
 @tf_export(v1=["make_template"])
-def make_template(name_,
-                  func_,
-                  create_scope_now_=False,
-                  unique_name_=None,
-                  custom_getter_=None,
-                  **kwargs):
-  """Given an arbitrary function, wrap it so that it does variable sharing.
+def make_template(
+    name_,
+    func_,
+    create_scope_now_=False,
+    unique_name_=None,
+    custom_getter_=None,
+    **kwargs
+):
+    """Given an arbitrary function, wrap it so that it does variable sharing.
 
   This wraps `func_` in a Template and partially evaluates it. Templates are
   functions that create variables the first time they are called and reuse them
@@ -151,24 +153,27 @@ def make_template(name_,
   Raises:
     ValueError: if `name_` is None.
   """
-  return make_template_internal(
-      name_,
-      func_,
-      create_scope_now_,
-      unique_name_,
-      custom_getter_,
-      create_graph_function_=False,
-      **kwargs)
+    return make_template_internal(
+        name_,
+        func_,
+        create_scope_now_,
+        unique_name_,
+        custom_getter_,
+        create_graph_function_=False,
+        **kwargs
+    )
 
 
-def make_template_internal(name_,
-                           func_,
-                           create_scope_now_=False,
-                           unique_name_=None,
-                           custom_getter_=None,
-                           create_graph_function_=False,
-                           **kwargs):
-  """Make a template, optionally compiling func_ into a graph function.
+def make_template_internal(
+    name_,
+    func_,
+    create_scope_now_=False,
+    unique_name_=None,
+    custom_getter_=None,
+    create_graph_function_=False,
+    **kwargs
+):
+    """Make a template, optionally compiling func_ into a graph function.
 
   See `make_template` for full documentation.
 
@@ -209,38 +214,40 @@ def make_template_internal(name_,
     ValueError: if `unique_name_` is not None and eager execution is enabled.
   """
 
-  if kwargs:
-    func_ = tf_decorator.make_decorator(func_,
-                                        functools.partial(func_, **kwargs))
-  if context.executing_eagerly():
-    if unique_name_ is not None:
-      raise ValueError(
-          "unique_name_ cannot be used when eager execution is enabled.")
-    return EagerTemplate(
+    if kwargs:
+        func_ = tf_decorator.make_decorator(func_, functools.partial(func_, **kwargs))
+    if context.executing_eagerly():
+        if unique_name_ is not None:
+            raise ValueError(
+                "unique_name_ cannot be used when eager execution is enabled."
+            )
+        return EagerTemplate(
+            name_,
+            func_,
+            create_scope_now=create_scope_now_,
+            custom_getter=custom_getter_,
+            create_graph_function=create_graph_function_,
+        )
+    return Template(
         name_,
         func_,
         create_scope_now=create_scope_now_,
+        unique_name=unique_name_,
         custom_getter=custom_getter_,
-        create_graph_function=create_graph_function_)
-  return Template(
-      name_,
-      func_,
-      create_scope_now=create_scope_now_,
-      unique_name=unique_name_,
-      custom_getter=custom_getter_,
-      create_graph_function=create_graph_function_)
+        create_graph_function=create_graph_function_,
+    )
 
 
 def _skip_common_stack_elements(stacktrace, base_case):
-  """Skips items that the target stacktrace shares with the base stacktrace."""
-  for i, (trace, base) in enumerate(zip(stacktrace, base_case)):
-    if trace != base:
-      return stacktrace[i:]
-  return stacktrace[-1:]
+    """Skips items that the target stacktrace shares with the base stacktrace."""
+    for i, (trace, base) in enumerate(zip(stacktrace, base_case)):
+        if trace != base:
+            return stacktrace[i:]
+    return stacktrace[-1:]
 
 
 class Template(trackable.Trackable):
-  """Wrap a function to aid in variable sharing.
+    """Wrap a function to aid in variable sharing.
 
   Templates are functions that create variables the first time they are called
   and reuse them thereafter. See `make_template` for full documentation.
@@ -251,14 +258,16 @@ class Template(trackable.Trackable):
   call.
   """
 
-  def __init__(self,
-               name,
-               func,
-               create_scope_now=False,
-               unique_name=None,
-               custom_getter=None,
-               create_graph_function=False):
-    """Creates a template for the given function.
+    def __init__(
+        self,
+        name,
+        func,
+        create_scope_now=False,
+        unique_name=None,
+        custom_getter=None,
+        create_graph_function=False,
+    ):
+        """Creates a template for the given function.
 
     Args:
       name: A name for the scope created by this template. The name will be made
@@ -286,269 +295,298 @@ class Template(trackable.Trackable):
     Raises:
       ValueError: if `name` is None.
     """
-    if create_graph_function:
-      self._func = function.defun(func)
-    else:
-      self._func = func
-    self._stacktrace = traceback.format_stack()[:-2]
-    self._name = name
-    self._unique_name = unique_name
-    self._custom_getter = custom_getter
-    if name is None:
-      raise ValueError("name cannot be None.")
-    if create_scope_now:
-      with variable_scope._pure_variable_scope(  # pylint:disable=protected-access
-          (self._unique_name or
-           variable_scope._get_unique_variable_scope(self._name)),  # pylint:disable=protected-access
-          custom_getter=self._custom_getter) as vs:
-        self._variable_scope = vs
-    else:
-      self._variable_scope = None
-    # This variable keeps track of whether the template has been called to
-    # completion, which is not the same as whether the scope has been created.
-    self._variables_created = False
-    # `MirroredStrategy` builds the graph with multiple threads. If a
-    # `merge_call` happens within a template, multiple calls may be in progress
-    # simultaneously. This variable keeps track of whether any call of the
-    # template has started.
-    self._first_call = True
+        if create_graph_function:
+            self._func = function.defun(func)
+        else:
+            self._func = func
+        self._stacktrace = traceback.format_stack()[:-2]
+        self._name = name
+        self._unique_name = unique_name
+        self._custom_getter = custom_getter
+        if name is None:
+            raise ValueError("name cannot be None.")
+        if create_scope_now:
+            with variable_scope._pure_variable_scope(  # pylint:disable=protected-access
+                (
+                    self._unique_name
+                    or variable_scope._get_unique_variable_scope(self._name)
+                ),  # pylint:disable=protected-access
+                custom_getter=self._custom_getter,
+            ) as vs:
+                self._variable_scope = vs
+        else:
+            self._variable_scope = None
+        # This variable keeps track of whether the template has been called to
+        # completion, which is not the same as whether the scope has been created.
+        self._variables_created = False
+        # `MirroredStrategy` builds the graph with multiple threads. If a
+        # `merge_call` happens within a template, multiple calls may be in progress
+        # simultaneously. This variable keeps track of whether any call of the
+        # template has started.
+        self._first_call = True
 
-  def _call_func(self, args, kwargs):
-    try:
-      if self._variables_created:
-        vars_at_start = len(
-            ops.get_collection_ref(ops.GraphKeys.GLOBAL_VARIABLES))
-        trainable_at_start = len(
-            ops.get_collection_ref(ops.GraphKeys.TRAINABLE_VARIABLES))
-
-        result = self._func(*args, **kwargs)
-
-        # Variables were previously created, implying this is not the first
-        # time the template has been called. Check to make sure that no new
-        # trainable variables were created this time around.
-        trainable_variables = ops.get_collection_ref(
-            ops.GraphKeys.TRAINABLE_VARIABLES)
-
-        # If a variable that we intend to train is created as a side effect
-        # of creating a template, then that is almost certainly an error.
-        if trainable_at_start != len(trainable_variables):
-          raise ValueError("Trainable variable created when calling a template "
-                           "after the first time, perhaps you used tf.Variable "
-                           "when you meant tf.get_variable: %s" %
-                           (trainable_variables[trainable_at_start:],))
-
-        # Non-trainable tracking variables are a legitimate reason why a new
-        # variable would be created, but it is a relatively advanced use-case,
-        # so log it.
-        variables = ops.get_collection_ref(ops.GraphKeys.GLOBAL_VARIABLES)
-        if vars_at_start != len(variables):
-          logging.info(
-              "New variables created when calling a template after "
-              "the first time, perhaps you used tf.Variable when you "
-              "meant tf.get_variable: %s", variables[vars_at_start:])
-      elif self._first_call:
-        self._first_call = False
+    def _call_func(self, args, kwargs):
         try:
-          # The first time we run, restore variables if necessary (via
-          # Trackable).
-          with trackable_util.capture_dependencies(template=self):
-            result = self._func(*args, **kwargs)
-        except:
-          self._first_call = True
-          raise
-        self._variables_created = True
-      else:  # We are calling the template in parallel from another thread.
-        result = self._func(*args, **kwargs)
-      return result
-    except Exception as exc:
-      # Reraise the exception, but append the original definition to the
-      # trace.
-      args = exc.args
-      if not args:
-        arg0 = ""
-      else:
-        arg0 = args[0]
-      trace = "".join(
-          _skip_common_stack_elements(self._stacktrace,
-                                      traceback.format_stack()))
-      arg0 = "%s\n\noriginally defined at:\n%s" % (arg0, trace)
-      new_args = [arg0]
-      new_args.extend(args[1:])
-      exc.args = tuple(new_args)
-      raise
+            if self._variables_created:
+                vars_at_start = len(
+                    ops.get_collection_ref(ops.GraphKeys.GLOBAL_VARIABLES)
+                )
+                trainable_at_start = len(
+                    ops.get_collection_ref(ops.GraphKeys.TRAINABLE_VARIABLES)
+                )
 
-  def __call__(self, *args, **kwargs):
-    if self._variable_scope:
-      # Only reuse variables if not on first call.
-      with variable_scope.variable_scope(
-          self._variable_scope, reuse=not self._first_call):
-        return self._call_func(args, kwargs)
-    else:
-      # The scope was not created at construction time, so create it here.
-      # Subsequent calls should reuse variables.
-      with variable_scope.variable_scope(
-          self._unique_name, self._name,
-          custom_getter=self._custom_getter) as vs:
-        self._variable_scope = vs
-        return self._call_func(args, kwargs)
+                result = self._func(*args, **kwargs)
 
-  @property
-  def name(self):
-    """Returns the name given to this Template."""
-    return self._name
+                # Variables were previously created, implying this is not the first
+                # time the template has been called. Check to make sure that no new
+                # trainable variables were created this time around.
+                trainable_variables = ops.get_collection_ref(
+                    ops.GraphKeys.TRAINABLE_VARIABLES
+                )
 
-  @property
-  def func(self):
-    """Returns the func given to this Template."""
-    return self._func
+                # If a variable that we intend to train is created as a side effect
+                # of creating a template, then that is almost certainly an error.
+                if trainable_at_start != len(trainable_variables):
+                    raise ValueError(
+                        "Trainable variable created when calling a template "
+                        "after the first time, perhaps you used tf.Variable "
+                        "when you meant tf.get_variable: %s"
+                        % (trainable_variables[trainable_at_start:],)
+                    )
 
-  @property
-  def variable_scope(self):
-    """Returns the variable scope object created by this Template."""
-    return self._variable_scope
+                # Non-trainable tracking variables are a legitimate reason why a new
+                # variable would be created, but it is a relatively advanced use-case,
+                # so log it.
+                variables = ops.get_collection_ref(ops.GraphKeys.GLOBAL_VARIABLES)
+                if vars_at_start != len(variables):
+                    logging.info(
+                        "New variables created when calling a template after "
+                        "the first time, perhaps you used tf.Variable when you "
+                        "meant tf.get_variable: %s",
+                        variables[vars_at_start:],
+                    )
+            elif self._first_call:
+                self._first_call = False
+                try:
+                    # The first time we run, restore variables if necessary (via
+                    # Trackable).
+                    with trackable_util.capture_dependencies(template=self):
+                        result = self._func(*args, **kwargs)
+                except:
+                    self._first_call = True
+                    raise
+                self._variables_created = True
+            else:  # We are calling the template in parallel from another thread.
+                result = self._func(*args, **kwargs)
+            return result
+        except Exception as exc:
+            # Reraise the exception, but append the original definition to the
+            # trace.
+            args = exc.args
+            if not args:
+                arg0 = ""
+            else:
+                arg0 = args[0]
+            trace = "".join(
+                _skip_common_stack_elements(self._stacktrace, traceback.format_stack())
+            )
+            arg0 = "%s\n\noriginally defined at:\n%s" % (arg0, trace)
+            new_args = [arg0]
+            new_args.extend(args[1:])
+            exc.args = tuple(new_args)
+            raise
 
-  @property
-  def variable_scope_name(self):
-    """Returns the variable scope name created by this Template."""
-    if self._variable_scope:
-      name = self._variable_scope.name
-      if not name or name[-1] == "/":
-        return name
-      else:
-        # To prevent partial matches on the scope_name, we add '/' at the end.
-        return name + "/"
+    def __call__(self, *args, **kwargs):
+        if self._variable_scope:
+            # Only reuse variables if not on first call.
+            with variable_scope.variable_scope(
+                self._variable_scope, reuse=not self._first_call
+            ):
+                return self._call_func(args, kwargs)
+        else:
+            # The scope was not created at construction time, so create it here.
+            # Subsequent calls should reuse variables.
+            with variable_scope.variable_scope(
+                self._unique_name, self._name, custom_getter=self._custom_getter
+            ) as vs:
+                self._variable_scope = vs
+                return self._call_func(args, kwargs)
 
-  @property
-  def variables(self):
-    """Returns the list of global and local variables created by the Template."""
-    return self.global_variables + self.local_variables
+    @property
+    def name(self):
+        """Returns the name given to this Template."""
+        return self._name
 
-  @property
-  def trainable_variables(self):
-    """Returns the list of trainable variables created by the Template."""
-    if self._variables_created:
-      return ops.get_collection(ops.GraphKeys.TRAINABLE_VARIABLES,
-                                self.variable_scope_name)
-    else:
-      return []
+    @property
+    def func(self):
+        """Returns the func given to this Template."""
+        return self._func
 
-  @property
-  def non_trainable_variables(self):
-    """Returns the list of non-trainable variables created by the Template."""
-    # TODO(apassos) Make sure it matches Eager when using local variables.
-    global_variables = self.global_variables
-    trainable_variables = set(self.trainable_variables)
-    return [x for x in global_variables if x not in trainable_variables]
+    @property
+    def variable_scope(self):
+        """Returns the variable scope object created by this Template."""
+        return self._variable_scope
 
-  @property
-  def global_variables(self):
-    """Returns the list of global variables created by the Template."""
-    if self._variables_created:
-      return ops.get_collection(ops.GraphKeys.GLOBAL_VARIABLES,
-                                self.variable_scope_name)
-    else:
-      return []
+    @property
+    def variable_scope_name(self):
+        """Returns the variable scope name created by this Template."""
+        if self._variable_scope:
+            name = self._variable_scope.name
+            if not name or name[-1] == "/":
+                return name
+            else:
+                # To prevent partial matches on the scope_name, we add '/' at the end.
+                return name + "/"
 
-  @property
-  def local_variables(self):
-    """Returns the list of global variables created by the Template."""
-    if self._variables_created:
-      return ops.get_collection(ops.GraphKeys.LOCAL_VARIABLES,
-                                self.variable_scope_name)
-    else:
-      return []
+    @property
+    def variables(self):
+        """Returns the list of global and local variables created by the Template."""
+        return self.global_variables + self.local_variables
 
-  @property
-  def weights(self):
-    """List of weights/variables created by the Template."""
-    return self.variables
+    @property
+    def trainable_variables(self):
+        """Returns the list of trainable variables created by the Template."""
+        if self._variables_created:
+            return ops.get_collection(
+                ops.GraphKeys.TRAINABLE_VARIABLES, self.variable_scope_name
+            )
+        else:
+            return []
 
-  @property
-  def trainable_weights(self):
-    """List of trainable weights/variables created by the Template."""
-    return self.trainable_variables
+    @property
+    def non_trainable_variables(self):
+        """Returns the list of non-trainable variables created by the Template."""
+        # TODO(apassos) Make sure it matches Eager when using local variables.
+        global_variables = self.global_variables
+        trainable_variables = set(self.trainable_variables)
+        return [x for x in global_variables if x not in trainable_variables]
 
-  @property
-  def non_trainable_weights(self):
-    """List of non-trainable weights/variables created by the Template."""
-    return self.non_trainable_variables
+    @property
+    def global_variables(self):
+        """Returns the list of global variables created by the Template."""
+        if self._variables_created:
+            return ops.get_collection(
+                ops.GraphKeys.GLOBAL_VARIABLES, self.variable_scope_name
+            )
+        else:
+            return []
 
-  @property
-  @deprecated("2017-02-21",
-              "The .var_scope property is deprecated. Please change your "
-              "code to use the .variable_scope property")
-  def var_scope(self):
-    """Returns the variable scope object created by this Template."""
-    return self._variable_scope
+    @property
+    def local_variables(self):
+        """Returns the list of global variables created by the Template."""
+        if self._variables_created:
+            return ops.get_collection(
+                ops.GraphKeys.LOCAL_VARIABLES, self.variable_scope_name
+            )
+        else:
+            return []
+
+    @property
+    def weights(self):
+        """List of weights/variables created by the Template."""
+        return self.variables
+
+    @property
+    def trainable_weights(self):
+        """List of trainable weights/variables created by the Template."""
+        return self.trainable_variables
+
+    @property
+    def non_trainable_weights(self):
+        """List of non-trainable weights/variables created by the Template."""
+        return self.non_trainable_variables
+
+    @property
+    @deprecated(
+        "2017-02-21",
+        "The .var_scope property is deprecated. Please change your "
+        "code to use the .variable_scope property",
+    )
+    def var_scope(self):
+        """Returns the variable scope object created by this Template."""
+        return self._variable_scope
 
 
 class _EagerTemplateVariableStore(object):
-  """Wrapper around EagerVariableStore to support nesting EagerTemplates."""
+    """Wrapper around EagerVariableStore to support nesting EagerTemplates."""
 
-  def __init__(self, variable_scope_name):
-    self._variable_scope_name = variable_scope_name
-    default = variable_scope._get_default_variable_store()  # pylint: disable=protected-access
-    if default._store_eager_variables:  # pylint: disable=protected-access
-      self._eager_variable_store = variable_scope.EagerVariableStore(default)
-    else:
-      # If no outer eager variable store has been made,
-      # the template needs to create one
-      self._eager_variable_store = variable_scope.EagerVariableStore()
-    self._used_once = False
-
-  def set_variable_scope_name(self, variable_scope_name):
-    self._variable_scope_name = variable_scope_name
-
-  @tf_contextlib.contextmanager
-  def as_default(self):
-    try:
-      if not self._used_once:
-        # If an outer eager VariableStore was explicitly created and set by
-        # the first time this template store was used (even if not at
-        # constructor time) then pick up the outer variable store.
-        default = variable_scope._get_default_variable_store()  # pylint: disable=protected-access
+    def __init__(self, variable_scope_name):
+        self._variable_scope_name = variable_scope_name
+        default = (
+            variable_scope._get_default_variable_store()
+        )  # pylint: disable=protected-access
         if default._store_eager_variables:  # pylint: disable=protected-access
-          self._eager_variable_store._store = default  # pylint: disable=protected-access
-        self._used_once = True
-      with self._eager_variable_store.as_default():  # pylint: disable=protected-access
-        yield
-    finally:
-      # Each _EagerTemplateVariableStore object lives underneath a variable
-      # scope (see EagerTemplate.__call__). This variable scope's subscopes are
-      # closed when the EagerTemplate object returns from __call__. For
-      # top-level _EagerTemplateVariableStore objects, the variable store to
-      # which the variable scope is attached is different from the
-      # EagerVariableStore; as such it is necessary to close its subscopes
-      # here as well.
-      if self._variable_scope_name is None:
-        raise RuntimeError("A variable scope must be set before an "
-                           "_EagerTemplateVariableStore object exits.")
-      variable_scope.get_variable_scope_store().close_variable_subscopes(
-          self._variable_scope_name)
+            self._eager_variable_store = variable_scope.EagerVariableStore(default)
+        else:
+            # If no outer eager variable store has been made,
+            # the template needs to create one
+            self._eager_variable_store = variable_scope.EagerVariableStore()
+        self._used_once = False
 
-  def _variables_in_scope(self, variable_list):
-    if self._variable_scope_name is None:
-      raise RuntimeError(
-          "A variable scope must be set before variables can be accessed.")
-    return [
-        v for v in variable_list
-        if v.name.startswith(self._variable_scope_name + "/")
-    ]
+    def set_variable_scope_name(self, variable_scope_name):
+        self._variable_scope_name = variable_scope_name
 
-  def variables(self):
-    return self._variables_in_scope(self._eager_variable_store.variables())
+    @tf_contextlib.contextmanager
+    def as_default(self):
+        try:
+            if not self._used_once:
+                # If an outer eager VariableStore was explicitly created and set by
+                # the first time this template store was used (even if not at
+                # constructor time) then pick up the outer variable store.
+                default = (
+                    variable_scope._get_default_variable_store()
+                )  # pylint: disable=protected-access
+                if default._store_eager_variables:  # pylint: disable=protected-access
+                    self._eager_variable_store._store = (
+                        default
+                    )  # pylint: disable=protected-access
+                self._used_once = True
+            with self._eager_variable_store.as_default():  # pylint: disable=protected-access
+                yield
+        finally:
+            # Each _EagerTemplateVariableStore object lives underneath a variable
+            # scope (see EagerTemplate.__call__). This variable scope's subscopes are
+            # closed when the EagerTemplate object returns from __call__. For
+            # top-level _EagerTemplateVariableStore objects, the variable store to
+            # which the variable scope is attached is different from the
+            # EagerVariableStore; as such it is necessary to close its subscopes
+            # here as well.
+            if self._variable_scope_name is None:
+                raise RuntimeError(
+                    "A variable scope must be set before an "
+                    "_EagerTemplateVariableStore object exits."
+                )
+            variable_scope.get_variable_scope_store().close_variable_subscopes(
+                self._variable_scope_name
+            )
 
-  def trainable_variables(self):
-    return self._variables_in_scope(
-        self._eager_variable_store.trainable_variables())
+    def _variables_in_scope(self, variable_list):
+        if self._variable_scope_name is None:
+            raise RuntimeError(
+                "A variable scope must be set before variables can be accessed."
+            )
+        return [
+            v
+            for v in variable_list
+            if v.name.startswith(self._variable_scope_name + "/")
+        ]
 
-  def non_trainable_variables(self):
-    return self._variables_in_scope(
-        self._eager_variable_store.non_trainable_variables())
+    def variables(self):
+        return self._variables_in_scope(self._eager_variable_store.variables())
+
+    def trainable_variables(self):
+        return self._variables_in_scope(
+            self._eager_variable_store.trainable_variables()
+        )
+
+    def non_trainable_variables(self):
+        return self._variables_in_scope(
+            self._eager_variable_store.non_trainable_variables()
+        )
 
 
 class EagerTemplate(Template):
-  """Wrap a function to aid in variable sharing in Eager mode.
+    """Wrap a function to aid in variable sharing in Eager mode.
 
   Templates are functions that create variables the first time they are called
   and reuse them thereafter. See `make_template` for full documentation.
@@ -559,13 +597,15 @@ class EagerTemplate(Template):
   call.
   """
 
-  def __init__(self,
-               name,
-               func,
-               create_scope_now=False,
-               custom_getter=None,
-               create_graph_function=False):
-    """Creates a template for the given function.
+    def __init__(
+        self,
+        name,
+        func,
+        create_scope_now=False,
+        custom_getter=None,
+        create_graph_function=False,
+    ):
+        """Creates a template for the given function.
 
     Args:
       name: A name for the scope created by this template. The name will be made
@@ -591,140 +631,148 @@ class EagerTemplate(Template):
     Raises:
       RuntimeError: if eager execution is not enabled.
     """
-    if not context.executing_eagerly():
-      raise RuntimeError(
-          "{} objects can only be used when eager execution is enabled, use "
-          "tf.Template for graph construction".format(type(self)))
-    super(EagerTemplate, self).__init__(name, func, create_scope_now, None,
-                                        custom_getter, create_graph_function)
-    if self._variable_scope is not None:
-      variable_scope_name = self._variable_scope.name
-    else:
-      # Defer setting the variable scope name until the variable scope
-      # is created in __call__.
-      variable_scope_name = None
-    self._template_store = _EagerTemplateVariableStore(variable_scope_name)
-    self._variable_scope_context_manager = None
+        if not context.executing_eagerly():
+            raise RuntimeError(
+                "{} objects can only be used when eager execution is enabled, use "
+                "tf.Template for graph construction".format(type(self))
+            )
+        super(EagerTemplate, self).__init__(
+            name, func, create_scope_now, None, custom_getter, create_graph_function
+        )
+        if self._variable_scope is not None:
+            variable_scope_name = self._variable_scope.name
+        else:
+            # Defer setting the variable scope name until the variable scope
+            # is created in __call__.
+            variable_scope_name = None
+        self._template_store = _EagerTemplateVariableStore(variable_scope_name)
+        self._variable_scope_context_manager = None
 
-  def _call_func(self, args, kwargs):
-    try:
-      vars_at_start = self._template_store.variables()
-      trainable_at_start = self._template_store.trainable_variables()
-      if self._variables_created:
-        result = self._func(*args, **kwargs)
-      else:
-        # The first time we run, restore variables if necessary (via
-        # Trackable).
-        with trackable_util.capture_dependencies(template=self):
-          result = self._func(*args, **kwargs)
+    def _call_func(self, args, kwargs):
+        try:
+            vars_at_start = self._template_store.variables()
+            trainable_at_start = self._template_store.trainable_variables()
+            if self._variables_created:
+                result = self._func(*args, **kwargs)
+            else:
+                # The first time we run, restore variables if necessary (via
+                # Trackable).
+                with trackable_util.capture_dependencies(template=self):
+                    result = self._func(*args, **kwargs)
 
-      if self._variables_created:
-        # Variables were previously created, implying this is not the first
-        # time the template has been called. Check to make sure that no new
-        # trainable variables were created this time around.
-        trainable_variables = self._template_store.trainable_variables()
-        # If a variable that we intend to train is created as a side effect
-        # of creating a template, then that is almost certainly an error.
-        if len(trainable_at_start) != len(trainable_variables):
-          raise ValueError(
-              "Trainable variable created when calling a template "
-              "after the first time, perhaps you used tf.Variable "
-              "when you meant tf.get_variable: %s" % list(
-                  object_identity.ObjectIdentitySet(trainable_variables) -
-                  object_identity.ObjectIdentitySet(trainable_at_start)))
+            if self._variables_created:
+                # Variables were previously created, implying this is not the first
+                # time the template has been called. Check to make sure that no new
+                # trainable variables were created this time around.
+                trainable_variables = self._template_store.trainable_variables()
+                # If a variable that we intend to train is created as a side effect
+                # of creating a template, then that is almost certainly an error.
+                if len(trainable_at_start) != len(trainable_variables):
+                    raise ValueError(
+                        "Trainable variable created when calling a template "
+                        "after the first time, perhaps you used tf.Variable "
+                        "when you meant tf.get_variable: %s"
+                        % list(
+                            object_identity.ObjectIdentitySet(trainable_variables)
+                            - object_identity.ObjectIdentitySet(trainable_at_start)
+                        )
+                    )
 
-        # Non-trainable tracking variables are a legitimate reason why a new
-        # variable would be created, but it is a relatively advanced use-case,
-        # so log it.
-        variables = self._template_store.variables()
-        if len(vars_at_start) != len(variables):
-          logging.info(
-              "New variables created when calling a template after "
-              "the first time, perhaps you used tf.Variable when you "
-              "meant tf.get_variable: %s",
-              list(
-                  object_identity.ObjectIdentitySet(variables) -
-                  object_identity.ObjectIdentitySet(vars_at_start)))
-      else:
-        self._variables_created = True
-      return result
-    except Exception as exc:
-      # Reraise the exception, but append the original definition to the
-      # trace.
-      args = exc.args
-      if not args:
-        arg0 = ""
-      else:
-        arg0 = args[0]
-      trace = "".join(
-          _skip_common_stack_elements(self._stacktrace,
-                                      traceback.format_stack()))
-      arg0 = "%s\n\noriginally defined at:\n%s" % (arg0, trace)
-      new_args = [arg0]
-      new_args.extend(args[1:])
-      exc.args = tuple(new_args)
-      raise
+                # Non-trainable tracking variables are a legitimate reason why a new
+                # variable would be created, but it is a relatively advanced use-case,
+                # so log it.
+                variables = self._template_store.variables()
+                if len(vars_at_start) != len(variables):
+                    logging.info(
+                        "New variables created when calling a template after "
+                        "the first time, perhaps you used tf.Variable when you "
+                        "meant tf.get_variable: %s",
+                        list(
+                            object_identity.ObjectIdentitySet(variables)
+                            - object_identity.ObjectIdentitySet(vars_at_start)
+                        ),
+                    )
+            else:
+                self._variables_created = True
+            return result
+        except Exception as exc:
+            # Reraise the exception, but append the original definition to the
+            # trace.
+            args = exc.args
+            if not args:
+                arg0 = ""
+            else:
+                arg0 = args[0]
+            trace = "".join(
+                _skip_common_stack_elements(self._stacktrace, traceback.format_stack())
+            )
+            arg0 = "%s\n\noriginally defined at:\n%s" % (arg0, trace)
+            new_args = [arg0]
+            new_args.extend(args[1:])
+            exc.args = tuple(new_args)
+            raise
 
-  def __call__(self, *args, **kwargs):
-    # In both branches below, the template store is installed as default after
-    # the variable scope is opened in order to ensure that templates nested at
-    # the same level correctly uniquify lower variable scope names.
-    if self._variable_scope:
-      # Create a cache for the variable scope context manager the first time
-      # around so that we don't have to keep recreating it.
-      if not self._variable_scope_context_manager:
-        self._variable_scope_context_manager = variable_scope.variable_scope(
-            self._variable_scope, reuse=variable_scope.AUTO_REUSE)
-      with self._variable_scope_context_manager:
-        with self._template_store.as_default():
-          return self._call_func(args, kwargs)
-    else:
-      # The scope was not created at construction time, so create it here.
-      # Subsequent calls should reuse variables.
-      with variable_scope.variable_scope(
-          self._unique_name, self._name,
-          custom_getter=self._custom_getter) as vs:
-        self._variable_scope = vs
-        # Because the scope was not created at construction time, the template
-        # store's variable scope name is unset; set it here.
-        self._template_store.set_variable_scope_name(vs.name)
-        with self._template_store.as_default():
-          return self._call_func(args, kwargs)
+    def __call__(self, *args, **kwargs):
+        # In both branches below, the template store is installed as default after
+        # the variable scope is opened in order to ensure that templates nested at
+        # the same level correctly uniquify lower variable scope names.
+        if self._variable_scope:
+            # Create a cache for the variable scope context manager the first time
+            # around so that we don't have to keep recreating it.
+            if not self._variable_scope_context_manager:
+                self._variable_scope_context_manager = variable_scope.variable_scope(
+                    self._variable_scope, reuse=variable_scope.AUTO_REUSE
+                )
+            with self._variable_scope_context_manager:
+                with self._template_store.as_default():
+                    return self._call_func(args, kwargs)
+        else:
+            # The scope was not created at construction time, so create it here.
+            # Subsequent calls should reuse variables.
+            with variable_scope.variable_scope(
+                self._unique_name, self._name, custom_getter=self._custom_getter
+            ) as vs:
+                self._variable_scope = vs
+                # Because the scope was not created at construction time, the template
+                # store's variable scope name is unset; set it here.
+                self._template_store.set_variable_scope_name(vs.name)
+                with self._template_store.as_default():
+                    return self._call_func(args, kwargs)
 
-  @property
-  def variables(self):
-    """Returns the list of variables created by the Template."""
-    # Currently there is no local variable in Eager mode.
-    if not self._variables_created:
-      return []
-    return self._template_store.variables()
+    @property
+    def variables(self):
+        """Returns the list of variables created by the Template."""
+        # Currently there is no local variable in Eager mode.
+        if not self._variables_created:
+            return []
+        return self._template_store.variables()
 
-  @property
-  def trainable_variables(self):
-    """Returns the list of trainable variables created by the Template."""
-    # Currently there is no local variable in Eager mode.
-    if not self._variables_created:
-      return []
-    return self._template_store.trainable_variables()
+    @property
+    def trainable_variables(self):
+        """Returns the list of trainable variables created by the Template."""
+        # Currently there is no local variable in Eager mode.
+        if not self._variables_created:
+            return []
+        return self._template_store.trainable_variables()
 
-  @property
-  def non_trainable_variables(self):
-    """Returns the list of non-trainable variables created by the Template."""
-    # Currently there is no local variable in Eager mode.
-    if not self._variables_created:
-      return []
-    return self._template_store.non_trainable_variables()
+    @property
+    def non_trainable_variables(self):
+        """Returns the list of non-trainable variables created by the Template."""
+        # Currently there is no local variable in Eager mode.
+        if not self._variables_created:
+            return []
+        return self._template_store.non_trainable_variables()
 
-  @property
-  def global_variables(self):
-    """Returns the list of global variables created by the Template."""
-    # Currently there is no local variable in Eager mode.
-    if not self._variables_created:
-      return []
-    return self.variables
+    @property
+    def global_variables(self):
+        """Returns the list of global variables created by the Template."""
+        # Currently there is no local variable in Eager mode.
+        if not self._variables_created:
+            return []
+        return self.variables
 
-  @property
-  def local_variables(self):
-    """Returns the list of global variables created by the Template."""
-    # Currently there is no local variable in Eager mode.
-    return []
+    @property
+    def local_variables(self):
+        """Returns the list of global variables created by the Template."""
+        # Currently there is no local variable in Eager mode.
+        return []

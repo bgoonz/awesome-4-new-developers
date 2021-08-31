@@ -25,25 +25,25 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 class _SummaryIterator(object):
-  """Yields `Event` protocol buffers from a given path."""
+    """Yields `Event` protocol buffers from a given path."""
 
-  def __init__(self, path):
-    self._tf_record_iterator = tf_record.tf_record_iterator(path)
+    def __init__(self, path):
+        self._tf_record_iterator = tf_record.tf_record_iterator(path)
 
-  def __iter__(self):
-    return self
+    def __iter__(self):
+        return self
 
-  def __next__(self):
-    r = next(self._tf_record_iterator)
-    return event_pb2.Event.FromString(r)
+    def __next__(self):
+        r = next(self._tf_record_iterator)
+        return event_pb2.Event.FromString(r)
 
-  next = __next__
+    next = __next__
 
 
-@tf_export(v1=['train.summary_iterator'])
+@tf_export(v1=["train.summary_iterator"])
 def summary_iterator(path):
-  # pylint: disable=line-too-long
-  """Returns a iterator for reading `Event` protocol buffers from an event file.
+    # pylint: disable=line-too-long
+    """Returns a iterator for reading `Event` protocol buffers from an event file.
 
   You can use this function to read events written to an event file. It returns
   a Python iterator that yields `Event` protocol buffers.
@@ -92,4 +92,4 @@ def summary_iterator(path):
   Returns:
     A iterator that yields `Event` protocol buffers
   """
-  return _SummaryIterator(path)
+    return _SummaryIterator(path)

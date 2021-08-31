@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Using-HackerRank</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h2 id="the-attempt-is-what-matters">The Attempt is What Matters</h2>
+<p>These are tough problems, and a lot of you won’t complete them in the time allotted. If you get the right answer, great. If not, that’s fine too, <em>as long as you made the attempt</em>. Whether you get it right or not doesn’t matter remotely as much as the time you spend trying to get the answer.</p>
+<p>Every minute you work on a problem is 5 experience points. Getting the right answer is 0 experience points.</p>
+<p>For the CS challenges, you don’t need to pass the test. You just need to work on it.</p>
+<h2 id="remember-uper">Remember UPER!</h2>
+<p>Remember <a href="https://github.com/LambdaSchool/CS-Wiki/wiki/Lambda-Problem-Solving-Framework">UPER</a>!</p>
+<p>Read the problem description slowly and carefully. Way more slowly and carefully than you need to. A mistake during <em>Understanding the Problem</em> will result in a wrong answer.</p>
+<p>The <em>Planning</em> phase is equally important.</p>
+<h2 id="write-comments">Write Comments</h2>
+<p>While in the Planning phase, write comments in the editor and then turn them into code, leaving the comments behind for posterity.</p>
+<p>If hiring managers ask you to complete a code challenge, they will grade you partially on how well-commented your code is.</p>
+<p>That doesn’t mean “tons of comments”. It means “good, concise comments in the right places”.</p>
+<h2 id="use-whitespace">Use Whitespace</h2>
+<p>If strategically adding a blank line makes your code more readable, do it. Good coders are able to recognize logically-connected “paragraphs” in their code and put whitespace between them to increase readability.</p>
+<h2 id="try-to-use-your-core-track-language">Try to use your core track language</h2>
+<p>It will help you keep the rust off.</p>
+<h2 id="remember-the-time-complexities-of-various-data-structures">Remember the time complexities of various data structures</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Time Complexity to Access</th>
+<th style="text-align: center;">Python</th>
+<th style="text-align: center;">Swift</th>
+<th style="text-align: center;">Obj-C</th>
+<th style="text-align: center;">Kotlin</th>
+<th style="text-align: center;">Java</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>O(1)</code></td>
+<td style="text-align: center;"><code>dict</code>, <code>set</code></td>
+<td style="text-align: center;"><code>Dictionary</code>, <code>Set</code></td>
+<td style="text-align: center;"><code>NSDictionary</code>, <code>NSSet</code></td>
+<td style="text-align: center;"><code>HashMap</code>, <code>Array</code></td>
+<td style="text-align: center;"><code>HashMap</code>, <code>ArrayList</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>O(n)</code></td>
+<td style="text-align: center;"><code>list</code></td>
+<td style="text-align: center;"><code>Array</code></td>
+<td style="text-align: center;"><code>NSArray</code></td>
+<td style="text-align: center;"><code>LinkedList</code></td>
+<td style="text-align: center;"><code>LinkedList</code></td>
+</tr>
+</tbody>
+</table>
+<p>Just because <code>O(1)</code> is performant doesn’t mean it’s always the right tool for the job. Use the right tool for the job!</p>
+<h2 id="get-familiar-with-the-hackerrank-ui-and-process">Get Familiar with the HackerRank UI and Process</h2>
+<p>This is a sticking point for many students. HackerRank has an interesting UI and it takes some getting used to. Their tests also have a consistent format and structure that you should explore and take the time to get familiar with.</p>
+<ul>
+<li><a href="https://youtu.be/hWrxLqwplkc">Click here for a short HackerRank demo video</a></li>
+</ul>
+<h3 id="function-input-and-output">Function input and output</h3>
+<p>The “input” is what gets passed to your function. This is likely different than the sample input they provide (that you might add to the <code>custom input</code> box). If you expand the main routine in the source code, you’ll see how they parse the input and pass it to your function.</p>
+<p>The “output” is what your function returns. Examine the spec for exactly what this.</p>
+<p>Your function won’t be tested on anything it <code>print()</code>s. Usefully, however, printed output appears in the <code>Debugging output</code> section at the bottom of the page after you run.</p>
+<h3 id="figure-out-what-gets-passed-to-your-function">Figure out what gets passed to your function</h3>
+<p>If you’re having trouble figuring out exactly what your function gets passed to it, try this:</p>
+<ul>
+<li>Add a line of code to your function to print the parameter(s)</li>
+<li>Put the given sample case into the <code>custom input</code> box</li>
+<li>Run the program</li>
+<li>Check the output in the <code>Debugging Output</code> in the section at the bottom</li>
+</ul>
+</body>
+</html>

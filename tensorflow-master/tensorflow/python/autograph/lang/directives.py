@@ -31,7 +31,7 @@ UNSPECIFIED = object()
 
 
 def set_element_type(entity, dtype, shape=UNSPECIFIED):
-  """Indicates that the entity is expected hold items of specified type/shape.
+    """Indicates that the entity is expected hold items of specified type/shape.
 
   The staged TensorFlow ops will reflect and assert this data type. Ignored
   otherwise.
@@ -41,18 +41,19 @@ def set_element_type(entity, dtype, shape=UNSPECIFIED):
     dtype: TensorFlow dtype value to assert for entity.
     shape: Optional shape to assert for entity.
   """
-  del entity
-  del dtype
-  del shape
+    del entity
+    del dtype
+    del shape
 
 
-@tf_export('autograph.experimental.set_loop_options')
+@tf_export("autograph.experimental.set_loop_options")
 def set_loop_options(
     parallel_iterations=UNSPECIFIED,
     swap_memory=UNSPECIFIED,
     maximum_iterations=UNSPECIFIED,
-    shape_invariants=UNSPECIFIED):
-  """Specifies additional arguments to be passed to the enclosing while_loop.
+    shape_invariants=UNSPECIFIED,
+):
+    """Specifies additional arguments to be passed to the enclosing while_loop.
 
   The parameters apply to and only to the immediately enclosing loop. It only
   has effect if the loop is staged as a TF while_loop; otherwise the parameters
@@ -92,7 +93,7 @@ def set_loop_options(
         to tf.while_loop. Unlike tf.while_loop, this is a list of
         `(tensor, shape)` pairs.
   """
-  del parallel_iterations
-  del swap_memory
-  del maximum_iterations
-  del shape_invariants
+    del parallel_iterations
+    del swap_memory
+    del maximum_iterations
+    del shape_invariants

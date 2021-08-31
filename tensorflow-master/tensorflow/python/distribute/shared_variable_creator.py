@@ -25,18 +25,18 @@ _VARIABLE_UNIQUIFYING_REGEX_AT_END = re.compile(r"_\d$")
 
 
 def _canonicalize_variable_name(name):
-  # If no name is specified, uses default name "Variable".
-  if name is None:
-    return "Variable"
-  # Replace all instances of "_<num>/" with "/"
-  name = _VARIABLE_UNIQUIFYING_REGEX.sub("/", name)
-  # Replace any instances of "_<num>" at the end of the string with ""
-  name = _VARIABLE_UNIQUIFYING_REGEX_AT_END.sub("", name)
-  return name
+    # If no name is specified, uses default name "Variable".
+    if name is None:
+        return "Variable"
+    # Replace all instances of "_<num>/" with "/"
+    name = _VARIABLE_UNIQUIFYING_REGEX.sub("/", name)
+    # Replace any instances of "_<num>" at the end of the string with ""
+    name = _VARIABLE_UNIQUIFYING_REGEX_AT_END.sub("", name)
+    return name
 
 
 def make_fn(shared_variable_store, device_id):
-  """Construct the variable creator function for device `device_id`.
+    """Construct the variable creator function for device `device_id`.
 
   Constructs custom variable creator functions for the given device.
   On first device (device_id == 0), it creates the variable using the
@@ -60,38 +60,40 @@ def make_fn(shared_variable_store, device_id):
     An appropriate creator function based on device_id.
 
   """
-  variable_scope_access_index = {}
-  assert isinstance(device_id, int)
+    variable_scope_access_index = {}
+    assert isinstance(device_id, int)
 
-  def create_new_variable(next_creator, **kwargs):
-    """Create the variable using `next_creator` and store it."""
-    canonical_name = _canonicalize_variable_name(kwargs.get("name"))
-    v = next_creator(**kwargs)
+    def create_new_variable(next_creator, **kwargs):
+        """Create the variable using `next_creator` and store it."""
+        canonical_name = _canonicalize_variable_name(kwargs.get("name"))
+        v = next_creator(**kwargs)
 
-    if canonical_name not in shared_variable_store:
-      shared_variable_store[canonical_name] = []
-    shared_variable_store[canonical_name].append(v)
-    return v
+        if canonical_name not in shared_variable_store:
+            shared_variable_store[canonical_name] = []
+        shared_variable_store[canonical_name].append(v)
+        return v
 
-  def reuse_variable(next_creator, **kwargs):
-    """Re-use existing variable from store with same name (in order)."""
-    del next_creator
-    name = kwargs.get("name")
-    canonical_name = _canonicalize_variable_name(name)
+    def reuse_variable(next_creator, **kwargs):
+        """Re-use existing variable from store with same name (in order)."""
+        del next_creator
+        name = kwargs.get("name")
+        canonical_name = _canonicalize_variable_name(name)
 
-    try:
-      variable_index = variable_scope_access_index.get(canonical_name, 0)
-      v = shared_variable_store[canonical_name][variable_index]
-      # TODO(priyag): Make this variable re-use more robust by adding checks
-      # that the requested shape and dtype match the existing variable.
-      variable_scope_access_index[canonical_name] = variable_index + 1
-      return v
-    except (KeyError, IndexError):
-      raise RuntimeError(
-          "Tried to create variable {} with mismatching name on device {}".
-          format(name, device_id))
+        try:
+            variable_index = variable_scope_access_index.get(canonical_name, 0)
+            v = shared_variable_store[canonical_name][variable_index]
+            # TODO(priyag): Make this variable re-use more robust by adding checks
+            # that the requested shape and dtype match the existing variable.
+            variable_scope_access_index[canonical_name] = variable_index + 1
+            return v
+        except (KeyError, IndexError):
+            raise RuntimeError(
+                "Tried to create variable {} with mismatching name on device {}".format(
+                    name, device_id
+                )
+            )
 
-  if device_id == 0:
-    return create_new_variable
-  else:
-    return reuse_variable
+    if device_id == 0:
+        return create_new_variable
+    else:
+        return reuse_variable

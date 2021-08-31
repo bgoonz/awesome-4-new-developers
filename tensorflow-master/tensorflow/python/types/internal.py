@@ -24,7 +24,7 @@ from __future__ import print_function
 
 # TODO(mdan): Is this strictly needed? Only ops.py really uses it.
 class NativeObject(object):
-  """Types natively supported by various TF operations.
+    """Types natively supported by various TF operations.
 
   The most notable example of NativeObject is Tensor.
   """

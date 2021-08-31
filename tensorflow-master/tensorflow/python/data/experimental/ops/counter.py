@@ -26,7 +26,7 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export("data.experimental.Counter", v1=[])
 def CounterV2(start=0, step=1, dtype=dtypes.int64):
-  """Creates a `Dataset` that counts from `start` in steps of size `step`.
+    """Creates a `Dataset` that counts from `start` in steps of size `step`.
 
   Unlike `tf.data.Dataset.range` which will stop at some ending number,
   `Counter` will produce elements indefinitely.
@@ -58,21 +58,24 @@ def CounterV2(start=0, step=1, dtype=dtypes.int64):
   Returns:
     A `Dataset` of scalar `dtype` elements.
   """
-  with ops.name_scope("counter"):
-    start = ops.convert_to_tensor(start, dtype=dtype, name="start")
-    step = ops.convert_to_tensor(step, dtype=dtype, name="step")
-    return dataset_ops.Dataset.from_tensors(0).repeat(None).scan(
-        start, lambda state, _: (state + step, state))
+    with ops.name_scope("counter"):
+        start = ops.convert_to_tensor(start, dtype=dtype, name="start")
+        step = ops.convert_to_tensor(step, dtype=dtype, name="step")
+        return (
+            dataset_ops.Dataset.from_tensors(0)
+            .repeat(None)
+            .scan(start, lambda state, _: (state + step, state))
+        )
 
 
 @tf_export(v1=["data.experimental.Counter"])
 def CounterV1(start=0, step=1, dtype=dtypes.int64):
-  return dataset_ops.DatasetV1Adapter(CounterV2(start, step, dtype))
+    return dataset_ops.DatasetV1Adapter(CounterV2(start, step, dtype))
 
 
 CounterV1.__doc__ = CounterV2.__doc__
 
 if tf2.enabled():
-  Counter = CounterV2
+    Counter = CounterV2
 else:
-  Counter = CounterV1
+    Counter = CounterV1

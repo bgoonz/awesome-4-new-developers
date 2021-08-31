@@ -26,7 +26,7 @@ from tensorflow.python.util import nest
 
 
 def jacobian(output, inputs, use_pfor=True, parallel_iterations=None):
-  """Computes jacobian of `output` w.r.t. `inputs`.
+    """Computes jacobian of `output` w.r.t. `inputs`.
 
   Args:
     output: A tensor.
@@ -45,43 +45,46 @@ def jacobian(output, inputs, use_pfor=True, parallel_iterations=None):
     sparse (IndexedSlices), jacobian function currently makes it dense and
     returns a Tensor instead. This may change in the future.
   """
-  flat_inputs = nest.flatten(inputs)
-  output_tensor_shape = output.shape
-  output_shape = array_ops.shape(output)
-  output = array_ops.reshape(output, [-1])
+    flat_inputs = nest.flatten(inputs)
+    output_tensor_shape = output.shape
+    output_shape = array_ops.shape(output)
+    output = array_ops.reshape(output, [-1])
 
-  def loop_fn(i):
-    y = array_ops.gather(output, i)
-    return gradient_ops.gradients(y, flat_inputs)
+    def loop_fn(i):
+        y = array_ops.gather(output, i)
+        return gradient_ops.gradients(y, flat_inputs)
 
-  try:
-    output_size = int(output.shape[0])
-  except TypeError:
-    output_size = array_ops.shape(output)[0]
+    try:
+        output_size = int(output.shape[0])
+    except TypeError:
+        output_size = array_ops.shape(output)[0]
 
-  if use_pfor:
-    pfor_outputs = control_flow_ops.pfor(
-        loop_fn, output_size, parallel_iterations=parallel_iterations)
-  else:
-    pfor_outputs = control_flow_ops.for_loop(
-        loop_fn,
-        [output.dtype] * len(flat_inputs),
-        output_size,
-        parallel_iterations=parallel_iterations)
+    if use_pfor:
+        pfor_outputs = control_flow_ops.pfor(
+            loop_fn, output_size, parallel_iterations=parallel_iterations
+        )
+    else:
+        pfor_outputs = control_flow_ops.for_loop(
+            loop_fn,
+            [output.dtype] * len(flat_inputs),
+            output_size,
+            parallel_iterations=parallel_iterations,
+        )
 
-  for i, out in enumerate(pfor_outputs):
-    if isinstance(out, ops.Tensor):
-      new_shape = array_ops.concat(
-          [output_shape, array_ops.shape(out)[1:]], axis=0)
-      out = array_ops.reshape(out, new_shape)
-      out.set_shape(output_tensor_shape.concatenate(flat_inputs[i].shape))
-      pfor_outputs[i] = out
+    for i, out in enumerate(pfor_outputs):
+        if isinstance(out, ops.Tensor):
+            new_shape = array_ops.concat(
+                [output_shape, array_ops.shape(out)[1:]], axis=0
+            )
+            out = array_ops.reshape(out, new_shape)
+            out.set_shape(output_tensor_shape.concatenate(flat_inputs[i].shape))
+            pfor_outputs[i] = out
 
-  return nest.pack_sequence_as(inputs, pfor_outputs)
+    return nest.pack_sequence_as(inputs, pfor_outputs)
 
 
 def batch_jacobian(output, inp, use_pfor=True, parallel_iterations=None):
-  """Computes and stacks jacobians of `output[i,...]` w.r.t. `input[i,...]`.
+    """Computes and stacks jacobians of `output[i,...]` w.r.t. `input[i,...]`.
 
   e.g.
   x = tf.constant([[1, 2], [3, 4]], dtype=tf.float32)
@@ -109,39 +112,42 @@ def batch_jacobian(output, inp, use_pfor=True, parallel_iterations=None):
   Raises:
     ValueError: if first dimension of `output` and `inp` do not match.
   """
-  output_shape = output.shape
-  if not output_shape[0].is_compatible_with(inp.shape[0]):
-    raise ValueError("Need first dimension of output shape (%s) and inp shape "
-                     "(%s) to match." % (output.shape, inp.shape))
-  if output_shape.is_fully_defined():
-    batch_size = int(output_shape[0])
-    output_row_size = output_shape.num_elements() // batch_size
-  else:
-    output_shape = array_ops.shape(output)
-    batch_size = output_shape[0]
-    output_row_size = array_ops.size(output) // batch_size
-  inp_shape = array_ops.shape(inp)
-  # Flatten output to 2-D.
-  with ops.control_dependencies(
-      [check_ops.assert_equal(batch_size, inp_shape[0])]):
-    output = array_ops.reshape(output, [batch_size, output_row_size])
+    output_shape = output.shape
+    if not output_shape[0].is_compatible_with(inp.shape[0]):
+        raise ValueError(
+            "Need first dimension of output shape (%s) and inp shape "
+            "(%s) to match." % (output.shape, inp.shape)
+        )
+    if output_shape.is_fully_defined():
+        batch_size = int(output_shape[0])
+        output_row_size = output_shape.num_elements() // batch_size
+    else:
+        output_shape = array_ops.shape(output)
+        batch_size = output_shape[0]
+        output_row_size = array_ops.size(output) // batch_size
+    inp_shape = array_ops.shape(inp)
+    # Flatten output to 2-D.
+    with ops.control_dependencies([check_ops.assert_equal(batch_size, inp_shape[0])]):
+        output = array_ops.reshape(output, [batch_size, output_row_size])
 
-  def loop_fn(i):
-    y = array_ops.gather(output, i, axis=1)
-    return gradient_ops.gradients(y, inp)[0]
+    def loop_fn(i):
+        y = array_ops.gather(output, i, axis=1)
+        return gradient_ops.gradients(y, inp)[0]
 
-  if use_pfor:
-    pfor_output = control_flow_ops.pfor(loop_fn, output_row_size,
-                                        parallel_iterations=parallel_iterations)
-  else:
-    pfor_output = control_flow_ops.for_loop(
-        loop_fn, output.dtype,
-        output_row_size,
-        parallel_iterations=parallel_iterations)
-  if pfor_output is None:
-    return None
-  pfor_output = array_ops.reshape(pfor_output,
-                                  [output_row_size, batch_size, -1])
-  output = array_ops.transpose(pfor_output, [1, 0, 2])
-  new_shape = array_ops.concat([output_shape, inp_shape[1:]], axis=0)
-  return array_ops.reshape(output, new_shape)
+    if use_pfor:
+        pfor_output = control_flow_ops.pfor(
+            loop_fn, output_row_size, parallel_iterations=parallel_iterations
+        )
+    else:
+        pfor_output = control_flow_ops.for_loop(
+            loop_fn,
+            output.dtype,
+            output_row_size,
+            parallel_iterations=parallel_iterations,
+        )
+    if pfor_output is None:
+        return None
+    pfor_output = array_ops.reshape(pfor_output, [output_row_size, batch_size, -1])
+    output = array_ops.transpose(pfor_output, [1, 0, 2])
+    new_shape = array_ops.concat([output_shape, inp_shape[1:]], axis=0)
+    return array_ops.reshape(output, new_shape)

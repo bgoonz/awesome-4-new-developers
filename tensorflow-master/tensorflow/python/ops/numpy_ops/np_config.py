@@ -26,7 +26,7 @@ from tensorflow.python.ops.numpy_ops import np_math_ops
 
 @np_export.np_export("experimental_enable_numpy_behavior")
 def enable_numpy_behavior(prefer_float32=False):
-  """Enable NumPy behavior on Tensors.
+    """Enable NumPy behavior on Tensors.
 
   Enabling NumPy behavior has three effects:
   * It adds to `tf.Tensor` some common NumPy methods such as `T`,
@@ -44,7 +44,7 @@ def enable_numpy_behavior(prefer_float32=False):
     for Python floats, or float64 (the default and the
     NumPy-compatible behavior).
   """
-  ops.enable_numpy_style_type_promotion()
-  ops.enable_numpy_style_slicing()
-  np_math_ops.enable_numpy_methods_on_tensor()
-  np_dtypes.set_prefer_float32(prefer_float32)
+    ops.enable_numpy_style_type_promotion()
+    ops.enable_numpy_style_slicing()
+    np_math_ops.enable_numpy_methods_on_tensor()
+    np_dtypes.set_prefer_float32(prefer_float32)

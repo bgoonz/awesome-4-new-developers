@@ -27,13 +27,14 @@ from tensorflow.python.util import deprecation
 from tensorflow.python.util.tf_export import tf_export
 
 
-@tf_export(v1=['saved_model.simple_save'])
+@tf_export(v1=["saved_model.simple_save"])
 @deprecation.deprecated(
     None,
-    'This function will only be available through the v1 compatibility '
-    'library as tf.compat.v1.saved_model.simple_save.')
+    "This function will only be available through the v1 compatibility "
+    "library as tf.compat.v1.saved_model.simple_save.",
+)
 def simple_save(session, export_dir, inputs, outputs, legacy_init_op=None):
-  """Convenience function to build a SavedModel suitable for serving.
+    """Convenience function to build a SavedModel suitable for serving.
 
   In many common cases, saving models for serving will be as simple as:
 
@@ -76,16 +77,18 @@ def simple_save(session, export_dir, inputs, outputs, legacy_init_op=None):
     legacy_init_op: Legacy support for op or group of ops to execute after the
         restore op upon a load.
   """
-  signature_def_map = {
-      signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
-          signature_def_utils.predict_signature_def(inputs, outputs)
-  }
-  b = builder.SavedModelBuilder(export_dir)
-  b.add_meta_graph_and_variables(
-      session,
-      tags=[tag_constants.SERVING],
-      signature_def_map=signature_def_map,
-      assets_collection=ops.get_collection(ops.GraphKeys.ASSET_FILEPATHS),
-      main_op=legacy_init_op,
-      clear_devices=True)
-  b.save()
+    signature_def_map = {
+        signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: signature_def_utils.predict_signature_def(
+            inputs, outputs
+        )
+    }
+    b = builder.SavedModelBuilder(export_dir)
+    b.add_meta_graph_and_variables(
+        session,
+        tags=[tag_constants.SERVING],
+        signature_def_map=signature_def_map,
+        assets_collection=ops.get_collection(ops.GraphKeys.ASSET_FILEPATHS),
+        main_op=legacy_init_op,
+        clear_devices=True,
+    )
+    b.save()

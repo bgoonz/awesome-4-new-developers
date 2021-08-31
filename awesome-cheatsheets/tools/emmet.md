@@ -1,22 +1,28 @@
 # EMMET
-*The essential toolkit for web-developers*
+
+_The essential toolkit for web-developers_
 
 ## Introduction
+
 Emmet is a productivity toolkit for web developers that uses expressions to generate HTML snippets.
 
 ## Installation
+
 Normally, installation for Emmet should be a straight-forward process from the package-manager, as most of the modern text editors support Emmet. If you have difficulty setting up emmet with your editor and wish to check Emmet is supported by your favourite editor or not, you can check it from here. [Emmet Installation instructions](https://emmet.io/download/)
 
 ## Usage
-You can use Emmet in two ways:
-* Tab Expand Way: Type your emmet code and press `Tab` key
-* Interactive Method: Press `alt + ctrl + Enter` and start typing your expressions. This should automatically generate HTML snippets on the fly.
 
-__This cheatsheet will assume that you press `Tab` after each expressions.__
+You can use Emmet in two ways:
+
+- Tab Expand Way: Type your emmet code and press `Tab` key
+- Interactive Method: Press `alt + ctrl + Enter` and start typing your expressions. This should automatically generate HTML snippets on the fly.
+
+**This cheatsheet will assume that you press `Tab` after each expressions.**
 
 ## HTML
 
-### Generating  HTML 5 DOCTYPE
+### Generating HTML 5 DOCTYPE
+
 `html:5`
 Will generate
 
@@ -36,6 +42,7 @@ Will generate
 ```
 
 ### Child items
+
 Child items are created using `>`
 
 `ul>li>p`
@@ -49,20 +56,20 @@ Child items are created using `>`
 ```
 
 ### Sibling Items
+
 Sibling items are created using `+`
 
 `html>head+body`
 
 ```html
 <html>
-<head></head>
-<body>
-
-</body>
+  <head></head>
+  <body></body>
 </html>
 ```
 
 ### Multiplication
+
 Items can be multiplied by `*`
 
 `ul>li*5`
@@ -78,6 +85,7 @@ Items can be multiplied by `*`
 ```
 
 ### Grouping
+
 Items can be grouped together using `()`
 
 `table>(tr>th*5)+tr>t*5`
@@ -102,6 +110,7 @@ Items can be grouped together using `()`
 ```
 
 ### Class and ID
+
 Class and Id in Emmet can be done using `.` and `#`
 
 `div.heading`
@@ -125,6 +134,7 @@ ID and Class can also be combined together
 ```
 
 ### Adding Content inside tags
+
 Contents inside tags can be added using `{}`
 
 `h1{Emmet is awesome}+h2{Every front end developers should use this}+p{This is paragraph}*2`
@@ -137,6 +147,7 @@ Contents inside tags can be added using `{}`
 ```
 
 ### Attributes inside HTML tags
+
 Attributes can be added using `[]`
 
 `a[href=https://google.com data-toggle=something target=_blank]`
@@ -146,6 +157,7 @@ Attributes can be added using `[]`
 ```
 
 ### Numbering
+
 Numbering can be done using `$`
 You can use this inside tag or contents.
 
@@ -185,24 +197,28 @@ To start the numbering from specific number, use this way
 ```
 
 ## Tips
-* Use `:` to expand known abbreviations
+
+- Use `:` to expand known abbreviations
 
 `input:date`
+
 ```HTML
 <input type="date" name="" id="">
 ```
 
 `form:post`
+
 ```HTML
 <form action="" method="post"></form>
 ```
 
 `link:css`
+
 ```html
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css" />
 ```
 
-* Building Navbar
+- Building Navbar
 
 `.navbar>ul>li*3>a[href=#]{Item $@-}`
 
@@ -216,12 +232,11 @@ To start the numbering from specific number, use this way
 </div>
 ```
 
-
 ## CSS
 
 Emmet works surprisingly well with css as well.
 
-* `f:l`
+- `f:l`
 
 ```css
 float: left;
@@ -229,7 +244,7 @@ float: left;
 
 You can also use any options n/r/l
 
-* `pos:a­`
+- `pos:a­`
 
 ```css
 position: absolute;
@@ -237,7 +252,7 @@ position: absolute;
 
 Also use any options, pos:a/r/f
 
-* `d:n/b­/f/­i/ib`
+- `d:n/b­/f/­i/ib`
 
 `d:ib`
 
@@ -245,38 +260,38 @@ Also use any options, pos:a/r/f
 display: inline-block;
 ```
 
-* You can use `m` for margin and `p` for padding followed by direction
+- You can use `m` for margin and `p` for padding followed by direction
 
 `mr` -> `margin-right`
 
 `pr` -> `padding-right`
 
-* `@f` will result in
+- `@f` will result in
 
 ```css
 @font-face {
-  font-family:;
-  src:url();
+  font-family: ;
+  src: url();
 }
 ```
 
 You can also use these shorthands
 
-| Shorthand      | Description |
-| ----------- | ----------- |
-| z      | z-index       |
-| w      | width       |
-| h      | height       |
-| fz   | font-size        |
-| ff   | font-family        |
-| fw   | font-weight        |
-| @lh   | line-height        |
-| maw   | max-width        |
-| mah   | max-height        |
-| miw   | min-width        |
-| mih   | min-width        |
-| !   | !important        |
-| @f   | font-face        |
-| @op   | opacity        |
-| @lh   | line-height        |
-| @op   | opacity        |
+| Shorthand | Description |
+| --------- | ----------- |
+| z         | z-index     |
+| w         | width       |
+| h         | height      |
+| fz        | font-size   |
+| ff        | font-family |
+| fw        | font-weight |
+| @lh       | line-height |
+| maw       | max-width   |
+| mah       | max-height  |
+| miw       | min-width   |
+| mih       | min-width   |
+| !         | !important  |
+| @f        | font-face   |
+| @op       | opacity     |
+| @lh       | line-height |
+| @op       | opacity     |

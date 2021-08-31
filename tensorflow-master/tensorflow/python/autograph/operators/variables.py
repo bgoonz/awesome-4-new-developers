@@ -20,14 +20,14 @@ from __future__ import print_function
 
 
 def ld(v):
-  """Load variable operator."""
-  if isinstance(v, Undefined):
-    return v.read()
-  return v
+    """Load variable operator."""
+    if isinstance(v, Undefined):
+        return v.read()
+    return v
 
 
 def ldu(load_v, name):
-  """Load variable operator that returns Undefined when failing to evaluate.
+    """Load variable operator that returns Undefined when failing to evaluate.
 
   Note: the name ("load or return undefined") is abbreviated to minimize
   the amount of clutter in generated code.
@@ -44,15 +44,15 @@ def ldu(load_v, name):
     Either the value of the symbol, or Undefined, if the symbol is not fully
     defined.
   """
-  try:
-    # TODO(mdan): Use locals()/globals() here.
-    return load_v()
-  except (KeyError, AttributeError, NameError):
-    return Undefined(name)
+    try:
+        # TODO(mdan): Use locals()/globals() here.
+        return load_v()
+    except (KeyError, AttributeError, NameError):
+        return Undefined(name)
 
 
 class Undefined(object):
-  """Represents an undefined symbol in Python.
+    """Represents an undefined symbol in Python.
 
   This is used to reify undefined symbols, which is required to use the
   functional form of loops.
@@ -78,31 +78,33 @@ class Undefined(object):
     symbol_name: Text, identifier for the undefined symbol
   """
 
-  __slots__ = ('symbol_name',)
+    __slots__ = ("symbol_name",)
 
-  def __init__(self, symbol_name):
-    self.symbol_name = symbol_name
+    def __init__(self, symbol_name):
+        self.symbol_name = symbol_name
 
-  def read(self):
-    raise UnboundLocalError("'{}' is used before assignment".format(
-        self.symbol_name))
+    def read(self):
+        raise UnboundLocalError(
+            "'{}' is used before assignment".format(self.symbol_name)
+        )
 
-  def __repr__(self):
-    return self.symbol_name
+    def __repr__(self):
+        return self.symbol_name
 
-  def __getattribute__(self, name):
-    try:
-      # If it's an existing attribute, return it.
-      return object.__getattribute__(self, name)
-    except AttributeError:
-      # Otherwise return Undefined.
-      return self
+    def __getattribute__(self, name):
+        try:
+            # If it's an existing attribute, return it.
+            return object.__getattribute__(self, name)
+        except AttributeError:
+            # Otherwise return Undefined.
+            return self
 
-  def __getitem__(self, i):
-    return self
+    def __getitem__(self, i):
+        return self
 
 
 # TODO(mdan): Refactor as a RetVal object, aggregating the value and do_return.
 class UndefinedReturnValue(object):
-  """Represents a return value that is undefined."""
-  pass
+    """Represents a return value that is undefined."""
+
+    pass

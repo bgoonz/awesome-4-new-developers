@@ -2,28 +2,28 @@
 
 ## Summary
 
--   Introduction
-    -   [Hello World](#hello-world)
-    -   [Go CLI Commands](#go-cli-commands)
-    -   [Go Modules](#go-modules)
--   Basic
-    -   [Basic Types](#basic-types)
-    -   [Variables](#variables)
-    -   [Operators](#operators)
-    -   [Conditional Statements](#conditional-statements)
-    -   [Loops](#loops)
-    -   [Arrays](#arrays)
-    -   [Functions](#functions)
--   Advanced
-    -   [Structs](#structs)
-    -   [Maps](#maps)
-    -   [Pointers](#pointers)
-    -   [Methods and Interfaces](#methods-and-interfaces)
-    -   [Errors](#errors)
-    -   [Testing](#testing)
-    -   [Concurrency](#concurrency)
--   Standard Libs
-    -   [Package fmt](#package-fmt)
+- Introduction
+  - [Hello World](#hello-world)
+  - [Go CLI Commands](#go-cli-commands)
+  - [Go Modules](#go-modules)
+- Basic
+  - [Basic Types](#basic-types)
+  - [Variables](#variables)
+  - [Operators](#operators)
+  - [Conditional Statements](#conditional-statements)
+  - [Loops](#loops)
+  - [Arrays](#arrays)
+  - [Functions](#functions)
+- Advanced
+  - [Structs](#structs)
+  - [Maps](#maps)
+  - [Pointers](#pointers)
+  - [Methods and Interfaces](#methods-and-interfaces)
+  - [Errors](#errors)
+  - [Testing](#testing)
+  - [Concurrency](#concurrency)
+- Standard Libs
+  - [Package fmt](#package-fmt)
 
 ## Hello World
 
@@ -86,11 +86,11 @@ $ go version
 
 ## Go Modules
 
--   Go projects are called **modules**
--   Each module has multiple **packages**
--   Each package should has a scoped functionality. Packages talk to each other to compose the code
--   A module needs at least one package, the **main**
--   The package main needs a entry function called **main**
+- Go projects are called **modules**
+- Each module has multiple **packages**
+- Each package should has a scoped functionality. Packages talk to each other to compose the code
+- A module needs at least one package, the **main**
+- The package main needs a entry function called **main**
 
 ```bash
 # Create Module
@@ -600,7 +600,7 @@ Go doesn't support `throw`, `try`, `catch` and other common error handling struc
 ```go
 import "errors"
 
-// Function that contain a logic that can cause a possible exception flow 
+// Function that contain a logic that can cause a possible exception flow
 func firstLetter(text string) (string, error) {
     if len(text) < 1 {
         return nil, errors.New("Parameter text is empty")
@@ -632,7 +632,7 @@ func Sum(x, y int) int {
 }
 
 // main_test.go
-import ( 
+import (
     "testing"
     "reflect"
 )
@@ -676,7 +676,7 @@ func main() {
     blocking2: 0
     blocking2: 1
     blocking2: 2
-    done 
+    done
 */
 
 // Go routines are a function (either declared previously or anonymous) called with the keyword go

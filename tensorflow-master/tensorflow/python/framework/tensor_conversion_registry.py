@@ -30,8 +30,8 @@ from tensorflow.python.util.tf_export import tf_export
 # Loaded lazily due to a circular dependency
 # ops->tensor_conversion_registry->constant_op->ops.
 constant_op = lazy_loader.LazyLoader(
-    "constant_op", globals(),
-    "tensorflow.python.framework.constant_op")
+    "constant_op", globals(), "tensorflow.python.framework.constant_op"
+)
 
 
 _tensor_conversion_func_registry = collections.defaultdict(list)
@@ -40,24 +40,18 @@ _tensor_conversion_func_lock = threading.Lock()
 
 # Instances of these types are always converted using
 # `_default_conversion_function`.
-_UNCONVERTIBLE_TYPES = six.integer_types + (
-    float,
-    np.generic,
-    np.ndarray,
-)
+_UNCONVERTIBLE_TYPES = six.integer_types + (float, np.generic, np.ndarray)
 
 
 def _default_conversion_function(value, dtype, name, as_ref):
-  del as_ref  # Unused.
-  return constant_op.constant(value, dtype, name=name)
+    del as_ref  # Unused.
+    return constant_op.constant(value, dtype, name=name)
 
 
 # TODO(josh11b): Add ctx argument to conversion_func() signature.
 @tf_export("register_tensor_conversion_function")
-def register_tensor_conversion_function(base_type,
-                                        conversion_func,
-                                        priority=100):
-  """Registers a function for converting objects of `base_type` to `Tensor`.
+def register_tensor_conversion_function(base_type, conversion_func, priority=100):
+    """Registers a function for converting objects of `base_type` to `Tensor`.
 
   The conversion function must have the following signature:
 
@@ -95,24 +89,25 @@ def register_tensor_conversion_function(base_type,
   Raises:
     TypeError: If the arguments do not have the appropriate type.
   """
-  base_types = base_type if isinstance(base_type, tuple) else (base_type,)
-  if any(not isinstance(x, type) for x in base_types):
-    raise TypeError("base_type must be a type or a tuple of types.")
-  if any(issubclass(x, _UNCONVERTIBLE_TYPES) for x in base_types):
-    raise TypeError("Cannot register conversions for Python numeric types and "
-                    "NumPy scalars and arrays.")
-  del base_types  # Only needed for validation.
-  if not callable(conversion_func):
-    raise TypeError("conversion_func must be callable.")
+    base_types = base_type if isinstance(base_type, tuple) else (base_type,)
+    if any(not isinstance(x, type) for x in base_types):
+        raise TypeError("base_type must be a type or a tuple of types.")
+    if any(issubclass(x, _UNCONVERTIBLE_TYPES) for x in base_types):
+        raise TypeError(
+            "Cannot register conversions for Python numeric types and "
+            "NumPy scalars and arrays."
+        )
+    del base_types  # Only needed for validation.
+    if not callable(conversion_func):
+        raise TypeError("conversion_func must be callable.")
 
-  with _tensor_conversion_func_lock:
-    _tensor_conversion_func_registry[priority].append(
-        (base_type, conversion_func))
-    _tensor_conversion_func_cache.clear()
+    with _tensor_conversion_func_lock:
+        _tensor_conversion_func_registry[priority].append((base_type, conversion_func))
+        _tensor_conversion_func_cache.clear()
 
 
 def get(query):
-  """Get conversion function for objects of `cls`.
+    """Get conversion function for objects of `cls`.
 
   Args:
     query: The type to query for.
@@ -120,21 +115,23 @@ def get(query):
   Returns:
     A list of conversion functions in increasing order of priority.
   """
-  if issubclass(query, _UNCONVERTIBLE_TYPES):
-    return [(query, _default_conversion_function)]
+    if issubclass(query, _UNCONVERTIBLE_TYPES):
+        return [(query, _default_conversion_function)]
 
-  conversion_funcs = _tensor_conversion_func_cache.get(query)
-  if conversion_funcs is None:
-    with _tensor_conversion_func_lock:
-      # Has another thread populated the cache in the meantime?
-      conversion_funcs = _tensor_conversion_func_cache.get(query)
-      if conversion_funcs is None:
-        conversion_funcs = []
-        for _, funcs_at_priority in sorted(
-            _tensor_conversion_func_registry.items()):
-          conversion_funcs.extend(
-              (base_type, conversion_func)
-              for base_type, conversion_func in funcs_at_priority
-              if issubclass(query, base_type))
-        _tensor_conversion_func_cache[query] = conversion_funcs
-  return conversion_funcs
+    conversion_funcs = _tensor_conversion_func_cache.get(query)
+    if conversion_funcs is None:
+        with _tensor_conversion_func_lock:
+            # Has another thread populated the cache in the meantime?
+            conversion_funcs = _tensor_conversion_func_cache.get(query)
+            if conversion_funcs is None:
+                conversion_funcs = []
+                for _, funcs_at_priority in sorted(
+                    _tensor_conversion_func_registry.items()
+                ):
+                    conversion_funcs.extend(
+                        (base_type, conversion_func)
+                        for base_type, conversion_func in funcs_at_priority
+                        if issubclass(query, base_type)
+                    )
+                _tensor_conversion_func_cache[query] = conversion_funcs
+    return conversion_funcs

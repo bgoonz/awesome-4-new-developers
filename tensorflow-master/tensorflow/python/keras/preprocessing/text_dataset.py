@@ -23,21 +23,25 @@ from tensorflow.python.ops import string_ops
 from tensorflow.python.util.tf_export import keras_export
 
 
-@keras_export('keras.utils.text_dataset_from_directory',
-              'keras.preprocessing.text_dataset_from_directory',
-              v1=[])
-def text_dataset_from_directory(directory,
-                                labels='inferred',
-                                label_mode='int',
-                                class_names=None,
-                                batch_size=32,
-                                max_length=None,
-                                shuffle=True,
-                                seed=None,
-                                validation_split=None,
-                                subset=None,
-                                follow_links=False):
-  """Generates a `tf.data.Dataset` from text files in a directory.
+@keras_export(
+    "keras.utils.text_dataset_from_directory",
+    "keras.preprocessing.text_dataset_from_directory",
+    v1=[],
+)
+def text_dataset_from_directory(
+    directory,
+    labels="inferred",
+    label_mode="int",
+    class_names=None,
+    batch_size=32,
+    max_length=None,
+    shuffle=True,
+    seed=None,
+    validation_split=None,
+    subset=None,
+    follow_links=False,
+):
+    """Generates a `tf.data.Dataset` from text files in a directory.
 
   If your directory structure is:
 
@@ -114,82 +118,86 @@ def text_dataset_from_directory(directory,
       of shape `(batch_size, num_classes)`, representing a one-hot
       encoding of the class index.
   """
-  if labels not in ('inferred', None):
-    if not isinstance(labels, (list, tuple)):
-      raise ValueError(
-          '`labels` argument should be a list/tuple of integer labels, of '
-          'the same size as the number of text files in the target '
-          'directory. If you wish to infer the labels from the subdirectory '
-          'names in the target directory, pass `labels="inferred"`. '
-          'If you wish to get a dataset that only contains text samples '
-          '(no labels), pass `labels=None`.')
-    if class_names:
-      raise ValueError('You can only pass `class_names` if the labels are '
-                       'inferred from the subdirectory names in the target '
-                       'directory (`labels="inferred"`).')
-  if label_mode not in {'int', 'categorical', 'binary', None}:
-    raise ValueError(
-        '`label_mode` argument must be one of "int", "categorical", "binary", '
-        'or None. Received: %s' % (label_mode,))
-  if labels is None or label_mode is None:
-    labels = None
-    label_mode = None
-  dataset_utils.check_validation_split_arg(
-      validation_split, subset, shuffle, seed)
+    if labels not in ("inferred", None):
+        if not isinstance(labels, (list, tuple)):
+            raise ValueError(
+                "`labels` argument should be a list/tuple of integer labels, of "
+                "the same size as the number of text files in the target "
+                "directory. If you wish to infer the labels from the subdirectory "
+                'names in the target directory, pass `labels="inferred"`. '
+                "If you wish to get a dataset that only contains text samples "
+                "(no labels), pass `labels=None`."
+            )
+        if class_names:
+            raise ValueError(
+                "You can only pass `class_names` if the labels are "
+                "inferred from the subdirectory names in the target "
+                'directory (`labels="inferred"`).'
+            )
+    if label_mode not in {"int", "categorical", "binary", None}:
+        raise ValueError(
+            '`label_mode` argument must be one of "int", "categorical", "binary", '
+            "or None. Received: %s" % (label_mode,)
+        )
+    if labels is None or label_mode is None:
+        labels = None
+        label_mode = None
+    dataset_utils.check_validation_split_arg(validation_split, subset, shuffle, seed)
 
-  if seed is None:
-    seed = np.random.randint(1e6)
-  file_paths, labels, class_names = dataset_utils.index_directory(
-      directory,
-      labels,
-      formats=('.txt',),
-      class_names=class_names,
-      shuffle=shuffle,
-      seed=seed,
-      follow_links=follow_links)
+    if seed is None:
+        seed = np.random.randint(1e6)
+    file_paths, labels, class_names = dataset_utils.index_directory(
+        directory,
+        labels,
+        formats=(".txt",),
+        class_names=class_names,
+        shuffle=shuffle,
+        seed=seed,
+        follow_links=follow_links,
+    )
 
-  if label_mode == 'binary' and len(class_names) != 2:
-    raise ValueError(
-        'When passing `label_mode="binary", there must exactly 2 classes. '
-        'Found the following classes: %s' % (class_names,))
+    if label_mode == "binary" and len(class_names) != 2:
+        raise ValueError(
+            'When passing `label_mode="binary", there must exactly 2 classes. '
+            "Found the following classes: %s" % (class_names,)
+        )
 
-  file_paths, labels = dataset_utils.get_training_or_validation_split(
-      file_paths, labels, validation_split, subset)
-  if not file_paths:
-    raise ValueError('No text files found.')
+    file_paths, labels = dataset_utils.get_training_or_validation_split(
+        file_paths, labels, validation_split, subset
+    )
+    if not file_paths:
+        raise ValueError("No text files found.")
 
-  dataset = paths_and_labels_to_dataset(
-      file_paths=file_paths,
-      labels=labels,
-      label_mode=label_mode,
-      num_classes=len(class_names),
-      max_length=max_length)
-  if shuffle:
-    # Shuffle locally at each iteration
-    dataset = dataset.shuffle(buffer_size=batch_size * 8, seed=seed)
-  dataset = dataset.batch(batch_size)
-  # Users may need to reference `class_names`.
-  dataset.class_names = class_names
-  return dataset
+    dataset = paths_and_labels_to_dataset(
+        file_paths=file_paths,
+        labels=labels,
+        label_mode=label_mode,
+        num_classes=len(class_names),
+        max_length=max_length,
+    )
+    if shuffle:
+        # Shuffle locally at each iteration
+        dataset = dataset.shuffle(buffer_size=batch_size * 8, seed=seed)
+    dataset = dataset.batch(batch_size)
+    # Users may need to reference `class_names`.
+    dataset.class_names = class_names
+    return dataset
 
 
-def paths_and_labels_to_dataset(file_paths,
-                                labels,
-                                label_mode,
-                                num_classes,
-                                max_length):
-  """Constructs a dataset of text strings and labels."""
-  path_ds = dataset_ops.Dataset.from_tensor_slices(file_paths)
-  string_ds = path_ds.map(
-      lambda x: path_to_string_content(x, max_length))
-  if label_mode:
-    label_ds = dataset_utils.labels_to_dataset(labels, label_mode, num_classes)
-    string_ds = dataset_ops.Dataset.zip((string_ds, label_ds))
-  return string_ds
+def paths_and_labels_to_dataset(
+    file_paths, labels, label_mode, num_classes, max_length
+):
+    """Constructs a dataset of text strings and labels."""
+    path_ds = dataset_ops.Dataset.from_tensor_slices(file_paths)
+    string_ds = path_ds.map(lambda x: path_to_string_content(x, max_length))
+    if label_mode:
+        label_ds = dataset_utils.labels_to_dataset(labels, label_mode, num_classes)
+        string_ds = dataset_ops.Dataset.zip((string_ds, label_ds))
+    return string_ds
 
 
 def path_to_string_content(path, max_length):
-  txt = io_ops.read_file(path)
-  if max_length is not None:
-    txt = string_ops.substr(txt, 0, max_length)
-  return txt
+    txt = io_ops.read_file(path)
+    if max_length is not None:
+        txt = string_ops.substr(txt, 0, max_length)
+    return txt

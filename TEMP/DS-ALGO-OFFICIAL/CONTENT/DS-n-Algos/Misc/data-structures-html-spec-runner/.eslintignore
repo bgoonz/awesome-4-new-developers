@@ -1,0 +1,7 @@
+.eslint*
+**/node_modules
+**/bower_components
+**/lib
+**/vendor
+**/*.min.js
+sprint-one/spec/verifyClass.js

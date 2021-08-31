@@ -23,7 +23,7 @@ from tensorflow.python.eager import execute
 
 
 def add_op_callback(callback_fn):
-  r"""Add a thread-local callback that intercepts op execution and op creation.
+    r"""Add a thread-local callback that intercepts op execution and op creation.
 
   The `callback_fn` will be invoked immediately after any of the three types
   of events:
@@ -100,34 +100,35 @@ def add_op_callback(callback_fn):
   Raises:
     ValueEror: If `callback_fn` is `None` or not callable.
   """
-  # TODO(b/139668041): Implement support for overriding `EagerTensor`s from
-  # callback.
-  if callback_fn is None:
-    raise ValueError("Passed callback function cannot be None.")
-  if not callable(callback_fn):
-    raise ValueError(
-        "Callback function passed to op_callback() is expected to be callable, "
-        "but is not. Received %s" % callback_fn)
-  ctx = context.context()
-  ctx.add_op_callback(callback_fn)
-  if ctx.executing_eagerly():
-    # Monkey-patch `execute.execute()`.
-    execute.execute = execute.execute_with_callbacks
+    # TODO(b/139668041): Implement support for overriding `EagerTensor`s from
+    # callback.
+    if callback_fn is None:
+        raise ValueError("Passed callback function cannot be None.")
+    if not callable(callback_fn):
+        raise ValueError(
+            "Callback function passed to op_callback() is expected to be callable, "
+            "but is not. Received %s" % callback_fn
+        )
+    ctx = context.context()
+    ctx.add_op_callback(callback_fn)
+    if ctx.executing_eagerly():
+        # Monkey-patch `execute.execute()`.
+        execute.execute = execute.execute_with_callbacks
 
 
 def should_invoke_op_callbacks():
-  """Determine if op callbacks are present and should be invoked.
+    """Determine if op callbacks are present and should be invoked.
 
   Returns:
     A thread-local result (boolean) indicating whether any op callback(s) exist
     and should be invoked.
   """
-  ctx = context.context()
-  return ctx.op_callbacks and not ctx.invoking_op_callbacks
+    ctx = context.context()
+    return ctx.op_callbacks and not ctx.invoking_op_callbacks
 
 
 def remove_op_callback(op_callback):
-  """Remove an already-added op callback.
+    """Remove an already-added op callback.
 
   Args:
     op_callback: The op callback to be removed.
@@ -136,26 +137,21 @@ def remove_op_callback(op_callback):
     KeyError: If `op_callback` has not been registered using `add_op_callback()`
       before.
   """
-  ctx = context.context()
-  ctx.remove_op_callback(op_callback)
-  if ctx.executing_eagerly() and not ctx.op_callbacks:
-    # Undo monkey-patch of execute.execute if there are no more callbacks.
-    execute.execute = execute.quick_execute
+    ctx = context.context()
+    ctx.remove_op_callback(op_callback)
+    if ctx.executing_eagerly() and not ctx.op_callbacks:
+        # Undo monkey-patch of execute.execute if there are no more callbacks.
+        execute.execute = execute.quick_execute
 
 
 def clear_op_callbacks():
-  """Clear all op callbacks registered in the current thread."""
-  for callback in context.context().op_callbacks:
-    remove_op_callback(callback)
+    """Clear all op callbacks registered in the current thread."""
+    for callback in context.context().op_callbacks:
+        remove_op_callback(callback)
 
 
-def invoke_op_callbacks(op_type,
-                        inputs,
-                        attrs,
-                        outputs,
-                        op_name=None,
-                        graph=None):
-  r"""Invoke the callbacks that exist in the current scope (if any).
+def invoke_op_callbacks(op_type, inputs, attrs, outputs, op_name=None, graph=None):
+    r"""Invoke the callbacks that exist in the current scope (if any).
 
   If no callbacks are present in the current scope, this method returns
   immediately.
@@ -182,37 +178,39 @@ def invoke_op_callbacks(op_type,
     `None`, or a `list` or `tuple` of output tenors that will override the
     original (input) `outputs`.
   """
-  ctx = context.context()
-  if ctx.op_callbacks:
-    # Guards against stack overflow that can result from recursive invocation
-    # due to op constructions inside client-supplied op callbacks.
-    ctx.invoking_op_callbacks = True
-    try:
-      if isinstance(attrs, dict):
-        attrs_list = []
-        for key in attrs:
-          attrs_list.append(key)
-          attrs_list.append(attrs[key])
-        attrs_tuple = tuple(attrs_list)
-      else:
-        attrs_tuple = attrs
+    ctx = context.context()
+    if ctx.op_callbacks:
+        # Guards against stack overflow that can result from recursive invocation
+        # due to op constructions inside client-supplied op callbacks.
+        ctx.invoking_op_callbacks = True
+        try:
+            if isinstance(attrs, dict):
+                attrs_list = []
+                for key in attrs:
+                    attrs_list.append(key)
+                    attrs_list.append(attrs[key])
+                attrs_tuple = tuple(attrs_list)
+            else:
+                attrs_tuple = attrs
 
-      new_outputs = outputs
-      for callback in ctx.op_callbacks:
-        new_outputs = callback(
-            op_type,
-            inputs,
-            attrs_tuple,
-            new_outputs,
-            op_name=op_name,
-            graph=graph)
-        if new_outputs is not None and len(new_outputs) != len(outputs):
-          raise ValueError(
-              "The op callback returned %s tensors, which does not match the "
-              "original number of outputs of op %s (%d)." %
-              (len(new_outputs), op_name, len(outputs)))
-      return new_outputs
-    finally:
-      ctx.invoking_op_callbacks = False
-  else:
-    return outputs
+            new_outputs = outputs
+            for callback in ctx.op_callbacks:
+                new_outputs = callback(
+                    op_type,
+                    inputs,
+                    attrs_tuple,
+                    new_outputs,
+                    op_name=op_name,
+                    graph=graph,
+                )
+                if new_outputs is not None and len(new_outputs) != len(outputs):
+                    raise ValueError(
+                        "The op callback returned %s tensors, which does not match the "
+                        "original number of outputs of op %s (%d)."
+                        % (len(new_outputs), op_name, len(outputs))
+                    )
+            return new_outputs
+        finally:
+            ctx.invoking_op_callbacks = False
+    else:
+        return outputs

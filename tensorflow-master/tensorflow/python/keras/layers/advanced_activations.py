@@ -28,12 +28,12 @@ from tensorflow.python.util.tf_export import keras_export
 
 
 def get_globals():
-  return globals()
+    return globals()
 
 
-@keras_export('keras.layers.LeakyReLU')
+@keras_export("keras.layers.LeakyReLU")
 class LeakyReLU(Layer):
-  """Leaky version of a Rectified Linear Unit.
+    """Leaky version of a Rectified Linear Unit.
 
   It allows a small gradient when the unit is not active:
 
@@ -66,31 +66,33 @@ class LeakyReLU(Layer):
 
   """
 
-  def __init__(self, alpha=0.3, **kwargs):
-    super(LeakyReLU, self).__init__(**kwargs)
-    if alpha is None:
-      raise ValueError('The alpha value of a Leaky ReLU layer '
-                       'cannot be None, needs a float. '
-                       'Got %s' % alpha)
-    self.supports_masking = True
-    self.alpha = backend.cast_to_floatx(alpha)
+    def __init__(self, alpha=0.3, **kwargs):
+        super(LeakyReLU, self).__init__(**kwargs)
+        if alpha is None:
+            raise ValueError(
+                "The alpha value of a Leaky ReLU layer "
+                "cannot be None, needs a float. "
+                "Got %s" % alpha
+            )
+        self.supports_masking = True
+        self.alpha = backend.cast_to_floatx(alpha)
 
-  def call(self, inputs):
-    return backend.relu(inputs, alpha=self.alpha)
+    def call(self, inputs):
+        return backend.relu(inputs, alpha=self.alpha)
 
-  def get_config(self):
-    config = {'alpha': float(self.alpha)}
-    base_config = super(LeakyReLU, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {"alpha": float(self.alpha)}
+        base_config = super(LeakyReLU, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
-  @tf_utils.shape_type_conversion
-  def compute_output_shape(self, input_shape):
-    return input_shape
+    @tf_utils.shape_type_conversion
+    def compute_output_shape(self, input_shape):
+        return input_shape
 
 
-@keras_export('keras.layers.PReLU')
+@keras_export("keras.layers.PReLU")
 class PReLU(Layer):
-  """Parametric Rectified Linear Unit.
+    """Parametric Rectified Linear Unit.
 
   It follows:
 
@@ -123,68 +125,71 @@ class PReLU(Layer):
       set `shared_axes=[1, 2]`.
   """
 
-  def __init__(self,
-               alpha_initializer='zeros',
-               alpha_regularizer=None,
-               alpha_constraint=None,
-               shared_axes=None,
-               **kwargs):
-    super(PReLU, self).__init__(**kwargs)
-    self.supports_masking = True
-    self.alpha_initializer = initializers.get(alpha_initializer)
-    self.alpha_regularizer = regularizers.get(alpha_regularizer)
-    self.alpha_constraint = constraints.get(alpha_constraint)
-    if shared_axes is None:
-      self.shared_axes = None
-    elif not isinstance(shared_axes, (list, tuple)):
-      self.shared_axes = [shared_axes]
-    else:
-      self.shared_axes = list(shared_axes)
+    def __init__(
+        self,
+        alpha_initializer="zeros",
+        alpha_regularizer=None,
+        alpha_constraint=None,
+        shared_axes=None,
+        **kwargs
+    ):
+        super(PReLU, self).__init__(**kwargs)
+        self.supports_masking = True
+        self.alpha_initializer = initializers.get(alpha_initializer)
+        self.alpha_regularizer = regularizers.get(alpha_regularizer)
+        self.alpha_constraint = constraints.get(alpha_constraint)
+        if shared_axes is None:
+            self.shared_axes = None
+        elif not isinstance(shared_axes, (list, tuple)):
+            self.shared_axes = [shared_axes]
+        else:
+            self.shared_axes = list(shared_axes)
 
-  @tf_utils.shape_type_conversion
-  def build(self, input_shape):
-    param_shape = list(input_shape[1:])
-    if self.shared_axes is not None:
-      for i in self.shared_axes:
-        param_shape[i - 1] = 1
-    self.alpha = self.add_weight(
-        shape=param_shape,
-        name='alpha',
-        initializer=self.alpha_initializer,
-        regularizer=self.alpha_regularizer,
-        constraint=self.alpha_constraint)
-    # Set input spec
-    axes = {}
-    if self.shared_axes:
-      for i in range(1, len(input_shape)):
-        if i not in self.shared_axes:
-          axes[i] = input_shape[i]
-    self.input_spec = InputSpec(ndim=len(input_shape), axes=axes)
-    self.built = True
+    @tf_utils.shape_type_conversion
+    def build(self, input_shape):
+        param_shape = list(input_shape[1:])
+        if self.shared_axes is not None:
+            for i in self.shared_axes:
+                param_shape[i - 1] = 1
+        self.alpha = self.add_weight(
+            shape=param_shape,
+            name="alpha",
+            initializer=self.alpha_initializer,
+            regularizer=self.alpha_regularizer,
+            constraint=self.alpha_constraint,
+        )
+        # Set input spec
+        axes = {}
+        if self.shared_axes:
+            for i in range(1, len(input_shape)):
+                if i not in self.shared_axes:
+                    axes[i] = input_shape[i]
+        self.input_spec = InputSpec(ndim=len(input_shape), axes=axes)
+        self.built = True
 
-  def call(self, inputs):
-    pos = backend.relu(inputs)
-    neg = -self.alpha * backend.relu(-inputs)
-    return pos + neg
+    def call(self, inputs):
+        pos = backend.relu(inputs)
+        neg = -self.alpha * backend.relu(-inputs)
+        return pos + neg
 
-  def get_config(self):
-    config = {
-        'alpha_initializer': initializers.serialize(self.alpha_initializer),
-        'alpha_regularizer': regularizers.serialize(self.alpha_regularizer),
-        'alpha_constraint': constraints.serialize(self.alpha_constraint),
-        'shared_axes': self.shared_axes
-    }
-    base_config = super(PReLU, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {
+            "alpha_initializer": initializers.serialize(self.alpha_initializer),
+            "alpha_regularizer": regularizers.serialize(self.alpha_regularizer),
+            "alpha_constraint": constraints.serialize(self.alpha_constraint),
+            "shared_axes": self.shared_axes,
+        }
+        base_config = super(PReLU, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
-  @tf_utils.shape_type_conversion
-  def compute_output_shape(self, input_shape):
-    return input_shape
+    @tf_utils.shape_type_conversion
+    def compute_output_shape(self, input_shape):
+        return input_shape
 
 
-@keras_export('keras.layers.ELU')
+@keras_export("keras.layers.ELU")
 class ELU(Layer):
-  """Exponential Linear Unit.
+    """Exponential Linear Unit.
 
   It follows:
 
@@ -205,30 +210,32 @@ class ELU(Layer):
     alpha: Scale for the negative factor.
   """
 
-  def __init__(self, alpha=1.0, **kwargs):
-    super(ELU, self).__init__(**kwargs)
-    if alpha is None:
-      raise ValueError('Alpha of an ELU layer cannot be None, '
-                       'requires a float. Got %s' % alpha)
-    self.supports_masking = True
-    self.alpha = backend.cast_to_floatx(alpha)
+    def __init__(self, alpha=1.0, **kwargs):
+        super(ELU, self).__init__(**kwargs)
+        if alpha is None:
+            raise ValueError(
+                "Alpha of an ELU layer cannot be None, "
+                "requires a float. Got %s" % alpha
+            )
+        self.supports_masking = True
+        self.alpha = backend.cast_to_floatx(alpha)
 
-  def call(self, inputs):
-    return backend.elu(inputs, self.alpha)
+    def call(self, inputs):
+        return backend.elu(inputs, self.alpha)
 
-  def get_config(self):
-    config = {'alpha': float(self.alpha)}
-    base_config = super(ELU, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {"alpha": float(self.alpha)}
+        base_config = super(ELU, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
-  @tf_utils.shape_type_conversion
-  def compute_output_shape(self, input_shape):
-    return input_shape
+    @tf_utils.shape_type_conversion
+    def compute_output_shape(self, input_shape):
+        return input_shape
 
 
-@keras_export('keras.layers.ThresholdedReLU')
+@keras_export("keras.layers.ThresholdedReLU")
 class ThresholdedReLU(Layer):
-  """Thresholded Rectified Linear Unit.
+    """Thresholded Rectified Linear Unit.
 
   It follows:
 
@@ -249,33 +256,37 @@ class ThresholdedReLU(Layer):
     theta: Float >= 0. Threshold location of activation.
   """
 
-  def __init__(self, theta=1.0, **kwargs):
-    super(ThresholdedReLU, self).__init__(**kwargs)
-    if theta is None:
-      raise ValueError('Theta of a Thresholded ReLU layer cannot be '
-                       'None, requires a float. Got %s' % theta)
-    if theta < 0:
-      raise ValueError('The theta value of a Thresholded ReLU layer '
-                       'should be >=0, got %s' % theta)
-    self.supports_masking = True
-    self.theta = backend.cast_to_floatx(theta)
+    def __init__(self, theta=1.0, **kwargs):
+        super(ThresholdedReLU, self).__init__(**kwargs)
+        if theta is None:
+            raise ValueError(
+                "Theta of a Thresholded ReLU layer cannot be "
+                "None, requires a float. Got %s" % theta
+            )
+        if theta < 0:
+            raise ValueError(
+                "The theta value of a Thresholded ReLU layer "
+                "should be >=0, got %s" % theta
+            )
+        self.supports_masking = True
+        self.theta = backend.cast_to_floatx(theta)
 
-  def call(self, inputs):
-    theta = math_ops.cast(self.theta, inputs.dtype)
-    return inputs * math_ops.cast(math_ops.greater(inputs, theta), inputs.dtype)
+    def call(self, inputs):
+        theta = math_ops.cast(self.theta, inputs.dtype)
+        return inputs * math_ops.cast(math_ops.greater(inputs, theta), inputs.dtype)
 
-  def get_config(self):
-    config = {'theta': float(self.theta)}
-    base_config = super(ThresholdedReLU, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {"theta": float(self.theta)}
+        base_config = super(ThresholdedReLU, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
-  @tf_utils.shape_type_conversion
-  def compute_output_shape(self, input_shape):
-    return input_shape
+    @tf_utils.shape_type_conversion
+    def compute_output_shape(self, input_shape):
+        return input_shape
 
 
 def _large_compatible_negative(tensor_type):
-  """Large negative number as Tensor.
+    """Large negative number as Tensor.
 
   This function is necessary because the standard value for epsilon
   in this module (-1e9) cannot be represented using tf.float16
@@ -286,14 +297,14 @@ def _large_compatible_negative(tensor_type):
   Returns:
     a large negative number.
   """
-  if tensor_type == dtypes.float16:
-    return dtypes.float16.min
-  return -1e9
+    if tensor_type == dtypes.float16:
+        return dtypes.float16.min
+    return -1e9
 
 
-@keras_export('keras.layers.Softmax')
+@keras_export("keras.layers.Softmax")
 class Softmax(Layer):
-  """Softmax activation function.
+    """Softmax activation function.
 
   Example without mask:
 
@@ -325,43 +336,46 @@ class Softmax(Layer):
     softmaxed output with the same shape as `inputs`.
   """
 
-  def __init__(self, axis=-1, **kwargs):
-    super(Softmax, self).__init__(**kwargs)
-    self.supports_masking = True
-    self.axis = axis
+    def __init__(self, axis=-1, **kwargs):
+        super(Softmax, self).__init__(**kwargs)
+        self.supports_masking = True
+        self.axis = axis
 
-  def call(self, inputs, mask=None):
-    if mask is not None:
-      # Since mask is 1.0 for positions we want to keep and 0.0 for
-      # masked positions, this operation will create a tensor which is 0.0 for
-      # positions we want to attend and -1e.9 for masked positions.
-      adder = (1.0 - math_ops.cast(mask, inputs.dtype)) * (
-          _large_compatible_negative(inputs.dtype))
+    def call(self, inputs, mask=None):
+        if mask is not None:
+            # Since mask is 1.0 for positions we want to keep and 0.0 for
+            # masked positions, this operation will create a tensor which is 0.0 for
+            # positions we want to attend and -1e.9 for masked positions.
+            adder = (1.0 - math_ops.cast(mask, inputs.dtype)) * (
+                _large_compatible_negative(inputs.dtype)
+            )
 
-      # Since we are adding it to the raw scores before the softmax, this is
-      # effectively the same as removing these entirely.
-      inputs += adder
-    if isinstance(self.axis, (tuple, list)):
-      if len(self.axis) > 1:
-        return math_ops.exp(inputs - math_ops.reduce_logsumexp(
-            inputs, axis=self.axis, keepdims=True))
-      else:
-        return backend.softmax(inputs, axis=self.axis[0])
-    return backend.softmax(inputs, axis=self.axis)
+            # Since we are adding it to the raw scores before the softmax, this is
+            # effectively the same as removing these entirely.
+            inputs += adder
+        if isinstance(self.axis, (tuple, list)):
+            if len(self.axis) > 1:
+                return math_ops.exp(
+                    inputs
+                    - math_ops.reduce_logsumexp(inputs, axis=self.axis, keepdims=True)
+                )
+            else:
+                return backend.softmax(inputs, axis=self.axis[0])
+        return backend.softmax(inputs, axis=self.axis)
 
-  def get_config(self):
-    config = {'axis': self.axis}
-    base_config = super(Softmax, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {"axis": self.axis}
+        base_config = super(Softmax, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
-  @tf_utils.shape_type_conversion
-  def compute_output_shape(self, input_shape):
-    return input_shape
+    @tf_utils.shape_type_conversion
+    def compute_output_shape(self, input_shape):
+        return input_shape
 
 
-@keras_export('keras.layers.ReLU')
+@keras_export("keras.layers.ReLU")
 class ReLU(Layer):
-  """Rectified Linear Unit activation function.
+    """Rectified Linear Unit activation function.
 
   With default values, it returns element-wise `max(x, 0)`.
 
@@ -408,42 +422,50 @@ class ReLU(Layer):
       to 0.
   """
 
-  def __init__(self, max_value=None, negative_slope=0, threshold=0, **kwargs):
-    super(ReLU, self).__init__(**kwargs)
-    if max_value is not None and max_value < 0.:
-      raise ValueError('max_value of a ReLU layer cannot be a negative '
-                       'value. Got: %s' % max_value)
-    if negative_slope is None or negative_slope < 0.:
-      raise ValueError('negative_slope of a ReLU layer cannot be a negative '
-                       'value. Got: %s' % negative_slope)
-    if threshold is None or threshold < 0.:
-      raise ValueError('threshold of a ReLU layer cannot be a negative '
-                       'value. Got: %s' % threshold)
+    def __init__(self, max_value=None, negative_slope=0, threshold=0, **kwargs):
+        super(ReLU, self).__init__(**kwargs)
+        if max_value is not None and max_value < 0.0:
+            raise ValueError(
+                "max_value of a ReLU layer cannot be a negative "
+                "value. Got: %s" % max_value
+            )
+        if negative_slope is None or negative_slope < 0.0:
+            raise ValueError(
+                "negative_slope of a ReLU layer cannot be a negative "
+                "value. Got: %s" % negative_slope
+            )
+        if threshold is None or threshold < 0.0:
+            raise ValueError(
+                "threshold of a ReLU layer cannot be a negative "
+                "value. Got: %s" % threshold
+            )
 
-    self.supports_masking = True
-    if max_value is not None:
-      max_value = backend.cast_to_floatx(max_value)
-    self.max_value = max_value
-    self.negative_slope = backend.cast_to_floatx(negative_slope)
-    self.threshold = backend.cast_to_floatx(threshold)
+        self.supports_masking = True
+        if max_value is not None:
+            max_value = backend.cast_to_floatx(max_value)
+        self.max_value = max_value
+        self.negative_slope = backend.cast_to_floatx(negative_slope)
+        self.threshold = backend.cast_to_floatx(threshold)
 
-  def call(self, inputs):
-    # alpha is used for leaky relu slope in activations instead of
-    # negative_slope.
-    return backend.relu(inputs,
-                        alpha=self.negative_slope,
-                        max_value=self.max_value,
-                        threshold=self.threshold)
+    def call(self, inputs):
+        # alpha is used for leaky relu slope in activations instead of
+        # negative_slope.
+        return backend.relu(
+            inputs,
+            alpha=self.negative_slope,
+            max_value=self.max_value,
+            threshold=self.threshold,
+        )
 
-  def get_config(self):
-    config = {
-        'max_value': self.max_value,
-        'negative_slope': self.negative_slope,
-        'threshold': self.threshold
-    }
-    base_config = super(ReLU, self).get_config()
-    return dict(list(base_config.items()) + list(config.items()))
+    def get_config(self):
+        config = {
+            "max_value": self.max_value,
+            "negative_slope": self.negative_slope,
+            "threshold": self.threshold,
+        }
+        base_config = super(ReLU, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
-  @tf_utils.shape_type_conversion
-  def compute_output_shape(self, input_shape):
-    return input_shape
+    @tf_utils.shape_type_conversion
+    def compute_output_shape(self, input_shape):
+        return input_shape

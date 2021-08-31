@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Blob storage website CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the main branch
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: npm install
+    - run: npm run build --if-present
+      env:
+        CI: true
+    - run: npm run export
+      env:
+        EXPORT_PDF: True
+        CI: true
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}    
+    - name: Upload to Azure
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.0.72
+        inlineScript: |
+            az storage blob upload-batch -s public/roadmap -d \$web/roadmap --account-name iamai --content-cache-control 'public,max-age=3600'
+    - name: Purge Azure CDN
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.0.72
+        inlineScript: |
+          az cdn endpoint purge --content-paths  "/*" --profile-name "i-am-ai" --name "i-am-ai" --resource-group "Productive"
+        # Azure logout 
+    - name: Azure Logout
+      run: |
+            az logout

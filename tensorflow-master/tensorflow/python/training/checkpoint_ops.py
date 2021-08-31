@@ -30,21 +30,23 @@ ops.NotDifferentiable("GenerateVocabRemapping")
 ops.NotDifferentiable("LoadAndRemapMatrix")
 
 
-def _load_and_remap_matrix(ckpt_path,
-                           old_tensor_name,
-                           new_row_vocab_offset,
-                           num_rows_to_load,
-                           new_col_vocab_size,
-                           initializer,
-                           old_row_vocab_size=-1,
-                           old_row_vocab_file=None,
-                           new_row_vocab_file=None,
-                           old_col_vocab_file=None,
-                           new_col_vocab_file=None,
-                           num_row_oov_buckets=0,
-                           num_col_oov_buckets=0,
-                           max_rows_in_memory=-1):
-  """Loads a 2-D (matrix) `Tensor` from checkpoint.
+def _load_and_remap_matrix(
+    ckpt_path,
+    old_tensor_name,
+    new_row_vocab_offset,
+    num_rows_to_load,
+    new_col_vocab_size,
+    initializer,
+    old_row_vocab_size=-1,
+    old_row_vocab_file=None,
+    new_row_vocab_file=None,
+    old_col_vocab_file=None,
+    new_col_vocab_file=None,
+    num_row_oov_buckets=0,
+    num_col_oov_buckets=0,
+    max_rows_in_memory=-1,
+):
+    """Loads a 2-D (matrix) `Tensor` from checkpoint.
 
   Generates 1D-remappings for rows and columns using the
   `GenerateVocabRemapping` op, and initializes any anticipated values with the
@@ -120,103 +122,114 @@ def _load_and_remap_matrix(ckpt_path,
       `new_col_vocab_file`.
     ValueError: If neither row vocabs or col vocabs are provided.
   """
-  if num_row_oov_buckets < 0:
-    raise ValueError("num_row_oov_buckets must be >= 0, but received %d" %
-                     num_row_oov_buckets)
-  if num_col_oov_buckets < 0:
-    raise ValueError("num_col_oov_buckets must be >= 0, but received %d" %
-                     num_col_oov_buckets)
+    if num_row_oov_buckets < 0:
+        raise ValueError(
+            "num_row_oov_buckets must be >= 0, but received %d" % num_row_oov_buckets
+        )
+    if num_col_oov_buckets < 0:
+        raise ValueError(
+            "num_col_oov_buckets must be >= 0, but received %d" % num_col_oov_buckets
+        )
 
-  if bool(old_row_vocab_file) != bool(new_row_vocab_file):
-    raise ValueError(
-        "old_row_vocab_file and new_row_vocab_file must both be specified or "
-        "left unspecified. old_row_vocab_file='{}', new_row_vocab_file='{}'".
-        format(old_row_vocab_file, new_row_vocab_file))
-  if bool(old_col_vocab_file) != bool(new_col_vocab_file):
-    raise ValueError(
-        "old_col_vocab_file and new_col_vocab_file must both be specified or "
-        "left unspecified. old_col_vocab_file='{}', new_col_vocab_file='{}'".
-        format(old_col_vocab_file, new_col_vocab_file))
+    if bool(old_row_vocab_file) != bool(new_row_vocab_file):
+        raise ValueError(
+            "old_row_vocab_file and new_row_vocab_file must both be specified or "
+            "left unspecified. old_row_vocab_file='{}', new_row_vocab_file='{}'".format(
+                old_row_vocab_file, new_row_vocab_file
+            )
+        )
+    if bool(old_col_vocab_file) != bool(new_col_vocab_file):
+        raise ValueError(
+            "old_col_vocab_file and new_col_vocab_file must both be specified or "
+            "left unspecified. old_col_vocab_file='{}', new_col_vocab_file='{}'".format(
+                old_col_vocab_file, new_col_vocab_file
+            )
+        )
 
-  remap_rows = new_row_vocab_file and old_row_vocab_file
-  remap_cols = new_col_vocab_file and old_col_vocab_file
-  if not (remap_rows or remap_cols):
-    raise ValueError(
-        "Must provide either row or column vocab files. If no remapping is "
-        "necessary, consider using `tf.contrib.framework.init_from_checkpoint` "
-        "instead.")
+    remap_rows = new_row_vocab_file and old_row_vocab_file
+    remap_cols = new_col_vocab_file and old_col_vocab_file
+    if not (remap_rows or remap_cols):
+        raise ValueError(
+            "Must provide either row or column vocab files. If no remapping is "
+            "necessary, consider using `tf.contrib.framework.init_from_checkpoint` "
+            "instead."
+        )
 
-  num_rows_present = num_rows_to_load
-  if remap_rows:
-    row_remapping, num_rows_present = (
-        gen_checkpoint_ops.generate_vocab_remapping(
+    num_rows_present = num_rows_to_load
+    if remap_rows:
+        row_remapping, num_rows_present = gen_checkpoint_ops.generate_vocab_remapping(
             new_vocab_file=new_row_vocab_file,
             old_vocab_file=old_row_vocab_file,
             new_vocab_offset=new_row_vocab_offset,
             num_new_vocab=num_rows_to_load,
-            old_vocab_size=old_row_vocab_size))
-  else:
-    # Even when the rows are not being reordered, we still need to generate a
-    # remapping to account for initializing partitioned Variables (when
-    # new_row_vocab_offset is non-zero).
-    row_remapping = math_ops.range(
-        new_row_vocab_offset,
-        new_row_vocab_offset + num_rows_to_load,
-        dtype=dtypes.int64)
+            old_vocab_size=old_row_vocab_size,
+        )
+    else:
+        # Even when the rows are not being reordered, we still need to generate a
+        # remapping to account for initializing partitioned Variables (when
+        # new_row_vocab_offset is non-zero).
+        row_remapping = math_ops.range(
+            new_row_vocab_offset,
+            new_row_vocab_offset + num_rows_to_load,
+            dtype=dtypes.int64,
+        )
 
-  col_remapping = []
-  num_cols_present = new_col_vocab_size
-  if remap_cols:
-    col_remapping, num_cols_present = (
-        gen_checkpoint_ops.generate_vocab_remapping(
+    col_remapping = []
+    num_cols_present = new_col_vocab_size
+    if remap_cols:
+        col_remapping, num_cols_present = gen_checkpoint_ops.generate_vocab_remapping(
             new_vocab_file=new_col_vocab_file,
             old_vocab_file=old_col_vocab_file,
             new_vocab_offset=0,  # Offset is unused for cols (no partitioning).
-            num_new_vocab=new_col_vocab_size))
+            num_new_vocab=new_col_vocab_size,
+        )
 
-  init_vals = initializer([
-      num_rows_to_load * new_col_vocab_size -
-      num_rows_present * num_cols_present, 1
-  ])
-  return_tensor = gen_checkpoint_ops.load_and_remap_matrix(
-      ckpt_path=ckpt_path,
-      old_tensor_name=old_tensor_name,
-      row_remapping=row_remapping,
-      col_remapping=col_remapping,
-      initializing_values=init_vals,
-      num_rows=num_rows_to_load,
-      num_cols=new_col_vocab_size,
-      max_rows_in_memory=max_rows_in_memory)
+    init_vals = initializer(
+        [num_rows_to_load * new_col_vocab_size - num_rows_present * num_cols_present, 1]
+    )
+    return_tensor = gen_checkpoint_ops.load_and_remap_matrix(
+        ckpt_path=ckpt_path,
+        old_tensor_name=old_tensor_name,
+        row_remapping=row_remapping,
+        col_remapping=col_remapping,
+        initializing_values=init_vals,
+        num_rows=num_rows_to_load,
+        num_cols=new_col_vocab_size,
+        max_rows_in_memory=max_rows_in_memory,
+    )
 
-  # Add OOV row(s) and column(s).
-  if num_row_oov_buckets > 0:
-    init_row_oov_val = initializer([num_row_oov_buckets, new_col_vocab_size])
-    init_row_oov_val = ops.convert_to_tensor(init_row_oov_val)
-    return_tensor = array_ops.concat([return_tensor, init_row_oov_val], 0)
-  if num_col_oov_buckets > 0:
-    # We need to add any row OOV to the new column shape.
-    init_col_oov_val = initializer(
-        [num_rows_to_load + num_row_oov_buckets, num_col_oov_buckets])
-    init_col_oov_val = ops.convert_to_tensor(init_col_oov_val)
-    return_tensor = array_ops.concat([return_tensor, init_col_oov_val], 1)
+    # Add OOV row(s) and column(s).
+    if num_row_oov_buckets > 0:
+        init_row_oov_val = initializer([num_row_oov_buckets, new_col_vocab_size])
+        init_row_oov_val = ops.convert_to_tensor(init_row_oov_val)
+        return_tensor = array_ops.concat([return_tensor, init_row_oov_val], 0)
+    if num_col_oov_buckets > 0:
+        # We need to add any row OOV to the new column shape.
+        init_col_oov_val = initializer(
+            [num_rows_to_load + num_row_oov_buckets, num_col_oov_buckets]
+        )
+        init_col_oov_val = ops.convert_to_tensor(init_col_oov_val)
+        return_tensor = array_ops.concat([return_tensor, init_col_oov_val], 1)
 
-  return return_tensor
+    return return_tensor
 
 
-def _load_and_remap_matrix_initializer(ckpt_path,
-                                       old_tensor_name,
-                                       new_row_vocab_size,
-                                       new_col_vocab_size,
-                                       old_row_vocab_size=-1,
-                                       old_row_vocab_file=None,
-                                       new_row_vocab_file=None,
-                                       old_col_vocab_file=None,
-                                       new_col_vocab_file=None,
-                                       num_row_oov_buckets=0,
-                                       num_col_oov_buckets=0,
-                                       initializer=None,
-                                       max_rows_in_memory=-1):
-  r"""Returns a var initializer for loading and remapping a 2-D (matrix) tensor.
+def _load_and_remap_matrix_initializer(
+    ckpt_path,
+    old_tensor_name,
+    new_row_vocab_size,
+    new_col_vocab_size,
+    old_row_vocab_size=-1,
+    old_row_vocab_file=None,
+    new_row_vocab_file=None,
+    old_col_vocab_file=None,
+    new_col_vocab_file=None,
+    num_row_oov_buckets=0,
+    num_col_oov_buckets=0,
+    initializer=None,
+    max_rows_in_memory=-1,
+):
+    r"""Returns a var initializer for loading and remapping a 2-D (matrix) tensor.
 
   The returned initializer loads a 2-D (matrix) `Tensor` with name
   `old_tensor_name` from the checkpoint at `ckpt_path`. It will reorder the
@@ -329,18 +342,20 @@ def _load_and_remap_matrix_initializer(ckpt_path,
   Raises:
     TypeError: If `initializer` is specified but not callable.
   """
-  if initializer is None:
-    # TODO(b/25671353): Consider using sqrt(6/(fan_in + fan_out)) instead, from
-    # Glorot and Bengio, 2010.
-    initializer = init_ops.zeros_initializer()
+    if initializer is None:
+        # TODO(b/25671353): Consider using sqrt(6/(fan_in + fan_out)) instead, from
+        # Glorot and Bengio, 2010.
+        initializer = init_ops.zeros_initializer()
 
-  if not callable(initializer):
-    raise TypeError(
-        "initializer must be callable, instead of being {} of type {}.".format(
-            initializer, type(initializer)))
+    if not callable(initializer):
+        raise TypeError(
+            "initializer must be callable, instead of being {} of type {}.".format(
+                initializer, type(initializer)
+            )
+        )
 
-  def _initializer(shape, dtype=dtypes.float32, partition_info=None):
-    """Variable initializer.
+    def _initializer(shape, dtype=dtypes.float32, partition_info=None):
+        """Variable initializer.
 
     Args:
       shape: Shape of `Tensor` to return. Should include OOV on both axes.
@@ -354,79 +369,95 @@ def _load_and_remap_matrix_initializer(ckpt_path,
       TypeError: If `dtype` is anything other than float32.
       ValueError: For shape mismatch upon invocation.
     """
-    # Sanity checks.
-    if dtype != dtypes.float32:
-      raise TypeError(
-          "Currently, only float32 is supported. Received dtype: {}".format(
-              dtype))
-    if len(shape) != 2:
-      raise ValueError("Expected 2-dim shape, but received: {}".format(shape))
-    if shape[0] <= 0:
-      raise ValueError(
-          "Expected 1st dim of shape to be > 0, but received shape: {}".format(
-              shape))
-    if shape[1] != (new_col_vocab_size + num_col_oov_buckets):
-      raise ValueError(
-          "Expected 2nd dim of shape to be new_col_vocab_size ({}) + "
-          "num_col_oov_buckets ({}) = {}, but received shape: {}".format(
-              new_col_vocab_size, num_col_oov_buckets,
-              new_col_vocab_size + num_col_oov_buckets, shape))
+        # Sanity checks.
+        if dtype != dtypes.float32:
+            raise TypeError(
+                "Currently, only float32 is supported. Received dtype: {}".format(dtype)
+            )
+        if len(shape) != 2:
+            raise ValueError("Expected 2-dim shape, but received: {}".format(shape))
+        if shape[0] <= 0:
+            raise ValueError(
+                "Expected 1st dim of shape to be > 0, but received shape: {}".format(
+                    shape
+                )
+            )
+        if shape[1] != (new_col_vocab_size + num_col_oov_buckets):
+            raise ValueError(
+                "Expected 2nd dim of shape to be new_col_vocab_size ({}) + "
+                "num_col_oov_buckets ({}) = {}, but received shape: {}".format(
+                    new_col_vocab_size,
+                    num_col_oov_buckets,
+                    new_col_vocab_size + num_col_oov_buckets,
+                    shape,
+                )
+            )
 
-    offset = 0
-    if partition_info is not None:
-      offset = partition_info.single_offset(shape)
+        offset = 0
+        if partition_info is not None:
+            offset = partition_info.single_offset(shape)
 
-    if offset + shape[0] > new_row_vocab_size + num_row_oov_buckets:
-      raise ValueError(
-          "Trying to initialize {} additional rows after {} rows have already "
-          "been initialized, which would exceed expected total row count of "
-          "new_row_vocab_size ({}) + num_row_oov_buckets ({}) = {}.".format(
-              shape[0], offset, new_row_vocab_size, num_row_oov_buckets,
-              new_row_vocab_size + num_row_oov_buckets))
+        if offset + shape[0] > new_row_vocab_size + num_row_oov_buckets:
+            raise ValueError(
+                "Trying to initialize {} additional rows after {} rows have already "
+                "been initialized, which would exceed expected total row count of "
+                "new_row_vocab_size ({}) + num_row_oov_buckets ({}) = {}.".format(
+                    shape[0],
+                    offset,
+                    new_row_vocab_size,
+                    num_row_oov_buckets,
+                    new_row_vocab_size + num_row_oov_buckets,
+                )
+            )
 
-    row_oov_buckets_to_use = min(shape[0],
-                                 max(0, offset + shape[0] - new_row_vocab_size))
-    num_rows_to_load = shape[0] - row_oov_buckets_to_use
+        row_oov_buckets_to_use = min(
+            shape[0], max(0, offset + shape[0] - new_row_vocab_size)
+        )
+        num_rows_to_load = shape[0] - row_oov_buckets_to_use
 
-    # We may be operating on an OOV-only partition, in which case we newly
-    # initialize all rows of this partition.
-    if offset > new_row_vocab_size:
-      if shape[0] != row_oov_buckets_to_use:
-        raise ValueError(
-            "Partitioned variable offset is greater than new vocab size and "
-            "not operating on OOV-only partition.")
-      return initializer(shape)
+        # We may be operating on an OOV-only partition, in which case we newly
+        # initialize all rows of this partition.
+        if offset > new_row_vocab_size:
+            if shape[0] != row_oov_buckets_to_use:
+                raise ValueError(
+                    "Partitioned variable offset is greater than new vocab size and "
+                    "not operating on OOV-only partition."
+                )
+            return initializer(shape)
 
-    return _load_and_remap_matrix(
-        ckpt_path=ckpt_path,
-        old_tensor_name=old_tensor_name,
-        new_row_vocab_offset=offset,
-        num_rows_to_load=num_rows_to_load,
-        new_col_vocab_size=new_col_vocab_size,
-        initializer=initializer,
-        old_row_vocab_size=old_row_vocab_size,
-        old_row_vocab_file=old_row_vocab_file,
-        new_row_vocab_file=new_row_vocab_file,
-        old_col_vocab_file=old_col_vocab_file,
-        new_col_vocab_file=new_col_vocab_file,
-        num_row_oov_buckets=row_oov_buckets_to_use,
-        num_col_oov_buckets=num_col_oov_buckets,
-        max_rows_in_memory=max_rows_in_memory)
+        return _load_and_remap_matrix(
+            ckpt_path=ckpt_path,
+            old_tensor_name=old_tensor_name,
+            new_row_vocab_offset=offset,
+            num_rows_to_load=num_rows_to_load,
+            new_col_vocab_size=new_col_vocab_size,
+            initializer=initializer,
+            old_row_vocab_size=old_row_vocab_size,
+            old_row_vocab_file=old_row_vocab_file,
+            new_row_vocab_file=new_row_vocab_file,
+            old_col_vocab_file=old_col_vocab_file,
+            new_col_vocab_file=new_col_vocab_file,
+            num_row_oov_buckets=row_oov_buckets_to_use,
+            num_col_oov_buckets=num_col_oov_buckets,
+            max_rows_in_memory=max_rows_in_memory,
+        )
 
-  return _initializer
+    return _initializer
 
 
-def _load_embedding_initializer(ckpt_path,
-                                embedding_tensor_name,
-                                new_vocab_size,
-                                embedding_dim,
-                                old_vocab_file,
-                                new_vocab_file,
-                                old_vocab_size=-1,
-                                num_oov_buckets=0,
-                                initializer=None,
-                                max_rows_in_memory=-1):
-  """Returns a variable initializer for loading pre-trained embeddings.
+def _load_embedding_initializer(
+    ckpt_path,
+    embedding_tensor_name,
+    new_vocab_size,
+    embedding_dim,
+    old_vocab_file,
+    new_vocab_file,
+    old_vocab_size=-1,
+    num_oov_buckets=0,
+    initializer=None,
+    max_rows_in_memory=-1,
+):
+    """Returns a variable initializer for loading pre-trained embeddings.
 
   Wrapper around `load_and_remap_matrix_initializer()` specialized for loading
   embedding weights and remapping according to the provided vocab files. See
@@ -464,23 +495,25 @@ def _load_embedding_initializer(ckpt_path,
   Returns:
     A variable initializer function.
   """
-  if initializer is None:
-    # TODO(b/25671353): This should be kept in sync with the stddev used by
-    # feature_column.py's _EmbeddingColumn.
-    initializer = init_ops.truncated_normal_initializer(
-        stddev=1.0 / math.sqrt(embedding_dim))
+    if initializer is None:
+        # TODO(b/25671353): This should be kept in sync with the stddev used by
+        # feature_column.py's _EmbeddingColumn.
+        initializer = init_ops.truncated_normal_initializer(
+            stddev=1.0 / math.sqrt(embedding_dim)
+        )
 
-  return _load_and_remap_matrix_initializer(
-      ckpt_path=ckpt_path,
-      old_tensor_name=embedding_tensor_name,
-      new_row_vocab_size=new_vocab_size,
-      new_col_vocab_size=embedding_dim,
-      old_row_vocab_size=old_vocab_size,
-      old_row_vocab_file=old_vocab_file,
-      new_row_vocab_file=new_vocab_file,
-      old_col_vocab_file=None,
-      new_col_vocab_file=None,
-      num_row_oov_buckets=num_oov_buckets,
-      num_col_oov_buckets=0,
-      initializer=initializer,
-      max_rows_in_memory=max_rows_in_memory)
+    return _load_and_remap_matrix_initializer(
+        ckpt_path=ckpt_path,
+        old_tensor_name=embedding_tensor_name,
+        new_row_vocab_size=new_vocab_size,
+        new_col_vocab_size=embedding_dim,
+        old_row_vocab_size=old_vocab_size,
+        old_row_vocab_file=old_vocab_file,
+        new_row_vocab_file=new_vocab_file,
+        old_col_vocab_file=None,
+        new_col_vocab_file=None,
+        num_row_oov_buckets=num_oov_buckets,
+        num_col_oov_buckets=0,
+        initializer=initializer,
+        max_rows_in_memory=max_rows_in_memory,
+    )

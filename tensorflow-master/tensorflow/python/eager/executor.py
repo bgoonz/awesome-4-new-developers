@@ -22,7 +22,7 @@ from tensorflow.python import pywrap_tfe
 
 
 class Executor(object):
-  """A class for handling eager execution.
+    """A class for handling eager execution.
 
   The default behavior for asynchronous execution is to serialize all ops on
   a single thread. Having different `Executor` objects in different threads
@@ -40,39 +40,39 @@ class Executor(object):
   ```
   """
 
-  __slots__ = ["_handle"]
+    __slots__ = ["_handle"]
 
-  def __init__(self, handle):
-    self._handle = handle
+    def __init__(self, handle):
+        self._handle = handle
 
-  def __del__(self):
-    try:
-      # pywrap_tfe.TFE_ExecutorWaitForAllPendingNodes(self._handle)
-      pywrap_tfe.TFE_DeleteExecutor(self._handle)
-    except TypeError:
-      # Suppress some exceptions, mainly for the case when we're running on
-      # module deletion. Things that can go wrong include the pywrap module
-      # already being unloaded, self._handle. no longer being
-      # valid, and so on. Printing warnings in these cases is silly
-      # (exceptions raised from __del__ are printed as warnings to stderr).
-      pass  # 'NoneType' object is not callable when the handle has been
-      # partially unloaded.
+    def __del__(self):
+        try:
+            # pywrap_tfe.TFE_ExecutorWaitForAllPendingNodes(self._handle)
+            pywrap_tfe.TFE_DeleteExecutor(self._handle)
+        except TypeError:
+            # Suppress some exceptions, mainly for the case when we're running on
+            # module deletion. Things that can go wrong include the pywrap module
+            # already being unloaded, self._handle. no longer being
+            # valid, and so on. Printing warnings in these cases is silly
+            # (exceptions raised from __del__ are printed as warnings to stderr).
+            pass  # 'NoneType' object is not callable when the handle has been
+            # partially unloaded.
 
-  def is_async(self):
-    return pywrap_tfe.TFE_ExecutorIsAsync(self._handle)
+    def is_async(self):
+        return pywrap_tfe.TFE_ExecutorIsAsync(self._handle)
 
-  def handle(self):
-    return self._handle
+    def handle(self):
+        return self._handle
 
-  def wait(self):
-    """Waits for ops dispatched in this executor to finish."""
-    pywrap_tfe.TFE_ExecutorWaitForAllPendingNodes(self._handle)
+    def wait(self):
+        """Waits for ops dispatched in this executor to finish."""
+        pywrap_tfe.TFE_ExecutorWaitForAllPendingNodes(self._handle)
 
-  def clear_error(self):
-    """Clears errors raised in this executor during execution."""
-    pywrap_tfe.TFE_ExecutorClearError(self._handle)
+    def clear_error(self):
+        """Clears errors raised in this executor during execution."""
+        pywrap_tfe.TFE_ExecutorClearError(self._handle)
 
 
 def new_executor(enable_async):
-  handle = pywrap_tfe.TFE_NewExecutor(enable_async)
-  return Executor(handle)
+    handle = pywrap_tfe.TFE_NewExecutor(enable_async)
+    return Executor(handle)

@@ -23,14 +23,14 @@ from __future__ import print_function
 
 
 class Iterable(object):
-  """Interface for distributed objects that admit iteration/reduction."""
+    """Interface for distributed objects that admit iteration/reduction."""
 
-  def __iter__(self):
-    pass
+    def __iter__(self):
+        pass
 
-  # TODO(mdan): Describe this contract.
-  def reduce(self, initial_state, reduce_func):
-    """Reduces this iterable object to a single element.
+    # TODO(mdan): Describe this contract.
+    def reduce(self, initial_state, reduce_func):
+        """Reduces this iterable object to a single element.
 
     The transformation calls `reduce_func` successively on each element.
     The `initial_state` argument is used for the initial state and the final
@@ -49,13 +49,13 @@ class Iterable(object):
 
 
 class Iterator(object):
-  """Interface for distributed iterators."""
+    """Interface for distributed iterators."""
 
-  def get_next(self):
-    """Unlike __next__, this may use a non-raising mechanism."""
+    def get_next(self):
+        """Unlike __next__, this may use a non-raising mechanism."""
 
-  def __next__(self):
-    pass
+    def __next__(self):
+        pass
 
-  def __iter__(self):
-    pass
+    def __iter__(self):
+        pass

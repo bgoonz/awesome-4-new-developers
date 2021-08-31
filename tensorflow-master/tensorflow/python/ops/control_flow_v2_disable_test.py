@@ -19,6 +19,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+
 os.environ["TF2_BEHAVIOR"] = "1"
 os.environ["TF_ENABLE_CONTROL_FLOW_V2"] = "0"
 
@@ -29,11 +30,10 @@ from tensorflow.python.platform import test
 
 
 class ControlFlowV2DisableTest(test.TestCase):
-
-  def testIsDisabled(self):
-    self.assertTrue(tf2.enabled())
-    self.assertFalse(control_flow_util.ENABLE_CONTROL_FLOW_V2)
+    def testIsDisabled(self):
+        self.assertTrue(tf2.enabled())
+        self.assertFalse(control_flow_util.ENABLE_CONTROL_FLOW_V2)
 
 
 if __name__ == "__main__":
-  googletest.main()
+    googletest.main()

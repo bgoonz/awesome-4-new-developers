@@ -29,9 +29,8 @@ from tensorflow.python.util import dispatch
 from tensorflow.python.util.tf_export import tf_export
 
 
-def remove_squeezable_dimensions(
-    labels, predictions, expected_rank_diff=0, name=None):
-  """Squeeze last dim if ranks differ from expected by exactly 1.
+def remove_squeezable_dimensions(labels, predictions, expected_rank_diff=0, name=None):
+    """Squeeze last dim if ranks differ from expected by exactly 1.
 
   In the common case where we expect shapes to match, `expected_rank_diff`
   defaults to 0, and we squeeze the last dimension of the larger rank if they
@@ -55,51 +54,51 @@ def remove_squeezable_dimensions(
   Returns:
     Tuple of `labels` and `predictions`, possibly with last dim squeezed.
   """
-  with ops.name_scope(name, 'remove_squeezable_dimensions',
-                      [labels, predictions]):
-    predictions = ops.convert_to_tensor(predictions)
-    labels = ops.convert_to_tensor(labels)
-    predictions_shape = predictions.get_shape()
-    predictions_rank = predictions_shape.ndims
-    labels_shape = labels.get_shape()
-    labels_rank = labels_shape.ndims
-    if (labels_rank is not None) and (predictions_rank is not None):
-      # Use static rank.
-      rank_diff = predictions_rank - labels_rank
-      if (rank_diff == expected_rank_diff + 1 and
-          predictions_shape.dims[-1].is_compatible_with(1)):
-        predictions = array_ops.squeeze(predictions, [-1])
-      elif (rank_diff == expected_rank_diff - 1 and
-            labels_shape.dims[-1].is_compatible_with(1)):
-        labels = array_ops.squeeze(labels, [-1])
-      return labels, predictions
+    with ops.name_scope(name, "remove_squeezable_dimensions", [labels, predictions]):
+        predictions = ops.convert_to_tensor(predictions)
+        labels = ops.convert_to_tensor(labels)
+        predictions_shape = predictions.get_shape()
+        predictions_rank = predictions_shape.ndims
+        labels_shape = labels.get_shape()
+        labels_rank = labels_shape.ndims
+        if (labels_rank is not None) and (predictions_rank is not None):
+            # Use static rank.
+            rank_diff = predictions_rank - labels_rank
+            if rank_diff == expected_rank_diff + 1 and predictions_shape.dims[
+                -1
+            ].is_compatible_with(1):
+                predictions = array_ops.squeeze(predictions, [-1])
+            elif rank_diff == expected_rank_diff - 1 and labels_shape.dims[
+                -1
+            ].is_compatible_with(1):
+                labels = array_ops.squeeze(labels, [-1])
+            return labels, predictions
 
-    # Use dynamic rank.
-    rank_diff = array_ops.rank(predictions) - array_ops.rank(labels)
-    if (predictions_rank is None) or (
-        predictions_shape.dims[-1].is_compatible_with(1)):
-      predictions = control_flow_ops.cond(
-          math_ops.equal(expected_rank_diff + 1, rank_diff),
-          lambda: array_ops.squeeze(predictions, [-1]),
-          lambda: predictions)
-    if (labels_rank is None) or (
-        labels_shape.dims[-1].is_compatible_with(1)):
-      labels = control_flow_ops.cond(
-          math_ops.equal(expected_rank_diff - 1, rank_diff),
-          lambda: array_ops.squeeze(labels, [-1]),
-          lambda: labels)
-    return labels, predictions
+        # Use dynamic rank.
+        rank_diff = array_ops.rank(predictions) - array_ops.rank(labels)
+        if (predictions_rank is None) or (
+            predictions_shape.dims[-1].is_compatible_with(1)
+        ):
+            predictions = control_flow_ops.cond(
+                math_ops.equal(expected_rank_diff + 1, rank_diff),
+                lambda: array_ops.squeeze(predictions, [-1]),
+                lambda: predictions,
+            )
+        if (labels_rank is None) or (labels_shape.dims[-1].is_compatible_with(1)):
+            labels = control_flow_ops.cond(
+                math_ops.equal(expected_rank_diff - 1, rank_diff),
+                lambda: array_ops.squeeze(labels, [-1]),
+                lambda: labels,
+            )
+        return labels, predictions
 
 
-@tf_export('math.confusion_matrix', v1=[])
+@tf_export("math.confusion_matrix", v1=[])
 @dispatch.add_dispatch_support
-def confusion_matrix(labels,
-                     predictions,
-                     num_classes=None,
-                     weights=None,
-                     dtype=dtypes.int32,
-                     name=None):
-  """Computes the confusion matrix from predictions and labels.
+def confusion_matrix(
+    labels, predictions, num_classes=None, weights=None, dtype=dtypes.int32, name=None
+):
+    """Computes the confusion matrix from predictions and labels.
 
   The matrix columns represent the prediction labels and the rows represent the
   real labels. The confusion matrix is always a 2-D array of shape `[n, n]`,
@@ -149,65 +148,82 @@ def confusion_matrix(labels,
       mismatched shapes, or if `weights` is not `None` and its shape doesn't
       match `predictions`.
   """
-  with ops.name_scope(name, 'confusion_matrix',
-                      (predictions, labels, num_classes, weights)) as name:
-    labels, predictions = remove_squeezable_dimensions(
-        ops.convert_to_tensor(labels, name='labels'),
-        ops.convert_to_tensor(
-            predictions, name='predictions'))
-    predictions = math_ops.cast(predictions, dtypes.int64)
-    labels = math_ops.cast(labels, dtypes.int64)
+    with ops.name_scope(
+        name, "confusion_matrix", (predictions, labels, num_classes, weights)
+    ) as name:
+        labels, predictions = remove_squeezable_dimensions(
+            ops.convert_to_tensor(labels, name="labels"),
+            ops.convert_to_tensor(predictions, name="predictions"),
+        )
+        predictions = math_ops.cast(predictions, dtypes.int64)
+        labels = math_ops.cast(labels, dtypes.int64)
 
-    # Sanity checks - underflow or overflow can cause memory corruption.
-    labels = control_flow_ops.with_dependencies(
-        [check_ops.assert_non_negative(
-            labels, message='`labels` contains negative values')],
-        labels)
-    predictions = control_flow_ops.with_dependencies(
-        [check_ops.assert_non_negative(
-            predictions, message='`predictions` contains negative values')],
-        predictions)
+        # Sanity checks - underflow or overflow can cause memory corruption.
+        labels = control_flow_ops.with_dependencies(
+            [
+                check_ops.assert_non_negative(
+                    labels, message="`labels` contains negative values"
+                )
+            ],
+            labels,
+        )
+        predictions = control_flow_ops.with_dependencies(
+            [
+                check_ops.assert_non_negative(
+                    predictions, message="`predictions` contains negative values"
+                )
+            ],
+            predictions,
+        )
 
-    if num_classes is None:
-      num_classes = math_ops.maximum(math_ops.reduce_max(predictions),
-                                     math_ops.reduce_max(labels)) + 1
-    else:
-      num_classes_int64 = math_ops.cast(num_classes, dtypes.int64)
-      labels = control_flow_ops.with_dependencies(
-          [check_ops.assert_less(
-              labels, num_classes_int64, message='`labels` out of bound')],
-          labels)
-      predictions = control_flow_ops.with_dependencies(
-          [check_ops.assert_less(
-              predictions, num_classes_int64,
-              message='`predictions` out of bound')],
-          predictions)
-
-    if weights is not None:
-      weights = ops.convert_to_tensor(weights, name='weights')
-      predictions.get_shape().assert_is_compatible_with(weights.get_shape())
-      weights = math_ops.cast(weights, dtype)
-
-    shape = array_ops.stack([num_classes, num_classes])
-    indices = array_ops.stack([labels, predictions], axis=1)
-    values = (array_ops.ones_like(predictions, dtype)
-              if weights is None else weights)
-    return array_ops.scatter_nd(
-        indices=indices,
-        updates=values,
-        shape=math_ops.cast(shape, dtypes.int64))
-
-
-@tf_export(v1=['math.confusion_matrix', 'confusion_matrix'])
-@dispatch.add_dispatch_support
-@deprecation.deprecated_endpoints('confusion_matrix', 'train.confusion_matrix')
-def confusion_matrix_v1(labels,
+        if num_classes is None:
+            num_classes = (
+                math_ops.maximum(
+                    math_ops.reduce_max(predictions), math_ops.reduce_max(labels)
+                )
+                + 1
+            )
+        else:
+            num_classes_int64 = math_ops.cast(num_classes, dtypes.int64)
+            labels = control_flow_ops.with_dependencies(
+                [
+                    check_ops.assert_less(
+                        labels, num_classes_int64, message="`labels` out of bound"
+                    )
+                ],
+                labels,
+            )
+            predictions = control_flow_ops.with_dependencies(
+                [
+                    check_ops.assert_less(
                         predictions,
-                        num_classes=None,
-                        dtype=dtypes.int32,
-                        name=None,
-                        weights=None):
-  """Computes the confusion matrix from predictions and labels.
+                        num_classes_int64,
+                        message="`predictions` out of bound",
+                    )
+                ],
+                predictions,
+            )
+
+        if weights is not None:
+            weights = ops.convert_to_tensor(weights, name="weights")
+            predictions.get_shape().assert_is_compatible_with(weights.get_shape())
+            weights = math_ops.cast(weights, dtype)
+
+        shape = array_ops.stack([num_classes, num_classes])
+        indices = array_ops.stack([labels, predictions], axis=1)
+        values = array_ops.ones_like(predictions, dtype) if weights is None else weights
+        return array_ops.scatter_nd(
+            indices=indices, updates=values, shape=math_ops.cast(shape, dtypes.int64)
+        )
+
+
+@tf_export(v1=["math.confusion_matrix", "confusion_matrix"])
+@dispatch.add_dispatch_support
+@deprecation.deprecated_endpoints("confusion_matrix", "train.confusion_matrix")
+def confusion_matrix_v1(
+    labels, predictions, num_classes=None, dtype=dtypes.int32, name=None, weights=None
+):
+    """Computes the confusion matrix from predictions and labels.
 
   The matrix columns represent the prediction labels and the rows represent the
   real labels. The confusion matrix is always a 2-D array of shape `[n, n]`,
@@ -257,5 +273,4 @@ def confusion_matrix_v1(labels,
       mismatched shapes, or if `weights` is not `None` and its shape doesn't
       match `predictions`.
   """
-  return confusion_matrix(labels, predictions, num_classes, weights, dtype,
-                          name)
+    return confusion_matrix(labels, predictions, num_classes, weights, dtype, name)

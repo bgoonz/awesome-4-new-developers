@@ -18,16 +18,18 @@
 import tensorflow as tf
 
 from tensorflow.python.platform import test
-from tensorflow.tools.consistency_integration_test.consistency_test_base import ConsistencyTestBase
+from tensorflow.tools.consistency_integration_test.consistency_test_base import (
+    ConsistencyTestBase,
+)
 from tensorflow.tools.consistency_integration_test.consistency_test_base import Example
 from tensorflow.tools.consistency_integration_test.consistency_test_base import RunMode
 
 
 class TypePromotionTests(ConsistencyTestBase):
-  """Test cases for inconsistent type promotion behaviors."""
+    """Test cases for inconsistent type promotion behaviors."""
 
-  def testFloatingPointPrecision(self):
-    """Tests inconsistent floating point precision between eager vs. graph.
+    def testFloatingPointPrecision(self):
+        """Tests inconsistent floating point precision between eager vs. graph.
 
     Bugs:   b/187097409
     Status: Inconsistent floating point precision
@@ -45,39 +47,39 @@ class TypePromotionTests(ConsistencyTestBase):
       `tf.constant(3.2)` as `arg`.
     """
 
-    def f(x):
-      return x * x
+        def f(x):
+            return x * x
 
-    # Note that running the same test in different modes results in different
-    # floating point precisions.
-    # RunMode: RAW
-    self._generic_test(
-        f, [
-            Example(arg=(3.2,), out=10.240000000000002, failure=[], bugs=[]),
-        ],
-        # TODO(b/187250924): `RunMode.SAVED` fails to run.
-        skip_modes=[RunMode.FUNCTION, RunMode.XLA, RunMode.SAVED])
+        # Note that running the same test in different modes results in different
+        # floating point precisions.
+        # RunMode: RAW
+        self._generic_test(
+            f,
+            [Example(arg=(3.2,), out=10.240000000000002, failure=[], bugs=[])],
+            # TODO(b/187250924): `RunMode.SAVED` fails to run.
+            skip_modes=[RunMode.FUNCTION, RunMode.XLA, RunMode.SAVED],
+        )
 
-    # RunMode: FUNCTION, XLA, SAVED
-    self._generic_test(
-        f, [
-            Example(arg=(3.2,), out=10.239999771118164, failure=[], bugs=[]),
-        ],
-        skip_modes=[RunMode.RAW])
+        # RunMode: FUNCTION, XLA, SAVED
+        self._generic_test(
+            f,
+            [Example(arg=(3.2,), out=10.239999771118164, failure=[], bugs=[])],
+            skip_modes=[RunMode.RAW],
+        )
 
-    # Explicitly construct tensor for input for getting consistent results
-    # across all `RunMode`s.
-    # RunMode: RAW, FUNCTION, XLA, SAVED
-    self._generic_test(
-        f, [
-            Example(
-                arg=(tf.constant(3.2),),
-                out=10.24000072479248,
-                failure=[],
-                bugs=[]),
-        ],
-        skip_modes=[])
+        # Explicitly construct tensor for input for getting consistent results
+        # across all `RunMode`s.
+        # RunMode: RAW, FUNCTION, XLA, SAVED
+        self._generic_test(
+            f,
+            [
+                Example(
+                    arg=(tf.constant(3.2),), out=10.24000072479248, failure=[], bugs=[]
+                )
+            ],
+            skip_modes=[],
+        )
 
 
-if __name__ == '__main__':
-  test.main()
+if __name__ == "__main__":
+    test.main()

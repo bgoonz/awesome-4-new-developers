@@ -22,20 +22,20 @@ from tensorflow.python.util import nest
 from tensorflow.python.util.lazy_loader import LazyLoader
 
 
-map_fn_lib = LazyLoader(
-    "map_fn_lib", globals(),
-    "tensorflow.python.ops.map_fn")
+map_fn_lib = LazyLoader("map_fn_lib", globals(), "tensorflow.python.ops.map_fn")
 
 
-def map_fn(fn,
-           elems,
-           dtype=None,
-           parallel_iterations=None,
-           back_prop=True,
-           swap_memory=False,
-           infer_shape=True,
-           name=None):
-  """map on the list of tensors unpacked from `elems` on dimension 0.
+def map_fn(
+    fn,
+    elems,
+    dtype=None,
+    parallel_iterations=None,
+    back_prop=True,
+    swap_memory=False,
+    infer_shape=True,
+    name=None,
+):
+    """map on the list of tensors unpacked from `elems` on dimension 0.
 
   The simplest version of `map_fn` repeatedly applies the callable `fn` to a
   sequence of elements from first to last. The elements are made of the
@@ -158,25 +158,21 @@ def map_fn(fn,
     # out = tf.ragged.constant([[2, 3, 4], [5, 6], [7, 8]])
     ```
   """
-  if dtype is None:
-    dtype = nest.map_structure(lambda e: e.dtype, elems)
-  dtype = nest.map_structure(_ragged_type_to_spec, dtype)
-  return map_fn_lib.map_fn(fn,
-                           elems,
-                           dtype,
-                           parallel_iterations,
-                           back_prop,
-                           swap_memory,
-                           infer_shape,
-                           name)
+    if dtype is None:
+        dtype = nest.map_structure(lambda e: e.dtype, elems)
+    dtype = nest.map_structure(_ragged_type_to_spec, dtype)
+    return map_fn_lib.map_fn(
+        fn, elems, dtype, parallel_iterations, back_prop, swap_memory, infer_shape, name
+    )
 
 
 def _ragged_type_to_spec(t):
-  if isinstance(t, ragged_tensor.RaggedTensorType):
-    # Note: need to adjust ragged_rank by 1, since RaggedTensorSpec gives the
-    # type for the mapped `fn` output, but RaggedTensorType gives the type for
-    # the result of stacking the mapped `fn` outputs.
-    return ragged_tensor.RaggedTensorSpec(
-        None, t.dtype, t.ragged_rank - 1, t.row_splits_dtype)
-  else:
-    return t
+    if isinstance(t, ragged_tensor.RaggedTensorType):
+        # Note: need to adjust ragged_rank by 1, since RaggedTensorSpec gives the
+        # type for the mapped `fn` output, but RaggedTensorType gives the type for
+        # the result of stacking the mapped `fn` outputs.
+        return ragged_tensor.RaggedTensorSpec(
+            None, t.dtype, t.ragged_rank - 1, t.row_splits_dtype
+        )
+    else:
+        return t

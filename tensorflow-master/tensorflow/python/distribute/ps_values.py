@@ -38,20 +38,19 @@ from tensorflow.python.types import core
 
 
 # Variable used in PSStrategy TF 1, TF2 and CentralStorageStrategy.
-class AggregatingVariable(resource_variable_ops.BaseResourceVariable,
-                          core.Tensor):
-  """A wrapper around a variable that aggregates updates across replicas."""
+class AggregatingVariable(resource_variable_ops.BaseResourceVariable, core.Tensor):
+    """A wrapper around a variable that aggregates updates across replicas."""
 
-  def __init__(self, strategy, v, aggregation):
-    self._distribute_strategy = strategy
-    self._v = v
-    # NOTE: We don't use "_distributed_container" here because we don't want
-    # to trigger that code path in regroup().
-    v._aggregating_container = weakref.ref(self)  # pylint: disable=protected-access
-    self._aggregation = aggregation
+    def __init__(self, strategy, v, aggregation):
+        self._distribute_strategy = strategy
+        self._v = v
+        # NOTE: We don't use "_distributed_container" here because we don't want
+        # to trigger that code path in regroup().
+        v._aggregating_container = weakref.ref(self)  # pylint: disable=protected-access
+        self._aggregation = aggregation
 
-  def __deepcopy__(self, memo):
-    """Perform a deepcopy of the `AggregatingVariable`.
+    def __deepcopy__(self, memo):
+        """Perform a deepcopy of the `AggregatingVariable`.
 
     Unlike the deepcopy of a regular tf.Variable, this keeps the original
     strategy and devices of the `AggregatingVariable`.  To avoid confusion
@@ -68,464 +67,487 @@ class AggregatingVariable(resource_variable_ops.BaseResourceVariable,
     Raises:
       RuntimeError: If trying to deepcopy into a different strategy.
     """
-    with ds_context.enter_or_assert_strategy(self._distribute_strategy):
-      v = copy.deepcopy(self._v, memo)
-
-    copied_variable = type(self)(
-        strategy=self._distribute_strategy,
-        v=v,
-        aggregation=self._aggregation)
-
-    memo[id(self)] = copied_variable
-
-    return copied_variable
-
-  def get(self):
-    return self._v
-
-  @property
-  def distribute_strategy(self):
-    return self._distribute_strategy
-
-  def __getattr__(self, name):
-    return getattr(self._v, name)
-
-  def _assign_func(self, *args, **kwargs):
-    with ds_context.enter_or_assert_strategy(self._distribute_strategy):
-      f = kwargs.pop("f")
-      if ds_context.in_cross_replica_context():
-        if distribute_lib.get_update_replica_id() is not None:
-          # We are calling an assign function in an update context.
-          return f(self._v, *args, **kwargs)
-
-        # We are calling an assign function in cross replica context, wrap it in
-        # an update call.
-        return self._distribute_strategy.extended.update(
-            self, f, args=args, kwargs=kwargs)
-      else:
-        replica_context = ds_context.get_replica_context()
-        assert replica_context
-        # We are calling an assign function in replica context.
-        # We reduce the value we want to assign/add/sub. More details about how
-        # we handle the different use cases can be found in the _reduce method.
-        # We call the function with the reduced value.
-        if self._aggregation == vs.VariableAggregation.NONE:
-          raise ValueError(
-              values_util.aggregation_error_msg.format(
-                  variable_type="AggregatingVariable"))
-
-        def merge_fn(strategy,
-                     value,
-                     use_locking=False,
-                     name=None,
-                     read_value=True):
-          v = values_util.apply_aggregation(strategy, value, self._aggregation,
-                                            self)
-          if name and isinstance(name, values.PerReplica):
-            name = name.values[0]
-          return strategy.extended.update(
-              self,
-              f,
-              args=(v,),
-              kwargs={
-                  "use_locking": use_locking,
-                  "name": name,
-                  "read_value": read_value
-              })
-        return replica_context.merge_call(merge_fn, args=args, kwargs=kwargs)
-
-  def assign_sub(self, *args, **kwargs):
-    assign_sub_fn = lambda var, *a, **kw: var.assign_sub(*a, **kw)
-    return self._assign_func(f=assign_sub_fn, *args, **kwargs)
-
-  def assign_add(self, *args, **kwargs):
-    assign_add_fn = lambda var, *a, **kw: var.assign_add(*a, **kw)
-    return self._assign_func(f=assign_add_fn, *args, **kwargs)
-
-  def assign(self, *args, **kwargs):
-    assign_fn = lambda var, *a, **kw: var.assign(*a, **kw)
-    return self._assign_func(f=assign_fn, *args, **kwargs)
-
-  @property
-  def initializer(self):
-    return self._v.initializer
-
-  def initialized_value(self):
-    return self._v.initialized_value()
-
-  @property
-  def initial_value(self):
-    return self._v.initial_value
-
-  @property
-  def op(self):
-    return self._v.op
-
-  def value(self):
-    return self._v.value()
-
-  def read_value(self):
-    return self._v.read_value()
-
-  def sparse_read(self, indices, name=None):
-    return self._v.sparse_read(indices, name=name)
+        with ds_context.enter_or_assert_strategy(self._distribute_strategy):
+            v = copy.deepcopy(self._v, memo)
+
+        copied_variable = type(self)(
+            strategy=self._distribute_strategy, v=v, aggregation=self._aggregation
+        )
+
+        memo[id(self)] = copied_variable
+
+        return copied_variable
+
+    def get(self):
+        return self._v
+
+    @property
+    def distribute_strategy(self):
+        return self._distribute_strategy
+
+    def __getattr__(self, name):
+        return getattr(self._v, name)
+
+    def _assign_func(self, *args, **kwargs):
+        with ds_context.enter_or_assert_strategy(self._distribute_strategy):
+            f = kwargs.pop("f")
+            if ds_context.in_cross_replica_context():
+                if distribute_lib.get_update_replica_id() is not None:
+                    # We are calling an assign function in an update context.
+                    return f(self._v, *args, **kwargs)
+
+                # We are calling an assign function in cross replica context, wrap it in
+                # an update call.
+                return self._distribute_strategy.extended.update(
+                    self, f, args=args, kwargs=kwargs
+                )
+            else:
+                replica_context = ds_context.get_replica_context()
+                assert replica_context
+                # We are calling an assign function in replica context.
+                # We reduce the value we want to assign/add/sub. More details about how
+                # we handle the different use cases can be found in the _reduce method.
+                # We call the function with the reduced value.
+                if self._aggregation == vs.VariableAggregation.NONE:
+                    raise ValueError(
+                        values_util.aggregation_error_msg.format(
+                            variable_type="AggregatingVariable"
+                        )
+                    )
+
+                def merge_fn(
+                    strategy, value, use_locking=False, name=None, read_value=True
+                ):
+                    v = values_util.apply_aggregation(
+                        strategy, value, self._aggregation, self
+                    )
+                    if name and isinstance(name, values.PerReplica):
+                        name = name.values[0]
+                    return strategy.extended.update(
+                        self,
+                        f,
+                        args=(v,),
+                        kwargs={
+                            "use_locking": use_locking,
+                            "name": name,
+                            "read_value": read_value,
+                        },
+                    )
+
+                return replica_context.merge_call(merge_fn, args=args, kwargs=kwargs)
+
+    def assign_sub(self, *args, **kwargs):
+        assign_sub_fn = lambda var, *a, **kw: var.assign_sub(*a, **kw)
+        return self._assign_func(f=assign_sub_fn, *args, **kwargs)
+
+    def assign_add(self, *args, **kwargs):
+        assign_add_fn = lambda var, *a, **kw: var.assign_add(*a, **kw)
+        return self._assign_func(f=assign_add_fn, *args, **kwargs)
+
+    def assign(self, *args, **kwargs):
+        assign_fn = lambda var, *a, **kw: var.assign(*a, **kw)
+        return self._assign_func(f=assign_fn, *args, **kwargs)
+
+    @property
+    def initializer(self):
+        return self._v.initializer
+
+    def initialized_value(self):
+        return self._v.initialized_value()
+
+    @property
+    def initial_value(self):
+        return self._v.initial_value
+
+    @property
+    def op(self):
+        return self._v.op
+
+    def value(self):
+        return self._v.value()
+
+    def read_value(self):
+        return self._v.read_value()
 
-  def eval(self, session=None):
-    return self._v.eval(session)
+    def sparse_read(self, indices, name=None):
+        return self._v.sparse_read(indices, name=name)
 
-  @property
-  def graph(self):
-    return self._v.graph
+    def eval(self, session=None):
+        return self._v.eval(session)
 
-  @property
-  def device(self):
-    return self._v.device
+    @property
+    def graph(self):
+        return self._v.graph
 
-  @property
-  def shape(self):
-    return self._v.shape
+    @property
+    def device(self):
+        return self._v.device
 
-  @property
-  def aggregation(self):
-    return self._aggregation
+    @property
+    def shape(self):
+        return self._v.shape
 
-  @property
-  def synchronization(self):
-    return self._v.synchronization
+    @property
+    def aggregation(self):
+        return self._aggregation
 
-  @property
-  def name(self):
-    return self._v.name
+    @property
+    def synchronization(self):
+        return self._v.synchronization
 
-  @property
-  def trainable(self):
-    return self._v.trainable
+    @property
+    def name(self):
+        return self._v.name
 
-  @property
-  def dtype(self):
-    return self._v.dtype
+    @property
+    def trainable(self):
+        return self._v.trainable
 
-  # TODO(josh11b): Test saving & restoring.
-  def _gather_saveables_for_checkpoint(self):
-    if isinstance(self._v, CachingVariable):
-      return self._v._gather_saveables_for_checkpoint()  # pylint:disable=protected-access
-    return {trackable.VARIABLE_VALUE_KEY: self._v}
+    @property
+    def dtype(self):
+        return self._v.dtype
 
-  def _map_resources(self, save_options):
-    """For implementing `Trackable`."""
-    # By delegating this method to the wrapped variable, SavedModel with
-    # AggregatingVariable are identical to SavedModel with normal variables.
-    obj_map, resource_map = self._v._map_resources(save_options)  # pylint:disable=protected-access
-    obj_map[self] = obj_map[self._v]
-    return obj_map, resource_map
+    # TODO(josh11b): Test saving & restoring.
+    def _gather_saveables_for_checkpoint(self):
+        if isinstance(self._v, CachingVariable):
+            return (
+                self._v._gather_saveables_for_checkpoint()
+            )  # pylint:disable=protected-access
+        return {trackable.VARIABLE_VALUE_KEY: self._v}
 
-  # pylint: disable=multiple-statements
-  def __add__(self, o):
-    return self._v + o
+    def _map_resources(self, save_options):
+        """For implementing `Trackable`."""
+        # By delegating this method to the wrapped variable, SavedModel with
+        # AggregatingVariable are identical to SavedModel with normal variables.
+        obj_map, resource_map = self._v._map_resources(
+            save_options
+        )  # pylint:disable=protected-access
+        obj_map[self] = obj_map[self._v]
+        return obj_map, resource_map
 
-  def __radd__(self, o):
-    return o + self._v
+    # pylint: disable=multiple-statements
+    def __add__(self, o):
+        return self._v + o
 
-  def __sub__(self, o):
-    return self._v - o
+    def __radd__(self, o):
+        return o + self._v
 
-  def __rsub__(self, o):
-    return o - self._v
+    def __sub__(self, o):
+        return self._v - o
 
-  def __mul__(self, o):
-    return self._v * o
+    def __rsub__(self, o):
+        return o - self._v
 
-  def __rmul__(self, o):
-    return o * self._v
+    def __mul__(self, o):
+        return self._v * o
 
-  def __truediv__(self, o):
-    return self._v / o
+    def __rmul__(self, o):
+        return o * self._v
 
-  def __rtruediv__(self, o):
-    return o / self._v
+    def __truediv__(self, o):
+        return self._v / o
 
-  def __floordiv__(self, o):
-    return self._v // o
+    def __rtruediv__(self, o):
+        return o / self._v
 
-  def __rfloordiv__(self, o):
-    return o // self._v
+    def __floordiv__(self, o):
+        return self._v // o
 
-  def __mod__(self, o):
-    return self._v % o
+    def __rfloordiv__(self, o):
+        return o // self._v
 
-  def __rmod__(self, o):
-    return o % self._v
+    def __mod__(self, o):
+        return self._v % o
 
-  def __lt__(self, o):
-    return self._v < o
+    def __rmod__(self, o):
+        return o % self._v
 
-  def __le__(self, o):
-    return self._v <= o
+    def __lt__(self, o):
+        return self._v < o
 
-  def __gt__(self, o):
-    return self._v > o
+    def __le__(self, o):
+        return self._v <= o
 
-  def __ge__(self, o):
-    return self._v >= o
+    def __gt__(self, o):
+        return self._v > o
 
-  def __and__(self, o):
-    return self._v & o
+    def __ge__(self, o):
+        return self._v >= o
 
-  def __rand__(self, o):
-    return o & self._v
+    def __and__(self, o):
+        return self._v & o
 
-  def __or__(self, o):
-    return self._v | o
+    def __rand__(self, o):
+        return o & self._v
 
-  def __ror__(self, o):
-    return o | self._v
+    def __or__(self, o):
+        return self._v | o
 
-  def __xor__(self, o):
-    return self._v ^ o
+    def __ror__(self, o):
+        return o | self._v
 
-  def __rxor__(self, o):
-    return o ^ self._v
+    def __xor__(self, o):
+        return self._v ^ o
 
-  def __getitem__(self, o):
-    return self._v[o]
+    def __rxor__(self, o):
+        return o ^ self._v
 
-  def __pow__(self, o, modulo=None):
-    return pow(self._v, o, modulo)
+    def __getitem__(self, o):
+        return self._v[o]
 
-  def __rpow__(self, o):
-    return pow(o, self._v)
+    def __pow__(self, o, modulo=None):
+        return pow(self._v, o, modulo)
 
-  def __invert__(self):
-    return ~self._v
+    def __rpow__(self, o):
+        return pow(o, self._v)
 
-  def __neg__(self):
-    return -self._v
+    def __invert__(self):
+        return ~self._v
 
-  def __abs__(self):
-    return abs(self._v)
+    def __neg__(self):
+        return -self._v
 
-  def __div__(self, o):
-    try:
-      return self._v.__div__(o)
-    except AttributeError:
-      # See https://docs.python.org/3/library/constants.html#NotImplemented
-      return NotImplemented
+    def __abs__(self):
+        return abs(self._v)
 
-  def __rdiv__(self, o):
-    try:
-      return self._v.__rdiv__(o)
-    except AttributeError:
-      # See https://docs.python.org/3/library/constants.html#NotImplemented
-      return NotImplemented
+    def __div__(self, o):
+        try:
+            return self._v.__div__(o)
+        except AttributeError:
+            # See https://docs.python.org/3/library/constants.html#NotImplemented
+            return NotImplemented
 
-  def __matmul__(self, o):
-    try:
-      return self._v.__matmul__(o)
-    except AttributeError:
-      # See https://docs.python.org/3/library/constants.html#NotImplemented
-      return NotImplemented
+    def __rdiv__(self, o):
+        try:
+            return self._v.__rdiv__(o)
+        except AttributeError:
+            # See https://docs.python.org/3/library/constants.html#NotImplemented
+            return NotImplemented
 
-  def __rmatmul__(self, o):
-    try:
-      return self._v.__rmatmul__(o)
-    except AttributeError:
-      # See https://docs.python.org/3/library/constants.html#NotImplemented
-      return NotImplemented
+    def __matmul__(self, o):
+        try:
+            return self._v.__matmul__(o)
+        except AttributeError:
+            # See https://docs.python.org/3/library/constants.html#NotImplemented
+            return NotImplemented
 
-  def __str__(self):
-    return str(self._v)
+    def __rmatmul__(self, o):
+        try:
+            return self._v.__rmatmul__(o)
+        except AttributeError:
+            # See https://docs.python.org/3/library/constants.html#NotImplemented
+            return NotImplemented
 
-  def __repr__(self):
-    return repr(self._v)
+    def __str__(self):
+        return str(self._v)
 
-  def _should_act_as_resource_variable(self):
-    """Pass resource_variable_ops.is_resource_variable check."""
-    pass
+    def __repr__(self):
+        return repr(self._v)
 
-  def _dense_var_to_tensor(self, dtype=None, name=None, as_ref=False):
-    return self._v._dense_var_to_tensor(dtype=dtype, name=name, as_ref=as_ref)  # pylint: disable=protected-access
+    def _should_act_as_resource_variable(self):
+        """Pass resource_variable_ops.is_resource_variable check."""
+        pass
+
+    def _dense_var_to_tensor(self, dtype=None, name=None, as_ref=False):
+        return self._v._dense_var_to_tensor(
+            dtype=dtype, name=name, as_ref=as_ref
+        )  # pylint: disable=protected-access
 
 
 class CachingVariable(resource_variable_ops.BaseResourceVariable, core.Tensor):
-  """A wrapper around a variable that caches read value locally."""
+    """A wrapper around a variable that caches read value locally."""
 
-  def __init__(self, v):
-    self._v = v
-    self._cache = None
-    self._current_new_cache_scope_count = 0
+    def __init__(self, v):
+        self._v = v
+        self._cache = None
+        self._current_new_cache_scope_count = 0
 
-  def get(self):
-    return self._v
+    def get(self):
+        return self._v
 
-  def __getattr__(self, name):
-    return getattr(self._v, name)
+    def __getattr__(self, name):
+        return getattr(self._v, name)
 
-  def read_value(self):
-    if distribute_utils.caching_scope_local.in_caching_scope():
-      return self.cached_read_value()
-    return self._v.read_value()
+    def read_value(self):
+        if distribute_utils.caching_scope_local.in_caching_scope():
+            return self.cached_read_value()
+        return self._v.read_value()
 
-  def sparse_read(self, indices, name=None):
-    return self._v.sparse_read(indices, name=name)
+    def sparse_read(self, indices, name=None):
+        return self._v.sparse_read(indices, name=name)
 
-  def cached_read_value(self):
-    if (distribute_utils.caching_scope_local.new_cache_scope_count >
-        self._current_new_cache_scope_count):
-      self._current_new_cache_scope_count += 1
-      self._cache = None
+    def cached_read_value(self):
+        if (
+            distribute_utils.caching_scope_local.new_cache_scope_count
+            > self._current_new_cache_scope_count
+        ):
+            self._current_new_cache_scope_count += 1
+            self._cache = None
 
-    with ops.device("CPU:0"):
-      if self._cache is not None:
-        return self._cache
-      else:
-        self._cache = array_ops.identity(self._v)
-        return self._cache
+        with ops.device("CPU:0"):
+            if self._cache is not None:
+                return self._cache
+            else:
+                self._cache = array_ops.identity(self._v)
+                return self._cache
 
-  def assign_sub(self, *args, **kwargs):
-    return self._v.assign_sub(*args, **kwargs)
+    def assign_sub(self, *args, **kwargs):
+        return self._v.assign_sub(*args, **kwargs)
 
-  def assign_add(self, *args, **kwargs):
-    return self._v.assign_add(*args, **kwargs)
+    def assign_add(self, *args, **kwargs):
+        return self._v.assign_add(*args, **kwargs)
 
-  def assign(self, *args, **kwargs):
-    return self._v.assign(*args, **kwargs)
+    def assign(self, *args, **kwargs):
+        return self._v.assign(*args, **kwargs)
 
-  @property
-  def initializer(self):
-    return self._v.initializer
+    @property
+    def initializer(self):
+        return self._v.initializer
 
-  def initialized_value(self):
-    return self._v.initialized_value()
+    def initialized_value(self):
+        return self._v.initialized_value()
 
-  @property
-  def initial_value(self):
-    return self._v.initial_value
+    @property
+    def initial_value(self):
+        return self._v.initial_value
 
-  @property
-  def op(self):
-    return self._v.op
+    @property
+    def op(self):
+        return self._v.op
 
-  def value(self):
-    if distribute_utils.caching_scope_local.in_caching_scope():
-      return self.cached_read_value()
-    return self._v.value()
+    def value(self):
+        if distribute_utils.caching_scope_local.in_caching_scope():
+            return self.cached_read_value()
+        return self._v.value()
 
-  def eval(self, session=None):
-    return self._v.eval(session)
+    def eval(self, session=None):
+        return self._v.eval(session)
 
-  @property
-  def graph(self):
-    return self._v.graph
+    @property
+    def graph(self):
+        return self._v.graph
 
-  @property
-  def device(self):
-    return self._v.device
+    @property
+    def device(self):
+        return self._v.device
 
-  @property
-  def shape(self):
-    return self._v.shape
+    @property
+    def shape(self):
+        return self._v.shape
 
-  @property
-  def synchronization(self):
-    return self._v.synchronization
+    @property
+    def synchronization(self):
+        return self._v.synchronization
 
-  @property
-  def name(self):
-    return self._v.name
+    @property
+    def name(self):
+        return self._v.name
 
-  @property
-  def trainable(self):
-    return self._v.trainable
+    @property
+    def trainable(self):
+        return self._v.trainable
 
-  @property
-  def dtype(self):
-    return self._v.dtype
+    @property
+    def dtype(self):
+        return self._v.dtype
 
-  @property
-  def constraint(self):
-    return self._v.constraint
+    @property
+    def constraint(self):
+        return self._v.constraint
 
-  def __array__(self):
-    return np.asarray(self.numpy())
+    def __array__(self):
+        return np.asarray(self.numpy())
 
-  def __complex__(self):
-    return complex(self.value().numpy())
+    def __complex__(self):
+        return complex(self.value().numpy())
 
-  def __int__(self):
-    return int(self.value().numpy())
+    def __int__(self):
+        return int(self.value().numpy())
 
-  def __float__(self):
-    return float(self.value().numpy())
+    def __float__(self):
+        return float(self.value().numpy())
 
-  def numpy(self):
-    if context.executing_eagerly():
-      return self.read_value().numpy()
-    else:
-      raise NotImplementedError(
-          "numpy() is only available when eager execution is enabled.")
+    def numpy(self):
+        if context.executing_eagerly():
+            return self.read_value().numpy()
+        else:
+            raise NotImplementedError(
+                "numpy() is only available when eager execution is enabled."
+            )
 
-  def __str__(self):
-    return str(self._v)
+    def __str__(self):
+        return str(self._v)
 
-  def __repr__(self):
-    return repr(self._v)
+    def __repr__(self):
+        return repr(self._v)
 
-  def _should_act_as_resource_variable(self):
-    """Pass resource_variable_ops.is_resource_variable check."""
-    pass
+    def _should_act_as_resource_variable(self):
+        """Pass resource_variable_ops.is_resource_variable check."""
+        pass
 
-  def _dense_var_to_tensor(self, dtype=None, name=None, as_ref=False):
-    if distribute_utils.caching_scope_local.in_caching_scope():
-      return self.cached_read_value()
-    return self._v._dense_var_to_tensor(dtype=dtype, name=name, as_ref=False)  # pylint: disable=protected-access
+    def _dense_var_to_tensor(self, dtype=None, name=None, as_ref=False):
+        if distribute_utils.caching_scope_local.in_caching_scope():
+            return self.cached_read_value()
+        return self._v._dense_var_to_tensor(
+            dtype=dtype, name=name, as_ref=False
+        )  # pylint: disable=protected-access
 
-  @classmethod
-  def _overload_overloadable_operators(cls):
-    """Register overloads for all operators."""
-    for operator in ops.Tensor.OVERLOADABLE_OPERATORS:
-      # Overloading __eq__ or __ne__ does not work as expected.
-      if operator == "__eq__" or operator == "__ne__":
-        continue
-      cls._tensor_overload_operator(operator)
+    @classmethod
+    def _overload_overloadable_operators(cls):
+        """Register overloads for all operators."""
+        for operator in ops.Tensor.OVERLOADABLE_OPERATORS:
+            # Overloading __eq__ or __ne__ does not work as expected.
+            if operator == "__eq__" or operator == "__ne__":
+                continue
+            cls._tensor_overload_operator(operator)
 
-  @classmethod
-  def _tensor_overload_operator(cls, operator):
-    """Delegate an operator overload to `ops.Tensor`."""
-    tensor_operator = getattr(ops.Tensor, operator)
+    @classmethod
+    def _tensor_overload_operator(cls, operator):
+        """Delegate an operator overload to `ops.Tensor`."""
+        tensor_operator = getattr(ops.Tensor, operator)
 
-    def _operator(v, *args, **kwargs):
-      return tensor_operator(v.value(), *args, **kwargs)  # pylint: disable=protected-access
-    setattr(cls, operator, _operator)
+        def _operator(v, *args, **kwargs):
+            return tensor_operator(
+                v.value(), *args, **kwargs
+            )  # pylint: disable=protected-access
 
-  def _gather_saveables_for_checkpoint(self):
-    return {trackable.VARIABLE_VALUE_KEY: self._v}
+        setattr(cls, operator, _operator)
 
-  def _map_resources(self, save_options):
-    """For implementing `Trackable`."""
-    # By delegating this method to the wrapped variable, SavedModel with
-    # AggregatingVariable are identical to SavedModel with normal variables.
-    obj_map, resource_map = self._v._map_resources(save_options)  # pylint:disable=protected-access
-    obj_map[self] = obj_map[self._v]
-    return obj_map, resource_map
+    def _gather_saveables_for_checkpoint(self):
+        return {trackable.VARIABLE_VALUE_KEY: self._v}
+
+    def _map_resources(self, save_options):
+        """For implementing `Trackable`."""
+        # By delegating this method to the wrapped variable, SavedModel with
+        # AggregatingVariable are identical to SavedModel with normal variables.
+        obj_map, resource_map = self._v._map_resources(
+            save_options
+        )  # pylint:disable=protected-access
+        obj_map[self] = obj_map[self._v]
+        return obj_map, resource_map
 
 
 # Register a conversion function which reads the value of the variable,
 # allowing instances of the class to be used as tensors.
 def _tensor_conversion_aggregate(var, dtype=None, name=None, as_ref=False):
-  return var._dense_var_to_tensor(dtype, name, as_ref)  # pylint: disable=protected-access
+    return var._dense_var_to_tensor(
+        dtype, name, as_ref
+    )  # pylint: disable=protected-access
 
 
-ops.register_tensor_conversion_function(AggregatingVariable,
-                                        _tensor_conversion_aggregate)
+ops.register_tensor_conversion_function(
+    AggregatingVariable, _tensor_conversion_aggregate
+)
 
 
 # Register a conversion function which reads the value of the variable,
 # allowing instances of the class to be used as tensors.
 def _tensor_conversion_caching(var, dtype=None, name=None, as_ref=False):
-  return var._dense_var_to_tensor(dtype, name, as_ref)  # pylint: disable=protected-access
+    return var._dense_var_to_tensor(
+        dtype, name, as_ref
+    )  # pylint: disable=protected-access
 
 
-ops.register_tensor_conversion_function(CachingVariable,
-                                        _tensor_conversion_caching)
+ops.register_tensor_conversion_function(CachingVariable, _tensor_conversion_caching)
 
 CachingVariable._overload_overloadable_operators()  # pylint: disable=protected-access

@@ -28,37 +28,38 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 class _ShuffleAndRepeatDataset(dataset_ops.UnaryUnchangedStructureDataset):
-  """A `Dataset` that fuses `shuffle` and `repeat`."""
+    """A `Dataset` that fuses `shuffle` and `repeat`."""
 
-  def __init__(self, input_dataset, buffer_size, count=None, seed=None):
-    self._input_dataset = input_dataset
-    self._buffer_size = ops.convert_to_tensor(
-        buffer_size, dtype=dtypes.int64, name="buffer_size")
-    if count is None:
-      self._count = constant_op.constant(-1, dtype=dtypes.int64, name="count")
-    else:
-      self._count = ops.convert_to_tensor(
-          count, dtype=dtypes.int64, name="count")
-    self._seed, self._seed2 = random_seed.get_seed(seed)
-    variant_tensor = gen_dataset_ops.shuffle_and_repeat_dataset(
-        self._input_dataset._variant_tensor,  # pylint: disable=protected-access
-        buffer_size=self._buffer_size,
-        count=self._count,
-        seed=self._seed,
-        seed2=self._seed2,
-        **self._flat_structure)
-    super(_ShuffleAndRepeatDataset, self).__init__(input_dataset,
-                                                   variant_tensor)
+    def __init__(self, input_dataset, buffer_size, count=None, seed=None):
+        self._input_dataset = input_dataset
+        self._buffer_size = ops.convert_to_tensor(
+            buffer_size, dtype=dtypes.int64, name="buffer_size"
+        )
+        if count is None:
+            self._count = constant_op.constant(-1, dtype=dtypes.int64, name="count")
+        else:
+            self._count = ops.convert_to_tensor(count, dtype=dtypes.int64, name="count")
+        self._seed, self._seed2 = random_seed.get_seed(seed)
+        variant_tensor = gen_dataset_ops.shuffle_and_repeat_dataset(
+            self._input_dataset._variant_tensor,  # pylint: disable=protected-access
+            buffer_size=self._buffer_size,
+            count=self._count,
+            seed=self._seed,
+            seed2=self._seed2,
+            **self._flat_structure
+        )
+        super(_ShuffleAndRepeatDataset, self).__init__(input_dataset, variant_tensor)
 
 
 @deprecation.deprecated(
     None,
     "Use `tf.data.Dataset.shuffle(buffer_size, seed)` followed by "
     "`tf.data.Dataset.repeat(count)`. Static tf.data optimizations will take "
-    "care of using the fused implementation.")
+    "care of using the fused implementation.",
+)
 @tf_export("data.experimental.shuffle_and_repeat")
 def shuffle_and_repeat(buffer_size, count=None, seed=None):
-  """Shuffles and repeats a Dataset, reshuffling with each repetition.
+    """Shuffles and repeats a Dataset, reshuffling with each repetition.
 
   >>> d = tf.data.Dataset.from_tensor_slices([1, 2, 3])
   >>> d = d.apply(tf.data.experimental.shuffle_and_repeat(2, count=2))
@@ -103,7 +104,7 @@ def shuffle_and_repeat(buffer_size, count=None, seed=None):
     `tf.data.Dataset.apply`.
   """
 
-  def _apply_fn(dataset):  # pylint: disable=missing-docstring
-    return _ShuffleAndRepeatDataset(dataset, buffer_size, count, seed)
+    def _apply_fn(dataset):  # pylint: disable=missing-docstring
+        return _ShuffleAndRepeatDataset(dataset, buffer_size, count, seed)
 
-  return _apply_fn
+    return _apply_fn

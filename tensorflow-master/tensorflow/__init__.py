@@ -25,6 +25,7 @@ from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import
 
 from tensorflow.python.platform import flags  # pylint: disable=g-import-not-at-top
 from tensorflow.python.platform import app  # pylint: disable=g-import-not-at-top
+
 app.flags = flags
 
 del absolute_import

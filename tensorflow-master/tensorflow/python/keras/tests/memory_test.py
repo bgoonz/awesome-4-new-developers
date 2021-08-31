@@ -29,48 +29,47 @@ from tensorflow.python.platform import test
 
 
 class SingleLayerNet(keras.Model):
-  """Simple keras model used to ensure that there are no leaks."""
+    """Simple keras model used to ensure that there are no leaks."""
 
-  def __init__(self):
-    super(SingleLayerNet, self).__init__()
-    self.fc1 = keras.layers.Dense(5)
+    def __init__(self):
+        super(SingleLayerNet, self).__init__()
+        self.fc1 = keras.layers.Dense(5)
 
-  def call(self, x):
-    return self.fc1(x)
+    def call(self, x):
+        return self.fc1(x)
 
 
 class MemoryTest(test.TestCase):
+    def testMemoryLeakInSimpleModelForwardOnly(self):
+        if not memory_test_util.memory_profiler_is_available():
+            self.skipTest("memory_profiler required to run this test")
 
-  def testMemoryLeakInSimpleModelForwardOnly(self):
-    if not memory_test_util.memory_profiler_is_available():
-      self.skipTest("memory_profiler required to run this test")
+        inputs = array_ops.zeros([32, 100], dtypes.float32)
+        net = SingleLayerNet()
 
-    inputs = array_ops.zeros([32, 100], dtypes.float32)
-    net = SingleLayerNet()
+        def f():
+            with backprop.GradientTape():
+                net(inputs)
 
-    def f():
-      with backprop.GradientTape():
-        net(inputs)
+        memory_test_util.assert_no_leak(f)
 
-    memory_test_util.assert_no_leak(f)
+    def testMemoryLeakInSimpleModelForwardAndBackward(self):
+        if not memory_test_util.memory_profiler_is_available():
+            self.skipTest("memory_profiler required to run this test")
 
-  def testMemoryLeakInSimpleModelForwardAndBackward(self):
-    if not memory_test_util.memory_profiler_is_available():
-      self.skipTest("memory_profiler required to run this test")
+        inputs = array_ops.zeros([32, 100], dtypes.float32)
+        net = SingleLayerNet()
 
-    inputs = array_ops.zeros([32, 100], dtypes.float32)
-    net = SingleLayerNet()
+        def f():
+            with backprop.GradientTape() as tape:
+                result = net(inputs)
 
-    def f():
-      with backprop.GradientTape() as tape:
-        result = net(inputs)
+            tape.gradient(result, net.variables)
 
-      tape.gradient(result, net.variables)
+            del tape
 
-      del tape
-
-    memory_test_util.assert_no_leak(f)
+        memory_test_util.assert_no_leak(f)
 
 
 if __name__ == "__main__":
-  test.main()
+    test.main()

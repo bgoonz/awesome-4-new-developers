@@ -27,9 +27,9 @@ from tensorflow.python.training.tracking import base as trackable
 from tensorflow.python.util.tf_export import keras_export
 
 
-@keras_export('keras.layers.DenseFeatures', v1=[])
+@keras_export("keras.layers.DenseFeatures", v1=[])
 class DenseFeatures(dense_features.DenseFeatures):
-  """A layer that produces a dense `Tensor` based on given `feature_columns`.
+    """A layer that produces a dense `Tensor` based on given `feature_columns`.
 
   Generally a single example in training data is described with FeatureColumns.
   At the first layer of the model, this column oriented data should be converted
@@ -60,12 +60,8 @@ class DenseFeatures(dense_features.DenseFeatures):
   ```
   """
 
-  def __init__(self,
-               feature_columns,
-               trainable=True,
-               name=None,
-               **kwargs):
-    """Creates a DenseFeatures object.
+    def __init__(self, feature_columns, trainable=True, name=None, **kwargs):
+        """Creates a DenseFeatures object.
 
     Args:
       feature_columns: An iterable containing the FeatureColumns to use as
@@ -82,55 +78,60 @@ class DenseFeatures(dense_features.DenseFeatures):
     Raises:
       ValueError: if an item in `feature_columns` is not a `DenseColumn`.
     """
-    super(DenseFeatures, self).__init__(
-        feature_columns=feature_columns,
-        trainable=trainable,
-        name=name,
-        **kwargs)
-    self._state_manager = _StateManagerImplV2(self, self.trainable)
+        super(DenseFeatures, self).__init__(
+            feature_columns=feature_columns, trainable=trainable, name=name, **kwargs
+        )
+        self._state_manager = _StateManagerImplV2(self, self.trainable)
 
-  def build(self, _):
-    for column in self._feature_columns:
-      with ops.name_scope_v2(column.name):
-        column.create_state(self._state_manager)
-    # We would like to call Layer.build and not _DenseFeaturesHelper.build.
-    # pylint: disable=protected-access
-    super(kfc._BaseFeaturesLayer, self).build(None)  # pylint: disable=bad-super-call
+    def build(self, _):
+        for column in self._feature_columns:
+            with ops.name_scope_v2(column.name):
+                column.create_state(self._state_manager)
+        # We would like to call Layer.build and not _DenseFeaturesHelper.build.
+        # pylint: disable=protected-access
+        super(kfc._BaseFeaturesLayer, self).build(
+            None
+        )  # pylint: disable=bad-super-call
 
 
 class _StateManagerImplV2(fc._StateManagerImpl):  # pylint: disable=protected-access
-  """Manages the state of DenseFeatures."""
+    """Manages the state of DenseFeatures."""
 
-  def create_variable(self,
-                      feature_column,
-                      name,
-                      shape,
-                      dtype=None,
-                      trainable=True,
-                      use_resource=True,
-                      initializer=None):
-    if name in self._cols_to_vars_map[feature_column]:
-      raise ValueError('Variable already exists.')
+    def create_variable(
+        self,
+        feature_column,
+        name,
+        shape,
+        dtype=None,
+        trainable=True,
+        use_resource=True,
+        initializer=None,
+    ):
+        if name in self._cols_to_vars_map[feature_column]:
+            raise ValueError("Variable already exists.")
 
-    # We explicitly track these variables since `name` is not guaranteed to be
-    # unique and disable manual tracking that the add_weight call does.
-    with no_manual_dependency_tracking_scope(self._layer):
-      var = self._layer.add_weight(
-          name=name,
-          shape=shape,
-          dtype=dtype,
-          initializer=initializer,
-          trainable=self._trainable and trainable,
-          use_resource=use_resource)
-    if isinstance(var, trackable.Trackable):
-      self._layer._track_trackable(var, feature_column.name + '/' + name)  # pylint: disable=protected-access
-    self._cols_to_vars_map[feature_column][name] = var
-    return var
+        # We explicitly track these variables since `name` is not guaranteed to be
+        # unique and disable manual tracking that the add_weight call does.
+        with no_manual_dependency_tracking_scope(self._layer):
+            var = self._layer.add_weight(
+                name=name,
+                shape=shape,
+                dtype=dtype,
+                initializer=initializer,
+                trainable=self._trainable and trainable,
+                use_resource=use_resource,
+            )
+        if isinstance(var, trackable.Trackable):
+            self._layer._track_trackable(
+                var, feature_column.name + "/" + name
+            )  # pylint: disable=protected-access
+        self._cols_to_vars_map[feature_column][name] = var
+        return var
 
 
 @tf_contextlib.contextmanager
 def no_manual_dependency_tracking_scope(obj):
-  """A context that disables manual dependency tracking for the given `obj`.
+    """A context that disables manual dependency tracking for the given `obj`.
 
   Sometimes library methods might track objects on their own and we might want
   to disable that and do the tracking on our own. One can then use this context
@@ -151,10 +152,10 @@ def no_manual_dependency_tracking_scope(obj):
   Yields:
     a scope in which the object doesn't track dependencies manually.
   """
-  # pylint: disable=protected-access
-  previous_value = getattr(obj, '_manual_tracking', True)
-  obj._manual_tracking = False
-  try:
-    yield
-  finally:
-    obj._manual_tracking = previous_value
+    # pylint: disable=protected-access
+    previous_value = getattr(obj, "_manual_tracking", True)
+    obj._manual_tracking = False
+    try:
+        yield
+    finally:
+        obj._manual_tracking = previous_value

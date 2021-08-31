@@ -23,7 +23,7 @@ from tensorflow.python.util.tf_export import tf_export
 
 @tf_export("train.CheckpointOptions")
 class CheckpointOptions(object):
-  """Options for constructing a Checkpoint.
+    """Options for constructing a Checkpoint.
 
   Used as the `options` argument to either `tf.train.Checkpoint.save()` or
   `tf.train.Checkpoint.restore()` methods to adjust how variables are
@@ -39,11 +39,11 @@ class CheckpointOptions(object):
   ```
   """
 
-  # Define object attributes in __slots__ for improved memory and performance.
-  __slots__ = ("experimental_io_device",)
+    # Define object attributes in __slots__ for improved memory and performance.
+    __slots__ = ("experimental_io_device",)
 
-  def __init__(self, experimental_io_device=None):
-    """Creates an object that stores options for a Checkpoint.
+    def __init__(self, experimental_io_device=None):
+        """Creates an object that stores options for a Checkpoint.
 
     Args:
       experimental_io_device: string. Applies in a distributed setting.
@@ -56,4 +56,4 @@ class CheckpointOptions(object):
         such as "/tmp" when running in a distributed setting. In that case pass
         a device for the host where the "/tmp" directory is accessible.
     """
-    self.experimental_io_device = experimental_io_device
+        self.experimental_io_device = experimental_io_device

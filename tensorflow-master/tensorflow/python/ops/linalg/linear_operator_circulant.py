@@ -50,22 +50,24 @@ _IFFT_OP = {1: fft_ops.ifft, 2: fft_ops.ifft2d, 3: fft_ops.ifft3d}
 #   common filters.
 # TODO(langmore) Support rectangular Toeplitz matrices.
 class _BaseLinearOperatorCirculant(linear_operator.LinearOperator):
-  """Base class for circulant operators.  Not user facing.
+    """Base class for circulant operators.  Not user facing.
 
   `LinearOperator` acting like a [batch] [[nested] block] circulant matrix.
   """
 
-  def __init__(self,
-               spectrum,
-               block_depth,
-               input_output_dtype=dtypes.complex64,
-               is_non_singular=None,
-               is_self_adjoint=None,
-               is_positive_definite=None,
-               is_square=True,
-               parameters=None,
-               name="LinearOperatorCirculant"):
-    r"""Initialize an `_BaseLinearOperatorCirculant`.
+    def __init__(
+        self,
+        spectrum,
+        block_depth,
+        input_output_dtype=dtypes.complex64,
+        is_non_singular=None,
+        is_self_adjoint=None,
+        is_positive_definite=None,
+        is_square=True,
+        parameters=None,
+        name="LinearOperatorCirculant",
+    ):
+        r"""Initialize an `_BaseLinearOperatorCirculant`.
 
     Args:
       spectrum:  Shape `[B1,...,Bb, N]` `Tensor`.  Allowed dtypes: `float16`,
@@ -93,56 +95,63 @@ class _BaseLinearOperatorCirculant(linear_operator.LinearOperator):
       TypeError:  If `spectrum` is not an allowed type.
     """
 
-    allowed_block_depths = [1, 2, 3]
+        allowed_block_depths = [1, 2, 3]
 
-    self._name = name
+        self._name = name
 
-    if block_depth not in allowed_block_depths:
-      raise ValueError("Expected block_depth to be in %s.  Found: %s." %
-                       (allowed_block_depths, block_depth))
-    self._block_depth = block_depth
+        if block_depth not in allowed_block_depths:
+            raise ValueError(
+                "Expected block_depth to be in %s.  Found: %s."
+                % (allowed_block_depths, block_depth)
+            )
+        self._block_depth = block_depth
 
-    with ops.name_scope(name, values=[spectrum]):
-      self._spectrum = self._check_spectrum_and_return_tensor(spectrum)
+        with ops.name_scope(name, values=[spectrum]):
+            self._spectrum = self._check_spectrum_and_return_tensor(spectrum)
 
-      # Check and auto-set hints.
-      if not self.spectrum.dtype.is_complex:
-        if is_self_adjoint is False:
-          raise ValueError(
-              "A real spectrum always corresponds to a self-adjoint operator.")
-        is_self_adjoint = True
+            # Check and auto-set hints.
+            if not self.spectrum.dtype.is_complex:
+                if is_self_adjoint is False:
+                    raise ValueError(
+                        "A real spectrum always corresponds to a self-adjoint operator."
+                    )
+                is_self_adjoint = True
 
-      if is_square is False:
-        raise ValueError(
-            "A [[nested] block] circulant operator is always square.")
-      is_square = True
+            if is_square is False:
+                raise ValueError(
+                    "A [[nested] block] circulant operator is always square."
+                )
+            is_square = True
 
-      super(_BaseLinearOperatorCirculant, self).__init__(
-          dtype=dtypes.as_dtype(input_output_dtype),
-          is_non_singular=is_non_singular,
-          is_self_adjoint=is_self_adjoint,
-          is_positive_definite=is_positive_definite,
-          is_square=is_square,
-          parameters=parameters,
-          name=name)
-      # TODO(b/143910018) Remove graph_parents in V3.
-      self._set_graph_parents([self.spectrum])
+            super(_BaseLinearOperatorCirculant, self).__init__(
+                dtype=dtypes.as_dtype(input_output_dtype),
+                is_non_singular=is_non_singular,
+                is_self_adjoint=is_self_adjoint,
+                is_positive_definite=is_positive_definite,
+                is_square=is_square,
+                parameters=parameters,
+                name=name,
+            )
+            # TODO(b/143910018) Remove graph_parents in V3.
+            self._set_graph_parents([self.spectrum])
 
-  def _check_spectrum_and_return_tensor(self, spectrum):
-    """Static check of spectrum.  Then return `Tensor` version."""
-    spectrum = linear_operator_util.convert_nonref_to_tensor(spectrum,
-                                                             name="spectrum")
+    def _check_spectrum_and_return_tensor(self, spectrum):
+        """Static check of spectrum.  Then return `Tensor` version."""
+        spectrum = linear_operator_util.convert_nonref_to_tensor(
+            spectrum, name="spectrum"
+        )
 
-    if spectrum.shape.ndims is not None:
-      if spectrum.shape.ndims < self.block_depth:
-        raise ValueError(
-            "Argument spectrum must have at least %d dimensions.  Found: %s" %
-            (self.block_depth, spectrum))
-    return spectrum
+        if spectrum.shape.ndims is not None:
+            if spectrum.shape.ndims < self.block_depth:
+                raise ValueError(
+                    "Argument spectrum must have at least %d dimensions.  Found: %s"
+                    % (self.block_depth, spectrum)
+                )
+        return spectrum
 
-  @property
-  def block_depth(self):
-    """Depth of recursively defined circulant blocks defining this `Operator`.
+    @property
+    def block_depth(self):
+        """Depth of recursively defined circulant blocks defining this `Operator`.
 
     With `A` the dense representation of this `Operator`,
 
@@ -171,99 +180,101 @@ class _BaseLinearOperatorCirculant(linear_operator.LinearOperator):
     Returns:
       Python `integer`.
     """
-    return self._block_depth
+        return self._block_depth
 
-  def block_shape_tensor(self):
-    """Shape of the block dimensions of `self.spectrum`."""
-    # If spectrum.shape = [s0, s1, s2], and block_depth = 2,
-    # block_shape = [s1, s2]
-    return self._block_shape_tensor()
+    def block_shape_tensor(self):
+        """Shape of the block dimensions of `self.spectrum`."""
+        # If spectrum.shape = [s0, s1, s2], and block_depth = 2,
+        # block_shape = [s1, s2]
+        return self._block_shape_tensor()
 
-  def _block_shape_tensor(self, spectrum_shape=None):
-    if self.block_shape.is_fully_defined():
-      return linear_operator_util.shape_tensor(
-          self.block_shape.as_list(), name="block_shape")
-    spectrum_shape = (
-        array_ops.shape(self.spectrum)
-        if spectrum_shape is None else spectrum_shape)
-    return spectrum_shape[-self.block_depth:]
+    def _block_shape_tensor(self, spectrum_shape=None):
+        if self.block_shape.is_fully_defined():
+            return linear_operator_util.shape_tensor(
+                self.block_shape.as_list(), name="block_shape"
+            )
+        spectrum_shape = (
+            array_ops.shape(self.spectrum) if spectrum_shape is None else spectrum_shape
+        )
+        return spectrum_shape[-self.block_depth :]
 
-  @property
-  def block_shape(self):
-    return self.spectrum.shape[-self.block_depth:]
+    @property
+    def block_shape(self):
+        return self.spectrum.shape[-self.block_depth :]
 
-  @property
-  def spectrum(self):
-    return self._spectrum
+    @property
+    def spectrum(self):
+        return self._spectrum
 
-  def _vectorize_then_blockify(self, matrix):
-    """Shape batch matrix to batch vector, then blockify trailing dimensions."""
-    # Suppose
-    #   matrix.shape = [m0, m1, m2, m3],
-    # and matrix is a matrix because the final two dimensions are matrix dims.
-    #   self.block_depth = 2,
-    #   self.block_shape = [b0, b1]  (note b0 * b1 = m2).
-    # We will reshape matrix to
-    #   [m3, m0, m1, b0, b1].
+    def _vectorize_then_blockify(self, matrix):
+        """Shape batch matrix to batch vector, then blockify trailing dimensions."""
+        # Suppose
+        #   matrix.shape = [m0, m1, m2, m3],
+        # and matrix is a matrix because the final two dimensions are matrix dims.
+        #   self.block_depth = 2,
+        #   self.block_shape = [b0, b1]  (note b0 * b1 = m2).
+        # We will reshape matrix to
+        #   [m3, m0, m1, b0, b1].
 
-    # Vectorize: Reshape to batch vector.
-    #   [m0, m1, m2, m3] --> [m3, m0, m1, m2]
-    # This is called "vectorize" because we have taken the final two matrix dims
-    # and turned this into a size m3 batch of vectors.
-    vec = distribution_util.rotate_transpose(matrix, shift=1)
+        # Vectorize: Reshape to batch vector.
+        #   [m0, m1, m2, m3] --> [m3, m0, m1, m2]
+        # This is called "vectorize" because we have taken the final two matrix dims
+        # and turned this into a size m3 batch of vectors.
+        vec = distribution_util.rotate_transpose(matrix, shift=1)
 
-    # Blockify: Blockfy trailing dimensions.
-    #   [m3, m0, m1, m2] --> [m3, m0, m1, b0, b1]
-    if (vec.shape.is_fully_defined() and
-        self.block_shape.is_fully_defined()):
-      # vec_leading_shape = [m3, m0, m1],
-      # the parts of vec that will not be blockified.
-      vec_leading_shape = vec.shape[:-1]
-      final_shape = vec_leading_shape.concatenate(self.block_shape)
-    else:
-      vec_leading_shape = array_ops.shape(vec)[:-1]
-      final_shape = array_ops.concat(
-          (vec_leading_shape, self.block_shape_tensor()), 0)
-    return array_ops.reshape(vec, final_shape)
+        # Blockify: Blockfy trailing dimensions.
+        #   [m3, m0, m1, m2] --> [m3, m0, m1, b0, b1]
+        if vec.shape.is_fully_defined() and self.block_shape.is_fully_defined():
+            # vec_leading_shape = [m3, m0, m1],
+            # the parts of vec that will not be blockified.
+            vec_leading_shape = vec.shape[:-1]
+            final_shape = vec_leading_shape.concatenate(self.block_shape)
+        else:
+            vec_leading_shape = array_ops.shape(vec)[:-1]
+            final_shape = array_ops.concat(
+                (vec_leading_shape, self.block_shape_tensor()), 0
+            )
+        return array_ops.reshape(vec, final_shape)
 
-  def _unblockify_then_matricize(self, vec):
-    """Flatten the block dimensions then reshape to a batch matrix."""
-    # Suppose
-    #   vec.shape = [v0, v1, v2, v3],
-    #   self.block_depth = 2.
-    # Then
-    #   leading shape = [v0, v1]
-    #   block shape = [v2, v3].
-    # We will reshape vec to
-    #   [v1, v2*v3, v0].
+    def _unblockify_then_matricize(self, vec):
+        """Flatten the block dimensions then reshape to a batch matrix."""
+        # Suppose
+        #   vec.shape = [v0, v1, v2, v3],
+        #   self.block_depth = 2.
+        # Then
+        #   leading shape = [v0, v1]
+        #   block shape = [v2, v3].
+        # We will reshape vec to
+        #   [v1, v2*v3, v0].
 
-    # Un-blockify: Flatten block dimensions.  Reshape
-    #   [v0, v1, v2, v3] --> [v0, v1, v2*v3].
-    if vec.shape.is_fully_defined():
-      # vec_shape = [v0, v1, v2, v3]
-      vec_shape = vec.shape.as_list()
-      # vec_leading_shape = [v0, v1]
-      vec_leading_shape = vec_shape[:-self.block_depth]
-      # vec_block_shape = [v2, v3]
-      vec_block_shape = vec_shape[-self.block_depth:]
-      # flat_shape = [v0, v1, v2*v3]
-      flat_shape = vec_leading_shape + [np.prod(vec_block_shape)]
-    else:
-      vec_shape = array_ops.shape(vec)
-      vec_leading_shape = vec_shape[:-self.block_depth]
-      vec_block_shape = vec_shape[-self.block_depth:]
-      flat_shape = array_ops.concat(
-          (vec_leading_shape, [math_ops.reduce_prod(vec_block_shape)]), 0)
-    vec_flat = array_ops.reshape(vec, flat_shape)
+        # Un-blockify: Flatten block dimensions.  Reshape
+        #   [v0, v1, v2, v3] --> [v0, v1, v2*v3].
+        if vec.shape.is_fully_defined():
+            # vec_shape = [v0, v1, v2, v3]
+            vec_shape = vec.shape.as_list()
+            # vec_leading_shape = [v0, v1]
+            vec_leading_shape = vec_shape[: -self.block_depth]
+            # vec_block_shape = [v2, v3]
+            vec_block_shape = vec_shape[-self.block_depth :]
+            # flat_shape = [v0, v1, v2*v3]
+            flat_shape = vec_leading_shape + [np.prod(vec_block_shape)]
+        else:
+            vec_shape = array_ops.shape(vec)
+            vec_leading_shape = vec_shape[: -self.block_depth]
+            vec_block_shape = vec_shape[-self.block_depth :]
+            flat_shape = array_ops.concat(
+                (vec_leading_shape, [math_ops.reduce_prod(vec_block_shape)]), 0
+            )
+        vec_flat = array_ops.reshape(vec, flat_shape)
 
-    # Matricize:  Reshape to batch matrix.
-    #   [v0, v1, v2*v3] --> [v1, v2*v3, v0],
-    # representing a shape [v1] batch of [v2*v3, v0] matrices.
-    matrix = distribution_util.rotate_transpose(vec_flat, shift=-1)
-    return matrix
+        # Matricize:  Reshape to batch matrix.
+        #   [v0, v1, v2*v3] --> [v1, v2*v3, v0],
+        # representing a shape [v1] batch of [v2*v3, v0] matrices.
+        matrix = distribution_util.rotate_transpose(vec_flat, shift=-1)
+        return matrix
 
-  def _fft(self, x):
-    """FFT along the last self.block_depth dimensions of x.
+    def _fft(self, x):
+        """FFT along the last self.block_depth dimensions of x.
 
     Args:
       x: `Tensor` with floating or complex `dtype`.
@@ -272,11 +283,11 @@ class _BaseLinearOperatorCirculant(linear_operator.LinearOperator):
     Returns:
       `Tensor` with `dtype` `complex64`.
     """
-    x_complex = _to_complex(x)
-    return _FFT_OP[self.block_depth](x_complex)
+        x_complex = _to_complex(x)
+        return _FFT_OP[self.block_depth](x_complex)
 
-  def _ifft(self, x):
-    """IFFT along the last self.block_depth dimensions of x.
+    def _ifft(self, x):
+        """IFFT along the last self.block_depth dimensions of x.
 
     Args:
       x: `Tensor` with floating or complex dtype.  Should be in the form
@@ -285,11 +296,11 @@ class _BaseLinearOperatorCirculant(linear_operator.LinearOperator):
     Returns:
       `Tensor` with `dtype` `complex64`.
     """
-    x_complex = _to_complex(x)
-    return _IFFT_OP[self.block_depth](x_complex)
+        x_complex = _to_complex(x)
+        return _IFFT_OP[self.block_depth](x_complex)
 
-  def convolution_kernel(self, name="convolution_kernel"):
-    """Convolution kernel corresponding to `self.spectrum`.
+    def convolution_kernel(self, name="convolution_kernel"):
+        """Convolution kernel corresponding to `self.spectrum`.
 
     The `D` dimensional DFT of this kernel is the frequency domain spectrum of
     this operator.
@@ -300,41 +311,41 @@ class _BaseLinearOperatorCirculant(linear_operator.LinearOperator):
     Returns:
       `Tensor` with `dtype` `self.dtype`.
     """
-    with self._name_scope(name):  # pylint: disable=not-callable
-      h = self._ifft(_to_complex(self.spectrum))
-      return math_ops.cast(h, self.dtype)
+        with self._name_scope(name):  # pylint: disable=not-callable
+            h = self._ifft(_to_complex(self.spectrum))
+            return math_ops.cast(h, self.dtype)
 
-  def _shape(self):
-    s_shape = self._spectrum.shape
-    # Suppose spectrum.shape = [a, b, c, d]
-    # block_depth = 2
-    # Then:
-    #   batch_shape = [a, b]
-    #   N = c*d
-    # and we want to return
-    #   [a, b, c*d, c*d]
-    batch_shape = s_shape[:-self.block_depth]
-    # trailing_dims = [c, d]
-    trailing_dims = s_shape[-self.block_depth:]
-    if trailing_dims.is_fully_defined():
-      n = np.prod(trailing_dims.as_list())
-    else:
-      n = None
-    n_x_n = tensor_shape.TensorShape([n, n])
-    return batch_shape.concatenate(n_x_n)
+    def _shape(self):
+        s_shape = self._spectrum.shape
+        # Suppose spectrum.shape = [a, b, c, d]
+        # block_depth = 2
+        # Then:
+        #   batch_shape = [a, b]
+        #   N = c*d
+        # and we want to return
+        #   [a, b, c*d, c*d]
+        batch_shape = s_shape[: -self.block_depth]
+        # trailing_dims = [c, d]
+        trailing_dims = s_shape[-self.block_depth :]
+        if trailing_dims.is_fully_defined():
+            n = np.prod(trailing_dims.as_list())
+        else:
+            n = None
+        n_x_n = tensor_shape.TensorShape([n, n])
+        return batch_shape.concatenate(n_x_n)
 
-  def _shape_tensor(self, spectrum=None):
-    spectrum = self.spectrum if spectrum is None else spectrum
-    # See self.shape for explanation of steps
-    s_shape = array_ops.shape(spectrum)
-    batch_shape = s_shape[:-self.block_depth]
-    trailing_dims = s_shape[-self.block_depth:]
-    n = math_ops.reduce_prod(trailing_dims)
-    n_x_n = [n, n]
-    return array_ops.concat((batch_shape, n_x_n), 0)
+    def _shape_tensor(self, spectrum=None):
+        spectrum = self.spectrum if spectrum is None else spectrum
+        # See self.shape for explanation of steps
+        s_shape = array_ops.shape(spectrum)
+        batch_shape = s_shape[: -self.block_depth]
+        trailing_dims = s_shape[-self.block_depth :]
+        n = math_ops.reduce_prod(trailing_dims)
+        n_x_n = [n, n]
+        return array_ops.concat((batch_shape, n_x_n), 0)
 
-  def assert_hermitian_spectrum(self, name="assert_hermitian_spectrum"):
-    """Returns an `Op` that asserts this operator has Hermitian spectrum.
+    def assert_hermitian_spectrum(self, name="assert_hermitian_spectrum"):
+        """Returns an `Op` that asserts this operator has Hermitian spectrum.
 
     This operator corresponds to a real-valued matrix if and only if its
     spectrum is Hermitian.
@@ -345,184 +356,188 @@ class _BaseLinearOperatorCirculant(linear_operator.LinearOperator):
     Returns:
       An `Op` that asserts this operator has Hermitian spectrum.
     """
-    eps = np.finfo(self.dtype.real_dtype.as_numpy_dtype).eps
-    with self._name_scope(name):  # pylint: disable=not-callable
-      # Assume linear accumulation of error.
-      max_err = eps * self.domain_dimension_tensor()
-      imag_convolution_kernel = math_ops.imag(self.convolution_kernel())
-      return check_ops.assert_less(
-          math_ops.abs(imag_convolution_kernel),
-          max_err,
-          message="Spectrum was not Hermitian")
+        eps = np.finfo(self.dtype.real_dtype.as_numpy_dtype).eps
+        with self._name_scope(name):  # pylint: disable=not-callable
+            # Assume linear accumulation of error.
+            max_err = eps * self.domain_dimension_tensor()
+            imag_convolution_kernel = math_ops.imag(self.convolution_kernel())
+            return check_ops.assert_less(
+                math_ops.abs(imag_convolution_kernel),
+                max_err,
+                message="Spectrum was not Hermitian",
+            )
 
-  def _assert_non_singular(self):
-    return linear_operator_util.assert_no_entries_with_modulus_zero(
-        self.spectrum,
-        message="Singular operator:  Spectrum contained zero values.")
+    def _assert_non_singular(self):
+        return linear_operator_util.assert_no_entries_with_modulus_zero(
+            self.spectrum, message="Singular operator:  Spectrum contained zero values."
+        )
 
-  def _assert_positive_definite(self):
-    # This operator has the action  Ax = F^H D F x,
-    # where D is the diagonal matrix with self.spectrum on the diag.  Therefore,
-    # <x, Ax> = <Fx, DFx>,
-    # Since F is bijective, the condition for positive definite is the same as
-    # for a diagonal matrix, i.e. real part of spectrum is positive.
-    message = (
-        "Not positive definite:  Real part of spectrum was not all positive.")
-    return check_ops.assert_positive(
-        math_ops.real(self.spectrum), message=message)
+    def _assert_positive_definite(self):
+        # This operator has the action  Ax = F^H D F x,
+        # where D is the diagonal matrix with self.spectrum on the diag.  Therefore,
+        # <x, Ax> = <Fx, DFx>,
+        # Since F is bijective, the condition for positive definite is the same as
+        # for a diagonal matrix, i.e. real part of spectrum is positive.
+        message = "Not positive definite:  Real part of spectrum was not all positive."
+        return check_ops.assert_positive(math_ops.real(self.spectrum), message=message)
 
-  def _assert_self_adjoint(self):
-    # Recall correspondence between symmetry and real transforms.  See docstring
-    return linear_operator_util.assert_zero_imag_part(
-        self.spectrum,
-        message=(
-            "Not self-adjoint:  The spectrum contained non-zero imaginary part."
-        ))
+    def _assert_self_adjoint(self):
+        # Recall correspondence between symmetry and real transforms.  See docstring
+        return linear_operator_util.assert_zero_imag_part(
+            self.spectrum,
+            message=(
+                "Not self-adjoint:  The spectrum contained non-zero imaginary part."
+            ),
+        )
 
-  def _broadcast_batch_dims(self, x, spectrum):
-    """Broadcast batch dims of batch matrix `x` and spectrum."""
-    spectrum = ops.convert_to_tensor_v2_with_dispatch(spectrum, name="spectrum")
-    # spectrum.shape = batch_shape + block_shape
-    # First make spectrum a batch matrix with
-    #   spectrum.shape = batch_shape + [prod(block_shape), 1]
-    batch_shape = self._batch_shape_tensor(
-        shape=self._shape_tensor(spectrum=spectrum))
-    spec_mat = array_ops.reshape(
-        spectrum, array_ops.concat((batch_shape, [-1, 1]), axis=0))
-    # Second, broadcast, possibly requiring an addition of array of zeros.
-    x, spec_mat = linear_operator_util.broadcast_matrix_batch_dims((x,
-                                                                    spec_mat))
-    # Third, put the block shape back into spectrum.
-    x_batch_shape = array_ops.shape(x)[:-2]
-    spectrum_shape = array_ops.shape(spectrum)
-    spectrum = array_ops.reshape(
-        spec_mat,
-        array_ops.concat(
-            (x_batch_shape,
-             self._block_shape_tensor(spectrum_shape=spectrum_shape)),
-            axis=0))
+    def _broadcast_batch_dims(self, x, spectrum):
+        """Broadcast batch dims of batch matrix `x` and spectrum."""
+        spectrum = ops.convert_to_tensor_v2_with_dispatch(spectrum, name="spectrum")
+        # spectrum.shape = batch_shape + block_shape
+        # First make spectrum a batch matrix with
+        #   spectrum.shape = batch_shape + [prod(block_shape), 1]
+        batch_shape = self._batch_shape_tensor(
+            shape=self._shape_tensor(spectrum=spectrum)
+        )
+        spec_mat = array_ops.reshape(
+            spectrum, array_ops.concat((batch_shape, [-1, 1]), axis=0)
+        )
+        # Second, broadcast, possibly requiring an addition of array of zeros.
+        x, spec_mat = linear_operator_util.broadcast_matrix_batch_dims((x, spec_mat))
+        # Third, put the block shape back into spectrum.
+        x_batch_shape = array_ops.shape(x)[:-2]
+        spectrum_shape = array_ops.shape(spectrum)
+        spectrum = array_ops.reshape(
+            spec_mat,
+            array_ops.concat(
+                (
+                    x_batch_shape,
+                    self._block_shape_tensor(spectrum_shape=spectrum_shape),
+                ),
+                axis=0,
+            ),
+        )
 
-    return x, spectrum
+        return x, spectrum
 
-  def _matmul(self, x, adjoint=False, adjoint_arg=False):
-    x = linalg.adjoint(x) if adjoint_arg else x
-    # With F the matrix of a DFT, and F^{-1}, F^H the inverse and Hermitian
-    # transpose, one can show that F^{-1} = F^{H} is the IDFT matrix.  Therefore
-    # matmul(x) = F^{-1} diag(spectrum) F x,
-    #           = F^{H} diag(spectrum) F x,
-    # so that
-    # matmul(x, adjoint=True) = F^{H} diag(conj(spectrum)) F x.
-    spectrum = _to_complex(self.spectrum)
-    if adjoint:
-      spectrum = math_ops.conj(spectrum)
+    def _matmul(self, x, adjoint=False, adjoint_arg=False):
+        x = linalg.adjoint(x) if adjoint_arg else x
+        # With F the matrix of a DFT, and F^{-1}, F^H the inverse and Hermitian
+        # transpose, one can show that F^{-1} = F^{H} is the IDFT matrix.  Therefore
+        # matmul(x) = F^{-1} diag(spectrum) F x,
+        #           = F^{H} diag(spectrum) F x,
+        # so that
+        # matmul(x, adjoint=True) = F^{H} diag(conj(spectrum)) F x.
+        spectrum = _to_complex(self.spectrum)
+        if adjoint:
+            spectrum = math_ops.conj(spectrum)
 
-    x = math_ops.cast(x, spectrum.dtype)
+        x = math_ops.cast(x, spectrum.dtype)
 
-    x, spectrum = self._broadcast_batch_dims(x, spectrum)
+        x, spectrum = self._broadcast_batch_dims(x, spectrum)
 
-    x_vb = self._vectorize_then_blockify(x)
-    fft_x_vb = self._fft(x_vb)
-    block_vector_result = self._ifft(spectrum * fft_x_vb)
-    y = self._unblockify_then_matricize(block_vector_result)
+        x_vb = self._vectorize_then_blockify(x)
+        fft_x_vb = self._fft(x_vb)
+        block_vector_result = self._ifft(spectrum * fft_x_vb)
+        y = self._unblockify_then_matricize(block_vector_result)
 
-    return math_ops.cast(y, self.dtype)
+        return math_ops.cast(y, self.dtype)
 
-  def _determinant(self):
-    axis = [-(i + 1) for i in range(self.block_depth)]
-    det = math_ops.reduce_prod(self.spectrum, axis=axis)
-    return math_ops.cast(det, self.dtype)
+    def _determinant(self):
+        axis = [-(i + 1) for i in range(self.block_depth)]
+        det = math_ops.reduce_prod(self.spectrum, axis=axis)
+        return math_ops.cast(det, self.dtype)
 
-  def _log_abs_determinant(self):
-    axis = [-(i + 1) for i in range(self.block_depth)]
-    lad = math_ops.reduce_sum(
-        math_ops.log(math_ops.abs(self.spectrum)), axis=axis)
-    return math_ops.cast(lad, self.dtype)
+    def _log_abs_determinant(self):
+        axis = [-(i + 1) for i in range(self.block_depth)]
+        lad = math_ops.reduce_sum(math_ops.log(math_ops.abs(self.spectrum)), axis=axis)
+        return math_ops.cast(lad, self.dtype)
 
-  def _solve(self, rhs, adjoint=False, adjoint_arg=False):
-    rhs = linalg.adjoint(rhs) if adjoint_arg else rhs
-    spectrum = _to_complex(self.spectrum)
-    if adjoint:
-      spectrum = math_ops.conj(spectrum)
+    def _solve(self, rhs, adjoint=False, adjoint_arg=False):
+        rhs = linalg.adjoint(rhs) if adjoint_arg else rhs
+        spectrum = _to_complex(self.spectrum)
+        if adjoint:
+            spectrum = math_ops.conj(spectrum)
 
-    rhs, spectrum = self._broadcast_batch_dims(rhs, spectrum)
+        rhs, spectrum = self._broadcast_batch_dims(rhs, spectrum)
 
-    rhs_vb = self._vectorize_then_blockify(rhs)
-    fft_rhs_vb = self._fft(rhs_vb)
-    solution_vb = self._ifft(fft_rhs_vb / spectrum)
-    x = self._unblockify_then_matricize(solution_vb)
-    return math_ops.cast(x, self.dtype)
+        rhs_vb = self._vectorize_then_blockify(rhs)
+        fft_rhs_vb = self._fft(rhs_vb)
+        solution_vb = self._ifft(fft_rhs_vb / spectrum)
+        x = self._unblockify_then_matricize(solution_vb)
+        return math_ops.cast(x, self.dtype)
 
-  def _diag_part(self):
-    # Get ones in shape of diag, which is [B1,...,Bb, N]
-    # Also get the size of the diag, "N".
-    if self.shape.is_fully_defined():
-      diag_shape = self.shape[:-1]
-      diag_size = self.domain_dimension.value
-    else:
-      diag_shape = self.shape_tensor()[:-1]
-      diag_size = self.domain_dimension_tensor()
-    ones_diag = array_ops.ones(diag_shape, dtype=self.dtype)
+    def _diag_part(self):
+        # Get ones in shape of diag, which is [B1,...,Bb, N]
+        # Also get the size of the diag, "N".
+        if self.shape.is_fully_defined():
+            diag_shape = self.shape[:-1]
+            diag_size = self.domain_dimension.value
+        else:
+            diag_shape = self.shape_tensor()[:-1]
+            diag_size = self.domain_dimension_tensor()
+        ones_diag = array_ops.ones(diag_shape, dtype=self.dtype)
 
-    # As proved in comments in self._trace, the value on the diag is constant,
-    # repeated N times.  This value is the trace divided by N.
+        # As proved in comments in self._trace, the value on the diag is constant,
+        # repeated N times.  This value is the trace divided by N.
 
-    # The handling of self.shape = (0, 0) is tricky, and is the reason we choose
-    # to compute trace and use that to compute diag_part, rather than computing
-    # the value on the diagonal ("diag_value") directly.  Both result in a 0/0,
-    # but in different places, and the current method gives the right result in
-    # the end.
+        # The handling of self.shape = (0, 0) is tricky, and is the reason we choose
+        # to compute trace and use that to compute diag_part, rather than computing
+        # the value on the diagonal ("diag_value") directly.  Both result in a 0/0,
+        # but in different places, and the current method gives the right result in
+        # the end.
 
-    # Here, if self.shape = (0, 0), then self.trace() = 0., and then
-    # diag_value = 0. / 0. = NaN.
-    diag_value = self.trace() / math_ops.cast(diag_size, self.dtype)
+        # Here, if self.shape = (0, 0), then self.trace() = 0., and then
+        # diag_value = 0. / 0. = NaN.
+        diag_value = self.trace() / math_ops.cast(diag_size, self.dtype)
 
-    # If self.shape = (0, 0), then ones_diag = [] (empty tensor), and then
-    # the following line is NaN * [] = [], as needed.
-    return diag_value[..., array_ops.newaxis] * ones_diag
+        # If self.shape = (0, 0), then ones_diag = [] (empty tensor), and then
+        # the following line is NaN * [] = [], as needed.
+        return diag_value[..., array_ops.newaxis] * ones_diag
 
-  def _trace(self):
-    # The diagonal of the [[nested] block] circulant operator is the mean of
-    # the spectrum.
-    # Proof:  For the [0,...,0] element, this follows from the IDFT formula.
-    # Then the result follows since all diagonal elements are the same.
+    def _trace(self):
+        # The diagonal of the [[nested] block] circulant operator is the mean of
+        # the spectrum.
+        # Proof:  For the [0,...,0] element, this follows from the IDFT formula.
+        # Then the result follows since all diagonal elements are the same.
 
-    # Therefore, the trace is the sum of the spectrum.
+        # Therefore, the trace is the sum of the spectrum.
 
-    # Get shape of diag along with the axis over which to reduce the spectrum.
-    # We will reduce the spectrum over all block indices.
-    if self.spectrum.shape.is_fully_defined():
-      spec_rank = self.spectrum.shape.ndims
-      axis = np.arange(spec_rank - self.block_depth, spec_rank, dtype=np.int32)
-    else:
-      spec_rank = array_ops.rank(self.spectrum)
-      axis = math_ops.range(spec_rank - self.block_depth, spec_rank)
+        # Get shape of diag along with the axis over which to reduce the spectrum.
+        # We will reduce the spectrum over all block indices.
+        if self.spectrum.shape.is_fully_defined():
+            spec_rank = self.spectrum.shape.ndims
+            axis = np.arange(spec_rank - self.block_depth, spec_rank, dtype=np.int32)
+        else:
+            spec_rank = array_ops.rank(self.spectrum)
+            axis = math_ops.range(spec_rank - self.block_depth, spec_rank)
 
-    # Real diag part "re_d".
-    # Suppose spectrum.shape = [B1,...,Bb, N1, N2]
-    # self.shape = [B1,...,Bb, N, N], with N1 * N2 = N.
-    # re_d_value.shape = [B1,...,Bb]
-    re_d_value = math_ops.reduce_sum(math_ops.real(self.spectrum), axis=axis)
+        # Real diag part "re_d".
+        # Suppose spectrum.shape = [B1,...,Bb, N1, N2]
+        # self.shape = [B1,...,Bb, N, N], with N1 * N2 = N.
+        # re_d_value.shape = [B1,...,Bb]
+        re_d_value = math_ops.reduce_sum(math_ops.real(self.spectrum), axis=axis)
 
-    if not self.dtype.is_complex:
-      return math_ops.cast(re_d_value, self.dtype)
+        if not self.dtype.is_complex:
+            return math_ops.cast(re_d_value, self.dtype)
 
-    # Imaginary part, "im_d".
-    if self.is_self_adjoint:
-      im_d_value = array_ops.zeros_like(re_d_value)
-    else:
-      im_d_value = math_ops.reduce_sum(math_ops.imag(self.spectrum), axis=axis)
+        # Imaginary part, "im_d".
+        if self.is_self_adjoint:
+            im_d_value = array_ops.zeros_like(re_d_value)
+        else:
+            im_d_value = math_ops.reduce_sum(math_ops.imag(self.spectrum), axis=axis)
 
-    return math_ops.cast(math_ops.complex(re_d_value, im_d_value), self.dtype)
+        return math_ops.cast(math_ops.complex(re_d_value, im_d_value), self.dtype)
 
-  @property
-  def _composite_tensor_fields(self):
-    return ("spectrum", "input_output_dtype")
+    @property
+    def _composite_tensor_fields(self):
+        return ("spectrum", "input_output_dtype")
 
 
 @tf_export("linalg.LinearOperatorCirculant")
 @linear_operator.make_composite_tensor
 class LinearOperatorCirculant(_BaseLinearOperatorCirculant):
-  """`LinearOperator` acting like a circulant matrix.
+    """`LinearOperator` acting like a circulant matrix.
 
   This operator acts like a circulant matrix `A` with
   shape `[B1,...,Bb, N, N]` for some `b >= 0`.  The first `b` indices index a
@@ -707,15 +722,17 @@ class LinearOperatorCirculant(_BaseLinearOperatorCirculant):
       ([pdf](https://ee.stanford.edu/~gray/toeplitz.pdf))
   """
 
-  def __init__(self,
-               spectrum,
-               input_output_dtype=dtypes.complex64,
-               is_non_singular=None,
-               is_self_adjoint=None,
-               is_positive_definite=None,
-               is_square=True,
-               name="LinearOperatorCirculant"):
-    r"""Initialize an `LinearOperatorCirculant`.
+    def __init__(
+        self,
+        spectrum,
+        input_output_dtype=dtypes.complex64,
+        is_non_singular=None,
+        is_self_adjoint=None,
+        is_positive_definite=None,
+        is_square=True,
+        name="LinearOperatorCirculant",
+    ):
+        r"""Initialize an `LinearOperatorCirculant`.
 
     This `LinearOperator` is initialized to have shape `[B1,...,Bb, N, N]`
     by providing `spectrum`, a `[B1,...,Bb, N]` `Tensor`.
@@ -752,34 +769,35 @@ class LinearOperatorCirculant(_BaseLinearOperatorCirculant):
       is_square:  Expect that this operator acts like square [batch] matrices.
       name:  A name to prepend to all ops created by this class.
     """
-    parameters = dict(
-        spectrum=spectrum,
-        input_output_dtype=input_output_dtype,
-        is_non_singular=is_non_singular,
-        is_self_adjoint=is_self_adjoint,
-        is_positive_definite=is_positive_definite,
-        is_square=is_square,
-        name=name
-    )
-    super(LinearOperatorCirculant, self).__init__(
-        spectrum,
-        block_depth=1,
-        input_output_dtype=input_output_dtype,
-        is_non_singular=is_non_singular,
-        is_self_adjoint=is_self_adjoint,
-        is_positive_definite=is_positive_definite,
-        is_square=is_square,
-        parameters=parameters,
-        name=name)
+        parameters = dict(
+            spectrum=spectrum,
+            input_output_dtype=input_output_dtype,
+            is_non_singular=is_non_singular,
+            is_self_adjoint=is_self_adjoint,
+            is_positive_definite=is_positive_definite,
+            is_square=is_square,
+            name=name,
+        )
+        super(LinearOperatorCirculant, self).__init__(
+            spectrum,
+            block_depth=1,
+            input_output_dtype=input_output_dtype,
+            is_non_singular=is_non_singular,
+            is_self_adjoint=is_self_adjoint,
+            is_positive_definite=is_positive_definite,
+            is_square=is_square,
+            parameters=parameters,
+            name=name,
+        )
 
-  def _eigvals(self):
-    return ops.convert_to_tensor_v2_with_dispatch(self.spectrum)
+    def _eigvals(self):
+        return ops.convert_to_tensor_v2_with_dispatch(self.spectrum)
 
 
 @tf_export("linalg.LinearOperatorCirculant2D")
 @linear_operator.make_composite_tensor
 class LinearOperatorCirculant2D(_BaseLinearOperatorCirculant):
-  """`LinearOperator` acting like a block circulant matrix.
+    """`LinearOperator` acting like a block circulant matrix.
 
   This operator acts like a block circulant matrix `A` with
   shape `[B1,...,Bb, N, N]` for some `b >= 0`.  The first `b` indices index a
@@ -898,15 +916,17 @@ class LinearOperatorCirculant2D(_BaseLinearOperatorCirculant):
     way.
   """
 
-  def __init__(self,
-               spectrum,
-               input_output_dtype=dtypes.complex64,
-               is_non_singular=None,
-               is_self_adjoint=None,
-               is_positive_definite=None,
-               is_square=True,
-               name="LinearOperatorCirculant2D"):
-    r"""Initialize an `LinearOperatorCirculant2D`.
+    def __init__(
+        self,
+        spectrum,
+        input_output_dtype=dtypes.complex64,
+        is_non_singular=None,
+        is_self_adjoint=None,
+        is_positive_definite=None,
+        is_square=True,
+        name="LinearOperatorCirculant2D",
+    ):
+        r"""Initialize an `LinearOperatorCirculant2D`.
 
     This `LinearOperator` is initialized to have shape `[B1,...,Bb, N, N]`
     by providing `spectrum`, a `[B1,...,Bb, N0, N1]` `Tensor` with `N0*N1 = N`.
@@ -943,31 +963,32 @@ class LinearOperatorCirculant2D(_BaseLinearOperatorCirculant):
       is_square:  Expect that this operator acts like square [batch] matrices.
       name:  A name to prepend to all ops created by this class.
     """
-    parameters = dict(
-        spectrum=spectrum,
-        input_output_dtype=input_output_dtype,
-        is_non_singular=is_non_singular,
-        is_self_adjoint=is_self_adjoint,
-        is_positive_definite=is_positive_definite,
-        is_square=is_square,
-        name=name
-    )
-    super(LinearOperatorCirculant2D, self).__init__(
-        spectrum,
-        block_depth=2,
-        input_output_dtype=input_output_dtype,
-        is_non_singular=is_non_singular,
-        is_self_adjoint=is_self_adjoint,
-        is_positive_definite=is_positive_definite,
-        is_square=is_square,
-        parameters=parameters,
-        name=name)
+        parameters = dict(
+            spectrum=spectrum,
+            input_output_dtype=input_output_dtype,
+            is_non_singular=is_non_singular,
+            is_self_adjoint=is_self_adjoint,
+            is_positive_definite=is_positive_definite,
+            is_square=is_square,
+            name=name,
+        )
+        super(LinearOperatorCirculant2D, self).__init__(
+            spectrum,
+            block_depth=2,
+            input_output_dtype=input_output_dtype,
+            is_non_singular=is_non_singular,
+            is_self_adjoint=is_self_adjoint,
+            is_positive_definite=is_positive_definite,
+            is_square=is_square,
+            parameters=parameters,
+            name=name,
+        )
 
 
 @tf_export("linalg.LinearOperatorCirculant3D")
 @linear_operator.make_composite_tensor
 class LinearOperatorCirculant3D(_BaseLinearOperatorCirculant):
-  """`LinearOperator` acting like a nested block circulant matrix.
+    """`LinearOperator` acting like a nested block circulant matrix.
 
   This operator acts like a block circulant matrix `A` with
   shape `[B1,...,Bb, N, N]` for some `b >= 0`.  The first `b` indices index a
@@ -1059,15 +1080,17 @@ class LinearOperatorCirculant3D(_BaseLinearOperatorCirculant):
     way.
   """
 
-  def __init__(self,
-               spectrum,
-               input_output_dtype=dtypes.complex64,
-               is_non_singular=None,
-               is_self_adjoint=None,
-               is_positive_definite=None,
-               is_square=True,
-               name="LinearOperatorCirculant3D"):
-    """Initialize an `LinearOperatorCirculant`.
+    def __init__(
+        self,
+        spectrum,
+        input_output_dtype=dtypes.complex64,
+        is_non_singular=None,
+        is_self_adjoint=None,
+        is_positive_definite=None,
+        is_square=True,
+        name="LinearOperatorCirculant3D",
+    ):
+        """Initialize an `LinearOperatorCirculant`.
 
     This `LinearOperator` is initialized to have shape `[B1,...,Bb, N, N]`
     by providing `spectrum`, a `[B1,...,Bb, N0, N1, N2]` `Tensor`
@@ -1104,32 +1127,33 @@ class LinearOperatorCirculant3D(_BaseLinearOperatorCirculant):
       is_square:  Expect that this operator acts like square [batch] matrices.
       name:  A name to prepend to all ops created by this class.
     """
-    parameters = dict(
-        spectrum=spectrum,
-        input_output_dtype=input_output_dtype,
-        is_non_singular=is_non_singular,
-        is_self_adjoint=is_self_adjoint,
-        is_positive_definite=is_positive_definite,
-        is_square=is_square,
-        name=name
-    )
-    super(LinearOperatorCirculant3D, self).__init__(
-        spectrum,
-        block_depth=3,
-        input_output_dtype=input_output_dtype,
-        is_non_singular=is_non_singular,
-        is_self_adjoint=is_self_adjoint,
-        is_positive_definite=is_positive_definite,
-        is_square=is_square,
-        parameters=parameters,
-        name=name)
+        parameters = dict(
+            spectrum=spectrum,
+            input_output_dtype=input_output_dtype,
+            is_non_singular=is_non_singular,
+            is_self_adjoint=is_self_adjoint,
+            is_positive_definite=is_positive_definite,
+            is_square=is_square,
+            name=name,
+        )
+        super(LinearOperatorCirculant3D, self).__init__(
+            spectrum,
+            block_depth=3,
+            input_output_dtype=input_output_dtype,
+            is_non_singular=is_non_singular,
+            is_self_adjoint=is_self_adjoint,
+            is_positive_definite=is_positive_definite,
+            is_square=is_square,
+            parameters=parameters,
+            name=name,
+        )
 
 
 def _to_complex(x):
-  if x.dtype.is_complex:
-    return x
-  dtype = dtypes.complex64
+    if x.dtype.is_complex:
+        return x
+    dtype = dtypes.complex64
 
-  if x.dtype == dtypes.float64:
-    dtype = dtypes.complex128
-  return math_ops.cast(x, dtype)
+    if x.dtype == dtypes.float64:
+        dtype = dtypes.complex128
+    return math_ops.cast(x, dtype)

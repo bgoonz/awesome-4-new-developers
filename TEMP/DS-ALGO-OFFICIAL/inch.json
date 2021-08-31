@@ -1,0 +1,12 @@
+{
+  "files": {
+    "included": [
+      "CONTENT/**/*.js"
+    ],
+    "excluded": [
+      "plugins/vendor/sparkr/sparkr.js",
+      "plugins/vendor/**/*.js",
+      "!regexp:/vendor/"
+    ]
+  }
+}

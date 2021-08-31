@@ -21,7 +21,7 @@ from __future__ import print_function
 
 # TODO(fengliuai): add the tf_export decrator
 class Composite(object):
-  """A decorator to register a function as a composition for an TF operator.
+    """A decorator to register a function as a composition for an TF operator.
 
   The argument to the decorator must be the name of a TF raw operator the
   function composites for. Decorated function must take positional arguments
@@ -35,22 +35,19 @@ class Composite(object):
         ....
   """
 
-  # TODO(fengliuai): support input_binding and output_binding so the arguments
-  # are not positional.
-  def __init__(self,
-               op_name,
-               inputs=None,
-               attrs=None,
-               derived_attrs=None,
-               outputs=None):
-    self._op_name = op_name
-    self._inputs = inputs
-    self._attrs = attrs
-    self._derived_attrs = derived_attrs
-    self._outputs = outputs
+    # TODO(fengliuai): support input_binding and output_binding so the arguments
+    # are not positional.
+    def __init__(
+        self, op_name, inputs=None, attrs=None, derived_attrs=None, outputs=None
+    ):
+        self._op_name = op_name
+        self._inputs = inputs
+        self._attrs = attrs
+        self._derived_attrs = derived_attrs
+        self._outputs = outputs
 
-  def __call__(self, compose_fn):
-    # TODO(fengliuai): more sanity check of the input function and make sure
-    # the bounded arguments of the function matches the 'inputs' and 'attrs'.
-    setattr(compose_fn, '_tfr_op_name', self._op_name)
-    return compose_fn
+    def __call__(self, compose_fn):
+        # TODO(fengliuai): more sanity check of the input function and make sure
+        # the bounded arguments of the function matches the 'inputs' and 'attrs'.
+        setattr(compose_fn, "_tfr_op_name", self._op_name)
+        return compose_fn

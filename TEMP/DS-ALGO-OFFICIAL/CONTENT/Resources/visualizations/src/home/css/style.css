@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Avenir, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.logo-center {
+  width: 35%;
+  position: relative;
+  padding-top: 0%;
+  margin: 0 auto;
+  -webkit-filter: drop-shadow(0px 12px 5px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0px 12px 5px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+}
+
+nav {
+  margin-top: -10%;
+  display: flex;
+  justify-content: space-between;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/red-paint-texture.jpg);
+  background-size: cover;
+}
+
+/*navbar1*/
+@import "https://fonts.googleapis.com/css?family=Raleway";
+
+div.container {
+  font-family: Raleway;
+  margin: 0 auto;
+  padding: 2em 2em;
+  text-align: center;
+}
+
+div.container a {
+  color: #fff;
+  text-decoration: none;
+  font: 20px Raleway;
+  margin: 0px 10px;
+  padding: 10px 10px;
+  position: relative;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.blue {
+  background: #2196f3;
+}
+
+/*logo */
+.navbar-brand {
+  padding: 0px;
+}
+
+.navbar-brand img {
+  background: rgb(248, 242, 242);
+  border-radius: 60%; /* the magic */
+  padding: 9px 10px;
+  position: relative;
+  float: left;
+  height: 50px;
+  margin: 15px 5px 0px 100px;
+}
+/*logo endl*/
+
+/* Circle behind */
+div.circleBehind a:before,
+div.circleBehind a:after {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  border: 4px solid #0277bd;
+  transform: translateX(-50%) translateY(-50%) scale(0.8);
+  border-radius: 50%;
+  background: transparent;
+  content: "";
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: -1;
+}
+
+div.circleBehind a:after {
+  border-width: 2px;
+  transition: all 0.4s;
+}
+
+div.circleBehind a:hover:before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+}
+
+div.circleBehind a:hover:after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50%) scale(1.3);
+}
+
+/*navbar1*/
+h1 {
+  text-align: center;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+.card {
+  background-color: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.card .body {
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #757575;
+}
+.cards {
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.card header {
+  padding: 10px;
+  background-color: #0084ad;
+  color: #fff;
+}
+.card header h2,
+a {
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: white;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+.card .body {
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #757575;
+}

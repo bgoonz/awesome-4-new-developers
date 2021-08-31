@@ -32,8 +32,10 @@ from tensorflow.python.ops import gen_functional_ops
 from tensorflow.python.ops import math_ops
 from tensorflow.python.ops import tensor_array_ops
 from tensorflow.python.ops import variable_scope as vs
+
 # pylint: disable=unused-import
 from tensorflow.python.ops.gen_functional_ops import remote_call
+
 # pylint: enable=unused-import
 from tensorflow.python.ops.gen_functional_ops import symbolic_gradient
 from tensorflow.python.util import compat
@@ -47,14 +49,16 @@ from tensorflow.python.util.tf_export import tf_export
 # TODO(yuanbyu, mrry): Handle stride to support sliding windows.
 @tf_export(v1=["foldl"])
 @dispatch.add_dispatch_support
-def foldl(fn,
-          elems,
-          initializer=None,
-          parallel_iterations=10,
-          back_prop=True,
-          swap_memory=False,
-          name=None):
-  """foldl on the list of tensors unpacked from `elems` on dimension 0.
+def foldl(
+    fn,
+    elems,
+    initializer=None,
+    parallel_iterations=10,
+    back_prop=True,
+    swap_memory=False,
+    name=None,
+):
+    """foldl on the list of tensors unpacked from `elems` on dimension 0.
 
   This foldl operator repeatedly applies the callable `fn` to a sequence
   of elements from first to last. The elements are made of the tensors
@@ -102,66 +106,70 @@ def foldl(fn,
     # sum == 21
     ```
   """
-  if not callable(fn):
-    raise TypeError(
-        f"{fn.__name__} is not callable. Please provide a callable function.")
+    if not callable(fn):
+        raise TypeError(
+            f"{fn.__name__} is not callable. Please provide a callable function."
+        )
 
-  def create_ta(elem):
-    return tensor_array_ops.TensorArray(
-        dtype=elem.dtype, size=n, dynamic_size=False,
-        infer_shape=True).unstack(elem)
+    def create_ta(elem):
+        return tensor_array_ops.TensorArray(
+            dtype=elem.dtype, size=n, dynamic_size=False, infer_shape=True
+        ).unstack(elem)
 
-  in_graph_mode = not context.executing_eagerly()
-  with ops.name_scope(name, "foldl", [elems]):
-    # TODO(akshayka): Remove the in_graph_mode check once caching devices are
-    # supported in Eager
-    if in_graph_mode:
-      # Any get_variable calls in fn will cache the first call locally
-      # and not issue repeated network I/O requests for each iteration.
-      varscope = vs.get_variable_scope()
-      varscope_caching_device_was_none = False
-      if varscope.caching_device is None:
-        # TODO(ebrevdo): Change to using colocate_with here and in other
-        # methods.
-        varscope.set_caching_device(lambda op: op.device)
-        varscope_caching_device_was_none = True
+    in_graph_mode = not context.executing_eagerly()
+    with ops.name_scope(name, "foldl", [elems]):
+        # TODO(akshayka): Remove the in_graph_mode check once caching devices are
+        # supported in Eager
+        if in_graph_mode:
+            # Any get_variable calls in fn will cache the first call locally
+            # and not issue repeated network I/O requests for each iteration.
+            varscope = vs.get_variable_scope()
+            varscope_caching_device_was_none = False
+            if varscope.caching_device is None:
+                # TODO(ebrevdo): Change to using colocate_with here and in other
+                # methods.
+                varscope.set_caching_device(lambda op: op.device)
+                varscope_caching_device_was_none = True
 
-    # Convert elems to tensor array. n may be known statically.
-    elems_flat = [
-        ops.convert_to_tensor(elem, name="elem") for elem in nest.flatten(elems)
-    ]
-    n = (
-        tensor_shape.dimension_value(elems_flat[0].shape[0]) or
-        array_ops.shape(elems_flat[0])[0])
+        # Convert elems to tensor array. n may be known statically.
+        elems_flat = [
+            ops.convert_to_tensor(elem, name="elem") for elem in nest.flatten(elems)
+        ]
+        n = (
+            tensor_shape.dimension_value(elems_flat[0].shape[0])
+            or array_ops.shape(elems_flat[0])[0]
+        )
 
-    elems_ta = nest.map_structure(create_ta, elems)
+        elems_ta = nest.map_structure(create_ta, elems)
 
-    if initializer is None:
-      a = nest.map_structure(lambda elem: elem.read(0), elems_ta)
-      i = constant_op.constant(1)
-    else:
-      a = initializer
-      i = constant_op.constant(0)
+        if initializer is None:
+            a = nest.map_structure(lambda elem: elem.read(0), elems_ta)
+            i = constant_op.constant(1)
+        else:
+            a = initializer
+            i = constant_op.constant(0)
 
-    def compute(i, a):
-      elem_i = nest.map_structure(lambda elem: elem.read(i), elems_ta)
-      a = fn(a, elem_i)
-      return [i + 1, a]
+        def compute(i, a):
+            elem_i = nest.map_structure(lambda elem: elem.read(i), elems_ta)
+            a = fn(a, elem_i)
+            return [i + 1, a]
 
-    _, r_a = control_flow_ops.while_loop(
-        lambda i, a: i < n,
-        compute, [i, a],
-        parallel_iterations=parallel_iterations,
-        back_prop=back_prop,
-        swap_memory=swap_memory,
-        maximum_iterations=n)
+        _, r_a = control_flow_ops.while_loop(
+            lambda i, a: i < n,
+            compute,
+            [i, a],
+            parallel_iterations=parallel_iterations,
+            back_prop=back_prop,
+            swap_memory=swap_memory,
+            maximum_iterations=n,
+        )
 
-    # TODO(akshayka): Remove the in_graph_mode check once caching devices are
-    # supported in Eager
-    if in_graph_mode and varscope_caching_device_was_none:
-      varscope.set_caching_device(None)
+        # TODO(akshayka): Remove the in_graph_mode check once caching devices are
+        # supported in Eager
+        if in_graph_mode and varscope_caching_device_was_none:
+            varscope.set_caching_device(None)
 
-    return r_a
+        return r_a
 
 
 @tf_export("foldl", v1=[])
@@ -174,15 +182,18 @@ results = tf.foldl(fn, elems, back_prop=False)
 Use:
 results = tf.nest.map_structure(tf.stop_gradient, tf.foldl(fn, elems))""",
     warn_once=True,
-    back_prop=False)
-def foldl_v2(fn,
-             elems,
-             initializer=None,
-             parallel_iterations=10,
-             back_prop=True,
-             swap_memory=False,
-             name=None):
-  """foldl on the list of tensors unpacked from `elems` on dimension 0.
+    back_prop=False,
+)
+def foldl_v2(
+    fn,
+    elems,
+    initializer=None,
+    parallel_iterations=10,
+    back_prop=True,
+    swap_memory=False,
+    name=None,
+):
+    """foldl on the list of tensors unpacked from `elems` on dimension 0.
 
   This foldl operator repeatedly applies the callable `fn` to a sequence
   of elements from first to last. The elements are made of the tensors
@@ -231,26 +242,29 @@ def foldl_v2(fn,
     # sum == 21
     ```
   """
-  return foldl(
-      fn=fn,
-      elems=elems,
-      initializer=initializer,
-      parallel_iterations=parallel_iterations,
-      back_prop=back_prop,
-      swap_memory=swap_memory,
-      name=name)
+    return foldl(
+        fn=fn,
+        elems=elems,
+        initializer=initializer,
+        parallel_iterations=parallel_iterations,
+        back_prop=back_prop,
+        swap_memory=swap_memory,
+        name=name,
+    )
 
 
 @tf_export(v1=["foldr"])
 @dispatch.add_dispatch_support
-def foldr(fn,
-          elems,
-          initializer=None,
-          parallel_iterations=10,
-          back_prop=True,
-          swap_memory=False,
-          name=None):
-  """foldr on the list of tensors unpacked from `elems` on dimension 0.
+def foldr(
+    fn,
+    elems,
+    initializer=None,
+    parallel_iterations=10,
+    back_prop=True,
+    swap_memory=False,
+    name=None,
+):
+    """foldr on the list of tensors unpacked from `elems` on dimension 0.
 
   This foldr operator repeatedly applies the callable `fn` to a sequence
   of elements from last to first. The elements are made of the tensors
@@ -298,67 +312,71 @@ def foldr(fn,
     # sum == 21
     ```
   """
-  if not callable(fn):
-    raise TypeError(
-        f"{fn.__name__} is not callable. Please provide a callable function.")
+    if not callable(fn):
+        raise TypeError(
+            f"{fn.__name__} is not callable. Please provide a callable function."
+        )
 
-  def create_ta(elem):
-    return tensor_array_ops.TensorArray(
-        dtype=elem.dtype, size=n, dynamic_size=False,
-        infer_shape=True).unstack(elem)
+    def create_ta(elem):
+        return tensor_array_ops.TensorArray(
+            dtype=elem.dtype, size=n, dynamic_size=False, infer_shape=True
+        ).unstack(elem)
 
-  in_graph_mode = not context.executing_eagerly()
-  with ops.name_scope(name, "foldr", [elems]):
-    # TODO(akshayka): Remove the in_graph_mode check once caching devices are
-    # supported in Eager
-    if in_graph_mode:
-      # Any get_variable calls in fn will cache the first call locally and not
-      # issue repeated network I/O requests for each iteration.
-      varscope = vs.get_variable_scope()
-      varscope_caching_device_was_none = False
-      if varscope.caching_device is None:
-        # TODO(ebrevdo): Change to using colocate_with here and in other
-        # methods.
-        varscope.set_caching_device(lambda op: op.device)
-        varscope_caching_device_was_none = True
+    in_graph_mode = not context.executing_eagerly()
+    with ops.name_scope(name, "foldr", [elems]):
+        # TODO(akshayka): Remove the in_graph_mode check once caching devices are
+        # supported in Eager
+        if in_graph_mode:
+            # Any get_variable calls in fn will cache the first call locally and not
+            # issue repeated network I/O requests for each iteration.
+            varscope = vs.get_variable_scope()
+            varscope_caching_device_was_none = False
+            if varscope.caching_device is None:
+                # TODO(ebrevdo): Change to using colocate_with here and in other
+                # methods.
+                varscope.set_caching_device(lambda op: op.device)
+                varscope_caching_device_was_none = True
 
-    # Convert elems to tensor array. n may be known statically.
-    elems_flat = [
-        ops.convert_to_tensor(elem, name="elem") for elem in nest.flatten(elems)
-    ]
-    n = (
-        tensor_shape.dimension_value(elems_flat[0].shape[0]) or
-        array_ops.shape(elems_flat[0])[0])
+        # Convert elems to tensor array. n may be known statically.
+        elems_flat = [
+            ops.convert_to_tensor(elem, name="elem") for elem in nest.flatten(elems)
+        ]
+        n = (
+            tensor_shape.dimension_value(elems_flat[0].shape[0])
+            or array_ops.shape(elems_flat[0])[0]
+        )
 
-    elems_ta = nest.map_structure(create_ta, elems)
+        elems_ta = nest.map_structure(create_ta, elems)
 
-    if initializer is None:
-      i = n - 1
-      a = nest.map_structure(lambda elem: elem.read(i), elems_ta)
-    else:
-      i = n
-      a = initializer
+        if initializer is None:
+            i = n - 1
+            a = nest.map_structure(lambda elem: elem.read(i), elems_ta)
+        else:
+            i = n
+            a = initializer
 
-    def compute(i, a):
-      i -= 1
-      elem = nest.map_structure(lambda elem: elem.read(i), elems_ta)
-      a_out = fn(a, elem)
-      return [i, a_out]
+        def compute(i, a):
+            i -= 1
+            elem = nest.map_structure(lambda elem: elem.read(i), elems_ta)
+            a_out = fn(a, elem)
+            return [i, a_out]
 
-    _, r_a = control_flow_ops.while_loop(
-        lambda i, a: i > 0,
-        compute, [i, a],
-        parallel_iterations=parallel_iterations,
-        back_prop=back_prop,
-        swap_memory=swap_memory,
-        maximum_iterations=n)
+        _, r_a = control_flow_ops.while_loop(
+            lambda i, a: i > 0,
+            compute,
+            [i, a],
+            parallel_iterations=parallel_iterations,
+            back_prop=back_prop,
+            swap_memory=swap_memory,
+            maximum_iterations=n,
+        )
 
-    # TODO(akshayka): Remove the in_graph_mode check once caching devices are
-    # supported in Eager
-    if in_graph_mode and varscope_caching_device_was_none:
-      varscope.set_caching_device(None)
+        # TODO(akshayka): Remove the in_graph_mode check once caching devices are
+        # supported in Eager
+        if in_graph_mode and varscope_caching_device_was_none:
+            varscope.set_caching_device(None)
 
-    return r_a
+        return r_a
 
 
 @tf_export("foldr", v1=[])
@@ -371,15 +389,18 @@ results = tf.foldr(fn, elems, back_prop=False)
 Use:
 results = tf.nest.map_structure(tf.stop_gradient, tf.foldr(fn, elems))""",
     warn_once=True,
-    back_prop=False)
-def foldr_v2(fn,
-             elems,
-             initializer=None,
-             parallel_iterations=10,
-             back_prop=True,
-             swap_memory=False,
-             name=None):
-  """foldr on the list of tensors unpacked from `elems` on dimension 0.
+    back_prop=False,
+)
+def foldr_v2(
+    fn,
+    elems,
+    initializer=None,
+    parallel_iterations=10,
+    back_prop=True,
+    swap_memory=False,
+    name=None,
+):
+    """foldr on the list of tensors unpacked from `elems` on dimension 0.
 
   This foldr operator repeatedly applies the callable `fn` to a sequence
   of elements from last to first. The elements are made of the tensors
@@ -428,28 +449,31 @@ def foldr_v2(fn,
     # sum == 21
     ```
   """
-  return foldr(
-      fn=fn,
-      elems=elems,
-      initializer=initializer,
-      parallel_iterations=parallel_iterations,
-      back_prop=back_prop,
-      swap_memory=swap_memory,
-      name=name)
+    return foldr(
+        fn=fn,
+        elems=elems,
+        initializer=initializer,
+        parallel_iterations=parallel_iterations,
+        back_prop=back_prop,
+        swap_memory=swap_memory,
+        name=name,
+    )
 
 
 @tf_export(v1=["scan"])
 @dispatch.add_dispatch_support
-def scan(fn,
-         elems,
-         initializer=None,
-         parallel_iterations=10,
-         back_prop=True,
-         swap_memory=False,
-         infer_shape=True,
-         reverse=False,
-         name=None):
-  """scan on the list of tensors unpacked from `elems` on dimension 0.
+def scan(
+    fn,
+    elems,
+    initializer=None,
+    parallel_iterations=10,
+    back_prop=True,
+    swap_memory=False,
+    infer_shape=True,
+    reverse=False,
+    name=None,
+):
+    """scan on the list of tensors unpacked from `elems` on dimension 0.
 
   See also `tf.map_fn`.
 
@@ -542,95 +566,97 @@ def scan(fn,
     # fibonaccis == ([1, 1, 2, 3, 5, 8], [1, 2, 3, 5, 8, 13])
     ```
   """
-  if not callable(fn):
-    raise TypeError(
-        f"{fn.__name__} is not callable. Please provide a callable function.")
+    if not callable(fn):
+        raise TypeError(
+            f"{fn.__name__} is not callable. Please provide a callable function."
+        )
 
-  input_is_sequence = nest.is_sequence(elems)
-  input_flatten = lambda x: nest.flatten(x) if input_is_sequence else [x]
+    input_is_sequence = nest.is_sequence(elems)
+    input_flatten = lambda x: nest.flatten(x) if input_is_sequence else [x]
 
-  def input_pack(x):
-    return nest.pack_sequence_as(elems, x) if input_is_sequence else x[0]
-
-  if initializer is None:
-    output_is_sequence = input_is_sequence
-    output_flatten = input_flatten
-    output_pack = input_pack
-  else:
-    output_is_sequence = nest.is_sequence(initializer)
-    output_flatten = lambda x: nest.flatten(x) if output_is_sequence else [x]
-
-    def output_pack(x):
-      return (nest.pack_sequence_as(initializer, x)
-              if output_is_sequence else x[0])
-
-  elems_flat = input_flatten(elems)
-
-  in_graph_mode = not context.executing_eagerly()
-  with ops.name_scope(name, "scan", elems_flat):
-    # TODO(akshayka): Remove the in_graph_mode check once caching devices are
-    # supported in Eager
-    if in_graph_mode:
-      # Any get_variable calls in fn will cache the first call locally
-      # and not issue repeated network I/O requests for each iteration.
-      varscope = vs.get_variable_scope()
-      varscope_caching_device_was_none = False
-      if varscope.caching_device is None:
-        # TODO(ebrevdo): Change to using colocate_with here and in other
-        # methods.
-        varscope.set_caching_device(lambda op: op.device)
-        varscope_caching_device_was_none = True
-
-    # Convert elems to tensor array.
-    elems_flat = [
-        ops.convert_to_tensor(elem, name="elem") for elem in elems_flat
-    ]
-
-    # Convert elems to tensor array. n may be known statically.
-    n = tensor_shape.dimension_value(elems_flat[0].shape[0])
-    if n is None:
-      n = array_ops.shape(elems_flat[0])[0]
-
-    # TensorArrays are always flat
-    elems_ta = [
-        tensor_array_ops.TensorArray(
-            dtype=elem.dtype,
-            size=n,
-            dynamic_size=False,
-            element_shape=elem.shape[1:],
-            infer_shape=True) for elem in elems_flat
-    ]
-    # Unpack elements
-    elems_ta = [
-        elem_ta.unstack(elem) for elem_ta, elem in zip(elems_ta, elems_flat)
-    ]
+    def input_pack(x):
+        return nest.pack_sequence_as(elems, x) if input_is_sequence else x[0]
 
     if initializer is None:
-      a_flat = [elem.read(n - 1 if reverse else 0) for elem in elems_ta]
-      i = 1
+        output_is_sequence = input_is_sequence
+        output_flatten = input_flatten
+        output_pack = input_pack
     else:
-      initializer_flat = output_flatten(initializer)
-      a_flat = [ops.convert_to_tensor(init) for init in initializer_flat]
-      i = 0
+        output_is_sequence = nest.is_sequence(initializer)
+        output_flatten = lambda x: nest.flatten(x) if output_is_sequence else [x]
 
-    # Create a tensor array to store the intermediate values.
-    accs_ta = [
-        tensor_array_ops.TensorArray(
-            dtype=init.dtype,
-            size=n,
-            element_shape=init.shape if infer_shape else None,
-            dynamic_size=False,
-            infer_shape=infer_shape) for init in a_flat
-    ]
+        def output_pack(x):
+            return nest.pack_sequence_as(initializer, x) if output_is_sequence else x[0]
 
-    if initializer is None:
-      accs_ta = [
-          acc_ta.write(n - 1 if reverse else 0, a)
-          for (acc_ta, a) in zip(accs_ta, a_flat)
-      ]
+    elems_flat = input_flatten(elems)
 
-    def compute(i, a_flat, tas):
-      """The loop body of scan.
+    in_graph_mode = not context.executing_eagerly()
+    with ops.name_scope(name, "scan", elems_flat):
+        # TODO(akshayka): Remove the in_graph_mode check once caching devices are
+        # supported in Eager
+        if in_graph_mode:
+            # Any get_variable calls in fn will cache the first call locally
+            # and not issue repeated network I/O requests for each iteration.
+            varscope = vs.get_variable_scope()
+            varscope_caching_device_was_none = False
+            if varscope.caching_device is None:
+                # TODO(ebrevdo): Change to using colocate_with here and in other
+                # methods.
+                varscope.set_caching_device(lambda op: op.device)
+                varscope_caching_device_was_none = True
+
+        # Convert elems to tensor array.
+        elems_flat = [ops.convert_to_tensor(elem, name="elem") for elem in elems_flat]
+
+        # Convert elems to tensor array. n may be known statically.
+        n = tensor_shape.dimension_value(elems_flat[0].shape[0])
+        if n is None:
+            n = array_ops.shape(elems_flat[0])[0]
+
+        # TensorArrays are always flat
+        elems_ta = [
+            tensor_array_ops.TensorArray(
+                dtype=elem.dtype,
+                size=n,
+                dynamic_size=False,
+                element_shape=elem.shape[1:],
+                infer_shape=True,
+            )
+            for elem in elems_flat
+        ]
+        # Unpack elements
+        elems_ta = [
+            elem_ta.unstack(elem) for elem_ta, elem in zip(elems_ta, elems_flat)
+        ]
+
+        if initializer is None:
+            a_flat = [elem.read(n - 1 if reverse else 0) for elem in elems_ta]
+            i = 1
+        else:
+            initializer_flat = output_flatten(initializer)
+            a_flat = [ops.convert_to_tensor(init) for init in initializer_flat]
+            i = 0
+
+        # Create a tensor array to store the intermediate values.
+        accs_ta = [
+            tensor_array_ops.TensorArray(
+                dtype=init.dtype,
+                size=n,
+                element_shape=init.shape if infer_shape else None,
+                dynamic_size=False,
+                infer_shape=infer_shape,
+            )
+            for init in a_flat
+        ]
+
+        if initializer is None:
+            accs_ta = [
+                acc_ta.write(n - 1 if reverse else 0, a)
+                for (acc_ta, a) in zip(accs_ta, a_flat)
+            ]
+
+        def compute(i, a_flat, tas):
+            """The loop body of scan.
 
       Args:
         i: the loop counter.
@@ -645,53 +671,62 @@ def scan(fn,
         TypeError: if initializer and fn() output structure do not match
         ValueType: if initializer and fn() output lengths do not match
       """
-      packed_elems = input_pack([elem_ta.read(i) for elem_ta in elems_ta])
-      packed_a = output_pack(a_flat)
-      a_out = fn(packed_a, packed_elems)
-      nest.assert_same_structure(elems if initializer is None else initializer,
-                                 a_out)
-      flat_a_out = output_flatten(a_out)
-      tas = [ta.write(i, value) for (ta, value) in zip(tas, flat_a_out)]
-      if reverse:
-        next_i = i - 1
-      else:
-        next_i = i + 1
-      return (next_i, flat_a_out, tas)
+            packed_elems = input_pack([elem_ta.read(i) for elem_ta in elems_ta])
+            packed_a = output_pack(a_flat)
+            a_out = fn(packed_a, packed_elems)
+            nest.assert_same_structure(
+                elems if initializer is None else initializer, a_out
+            )
+            flat_a_out = output_flatten(a_out)
+            tas = [ta.write(i, value) for (ta, value) in zip(tas, flat_a_out)]
+            if reverse:
+                next_i = i - 1
+            else:
+                next_i = i + 1
+            return (next_i, flat_a_out, tas)
 
-    if reverse:
-      initial_i = n - 1 - i
-      condition = lambda i, _1, _2: i >= 0
-    else:
-      initial_i = i
-      condition = lambda i, _1, _2: i < n
-    _, _, r_a = control_flow_ops.while_loop(
-        condition,
-        compute, (initial_i, a_flat, accs_ta),
-        parallel_iterations=parallel_iterations,
-        back_prop=back_prop,
-        swap_memory=swap_memory,
-        maximum_iterations=n)
+        if reverse:
+            initial_i = n - 1 - i
+            condition = lambda i, _1, _2: i >= 0
+        else:
+            initial_i = i
+            condition = lambda i, _1, _2: i < n
+        _, _, r_a = control_flow_ops.while_loop(
+            condition,
+            compute,
+            (initial_i, a_flat, accs_ta),
+            parallel_iterations=parallel_iterations,
+            back_prop=back_prop,
+            swap_memory=swap_memory,
+            maximum_iterations=n,
+        )
 
-    results_flat = [r.stack() for r in r_a]
+        results_flat = [r.stack() for r in r_a]
 
-    n_static = tensor_shape.Dimension(
-        tensor_shape.dimension_value(
-            elems_flat[0].get_shape().with_rank_at_least(1)[0]))
-    for elem in elems_flat[1:]:
-      n_static.assert_is_compatible_with(
-          tensor_shape.Dimension(
-              tensor_shape.dimension_value(
-                  elem.get_shape().with_rank_at_least(1)[0])))
-    for r in results_flat:
-      r.set_shape(
-          tensor_shape.TensorShape(n_static).concatenate(r.get_shape()[1:]))
+        n_static = tensor_shape.Dimension(
+            tensor_shape.dimension_value(
+                elems_flat[0].get_shape().with_rank_at_least(1)[0]
+            )
+        )
+        for elem in elems_flat[1:]:
+            n_static.assert_is_compatible_with(
+                tensor_shape.Dimension(
+                    tensor_shape.dimension_value(
+                        elem.get_shape().with_rank_at_least(1)[0]
+                    )
+                )
+            )
+        for r in results_flat:
+            r.set_shape(
+                tensor_shape.TensorShape(n_static).concatenate(r.get_shape()[1:])
+            )
 
-    # TODO(akshayka): Remove the in_graph_mode check once caching devices are
-    # supported in Eager
-    if in_graph_mode and varscope_caching_device_was_none:
-      varscope.set_caching_device(None)
+        # TODO(akshayka): Remove the in_graph_mode check once caching devices are
+        # supported in Eager
+        if in_graph_mode and varscope_caching_device_was_none:
+            varscope.set_caching_device(None)
 
-    return output_pack(results_flat)
+        return output_pack(results_flat)
 
 
 @tf_export("scan", v1=[])
@@ -704,17 +739,20 @@ results = tf.scan(fn, elems, back_prop=False)
 Use:
 results = tf.nest.map_structure(tf.stop_gradient, tf.scan(fn, elems))""",
     warn_once=True,
-    back_prop=False)
-def scan_v2(fn,
-            elems,
-            initializer=None,
-            parallel_iterations=10,
-            back_prop=True,
-            swap_memory=False,
-            infer_shape=True,
-            reverse=False,
-            name=None):
-  """scan on the list of tensors unpacked from `elems` on dimension 0.
+    back_prop=False,
+)
+def scan_v2(
+    fn,
+    elems,
+    initializer=None,
+    parallel_iterations=10,
+    back_prop=True,
+    swap_memory=False,
+    infer_shape=True,
+    reverse=False,
+    name=None,
+):
+    """scan on the list of tensors unpacked from `elems` on dimension 0.
 
   The simplest version of `scan` repeatedly applies the callable `fn` to a
   sequence of elements from first to last. The elements are made of the tensors
@@ -806,21 +844,22 @@ def scan_v2(fn,
     # fibonaccis == ([1, 1, 2, 3, 5, 8], [1, 2, 3, 5, 8, 13])
     ```
   """
-  return scan(
-      fn=fn,
-      elems=elems,
-      initializer=initializer,
-      parallel_iterations=parallel_iterations,
-      back_prop=back_prop,
-      swap_memory=swap_memory,
-      infer_shape=infer_shape,
-      reverse=reverse,
-      name=name)
+    return scan(
+        fn=fn,
+        elems=elems,
+        initializer=initializer,
+        parallel_iterations=parallel_iterations,
+        back_prop=back_prop,
+        swap_memory=swap_memory,
+        infer_shape=infer_shape,
+        reverse=reverse,
+        name=name,
+    )
 
 
 # pylint: disable=invalid-name
 def If(cond, inputs, then_branch, else_branch, name=None):
-  r"""output = Cond(inputs) ?
+    r"""output = Cond(inputs) ?
 
   then_branch(inputs) : else_branch(inputs).
 
@@ -840,32 +879,34 @@ def If(cond, inputs, then_branch, else_branch, name=None):
     A list of tensors returned by either then_branch(inputs)
     or else_branch(inputs).
   """
-  # pylint: disable=protected-access
-  # Handle the Defun case until users have transitioned to tf.function. Note
-  # that composites may need to be re-packed by the caller.
-  if isinstance(then_branch, function._DefinedFunction):
-    tlist = [_.type for _ in then_branch.definition.signature.output_arg]
-    return gen_functional_ops._if(
-        cond, inputs, tlist, then_branch, else_branch, name=name)
+    # pylint: disable=protected-access
+    # Handle the Defun case until users have transitioned to tf.function. Note
+    # that composites may need to be re-packed by the caller.
+    if isinstance(then_branch, function._DefinedFunction):
+        tlist = [_.type for _ in then_branch.definition.signature.output_arg]
+        return gen_functional_ops._if(
+            cond, inputs, tlist, then_branch, else_branch, name=name
+        )
 
-  # We assume that `then_branch` is a ConcreteFunction here.
-  then_out = then_branch.structured_outputs
-  else_out = else_branch.structured_outputs
+    # We assume that `then_branch` is a ConcreteFunction here.
+    then_out = then_branch.structured_outputs
+    else_out = else_branch.structured_outputs
 
-  # Ensure then/else are the same type of composites to avoid an invalid call
-  # to pack_sequence_as later on.
-  nest.assert_same_structure(then_out, else_out, expand_composites=True)
+    # Ensure then/else are the same type of composites to avoid an invalid call
+    # to pack_sequence_as later on.
+    nest.assert_same_structure(then_out, else_out, expand_composites=True)
 
-  tlist = nest.flatten(then_branch.output_dtypes)
-  ret = gen_functional_ops._if(
-      cond, inputs, tlist, then_branch, else_branch, name=name)
+    tlist = nest.flatten(then_branch.output_dtypes)
+    ret = gen_functional_ops._if(
+        cond, inputs, tlist, then_branch, else_branch, name=name
+    )
 
-  # Re-pack the outputs to restore any CompositeTensors
-  return nest.pack_sequence_as(then_out, ret, expand_composites=True)
+    # Re-pack the outputs to restore any CompositeTensors
+    return nest.pack_sequence_as(then_out, ret, expand_composites=True)
 
 
 def Gradient(inputs, f, name=None):
-  r"""Computes the gradient function for function f via backpropagation.
+    r"""Computes the gradient function for function f via backpropagation.
 
   Args:
     inputs: A list of tensors of size N + M.
@@ -882,51 +923,51 @@ def Gradient(inputs, f, name=None):
   Returns:
     A list of tensors of size N.
   """
-  # TODO(zhifengc): Pretty-print the above spec in latex.
-  # TODO(zhfiengc): Needs some math expert to say the comment above better.
-  tlist = [_.type for _ in f.definition.signature.input_arg]
-  return symbolic_gradient(input=inputs, Tout=tlist, f=f, name=name)
+    # TODO(zhifengc): Pretty-print the above spec in latex.
+    # TODO(zhfiengc): Needs some math expert to say the comment above better.
+    tlist = [_.type for _ in f.definition.signature.input_arg]
+    return symbolic_gradient(input=inputs, Tout=tlist, f=f, name=name)
 
 
 def _GetInputDtypes(func):
-  """Returns the input dtypes of func, excluding dtypes for captured inputs."""
-  if isinstance(func, function._DefinedFunction):  # pylint: disable=protected-access
-    return func.declared_input_types
+    """Returns the input dtypes of func, excluding dtypes for captured inputs."""
+    if isinstance(func, function._DefinedFunction):  # pylint: disable=protected-access
+        return func.declared_input_types
 
-  # We assume that `func` is a ConcreteFunction here, but we are not able to
-  # verify since importing eager function library will cause cyclic dependence.
-  #
-  # ConcreteFunction.inputs includes captured inputs.
-  num_non_captured_inputs = len(func.inputs) - len(func.captured_inputs)
-  inputs_without_captured = func.inputs[:num_non_captured_inputs]
-  return [t.dtype for t in inputs_without_captured]
+    # We assume that `func` is a ConcreteFunction here, but we are not able to
+    # verify since importing eager function library will cause cyclic dependence.
+    #
+    # ConcreteFunction.inputs includes captured inputs.
+    num_non_captured_inputs = len(func.inputs) - len(func.captured_inputs)
+    inputs_without_captured = func.inputs[:num_non_captured_inputs]
+    return [t.dtype for t in inputs_without_captured]
 
 
 def _LoopBodyCaptureWrapper(func):
-  """Returns a wrapper for `func` that handles loop-carried captured inputs."""
+    """Returns a wrapper for `func` that handles loop-carried captured inputs."""
 
-  @function.Defun(*_GetInputDtypes(func), func_name="%s_Wrapper" % func.name)
-  def Wrapper(*args):
-    """A wrapper that handles loop-carried captured inputs."""
-    result = func(*args)
-    extra_args = tuple(function.get_extra_args())
-    # Nullary functions return an Operation. Normal functions can't do this
-    # because their return values are converted to Tensors.
-    if isinstance(result, ops.Operation):
-      return extra_args
-    # Unary functions return a single Tensor value.
-    elif not isinstance(result, (list, tuple)):
-      return (result,) + extra_args
-    # N-ary functions return a tuple of Tensors.
-    else:
-      return result + type(result)(extra_args)
+    @function.Defun(*_GetInputDtypes(func), func_name="%s_Wrapper" % func.name)
+    def Wrapper(*args):
+        """A wrapper that handles loop-carried captured inputs."""
+        result = func(*args)
+        extra_args = tuple(function.get_extra_args())
+        # Nullary functions return an Operation. Normal functions can't do this
+        # because their return values are converted to Tensors.
+        if isinstance(result, ops.Operation):
+            return extra_args
+        # Unary functions return a single Tensor value.
+        elif not isinstance(result, (list, tuple)):
+            return (result,) + extra_args
+        # N-ary functions return a tuple of Tensors.
+        else:
+            return result + type(result)(extra_args)
 
-  return Wrapper
+    return Wrapper
 
 
 # pylint: disable=invalid-name,protected-access
 def While(input_, cond, body, name=None, hostmem=None):
-  r"""output = input; While (Cond(output)) { output = Body(output) }.
+    r"""output = input; While (Cond(output)) { output = Body(output) }.
 
   Args:
     input_: A list of `Tensor` objects. A list of input tensors whose types are
@@ -951,48 +992,53 @@ def While(input_, cond, body, name=None, hostmem=None):
     A list of `Tensor` objects. Has the same type as `input`.
     A list of output tensors whose types are T.
   """
-  if cond.captured_inputs:
-    raise ValueError(
-        "The 'cond' argument can not have implicitly captured inputs. Received "
-        f"captured_inputs: {cond.captured_inputs}")
+    if cond.captured_inputs:
+        raise ValueError(
+            "The 'cond' argument can not have implicitly captured inputs. Received "
+            f"captured_inputs: {cond.captured_inputs}"
+        )
 
-  cond_input_types = _GetInputDtypes(cond)
-  body_input_types = _GetInputDtypes(body)
+    cond_input_types = _GetInputDtypes(cond)
+    body_input_types = _GetInputDtypes(body)
 
-  if cond_input_types != body_input_types:
-    raise ValueError(
-        "The 'cond' and 'body' signatures do not match. Received: "
-        f"cond_input_types={cond_input_types}, body_input_types="
-        f"{body_input_types}")
+    if cond_input_types != body_input_types:
+        raise ValueError(
+            "The 'cond' and 'body' signatures do not match. Received: "
+            f"cond_input_types={cond_input_types}, body_input_types="
+            f"{body_input_types}"
+        )
 
-  if body.captured_inputs:
-    cond_dtypes = list(body_input_types) + [
-        t.dtype for t in body.captured_inputs
-    ]
+    if body.captured_inputs:
+        cond_dtypes = list(body_input_types) + [t.dtype for t in body.captured_inputs]
 
-    @function.Defun(*cond_dtypes, func_name="%s_Wrapper" % cond.name)
-    def CondWrapper(*args):
-      """A wrapper that handles loop-carried captured inputs."""
-      return cond(*args[:len(body_input_types)])
+        @function.Defun(*cond_dtypes, func_name="%s_Wrapper" % cond.name)
+        def CondWrapper(*args):
+            """A wrapper that handles loop-carried captured inputs."""
+            return cond(*args[: len(body_input_types)])
 
-    ret = gen_functional_ops._while(
-        input_ + body.captured_inputs,
-        CondWrapper,
-        _LoopBodyCaptureWrapper(body),
-        name=name)
-    # Slice off the loop-carried captured inputs.
-    ret = ret[:-len(body.captured_inputs)]
-  else:
-    ret = gen_functional_ops._while(input_, cond, body, name=name)
-  if hostmem:
-    input_attr = attr_value_pb2.AttrValue()
-    input_attr.list.i.extend(hostmem)
-    ret[0].op._set_attr("_input_hostmem", input_attr)  # pylint: disable=protected-access
+        ret = gen_functional_ops._while(
+            input_ + body.captured_inputs,
+            CondWrapper,
+            _LoopBodyCaptureWrapper(body),
+            name=name,
+        )
+        # Slice off the loop-carried captured inputs.
+        ret = ret[: -len(body.captured_inputs)]
+    else:
+        ret = gen_functional_ops._while(input_, cond, body, name=name)
+    if hostmem:
+        input_attr = attr_value_pb2.AttrValue()
+        input_attr.list.i.extend(hostmem)
+        ret[0].op._set_attr(
+            "_input_hostmem", input_attr
+        )  # pylint: disable=protected-access
 
-    output_attr = attr_value_pb2.AttrValue()
-    output_attr.list.i.extend(hostmem)
-    ret[0].op._set_attr("_output_hostmem", output_attr)  # pylint: disable=protected-access
-  return ret
+        output_attr = attr_value_pb2.AttrValue()
+        output_attr.list.i.extend(hostmem)
+        ret[0].op._set_attr(
+            "_output_hostmem", output_attr
+        )  # pylint: disable=protected-access
+    return ret
 
 
 # b/36459430
@@ -1008,77 +1054,69 @@ def While(input_, cond, body, name=None, hostmem=None):
 #
 # It should be possible and probably better to write a XLA C++ kernel
 # implementing the logic in _ForUsingWhile.
-def _ForUsingWhile(start,
-                   limit,
-                   delta,
-                   inputs,
-                   forbody,
-                   name=None,
-                   hostmem=None):
-  """Helper to implement a For loop using a While."""
-  # To support negative delta (e.g., range(100, 0, -3)), we iterate
-  # over the range(n) and use iter * delta + start as the real
-  # iteration index. (e.g., for i in range(34): iter = i * (-3) +
-  # 100).
-  d = math_ops.abs(delta)
-  # XLA on TPUs doesn't support integer division
-  n = math_ops.cast(
-      math_ops.cast((math_ops.abs(limit - start) + d - 1), dtypes.float32) /
-      math_ops.cast(d, dtypes.float32), dtypes.int32)
+def _ForUsingWhile(start, limit, delta, inputs, forbody, name=None, hostmem=None):
+    """Helper to implement a For loop using a While."""
+    # To support negative delta (e.g., range(100, 0, -3)), we iterate
+    # over the range(n) and use iter * delta + start as the real
+    # iteration index. (e.g., for i in range(34): iter = i * (-3) +
+    # 100).
+    d = math_ops.abs(delta)
+    # XLA on TPUs doesn't support integer division
+    n = math_ops.cast(
+        math_ops.cast((math_ops.abs(limit - start) + d - 1), dtypes.float32)
+        / math_ops.cast(d, dtypes.float32),
+        dtypes.int32,
+    )
 
-  # Carried loop variables ("extra_args") are implicitly added to the input list
-  # of the WhileBody function. WhileCond does not call forbody, and so does not
-  # depend on any of forbody's extra_args. Since WhileCond and WhileBody
-  # must have identical inputs, we have to augment the cond signature to take
-  # the same types as the carried loop variables.
-  body_sig = [dtypes.int32] * 4 + list(forbody.declared_input_types)[1:]
+    # Carried loop variables ("extra_args") are implicitly added to the input list
+    # of the WhileBody function. WhileCond does not call forbody, and so does not
+    # depend on any of forbody's extra_args. Since WhileCond and WhileBody
+    # must have identical inputs, we have to augment the cond signature to take
+    # the same types as the carried loop variables.
+    body_sig = [dtypes.int32] * 4 + list(forbody.declared_input_types)[1:]
 
-  cond_name = "%s_Cond" % forbody.name
+    cond_name = "%s_Cond" % forbody.name
 
-  @function.Defun(*body_sig, func_name=cond_name)
-  def WhileCond(i, n, *args):
-    del args
-    return i < n
+    @function.Defun(*body_sig, func_name=cond_name)
+    def WhileCond(i, n, *args):
+        del args
+        return i < n
 
-  body_name = "%s_Body" % forbody.name
+    body_name = "%s_Body" % forbody.name
 
-  @function.Defun(*body_sig, func_name=body_name)
-  def WhileBody(i, n, start, delta, *args):
-    """A While wrapper for forbody that handles loop-carried captured inputs."""
-    for_result = forbody(start + i * delta, *args)
-    # Nullary functions return an Operation. Normal functions can't do this
-    # because their return values are converted to Tensors.
-    if isinstance(for_result, ops.Operation):
-      for_result = ()
-    # Unary functions return a single Tensor value.
-    elif isinstance(for_result, ops.Tensor):
-      for_result = (for_result,)
-    return (i + 1, n, start, delta) + tuple(for_result)
+    @function.Defun(*body_sig, func_name=body_name)
+    def WhileBody(i, n, start, delta, *args):
+        """A While wrapper for forbody that handles loop-carried captured inputs."""
+        for_result = forbody(start + i * delta, *args)
+        # Nullary functions return an Operation. Normal functions can't do this
+        # because their return values are converted to Tensors.
+        if isinstance(for_result, ops.Operation):
+            for_result = ()
+        # Unary functions return a single Tensor value.
+        elif isinstance(for_result, ops.Tensor):
+            for_result = (for_result,)
+        return (i + 1, n, start, delta) + tuple(for_result)
 
-  if hostmem is not None:
-    hostmem = [0, 1, 2, 3] + [(4 + _) for _ in hostmem]
-  else:
-    hostmem = [0, 1, 2, 3]
+    if hostmem is not None:
+        hostmem = [0, 1, 2, 3] + [(4 + _) for _ in hostmem]
+    else:
+        hostmem = [0, 1, 2, 3]
 
-  results = While(
-      input_=[0, n, start, delta] + inputs,
-      cond=WhileCond,
-      body=WhileBody,
-      name=name,
-      hostmem=hostmem)
-  # Slice off the loop-carried captured inputs.
-  return list(results[4:len(results)])
+    results = While(
+        input_=[0, n, start, delta] + inputs,
+        cond=WhileCond,
+        body=WhileBody,
+        name=name,
+        hostmem=hostmem,
+    )
+    # Slice off the loop-carried captured inputs.
+    return list(results[4 : len(results)])
 
 
-def For(start,
-        limit,
-        delta,
-        inputs,
-        body,
-        name=None,
-        hostmem=None,
-        rewrite_with_while=None):
-  r"""out = input; for i in range(start, limit, delta) out = body(i, out).
+def For(
+    start, limit, delta, inputs, body, name=None, hostmem=None, rewrite_with_while=None
+):
+    r"""out = input; for i in range(start, limit, delta) out = body(i, out).
 
   Args:
     start: A `Tensor` of type `int32`.
@@ -1098,43 +1136,45 @@ def For(start,
     A list of `Tensor` objects. Has the same type as `input`.
     A list of output tensors whose types are T.
   """
-  if rewrite_with_while:
-    return _ForUsingWhile(start, limit, delta, inputs, body, name, hostmem)
-  if body.captured_inputs:
-    ret = gen_functional_ops._for(
-        start,
-        limit,
-        delta,
-        inputs + body.captured_inputs,
-        _LoopBodyCaptureWrapper(body),
-        name=name)
-    # Slice off the loop-carried captured inputs.
-    ret = ret[:-len(body.captured_inputs)]
-  else:
-    ret = gen_functional_ops._for(start, limit, delta, inputs, body, name=name)
-  if hostmem:
-    num_for_params = 3  # start/limit/delta
+    if rewrite_with_while:
+        return _ForUsingWhile(start, limit, delta, inputs, body, name, hostmem)
+    if body.captured_inputs:
+        ret = gen_functional_ops._for(
+            start,
+            limit,
+            delta,
+            inputs + body.captured_inputs,
+            _LoopBodyCaptureWrapper(body),
+            name=name,
+        )
+        # Slice off the loop-carried captured inputs.
+        ret = ret[: -len(body.captured_inputs)]
+    else:
+        ret = gen_functional_ops._for(start, limit, delta, inputs, body, name=name)
+    if hostmem:
+        num_for_params = 3  # start/limit/delta
 
-    input_attr = attr_value_pb2.AttrValue()
-    input_attr.list.i.extend([num_for_params + i for i in hostmem])
-    ret[0].op._set_attr("_input_hostmem", input_attr)  # pylint: disable=protected-access
+        input_attr = attr_value_pb2.AttrValue()
+        input_attr.list.i.extend([num_for_params + i for i in hostmem])
+        ret[0].op._set_attr(
+            "_input_hostmem", input_attr
+        )  # pylint: disable=protected-access
 
-    output_attr = attr_value_pb2.AttrValue()
-    output_attr.list.i.extend(hostmem)
-    ret[0].op._set_attr("_output_hostmem", output_attr)  # pylint: disable=protected-access
-  return ret
+        output_attr = attr_value_pb2.AttrValue()
+        output_attr.list.i.extend(hostmem)
+        ret[0].op._set_attr(
+            "_output_hostmem", output_attr
+        )  # pylint: disable=protected-access
+    return ret
 
 
 # pylint: enable=invalid-name,protected-access
 
 
-def partitioned_call(args,
-                     f,
-                     tout=None,
-                     executing_eagerly=None,
-                     config=None,
-                     executor_type=None):
-  """Executes a function while respecting device annotations.
+def partitioned_call(
+    args, f, tout=None, executing_eagerly=None, config=None, executor_type=None
+):
+    """Executes a function while respecting device annotations.
 
   Currently, only those functions that execute within the same address space
   can be executed.
@@ -1160,81 +1200,85 @@ def partitioned_call(args,
     the `Operation` if not.
   """
 
-  if tout is None:
-    tout = tuple(x.type for x in f.definition.signature.output_arg)
+    if tout is None:
+        tout = tuple(x.type for x in f.definition.signature.output_arg)
 
-  if executing_eagerly is None:
-    executing_eagerly = context.executing_eagerly()
+    if executing_eagerly is None:
+        executing_eagerly = context.executing_eagerly()
 
-  if config is None:
-    config = function_utils.get_disabled_rewriter_config()
+    if config is None:
+        config = function_utils.get_disabled_rewriter_config()
 
-  if executor_type is None:
-    executor_type = ""
+    if executor_type is None:
+        executor_type = ""
 
-  if executing_eagerly:
-    if f.stateful_ops:
-      outputs = gen_functional_ops.stateful_partitioned_call(
-          args=args,
-          Tout=tout,
-          f=f,
-          config_proto=config,
-          executor_type=executor_type)
-    else:
-      outputs = gen_functional_ops.partitioned_call(
-          args=args,
-          Tout=tout,
-          f=f,
-          config_proto=config,
-          executor_type=executor_type)
-    return outputs if outputs else None
+    if executing_eagerly:
+        if f.stateful_ops:
+            outputs = gen_functional_ops.stateful_partitioned_call(
+                args=args,
+                Tout=tout,
+                f=f,
+                config_proto=config,
+                executor_type=executor_type,
+            )
+        else:
+            outputs = gen_functional_ops.partitioned_call(
+                args=args,
+                Tout=tout,
+                f=f,
+                config_proto=config,
+                executor_type=executor_type,
+            )
+        return outputs if outputs else None
 
-  # The generated binding returns an empty list for functions that don't
-  # return any Tensors, hence the need to use `create_op` directly.
-  args = [ops.convert_to_tensor(x) for x in args]
-  tin_attr = attr_value_pb2.AttrValue(
-      list=attr_value_pb2.AttrValue.ListValue(
-          type=[x.dtype.as_datatype_enum for x in args]))
-  tout_attr = attr_value_pb2.AttrValue(
-      list=attr_value_pb2.AttrValue.ListValue(type=tout))
-  func_attr = attr_value_pb2.AttrValue(
-      func=attr_value_pb2.NameAttrList(name=f.name))
-  executor_type_attr = attr_value_pb2.AttrValue(
-      s=compat.as_bytes(executor_type))
+    # The generated binding returns an empty list for functions that don't
+    # return any Tensors, hence the need to use `create_op` directly.
+    args = [ops.convert_to_tensor(x) for x in args]
+    tin_attr = attr_value_pb2.AttrValue(
+        list=attr_value_pb2.AttrValue.ListValue(
+            type=[x.dtype.as_datatype_enum for x in args]
+        )
+    )
+    tout_attr = attr_value_pb2.AttrValue(
+        list=attr_value_pb2.AttrValue.ListValue(type=tout)
+    )
+    func_attr = attr_value_pb2.AttrValue(func=attr_value_pb2.NameAttrList(name=f.name))
+    executor_type_attr = attr_value_pb2.AttrValue(s=compat.as_bytes(executor_type))
 
-  # When running in graph mode, the graph and function graphs are optimized
-  # (i.e. run through grappler) per the session options, so we can disable any
-  # eager-specific rewriting.
-  config_proto = attr_value_pb2.AttrValue(s=config)
+    # When running in graph mode, the graph and function graphs are optimized
+    # (i.e. run through grappler) per the session options, so we can disable any
+    # eager-specific rewriting.
+    config_proto = attr_value_pb2.AttrValue(s=config)
 
-  graph = ops.get_default_graph()
-  f.add_to_graph(graph)
-  op_name = "StatefulPartitionedCall" if f.stateful_ops else "PartitionedCall"
+    graph = ops.get_default_graph()
+    f.add_to_graph(graph)
+    op_name = "StatefulPartitionedCall" if f.stateful_ops else "PartitionedCall"
 
-  # Propagate the attribute indicating the need to compile from function to the
-  # call itself.
-  xla_compile_attr = "_XlaMustCompile"
-  op_attrs = {
-      "Tin": tin_attr,
-      "Tout": tout_attr,
-      "f": func_attr,
-      "config_proto": config_proto,
-      "executor_type": executor_type_attr,
-  }
-  if xla_compile_attr in f.definition.attr:
-    op_attrs[xla_compile_attr] = f.definition.attr[xla_compile_attr]
-  op = graph.create_op(op_name, args, tout, name=op_name, attrs=op_attrs)
-  outputs = op.outputs
-  if hasattr(f, "graph"):
-    _set_read_only_resource_inputs_attr(op, f.graph)
-    if hasattr(f.graph, "collective_manager_ids_used"):
-      ops.set_int_list_attr(op, acd.COLLECTIVE_MANAGER_IDS,
-                            f.graph.collective_manager_ids_used)
-  return outputs if outputs else op
+    # Propagate the attribute indicating the need to compile from function to the
+    # call itself.
+    xla_compile_attr = "_XlaMustCompile"
+    op_attrs = {
+        "Tin": tin_attr,
+        "Tout": tout_attr,
+        "f": func_attr,
+        "config_proto": config_proto,
+        "executor_type": executor_type_attr,
+    }
+    if xla_compile_attr in f.definition.attr:
+        op_attrs[xla_compile_attr] = f.definition.attr[xla_compile_attr]
+    op = graph.create_op(op_name, args, tout, name=op_name, attrs=op_attrs)
+    outputs = op.outputs
+    if hasattr(f, "graph"):
+        _set_read_only_resource_inputs_attr(op, f.graph)
+        if hasattr(f.graph, "collective_manager_ids_used"):
+            ops.set_int_list_attr(
+                op, acd.COLLECTIVE_MANAGER_IDS, f.graph.collective_manager_ids_used
+            )
+    return outputs if outputs else op
 
 
 def _set_read_only_resource_inputs_attr(op, func_graph):
-  """Sets the list of resource inputs which are read-only.
+    """Sets the list of resource inputs which are read-only.
 
   This is used by AutomaticControlDependencies.
 
@@ -1242,6 +1286,5 @@ def _set_read_only_resource_inputs_attr(op, func_graph):
     op: PartitionedCall Operation.
     func_graph: FuncGraph.
   """
-  read_only_indices = acd.get_read_only_resource_input_indices_graph(func_graph)
-  ops.set_int_list_attr(op, acd.READ_ONLY_RESOURCE_INPUTS_ATTR,
-                        read_only_indices)
+    read_only_indices = acd.get_read_only_resource_input_indices_graph(func_graph)
+    ops.set_int_list_attr(op, acd.READ_ONLY_RESOURCE_INPUTS_ATTR, read_only_indices)

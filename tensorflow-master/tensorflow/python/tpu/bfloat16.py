@@ -29,7 +29,7 @@ from tensorflow.python.util.tf_export import tf_export
 
 
 def _get_custom_getter():
-  """Returns a custom getter that this class's methods must be called under.
+    """Returns a custom getter that this class's methods must be called under.
 
   All methods of this class must be called under a variable scope that was
   passed this custom getter. Example:
@@ -48,34 +48,34 @@ def _get_custom_getter():
   storing the variable as the requested dtype.
   """
 
-  def inner_custom_getter(getter, *args, **kwargs):
-    """Custom getter that forces variables to have type self.variable_type."""
-    cast_to_bfloat16 = False
-    requested_dtype = kwargs['dtype']
-    if requested_dtype == dtypes.bfloat16:
-      # Only change the variable dtype if doing so does not decrease variable
-      # precision.
-      kwargs['dtype'] = dtypes.float32
-      cast_to_bfloat16 = True
-    var = getter(*args, **kwargs)
-    # This if statement is needed to guard the cast, because batch norm
-    # assigns directly to the return value of this custom getter. The cast
-    # makes the return value not a variable so it cannot be assigned. Batch
-    # norm variables are always in fp32 so this if statement is never
-    # triggered for them.
-    if cast_to_bfloat16:
-      var = math_ops.cast(var, dtypes.bfloat16)
-    return var
+    def inner_custom_getter(getter, *args, **kwargs):
+        """Custom getter that forces variables to have type self.variable_type."""
+        cast_to_bfloat16 = False
+        requested_dtype = kwargs["dtype"]
+        if requested_dtype == dtypes.bfloat16:
+            # Only change the variable dtype if doing so does not decrease variable
+            # precision.
+            kwargs["dtype"] = dtypes.float32
+            cast_to_bfloat16 = True
+        var = getter(*args, **kwargs)
+        # This if statement is needed to guard the cast, because batch norm
+        # assigns directly to the return value of this custom getter. The cast
+        # makes the return value not a variable so it cannot be assigned. Batch
+        # norm variables are always in fp32 so this if statement is never
+        # triggered for them.
+        if cast_to_bfloat16:
+            var = math_ops.cast(var, dtypes.bfloat16)
+        return var
 
-  return inner_custom_getter
+    return inner_custom_getter
 
 
-@tf_export(v1=['tpu.bfloat16_scope'])
+@tf_export(v1=["tpu.bfloat16_scope"])
 @tf_contextlib.contextmanager
 def bfloat16_scope(
     name: Optional[Text] = None
 ) -> Generator[variable_scope.variable_scope, None, None]:
-  """Scope class for bfloat16 variables so that the model uses custom getter.
+    """Scope class for bfloat16 variables so that the model uses custom getter.
 
   This enables variables to be read as bfloat16 type when using get_variable.
 
@@ -85,8 +85,9 @@ def bfloat16_scope(
   Yields:
     a variable scope.
   """
-  if name is None:
-    name = ''
-  with variable_scope.variable_scope(
-      name, custom_getter=_get_custom_getter()) as varscope:
-    yield varscope
+    if name is None:
+        name = ""
+    with variable_scope.variable_scope(
+        name, custom_getter=_get_custom_getter()
+    ) as varscope:
+        yield varscope

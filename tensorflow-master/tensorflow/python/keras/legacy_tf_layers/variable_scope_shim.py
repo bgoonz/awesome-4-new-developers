@@ -36,19 +36,19 @@ from tensorflow.python.util import tf_decorator
 
 
 def as_shape(shape):
-  """Converts the given object to a TensorShape."""
-  if isinstance(shape, tensor_shape.TensorShape):
-    return shape
-  else:
-    return tensor_shape.TensorShape(shape)
+    """Converts the given object to a TensorShape."""
+    if isinstance(shape, tensor_shape.TensorShape):
+        return shape
+    else:
+        return tensor_shape.TensorShape(shape)
 
 
 def _is_callable_object(obj):
-  return hasattr(obj, "__call__") and tf_inspect.ismethod(obj.__call__)
+    return hasattr(obj, "__call__") and tf_inspect.ismethod(obj.__call__)
 
 
 def _has_kwargs(fn):
-  """Returns whether the passed callable has **kwargs in its signature.
+    """Returns whether the passed callable has **kwargs in its signature.
 
   Args:
     fn: Function, or function-like object (e.g., result of `functools.partial`).
@@ -59,19 +59,19 @@ def _has_kwargs(fn):
   Raises:
      `TypeError`: If fn is not a Function, or function-like object.
   """
-  if isinstance(fn, functools.partial):
-    fn = fn.func
-  elif _is_callable_object(fn):
-    fn = fn.__call__
-  elif not callable(fn):
-    raise TypeError(
-        "fn should be a function-like object, but is of type {}.".format(
-            type(fn)))
-  return tf_inspect.getfullargspec(fn).varkw is not None
+    if isinstance(fn, functools.partial):
+        fn = fn.func
+    elif _is_callable_object(fn):
+        fn = fn.__call__
+    elif not callable(fn):
+        raise TypeError(
+            "fn should be a function-like object, but is of type {}.".format(type(fn))
+        )
+    return tf_inspect.getfullargspec(fn).varkw is not None
 
 
 def fn_args(fn):
-  """Get argument names for function-like object.
+    """Get argument names for function-like object.
 
   Args:
     fn: Function, or function-like object (e.g., result of `functools.partial`).
@@ -82,57 +82,63 @@ def fn_args(fn):
   Raises:
     ValueError: if partial function has positionally bound arguments
   """
-  if isinstance(fn, functools.partial):
-    args = fn_args(fn.func)
-    args = [a for a in args[len(fn.args):] if a not in (fn.keywords or [])]
-  else:
-    if hasattr(fn, "__call__") and tf_inspect.ismethod(fn.__call__):
-      fn = fn.__call__
-    args = tf_inspect.getfullargspec(fn).args
-    if _is_bound_method(fn) and args:
-      # If it's a bound method, it may or may not have a self/cls first
-      # argument; for example, self could be captured in *args.
-      # If it does have a positional argument, it is self/cls.
-      args.pop(0)
-  return tuple(args)
+    if isinstance(fn, functools.partial):
+        args = fn_args(fn.func)
+        args = [a for a in args[len(fn.args) :] if a not in (fn.keywords or [])]
+    else:
+        if hasattr(fn, "__call__") and tf_inspect.ismethod(fn.__call__):
+            fn = fn.__call__
+        args = tf_inspect.getfullargspec(fn).args
+        if _is_bound_method(fn) and args:
+            # If it's a bound method, it may or may not have a self/cls first
+            # argument; for example, self could be captured in *args.
+            # If it does have a positional argument, it is self/cls.
+            args.pop(0)
+    return tuple(args)
 
 
 def _is_bound_method(fn):
-  _, fn = tf_decorator.unwrap(fn)
-  return tf_inspect.ismethod(fn) and (fn.__self__ is not None)
+    _, fn = tf_decorator.unwrap(fn)
+    return tf_inspect.ismethod(fn) and (fn.__self__ is not None)
 
 
 def validate_synchronization_aggregation_trainable(
-    synchronization, aggregation, trainable, name):
-  """Given user-provided variable properties, sets defaults and validates."""
-  if aggregation is None:
-    aggregation = variables.VariableAggregation.NONE
-  else:
-    if not isinstance(aggregation,
-                      (variables.VariableAggregation,
-                       variables.VariableAggregationV2)):
-      try:
-        aggregation = variables.VariableAggregationV2(aggregation)
-      except ValueError:
-        raise ValueError(
-            "Invalid variable aggregation mode: {} for variable: {}".format(
-                aggregation, name))
-  if synchronization is None:
-    synchronization = variables.VariableSynchronization.AUTO
-  else:
-    try:
-      synchronization = variables.VariableSynchronization(synchronization)
-    except ValueError:
-      raise ValueError(
-          "Invalid variable synchronization mode: {} for variable: {}".format(
-              synchronization, name))
-  if trainable is None:
-    trainable = synchronization != variables.VariableSynchronization.ON_READ
-  return synchronization, aggregation, trainable
+    synchronization, aggregation, trainable, name
+):
+    """Given user-provided variable properties, sets defaults and validates."""
+    if aggregation is None:
+        aggregation = variables.VariableAggregation.NONE
+    else:
+        if not isinstance(
+            aggregation,
+            (variables.VariableAggregation, variables.VariableAggregationV2),
+        ):
+            try:
+                aggregation = variables.VariableAggregationV2(aggregation)
+            except ValueError:
+                raise ValueError(
+                    "Invalid variable aggregation mode: {} for variable: {}".format(
+                        aggregation, name
+                    )
+                )
+    if synchronization is None:
+        synchronization = variables.VariableSynchronization.AUTO
+    else:
+        try:
+            synchronization = variables.VariableSynchronization(synchronization)
+        except ValueError:
+            raise ValueError(
+                "Invalid variable synchronization mode: {} for variable: {}".format(
+                    synchronization, name
+                )
+            )
+    if trainable is None:
+        trainable = synchronization != variables.VariableSynchronization.ON_READ
+    return synchronization, aggregation, trainable
 
 
 class _EagerVariableStore(object):
-  """TF2-compatible VariableStore that avoids collections & tracks regularizers.
+    """TF2-compatible VariableStore that avoids collections & tracks regularizers.
 
   New variable names and new variables can be created; all stored
   variables are initialized with the initializer passed to __init__.
@@ -146,33 +152,34 @@ class _EagerVariableStore(object):
       the corresponding TensorFlow Variables as values.
   """
 
-  __slots__ = ["_vars", "_regularizers", "_store_eager_variables"]
+    __slots__ = ["_vars", "_regularizers", "_store_eager_variables"]
 
-  def __init__(self):
-    """Create a variable store."""
-    self._vars = {}  # A dictionary of the stored TensorFlow variables.
-    self._regularizers = {}  # A dict mapping var names to their regularizers.
-    self._store_eager_variables = True
+    def __init__(self):
+        """Create a variable store."""
+        self._vars = {}  # A dictionary of the stored TensorFlow variables.
+        self._regularizers = {}  # A dict mapping var names to their regularizers.
+        self._store_eager_variables = True
 
-  def get_variable(
-      self,
-      name,
-      shape=None,
-      dtype=dtypes.float32,
-      initializer=None,
-      regularizer=None,
-      reuse=None,
-      trainable=None,
-      collections=None,
-      caching_device=None,
-      partitioner=None,
-      validate_shape=True,
-      use_resource=None,
-      custom_getter=None,
-      constraint=None,
-      synchronization=vs.VariableSynchronization.AUTO,
-      aggregation=vs.VariableAggregation.NONE):
-    """Gets an existing variable with these parameters or create a new one.
+    def get_variable(
+        self,
+        name,
+        shape=None,
+        dtype=dtypes.float32,
+        initializer=None,
+        regularizer=None,
+        reuse=None,
+        trainable=None,
+        collections=None,
+        caching_device=None,
+        partitioner=None,
+        validate_shape=True,
+        use_resource=None,
+        custom_getter=None,
+        constraint=None,
+        synchronization=vs.VariableSynchronization.AUTO,
+        aggregation=vs.VariableAggregation.NONE,
+    ):
+        """Gets an existing variable with these parameters or create a new one.
 
     If a variable with the given name is already stored, we return the stored
     variable. Otherwise, we create a new one.
@@ -264,147 +271,153 @@ class _EagerVariableStore(object):
       RuntimeError: when eager execution is enabled and not called from an
         EagerVariableStore.
     """
-    if custom_getter is not None and not callable(custom_getter):
-      raise ValueError("Passed a custom_getter which is not callable: %s" %
-                       custom_getter)
+        if custom_getter is not None and not callable(custom_getter):
+            raise ValueError(
+                "Passed a custom_getter which is not callable: %s" % custom_getter
+            )
 
-    with ops.init_scope():
-      if context.executing_eagerly():
-        # Variable creation and initialization takes place in `init_scope`s;
-        # as such, if an `init_scope` lifts us into the eager context, then we
-        # need to use `ResourceVariable`s.
-        use_resource = True
+        with ops.init_scope():
+            if context.executing_eagerly():
+                # Variable creation and initialization takes place in `init_scope`s;
+                # as such, if an `init_scope` lifts us into the eager context, then we
+                # need to use `ResourceVariable`s.
+                use_resource = True
 
-    # Note that it's fine to reuse eager variables whose initialization was
-    # lifted from a function-building graph into the eager context (that's why
-    # the following clause is not wrapped in an `init_scope`); lifted variables
-    # are tracked by the graph's `VariableStore`.
-    if context.executing_eagerly():
-      reuse = vs.AUTO_REUSE
+        # Note that it's fine to reuse eager variables whose initialization was
+        # lifted from a function-building graph into the eager context (that's why
+        # the following clause is not wrapped in an `init_scope`); lifted variables
+        # are tracked by the graph's `VariableStore`.
+        if context.executing_eagerly():
+            reuse = vs.AUTO_REUSE
 
-    # If a *_ref type is passed in an error would be triggered further down the
-    # stack. We prevent this using base_dtype to get a non-ref version of the
-    # type, before doing anything else. When _ref types are removed in favor of
-    # resources, this line can be removed.
-    try:
-      dtype = dtype.base_dtype
-    except AttributeError:
-      # .base_dtype not existing means that we will try and use the raw dtype
-      # which was passed in - this might be a NumPy type which is valid.
-      pass
+        # If a *_ref type is passed in an error would be triggered further down the
+        # stack. We prevent this using base_dtype to get a non-ref version of the
+        # type, before doing anything else. When _ref types are removed in favor of
+        # resources, this line can be removed.
+        try:
+            dtype = dtype.base_dtype
+        except AttributeError:
+            # .base_dtype not existing means that we will try and use the raw dtype
+            # which was passed in - this might be a NumPy type which is valid.
+            pass
 
-    # This is the main logic of get_variable.  However, custom_getter
-    # may override this logic.  So we save it as a callable and pass
-    # it to custom_getter.
-    # Note: the parameters of _true_getter, and their documentation, match
-    # *exactly* item-for-item with the docstring of this method.
-    def _true_getter(  # pylint: disable=missing-docstring
+        # This is the main logic of get_variable.  However, custom_getter
+        # may override this logic.  So we save it as a callable and pass
+        # it to custom_getter.
+        # Note: the parameters of _true_getter, and their documentation, match
+        # *exactly* item-for-item with the docstring of this method.
+        def _true_getter(  # pylint: disable=missing-docstring
+            name,
+            shape=None,
+            dtype=dtypes.float32,
+            initializer=None,
+            regularizer=None,
+            reuse=None,
+            trainable=None,
+            collections=None,  # pylint: disable=unused-argument
+            caching_device=None,
+            partitioner=None,
+            validate_shape=True,
+            use_resource=None,  # pylint: disable=unused-argument
+            constraint=None,
+            synchronization=vs.VariableSynchronization.AUTO,
+            aggregation=vs.VariableAggregation.NONE,
+        ):
+            # Partitioned variable currently unsupported w/ the shim
+            if partitioner is not None:
+                raise ValueError(
+                    "`partitioner` arg for `get_variable` is unsupported in TF2."
+                    "File a bug if you need help. You passed %s" % partitioner
+                )
+
+            # Single variable case
+            if "%s/part_0" % name in self._vars:
+                raise ValueError(
+                    "No partitioner was provided, but a partitioned version of the "
+                    "variable was found: %s/part_0. Perhaps a variable of the same "
+                    "name was already created with partitioning?" % name
+                )
+
+            return self._get_single_variable(
+                name=name,
+                shape=shape,
+                dtype=dtype,
+                initializer=initializer,
+                regularizer=regularizer,
+                reuse=reuse,
+                trainable=trainable,
+                caching_device=caching_device,
+                validate_shape=validate_shape,
+                constraint=constraint,
+                synchronization=synchronization,
+                aggregation=aggregation,
+            )
+
+        synchronization, aggregation, trainable = validate_synchronization_aggregation_trainable(
+            synchronization, aggregation, trainable, name
+        )
+
+        if custom_getter is not None:
+            # Handle backwards compatibility with getter arguments that were added
+            # to the API after users started writing custom getters.
+            custom_getter_kwargs = {
+                "getter": _true_getter,
+                "name": name,
+                "shape": shape,
+                "dtype": dtype,
+                "initializer": initializer,
+                "regularizer": regularizer,
+                "reuse": reuse,
+                "trainable": trainable,
+                "collections": collections,
+                "caching_device": caching_device,
+                "partitioner": partitioner,
+                "validate_shape": validate_shape,
+                "use_resource": use_resource,
+                "synchronization": synchronization,
+                "aggregation": aggregation,
+            }
+            # `fn_args` and `has_kwargs` can handle functions, `functools.partial`,
+            # `lambda`.
+            if "constraint" in fn_args(custom_getter) or _has_kwargs(custom_getter):
+                custom_getter_kwargs["constraint"] = constraint
+            return custom_getter(**custom_getter_kwargs)
+        else:
+            return _true_getter(
+                name,
+                shape=shape,
+                dtype=dtype,
+                initializer=initializer,
+                regularizer=regularizer,
+                reuse=reuse,
+                trainable=trainable,
+                collections=collections,
+                caching_device=caching_device,
+                partitioner=partitioner,
+                validate_shape=validate_shape,
+                use_resource=use_resource,
+                constraint=constraint,
+                synchronization=synchronization,
+                aggregation=aggregation,
+            )
+
+    def _get_single_variable(
+        self,
         name,
         shape=None,
         dtype=dtypes.float32,
         initializer=None,
         regularizer=None,
+        partition_info=None,
         reuse=None,
         trainable=None,
-        collections=None,  # pylint: disable=unused-argument
         caching_device=None,
-        partitioner=None,
         validate_shape=True,
-        use_resource=None,  # pylint: disable=unused-argument
         constraint=None,
         synchronization=vs.VariableSynchronization.AUTO,
-        aggregation=vs.VariableAggregation.NONE):
-      # Partitioned variable currently unsupported w/ the shim
-      if partitioner is not None:
-        raise ValueError(
-            "`partitioner` arg for `get_variable` is unsupported in TF2."
-            "File a bug if you need help. You passed %s" % partitioner)
-
-      # Single variable case
-      if "%s/part_0" % name in self._vars:
-        raise ValueError(
-            "No partitioner was provided, but a partitioned version of the "
-            "variable was found: %s/part_0. Perhaps a variable of the same "
-            "name was already created with partitioning?" % name)
-
-      return self._get_single_variable(
-          name=name,
-          shape=shape,
-          dtype=dtype,
-          initializer=initializer,
-          regularizer=regularizer,
-          reuse=reuse,
-          trainable=trainable,
-          caching_device=caching_device,
-          validate_shape=validate_shape,
-          constraint=constraint,
-          synchronization=synchronization,
-          aggregation=aggregation)
-
-    synchronization, aggregation, trainable = (
-        validate_synchronization_aggregation_trainable(
-            synchronization, aggregation, trainable, name))
-
-    if custom_getter is not None:
-      # Handle backwards compatibility with getter arguments that were added
-      # to the API after users started writing custom getters.
-      custom_getter_kwargs = {
-          "getter": _true_getter,
-          "name": name,
-          "shape": shape,
-          "dtype": dtype,
-          "initializer": initializer,
-          "regularizer": regularizer,
-          "reuse": reuse,
-          "trainable": trainable,
-          "collections": collections,
-          "caching_device": caching_device,
-          "partitioner": partitioner,
-          "validate_shape": validate_shape,
-          "use_resource": use_resource,
-          "synchronization": synchronization,
-          "aggregation": aggregation,
-      }
-      # `fn_args` and `has_kwargs` can handle functions, `functools.partial`,
-      # `lambda`.
-      if ("constraint" in fn_args(custom_getter) or
-          _has_kwargs(custom_getter)):
-        custom_getter_kwargs["constraint"] = constraint
-      return custom_getter(**custom_getter_kwargs)
-    else:
-      return _true_getter(
-          name,
-          shape=shape,
-          dtype=dtype,
-          initializer=initializer,
-          regularizer=regularizer,
-          reuse=reuse,
-          trainable=trainable,
-          collections=collections,
-          caching_device=caching_device,
-          partitioner=partitioner,
-          validate_shape=validate_shape,
-          use_resource=use_resource,
-          constraint=constraint,
-          synchronization=synchronization,
-          aggregation=aggregation)
-
-  def _get_single_variable(
-      self,
-      name,
-      shape=None,
-      dtype=dtypes.float32,
-      initializer=None,
-      regularizer=None,
-      partition_info=None,
-      reuse=None,
-      trainable=None,
-      caching_device=None,
-      validate_shape=True,
-      constraint=None,
-      synchronization=vs.VariableSynchronization.AUTO,
-      aggregation=vs.VariableAggregation.NONE):
-    """Get or create a single Variable (e.g.
+        aggregation=vs.VariableAggregation.NONE,
+    ):
+        """Get or create a single Variable (e.g.
 
     a shard or entire variable).
 
@@ -432,100 +445,116 @@ class _EagerVariableStore(object):
     Raises:
       ValueError: See documentation of get_variable above.
     """
-    # Set to true if initializer is a constant.
-    initializing_from_value = False
-    if initializer is not None and not callable(initializer):
-      initializing_from_value = True
-    if shape is not None and initializing_from_value:
-      raise ValueError("If initializer is a constant, do not specify shape.")
+        # Set to true if initializer is a constant.
+        initializing_from_value = False
+        if initializer is not None and not callable(initializer):
+            initializing_from_value = True
+        if shape is not None and initializing_from_value:
+            raise ValueError("If initializer is a constant, do not specify shape.")
 
-    dtype = dtypes.as_dtype(dtype)
-    shape = as_shape(shape)
+        dtype = dtypes.as_dtype(dtype)
+        shape = as_shape(shape)
 
-    if name in self._vars:
-      # Here we handle the case when returning an existing variable.
-      if reuse is False:  # pylint: disable=g-bool-id-comparison
-        err_msg = ("Variable %s already exists, disallowed."
-                   " Did you mean to set reuse=True or "
-                   "reuse=tf.AUTO_REUSE in VarScope?" % name)
-        # ResourceVariables don't have an op associated with so no traceback
-        raise ValueError(err_msg)
-      found_var = self._vars[name]
-      if not shape.is_compatible_with(found_var.get_shape()):
-        raise ValueError("Trying to share variable %s, but specified shape %s"
-                         " and found shape %s." %
-                         (name, shape, found_var.get_shape()))
-      if not dtype.is_compatible_with(found_var.dtype):
-        dtype_str = dtype.name
-        found_type_str = found_var.dtype.name
-        raise ValueError("Trying to share variable %s, but specified dtype %s"
-                         " and found dtype %s." %
-                         (name, dtype_str, found_type_str))
-      return found_var
+        if name in self._vars:
+            # Here we handle the case when returning an existing variable.
+            if reuse is False:  # pylint: disable=g-bool-id-comparison
+                err_msg = (
+                    "Variable %s already exists, disallowed."
+                    " Did you mean to set reuse=True or "
+                    "reuse=tf.AUTO_REUSE in VarScope?" % name
+                )
+                # ResourceVariables don't have an op associated with so no traceback
+                raise ValueError(err_msg)
+            found_var = self._vars[name]
+            if not shape.is_compatible_with(found_var.get_shape()):
+                raise ValueError(
+                    "Trying to share variable %s, but specified shape %s"
+                    " and found shape %s." % (name, shape, found_var.get_shape())
+                )
+            if not dtype.is_compatible_with(found_var.dtype):
+                dtype_str = dtype.name
+                found_type_str = found_var.dtype.name
+                raise ValueError(
+                    "Trying to share variable %s, but specified dtype %s"
+                    " and found dtype %s." % (name, dtype_str, found_type_str)
+                )
+            return found_var
 
-    # The code below handles only the case of creating a new variable.
-    if reuse is True:  # pylint: disable=g-bool-id-comparison
-      raise ValueError("Variable %s does not exist, or was not created with "
-                       "tf.get_variable(). Did you mean to set "
-                       "reuse=tf.AUTO_REUSE in VarScope?" % name)
+        # The code below handles only the case of creating a new variable.
+        if reuse is True:  # pylint: disable=g-bool-id-comparison
+            raise ValueError(
+                "Variable %s does not exist, or was not created with "
+                "tf.get_variable(). Did you mean to set "
+                "reuse=tf.AUTO_REUSE in VarScope?" % name
+            )
 
-    # Create the tensor to initialize the variable with default value.
-    if initializer is None:
-      initializer, initializing_from_value = self._get_default_initializer(
-          name=name, shape=shape, dtype=dtype)
-    # Enter an init scope when creating the initializer.
-    with ops.init_scope():
-      if initializing_from_value:
-        init_val = initializer
-        variable_dtype = None
-      else:
-        # Instantiate initializer if provided initializer is a type object.
-        if tf_inspect.isclass(initializer):
-          initializer = initializer()
-        if shape.is_fully_defined():
-          if "partition_info" in tf_inspect.getargspec(initializer).args:
-            init_val = functools.partial(initializer,
-                                         shape.as_list(),
-                                         dtype=dtype,
-                                         partition_info=partition_info)
-          else:
-            init_val = functools.partial(initializer,
-                                         shape.as_list(), dtype=dtype)
-          variable_dtype = dtype.base_dtype
-        else:
-          init_val = initializer
-          variable_dtype = None
+        # Create the tensor to initialize the variable with default value.
+        if initializer is None:
+            initializer, initializing_from_value = self._get_default_initializer(
+                name=name, shape=shape, dtype=dtype
+            )
+        # Enter an init scope when creating the initializer.
+        with ops.init_scope():
+            if initializing_from_value:
+                init_val = initializer
+                variable_dtype = None
+            else:
+                # Instantiate initializer if provided initializer is a type object.
+                if tf_inspect.isclass(initializer):
+                    initializer = initializer()
+                if shape.is_fully_defined():
+                    if "partition_info" in tf_inspect.getargspec(initializer).args:
+                        init_val = functools.partial(
+                            initializer,
+                            shape.as_list(),
+                            dtype=dtype,
+                            partition_info=partition_info,
+                        )
+                    else:
+                        init_val = functools.partial(
+                            initializer, shape.as_list(), dtype=dtype
+                        )
+                    variable_dtype = dtype.base_dtype
+                else:
+                    init_val = initializer
+                    variable_dtype = None
 
-    # Create the variable (Always eagerly as a workaround for a strange
-    # tpu / funcgraph / keras functional model interaction )
-    with ops.init_scope():
-      v = variables.Variable(
-          initial_value=init_val,
-          name=name,
-          trainable=trainable,
-          caching_device=caching_device,
-          dtype=variable_dtype,
-          validate_shape=validate_shape,
-          constraint=constraint,
-          synchronization=synchronization,
-          aggregation=aggregation)
+        # Create the variable (Always eagerly as a workaround for a strange
+        # tpu / funcgraph / keras functional model interaction )
+        with ops.init_scope():
+            v = variables.Variable(
+                initial_value=init_val,
+                name=name,
+                trainable=trainable,
+                caching_device=caching_device,
+                dtype=variable_dtype,
+                validate_shape=validate_shape,
+                constraint=constraint,
+                synchronization=synchronization,
+                aggregation=aggregation,
+            )
 
-    self._vars[name] = v
-    logging.vlog(1, "Created variable %s with shape %s and init %s", v.name,
-                 format(shape), initializer)
+        self._vars[name] = v
+        logging.vlog(
+            1,
+            "Created variable %s with shape %s and init %s",
+            v.name,
+            format(shape),
+            initializer,
+        )
 
-    # Run the regularizer if requested and save the resulting loss.
-    if regularizer:
-      self.add_regularizer(v, regularizer)
+        # Run the regularizer if requested and save the resulting loss.
+        if regularizer:
+            self.add_regularizer(v, regularizer)
 
-    return v
+        return v
 
-  def add_regularizer(self, var, regularizer):
-    self._regularizers[var.name] = functools.partial(regularizer, var)
+    def add_regularizer(self, var, regularizer):
+        self._regularizers[var.name] = functools.partial(regularizer, var)
 
-  # Initialize variable when no initializer provided
-  def _get_default_initializer(self, name, shape=None, dtype=dtypes.float32):
-    """Provide a default initializer and a corresponding value.
+    # Initialize variable when no initializer provided
+    def _get_default_initializer(self, name, shape=None, dtype=dtypes.float32):
+        """Provide a default initializer and a corresponding value.
 
     Args:
       name: see get_variable.
@@ -538,56 +567,66 @@ class _EagerVariableStore(object):
     Raises:
       ValueError: When giving unsupported dtype.
     """
-    del shape
-    # If dtype is DT_FLOAT, provide a uniform unit scaling initializer
-    if dtype.is_floating:
-      initializer = init_ops.glorot_uniform_initializer()
-      initializing_from_value = False
-    # If dtype is DT_INT/DT_UINT, provide a default value `zero`
-    # If dtype is DT_BOOL, provide a default value `FALSE`
-    elif (dtype.is_integer or dtype.is_unsigned or dtype.is_bool or
-          dtype == dtypes.string):
-      initializer = init_ops.zeros_initializer()
-      initializing_from_value = False
-    # NOTES:Do we need to support for handling DT_STRING and DT_COMPLEX here?
-    else:
-      raise ValueError("An initializer for variable %s of %s is required" %
-                       (name, dtype.base_dtype))
+        del shape
+        # If dtype is DT_FLOAT, provide a uniform unit scaling initializer
+        if dtype.is_floating:
+            initializer = init_ops.glorot_uniform_initializer()
+            initializing_from_value = False
+        # If dtype is DT_INT/DT_UINT, provide a default value `zero`
+        # If dtype is DT_BOOL, provide a default value `FALSE`
+        elif (
+            dtype.is_integer
+            or dtype.is_unsigned
+            or dtype.is_bool
+            or dtype == dtypes.string
+        ):
+            initializer = init_ops.zeros_initializer()
+            initializing_from_value = False
+        # NOTES:Do we need to support for handling DT_STRING and DT_COMPLEX here?
+        else:
+            raise ValueError(
+                "An initializer for variable %s of %s is required"
+                % (name, dtype.base_dtype)
+            )
 
-    return initializer, initializing_from_value
+        return initializer, initializing_from_value
 
 
 class VariableAndLossTracker(module.Module):
-  """Module that has a scope to capture vars/losses made by `get_variable`."""
+    """Module that has a scope to capture vars/losses made by `get_variable`."""
 
-  def __init__(self):
-    self._var_store = _EagerVariableStore()  # pylint: disable=protected-access
-    self._variables = {}
+    def __init__(self):
+        self._var_store = _EagerVariableStore()  # pylint: disable=protected-access
+        self._variables = {}
 
-  def _variable_creator(self, next_creator, **kwargs):
-    var = next_creator(**kwargs)
-    self._variables[var.name] = var
+    def _variable_creator(self, next_creator, **kwargs):
+        var = next_creator(**kwargs)
+        self._variables[var.name] = var
 
-    return var
+        return var
 
-  @tf_contextlib.contextmanager
-  def scope(self):
-    with vs.variable_creator_scope(
-        self._variable_creator), vs.with_variable_store(self._var_store):
-      yield
+    @tf_contextlib.contextmanager
+    def scope(self):
+        with vs.variable_creator_scope(self._variable_creator), vs.with_variable_store(
+            self._var_store
+        ):
+            yield
 
-  def get_regularization_losses(self):
-    # TODO(kaftan): Consider adding a regex scope like the collection access.
-    # But, < 40-50 usages of get_regularization_loss(es) with `scope`
-    # & possible to do manually?
-    losses = {}
-    for var_name, regularizer in self._var_store._regularizers.items():  # pylint: disable=protected-access
-      losses[var_name] = regularizer()
-    return losses
+    def get_regularization_losses(self):
+        # TODO(kaftan): Consider adding a regex scope like the collection access.
+        # But, < 40-50 usages of get_regularization_loss(es) with `scope`
+        # & possible to do manually?
+        losses = {}
+        for (
+            var_name,
+            regularizer,
+        ) in self._var_store._regularizers.items():  # pylint: disable=protected-access
+            losses[var_name] = regularizer()
+        return losses
 
 
 class VariableScopeWrapperLayer(base_layer.Layer):
-  """Wrapper Layer to capture `compat.v1.get_variable` and `compat.v1.layers`.
+    """Wrapper Layer to capture `compat.v1.get_variable` and `compat.v1.layers`.
 
   See go/tf2-migration-model-bookkeeping for background.
 
@@ -734,23 +773,23 @@ class VariableScopeWrapperLayer(base_layer.Layer):
   Coming soon: A better guide, testing/verification guide.
   """
 
-  def __init__(self, **kwargs):
-    super().__init__(**kwargs)
-    # Relies on keras layers tracking Modules
-    self.tracker = VariableAndLossTracker()
-    # May need to inspect func to see if it should pass a `training` arg or not
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # Relies on keras layers tracking Modules
+        self.tracker = VariableAndLossTracker()
+        # May need to inspect func to see if it should pass a `training` arg or not
 
-  def forward_pass(self, *args, **kwargs):
-    raise NotImplementedError
+    def forward_pass(self, *args, **kwargs):
+        raise NotImplementedError
 
-  def call(self, *args, **kwargs):
-    with self.tracker.scope():
-      out = self.forward_pass(*args, **kwargs)
-    if not self._eager_losses:
-      # We have to record regularization losses in the call as if they
-      # are activity losses.
-      # So, don't double-count regularization losses if the layer is used
-      # multiple times in a model
-      for loss in self.tracker.get_regularization_losses().values():
-        self.add_loss(loss)
-    return out
+    def call(self, *args, **kwargs):
+        with self.tracker.scope():
+            out = self.forward_pass(*args, **kwargs)
+        if not self._eager_losses:
+            # We have to record regularization losses in the call as if they
+            # are activity losses.
+            # So, don't double-count regularization losses if the layer is used
+            # multiple times in a model
+            for loss in self.tracker.get_regularization_losses().values():
+                self.add_loss(loss)
+        return out

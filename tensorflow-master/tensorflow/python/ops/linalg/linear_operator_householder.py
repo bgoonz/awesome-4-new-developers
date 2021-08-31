@@ -29,13 +29,13 @@ from tensorflow.python.ops.linalg import linear_operator
 from tensorflow.python.ops.linalg import linear_operator_util
 from tensorflow.python.util.tf_export import tf_export
 
-__all__ = ["LinearOperatorHouseholder",]
+__all__ = ["LinearOperatorHouseholder"]
 
 
 @tf_export("linalg.LinearOperatorHouseholder")
 @linear_operator.make_composite_tensor
 class LinearOperatorHouseholder(linear_operator.LinearOperator):
-  """`LinearOperator` acting like a [batch] of Householder transformations.
+    """`LinearOperator` acting like a [batch] of Householder transformations.
 
   This operator acts like a [batch] of householder reflections with shape
   `[B1,...,Bb, N, N]` for some `b >= 0`.  The first `b` indices index a
@@ -94,14 +94,16 @@ class LinearOperatorHouseholder(linear_operator.LinearOperator):
     way.
   """
 
-  def __init__(self,
-               reflection_axis,
-               is_non_singular=None,
-               is_self_adjoint=None,
-               is_positive_definite=None,
-               is_square=None,
-               name="LinearOperatorHouseholder"):
-    r"""Initialize a `LinearOperatorHouseholder`.
+    def __init__(
+        self,
+        reflection_axis,
+        is_non_singular=None,
+        is_self_adjoint=None,
+        is_positive_definite=None,
+        is_square=None,
+        name="LinearOperatorHouseholder",
+    ):
+        r"""Initialize a `LinearOperatorHouseholder`.
 
     Args:
       reflection_axis:  Shape `[B1,...,Bb, N]` `Tensor` with `b >= 0` `N >= 0`.
@@ -125,153 +127,160 @@ class LinearOperatorHouseholder(linear_operator.LinearOperator):
       ValueError:  `is_self_adjoint` is not `True`, `is_positive_definite` is
         not `False` or `is_square` is not `True`.
     """
-    parameters = dict(
-        reflection_axis=reflection_axis,
-        is_non_singular=is_non_singular,
-        is_self_adjoint=is_self_adjoint,
-        is_positive_definite=is_positive_definite,
-        is_square=is_square,
-        name=name
-    )
+        parameters = dict(
+            reflection_axis=reflection_axis,
+            is_non_singular=is_non_singular,
+            is_self_adjoint=is_self_adjoint,
+            is_positive_definite=is_positive_definite,
+            is_square=is_square,
+            name=name,
+        )
 
-    with ops.name_scope(name, values=[reflection_axis]):
-      self._reflection_axis = linear_operator_util.convert_nonref_to_tensor(
-          reflection_axis, name="reflection_axis")
-      self._check_reflection_axis(self._reflection_axis)
+        with ops.name_scope(name, values=[reflection_axis]):
+            self._reflection_axis = linear_operator_util.convert_nonref_to_tensor(
+                reflection_axis, name="reflection_axis"
+            )
+            self._check_reflection_axis(self._reflection_axis)
 
-      # Check and auto-set hints.
-      if is_self_adjoint is False:  # pylint:disable=g-bool-id-comparison
-        raise ValueError("A Householder operator is always self adjoint.")
-      else:
-        is_self_adjoint = True
+            # Check and auto-set hints.
+            if is_self_adjoint is False:  # pylint:disable=g-bool-id-comparison
+                raise ValueError("A Householder operator is always self adjoint.")
+            else:
+                is_self_adjoint = True
 
-      if is_positive_definite is True:  # pylint:disable=g-bool-id-comparison
-        raise ValueError(
-            "A Householder operator is always non-positive definite.")
-      else:
-        is_positive_definite = False
+            if is_positive_definite is True:  # pylint:disable=g-bool-id-comparison
+                raise ValueError(
+                    "A Householder operator is always non-positive definite."
+                )
+            else:
+                is_positive_definite = False
 
-      if is_square is False:  # pylint:disable=g-bool-id-comparison
-        raise ValueError("A Householder operator is always square.")
-      is_square = True
+            if is_square is False:  # pylint:disable=g-bool-id-comparison
+                raise ValueError("A Householder operator is always square.")
+            is_square = True
 
-      super(LinearOperatorHouseholder, self).__init__(
-          dtype=self._reflection_axis.dtype,
-          is_non_singular=is_non_singular,
-          is_self_adjoint=is_self_adjoint,
-          is_positive_definite=is_positive_definite,
-          is_square=is_square,
-          parameters=parameters,
-          name=name)
-      # TODO(b/143910018) Remove graph_parents in V3.
-      self._set_graph_parents([self._reflection_axis])
+            super(LinearOperatorHouseholder, self).__init__(
+                dtype=self._reflection_axis.dtype,
+                is_non_singular=is_non_singular,
+                is_self_adjoint=is_self_adjoint,
+                is_positive_definite=is_positive_definite,
+                is_square=is_square,
+                parameters=parameters,
+                name=name,
+            )
+            # TODO(b/143910018) Remove graph_parents in V3.
+            self._set_graph_parents([self._reflection_axis])
 
-  def _check_reflection_axis(self, reflection_axis):
-    """Static check of reflection_axis."""
-    if (reflection_axis.shape.ndims is not None and
-        reflection_axis.shape.ndims < 1):
-      raise ValueError(
-          "Argument reflection_axis must have at least 1 dimension.  "
-          "Found: %s" % reflection_axis)
+    def _check_reflection_axis(self, reflection_axis):
+        """Static check of reflection_axis."""
+        if reflection_axis.shape.ndims is not None and reflection_axis.shape.ndims < 1:
+            raise ValueError(
+                "Argument reflection_axis must have at least 1 dimension.  "
+                "Found: %s" % reflection_axis
+            )
 
-  def _shape(self):
-    # If d_shape = [5, 3], we return [5, 3, 3].
-    d_shape = self._reflection_axis.shape
-    return d_shape.concatenate(d_shape[-1:])
+    def _shape(self):
+        # If d_shape = [5, 3], we return [5, 3, 3].
+        d_shape = self._reflection_axis.shape
+        return d_shape.concatenate(d_shape[-1:])
 
-  def _shape_tensor(self):
-    d_shape = array_ops.shape(self._reflection_axis)
-    k = d_shape[-1]
-    return array_ops.concat((d_shape, [k]), 0)
+    def _shape_tensor(self):
+        d_shape = array_ops.shape(self._reflection_axis)
+        k = d_shape[-1]
+        return array_ops.concat((d_shape, [k]), 0)
 
-  def _assert_non_singular(self):
-    return control_flow_ops.no_op("assert_non_singular")
+    def _assert_non_singular(self):
+        return control_flow_ops.no_op("assert_non_singular")
 
-  def _assert_positive_definite(self):
-    raise errors.InvalidArgumentError(
-        node_def=None, op=None, message="Householder operators are always "
-        "non-positive definite.")
+    def _assert_positive_definite(self):
+        raise errors.InvalidArgumentError(
+            node_def=None,
+            op=None,
+            message="Householder operators are always " "non-positive definite.",
+        )
 
-  def _assert_self_adjoint(self):
-    return control_flow_ops.no_op("assert_self_adjoint")
+    def _assert_self_adjoint(self):
+        return control_flow_ops.no_op("assert_self_adjoint")
 
-  def _matmul(self, x, adjoint=False, adjoint_arg=False):
-    # Given a vector `v`, we would like to reflect `x` about the hyperplane
-    # orthogonal to `v` going through the origin.  We first project `x` to `v`
-    # to get v * dot(v, x) / dot(v, v).  After we project, we can reflect the
-    # projection about the hyperplane by flipping sign to get
-    # -v * dot(v, x) / dot(v, v).  Finally, we can add back the component
-    # that is orthogonal to v. This is invariant under reflection, since the
-    # whole hyperplane is invariant. This component is equal to x - v * dot(v,
-    # x) / dot(v, v), giving the formula x - 2 * v * dot(v, x) / dot(v, v)
-    # for the reflection.
+    def _matmul(self, x, adjoint=False, adjoint_arg=False):
+        # Given a vector `v`, we would like to reflect `x` about the hyperplane
+        # orthogonal to `v` going through the origin.  We first project `x` to `v`
+        # to get v * dot(v, x) / dot(v, v).  After we project, we can reflect the
+        # projection about the hyperplane by flipping sign to get
+        # -v * dot(v, x) / dot(v, v).  Finally, we can add back the component
+        # that is orthogonal to v. This is invariant under reflection, since the
+        # whole hyperplane is invariant. This component is equal to x - v * dot(v,
+        # x) / dot(v, v), giving the formula x - 2 * v * dot(v, x) / dot(v, v)
+        # for the reflection.
 
-    # Note that because this is a reflection, it lies in O(n) (for real vector
-    # spaces) or U(n) (for complex vector spaces), and thus is its own adjoint.
-    reflection_axis = ops.convert_to_tensor_v2_with_dispatch(
-        self.reflection_axis)
-    x = linalg.adjoint(x) if adjoint_arg else x
-    normalized_axis = nn.l2_normalize(reflection_axis, axis=-1)
-    mat = normalized_axis[..., array_ops.newaxis]
-    x_dot_normalized_v = math_ops.matmul(mat, x, adjoint_a=True)
+        # Note that because this is a reflection, it lies in O(n) (for real vector
+        # spaces) or U(n) (for complex vector spaces), and thus is its own adjoint.
+        reflection_axis = ops.convert_to_tensor_v2_with_dispatch(self.reflection_axis)
+        x = linalg.adjoint(x) if adjoint_arg else x
+        normalized_axis = nn.l2_normalize(reflection_axis, axis=-1)
+        mat = normalized_axis[..., array_ops.newaxis]
+        x_dot_normalized_v = math_ops.matmul(mat, x, adjoint_a=True)
 
-    return x - 2 * mat * x_dot_normalized_v
+        return x - 2 * mat * x_dot_normalized_v
 
-  def _trace(self):
-    # We have (n - 1) +1 eigenvalues and a single -1 eigenvalue.
-    shape = self.shape_tensor()
-    return math_ops.cast(
-        self._domain_dimension_tensor(shape=shape) - 2,
-        self.dtype) * array_ops.ones(
-            shape=self._batch_shape_tensor(shape=shape), dtype=self.dtype)
+    def _trace(self):
+        # We have (n - 1) +1 eigenvalues and a single -1 eigenvalue.
+        shape = self.shape_tensor()
+        return math_ops.cast(
+            self._domain_dimension_tensor(shape=shape) - 2, self.dtype
+        ) * array_ops.ones(
+            shape=self._batch_shape_tensor(shape=shape), dtype=self.dtype
+        )
 
-  def _determinant(self):
-    # For householder transformations, the determinant is -1.
-    return -array_ops.ones(shape=self.batch_shape_tensor(), dtype=self.dtype)  # pylint: disable=invalid-unary-operand-type
+    def _determinant(self):
+        # For householder transformations, the determinant is -1.
+        return -array_ops.ones(
+            shape=self.batch_shape_tensor(), dtype=self.dtype
+        )  # pylint: disable=invalid-unary-operand-type
 
-  def _log_abs_determinant(self):
-    # Orthogonal matrix -> log|Q| = 0.
-    return array_ops.zeros(shape=self.batch_shape_tensor(), dtype=self.dtype)
+    def _log_abs_determinant(self):
+        # Orthogonal matrix -> log|Q| = 0.
+        return array_ops.zeros(shape=self.batch_shape_tensor(), dtype=self.dtype)
 
-  def _solve(self, rhs, adjoint=False, adjoint_arg=False):
-    # A householder reflection is a reflection, hence is idempotent. Thus we
-    # can just apply a matmul.
-    return self._matmul(rhs, adjoint, adjoint_arg)
+    def _solve(self, rhs, adjoint=False, adjoint_arg=False):
+        # A householder reflection is a reflection, hence is idempotent. Thus we
+        # can just apply a matmul.
+        return self._matmul(rhs, adjoint, adjoint_arg)
 
-  def _to_dense(self):
-    reflection_axis = ops.convert_to_tensor_v2_with_dispatch(
-        self.reflection_axis)
-    normalized_axis = nn.l2_normalize(reflection_axis, axis=-1)
-    mat = normalized_axis[..., array_ops.newaxis]
-    matrix = -2 * math_ops.matmul(mat, mat, adjoint_b=True)
-    return array_ops.matrix_set_diag(
-        matrix, 1. + array_ops.matrix_diag_part(matrix))
+    def _to_dense(self):
+        reflection_axis = ops.convert_to_tensor_v2_with_dispatch(self.reflection_axis)
+        normalized_axis = nn.l2_normalize(reflection_axis, axis=-1)
+        mat = normalized_axis[..., array_ops.newaxis]
+        matrix = -2 * math_ops.matmul(mat, mat, adjoint_b=True)
+        return array_ops.matrix_set_diag(
+            matrix, 1.0 + array_ops.matrix_diag_part(matrix)
+        )
 
-  def _diag_part(self):
-    reflection_axis = ops.convert_to_tensor_v2_with_dispatch(
-        self.reflection_axis)
-    normalized_axis = nn.l2_normalize(reflection_axis, axis=-1)
-    return 1. - 2 * normalized_axis * math_ops.conj(normalized_axis)
+    def _diag_part(self):
+        reflection_axis = ops.convert_to_tensor_v2_with_dispatch(self.reflection_axis)
+        normalized_axis = nn.l2_normalize(reflection_axis, axis=-1)
+        return 1.0 - 2 * normalized_axis * math_ops.conj(normalized_axis)
 
-  def _eigvals(self):
-    # We have (n - 1) +1 eigenvalues and a single -1 eigenvalue.
-    result_shape = array_ops.shape(self.reflection_axis)
-    n = result_shape[-1]
-    ones_shape = array_ops.concat([result_shape[:-1], [n - 1]], axis=-1)
-    neg_shape = array_ops.concat([result_shape[:-1], [1]], axis=-1)
-    eigvals = array_ops.ones(shape=ones_shape, dtype=self.dtype)
-    eigvals = array_ops.concat(
-        [-array_ops.ones(shape=neg_shape, dtype=self.dtype), eigvals], axis=-1)  # pylint: disable=invalid-unary-operand-type
-    return eigvals
+    def _eigvals(self):
+        # We have (n - 1) +1 eigenvalues and a single -1 eigenvalue.
+        result_shape = array_ops.shape(self.reflection_axis)
+        n = result_shape[-1]
+        ones_shape = array_ops.concat([result_shape[:-1], [n - 1]], axis=-1)
+        neg_shape = array_ops.concat([result_shape[:-1], [1]], axis=-1)
+        eigvals = array_ops.ones(shape=ones_shape, dtype=self.dtype)
+        eigvals = array_ops.concat(
+            [-array_ops.ones(shape=neg_shape, dtype=self.dtype), eigvals], axis=-1
+        )  # pylint: disable=invalid-unary-operand-type
+        return eigvals
 
-  def _cond(self):
-    # Householder matrices are rotations which have condition number 1.
-    return array_ops.ones(self.batch_shape_tensor(), dtype=self.dtype)
+    def _cond(self):
+        # Householder matrices are rotations which have condition number 1.
+        return array_ops.ones(self.batch_shape_tensor(), dtype=self.dtype)
 
-  @property
-  def reflection_axis(self):
-    return self._reflection_axis
+    @property
+    def reflection_axis(self):
+        return self._reflection_axis
 
-  @property
-  def _composite_tensor_fields(self):
-    return ("reflection_axis",)
+    @property
+    def _composite_tensor_fields(self):
+        return ("reflection_axis",)

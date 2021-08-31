@@ -1,0 +1,20 @@
+{
+  "name": "solution",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "Bryan Guner",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-spies": "^1.0.0"
+  }
+}
