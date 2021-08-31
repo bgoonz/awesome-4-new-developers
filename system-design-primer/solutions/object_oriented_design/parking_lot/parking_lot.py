@@ -10,7 +10,6 @@ class VehicleSize(Enum):
 
 
 class Vehicle(metaclass=ABCMeta):
-
     def __init__(self, vehicle_size, license_plate, spot_size):
         self.vehicle_size = vehicle_size
         self.license_plate = license_plate
@@ -31,16 +30,16 @@ class Vehicle(metaclass=ABCMeta):
 
 
 class Motorcycle(Vehicle):
-
     def __init__(self, license_plate):
-        super(Motorcycle, self).__init__(VehicleSize.MOTORCYCLE, license_plate, spot_size=1)
+        super(Motorcycle, self).__init__(
+            VehicleSize.MOTORCYCLE, license_plate, spot_size=1
+        )
 
     def can_fit_in_spot(self, spot):
         return True
 
 
 class Car(Vehicle):
-
     def __init__(self, license_plate):
         super(Car, self).__init__(VehicleSize.COMPACT, license_plate, spot_size=1)
 
@@ -49,7 +48,6 @@ class Car(Vehicle):
 
 
 class Bus(Vehicle):
-
     def __init__(self, license_plate):
         super(Bus, self).__init__(VehicleSize.LARGE, license_plate, spot_size=5)
 
@@ -58,7 +56,6 @@ class Bus(Vehicle):
 
 
 class ParkingLot(object):
-
     def __init__(self, num_levels):
         self.num_levels = num_levels
         self.levels = []  # List of Levels
@@ -101,7 +98,6 @@ class Level(object):
 
 
 class ParkingSpot(object):
-
     def __init__(self, level, row, spot_number, spot_size, vehicle_size):
         self.level = level
         self.row = row

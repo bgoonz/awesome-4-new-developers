@@ -24,67 +24,68 @@ from tensorflow.python.framework import dtypes
 from tensorflow.python.ops import array_ops
 from tensorflow.python.ops import math_ops
 from tensorflow.python.platform import test
+
 # pylint: enable=g-direct-tensorflow-import
 
 
 class WhereOpTest(xla_test.XLATestCase):
+    def testWhere(self):
+        """Test first form of where (return indices)."""
 
-  def testWhere(self):
-    """Test first form of where (return indices)."""
+        with self.session() as sess:
+            with self.test_scope():
+                x = array_ops.placeholder(dtypes.bool)
+                true_vals = array_ops.where(x)
 
-    with self.session() as sess:
-      with self.test_scope():
-        x = array_ops.placeholder(dtypes.bool)
-        true_vals = array_ops.where(x)
+            # Output of the computation is dynamic.
+            feed = [[True, False, False], [False, True, True]]
+            self.assertAllEqual(
+                [[0, 0], [1, 1], [1, 2]], sess.run(true_vals, {x: feed})
+            )
 
-      # Output of the computation is dynamic.
-      feed = [[True, False, False], [False, True, True]]
-      self.assertAllEqual([[0, 0], [1, 1], [1, 2]],
-                          sess.run(true_vals, {x: feed}))
+    def testWhereGather(self):
+        """Test where followed by a gather."""
 
-  def testWhereGather(self):
-    """Test where followed by a gather."""
+        with self.session() as sess:
+            with self.test_scope():
+                x = array_ops.placeholder(dtypes.bool)
+                value = array_ops.constant([[0, 1], [2, 3]], dtypes.float32)
+                true_vals = array_ops.where(x)
 
-    with self.session() as sess:
-      with self.test_scope():
-        x = array_ops.placeholder(dtypes.bool)
-        value = array_ops.constant([[0, 1], [2, 3]], dtypes.float32)
-        true_vals = array_ops.where(x)
+                # Gather 0, 2, 3.
+                gathered = array_ops.gather_nd(value, true_vals)
 
-        # Gather 0, 2, 3.
-        gathered = array_ops.gather_nd(value, true_vals)
+            feed = [[True, False], [True, True]]
+            self.assertAllEqual([0, 2, 3], sess.run(gathered, {x: feed}))
 
-      feed = [[True, False], [True, True]]
-      self.assertAllEqual([0, 2, 3], sess.run(gathered, {x: feed}))
+    def testWhereGatherReduce(self):
+        """Test where followed by a gather and a reduce."""
 
-  def testWhereGatherReduce(self):
-    """Test where followed by a gather and a reduce."""
+        with self.session() as sess:
+            with self.test_scope():
+                x = array_ops.placeholder(dtypes.bool)
+                value = array_ops.constant([[0, 1], [2, 3]], dtypes.float32)
+                indices = array_ops.where(x)
 
-    with self.session() as sess:
-      with self.test_scope():
-        x = array_ops.placeholder(dtypes.bool)
-        value = array_ops.constant([[0, 1], [2, 3]], dtypes.float32)
-        indices = array_ops.where(x)
+                # Reduce to 5
+                gathered = array_ops.gather_nd(value, indices)
+                reduction = math_ops.reduce_sum(gathered)
 
-        # Reduce to 5
-        gathered = array_ops.gather_nd(value, indices)
-        reduction = math_ops.reduce_sum(gathered)
+            feed = [[True, False], [True, True]]
+            self.assertAllEqual(5, sess.run(reduction, {x: feed}))
 
-      feed = [[True, False], [True, True]]
-      self.assertAllEqual(5, sess.run(reduction, {x: feed}))
+    def testWhere1D(self):
+        """Test first form of where (return indices)."""
 
-  def testWhere1D(self):
-    """Test first form of where (return indices)."""
+        with self.session() as sess:
+            with self.test_scope():
+                x = array_ops.placeholder(dtypes.bool)
+                result = array_ops.where(x)
 
-    with self.session() as sess:
-      with self.test_scope():
-        x = array_ops.placeholder(dtypes.bool)
-        result = array_ops.where(x)
-
-      # Output of the computation is dynamic.
-      feed = [True, False, True]
-      self.assertAllEqual([[0], [2]], sess.run(result, {x: feed}))
+            # Output of the computation is dynamic.
+            feed = [True, False, True]
+            self.assertAllEqual([[0], [2]], sess.run(result, {x: feed}))
 
 
 if __name__ == "__main__":
-  test.main()
+    test.main()

@@ -11,7 +11,6 @@ class Rank(Enum):
 
 
 class Employee(metaclass=ABCMeta):
-
     def __init__(self, employee_id, name, rank, call_center):
         self.employee_id = employee_id
         self.name = name
@@ -41,7 +40,6 @@ class Employee(metaclass=ABCMeta):
 
 
 class Operator(Employee):
-
     def __init__(self, employee_id, name):
         super(Operator, self).__init__(employee_id, name, Rank.OPERATOR)
 
@@ -51,7 +49,6 @@ class Operator(Employee):
 
 
 class Supervisor(Employee):
-
     def __init__(self, employee_id, name):
         super(Operator, self).__init__(employee_id, name, Rank.SUPERVISOR)
 
@@ -61,12 +58,11 @@ class Supervisor(Employee):
 
 
 class Director(Employee):
-
     def __init__(self, employee_id, name):
         super(Operator, self).__init__(employee_id, name, Rank.DIRECTOR)
 
     def escalate_call(self):
-        raise NotImplementedError('Directors must be able to handle any call')
+        raise NotImplementedError("Directors must be able to handle any call")
 
 
 class CallState(Enum):
@@ -77,7 +73,6 @@ class CallState(Enum):
 
 
 class Call(object):
-
     def __init__(self, rank):
         self.state = CallState.READY
         self.rank = rank
@@ -85,7 +80,6 @@ class Call(object):
 
 
 class CallCenter(object):
-
     def __init__(self, operators, supervisors, directors):
         self.operators = operators
         self.supervisors = supervisors
@@ -94,7 +88,7 @@ class CallCenter(object):
 
     def dispatch_call(self, call):
         if call.rank not in (Rank.OPERATOR, Rank.SUPERVISOR, Rank.DIRECTOR):
-            raise ValueError('Invalid call rank: {}'.format(call.rank))
+            raise ValueError("Invalid call rank: {}".format(call.rank))
         employee = None
         if call.rank == Rank.OPERATOR:
             employee = self._dispatch_call(call, self.operators)

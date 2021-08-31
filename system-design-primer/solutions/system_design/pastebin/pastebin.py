@@ -4,7 +4,6 @@ from mrjob.job import MRJob
 
 
 class HitCounts(MRJob):
-
     def extract_url(self, line):
         """Extract the generated url from the log line."""
         pass
@@ -36,11 +35,8 @@ class HitCounts(MRJob):
 
     def steps(self):
         """Run the map and reduce steps."""
-        return [
-            self.mr(mapper=self.mapper,
-                    reducer=self.reducer)
-        ]
+        return [self.mr(mapper=self.mapper, reducer=self.reducer)]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     HitCounts.run()

@@ -23,10 +23,9 @@ cpurt = tf_cpurt.TfCpurtExecutor()
 
 
 class TfReshapeTest(googletest.TestCase):
-
-  def test_reshape_unknown_1d(self):
-    # TODO(ezhulenev): Make it work without shape constraint.
-    mlir_function = """
+    def test_reshape_unknown_1d(self):
+        # TODO(ezhulenev): Make it work without shape constraint.
+        mlir_function = """
       func @test(%arg0: tensor<?xf32>
                 {cpurt.constraint = "shape"}) -> tensor<?x?xf32> {
         %0 = "tf.Const"() { value = dense<[2, -1]> : tensor<2xi32> }
@@ -36,17 +35,16 @@ class TfReshapeTest(googletest.TestCase):
         return %1 : tensor<?x?xf32>
       }"""
 
-    # TODO(ezhulenev): Make it work with default executable.
-    compiled = cpurt.compile(mlir_function, 'test',
-                             tf_cpurt.Specialization.ALWAYS)
+        # TODO(ezhulenev): Make it work with default executable.
+        compiled = cpurt.compile(mlir_function, "test", tf_cpurt.Specialization.ALWAYS)
 
-    d0 = np.random.randint(1, 10) * 2
+        d0 = np.random.randint(1, 10) * 2
 
-    arg0 = np.random.uniform(0, 10.0, size=(d0)).astype(np.float32)
+        arg0 = np.random.uniform(0, 10.0, size=(d0)).astype(np.float32)
 
-    [res] = cpurt.execute(compiled, [arg0])
-    np.testing.assert_allclose(res, np.reshape(arg0, (2, -1)), atol=0.0)
+        [res] = cpurt.execute(compiled, [arg0])
+        np.testing.assert_allclose(res, np.reshape(arg0, (2, -1)), atol=0.0)
 
 
-if __name__ == '__main__':
-  googletest.main()
+if __name__ == "__main__":
+    googletest.main()

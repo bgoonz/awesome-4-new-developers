@@ -1,12 +1,10 @@
 class Item(object):
-
     def __init__(self, key, value):
         self.key = key
         self.value = value
 
 
 class HashTable(object):
-
     def __init__(self, size):
         self.size = size
         self.table = [[] for _ in range(self.size)]
@@ -27,7 +25,7 @@ class HashTable(object):
         for item in self.table[hash_index]:
             if item.key == key:
                 return item.value
-        raise KeyError('Key not found')
+        raise KeyError("Key not found")
 
     def remove(self, key):
         hash_index = self._hash_function(key)
@@ -35,4 +33,4 @@ class HashTable(object):
             if item.key == key:
                 del self.table[hash_index][index]
                 return
-        raise KeyError('Key not found')
+        raise KeyError("Key not found")

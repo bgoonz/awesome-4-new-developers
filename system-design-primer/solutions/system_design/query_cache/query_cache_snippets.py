@@ -2,7 +2,6 @@
 
 
 class QueryApi(object):
-
     def __init__(self, memory_cache, reverse_index_cluster):
         self.memory_cache = memory_cache
         self.reverse_index_cluster = reverse_index_cluster
@@ -23,14 +22,12 @@ class QueryApi(object):
 
 
 class Node(object):
-
     def __init__(self, query, results):
         self.query = query
         self.results = results
 
 
 class LinkedList(object):
-
     def __init__(self):
         self.head = None
         self.tail = None
@@ -46,7 +43,6 @@ class LinkedList(object):
 
 
 class Cache(object):
-
     def __init__(self, MAX_SIZE):
         self.MAX_SIZE = MAX_SIZE
         self.size = 0

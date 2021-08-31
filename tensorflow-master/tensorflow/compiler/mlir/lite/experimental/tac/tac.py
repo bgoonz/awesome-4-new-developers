@@ -14,11 +14,13 @@
 # ==============================================================================
 """Target aware conversion for TFLite model."""
 
-from tensorflow.compiler.mlir.lite.experimental.tac.py_wrapper import _pywrap_tac_wrapper
+from tensorflow.compiler.mlir.lite.experimental.tac.py_wrapper import (
+    _pywrap_tac_wrapper,
+)
 
 
 def run_tac(model_path, targets, output_path):
-  """Run target aware conversion for the given tflite model file.
+    """Run target aware conversion for the given tflite model file.
 
   Args:
     model_path: Path to the tflite model file.
@@ -34,13 +36,13 @@ def run_tac(model_path, targets, output_path):
       Targets are not specified.
       Invalid output_path.
   """
-  if not model_path:
-    raise ValueError("Invalid model_path.")
+    if not model_path:
+        raise ValueError("Invalid model_path.")
 
-  if not targets:
-    raise ValueError("Targets are not specified.")
+    if not targets:
+        raise ValueError("Targets are not specified.")
 
-  if not output_path:
-    raise ValueError("Invalid output_path.")
+    if not output_path:
+        raise ValueError("Invalid output_path.")
 
-  return _pywrap_tac_wrapper.run_tac(model_path, targets, output_path)
+    return _pywrap_tac_wrapper.run_tac(model_path, targets, output_path)

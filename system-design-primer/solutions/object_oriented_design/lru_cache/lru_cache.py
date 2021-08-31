@@ -1,12 +1,10 @@
 class Node(object):
-
     def __init__(self, results):
         self.results = results
         self.next = next
 
 
 class LinkedList(object):
-
     def __init__(self):
         self.head = None
         self.tail = None
@@ -22,7 +20,6 @@ class LinkedList(object):
 
 
 class Cache(object):
-
     def __init__(self, MAX_SIZE):
         self.MAX_SIZE = MAX_SIZE
         self.size = 0

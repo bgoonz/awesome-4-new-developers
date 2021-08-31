@@ -9,7 +9,6 @@ class State(Enum):
 
 
 class Graph(object):
-
     def bfs(self, source, dest):
         if source is None:
             return False
@@ -29,7 +28,6 @@ class Graph(object):
 
 
 class Person(object):
-
     def __init__(self, id, name):
         self.id = id
         self.name = name
@@ -37,7 +35,6 @@ class Person(object):
 
 
 class LookupService(object):
-
     def __init__(self):
         self.lookup = {}  # key: person_id, value: person_server
 
@@ -47,7 +44,6 @@ class LookupService(object):
 
 
 class PersonServer(object):
-
     def __init__(self):
         self.people = {}  # key: person_id, value: person
 
@@ -60,7 +56,6 @@ class PersonServer(object):
 
 
 class UserGraphService(object):
-
     def __init__(self, person_ids, lookup):
         self.lookup = lookup
         self.person_ids = person_ids

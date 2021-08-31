@@ -4,7 +4,6 @@ from mrjob.job import MRJob
 
 
 class RemoveDuplicateUrls(MRJob):
-
     def mapper(self, _, line):
         yield line, 1
 
@@ -15,11 +14,8 @@ class RemoveDuplicateUrls(MRJob):
 
     def steps(self):
         """Run the map and reduce steps."""
-        return [
-            self.mr(mapper=self.mapper,
-                    reducer=self.reducer)
-        ]
+        return [self.mr(mapper=self.mapper, reducer=self.reducer)]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     RemoveDuplicateUrls.run()

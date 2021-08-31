@@ -12,7 +12,6 @@ class Suit(Enum):
 
 
 class Card(metaclass=ABCMeta):
-
     def __init__(self, value, suit):
         self.value = value
         self.suit = suit
@@ -30,7 +29,6 @@ class Card(metaclass=ABCMeta):
 
 
 class BlackJackCard(Card):
-
     def __init__(self, value, suit):
         super(BlackJackCard, self).__init__(value, suit)
 
@@ -55,11 +53,10 @@ class BlackJackCard(Card):
         if 1 <= new_value <= 13:
             self._value = new_value
         else:
-            raise ValueError('Invalid card value: {}'.format(new_value))
+            raise ValueError("Invalid card value: {}".format(new_value))
 
 
 class Hand(object):
-
     def __init__(self, cards):
         self.cards = cards
 
@@ -96,7 +93,6 @@ class BlackJackHand(Hand):
 
 
 class Deck(object):
-
     def __init__(self, cards):
         self.cards = cards
         self.deal_index = 0

@@ -20,6 +20,7 @@ from ._chlo_ops_gen import *
 
 
 def register_chlo_dialect(context, load=True):
-  from .._cext_loader import load_extension
-  ext = load_extension("_mlirHlo")
-  ext.register_chlo_dialect(context, load=load)
+    from .._cext_loader import load_extension
+
+    ext = load_extension("_mlirHlo")
+    ext.register_chlo_dialect(context, load=load)

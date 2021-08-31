@@ -4,7 +4,6 @@ from mrjob.job import MRJob
 
 
 class SalesRanker(MRJob):
-
     def within_past_week(self, timestamp):
         """Return True if timestamp is within past week, False otherwise."""
         ...
@@ -21,7 +20,7 @@ class SalesRanker(MRJob):
         (bar, p3), 10
         (foo, p4), 1
         """
-        timestamp, product_id, category, quantity = line.split('\t')
+        timestamp, product_id, category, quantity = line.split("\t")
         if self.within_past_week(timestamp):
             yield (category, product_id), quantity
 
@@ -66,12 +65,10 @@ class SalesRanker(MRJob):
     def steps(self):
         """Run the map and reduce steps."""
         return [
-            self.mr(mapper=self.mapper,
-                    reducer=self.reducer),
-            self.mr(mapper=self.mapper_sort,
-                    reducer=self.reducer_identity),
+            self.mr(mapper=self.mapper, reducer=self.reducer),
+            self.mr(mapper=self.mapper_sort, reducer=self.reducer_identity),
         ]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     SalesRanker.run()
